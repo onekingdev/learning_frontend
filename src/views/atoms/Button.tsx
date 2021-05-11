@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import {BasicColor, shadeColor} from '../Color';
 import styled from 'styled-components';
 
@@ -13,9 +13,6 @@ export const Button: FC<ButtonProps> = ({
   onClick = () => {},
   color = BasicColor.green,
 }) => {
-  useEffect(() => {
-    console.log(color, shadeColor(color, 5));
-  }, []);
   return (
     <StyledButton color={color} onClick={onClick}>
       {value}
