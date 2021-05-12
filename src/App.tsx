@@ -7,10 +7,6 @@ import {
   Headline5,
   Headline6,
 } from './views/atoms/Headline/Headline';
-import {Wallet} from './views/molecules/Wallet/Wallet';
-import {ServiceButton} from './views/atoms/ServiceButton';
-import google from './views/assets/google-logo.svg';
-import {Battery} from './views/atoms/Battery';
 
 function App() {
   return (
@@ -21,9 +17,6 @@ function App() {
       <Headline4 body={'H1 Head'} isDark={true} />
       <Headline5 body={'H1 Head'} isDark={true} />
       <Headline6 body={'H1 Head'} isDark={true} />
-      <Wallet money={10000} />
-      <ServiceButton value={'xd'} icon={google} onClick={() => {}} />
-      <Battery />
     </div>
   );
 }

@@ -4,6 +4,9 @@ export enum BasicColor {
   orange = '#CC5B1D',
   green = '#21B95C',
   greenSoft = '#26B824',
+  yellow = '#F4C222',
+  gray40 = '#C6CACC',
+  gray60 = '#919699',
 }
 
 export const shadeColor = (color: string, percent: number) => {
