@@ -60,7 +60,7 @@ const Wrapper = styled.div<{isValid: boolean}>`
   color: ${BasicColor.gray60};
   border: ${p => (p.isValid ? 'none' : `1px solid ${BasicColor.yellow}`)};
   box-shadow: ${p =>
-    p.isValid ? 'none' : `0px 4px 4px rgba(199, 83, 80, 0.3)`};
+    p.isValid ? 'none' : '0px 4px 4px rgba(199, 83, 80, 0.3)'};
   border-radius: 8px;
 `;
 
