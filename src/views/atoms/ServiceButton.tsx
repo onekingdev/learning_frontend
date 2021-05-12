@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor, shadeColor} from '../Color';
-import logo from '../assets/google-icon.svg';
 
 type ServiceButtonProps = {
   value: string;
@@ -45,7 +44,7 @@ const StyledServiceButton = styled.button<{icon: string}>`
     transition: background 0s;
   }
   &::before {
-    content: url(${logo});
+    content: url(${p => p.icon});
     vertical-align: -25%;
     padding: 0 6px 0 0;
   }
