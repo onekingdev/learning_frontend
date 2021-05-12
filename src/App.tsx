@@ -7,6 +7,7 @@ import {
   Headline5,
   Headline6,
 } from './views/atoms/Headline/Headline';
+import {Wallet} from './views/molecules/Wallet/Wallet';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Headline4 body={'H1 Head'} isDark={true} />
       <Headline5 body={'H1 Head'} isDark={true} />
       <Headline6 body={'H1 Head'} isDark={true} />
+      <Wallet money={10000} />
     </div>
   );
 }
