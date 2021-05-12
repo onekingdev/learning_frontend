@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor, shadeColor} from '../Color';
+import logo from '../assets/google-icon.svg';
 
 type ServiceButtonProps = {
   value: string;
@@ -24,15 +25,14 @@ const StyledServiceButton = styled.button<{icon: string}>`
   background-color: ${BasicColor.white};
   color: ${BasicColor.black};
   font-family: Montserrat;
-  padding: 6px 20px;
   width: 262px;
   height: 49px;
   border-radius: 20px;
   font-weight: 500;
   font-size: 14px;
-  line-height: 17px;
   background-position: center;
   transition: background 800ms;
+  display: inline;
   border: none;
   &:hover {
     background: ${shadeColor(BasicColor.white, -10)}
@@ -45,12 +45,8 @@ const StyledServiceButton = styled.button<{icon: string}>`
     transition: background 0s;
   }
   &::before {
-    content: '';
-    display: block;
-    background: url(${p => p.icon}) no-repeat;
-    width: 20px;
-    height: 20px;
-    float: left;
-    margin: 0 6px 0 0;
+    content: url(${logo});
+    vertical-align: -25%;
+    padding: 0 6px 0 0;
   }
 `;
