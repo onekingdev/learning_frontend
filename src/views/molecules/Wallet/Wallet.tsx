@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Icon} from '../../atoms/Icon';
 import {Balance} from '../../atoms/WalletBalance';
-import coins from '../../../images/symbols/coins.png';
+import coins from '../../assets/coins.svg';
 import styled from 'styled-components';
 
 const WalletStyle = styled.div`
