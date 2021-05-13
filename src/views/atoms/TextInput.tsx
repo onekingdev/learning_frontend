@@ -6,12 +6,14 @@ type TextInputProps = {
   label: string;
   validate?: () => boolean;
   errMsg?: string;
+  isSecret?: boolean;
 };
 
 export const TextInput: FC<TextInputProps> = ({
   label,
   validate = (_: string) => true || _,
   errMsg,
+  isSecret = false,
 }) => {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState<boolean>(true);
@@ -29,7 +31,10 @@ export const TextInput: FC<TextInputProps> = ({
     <>
       <Wrapper isValid={isValid}>
         <Label>{label}</Label>
-        <StyledInput onChange={e => setValue(e.target.value)} />
+        <StyledInput
+          onChange={e => setValue(e.target.value)}
+          type={isSecret ? 'password' : 'text'}
+        />
       </Wrapper>
       {errMsg && !isValid ? <Warning>{errMsg}</Warning> : null}
     </>
@@ -38,11 +43,9 @@ export const TextInput: FC<TextInputProps> = ({
 
 const StyledInput = styled.input`
   border: none;
-  font-size: 16px;
   outline: 0;
-  padding: 16px 8px 10px;
+  padding: 20px 8px 10px;
   width: 100%;
-  font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 13px;
@@ -51,10 +54,10 @@ const StyledInput = styled.input`
 `;
 
 const Wrapper = styled.div<{isValid: boolean}>`
-  border: solid 1px ${BasicColor.gray40};
   font-family: Montserrat;
-  font-style: normal;
+  background-color: ${BasicColor.white};
   font-weight: 500;
+  height: 47px;
   font-size: 13px;
   line-height: 16px;
   color: ${BasicColor.gray60};
@@ -65,9 +68,8 @@ const Wrapper = styled.div<{isValid: boolean}>`
 `;
 
 const Label = styled.label`
-  font-size: 16px;
   position: absolute;
-  padding: 0 8px;
+  padding: 3px 8px;
 `;
 
 const Warning = styled.label`
