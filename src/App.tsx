@@ -15,11 +15,12 @@ import avatar from './views/assets/avatars/avatar1.svg';
 import {UserProgressBar} from './views/atoms/UserProgressBar';
 import {UserProgress} from './views/molecules/UserProgress';
 import {Subtitle} from './views/atoms/Subtitle';
-import {Body} from './views/atoms/Body';
+import {Header} from './views/organisms/Header';
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <Headline1 body={'H1 Head'} isDark={true} />
       <Headline2 body={'H1 Head'} isDark={true} />
       <Headline3 body={'H1 Head'} isDark={true} />
@@ -32,7 +33,6 @@ function App() {
       <UserIcon avatar={avatar} />
       <UserProgressBar progress={20} />
       <Subtitle value={'Tony'} />
-      <Body value={'sofu'} />
       <UserProgress
         rank={10}
         level={3}
@@ -40,7 +40,7 @@ function App() {
         expMax={200}
         icon={avatar}
         userName={'Elliot Alderson'}
-        progress={100}
+        progress={10}
       />
     </div>
   );

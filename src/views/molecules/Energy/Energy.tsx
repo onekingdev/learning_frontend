@@ -11,7 +11,7 @@ type EnergyProps = {
 };
 
 const EnergyStyle = styled.div`
-  width: 340px;
+  width: 320px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -22,7 +22,7 @@ export const Energy: FC<EnergyProps> = ({charge}) => {
   return (
     <>
       <EnergyStyle>
-        <Icon image={lightning} size={IconSize.medium} />
+        <Icon image={lightning} size={IconSize.small} />
         <Battery />
         <BatteryButton value="GET!" onClick={() => console.log('Hella yes')} />
       </EnergyStyle>

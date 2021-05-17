@@ -4,6 +4,7 @@ import {Balance} from '../../atoms/WalletBalance';
 import {BasicColor} from '../../Color';
 import coins from '../../assets/coins.svg';
 import styled from 'styled-components';
+import {IconSize} from '../../atoms/Icon/Size';
 
 const WalletStyle = styled.div`
   width: 130px;
@@ -19,14 +20,14 @@ const WalletStyle = styled.div`
 `;
 
 type WalletProps = {
-  balance?: number;
+  balance: number;
 };
 
 export const Wallet: FC<WalletProps> = ({balance}) => {
   return (
     <>
       <WalletStyle>
-        <Icon image={coins} />
+        <Icon image={coins} size={IconSize.small} />
         <Balance>${balance}</Balance>
       </WalletStyle>
     </>

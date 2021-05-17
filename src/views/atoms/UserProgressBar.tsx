@@ -13,8 +13,10 @@ const UserProgressBarStyle = styled.div`
   border-radius: 40px;
 `;
 
-const Progress = styled.div`
-  width: 100px;
+const Progress = styled.div<{
+  progress: number;
+}>`
+  width: ${p => p.progress}%;
   height: 12px;
   background-color: ${BasicColor.greenSoft};
   border-radius: 40px;
@@ -23,7 +25,7 @@ export const UserProgressBar: FC<UserProgressBarProps> = ({progress}) => {
   return (
     <>
       <UserProgressBarStyle>
-        <Progress />
+        <Progress progress={progress} />
       </UserProgressBarStyle>
     </>
   );
