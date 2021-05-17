@@ -35,8 +35,6 @@ const StyledButton = styled.button<{
   line-height: 17px;
   background-position: center;
   transition: background 800ms;
-  margin: 25px 0 25px 0;
-  justify-self: center;
   border: none;
   &:hover {
     background: ${p => shadeColor(p.color, 10)}

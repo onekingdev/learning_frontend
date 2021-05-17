@@ -1,9 +1,47 @@
-import {LogIn} from './views/pages/Login/Login';
+import React from 'react';
+import {
+  Headline1,
+  Headline2,
+  Headline3,
+  Headline4,
+  Headline5,
+  Headline6,
+} from './views/atoms/Headline/Headline';
+import {Wallet} from './views/molecules/Wallet/Wallet';
+import {Battery} from './views/atoms/Battery/Battery';
+import {Energy} from './views/molecules/Energy/Energy';
+import {UserIcon} from './views/atoms/UserIcon';
+import avatar from './views/assets/avatars/avatar1.svg';
+import {UserProgressBar} from './views/atoms/UserProgressBar';
+import {UserProgress} from './views/molecules/UserProgress';
+import {Subtitle} from './views/atoms/Subtitle';
+import {Body} from './views/atoms/Body';
 
 function App() {
   return (
     <div className="App">
-      <LogIn />
+      <Headline1 body={'H1 Head'} isDark={true} />
+      <Headline2 body={'H1 Head'} isDark={true} />
+      <Headline3 body={'H1 Head'} isDark={true} />
+      <Headline4 body={'H1 Head'} isDark={true} />
+      <Headline5 body={'H1 Head'} isDark={true} />
+      <Headline6 body={'H1 Head'} isDark={true} />
+      <Wallet balance={10000} />
+      <Battery />
+      <Energy />
+      <UserIcon avatar={avatar} />
+      <UserProgressBar progress={20} />
+      <Subtitle value={'Tony'} />
+      <Body value={'sofu'} />
+      <UserProgress
+        rank={10}
+        level={3}
+        exp={20}
+        expMax={200}
+        icon={avatar}
+        userName={'Elliot Alderson'}
+        progress={100}
+      />
     </div>
   );
 }

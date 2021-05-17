@@ -7,6 +7,7 @@ export enum BasicColor {
   yellow = '#F4C222',
   gray40 = '#C6CACC',
   gray60 = '#919699',
+  gray80 = '#5E6366',
   blue = '#1771B9',
 }
 
