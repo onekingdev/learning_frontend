@@ -6,9 +6,7 @@ import {IconSize} from '../../atoms/Icon/Size';
 import styled from 'styled-components';
 import {BatteryButton} from '../../atoms/Battery/BatteryButton';
 
-type EnergyProps = {
-  charge?: boolean;
-};
+type EnergyProps = {};
 
 const EnergyStyle = styled.div`
   width: 320px;
@@ -18,7 +16,7 @@ const EnergyStyle = styled.div`
   justify-content: space-between;
 `;
 
-export const Energy: FC<EnergyProps> = ({charge}) => {
+export const Energy: FC<EnergyProps> = () => {
   return (
     <>
       <EnergyStyle>

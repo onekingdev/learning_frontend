@@ -1,14 +1,17 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
 
-type BatteryProps = {
-  charge?: boolean;
-};
+type BatteryProps = {};
 
-const ChargeItem = styled.div`
+const ChargeItem = styled.div<{
+  color: BasicColor.greenSoft | BasicColor.gray80;
+  borderColor: '#148712' | '#3F3F3F';
+}>`
   width: 15px;
   height: 34px;
+  background-color: ${p => p.color};
+  border-bottom: 10px solid ${p => p.borderColor};
 `;
 
 const BatteryStyles = styled.div`
@@ -38,27 +41,51 @@ const BatteryPole = styled.div`
   background-color: #505050;
   border-bottom: 7px solid #3c3c3c;
 `;
-export const Battery: FC<BatteryProps> = ({charge}) => {
-  const chargeArray = [false, false, false, false, false, false, false, false];
-  useEffect(() => {
-    const chargeTrue = chargeArray.find(item =>
-      charge ? item : item === true
-    );
+export const Battery: FC<BatteryProps> = () => {
+  const chargeArray = [
+    {
+      id: 1,
+      charge: false,
+    },
+    {
+      id: 2,
+      charge: false,
+    },
+    {
+      id: 3,
+      charge: false,
+    },
+    {
+      id: 4,
+      charge: false,
+    },
+    {
+      id: 5,
+      charge: false,
+    },
+    {
+      id: 6,
+      charge: false,
+    },
+    {
+      id: 7,
+      charge: false,
+    },
+    {
+      id: 8,
+      charge: false,
+    },
+  ];
 
-    console.log(chargeTrue);
-  }, []);
   return (
     <>
       <BatteryContainer>
         <BatteryStyles>
           {chargeArray.map(item => (
             <ChargeItem
-              style={{
-                backgroundColor: item
-                  ? `${BasicColor.greenSoft}`
-                  : `${BasicColor.gray80}`,
-                borderBottom: `10px solid ${item ? '#148712' : '#3F3F3F'}`,
-              }}
+              color={item.charge ? BasicColor.greenSoft : BasicColor.gray80}
+              borderColor={item.charge ? '#148712' : '#3F3F3F'}
+              key={item.id}
             />
           ))}
         </BatteryStyles>

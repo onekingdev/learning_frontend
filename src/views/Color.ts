@@ -5,10 +5,18 @@ export enum BasicColor {
   green = '#21B95C',
   greenSoft = '#26B824',
   yellow = '#F4C222',
+  gray20 = '#F1F3F4',
+  gray30 = '#E3E5E5',
   gray40 = '#C6CACC',
   gray60 = '#919699',
   gray80 = '#5E6366',
+  gray90 = '#3F3F3F',
   blue = '#1771B9',
+  red = '#EC5858',
+  aqua = '#22BAAF',
+  darkGreen = '#13705F',
+  purple = '#A685E2',
+  pink = '#CE2489',
 }
 
 export const shadeColor = (color: string, percent: number) => {
