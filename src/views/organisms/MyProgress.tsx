@@ -1,3 +1,4 @@
+import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../Color';
 import {LessonProgress} from '../molecules/LessonProgress';
@@ -9,6 +10,9 @@ import HEALTH from '../assets/health.svg';
 import MYPROGRESS from '../assets/My Progress.svg';
 import {Icon} from '../atoms/Icon/Icon';
 
+type MyProgressProps = {
+  point: number;
+};
 const MyProgressStyle = styled.div`
   width: 330px;
   height: 450px;
@@ -24,7 +28,7 @@ const MyProgressStyle = styled.div`
 const MyProgressTitle = styled.div`
   margin-bottom: 25px;
 `;
-export const MyProgress = () => {
+export const MyProgress: FC<MyProgressProps> = ({point}) => {
   const lessonProps = [
     {
       title: ELA,
@@ -55,7 +59,7 @@ export const MyProgress = () => {
         </MyProgressTitle>
         {lessonProps.map((item, i) => (
           <LessonProgress
-            point={5}
+            point={point}
             title={item.title}
             color={item.color}
             key={i}
