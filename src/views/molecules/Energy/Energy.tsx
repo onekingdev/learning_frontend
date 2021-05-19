@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import {BatteryButton} from '../../atoms/Battery/BatteryButton';
 
 type EnergyProps = {
-  charge: number;
+  charge?: boolean;
 };
 
 const EnergyStyle = styled.div`
@@ -23,7 +23,7 @@ export const Energy: FC<EnergyProps> = ({charge}) => {
     <>
       <EnergyStyle>
         <Icon image={lightning} size={IconSize.small} />
-        <Battery charge={charge} />
+        <Battery />
         <BatteryButton value="GET!" onClick={() => console.log('Hella yes')} />
       </EnergyStyle>
     </>

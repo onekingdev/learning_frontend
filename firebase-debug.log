@@ -1,0 +1,196 @@
+[debug] [2021-05-19T00:56:59.950Z] ----------------------------------------------------------------------
+[debug] [2021-05-19T00:56:59.951Z] Command:       /home/juanpa/.nvm/versions/node/v14.16.1/bin/node /home/juanpa/.nvm/versions/node/v14.16.1/bin/firebase init hosting:github
+[debug] [2021-05-19T00:56:59.951Z] CLI Version:   9.10.2
+[debug] [2021-05-19T00:56:59.952Z] Platform:      linux
+[debug] [2021-05-19T00:56:59.952Z] Node Version:  v14.16.1
+[debug] [2021-05-19T00:56:59.952Z] Time:          Tue May 18 2021 19:56:59 GMT-0500 (Central Daylight Time)
+[debug] [2021-05-19T00:56:59.952Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-05-19T00:56:59.955Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-05-19T00:56:59.956Z] > authorizing via signed-in user (juanpablo@learnwithsocrates.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/juanpa/Documents/Code/Socrates/Learning/learning_frontend
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using learningwithsocrates-frontend. 
+[debug] [2021-05-19T00:56:59.960Z] > refreshing access token with scopes: []
+[debug] [2021-05-19T00:56:59.961Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-05-19T00:57:00.122Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Wed, 19 May 2021 00:57:00 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-05-19T00:57:00.144Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend [none]
+[debug] [2021-05-19T00:57:00.370Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend 200
+[debug] [2021-05-19T00:57:00.371Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend {"projectId":"learningwithsocrates-frontend","projectNumber":"1031928174067","displayName":"LearningWithSocrates-Frontend","name":"projects/learningwithsocrates-frontend","resources":{"hostingSite":"learningwithsocrates-frontend"},"state":"ACTIVE"}
+[info] 
+=== Hosting:github Setup
+[info] 
+[info] i  Detected a .git folder at /home/juanpa/Documents/Code/Socrates/Learning/learning_frontend 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=307550897&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2021-05-19T00:57:00.756Z] >>> HTTP REQUEST POST https://github.com/login/oauth/access_token  
+ {"client_id":"89cf50f02ac6aaed3484","client_secret":"3330d14abc895d9a74d5f17cd7a00711fa2c5bf0","code":"960a52cab2d5086a7f4d","redirect_uri":"http://localhost:9005","state":"307550897"}
+[debug] [2021-05-19T00:57:01.044Z] <<< HTTP RESPONSE 200 {"server":"GitHub.com","date":"Wed, 19 May 2021 00:57:01 GMT","content-type":"application/json; charset=utf-8","transfer-encoding":"chunked","vary":"X-PJAX, Accept-Encoding, Accept, X-Requested-With","permissions-policy":"interest-cohort=()","etag":"W/\"7b9d009143f5a3a0381ddfe32197631f\"","cache-control":"max-age=0, private, must-revalidate","strict-transport-security":"max-age=31536000; includeSubdomains; preload","x-frame-options":"deny","x-content-type-options":"nosniff","x-xss-protection":"0","referrer-policy":"origin-when-cross-origin, strict-origin-when-cross-origin","expect-ct":"max-age=2592000, report-uri=\"https://api.github.com/_private/browser/errors\"","content-security-policy":"default-src 'none'; base-uri 'self'; block-all-mixed-content; connect-src 'self' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com; frame-ancestors 'none'; frame-src render.githubusercontent.com; img-src 'self' data: github.githubassets.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com; manifest-src 'self'; media-src 'none'; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; worker-src github.com/socket-worker-3f088aa2.js gist.github.com/socket-worker-3f088aa2.js","x-github-request-id":"36FC:1BD1:14C8B2F:2AEE8EF:60A4625C"}
+[debug] [2021-05-19T00:57:01.048Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2021-05-19T00:57:01.612Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2021-05-19T00:57:01.613Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"juanpa-a","id":30605567,"node_id":"MDQ6VXNlcjMwNjA1NTY3","avatar_url":"https://avatars.githubusercontent.com/u/30605567?v=4","gravatar_id":"","url":"https://api.github.com/users/juanpa-a","html_url":"https://github.com/juanpa-a","followers_url":"https://api.github.com/users/juanpa-a/followers","following_url":"https://api.github.com/users/juanpa-a/following{/other_user}","gists_url":"https://api.github.com/users/juanpa-a/gists{/gist_id}","starred_url":"https://api.github.com/users/juanpa-a/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/juanpa-a/subscriptions","organizations_url":"https://api.github.com/users/juanpa-a/orgs","repos_url":"https://api.github.com/users/juanpa-a/repos","events_url":"https://api.github.com/users/juanpa-a/events{/privacy}","received_events_url":"https://api.github.com/users/juanpa-a/received_events","type":"User","site_admin":false,"name":"Juan Pablo Ascencio","company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":null,"twitter_username":null,"public_repos":55,"public_gists":0,"followers":5,"following":3,"created_at":"2017-07-31T20:03:08Z","updated_at":"2021-05-18T21:54:01Z","private_gists":0,"total_private_repos":5,"owned_private_repos":5,"disk_usage":44665,"collaborators":2,"two_factor_authentication":true,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] ✔  Success! Logged into GitHub as juanpa-a 
+[info] 
+[debug] [2021-05-19T00:57:04.226Z] >>> [apiv2][query] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key type=owner
+[debug] [2021-05-19T00:57:04.548Z] <<< [apiv2][status] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key 404
+[debug] [2021-05-19T00:57:04.549Z] <<< [apiv2][body] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2021-05-19T00:57:11.334Z] >>> [apiv2][query] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key type=owner
+[debug] [2021-05-19T00:57:11.473Z] >>> [apiv2][query] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key type=owner
+[debug] [2021-05-19T00:57:11.608Z] <<< [apiv2][status] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key 404
+[debug] [2021-05-19T00:57:11.608Z] <<< [apiv2][body] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2021-05-19T00:57:11.616Z] >>> [apiv2][query] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key type=owner
+[debug] [2021-05-19T00:57:11.745Z] <<< [apiv2][status] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key 404
+[debug] [2021-05-19T00:57:11.745Z] <<< [apiv2][body] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2021-05-19T14:45:19.691Z] ----------------------------------------------------------------------
+[debug] [2021-05-19T14:45:19.692Z] Command:       /home/juanpa/.nvm/versions/node/v14.16.1/bin/node /home/juanpa/.nvm/versions/node/v14.16.1/bin/firebase init hosting:github
+[debug] [2021-05-19T14:45:19.692Z] CLI Version:   9.10.2
+[debug] [2021-05-19T14:45:19.692Z] Platform:      linux
+[debug] [2021-05-19T14:45:19.692Z] Node Version:  v14.16.1
+[debug] [2021-05-19T14:45:19.702Z] Time:          Wed May 19 2021 09:45:19 GMT-0500 (Central Daylight Time)
+[debug] [2021-05-19T14:45:19.702Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-05-19T14:45:19.718Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-05-19T14:45:19.718Z] > authorizing via signed-in user (juanpablo@learnwithsocrates.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/juanpa/Documents/Code/Socrates/Learning/learning_frontend
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using learningwithsocrates-frontend. 
+[debug] [2021-05-19T14:45:19.730Z] > refreshing access token with scopes: []
+[debug] [2021-05-19T14:45:19.730Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-05-19T14:45:19.897Z] <<< HTTP RESPONSE 200 {"date":"Wed, 19 May 2021 14:45:19 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-05-19T14:45:19.918Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend [none]
+[debug] [2021-05-19T14:45:20.202Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend 200
+[debug] [2021-05-19T14:45:20.203Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend {"projectId":"learningwithsocrates-frontend","projectNumber":"1031928174067","displayName":"LearningWithSocrates-Frontend","name":"projects/learningwithsocrates-frontend","resources":{"hostingSite":"learningwithsocrates-frontend"},"state":"ACTIVE"}
+[info] 
+=== Hosting:github Setup
+[info] 
+[info] i  Detected a .git folder at /home/juanpa/Documents/Code/Socrates/Learning/learning_frontend 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=316852301&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2021-05-19T14:45:20.784Z] >>> HTTP REQUEST POST https://github.com/login/oauth/access_token  
+ {"client_id":"89cf50f02ac6aaed3484","client_secret":"3330d14abc895d9a74d5f17cd7a00711fa2c5bf0","code":"8eec7fdc053f14168a8c","redirect_uri":"http://localhost:9005","state":"316852301"}
+[debug] [2021-05-19T14:45:21.078Z] <<< HTTP RESPONSE 200 {"server":"GitHub.com","date":"Wed, 19 May 2021 14:45:21 GMT","content-type":"application/json; charset=utf-8","transfer-encoding":"chunked","vary":"X-PJAX, Accept-Encoding, Accept, X-Requested-With","permissions-policy":"interest-cohort=()","etag":"W/\"fa16d8da51b46682010cf084dbd37648\"","cache-control":"max-age=0, private, must-revalidate","strict-transport-security":"max-age=31536000; includeSubdomains; preload","x-frame-options":"deny","x-content-type-options":"nosniff","x-xss-protection":"0","referrer-policy":"origin-when-cross-origin, strict-origin-when-cross-origin","expect-ct":"max-age=2592000, report-uri=\"https://api.github.com/_private/browser/errors\"","content-security-policy":"default-src 'none'; base-uri 'self'; block-all-mixed-content; connect-src 'self' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com; frame-ancestors 'none'; frame-src render.githubusercontent.com; img-src 'self' data: github.githubassets.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com; manifest-src 'self'; media-src 'none'; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; worker-src github.com/socket-worker-3f088aa2.js gist.github.com/socket-worker-3f088aa2.js","x-github-request-id":"3628:2775:F9D167:20902F4:60A52480"}
+[debug] [2021-05-19T14:45:21.080Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2021-05-19T14:45:21.404Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2021-05-19T14:45:21.404Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"juanpa-a","id":30605567,"node_id":"MDQ6VXNlcjMwNjA1NTY3","avatar_url":"https://avatars.githubusercontent.com/u/30605567?v=4","gravatar_id":"","url":"https://api.github.com/users/juanpa-a","html_url":"https://github.com/juanpa-a","followers_url":"https://api.github.com/users/juanpa-a/followers","following_url":"https://api.github.com/users/juanpa-a/following{/other_user}","gists_url":"https://api.github.com/users/juanpa-a/gists{/gist_id}","starred_url":"https://api.github.com/users/juanpa-a/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/juanpa-a/subscriptions","organizations_url":"https://api.github.com/users/juanpa-a/orgs","repos_url":"https://api.github.com/users/juanpa-a/repos","events_url":"https://api.github.com/users/juanpa-a/events{/privacy}","received_events_url":"https://api.github.com/users/juanpa-a/received_events","type":"User","site_admin":false,"name":"Juan Pablo Ascencio","company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":null,"twitter_username":null,"public_repos":55,"public_gists":0,"followers":5,"following":3,"created_at":"2017-07-31T20:03:08Z","updated_at":"2021-05-18T21:54:01Z","private_gists":0,"total_private_repos":5,"owned_private_repos":5,"disk_usage":44665,"collaborators":2,"two_factor_authentication":true,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] ✔  Success! Logged into GitHub as juanpa-a 
+[info] 
+[debug] [2021-05-19T14:45:23.824Z] >>> [apiv2][query] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key type=owner
+[debug] [2021-05-19T14:45:24.096Z] <<< [apiv2][status] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key 404
+[debug] [2021-05-19T14:45:24.097Z] <<< [apiv2][body] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2021-05-19T16:58:30.837Z] ----------------------------------------------------------------------
+[debug] [2021-05-19T16:58:30.839Z] Command:       /home/juanpa/.nvm/versions/node/v14.16.1/bin/node /home/juanpa/.nvm/versions/node/v14.16.1/bin/firebase init hosting:github
+[debug] [2021-05-19T16:58:30.839Z] CLI Version:   9.10.2
+[debug] [2021-05-19T16:58:30.839Z] Platform:      linux
+[debug] [2021-05-19T16:58:30.839Z] Node Version:  v14.16.1
+[debug] [2021-05-19T16:58:30.839Z] Time:          Wed May 19 2021 11:58:30 GMT-0500 (Central Daylight Time)
+[debug] [2021-05-19T16:58:30.840Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-05-19T16:58:30.843Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-05-19T16:58:30.843Z] > authorizing via signed-in user (juanpablo@learnwithsocrates.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/juanpa/Documents/Code/Socrates/Learning/learning_frontend
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using learningwithsocrates-frontend. 
+[debug] [2021-05-19T16:58:30.848Z] > refreshing access token with scopes: []
+[debug] [2021-05-19T16:58:30.848Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-05-19T16:58:31.027Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Wed, 19 May 2021 16:58:30 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-05-19T16:58:31.047Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend [none]
+[debug] [2021-05-19T16:58:31.234Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend 200
+[debug] [2021-05-19T16:58:31.234Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/learningwithsocrates-frontend {"projectId":"learningwithsocrates-frontend","projectNumber":"1031928174067","displayName":"LearningWithSocrates-Frontend","name":"projects/learningwithsocrates-frontend","resources":{"hostingSite":"learningwithsocrates-frontend"},"state":"ACTIVE"}
+[info] 
+=== Hosting:github Setup
+[info] 
+[info] i  Detected a .git folder at /home/juanpa/Documents/Code/Socrates/Learning/learning_frontend 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=949687303&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2021-05-19T16:58:31.760Z] >>> HTTP REQUEST POST https://github.com/login/oauth/access_token  
+ {"client_id":"89cf50f02ac6aaed3484","client_secret":"3330d14abc895d9a74d5f17cd7a00711fa2c5bf0","code":"20aed57798a9e582b83a","redirect_uri":"http://localhost:9005","state":"949687303"}
+[debug] [2021-05-19T16:58:32.074Z] <<< HTTP RESPONSE 200 {"server":"GitHub.com","date":"Wed, 19 May 2021 16:58:32 GMT","content-type":"application/json; charset=utf-8","transfer-encoding":"chunked","vary":"X-PJAX, Accept-Encoding, Accept, X-Requested-With","permissions-policy":"interest-cohort=()","etag":"W/\"94d83e7a4390e84ce6557dd3275833dc\"","cache-control":"max-age=0, private, must-revalidate","strict-transport-security":"max-age=31536000; includeSubdomains; preload","x-frame-options":"deny","x-content-type-options":"nosniff","x-xss-protection":"0","referrer-policy":"origin-when-cross-origin, strict-origin-when-cross-origin","expect-ct":"max-age=2592000, report-uri=\"https://api.github.com/_private/browser/errors\"","content-security-policy":"default-src 'none'; base-uri 'self'; block-all-mixed-content; connect-src 'self' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com; frame-ancestors 'none'; frame-src render.githubusercontent.com; img-src 'self' data: github.githubassets.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com; manifest-src 'self'; media-src 'none'; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; worker-src github.com/socket-worker-3f088aa2.js gist.github.com/socket-worker-3f088aa2.js","x-github-request-id":"369A:353D:20B0F6D:418989F:60A543B7"}
+[debug] [2021-05-19T16:58:32.077Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2021-05-19T16:58:32.454Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2021-05-19T16:58:32.454Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"juanpa-a","id":30605567,"node_id":"MDQ6VXNlcjMwNjA1NTY3","avatar_url":"https://avatars.githubusercontent.com/u/30605567?v=4","gravatar_id":"","url":"https://api.github.com/users/juanpa-a","html_url":"https://github.com/juanpa-a","followers_url":"https://api.github.com/users/juanpa-a/followers","following_url":"https://api.github.com/users/juanpa-a/following{/other_user}","gists_url":"https://api.github.com/users/juanpa-a/gists{/gist_id}","starred_url":"https://api.github.com/users/juanpa-a/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/juanpa-a/subscriptions","organizations_url":"https://api.github.com/users/juanpa-a/orgs","repos_url":"https://api.github.com/users/juanpa-a/repos","events_url":"https://api.github.com/users/juanpa-a/events{/privacy}","received_events_url":"https://api.github.com/users/juanpa-a/received_events","type":"User","site_admin":false,"name":"Juan Pablo Ascencio","company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":null,"twitter_username":null,"public_repos":55,"public_gists":0,"followers":5,"following":3,"created_at":"2017-07-31T20:03:08Z","updated_at":"2021-05-18T21:54:01Z","private_gists":0,"total_private_repos":5,"owned_private_repos":5,"disk_usage":44665,"collaborators":2,"two_factor_authentication":true,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] ✔  Success! Logged into GitHub as juanpa-a 
+[info] 
+[debug] [2021-05-19T16:58:34.414Z] >>> [apiv2][query] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key type=owner
+[debug] [2021-05-19T16:58:34.696Z] <<< [apiv2][status] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key 404
+[debug] [2021-05-19T16:58:34.696Z] <<< [apiv2][body] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2021-05-19T16:58:36.607Z] >>> [apiv2][query] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key type=owner
+[debug] [2021-05-19T16:58:36.891Z] <<< [apiv2][status] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key 404
+[debug] [2021-05-19T16:58:36.891Z] <<< [apiv2][body] GET https://api.github.com/repos/WithSocrates/learning_frontend/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}

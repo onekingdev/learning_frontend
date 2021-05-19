@@ -27,7 +27,7 @@ export const Wallet: FC<WalletProps> = ({balance}) => {
   return (
     <>
       <WalletStyle>
-        <Icon image={coins} size={IconSize.medium} />
+        <Icon image={coins} size={IconSize.small} />
         <Balance>${balance}</Balance>
       </WalletStyle>
     </>
