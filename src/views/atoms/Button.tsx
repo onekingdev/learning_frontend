@@ -15,7 +15,7 @@ export const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <StyledButton color={color} onClick={onClick}>
-      {value}
+      <span>{value}</span>
     </StyledButton>
   );
 };

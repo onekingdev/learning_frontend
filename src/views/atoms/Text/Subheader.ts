@@ -7,7 +7,7 @@ type SubheaderProps = {
   isDark?: boolean;
 };
 
-export const Subheader = styled.h1<SubheaderProps>`
+export const Subheader = styled.h3<SubheaderProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-size: 24px;

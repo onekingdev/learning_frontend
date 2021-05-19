@@ -7,7 +7,7 @@ type LessonProps = {
   isDark?: boolean;
 };
 
-export const LessonProps = styled.h1<LessonProps>`
+export const LessonProps = styled.h4<LessonProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-weight: 500;
