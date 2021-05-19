@@ -63,7 +63,7 @@ export const LogIn: FC = () => {
             label={dictionary['en'].password}
             isSecret={true}
             validate={validatePassword}
-            errMsg={'Your password is incorrect please try again'}
+            errMsg={'Your password is incorrect, please try again.'}
           />
           <Caption value={dictionary['en'].forgot} />
           <ServicesMobile>
