@@ -7,7 +7,7 @@ type LevelUpProps = {
   isDark?: boolean;
 };
 
-export const LevelUp = styled.h5<LevelUpProps>`
+export const LevelUp = styled.h1<LevelUpProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-weight: 600;

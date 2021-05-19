@@ -7,7 +7,7 @@ type TitleProps = {
   isDark?: boolean;
 };
 
-export const Title = styled.h2<TitleProps>`
+export const Title = styled.h1<TitleProps>`
   font-family: ${Typography.secondary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-weight: bold;

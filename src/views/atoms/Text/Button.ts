@@ -6,7 +6,7 @@ type ButtonProps = {
   isDark?: boolean;
 };
 
-export const Button = styled.span<ButtonProps>`
+export const Button = styled.h1<ButtonProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-weight: 500;
