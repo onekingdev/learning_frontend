@@ -1,13 +1,14 @@
 import {FC, useEffect} from 'react';
 // import {Body} from '../../atoms/Body';
 import {Body} from '../../atoms/Body';
-import {Button} from '../../atoms/Button';
+// import {Button} from '../../atoms/Button';
+import {Button, ButtonColors} from '../../molecules/Button';
 import {Button as ButtonText} from '../../atoms/Text/Button';
 import {Caption} from '../../atoms/Caption';
 import {Headline4, Headline5} from '../../atoms/Headline/Headline';
 import {ServiceButton} from '../../atoms/ServiceButton';
 import {TextInput} from '../../atoms/TextInput';
-import {BasicColor} from '../../Color';
+// import {BasicColor} from '../../Color';
 import {dictionary} from './dictionary';
 import google from '../../assets/google-logo.svg';
 import greeting from '../../assets/greeting.svg';
@@ -26,6 +27,7 @@ import {
   Card,
 } from './Style';
 import {Divider} from '../../atoms/Divider';
+import {BasicColor} from '../../Color';
 
 const validatePassword = (password: string) => {
   return password !== 'test';
@@ -75,13 +77,18 @@ export const LogIn: FC = () => {
             />
           </ServicesMobile>
           <Actions>
-            <Button>
+            {/* <Button>
               <ButtonText> Login </ButtonText>
             </Button>
             <Divider value={dictionary['en'].or} />
             <Button>
                 <ButtonText> Sign Up </ButtonText>
-            </Button>
+            </Button> */}
+            <Button
+              value={'test'}
+              // color
+            />
+            <Button value={'test'} color={ButtonColors.login} />
           </Actions>
           <Services>
             <ServiceButton

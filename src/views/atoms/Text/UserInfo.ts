@@ -6,7 +6,7 @@ type UserInfoProps = {
   isDark?: boolean;
 };
 
-export const UserInfo = styled.h1<UserInfoProps>`
+export const UserInfo = styled.span<UserInfoProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-weight: 500;
