@@ -2,6 +2,7 @@ import {FC, useEffect} from 'react';
 // import {Body} from '../../atoms/Body';
 import {Body} from '../../atoms/Body';
 import {Button} from '../../atoms/Button';
+import {Button as ButtonText} from '../../atoms/Text/Button';
 import {Caption} from '../../atoms/Caption';
 import {Headline4, Headline5} from '../../atoms/Headline/Headline';
 import {ServiceButton} from '../../atoms/ServiceButton';
@@ -74,9 +75,13 @@ export const LogIn: FC = () => {
             />
           </ServicesMobile>
           <Actions>
-            <Button value={dictionary['en'].login} />
+            <Button>
+              <ButtonText> Login </ButtonText>
+            </Button>
             <Divider value={dictionary['en'].or} />
-            <Button value={dictionary['en'].create} color={BasicColor.orange} />
+            <Button>
+                <ButtonText> Sign Up </ButtonText>
+            </Button>
           </Actions>
           <Services>
             <ServiceButton

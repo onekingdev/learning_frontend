@@ -1,11 +1,26 @@
+import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor, shadeColor} from '../Color';
+import {Button as ButtonText} from '../atoms/Text/Button';
+
+const enum ButtonColors {
+  login = BasicColor.greenSoft,
+}
 
 type ButtonProps = {
-  color?: BasicColor.orange | BasicColor.green | BasicColor.greenSoft;
+  value: string;
+  color?: ButtonColors;
 };
 
-export const Button = styled.button<ButtonProps>`
+export const Button: FC<ButtonProps> = ({value, color}) => {
+  return (
+    <StyledButton color={color}>
+      <ButtonText>{value}</ButtonText>
+    </StyledButton>
+  );
+};
+
+const StyledButton = styled.button<{color?: ButtonColors}>`
   background-color: ${props => props.color || BasicColor.greenSoft};
   color: ${BasicColor.white};
   padding: 18px 32px;
