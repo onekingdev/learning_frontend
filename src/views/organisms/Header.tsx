@@ -12,11 +12,12 @@ import avatar from '../assets/avatars/avatar1.svg';
 import {IconSize} from '../atoms/Icon/Size';
 
 const HeaderStyles = styled.div`
-  width: 90%;
+  width: 85%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 30px;
 `;
 
 export const Header = () => {
@@ -25,7 +26,7 @@ export const Header = () => {
       <HeaderStyles>
         <Icon image={menu_toggle} size={IconSize.small} />
         <Icon image={home} size={IconSize.medium} />
-        <Energy />
+        <Energy charge={4} />
         <Icon image={modality} size={IconSize.medium} />
         <Wallet balance={10000} />
         <Icon image={settings} size={IconSize.small} />

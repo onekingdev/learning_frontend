@@ -1,14 +1,19 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
 
 type BatteryProps = {
-  charge?: boolean;
+  charge: number;
 };
 
-const ChargeItem = styled.div`
+const ChargeItem = styled.div<{
+  color: BasicColor.greenSoft | BasicColor.gray80;
+  borderColor: BasicColor.greenShadow | BasicColor.gray90;
+}>`
   width: 15px;
   height: 34px;
+  background-color: ${p => p.color};
+  border-bottom: 10px solid ${p => p.borderColor};
 `;
 
 const BatteryStyles = styled.div`
@@ -40,25 +45,21 @@ const BatteryPole = styled.div`
 `;
 export const Battery: FC<BatteryProps> = ({charge}) => {
   const chargeArray = [false, false, false, false, false, false, false, false];
-  useEffect(() => {
-    const chargeTrue = chargeArray.find(item =>
-      charge ? item : item === true
-    );
-
-    console.log(chargeTrue);
-  }, []);
+  const IncreaseCharge = () => {
+    for (let i = 0; i < charge; i++) {
+      chargeArray[i] = true;
+    }
+  };
+  IncreaseCharge();
   return (
     <>
       <BatteryContainer>
         <BatteryStyles>
-          {chargeArray.map(item => (
+          {chargeArray.map((item, i) => (
             <ChargeItem
-              style={{
-                backgroundColor: item
-                  ? `${BasicColor.greenSoft}`
-                  : `${BasicColor.gray80}`,
-                borderBottom: `10px solid ${item ? '#148712' : '#3F3F3F'}`,
-              }}
+              color={item ? BasicColor.greenSoft : BasicColor.gray80}
+              borderColor={item ? BasicColor.greenShadow : BasicColor.gray90}
+              key={i}
             />
           ))}
         </BatteryStyles>
