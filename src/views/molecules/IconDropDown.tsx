@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {Body} from '../atoms/Text/Body';
+import {BasicColor} from '../Color';
 
 type Option = {
   name: string;
@@ -37,9 +38,9 @@ const Dropdown = styled.div`
 const DropdownContent = styled.div`
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: ${BasicColor.white20};
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px shadeColor(${BasicColor.white20}, 20);
   padding: 12px 16px;
   z-index: 1;
   ${Dropdown}:hover & {

@@ -1,5 +1,6 @@
 export enum BasicColor {
   white = '#FFFFFF',
+  white20 = '#f9f9f9',
   black = '#000000',
   orange = '#CC5B1D',
   green = '#21B95C',

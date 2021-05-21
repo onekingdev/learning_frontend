@@ -1,4 +1,4 @@
-import React from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import home from '../assets/home.svg';
 import {Icon} from '../atoms/Icon/Icon';
@@ -8,19 +8,27 @@ import modality from '../assets/modality.svg';
 import {Wallet} from '../molecules/Wallet/Wallet';
 import settings from '../assets/settings.svg';
 import {UserProgress} from './UserProgress';
-import avatar from '../assets/avatars/avatar1.svg';
 import {IconSize} from '../atoms/Icon/Size';
 
-const HeaderStyles = styled.div`
-  width: 85%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-`;
+type HeaderProps = {
+  rank: number;
+  level: number;
+  exp: number;
+  expMax: number;
+  icon: string;
+  userName: string;
+  progress: number;
+};
 
-export const Header = () => {
+export const Header: FC<HeaderProps> = ({
+  rank,
+  level,
+  exp,
+  expMax,
+  icon,
+  userName,
+  progress,
+}) => {
   return (
     <>
       <HeaderStyles>
@@ -31,15 +39,24 @@ export const Header = () => {
         <Wallet balance={10000} />
         <Icon image={settings} size={IconSize.small} />
         <UserProgress
-          rank={10}
-          level={3}
-          exp={20}
-          expMax={200}
-          icon={avatar}
-          userName={'Elliot Alderson'}
-          progress={10}
+          rank={rank}
+          level={level}
+          exp={exp}
+          expMax={expMax}
+          icon={icon}
+          userName={userName}
+          progress={progress}
         />
       </HeaderStyles>
     </>
   );
 };
+
+const HeaderStyles = styled.div`
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+`;
