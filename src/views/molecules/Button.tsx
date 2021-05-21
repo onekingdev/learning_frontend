@@ -20,7 +20,11 @@ export const Button: FC<ButtonProps> = ({value, color}) => {
   );
 };
 
-const StyledButton = styled.button<{bgColor?: ButtonColors}>`
+type StyledButtonProps = {
+  bgColor?: ButtonColors;
+};
+
+const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${props => props.bgColor || BasicColor.greenSoft};
   color: ${BasicColor.white};
   padding: 18px 32px;
