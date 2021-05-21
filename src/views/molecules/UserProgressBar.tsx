@@ -6,21 +6,6 @@ type UserProgressBarProps = {
   progress: number;
 };
 
-const UserProgressBarStyle = styled.div`
-  width: 186px;
-  height: 12px;
-  background-color: ${BasicColor.gray80};
-  border-radius: 40px;
-`;
-
-const Progress = styled.div<{
-  progress: number;
-}>`
-  width: ${p => p.progress}%;
-  height: 12px;
-  background-color: ${BasicColor.greenSoft};
-  border-radius: 40px;
-`;
 export const UserProgressBar: FC<UserProgressBarProps> = ({progress}) => {
   return (
     <>
@@ -30,3 +15,21 @@ export const UserProgressBar: FC<UserProgressBarProps> = ({progress}) => {
     </>
   );
 };
+
+type ProgressProps = {
+  progress: number;
+};
+
+const UserProgressBarStyle = styled.div`
+  width: 186px;
+  height: 12px;
+  background-color: ${BasicColor.gray80};
+  border-radius: 40px;
+`;
+
+const Progress = styled.div<ProgressProps>`
+  width: ${p => p.progress}%;
+  height: 12px;
+  background-color: ${BasicColor.greenSoft};
+  border-radius: 40px;
+`;

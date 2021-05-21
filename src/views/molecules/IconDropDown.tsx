@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import {Caption} from '../atoms/Caption';
+import {Body} from '../atoms/Text/Body';
 
 type Option = {
   name: string;
@@ -22,7 +22,7 @@ export const IconDropDown: FC<IconDropDownProps> = ({
       <img src={icon} alt="" />
       <DropdownContent>
         {options.map(o => (
-          <Caption value={o.name} isDark={true} />
+          <Body isDark={true}>{o.name}</Body>
         ))}
       </DropdownContent>
     </Dropdown>

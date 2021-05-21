@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../Color';
-import {UserProgressBar} from '../atoms/UserProgressBar';
+import {UserProgressBar} from './UserProgressBar';
 import {UserIcon} from '../atoms/UserIcon';
 
 type UserProgressProps = {
