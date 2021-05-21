@@ -7,7 +7,7 @@ import {Energy} from '../molecules/Energy/Energy';
 import modality from '../assets/modality.svg';
 import {Wallet} from '../molecules/Wallet/Wallet';
 import settings from '../assets/settings.svg';
-import {UserProgress} from '../molecules/UserProgress';
+import {UserProgress} from './UserProgress';
 import avatar from '../assets/avatars/avatar1.svg';
 import {IconSize} from '../atoms/Icon/Size';
 

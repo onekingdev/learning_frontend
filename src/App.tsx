@@ -13,7 +13,7 @@ function App() {
         title={'test'}
         color={'#FF0000'}
       />
-      <UserIcon avatar={'https://picsum.photos/200'} />
+      <UserIcon src={'https://picsum.photos/200'} />
     </div>
   );
 }

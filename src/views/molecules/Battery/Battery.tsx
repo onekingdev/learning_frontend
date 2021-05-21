@@ -6,10 +6,38 @@ type BatteryProps = {
   charge: number;
 };
 
-const ChargeItem = styled.div<{
+export const Battery: FC<BatteryProps> = ({charge}) => {
+  const chargeArray = [false, false, false, false, false, false, false, false];
+  const IncreaseCharge = () => {
+    for (let i = 0; i < charge; i++) {
+      chargeArray[i] = true;
+    }
+  };
+  IncreaseCharge();
+  return (
+    <>
+      <BatteryContainer>
+        <BatteryStyles>
+          {chargeArray.map((item, i) => (
+            <ChargeItem
+              color={item ? BasicColor.greenSoft : BasicColor.gray80}
+              borderColor={item ? BasicColor.greenShadow : BasicColor.gray90}
+              key={i}
+            />
+          ))}
+        </BatteryStyles>
+        <BatteryPole />
+      </BatteryContainer>
+    </>
+  );
+};
+
+type ChargeItemProps = {
   color: BasicColor.greenSoft | BasicColor.gray80;
   borderColor: BasicColor.greenShadow | BasicColor.gray90;
-}>`
+};
+
+const ChargeItem = styled.div<ChargeItemProps>`
   width: 15px;
   height: 34px;
   background-color: ${p => p.color};
@@ -43,28 +71,3 @@ const BatteryPole = styled.div`
   background-color: #505050;
   border-bottom: 7px solid #3c3c3c;
 `;
-export const Battery: FC<BatteryProps> = ({charge}) => {
-  const chargeArray = [false, false, false, false, false, false, false, false];
-  const IncreaseCharge = () => {
-    for (let i = 0; i < charge; i++) {
-      chargeArray[i] = true;
-    }
-  };
-  IncreaseCharge();
-  return (
-    <>
-      <BatteryContainer>
-        <BatteryStyles>
-          {chargeArray.map((item, i) => (
-            <ChargeItem
-              color={item ? BasicColor.greenSoft : BasicColor.gray80}
-              borderColor={item ? BasicColor.greenShadow : BasicColor.gray90}
-              key={i}
-            />
-          ))}
-        </BatteryStyles>
-        <BatteryPole />
-      </BatteryContainer>
-    </>
-  );
-};

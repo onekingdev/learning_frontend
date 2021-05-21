@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import {Icon} from '../../atoms/Icon/Icon';
 import lightning from '../../assets/lightning.svg';
-import {Battery} from '../../atoms/Battery/Battery';
+import {Battery} from '../Battery/Battery';
 import {IconSize} from '../../atoms/Icon/Size';
 import styled from 'styled-components';
-import {BatteryButton} from '../../atoms/Battery/BatteryButton';
+import {BatteryButton} from '../Battery/BatteryButton';
 
 type EnergyProps = {
   charge: number;
