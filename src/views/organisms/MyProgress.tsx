@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../Color';
-import {LessonProgress} from '../molecules/LessonProgress';
+import {TopicProgress} from '../molecules/TopicProgress';
 import ELA from '../assets/ELA.svg';
 import MATH from '../assets/MATH.svg';
 import SIGHT from '../assets/sight words.svg';
@@ -58,8 +58,9 @@ export const MyProgress: FC<MyProgressProps> = ({point}) => {
           <Icon image={MYPROGRESS} />
         </MyProgressTitle>
         {lessonProps.map((item, i) => (
-          <LessonProgress
-            point={point}
+          <TopicProgress
+            points={point}
+            maxPoints={8}
             title={item.title}
             color={item.color}
             key={i}
