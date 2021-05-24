@@ -17,13 +17,7 @@ import {
   MobileWelcome,
   Action,
   Field,
-  Illustrations,
-  Logo,
-  ClassroomIlustration,
 } from './Style';
-
-import logo from '../../assets/socrates-logo.svg';
-import classroom from '../../assets/teacher-and-children.svg';
 
 const validatePassword = (password: string) => {
   return password !== 'test';
@@ -40,11 +34,6 @@ export const LogIn: FC = () => {
           <Header isDark={true}>Welcome back!</Header>
           <Subheader isDark={true}>to login say cheese!</Subheader>
         </MobileWelcome>
-
-        <Illustrations>
-          <Logo src={logo} alt="" />
-          <ClassroomIlustration src={classroom} alt="" />
-        </Illustrations>
       </Greet>
       <Card>
         <Form>

@@ -12,7 +12,6 @@ export const Subheader = styled.h3<SubheaderProps>`
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-size: 24px;
   line-height: 29px;
-  margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 12px;
     line-height: 15px;

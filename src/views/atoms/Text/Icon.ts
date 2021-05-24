@@ -15,7 +15,6 @@ export const IconUp = styled.span<IconUpProps>`
   line-height: 15px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 9px;
     line-height: 11px;
