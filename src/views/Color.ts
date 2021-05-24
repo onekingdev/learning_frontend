@@ -21,6 +21,16 @@ export enum BasicColor {
   pink = '#CE2489',
 }
 
+export enum ButtonColor {
+  google = '#FFFFFF',
+  signUp = '#CC5B1D',
+  login = '#21B95C',
+  validate = '#26B824',
+  join = '#F4C222',
+  next = '#1771B9',
+  start = '#22BAAF',
+}
+
 export const shadeColor = (color: string, percent: number) => {
   let R = parseInt(color.substring(1, 3), 16);
   let G = parseInt(color.substring(3, 5), 16);
