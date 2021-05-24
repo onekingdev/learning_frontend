@@ -1,16 +1,16 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import home from '../assets/home.svg';
-import {Icon} from '../../atoms/Icon/Icon';
+import {Icon} from '../atoms/Icon/Icon';
 import menu_toggle from '../assets/Menu Toggle.svg';
-import {Energy} from '../../molecules/Energy/Energy';
+import {Energy} from '../molecules/Energy/Energy';
 import modality from '../assets/modality.svg';
-import {Wallet} from '../../molecules/Wallet/Wallet';
+import {Wallet} from '../molecules/Wallet/Wallet';
 import settings from '../assets/settings.svg';
-import {UserProgress} from '../UserProgress';
-import {IconSize} from '../../atoms/Icon/Size';
+import {UserProgress} from './UserProgress';
+import {IconSize} from '../atoms/Icon/Size';
 
-type TopMenuProps = {
+type HeaderProps = {
   rank: number;
   level: number;
   exp: number;
@@ -20,7 +20,7 @@ type TopMenuProps = {
   progress: number;
 };
 
-export const TopMenu: FC<TopMenuProps> = ({
+export const Header: FC<HeaderProps> = ({
   rank,
   level,
   exp,
@@ -31,7 +31,7 @@ export const TopMenu: FC<TopMenuProps> = ({
 }) => {
   return (
     <>
-      <TopMenuStyles>
+      <HeaderStyles>
         <Icon image={menu_toggle} size={IconSize.small} />
         <Icon image={home} size={IconSize.medium} />
         <Energy charge={4} />
@@ -47,12 +47,12 @@ export const TopMenu: FC<TopMenuProps> = ({
           userName={userName}
           progress={progress}
         />
-      </TopMenuStyles>
+      </HeaderStyles>
     </>
   );
 };
 
-const TopMenuStyles = styled.div`
+const HeaderStyles = styled.div`
   width: 85%;
   margin: 0 auto;
   display: flex;
