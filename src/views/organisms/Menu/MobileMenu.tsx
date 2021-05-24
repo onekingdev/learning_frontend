@@ -19,17 +19,20 @@ export const MobileMenu = () => {
   };
   return (
     <>
-      <MobileMenuStyles>
-        <Icon
-          image={openSidebar ? toggle : cancel}
-          size={IconSize.small}
-          onClick={deploySidebar}
-        />
-        <Icon image={home} size={IconSize.medium} />
-        <Icon image={modality} size={IconSize.medium} />
-        <Icon image={lightning} size={IconSize.medium} />
-        <Icon image={coins} size={IconSize.medium} />
-      </MobileMenuStyles>
+      <MobileMenuContainer>
+        <NavPanel isClose={openSidebar} />
+        <MobileMenuStyles>
+          <Icon
+            image={openSidebar ? cancel : toggle}
+            size={IconSize.small}
+            onClick={deploySidebar}
+          />
+          <Icon image={home} size={IconSize.medium} />
+          <Icon image={modality} size={IconSize.medium} />
+          <Icon image={lightning} size={IconSize.medium} />
+          <Icon image={coins} size={IconSize.medium} />
+        </MobileMenuStyles>
+      </MobileMenuContainer>
     </>
   );
 };
@@ -44,7 +47,8 @@ const MobileMenuStyles = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-
+`;
+const MobileMenuContainer = styled.div`
   @media screen and (min-width: ${ScreenSize.tablet}) {
     display: none;
   }

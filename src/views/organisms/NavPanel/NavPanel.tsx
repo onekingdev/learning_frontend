@@ -17,10 +17,14 @@ import {
 } from './Style';
 import {IconSize} from '../../atoms/Icon/Size';
 
-export const NavPanel = () => {
+type NavPanelProps = {
+  isClose: boolean;
+};
+
+export const NavPanel: FC<NavPanelProps> = ({isClose}) => {
   return (
     <>
-      <NavPanelStyles>
+      <NavPanelStyles state={isClose}>
         <ClosedContainer>
           <Icon image={closed} />
         </ClosedContainer>
