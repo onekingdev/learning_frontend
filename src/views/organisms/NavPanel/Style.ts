@@ -5,11 +5,12 @@ import {ScreenSize} from '../../screenSize';
 
 export const NavPanelStyles = styled.div<{
   size?: string;
+  state: boolean;
 }>`
   width: 10%;
   height: 100vh;
   background-color: ${BasicColor.green};
-  display: flex;
+  display: ${p => (p.state ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
