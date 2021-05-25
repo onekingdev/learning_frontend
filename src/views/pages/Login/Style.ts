@@ -28,7 +28,9 @@ export const MobileWelcome = styled.div`
 `;
 
 export const DesktopWelcome = styled.div`
+  display: none;
   @media (min-width: ${ScreenSize.desktop}) {
+    display: block;
     margin-bottom: 4rem;
   }
 `;
