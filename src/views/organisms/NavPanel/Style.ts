@@ -16,6 +16,7 @@ export const NavPanelStyles = styled.div<{
   justify-content: flex-start;
   position: absolute;
   left: 0;
+  top: 0;
   min-width: 90px;
   max-width: 100px;
 
@@ -46,6 +47,6 @@ export const IconResponsiveContainer = styled.div`
   display: flex;
   justify-content: center;
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    display: ${window.innerWidth < 768 ? 'flex' : 'none'};
+    display: none;
   }
 `;

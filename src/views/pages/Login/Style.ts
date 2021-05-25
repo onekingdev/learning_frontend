@@ -55,41 +55,6 @@ export const Card = styled.div`
   }
 `;
 
-export const Form = styled.div`
-  padding: 2rem;
-  @media (min-width: ${ScreenSize.desktop}) {
-    all: unset;
-  }
-`;
-
-export const Field = styled.div`
-  margin-top: 11px;
-  margin-bottom: 11px;
-`;
-
-export const Action = styled.div`
-  margin-top: 30px;
-  margin-bottom: 30px;
-  @media (min-width: ${ScreenSize.phone}) {
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-`;
-
-export const Actions = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  margin-left: 3rem;
-  margin-right: 3rem;
-  @media (min-width: ${ScreenSize.desktop}) {
-    grid-template-columns: 1fr 0 1fr;
-    grid-gap: 20px;
-    direction: rtl;
-    margin-top: 2rem;
-    margin-left: 0;
-  }
-`;
-
 export const Legal = styled.div`
   display: none;
   @media (min-width: ${ScreenSize.desktop}) {
