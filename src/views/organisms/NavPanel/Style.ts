@@ -5,18 +5,16 @@ import {ScreenSize} from '../../screenSize';
 
 export const NavPanelStyles = styled.div<{
   size?: string;
-  state: boolean;
 }>`
   width: 10%;
   height: 100vh;
   background-color: ${BasicColor.green};
-  display: ${p => (p.state ? 'flex' : 'none')};
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   position: absolute;
   left: 0;
-  top: 0;
   min-width: 90px;
   max-width: 100px;
 
@@ -47,6 +45,6 @@ export const IconResponsiveContainer = styled.div`
   display: flex;
   justify-content: center;
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    display: none;
+    display: ${window.innerWidth < 768 ? 'flex' : 'none'};
   }
 `;

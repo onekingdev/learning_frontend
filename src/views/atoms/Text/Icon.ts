@@ -7,7 +7,7 @@ type IconUpProps = {
   isDark?: boolean;
 };
 
-export const IconUp = styled.span<IconUpProps>`
+export const Icon = styled.span<IconUpProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-weight: 500;
