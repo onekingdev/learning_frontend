@@ -32,6 +32,7 @@ export const DesktopWelcome = styled.div`
   @media (min-width: ${ScreenSize.desktop}) {
     display: block;
     margin-bottom: 4rem;
+    text-align: center;
   }
 `;
 
