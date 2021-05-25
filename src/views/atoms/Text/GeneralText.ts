@@ -14,6 +14,7 @@ export const GeneralText = styled.span<GeneralTextProps>`
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
+  margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 16px;
     line-height: 20px;

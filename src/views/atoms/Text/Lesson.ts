@@ -14,6 +14,7 @@ export const LessonProps = styled.h4<LessonProps>`
   font-size: 28px;
   line-height: 24px;
   letter-spacing: 0.44px;
+  margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 16px;
     line-height: 16px;

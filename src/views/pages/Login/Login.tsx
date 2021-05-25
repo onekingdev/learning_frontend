@@ -1,72 +1,90 @@
 import {FC, useEffect} from 'react';
-import {Divider} from '../../atoms/Divider';
-import {GeneralText} from '../../atoms/Text/GeneralText';
 import {Header} from '../../atoms/Text/Header';
-import {Link} from '../../atoms/Text/Link';
 import {Subheader} from '../../atoms/Text/Subheader';
-import {TextInput} from '../../atoms/Text/TextInput';
 import {ButtonColor} from '../../Color';
-import {Button} from '../../molecules/Button';
+import {Button as ButtonText} from '../../atoms/Text/Button';
 import {
   Login,
   Greet,
   Card,
-  Form,
-  Actions,
   Legal,
   MobileWelcome,
-  Action,
-  Field,
+  Illustrations,
+  Logo,
+  ClassroomIlustration,
+  LoginWrapper,
+  DesktopWelcome,
+  GreetingIlustration,
 } from './Style';
 
-const validatePassword = (password: string) => {
-  return password !== 'test';
-};
+import {dictionary} from './dictionary';
+
+import logo from '../../assets/socrates-logo.svg';
+import classroom from '../../assets/teacher-and-children.svg';
+import greeting from '../../assets/greeting.svg';
+import {Actions} from '../../molecules/Login/Actions';
+import {Form} from '../../molecules/Login/Form';
 
 export const LogIn: FC = () => {
   useEffect(() => {
     console.log('testy test');
   }, []);
+
+  const language = 'en';
+
+  const validatePassword = (password: string) => {
+    return password !== 'test';
+  };
+
   return (
     <Login>
       <Greet>
         <MobileWelcome>
-          <Header isDark={true}>Welcome back!</Header>
-          <Subheader isDark={true}>to login say cheese!</Subheader>
+          <Header isDark={true}>{dictionary[language].welcome}</Header>
+          <Subheader isDark={true}>
+            {dictionary[language].instructions}
+          </Subheader>
         </MobileWelcome>
+
+        <Illustrations>
+          <Logo src={logo} alt="Learn with Socrates logo" />
+          <ClassroomIlustration src={classroom} alt="Classroom Illustratoin" />
+          <GreetingIlustration
+            src={greeting}
+            alt="Teach with student's illustration"
+          />
+        </Illustrations>
       </Greet>
+
       <Card>
-        <Form>
-          <Field>
-            <GeneralText>Log in</GeneralText>
-          </Field>
-          <Field>
-            <TextInput label={'test'} />
-          </Field>
-          <Field>
-            <TextInput
-              label={'test'}
-              validate={validatePassword}
-              errMsg={'Your password is incorrect'}
-              isSecret={true}
-            />
-          </Field>
-          <Link>Forgot your password?</Link>
-        </Form>
-        <Actions>
-          <Action>
-            <Button
-              value={'Log In with Google'}
-              darkText={true}
-              color={ButtonColor.google}
-            />
-          </Action>
-          <Divider value={'or'} />
-          <Action>
-            <Button value={'Log In'} color={ButtonColor.login} />
-          </Action>
-        </Actions>
-        <Legal></Legal>
+        <LoginWrapper>
+          <DesktopWelcome>
+            <Header>{dictionary[language].welcome}</Header>
+            <Subheader>{dictionary[language].instructions}</Subheader>
+          </DesktopWelcome>
+
+          <Form
+            login={dictionary[language].login}
+            email={dictionary[language].email}
+            password={dictionary[language].password}
+            forgot={dictionary[language].forgot}
+            wrongPasswordMessage={dictionary[language].error}
+            passwordValidator={validatePassword}
+          />
+          <Actions
+            googleText={dictionary[language].with_google}
+            googleColor={ButtonColor.google}
+            or={dictionary[language].or}
+            loginText={dictionary[language].login}
+            loginColor={ButtonColor.login}
+          />
+        </LoginWrapper>
+
+        <Legal>
+          <ButtonText>{dictionary[language].about}</ButtonText>
+          <ButtonText>{dictionary[language].privacy}</ButtonText>
+          <ButtonText>{dictionary[language].children_privacy}</ButtonText>
+        </Legal>
       </Card>
     </Login>
   );
