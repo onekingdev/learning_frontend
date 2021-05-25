@@ -26,6 +26,8 @@ import {
   GreetingIlustration,
 } from './Style';
 
+import {dictionary} from './dictionary';
+
 import logo from '../../assets/socrates-logo.svg';
 import classroom from '../../assets/teacher-and-children.svg';
 import greeting from '../../assets/greeting.svg';
@@ -38,71 +40,80 @@ export const LogIn: FC = () => {
   useEffect(() => {
     console.log('testy test');
   }, []);
+
+  const language = 'en';
+
   return (
     <Login>
       <Greet>
         <MobileWelcome>
-          <Header isDark={true}>Welcome back!</Header>
+          <Header isDark={true}>{dictionary[language].welcome}</Header>
           <Subheader isDark={true}>
-            To login please enter your email and password
+            {dictionary[language].instructions}
           </Subheader>
         </MobileWelcome>
 
         <Illustrations>
-          <Logo src={logo} alt="" />
-          <ClassroomIlustration src={classroom} alt="" />
-          <GreetingIlustration src={greeting} alt="" />
+          <Logo src={logo} alt="Learn with Socrates logo" />
+          <ClassroomIlustration src={classroom} alt="Classroom Illustratoin" />
+          <GreetingIlustration
+            src={greeting}
+            alt="Teach with student's illustration"
+          />
         </Illustrations>
       </Greet>
 
       <Card>
         <LoginWrapper>
           <DesktopWelcome>
-            <Header>Welcome back!</Header>
-            <Subheader>To login please enter your email and password</Subheader>
+            <Header>{dictionary[language].welcome}</Header>
+            <Subheader>{dictionary[language].instructions}</Subheader>
           </DesktopWelcome>
 
           <Form>
             <Field>
-              <GeneralText>Log in</GeneralText>
+              <GeneralText>{dictionary[language].login}</GeneralText>
             </Field>
 
             <Field>
-              <TextInput label={'test'} />
+              <TextInput label={dictionary[language].email} />
             </Field>
 
             <Field>
               <TextInput
-                label={'test'}
+                label={dictionary[language].password}
                 validate={validatePassword}
-                errMsg={'Your password is incorrect'}
+                errMsg={dictionary[language].error}
                 isSecret={true}
               />
             </Field>
-            <Link>Forgot your password?</Link>
+            <Link>{dictionary[language].forgot}</Link>
           </Form>
 
           <Actions>
             <Action>
               <Button
-                value={'Log In with Google'}
+                value={dictionary[language].with_google}
                 darkText={true}
                 color={ButtonColor.google}
               />
             </Action>
 
-            <Divider value={'or'} />
+            <Divider value={dictionary[language].or} />
 
             <Action>
-              <Button value={'Log In'} color={ButtonColor.login} />
+              <Button
+                value={dictionary[language].login}
+                color={ButtonColor.login}
+              />
             </Action>
           </Actions>
         </LoginWrapper>
 
         <Legal>
-          <ButtonText>About Us</ButtonText>
-          <ButtonText>Privacy Policy</ButtonText>
-          <ButtonText>Children's Privacy Policy</ButtonText>
+          <ButtonText>{dictionary[language].about}</ButtonText>
+          <ButtonText>{dictionary[language].privacy}</ButtonText>
+          <ButtonText>{dictionary[language].children_privacy}</ButtonText>
         </Legal>
       </Card>
     </Login>
