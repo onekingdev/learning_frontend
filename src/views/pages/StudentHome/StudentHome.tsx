@@ -1,5 +1,4 @@
 import {FC} from 'react';
-
 import {StudentHomeStyle} from './Style';
 import {TopMenu} from '../../organisms/Menu/TopMenu';
 import {NavPanel} from '../../organisms/NavPanel/NavPanel';

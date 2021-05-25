@@ -42,7 +42,7 @@ export const TopMenu: FC<TopMenuProps> = ({
   return (
     <>
       <TopMenuStyles>
-        <NavPanel isClose={openSidebar} />
+        <NavPanel isClose={openSidebar} deploySideBar={deploySidebar} />
         <Icon
           image={openSidebar ? '' : menu_toggle}
           size={IconSize.small}
