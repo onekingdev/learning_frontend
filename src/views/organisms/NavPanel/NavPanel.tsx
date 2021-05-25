@@ -1,13 +1,12 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import {Icon} from '../../atoms/Icon/Icon';
 
 import question from '../../assets/Question mobile.svg';
-import closed from '../../assets/x.svg';
+import closed from '../../assets/close.svg';
 import game from '../../assets/games mobile.svg';
 import progress from '../../assets/progress mobile.svg';
 import collectibles from '../../assets/collectibles mobile.svg';
 import settings from '../../assets/settings.svg';
-import {UserIcon} from '../../atoms/UserIcon';
 import avatar from '../../assets/avatars/avatar1.svg';
 import {
   NavPanelStyles,
@@ -15,12 +14,15 @@ import {
   IconResponsiveContainer,
   ClosedContainer,
 } from './Style';
-import {IconSize} from '../../atoms/Icon/Size';
 
-export const NavPanel = () => {
+type NavPanelProps = {
+  isClose: boolean;
+};
+
+export const NavPanel: FC<NavPanelProps> = ({isClose}) => {
   return (
     <>
-      <NavPanelStyles>
+      <NavPanelStyles state={isClose}>
         <ClosedContainer>
           <Icon image={closed} />
         </ClosedContainer>
