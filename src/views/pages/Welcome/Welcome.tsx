@@ -4,10 +4,8 @@ import {Header} from '../../atoms/Text/Header';
 import {Subheader} from '../../atoms/Text/Subheader';
 import welcome from '../../assets/welcome-page.svg';
 import {Button} from '../../molecules/Button';
-import {Button as ButtonText} from '../../atoms/Text/Button';
 import {ButtonColor} from '../../Color';
 import styled from 'styled-components';
-// import {Wrapper, Logo} from './Style';
 import background from '../../assets/colored-shapes-bg.svg';
 import {Icon} from '../../atoms/Text/Icon';
 
