@@ -14,5 +14,4 @@ export const UserInfo = styled.span<UserInfoProps>`
   line-height: 15px;
   letter-spacing: 0.75px;
   text-transform: capitalize;
-  margin: 0;
 `;

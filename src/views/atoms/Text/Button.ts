@@ -14,5 +14,4 @@ export const Button = styled.span<ButtonProps>`
   line-height: 20px;
   letter-spacing: 0.75px;
   text-transform: capitalize;
-  margin: 0;
 `;

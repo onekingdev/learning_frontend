@@ -13,7 +13,6 @@ export const Header = styled.h1<HeaderProps>`
   font-weight: 800;
   font-size: 40px;
   line-height: 49px;
-  margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 24px;
     line-height: 22px;
