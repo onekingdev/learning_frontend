@@ -42,9 +42,9 @@ export const TopMenu: FC<TopMenuProps> = ({
   return (
     <>
       <TopMenuStyles>
-        <NavPanel isClose={openSidebar} deploySideBar={deploySidebar} />
+        <NavPanel isClose={openSidebar} />
         <Icon
-          image={menu_toggle}
+          image={openSidebar ? '' : menu_toggle}
           size={IconSize.small}
           onClick={deploySidebar}
         />
@@ -52,6 +52,7 @@ export const TopMenu: FC<TopMenuProps> = ({
         <Energy charge={energyCharge} />
         <Icon image={modality} size={IconSize.medium} />
         <Wallet balance={balance} />
+        <Icon image={settings} size={IconSize.small} />
         <UserProgress
           rank={rank}
           level={level}
@@ -71,7 +72,7 @@ const TopMenuStyles = styled.div`
 
   @media screen and (min-width: ${ScreenSize.tablet}) {
     width: 95%;
-    margin: 10px auto;
+    margin: 30px auto;
     display: flex;
     justify-content: space-between;
     align-items: center;

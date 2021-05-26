@@ -10,17 +10,15 @@ export const NavPanelStyles = styled.div<{
   width: 10%;
   height: 100vh;
   background-color: ${BasicColor.green};
-  display: flex;
+  display: ${p => (p.state ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   position: absolute;
-  left: ${p => (p.state ? 0 : '-100px')};
-  top: 0;
+  left: 0;
   min-width: 90px;
   max-width: 100px;
-  transition-duration: 0.3s;
-  z-index: 2;
+
   @media screen and (min-width: ${ScreenSize.desktop}) {
     align-items: flex-end;
   }
@@ -36,7 +34,7 @@ export const ClosedContainer = styled.div`
 `;
 export const IconContainer = styled.div`
   width: 100%;
-  height: 65px;
+  height: 80px;
   margin-top: 15px;
   display: flex;
   justify-content: center;
@@ -48,6 +46,6 @@ export const IconResponsiveContainer = styled.div`
   display: flex;
   justify-content: center;
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    display: none;
+    display: ${window.innerWidth < 768 ? 'flex' : 'none'};
   }
 `;

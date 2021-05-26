@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import {Icon} from '../../atoms/Icon/Icon';
 
 import question from '../../assets/Question mobile.svg';
@@ -17,15 +17,14 @@ import {
 
 type NavPanelProps = {
   isClose: boolean;
-  deploySideBar?: () => void;
 };
 
-export const NavPanel: FC<NavPanelProps> = ({isClose, deploySideBar}) => {
+export const NavPanel: FC<NavPanelProps> = ({isClose}) => {
   return (
     <>
       <NavPanelStyles state={isClose}>
         <ClosedContainer>
-          <Icon image={closed} onClick={deploySideBar} />
+          <Icon image={closed} />
         </ClosedContainer>
         <IconContainer>
           <Icon image={question} />
@@ -39,6 +38,9 @@ export const NavPanel: FC<NavPanelProps> = ({isClose, deploySideBar}) => {
         <IconContainer>
           <Icon image={collectibles} />
         </IconContainer>
+        <IconResponsiveContainer>
+          <Icon image={settings} />
+        </IconResponsiveContainer>
         <IconResponsiveContainer>
           <Icon image={avatar} />
         </IconResponsiveContainer>

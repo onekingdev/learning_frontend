@@ -1,11 +1,26 @@
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {LogIn} from './views/pages/Login/Login';
+import {Welcome} from './views/pages/Welcome/Welcome';
+import {Testing} from './views/pages/Testing/Testing';
 
-function App() {
+export default () => {
   return (
-    <div className="App">
-      <LogIn />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Welcome />
+        </Route>
+        <Route path="/login">
+          <LogIn />
+        </Route>
+        {process.env.NODE_ENV === 'development' ? (
+          <Route path="/testing">
+            <Testing />
+          </Route>
+        ) : null}
+      </Switch>
+    </Router>
   );
-}
+};
 
-export default App;
+//This is a comment
