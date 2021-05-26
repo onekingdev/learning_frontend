@@ -8,7 +8,7 @@ type TitleProps = {
 };
 
 export const Title = styled.h2<TitleProps>`
-  font-family: ${Typography.secondary};
+  font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-weight: bold;
   font-size: 40px;
