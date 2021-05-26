@@ -39,7 +39,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
         currentQuestion={currentQuestion}
         totalQuestions={totalQuestions}
       ></LessonProgressTitle>
-      // !! Changed hardcoded bars for a map
+      {/* // !! Changed hardcoded bars for a map */}
       <StyledLessonProgressBarWrapper>
         {buildBars(totalQuestions).map((bar: ProgressBar) => (
           <LessonProgressBar bgColor={bar.color}></LessonProgressBar>

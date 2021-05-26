@@ -9,46 +9,39 @@ import {Wrapper} from './Style';
 import apple from '../../assets/apple.svg';
 
 export const Question: FC = () => {
+  const options = [
+    {image: apple},
+    {image: apple},
+    {image: apple},
+    {image: apple},
+  ];
+  const answers = [
+    {value: 'apple'},
+    {value: 'apple'},
+    {value: 'apple'},
+    {value: 'apple'},
+  ];
+
   return (
     <Wrapper>
-      {/* <LessonProgress
-        bgColorTopic={BasicColor.blue}
-        currentQuestion={1}
-        topic={'Math'}
-        totalQuestions={10}
-        width={20}
-      /> */}
+      <LessonProgress currentQuestion={1} topic={'Math'} totalQuestions={10} />
       <Container>
         <BlackBoard>
           <Lesson>Which of these is not an apple?</Lesson>
-          <img src={apple} alt="correct answer" />
-          <img src={apple} alt="correct answer" />
-          <img src={apple} alt="correct answer" />
-          <img src={apple} alt="correct answer" />
+          {options.map(option => (
+            <img src={option.image} alt="correct answer" />
+          ))}
         </BlackBoard>
         <AnswerWrapper>
           <Lesson>What is the answer?</Lesson>
           <AnswersWrapper>
-            <Button
-              value={'apple'}
-              color={ButtonColor.google}
-              darkText={true}
-            />
-            <Button
-              value={'apple'}
-              color={ButtonColor.google}
-              darkText={true}
-            />
-            <Button
-              value={'apple'}
-              color={ButtonColor.google}
-              darkText={true}
-            />
-            <Button
-              value={'apple'}
-              color={ButtonColor.google}
-              darkText={true}
-            />
+            {answers.map(answer => (
+              <Button
+                value={answer.value}
+                color={ButtonColor.google}
+                darkText={true}
+              />
+            ))}
           </AnswersWrapper>
           <Button value={'validate'} />
         </AnswerWrapper>
