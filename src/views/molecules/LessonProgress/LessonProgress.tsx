@@ -21,6 +21,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   currentQuestion,
   totalQuestions,
 }) => {
+  // !! Added bar array builder function
   const buildBars = (totalQuestions: number) => {
     const bars = [];
     // TODO add logic inside this loop to build a
@@ -38,6 +39,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
         currentQuestion={currentQuestion}
         totalQuestions={totalQuestions}
       ></LessonProgressTitle>
+      // !! Changed hardcoded bars for a map
       <StyledLessonProgressBarWrapper>
         {buildBars(totalQuestions).map((bar: ProgressBar) => (
           <LessonProgressBar bgColor={bar.color}></LessonProgressBar>
