@@ -4,6 +4,7 @@ import {ScreenSize} from '../../screenSize';
 
 type LessonProgressBarProps = {
   bgColor: string;
+  finished?: boolean;
 };
 
 export const LessonProgressBar: FC<LessonProgressBarProps> = ({bgColor}) => {
@@ -14,6 +15,4 @@ const StyledLessonProgressBar = styled.div<{bgColor: string}>`
   width: 100%;
   height: 100%;
   background-color: ${props => props.bgColor};
-  border-left: 1px solid white;
-  border-right: 1px solid white;
 `;

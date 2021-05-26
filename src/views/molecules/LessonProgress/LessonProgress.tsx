@@ -8,6 +8,7 @@ type LessonProgressProps = {
   topic: string;
   currentQuestion: number;
   totalQuestions: number;
+  finished?: boolean;
 };
 
 export const LessonProgress: FC<LessonProgressProps> = ({
@@ -16,7 +17,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   totalQuestions,
 }) => {
   return (
-    <LessonProgressWrapper>
+    <StyledLessonProgressWrapper>
       <LessonProgressTitle
         topic={topic}
         currentQuestion={currentQuestion}
@@ -29,11 +30,11 @@ export const LessonProgress: FC<LessonProgressProps> = ({
         <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
         <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
       </StyledLessonProgressBarWrapper>
-    </LessonProgressWrapper>
+    </StyledLessonProgressWrapper>
   );
 };
 
-const LessonProgressWrapper = styled.div`
+const StyledLessonProgressWrapper = styled.div`
   width: 100%;
   @media screen and (min-width: ${ScreenSize.phone}) {
     width: 1366px;
@@ -44,9 +45,7 @@ const StyledLessonProgressBarWrapper = styled.div`
   width: 100%;
   height: 30px;
   display: flex;
-  &:first-child {
-    border-left: 10px solid blue;
-  }
+  grid-gap: 1px;
   @media screen and (min-width: ${ScreenSize.phone}) {
     height: 57px;
   }

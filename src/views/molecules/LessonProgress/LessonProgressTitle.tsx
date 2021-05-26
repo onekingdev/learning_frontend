@@ -8,13 +8,18 @@ type LessonProgressTitleProps = {
   topic: string;
   currentQuestion: number;
   totalQuestions: number;
+  finished?: boolean;
 };
 
 export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
   topic,
   currentQuestion,
   totalQuestions,
+  finished,
 }) => {
+  const questionText = finished
+    ? 'Good job!'
+    : 'Question ' + currentQuestion + ' of ' + totalQuestions;
   return (
     <LessonProgressTitleWrapper>
       <LessonProgressTopic>
@@ -22,9 +27,7 @@ export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
       </LessonProgressTopic>
       <TriangleRight></TriangleRight>
       <LessonProgressQuestion>
-        <LevelUp>
-          Question {currentQuestion} of {totalQuestions}
-        </LevelUp>
+        <LevelUp>{questionText}</LevelUp>
       </LessonProgressQuestion>
     </LessonProgressTitleWrapper>
   );
