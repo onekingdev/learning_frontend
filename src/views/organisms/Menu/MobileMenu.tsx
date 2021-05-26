@@ -48,6 +48,7 @@ const MobileMenuStyles = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  z-index: 3;
 `;
 const MobileMenuContainer = styled.div`
   @media screen and (min-width: ${ScreenSize.tablet}) {

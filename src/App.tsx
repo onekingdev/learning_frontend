@@ -1,18 +1,11 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {LogIn} from './views/pages/Login/Login';
-import {Welcome} from './views/pages/Welcome/Welcome';
 
-export default () => {
+function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Welcome />
-        </Route>
-        <Route path="/login">
-          <LogIn />
-        </Route>
-      </Switch>
-    </Router>
+    <div className="App">
+      <LogIn />
+    </div>
   );
-};
+}
+
+export default App;

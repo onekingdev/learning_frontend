@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {BasicColor} from '../Color';
 import upArrow from '../assets/upArrow.svg';
 import {Typography} from '../atoms/Text/typography';
+import {ScreenSize} from '../screenSize';
 
 type StartLessonProps = {
   onClick: () => void;
@@ -22,14 +23,22 @@ export const StartLesson: FC<StartLessonProps> = ({onClick}) => {
 };
 
 const StartLessonStyles = styled.div`
-  width: 75%;
-  height: 170px;
-  background-color: ${BasicColor.blue};
-  margin: 0 auto;
-  border-radius: 82px 82px 0 0;
-  display: flex;
-  justify-content: center;
-  color: ${BasicColor.white};
+  display: none;
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    width: 100%;
+    height: 130px;
+    background-color: ${BasicColor.blue};
+    margin: 0 auto;
+    border-radius: 82px 82px 0 0;
+    display: flex;
+    justify-content: center;
+    color: ${BasicColor.white};
+    position: absolute;
+    bottom: 0;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    height: 100px;
+  }
 `;
 const PlayLessonContainer = styled.div`
   width: 143px;
