@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {LessonProgressTitle} from './LessonProgressTitle';
 import {LessonProgressBar} from './LessonProgressBar';
 import {ScreenSize} from '../../screenSize';
+import {BasicColor} from '../../Color';
 
 type LessonProgressProps = {
   topic: string;
@@ -11,11 +12,25 @@ type LessonProgressProps = {
   finished?: boolean;
 };
 
+type ProgressBar = {
+  color: BasicColor;
+};
+
 export const LessonProgress: FC<LessonProgressProps> = ({
   topic,
   currentQuestion,
   totalQuestions,
 }) => {
+  const buildBars = (totalQuestions: number) => {
+    const bars = [];
+    // TODO add logic inside this loop to build a
+    // TODO proper progress bar
+    for (let i = 0; i < totalQuestions; i++) {
+      bars.push({color: BasicColor.purple});
+    }
+    return bars;
+  };
+
   return (
     <StyledLessonProgressWrapper>
       <LessonProgressTitle
@@ -24,11 +39,9 @@ export const LessonProgress: FC<LessonProgressProps> = ({
         totalQuestions={totalQuestions}
       ></LessonProgressTitle>
       <StyledLessonProgressBarWrapper>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
+        {buildBars(totalQuestions).map((bar: ProgressBar) => (
+          <LessonProgressBar bgColor={bar.color}></LessonProgressBar>
+        ))}
       </StyledLessonProgressBarWrapper>
     </StyledLessonProgressWrapper>
   );
