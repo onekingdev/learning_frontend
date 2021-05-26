@@ -4,50 +4,14 @@ import {ScreenSize} from '../../screenSize';
 
 type LessonProgressBarProps = {
   bgColor: string;
-  width: number;
 };
 
-export const LessonProgressBar: FC<LessonProgressBarProps> = ({
-  bgColor,
-  width,
-}) => {
-  return (
-    <StyledLessonProgressBarWrapper>
-      <StyledLessonProgressBar
-        width={width}
-        bgColor={bgColor}
-      ></StyledLessonProgressBar>
-      <StyledLessonProgressBar
-        width={width}
-        bgColor={bgColor}
-      ></StyledLessonProgressBar>
-      <StyledLessonProgressBar
-        width={width}
-        bgColor={bgColor}
-      ></StyledLessonProgressBar>
-      <StyledLessonProgressBar
-        width={width}
-        bgColor={bgColor}
-      ></StyledLessonProgressBar>
-      <StyledLessonProgressBar
-        width={width}
-        bgColor={bgColor}
-      ></StyledLessonProgressBar>
-    </StyledLessonProgressBarWrapper>
-  );
+export const LessonProgressBar: FC<LessonProgressBarProps> = ({bgColor}) => {
+  return <StyledLessonProgressBar bgColor={bgColor}></StyledLessonProgressBar>;
 };
 
-const StyledLessonProgressBarWrapper = styled.div`
+const StyledLessonProgressBar = styled.div<{bgColor: string}>`
   width: 100%;
-  height: 30px;
-  display: flex;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    height: 57px;
-  }
-`;
-
-const StyledLessonProgressBar = styled.div<{width: number; bgColor: string}>`
-  width: ${props => props.width}px;
   height: 100%;
   background-color: ${props => props.bgColor};
   border-left: 1px solid white;

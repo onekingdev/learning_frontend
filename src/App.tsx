@@ -22,5 +22,3 @@ export default () => {
     </Router>
   );
 };
-
-//This is a comment

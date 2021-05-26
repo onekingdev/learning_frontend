@@ -6,16 +6,14 @@ import {ScreenSize} from '../../screenSize';
 
 type LessonProgressTitleProps = {
   topic: string;
-  current_question: number;
-  total_questions: number;
-  bgColor: string;
-  width: number;
+  currentQuestion: number;
+  totalQuestions: number;
 };
 
 export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
   topic,
-  current_question,
-  total_questions,
+  currentQuestion,
+  totalQuestions,
 }) => {
   return (
     <LessonProgressTitleWrapper>
@@ -25,7 +23,7 @@ export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
       <TriangleRight></TriangleRight>
       <LessonProgressQuestion>
         <LevelUp>
-          Question {current_question} of {total_questions}
+          Question {currentQuestion} of {totalQuestions}
         </LevelUp>
       </LessonProgressQuestion>
     </LessonProgressTitleWrapper>
@@ -74,6 +72,7 @@ const LessonProgressTitleWrapper = styled.div`
   grid-template-columns: 4fr auto 6fr;
   align-content: center;
   background-color: ${BasicColor.aqua};
+  border-bottom: 1px solid white;
   @media (max-width: ${ScreenSize.phone}) {
     height: 34px;
   }

@@ -2,39 +2,52 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {LessonProgressTitle} from './LessonProgressTitle';
 import {LessonProgressBar} from './LessonProgressBar';
+import {ScreenSize} from '../../screenSize';
 
 type LessonProgressProps = {
   topic: string;
-  current_question: number;
-  total_questions: number;
-  bgColorTopic: string;
-  width: number;
+  currentQuestion: number;
+  totalQuestions: number;
 };
 
 export const LessonProgress: FC<LessonProgressProps> = ({
   topic,
-  current_question,
-  total_questions,
-  bgColorTopic,
-  width,
+  currentQuestion,
+  totalQuestions,
 }) => {
   return (
     <LessonProgressWrapper>
       <LessonProgressTitle
         topic={topic}
-        current_question={current_question}
-        total_questions={total_questions}
-        bgColor={bgColorTopic}
-        width={width}
+        currentQuestion={currentQuestion}
+        totalQuestions={totalQuestions}
       ></LessonProgressTitle>
-      <LessonProgressBar
-        width={width}
-        bgColor={bgColorTopic}
-      ></LessonProgressBar>
+      <StyledLessonProgressBarWrapper>
+        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
+        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
+        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
+        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
+        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
+      </StyledLessonProgressBarWrapper>
     </LessonProgressWrapper>
   );
 };
 
 const LessonProgressWrapper = styled.div`
-  width: 500px;
+  width: 100%;
+  @media screen and (min-width: ${ScreenSize.phone}) {
+    width: 1366px;
+  }
+`;
+
+const StyledLessonProgressBarWrapper = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+  &:first-child {
+    border-left: 10px solid blue;
+  }
+  @media screen and (min-width: ${ScreenSize.phone}) {
+    height: 57px;
+  }
 `;
