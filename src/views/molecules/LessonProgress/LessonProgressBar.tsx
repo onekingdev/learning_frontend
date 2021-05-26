@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
 
 type LessonProgressBarProps = {
   bgColor: string;
