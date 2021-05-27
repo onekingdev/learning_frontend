@@ -5,10 +5,21 @@ import {BasicColor, ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
 import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
 import {MobileMenu} from '../../organisms/Menu/MobileMenu';
-import {Wrapper} from './Style';
+import {
+  Answers,
+  AnswerWrapper,
+  BlackBoard,
+  Container,
+  Options,
+  Option,
+  Submit,
+  Wrapper,
+} from './Style';
 import apple from '../../assets/apple.svg';
 
 export const Question: FC = () => {
+  // TODO answers and options must come from DB
+  // TODO and the type should be much more roboust
   const options = [
     {image: apple},
     {image: apple},
@@ -28,13 +39,18 @@ export const Question: FC = () => {
       <Container>
         <BlackBoard>
           <Lesson>Which of these is not an apple?</Lesson>
-          {options.map(option => (
-            <img src={option.image} alt="correct answer" />
-          ))}
+          <Options>
+            {options.map((option, index) => (
+              <Option>
+                <img src={option.image} alt="correct answer" />
+                <Lesson>{++index}</Lesson>
+              </Option>
+            ))}
+          </Options>
         </BlackBoard>
         <AnswerWrapper>
           <Lesson>What is the answer?</Lesson>
-          <AnswersWrapper>
+          <Answers>
             {answers.map(answer => (
               <Button
                 value={answer.value}
@@ -42,33 +58,13 @@ export const Question: FC = () => {
                 darkText={true}
               />
             ))}
-          </AnswersWrapper>
-          <Button value={'validate'} />
+          </Answers>
+          <Submit>
+            <Button value={'validate'} />
+          </Submit>
         </AnswerWrapper>
       </Container>
       <MobileMenu />
     </Wrapper>
   );
 };
-
-const BlackBoard = styled.div`
-  background-color: #13705f;
-  border: 7px solid #5c2100;
-  height: 25vh;
-`;
-
-const AnswerWrapper = styled.div`
-  background-color: #3f3f3f;
-  height: 25vh;
-`;
-
-const Container = styled.div`
-  text-align: center;
-  display: grid;
-  grid-template-columns: 1fr;
-`;
-
-const AnswersWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
