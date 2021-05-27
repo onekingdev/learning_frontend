@@ -1,11 +1,6 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {Icon} from '../atoms/Icon/Icon';
-import {Header} from '../atoms/Text/Header';
-import {LessonProps} from '../atoms/Text/Lesson';
-import {Subheader} from '../atoms/Text/Subheader';
-import {Title} from '../atoms/Text/Title';
-
 import {BasicColor} from '../Color';
 
 type TopicProgressProps = {
@@ -31,7 +26,7 @@ export const TopicProgress: FC<TopicProgressProps> = ({
   return (
     <>
       <TopicProgressContainer>
-        <LessonProps isDark={true}>{title}</LessonProps>
+        <Icon image={title} />
         <TopicProgressStyles>
           {generateProgress(points, maxPoints).map((item, i) => {
             return (
@@ -57,6 +52,7 @@ const TopicProgressContainer = styled.div`
   width: 275px;
   height: 84px;
   display: grid;
+  grid-row-gap: 14px;
 `;
 
 const TopicProgressStyles = styled.div`

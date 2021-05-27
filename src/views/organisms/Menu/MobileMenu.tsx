@@ -12,25 +12,16 @@ import {IconSize} from '../../atoms/Icon/Size';
 import {useState} from 'react';
 import {ScreenSize} from '../../screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
-import {StartLesson} from '../../molecules/StartLesson';
 
 export const MobileMenu: FC = () => {
   const [openSidebar, setOpenSidebar] = useState(Boolean);
-  const [closeStartButton, setCloseStartButton] = useState(Boolean);
   const deploySidebar = () => {
     setOpenSidebar(!openSidebar);
-    setCloseStartButton(!closeStartButton);
   };
   return (
     <>
       <MobileMenuContainer>
-        <StartLesson
-          onClick={() => console.log('Hello friend')}
-          isClose={false}
-        />
-        <NavPanelContainer>
-          <NavPanel isClose={openSidebar} />
-        </NavPanelContainer>
+        <NavPanel isClose={openSidebar} />
         <MobileMenuStyles>
           <Icon
             image={openSidebar ? close : toggle}
@@ -51,20 +42,14 @@ const MobileMenuStyles = styled.div`
   width: 100%;
   height: 57px;
   background-color: ${BasicColor.blue};
-  position: relative;
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 3;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    display: none;
-  }
 `;
 const MobileMenuContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const NavPanelContainer = styled.div`
   @media screen and (min-width: ${ScreenSize.tablet}) {
     display: none;
   }
