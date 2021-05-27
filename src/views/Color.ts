@@ -19,6 +19,7 @@ export enum BasicColor {
   darkGreen = '#13705F',
   purple = '#A685E2',
   pink = '#CE2489',
+  brown = '#B7784B',
 }
 
 export enum ButtonColor {

@@ -9,21 +9,26 @@ import SCIENCE from '../assets/SCIENCE.svg';
 import HEALTH from '../assets/health.svg';
 import MYPROGRESS from '../assets/My Progress.svg';
 import {Icon} from '../atoms/Icon/Icon';
+import {ScreenSize} from '../screenSize';
 
 type MyProgressProps = {
   point: number;
 };
 const MyProgressStyle = styled.div`
-  width: 330px;
-  height: 450px;
-  background-color: ${BasicColor.white};
-  border-radius: 30px;
-  box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 30px 25px;
+  display: none;
+
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    width: 300px;
+    height: 450px;
+    background-color: ${BasicColor.white};
+    border-radius: 30px;
+    box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 25px;
+  }
 `;
 const MyProgressTitle = styled.div`
   margin-bottom: 25px;

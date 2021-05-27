@@ -14,10 +14,12 @@ export const LevelUp = styled.h5<LevelUpProps>`
   font-size: 24px;
   line-height: 29px;
   letter-spacing: 0.75px;
+  text-transform: capitalize;
   margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.75px;
+    text-transform: capitalize;
   }
 `;
