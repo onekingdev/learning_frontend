@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
-import locker from '../../assets/locker.png';
+
 import {ScreenSize} from '../../screenSize';
 
 export const StudentHomeStyle = styled.div`
@@ -28,6 +28,13 @@ export const CharacterContainer = styled.div`
     align-items: center;
     margin-top: 50px;
   }
+
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: 85%;
+    margin-top: 0;
+    grid-template-columns: 1fr 400px;
+    justify-items: flex-end;
+  }
 `;
 
 export const BackgroundHome = styled.div`
@@ -44,34 +51,19 @@ export const BackgroundHome = styled.div`
   }
 `;
 
-export const BackgroundLocker = styled.div`
-  width: 100%;
-  height: 310px;
-  background-image: url(${locker});
-  background-position: center top;
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: -30px;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    top: 20px;
-    height: 360px;
-    background-position: left center;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    background-size: cover;
-    left: 20%;
-    width: 500px;
-    height: 310px;
-    top: 15%;
-  }
-`;
 export const BackgroundHomeFloor = styled.div`
   width: 100%;
-  height: 80%;
+  height: 50%;
   background-color: ${BasicColor.brown};
+  position: absolute;
+  z-index: -10;
+  bottom: 0;
 
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    height: 60%;
+    height: 35%;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: 90%;
+    height: 30%;
   }
 `;

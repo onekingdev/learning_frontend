@@ -2,7 +2,6 @@ import {FC} from 'react';
 import {
   BackgroundHome,
   BackgroundHomeFloor,
-  BackgroundLocker,
   CharacterContainer,
   StudentHomeStyle,
 } from './Style';
@@ -54,10 +53,9 @@ export const StudentHome: FC<StudentHomeProps> = ({
           <HomeCharacter userName={'Sophie'} />
           <MyProgress point={5} />
         </CharacterContainer>
-        <BackgroundHome>
-          <BackgroundLocker />
-          <BackgroundHomeFloor />
-        </BackgroundHome>
+
+        <BackgroundHomeFloor />
+
         <MobileMenu />
       </StudentHomeStyle>
     </>

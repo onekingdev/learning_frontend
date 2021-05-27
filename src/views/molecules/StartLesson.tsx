@@ -39,12 +39,15 @@ const StartLessonStyles = styled.div<StartLessonStylesProps>`
   bottom: 0;
   z-index: 3;
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    height: 130px;
+    width: 90%;
+    left: 5%;
+    height: 70px;
     position: absolute;
     bottom: 0;
   }
+
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    height: 100px;
+    height: 60px;
   }
 `;
 const PlayLessonContainer = styled.div`
@@ -57,10 +60,17 @@ const PlayeLessonArrow = styled.img`
   width: 30px;
   height: 10px;
   margin-top: 15px;
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    height: 15px;
+  }
 `;
 const PlayLessonText = styled.p`
   font-family: ${Typography.primary};
   font-size: 14px;
   font-weight: 700;
   margin-top: 5px;
+
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    font-size: 20px;
+  }
 `;

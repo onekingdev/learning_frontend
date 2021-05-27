@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import welcome from '../assets/welcome.png';
 import {Header} from '../atoms/Text/Header';
 import {Title} from '../atoms/Text/Title';
-
+import locker from '../assets/locker.png';
 import avatar from '../assets/avatars/girl-11.png';
 import {Subheader} from '../atoms/Text/Subheader';
 import {ScreenSize} from '../screenSize';
@@ -22,6 +22,7 @@ export const HomeCharacter: FC<HomeCharacterProps> = ({userName}) => {
         <AvatarContainer>
           <Character src={avatar} />
         </AvatarContainer>
+        <BackgroundLocker />
       </HomeCharacterStyle>
     </>
   );
@@ -29,10 +30,10 @@ export const HomeCharacter: FC<HomeCharacterProps> = ({userName}) => {
 
 const HomeCharacterStyle = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 const WelcomeMessage = styled.div`
   width: 90%;
@@ -55,6 +56,29 @@ const Character = styled.img`
   margin-top: 30px;
 
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    width: 229px;
+  }
+
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: 194px;
+  }
+`;
+export const BackgroundLocker = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${locker});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: -1;
+
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    background-position: bottom;
+    width: 550px;
+  }
+
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    padding-top: 50px;
+    background-position: center;
   }
 `;

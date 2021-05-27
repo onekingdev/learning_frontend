@@ -28,7 +28,9 @@ export const MobileMenu: FC = () => {
           onClick={() => console.log('Hello friend')}
           isClose={false}
         />
-        <NavPanel isClose={openSidebar} />
+        <NavPanelContainer>
+          <NavPanel isClose={openSidebar} />
+        </NavPanelContainer>
         <MobileMenuStyles>
           <Icon
             image={openSidebar ? close : toggle}
@@ -61,4 +63,9 @@ const MobileMenuStyles = styled.div`
 const MobileMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const NavPanelContainer = styled.div`
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    display: none;
+  }
 `;
