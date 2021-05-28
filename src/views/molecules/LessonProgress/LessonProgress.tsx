@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {LessonProgressTitle} from './LessonProgressTitle';
 import {LessonProgressBar} from './LessonProgressBar';
 import {ScreenSize} from '../../screenSize';
+import {BasicColor} from '../../Color';
 
 type LessonProgressProps = {
   topic: string;
@@ -11,11 +12,26 @@ type LessonProgressProps = {
   finished?: boolean;
 };
 
+type ProgressBar = {
+  color: BasicColor;
+};
+
 export const LessonProgress: FC<LessonProgressProps> = ({
   topic,
   currentQuestion,
   totalQuestions,
 }) => {
+  // !! Added bar array builder function
+  const buildBars = (totalQuestions: number) => {
+    const bars = [];
+    // TODO add logic inside this loop to build a
+    // TODO proper progress bar
+    for (let i = 0; i < totalQuestions; i++) {
+      bars.push({color: BasicColor.purple});
+    }
+    return bars;
+  };
+
   return (
     <StyledLessonProgressWrapper>
       <LessonProgressTitle
@@ -23,12 +39,11 @@ export const LessonProgress: FC<LessonProgressProps> = ({
         currentQuestion={currentQuestion}
         totalQuestions={totalQuestions}
       ></LessonProgressTitle>
+      {/* // !! Changed hardcoded bars for a map */}
       <StyledLessonProgressBarWrapper>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
-        <LessonProgressBar bgColor={'blue'}></LessonProgressBar>
+        {buildBars(totalQuestions).map((bar: ProgressBar) => (
+          <LessonProgressBar bgColor={bar.color}></LessonProgressBar>
+        ))}
       </StyledLessonProgressBarWrapper>
     </StyledLessonProgressWrapper>
   );
@@ -37,7 +52,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
 const StyledLessonProgressWrapper = styled.div`
   width: 100%;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    width: 1366px;
+    max-width: 1366px;
   }
 `;
 
