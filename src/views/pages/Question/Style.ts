@@ -3,8 +3,20 @@ import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
+  background-image: url(${background});
+  background-repeat: no-repeat;
+  background-size: cover;
   @media (max-width: ${ScreenSize.tablet}) {
     height: 100vh;
+  }
+  @media (min-width: ${ScreenSize.desktop}) {
+    height: 100vh;
+  }
+`;
+
+export const ProgressWrapper = styled.div`
+  @media (min-width: ${ScreenSize.desktop}) {
+    margin-top: 3rem;
   }
 `;
 
@@ -28,6 +40,9 @@ export const Options = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   @media (min-width: ${ScreenSize.tablet}) {
     grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: ${ScreenSize.desktop}) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
 
@@ -60,13 +75,19 @@ export const AnswerWrapper = styled.div`
 export const Container = styled.div`
   text-align: center;
   display: grid;
-  background-image: url(${background});
-  background-repeat: no-repeat;
-  background-size: cover;
   height: calc(100% - 57px - 33px - 30px - 35px);
   @media (min-width: ${ScreenSize.tablet}) {
     height: calc(100% - 71px - 57px - 33px);
     grid-template-columns: 50% 50%;
+  }
+  @media (min-width: ${ScreenSize.tablet}) {
+    grid-template-columns: 66% 33%;
+    max-width: 1366px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: ${ScreenSize.desktop}) {
+    height: unset;
   }
 `;
 
