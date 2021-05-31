@@ -71,13 +71,17 @@ const TopMenuStyles = styled.div`
 
   @media screen and (min-width: ${ScreenSize.tablet}) {
     width: 98%;
-    max-width: 968px;
-    padding-top: 45px;
-    padding-bottom: 45px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    margin-top: 0;
+    max-width: 968px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
