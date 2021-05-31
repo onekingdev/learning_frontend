@@ -51,7 +51,8 @@ const MobileMenuStyles = styled.div`
   width: 100%;
   height: 57px;
   background-color: ${BasicColor.blue};
-  position: relative;
+  position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
