@@ -15,6 +15,7 @@ import {
   Submit,
   Wrapper,
   OptionWrapper,
+  ProgressWrapper,
 } from './Style';
 import apple from '../../assets/apple.svg';
 import {TopMenu} from '../../organisms/Menu/TopMenu';
@@ -48,7 +49,13 @@ export const Question: FC = () => {
         progress={3}
         rank={34}
       />
-      <LessonProgress currentQuestion={1} topic={'Math'} totalQuestions={10} />
+      <ProgressWrapper>
+        <LessonProgress
+          currentQuestion={1}
+          topic={'Math'}
+          totalQuestions={10}
+        />
+      </ProgressWrapper>
       <Container id="container">
         <BlackBoard>
           <Lesson>Which of these is not an apple?</Lesson>
