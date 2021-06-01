@@ -35,15 +35,13 @@ const StartLessonStyles = styled.div<StartLessonStylesProps>`
   display: ${p => (p.isClose ? 'none' : 'flex')};
   justify-content: center;
   color: ${BasicColor.white};
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  z-index: 3;
+  z-index: 1;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     width: 90%;
     left: 5%;
     height: 70px;
-    position: absolute;
-    bottom: 0;
   }
 
   @media screen and (min-width: ${ScreenSize.desktop}) {
