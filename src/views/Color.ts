@@ -32,12 +32,6 @@ export enum ButtonColor {
   start = '#22BAAF',
 }
 
-export enum SettingBarColor {
-  accessibility = '#ec5858',
-  audio = '#22bab0',
-  notifications = '#1771b9',
-}
-
 export const shadeColor = (color: string, percent: number) => {
   let R = parseInt(color.substring(1, 3), 16);
   let G = parseInt(color.substring(3, 5), 16);
