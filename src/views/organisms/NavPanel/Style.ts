@@ -14,13 +14,13 @@ export const NavPanelStyles = styled.div<{
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  position: fixed;
+  position: absolute;
   left: ${p => (p.state ? 0 : '-100px')};
   top: 0;
   min-width: 90px;
   max-width: 100px;
   transition-duration: 0.3s;
-
+  z-index: 2;
   @media screen and (min-width: ${ScreenSize.desktop}) {
     align-items: flex-end;
   }
