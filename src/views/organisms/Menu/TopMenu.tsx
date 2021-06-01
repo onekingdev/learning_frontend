@@ -6,6 +6,7 @@ import menu_toggle from '../../assets/Menu Toggle.svg';
 import {Energy} from '../../molecules/Energy/Energy';
 import modality from '../../assets/modality.svg';
 import {Wallet} from '../../molecules/Wallet/Wallet';
+import settings from '../../assets/settings.svg';
 import {UserProgress} from '../UserProgress';
 import {IconSize} from '../../atoms/Icon/Size';
 import {ScreenSize} from '../../screenSize';
@@ -42,13 +43,11 @@ export const TopMenu: FC<TopMenuProps> = ({
     <>
       <TopMenuStyles>
         <NavPanel isClose={openSidebar} deploySideBar={deploySidebar} />
-        <ToggleButtonContainer isClose={openSidebar}>
-          <Icon
-            image={menu_toggle}
-            size={IconSize.small}
-            onClick={deploySidebar}
-          />
-        </ToggleButtonContainer>
+        <Icon
+          image={menu_toggle}
+          size={IconSize.small}
+          onClick={deploySidebar}
+        />
         <Icon image={home} size={IconSize.medium} />
         <Energy charge={energyCharge} />
         <Icon image={modality} size={IconSize.medium} />
@@ -67,9 +66,6 @@ export const TopMenu: FC<TopMenuProps> = ({
   );
 };
 
-type ToggleButtonProps = {
-  isClose: boolean;
-};
 const TopMenuStyles = styled.div`
   display: none;
 
@@ -88,7 +84,4 @@ const TopMenuStyles = styled.div`
     margin-left: auto;
     margin-right: auto;
   }
-`;
-const ToggleButtonContainer = styled.div<ToggleButtonProps>`
-  opacity: ${p => (p.isClose ? 0 : 1)};
 `;
