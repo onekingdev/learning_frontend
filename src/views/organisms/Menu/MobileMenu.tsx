@@ -51,12 +51,11 @@ const MobileMenuStyles = styled.div`
   width: 100%;
   height: 57px;
   background-color: ${BasicColor.blue};
-  position: fixed;
-  bottom: 0;
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 2;
+  z-index: 3;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     display: none;
   }
