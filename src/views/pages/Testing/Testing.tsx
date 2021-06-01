@@ -1,18 +1,11 @@
 import {FC} from 'react';
-import {BadgeWrapper} from '../../atoms/BadgeWrapper';
-import {AvatarBadge} from '../../molecules/AvatarBadge';
-import {RibbonText} from '../../molecules/RibbonText';
-import {SettingBar} from '../../molecules/SettingBar';
-// import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
-// import {BasicColor} from '../../Color';
+import {BasicColor} from '../../Color';
+import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
 
 export const Testing: FC = () => {
   return (
     <div>
-      <AvatarBadge />
-      <RibbonText body={'testy test'} />
-      <BadgeWrapper />
-      <SettingBar body={'testy test'} color={'cyan'} />
+      <LessonProgress topic={'Math'} currentQuestion={3} totalQuestions={10} />
     </div>
   );
 };

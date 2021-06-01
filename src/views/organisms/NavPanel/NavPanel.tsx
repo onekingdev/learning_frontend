@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import {Icon} from '../../atoms/Icon/Icon';
 
 import question from '../../assets/Question mobile.svg';
@@ -6,7 +6,6 @@ import closed from '../../assets/close.svg';
 import game from '../../assets/games mobile.svg';
 import progress from '../../assets/progress mobile.svg';
 import collectibles from '../../assets/collectibles mobile.svg';
-import settings from '../../assets/settings.svg';
 import avatar from '../../assets/avatars/avatar1.svg';
 import {
   NavPanelStyles,
