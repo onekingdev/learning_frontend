@@ -1,5 +1,10 @@
 import {FC} from 'react';
-import {BackgroundHome, CharacterContainer, StudentHomeStyle} from './Style';
+import {
+  BackgroundHome,
+  BackgroundHomeFloor,
+  CharacterContainer,
+  StudentHomeStyle,
+} from './Style';
 import {TopMenu} from '../../organisms/Menu/TopMenu';
 import {NavPanel} from '../../organisms/NavPanel/NavPanel';
 import {MyProgress} from '../../organisms/MyProgress';
@@ -32,24 +37,27 @@ export const StudentHome: FC<StudentHomeProps> = ({
 }) => {
   return (
     <>
-      <TopMenu
-        rank={rank}
-        level={level}
-        exp={exp}
-        expMax={expMax}
-        icon={icon}
-        userName={userName}
-        progress={progress}
-        energyCharge={energyCharge}
-        balance={balance}
-      />
       <StudentHomeStyle>
+        <TopMenu
+          rank={rank}
+          level={level}
+          exp={exp}
+          expMax={expMax}
+          icon={icon}
+          userName={userName}
+          progress={progress}
+          energyCharge={energyCharge}
+          balance={balance}
+        />
         <CharacterContainer>
           <HomeCharacter userName={'Sophie'} />
           <MyProgress point={5} />
         </CharacterContainer>
+
+        <BackgroundHomeFloor />
+
+        <MobileMenu />
       </StudentHomeStyle>
-      <MobileMenu />
     </>
   );
 };

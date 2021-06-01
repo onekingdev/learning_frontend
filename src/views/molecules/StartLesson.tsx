@@ -32,21 +32,18 @@ const StartLessonStyles = styled.div<StartLessonStylesProps>`
   background-color: ${BasicColor.blue};
   margin: 0 auto;
   border-radius: 50px 50px 0 0;
-  display: ${p =>
-    window.location.pathname === '/home'
-      ? p.isClose
-        ? 'none'
-        : 'flex'
-      : 'none'};
+  display: ${p => (p.isClose ? 'none' : 'flex')};
   justify-content: center;
   color: ${BasicColor.white};
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  z-index: 1;
+  z-index: 3;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     width: 90%;
     left: 5%;
     height: 70px;
+    position: absolute;
+    bottom: 0;
   }
 
   @media screen and (min-width: ${ScreenSize.desktop}) {
@@ -62,7 +59,7 @@ const PlayLessonContainer = styled.div`
 const PlayeLessonArrow = styled.img`
   width: 30px;
   height: 10px;
-  margin-top: 10px;
+  margin-top: 15px;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     height: 15px;
   }
@@ -71,7 +68,7 @@ const PlayLessonText = styled.p`
   font-family: ${Typography.primary};
   font-size: 14px;
   font-weight: 700;
-  margin-top: 3px;
+  margin-top: 5px;
 
   @media screen and (min-width: ${ScreenSize.tablet}) {
     font-size: 20px;

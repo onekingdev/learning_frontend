@@ -6,6 +6,7 @@ import menu_toggle from '../../assets/Menu Toggle.svg';
 import {Energy} from '../../molecules/Energy/Energy';
 import modality from '../../assets/modality.svg';
 import {Wallet} from '../../molecules/Wallet/Wallet';
+import settings from '../../assets/settings.svg';
 import {UserProgress} from '../UserProgress';
 import {IconSize} from '../../atoms/Icon/Size';
 import {ScreenSize} from '../../screenSize';
@@ -76,8 +77,11 @@ const TopMenuStyles = styled.div`
     align-items: center;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    margin: 0 auto;
-    padding: 15px 0;
+    margin-top: 0;
     max-width: 968px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
