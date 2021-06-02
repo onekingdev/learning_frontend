@@ -1,4 +1,4 @@
 export enum Typography {
   primary = 'Montserrat',
-  secondary = 'Quicksand',
+  secondary = "'Quicksand', sans-serif",
 }
