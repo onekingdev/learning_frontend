@@ -4,10 +4,7 @@ import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
 import {Question} from './views/pages/Question/Question';
 import {MyProfile} from './views/pages/MyProfile/MyProfile';
-import {Backpack} from './views/pages/Backpack/Backpack';
-import {Games} from './views/pages/Games/Games';
-import {GamesMenu} from './views/pages/GamesMenu/GamesMenu';
-import {StudentHome} from './views/pages/StudentHome/StudentHome';
+import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 
 export default () => {
   return (
@@ -25,17 +22,8 @@ export default () => {
         <Route path="/profile">
           <MyProfile />
         </Route>
-        <Route path="/home">
-          <StudentHome />
-        </Route>
-        <Route path="/backpack">
-          <Backpack />
-        </Route>
-        <Route path="/games/categories">
-          <Games />
-        </Route>
-        <Route path="/games">
-          <GamesMenu />
+        <Route path="/confirmation">
+          <ConfirmAccount />
         </Route>
         {process.env.NODE_ENV === 'development' ? (
           <Route path="/testing">
