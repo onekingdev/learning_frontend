@@ -5,7 +5,7 @@ import {ScreenSize} from '../../screenSize';
 
 export const StudentHomeStyle = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ export const StudentHomeStyle = styled.div`
 `;
 export const CharacterContainer = styled.div`
   width: 100%;
-  height: 70vh;
+  height: 80vh;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
@@ -27,7 +27,6 @@ export const CharacterContainer = styled.div`
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     margin-top: 50px;
-    height: 80vh;
   }
 
   @media screen and (min-width: ${ScreenSize.desktop}) {
@@ -49,5 +48,22 @@ export const BackgroundHome = styled.div`
 
   @media screen and (min-width: ${ScreenSize.desktop}) {
     height: 80vh;
+  }
+`;
+
+export const BackgroundHomeFloor = styled.div`
+  width: 100%;
+  height: 50%;
+  background-color: ${BasicColor.brown};
+  position: absolute;
+  z-index: -10;
+  bottom: 0;
+
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    height: 35%;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: 90%;
+    height: 30%;
   }
 `;
