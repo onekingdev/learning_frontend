@@ -7,49 +7,19 @@ import {MobileMenu} from '../../organisms/Menu/MobileMenu';
 
 import {StartLesson} from '../../molecules/StartLesson';
 import {HomeCharacter} from '../../organisms/HomeCharacter';
-type StudentHomeProps = {
-  rank: number;
-  level: number;
-  exp: number;
-  expMax: number;
-  icon: string;
-  userName: string;
-  progress: number;
-  energyCharge: number;
-  balance: number;
-};
+import {StudentMenu} from '../../templates/StudentMenu';
 
-export const StudentHome: FC<StudentHomeProps> = ({
-  rank,
-  level,
-  exp,
-  expMax,
-  icon,
-  userName,
-  progress,
-  energyCharge,
-  balance,
-}) => {
+export const StudentHome: FC = () => {
   return (
     <>
-      <TopMenu
-        rank={rank}
-        level={level}
-        exp={exp}
-        expMax={expMax}
-        icon={icon}
-        userName={userName}
-        progress={progress}
-        energyCharge={energyCharge}
-        balance={balance}
-      />
-      <StudentHomeStyle>
-        <CharacterContainer>
-          <HomeCharacter userName={'Sophie'} />
-          <MyProgress point={5} />
-        </CharacterContainer>
-      </StudentHomeStyle>
-      <MobileMenu />
+      <StudentMenu>
+        <StudentHomeStyle>
+          <CharacterContainer>
+            <HomeCharacter userName={'Sophie'} />
+            <MyProgress point={5} />
+          </CharacterContainer>
+        </StudentHomeStyle>
+      </StudentMenu>
     </>
   );
 };
