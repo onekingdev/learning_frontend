@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
-import backpackBase from '../../assets/backpack-base.png';
+import backpackBase from '../../assets/backpack-base.svg';
 import {ScreenSize} from '../../screenSize';
 
 export const BackpackContainer = styled.div`
@@ -77,26 +77,6 @@ export const BackpackBase = styled.div`
   }
 `;
 
-export const BackpackLogoContainer = styled.div`
-  width: 100px;
-  height: 35px;
-  border-radius: 15px;
-  background-color: ${BasicColor.white};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 5px;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    width: 150px;
-    height: 50px;
-    margin-bottom: 40px;
-  }
-`;
-
-export const BackpackLogo = styled.img`
-  width: 90%;
-`;
-
 export const BackpackButtonsContainer = styled.div`
   width: 90%;
   height: 150px;
@@ -104,7 +84,7 @@ export const BackpackButtonsContainer = styled.div`
   margin-left: 20px;
   justify-content: center;
   align-items: flex-start;
-  padding-bottom: 20px;
+  padding-top: 15px;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     height: 200px;
   }

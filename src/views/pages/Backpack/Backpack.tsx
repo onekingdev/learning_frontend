@@ -6,24 +6,21 @@ import {
   BackpackContainer,
   BackpackFace,
   BackpackHook,
-  BackpackLogo,
-  BackpackLogoContainer,
   BackpackDecorationLeft,
   BackpackDecorationRight,
   BackPackStyles,
   ControlButtonContainer,
   HookBracket,
 } from './Styles';
-import backpackHook from '../../assets/backpack-hook.png';
+import backpackHook from '../../assets/backpack-hook.svg';
 import {MobileMenu} from '../../organisms/Menu/MobileMenu';
-import learnLogo from '../../assets/logo-learn.svg';
 import {BackpackButton} from '../../atoms/BackpackButton';
-import avatarButton from '../../assets/avatar-button.png';
-import cardsButton from '../../assets/cards-button.png';
-import controlButton from '../../assets/control-button.png';
-import backpackFace from '../../assets/backpack-face.png';
-import backpackLeft from '../../assets/backpack-left.png';
-import backpackRight from '../../assets/backpack-right.png';
+import avatarButton from '../../assets/avatar-button.svg';
+import cardsButton from '../../assets/cards-button.svg';
+import controlButton from '../../assets/control-button.svg';
+import backpackFace from '../../assets/backpack-face.svg';
+import backpackLeft from '../../assets/backpack-left.svg';
+import backpackRight from '../../assets/backpack-right.svg';
 
 export const Backpack: FC = () => {
   return (
@@ -36,9 +33,6 @@ export const Backpack: FC = () => {
           </HookBracket>
           <BackpackDecorationRight src={backpackRight} />
           <BackpackBase>
-            <BackpackLogoContainer>
-              <BackpackLogo src={learnLogo} />
-            </BackpackLogoContainer>
             <BackpackButtonsContainer>
               <AvatarButtonContainer>
                 <BackpackButton
