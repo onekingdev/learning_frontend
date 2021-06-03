@@ -17,7 +17,7 @@ export const Title = styled.h2<TitleProps>`
   line-height: 20px;
 
   @media (min-width: ${ScreenSize.desktop}) {
-    font-size: 40px;
+    font-size: 34px;
     line-height: 50px;
   }
 `;
