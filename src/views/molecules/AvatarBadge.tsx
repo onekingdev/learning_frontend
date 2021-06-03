@@ -69,6 +69,7 @@ const Name = styled.div`
     font-weight: bold;
     font-size: 40px;
     line-height: 50px;
+    text-align: right;
   }
 `;
 
