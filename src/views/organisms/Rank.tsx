@@ -4,6 +4,7 @@ import {Title} from '../atoms/Text/Title';
 import {UserRank} from '../molecules/UserRank';
 import avatar from '../assets/avatars/avatar1.svg';
 import {BasicColor} from '../Color';
+import {ScreenSize} from '../screenSize';
 
 export const Rank: FC = () => {
   return (
@@ -28,10 +29,13 @@ const RankStyles = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10px;
+  padding: 10px;
   border-radius: 20px;
   background-color: ${BasicColor.white};
   box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    height: 470px;
+  }
 `;
 const RankUsersContainer = styled.div`
   width: 100%;

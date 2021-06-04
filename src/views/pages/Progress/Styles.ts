@@ -22,6 +22,7 @@ export const ProgressStyle = styled.div`
     justify-content: center;
     margin-top: 80px;
     grid-gap: 40px;
+    align-items: flex-end;
   }
 `;
 export const ProgressTitle = styled.div`
@@ -32,10 +33,12 @@ export const ProgressTitle = styled.div`
     width: 30%;
   }
 `;
-export const ProgressAvatarContainer = styled.div`
+
+export const ProgressCharacter = styled.img`
   display: none;
 
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    display: default;
+    display: initial;
+    width: 194px;
   }
 `;
