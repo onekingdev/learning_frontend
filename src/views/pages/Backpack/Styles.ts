@@ -8,6 +8,10 @@ export const BackpackContainer = styled.div`
   height: 80vh;
   display: flex;
   align-items: flex-end;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    align-items: flex-start;
+    margin-top: 20px;
+  }
 `;
 export const BackPackStyles = styled.div`
   width: 100%;
@@ -73,7 +77,7 @@ export const BackpackBase = styled.div`
   align-items: center;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     top: 80px;
-    height: 400px;
+    height: 410px;
   }
 `;
 

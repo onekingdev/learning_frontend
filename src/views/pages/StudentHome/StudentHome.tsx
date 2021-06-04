@@ -1,5 +1,10 @@
 import {FC} from 'react';
-import {BackgroundHome, CharacterContainer, StudentHomeStyle} from './Style';
+import {
+  BackgroundHome,
+  CharacterContainer,
+  MyProgressContainer,
+  StudentHomeStyle,
+} from './Style';
 import {TopMenu} from '../../organisms/Menu/TopMenu';
 import {NavPanel} from '../../organisms/NavPanel/NavPanel';
 import {MyProgress} from '../../organisms/MyProgress';
@@ -16,7 +21,9 @@ export const StudentHome: FC = () => {
         <StudentHomeStyle>
           <CharacterContainer>
             <HomeCharacter userName={'Sophie'} />
-            <MyProgress point={5} />
+            <MyProgressContainer>
+              <MyProgress point={5} />
+            </MyProgressContainer>
           </CharacterContainer>
         </StudentHomeStyle>
       </StudentMenu>
