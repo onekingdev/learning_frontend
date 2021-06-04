@@ -1,7 +1,6 @@
 import {FC} from 'react';
-import styled from 'styled-components';
 import {Lesson} from '../../atoms/Text/Lesson';
-import {BasicColor, ButtonColor} from '../../Color';
+import {ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
 import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
 import {MobileMenu} from '../../organisms/Menu/MobileMenu';

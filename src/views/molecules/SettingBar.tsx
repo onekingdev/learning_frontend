@@ -11,7 +11,7 @@ type SettingProps = {
   icon?: string; // !! TODO: evaluate proper route prop
 };
 
-export const SettingBar: FC<SettingProps> = ({body, route, color}) => {
+export const SettingBar: FC<SettingProps> = ({body, color}) => {
   return <StyledSetting bgColor={color}>{body}</StyledSetting>;
 };
 

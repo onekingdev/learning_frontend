@@ -4,7 +4,7 @@ import {BadgeWrapper, LockedBadgeWrapper} from '../atoms/BadgeWrapper';
 import question from '../assets/question-mark.svg';
 import {RibbonText} from './RibbonText';
 
-export const BadgeContainer = () => {
+export const BadgeContainer: FC = () => {
   const badges = [
     'https://i.pravatar.cc/300',
     'https://i.pravatar.cc/300',
