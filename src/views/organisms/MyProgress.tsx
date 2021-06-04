@@ -55,20 +55,17 @@ export const MyProgress: FC<MyProgressProps> = ({point}) => {
 };
 
 const MyProgressStyle = styled.div`
-  display: none;
+  width: 300px;
+  height: 450px;
+  background-color: ${BasicColor.white};
+  border-radius: 30px;
+  box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 35px 25px;
 
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    width: 300px;
-    height: 450px;
-    background-color: ${BasicColor.white};
-    border-radius: 30px;
-    box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 35px 25px;
-  }
   @media screen and (min-width: ${ScreenSize.desktop}) {
     height: 420px;
   }
