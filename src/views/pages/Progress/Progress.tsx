@@ -2,7 +2,12 @@ import {FC} from 'react';
 import {RibbonText} from '../../molecules/RibbonText';
 import {MyProgress} from '../../organisms/MyProgress';
 import {StudentMenu} from '../../templates/StudentMenu';
-import {ProgressBackground, ProgressStyle, ProgressTitle} from './Styles';
+import {
+  ProgressAvatarContainer,
+  ProgressBackground,
+  ProgressStyle,
+  ProgressTitle,
+} from './Styles';
 import {Rank} from '../../organisms/Rank';
 
 export const Progress: FC = () => {
@@ -10,10 +15,10 @@ export const Progress: FC = () => {
     <>
       <ProgressBackground>
         <StudentMenu>
+          <ProgressTitle>
+            <RibbonText body={'Progress'} />
+          </ProgressTitle>
           <ProgressStyle>
-            <ProgressTitle>
-              <RibbonText body={'Progress'} />
-            </ProgressTitle>
             <MyProgress point={5} />
             <Rank />
           </ProgressStyle>

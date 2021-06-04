@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Title} from '../atoms/Text/Title';
 import {UserRank} from '../molecules/UserRank';
 import avatar from '../assets/avatars/avatar1.svg';
+import {BasicColor} from '../Color';
 
 export const Rank: FC = () => {
   return (
@@ -29,7 +30,7 @@ const RankStyles = styled.div`
   align-items: center;
   padding-top: 10px;
   border-radius: 20px;
-
+  background-color: ${BasicColor.white};
   box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
 `;
 const RankUsersContainer = styled.div`
