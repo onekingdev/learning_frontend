@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 `;
 
 const Ribbon = styled.div`
-  background-color: #f4c222;
+  background-color: ${BasicColor.yellow};
   text-align: center;
   padding-top: 8px;
   font-family: ${Typography.secondary};
@@ -43,7 +43,8 @@ const RibbonHead = styled.div`
   height: 0;
   border-style: solid;
   border-width: 16px;
-  border-color: #f4c222 #f4c222 #f4c222 transparent;
+  border-color: ${BasicColor.yellow} ${BasicColor.yellow} ${BasicColor.yellow}
+    transparent;
   @media (min-width: ${ScreenSize.tablet}) {
     border-width: 32px;
   }
@@ -52,7 +53,7 @@ const RibbonTail = styled.div`
   height: 0;
   border-style: solid;
   border-width: 16px;
-  border-color: #f4c222 transparent #f4c222 #f4c222;
+  border-color: ${`${BasicColor.yellow} transparent ${BasicColor.yellow} ${BasicColor.yellow}`};
   @media (min-width: ${ScreenSize.tablet}) {
     border-width: 32px;
   }

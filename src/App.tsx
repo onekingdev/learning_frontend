@@ -9,6 +9,8 @@ import {Games} from './views/pages/Games/Games';
 import {GamesMenu} from './views/pages/GamesMenu/GamesMenu';
 import {StudentHome} from './views/pages/StudentHome/StudentHome';
 import {Progress} from './views/pages/Progress/Progress';
+import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
+import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 
 export default () => {
   return (
@@ -40,6 +42,12 @@ export default () => {
         </Route>
         <Route path="/games">
           <GamesMenu />
+        </Route>
+        <Route path="/map">
+          <KnowledgeMap />
+        </Route>
+        <Route path="/confirmation">
+          <ConfirmAccount />
         </Route>
         {process.env.NODE_ENV === 'development' ? (
           <Route path="/testing">
