@@ -9,51 +9,46 @@ import adventure from '../assets/adventure.svg';
 import sport from '../assets/sports.svg';
 import skill from '../assets/skills.svg';
 
-export const GameMainMenu: FC = () => {
+export const GamesMenu: FC = () => {
   return (
     <>
-      <GameMainMenuStyle>
+      <GamesMenuStyle>
         <GameMenuButton
           gameMode={'Arcade'}
           gameModeImage={arcade}
           color={BasicColor.red}
           onClick={() => console.log('Hella yes')}
-          isButton={true}
         />
         <GameMenuButton
           gameMode={'Learning'}
           gameModeImage={learning}
           color={BasicColor.green}
           onClick={() => console.log('Hella yes')}
-          isButton={true}
         />
         <GameMenuButton
           gameMode={'Adventure'}
           gameModeImage={adventure}
           color={BasicColor.aqua}
           onClick={() => console.log('Hella yes')}
-          isButton={true}
         />
         <GameMenuButton
           gameMode={'Sport'}
           gameModeImage={sport}
           color={BasicColor.blue}
           onClick={() => console.log('Hella yes')}
-          isButton={true}
         />
         <GameMenuButton
           gameMode={'Skill'}
           gameModeImage={skill}
           color={BasicColor.purple}
           onClick={() => console.log('Hella yes')}
-          isButton={true}
         />
-      </GameMainMenuStyle>
+      </GamesMenuStyle>
     </>
   );
 };
 
-const GameMainMenuStyle = styled.div`
+const GamesMenuStyle = styled.div`
   width: 100%;
   height: auto;
   display: grid;

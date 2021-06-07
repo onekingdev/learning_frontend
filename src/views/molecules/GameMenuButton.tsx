@@ -7,8 +7,7 @@ type GameButtonProps = {
   gameMode: string;
   gameModeImage: string;
   color: string;
-  onClick?: () => void;
-  isButton: boolean;
+  onClick: () => void;
 };
 
 export const GameMenuButton: FC<GameButtonProps> = ({
@@ -16,11 +15,10 @@ export const GameMenuButton: FC<GameButtonProps> = ({
   gameModeImage,
   color,
   onClick,
-  isButton,
 }) => {
   return (
     <>
-      <CardGame color={color} onClick={onClick} isButton={isButton}>
+      <CardGame color={color} onClick={onClick}>
         <Title>{gameMode}</Title>
         <CardGameImage src={gameModeImage} />
       </CardGame>
@@ -30,7 +28,6 @@ export const GameMenuButton: FC<GameButtonProps> = ({
 
 type CardGameProps = {
   color: string;
-  isButton: boolean;
 };
 
 const CardGame = styled.div<CardGameProps>`
@@ -44,10 +41,9 @@ const CardGame = styled.div<CardGameProps>`
   justify-content: space-around;
   align-items: center;
   padding: 0 10px;
-  cursor: ${p => (p.isButton ? 'pointer' : 'default')};
-
-  &: hover {
-    transform: scale(${p => (p.isButton ? 1.1 : 1)});
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
   }
   @media screen and (min-width: ${ScreenSize.tablet}) {
     padding: 10px;

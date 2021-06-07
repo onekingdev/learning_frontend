@@ -51,9 +51,3 @@ export const BackgroundHome = styled.div`
     height: 80vh;
   }
 `;
-export const MyProgressContainer = styled.div`
-  display: none;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    display: flex;
-  }
-`;

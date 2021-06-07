@@ -6,6 +6,7 @@ type iconProps = {
   image: string;
   size?: IconSize.small | IconSize.medium | IconSize.large;
   onClick?: () => void;
+  round?: boolean;
 };
 
 export const Icon: FC<iconProps> = ({image, onClick, size}) => {
@@ -18,7 +19,9 @@ export const Icon: FC<iconProps> = ({image, onClick, size}) => {
 
 const IconStyle = styled.img<{
   size?: IconSize.small | IconSize.medium | IconSize.large;
+  round?: boolean;
 }>`
   width: ${p => p.size};
   height: ${p => p.size};
+  border-radius: ${p => (p.round ? 0 : '100%')};
 `;
