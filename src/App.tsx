@@ -4,6 +4,9 @@ import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
 import {Question} from './views/pages/Question/Question';
 import {Avatar} from './views/pages/Avatar/Avatar';
+import {MyProfile} from './views/pages/MyProfile/MyProfile';
+import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
+import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 
 export default () => {
   return (
@@ -20,6 +23,15 @@ export default () => {
         </Route>
         <Route path="/avatar">
           <Avatar />
+        </Route>
+        <Route path="/profile">
+          <MyProfile />
+        </Route>
+        <Route path="/map">
+          <KnowledgeMap />
+        </Route>
+        <Route path="/confirmation">
+          <ConfirmAccount />
         </Route>
         {process.env.NODE_ENV === 'development' ? (
           <Route path="/testing">
