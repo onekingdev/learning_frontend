@@ -8,11 +8,6 @@ export const BackpackContainer = styled.div`
   height: 80vh;
   display: flex;
   align-items: flex-end;
-  overflow: hidden;
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    align-items: flex-start;
-    margin-top: 20px;
-  }
 `;
 export const BackPackStyles = styled.div`
   width: 100%;
@@ -33,30 +28,24 @@ export const HookBracket = styled.div`
 `;
 export const BackpackDecorationLeft = styled.img`
   display: none;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    width: 250px;
-    height: 410px;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: 215px;
+    height: 380px;
     display: initial;
     position: absolute;
-    left: -100px;
-    top: 70px;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
     left: 0;
+    top: 70px;
   }
 `;
 export const BackpackDecorationRight = styled.img`
   display: none;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    width: 250px;
-    height: 410px;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: 215px;
+    height: 380px;
     display: initial;
     position: absolute;
-    right: -100px;
-    top: 70px;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
     right: 0;
+    top: 70px;
   }
 `;
 export const BackpackHook = styled.img`
@@ -84,7 +73,7 @@ export const BackpackBase = styled.div`
   align-items: center;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     top: 80px;
-    height: 410px;
+    height: 400px;
   }
 `;
 
