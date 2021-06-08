@@ -20,7 +20,6 @@ export enum BasicColor {
   purple = '#A685E2',
   pink = '#CE2489',
   brown = '#B7784B',
-  darkBrown = '#5C2B0C',
 }
 
 export enum ButtonColor {
@@ -31,6 +30,12 @@ export enum ButtonColor {
   join = '#F4C222',
   next = '#1771B9',
   start = '#22BAAF',
+}
+
+export enum SettingBarColor {
+  accessibility = '#ec5858',
+  audio = '#22bab0',
+  notifications = '#1771b9',
 }
 
 export const shadeColor = (color: string, percent: number) => {
