@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {Title} from '../../atoms/Text/Title';
-import {Icon} from '../../atoms/Icon/Icon';
+import {RoundIcon} from '../../atoms/Icon/Icon';
 import {BasicColor} from '../../Color';
 import {ScreenSize} from '../../screenSize';
 
@@ -19,7 +19,7 @@ export const AvatarFavorites: FC = () => {
       <FavoritesCloset>
         {favorites.map(favorite => (
           <FavoritesDrawer>
-            <Icon image={favorite.image} round={true}></Icon>
+            <RoundIcon src={favorite.image}></RoundIcon>
           </FavoritesDrawer>
         ))}
       </FavoritesCloset>

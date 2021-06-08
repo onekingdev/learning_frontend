@@ -9,13 +9,11 @@ import arrowRight from '../../assets/arrows/arrowRight.svg';
 
 export const AvatarSelector: FC = () => {
   return (
-    <>
-      <SelectorGrid>
-        <LeftArrow src={arrowLeft}></LeftArrow>
-        <CurrentAvatar src={myAvatar}></CurrentAvatar>
-        <RightArrow src={arrowRight}></RightArrow>
-      </SelectorGrid>
-    </>
+    <SelectorGrid>
+      <LeftArrow src={arrowLeft}></LeftArrow>
+      <CurrentAvatar src={myAvatar}></CurrentAvatar>
+      <RightArrow src={arrowRight}></RightArrow>
+    </SelectorGrid>
   );
 };
 
