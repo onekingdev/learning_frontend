@@ -1,12 +1,11 @@
 import {FC} from 'react';
-import {BadgeContainer} from '../../molecules/BadgeContainer';
-import {StudentSettings} from '../../organisms/StudentSettings';
+import {BasicColor} from '../../Color';
+import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
 
 export const Testing: FC = () => {
   return (
     <div>
-      <StudentSettings />
-      <BadgeContainer />
+      <LessonProgress topic={'Math'} currentQuestion={3} totalQuestions={10} />
     </div>
   );
 };

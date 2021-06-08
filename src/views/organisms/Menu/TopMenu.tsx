@@ -42,13 +42,11 @@ export const TopMenu: FC<TopMenuProps> = ({
     <>
       <TopMenuStyles>
         <NavPanel isClose={openSidebar} deploySideBar={deploySidebar} />
-        <ToggleButtonContainer isClose={openSidebar}>
-          <Icon
-            image={menu_toggle}
-            size={IconSize.small}
-            onClick={deploySidebar}
-          />
-        </ToggleButtonContainer>
+        <Icon
+          image={menu_toggle}
+          size={IconSize.small}
+          onClick={deploySidebar}
+        />
         <Icon image={home} size={IconSize.medium} />
         <Energy charge={energyCharge} />
         <Icon image={modality} size={IconSize.medium} />
@@ -67,9 +65,6 @@ export const TopMenu: FC<TopMenuProps> = ({
   );
 };
 
-type ToggleButtonProps = {
-  isClose: boolean;
-};
 const TopMenuStyles = styled.div`
   display: none;
 
@@ -81,11 +76,11 @@ const TopMenuStyles = styled.div`
     align-items: center;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    margin: 0 auto;
-    padding: 15px 0;
-    max-width: 1024px;
+    margin-top: 0;
+    max-width: 968px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
   }
-`;
-const ToggleButtonContainer = styled.div<ToggleButtonProps>`
-  opacity: ${p => (p.isClose ? 0 : 1)};
 `;

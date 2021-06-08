@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../Color';
-import {ScreenSize} from '../screenSize';
 
 type DividerProps = {
   value: string;
@@ -27,7 +26,7 @@ const StyledDivider = styled.div`
   font-size: 14px;
   padding-left: 3rem;
   padding-right: 3rem;
-  @media (min-width: ${ScreenSize.tablet}) {
+  @media (min-width: 768px) {
     visibility: hidden;
   }
 `;
