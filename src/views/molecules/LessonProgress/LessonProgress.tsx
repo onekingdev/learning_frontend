@@ -20,7 +20,6 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   topic,
   currentQuestion,
   totalQuestions,
-  finished,
 }) => {
   // !! Added bar array builder function
   const buildBars = (totalQuestions: number) => {
@@ -28,7 +27,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
     // TODO add logic inside this loop to build a
     // TODO proper progress bar
     for (let i = 0; i < totalQuestions; i++) {
-      bars.push({color: BasicColor.green});
+      bars.push({color: BasicColor.purple});
     }
     return bars;
   };
@@ -39,7 +38,6 @@ export const LessonProgress: FC<LessonProgressProps> = ({
         topic={topic}
         currentQuestion={currentQuestion}
         totalQuestions={totalQuestions}
-        finished={finished}
       ></LessonProgressTitle>
       {/* // !! Changed hardcoded bars for a map */}
       <StyledLessonProgressBarWrapper>
