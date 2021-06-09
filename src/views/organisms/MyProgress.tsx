@@ -2,93 +2,38 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../Color';
 import {TopicProgress} from '../molecules/TopicProgress';
+import MYPROGRESS from '../assets/My Progress.svg';
+import {Icon} from '../atoms/Icon/Icon';
 import {ScreenSize} from '../screenSize';
 import {Title} from '../atoms/Text/Title';
 
-export const MyProgress: FC = () => {
+type MyProgressProps = {
+  point: number;
+};
+
+export const MyProgress: FC<MyProgressProps> = ({point}) => {
   const lessonProps = [
     {
       title: 'ELA',
       color: BasicColor.red,
-      progress: [
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-      ],
     },
     {
       title: 'MATH',
       color: BasicColor.orange,
-      progress: [
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-      ],
     },
     {
       title: 'SIGHT',
       color: BasicColor.yellow,
-      progress: [
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-      ],
     },
     {
       title: 'SCIENCE',
       color: BasicColor.green,
-      progress: [
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-      ],
     },
     {
       title: 'HEALTH',
       color: BasicColor.aqua,
-      progress: [
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        true,
-      ],
     },
   ];
-
   return (
     <>
       <MyProgressStyle>
@@ -97,8 +42,8 @@ export const MyProgress: FC = () => {
         </MyProgressTitle>
         {lessonProps.map((item, i) => (
           <TopicProgress
-            points={item.progress}
-            maxPoints={10}
+            points={point}
+            maxPoints={8}
             title={item.title}
             color={item.color}
             key={i}
@@ -110,21 +55,24 @@ export const MyProgress: FC = () => {
 };
 
 const MyProgressStyle = styled.div`
-  width: 300px;
-  height: 450px;
-  background-color: ${BasicColor.white};
-  border-radius: 30px;
-  box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 35px 25px;
+  display: none;
 
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    width: 300px;
+    height: 450px;
+    background-color: ${BasicColor.white};
+    border-radius: 30px;
+    box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 35px 25px;
+  }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    height: 400px;
+    height: 420px;
   }
 `;
 const MyProgressTitle = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 `;

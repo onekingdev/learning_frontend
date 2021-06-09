@@ -50,10 +50,8 @@ export const MobileMenu: FC = () => {
 
 const MobileMenuStyles = styled.div`
   width: 100%;
-  height: 57px;
+  height: 60px;
   background-color: ${BasicColor.blue};
-  position: fixed;
-  bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -62,22 +60,23 @@ const MobileMenuStyles = styled.div`
     display: none;
   }
 `;
+
 const MobileMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const NavPanelContainer = styled.div`
   @media screen and (min-width: ${ScreenSize.tablet}) {
     display: none;
   }
 `;
+
 const BackgroundHomeFloor = styled.div`
   width: 100%;
   height: 50%;
   background-color: ${BasicColor.brown};
-  position: absolute;
   z-index: -10;
-  bottom: 0;
   display: ${window.location.pathname === '/home' ? 'static' : 'none'};
   @media screen and (min-width: ${ScreenSize.tablet}) {
     height: 35%;

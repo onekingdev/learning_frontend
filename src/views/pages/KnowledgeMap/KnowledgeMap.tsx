@@ -17,11 +17,7 @@ import isle from '../../assets/islands/fillers/island.svg';
 import rock from '../../assets/islands/fillers/rock.svg';
 import rock2 from '../../assets/islands/fillers/rock-2.svg';
 import boulder from '../../assets/islands/fillers/rocxk.svg';
-
-// type KnowledgeMapProps = {
-//   image: string;
-//   route: string;
-// };
+import {ScreenSize} from '../../screenSize';
 
 export const KnowledgeMap: FC = () => {
   const subjects = [
@@ -75,14 +71,29 @@ const Ocean = styled.div`
   background-image: url(${ocean});
   background-repeat: no-repeat;
   background-size: cover;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  @media (min-width: ${ScreenSize.desktop}) {
+    min-height: unset;
+    margin-top: 75px;
+  }
 `;
 
 const Island = styled.img`
-  width: 60vw;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const Filler = styled.img`
-  width: 30vw;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  @media (min-width: ${ScreenSize.desktop}) {
+    margin-top: 30%;
+    width: 40%;
+  }
 `;
 
 const Subject = styled.div`
