@@ -20,6 +20,7 @@ const FavoritesTitle = styled.div`
   align-content: center;
   text-transform: uppercase;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    visibility: hidden;
+    width: auto;
+    grid-row: 1 / 2;
   }
 `;
