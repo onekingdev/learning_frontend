@@ -24,6 +24,7 @@ export const Welcome: FC = () => {
   return (
     <Wrapper>
       <Logo src={logo} alt="Learn with Socrates logo" />
+
       <Body>
         <Header isDark={true}>{dictionary[language].practice}</Header>
         <Description>
@@ -32,7 +33,9 @@ export const Welcome: FC = () => {
           </Subheader>
         </Description>
       </Body>
+
       <Illustration src={welcome} alt="" />
+
       <Actions>
         <Button value={dictionary[language].login} color={ButtonColor.login} />
         <Button
@@ -41,6 +44,7 @@ export const Welcome: FC = () => {
           darkText={true}
         />
       </Actions>
+
       <Legal>
         <Icon style={{textAlign: 'center'}} isDark={true}>
           {dictionary[language].about}
