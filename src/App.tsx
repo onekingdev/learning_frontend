@@ -3,7 +3,6 @@ import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
 import {Question} from './views/pages/Question/Question';
-import {Avatar} from './views/pages/Avatar/Avatar';
 import {MyProfile} from './views/pages/MyProfile/MyProfile';
 import {Backpack} from './views/pages/Backpack/Backpack';
 import {Games} from './views/pages/Games/Games';
@@ -25,9 +24,6 @@ export default () => {
         </Route>
         <Route path="/question">
           <Question />
-        </Route>
-        <Route path="/avatar">
-          <Avatar />
         </Route>
         <Route path="/profile">
           <MyProfile />

@@ -3,6 +3,7 @@ import {Lesson} from '../../atoms/Text/Lesson';
 import {ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
 import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
+import {MobileMenu} from '../../organisms/Menu/MobileMenu';
 import {
   Answers,
   AnswerWrapper,

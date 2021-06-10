@@ -22,7 +22,3 @@ const IconStyle = styled.img<{
   width: ${p => p.size};
   height: ${p => p.size};
 `;
-
-export const RoundIcon = styled(IconStyle)`
-  border-radius: 100%;
-`;
