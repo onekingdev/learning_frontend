@@ -6,13 +6,14 @@ import toggle from '../../assets/menu-toggle-mobile.svg';
 import home from '../../assets/home.svg';
 import modalityIcon from '../../assets/modality.svg';
 import energyButton from '../../assets/lightning.svg';
-import walletIcon from '../../assets/coins.svg';
+import walletIcon from '../../assets/coins-mobile.svg';
 import close from '../../assets/close.svg';
 import {IconSize} from '../../atoms/Icon/Size';
 import {useState} from 'react';
 import {ScreenSize} from '../../screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
 import {StartLesson} from '../../molecules/StartLesson';
+import {IconDropDown} from '../../molecules/IconDropDown';
 
 export const MobileMenu: FC = () => {
   const [openSidebar, setOpenSidebar] = useState(Boolean);
@@ -38,9 +39,23 @@ export const MobileMenu: FC = () => {
             onClick={deploySidebar}
           />
           <Icon image={home} size={IconSize.medium} />
-          <Icon image={modalityIcon} size={IconSize.medium} />
+          <IconDropdownContainer>
+            <IconDropDown
+              icon={modalityIcon}
+              options={[
+                {name: 'AI'},
+                {name: 'Choose your path'},
+                {name: 'Practice'},
+              ]}
+            />
+          </IconDropdownContainer>
           <Icon image={energyButton} size={IconSize.medium} />
-          <Icon image={walletIcon} size={IconSize.medium} />
+          <IconDropdownContainer>
+            <IconDropDown
+              icon={walletIcon}
+              options={[{name: 'balance'}, {name: '3400'}]}
+            />
+          </IconDropdownContainer>
         </MobileMenuStyles>
         <BackgroundHomeFloor />
       </MobileMenuContainer>
@@ -50,10 +65,10 @@ export const MobileMenu: FC = () => {
 
 const MobileMenuStyles = styled.div`
   width: 100%;
-  height: 60px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  height: 57px;
   background-color: ${BasicColor.blue};
+  position: fixed;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -62,23 +77,22 @@ const MobileMenuStyles = styled.div`
     display: none;
   }
 `;
-
 const MobileMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const NavPanelContainer = styled.div`
   @media screen and (min-width: ${ScreenSize.tablet}) {
     display: none;
   }
 `;
-
 const BackgroundHomeFloor = styled.div`
   width: 100%;
   height: 50%;
   background-color: ${BasicColor.brown};
+  position: absolute;
   z-index: -10;
+  bottom: 0;
   display: ${window.location.pathname === '/home' ? 'static' : 'none'};
   @media screen and (min-width: ${ScreenSize.tablet}) {
     height: 35%;
@@ -87,4 +101,7 @@ const BackgroundHomeFloor = styled.div`
     width: 90%;
     height: 30%;
   }
+`;
+const IconDropdownContainer = styled.div`
+  width: 50px;
 `;
