@@ -3,7 +3,6 @@ import {Lesson} from '../../atoms/Text/Lesson';
 import {ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
 import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
-import {MobileMenu} from '../../organisms/Menu/MobileMenu';
 import {
   Answers,
   AnswerWrapper,
@@ -17,7 +16,6 @@ import {
   ProgressWrapper,
 } from './Style';
 import apple from '../../assets/apple.svg';
-import {TopMenu} from '../../organisms/Menu/TopMenu';
 import {StudentMenu} from '../../templates/StudentMenu';
 
 export const Question: FC = () => {
