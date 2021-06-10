@@ -20,6 +20,8 @@ export const MobileMenu: FC = () => {
   const [closeStartButton, setCloseStartButton] = useState(Boolean);
   const deploySidebar = () => {
     setOpenSidebar(!openSidebar);
+  };
+  const removeStartButton = () => {
     setCloseStartButton(!closeStartButton);
   };
   return (
@@ -27,7 +29,7 @@ export const MobileMenu: FC = () => {
       <MobileMenuContainer>
         <StartLesson
           onClick={() => console.log('Hello friend')}
-          isClose={false}
+          isClose={closeStartButton ? true : false}
         />
         <NavPanelContainer>
           <NavPanel isClose={openSidebar} />
@@ -39,7 +41,7 @@ export const MobileMenu: FC = () => {
             onClick={deploySidebar}
           />
           <Icon image={home} size={IconSize.medium} />
-          <IconDropdownContainer>
+          <IconDropdownContainer onClick={removeStartButton}>
             <IconDropDown
               icon={modalityIcon}
               options={[
@@ -50,7 +52,7 @@ export const MobileMenu: FC = () => {
             />
           </IconDropdownContainer>
           <Icon image={energyButton} size={IconSize.medium} />
-          <IconDropdownContainer>
+          <IconDropdownContainer onClick={removeStartButton}>
             <IconDropDown
               icon={walletIcon}
               options={[{name: 'balance'}, {name: '3400'}]}

@@ -170,4 +170,5 @@ const DropdownIcon = styled.img`
 `;
 const ExtendUserInfo = styled(UserInfo)<ExtendUserInfoProps>`
   color: ${p => p.color};
+  font-weight: 600;
 `;

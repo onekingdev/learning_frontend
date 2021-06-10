@@ -58,7 +58,7 @@ const DropdownContent = styled.div`
   background-color: ${BasicColor.white};
   padding: 3px;
   z-index: 1;
-  bottom: 60px;
+  bottom: 55px;
   font-size: 12px;
   border: 2px solid ${BasicColor.gray60};
   border-radius: 10px 10px 0 0;
