@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import background from '../../assets/colored-shapes-bg.svg';
-import {BasicColor} from '../../Color';
 import {ScreenSize} from '../../screenSize';
 
 export const Wrapper = styled.div`
@@ -84,39 +83,4 @@ export const Legal = styled.div`
 
 export const Description = styled.div`
   margin-top: 1.2rem;
-`;
-export const ModalContent = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  top: 0;
-  left: 0;
-  background-color: ${BasicColor.background40};
-`;
-export const ModalStyles = styled.div`
-  width: 80%;
-  height: 270px;
-  margin: 0 auto;
-  background-color: ${BasicColor.blue};
-  border-radius: 40px;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    height: 290px;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    width: 500px;
-  }
-`;
-export const ModalItemsContainer = styled.div`
-  width: 80%;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  grid-gap: 15px;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
-  font-size: 14px;
 `;
