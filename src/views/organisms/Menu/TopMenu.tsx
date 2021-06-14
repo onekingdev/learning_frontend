@@ -10,7 +10,6 @@ import {UserProgress} from '../UserProgress';
 import {IconSize} from '../../atoms/Icon/Size';
 import {ScreenSize} from '../../screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
-import {IconDropDown} from '../../molecules/IconDropDown';
 
 type TopMenuProps = {
   rank: number;
@@ -52,16 +51,7 @@ export const TopMenu: FC<TopMenuProps> = ({
         </ToggleButtonContainer>
         <Icon image={home} size={IconSize.medium} />
         <Energy charge={energyCharge} />
-        <ModalityContainer>
-          <IconDropDown
-            icon={modality}
-            options={[
-              {name: 'AI'},
-              {name: 'Choose your path'},
-              {name: 'Practice'},
-            ]}
-          />
-        </ModalityContainer>
+        <Icon image={modality} size={IconSize.medium} />
         <Wallet balance={balance} />
         <UserProgress
           rank={rank}
@@ -98,8 +88,4 @@ const TopMenuStyles = styled.div`
 `;
 const ToggleButtonContainer = styled.div<ToggleButtonProps>`
   opacity: ${p => (p.isClose ? 0 : 1)};
-`;
-
-const ModalityContainer = styled.div`
-  width: 60px;
 `;

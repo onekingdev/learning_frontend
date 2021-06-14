@@ -8,41 +8,43 @@ import learning from '../assets/learn.svg';
 import adventure from '../assets/adventure.svg';
 import sport from '../assets/sports.svg';
 import skill from '../assets/skills.svg';
+import {dictionary} from '../pages/Games/dictionary';
 
 export const GameMainMenu: FC = () => {
+  const language = 'en';
   return (
     <>
       <GameMainMenuStyle>
         <GameMenuButton
-          gameMode={'Arcade'}
+          gameMode={dictionary[language].arcade}
           gameModeImage={arcade}
           color={BasicColor.red}
           onClick={() => console.log('Hella yes')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={'Learning'}
+          gameMode={dictionary[language].learning}
           gameModeImage={learning}
           color={BasicColor.green}
           onClick={() => console.log('Hella yes')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={'Adventure'}
+          gameMode={dictionary[language].adventure}
           gameModeImage={adventure}
           color={BasicColor.aqua}
           onClick={() => console.log('Hella yes')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={'Sport'}
+          gameMode={dictionary[language].sport}
           gameModeImage={sport}
           color={BasicColor.blue}
           onClick={() => console.log('Hella yes')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={'Skill'}
+          gameMode={dictionary[language].skill}
           gameModeImage={skill}
           color={BasicColor.purple}
           onClick={() => console.log('Hella yes')}

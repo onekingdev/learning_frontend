@@ -1,23 +1,22 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import welcome from '../assets/welcome.svg';
-import {Header} from '../atoms/Text/Header';
 import {Title} from '../atoms/Text/Title';
 import locker from '../assets/locker.svg';
 import avatar from '../assets/avatars/girl-11.svg';
-import {Subheader} from '../atoms/Text/Subheader';
 import {ScreenSize} from '../screenSize';
-
+import {dictionary} from '../pages/StudentHome/dictionary';
 type HomeCharacterProps = {
   userName: string;
 };
 
 export const HomeCharacter: FC<HomeCharacterProps> = ({userName}) => {
+  const language = 'en';
   return (
     <>
       <HomeCharacterStyle>
         <WelcomeMessage>
-          <Title>Welcome back {userName}</Title>
+          <Title>{`${dictionary[language].welcome} ${userName}`}</Title>
         </WelcomeMessage>
         <AvatarContainer>
           <Character src={avatar} />

@@ -62,19 +62,3 @@ export const MyProgressContainer = styled.div`
     display: flex;
   }
 `;
-export const BackgroundHomeFloor = styled.div`
-  width: 100%;
-  height: 50%;
-  position: absolute;
-  bottom: 0;
-  background-color: ${BasicColor.brown};
-  z-index: -10;
-  display: ${window.location.pathname === '/home' ? 'static' : 'none'};
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    height: 35%;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    width: 90%;
-    height: 30%;
-  }
-`;
