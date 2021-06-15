@@ -4,11 +4,13 @@ import {BasicColor} from '../Color';
 import {TopicProgress} from '../molecules/TopicProgress';
 import {ScreenSize} from '../screenSize';
 import {Title} from '../atoms/Text/Title';
+import {dictionary} from '../pages/Progress/dictionary';
 
 export const MyProgress: FC = () => {
+  const language = 'en';
   const lessonProps = [
     {
-      title: 'ELA',
+      title: dictionary[language].ela,
       color: BasicColor.red,
       progress: [
         false,
@@ -24,7 +26,7 @@ export const MyProgress: FC = () => {
       ],
     },
     {
-      title: 'MATH',
+      title: dictionary[language].math,
       color: BasicColor.orange,
       progress: [
         false,
@@ -40,7 +42,7 @@ export const MyProgress: FC = () => {
       ],
     },
     {
-      title: 'SIGHT',
+      title: dictionary[language].sight,
       color: BasicColor.yellow,
       progress: [
         false,
@@ -56,7 +58,7 @@ export const MyProgress: FC = () => {
       ],
     },
     {
-      title: 'SCIENCE',
+      title: dictionary[language].science,
       color: BasicColor.green,
       progress: [
         false,
@@ -72,7 +74,7 @@ export const MyProgress: FC = () => {
       ],
     },
     {
-      title: 'HEALTH',
+      title: dictionary[language].health,
       color: BasicColor.aqua,
       progress: [
         false,
@@ -93,7 +95,7 @@ export const MyProgress: FC = () => {
     <>
       <MyProgressStyle>
         <MyProgressTitle>
-          <Title isDark={true}>My Progress</Title>
+          <Title isDark={true}>{dictionary[language].progress}</Title>
         </MyProgressTitle>
         {lessonProps.map((item, i) => (
           <TopicProgress

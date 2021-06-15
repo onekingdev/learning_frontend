@@ -1,6 +1,17 @@
 import styled from 'styled-components';
+import {BasicColor} from '../../Color';
+import background from '../../assets/colored-shapes-bg.svg';
 import {ScreenSize} from '../../screenSize';
 
+export const Wrapper = styled.div`
+  background-image: url(${background});
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+`;
 export const StudentHomeStyle = styled.div`
   width: 100%;
   height: 80vh;

@@ -16,6 +16,7 @@ import {
   ProgressWrapper,
 } from './Style';
 import apple from '../../assets/apple.svg';
+import {TopMenu} from '../../organisms/Menu/TopMenu';
 import {FinishLesson} from '../../organisms/FinishLesson';
 import {StudentMenu} from '../../templates/StudentMenu';
 

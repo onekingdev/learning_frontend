@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   background-size: cover;
   height: 100vh;
   display: grid;
-  grid-template-rows: 1fr repeat(3, 2fr) 3rem;
+  grid-template-rows: repeat(4, 1fr) 3rem;
 `;
 
 export const Logo = styled.img`

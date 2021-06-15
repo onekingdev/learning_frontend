@@ -6,9 +6,8 @@ import welcome from '../../assets/welcome-page.svg';
 import {Button} from '../../molecules/Button';
 import {ButtonColor} from '../../Color';
 import {Icon} from '../../atoms/Text/Icon';
-import {Link} from 'react-router-dom';
-
 import {dictionary} from '../Welcome/dictionary';
+
 import {
   Wrapper,
   Logo,
@@ -38,12 +37,7 @@ export const Welcome: FC = () => {
       <Illustration src={welcome} alt="" />
 
       <Actions>
-        <Link to={'/login'}>
-          <Button
-            value={dictionary[language].login}
-            color={ButtonColor.login}
-          />
-        </Link>
+        <Button value={dictionary[language].login} color={ButtonColor.login} />
         <Button
           value={dictionary[language].join}
           color={ButtonColor.join}

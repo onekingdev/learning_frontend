@@ -4,6 +4,7 @@ import {BasicColor} from '../Color';
 import upArrow from '../assets/upArrow.svg';
 import {Typography} from '../atoms/Text/typography';
 import {ScreenSize} from '../screenSize';
+import {dictionary} from '../pages/StudentHome/dictionary';
 
 type StartLessonProps = {
   onClick: () => void;
@@ -11,12 +12,13 @@ type StartLessonProps = {
 };
 
 export const StartLesson: FC<StartLessonProps> = ({onClick, isClose}) => {
+  const language = 'en';
   return (
     <>
       <StartLessonStyles isClose={isClose}>
         <PlayLessonContainer onClick={onClick}>
           <PlayeLessonArrow src={upArrow} />
-          <PlayLessonText>Start</PlayLessonText>
+          <PlayLessonText>{dictionary[language].start}</PlayLessonText>
         </PlayLessonContainer>
       </StartLessonStyles>
     </>

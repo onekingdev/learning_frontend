@@ -1,18 +1,19 @@
 import {FC} from 'react';
-import {GamesMenuContainer, GamesMenuTitleContainer} from './Styles';
+import {GamesMenuContainer, GamesMenuTitleContainer, Wrapper} from './Styles';
 import {GameCardPresentation} from '../../molecules/GameCardPresentation';
 import imagen from '../../assets/apple.svg';
 import {GameMenuButton} from '../../molecules/GameMenuButton';
 import arcade from '../../assets/arcade.svg';
 import {BasicColor} from '../../Color';
 import {StudentMenu} from '../../templates/StudentMenu';
+import {dictionary} from './dictionary';
 
 export const GamesMenu: FC = () => {
   const gameCards = [
     {
       gameTitle: 'PRINCESS GOLDBLADE',
       image: imagen,
-      gamePrice: 10,
+      gamePrice: 100,
     },
     {
       gameTitle: 'PRINCESS GOLDBLADE',
@@ -65,28 +66,31 @@ export const GamesMenu: FC = () => {
       gamePrice: 10,
     },
   ];
+  const lenguage = 'en';
   return (
     <>
-      <StudentMenu>
-        <GamesMenuTitleContainer>
-          <GameMenuButton
-            gameMode={'Arcade'}
-            gameModeImage={arcade}
-            color={BasicColor.red}
-            isButton={false}
-          />
-        </GamesMenuTitleContainer>
-        <GamesMenuContainer>
-          {gameCards.map((item, i) => (
-            <GameCardPresentation
-              gameName={item.gameTitle}
-              gameImage={item.image}
-              price={item.gamePrice}
-              key={i}
+      <Wrapper>
+        <StudentMenu>
+          <GamesMenuTitleContainer>
+            <GameMenuButton
+              gameMode={dictionary[lenguage].arcade}
+              gameModeImage={arcade}
+              color={BasicColor.red}
+              isButton={false}
             />
-          ))}
-        </GamesMenuContainer>
-      </StudentMenu>
+          </GamesMenuTitleContainer>
+          <GamesMenuContainer>
+            {gameCards.map((item, i) => (
+              <GameCardPresentation
+                gameName={item.gameTitle}
+                gameImage={item.image}
+                price={item.gamePrice}
+                key={i}
+              />
+            ))}
+          </GamesMenuContainer>
+        </StudentMenu>
+      </Wrapper>
     </>
   );
 };

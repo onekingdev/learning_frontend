@@ -8,37 +8,28 @@ import {Button} from '../Button';
 type LoginActionsProps = {
   googleText: string;
   googleColor: ButtonColor;
-  googleAction: () => void;
-  or: string;
   loginText: string;
   loginColor: ButtonColor;
-  loginAction: () => void;
+  or: string;
 };
 
 export const Actions: FC<LoginActionsProps> = ({
   googleText,
   googleColor,
-  googleAction,
-  or,
   loginText,
   loginColor,
-  loginAction,
+  or,
 }) => {
   return (
     <StyledActions>
       <Action>
-        <Button
-          value={googleText}
-          darkText={true}
-          color={googleColor}
-          onClick={googleAction}
-        />
+        <Button value={googleText} darkText={true} color={googleColor} />
       </Action>
 
       <Divider value={or} />
 
       <Action>
-        <Button value={loginText} color={loginColor} onClick={loginAction} />
+        <Button value={loginText} color={loginColor} />
       </Action>
     </StyledActions>
   );
