@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import {BasicColor} from '../../Color';
-
 import {ScreenSize} from '../../screenSize';
 
 export const StudentHomeStyle = styled.div`

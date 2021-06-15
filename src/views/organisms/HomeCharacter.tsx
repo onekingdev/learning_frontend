@@ -5,18 +5,17 @@ import {Title} from '../atoms/Text/Title';
 import locker from '../assets/locker.svg';
 import avatar from '../assets/avatars/girl-11.svg';
 import {ScreenSize} from '../screenSize';
-import {dictionary} from '../pages/StudentHome/dictionary';
+
 type HomeCharacterProps = {
   userName: string;
 };
 
 export const HomeCharacter: FC<HomeCharacterProps> = ({userName}) => {
-  const language = 'en';
   return (
     <>
       <HomeCharacterStyle>
         <WelcomeMessage>
-          <Title>{`${dictionary[language].welcome} ${userName}`}</Title>
+          <Title>Welcome back {userName}</Title>
         </WelcomeMessage>
         <AvatarContainer>
           <Character src={avatar} />

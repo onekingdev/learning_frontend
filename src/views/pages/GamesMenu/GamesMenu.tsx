@@ -1,9 +1,7 @@
 import {FC} from 'react';
 import {GamesMenuContainer, GamesMenuTitleContainer} from './Styles';
 import {GameCardPresentation} from '../../molecules/GameCardPresentation';
-import {MobileMenu} from '../../organisms/Menu/MobileMenu';
 import imagen from '../../assets/apple.svg';
-import {TopMenu} from '../../organisms/Menu/TopMenu';
 import {GameMenuButton} from '../../molecules/GameMenuButton';
 import arcade from '../../assets/arcade.svg';
 import {BasicColor} from '../../Color';
