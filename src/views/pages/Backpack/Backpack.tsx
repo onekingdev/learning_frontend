@@ -14,7 +14,6 @@ import {
   HookBracket,
 } from './Styles';
 import backpackHook from '../../assets/backpack-hook.svg';
-import {MobileMenu} from '../../organisms/Menu/MobileMenu';
 import {BackpackButton} from '../../atoms/BackpackButton';
 import avatarButton from '../../assets/avatar-button.svg';
 import cardsButton from '../../assets/cards-button.svg';

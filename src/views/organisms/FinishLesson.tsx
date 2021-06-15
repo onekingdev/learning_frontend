@@ -2,7 +2,6 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {GeneralText} from '../atoms/Text/GeneralText';
 import finishLesson from '../assets/finish-lesson.svg';
-import {Body} from '../atoms/Text/Body';
 import {BasicColor, ButtonColor} from '../Color';
 import {Icon} from '../atoms/Icon/Icon';
 import energyIcon from '../assets/lightning.svg';

@@ -6,12 +6,7 @@ import {
   RankContainer,
   StudentHomeStyle,
 } from './Style';
-import {TopMenu} from '../../organisms/Menu/TopMenu';
-import {NavPanel} from '../../organisms/NavPanel/NavPanel';
 import {MyProgress} from '../../organisms/MyProgress';
-import {MobileMenu} from '../../organisms/Menu/MobileMenu';
-
-import {StartLesson} from '../../molecules/StartLesson';
 import {HomeCharacter} from '../../organisms/HomeCharacter';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {Rank} from '../../organisms/Rank';

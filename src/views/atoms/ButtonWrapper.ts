@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import {BasicColor, ButtonColor, shadeColor} from '../Color';
 
-export const ButtonWrapper = styled.button<{bgColor?: ButtonColor}>`
+type ButtonWrapperProps = {
+  bgColor?: ButtonColor;
+  onClick?: () => void;
+};
+
+export const ButtonWrapper = styled.button<ButtonWrapperProps>`
   background-color: ${props => props.bgColor || BasicColor.greenSoft};
   color: ${BasicColor.white};
   padding: 18px 32px;
