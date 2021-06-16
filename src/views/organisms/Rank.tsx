@@ -5,14 +5,12 @@ import {UserRank} from '../molecules/UserRank';
 import avatar from '../assets/avatars/avatar1.svg';
 import {BasicColor} from '../Color';
 import {ScreenSize} from '../screenSize';
-import {dictionary} from '../pages/Progress/dictionary';
 
 export const Rank: FC = () => {
-  const language = 'en';
   return (
     <>
       <RankStyles>
-        <Title isDark={true}># {dictionary[language].rank}</Title>
+        <Title isDark={true}># Rank</Title>
         <RankUsersContainer>
           <UserRank userRank={4} userName={'Sophie'} userIcon={avatar} />
           <UserRank userRank={5} userName={'Sophie'} userIcon={avatar} />

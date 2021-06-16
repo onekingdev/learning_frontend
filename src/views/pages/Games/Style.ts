@@ -1,14 +1,6 @@
 import styled from 'styled-components';
 import titleBackground from '../../assets/title-games-background.png';
-import {ScreenSize} from '../../screenSize';
-import background from '../../assets/colored-shapes-bg.svg';
 
-export const Wrapper = styled.div`
-  background-image: url(${background});
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-`;
 export const GamesContainer = styled.div`
   width: 100%;
   display: flex;

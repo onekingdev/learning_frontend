@@ -2,14 +2,7 @@ import styled from 'styled-components';
 import {BasicColor} from '../../Color';
 import backpackBase from '../../assets/backpack-base.svg';
 import {ScreenSize} from '../../screenSize';
-import background from '../../assets/colored-shapes-bg.svg';
 
-export const Wrapper = styled.div`
-  background-image: url(${background});
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-`;
 export const BackpackContainer = styled.div`
   width: 100%;
   height: 80vh;

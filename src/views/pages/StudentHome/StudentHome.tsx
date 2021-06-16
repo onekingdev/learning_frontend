@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import {
-  Wrapper,
   CharacterContainer,
   MyProgressContainer,
   RankContainer,
@@ -14,21 +13,19 @@ import {Rank} from '../../organisms/Rank';
 export const StudentHome: FC = () => {
   return (
     <>
-      <Wrapper>
-        <StudentMenu>
-          <StudentHomeStyle>
-            <CharacterContainer>
-              <RankContainer>
-                <Rank />
-              </RankContainer>
-              <HomeCharacter userName={'Sophie'} />
-              <MyProgressContainer>
-                <MyProgress />
-              </MyProgressContainer>
-            </CharacterContainer>
-          </StudentHomeStyle>
-        </StudentMenu>
-      </Wrapper>
+      <StudentMenu>
+        <StudentHomeStyle>
+          <CharacterContainer>
+            <RankContainer>
+              <Rank />
+            </RankContainer>
+            <HomeCharacter userName={'Sophie'} />
+            <MyProgressContainer>
+              <MyProgress />
+            </MyProgressContainer>
+          </CharacterContainer>
+        </StudentHomeStyle>
+      </StudentMenu>
     </>
   );
 };

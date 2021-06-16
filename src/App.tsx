@@ -12,6 +12,7 @@ import {StudentHome} from './views/pages/StudentHome/StudentHome';
 import {Progress} from './views/pages/Progress/Progress';
 import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
+import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 
 export default () => {
   return (
@@ -52,6 +53,9 @@ export default () => {
         </Route>
         <Route path="/confirmation">
           <ConfirmAccount />
+        </Route>
+        <Route path="/topics">
+          <TopicsMenu />
         </Route>
         {process.env.NODE_ENV === 'development' ? (
           <Route path="/testing">
