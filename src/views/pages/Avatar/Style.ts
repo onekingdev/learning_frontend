@@ -8,7 +8,7 @@ export const AvatarContainer = styled.div`
   background-image: url(${background});
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   @media screen and (min-width: ${ScreenSize.phone}) {
     width: auto;
     grid-template-rows: 186px auto;
