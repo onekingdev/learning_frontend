@@ -55,6 +55,8 @@ const MobileMenuStyles = styled.div`
   border-top-right-radius: 10px;
   background-color: ${BasicColor.blue};
   display: flex;
+  position: fixed;
+  bottom: 0;
   justify-content: space-around;
   align-items: center;
   z-index: 2;

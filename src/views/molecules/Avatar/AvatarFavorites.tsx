@@ -2,7 +2,6 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {RoundIcon} from '../../atoms/Icon/Icon';
 import {BasicColor} from '../../Color';
-import {ScreenSize} from '../../screenSize';
 
 export const AvatarFavorites: FC = () => {
   const favorites = [];
@@ -31,13 +30,10 @@ const FavoritesDrawer = styled.div`
 
 const FavoritesCloset = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 7px;
   height: 85px;
   align-content: center;
   justify-content: center;
   background-color: ${BasicColor.darkBrown};
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    display: none;
-  }
 `;

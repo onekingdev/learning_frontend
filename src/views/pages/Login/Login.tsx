@@ -11,12 +11,14 @@ import greeting from '../../assets/greeting.svg';
 import {Actions} from '../../molecules/Login/Actions';
 import {Form} from '../../molecules/Login/Form';
 import {Greet} from '../../molecules/Login/Greet';
+import {useHistory} from 'react-router-dom';
 
 export const LogIn: FC = () => {
   useEffect(() => {
     console.log('testy test');
   }, []);
 
+  const history = useHistory();
   const language = 'en';
 
   const validatePassword = (password: string) => {
@@ -49,9 +51,11 @@ export const LogIn: FC = () => {
           <Actions
             googleText={dictionary[language].with_google}
             googleColor={ButtonColor.google}
+            googleAction={() => console.log('google auth')} // !! remove console.logs!!!
             or={dictionary[language].or}
             loginText={dictionary[language].login}
             loginColor={ButtonColor.login}
+            loginAction={() => history.push('/home')}
           />
         </LoginWrapper>
         <Legal>

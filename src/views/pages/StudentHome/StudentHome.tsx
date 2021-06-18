@@ -1,55 +1,31 @@
 import {FC} from 'react';
-import {BackgroundHome, CharacterContainer, StudentHomeStyle} from './Style';
-import {TopMenu} from '../../organisms/Menu/TopMenu';
-import {NavPanel} from '../../organisms/NavPanel/NavPanel';
+import {
+  CharacterContainer,
+  MyProgressContainer,
+  RankContainer,
+  StudentHomeStyle,
+} from './Style';
 import {MyProgress} from '../../organisms/MyProgress';
-import {MobileMenu} from '../../organisms/Menu/MobileMenu';
-
-import {StartLesson} from '../../molecules/StartLesson';
 import {HomeCharacter} from '../../organisms/HomeCharacter';
-type StudentHomeProps = {
-  rank: number;
-  level: number;
-  exp: number;
-  expMax: number;
-  icon: string;
-  userName: string;
-  progress: number;
-  energyCharge: number;
-  balance: number;
-};
+import {StudentMenu} from '../../templates/StudentMenu';
+import {Rank} from '../../organisms/Rank';
 
-export const StudentHome: FC<StudentHomeProps> = ({
-  rank,
-  level,
-  exp,
-  expMax,
-  icon,
-  userName,
-  progress,
-  energyCharge,
-  balance,
-}) => {
+export const StudentHome: FC = () => {
   return (
     <>
-      <TopMenu
-        rank={rank}
-        level={level}
-        exp={exp}
-        expMax={expMax}
-        icon={icon}
-        userName={userName}
-        progress={progress}
-        energyCharge={energyCharge}
-        balance={balance}
-      />
-      <StudentHomeStyle>
-        <CharacterContainer>
-          <HomeCharacter userName={'Sophie'} />
-          <MyProgress point={5} />
-        </CharacterContainer>
-      </StudentHomeStyle>
-      <MobileMenu />
+      <StudentMenu>
+        <StudentHomeStyle>
+          <CharacterContainer>
+            <RankContainer>
+              <Rank />
+            </RankContainer>
+            <HomeCharacter userName={'Sophie'} />
+            <MyProgressContainer>
+              <MyProgress />
+            </MyProgressContainer>
+          </CharacterContainer>
+        </StudentHomeStyle>
+      </StudentMenu>
     </>
   );
 };

@@ -2,7 +2,6 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {UserInfo} from '../atoms/Text/UserInfo';
 import {BasicColor} from '../Color';
-import {ScreenSize} from '../screenSize';
 
 type GameCardProps = {
   gameName: string;

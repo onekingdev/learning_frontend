@@ -20,7 +20,7 @@ export const NavPanelStyles = styled.div<{
   min-width: 90px;
   max-width: 100px;
   transition-duration: 0.3s;
-
+  z-index: 10;
   @media screen and (min-width: ${ScreenSize.desktop}) {
     align-items: flex-end;
   }
