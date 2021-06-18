@@ -51,8 +51,6 @@ export const MobileMenu: FC = () => {
 const MobileMenuStyles = styled.div`
   width: 100%;
   height: 60px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
   background-color: ${BasicColor.blue};
   display: flex;
   justify-content: space-around;

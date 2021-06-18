@@ -7,8 +7,6 @@ export const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-  display: grid;
-  grid-template-rows: 1fr repeat(3, 2fr) 3rem;
 `;
 
 export const Logo = styled.img`
@@ -77,6 +75,8 @@ export const Actions = styled.div`
 export const Legal = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  position: absolute;
+  bottom: 2rem;
   width: 85vw;
   margin-left: 7.5vw;
 `;

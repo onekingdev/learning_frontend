@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Title} from '../../atoms/Text/Title';
 import {BasicColor} from '../../Color';
 import {ScreenSize} from '../../screenSize';
+import ribbon from '../../assets/ribbon.svg';
 
 export const AvatarFavoritesTitle: FC = () => {
   return (
@@ -20,6 +21,18 @@ const FavoritesTitle = styled.div`
   align-content: center;
   text-transform: uppercase;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    visibility: hidden;
+    width: auto;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    background-color: transparent;
+    background-image: url(${ribbon});
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: auto;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    background-size: 500px 80px;
   }
 `;

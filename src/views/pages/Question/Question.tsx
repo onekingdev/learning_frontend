@@ -3,6 +3,7 @@ import {Lesson} from '../../atoms/Text/Lesson';
 import {ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
 import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
+import {MobileMenu} from '../../organisms/Menu/MobileMenu';
 import {
   Answers,
   AnswerWrapper,
@@ -16,7 +17,7 @@ import {
   ProgressWrapper,
 } from './Style';
 import apple from '../../assets/apple.svg';
-import {FinishLesson} from '../../organisms/FinishLesson';
+import {TopMenu} from '../../organisms/Menu/TopMenu';
 import {StudentMenu} from '../../templates/StudentMenu';
 
 export const Question: FC = () => {
@@ -34,7 +35,7 @@ export const Question: FC = () => {
     {value: 'apple'},
     {value: 'apple'},
   ];
-  const isLessonFinished = false;
+
   return (
     <Wrapper>
       <StudentMenu>
@@ -45,38 +46,34 @@ export const Question: FC = () => {
             totalQuestions={10}
           />
         </ProgressWrapper>
-        {isLessonFinished ? (
-          <FinishLesson tokens={10} energy={1} />
-        ) : (
-          <Container id="container">
-            <BlackBoard>
-              <Lesson>Which of these is not an apple?</Lesson>
-              <Options>
-                {options.map((option, index) => (
-                  <OptionWrapper>
-                    <Option src={option.image} alt="correct answer" />
-                    <Lesson>{++index}</Lesson>
-                  </OptionWrapper>
-                ))}
-              </Options>
-            </BlackBoard>
-            <AnswerWrapper>
-              <Lesson>What is the answer?</Lesson>
-              <Answers>
-                {answers.map(answer => (
-                  <Button
-                    value={answer.value}
-                    color={ButtonColor.google}
-                    darkText={true}
-                  />
-                ))}
-              </Answers>
-              <Submit>
-                <Button value={'validate'} />
-              </Submit>
-            </AnswerWrapper>
-          </Container>
-        )}
+        <Container id="container">
+          <BlackBoard>
+            <Lesson>Which of these is not an apple?</Lesson>
+            <Options>
+              {options.map((option, index) => (
+                <OptionWrapper>
+                  <Option src={option.image} alt="correct answer" />
+                  <Lesson>{++index}</Lesson>
+                </OptionWrapper>
+              ))}
+            </Options>
+          </BlackBoard>
+          <AnswerWrapper>
+            <Lesson>What is the answer?</Lesson>
+            <Answers>
+              {answers.map(answer => (
+                <Button
+                  value={answer.value}
+                  color={ButtonColor.google}
+                  darkText={true}
+                />
+              ))}
+            </Answers>
+            <Submit>
+              <Button value={'validate'} />
+            </Submit>
+          </AnswerWrapper>
+        </Container>
       </StudentMenu>
     </Wrapper>
   );
