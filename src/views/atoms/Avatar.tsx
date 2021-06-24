@@ -1,5 +1,5 @@
 import {FC, useEffect} from 'react';
-import {ReactComponent as AvatarSvg} from '../assets/avatars/girl-11.svg';
+import {ReactComponent as AvatarSvg} from '../assets/avatars/girl-6.svg';
 import {shadeColor} from '../Color';
 
 type AvatarProps = {

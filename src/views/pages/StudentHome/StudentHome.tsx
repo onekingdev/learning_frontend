@@ -1,5 +1,6 @@
 import {FC} from 'react';
 import {
+  BackgroundHomeFloor,
   CharacterContainer,
   MyProgressContainer,
   RankContainer,
@@ -25,6 +26,7 @@ export const StudentHome: FC = () => {
             </MyProgressContainer>
           </CharacterContainer>
         </StudentHomeStyle>
+        <BackgroundHomeFloor />
       </StudentMenu>
     </>
   );

@@ -51,7 +51,7 @@ export const Legal = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     position: absolute;
-    bottom: 2rem;
+    bottom: 1rem;
     left: calc(50vw + 3rem);
   }
 `;
@@ -60,7 +60,7 @@ export const LoginWrapper = styled.div`
   @media (min-width: ${ScreenSize.desktop}) {
     width: 60%;
     min-width: 550px;
-    margin-top: 15rem;
+    margin-top: 8rem;
     margin-left: 3rem;
   }
 `;
