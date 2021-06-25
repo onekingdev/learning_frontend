@@ -47,7 +47,7 @@ export const NavPanel: FC<NavPanelProps> = ({isClose, deploySideBar}) => {
           />
         </IconContainer>
         <IconResponsiveContainer>
-          <Icon image={avatar} onClick={() => history.push('/avatar')} />
+          <Icon image={avatar} onClick={() => history.push('/profile')} />
         </IconResponsiveContainer>
       </NavPanelStyles>
     </>
