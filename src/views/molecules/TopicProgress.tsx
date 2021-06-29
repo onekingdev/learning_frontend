@@ -1,10 +1,15 @@
 import {FC} from 'react';
 import styled from 'styled-components';
+import {Icon} from '../atoms/Icon/Icon';
+import {Header} from '../atoms/Text/Header';
 import {Lesson} from '../atoms/Text/Lesson';
+import {Subheader} from '../atoms/Text/Subheader';
+import {Title} from '../atoms/Text/Title';
+
 import {BasicColor} from '../Color';
 
 type TopicProgressProps = {
-  points: boolean[];
+  points: number;
   maxPoints: number;
   title: string;
   color: string;
@@ -15,41 +20,29 @@ export const TopicProgress: FC<TopicProgressProps> = ({
   color,
   maxPoints,
 }) => {
-  const generateProgress = () => {
-    const progressWeekOne = points.slice(0, 5);
-    const progressWeekTwo = points.slice(5, 10);
-
-    return {progressWeekOne, progressWeekTwo};
+  const generateProgress = (curr: number, max: number) => {
+    const progressState = [];
+    for (let i = 0; i < max; i++) {
+      progressState.push(i < curr ? true : false);
+    }
+    return progressState;
   };
 
   return (
     <>
       <TopicProgressContainer>
         <Lesson isDark={true}>{title}</Lesson>
-        <TopicProgressStyle>
-          <TopicPointsContainer>
-            {generateProgress().progressWeekOne.map((item, i) => {
-              return (
-                <ProgressPoint
-                  color={item ? color : BasicColor.gray80}
-                  width={275 / maxPoints - 5}
-                  key={i}
-                />
-              );
-            })}
-          </TopicPointsContainer>
-          <TopicPointsContainer>
-            {generateProgress().progressWeekTwo.map((item, i) => {
-              return (
-                <ProgressPoint
-                  color={item ? color : BasicColor.gray80}
-                  width={275 / maxPoints - 5}
-                  key={i}
-                />
-              );
-            })}
-          </TopicPointsContainer>
-        </TopicProgressStyle>
+        <TopicProgressStyles>
+          {generateProgress(points, maxPoints).map((item, i) => {
+            return (
+              <ProgressPoint
+                color={item ? color : BasicColor.gray80}
+                width={275 / maxPoints - 10}
+                key={i}
+              />
+            );
+          })}
+        </TopicProgressStyles>
       </TopicProgressContainer>
     </>
   );
@@ -61,17 +54,12 @@ type PropgressPointProps = {
 };
 
 const TopicProgressContainer = styled.div`
-  width: 100%;
+  width: 275px;
   height: 84px;
   display: grid;
 `;
-const TopicProgressStyle = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-`;
-const TopicPointsContainer = styled.div`
+
+const TopicProgressStyles = styled.div`
   width: 100%;
   height: 36px;
   background-color: ${BasicColor.gray40};

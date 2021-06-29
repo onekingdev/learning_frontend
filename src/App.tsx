@@ -4,12 +4,8 @@ import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
 import {Question} from './views/pages/Question/Question';
 import {Avatar} from './views/pages/Avatar/Avatar';
+import {CardCollectible} from './views/pages/CardCollectible/CardCollectible';
 import {MyProfile} from './views/pages/MyProfile/MyProfile';
-import {Backpack} from './views/pages/Backpack/Backpack';
-import {Games} from './views/pages/Games/Games';
-import {GamesMenu} from './views/pages/GamesMenu/GamesMenu';
-import {StudentHome} from './views/pages/StudentHome/StudentHome';
-import {Progress} from './views/pages/Progress/Progress';
 import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 
@@ -29,23 +25,11 @@ export default () => {
         <Route path="/avatar">
           <Avatar />
         </Route>
+        <Route path="/collectibles">
+          <CardCollectible />
+        </Route>
         <Route path="/profile">
           <MyProfile />
-        </Route>
-        <Route path="/home">
-          <StudentHome />
-        </Route>
-        <Route path="/progress">
-          <Progress />
-        </Route>
-        <Route path="/backpack">
-          <Backpack />
-        </Route>
-        <Route path="/games/categories">
-          <Games />
-        </Route>
-        <Route path="/games">
-          <GamesMenu />
         </Route>
         <Route path="/map">
           <KnowledgeMap />

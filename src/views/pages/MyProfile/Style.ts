@@ -19,13 +19,13 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-gap: 60px;
     max-width: 1025px;
-    padding-top: 10px;
+    padding-top: 85px;
   }
 `;
 
 export const Head = styled.div`
   margin-top: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 28px;
   margin-left: auto;
   margin-right: auto;
 `;

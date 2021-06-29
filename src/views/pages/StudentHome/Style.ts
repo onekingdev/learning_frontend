@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
 import {BasicColor} from '../../Color';
+
+import {ScreenSize} from '../../screenSize';
 
 export const StudentHomeStyle = styled.div`
   width: 100%;
@@ -23,6 +24,7 @@ export const CharacterContainer = styled.div`
   justify-items: center;
 
   @media screen and (min-width: ${ScreenSize.tablet}) {
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     margin-top: 50px;
     height: 80vh;
@@ -31,17 +33,11 @@ export const CharacterContainer = styled.div`
   @media screen and (min-width: ${ScreenSize.desktop}) {
     width: 85%;
     margin-top: 0;
-    grid-template-columns: 300px 1fr 400px;
+    grid-template-columns: 1fr 400px;
     justify-items: flex-end;
   }
 `;
 
-export const RankContainer = styled.div`
-  display: none;
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    display: initial;
-  }
-`;
 export const BackgroundHome = styled.div`
   width: 100%;
   height: 60vh;
@@ -53,27 +49,5 @@ export const BackgroundHome = styled.div`
 
   @media screen and (min-width: ${ScreenSize.desktop}) {
     height: 80vh;
-  }
-`;
-export const MyProgressContainer = styled.div`
-  display: none;
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    display: flex;
-  }
-`;
-export const BackgroundHomeFloor = styled.div`
-  width: 100%;
-  height: 50%;
-  position: absolute;
-  bottom: 0;
-  background-color: ${BasicColor.brown};
-  z-index: -10;
-  display: ${window.location.pathname === '/home' ? 'static' : 'none'};
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    height: 35%;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    width: 90%;
-    height: 30%;
   }
 `;

@@ -10,8 +10,6 @@ import {UserProgress} from '../UserProgress';
 import {IconSize} from '../../atoms/Icon/Size';
 import {ScreenSize} from '../../screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
-import {IconDropDown} from '../../molecules/IconDropDown';
-import {useHistory} from 'react-router-dom';
 
 type TopMenuProps = {
   rank: number;
@@ -40,8 +38,6 @@ export const TopMenu: FC<TopMenuProps> = ({
   const deploySidebar = () => {
     setOpenSidebar(!openSidebar);
   };
-
-  const history = useHistory();
   return (
     <>
       <TopMenuStyles>
@@ -53,24 +49,9 @@ export const TopMenu: FC<TopMenuProps> = ({
             onClick={deploySidebar}
           />
         </ToggleButtonContainer>
-        <HomeIcon>
-          <Icon
-            image={home}
-            size={IconSize.medium}
-            onClick={() => history.push('/home')}
-          />
-        </HomeIcon>
+        <Icon image={home} size={IconSize.medium} />
         <Energy charge={energyCharge} />
-        <ModalityContainer>
-          <IconDropDown
-            icon={modality}
-            options={[
-              {name: 'AI', action: () => history.push('/question')},
-              {name: 'Choose your path', action: () => history.push('/map')},
-              {name: 'Practice', action: () => history.push('/subjects')},
-            ]}
-          />
-        </ModalityContainer>
+        <Icon image={modality} size={IconSize.medium} />
         <Wallet balance={balance} />
         <UserProgress
           rank={rank}
@@ -107,11 +88,4 @@ const TopMenuStyles = styled.div`
 `;
 const ToggleButtonContainer = styled.div<ToggleButtonProps>`
   opacity: ${p => (p.isClose ? 0 : 1)};
-`;
-
-const ModalityContainer = styled.div`
-  width: 60px;
-`;
-const HomeIcon = styled.div`
-  cursor: pointer;
 `;
