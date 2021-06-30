@@ -9,11 +9,9 @@ import adventure from '../assets/adventure.svg';
 import sport from '../assets/sports.svg';
 import skill from '../assets/skills.svg';
 import {dictionary} from '../pages/Games/dictionary';
-import {useHistory} from 'react-router-dom';
 
 export const GameMainMenu: FC = () => {
   const language = 'en';
-  const history = useHistory();
   return (
     <>
       <GameMainMenuStyle>
@@ -21,35 +19,35 @@ export const GameMainMenu: FC = () => {
           gameMode={dictionary[language].arcade}
           gameModeImage={arcade}
           color={BasicColor.red}
-          onClick={() => history.push('/games')}
+          onClick={() => console.log('Hella yes')}
           isButton={true}
         />
         <GameMenuButton
           gameMode={dictionary[language].learning}
           gameModeImage={learning}
           color={BasicColor.green}
-          onClick={() => history.push('/games')}
+          onClick={() => console.log('Hella yes')}
           isButton={true}
         />
         <GameMenuButton
           gameMode={dictionary[language].adventure}
           gameModeImage={adventure}
           color={BasicColor.aqua}
-          onClick={() => history.push('/games')}
+          onClick={() => console.log('Hella yes')}
           isButton={true}
         />
         <GameMenuButton
           gameMode={dictionary[language].sport}
           gameModeImage={sport}
           color={BasicColor.blue}
-          onClick={() => history.push('/games')}
+          onClick={() => console.log('Hella yes')}
           isButton={true}
         />
         <GameMenuButton
           gameMode={dictionary[language].skill}
           gameModeImage={skill}
           color={BasicColor.purple}
-          onClick={() => history.push('/games')}
+          onClick={() => console.log('Hella yes')}
           isButton={true}
         />
       </GameMainMenuStyle>

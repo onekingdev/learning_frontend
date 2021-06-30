@@ -75,9 +75,7 @@ export const Wallet: FC<WalletProps> = ({balance}) => {
     <>
       <WalletContainer>
         <WalletStyle>
-          <IconContainer>
-            <Icon image={coins} size={IconSize.medium} />
-          </IconContainer>
+          <Icon image={coins} size={IconSize.medium} />
           <Balance>{balance}</Balance>
           <DropdownIcon src={dropDownArrow} onClick={deployDropdown} />
         </WalletStyle>
@@ -127,7 +125,8 @@ const WalletStyle = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    border-left: none;
     z-index: 2;
     background-color: ${BasicColor.white};
   }
@@ -170,8 +169,4 @@ const DropdownIcon = styled.img`
 const ExtendUserInfo = styled(UserInfo)<ExtendUserInfoProps>`
   color: ${p => p.color};
   font-weight: 600;
-`;
-const IconContainer = styled.div`
-  position: absolute;
-  left: -6px;
 `;

@@ -22,9 +22,7 @@ import {
   ModalStyles,
   ModalItemsContainer,
 } from './Style';
-import {UserInfo} from '../../atoms/Text/UserInfo';
 import {TextInput} from '../../atoms/Text/TextInput';
-import {GeneralText} from '../../atoms/Text/GeneralText';
 
 export const Welcome: FC = () => {
   const language = 'en';

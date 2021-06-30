@@ -22,10 +22,8 @@ import backpackFace from '../../assets/backpack-face.svg';
 import backpackLeft from '../../assets/backpack-left.svg';
 import backpackRight from '../../assets/backpack-right.svg';
 import {StudentMenu} from '../../templates/StudentMenu';
-import {useHistory} from 'react-router-dom';
 
 export const Backpack: FC = () => {
-  const history = useHistory();
   return (
     <>
       <Wrapper>
@@ -41,21 +39,21 @@ export const Backpack: FC = () => {
                 <BackpackButtonsContainer>
                   <AvatarButtonContainer>
                     <BackpackButton
-                      onClick={() => history.push('/avatar')}
+                      onClick={() => console.log('Hella yes')}
                       image={avatarButton}
                       width={60}
                       height={130}
                     />
                   </AvatarButtonContainer>
                   <BackpackButton
-                    onClick={() => history.push('/collectibles')}
+                    onClick={() => console.log('Hella yes')}
                     image={cardsButton}
                     width={100}
                     height={70}
                   />
                   <ControlButtonContainer>
                     <BackpackButton
-                      onClick={() => history.push('/games/categories')}
+                      onClick={() => console.log('Hella yes')}
                       image={controlButton}
                       width={100}
                       height={70}
