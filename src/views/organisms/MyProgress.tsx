@@ -2,48 +2,105 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../Color';
 import {TopicProgress} from '../molecules/TopicProgress';
-import MYPROGRESS from '../assets/My Progress.svg';
-import {Icon} from '../atoms/Icon/Icon';
 import {ScreenSize} from '../screenSize';
 import {Title} from '../atoms/Text/Title';
+import {dictionary} from '../pages/Progress/dictionary';
 
-type MyProgressProps = {
-  point: number;
-};
-
-export const MyProgress: FC<MyProgressProps> = ({point}) => {
+export const MyProgress: FC = () => {
+  const language = 'en';
   const lessonProps = [
     {
-      title: 'ELA',
+      title: dictionary[language].ela,
       color: BasicColor.red,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+      ],
     },
     {
-      title: 'MATH',
+      title: dictionary[language].math,
       color: BasicColor.orange,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+      ],
     },
     {
-      title: 'SIGHT',
+      title: dictionary[language].sight,
       color: BasicColor.yellow,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+      ],
     },
     {
-      title: 'SCIENCE',
+      title: dictionary[language].science,
       color: BasicColor.green,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+      ],
     },
     {
-      title: 'HEALTH',
+      title: dictionary[language].health,
       color: BasicColor.aqua,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+      ],
     },
   ];
+
   return (
     <>
       <MyProgressStyle>
         <MyProgressTitle>
-          <Title isDark={true}>My Progress</Title>
+          <Title isDark={true}>{dictionary[language].progress}</Title>
         </MyProgressTitle>
         {lessonProps.map((item, i) => (
           <TopicProgress
-            points={point}
-            maxPoints={8}
+            points={item.progress}
+            maxPoints={10}
             title={item.title}
             color={item.color}
             key={i}
@@ -55,24 +112,21 @@ export const MyProgress: FC<MyProgressProps> = ({point}) => {
 };
 
 const MyProgressStyle = styled.div`
-  display: none;
+  width: 300px;
+  height: 450px;
+  background-color: ${BasicColor.white};
+  border-radius: 30px;
+  box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 35px 25px;
 
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    width: 300px;
-    height: 450px;
-    background-color: ${BasicColor.white};
-    border-radius: 30px;
-    box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 35px 25px;
-  }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    height: 420px;
+    height: 400px;
   }
 `;
 const MyProgressTitle = styled.div`
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 `;

@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import mythology from '../../assets/mythology.svg';
+import {ScreenSize} from '../../screenSize';
 
 export const CardCollectible: FC = () => {
   return <StyledCard></StyledCard>;
@@ -16,4 +17,8 @@ const StyledCard = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: 70%;
+  }
 `;

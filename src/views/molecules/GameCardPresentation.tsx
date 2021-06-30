@@ -2,7 +2,7 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {UserInfo} from '../atoms/Text/UserInfo';
 import {BasicColor} from '../Color';
-import {ScreenSize} from '../screenSize';
+import coin from '../assets/coin.svg';
 
 type GameCardProps = {
   gameName: string;
@@ -25,7 +25,7 @@ export const GameCardPresentation: FC<GameCardProps> = ({
         <GameCardPriceContainer>
           <GameCardPrice>
             <UserInfo>{price}</UserInfo>
-            <CoinImage />
+            <CoinImage src={coin} />
           </GameCardPrice>
         </GameCardPriceContainer>
       </GameCardStyles>
@@ -45,6 +45,7 @@ const GameCardStyles = styled.div`
   justify-content: flex-start;
   margin-top: 30px;
   cursor: pointer;
+  background-color: ${BasicColor.white};
   &: hover {
     transform: scale(1.1);
   }
@@ -68,20 +69,18 @@ const GameCardPriceContainer = styled.div`
 `;
 
 const GameCardPrice = styled.div`
-  width: 45px;
+  width: 50px;
   height: 20px;
   border-radius: 20px;
   margin: 5px;
   display: flex;
+  align-content: center;
+  grid-gap: 2px;
   justify-content: flex-end;
-  align-items: center;
   background-color: ${BasicColor.blue};
-  padding: 3px;
+  padding-top: 3px;
 `;
 const CoinImage = styled.img`
   width: 20px;
-  height: 20px;
   border-radius: 100%;
-  background-color: ${BasicColor.yellow};
-  margin-left: 4px;
 `;
