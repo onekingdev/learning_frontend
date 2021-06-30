@@ -6,9 +6,7 @@ import coins from '../../assets/coins.svg';
 import styled from 'styled-components';
 import {IconSize} from '../../atoms/Icon/Size';
 import {ScreenSize} from '../../screenSize';
-import {IconDropDown} from '../IconDropDown';
 import {UserInfo} from '../../atoms/Text/UserInfo';
-import {GeneralText} from '../../atoms/Text/GeneralText';
 import dropDownArrow from '../../assets/drop-down-arrow.svg';
 
 type WalletProps = {
@@ -77,7 +75,9 @@ export const Wallet: FC<WalletProps> = ({balance}) => {
     <>
       <WalletContainer>
         <WalletStyle>
-          <Icon image={coins} size={IconSize.medium} />
+          <IconContainer>
+            <Icon image={coins} size={IconSize.medium} />
+          </IconContainer>
           <Balance>{balance}</Balance>
           <DropdownIcon src={dropDownArrow} onClick={deployDropdown} />
         </WalletStyle>
@@ -127,8 +127,7 @@ const WalletStyle = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-left: none;
+    justify-content: flex-end;
     z-index: 2;
     background-color: ${BasicColor.white};
   }
@@ -171,4 +170,8 @@ const DropdownIcon = styled.img`
 const ExtendUserInfo = styled(UserInfo)<ExtendUserInfoProps>`
   color: ${p => p.color};
   font-weight: 600;
+`;
+const IconContainer = styled.div`
+  position: absolute;
+  left: -6px;
 `;
