@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import titleBackground from '../../assets/title-games-background.png';
-import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`

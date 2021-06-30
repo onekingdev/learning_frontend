@@ -6,55 +6,102 @@ import {ScreenSize} from '../../screenSize';
 import {CardCollectible} from './CardCollectible';
 
 export const CardCollectibleCarrousel: FC = () => {
+  const handleMoveRight = () => {
+    const carousel = document.getElementById('carousel');
+    if (carousel) {
+      return (carousel.scrollLeft += carousel.offsetWidth);
+    }
+    return null;
+  };
+  const handleMoveLeft = () => {
+    const carousel = document.getElementById('carousel');
+    if (carousel) {
+      return (carousel.scrollLeft -= carousel.offsetWidth);
+    }
+    return null;
+  };
+
   return (
-    <CardCarrousel>
-      <LeftArrow src={arrowLeft}></LeftArrow>
-      <CardCollectible></CardCollectible>
-      <CardCollectible></CardCollectible>
-      <CardCollectible></CardCollectible>
-      <RightArrow src={arrowRight}></RightArrow>
-    </CardCarrousel>
+    <>
+      <CarrouselContainer>
+        <div>
+          <LeftArrow src={arrowLeft} onClick={handleMoveLeft} />
+        </div>
+        <CardCarrousel id="carousel">
+          <CardCollectible></CardCollectible>
+          <CardCollectible></CardCollectible>
+          <CardCollectible></CardCollectible>
+          <CardCollectible></CardCollectible>
+          <CardCollectible></CardCollectible>
+          <CardCollectible></CardCollectible>
+          <CardCollectible></CardCollectible>
+          <CardCollectible></CardCollectible>
+          <CardCollectible></CardCollectible>
+        </CardCarrousel>
+        <div>
+          <RightArrow src={arrowRight} onClick={handleMoveRight} />
+        </div>
+      </CarrouselContainer>
+    </>
   );
 };
 
-const CardCarrousel = styled.div`
-  display: grid;
-  height: 100%;
-  grid-template-columns: 80px 1fr 0 0 80px;
+const CarrouselContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
   align-items: center;
-  justify-items: center;
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    grid-template-columns: 80px 1fr 1fr 0 80px;
+    width: 80%;
   }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    grid-template-columns: minmax(80px, auto) repeat(3, minmax(200px, 300px)) minmax(
-        80px,
-        auto
-      );
+`;
+const CardCarrousel = styled.div`
+  display: flex;
+  height: 230px;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-items: center;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scroll-behavior: smooth;
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    height: 250px;
   }
 `;
 
 const LeftArrow = styled.img`
   width: 25px;
-  grid-row: 1 / 2;
+  margin: 0 15px;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     width: 32px;
+    margin: 0 20px;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    width: 45px;
-    margin-left: auto;
-    margin-right: 20px;
+    width: 40px;
+    cursor: pointer;
+    &: hover {
+      transform: scale(1.1);
+    }
   }
 `;
 
 const RightArrow = styled.img`
   width: 25px;
-  grid-column: -2 / -1;
+  margin: 0 15px;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     width: 32px;
+    margin: 0 20px;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    width: 45px;
-    margin-right: auto;
-    margin-left: 20px;
+    width: 40px;
+    cursor: pointer;
+    &: hover {
+      transform: scale(1.1);
+    }
+   
+    
 `;

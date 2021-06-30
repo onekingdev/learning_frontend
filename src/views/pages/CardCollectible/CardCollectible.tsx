@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {CardCollectibleContainer, Wrapper} from './Style';
 import {CardCollectibleTitle} from '../../molecules/CardCollectible/CardCollectibleTitle';
-import {CardCollectibleStore} from '../../molecules/CardCollectible/CardCollectibleStore';
+import {CardsStore} from '../../molecules/CardCollectible/CardsStore';
 import {CardCollectibleCarrousel} from '../../molecules/CardCollectible/CardCollectibleCarrousel';
 import {StudentMenu} from '../../templates/StudentMenu';
 
@@ -11,7 +11,7 @@ export const CardCollectible: FC = () => {
       <StudentMenu>
         <CardCollectibleContainer>
           <CardCollectibleTitle></CardCollectibleTitle>
-          <CardCollectibleStore></CardCollectibleStore>
+          <CardsStore></CardsStore>
           <CardCollectibleCarrousel></CardCollectibleCarrousel>
         </CardCollectibleContainer>
       </StudentMenu>
