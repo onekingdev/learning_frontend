@@ -53,7 +53,7 @@ const StyledActions = styled.div`
     grid-template-columns: 1fr 0 1fr;
     grid-gap: 20px;
     direction: rtl;
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-left: 0;
   }
 `;

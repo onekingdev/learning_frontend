@@ -1,5 +1,8 @@
 import {FC} from 'react';
 import styled from 'styled-components';
+import {Icon} from '../atoms/Icon/Icon';
+import {IconSize} from '../atoms/Icon/Size';
+
 import {UserInfo} from '../atoms/Text/UserInfo';
 import {BasicColor} from '../Color';
 import {ScreenSize} from '../screenSize';
@@ -18,7 +21,7 @@ type IconDropDownProps = {
 
 export const IconDropDown: FC<IconDropDownProps> = ({
   icon,
-  options = [{name: 'test'}],
+  options,
   onIconClick,
 }) => {
   return (
@@ -34,7 +37,7 @@ export const IconDropDown: FC<IconDropDownProps> = ({
       </label>
       <DropdownContent>
         {options.map((o, i) => (
-          <DropDownText key={i} isDark={true}>
+          <DropDownText key={i} isDark={true} onClick={o.action}>
             {o.name}
           </DropDownText>
         ))}

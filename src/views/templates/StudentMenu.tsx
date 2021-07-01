@@ -17,7 +17,7 @@ export const StudentMenu: FC = ({children}) => {
         userName={'Elliot Alderson'}
         progress={50}
         energyCharge={1}
-        balance={1999}
+        balance={999999}
       />
       <div>{children}</div>
       <MobileMenu />
