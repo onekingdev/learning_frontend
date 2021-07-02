@@ -44,8 +44,8 @@ const Container = styled.div`
 `;
 
 const RibbonWrapper = styled.div`
-  width: 50%;
-  margin-bottom: 10px;
+  width: 60%;
+  margin-bottom: 12px;
   margin-left: auto;
   margin-right: auto;
 `;

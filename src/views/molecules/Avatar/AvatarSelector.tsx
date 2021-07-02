@@ -36,7 +36,6 @@ const SelectorGrid = styled.div`
   grid-template-rows: auto;
   align-content: center;
   justify-content: center;
-  margin-top: 15px;
   @media screen and (min-width: ${ScreenSize.phone}) {
     grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
     grid-row: 2 / 3;
@@ -56,7 +55,7 @@ const CurrentAvatar = styled.img`
   @media screen and (min-width: ${ScreenSize.phone}) {
     grid-row: 1 / 2;
     grid-column: 3 / 4;
-    width: 200px;
+    width: 281px;
   }
 `;
 
@@ -84,7 +83,7 @@ const RightArrow = styled.img`
 
 const FavoriteIcon = styled.img`
   position: relative;
-  width: 50px;
+  width: 55px;
   grid-column: 3 / 4;
   grid-row: 1 / 2;
   justify-self: start;
@@ -106,20 +105,20 @@ const BodyPartWardrobe = styled.img`
   @media screen and (min-width: ${ScreenSize.phone}) {
     grid-row: 1 / 2;
     height: 100%;
-    max-height: 480px;
+    max-height: 534px;
   }
 `;
 
 const AvatarWardrobe = styled.img`
   display: none;
   justify-self: start;
-  align-self: start;
+  align-self: end;
   @media screen and (min-width: ${ScreenSize.phone}) {
     display: block;
     grid-row: 1 / 2;
     grid-column: 5 / 6;
     height: 100%;
-    max-height: 480px;
+    max-height: 534px;
   }
 `;
 
@@ -137,5 +136,5 @@ const FavoritesDrawer = styled.div`
 
 const CenteredRoundIcon = styled(RoundIcon)`
   margin: auto;
-  margin-left: calc(160px / 2 - 75px / 2);
+  margin-left: calc(176px / 2 - 75px / 2);
 `;

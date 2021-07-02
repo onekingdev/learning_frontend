@@ -33,6 +33,6 @@ const FavoritesTitle = styled.div`
     width: auto;
     grid-row: 1 / 2;
     grid-column: 1 / 2;
-    background-size: 400px 70px;
+    background-size: 500px 80px;
   }
 `;

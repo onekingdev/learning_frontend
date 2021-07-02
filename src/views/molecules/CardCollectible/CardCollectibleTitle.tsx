@@ -14,7 +14,7 @@ export const CardCollectibleTitle: FC = () => {
 
 const CardTitle = styled.div`
   display: grid;
-  height: 90%;
+  height: 100%;
   text-align: center;
   align-content: center;
   background-image: url(${ribbon});
@@ -25,6 +25,6 @@ const CardTitle = styled.div`
     background-size: 296px 58px;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    background-size: 400px 60px;
+    background-size: 500px 80px;
   }
 `;

@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 
 export const ProgressWrapper = styled.div`
   @media (min-width: ${ScreenSize.desktop}) {
-    margin-top: 1rem;
+    margin-top: 3rem;
   }
 `;
 
@@ -32,9 +32,6 @@ export const BlackBoard = styled.div`
     margin: 1rem;
     margin-top: 5rem;
     margin-bottom: 7rem;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    margin: 1rem;
   }
 `;
 
@@ -73,9 +70,6 @@ export const AnswerWrapper = styled.div`
     margin-top: 5rem;
     margin-bottom: 7rem;
   }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    margin: 1rem;
-  }
 `;
 
 export const Container = styled.div`
@@ -83,7 +77,11 @@ export const Container = styled.div`
   display: grid;
   height: calc(100% - 57px - 33px - 30px - 35px);
   @media (min-width: ${ScreenSize.tablet}) {
-    grid-template-columns: 60% 40%;
+    height: calc(100% - 71px - 57px - 33px);
+    grid-template-columns: 50% 50%;
+  }
+  @media (min-width: ${ScreenSize.tablet}) {
+    grid-template-columns: 66% 33%;
     max-width: 1366px;
     margin-left: auto;
     margin-right: auto;

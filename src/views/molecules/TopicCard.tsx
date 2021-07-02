@@ -6,18 +6,12 @@ type TopicCardProps = {
   image: string;
   subject: string;
   background: string;
-  onClick?: () => void;
 };
 
-export const TopicCard: FC<TopicCardProps> = ({
-  image,
-  subject,
-  background,
-  onClick,
-}) => {
+export const TopicCard: FC<TopicCardProps> = ({image, subject, background}) => {
   return (
     <>
-      <TopicCardStyles color={background} onClick={onClick}>
+      <TopicCardStyles color={background}>
         <TopicCardImage src={image} />
         <TopicCardText isDark={true}>{subject}</TopicCardText>
       </TopicCardStyles>

@@ -46,7 +46,7 @@ const GameCardStyles = styled.div`
   margin-top: 30px;
   cursor: pointer;
   background-color: ${BasicColor.white};
-  &: hover {
+  &:hover {
     transform: scale(1.1);
   }
 `;
