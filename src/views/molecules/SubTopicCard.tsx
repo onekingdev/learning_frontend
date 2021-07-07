@@ -5,10 +5,13 @@ import {Subheader} from '../atoms/Text/Subheader';
 import {BasicColor} from '../Color';
 import {ScreenSize} from '../screenSize';
 
-export const SubTopicCard: FC = () => {
+type SubTopicCardProps = {
+  onClick: () => void;
+};
+export const SubTopicCard: FC<SubTopicCardProps> = ({onClick}) => {
   return (
     <>
-      <SubTopicStyle>
+      <SubTopicStyle onClick={onClick}>
         <SubTopicTextContainer>
           <SubTopicTitle isDark={true}>Lorem ipsum dolor </SubTopicTitle>
           <SubTopicDescription isDark={true}>

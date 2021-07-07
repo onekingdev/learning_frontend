@@ -14,6 +14,7 @@ import {ScreenSize} from '../../screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
 import {StartLesson} from '../../molecules/StartLesson';
 import {IconDropDown} from '../../molecules/IconDropDown';
+import {useHistory} from 'react-router-dom';
 
 export const MobileMenu: FC = () => {
   const [openSidebar, setOpenSidebar] = useState(Boolean);
@@ -24,11 +25,12 @@ export const MobileMenu: FC = () => {
   const removeStartButton = () => {
     setCloseStartButton(!closeStartButton);
   };
+  const history = useHistory();
   return (
     <>
       <MobileMenuContainer>
         <StartLesson
-          onClick={() => console.log('Hello friend')}
+          onClick={() => history.push('/question')}
           isClose={closeStartButton ? true : false}
         />
         <NavPanelContainer>
@@ -40,14 +42,18 @@ export const MobileMenu: FC = () => {
             size={IconSize.small}
             onClick={deploySidebar}
           />
-          <Icon image={home} size={IconSize.medium} />
+          <Icon
+            image={home}
+            size={IconSize.medium}
+            onClick={() => history.push('/home')}
+          />
           <IconDropdownContainer>
             <IconDropDown
               icon={modalityIcon}
               options={[
-                {name: 'AI'},
-                {name: 'Choose your path'},
-                {name: 'Practice'},
+                {name: 'AI', action: () => history.push('/question')},
+                {name: 'Choose your path', action: () => history.push('/map')},
+                {name: 'Practice', action: () => history.push('/subjects')},
               ]}
               onIconClick={removeStartButton}
             />

@@ -7,7 +7,7 @@ import math from '../../assets/islands/math-island.svg';
 import science from '../../assets/islands/science-island.svg';
 import sight from '../../assets/islands/sigh-island.svg';
 import ela from '../../assets/islands/ela-island.svg';
-
+import boatIcon from '../../assets/boat.svg';
 import boat from '../../assets/islands/fillers/boat.svg';
 
 import barrell from '../../assets/islands/fillers/barril.svg';
@@ -18,6 +18,7 @@ import rock from '../../assets/islands/fillers/rock.svg';
 import rock2 from '../../assets/islands/fillers/rock-2.svg';
 import boulder from '../../assets/islands/fillers/rocxk.svg';
 import {ScreenSize} from '../../screenSize';
+import {useHistory} from 'react-router-dom';
 
 export const KnowledgeMap: FC = () => {
   const subjects = [
@@ -43,7 +44,7 @@ export const KnowledgeMap: FC = () => {
     }
     return fillers[getRandomNumber(3)];
   };
-
+  const history = useHistory();
   return (
     <StudentMenu>
       <Ocean>
@@ -51,13 +52,13 @@ export const KnowledgeMap: FC = () => {
           const fill = getFiller();
           return i % 2 === 0 ? (
             <SubjectEven>
-              <Island src={s.image} />
+              <Island src={s.image} onClick={() => history.push('/question')} />
               <Filler src={fill} />
             </SubjectEven>
           ) : (
             <SubjectOdd>
               <Filler src={fill} />
-              <Island src={s.image} />
+              <Island src={s.image} onClick={() => history.push('/question')} />
             </SubjectOdd>
           );
         })}
@@ -74,6 +75,7 @@ const Ocean = styled.div`
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
+  cursor: url(${boatIcon}), auto;
   @media (min-width: ${ScreenSize.desktop}) {
     min-height: unset;
     margin-top: 75px;
@@ -84,6 +86,10 @@ const Island = styled.img`
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+  cursor: pointer;
+  &: hover {
+    transform: scale(1.1);
+  }
 `;
 
 const Filler = styled.img`

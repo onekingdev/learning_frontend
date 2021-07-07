@@ -11,6 +11,7 @@ import {IconSize} from '../../atoms/Icon/Size';
 import {ScreenSize} from '../../screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
 import {IconDropDown} from '../../molecules/IconDropDown';
+import {useHistory} from 'react-router-dom';
 
 type TopMenuProps = {
   rank: number;
@@ -39,6 +40,8 @@ export const TopMenu: FC<TopMenuProps> = ({
   const deploySidebar = () => {
     setOpenSidebar(!openSidebar);
   };
+
+  const history = useHistory();
   return (
     <>
       <TopMenuStyles>
@@ -50,15 +53,21 @@ export const TopMenu: FC<TopMenuProps> = ({
             onClick={deploySidebar}
           />
         </ToggleButtonContainer>
-        <Icon image={home} size={IconSize.medium} />
+        <HomeIcon>
+          <Icon
+            image={home}
+            size={IconSize.medium}
+            onClick={() => history.push('/home')}
+          />
+        </HomeIcon>
         <Energy charge={energyCharge} />
         <ModalityContainer>
           <IconDropDown
             icon={modality}
             options={[
-              {name: 'AI'},
-              {name: 'Choose your path'},
-              {name: 'Practice'},
+              {name: 'AI', action: () => console.log('IA')},
+              {name: 'Choose your path', action: () => console.log('Choose')},
+              {name: 'Practice', action: () => console.log('Practice')},
             ]}
           />
         </ModalityContainer>
@@ -102,4 +111,7 @@ const ToggleButtonContainer = styled.div<ToggleButtonProps>`
 
 const ModalityContainer = styled.div`
   width: 60px;
+`;
+const HomeIcon = styled.div`
+  cursor: pointer;
 `;

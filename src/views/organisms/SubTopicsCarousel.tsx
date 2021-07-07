@@ -6,6 +6,7 @@ import {SubTopicCard} from '../molecules/SubTopicCard';
 import {ScreenSize} from '../screenSize';
 import rightArrow from '../assets/right-arrow.svg';
 import leftArrow from '../assets/left-arrow.svg';
+import {useHistory} from 'react-router-dom';
 
 type SubTopicProps = {
   name: string;
@@ -17,16 +18,16 @@ export const SubTopicsCarousel: FC<SubTopicProps> = ({name}) => {
     if (carousel) {
       return (carousel.scrollLeft += carousel.offsetWidth);
     }
-    return null;
+    return;
   };
   const handleMoveLeft = () => {
     const carousel = document.getElementById(`${name}`);
     if (carousel) {
       return (carousel.scrollLeft -= carousel.offsetWidth);
     }
-    return null;
+    return;
   };
-
+  const history = useHistory();
   return (
     <>
       <SubTopicContainer>
@@ -38,21 +39,34 @@ export const SubTopicsCarousel: FC<SubTopicProps> = ({name}) => {
             <img src={leftArrow} />
           </CarouselButton>
           <CarouselStyle id={name}>
-            <SubTopicCard /> <SubTopicCard /> <SubTopicCard /> <SubTopicCard />
-            <SubTopicCard /> <SubTopicCard /> <SubTopicCard /> <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard /> <SubTopicCard /> <SubTopicCard /> <SubTopicCard />
-            <SubTopicCard /> <SubTopicCard /> <SubTopicCard /> <SubTopicCard />
-            <SubTopicCard /> <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard />
-            <SubTopicCard />
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />{' '}
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
+            <SubTopicCard onClick={() => history.push('/question')} />
           </CarouselStyle>
           <CarouselButton onClick={handleMoveRight}>
             <img src={rightArrow} />

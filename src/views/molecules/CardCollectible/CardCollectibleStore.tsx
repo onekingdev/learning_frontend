@@ -1,38 +1,28 @@
 import {FC} from 'react';
 import styled from 'styled-components';
+import mythology from '../../assets/mythology.svg';
 import {ScreenSize} from '../../screenSize';
-import {CardCollectible} from './CardCollectible';
 
 export const CardCollectibleStore: FC = () => {
   return (
-    <CardStore>
-      <CardCollectible></CardCollectible>
-      <CardCollectible></CardCollectible>
-      <CardCollectible></CardCollectible>
-      <CardCollectible></CardCollectible>
-      <CardCollectible></CardCollectible>
-      <CardCollectible></CardCollectible>
-    </CardStore>
+    <>
+      <Card />
+    </>
   );
 };
 
-const CardStore = styled.div`
-  display: grid;
-  height: 100%;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  justify-items: center;
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    margin-left: 35px;
-    margin-right: 35px;
-  }
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(6, 1fr);
-  }
+const Card = styled.div`
+  aspect-ratio: 8 / 11;
+  border-radius: 10px;
+  background-color: gray;
+  width: 90%;
+  max-height: 90%;
+  background-image: url(${mythology});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    grid-template-columns: repeat(6, 200px);
-    margin: auto;
+    width: 70%;
   }
 `;

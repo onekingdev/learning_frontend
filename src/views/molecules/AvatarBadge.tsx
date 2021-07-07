@@ -49,8 +49,8 @@ const Avatar = styled.img`
   width: 100px;
   z-index: 50;
   @media (min-width: ${ScreenSize.tablet}) {
-    width: 210px;
-    height: 210px;
+    width: 150px;
+    height: 150px;
   }
 `;
 
