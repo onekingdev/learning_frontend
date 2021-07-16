@@ -14,6 +14,8 @@ import {
   Wrapper,
   OptionWrapper,
   ProgressWrapper,
+  TextOptionsList,
+  TextOptionItem,
 } from './Style';
 import apple from '../../assets/apple.svg';
 import {FinishLesson} from '../../organisms/FinishLesson';
@@ -51,14 +53,28 @@ export const Question: FC = () => {
           <Container id="container">
             <BlackBoard>
               <Lesson>Which of these is not an apple?</Lesson>
-              <Options>
-                {options.map((option, index) => (
-                  <OptionWrapper>
-                    <Option src={option.image} alt="correct answer" />
-                    <Lesson>{++index}</Lesson>
-                  </OptionWrapper>
-                ))}
-              </Options>
+              <TextOptionsList>
+                <TextOptionItem>
+                  <Lesson>
+                    Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
+                  </Lesson>
+                </TextOptionItem>
+                <TextOptionItem>
+                  <Lesson>
+                    Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
+                  </Lesson>
+                </TextOptionItem>
+                <TextOptionItem>
+                  <Lesson>
+                    Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
+                  </Lesson>
+                </TextOptionItem>
+                <TextOptionItem>
+                  <Lesson>
+                    Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
+                  </Lesson>
+                </TextOptionItem>
+              </TextOptionsList>
             </BlackBoard>
             <AnswerWrapper>
               <Lesson>What is the answer?</Lesson>

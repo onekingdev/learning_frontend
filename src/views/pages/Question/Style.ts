@@ -48,7 +48,21 @@ export const Options = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
+export const TextOptionsList = styled.ol`
+  width: 100%;
+  list-style-type: upper-latin;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
 
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    grid-gap: 30px;
+  }
+`;
+export const TextOptionItem = styled.li`
+  width: 100%;
+`;
 export const OptionWrapper = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
