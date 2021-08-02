@@ -117,6 +117,11 @@ export const Answers = styled.div`
   }
 `;
 
+export const AnswerForm = styled.form`
+  grid-column: 1/3;
+  width: 100%;
+  margin: 0 auto;
+`;
 export const Submit = styled.div`
   padding-left: 2rem;
   padding-right: 2rem;

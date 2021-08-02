@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {Lesson} from '../../atoms/Text/Lesson';
 import {ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
@@ -16,10 +16,12 @@ import {
   ProgressWrapper,
   TextOptionsList,
   TextOptionItem,
+  AnswerForm,
 } from './Style';
 import apple from '../../assets/apple.svg';
 import {FinishLesson} from '../../organisms/FinishLesson';
 import {StudentMenu} from '../../templates/StudentMenu';
+import {TextInput} from '../../atoms/Text/TextInput';
 
 export const Question: FC = () => {
   // TODO answers and options must come from DB
@@ -36,6 +38,10 @@ export const Question: FC = () => {
     {value: 'apple'},
     {value: 'apple'},
   ];
+
+  const [answerType, setAnswerType] = useState('button');
+  const [questioType, setQuestionType] = useState('image');
+
   const isLessonFinished = false;
   return (
     <Wrapper>
@@ -53,39 +59,55 @@ export const Question: FC = () => {
           <Container id="container">
             <BlackBoard>
               <Lesson>Which of these is not an apple?</Lesson>
-              <TextOptionsList>
-                <TextOptionItem>
-                  <Lesson>
-                    Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                  </Lesson>
-                </TextOptionItem>
-                <TextOptionItem>
-                  <Lesson>
-                    Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                  </Lesson>
-                </TextOptionItem>
-                <TextOptionItem>
-                  <Lesson>
-                    Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                  </Lesson>
-                </TextOptionItem>
-                <TextOptionItem>
-                  <Lesson>
-                    Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                  </Lesson>
-                </TextOptionItem>
-              </TextOptionsList>
+              {questioType === 'image' ? (
+                <Options>
+                  {options.map(option => (
+                    <OptionWrapper>
+                      <Option src={option.image} />
+                    </OptionWrapper>
+                  ))}
+                </Options>
+              ) : (
+                <TextOptionsList>
+                  <TextOptionItem>
+                    <Lesson>
+                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
+                    </Lesson>
+                  </TextOptionItem>
+                  <TextOptionItem>
+                    <Lesson>
+                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
+                    </Lesson>
+                  </TextOptionItem>
+                  <TextOptionItem>
+                    <Lesson>
+                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
+                    </Lesson>
+                  </TextOptionItem>
+                  <TextOptionItem>
+                    <Lesson>
+                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
+                    </Lesson>
+                  </TextOptionItem>
+                </TextOptionsList>
+              )}
             </BlackBoard>
             <AnswerWrapper>
               <Lesson>What is the answer?</Lesson>
               <Answers>
-                {answers.map(answer => (
-                  <Button
-                    value={answer.value}
-                    color={ButtonColor.google}
-                    darkText={true}
-                  />
-                ))}
+                {answerType === 'button' ? (
+                  answers.map(answer => (
+                    <Button
+                      value={answer.value}
+                      color={ButtonColor.google}
+                      darkText={true}
+                    />
+                  ))
+                ) : (
+                  <AnswerForm>
+                    <TextInput label="" />
+                  </AnswerForm>
+                )}
               </Answers>
               <Submit>
                 <Button value={'validate'} />
