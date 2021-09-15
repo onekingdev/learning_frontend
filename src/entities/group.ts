@@ -1,5 +1,5 @@
 export interface IGroup {
-  groupMembers: [];
+  groupMembers: string[];
   grade: string;
-  areasOfKnowledge: [];
+  areasOfKnowledge: string[];
 }

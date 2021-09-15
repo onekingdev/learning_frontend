@@ -1,6 +1,8 @@
+import {IBlockConfig} from './blockConfig';
+
 export interface IBlock {
-  questions: [];
-  config: {};
+  questions: string[];
+  config: IBlockConfig;
   chosenAnswer: string;
   isCorrect: boolean;
 }

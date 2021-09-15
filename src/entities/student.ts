@@ -1,8 +1,10 @@
+import {Gender} from './gender';
+
 export interface IStudent {
   userName: string;
   avatar: string;
-  avatarFavorites: [];
-  gender: string;
+  avatarFavorites: string[];
+  gender: Gender;
   firstName: string;
   lastName: string;
   activeGroupId: string;
