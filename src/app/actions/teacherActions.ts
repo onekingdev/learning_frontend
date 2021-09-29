@@ -1,5 +1,5 @@
 export const teacherCreatesStudent = (payload: string) => ({
-  type: 'TEACHER_CREATES_STUDENT',
+  type: 'TEACHER_CREATE_STUDENT',
   payload,
 });
 
