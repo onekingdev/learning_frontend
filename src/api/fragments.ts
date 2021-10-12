@@ -16,13 +16,14 @@ export const COLLECTIBLE_FRAGMENT = gql`
 `;
 
 export const AVATAR_FRAGMENT = gql`
-  fragment avatarData on AvatarSchema
+  fragment avatarData on AvatarSchema {
     id
     isActive
     typeOf
     name
-    image	
-}`;
+    image
+  }
+`;
 
 export const LEVEL_FRAGMENT = gql`
   fragment levelData on LevelSchema {
