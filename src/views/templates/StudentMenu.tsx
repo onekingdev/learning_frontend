@@ -4,10 +4,13 @@ import {MobileMenu} from '../organisms/Menu/MobileMenu';
 import avatar from '../assets/avatars/avatar1.svg';
 import styled from 'styled-components';
 import {ScreenSize} from '../screenSize';
+import {COLLECTIBLE_CALL} from '../../api/queries';
 
 export const StudentMenu: FC = ({children}) => {
+  // COLLECTIBLE_CALL();
   return (
     <Template>
+      <button onClick={() => COLLECTIBLE_CALL()}></button>
       <TopMenu
         rank={10}
         level={190}

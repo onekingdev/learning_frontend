@@ -15,69 +15,62 @@ import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
-import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 
-export const client = new ApolloClient({
-  uri: 'http://localhost:8000/graphql/',
-  cache: new InMemoryCache(),
-});
 export default () => {
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Welcome />
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Welcome />
+        </Route>
+        <Route path="/login">
+          <LogIn />
+        </Route>
+        <Route path="/question">
+          <Question />
+        </Route>
+        <Route path="/avatar">
+          <Avatar />
+        </Route>
+        <Route path="/collectibles">
+          <CardCollectible />
+        </Route>
+        <Route path="/profile">
+          <MyProfile />
+        </Route>
+        <Route path="/home">
+          <StudentHome />
+        </Route>
+        <Route path="/progress">
+          <Progress />
+        </Route>
+        <Route path="/backpack">
+          <Backpack />
+        </Route>
+        <Route path="/games/categories">
+          <Games />
+        </Route>
+        <Route path="/games">
+          <GamesMenu />
+        </Route>
+        <Route path="/map">
+          <KnowledgeMap />
+        </Route>
+        <Route path="/confirmation">
+          <ConfirmAccount />
+        </Route>
+        <Route path="/subjects">
+          <SubjectsMenu />
+        </Route>
+        <Route path="/topic">
+          <TopicsMenu />
+        </Route>
+        {process.env.NODE_ENV === 'development' ? (
+          <Route path="/testing">
+            <Testing />
           </Route>
-          <Route path="/login">
-            <LogIn />
-          </Route>
-          <Route path="/question">
-            <Question />
-          </Route>
-          <Route path="/avatar">
-            <Avatar />
-          </Route>
-          <Route path="/collectibles">
-            <CardCollectible />
-          </Route>
-          <Route path="/profile">
-            <MyProfile />
-          </Route>
-          <Route path="/home">
-            <StudentHome />
-          </Route>
-          <Route path="/progress">
-            <Progress />
-          </Route>
-          <Route path="/backpack">
-            <Backpack />
-          </Route>
-          <Route path="/games/categories">
-            <Games />
-          </Route>
-          <Route path="/games">
-            <GamesMenu />
-          </Route>
-          <Route path="/map">
-            <KnowledgeMap />
-          </Route>
-          <Route path="/confirmation">
-            <ConfirmAccount />
-          </Route>
-          <Route path="/subjects">
-            <SubjectsMenu />
-          </Route>
-          <Route path="/topic">
-            <TopicsMenu />
-          </Route>
-          {process.env.NODE_ENV === 'development' ? (
-            <Route path="/testing">
-              <Testing />
-            </Route>
-          ) : null}
-        </Switch>
-      </Router>
-    </ApolloProvider>
+        ) : null}
+      </Switch>
+    </Router>
   );
 };

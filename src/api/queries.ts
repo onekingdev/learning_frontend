@@ -1,2 +1,20 @@
-import {gql} from '@apollo/client';
-import {client} from '../App';
+//import {COLLECTIBLE_FRAGMENT} from './fragments';
+
+export const COLLECTIBLE_CALL = () => {
+  fetch('http://localhost:8000/graphql/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: `
+              query collectibles {
+                id
+              }
+            `,
+      vaiables: {},
+    }),
+  })
+    .then(res => res.json())
+    .then(result => console.log(result));
+};
