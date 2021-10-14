@@ -1,13 +1,17 @@
 export const COLLECTIBLE_FRAGMENT = `
-    id
-    isActive
-    price
-    category {
-      id
+    query{
+      collectibles{
+        id
       isActive
+      price
+      category {
+        id
+        isActive
+        name
+      }
       name
+      }
     }
-    name
 `;
 
 export const AVATAR_FRAGMENT = `
