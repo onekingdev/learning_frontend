@@ -1,7 +1,4 @@
-import {gql} from '@apollo/client';
-
-export const COLLECTIBLE_FRAGMENT = gql`
-  fragment collectibleData on CollectibleSchema {
+export const COLLECTIBLE_FRAGMENT = `
     id
     isActive
     price
@@ -11,64 +8,50 @@ export const COLLECTIBLE_FRAGMENT = gql`
       name
     }
     name
-    owned
-  }
 `;
 
-export const AVATAR_FRAGMENT = gql`
-  fragment avatarData on AvatarSchema {
+export const AVATAR_FRAGMENT = `
     id
     isActive
     typeOf
     name
     image
-  }
 `;
 
-export const LEVEL_FRAGMENT = gql`
-  fragment levelData on LevelSchema {
+export const LEVEL_FRAGMENT = `
     id
     isActive
     pointsRequired
     name
-  }
 `;
 
-export const ACHIEVEMENT_FRAGMENT = gql`
-  ${LEVEL_FRAGMENT}
-  fragment achievementData on AchievementSchema {
+export const ACHIEVEMENT_FRAGMENT = `
     id
     isActive
     image
     hexColor
     levelRequired {
-      ...levelData
+      ${LEVEL_FRAGMENT}
     }
     engangementPoints
     coinsEarned
     name
-  }
 `;
 
-export const STUDENT_FRAGMENT = gql`
-  ${LEVEL_FRAGMENT}, 
-  ${AVATAR_FRAGMENT}
-  fragment studentData on StudentSchema {
+export const STUDENT_FRAGMENT = `
     id
     isActive
     firstName
     gender
     level {
-      ...levelData
+      ${LEVEL_FRAGMENT}
     }
     avatar {
-      ...avatarData
+      ${AVATAR_FRAGMENT}
     }
-  }
 `;
 
-export const ANSWER_FRAGMENT = gql`
-  fragment answerData on AnswerOptionSchema {
+export const ANSWER_FRAGMENT = `
     id
     identifier
     isCorrect
@@ -77,45 +60,36 @@ export const ANSWER_FRAGMENT = gql`
     image
     audioFile
     video
-  }
 `;
 
-export const QUESTION_FRAGMENT = gql`
-  ${ANSWER_FRAGMENT}
-  fragment questionData on QuestionSchema {
+export const QUESTION_FRAGMENT = `
     id
     isActive
     questionText
     answeroptionSet {
-      ...answerData
+      ${ANSWER_FRAGMENT}
     }
-  }
 `;
 
-export const BLOCK_PRESENTATION_FRAGMENT = gql`
-  fragment blockPresentationData on BlockPresentationSchema {
+export const BLOCK_PRESENTATION_FRAGMENT = `
     id
     isActive
     hits
     errors
     total
     points
-  }
 `;
 
-export const BLOCK_FRAGMENT = gql`
-  ${QUESTION_FRAGMENT},
-  ${BLOCK_PRESENTATION_FRAGMENT}
-  fragment blockData on BlockSchema{
+export const BLOCK_FRAGMENT = `
 	  id
     isActive
     modality
     questions {
-      ...questionData
+      ${QUESTION_FRAGMENT}
     }
     modality
     blockpresentationSet{
-      ...blockPresentationData
+     ${BLOCK_PRESENTATION_FRAGMENT}
     }
     blockconfigurationSet{
       id
@@ -126,43 +100,35 @@ export const BLOCK_FRAGMENT = gql`
       }
       value
     }
-}`;
+`;
 
-export const STUDENT_PLAN_FRAGMENT = gql`
-  fragment studentPlanData on StudentPlanSchema {
+export const STUDENT_PLAN_FRAGMENT = `
     id
     isActive
     name
     slug
     totalCredits
     validityDate
-  }
 `;
 
-export const AUDIENCE_FRAGMENT = gql`
-  ${STUDENT_PLAN_FRAGMENT}
-  fragment audienceData on AudienceSchema {
+export const AUDIENCE_FRAGMENT = `
     id
     isActive
     slug
     name
     studentplanSet {
-      ...studentPlanData
+      ${STUDENT_PLAN_FRAGMENT}
     }
-  }
 `;
 
-export const AREAS_OF_KNOWLEDGE_FRAGMENT = gql`
-  ${AUDIENCE_FRAGMENT}
-  fragment areaOfKnowledgeData on AreaOfKnowledgeSchema {
+export const AREAS_OF_KNOWLEDGE_FRAGMENT = `
     id
     identifier
     hexColor
     slug
     image
     audience {
-      ...audienceData
+      ${AUDIENCE_FRAGMENT}
     }
     name
-  }
 `;

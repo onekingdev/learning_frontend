@@ -1,5 +1,7 @@
 //import {COLLECTIBLE_FRAGMENT} from './fragments';
 
+import {COLLECTIBLE_FRAGMENT} from './fragments';
+
 export const COLLECTIBLE_CALL = () => {
   fetch('http://localhost:8000/graphql/', {
     method: 'POST',
@@ -8,8 +10,10 @@ export const COLLECTIBLE_CALL = () => {
     },
     body: JSON.stringify({
       query: `
-              query collectibles {
-                id
+              query {
+                  collectibles{
+                    ${COLLECTIBLE_FRAGMENT}
+                  }
               }
             `,
       vaiables: {},
