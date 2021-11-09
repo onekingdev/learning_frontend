@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import {ScreenSize} from '../screenSize';
 
 export const StudentMenu: FC = ({children}) => {
+  // COLLECTIBLE_CALL();
   return (
     <Template>
       <TopMenu
