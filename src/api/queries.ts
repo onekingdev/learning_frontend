@@ -1,6 +1,4 @@
-import {COLLECTIBLE_FRAGMENT} from './fragments';
-
-const queryFetch = (
+export const get = (
   query: string,
   handleData: (x: any) => void,
   handleError: (x: any) => void
