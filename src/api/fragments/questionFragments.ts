@@ -1,4 +1,3 @@
-
 export const UNIVERSAL_AOK = `
     {
         id
