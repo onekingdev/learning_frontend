@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {
   CardCollectibleContainer,
   Wrapper,
@@ -18,10 +18,11 @@ import {Modal} from '../../atoms/Modal';
 import mythology from '../../assets/mythology.svg';
 
 export const CardCollectible: FC = () => {
-  const [isModalClose, setIsModalClose] = useState(Boolean);
+  const [isModalClose, setIsModalClose] = useState(true);
   const closeModal = () => {
     setIsModalClose(!isModalClose);
   };
+
   return (
     <Wrapper>
       <StudentMenu>

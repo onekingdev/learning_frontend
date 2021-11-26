@@ -1,15 +1,27 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import arrowLeft from '../../assets/arrows/arrowLeft.svg';
 import arrowRight from '../../assets/arrows/arrowRight.svg';
 import {ScreenSize} from '../../screenSize';
 import {CardCollectible} from './CardCollectible';
+import {get} from '../../../api/queries';
+import {COLLECTIBLE} from '../../../api/fragments/progressFragments';
 
 type CarouselProps = {
   onClick: () => void;
 };
 
 export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
+  const [collectibles, getCollectibles] = useState([]);
+
+  const handleData = (data: any) => {
+    console.log(data);
+    getCollectibles(data.data.collectibles);
+  };
+  const handleError = (error: any) => {
+    console.error(error);
+  };
+
   const handleMoveRight = () => {
     const carousel = document.getElementById('carousel');
     if (carousel) {
@@ -25,6 +37,10 @@ export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
     return null;
   };
 
+  useEffect(() => {
+    get('collectibles', COLLECTIBLE, handleData, handleError);
+  }, []);
+
   return (
     <>
       <CarrouselContainer>
@@ -32,16 +48,9 @@ export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
           <LeftArrow src={arrowLeft} onClick={handleMoveLeft} />
         </div>
         <CardCarrousel id="carousel">
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
-          <CardCollectible onClick={onClick} />
+          {collectibles.map(() => (
+            <CardCollectible onClick={onClick} />
+          ))}
         </CardCarrousel>
         <div>
           <RightArrow src={arrowRight} onClick={handleMoveRight} />

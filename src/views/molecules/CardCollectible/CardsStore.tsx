@@ -1,18 +1,31 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {ScreenSize} from '../../screenSize';
 import {CardCollectibleStore} from './CardCollectibleStore';
+import {get} from '../../../api/queries';
+import {COLLECTIBLE_CATEGORY} from '../../../api/fragments/progressFragments';
 
 export const CardsStore: FC = () => {
+  const [collectiblesCategory, getCollectiblesCategory] = useState([]);
+  const handleData = (data: any) => {
+    console.log(data);
+    getCollectiblesCategory(data.data.collectiblesCategory);
+  };
+
+  const handleError = (error: any) => {
+    console.error(error);
+  };
+
+  useEffect(() => {
+    get('collectiblesCategory', COLLECTIBLE_CATEGORY, handleData, handleError);
+  }, []);
+
   return (
     <>
       <CardsStoreStyle>
-        <CardCollectibleStore />
-        <CardCollectibleStore />
-        <CardCollectibleStore />
-        <CardCollectibleStore />
-        <CardCollectibleStore />
-        <CardCollectibleStore />
+        {collectiblesCategory.map(() => (
+          <CardCollectibleStore />
+        ))}
       </CardsStoreStyle>
     </>
   );
