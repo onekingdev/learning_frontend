@@ -6,10 +6,10 @@ import {get} from '../../../api/queries';
 import {COLLECTIBLE_CATEGORY} from '../../../api/fragments/progressFragments';
 
 export const CardsStore: FC = () => {
-  const [collectiblesCategory, getCollectiblesCategory] = useState([]);
+  const [collectiblesCategory, setCollectiblesCategory] = useState([]);
   const handleData = (data: any) => {
     console.log(data);
-    getCollectiblesCategory(data.data.collectiblesCategory);
+    setCollectiblesCategory(data.data.collectiblesCategory);
   };
 
   const handleError = (error: any) => {

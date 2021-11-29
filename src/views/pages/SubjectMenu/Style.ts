@@ -26,7 +26,8 @@ export const SubjectsCardsContainer = styled.div`
     width: 70%;
     grid-template-columns: repeat(4, 1fr);
     margin-top: 50px;
-    grid-gap: 0;
+    grid-column-gap: 0;
+    grid-row-gap: 25px;
   }
 `;
 export const TitleContainer = styled.div`
