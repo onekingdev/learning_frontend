@@ -8,15 +8,15 @@ import {RibbonText} from '../../molecules/RibbonText';
 import {dictionary} from './dictionary';
 import {useHistory} from 'react-router-dom';
 import {get} from '../../../api/queries';
-import {TOPIC} from '../../../api/fragments/questionFragments';
+import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
 
 export const SubjectsMenu: FC = () => {
   const history = useHistory();
   const language = 'en';
-  const [topics, setTopics] = useState([]);
+  const [areasOfKnowledge, setTopics] = useState([]);
 
   const handleData = (data: any) => {
-    setTopics(data.data.topics);
+    setTopics(data.data.areasOfKnowledge);
   };
 
   const handleError = (error: any) => {
@@ -24,8 +24,8 @@ export const SubjectsMenu: FC = () => {
   };
 
   useEffect(() => {
-    get('topics', TOPIC, handleData, handleError);
-    console.log(topics);
+    get('areasOfKnowledge', AREA_OF_KNOWLEDGE, handleData, handleError);
+    console.log(areasOfKnowledge);
   }, []);
 
   return (
@@ -36,15 +36,21 @@ export const SubjectsMenu: FC = () => {
             <RibbonText body={dictionary[language].title} />
           </TitleContainer>
           <SubjectsCardsContainer>
-            {topics.map((topic: {name: string}) => (
-              <TopicCard
-                image={math}
-                background={BasicColor.orange}
-                subject={topic.name}
-                onClick={() => history.push('/topic')}
-                isButton={true}
-              />
-            ))}
+            {areasOfKnowledge.map(
+              (areaOfKnowledge: {
+                name: string;
+                image: string;
+                hexColor: string;
+              }) => (
+                <TopicCard
+                  image={areaOfKnowledge.image}
+                  background={areaOfKnowledge.hexColor}
+                  subject={areaOfKnowledge.name}
+                  onClick={() => history.push('/topic')}
+                  isButton={true}
+                />
+              )
+            )}
           </SubjectsCardsContainer>
         </StudentMenu>
       </Wrapper>
