@@ -29,7 +29,6 @@ export const UNIVERSAL_TOPIC = `
 `;
 
 export const AREA_OF_KNOWLEDGE = `
-    {
         id
         identifier
         randomSlug
@@ -37,11 +36,9 @@ export const AREA_OF_KNOWLEDGE = `
         slug
         image
         name
-    }
 `;
 
 export const TOPIC = `
-    {
         id
         identifier
         isActive
@@ -52,7 +49,6 @@ export const TOPIC = `
         treeId
         level
         name
-    }
 `;
 
 export const TOPIC_GRADE = `

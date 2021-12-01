@@ -4,7 +4,7 @@ import arrowLeft from '../../assets/arrows/arrowLeft.svg';
 import arrowRight from '../../assets/arrows/arrowRight.svg';
 import {ScreenSize} from '../../screenSize';
 import {CardCollectible} from './CardCollectible';
-import {get} from '../../../api/queries';
+import {get} from '../../../api/queries/get';
 import {COLLECTIBLE} from '../../../api/fragments/progressFragments';
 
 type CarouselProps = {

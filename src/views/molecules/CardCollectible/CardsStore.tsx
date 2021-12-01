@@ -2,14 +2,14 @@ import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {ScreenSize} from '../../screenSize';
 import {CardCollectibleStore} from './CardCollectibleStore';
-import {get} from '../../../api/queries';
+import {get} from '../../../api/queries/get';
 import {COLLECTIBLE_CATEGORY} from '../../../api/fragments/progressFragments';
 
 export const CardsStore: FC = () => {
-  const [collectiblesCategory, setCollectiblesCategory] = useState([]);
+  const [collectiblesCategory, getCollectiblesCategory] = useState([]);
   const handleData = (data: any) => {
     console.log(data);
-    setCollectiblesCategory(data.data.collectiblesCategory);
+    getCollectiblesCategory(data.data.collectiblesCategory);
   };
 
   const handleError = (error: any) => {
