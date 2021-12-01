@@ -1,19 +1,31 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TopicCard} from '../../molecules/TopicCard';
-import math from '../../assets/math-elements.svg';
-import ela from '../../assets/ela-elements.svg';
-import science from '../../assets/science-elements.svg';
-import sight from '../../assets/sight-words-elements.svg';
-import {BasicColor} from '../../Color';
 import {Wrapper, SubjectsCardsContainer, TitleContainer} from './Style';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {RibbonText} from '../../molecules/RibbonText';
 import {dictionary} from './dictionary';
 import {useHistory} from 'react-router-dom';
+import {get} from '../../../api/queries/get';
+import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
 
 export const SubjectsMenu: FC = () => {
   const history = useHistory();
   const language = 'en';
+  const [areasOfKnowledge, setTopics] = useState([]);
+
+  const handleData = (data: any) => {
+    setTopics(data.data.areasOfKnowledge);
+  };
+
+  const handleError = (error: any) => {
+    console.error(error);
+  };
+
+  useEffect(() => {
+    get('areasOfKnowledge', AREA_OF_KNOWLEDGE, handleData, handleError);
+    console.log(areasOfKnowledge);
+  }, []);
+
   return (
     <>
       <Wrapper>
@@ -22,34 +34,21 @@ export const SubjectsMenu: FC = () => {
             <RibbonText body={dictionary[language].title} />
           </TitleContainer>
           <SubjectsCardsContainer>
-            <TopicCard
-              image={math}
-              background={BasicColor.orange}
-              subject={dictionary[language].math}
-              onClick={() => history.push('/topic')}
-              isButton={true}
-            />
-            <TopicCard
-              image={ela}
-              background={BasicColor.red}
-              subject={dictionary[language].ela}
-              onClick={() => history.push('/topic')}
-              isButton={true}
-            />
-            <TopicCard
-              image={science}
-              background={BasicColor.green}
-              subject={dictionary[language].science}
-              onClick={() => history.push('/topic')}
-              isButton={true}
-            />
-            <TopicCard
-              image={sight}
-              background={BasicColor.yellow}
-              subject={dictionary[language].sight}
-              onClick={() => history.push('/topic')}
-              isButton={true}
-            />
+            {areasOfKnowledge.map(
+              (areaOfKnowledge: {
+                name: string;
+                image: string;
+                hexColor: string;
+              }) => (
+                <TopicCard
+                  image={areaOfKnowledge.image}
+                  background={areaOfKnowledge.hexColor}
+                  subject={areaOfKnowledge.name}
+                  onClick={() => history.push('/topic')}
+                  isButton={true}
+                />
+              )
+            )}
           </SubjectsCardsContainer>
         </StudentMenu>
       </Wrapper>
