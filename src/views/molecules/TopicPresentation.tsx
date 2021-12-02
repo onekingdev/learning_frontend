@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import math from '../assets/math-elements.svg';
 import {BasicColor} from '../Color';
 import {Header} from '../atoms/Text/Header';
 import {GeneralText} from '../atoms/Text/GeneralText';
@@ -9,9 +8,13 @@ import {ScreenSize} from '../screenSize';
 
 type TopicPresentationProps = {
   title: string;
+  image: string;
 };
 
-export const TopicPresentation: FC<TopicPresentationProps> = ({title}) => {
+export const TopicPresentation: FC<TopicPresentationProps> = ({
+  title,
+  image,
+}) => {
   return (
     <>
       <TopicPresentationStyles>
@@ -26,7 +29,7 @@ export const TopicPresentation: FC<TopicPresentationProps> = ({title}) => {
           </TopicDescription>
         </TopicPresentationText>
         <TopicCard
-          image={math}
+          image={image}
           background={BasicColor.orange}
           subject={title}
           isButton={false}

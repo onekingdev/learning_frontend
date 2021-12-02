@@ -7,13 +7,14 @@ import {ScreenSize} from '../screenSize';
 
 type SubTopicCardProps = {
   onClick: () => void;
+  name: string;
 };
-export const SubTopicCard: FC<SubTopicCardProps> = ({onClick}) => {
+export const SubTopicCard: FC<SubTopicCardProps> = ({onClick, name}) => {
   return (
     <>
       <SubTopicStyle onClick={onClick}>
         <SubTopicTextContainer>
-          <SubTopicTitle isDark={true}>Lorem ipsum dolor </SubTopicTitle>
+          <SubTopicTitle isDark={true}>{name}</SubTopicTitle>
           <SubTopicDescription isDark={true}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </SubTopicDescription>

@@ -4,11 +4,14 @@ import {StudentMenu} from '../../templates/StudentMenu';
 import {TopicPresentation} from '../../molecules/TopicPresentation';
 import {SubTopicsCarousel} from '../../organisms/SubTopicsCarousel';
 import {get} from '../../../api/queries/get';
-import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
 import {AREA_OF_KNOWLEDGE_QUERY} from '../../../api/queries/questions';
 
 export const TopicsMenu: FC = () => {
-  const [areaOfKnowledge, setAreaOfKnowledge] = useState({name: ''});
+  const [areaOfKnowledge, setAreaOfKnowledge] = useState({
+    name: '',
+    topicSet: [],
+    image: '',
+  });
 
   const handleData = (data: any) => {
     setAreaOfKnowledge(data.data.areaOfKnowledgeById);
@@ -31,9 +34,13 @@ export const TopicsMenu: FC = () => {
       <Wrapper>
         <StudentMenu>
           <TopicsMenuStyles>
-            <TopicPresentation title={areaOfKnowledge.name} />
-            <SubTopicsCarousel name={'car1'} />
-            <SubTopicsCarousel name={'car2'} />
+            <TopicPresentation
+              title={areaOfKnowledge.name}
+              image={areaOfKnowledge.image}
+            />
+            {areaOfKnowledge.topicSet.map((item: any) => (
+              <SubTopicsCarousel name={item.name} subTopics={item.subTopics} />
+            ))}
           </TopicsMenuStyles>
         </StudentMenu>
       </Wrapper>

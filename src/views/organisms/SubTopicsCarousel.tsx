@@ -10,9 +10,10 @@ import {useHistory} from 'react-router-dom';
 
 type SubTopicProps = {
   name: string;
+  subTopics: [];
 };
 
-export const SubTopicsCarousel: FC<SubTopicProps> = ({name}) => {
+export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics}) => {
   const handleMoveRight = () => {
     const carousel = document.getElementById(`${name}`);
     if (carousel) {
@@ -32,41 +33,19 @@ export const SubTopicsCarousel: FC<SubTopicProps> = ({name}) => {
     <>
       <SubTopicContainer>
         <CarouselTitle onClick={handleMoveRight}>
-          <Header isDark={true}>Lorem ipsum dolor </Header>
+          <Header isDark={true}>{name}</Header>
         </CarouselTitle>
         <CarouselContainer>
           <CarouselButton onClick={handleMoveLeft}>
             <img src={leftArrow} />
           </CarouselButton>
           <CarouselStyle id={name}>
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />{' '}
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
-            <SubTopicCard onClick={() => history.push('/question')} />
+            {subTopics.map((item: {name: string}) => (
+              <SubTopicCard
+                onClick={() => history.push('/question')}
+                name={item.name}
+              />
+            ))}
           </CarouselStyle>
           <CarouselButton onClick={handleMoveRight}>
             <img src={rightArrow} />
