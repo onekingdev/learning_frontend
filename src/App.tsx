@@ -62,7 +62,7 @@ export default () => {
         <Route path="/subjects">
           <SubjectsMenu />
         </Route>
-        <Route path="/topic">
+        <Route path="/topic/:topicId">
           <TopicsMenu />
         </Route>
         {process.env.NODE_ENV === 'development' ? (
