@@ -32,6 +32,9 @@ export default () => {
         <Route path="/avatar">
           <Avatar />
         </Route>
+        <Route path="/collectibles/:collectibleId">
+          <CardCollectible />
+        </Route>
         <Route path="/collectibles">
           <CardCollectible />
         </Route>
