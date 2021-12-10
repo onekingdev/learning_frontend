@@ -1,12 +1,7 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {StudentMenu} from '../../templates/StudentMenu';
-
 import ocean from '../../assets/islands/ocean.svg';
-import math from '../../assets/islands/math-island.svg';
-import science from '../../assets/islands/science-island.svg';
-import sight from '../../assets/islands/sigh-island.svg';
-import ela from '../../assets/islands/ela-island.svg';
 import boatIcon from '../../assets/boat.svg';
 import boat from '../../assets/islands/fillers/boat.svg';
 
@@ -19,14 +14,21 @@ import rock2 from '../../assets/islands/fillers/rock-2.svg';
 import boulder from '../../assets/islands/fillers/rocxk.svg';
 import {ScreenSize} from '../../screenSize';
 import {useHistory} from 'react-router-dom';
+import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
+import {get} from '../../../api/queries/get';
 
 export const KnowledgeMap: FC = () => {
-  const subjects = [
-    {image: math},
-    {image: science},
-    {image: sight},
-    {image: ela},
-  ];
+  const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
+  const handleData = (data: any) => {
+    setAreasOfKnowledge(data.data.areasOfKnowledge);
+  };
+  const handleError = (error: any) => {
+    console.error(error);
+  };
+  useEffect(() => {
+    get('areasOfKnowledge', `{${AREA_OF_KNOWLEDGE}}`, handleData, handleError);
+    console.log(areasOfKnowledge);
+  }, []);
 
   const getRandomNumber = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -48,20 +50,33 @@ export const KnowledgeMap: FC = () => {
   return (
     <StudentMenu>
       <Ocean>
-        {subjects.map((s, i) => {
-          const fill = getFiller();
-          return i % 2 === 0 ? (
-            <SubjectEven>
-              <Island src={s.image} onClick={() => history.push('/question')} />
-              <Filler src={fill} />
-            </SubjectEven>
-          ) : (
-            <SubjectOdd>
-              <Filler src={fill} />
-              <Island src={s.image} onClick={() => history.push('/question')} />
-            </SubjectOdd>
-          );
-        })}
+        {areasOfKnowledge.map(
+          (
+            areaOfKnowledge: {
+              islandImage: string;
+            },
+            i
+          ) => {
+            const fill = getFiller();
+            return i % 2 === 0 ? (
+              <SubjectEven>
+                <Island
+                  src={areaOfKnowledge.islandImage}
+                  onClick={() => history.push('/question')}
+                />
+                <Filler src={fill} />
+              </SubjectEven>
+            ) : (
+              <SubjectOdd>
+                <Filler src={fill} />
+                <Island
+                  src={areaOfKnowledge.islandImage}
+                  onClick={() => history.push('/question')}
+                />
+              </SubjectOdd>
+            );
+          }
+        )}
       </Ocean>
     </StudentMenu>
   );

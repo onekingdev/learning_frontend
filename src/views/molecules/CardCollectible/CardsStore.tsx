@@ -12,7 +12,7 @@ export const CardsStore: FC = () => {
     setCollectiblesCategory(data.data.collectiblesCategory);
   };
 
-  const handleError = (error: any) => {
+  const handleError = (error: string) => {
     console.error(error);
   };
 
@@ -23,8 +23,12 @@ export const CardsStore: FC = () => {
   return (
     <>
       <CardsStoreStyle>
-        {collectiblesCategory.map(() => (
-          <CardCollectibleStore />
+        {collectiblesCategory.map((item: {image: ''; id: ''}, i: number) => (
+          <CardCollectibleStore
+            key={i}
+            image={`http://143.244.183.24/media/${item.image}`}
+            id={item.id}
+          />
         ))}
       </CardsStoreStyle>
     </>

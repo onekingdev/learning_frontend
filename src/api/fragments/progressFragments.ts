@@ -32,11 +32,12 @@ export const COLLECTIBLE_CATEGORY = `
     treeId
     level
     name
+    image
   }
 `;
 
 export const COLLECTIBLE = `
-  {
+  
     id
     identifier
     isActive
@@ -44,7 +45,9 @@ export const COLLECTIBLE = `
     price
     name
     owned
-  }
+    image
+    description
+  
 `;
 
 export const ACHIEVEMENTS = `

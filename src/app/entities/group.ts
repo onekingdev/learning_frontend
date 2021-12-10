@@ -1,6 +1,5 @@
-import { IClassmate } from "./classmate";
 export interface IGroup {
-  groupMembers: Array<IClassmate>;
+  groupMembers: string[];
   grade: string;
   areasOfKnowledge: string[];
 }

@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import {Lesson} from '../../atoms/Text/Lesson';
 import {ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
@@ -39,10 +39,10 @@ export const Question: FC = () => {
     {value: 'apple'},
   ];
 
-  const [answerType, setAnswerType] = useState('button');
-  const [questioType, setQuestionType] = useState('image');
+  const answerType = 'button';
+  const questionType = 'image';
 
-  const isLessonFinished = false;
+  const isLessonFinished = true;
   return (
     <Wrapper>
       <StudentMenu>
@@ -59,10 +59,10 @@ export const Question: FC = () => {
           <Container id="container">
             <BlackBoard>
               <Lesson>Which of these is not an apple?</Lesson>
-              {questioType === 'image' ? (
+              {questionType === 'image' ? (
                 <Options>
-                  {options.map((option, i) => (
-                    <OptionWrapper key={i}>
+                  {options.map(option => (
+                    <OptionWrapper>
                       <Option src={option.image} />
                     </OptionWrapper>
                   ))}
@@ -96,9 +96,8 @@ export const Question: FC = () => {
               <Lesson>What is the answer?</Lesson>
               <Answers>
                 {answerType === 'button' ? (
-                  answers.map((answer, i) => (
+                  answers.map(answer => (
                     <Button
-                      key={i}
                       value={answer.value}
                       color={ButtonColor.google}
                       darkText={true}

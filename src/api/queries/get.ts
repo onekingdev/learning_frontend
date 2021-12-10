@@ -1,8 +1,8 @@
 export const get = (
   queryName: string,
   query: string,
-  handleData: (x: unknown) => void,
-  handleError: (x: unknown) => void
+  handleData: (x: any) => void,
+  handleError: (x: any) => void
 ) => {
   return fetch('http://143.244.183.24/graphql/', {
     method: 'POST',
