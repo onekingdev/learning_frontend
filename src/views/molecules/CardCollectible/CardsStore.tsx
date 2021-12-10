@@ -23,8 +23,8 @@ export const CardsStore: FC = () => {
   return (
     <>
       <CardsStoreStyle>
-        {collectiblesCategory.map((i: string) => (
-          <CardCollectibleStore key={i} />
+        {collectiblesCategory.map(() => (
+          <CardCollectibleStore />
         ))}
       </CardsStoreStyle>
     </>

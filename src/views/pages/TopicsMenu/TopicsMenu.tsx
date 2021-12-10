@@ -5,14 +5,8 @@ import {TopicPresentation} from '../../molecules/TopicPresentation';
 import {SubTopicsCarousel} from '../../organisms/SubTopicsCarousel';
 import {get} from '../../../api/queries/get';
 import {AREA_OF_KNOWLEDGE_QUERY} from '../../../api/queries/questions';
-import {useParams} from 'react-router-dom';
-
-interface RouteTopicParams {
-  topicId: string;
-}
 
 export const TopicsMenu: FC = () => {
-  const {topicId} = useParams<RouteTopicParams>();
   const [areaOfKnowledge, setAreaOfKnowledge] = useState({
     name: '',
     topicSet: [],
@@ -29,7 +23,7 @@ export const TopicsMenu: FC = () => {
 
   useEffect(() => {
     get(
-      `areaOfKnowledgeById(id:"${topicId}")`,
+      'areaOfKnowledgeById(id:"1")',
       AREA_OF_KNOWLEDGE_QUERY,
       handleData,
       handleError

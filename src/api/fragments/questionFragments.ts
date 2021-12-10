@@ -35,7 +35,6 @@ export const AREA_OF_KNOWLEDGE = `
         hexColor
         slug
         image
-        islandImage
         name
 `;
 
