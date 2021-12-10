@@ -32,6 +32,9 @@ export default () => {
         <Route path="/avatar">
           <Avatar />
         </Route>
+        <Route path="/collectibles/:collectibleId">
+          <CardCollectible />
+        </Route>
         <Route path="/collectibles">
           <CardCollectible />
         </Route>
@@ -62,7 +65,7 @@ export default () => {
         <Route path="/subjects">
           <SubjectsMenu />
         </Route>
-        <Route path="/topic">
+        <Route path="/topic/:topicId">
           <TopicsMenu />
         </Route>
         {process.env.NODE_ENV === 'development' ? (

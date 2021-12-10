@@ -15,38 +15,57 @@ import {CardsStore} from '../../molecules/CardCollectible/CardsStore';
 import {CardCollectibleCarrousel} from '../../molecules/CardCollectible/CardCollectibleCarrousel';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {Modal} from '../../atoms/Modal';
-import mythology from '../../assets/mythology.svg';
+import {useParams, useHistory} from 'react-router-dom';
+import {get} from '../../../api/queries/get';
+import {COLLECTIBLE_QUERY} from '../../../api/queries/progress';
+
+interface RouteCollectibleParams {
+  collectibleId: string;
+}
+
+interface collectibleProps {
+  image: string;
+  description: string;
+  name: string;
+}
 
 export const CardCollectible: FC = () => {
-  const [isModalClose, setIsModalClose] = useState(true);
+  const history = useHistory();
+  const {collectibleId} = useParams<RouteCollectibleParams>();
+  const [collectible, setCollectible] = useState<collectibleProps>();
+
   const closeModal = () => {
-    setIsModalClose(!isModalClose);
+    history.push('/collectibles');
   };
+  const handleData = (data: any) => {
+    setCollectible(data.data.collectibleById);
+  };
+
+  const handleError = (error: any) => {
+    console.error(error);
+  };
+
+  useEffect(() => {
+    get(
+      `collectibleById(id:"${collectibleId}")`,
+      COLLECTIBLE_QUERY,
+      handleData,
+      handleError
+    );
+  }, [collectibleId]);
 
   return (
     <Wrapper>
       <StudentMenu>
-        {isModalClose ? null : (
+        {!collectible ? null : (
           <Modal>
             <ModalContent>
               <ModalStyles>
                 <CloseButton onClick={closeModal}>X</CloseButton>
-                <ModalImage src={mythology} />
+                <ModalImage src={collectible.image} />
                 <ModalTextContainer>
-                  <ModalTitle>Cronos</ModalTitle>
-                  <ModalText isDark={true}>Roman Name: Saturn</ModalText>
-                  <ModalText isDark={true}>Job: Titan of the Harvest</ModalText>
-                  <ModalText isDark={true}>
-                    Symbol(s): Sickle, Grain Snak
-                  </ModalText>
-                  <ModalText isDark={true}>
-                    Family: Rhea(wife), Zeus, Hera, Poseidon, Hades, Hestia,
-                    Chiron (Children)
-                  </ModalText>
-                  <ModalText isDark={true}>Fact 1: Leader of Titans</ModalText>
-                  <ModalText isDark={true}>
-                    Fact 2: There is a start named after him
-                  </ModalText>
+                  <ModalTitle>{collectible.name}</ModalTitle>
+                  <ModalText isDark={true}>{collectible.description}</ModalText>
                 </ModalTextContainer>
               </ModalStyles>
             </ModalContent>
@@ -55,9 +74,7 @@ export const CardCollectible: FC = () => {
         <CardCollectibleContainer>
           <CardCollectibleTitle></CardCollectibleTitle>
           <CardsStore></CardsStore>
-          <CardCollectibleCarrousel
-            onClick={closeModal}
-          ></CardCollectibleCarrousel>
+          <CardCollectibleCarrousel></CardCollectibleCarrousel>
         </CardCollectibleContainer>
       </StudentMenu>
     </Wrapper>
