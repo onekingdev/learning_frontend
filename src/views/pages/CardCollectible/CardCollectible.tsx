@@ -21,6 +21,7 @@ import {COLLECTIBLE_QUERY} from '../../../api/queries/progress';
 
 interface RouteCollectibleParams {
   collectibleId: string;
+  categoryId: string;
 }
 
 interface collectibleProps {
@@ -31,11 +32,11 @@ interface collectibleProps {
 
 export const CardCollectible: FC = () => {
   const history = useHistory();
-  const {collectibleId} = useParams<RouteCollectibleParams>();
+  const {collectibleId, categoryId} = useParams<RouteCollectibleParams>();
   const [collectible, setCollectible] = useState<collectibleProps>();
 
   const closeModal = () => {
-    history.push('/collectibles');
+    history.push(`/collectibles/category_${categoryId}`);
   };
   const handleData = (data: any) => {
     setCollectible(data.data.collectibleById);

@@ -7,6 +7,7 @@ import {CardCollectible} from './CardCollectible';
 import {get} from '../../../api/queries/get';
 import {COLLECTIBLE} from '../../../api/fragments/progressFragments';
 import {useParams, useHistory} from 'react-router-dom';
+import {COLLECTIBLE_CATEGORY_BY_ID_QUERY} from '../../../api/queries/progress';
 
 type CarouselProps = {
   onClick?: () => void;
@@ -16,13 +17,19 @@ interface RouteCollectibleParams {
   categoryId: string;
 }
 
+interface CollectibleCategoryProps {
+  id: string;
+  name: string;
+  image: string;
+  collectibleSet: [];
+}
+
 export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
-  const [collectibles, getCollectibles] = useState([]);
+  const [collectibles, getCollectibles] = useState<CollectibleCategoryProps>();
   const {categoryId} = useParams<RouteCollectibleParams>();
   const history = useHistory();
   const handleData = (data: any) => {
-    console.log(data);
-    getCollectibles(data.data.collectibles);
+    getCollectibles(data.data.collectibleCategoryById);
   };
   const handleError = (error: any) => {
     console.error(error);
@@ -48,24 +55,31 @@ export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
   };
 
   useEffect(() => {
-    get('collectibles', `{${COLLECTIBLE}}`, handleData, handleError);
-  }, []);
-
+    get(
+      `collectibleCategoryById(id:"${categoryId}")`,
+      `${COLLECTIBLE_CATEGORY_BY_ID_QUERY}`,
+      handleData,
+      handleError
+    );
+  }, [categoryId]);
+  console.log(categoryId, 'TYpe');
   return (
     <>
       <CarrouselContainer>
         <div>
           <LeftArrow src={arrowLeft} onClick={handleMoveLeft} />
         </div>
-        <CardCarrousel id="carousel">
-          {collectibles.map((item: {image: ''}, i: any) => (
-            <CardCollectible
-              onClick={() => handleClick(item)}
-              image={`http://143.244.183.24/media/${item.image}`}
-              key={i}
-            />
-          ))}
-        </CardCarrousel>
+        {!collectibles ? null : (
+          <CardCarrousel id="carousel">
+            {collectibles.collectibleSet.map((item: {image: ''}, i: any) => (
+              <CardCollectible
+                onClick={() => handleClick(item)}
+                image={`http://143.244.183.24/media/${item.image}`}
+                key={i}
+              />
+            ))}
+          </CardCarrousel>
+        )}
         <div>
           <RightArrow src={arrowRight} onClick={handleMoveRight} />
         </div>

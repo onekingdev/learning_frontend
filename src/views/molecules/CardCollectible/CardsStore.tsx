@@ -12,12 +12,17 @@ export const CardsStore: FC = () => {
     setCollectiblesCategory(data.data.collectiblesCategory);
   };
 
-  const handleError = (error: string) => {
+  const handleError = (error: any) => {
     console.error(error);
   };
 
   useEffect(() => {
-    get('collectiblesCategory', COLLECTIBLE_CATEGORY, handleData, handleError);
+    get(
+      'collectiblesCategory',
+      `{${COLLECTIBLE_CATEGORY}}`,
+      handleData,
+      handleError
+    );
   }, []);
 
   return (

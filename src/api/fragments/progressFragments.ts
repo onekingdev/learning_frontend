@@ -22,7 +22,6 @@ export const LEVEL = `
 `;
 
 export const COLLECTIBLE_CATEGORY = `
-  {
     id
     identifier
     isActive
@@ -33,7 +32,6 @@ export const COLLECTIBLE_CATEGORY = `
     level
     name
     image
-  }
 `;
 
 export const COLLECTIBLE = `

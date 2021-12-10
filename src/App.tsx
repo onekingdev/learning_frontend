@@ -16,12 +16,16 @@ import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 
+import {StoreProvider} from './app/store';
+
 export default () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Welcome />
+          <StoreProvider>
+            <Welcome />
+          </StoreProvider>
         </Route>
         <Route path="/login">
           <LogIn />
