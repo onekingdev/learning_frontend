@@ -5,7 +5,6 @@ import arrowRight from '../../assets/arrows/arrowRight.svg';
 import {ScreenSize} from '../../screenSize';
 import {CardCollectible} from './CardCollectible';
 import {get} from '../../../api/queries/get';
-import {COLLECTIBLE} from '../../../api/fragments/progressFragments';
 import {useParams, useHistory} from 'react-router-dom';
 import {COLLECTIBLE_CATEGORY_BY_ID_QUERY} from '../../../api/queries/progress';
 
