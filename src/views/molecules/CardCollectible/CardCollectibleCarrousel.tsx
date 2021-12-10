@@ -6,20 +6,14 @@ import {ScreenSize} from '../../screenSize';
 import {CardCollectible} from './CardCollectible';
 import {get} from '../../../api/queries/get';
 import {COLLECTIBLE} from '../../../api/fragments/progressFragments';
-import {useParams, useHistory} from 'react-router-dom';
 
 type CarouselProps = {
-  onClick?: () => void;
+  onClick: () => void;
 };
-
-interface RouteCollectibleParams {
-  collectibleId: string;
-}
 
 export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
   const [collectibles, getCollectibles] = useState([]);
-  const {collectibleId} = useParams<RouteCollectibleParams>();
-  const history = useHistory();
+
   const handleData = (data: any) => {
     console.log(data);
     getCollectibles(data.data.collectibles);
@@ -43,12 +37,8 @@ export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
     return null;
   };
 
-  const handleClick = (item: any) => {
-    history.push(`/collectibles/${item.id}`);
-  };
-
   useEffect(() => {
-    get('collectibles', `{${COLLECTIBLE}}`, handleData, handleError);
+    get('collectibles', COLLECTIBLE, handleData, handleError);
   }, []);
 
   return (
@@ -58,12 +48,8 @@ export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
           <LeftArrow src={arrowLeft} onClick={handleMoveLeft} />
         </div>
         <CardCarrousel id="carousel">
-          {collectibles.map((item: {image: ''}, i: any) => (
-            <CardCollectible
-              onClick={() => handleClick(item)}
-              image={item.image}
-              key={i}
-            />
+          {collectibles.map(() => (
+            <CardCollectible onClick={onClick} />
           ))}
         </CardCarrousel>
         <div>

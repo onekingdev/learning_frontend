@@ -1,24 +1,31 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {TopMenu} from '../organisms/Menu/TopMenu';
 import {MobileMenu} from '../organisms/Menu/MobileMenu';
-import avatar from '../assets/avatars/avatar1.svg';
+import avatarPlaceHolder from '../assets/avatars/avatar1.svg';
 import styled from 'styled-components';
 import {ScreenSize} from '../screenSize';
 
+import {useStore} from '../../app/store';
+
 export const StudentMenu: FC = ({children}) => {
-  // COLLECTIBLE_CALL();
+  const student = useStore();
+
+  useEffect(() => {
+    console.log('student', student);
+  });
+
   return (
     <Template>
       <TopMenu
-        rank={10}
-        level={190}
-        exp={100}
-        expMax={200}
-        icon={avatar}
-        userName={'Elliot Alderson'}
-        progress={50}
+        rank={42}
+        level={student?.wallet.level || 12}
+        exp={student?.wallet.experience || 9000}
+        expMax={student?.wallet.experience || 9001}
+        icon={student?.user.avatar || avatarPlaceHolder}
+        userName={student?.user.firstName || 'Champ!'}
+        progress={1}
         energyCharge={1}
-        balance={999999}
+        balance={student?.wallet.balance || 0}
       />
       <div>{children}</div>
       <MobileMenu />

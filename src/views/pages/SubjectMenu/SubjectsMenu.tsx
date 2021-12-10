@@ -39,13 +39,12 @@ export const SubjectsMenu: FC = () => {
                 name: string;
                 image: string;
                 hexColor: string;
-                id: any;
               }) => (
                 <TopicCard
                   image={areaOfKnowledge.image}
                   background={areaOfKnowledge.hexColor}
                   subject={areaOfKnowledge.name}
-                  onClick={() => history.push(`/topic/${areaOfKnowledge.id}`)}
+                  onClick={() => history.push('/topic')}
                   isButton={true}
                 />
               )

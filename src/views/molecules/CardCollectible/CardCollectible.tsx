@@ -1,16 +1,16 @@
 import {FC} from 'react';
 import styled from 'styled-components';
+import mythology from '../../assets/mythology.svg';
 import {ScreenSize} from '../../screenSize';
 
 type CardProps = {
   onClick: () => void;
-  image: string;
 };
 
-export const CardCollectible: FC<CardProps> = ({onClick, image}) => {
+export const CardCollectible: FC<CardProps> = ({onClick}) => {
   return (
     <StyledCard>
-      <CardImage src={image} onClick={onClick} />
+      <CardImage src={mythology} onClick={onClick} />
     </StyledCard>
   );
 };

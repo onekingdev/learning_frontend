@@ -16,12 +16,16 @@ import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 
+import {StoreProvider} from './app/store';
+
 export default () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Welcome />
+          <StoreProvider>
+            <Welcome />
+          </StoreProvider>
         </Route>
         <Route path="/login">
           <LogIn />
@@ -31,9 +35,6 @@ export default () => {
         </Route>
         <Route path="/avatar">
           <Avatar />
-        </Route>
-        <Route path="/collectibles/:collectibleId">
-          <CardCollectible />
         </Route>
         <Route path="/collectibles">
           <CardCollectible />
@@ -65,7 +66,7 @@ export default () => {
         <Route path="/subjects">
           <SubjectsMenu />
         </Route>
-        <Route path="/topic/:topicId">
+        <Route path="/topic">
           <TopicsMenu />
         </Route>
         {process.env.NODE_ENV === 'development' ? (

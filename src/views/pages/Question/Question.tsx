@@ -61,8 +61,8 @@ export const Question: FC = () => {
               <Lesson>Which of these is not an apple?</Lesson>
               {questioType === 'image' ? (
                 <Options>
-                  {options.map(option => (
-                    <OptionWrapper>
+                  {options.map((option, i) => (
+                    <OptionWrapper key={i}>
                       <Option src={option.image} />
                     </OptionWrapper>
                   ))}
@@ -96,8 +96,9 @@ export const Question: FC = () => {
               <Lesson>What is the answer?</Lesson>
               <Answers>
                 {answerType === 'button' ? (
-                  answers.map(answer => (
+                  answers.map((answer, i) => (
                     <Button
+                      key={i}
                       value={answer.value}
                       color={ButtonColor.google}
                       darkText={true}
