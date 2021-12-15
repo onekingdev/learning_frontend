@@ -61,7 +61,7 @@ export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
       handleError
     );
   }, [categoryId]);
-  console.log(categoryId, 'TYpe');
+
   return (
     <>
       <CarrouselContainer>
