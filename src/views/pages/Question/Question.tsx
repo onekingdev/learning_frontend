@@ -22,6 +22,7 @@ import apple from '../../assets/apple.svg';
 import {FinishLesson} from '../../organisms/FinishLesson';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {TextInput} from '../../atoms/Text/TextInput';
+import {MultipleChoiceText} from '../../molecules/QuestionTypes/MultipleChoiceText';
 
 export const Question: FC = () => {
   // TODO answers and options must come from DB
@@ -38,11 +39,16 @@ export const Question: FC = () => {
     {value: 'apple'},
     {value: 'apple'},
   ];
-
+  const optionsText = [
+    {value: 'Hello friend'},
+    {value: 'Hello friend'},
+    {value: 'Hello friend'},
+    {value: 'Hello friend'},
+  ];
   const answerType = 'button';
   const questionType = 'image';
 
-  const isLessonFinished = true;
+  const isLessonFinished = false;
   return (
     <Wrapper>
       <StudentMenu>
@@ -59,7 +65,7 @@ export const Question: FC = () => {
           <Container id="container">
             <BlackBoard>
               <Lesson>Which of these is not an apple?</Lesson>
-              {questionType === 'image' ? (
+              {questionType !== 'image' ? (
                 <Options>
                   {options.map((option, i) => (
                     <OptionWrapper key={i}>
@@ -68,28 +74,7 @@ export const Question: FC = () => {
                   ))}
                 </Options>
               ) : (
-                <TextOptionsList>
-                  <TextOptionItem>
-                    <Lesson>
-                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                    </Lesson>
-                  </TextOptionItem>
-                  <TextOptionItem>
-                    <Lesson>
-                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                    </Lesson>
-                  </TextOptionItem>
-                  <TextOptionItem>
-                    <Lesson>
-                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                    </Lesson>
-                  </TextOptionItem>
-                  <TextOptionItem>
-                    <Lesson>
-                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                    </Lesson>
-                  </TextOptionItem>
-                </TextOptionsList>
+                <MultipleChoiceText options={optionsText} />
               )}
             </BlackBoard>
             <AnswerWrapper>
