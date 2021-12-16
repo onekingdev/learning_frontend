@@ -66,7 +66,7 @@ export const Question: FC = () => {
           <Container id="container">
             <BlackBoard>
               <Lesson>Which of these is not an apple?</Lesson>
-              {questionType === 'image' ? (
+              {questionType !== 'image' ? (
                 <MultipleChoiceImage options={options} />
               ) : (
                 <MultipleChoiceText options={optionsText} />
