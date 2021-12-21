@@ -5,6 +5,7 @@ import myAvatar from '../../assets/avatars/girl-11.svg';
 import arrowLeft from '../../assets/arrows/arrowLeft.svg';
 import arrowRight from '../../assets/arrows/arrowRight.svg';
 import favoriteEnabled from '../../assets/favorite_enabled.svg';
+import favoriteDisabled from '../../assets/favorite_disabled.svg';
 import wardrobe from '../../assets/wardrobe.svg';
 import {RoundIcon} from '../../atoms/Icon/Icon';
 import drawer_accessories from '../../assets/drawers/drawer_accessories.png';
@@ -38,9 +39,46 @@ export const AvatarSelector: FC<AvatarSelectorProps> = ({
   const [bodyIndex, setBodyIndex] = useState(1);
   const [footerIndex, setFooterIndex] = useState(1);
   const [atomIndex, setAtomIndex] = useState(0);
+  const [favoriteImage, setFavoriteImage] = useState(favoriteDisabled);
+
+  const [accessoryFavorite, setAccessoryFavorite] = useState(
+    'https://via.placeholder.com/75'
+  );
+  const [headerFavorite, setHeaderFavorite] = useState(
+    'https://via.placeholder.com/75'
+  );
+  const [bodyFavorite, setBodyFavorite] = useState(
+    'https://via.placeholder.com/75'
+  );
+  const [footerFavorite, setFooterFavorite] = useState(
+    'https://via.placeholder.com/75'
+  );
+
+  useEffect(() => {}, []);
   const currentAtomIndex = (val: any) => {
     setAtomIndex(val);
-    console.log('Current Atom Index', val);
+    switch (val) {
+      case 1:
+        accessoryFavorite === 'https://via.placeholder.com/75'
+          ? setFavoriteImage(favoriteDisabled)
+          : setFavoriteImage(favoriteEnabled);
+        break;
+      case 2:
+        headerFavorite === 'https://via.placeholder.com/75'
+          ? setFavoriteImage(favoriteDisabled)
+          : setFavoriteImage(favoriteEnabled);
+        break;
+      case 3:
+        bodyFavorite === 'https://via.placeholder.com/75'
+          ? setFavoriteImage(favoriteDisabled)
+          : setFavoriteImage(favoriteEnabled);
+        break;
+      case 4:
+        footerFavorite === 'https://via.placeholder.com/75'
+          ? setFavoriteImage(favoriteDisabled)
+          : setFavoriteImage(favoriteEnabled);
+        break;
+    }
   };
   const currentIndexNext = () => {
     switch (atomIndex) {
@@ -76,6 +114,35 @@ export const AvatarSelector: FC<AvatarSelectorProps> = ({
         break;
     }
   };
+  const setFavorite = () => {
+    switch (atomIndex) {
+      case 1:
+        setAccessoryFavorite(accessories[accessoryIndex].image);
+        accessories[accessoryIndex].image === 'https://via.placeholder.com/75'
+          ? setFavoriteImage(favoriteDisabled)
+          : setFavoriteImage(favoriteEnabled);
+        break;
+      case 2:
+        setHeaderFavorite(headers[headerIndex].image);
+        headers[headerIndex].image === 'https://via.placeholder.com/75'
+          ? setFavoriteImage(favoriteDisabled)
+          : setFavoriteImage(favoriteEnabled);
+        break;
+      case 3:
+        setBodyFavorite(bodies[bodyIndex].image);
+        bodies[bodyIndex].image === 'https://via.placeholder.com/75'
+          ? setFavoriteImage(favoriteDisabled)
+          : setFavoriteImage(favoriteEnabled);
+        break;
+      case 4:
+        setFooterFavorite(footers[footerIndex].image);
+        footers[footerIndex].image === 'https://via.placeholder.com/75'
+          ? setFavoriteImage(favoriteDisabled)
+          : setFavoriteImage(favoriteEnabled);
+        break;
+    }
+  };
+
   return (
     <SelectorGrid>
       <LeftArrow onClick={currentIndexPrev} src={arrowLeft}></LeftArrow>
@@ -100,7 +167,7 @@ export const AvatarSelector: FC<AvatarSelectorProps> = ({
         <CurrentFooter src={footers[footerIndex].image} />
       </CurrentAvatar>
       <RightArrow onClick={currentIndexNext} src={arrowRight}></RightArrow>
-      <FavoriteIcon src={favoriteEnabled}></FavoriteIcon>
+      <FavoriteIcon onClick={setFavorite} src={favoriteImage}></FavoriteIcon>
       <BodyPartWardrobe src={wardrobe}></BodyPartWardrobe>
       <AtomsDrawer>
         <AtomsRoundIcon
@@ -142,9 +209,10 @@ export const AvatarSelector: FC<AvatarSelectorProps> = ({
       </AtomsDrawer>
       <AvatarWardrobe src={wardrobe}></AvatarWardrobe>
       <FavoritesDrawer>
-        {favorites.map(favorite => (
-          <CenteredRoundIcon src={favorite.image}></CenteredRoundIcon>
-        ))}
+        <CenteredRoundIcon src={accessoryFavorite}></CenteredRoundIcon>
+        <CenteredRoundIcon src={headerFavorite}></CenteredRoundIcon>
+        <CenteredRoundIcon src={bodyFavorite}></CenteredRoundIcon>
+        <CenteredRoundIcon src={footerFavorite}></CenteredRoundIcon>
       </FavoritesDrawer>
     </SelectorGrid>
   );
@@ -156,7 +224,7 @@ const SelectorGrid = styled.div`
   grid-template-rows: auto;
   align-content: center;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: 100px;
   @media screen and (min-width: ${ScreenSize.phone}) {
     grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
     grid-row: 2 / 3;
@@ -187,6 +255,8 @@ const CurrentAccessory = styled.img`
   margin: auto;
   position: relative;
   z-index: 999;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
@@ -197,6 +267,8 @@ const CurrentHeader = styled.img`
   position: relative;
   width: 160px;
   margin: auto;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {
     width: 160px;
     grid-row: 1 / 2;
@@ -208,6 +280,8 @@ const CurrentBody = styled.img`
   height: 100px;
   margin: auto;
   z-index: 99;
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {
     height: 100px;
     grid-row: 2 / 3;
@@ -218,6 +292,8 @@ const CurrentBody = styled.img`
 const CurrentFooter = styled.img`
   height: 138px;
   margin: auto;
+  grid-row: 3 / 4;
+  grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {
     height: 138px;
     grid-row: 3 / 4;
@@ -256,8 +332,8 @@ const FavoriteIcon = styled.img`
   align-self: end;
   @media screen and (min-width: ${ScreenSize.phone}) {
     grid-row: 1 / 2;
-    grid-column: 3 / 4;
-    justify-self: end;
+    grid-column: 4 / 5;
+    justify-self: start;
   }
 `;
 
@@ -314,9 +390,13 @@ const FavoritesDrawer = styled.div`
 `;
 
 const CenteredRoundIcon = styled(RoundIcon)`
+  background-color: #fff;
+  width: 75px;
+  height: 75px;
+  padding: 5px;
   margin: auto;
-  margin-left: calc(160px / 2 - 75px / 2);
-  margin-right: calc(160px / 2 - 75px / 2);
+  margin-left: calc(160px / 2 - 85px / 2);
+  margin-right: calc(160px / 2 - 85px / 2);
 `;
 
 const AtomsRoundIcon = styled(RoundIcon)`
