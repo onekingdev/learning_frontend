@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 type VideoProps = {
   source: string;
@@ -7,7 +8,13 @@ type VideoProps = {
 export const VideoQuestion = ({source}: VideoProps) => {
   return (
     <div>
-      <iframe src={source} height={'480px'} width={'720px'} />
+      <VideoStyles src={source} />
     </div>
   );
 };
+
+const VideoStyles = styled.iframe`
+  width: 720px;
+  height: 480px;
+  border-radius: 40px;
+`;
