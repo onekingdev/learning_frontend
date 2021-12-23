@@ -3,29 +3,25 @@ import styled from 'styled-components';
 import {RoundIcon} from '../../atoms/Icon/Icon';
 import {BasicColor} from '../../Color';
 import {ScreenSize} from '../../screenSize';
-import placeHolder from '../../assets/placeholder.png';
 
-export const AvatarFavorites: FC = () => {
-  const favorites = [];
+export const AvatarAtoms: FC = () => {
+  const atoms = [];
   for (let i = 0; i < 4; i++) {
-    favorites.push({image: placeHolder});
+    atoms.push({image: 'https://via.placeholder.com/75'});
   }
 
   return (
-    <FavoritesCloset>
-      {favorites.map(favorite => (
-        <FavoritesDrawer>
-          <RoundIcon
-            src={favorite.image}
-            style={{width: '75px', height: '75px'}}
-          ></RoundIcon>
-        </FavoritesDrawer>
+    <AtomsCloset>
+      {atoms.map(atom => (
+        <AtomsDrawer>
+          <RoundIcon src={atom.image}></RoundIcon>
+        </AtomsDrawer>
       ))}
-    </FavoritesCloset>
+    </AtomsCloset>
   );
 };
 
-const FavoritesDrawer = styled.div`
+const AtomsDrawer = styled.div`
   display: grid;
   background-color: ${BasicColor.brown};
   height: 85px;
@@ -33,7 +29,7 @@ const FavoritesDrawer = styled.div`
   justify-content: center;
 `;
 
-const FavoritesCloset = styled.div`
+const AtomsCloset = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 7px;
