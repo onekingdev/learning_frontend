@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Modal} from '../atoms/Modal';
 import {Typography} from '../atoms/Text/typography';
 import {BasicColor} from '../Color';
+import {VideoQuestion} from '../molecules/VideoQuestions';
 import {ScreenSize} from '../screenSize';
 
 export const VideoModalAssistor: FC = () => {
@@ -17,11 +18,7 @@ export const VideoModalAssistor: FC = () => {
           <ModalContainer>
             <ModalStyles>
               <CloseButton onClick={closeModal}>X</CloseButton>
-              <VideoAssistor
-                src="https://www.youtube.com/watch?v=5qap5aO4i9A"
-                autoPlay
-                controls
-              />
+              <VideoQuestion source="https://firebasestorage.googleapis.com/v0/b/trailers-e06ca.appspot.com/o/Stardew%20Valley.mp4?alt=media&token=072289ae-b88f-4070-be0b-75457ff5ef4d" />
             </ModalStyles>
           </ModalContainer>
         </Modal>
@@ -51,15 +48,10 @@ const ModalStyles = styled.div`
     height: 400px;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    width: 500px;
+    width: 720px;
+    height: 480px;
   }
 `;
-const VideoAssistor = styled.video`
-  width: 100%;
-  border-radius: 40px;
-  height: 100%;
-`;
-
 const CloseButton = styled.div`
   font-size: 30px;
   font-weight: bold;
