@@ -128,3 +128,13 @@ export const Submit = styled.div`
   padding-bottom: 0;
   padding-top: 1rem;
 `;
+
+export const AssistorContainer = styled.div`
+  width: 95%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  grid-gap: 10px;
+  margin: 0 auto;
+`;
