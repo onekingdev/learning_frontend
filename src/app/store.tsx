@@ -12,7 +12,7 @@ import {IWallet} from './entities/wallet';
 import {IBlock} from './entities/block';
 
 import {Gender} from './entities/gender';
-const MockStore: Store = {
+export const MockStore: Store = {
   user: {
     userName: 'Juanpa',
     avatar: 'string',
@@ -65,7 +65,7 @@ type Store = {
 };
 
 export const StoreProvider = ({children}: any) => {
-  const [store, reducer] = useState<Store | undefined>(MockStore);
+  const [store, reducer] = useState<Store | undefined>(undefined);
   return (
     <StudentContext.Provider value={store}>
       <StudentContextUpdate.Provider value={reducer}>

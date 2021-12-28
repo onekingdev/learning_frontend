@@ -23,8 +23,6 @@ type PrivateRouteProps = {
   requireAuth: boolean
 }
 export const PrivateRoute = ({requireAuth=true, ...rest}) => {
-  // console.log(rest);
-  // console.log(requireAuth)
   const store = useStore();
   const isAuthenticated = !!store?.user?.token;
   return (
