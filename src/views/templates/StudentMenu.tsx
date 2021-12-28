@@ -5,12 +5,14 @@ import avatarPlaceHolder from '../assets/avatars/avatar1.svg';
 import styled from 'styled-components';
 import {ScreenSize} from '../screenSize';
 
-import {useStore} from '../../app/store';
+import {useStore, useStoreUpdate} from '../../app/store';
 
 export const StudentMenu: FC = ({children}) => {
   const student = useStore();
+  const setStudent = useStoreUpdate();
 
   useEffect(() => {
+    setStudent(student);
     console.log('student', student);
   });
 

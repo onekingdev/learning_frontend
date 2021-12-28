@@ -51,8 +51,8 @@ const MockStore: Store = {
 
 const StudentContext = createContext<Store | undefined>(MockStore);
 const StudentContextUpdate = createContext<
-  Dispatch<SetStateAction<Store | undefined>> | undefined
->(undefined);
+  Dispatch<SetStateAction<Store | undefined>>
+>(()=>{});
 
 export const useStore = () => useContext(StudentContext);
 export const useStoreUpdate = () => useContext(StudentContextUpdate);
@@ -65,8 +65,7 @@ type Store = {
 };
 
 export const StoreProvider = ({children}: any) => {
-  const [store, reducer] = useState<Store | undefined>(undefined);
-
+  const [store, reducer] = useState<Store | undefined>(MockStore);
   return (
     <StudentContext.Provider value={store}>
       <StudentContextUpdate.Provider value={reducer}>

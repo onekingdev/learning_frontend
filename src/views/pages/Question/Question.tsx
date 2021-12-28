@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {Lesson} from '../../atoms/Text/Lesson';
 import {ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
@@ -8,20 +8,23 @@ import {
   AnswerWrapper,
   BlackBoard,
   Container,
-  Options,
-  Option,
   Submit,
   Wrapper,
-  OptionWrapper,
   ProgressWrapper,
-  TextOptionsList,
-  TextOptionItem,
   AnswerForm,
+  AssistorContainer,
 } from './Style';
 import apple from '../../assets/apple.svg';
 import {FinishLesson} from '../../organisms/FinishLesson';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {TextInput} from '../../atoms/Text/TextInput';
+import {MultipleChoiceText} from '../../molecules/QuestionTypes/MultipleChoiceText';
+import {MultipleChoiceImage} from '../../molecules/QuestionTypes/MultipleChoiceImage';
+import {VideoModalAssistor} from '../../organisms/VideoModalAssistor';
+import {Icon} from '../../atoms/Icon/Icon';
+import video from '../../assets/video.svg';
+import assistor from '../../assets/text-to-speech.svg';
+import {IconSize} from '../../atoms/Icon/Size';
 
 export const Question: FC = () => {
   // TODO answers and options must come from DB
@@ -38,14 +41,25 @@ export const Question: FC = () => {
     {value: 'apple'},
     {value: 'apple'},
   ];
-
+  const optionsText = [
+    {value: 'Hello friend'},
+    {value: 'Hello friend'},
+    {value: 'Hello friend'},
+    {value: 'Hello friend'},
+  ];
   const answerType = 'button';
   const questionType = 'image';
+  const [showAssistor, setShowAssistor] = useState(false);
 
-  const isLessonFinished = true;
+  const closeVideoModal = () => {
+    setShowAssistor(!showAssistor);
+    console.log('Hella');
+  };
+  const isLessonFinished = false;
   return (
     <Wrapper>
       <StudentMenu>
+        {showAssistor ? <VideoModalAssistor onClick={closeVideoModal} /> : null}
         <ProgressWrapper>
           <LessonProgress
             currentQuestion={1}
@@ -54,43 +68,24 @@ export const Question: FC = () => {
           />
         </ProgressWrapper>
         {isLessonFinished ? (
-          <FinishLesson tokens={10} energy={1} />
+          <FinishLesson tokens={10} energy={10} />
         ) : (
           <Container id="container">
             <BlackBoard>
               <Lesson>Which of these is not an apple?</Lesson>
-              {questionType === 'image' ? (
-                <Options>
-                  {options.map((option, i) => (
-                    <OptionWrapper key={i}>
-                      <Option src={option.image} />
-                    </OptionWrapper>
-                  ))}
-                </Options>
+              {questionType !== 'image' ? (
+                <MultipleChoiceImage options={options} />
               ) : (
-                <TextOptionsList>
-                  <TextOptionItem>
-                    <Lesson>
-                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                    </Lesson>
-                  </TextOptionItem>
-                  <TextOptionItem>
-                    <Lesson>
-                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                    </Lesson>
-                  </TextOptionItem>
-                  <TextOptionItem>
-                    <Lesson>
-                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                    </Lesson>
-                  </TextOptionItem>
-                  <TextOptionItem>
-                    <Lesson>
-                      Hellaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaa
-                    </Lesson>
-                  </TextOptionItem>
-                </TextOptionsList>
+                <MultipleChoiceText options={optionsText} />
               )}
+              <AssistorContainer>
+                <Icon image={assistor} />
+                <Icon
+                  image={video}
+                  onClick={closeVideoModal}
+                  size={IconSize.small}
+                />
+              </AssistorContainer>
             </BlackBoard>
             <AnswerWrapper>
               <Lesson>What is the answer?</Lesson>

@@ -9,7 +9,7 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["off", { "singleQuote": true }],
     "block-scoped-var": "error",
     "eqeqeq": "error",
     "no-var": "error",
