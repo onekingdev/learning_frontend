@@ -2,10 +2,6 @@ import {FC, useEffect, useState} from 'react';
 import {ScreenSize} from '../../screenSize';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
-import arrowLeft from '../../assets/arrows/arrowLeft.svg';
-import arrowRight from '../../assets/arrows/arrowRight.svg';
-import favoriteEnabled from '../../assets/favorite_enabled.svg';
-import favoriteDisabled from '../../assets/favorite_disabled.svg';
 import wardrobe from '../../assets/wardrobe.svg';
 import {RoundIcon} from '../../atoms/Icon/Icon';
 import drawer_accessories from '../../assets/drawers/drawer_accessories.png';
@@ -19,7 +15,7 @@ import {
   footers,
 } from '../../pages/Avatar/atoms.json';
 
-export const AvatarSelector: FC = () => {
+export const WardrobeSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
   const placeHolder = serverUrl + 'assets/avatars/placeholder.png';
   const accessories_max = accessories.length;
@@ -31,135 +27,173 @@ export const AvatarSelector: FC = () => {
   const [bodyIndex, setBodyIndex] = useState(1);
   const [footerIndex, setFooterIndex] = useState(1);
   const [atomIndex, setAtomIndex] = useState(0);
-  const [favoriteImage, setFavoriteImage] = useState(favoriteDisabled);
-  const [accessoryFavorite, setAccessoryFavorite] = useState(placeHolder);
-  const [headerFavorite, setHeaderFavorite] = useState(placeHolder);
-  const [bodyFavorite, setBodyFavorite] = useState(placeHolder);
-  const [footerFavorite, setFooterFavorite] = useState(placeHolder);
   const [iconSize, setIconSize] = useState(80);
+  const [atomSize, setAtomSize] = useState(113);
   const width = window.screen.width;
   useEffect(() => {
     width > 420 ? setIconSize(80) : setIconSize(30);
-    console.log(accessories);
+    width > 420 ? setAtomSize(113) : setIconSize(83);
   }, []);
   const currentAtomIndex = (val: any) => {
     setAtomIndex(val);
-    switch (val) {
-      case 1:
-        accessoryFavorite === placeHolder
-          ? setFavoriteImage(favoriteDisabled)
-          : setFavoriteImage(favoriteEnabled);
-        break;
-      case 2:
-        headerFavorite === placeHolder
-          ? setFavoriteImage(favoriteDisabled)
-          : setFavoriteImage(favoriteEnabled);
-        break;
-      case 3:
-        bodyFavorite === placeHolder
-          ? setFavoriteImage(favoriteDisabled)
-          : setFavoriteImage(favoriteEnabled);
-        break;
-      case 4:
-        footerFavorite === placeHolder
-          ? setFavoriteImage(favoriteDisabled)
-          : setFavoriteImage(favoriteEnabled);
-        break;
-    }
   };
-  const currentIndexNext = () => {
-    switch (atomIndex) {
+
+  const renderSwitch = (param: any) => {
+    switch (param) {
       case 1:
-        accessoryIndex + 1 < accessories_max
-          ? setAccessoryIndex(accessoryIndex + 1)
-          : null;
-        break;
+        return (
+          <WardrobeScroll>
+            {accessories.map((item, i) => (
+              <WardrobeAtom
+                onClick={() => setAccessoryIndex(i)}
+                style={
+                  accessoryIndex === i
+                    ? {
+                        border: 'solid 5px red',
+                        width: atomSize - 10 + 'px',
+                        height: atomSize - 10 + 'px',
+                        backgroundColor: '#ccc',
+                      }
+                    : {border: 'solid 0px red'}
+                }
+              >
+                <AtomImg
+                  src={serverUrl + item.image}
+                  style={
+                    accessoryIndex === i
+                      ? {
+                          width: atomSize - 20 + 'px',
+                          height: atomSize - 20 + 'px',
+                        }
+                      : {
+                          width: atomSize - 10 + 'px',
+                          height: atomSize - 10 + 'px',
+                        }
+                  }
+                />
+              </WardrobeAtom>
+            ))}
+          </WardrobeScroll>
+        );
       case 2:
-        headerIndex + 1 < headers_max ? setHeaderIndex(headerIndex + 1) : null;
-        break;
+        return (
+          <WardrobeScroll>
+            {headers.map((item, i) => (
+              <WardrobeAtom
+                onClick={() => setHeaderIndex(i)}
+                style={
+                  headerIndex === i
+                    ? {
+                        border: 'solid 5px red',
+                        width: atomSize - 10 + 'px',
+                        height: atomSize - 10 + 'px',
+                        backgroundColor: '#ccc',
+                      }
+                    : {border: 'solid 0px red'}
+                }
+              >
+                <AtomImg
+                  src={serverUrl + item.image}
+                  style={
+                    headerIndex === i
+                      ? {
+                          width: atomSize - 20 + 'px',
+                          height: atomSize - 20 + 'px',
+                        }
+                      : {
+                          width: atomSize - 10 + 'px',
+                          height: atomSize - 10 + 'px',
+                        }
+                  }
+                />
+              </WardrobeAtom>
+            ))}
+          </WardrobeScroll>
+        );
       case 3:
-        bodyIndex + 1 < bodies_max ? setBodyIndex(bodyIndex + 1) : null;
-        break;
+        return (
+          <WardrobeScroll>
+            {bodies.map((item, i) => (
+              <WardrobeAtom
+                onClick={() => setBodyIndex(i)}
+                style={
+                  bodyIndex === i
+                    ? {
+                        border: 'solid 5px red',
+                        width: atomSize - 10 + 'px',
+                        height: atomSize - 10 + 'px',
+                        backgroundColor: '#ccc',
+                      }
+                    : {border: 'solid 0px red'}
+                }
+              >
+                <AtomImg
+                  src={serverUrl + item.image}
+                  style={
+                    bodyIndex === i
+                      ? {
+                          width: atomSize - 20 + 'px',
+                          height: atomSize - 20 + 'px',
+                        }
+                      : {
+                          width: atomSize - 10 + 'px',
+                          height: atomSize - 10 + 'px',
+                        }
+                  }
+                />
+              </WardrobeAtom>
+            ))}
+          </WardrobeScroll>
+        );
       case 4:
-        footerIndex + 1 < footers_max ? setFooterIndex(footerIndex + 1) : null;
-        break;
-    }
-  };
-  const currentIndexPrev = () => {
-    switch (atomIndex) {
-      case 1:
-        accessoryIndex - 1 < 0 ? null : setAccessoryIndex(accessoryIndex - 1);
-        break;
-      case 2:
-        headerIndex - 1 < 0 ? null : setHeaderIndex(headerIndex - 1);
-        break;
-      case 3:
-        bodyIndex - 1 < 0 ? null : setBodyIndex(bodyIndex - 1);
-        break;
-      case 4:
-        footerIndex - 1 < 0 ? null : setFooterIndex(footerIndex - 1);
-        break;
-    }
-  };
-  const setFavorite = () => {
-    switch (atomIndex) {
-      case 1:
-        setAccessoryFavorite(serverUrl + accessories[accessoryIndex].image);
-        accessories[accessoryIndex].image === placeHolder
-          ? setFavoriteImage(favoriteDisabled)
-          : setFavoriteImage(favoriteEnabled);
-        break;
-      case 2:
-        setHeaderFavorite(serverUrl + headers[headerIndex].image);
-        headers[headerIndex].image === placeHolder
-          ? setFavoriteImage(favoriteDisabled)
-          : setFavoriteImage(favoriteEnabled);
-        break;
-      case 3:
-        setBodyFavorite(serverUrl + bodies[bodyIndex].image);
-        bodies[bodyIndex].image === placeHolder
-          ? setFavoriteImage(favoriteDisabled)
-          : setFavoriteImage(favoriteEnabled);
-        break;
-      case 4:
-        setFooterFavorite(serverUrl + footers[footerIndex].image);
-        footers[footerIndex].image === placeHolder
-          ? setFavoriteImage(favoriteDisabled)
-          : setFavoriteImage(favoriteEnabled);
-        break;
+        return (
+          <WardrobeScroll>
+            {footers.map((item, i) => (
+              <WardrobeAtom
+                onClick={() => setFooterIndex(i)}
+                style={
+                  footerIndex === i
+                    ? {
+                        border: 'solid 5px red',
+                        width: atomSize - 10 + 'px',
+                        height: atomSize - 10 + 'px',
+                        backgroundColor: '#ccc',
+                      }
+                    : {border: 'solid 0px red'}
+                }
+              >
+                <AtomImg
+                  src={serverUrl + item.image}
+                  style={
+                    footerIndex === i
+                      ? {
+                          width: atomSize - 20 + 'px',
+                          height: atomSize - 20 + 'px',
+                        }
+                      : {
+                          width: atomSize - 10 + 'px',
+                          height: atomSize - 10 + 'px',
+                        }
+                  }
+                />
+              </WardrobeAtom>
+            ))}
+          </WardrobeScroll>
+        );
+      default:
+        return (
+          <WardrobeScroll>
+            {Array.from(Array(9), (e, i) => (
+              <WardrobeAtom />
+            ))}
+          </WardrobeScroll>
+        );
     }
   };
 
   return (
-    <AvatarModule>
-      <FavoritesCloset>
-        <MobileFavoritesDrawer>
-          <RoundIcon
-            src={accessoryFavorite}
-            style={{width: '75px', height: '75px', background: '#fff'}}
-          ></RoundIcon>
-        </MobileFavoritesDrawer>
-        <MobileFavoritesDrawer>
-          <RoundIcon
-            src={headerFavorite}
-            style={{width: '75px', height: '75px', background: '#fff'}}
-          ></RoundIcon>
-        </MobileFavoritesDrawer>
-        <MobileFavoritesDrawer>
-          <RoundIcon
-            src={bodyFavorite}
-            style={{width: '75px', height: '75px', background: '#fff'}}
-          ></RoundIcon>
-        </MobileFavoritesDrawer>
-        <MobileFavoritesDrawer>
-          <RoundIcon
-            src={footerFavorite}
-            style={{width: '75px', height: '75px', background: '#fff'}}
-          ></RoundIcon>
-        </MobileFavoritesDrawer>
-      </FavoritesCloset>
+    <WardrobeModule>
       <SelectorGrid>
-        <LeftArrow onClick={currentIndexPrev} src={arrowLeft}></LeftArrow>
         <CurrentAvatar>
           <CurrentAccessory
             src={serverUrl + accessories[accessoryIndex].image}
@@ -180,8 +214,6 @@ export const AvatarSelector: FC = () => {
           <CurrentBody src={serverUrl + bodies[bodyIndex].image} />
           <CurrentFooter src={serverUrl + footers[footerIndex].image} />
         </CurrentAvatar>
-        <RightArrow onClick={currentIndexNext} src={arrowRight}></RightArrow>
-        <FavoriteIcon onClick={setFavorite} src={favoriteImage}></FavoriteIcon>
         <BodyPartWardrobe src={wardrobe}></BodyPartWardrobe>
         <AtomsDrawer>
           <AtomsRoundIcon
@@ -237,19 +269,13 @@ export const AvatarSelector: FC = () => {
             }
           />
         </AtomsDrawer>
-        <AvatarWardrobe src={wardrobe}></AvatarWardrobe>
-        <FavoritesDrawer>
-          <CenteredRoundIcon src={accessoryFavorite}></CenteredRoundIcon>
-          <CenteredRoundIcon src={headerFavorite}></CenteredRoundIcon>
-          <CenteredRoundIcon src={bodyFavorite}></CenteredRoundIcon>
-          <CenteredRoundIcon src={footerFavorite}></CenteredRoundIcon>
-        </FavoritesDrawer>
+        <WardrobeDrawer>{renderSwitch(atomIndex)}</WardrobeDrawer>
       </SelectorGrid>
-    </AvatarModule>
+    </WardrobeModule>
   );
 };
 
-const AvatarModule = styled.div``;
+const WardrobeModule = styled.div``;
 
 const SelectorGrid = styled.div`
   display: grid;
@@ -259,24 +285,23 @@ const SelectorGrid = styled.div`
   justify-content: center;
   margin-top: 100px;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
+    grid-template-columns: 2fr 1fr 2fr;
     grid-row: 2 / 3;
     margin-top: 20px;
   }
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    grid-template-columns: 3fr 1fr 2fr 1fr 3fr;
+    grid-template-columns: 3fr 2fr 3fr;
     grid-row: 2 / 3;
     margin-top: 20px;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    grid-template-columns: 2fr 100px 1fr 100px 2fr;
+    grid-template-columns: 2fr 1fr 2fr;
     margin-top: 20px;
   }
 `;
 
 const CurrentAvatar = styled.div`
   width: 200px;
-  margin: auto;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 138px 100px 130px;
@@ -284,6 +309,7 @@ const CurrentAvatar = styled.div`
     grid-row: 1 / 2;
     grid-column: 3 / 4;
     width: 200px;
+    align-self: end;
   }
 `;
 
@@ -337,42 +363,6 @@ const CurrentFooter = styled.img`
   }
 `;
 
-const LeftArrow = styled.img`
-  width: 37px;
-  margin: auto;
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    grid-row: 1 / 2;
-    grid-column: 2 / 3;
-  }
-`;
-
-const RightArrow = styled.img`
-  width: 37px;
-  margin: auto;
-  grid-column: 3 / 4;
-  grid-row: 1 / 2;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    grid-row: 1 / 2;
-    grid-column: 4 / 5;
-  }
-`;
-
-const FavoriteIcon = styled.img`
-  position: relative;
-  width: 50px;
-  grid-column: 3 / 4;
-  grid-row: 1 / 2;
-  justify-self: start;
-  align-self: end;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    grid-row: 1 / 2;
-    grid-column: 4 / 5;
-    justify-self: start;
-  }
-`;
-
 const BodyPartWardrobe = styled.img`
   position: relative;
   grid-column: 1 / 2;
@@ -409,29 +399,53 @@ const AtomsDrawer = styled.div`
   }
 `;
 
-const AvatarWardrobe = styled.img`
+const WardrobeDrawer = styled.div`
   display: none;
-  justify-self: start;
-  align-self: start;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    display: block;
-    grid-row: 1 / 2;
-    grid-column: 5 / 6;
-    height: 100%;
-    max-height: 480px;
-  }
-`;
-
-const FavoritesDrawer = styled.div`
-  display: none;
+  background-color: #5c2b0c;
+  width: 420px;
+  height: 420px;
+  align-self: end;
+  margin: 10px 20px;
   @media screen and (min-width: ${ScreenSize.phone}) {
     grid-template-rows: repeat(4, 1fr);
     display: grid;
     align-content: center;
     justify-content: start;
     grid-row: 1 / 2;
-    grid-column: 5 / 6;
+    grid-column: 2 / 3;
   }
+`;
+
+const WardrobeScroll = styled.div`
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  max-height: 400px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const WardrobeAtom = styled.div`
+  margin: auto;
+  position: relative;
+  z-index: 999;
+  width: 113px;
+  height: 113px;
+  background-color: #fff;
+  margin: 10px;
+`;
+
+const AtomImg = styled.img`
+  margin: auto;
+  position: relative;
+  z-index: 999;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
 `;
 
 const CenteredRoundIcon = styled(RoundIcon)`

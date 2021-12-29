@@ -1,9 +1,10 @@
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
 import {Question} from './views/pages/Question/Question';
 import {Avatar} from './views/pages/Avatar/Avatar';
+import {Wardrobe} from './views/pages/Avatar/Wardrobe';
 import {CardCollectible} from './views/pages/CardCollectible/CardCollectible';
 import {MyProfile} from './views/pages/MyProfile/MyProfile';
 import {Backpack} from './views/pages/Backpack/Backpack';
@@ -15,78 +16,66 @@ import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
-import {FC} from 'react';
-import {StoreProvider, useStore} from './app/store';
-type PrivateRouteProps = {
-  paths: string,
-  rest: object,
-  requireAuth: boolean
-}
-export const PrivateRoute = ({requireAuth=true, ...rest}) => {
-  const store = useStore();
-  const isAuthenticated = !!store?.user?.token;
-  return (
-    <Route
-      {...rest}
-    >
-      {requireAuth ? (isAuthenticated ? rest.children : <Redirect to={{pathname: '/login'}} />) : rest.children}
-      </Route>
-  )
-}
+
+import {StoreProvider} from './app/store';
 
 export default () => {
   return (
-    <StoreProvider>
     <Router>
       <Switch>
-        <PrivateRoute exact path="/" requireAuth={false}>
+        <Route exact path="/">
+          <StoreProvider>
             <Welcome />
-        </PrivateRoute>
-        <PrivateRoute path="/login" requireAuth={false}>
+          </StoreProvider>
+        </Route>
+        <Route path="/login">
           <LogIn />
-        </PrivateRoute>
-        <PrivateRoute path="/question">
+        </Route>
+        <Route path="/question">
           <Question />
-        </PrivateRoute>
-        <PrivateRoute path="/avatar">
+        </Route>
+        <Route path="/avatar">
           <Avatar />
-        </PrivateRoute>
-        <PrivateRoute path="/collectibles/category_:categoryId/:collectibleId">
+        </Route>
+        <Route path="/wardrobe">
+          <Wardrobe />
+        </Route>
+        <Route path="/collectibles/category_:categoryId/:collectibleId">
           <CardCollectible />
-        </PrivateRoute>
-        <PrivateRoute path="/collectibles/category_:categoryId">
+        </Route>
+        <Route path="/collectibles/category_:categoryId">
           <CardCollectible />
-        </PrivateRoute>
-        <PrivateRoute path="/profile">
+        </Route>
+        <Route path="/profile">
           <MyProfile />
-        </PrivateRoute>
-        <PrivateRoute path="/home">
+        </Route>
+        <Route path="/home">
           <StudentHome />
-        </PrivateRoute>
-        <PrivateRoute path="/progress">
+        </Route>
+        <Route path="/progress">
           <Progress />
-        </PrivateRoute>
-        <PrivateRoute path="/backpack">
+        </Route>
+        <Route path="/backpack">
           <Backpack />
-        </PrivateRoute>
-        <PrivateRoute path="/games/categories">
+        </Route>
+        <Route path="/games/categories">
           <Games />
-        </PrivateRoute>
-        <PrivateRoute path="/games">
+        </Route>
+        <Route path="/games">
           <GamesMenu />
-        </PrivateRoute>
-        <PrivateRoute path="/map">
+        </Route>
+        <Route path="/map">
           <KnowledgeMap />
-        </PrivateRoute>
-        <PrivateRoute path="/confirmation">
+        </Route>
+        <Route path="/confirmation">
           <ConfirmAccount />
-        </PrivateRoute>
-        <PrivateRoute path="/subjects">
+        </Route>
+        <Route path="/subjects">
           <SubjectsMenu />
-        </PrivateRoute>
-        <PrivateRoute path="/topic/:topicId">
+        </Route>
+        <Route path="/topic/:topicId">
           <TopicsMenu />
-        </PrivateRoute>
+        </Route>
         {process.env.NODE_ENV === 'development' ? (
           <Route path="/testing">
             <Testing />
@@ -94,7 +83,5 @@ export default () => {
         ) : null}
       </Switch>
     </Router>
-    </StoreProvider>
-
   );
 };

@@ -12,7 +12,7 @@ import {IWallet} from './entities/wallet';
 import {IBlock} from './entities/block';
 
 import {Gender} from './entities/gender';
-export const MockStore: Store = {
+const MockStore: Store = {
   user: {
     userName: 'Juanpa',
     avatar: 'string',
@@ -51,8 +51,8 @@ export const MockStore: Store = {
 
 const StudentContext = createContext<Store | undefined>(MockStore);
 const StudentContextUpdate = createContext<
-  Dispatch<SetStateAction<Store | undefined>>
->(()=>{});
+  Dispatch<SetStateAction<Store | undefined>> | undefined
+>(undefined);
 
 export const useStore = () => useContext(StudentContext);
 export const useStoreUpdate = () => useContext(StudentContextUpdate);
@@ -66,6 +66,7 @@ type Store = {
 
 export const StoreProvider = ({children}: any) => {
   const [store, reducer] = useState<Store | undefined>(undefined);
+
   return (
     <StudentContext.Provider value={store}>
       <StudentContextUpdate.Provider value={reducer}>

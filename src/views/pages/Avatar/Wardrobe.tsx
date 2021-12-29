@@ -1,16 +1,16 @@
 import {FC} from 'react';
-import {AvatarFavoritesTitle} from '../../molecules/Avatar/AvatarFavoritesTitle';
-import {AvatarSelector} from '../../molecules/Avatar/AvatarSelector';
+import {WardrobeTitle} from '../../molecules/Avatar/WardrobeTitle';
+import {WardrobeSelector} from '../../molecules/Avatar/WardrobeSelector';
 import {AvatarContainer, Wrapper} from './Style';
 import {StudentMenu} from '../../templates/StudentMenu';
 
-export const Avatar: FC = () => {
+export const Wardrobe: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
         <AvatarContainer>
-          <AvatarFavoritesTitle />
-          <AvatarSelector />
+          <WardrobeTitle />
+          <WardrobeSelector />
         </AvatarContainer>
       </StudentMenu>
     </Wrapper>
