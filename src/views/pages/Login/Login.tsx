@@ -12,19 +12,42 @@ import {Actions} from '../../molecules/Login/Actions';
 import {Form} from '../../molecules/Login/Form';
 import {Greet} from '../../molecules/Login/Greet';
 import {useHistory} from 'react-router-dom';
-
+import {StoreProvider, useStore, useStoreUpdate, MockStore} from '../../../app/store';
+import {get} from '../../../api/queries/get'
 export const LogIn: FC = () => {
   useEffect(() => {
     console.log('testy test');
   }, []);
 
   const history = useHistory();
+  const store = useStore();
+  const setStore = useStoreUpdate();
   const language = 'en';
-
   const validatePassword = (password: string) => {
     return password !== 'test';
   };
+  const loginAction = () => {
+    // get(
+    //   `mutation`,
+    //   `{
+    //     tokenAuth(username: "armin", password: "123456") {
+    //       token
+    //     }
+    //   }`,
+    //   onLoginSuccess,
+    //   onLoginError
+    // );
+    onLoginSuccess({});
+  }
+  const onLoginSuccess = (data: any) => {
+    console.log("login Success")
+    setStore(MockStore);
+    history.push('/home')
 
+  }
+  const onLoginError = (error: any) => {
+    console.log("login error")
+  }
   return (
     <Login>
       <Greet
@@ -55,7 +78,7 @@ export const LogIn: FC = () => {
             or={dictionary[language].or}
             loginText={dictionary[language].login}
             loginColor={ButtonColor.login}
-            loginAction={() => history.push('/home')}
+            loginAction={loginAction}
           />
         </LoginWrapper>
         <Legal>

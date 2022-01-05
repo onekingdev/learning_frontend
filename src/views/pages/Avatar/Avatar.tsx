@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import {AvatarFavorites} from '../../molecules/Avatar/AvatarFavorites';
 import {AvatarFavoritesTitle} from '../../molecules/Avatar/AvatarFavoritesTitle';
 import {AvatarSelector} from '../../molecules/Avatar/AvatarSelector';
 import {AvatarContainer, Wrapper} from './Style';
@@ -10,6 +11,7 @@ export const Avatar: FC = () => {
       <StudentMenu>
         <AvatarContainer>
           <AvatarFavoritesTitle />
+          <AvatarFavorites />
           <AvatarSelector />
         </AvatarContainer>
       </StudentMenu>
