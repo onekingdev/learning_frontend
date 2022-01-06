@@ -63,13 +63,13 @@ export const TOPIC_GRADE = `
 `;
 
 export const QUESTION = `
-    {
+    
         id
         identifier
         isActive
         randomSlug
         questionText
-    }
+    
 `;
 
 export const ANSWER_OPTION = `

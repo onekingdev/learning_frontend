@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Lesson} from '../../atoms/Text/Lesson';
 import {ButtonColor} from '../../Color';
 import {Button} from '../../molecules/Button';
@@ -25,10 +25,39 @@ import {Icon} from '../../atoms/Icon/Icon';
 import video from '../../assets/video.svg';
 import assistor from '../../assets/text-to-speech.svg';
 import {IconSize} from '../../atoms/Icon/Size';
+import { get } from '../../../api/queries/get';
+import { BLOCK_PRESENTATION_QUERY } from '../../../api/queries/questions';
+
+interface blockPresentationParams {
+    block: {
+      id: string
+      topics: [{
+        id: string
+        name: string
+        questionSet: [{
+          questionText: string
+          answeroptionSet:[{
+            answerText: string
+          }]
+        }]
+      }]
+      typeOf: {
+        id: string
+        name: string
+      }
+    }
+    id: string
+}
+
 
 export const Question: FC = () => {
   // TODO answers and options must come from DB
   // TODO and the type should be much more roboust
+  const [value, setValue] = useState('');
+  const [block, setBlock] = useState<blockPresentationParams>();
+  const [answer, setAnswer] = useState('');
+  const [question, setQuestion] = useState('')
+
   const options = [
     {image: apple},
     {image: apple},
@@ -47,15 +76,43 @@ export const Question: FC = () => {
     {value: 'Hello friend'},
     {value: 'Hello friend'},
   ];
-  const answerType = 'button';
+  const answerText = false;
   const questionType = 'image';
   const [showAssistor, setShowAssistor] = useState(false);
+  const onChange = (e:any) => {
+    setValue(e.target.value);
+  }
 
   const closeVideoModal = () => {
     setShowAssistor(!showAssistor);
-    console.log('Hella');
   };
   const isLessonFinished = false;
+  const handleData = (data: any) => {
+    setBlock(data.data.blockPresentationById);
+  };
+
+  const handleError = (error: any) => {
+    console.error(error);
+  };
+  useEffect(() => {
+    get(
+      'blockPresentationById(id:"2")',
+      BLOCK_PRESENTATION_QUERY,
+      handleData,
+      handleError
+    );
+
+  }, [])
+
+  const handleQuestion = () => {
+    const topics = block?.block.topics[0]
+    const questions = topics?.questionSet[0]
+    const answer = questions?.answeroptionSet[0].answerText
+
+    if(value === answer){
+      console.log('correct')
+    }
+  }
   return (
     <Wrapper>
       <StudentMenu>
@@ -72,7 +129,7 @@ export const Question: FC = () => {
         ) : (
           <Container id="container">
             <BlackBoard>
-              <Lesson>Which of these is not an apple?</Lesson>
+              <Lesson>{block?.block.topics[0].questionSet[0].questionText}</Lesson>
               {questionType !== 'image' ? (
                 <MultipleChoiceImage options={options} />
               ) : (
@@ -90,7 +147,7 @@ export const Question: FC = () => {
             <AnswerWrapper>
               <Lesson>What is the answer?</Lesson>
               <Answers>
-                {answerType === 'button' ? (
+                {answerText ? (
                   answers.map((answer, i) => (
                     <Button
                       key={i}
@@ -101,12 +158,12 @@ export const Question: FC = () => {
                   ))
                 ) : (
                   <AnswerForm>
-                    <TextInput label="" />
+                    <TextInput label="Answer" onChange={onChange}/>
                   </AnswerForm>
                 )}
               </Answers>
               <Submit>
-                <Button value={'validate'} />
+                <Button value={'validate'} onClick={handleQuestion} />
               </Submit>
             </AnswerWrapper>
           </Container>

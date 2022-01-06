@@ -1,10 +1,3 @@
-import * as TYPES from '../types'
-export const studentSetData = (payload: any) => {
-  return {
-      type: TYPES.STUDENT_SET_DATA,
-      payload: payload,
-  };
-};
 export const studentGetCollectible = (payload: string) => ({
   type: 'STUDENT_GET_COLLECTIBLE',
   payload,

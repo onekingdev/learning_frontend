@@ -5,15 +5,11 @@ import avatarPlaceHolder from '../assets/avatars/avatar1.svg';
 import styled from 'styled-components';
 import {ScreenSize} from '../screenSize';
 
-import { useDispatch, useSelector } from 'react-redux'
-import * as TYPES from '../../app/types'
+import {useStore, useStoreUpdate} from '../../app/store';
 
 export const StudentMenu: FC = ({children}) => {
-  const student = useSelector((state:any) => state.studentState)
-  const dispatch = useDispatch()
-  const setStudent = (student:any) => {
-    dispatch({ type: TYPES.STUDENT_SET_DATA, payload:student })
-  }
+  const student = useStore();
+  const setStudent = useStoreUpdate();
 
   useEffect(() => {
     setStudent(student);
