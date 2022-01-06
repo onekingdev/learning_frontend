@@ -15,6 +15,8 @@ import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
+import { useSelector } from 'react-redux';
+import { Store } from './app/configureStore'
 import {FC} from 'react';
 type PrivateRouteProps = {
   paths: string,
@@ -22,9 +24,9 @@ type PrivateRouteProps = {
   requireAuth: boolean
 }
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
-  // const store = useStore();
-  // const isAuthenticated = !!store?.user?.token;
-  const isAuthenticated = true;
+  const user = useSelector((state : Store) => state.user)
+  const isAuthenticated = !!user?.token;
+
   return (
     <Route
       {...rest}
@@ -33,6 +35,7 @@ const PrivateRoute = ({requireAuth=true, ...rest}) => {
       </Route>
   )
 }
+
 export function Routes(props: any) {
   return (
     <Router>

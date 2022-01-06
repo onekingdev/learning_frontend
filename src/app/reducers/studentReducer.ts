@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {
   switch (action.type) {
     case TYPE.STUDENT_SET_DATA:
-      console.log("will set user", action.payload);
+      console.log('will set user', action.payload);
       return {
         ...state,
         ...action.payload

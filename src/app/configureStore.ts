@@ -12,7 +12,7 @@ import {IBlock} from './entities/block';
 import {Gender} from './entities/gender';
 
 
-type Store = {
+export type Store = {
     user: IStudent;
     group: IGroup;
     wallet: IWallet;

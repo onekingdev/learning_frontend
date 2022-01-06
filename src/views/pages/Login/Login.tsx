@@ -18,7 +18,7 @@ import * as TYPES from '../../../app/types'
 import {MockStore} from '../../../app/configureStore'
 export const LogIn: FC = () => {
   useEffect(() => {
-    console.log('testy testaa');
+    console.log('testy test');
   }, []);
   const store = useSelector((state) => state)
   const history = useHistory();
@@ -43,6 +43,7 @@ export const LogIn: FC = () => {
   const onLoginSuccess = (data: any) => {
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload: data })
     history.push('/home')
+    console.log("logan success");
   }
   const onLoginError = (error: any) => {
     console.log("login error")
