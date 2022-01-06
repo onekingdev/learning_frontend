@@ -1,17 +1,64 @@
 import {applyMiddleware, compose, createStore} from 'redux';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-// @ts-ignore
 import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
-// @ts-ignore
 import devTools from 'remote-redux-devtools';
+import {IStudent} from './entities/student';
+import {IGroup} from './entities/group';
+import {IWallet} from './entities/wallet';
+import {IBlock} from './entities/block';
+import {Gender} from './entities/gender';
+
+
+type Store = {
+    user: IStudent;
+    group: IGroup;
+    wallet: IWallet;
+    block: IBlock;
+  };
+
+export const MockStore: Store = {
+    user: {
+      userName: 'Juanpa',
+      avatar: 'string',
+      avatarFavorites: [],
+      gender: Gender.male,
+      firstName: 'string',
+      lastName: 'string',
+      activeGroupId: 'string',
+      DoB: new Date(),
+      guardianId: 'string',
+      email: 'string',
+      token: 'string',
+    },
+    group: {
+      groupMembers: [
+        {
+          avatarURL: 'string',
+          name: 'string',
+        },
+      ],
+      grade: 'string',
+      areasOfKnowledge: ['', '', ''],
+    },
+    wallet: {
+      balance: 1,
+      experience: 2,
+      level: 3,
+    },
+    block: {
+      questions: ['hello'],
+      config: {name: 'sdscd'},
+      chosenAnswer: '2',
+      isCorrect: true,
+    },
+};
 
 const persistConfig = {
-    key: 'authState',
-    storage: storage,
-    whitelist: ['authState'] // which reducer want to store
+    key: 'root',
+    storage: storage
 };
 
 const logger = createLogger();
@@ -37,6 +84,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store: any = createStore(persistedReducer, enhancer);
 export default function configureStore(onCompletion: any) {
     // let store: any = createStore(persistedReducer, enhancer);
-    let persistor = persistStore(store);
+    const persistor = persistStore(store);
     return {store, persistor};
 }

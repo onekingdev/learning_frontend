@@ -16,15 +16,15 @@ import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 import {FC} from 'react';
-import {StoreProvider, useStore} from './app/store';
 type PrivateRouteProps = {
   paths: string,
   rest: object,
   requireAuth: boolean
 }
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
-  const store = useStore();
-  const isAuthenticated = !!store?.user?.token;
+  // const store = useStore();
+  // const isAuthenticated = !!store?.user?.token;
+  const isAuthenticated = true;
   return (
     <Route
       {...rest}

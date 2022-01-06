@@ -12,16 +12,17 @@ import {Actions} from '../../molecules/Login/Actions';
 import {Form} from '../../molecules/Login/Form';
 import {Greet} from '../../molecules/Login/Greet';
 import {useHistory} from 'react-router-dom';
-import {StoreProvider, useStore, useStoreUpdate, MockStore} from '../../../app/store';
 import {get} from '../../../api/queries/get'
+import { useDispatch, useSelector } from 'react-redux'
+import * as TYPES from '../../../app/types'
+import {MockStore} from '../../../app/configureStore'
 export const LogIn: FC = () => {
   useEffect(() => {
     console.log('testy test');
   }, []);
-
+  const store = useSelector((state) => state)
   const history = useHistory();
-  const store = useStore();
-  const setStore = useStoreUpdate();
+  const dispatch = useDispatch()
   const language = 'en';
   const validatePassword = (password: string) => {
     return password !== 'test';
@@ -37,13 +38,11 @@ export const LogIn: FC = () => {
     //   onLoginSuccess,
     //   onLoginError
     // );
-    onLoginSuccess({});
+    onLoginSuccess(MockStore.user);
   }
   const onLoginSuccess = (data: any) => {
-    console.log("login Success")
-    setStore(MockStore);
-    history.push('/home')
-
+    // history.push('/home')
+    dispatch({ type: TYPES.STUDENT_SET_DATA, payload: data })
   }
   const onLoginError = (error: any) => {
     console.log("login error")
