@@ -7,7 +7,6 @@ type TextInputProps = {
   validate?: (text: string) => boolean;
   errMsg?: string;
   isSecret?: boolean;
-  onChange?: (e:any) => void;
 };
 
 export const TextInput: FC<TextInputProps> = ({
@@ -15,25 +14,25 @@ export const TextInput: FC<TextInputProps> = ({
   validate = (_: string) => true || _,
   errMsg = '',
   isSecret = false,
-  onChange
 }) => {
-  //const [value, setValue] = useState('');
+  const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState<boolean>(true);
- /* useEffect(() => {
+
+  useEffect(() => {
     if (validate(value) && isValid === false) {
       setIsValid(true);
     }
     if (!validate(value) && isValid === true) {
       setIsValid(false);
     }
-  }, [value]);*/
+  }, [value]);
 
   return (
     <>
       <Wrapper isValid={isValid}>
         <Label>{label}</Label>
         <StyledInput
-          onChange={onChange}
+          onChange={e => setValue(e.target.value)}
           type={isSecret ? 'password' : 'text'}
         />
       </Wrapper>
