@@ -13,20 +13,19 @@ import {Form} from '../../molecules/Login/Form';
 import {Greet} from '../../molecules/Login/Greet';
 import {useHistory} from 'react-router-dom';
 import {get} from '../../../api/queries/get'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import * as TYPES from '../../../app/types'
 import {MockStore} from '../../../app/configureStore'
+import { IStudent } from '../../../app/entities/student';
 export const LogIn: FC = () => {
-  useEffect(() => {
-    console.log('testy test');
-  }, []);
-  const store = useSelector((state) => state)
   const history = useHistory();
   const dispatch = useDispatch()
   const language = 'en';
+
   const validatePassword = (password: string) => {
     return password !== 'test';
   };
+
   const loginAction = () => {
     // get(
     //   `mutation`,
@@ -40,14 +39,19 @@ export const LogIn: FC = () => {
     // );
     onLoginSuccess(MockStore.user);
   }
-  const onLoginSuccess = (data: any) => {
+
+  const onLoginSuccess = (data: IStudent) => {
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload: data })
     history.push('/home')
-    console.log("logan success");
   }
+
   const onLoginError = (error: any) => {
-    console.log("login error")
+    console.log('login error')
   }
+
+  useEffect(() => {
+    dispatch({type:TYPES.STUDENT_RESET})
+  }, []);
   return (
     <Login>
       <Greet

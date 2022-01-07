@@ -10,7 +10,7 @@ import {IGroup} from './entities/group';
 import {IWallet} from './entities/wallet';
 import {IBlock} from './entities/block';
 import {Gender} from './entities/gender';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 export type Store = {
     user: IStudent;
@@ -71,13 +71,9 @@ const promise = () => (next: any) => (action: any) => (
         : next(action)
 )
 
-const enhancer = compose(
+const enhancer = composeWithDevTools(
     applyMiddleware(thunk, promise, logger),
     // applyMiddleware(thunk, promise),
-    devTools({
-        name: 'Socrates 2.0',
-        realtime: true,
-    }),
 );
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

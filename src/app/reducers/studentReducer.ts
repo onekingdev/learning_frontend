@@ -4,8 +4,17 @@ import {IGroup} from '../entities/group';
 import {IWallet} from '../entities/wallet';
 import {IBlock} from '../entities/block';
 const INITIAL_STATE = {
-  collectibles: [],
-  avatars: []
+  userName: null,
+  avatar: null,
+  avatarFavorites: [],
+  gender: null,
+  firstName: null,
+  lastName: null,
+  activeGroupId: null,
+  DoB: null,
+  guardianId: null,
+  email: null,
+  token: null,
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {
@@ -16,11 +25,11 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         ...state,
         ...action.payload
       };
-    case TYPE.STUDENT_GET_COLLECTIBLE:
-      return {
-        ...state,
-          collectibles: [...state.collectibles, action.payload],
-      };
+    // case TYPE.STUDENT_GET_COLLECTIBLE:
+    //   return {
+    //     ...state,
+    //       collectibles: [...state.collectibles, action.payload],
+    //   };
     case TYPE.STUDENT_ANSWERS_BLOCK:
       return {
         ...state,
@@ -29,13 +38,13 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: I
       return {
         ...state,
       };
-    case TYPE.STUDENT_ADD_AVATAR:
-      return {
-        ...state,
-        student: {
-          avatars: [...state.avatars, action.payload],
-        },
-      };
+    // case TYPE.STUDENT_ADD_AVATAR:
+    //   return {
+    //     ...state,
+    //     student: {
+    //       avatars: [...state.avatars, action.payload],
+    //     },
+    //   };
     // case TYPE.STUDENT_REMOVE_AVATAR:
     //   return {
     //     ...state,
@@ -89,6 +98,8 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: I
           config: action.payload,
         },
       };
+    case TYPE.STUDENT_RESET:
+      return INITIAL_STATE;
     default:
       return state;
   }

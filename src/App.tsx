@@ -1,4 +1,3 @@
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import {Routes} from './Routes'
 import { Provider } from 'react-redux';
 import store from './app/configureStore';
