@@ -7,25 +7,25 @@ export const BLOCK_CONFIGURATION_KEYWORD = `
 `;
 
 export const BLOCK_TYPE = `
-    {
+    
         id
         identifier
         isActive
         randomSlug
         name
-    }
+    
 `;
 
 export const BLOCK_TYPE_CONFIGURATION = `
-    {
+    
         id
         isActive
         value
-    }
+    
 `;
 
 export const BLOCK = `
-    {
+    
         id
         identifier
         isActive
@@ -33,7 +33,7 @@ export const BLOCK = `
         engangementPointsAvailable
         coinsAvailable
         batteryPointsAvailable
-    }
+    
 `;
 
 export const BLOCK_PRESENTATON = `
@@ -60,9 +60,9 @@ export const BLOCK_QUESTION = `
 `;
 
 export const BLOCK_QUESTION_PRESENTATION = `
-    {
+    
         id
         identifier
         randomSlug
-    }
+    
 `;
