@@ -18,11 +18,7 @@ import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 import { useSelector } from 'react-redux';
 import { Store } from './app/configureStore'
 import {FC} from 'react';
-type PrivateRouteProps = {
-  paths: string,
-  rest: object,
-  requireAuth: boolean
-}
+
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
   const user = useSelector((state : Store) => state.user)
   const isAuthenticated = !!user?.token;
