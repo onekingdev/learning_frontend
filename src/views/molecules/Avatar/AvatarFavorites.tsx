@@ -3,18 +3,22 @@ import styled from 'styled-components';
 import {RoundIcon} from '../../atoms/Icon/Icon';
 import {BasicColor} from '../../Color';
 import {ScreenSize} from '../../screenSize';
+import placeHolder from '../../assets/placeholder.png';
 
 export const AvatarFavorites: FC = () => {
   const favorites = [];
   for (let i = 0; i < 4; i++) {
-    favorites.push({image: 'https://via.placeholder.com/75'});
+    favorites.push({image: placeHolder});
   }
 
   return (
     <FavoritesCloset>
       {favorites.map(favorite => (
         <FavoritesDrawer>
-          <RoundIcon src={favorite.image}></RoundIcon>
+          <RoundIcon
+            src={favorite.image}
+            style={{width: '75px', height: '75px'}}
+          ></RoundIcon>
         </FavoritesDrawer>
       ))}
     </FavoritesCloset>

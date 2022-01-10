@@ -4,7 +4,6 @@ import storage from 'redux-persist/lib/storage';
 import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
-import devTools from 'remote-redux-devtools';
 import {IStudent} from './entities/student';
 import {IGroup} from './entities/group';
 import {IWallet} from './entities/wallet';
