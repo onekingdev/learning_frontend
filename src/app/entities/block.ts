@@ -1,5 +1,3 @@
-import {IBlockConfig} from './blockConfig';
-
 export interface IAnswer {
   id: string;
   identifier: string;
