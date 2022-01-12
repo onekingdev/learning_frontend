@@ -14,3 +14,4 @@ export const STUDENT_CONFIG = 'STUDENT_CONFIG';
 export const STUDENT_SET_DATA = 'STUDENT_SET_DATA';
 export const STUDENT_RESET = 'STUDENT_SET_RESET';
 export const SET_COLLECTIBLE = 'SET_COLLECTIBLE';
+export const SET_AOK = 'SET_AOK';

@@ -73,3 +73,8 @@ export const setCollectibles = (payload: string) => ({
   type: 'SET_COLLECTIBLE',
   payload
 })
+
+export const setAreasOfKnowledge = (payload: string) => ({
+  type: 'SET_AOK',
+  payload
+})

@@ -11,6 +11,7 @@ import {IBlock} from './entities/block';
 import {Gender} from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { ICollectibleCategory } from './entities/collectibles';
+import { IAreasOfKnowledge } from './entities/areasOfKnowledge';
 
 export type Store = {
     user: IStudent;
@@ -18,6 +19,7 @@ export type Store = {
     wallet: IWallet;
     block?: IBlock;
     collectibles?: ICollectibleCategory;
+    areasOfKnowLedge?: IAreasOfKnowledge;
   };
 
 export const MockStore: Store = {
