@@ -6,7 +6,7 @@ import {ScreenSize} from '../../screenSize';
 import {CardCollectible} from './CardCollectible';
 import {get} from '../../../api/queries/get';
 import {useParams, useHistory} from 'react-router-dom';
-import {COLLECTIBLE_CATEGORY_BY_ID_QUERY} from '../../../api/queries/progress';
+import {COLLECTIBLE_CATEGORY_QUERY} from '../../../api/queries/progress';
 
 type CarouselProps = {
   onClick?: () => void;
@@ -56,7 +56,7 @@ export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
   useEffect(() => {
     get(
       `collectibleCategoryById(id:"${categoryId}")`,
-      `${COLLECTIBLE_CATEGORY_BY_ID_QUERY}`,
+      `${COLLECTIBLE_CATEGORY_QUERY}`,
       handleData,
       handleError
     );

@@ -50,3 +50,7 @@ export interface ICollectibleCategory {
     collectibleSet: ICollectible[];
     name: string;
 }
+export interface IRouteCollectible {
+    collectibleId: string;
+    categoryId: string;
+}

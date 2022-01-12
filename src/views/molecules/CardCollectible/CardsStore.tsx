@@ -3,12 +3,18 @@ import styled from 'styled-components';
 import {ScreenSize} from '../../screenSize';
 import {CardCollectibleStore} from './CardCollectibleStore';
 import {get} from '../../../api/queries/get';
-import {COLLECTIBLE_CATEGORY} from '../../../api/fragments/progressFragments';
+import { COLLECTIBLE_CATEGORY_QUERY } from '../../../api/queries/progress';
+import { useDispatch, useSelector } from 'react-redux';
+import * as TYPE from '../../../app/types';
+import { Store } from '../../../app/configureStore';
 
 export const CardsStore: FC = () => {
   const [collectiblesCategory, setCollectiblesCategory] = useState([]);
+  const selector = useSelector((state: Store) => state)
+  const dispatch = useDispatch();
   const handleData = (data: any) => {
     console.log(data);
+    dispatch({type: TYPE.SET_COLLECTIBLE, payload: data.data.collectiblesCategory})
     setCollectiblesCategory(data.data.collectiblesCategory);
   };
 
@@ -19,10 +25,11 @@ export const CardsStore: FC = () => {
   useEffect(() => {
     get(
       'collectiblesCategory',
-      `{${COLLECTIBLE_CATEGORY}}`,
+      `${COLLECTIBLE_CATEGORY_QUERY}`,
       handleData,
       handleError
     );
+    console.log(selector,'COOOOOOOOOOOOOLLL')
   }, []);
 
   return (

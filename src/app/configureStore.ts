@@ -10,12 +10,14 @@ import {IWallet} from './entities/wallet';
 import {IBlock} from './entities/block';
 import {Gender} from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { ICollectibleCategory } from './entities/collectibles';
 
 export type Store = {
     user: IStudent;
     group: IGroup;
     wallet: IWallet;
-    block: IBlock;
+    block?: IBlock;
+    collectibles?: ICollectibleCategory;
   };
 
 export const MockStore: Store = {
@@ -47,12 +49,12 @@ export const MockStore: Store = {
       experience: 2,
       level: 3,
     },
-    block: {
-      questions: ['hello'],
-      config: {name: 'sdscd'},
-      chosenAnswer: '2',
-      isCorrect: true,
-    },
+    // block: {
+    //   questions: ['hello'],
+    //   config: {name: 'sdscd'},
+    //   chosenAnswer: '2',
+    //   isCorrect: true,
+    // },
 };
 
 const persistConfig = {

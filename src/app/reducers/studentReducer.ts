@@ -100,6 +100,11 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: I
       };
     case TYPE.STUDENT_RESET:
       return INITIAL_STATE;
+    case TYPE.SET_COLLECTIBLE:
+      return {
+        ...state,
+        collectibles: action.payload
+      }
     default:
       return state;
   }
