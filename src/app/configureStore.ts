@@ -35,6 +35,11 @@ export const MockStore: Store = {
       guardianId: 'string',
       email: 'string',
       token: 'string',
+      wallet: {
+        balance: 0,
+        experience: 217,
+        level: 5,
+      },
     },
     group: {
       groupMembers: [
