@@ -31,14 +31,11 @@ export const BLOCK_PRESENTATION_QUERY = `
       ${BLOCK_QUESTION_PRESENTATION}
       block
         {
-        topics{
-          ${TOPIC}
-          questionSet{
+        questions{
             ${QUESTION}
             answeroptionSet
             ${ANSWER_OPTION}
           }
-        }
         ${BLOCK}
         typeOf{
           ${BLOCK_TYPE}

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Title} from '../atoms/Text/Title';
 import {UserRank} from '../molecules/UserRank';
@@ -6,19 +6,28 @@ import avatar from '../assets/avatars/avatar1.svg';
 import {BasicColor} from '../Color';
 import {ScreenSize} from '../screenSize';
 import {dictionary} from '../pages/Progress/dictionary';
+import {getRanking, writeProgress, writeRanking} from '../../app/firebase';
 
 export const Rank: FC = () => {
   const language = 'en';
+  const mock_ranking = ['Candy', 'Tony', 'Emily', 'Albert', 'Viri'];
+
+  const [ranking, setRanking] = useState(mock_ranking);
+
+  useEffect(() => {
+    getRanking(setRanking);
+  }, []);
+
   return (
     <>
       <RankStyles>
         <Title isDark={true}># {dictionary[language].rank}</Title>
         <RankUsersContainer>
-          <UserRank userRank={4} userName={'Sophie'} userIcon={avatar} />
-          <UserRank userRank={5} userName={'Sophie'} userIcon={avatar} />
-          <UserRank userRank={6} userName={'Sophie'} userIcon={avatar} />
-          <UserRank userRank={7} userName={'Sophie'} userIcon={avatar} />
-          <UserRank userRank={8} userName={'Sophie'} userIcon={avatar} />
+          {ranking.map((name, i) => {
+            return (
+              <UserRank userRank={i + 1} userName={name} userIcon={avatar} />
+            );
+          })}
         </RankUsersContainer>
       </RankStyles>
     </>
