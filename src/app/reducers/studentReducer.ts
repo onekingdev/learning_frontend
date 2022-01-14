@@ -110,6 +110,11 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         ...state,
         areasOfKnowledge: action.payload
       };
+    case TYPE.SET_BLOCK_PRESENTATION:
+      return {
+        ...state,
+        blockPresentation: action.payload
+      };
     default:
       return state;
   }

@@ -12,4 +12,9 @@ export interface IStudent {
   guardianId: string;
   email: string;
   token: string;
+  wallet: {
+    balance: number;
+    experience: number;
+    level: number;
+  }
 }

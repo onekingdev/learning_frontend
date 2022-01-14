@@ -1,19 +1,12 @@
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../Color';
 import {TopicProgress} from '../molecules/TopicProgress';
 import {ScreenSize} from '../screenSize';
 import {Title} from '../atoms/Text/Title';
 import {dictionary} from '../pages/Progress/dictionary';
-import {database, writeUserData, getProgress, writeProgress} from '../../app/firebase';
 
 export const MyProgress: FC = () => {
-  useEffect(() => {
-    console.log('database');
-    console.log(database);
-    console.log('write');
-    getProgress(setProgress);
-  }, []);
   const language = 'en';
   const lessonProps = [
     {
@@ -97,8 +90,6 @@ export const MyProgress: FC = () => {
       ],
     },
   ];
-  const [progress, setProgress] = useState(lessonProps);
-
 
   return (
     <>
@@ -106,7 +97,7 @@ export const MyProgress: FC = () => {
         <MyProgressTitle>
           <Title isDark={true}>{dictionary[language].progress}</Title>
         </MyProgressTitle>
-        {progress.map((item, i) => (
+        {lessonProps.map((item, i) => (
           <TopicProgress
             points={item.progress}
             maxPoints={10}
