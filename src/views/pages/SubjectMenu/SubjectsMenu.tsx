@@ -7,18 +7,14 @@ import {dictionary} from './dictionary';
 import {useHistory} from 'react-router-dom';
 import {get} from '../../../api/queries/get';
 import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
-import { useDispatch } from 'react-redux';
-import * as TYPE from '../../../app/types';
 
 export const SubjectsMenu: FC = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
   const language = 'en';
   const [areasOfKnowledge, setTopics] = useState([]);
 
   const handleData = (data: any) => {
     setTopics(data.data.areasOfKnowledge);
-    dispatch({type: TYPE.SET_AOK, payload: data.data.areasOfKnowledge});
   };
 
   const handleError = (error: any) => {

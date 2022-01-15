@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {AvatarFavoritesTitle} from '../../molecules/Avatar/AvatarFavoritesTitle';
-import {AvatarSelector} from '../../molecules/Avatar/Selector/AvatarSelector';
+import {AvatarSelector} from '../../molecules/Avatar/AvatarSelector';
 import {AvatarContainer, Wrapper} from './Style';
 import {StudentMenu} from '../../templates/StudentMenu';
 

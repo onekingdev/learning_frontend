@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as TYPES from '../../app/types'
 
 export const StudentMenu: FC = ({children}) => {
-  const student = useSelector((state:any) => state.user)
+  const student = useSelector((state:any) => state.studentState)
   const dispatch = useDispatch()
   const setStudent = (student:any) => {
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload:student })
@@ -18,7 +18,7 @@ export const StudentMenu: FC = ({children}) => {
   useEffect(() => {
     setStudent(student);
     console.log('student', student);
-  },[]);
+  });
 
   return (
     <Template>
@@ -27,10 +27,10 @@ export const StudentMenu: FC = ({children}) => {
         level={student?.wallet.level || 12}
         exp={student?.wallet.experience || 9000}
         expMax={student?.wallet.experience || 9001}
-        icon={student?.avatar || avatarPlaceHolder}
-        userName={student?.userName || 'Champ!'}
+        icon={student?.user.avatar || avatarPlaceHolder}
+        userName={student?.user.firstName || 'Champ!'}
         progress={1}
-        energyCharge={4}
+        energyCharge={1}
         balance={student?.wallet.balance || 0}
       />
       <div>{children}</div>

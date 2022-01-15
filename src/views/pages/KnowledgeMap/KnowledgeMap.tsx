@@ -16,16 +16,11 @@ import {ScreenSize} from '../../screenSize';
 import {useHistory} from 'react-router-dom';
 import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
 import {get} from '../../../api/queries/get';
-import { useDispatch } from 'react-redux';
-import * as TYPE from '../../../app/types';
-
 
 export const KnowledgeMap: FC = () => {
-  const dispatch = useDispatch();
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
   const handleData = (data: any) => {
     setAreasOfKnowledge(data.data.areasOfKnowledge);
-    dispatch({type: TYPE.SET_AOK, payload: data.data.areasOfKnowledge});
   };
   const handleError = (error: any) => {
     console.error(error);

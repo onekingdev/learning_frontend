@@ -100,21 +100,6 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: I
       };
     case TYPE.STUDENT_RESET:
       return INITIAL_STATE;
-    case TYPE.SET_COLLECTIBLE:
-      return {
-        ...state,
-        collectibles: action.payload
-      };
-    case TYPE.SET_AOK:
-      return {
-        ...state,
-        areasOfKnowledge: action.payload
-      };
-    case TYPE.SET_BLOCK_PRESENTATION:
-      return {
-        ...state,
-        blockPresentation: action.payload
-      };
     default:
       return state;
   }
