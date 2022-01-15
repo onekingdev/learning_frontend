@@ -43,6 +43,19 @@ export const Question: FC = () => {
   const [answer, setAnswer] = useState('');
   const [question, setQuestion] = useState('')
 
+  const handleDataa = (data: any) => {
+    console.log("Data is", data);
+  }
+
+  useEffect(() => {
+    get(
+      `blocksPresentation`,
+      `${BLOCK_PRESENTATION_QUERY}`,
+      handleDataa,
+      handleError
+    );
+  }, []);
+
   const options = [
     {image: apple},
     {image: apple},
