@@ -5,13 +5,10 @@ import {TopicProgress} from '../molecules/TopicProgress';
 import {ScreenSize} from '../screenSize';
 import {Title} from '../atoms/Text/Title';
 import {dictionary} from '../pages/Progress/dictionary';
-import {database, getProgress, writeProgress} from '../../app/firebase';
+import { getProgress } from '../../app/firebase';
 
 export const MyProgress: FC = () => {
   useEffect(() => {
-    console.log('database');
-    console.log(database);
-    console.log('write');
     getProgress(setProgress);
   }, []);
   const language = 'en';
