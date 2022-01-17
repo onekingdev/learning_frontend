@@ -10,7 +10,7 @@ export const COLLECTIBLE_QUERY = `
     }
 `;
 
-export const COLLECTIBLE_CATEGORY_BY_ID_QUERY = `
+export const COLLECTIBLE_CATEGORY_QUERY = `
     {
         ${COLLECTIBLE_CATEGORY}
         collectibleSet{

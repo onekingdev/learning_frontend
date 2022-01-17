@@ -27,36 +27,34 @@ import assistor from '../../assets/text-to-speech.svg';
 import {IconSize} from '../../atoms/Icon/Size';
 import { get } from '../../../api/queries/get';
 import { BLOCK_PRESENTATION_QUERY } from '../../../api/queries/questions';
-
-interface blockPresentationParams {
-    block: {
-      id: string
-      topics: [{
-        id: string
-        name: string
-        questionSet: [{
-          questionText: string
-          answeroptionSet:[{
-            answerText: string
-          }]
-        }]
-      }]
-      typeOf: {
-        id: string
-        name: string
-      }
-    }
-    id: string
-}
+import { IBlockPresentation } from '../../../app/entities/block';
+import { useDispatch, useSelector } from 'react-redux';
+import { Store } from '../../../app/configureStore';
+import * as TYPE from '../../../app/types';
 
 
 export const Question: FC = () => {
   // TODO answers and options must come from DB
   // TODO and the type should be much more roboust
   const [value, setValue] = useState('');
-  const [block, setBlock] = useState<blockPresentationParams>();
+  const state = useSelector((state: Store) => state)
+  const dispatch = useDispatch();
+  const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
   const [answer, setAnswer] = useState('');
   const [question, setQuestion] = useState('')
+
+  const handleDataa = (data: any) => {
+    console.log("Data is", data);
+  }
+
+  useEffect(() => {
+    get(
+      `blocksPresentation`,
+      `${BLOCK_PRESENTATION_QUERY}`,
+      handleDataa,
+      handleError
+    );
+  }, []);
 
   const options = [
     {image: apple},
@@ -88,7 +86,8 @@ export const Question: FC = () => {
   };
   const isLessonFinished = false;
   const handleData = (data: any) => {
-    setBlock(data.data.blockPresentationById);
+    setBlockPresentation(data.data.blockPresentationById);
+    dispatch({ type: TYPE.SET_BLOCK_PRESENTATION, payload: data.data.blockPresentationById})
   };
 
   const handleError = (error: any) => {
@@ -96,19 +95,19 @@ export const Question: FC = () => {
   };
   useEffect(() => {
     get(
-      'blockPresentationById(id:"2")',
+      'blockPresentationById(id:"1")',
       BLOCK_PRESENTATION_QUERY,
       handleData,
       handleError
     );
-
+      console.log(state.blockPresentation,'blokkkkkk')
   }, [])
 
   const handleQuestion = () => {
-    const topics = block?.block.topics[0]
-    const questions = topics?.questionSet[0]
+    const topics = blockPresentation?.block
+    const questions = topics?.questions[0]
     const answer = questions?.answeroptionSet[0].answerText
-
+    console.log(blockPresentation?.block)
     if(value === answer){
       console.log('correct')
     }
@@ -129,7 +128,7 @@ export const Question: FC = () => {
         ) : (
           <Container id="container">
             <BlackBoard>
-              <Lesson>{block?.block.topics[0].questionSet[0].questionText}</Lesson>
+              <Lesson>{state.blockPresentation?.block.questions[0].questionText}</Lesson>
               {questionType !== 'image' ? (
                 <MultipleChoiceImage options={options} />
               ) : (

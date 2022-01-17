@@ -4,19 +4,23 @@ import storage from 'redux-persist/lib/storage';
 import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
-import devTools from 'remote-redux-devtools';
 import {IStudent} from './entities/student';
 import {IGroup} from './entities/group';
 import {IWallet} from './entities/wallet';
-import {IBlock} from './entities/block';
+import {IBlock, IBlockPresentation} from './entities/block';
 import {Gender} from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { ICollectibleCategory } from './entities/collectibles';
+import { IAreasOfKnowledge } from './entities/areasOfKnowledge';
 
 export type Store = {
     user: IStudent;
     group: IGroup;
     wallet: IWallet;
-    block: IBlock;
+    block?: IBlock;
+    collectibles?: ICollectibleCategory;
+    areasOfKnowLedge?: IAreasOfKnowledge;
+    blockPresentation?: IBlockPresentation;
   };
 
 export const MockStore: Store = {
@@ -32,6 +36,11 @@ export const MockStore: Store = {
       guardianId: 'string',
       email: 'string',
       token: 'string',
+      wallet: {
+        balance: 0,
+        experience: 217,
+        level: 5,
+      },
     },
     group: {
       groupMembers: [
@@ -48,12 +57,12 @@ export const MockStore: Store = {
       experience: 2,
       level: 3,
     },
-    block: {
-      questions: ['hello'],
-      config: {name: 'sdscd'},
-      chosenAnswer: '2',
-      isCorrect: true,
-    },
+    // block: {
+    //   questions: ['hello'],
+    //   config: {name: 'sdscd'},
+    //   chosenAnswer: '2',
+    //   isCorrect: true,
+    // },
 };
 
 const persistConfig = {

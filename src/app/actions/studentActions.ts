@@ -68,3 +68,18 @@ export const studentConfig = (payload: string) => ({
   type: 'STUDENT_CONFIG',
   payload,
 });
+
+export const setCollectibles = (payload: string) => ({
+  type: 'SET_COLLECTIBLE',
+  payload
+})
+
+export const setAreasOfKnowledge = (payload: string) => ({
+  type: 'SET_AOK',
+  payload
+})
+
+export const setBlockPresentation = (payload: string) => ({
+  type: 'SET_BLOCK_PRESENTATION',
+  payload
+})
