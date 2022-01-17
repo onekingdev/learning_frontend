@@ -4,7 +4,6 @@ import {BasicColor} from '../Color';
 import {UserProgressBar} from '../molecules/UserProgressBar';
 import {UserIcon} from '../atoms/UserIcon';
 import {Typography} from '../atoms/Text/typography';
-import { useHistory } from 'react-router-dom';
 
 type UserProgressProps = {
   rank: number;
@@ -25,7 +24,6 @@ export const UserProgress: FC<UserProgressProps> = ({
   progress,
   userName,
 }) => {
-  const history = useHistory();
   return (
     <>
       <UserProgressContainer>
@@ -43,7 +41,7 @@ export const UserProgress: FC<UserProgressProps> = ({
           </ExpContainer>
           <UserProgressBar progress={progress} />
         </UserProgressStyle>
-        <UserIcon src={icon} onClick={() => history.push('/avatar')}/>
+        <UserIcon src={icon} />
       </UserProgressContainer>
     </>
   );

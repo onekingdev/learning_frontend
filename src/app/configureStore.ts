@@ -7,7 +7,7 @@ import rootReducer from './rootReducer';
 import {IStudent} from './entities/student';
 import {IGroup} from './entities/group';
 import {IWallet} from './entities/wallet';
-import {IBlock, IBlockPresentation} from './entities/block';
+import {IBlock} from './entities/block';
 import {Gender} from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { ICollectibleCategory } from './entities/collectibles';
@@ -20,7 +20,6 @@ export type Store = {
     block?: IBlock;
     collectibles?: ICollectibleCategory;
     areasOfKnowLedge?: IAreasOfKnowledge;
-    blockPresentation?: IBlockPresentation;
   };
 
 export const MockStore: Store = {
@@ -36,11 +35,6 @@ export const MockStore: Store = {
       guardianId: 'string',
       email: 'string',
       token: 'string',
-      wallet: {
-        balance: 0,
-        experience: 217,
-        level: 5,
-      },
     },
     group: {
       groupMembers: [

@@ -65,8 +65,9 @@ export const TopMenu: FC<TopMenuProps> = ({
           <IconDropDown
             icon={modality}
             options={[
-              {name: 'AI', action: () => history.push('/map')},
-              {name: 'Choose your path', action: () => history.push('/subjects')}
+              {name: 'AI', action: () => history.push('/question')},
+              {name: 'Choose your path', action: () => history.push('/map')},
+              {name: 'Practice', action: () => history.push('/subjects')},
             ]}
           />
         </ModalityContainer>

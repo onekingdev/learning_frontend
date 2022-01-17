@@ -78,8 +78,3 @@ export const setAreasOfKnowledge = (payload: string) => ({
   type: 'SET_AOK',
   payload
 })
-
-export const setBlockPresentation = (payload: string) => ({
-  type: 'SET_BLOCK_PRESENTATION',
-  payload
-})

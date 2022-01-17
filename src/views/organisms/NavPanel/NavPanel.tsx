@@ -7,7 +7,6 @@ import game from '../../assets/games mobile.svg';
 import progress from '../../assets/progress mobile.svg';
 import collectibles from '../../assets/collectibles mobile.svg';
 import avatar from '../../assets/user-mobile.svg';
-import homework from '../../assets/homework.svg';
 import {
   NavPanelStyles,
   IconContainer,
@@ -30,9 +29,6 @@ export const NavPanel: FC<NavPanelProps> = ({isClose, deploySideBar}) => {
           <Icon image={closed} onClick={deploySideBar} />
         </ClosedContainer>
         <IconContainer>
-          <Icon image={homework} onClick={() => history.push('/question')}/>
-        </IconContainer>
-        <IconContainer>
           <Icon image={question} onClick={() => history.push('/question')} />
         </IconContainer>
         <IconContainer>
@@ -51,7 +47,7 @@ export const NavPanel: FC<NavPanelProps> = ({isClose, deploySideBar}) => {
           />
         </IconContainer>
         <IconResponsiveContainer>
-          <Icon image={avatar} onClick={() => history.push('/avatar')} />
+          <Icon image={avatar} onClick={() => history.push('/profile')} />
         </IconResponsiveContainer>
       </NavPanelStyles>
     </>
