@@ -102,7 +102,13 @@ const userProgress = [
   },
 ];
 
-const ranking = ['Tony', 'Emily', 'Albert', 'Viri', 'Candy'];
+const ranking = [
+    "Tony",
+    "Emily",
+    "Albert",
+    "Viri",
+    "Candy",
+  ]
 
 export function writeProgress() {
   const db = getDatabase(app);
@@ -119,15 +125,15 @@ export const getProgress = (update: Function) => {
 };
 
 export function writeRanking() {
-  const db = getDatabase(app);
-  set(ref(db, 'ranking/test_user'), ranking);
-}
-
-export const getRanking = (update: Function) => {
-  const db = getDatabase(app);
-  const progressRef = ref(db, 'ranking/test_user');
-  onValue(progressRef, snapshot => {
-    const data = snapshot.val();
-    update(data);
-  });
-};
+    const db = getDatabase(app);
+    set(ref(db, 'ranking/test_user'), ranking);
+  }
+  
+  export const getRanking = (update: Function) => {
+    const db = getDatabase(app);
+    const progressRef = ref(db, 'ranking/test_user');
+    onValue(progressRef, snapshot => {
+      const data = snapshot.val();
+      update(data);
+    });
+  };

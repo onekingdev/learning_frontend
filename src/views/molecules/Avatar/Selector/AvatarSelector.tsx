@@ -1,42 +1,37 @@
 import {FC, useEffect, useState} from 'react';
-import {RoundIcon} from '../../../atoms/Icon/Icon';
-import {
-  accessories,
-  headers,
-  bodies,
-  footers,
-} from '../../../pages/Avatar/atoms';
-import {
-  AtomsDrawer,
-  AtomsRoundIcon,
-  AvatarModule,
-  AvatarWardrobe,
-  BodyPartWardrobe,
-  CenteredRoundIcon,
-  CurrentAccessory,
-  CurrentAvatar,
-  CurrentBody,
-  CurrentFooter,
-  CurrentHeader,
-  FavoriteIcon,
-  FavoritesCloset,
-  FavoritesDrawer,
-  LeftArrow,
-  MobileFavoritesDrawer,
-  RightArrow,
-  SelectorGrid,
-} from './Style';
-
-const arrowLeft = '#';
-const arrowRight = '#';
-const favoriteEnabled = '#';
-const favoriteDisabled = '#';
-const wardrobe = '#';
-const drawer_accessories = '#';
-const drawer_hairs = '#';
-const drawer_clothes = '#';
-const drawer_pants = '#';
-
+import {ScreenSize} from '../../../screenSize';
+import styled from 'styled-components';
+import {BasicColor} from '../../../Color';
+import arrowLeft from '../../../assets/arrows/arrowLeft.svg';
+import arrowRight from '../../../assets/arrows/arrowRight.svg';
+import favoriteEnabled from '../../../assets/favorite_enabled.svg';
+import favoriteDisabled from '../../../assets/favorite_disabled.svg';
+import wardrobe from '../../../assets/wardrobe.svg';
+import {RoundIcon} from '../../../atoms/Icon/Icon'
+import drawer_accessories from '../../../assets/drawers/drawer_accessories.png';
+import drawer_hairs from '../../../assets/drawers/drawer_hairs.png';
+import drawer_clothes from '../../../assets/drawers/drawer_clothes.png';
+import drawer_pants from '../../../assets/drawers/drawer_pants.png';
+// import data from '../../../pages/Avatar/atoms'
+import {headers, bodies, footers, accessories} from '../../../pages/Avatar/atoms'
+import {AvatarModule,
+        SelectorGrid,
+        CurrentAvatar,
+        CurrentAccessory,
+        CurrentHeader,
+        CurrentBody,
+        CurrentFooter,
+        LeftArrow,
+        RightArrow,
+        FavoriteIcon,
+        BodyPartWardrobe,
+        AtomsDrawer,
+        AvatarWardrobe,
+        FavoritesCloset,
+        MobileFavoritesDrawer,
+        AtomsRoundIcon,
+        FavoritesDrawer,
+        CenteredRoundIcon } from './Style'
 export const AvatarSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
   const placeHolder = serverUrl + 'assets/avatars/placeholder.png';
