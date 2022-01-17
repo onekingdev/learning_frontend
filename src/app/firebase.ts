@@ -1,5 +1,6 @@
 import {initializeApp} from 'firebase/app';
 import {getDatabase, set, ref, onValue} from 'firebase/database';
+import {getStorage, ref as assetRef, getDownloadURL} from 'firebase/storage';
 import {BasicColor} from '../views/Color';
 import {dictionary} from '../views/pages/Progress/dictionary';
 
@@ -130,4 +131,42 @@ export const getRanking = (update: Function) => {
     const data = snapshot.val();
     update(data);
   });
+};
+
+// const storage = getStorage();
+// getDownloadURL(assetRef(storage, 'images/stars.jpg'))
+//   .then((url) => {
+//     // `url` is the download URL for 'images/stars.jpg'
+
+//     // This can be downloaded directly:
+//     const xhr = new XMLHttpRequest();
+//     xhr.responseType = 'blob';
+//     xhr.onload = (event) => {
+//       const blob = xhr.response;
+//     };
+//     xhr.open('GET', url);
+//     xhr.send();
+
+//     // Or inserted into an <img> element
+//     const img = document.getElementById('myimg');
+//     img.setAttribute('src', url);
+//   })
+//   .catch((error) => {
+//     // Handle any errors
+//   });
+
+export const getAvatarAsset = (
+  directory: string,
+  image: string,
+  setPhoto: (url: any) => void
+) => {
+  const storage = getStorage();
+  getDownloadURL(assetRef(storage, `assets/avatar/${directory}/${image}`))
+    .then(url => {
+      console.log("url is", url)
+      setPhoto(url)
+    })
+    .catch(err => {
+      console.log('Error in pic getting', err);
+    });
 };

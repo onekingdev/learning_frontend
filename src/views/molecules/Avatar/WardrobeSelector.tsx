@@ -8,12 +8,7 @@ import drawer_accessories from '../../assets/drawers/drawer_accessories.png';
 import drawer_hairs from '../../assets/drawers/drawer_hairs.png';
 import drawer_clothes from '../../assets/drawers/drawer_clothes.png';
 import drawer_pants from '../../assets/drawers/drawer_pants.png';
-import {
-  accessories,
-  headers,
-  bodies,
-  footers,
-} from '../../pages/Avatar/atoms';
+import {accessories, headers, bodies, footers} from '../../pages/Avatar/atoms';
 // import data from '../../pages/Avatar/atoms';
 export const WardrobeSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
@@ -22,7 +17,7 @@ export const WardrobeSelector: FC = () => {
   const headers_max = headers.length;
   const bodies_max = bodies.length;
   const footers_max = footers.length;
-  
+
   const [accessoryIndex, setAccessoryIndex] = useState(1);
   const [headerIndex, setHeaderIndex] = useState(1);
   const [bodyIndex, setBodyIndex] = useState(1);

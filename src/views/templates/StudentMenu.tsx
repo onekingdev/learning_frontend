@@ -17,7 +17,6 @@ export const StudentMenu: FC = ({children}) => {
 
   useEffect(() => {
     setStudent(student);
-    console.log('student', student);
   },[]);
 
   return (
