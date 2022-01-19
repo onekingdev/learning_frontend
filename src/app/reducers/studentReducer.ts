@@ -20,6 +20,7 @@ const INITIAL_STATE = {
 const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {
   switch (action.type) {
     case TYPE.STUDENT_SET_DATA:
+      console.log('will set user', action.payload);
       return {
         ...state,
         ...action.payload
@@ -108,6 +109,11 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: I
       return {
         ...state,
         areasOfKnowledge: action.payload
+      };
+    case TYPE.SET_BLOCK_PRESENTATION:
+      return {
+        ...state,
+        blockPresentation: action.payload
       };
     default:
       return state;

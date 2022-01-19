@@ -1,42 +1,42 @@
 import {FC, useEffect, useState} from 'react';
-import arrowLeft from '../../../assets/arrows/arrowLeft.svg';
-import arrowRight from '../../../assets/arrows/arrowRight.svg';
-import favoriteEnabled from '../../../assets/favorite_enabled.svg';
-import favoriteDisabled from '../../../assets/favorite_disabled.svg';
-import wardrobe from '../../../assets/wardrobe.svg';
 import {RoundIcon} from '../../../atoms/Icon/Icon';
-import drawer_accessories from '../../../assets/drawers/drawer_accessories.png';
-import drawer_hairs from '../../../assets/drawers/drawer_hairs.png';
-import drawer_clothes from '../../../assets/drawers/drawer_clothes.png';
-import drawer_pants from '../../../assets/drawers/drawer_pants.png';
-// import data from '../../../pages/Avatar/atoms'
 import {
+  accessories,
   headers,
   bodies,
   footers,
-  accessories,
 } from '../../../pages/Avatar/atoms';
 import {
+  AtomsDrawer,
+  AtomsRoundIcon,
   AvatarModule,
-  SelectorGrid,
-  CurrentAvatar,
+  AvatarWardrobe,
+  BodyPartWardrobe,
+  CenteredRoundIcon,
   CurrentAccessory,
-  CurrentHeader,
+  CurrentAvatar,
   CurrentBody,
   CurrentFooter,
-  LeftArrow,
-  RightArrow,
+  CurrentHeader,
   FavoriteIcon,
-  BodyPartWardrobe,
-  AtomsDrawer,
-  AvatarWardrobe,
   FavoritesCloset,
-  MobileFavoritesDrawer,
-  AtomsRoundIcon,
   FavoritesDrawer,
-  CenteredRoundIcon,
+  LeftArrow,
+  MobileFavoritesDrawer,
+  RightArrow,
+  SelectorGrid,
 } from './Style';
-import {getAvatarAsset} from '../../../../app/firebase';
+
+const arrowLeft = '#';
+const arrowRight = '#';
+const favoriteEnabled = '#';
+const favoriteDisabled = '#';
+const wardrobe = '#';
+const drawer_accessories = '#';
+const drawer_hairs = '#';
+const drawer_clothes = '#';
+const drawer_pants = '#';
+
 export const AvatarSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
   const placeHolder = serverUrl + 'assets/avatars/placeholder.png';
@@ -55,35 +55,11 @@ export const AvatarSelector: FC = () => {
   const [bodyFavorite, setBodyFavorite] = useState(placeHolder);
   const [footerFavorite, setFooterFavorite] = useState(placeHolder);
   const [iconSize, setIconSize] = useState(80);
-  const [testRef, setTestRef] = useState('');
-
-  const [accesoryRef, setAccesoryRef] = useState('');
-  const [headRef, setHeadRef] = useState('');
-  const [bodyRef, setBodyRef] = useState('');
-  const [footRef, setFootRef] = useState('');
-
-  const [favAccesoryRef, setFavAccesoryRef] = useState('');
-  const [favHeadRef, setFavHeadRef] = useState('');
-  const [favBodyRef, setFavBodyRef] = useState('');
-  const [favFootRef, setFavFootRef] = useState('');
-
   const width = window.screen.width;
   useEffect(() => {
-    // setSelected avatar
-    getAvatarAsset('accessories', 'bear_hat.svg', setAccesoryRef);
-    getAvatarAsset('headers', 'boy1.svg', setHeadRef);
-    getAvatarAsset('bodies', 'tshirt1.svg', setBodyRef);
-    getAvatarAsset('footers', 'pants1.svg', setFootRef);
-    // set fav avatar items
-    getAvatarAsset('accessories', 'bow.svg', setFavAccesoryRef);
-    getAvatarAsset('headers', 'boy1.svg', setFavHeadRef);
-    getAvatarAsset('bodies', 'tshirt4.svg', setFavBodyRef);
-    getAvatarAsset('footers', 'pants3.svg', setFavFootRef);
     width > 420 ? setIconSize(80) : setIconSize(30);
+    console.log(accessories);
   }, []);
-  useEffect(() => {
-    console.log('Test ref', testRef);
-  }, [testRef]);
   const currentAtomIndex = (val: any) => {
     setAtomIndex(val);
     switch (val) {
@@ -204,7 +180,7 @@ export const AvatarSelector: FC = () => {
         <LeftArrow onClick={currentIndexPrev} src={arrowLeft}></LeftArrow>
         <CurrentAvatar>
           <CurrentAccessory
-            src={accesoryRef}
+            src={serverUrl + accessories[accessoryIndex].image}
             style={{
               width: accessories[accessoryIndex].scale * 160 + 'px',
               top: accessories[accessoryIndex].top + 'px',
@@ -212,15 +188,15 @@ export const AvatarSelector: FC = () => {
             }}
           />
           <CurrentHeader
-            src={headRef}
+            src={serverUrl + headers[headerIndex].image}
             style={{
               width: headers[headerIndex].scale * 160 + 'px',
               top: headers[headerIndex].top + 'px',
               left: headers[headerIndex].left + 'px',
             }}
           />
-          <CurrentBody src={bodyRef} />
-          <CurrentFooter src={footRef} />
+          <CurrentBody src={serverUrl + bodies[bodyIndex].image} />
+          <CurrentFooter src={serverUrl + footers[footerIndex].image} />
         </CurrentAvatar>
         <RightArrow onClick={currentIndexNext} src={arrowRight}></RightArrow>
         <FavoriteIcon onClick={setFavorite} src={favoriteImage}></FavoriteIcon>
@@ -281,10 +257,10 @@ export const AvatarSelector: FC = () => {
         </AtomsDrawer>
         <AvatarWardrobe src={wardrobe}></AvatarWardrobe>
         <FavoritesDrawer>
-          <CenteredRoundIcon src={favAccesoryRef}></CenteredRoundIcon>
-          <CenteredRoundIcon src={favHeadRef}></CenteredRoundIcon>
-          <CenteredRoundIcon src={favBodyRef}></CenteredRoundIcon>
-          <CenteredRoundIcon src={favFootRef}></CenteredRoundIcon>
+          <CenteredRoundIcon src={accessoryFavorite}></CenteredRoundIcon>
+          <CenteredRoundIcon src={headerFavorite}></CenteredRoundIcon>
+          <CenteredRoundIcon src={bodyFavorite}></CenteredRoundIcon>
+          <CenteredRoundIcon src={footerFavorite}></CenteredRoundIcon>
         </FavoritesDrawer>
       </SelectorGrid>
     </AvatarModule>

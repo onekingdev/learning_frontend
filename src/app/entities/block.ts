@@ -64,5 +64,12 @@ export interface IBlock {
   coinsAvailable: number;
   batteryPointsAvailable: number;
   typeOf: IBlockType;
+  questions: IQuestion[];
 }
 
+export interface IBlockPresentation {
+  id: string;
+  identifier: string;
+  randomSlug: string;
+  block: IBlock;
+}

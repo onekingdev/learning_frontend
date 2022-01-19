@@ -17,7 +17,6 @@ import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 import { useSelector } from 'react-redux';
 import { Store } from './app/configureStore'
-import {FC} from 'react';
 
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
   const user = useSelector((state : Store) => state.user)
@@ -42,7 +41,7 @@ export function Routes(props: any) {
         <PrivateRoute path="/login" requireAuth={false}>
           <LogIn />
         </PrivateRoute>
-        <PrivateRoute path="/question" requireAuth={false}>
+        <PrivateRoute path="/question/presentation_:presentationId" requireAuth={false}>
           <Question />
         </PrivateRoute>
         <PrivateRoute path="/avatar">
