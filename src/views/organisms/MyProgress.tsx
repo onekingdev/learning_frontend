@@ -9,9 +9,6 @@ import {database, getProgress} from '../../app/firebase';
 
 export const MyProgress: FC = () => {
   useEffect(() => {
-    console.log('database');
-    console.log(database);
-    console.log('write');
     getProgress(setProgress);
   }, []);
   const language = 'en';
