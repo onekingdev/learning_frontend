@@ -21,7 +21,6 @@ export const TopicsMenu: FC = () => {
 
   const handleData = (data: any) => {
     setAreaOfKnowledge(data.data.areaOfKnowledgeById);
-    console.log(areaOfKnowledge);
   };
   const handleError = (error: any) => {
     console.error(error);

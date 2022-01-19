@@ -29,7 +29,6 @@ export const CardsStore: FC = () => {
       handleData,
       handleError
     );
-    console.log(selector,'COOOOOOOOOOOOOLLL')
   }, []);
 
   return (
