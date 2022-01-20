@@ -1,10 +1,11 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import {Lesson} from '../../atoms/Text/Lesson';
+import { IAnswer } from '../../../app/entities/block';
+import { BasicColor } from '../../Color';
 import {ScreenSize} from '../../screenSize';
 
 type ChoiceTextProps = {
-  options: {value: string}[];
+  options: IAnswer[];
 };
 
 export const MultipleChoiceText: FC<ChoiceTextProps> = ({options}) => {
@@ -12,8 +13,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({options}) => {
     <>
       <TextOptionsList>
         {options.map((option, i) => (
-          <TextOptionItem key={i}>
-            <Lesson>{option.value}</Lesson>
+          <TextOptionItem key={i} onClick={() => console.log(option.answerText)}>
+            {option.answerText}
           </TextOptionItem>
         ))}
       </TextOptionsList>
@@ -21,18 +22,42 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({options}) => {
   );
 };
 
-const TextOptionsList = styled.ol`
-  width: 100%;
-  list-style-type: upper-latin;
+const TextOptionsList = styled.div`
+  width: 90%;
+  margin: 20px auto;
   text-align: left;
-  display: flex;
-  flex-direction: column;
-  grid-gap: 10px;
-
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  align-items: center;
+  justify-content: center;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     grid-gap: 30px;
   }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    grid-template-columns: repeat(2,1fr);
+    height: 50%;
+    margin: 50px auto;
+    grid-gap: 40px;
+  }
 `;
-const TextOptionItem = styled.li`
+const TextOptionItem = styled.div`
   width: 100%;
+  padding: 2px;
+  background-color: ${BasicColor.white20};
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  &:hover{
+    background-color: ${BasicColor.gray30};
+  }
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    height: 35px;
+    line-height: 35px;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    height: 40px;
+    line-height: 40px;
+  }
 `;

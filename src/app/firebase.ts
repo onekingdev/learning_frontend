@@ -1,11 +1,5 @@
 import {initializeApp} from 'firebase/app';
 import {getDatabase, set, ref, onValue} from 'firebase/database';
-import {
-  getStorage,
-  ref as assetRef,
-  getDownloadURL,
-  listAll,
-} from 'firebase/storage';
 import {BasicColor} from '../views/Color';
 import {dictionary} from '../views/pages/Progress/dictionary';
 
@@ -115,7 +109,7 @@ export function writeProgress() {
   set(ref(db, 'progress/test_user'), userProgress);
 }
 
-export const getProgress = update => {
+export const getProgress = (update: Function) => {
   const db = getDatabase(app);
   const progressRef = ref(db, 'progress/test_user');
   onValue(progressRef, snapshot => {
@@ -125,42 +119,16 @@ export const getProgress = update => {
 };
 
 export function writeRanking() {
+
   const db = getDatabase(app);
   set(ref(db, 'ranking/test_user'), ranking);
 }
 
-export const getRanking = update => {
+export const getRanking = (update: Function) => {
   const db = getDatabase(app);
   const progressRef = ref(db, 'ranking/test_user');
   onValue(progressRef, snapshot => {
     const data = snapshot.val();
     update(data);
-  });
-};
-
-export const getAvatarAsset = (directory, image, setPhoto) => {
-  const storage = getStorage();
-  getDownloadURL(assetRef(storage, `assets/avatar/${directory}/${image}`))
-    .then(url => {
-      console.log('url is', url);
-      setPhoto(url);
-    })
-    .catch(err => {
-      console.log('Error in pic getting', err);
-    });
-};
-
-export const getAvatarDir = async (dir, setDir) => {
-  const storage = getStorage();
-  const listRef = assetRef(storage, `assets/avatar/${dir}`);
-  listAll(listRef).then(res => {
-    // temp convert to this structure
-    // {
-    //   image: 'assets/avatars/headers/boy3.svg',
-    //   scale: 1,
-    //   top: -6,
-    //   left: 0,
-    // },
-    Promise.all(res.items.map(getDownloadURL)).then(setDir);
   });
 };

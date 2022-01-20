@@ -1,4 +1,4 @@
-import { BLOCK, BLOCK_CONFIGURATION_KEYWORD, BLOCK_QUESTION_PRESENTATION, BLOCK_TYPE, BLOCK_TYPE_CONFIGURATION } from '../fragments/blockFragments';
+import { BLOCK, BLOCK_CONFIGURATION_KEYWORD, BLOCK_PRESENTATON, BLOCK_TYPE, BLOCK_TYPE_CONFIGURATION } from '../fragments/blockFragments';
 import {ANSWER_OPTION, AREA_OF_KNOWLEDGE, QUESTION, TOPIC} from '../fragments/questionFragments';
 
 export const TOPICS_QUERY = `
@@ -28,7 +28,7 @@ export const QUESTION_QUERY = `
 
 export const BLOCK_PRESENTATION_QUERY = `
     {
-      ${BLOCK_QUESTION_PRESENTATION}
+      ${BLOCK_PRESENTATON}
       block
         {
         questions{
