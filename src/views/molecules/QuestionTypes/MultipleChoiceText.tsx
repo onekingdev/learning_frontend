@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import { IAnswer } from '../../../app/entities/block';
-import { BasicColor } from '../../Color';
+import {Lesson} from '../../atoms/Text/Lesson';
 import {ScreenSize} from '../../screenSize';
 
 type ChoiceTextProps = {
@@ -13,8 +13,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({options}) => {
     <>
       <TextOptionsList>
         {options.map((option, i) => (
-          <TextOptionItem key={i} onClick={() => console.log(option.answerText)}>
-            {option.answerText}
+          <TextOptionItem key={i}>
+            <Lesson>{option.answerText}</Lesson>
           </TextOptionItem>
         ))}
       </TextOptionsList>
@@ -22,42 +22,18 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({options}) => {
   );
 };
 
-const TextOptionsList = styled.div`
-  width: 90%;
-  margin: 20px auto;
+const TextOptionsList = styled.ol`
+  width: 100%;
+  list-style-type: upper-latin;
   text-align: left;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+
   @media screen and (min-width: ${ScreenSize.tablet}) {
     grid-gap: 30px;
   }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    grid-template-columns: repeat(2,1fr);
-    height: 50%;
-    margin: 50px auto;
-    grid-gap: 40px;
-  }
 `;
-const TextOptionItem = styled.div`
+const TextOptionItem = styled.li`
   width: 100%;
-  padding: 2px;
-  background-color: ${BasicColor.white20};
-  cursor: pointer;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 5px;
-  &:hover{
-    background-color: ${BasicColor.gray30};
-  }
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    height: 35px;
-    line-height: 35px;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    height: 40px;
-    line-height: 40px;
-  }
 `;
