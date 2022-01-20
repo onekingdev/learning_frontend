@@ -19,9 +19,7 @@ import {MockStore} from '../../../app/configureStore'
 import { IStudent } from '../../../app/entities/student';
 import Avatar from '@mui/material/Avatar';
 import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
-import { PaymentMethod } from '../../molecules/PaymentMethod/PaymentMethod';
-
-import { SettingContainer, FlexColumn, FlexRow, PackageContainer } from './Style'
+import { SettingContainer, FlexColumn, FlexRow } from './Style'
 export const Account: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
@@ -33,12 +31,12 @@ export const Account: FC = () => {
   return (
         <ParentPgContainer onlyLogoImgNav={true}>
           <>
-            <ParentPgStepper step={1}/>
+            <ParentPgStepper />
             <SettingContainer>
               <FlexColumn>
                 <b>Choose your plan</b>
                 <br />
-                <FlexRow style={{flexWrap: 'unset'}}>
+                <FlexRow>
                   <Button
                     variant="contained"
                     className={classes.monthButton}
@@ -69,12 +67,9 @@ export const Account: FC = () => {
                 </FlexRow>
               </FlexColumn>
             </SettingContainer>
-            <PackageContainer>
-              <PackagePanel type="Gold" price={19.99} plan="month"/>
-              <PackagePanel type="Combo" price={14.99} plan="month"/>
-              <PackagePanel type="Sole" price={5.99} plan="month"/>
-            </PackageContainer>
-            <PaymentMethod method="paypal" type="Gold" price={19.99}/>
+            <PackagePanel type="gold" price={19.99} plan="month"/>
+            <PackagePanel type="combo" price={14.99} plan="month"/>
+            <PackagePanel type="sole" price={5.99} plan="month"/>
           </>
         </ParentPgContainer>
   );

@@ -9,10 +9,8 @@ import {
   StepContent,
   Point
 } from './Style'
-type ParentPgStepperProps = {
-  step: number;
-}
-export const ParentPgStepper: FC<ParentPgStepperProps> = ({step}) => {
+
+export const ParentPgStepper: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const [age, setAge] = useState('');
@@ -22,13 +20,13 @@ export const ParentPgStepper: FC<ParentPgStepperProps> = ({step}) => {
 
   return (
     <Container>
-        <Point color={"#21B95C"} isCurrent={step === 1}> <b>1</b> </Point>
+        <Point color={"#21B95C"} isCurrent={true}> <b>1</b> </Point>
         <StepContent>Choose your plan</StepContent>
         <Line />
-        <Point color={"#1771B9"} isCurrent={step === 2}> 2 </Point>
+        <Point color={"#1771B9"} isCurrent={false}> 2 </Point>
         <StepContent color={"#1771B9"}>Set up you account</StepContent>
         <Line />
-        <Point color={"#22BAAF"} isCurrent={step === 3}> 3 </Point>
+        <Point color={"#22BAAF"} isCurrent={false}> 3 </Point>
         <StepContent color={"#22BAAF"}>Ready</StepContent>
     </Container>
   );
