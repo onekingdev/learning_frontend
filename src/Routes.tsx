@@ -15,11 +15,8 @@ import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
-import {Account} from './views/pages/Account/Account';
-
 import { useSelector } from 'react-redux';
 import { Store } from './app/configureStore'
-import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgContainer'
 
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
   const user = useSelector((state : Store) => state.user)
@@ -85,9 +82,6 @@ export function Routes(props: any) {
         </PrivateRoute>
         <PrivateRoute path="/topic/:topicId">
           <TopicsMenu />
-        </PrivateRoute>
-        <PrivateRoute path="/parent/account">
-          <Account />
         </PrivateRoute>
         {process.env.NODE_ENV === 'development' ? (
           <Route path="/testing">
