@@ -74,6 +74,9 @@ export const SubjectTitle = styled.div`
     font-weight: 500;
     font-size: 16px;
     padding-left:16px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 `
 
 export const useStyles = makeStyles({

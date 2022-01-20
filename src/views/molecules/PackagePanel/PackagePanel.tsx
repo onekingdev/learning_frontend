@@ -30,6 +30,12 @@ import science_sole from '../../assets/packageIcons/science_sole.svg'
 import financial_sole from '../../assets/packageIcons/financial_sole.svg'
 import health_sole from '../../assets/packageIcons/health_sole.svg'
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import {
   useStyles,
   Container,
@@ -67,32 +73,32 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price}) => {
         <Subjects>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={math_gold} />)}
-            {type === "Combo" && (<SubjectIcon src={math_combo} />)}
-            {type === "Sole" && (<SubjectIcon src={math_sole} />)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},}}/><SubjectIcon src={math_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},}} /><SubjectIcon src={math_sole} /></>)}
             <SubjectTitle>MATH</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={ela_gold} />)}
-            {type === "Combo" && (<SubjectIcon src={ela_combo} />)}
-            {type === "Sole" && (<SubjectIcon src={ela_sole} />)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},}} /><SubjectIcon src={ela_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},}} /><SubjectIcon src={ela_sole} /></>)}
             <SubjectTitle>ELA + SIGHT WORDS</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={science_gold} />)}
-            {type === "Combo" && (<SubjectIcon src={science_combo} />)}
-            {type === "Sole" && (<SubjectIcon src={science_sole} />)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},}} /><SubjectIcon src={science_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},}} /><SubjectIcon src={science_sole} /></>)}
             <SubjectTitle>SCIENCE</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={financial_gold} />)}
-            {type === "Combo" && (<SubjectIcon src={financial_combo} />)}
-            {type === "Sole" && (<SubjectIcon src={financial_sole} />)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},}} /><SubjectIcon src={financial_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},}} /><SubjectIcon src={financial_sole} /></>)}
             <SubjectTitle>FINANCIAL LITERACY</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={health_gold} />)}
-            {type === "Combo" && (<SubjectIcon src={health_combo} />)}
-            {type === "Sole" && (<SubjectIcon src={health_sole} />)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},}} /><SubjectIcon src={health_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},}} /><SubjectIcon src={health_sole} /></>)}
             <SubjectTitle>HEALTH & SAFETY</SubjectTitle>
           </Subject>
         </Subjects>

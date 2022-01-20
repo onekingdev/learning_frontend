@@ -26,6 +26,10 @@ export const PackageContainer = styled.div`
   padding-top: 45px;
   padding-bottom: 8px;
   display: flex;
+  flex-wrap: wrap;
+`
+export const PaymentContainer = styled.div`
+  padding: 45px;
 `
 export const useStyles = makeStyles({
   monthButton: {

@@ -19,6 +19,8 @@ import {MockStore} from '../../../app/configureStore'
 import { IStudent } from '../../../app/entities/student';
 import Avatar from '@mui/material/Avatar';
 import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
+import { PaymentMethod } from '../../molecules/PaymentMethod/PaymentMethod';
+
 import { SettingContainer, FlexColumn, FlexRow, PackageContainer } from './Style'
 export const Account: FC = () => {
   const history = useHistory();
@@ -36,7 +38,7 @@ export const Account: FC = () => {
               <FlexColumn>
                 <b>Choose your plan</b>
                 <br />
-                <FlexRow>
+                <FlexRow style={{flexWrap: 'unset'}}>
                   <Button
                     variant="contained"
                     className={classes.monthButton}
@@ -72,6 +74,7 @@ export const Account: FC = () => {
               <PackagePanel type="Combo" price={14.99} plan="month"/>
               <PackagePanel type="Sole" price={5.99} plan="month"/>
             </PackageContainer>
+            <PaymentMethod method="paypal" type="Gold" price={19.99}/>
           </>
         </ParentPgContainer>
   );
