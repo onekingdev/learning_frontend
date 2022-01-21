@@ -13,7 +13,6 @@ export const Container = styled.div`
   justify-content: space-between;
 `;
 
-
 export const Home = styled.img`
 `;
 

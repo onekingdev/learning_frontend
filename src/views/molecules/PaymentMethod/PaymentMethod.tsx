@@ -45,6 +45,7 @@ type PackagePanelProps = {
   type: string;
   price: number;
 };
+
 export const PaymentMethod: FC<PackagePanelProps> = ({type, method, price}) => {
   const history = useHistory();
   const dispatch = useDispatch()

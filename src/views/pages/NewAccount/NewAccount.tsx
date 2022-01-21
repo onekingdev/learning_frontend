@@ -1,35 +1,24 @@
 import {FC, useEffect} from 'react';
+
+import {useHistory} from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import { useStyles } from './Style';
 import {Header} from '../../atoms/Text/Header';
 import {Subheader} from '../../atoms/Text/Subheader';
 import {ButtonColor} from '../../Color';
 import {Button as ButtonText} from '../../atoms/Text/Button';
-import { ParentPgContainer } from '../../../views/molecules/ParentPgContainer/ParentPgContainer'
-import { PackagePanel } from '../../../views/molecules/PackagePanel/PackagePanel'
-
-
-// import {} from './Style';
-import {useHistory} from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import Avatar from '@mui/material/Avatar';
-import { useStyles } from './Style';
+import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
+import { PackagePanel } from '../../molecules/PackagePanel/PackagePanel'
 import * as TYPES from '../../../app/types'
 import {MockStore} from '../../../app/configureStore'
 import { IStudent } from '../../../app/entities/student';
 import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
-import { Container, FormContainer, ContactContainer, Title, ContactHeader, ContactBody } from './Style'
 import SocratesImg from '../../assets/socrates.svg'
-export const Create: FC = () => {
+import { Container, FormContainer, ContactContainer, Title, ContactHeader, ContactBody } from './Style'
+const NewAccount: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const language = 'en';
@@ -68,18 +57,18 @@ export const Create: FC = () => {
                 </FormContainer>
                 <ContactContainer>
                     <ContactHeader>
-                        <img src={SocratesImg} style={{paddingLeft:20, paddingRight: 10}}/>
-                        <div style={{fontSize:'60px', lineHeight: '75px', fontWeight: 600, textAlign: 'center', paddingRight: 25}}>Welcome <br />to Socrates</div>
+                        <img src={SocratesImg} className="p-l-20 p-r-10"/>
+                        <div className="font-s-60 line-h-75 font-w-6 text-center p-r-25">Welcome <br />to Socrates</div>
                     </ContactHeader>
                     <ContactBody>
-                        <div style={{fontWeight: 800, fontSize: 30, lineHeight: "36px", paddingBottom: '25px'}}>Contact Us</div>
-                        <div style={{fontWeight: 500, fontSize:21, lineHeight: "25px", paddingBottom: '50px'}}>You have any question about your plan?</div>
-                        <div style={{display: 'flex', flexDirection:'column'}}>
-                            <div style={{fontWeight: 700, fontSize:35, paddingBottom: '20px'}}>We're happy to help you</div>
-                            <div style={{display: 'flex',justifyContent: 'space-between'}}>
-                                <div style={{paddingLeft: '10px'}}><u>Contact Us</u></div>
+                        <div className="font-w-8 font-s-30 line-h-35 p-b-25">Contact Us</div>
+                        <div className="font-w-5 font-s-20 line-h-25 p-b-50">You have any question about your plan?</div>
+                        <div className="flex-col">
+                            <div className="font-w-7 font-s-35 p-b-20">We're happy to help you</div>
+                            <div className="flex justify-space-between">
+                                <div className="p-l-10"><u>Contact Us</u></div>
                                 <div><u>FAQ</u></div>
-                                <div style={{paddingRight: '10px'}}><u>Plans</u></div>
+                                <div className="p-r-10"><u>Plans</u></div>
                             </div>
                         </div>
                     </ContactBody>
@@ -89,3 +78,4 @@ export const Create: FC = () => {
         </ParentPgContainer>
   );
 };
+export default NewAccount;

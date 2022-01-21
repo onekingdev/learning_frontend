@@ -16,11 +16,12 @@ import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 import {Account} from './views/pages/Account/Account';
-import {Create} from './views/pages/Account/Create'
+import NewAccount from './views/pages/NewAccount/NewAccount';
+import KidsList from './views/pages/KidsList/KidsList';
 import { useSelector } from 'react-redux';
 import { Store } from './app/configureStore'
 import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgContainer'
-
+import NewKids from './views/pages/NewKids/NewKids'
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
   const user = useSelector((state : Store) => state.user)
   const isAuthenticated = !!user?.token;
@@ -90,7 +91,13 @@ export function Routes(props: any) {
           <Account />
         </PrivateRoute>
         <PrivateRoute path="/parent/create">
-          <Create />
+          <NewAccount />
+        </PrivateRoute>
+        <PrivateRoute path="/kids/list">
+          <KidsList />
+        </PrivateRoute>
+        <PrivateRoute path="/kids/new">
+          <NewKids />
         </PrivateRoute>
         {process.env.NODE_ENV === 'development' ? (
           <Route path="/testing">
@@ -101,4 +108,3 @@ export function Routes(props: any) {
     </Router>
   );
 }
-
