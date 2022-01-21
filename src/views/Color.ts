@@ -30,9 +30,8 @@ export enum ButtonColor {
   login = '#21B95C',
   validate = '#26B824',
   join = '#F4C222',
-  next = '#1771B9',
+  next = '#F4C222',
   start = '#22BAAF',
-  support = '#21B95C',
 }
 
 export enum SettingBarColor {
