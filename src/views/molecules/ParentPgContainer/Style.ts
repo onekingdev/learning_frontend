@@ -58,8 +58,8 @@ export const GateWay = styled.img`
 `
 export const NoteBook = styled.img`
     position: absolute;
-    top: 870px;
-    right: 196px;
+    top: 600px;
+    right: 90px;
 `
 
 export const Center = styled.div`

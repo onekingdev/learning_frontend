@@ -1,14 +1,23 @@
 import {FC, useEffect} from 'react';
+import {Header} from '../../atoms/Text/Header';
+import {Subheader} from '../../atoms/Text/Subheader';
+import {ButtonColor} from '../../Color';
+import {Button as ButtonText} from '../../atoms/Text/Button';
 import { ParentPgContainer } from '../../../views/molecules/ParentPgContainer/ParentPgContainer'
 import { PackagePanel } from '../../../views/molecules/PackagePanel/PackagePanel'
+
+
+// import {} from './Style';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
+
 import { useStyles } from './Style';
 import * as TYPES from '../../../app/types'
 import {MockStore} from '../../../app/configureStore'
 import { IStudent } from '../../../app/entities/student';
+import Avatar from '@mui/material/Avatar';
 import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
 import { PaymentMethod } from '../../molecules/PaymentMethod/PaymentMethod';
 

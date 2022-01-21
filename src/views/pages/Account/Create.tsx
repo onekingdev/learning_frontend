@@ -1,24 +1,34 @@
 import {FC, useEffect} from 'react';
-
-import {useHistory} from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import { useStyles } from './Style';
 import {Header} from '../../atoms/Text/Header';
 import {Subheader} from '../../atoms/Text/Subheader';
 import {ButtonColor} from '../../Color';
 import {Button as ButtonText} from '../../atoms/Text/Button';
-import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
-import { PackagePanel } from '../../molecules/PackagePanel/PackagePanel'
+import { ParentPgContainer } from '../../../views/molecules/ParentPgContainer/ParentPgContainer'
+import { PackagePanel } from '../../../views/molecules/PackagePanel/PackagePanel'
+
+
+// import {} from './Style';
+import {useHistory} from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import { useStyles } from './Style';
 import * as TYPES from '../../../app/types'
 import {MockStore} from '../../../app/configureStore'
 import { IStudent } from '../../../app/entities/student';
+import Avatar from '@mui/material/Avatar';
 import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
-import SocratesImg from '../../assets/socrates.svg'
 import { Container, FormContainer, ContactContainer, Title, ContactHeader, ContactBody } from './Style'
-const NewAccount: FC = () => {
+export const Create: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const language = 'en';
@@ -33,7 +43,7 @@ const NewAccount: FC = () => {
             <Container>
                 <FormContainer>
                     <Title>Choose your name and password</Title>
-                    <Grid container spacing={5}>
+                    <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <TextField label="User Name" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
                         </Grid>
@@ -57,20 +67,8 @@ const NewAccount: FC = () => {
                 </FormContainer>
                 <ContactContainer>
                     <ContactHeader>
-                        <img src={SocratesImg} className="p-l-20 p-r-10"/>
-                        <div className="font-s-60 line-h-75 font-w-6 text-center p-r-25">Welcome <br />to Socrates</div>
                     </ContactHeader>
                     <ContactBody>
-                        <div className="font-w-8 font-s-30 line-h-35 p-b-25">Contact Us</div>
-                        <div className="font-w-5 font-s-20 line-h-25 p-b-50">You have any question about your plan?</div>
-                        <div className="flex-col">
-                            <div className="font-w-7 font-s-35 p-b-20">We're happy to help you</div>
-                            <div className="flex justify-space-between">
-                                <div className="p-l-10"><u>Contact Us</u></div>
-                                <div><u>FAQ</u></div>
-                                <div className="p-r-10"><u>Plans</u></div>
-                            </div>
-                        </div>
                     </ContactBody>
                 </ContactContainer>
             </Container>
@@ -78,4 +76,3 @@ const NewAccount: FC = () => {
         </ParentPgContainer>
   );
 };
-export default NewAccount;

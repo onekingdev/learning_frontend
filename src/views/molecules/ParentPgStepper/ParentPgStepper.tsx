@@ -1,17 +1,17 @@
 import {FC, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
+import Avatar from '@mui/material/Avatar';
+import logoTitle from '../../assets/logo-learn.svg'
 import {
   Container,
   Line,
   StepContent,
   Point
 } from './Style'
-
 type ParentPgStepperProps = {
   step: number;
 }
-
 export const ParentPgStepper: FC<ParentPgStepperProps> = ({step}) => {
   const history = useHistory();
   const dispatch = useDispatch()

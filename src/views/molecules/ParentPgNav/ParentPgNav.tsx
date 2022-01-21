@@ -15,6 +15,7 @@ import { useStyles } from './Style';
 import * as TYPES from '../../../app/types'
 import logoTitle from '../../assets/logo-learn.svg'
 import home from '../../assets/home_pc.svg'
+import { ButtonColor } from '../../Color'
 import avatar from '../../assets/avatars/avatar1.svg'
 import {
   Container,
@@ -28,7 +29,6 @@ import {
 type ParentPgNavProps = {
   onlyLogoImg: boolean;
 };
-
 export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   const history = useHistory();
   const dispatch = useDispatch()
