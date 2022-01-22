@@ -7,6 +7,7 @@ import { BlackBoard } from '../../pages/Question/Style';
 export const Container = styled.div`
   position: relative;
   display: flex;
+  padding-bottom: 100px;
 `;
 
 export const PaymentContainer = styled.div`
@@ -147,13 +148,37 @@ export const useStyles = makeStyles({
         marginTop: '30px !important',
         marginBottom: '30px !important'
     },
-    monthButton: {
+    orderButton: {
         "&.MuiButton-root":{
             marginTop: '40px',
             backgroundColor: '#21B95C',
             borderRadius: '20px',
             height: '49px',
             width: '270px',
+            textTransform: 'unset',
+            fontSize: '16px',
+            lineHeight: '20px',
+            fontWeight: '500',
+        }
+    },
+    updateButton: {
+        "&.MuiButton-root":{
+            marginTop: '40px',
+            backgroundColor: '#21B95C',
+            borderRadius: '20px',
+            height: '49px',
+            textTransform: 'unset',
+            fontSize: '16px',
+            lineHeight: '20px',
+            fontWeight: '500',
+        }
+    },
+    returnButton: {
+        "&.MuiButton-root":{
+            marginTop: '40px',
+            backgroundColor: '#919699',
+            borderRadius: '20px',
+            height: '49px',
             textTransform: 'unset',
             fontSize: '16px',
             lineHeight: '20px',
@@ -184,18 +209,22 @@ export const useStyles = makeStyles({
     input: {
         "& fieldset": {
             borderColor:'#1976D2',
-            borderRadius: '25px'
+            borderRadius: '25px',
+            borderWidth: '2px'
         },
         "& MuiFormControl-root": {
             borderRadius: '25px',
+            borderWidth: '2px'
         },
         "& input": {
             backgroundColor: 'white',
             borderRadius: '25px',
+            borderWidth: '2px'
         },
         "& .MuiInputBase-input": {
             backgroundColor: "white",
             borderRadius: "25px",
+            borderWidth: '2px'
         }
     }
   });
