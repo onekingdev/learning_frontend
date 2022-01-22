@@ -24,6 +24,7 @@
   "paths": {
     "@atoms": "[views/atoms/]",
     "@molecules": "[views/molucules/]",
+    "@assets": "[views/assets/]",
     // "@organims/*": "[]",
   } 
 }
