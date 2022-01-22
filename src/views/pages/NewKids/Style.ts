@@ -39,32 +39,6 @@ export const Socrates = styled.img`
 `
 
 export const useStyles = makeStyles({
-
-  createKidButton: {
-    "&.MuiButton-root":{
-      backgroundColor: '#22BAAF',
-      borderRadius: '20px',
-      height: '49px',
-      width: '215px',
-      textTransform: 'unset',
-      fontSize: '16px',
-      fontWeight: 500,
-      color: 'white',
-    }
-  },
-  nextKidButton: {
-    "&.MuiButton-root":{
-      backgroundColor: '#FFB703',
-      borderRadius: '20px',
-      height: '49px',
-      width: '215px',
-      textTransform: 'unset',
-      fontSize: '16px',
-      fontWeight: 500,
-      color: 'white',
-      float: 'right',
-    }
-  },
   paper: {
     maxWidth: "29.5vw",
     paddingTop:'40px',

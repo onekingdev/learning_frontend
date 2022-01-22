@@ -22,9 +22,11 @@ import {
   CardType,
   Apple,
   FlexRow,
-  Title
+  Title,
+  CardContent
  } from './Style'
  import StripeInput from "./StripeInput";
+import { FlexColumn } from '../../pages/Account/Style';
 type PaymentFormProps = {
   isUpdate: boolean
 };
@@ -93,14 +95,17 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 onChange={(e)=> setPaymentMethod(e.target.value)}
             >
                 <FlexRow>
-                    <FormControlLabel value="paypal" control={<Radio className={classes.radio} disabled/>} label="" ></FormControlLabel>
+                    <FormControlLabel value="paypal" control={<Radio className={classes.radio} disabled/>} label=""></FormControlLabel>
                     <PayPal src={paypal}/>
                     <Apple src={apple}/>
                 </FlexRow>
                 <Divider className={classes.divider} />
                 <FlexRow>
-                    <FormControlLabel value="card" control={<Radio className={classes.radio}/>} label="Credit or debit card" />
-                    <CardType src={visacard} />
+                    <FormControlLabel value="card" control={<Radio className={classes.radio}/>} label="" />
+                    <CardContent>
+                        <div>Credit or debit card</div>
+                        <CardType src={visacard} />
+                    </CardContent>
                 </FlexRow>
             </RadioGroup>
         </FormControl>
@@ -193,7 +198,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     className={classes.input}
                     />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6} md={6}>
                 <TextField
                     label="City"
                     variant="outlined"
@@ -204,7 +209,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     className={classes.input}
                 />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6} md={6}>
                 <TextField
                     label="State/ Province"
                     variant="outlined"
@@ -215,7 +220,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     className={classes.input}
                     />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6} md={6}>
                 <TextField
                     label="Zip /Postal Code"
                     variant="outlined"
@@ -226,7 +231,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     className={classes.input}
                     />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6} md={6}>
                 <TextField
                     label="Country"
                     variant="outlined"

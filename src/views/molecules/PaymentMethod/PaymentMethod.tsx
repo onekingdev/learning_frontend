@@ -92,11 +92,11 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan})
                     </OrderItemTitleContainer>
                     <OrderItemContent>$4.98</OrderItemContent>
                 </OrderItem>
-                <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px'}}>
-                    <Grid item xs={6}>
+                <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>
+                    <Grid item md={6} xs={10}>
                         <TextField label="Coupon code" variant="outlined" fullWidth className={`${classes.codeInput} ${classes.input}`}/>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item md={6} xs={10}>
                         <Button
                             variant="contained"
                             className={classes.codeButtn}

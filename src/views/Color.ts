@@ -33,6 +33,8 @@ export enum ButtonColor {
   next = '#1771B9',
   start = '#22BAAF',
   support = '#21B95C',
+  create = '#22BAAF',
+  nextKid = '#FFB703',
 }
 
 export enum SettingBarColor {

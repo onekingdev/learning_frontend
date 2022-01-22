@@ -26,7 +26,7 @@ const NewAccount: FC = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
-  const [validateMsg, setValidateMsg] = useState({
+  const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
       userName: null,
       password: null,
       confPassword: null
@@ -37,7 +37,21 @@ const NewAccount: FC = () => {
   }
 
   const handleCreate = () => {
+    if(!formValidation()) return;
+    console.log("validation ok")
+  }
 
+  const formValidation = () => {
+      const validateMsgTemp = {...validateMsg}
+      let valiResult = true;
+      for(const key in validateMsg) {
+        if(validateMsg[key] === null) {
+            validateMsgTemp[key] = "Field is required";
+        }
+        if(validateMsgTemp[key]) valiResult = false;
+      }
+      setValidateMsg(validateMsgTemp);
+      return valiResult;
   }
 
   useEffect(() => {
@@ -52,46 +66,51 @@ const NewAccount: FC = () => {
                     <Title>Choose your name and password</Title>
                     <Grid container spacing={5}>
                         <Grid item xs={12}>
-                            <TextField label="User Name" variant="outlined" fullWidth sx={{backgroundColor: 'white'}} value={userName}
+                            <TextField label="User Name" variant="outlined" fullWidth value={userName}
                                 onChange={(e) => {
                                     setUserName(e.target.value);
                                     handleFormChange("userName",e.target.value.length === 0 ? "Field is required" : "");
                                 }}
                                 error={!!validateMsg.userName}
                                 helperText={validateMsg.userName}
+                                className={classes.input}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField label="Password" variant="outlined" fullWidth sx={{backgroundColor: 'white'}} value={password}
+                            <TextField label="Password" variant="outlined" fullWidth value={password}
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                     handleFormChange("password",e.target.value.length === 0 ? "Field is required" : "");
                                 }}
                                 error={!!validateMsg.password}
                                 helperText={validateMsg.password}
+                                className={classes.input}
+
                             />
                         </Grid>
                         <Grid item xs={12} md={12}>
-                            <TextField label="Confirm Password" variant="outlined" fullWidth sx={{backgroundColor: 'white'}} value={confPassword}
+                            <TextField label="Confirm Password" variant="outlined" fullWidth value={confPassword}
                                 onChange={(e) => {
                                     setConfPassword(e.target.value);
                                     handleFormChange("confPassword",e.target.value.length === 0 ? "Field is required" : password !== e.target.value ? "Password is not matched with confirm password" : "");
                                 }}
                                 error={!!validateMsg.confPassword}
                                 helperText={validateMsg.confPassword}
+                                className={classes.input}
                             />
                         </Grid>
                     </Grid>
-                    <div>
-                    <Button
-                        variant="contained"
-                        className={classes.createButton}
-                        color="success"
-                        onClick={handleCreate}
-                    >
-                        Create Account
-                    </Button>
+                    <div className="flex">
+                        <Button
+                            variant="contained"
+                            className={classes.createButton}
+                            color="success"
+                            onClick={handleCreate}
+                        >
+                            Create Account
+                        </Button>
                     </div>
+                    <div className="p-b-95 p-t-30 font-s-15 inline">By clicking Create Account, you aggree to Learn With Socrates’s <div className="font-w-9 inline">User Agreement, Privacy Policy,</div> and  <div className="font-w-9 inline">Cookie Policy</div></div>
                 </FormContainer>
                 <ContactContainer>
                     <ContactHeader>

@@ -5,13 +5,25 @@ import background from '../../assets/colored-shapes-bg.svg';
 import { BlackBoard } from '../../pages/Question/Style';
 
 export const Container = styled.div`
-  position: relative;
-  width: 384px;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  background-color: ${props => props.color === "Gold" ? "#FFFBF0" : "#F0FFF6"};
-  margin: 38px;
+    position: relative;
+    width: 384px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    background-color: ${props => props.color === "Gold" ? "#FFFBF0" : "#F0FFF6"};
+    margin: 38px;
+    @media screen and (max-width: ${'500px'}) {
+        margin-left:10px;
+        margin-right: 10px;
+        max-width: 384px;
+        // margin: unset;
+    }
+    @media screen and (max-width: ${ScreenSize.phone}) {
+        margin-left:10px;
+        margin-right: 10px;
+        max-width: 100vw;
+        // margin: unset;
+    }
 `;
 
 export const Header = styled.div`

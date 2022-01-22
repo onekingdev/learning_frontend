@@ -4,7 +4,6 @@ import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper'
 import { useStyles } from './Style';
 import * as TYPES from '../../../app/types'
@@ -17,6 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import socrates from '../../assets/socrates.svg'
+import Button from '../../molecules/MuiButton'
+import {ButtonColor, shadeColor, BasicColor} from '../../Color';
 
 const NewKids: FC = () => {
 
@@ -165,26 +166,10 @@ const NewKids: FC = () => {
                         />
                     </Grid>
                     <Grid item xs={12} md={12} lg={6}>
-                        <Button
-                            variant="contained"
-                            className={classes.createKidButton}
-                            color="info"
-                            onClick={()=>{}}
-                            fullWidth
-                        >
-                            Create Kid
-                        </Button>
+                        <Button value="Create Kid" bgColor={ButtonColor.create} onClick={handleCreate}/>
                     </Grid>
                     <Grid item xs={12} md={12} lg={6}>
-                        <Button
-                            variant="contained"
-                            className={classes.nextKidButton}
-                            color="warning"
-                            onClick={handleNext}
-                            fullWidth
-                        >
-                            Next Kid
-                        </Button>
+                        <Button value="Next Kid" bgColor={ButtonColor.nextKid} onClick={handleNext} align="right" />
                     </Grid>
                 </Grid>
             </Paper>
