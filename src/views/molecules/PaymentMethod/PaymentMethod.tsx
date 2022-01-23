@@ -1,14 +1,11 @@
-import {FC, useEffect, ReactChildren, ReactChild} from 'react';
+import {FC, useEffect, ReactChildren, ReactChild, useState, useRef} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import {ParentPgNav} from '../ParentPgNav/ParentPgNav'
 import * as TYPES from '../../../app/types'
-import colorpanel from '../../assets/colorPannel.svg';
-import paypal from '../../assets/paypal.svg'
-import apple from '../../assets/apple-pay.svg'
-import visacard from '../../assets/visacard.svg'
 import payOrderLog from '../../assets/pay-order-log.svg'
-import Button from '@mui/material/Button';
+import Button from '../../molecules/MuiButton'
+import TextField from '../../molecules/MuiTextField'
+import {ButtonColor, shadeColor, BasicColor} from '../../Color';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -16,8 +13,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
+import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
+import {PaymentForm} from './PaymentForm'
 import {
   useStyles,
   Container,
@@ -39,79 +36,36 @@ import {
   FlexRow,
   Title
  } from './Style'
-
-type PackagePanelProps = {
-  method: string;
+ import StripeInput from "./StripeInput";
+type PaymentMethodProps = {
   type: string;
   price: number;
+  path: any;
+  plan: string;
 };
-
-export const PaymentMethod: FC<PackagePanelProps> = ({type, method, price}) => {
+interface PaymentFormFunc {
+    handleOrder(): void;
+    handleUpdate(): void;
+}
+export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan}) => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
+  const stripe = useStripe();
+  const elements = useElements();
+  const paymentFormRef = useRef<PaymentFormFunc>(null)
+
+  const handleOrder = (event: any) => {
+    paymentFormRef?.current?.handleOrder()
+  }
 
   useEffect(() => {
   }, []);
+
   return (
     <Container>
         <PaymentContainer>
-            <Title>Payment Method</Title>
-            <FormControl>
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
-                    name="radio-buttons-group"
-                >
-                    <FlexRow>
-                        <FormControlLabel value="paypal" control={<Radio className={classes.radio}/>} label="" ></FormControlLabel>
-                        <PayPal src={paypal}/>
-                        <Apple src={apple}/>
-                    </FlexRow>
-                    <Divider className={classes.divider} />
-                    <FlexRow>
-                        <FormControlLabel value="creditCard" control={<Radio className={classes.radio}/>} label="Credit or debit card" />
-                        <CardType src={visacard} />
-                    </FlexRow>
-                </RadioGroup>
-            </FormControl>
-            <div style={{fontSize: '24px', fontWeight: '700', paddingTop: '15px', paddingBottom: '15px'}}>Billing Information</div>
-            <Grid container spacing={4}>
-                <Grid item xs={12}>
-                    <TextField label="Full Name" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField label="Card Number" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField label="Expiry Date" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField label="CVC/CVV" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField label="Address Line 1" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField label="Address Line 2" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField label="City" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField label="State/ Province" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField label="Zip /Postal Code" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField label="Country" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-                <Grid item xs={12} md={12}>
-                    <TextField label="Phone" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
-                </Grid>
-            </Grid>
-            <div style={{color: '#BCC3C8', fontSize: '14px', paddingTop: '30px', paddingBottom: '30px'}}>Your transactions is secured SSL encryption</div>
+            <PaymentForm isUpdate={false} ref={paymentFormRef}/>
         </PaymentContainer>
         <OrderContainer>
             <OrderTitleContainer>
@@ -133,20 +87,20 @@ export const PaymentMethod: FC<PackagePanelProps> = ({type, method, price}) => {
                     </OrderItemTitleContainer>
                     <OrderItemContent>$4.98</OrderItemContent>
                 </OrderItem>
-                <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px'}}>
-                    <Grid item xs={6}>
-                        <TextField label="Coupon code" variant="outlined" fullWidth sx={{backgroundColor: 'white'}} className={classes.codeInput}/>
+                <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>
+                    <Grid item md={6} xs={10}>
+                    <TextField
+                        label="Coupon code"
+                        className={classes.codeInput}
+                    />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item md={6} xs={10}>
                         <Button
-                            variant="contained"
-                            className={classes.codeButtn}
-                            color="primary"
+                            bgColor={BasicColor.yellow}
+                            color={BasicColor.black}
                             onClick={()=>{}}
-                            fullWidth
-                        >
-                            Apply Coupon
-                        </Button>
+                            value="Apply Coupon"
+                        />
                     </Grid>
                 </Grid>
                 <OrderItem>
@@ -178,13 +132,11 @@ export const PaymentMethod: FC<PackagePanelProps> = ({type, method, price}) => {
                     <div style={{paddingLeft: '20px'}}>I have read and agree to the website terms and conditions*</div>
                 </OrderTip>
                 <Button
-                    variant="contained"
-                    className={classes.monthButton}
-                    color="success"
-                    onClick={()=>{}}
-                >
-                    Place an Order
-                </Button>
+                    bgColor={BasicColor.green}
+                    onClick={handleOrder}
+                    value="Place an Order"
+                    weight={700}
+                />
             </OrderBody>
         </OrderContainer>
     </Container>

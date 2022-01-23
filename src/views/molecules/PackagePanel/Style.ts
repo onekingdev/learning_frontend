@@ -3,20 +3,33 @@ import {ScreenSize} from '../../screenSize';
 import { makeStyles } from '@mui/styles'
 import background from '../../assets/colored-shapes-bg.svg';
 import { BlackBoard } from '../../pages/Question/Style';
+import {ButtonColor, BasicColor} from '../../Color';
 
 export const Container = styled.div`
-  position: relative;
-  width: 384px;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  background-color: ${props => props.color === "Gold" ? "#FFFBF0" : "#F0FFF6"};
-  margin: 38px;
+    position: relative;
+    width: 384px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    background-color: ${props => props.color === "Gold" ? BasicColor.paleOrange : BasicColor.ligntBlue};
+    margin: 38px;
+    @media screen and (max-width: ${'500px'}) {
+        margin-left:10px;
+        margin-right: 10px;
+        max-width: 384px;
+        // margin: unset;
+    }
+    @media screen and (max-width: ${ScreenSize.phone}) {
+        margin-left:10px;
+        margin-right: 10px;
+        max-width: 100vw;
+        // margin: unset;
+    }
 `;
 
 export const Header = styled.div`
     width: 100%;
-    background-color: ${props => props.color === "Gold" ? "#F4C222" : props.color === "Combo" ? "#22BAAF" : "#26B824"};
+    background-color: ${props => props.color === "Gold" ? BasicColor.yellow : props.color === "Combo" ? BasicColor.aqua : BasicColor.greenSoft};
     height: 88px;
     border-radius: 10px;
     display: flex;
@@ -80,43 +93,4 @@ export const SubjectTitle = styled.div`
 `
 
 export const useStyles = makeStyles({
-    button_gold: {
-      "&.MuiButton-root":{
-        backgroundColor: '#F4C222',
-        borderRadius: '20px',
-        height: '50px',
-        width: '215px',
-        textTransform: 'unset',
-        fontSize: '16px',
-        color: 'black',
-      }
-    },
-    button_combo: {
-        "&.MuiButton-root":{
-          backgroundColor: '#F0FFF6',
-          borderColor: '#22BAAF',
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderRadius: '20px',
-          height: '50px',
-          width: '215px',
-          textTransform: 'unset',
-          fontSize: '16px',
-          color: 'black',
-        }
-      },
-    button_sole: {
-        "&.MuiButton-root":{
-            backgroundColor: '#F0FFF6',
-            borderColor: '#26B824',
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderRadius: '20px',
-            height: '50px',
-            width: '215px',
-            textTransform: 'unset',
-            fontSize: '16px',
-            color: 'black',
-        }
-    }
-  });
+});

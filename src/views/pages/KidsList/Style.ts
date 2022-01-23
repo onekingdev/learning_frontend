@@ -48,40 +48,4 @@ export const Container = styled.div`
 
 export const useStyles = makeStyles({
 
-  deleteButton: {
-    "&.MuiButton-root":{
-      backgroundColor: '#EC5858',
-      borderRadius: '20px',
-      height: '49px',
-      // width: '215px',
-      textTransform: 'unset',
-      fontSize: '16px',
-      fontWeight: 500,
-      color: 'white',
-    }
-  },
-  chPwdButton: {
-    "&.MuiButton-root":{
-      backgroundColor: '#FB8500',
-      borderRadius: '20px',
-      height: '49px',
-      // width: '215px',
-      textTransform: 'unset',
-      fontSize: '16px',
-      fontWeight: 500,
-      color: 'white',
-    }
-  },
-  addButton: {
-    "&.MuiButton-root":{
-      backgroundColor: '#21B95C',
-      borderRadius: '20px',
-      height: '49px',
-      // width: '215px',
-      textTransform: 'unset',
-      fontSize: '16px',
-      fontWeight: 500,
-      color: 'white',
-    }
-  },
 });

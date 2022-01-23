@@ -3,24 +3,42 @@ import {ScreenSize} from '../../screenSize';
 import { makeStyles } from '@mui/styles'
 import background from '../../assets/colored-shapes-bg.svg';
 import { BlackBoard } from '../../pages/Question/Style';
+import {ButtonColor, BasicColor} from '../../Color';
 
 export const Container = styled.div`
-  position: relative;
-  display: flex;
+    position: relative;
+    display: flex;
+    padding-bottom: 100px;
+    margin-left:auto;
+    margin-right: auto;
+    @media screen and (max-width: 1100px) {
+        flex-direction: column;
+        // display:none
+    }
 `;
 
 export const PaymentContainer = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 720px;
-    background-color: #E8F1F8;
-    border-color: #80B1D8;
+    // width: 37.5vw;
+    background-color: ${BasicColor.veryLightCyanBlue};
+    border-color: ${BasicColor.paleRed};
     border-width: 1px;
     border-style: solid;
     padding-left: 90px;
     padding-right: 90px;
     padding-top: 50px;
     padding-bottom: 50px;
+    // @media screen and (max-width: ${ScreenSize.tablet}) {
+    //     max-width: 720px;
+    // }
+    @media screen and (max-width: 1100px) {
+        max-width: 540px;
+    }
+    @media screen and (max-width: ${ScreenSize.phone}) {
+        width: calc(100vw - 180px)
+    }
 `
 
 export const Title = styled.div`
@@ -29,12 +47,25 @@ export const Title = styled.div`
 `
 
 export const OrderContainer = styled.div`
-    width: 510px;
+    max-width: 510px;
     display: flex;
     flex-direction: column;
+    // width: 26.5vw;
+    min-width: 400px;
     border-width: 1px;
-    border-color: #1771B9;
+    border-color: ${BasicColor.blue};
     border-style: solid;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        max-width: 720px;
+        // width: unset;
+    }
+    @media screen and (max-width: 1100px) {
+        max-width: 720px;
+        // display:none
+    }
+    @media screen and (max-width: ${ScreenSize.phone}) {
+        min-width: unset;
+    }
 `
 export const OrderTitleContainer = styled.div`
     background-color: white;
@@ -56,7 +87,7 @@ export const OrderTitle = styled.div`
 `
 
 export const OrderBody = styled.div`
-    background-color: #1771B9;
+    background-color: ${BasicColor.blue};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,10 +100,18 @@ export const OrderItem = styled.div`
     width: 330px;
     padding-left: 35px;
     padding-right: 35px;
-    justify-content: space-between
+    justify-content: space-between;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        width: 100vw;
+        padding-left: unset;
+        padding-right: unset;
+    }
 `
 export const OrderItemTitleContainer = styled.div`
     display: unset;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+       padding-left: 35px;
+    }
 `
 export const OrderItemTitle = styled.div`
     color: white;
@@ -80,6 +119,7 @@ export const OrderItemTitle = styled.div`
     font-size: 16px;
     line-height: 20px;
     display: flex;
+    
 `
 export const OrderItemSubtitle = styled.div`
     color: white;
@@ -96,6 +136,9 @@ export const OrderItemContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        padding-right: 35px;
+     }
 `
 export const OrderTip = styled.div`
     font-weight: 400;
@@ -106,12 +149,16 @@ export const OrderTip = styled.div`
     padding-left: 55px;
     padding-right: 55px;
     display: flex;
-    
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        padding-left: 10px;
+        padding-right: 10px;
+        align-self: start;
+    }
 `
 
 export const Header = styled.div`
     width: 100%;
-    background-color: ${props => props.color === "Gold" ? "#F4C222" : props.color === "Combo" ? "#22BAAF" : "#26B824"};
+    background-color: ${props => props.color === "Gold" ? BasicColor.yellow : props.color === "Combo" ? BasicColor.aqua : BasicColor.greenSoft};
     height: 88px;
     border-radius: 10px;
     display: flex;
@@ -121,19 +168,40 @@ export const Header = styled.div`
 `
 
 export const PayPal = styled.img`
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        max-width: 19.7vw;
+        width: unset;
+    }
 `
 
 export const Apple = styled.img`
     padding-left: 30px;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        max-width: 19.7vw;
+        width: unset;
+    }
 `
 
 export const CardType = styled.img`
-    padding-left: 90px;
+    width: 180px;
+`
+
+export const CardContent = styled.div`
+    width: 415px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        flex-direction: column;
+        width: unset;
+    }
+
 `
 
 export const FlexRow = styled.div`
     display: flex;
-    alignItems: center;
+    // alignItems: center;
+    // flex-wrap: wrap;
 `
 
 export const useStyles = makeStyles({
@@ -147,30 +215,6 @@ export const useStyles = makeStyles({
         marginTop: '30px !important',
         marginBottom: '30px !important'
     },
-    monthButton: {
-        "&.MuiButton-root":{
-            marginTop: '40px',
-            backgroundColor: '#21B95C',
-            borderRadius: '20px',
-            height: '49px',
-            width: '270px',
-            textTransform: 'unset',
-            fontSize: '16px',
-            lineHeight: '20px',
-            fontWeight: '500',
-        }
-    },
-    codeButtn: {
-        "&.MuiButton-root":{
-            backgroundColor: '#F4C222',
-            borderRadius: '20px',
-            textTransform: 'unset',
-            fontSize: '16px',
-            lineHeight: '20px',
-            fontWeight: '700',
-            height: '50px',
-        }
-    },
     codeInput: {
         "&.MuiOutlinedInput-root": {
             height: '50px'
@@ -180,5 +224,5 @@ export const useStyles = makeStyles({
         "& .Mui-focused": {
             color: 'black !important'
         }
-    }
+    },
   });

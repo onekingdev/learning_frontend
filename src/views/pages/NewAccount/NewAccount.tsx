@@ -1,17 +1,12 @@
-import {FC, useEffect} from 'react';
-
+import {FC, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import Button from '@mui/material/Button';
+import Button from '../../molecules/MuiButton'
+import TextField from '../../molecules/MuiTextField'
 import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
 import { useStyles } from './Style';
-import {Header} from '../../atoms/Text/Header';
-import {Subheader} from '../../atoms/Text/Subheader';
-import {ButtonColor} from '../../Color';
-import {Button as ButtonText} from '../../atoms/Text/Button';
+import {ButtonColor, BasicColor} from '../../Color';
 import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
-import { PackagePanel } from '../../molecules/PackagePanel/PackagePanel'
 import * as TYPES from '../../../app/types'
 import {MockStore} from '../../../app/configureStore'
 import { IStudent } from '../../../app/entities/student';
@@ -21,11 +16,43 @@ import { Container, FormContainer, ContactContainer, Title, ContactHeader, Conta
 const NewAccount: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
-  const language = 'en';
   const classes = useStyles();
+  const language = 'en';
+
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confPassword, setConfPassword] = useState('');
+  const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
+      userName: null,
+      password: null,
+      confPassword: null
+  });
+
+  const handleFormChange = (field: string, errMsg: string) => {
+    setValidateMsg({...validateMsg, [field]: errMsg})
+  }
+
+  const handleCreate = () => {
+    if(!formValidation()) return;
+    console.log("validation ok")
+  }
+
+  const formValidation = () => {
+      const validateMsgTemp = {...validateMsg}
+      let valiResult = true;
+      for(const key in validateMsg) {
+        if(validateMsg[key] === null) {
+            validateMsgTemp[key] = "Field is required";
+        }
+        if(validateMsgTemp[key]) valiResult = false;
+      }
+      setValidateMsg(validateMsgTemp);
+      return valiResult;
+  }
 
   useEffect(() => {
   }, []);
+
   return (
         <ParentPgContainer onlyLogoImgNav={true}>
           <>
@@ -33,27 +60,50 @@ const NewAccount: FC = () => {
             <Container>
                 <FormContainer>
                     <Title>Choose your name and password</Title>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={5}>
                         <Grid item xs={12}>
-                            <TextField label="User Name" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                            <TextField
+                                label="User Name"
+                                onChange={(e) => {
+                                    setUserName(e.target.value);
+                                    handleFormChange("userName",e.target.value.length === 0 ? "Field is required" : "");
+                                }}
+                                error={!!validateMsg.userName}
+                                helperText={validateMsg.userName}
+                            />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField label="Password" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                            <TextField
+                                label="Password"
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    handleFormChange("password",e.target.value.length === 0 ? "Field is required" : "");
+                                }}
+                                error={!!validateMsg.password}
+                                helperText={validateMsg.password}
+                            />
                         </Grid>
                         <Grid item xs={12} md={12}>
-                            <TextField label="Confirm Password" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                            <TextField
+                                label="Confirm Password"
+                                onChange={(e) => {
+                                    setConfPassword(e.target.value);
+                                    handleFormChange("confPassword",e.target.value.length === 0 ? "Field is required" : password !== e.target.value ? "Password is not matched with confirm password" : "");
+                                }}
+                                error={!!validateMsg.confPassword}
+                                helperText={validateMsg.confPassword}
+                            />
                         </Grid>
                     </Grid>
-                    <div>
-                    <Button
-                        variant="contained"
-                        className={classes.createButton}
-                        color="success"
-                        onClick={()=>{}}
-                    >
-                        Create Account
-                    </Button>
+                    <div className="flex">
+                        <Button
+                            bgColor={BasicColor.green}
+                            onClick={handleCreate}
+                            value="Create Account"
+                            margin="45px 0 0 0"
+                        />
                     </div>
+                    <div className="p-b-95 p-t-30 font-s-15 inline">By clicking Create Account, you aggree to Learn With Socrates’s <div className="font-w-9 inline">User Agreement, Privacy Policy,</div> and  <div className="font-w-9 inline">Cookie Policy</div></div>
                 </FormContainer>
                 <ContactContainer>
                     <ContactHeader>

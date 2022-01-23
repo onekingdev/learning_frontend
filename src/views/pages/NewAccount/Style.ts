@@ -2,26 +2,38 @@ import styled from 'styled-components';
 import background from '../../assets/colored-shapes-bg.svg';
 import {ScreenSize} from '../../screenSize';
 import { makeStyles } from '@mui/styles'
+import {ButtonColor, BasicColor} from '../../Color';
 
 export const Container = styled.div`
   position: relative;
   display: flex;
   margin-top: 80px;
   padding-bottom: 100px;
-  flex-wrap: wrap;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    padding-bottom: 0px;
+  }
 `;
 
 export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 720px;
-    border-color: #80B1D8;
+    border-color: ${BasicColor.paleRed};
     border-width: 1px;
     border-style: solid;
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 130px;
     padding-bottom: 50px;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+      padding-left: 5.2%;
+      padding-right: 5.2%;
+      padding-top: 6.7%;
+      padding-bottom: 2.6%;
+      background-color: ${BasicColor.blue};
+      color: white;
+      border-radius: 32px 32px 0px 0px;
+    }
 `;
 
 export const ContactContainer = styled.div`
@@ -29,14 +41,20 @@ export const ContactContainer = styled.div`
     display: flex;
     flex-direction: column;
     border-width: 1px;
-    border-color: #1771B9;
+    border-color: ${BasicColor.blue};
     border-style: solid;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+      display: none;
+    }
 `;
 
 export const Title = styled.div`
     font-size: 32px;
     font-weight: 700;
     padding-bottom: 60px;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+      font-size: 20px;
+    }
 `;
 
 export const ContactHeader = styled.div`
@@ -50,7 +68,7 @@ export const ContactHeader = styled.div`
 `;
 
 export const ContactBody = styled.div`
-    background-color: #1771B9;
+    background-color: ${BasicColor.blue};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,17 +78,4 @@ export const ContactBody = styled.div`
 `;
 
 export const useStyles = makeStyles({
-  createButton: {
-    float: 'right',
-    "&.MuiButton-root":{
-      marginTop: '45px',
-      backgroundColor: '#21B95C',
-      borderRadius: '20px',
-      height: '49px',
-      width: '215px',
-      textTransform: 'unset',
-      fontSize: '16px',
-      zIndex: 2,
-    }
-  }
 });
