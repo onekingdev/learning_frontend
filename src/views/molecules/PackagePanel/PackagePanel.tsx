@@ -1,4 +1,4 @@
-import {FC, useEffect, ReactChildren, ReactChild, useState} from 'react';
+import {FC, useEffect, ReactChildren, ReactChild} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import Button from '@mui/material/Button';
@@ -39,21 +39,12 @@ type PackagePanelProps = {
   type: string;
   plan: string;
   price: number;
-  onSubmit: any;
 };
-export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price, onSubmit}) => {
+export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price}) => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
-  const [paths, setPaths] = useState([]);
 
-  const handleCheckPath = (path: string, isChecked: boolean) => {
-    let temp:any = [];
-    temp = [...paths];
-    if(isChecked) temp.push(path)
-    else temp.pop(path)
-    setPaths(temp)
-  }
   useEffect(() => {
   }, []);
   return (
@@ -66,32 +57,32 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price, onSubmit
         <Subjects>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={math_gold} />)}
-            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("math", e.target.checked) }/><SubjectIcon src={math_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("math", e.target.checked) }/><SubjectIcon src={math_sole} /></>)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}}/><SubjectIcon src={math_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={math_sole} /></>)}
             <SubjectTitle>MATH</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={ela_gold} />)}
-            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("ela", e.target.checked) }/><SubjectIcon src={ela_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("ela", e.target.checked) }/><SubjectIcon src={ela_sole} /></>)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={ela_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={ela_sole} /></>)}
             <SubjectTitle>ELA + SIGHT WORDS</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={science_gold} />)}
-            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("science", e.target.checked) }/><SubjectIcon src={science_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("science", e.target.checked) }/><SubjectIcon src={science_sole} /></>)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={science_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={science_sole} /></>)}
             <SubjectTitle>SCIENCE</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={financial_gold} />)}
-            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("financial", e.target.checked) }/><SubjectIcon src={financial_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("financial", e.target.checked) }/><SubjectIcon src={financial_sole} /></>)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={financial_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={financial_sole} /></>)}
             <SubjectTitle>FINANCIAL LITERACY</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={health_gold} />)}
-            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("health", e.target.checked) }/><SubjectIcon src={health_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("health", e.target.checked) }/><SubjectIcon src={health_sole} /></>)}
+            {type === "Combo" && (<><Checkbox sx={{color: '#22BAAF','&.Mui-checked': {color: '#22BAAF',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={health_combo} /></>)}
+            {type === "Sole" && (<><Checkbox sx={{color: '#26B824','&.Mui-checked': {color: '#26B824',},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={health_sole} /></>)}
             <SubjectTitle>HEALTH & SAFETY</SubjectTitle>
           </Subject>
         </Subjects>
@@ -103,7 +94,7 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price, onSubmit
           variant="contained"
           className={type === "Gold" ? classes.button_gold : type === "Combo" ? classes.button_combo : classes.button_sole}
           color="success"
-          onClick={()=>{onSubmit(paths);}}
+          onClick={()=>{}}
         >
           Submit
         </Button>

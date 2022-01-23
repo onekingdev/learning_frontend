@@ -8,9 +8,7 @@ export const Container = styled.div`
   display: flex;
   margin-top: 80px;
   padding-bottom: 100px;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    padding-bottom: 0px;
-  }
+  flex-wrap: wrap;
 `;
 
 export const FormContainer = styled.div`
@@ -24,15 +22,6 @@ export const FormContainer = styled.div`
     padding-right: 100px;
     padding-top: 130px;
     padding-bottom: 50px;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-      padding-left: 5.2%;
-      padding-right: 5.2%;
-      padding-top: 6.7%;
-      padding-bottom: 2.6%;
-      background-color: #1771B9;
-      color: white;
-      border-radius: 32px 32px 0px 0px;
-    }
 `;
 
 export const ContactContainer = styled.div`
@@ -42,18 +31,12 @@ export const ContactContainer = styled.div`
     border-width: 1px;
     border-color: #1771B9;
     border-style: solid;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-      display: none;
-    }
 `;
 
 export const Title = styled.div`
     font-size: 32px;
     font-weight: 700;
     padding-bottom: 60px;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-      font-size: 20px;
-    }
 `;
 
 export const ContactHeader = styled.div`
@@ -78,6 +61,7 @@ export const ContactBody = styled.div`
 
 export const useStyles = makeStyles({
   createButton: {
+    float: 'right',
     "&.MuiButton-root":{
       marginTop: '45px',
       backgroundColor: '#21B95C',
@@ -87,40 +71,6 @@ export const useStyles = makeStyles({
       textTransform: 'unset',
       fontSize: '16px',
       zIndex: 2,
-      marginLeft: 'auto',
-      [`@media (max-width:${ScreenSize.tablet})`]: { // eslint-disable-line no-useless-computed-key
-        marginLeft: 'auto',
-        marginRight: 'auto'
-      }
-    },
-  },
-  input: {
-      // "&.MuiOutlinedInput-root": {
-      //   height: '50px'
-      // },
-      "& .MuiInputLabel-root": {
-      },
-      "& .Mui-focused": {
-          color: 'black !important'
-      },
-      "& fieldset": {
-          borderColor:'#1976D2',
-          borderRadius: '25px',
-          borderWidth: '2px'
-      },
-      "& MuiFormControl-root": {
-          borderRadius: '25px',
-          borderWidth: '2px'
-      },
-      "& input": {
-          backgroundColor: 'white',
-          borderRadius: '25px',
-          borderWidth: '2px'
-      },
-      "& .MuiInputBase-input": {
-          backgroundColor: "white",
-          borderRadius: "25px",
-          borderWidth: '2px'
-      }
+    }
   }
 });

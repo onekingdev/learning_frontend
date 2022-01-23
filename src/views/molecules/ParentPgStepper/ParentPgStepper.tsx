@@ -26,7 +26,7 @@ export const ParentPgStepper: FC<ParentPgStepperProps> = ({step}) => {
         <StepContent>Choose your plan</StepContent>
         <Line />
         <Point color={"#1771B9"} isCurrent={step === 2}> 2 </Point>
-        <StepContent color={"#1771B9"}>Set up your account</StepContent>
+        <StepContent color={"#1771B9"}>Set up you account</StepContent>
         <Line />
         <Point color={"#22BAAF"} isCurrent={step === 3}> 3 </Point>
         <StepContent color={"#22BAAF"}>Ready</StepContent>

@@ -22,22 +22,13 @@ export const Line = styled.div`
     width: 62px;
     margin-left: 10px;
     margin-right: 10px;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-        display: none
-    }
-    
 `;
 
 export const StepContent = styled.div`
     font-size: 24px;
     padding-left: 10px;
     color: ${props => props.color || "#21B95C"};
-    @media screen and (max-width: ${ScreenSize.phone}) {
-        display: none
-    }
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-        font-size: 3vw;
-    }
+    
 `;
 
 export const Point = styled.div`
@@ -53,11 +44,4 @@ export const Point = styled.div`
     color: ${(props: pointProps) => props.isCurrent && "white" || props.color};
     border-color: ${props => props.color || "#21B95C"};
     border-style: solid;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-        margin-left: 15px;
-    }
-    @media screen and (max-width: ${ScreenSize.phone}) {
-        margin: 15px;
-    }
-    
 `;

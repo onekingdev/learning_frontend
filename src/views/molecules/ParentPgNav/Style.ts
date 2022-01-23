@@ -9,13 +9,8 @@ export const Container = styled.div`
   min-height: 65px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 3.8vw;
   display: flex;
   justify-content: space-between;
-  @media screen and (max-width: ${ScreenSize.desktop}) {
-    padding-top: 4.2vw;
-    padding-bottom: 1.7vw;
-  }
 `;
 
 export const Home = styled.img`

@@ -78,17 +78,17 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
       </LogoContainer>
       <NameAvatarGroup>
         <FormControl className={classes.formControl}>
-          <InputLabel id="menu">Menu</InputLabel>
+          <InputLabel id="name">Age</InputLabel>
           <Select
-            labelId="menu"
-            id="menu-select"
+            labelId="name"
+            id="name-select"
             value={age}
-            label="Menu"
+            label="Name"
             onChange={handleChange}
           >
-            <MenuItem value={"settings"}>Settings</MenuItem>
-            <MenuItem value={"manageKids"}>Manage Kids</MenuItem>
-            <MenuItem value={"signOut"}>Sign Out</MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
           </Select>
         </FormControl>
         <Avatar sx={{ bgcolor: '#22BAAF', height:'60px', width:'60px', marginLeft: '15px'}} alt="Remy Sharp" src={avatar} />

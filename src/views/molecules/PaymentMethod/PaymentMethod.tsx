@@ -1,4 +1,4 @@
-import {FC, useEffect, ReactChildren, ReactChild, useState, useRef} from 'react';
+import {FC, useEffect, ReactChildren, ReactChild} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import {ParentPgNav} from '../ParentPgNav/ParentPgNav'
@@ -18,8 +18,6 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
-import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
-import {PaymentForm} from './PaymentForm'
 import {
   useStyles,
   Container,
@@ -41,36 +39,79 @@ import {
   FlexRow,
   Title
  } from './Style'
- import StripeInput from "./StripeInput";
-type PaymentMethodProps = {
+
+type PackagePanelProps = {
+  method: string;
   type: string;
   price: number;
-  path: any;
-  plan: string;
 };
-interface PaymentFormFunc {
-    handleOrder(): void;
-    handleUpdate(): void;
-}
-export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan}) => {
+
+export const PaymentMethod: FC<PackagePanelProps> = ({type, method, price}) => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
-  const stripe = useStripe();
-  const elements = useElements();
-  const paymentFormRef = useRef<PaymentFormFunc>(null)
-
-  const handleOrder = (event: any) => {
-    paymentFormRef?.current?.handleOrder()
-  }
 
   useEffect(() => {
   }, []);
-
   return (
     <Container>
         <PaymentContainer>
-            <PaymentForm isUpdate={false} ref={paymentFormRef}/>
+            <Title>Payment Method</Title>
+            <FormControl>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="female"
+                    name="radio-buttons-group"
+                >
+                    <FlexRow>
+                        <FormControlLabel value="paypal" control={<Radio className={classes.radio}/>} label="" ></FormControlLabel>
+                        <PayPal src={paypal}/>
+                        <Apple src={apple}/>
+                    </FlexRow>
+                    <Divider className={classes.divider} />
+                    <FlexRow>
+                        <FormControlLabel value="creditCard" control={<Radio className={classes.radio}/>} label="Credit or debit card" />
+                        <CardType src={visacard} />
+                    </FlexRow>
+                </RadioGroup>
+            </FormControl>
+            <div style={{fontSize: '24px', fontWeight: '700', paddingTop: '15px', paddingBottom: '15px'}}>Billing Information</div>
+            <Grid container spacing={4}>
+                <Grid item xs={12}>
+                    <TextField label="Full Name" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField label="Card Number" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField label="Expiry Date" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField label="CVC/CVV" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField label="Address Line 1" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField label="Address Line 2" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField label="City" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField label="State/ Province" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField label="Zip /Postal Code" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField label="Country" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+                <Grid item xs={12} md={12}>
+                    <TextField label="Phone" variant="outlined" fullWidth sx={{backgroundColor: 'white'}}/>
+                </Grid>
+            </Grid>
+            <div style={{color: '#BCC3C8', fontSize: '14px', paddingTop: '30px', paddingBottom: '30px'}}>Your transactions is secured SSL encryption</div>
         </PaymentContainer>
         <OrderContainer>
             <OrderTitleContainer>
@@ -92,11 +133,11 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan})
                     </OrderItemTitleContainer>
                     <OrderItemContent>$4.98</OrderItemContent>
                 </OrderItem>
-                <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>
-                    <Grid item md={6} xs={10}>
-                        <TextField label="Coupon code" variant="outlined" fullWidth className={`${classes.codeInput} ${classes.input}`}/>
+                <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px'}}>
+                    <Grid item xs={6}>
+                        <TextField label="Coupon code" variant="outlined" fullWidth sx={{backgroundColor: 'white'}} className={classes.codeInput}/>
                     </Grid>
-                    <Grid item md={6} xs={10}>
+                    <Grid item xs={6}>
                         <Button
                             variant="contained"
                             className={classes.codeButtn}
@@ -138,9 +179,9 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan})
                 </OrderTip>
                 <Button
                     variant="contained"
-                    className={classes.orderButton}
+                    className={classes.monthButton}
                     color="success"
-                    onClick={handleOrder}
+                    onClick={()=>{}}
                 >
                     Place an Order
                 </Button>
