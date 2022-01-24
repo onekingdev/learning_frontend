@@ -22,6 +22,9 @@ import financial_sole from '../../assets/packageIcons/financial_sole.svg'
 import health_sole from '../../assets/packageIcons/health_sole.svg'
 import Button from '../../molecules/MuiButton'
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
+import FormControl from '@mui/material/FormControl';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 
 import {
   useStyles,
@@ -36,6 +39,7 @@ import {
   Subject,
   SubjectIcon,
   SubjectTitle,
+  Mask,
  } from './Style'
 
 type PackagePanelProps = {
@@ -43,13 +47,13 @@ type PackagePanelProps = {
   plan: string;
   price: number;
   onSubmit: any;
+  disabled?: boolean;
 };
-export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price, onSubmit}) => {
+export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price, onSubmit, disabled=false}) => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
-  const [paths, setPaths] = useState([]);
-
+  const [paths, setPaths] = useState<any>(['']);
   const handleCheckPath = (path: string, isChecked: boolean) => {
     let temp:any = [];
     temp = [...paths];
@@ -60,7 +64,8 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price, onSubmit
   useEffect(() => {
   }, []);
   return (
-    <Container>
+    <Container color={type}>
+      { disabled && (<Mask />) }
       <Header color={type}>
         <Avatar src={avatar} />
         <b>{type}{" "}Package</b>
@@ -70,31 +75,31 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, plan, price, onSubmit
           <Subject>
             {type === "Gold" && (<SubjectIcon src={math_gold} />)}
             {type === "Combo" && (<><Checkbox sx={{color: BasicColor.aqua,'&.Mui-checked': {color: BasicColor.aqua,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("math", e.target.checked) }/><SubjectIcon src={math_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("math", e.target.checked) }/><SubjectIcon src={math_sole} /></>)}
+            {type === "Sole" && (<><Radio value={'math'} onClick={() => setPaths(['math'])} checked={paths[0] === 'math'} sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}}/><SubjectIcon src={math_sole} /></>)}
             <SubjectTitle>MATH</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={ela_gold} />)}
             {type === "Combo" && (<><Checkbox sx={{color: BasicColor.aqua,'&.Mui-checked': {color: BasicColor.aqua,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("ela", e.target.checked) }/><SubjectIcon src={ela_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("ela", e.target.checked) }/><SubjectIcon src={ela_sole} /></>)}
+            {type === "Sole" && (<><Radio value={"ela"} onClick={() => setPaths(['ela'])} checked={paths[0] === 'ela'} sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}}/><SubjectIcon src={ela_sole} /></>)}
             <SubjectTitle>ELA + SIGHT WORDS</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={science_gold} />)}
             {type === "Combo" && (<><Checkbox sx={{color: BasicColor.aqua,'&.Mui-checked': {color: BasicColor.aqua,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("science", e.target.checked) }/><SubjectIcon src={science_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("science", e.target.checked) }/><SubjectIcon src={science_sole} /></>)}
+            {type === "Sole" && (<><Radio value={"science"} onClick={() => setPaths(['science'])} checked={paths[0] === 'science'} sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}}/><SubjectIcon src={science_sole} /></>)}
             <SubjectTitle>SCIENCE</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={financial_gold} />)}
             {type === "Combo" && (<><Checkbox sx={{color: BasicColor.aqua,'&.Mui-checked': {color: BasicColor.aqua,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("financial", e.target.checked) }/><SubjectIcon src={financial_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("financial", e.target.checked) }/><SubjectIcon src={financial_sole} /></>)}
+            {type === "Sole" && (<><Radio value={"financial"} onClick={() => setPaths(['financial'])} checked={paths[0] === 'financial'} sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}}/><SubjectIcon src={financial_sole} /></>)}
             <SubjectTitle>FINANCIAL LITERACY</SubjectTitle>
           </Subject>
           <Subject>
             {type === "Gold" && (<SubjectIcon src={health_gold} />)}
             {type === "Combo" && (<><Checkbox sx={{color: BasicColor.aqua,'&.Mui-checked': {color: BasicColor.aqua,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("health", e.target.checked) }/><SubjectIcon src={health_combo} /></>)}
-            {type === "Sole" && (<><Checkbox sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} onChange={ (e) => handleCheckPath("health", e.target.checked) }/><SubjectIcon src={health_sole} /></>)}
+            {type === "Sole" && (<><Radio value={"health"} onClick={() => setPaths(['health'])} checked={paths[0] === 'health'} sx={{color: BasicColor.greenSoft,'&.Mui-checked': {color: BasicColor.greenSoft,},padding:'0px',paddingLeft: '9px', paddingRight: '9px'}} /><SubjectIcon src={health_sole} /></>)}
             <SubjectTitle>HEALTH & SAFETY</SubjectTitle>
           </Subject>
         </Subjects>

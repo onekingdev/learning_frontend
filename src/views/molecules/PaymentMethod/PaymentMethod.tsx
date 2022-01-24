@@ -6,12 +6,6 @@ import payOrderLog from '../../assets/pay-order-log.svg'
 import Button from '../../molecules/MuiButton'
 import TextField from '../../molecules/MuiTextField'
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import {PaymentForm} from './PaymentForm'
@@ -30,11 +24,6 @@ import {
   OrderItemSubtitle,
   OrderItemContent,
   OrderTip,
-  PayPal,
-  CardType,
-  Apple,
-  FlexRow,
-  Title
  } from './Style'
  import StripeInput from "./StripeInput";
 type PaymentMethodProps = {
@@ -57,6 +46,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan})
 
   const handleOrder = (event: any) => {
     paymentFormRef?.current?.handleOrder()
+    history.push('/parent/create')
   }
 
   useEffect(() => {

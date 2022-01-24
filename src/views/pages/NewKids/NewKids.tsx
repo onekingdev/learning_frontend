@@ -18,6 +18,7 @@ import socrates from '../../assets/socrates.svg'
 import Button from '../../molecules/MuiButton'
 import TextField from '../../molecules/MuiTextField'
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
+import { HistoryRounded } from '@mui/icons-material';
 
 const NewKids: FC = () => {
 
@@ -48,7 +49,7 @@ const NewKids: FC = () => {
     }
 
     const handleCreate = () => {
-
+        history.push('/kids/list')
     }
 
     const handleNext = () => {

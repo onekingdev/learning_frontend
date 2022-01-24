@@ -35,6 +35,7 @@ const NewAccount: FC = () => {
   const handleCreate = () => {
     if(!formValidation()) return;
     console.log("validation ok")
+    history.push('/kids/new');
   }
 
   const formValidation = () => {
@@ -60,7 +61,7 @@ const NewAccount: FC = () => {
             <Container>
                 <FormContainer>
                     <Title>Choose your name and password</Title>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={5}>
                         <Grid item xs={12}>
                             <TextField
                                 label="User Name"

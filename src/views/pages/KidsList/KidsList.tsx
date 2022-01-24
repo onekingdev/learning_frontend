@@ -42,7 +42,11 @@ const KidsList: FC = () => {
   }
 
   const Kid = (props:any) => {
-    const [password, setPassword]=  useState(props.password)
+
+    const [userName, setUserName] = useState(props.userName);
+    const [password, setPassword]=  useState(props.password);
+    const [grade, setGrade] = useState(props.grade)
+
     return (
     <div className="flex justify-center align-center p-b-50 w-100">
       <Avatar src={props.avatar} />
@@ -50,13 +54,13 @@ const KidsList: FC = () => {
           <Grid item xs={12} md={4}>
             <TextField
               label="User Name"
-              value={props.userName}
+              value={userName} onChange={(e) => setUserName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} md={3}>
             <TextField
-              label="Password"
-              value={password} onChange={(e)=>{setPassword(e.target.value)}}
+              label="Grade"
+              value={grade} onChange={(e)=>{setGrade(e.target.value)}}
             />
           </Grid>
           <Grid item xs={12} md={2.5}>
@@ -90,18 +94,22 @@ const KidsList: FC = () => {
       {
         userName: "armin",
         password: '123456',
+        grade: '1',
         avatar: kidAvatars[0]
       }, {
         userName: "armin",
         password: '123456',
-        avatar: kidAvatars[1]
+        grade: '1',
+          avatar: kidAvatars[1]
       }, {
         userName: "armin",
         password: '123456',
+        grade: '1',
         avatar: kidAvatars[2]
       }, {
         userName: "armin",
         password: '123456',
+        grade: '1',
         avatar: kidAvatars[0]
       },
     ])
