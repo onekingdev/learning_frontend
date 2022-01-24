@@ -1,6 +1,5 @@
 import { BLOCK, BLOCK_CONFIGURATION_KEYWORD, BLOCK_PRESENTATON, BLOCK_TYPE, BLOCK_TYPE_CONFIGURATION } from '../fragments/blockFragments';
-import {ANSWER_OPTION, AREA_OF_KNOWLEDGE, QUESTION, TOPIC, TOPIC_GRADE} from '../fragments/questionFragments';
-
+import {ANSWER_OPTION, AREA_OF_KNOWLEDGE, QUESTION, TOPIC} from '../fragments/questionFragments';
 
 export const TOPICS_QUERY = `
    { 
@@ -9,15 +8,6 @@ export const TOPICS_QUERY = `
         ${TOPIC}
       }
     }
-`;
-
-
-export const TOPIC_GRADE_QUERY = `
-  {
-    ${TOPIC_GRADE}
-    topic
-    ${TOPICS_QUERY}
-  }
 `;
 
 export const AREA_OF_KNOWLEDGE_QUERY = `
@@ -39,19 +29,14 @@ export const QUESTION_QUERY = `
 export const BLOCK_PRESENTATION_QUERY = `
     {
       ${BLOCK_PRESENTATON}
-      block{
-        ${BLOCK}
+      block
+        {
         questions{
             ${QUESTION}
             answeroptionSet
             ${ANSWER_OPTION}
-        }
-        topicGrade{
-          ${TOPIC_GRADE}
-          topic{
-            videoAssistor
           }
-        }
+        ${BLOCK}
         typeOf{
           ${BLOCK_TYPE}
             blocktypeconfigurationSet{

@@ -15,9 +15,18 @@ import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
+import {Account} from './views/pages/Account/Account';
+import NewAccount from './views/pages/NewAccount/NewAccount';
+import KidsList from './views/pages/KidsList/KidsList';
 import { useSelector } from 'react-redux';
 import { Store } from './app/configureStore'
+import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgContainer'
 
+// for bruce test
+import {Settings} from './views/pages/Settings/Settings';
+
+
+import NewKids from './views/pages/NewKids/NewKids'
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
   const user = useSelector((state : Store) => state.user)
   const isAuthenticated = !!user?.token;
@@ -83,6 +92,21 @@ export function Routes(props: any) {
         <PrivateRoute path="/topic/:topicId">
           <TopicsMenu />
         </PrivateRoute>
+        <PrivateRoute path="/parent/setting">
+          <Settings />
+        </PrivateRoute>
+        <PrivateRoute path="/parent/account">
+          <Account />
+        </PrivateRoute>
+        <PrivateRoute path="/parent/create">
+          <NewAccount />
+        </PrivateRoute>
+        <PrivateRoute path="/kids/list">
+          <KidsList />
+        </PrivateRoute>
+        <PrivateRoute path="/kids/new">
+          <NewKids />
+        </PrivateRoute>
         {process.env.NODE_ENV === 'development' ? (
           <Route path="/testing">
             <Testing />
@@ -92,4 +116,3 @@ export function Routes(props: any) {
     </Router>
   );
 }
-

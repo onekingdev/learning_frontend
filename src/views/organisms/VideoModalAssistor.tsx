@@ -8,17 +8,18 @@ import {ScreenSize} from '../screenSize';
 
 type VideoModalProps = {
   onClick: () => void;
-  source: string;
 };
-export const VideoModalAssistor: FC<VideoModalProps> = ({onClick,source}) => {
-
+export const VideoModalAssistor: FC<VideoModalProps> = ({onClick}) => {
+  const closeModal = () => {
+    console.log('Hella yes');
+  };
   return (
     <>
       <Modal>
         <ModalContainer>
           <ModalStyles>
             <CloseButton onClick={onClick}>X</CloseButton>
-            <VideoQuestion source={source} />
+            <VideoQuestion source="https://firebasestorage.googleapis.com/v0/b/trailers-e06ca.appspot.com/o/Stardew%20Valley.mp4?alt=media&token=072289ae-b88f-4070-be0b-75457ff5ef4d" />
           </ModalStyles>
         </ModalContainer>
       </Modal>
