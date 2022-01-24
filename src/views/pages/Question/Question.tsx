@@ -40,6 +40,7 @@ export const Question: FC = () => {
   const {presentationId} = useParams<RoutePresentationParams>();
   const state = useSelector((state: Store) => state)
   const [isFinished, setIsFinished] = useState(false);
+  const [video, setVideo] = useState<string>();
   //const dispatch = useDispatch();
   const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
   const [question, setQuestion] = useState<IQuestion>();
@@ -101,7 +102,8 @@ export const Question: FC = () => {
   }, [presentationId]);
 
   useEffect(() => {
-     setQuestion(blockPresentation?.block.questions[questionCounter])
+    setVideo(blockPresentation?.block.topicGrade.topic.videoAssistor)
+    setQuestion(blockPresentation?.block.questions[questionCounter])
   },[blockPresentation,questionCounter])
 
   const handleNextQuestion = () => {
@@ -122,7 +124,7 @@ export const Question: FC = () => {
         :
         blockPresentation && question ?
         <StudentMenu>
-        {showAssistor ? <VideoModalAssistor onClick={closeVideoModal} source={blockPresentation.block.topicGrade.topic.videoAssistor}/> : null}
+        {showAssistor ? <VideoModalAssistor onClick={closeVideoModal} source={video ? video : ''}/> : null}
         <ProgressWrapper>
           <LessonProgress
             currentQuestion={questionCounter + 1}
