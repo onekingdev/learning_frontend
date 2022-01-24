@@ -122,7 +122,7 @@ export const Question: FC = () => {
         :
         blockPresentation && question ?
         <StudentMenu>
-        {showAssistor ? <VideoModalAssistor onClick={closeVideoModal} /> : null}
+        {showAssistor ? <VideoModalAssistor onClick={closeVideoModal} source={blockPresentation.block.topicGrade.topic.videoAssistor}/> : null}
         <ProgressWrapper>
           <LessonProgress
             currentQuestion={questionCounter + 1}
