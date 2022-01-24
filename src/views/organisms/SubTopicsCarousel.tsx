@@ -7,22 +7,25 @@ import {ScreenSize} from '../screenSize';
 import rightArrow from '../assets/right-arrow.svg';
 import leftArrow from '../assets/left-arrow.svg';
 import {useHistory} from 'react-router-dom';
+import { ITopic } from '../../app/entities/block';
 
 type SubTopicProps = {
   name: string;
-  subTopics: [];
+  subTopics: ITopic[];
+  id: string;
 };
 
-export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics}) => {
+export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics,id}) => {
   const handleMoveRight = () => {
-    const carousel = document.getElementById(`${name}`);
+    console.log(id)
+    const carousel = document.getElementById(`${id}`);
     if (carousel) {
       return (carousel.scrollLeft += carousel.offsetWidth);
     }
     return;
   };
   const handleMoveLeft = () => {
-    const carousel = document.getElementById(`${name}`);
+    const carousel = document.getElementById(`${id}`);
     if (carousel) {
       return (carousel.scrollLeft -= carousel.offsetWidth);
     }
@@ -39,11 +42,12 @@ export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics}) => {
           <CarouselButton onClick={handleMoveLeft}>
             <img src={leftArrow} />
           </CarouselButton>
-          <CarouselStyle id={name}>
-            {subTopics.map((item: {name: string}) => (
+          <CarouselStyle id={id}>
+            {subTopics.map((item: {name: string}, i:any) => (
               <SubTopicCard
                 onClick={() => history.push('/question')}
                 name={item.name}
+                key={i}
               />
             ))}
           </CarouselStyle>

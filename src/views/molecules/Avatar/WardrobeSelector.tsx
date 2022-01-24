@@ -1,4 +1,4 @@
-import {FC, SetStateAction, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {ScreenSize} from '../../screenSize';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
@@ -8,18 +8,21 @@ import drawer_accessories from '../../assets/drawers/drawer_accessories.png';
 import drawer_hairs from '../../assets/drawers/drawer_hairs.png';
 import drawer_clothes from '../../assets/drawers/drawer_clothes.png';
 import drawer_pants from '../../assets/drawers/drawer_pants.png';
-import {accessories, headers, footers} from '../../pages/Avatar/atoms';
-import {getAvatarAsset, getAvatarDir} from '../../../app/firebase';
-import axios from 'axios';
+import {
+  accessories,
+  headers,
+  bodies,
+  footers,
+} from '../../pages/Avatar/atoms';
 // import data from '../../pages/Avatar/atoms';
 export const WardrobeSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
   const placeHolder = serverUrl + 'assets/avatars/placeholder.png';
-  // const accessories_max = accessories.length;
-  // const headers_max = headers.length;
-  // const bodies_max = bodies.length;
-  // const footers_max = footers.length;
-
+  const accessories_max = accessories.length;
+  const headers_max = headers.length;
+  const bodies_max = bodies.length;
+  const footers_max = footers.length;
+  
   const [accessoryIndex, setAccessoryIndex] = useState(1);
   const [headerIndex, setHeaderIndex] = useState(1);
   const [bodyIndex, setBodyIndex] = useState(1);
@@ -28,179 +31,6 @@ export const WardrobeSelector: FC = () => {
   const [iconSize, setIconSize] = useState(80);
   const [atomSize, setAtomSize] = useState(113);
   const width = window.screen.width;
-
-  const [accesoryRef, setAccesoryRef] = useState('');
-  const [headRef, setHeadRef] = useState('');
-  const [bodyRef, setBodyRef] = useState('');
-  const [footRef, setFootRef] = useState('');
-
-  const [accessories, setAccessories] = useState([]);
-  const [headers, setHeaders] = useState([]);
-  const [bodies, setBodies] = useState([]);
-  const [footers, setFooters] = useState([]);
-
-  useEffect(() => {
-    // setSelected avatar
-    // getAvatarAsset('accessories', 'bear_hat.svg', setAccesoryRef);
-    // getAvatarAsset('heads', 'boy1.svg', setHeadRef);
-    // getAvatarAsset('bodies', 'tshirt1.svg', setBodyRef);
-    // getAvatarAsset('pants', 'pants1.svg', setFootRef);
-
-    const params = window.location.pathname.split('/')[2];
-
-    switch (params) {
-      case 'accessories':
-        currentAtomIndex(1);
-        break;
-      case 'head':
-        currentAtomIndex(2);
-        break;
-      case 'body':
-        currentAtomIndex(3);
-        break;
-      case 'pants':
-        currentAtomIndex(4);
-        break;
-      default:
-        break;
-    }
-
-    console.log(params);
-
-    getAvatarDir('accessories', setAccessories);
-    getAvatarDir('heads', setHeaders);
-    getAvatarDir('bodies', setBodies);
-    getAvatarDir('pants', setFooters);
-
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        {
-          studentById(id: "1") {
-            avatarAccessories {
-                image
-            }
-            avatarHead {
-              image
-            }
-            avatarClothes {
-              image
-            }
-            avatarPants {
-              image
-            }
-          }
-        }
-          `,
-      },
-    }).then((result: any) => {
-      const accesory = result.data.data.studentById.avatarAccessories.image;
-      const head = result.data.data.studentById.avatarHead.image;
-      const body = result.data.data.studentById.avatarClothes.image;
-      const foot = result.data.data.studentById.avatarPants.image;
-
-      setAccesoryRef(accesory);
-      setHeadRef(head);
-      setBodyRef(body);
-      setFootRef(foot);
-    });
-  }, []);
-
-  const setAccessory = (i: number) => {
-    const head = accessories[i];
-    setAccesoryRef(head);
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        mutation SetAvatar {
-          setStudentAvatar(avatarTypeOf:1, studentId:1, avatarUrl: "${accessories[i]}") {
-             student {
-               id
-             }
-         }
-     }
-          `,
-      },
-    }).then(console.log);
-  };
-
-  const setHeader = (i: number) => {
-    const head = headers[i];
-    setHeadRef(head);
-
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        mutation SetAvatar {
-          setStudentAvatar(avatarTypeOf:2, studentId:1, avatarUrl: "${headers[i]}") {
-             student {
-               id
-             }
-         }
-     }
-          `,
-      },
-    }).then(console.log);
-  };
-
-  const setBody = (i: number) => {
-    const head = bodies[i];
-    setBodyRef(head);
-
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        mutation SetAvatar {
-          setStudentAvatar(avatarTypeOf:3, studentId:1, avatarUrl: "${bodies[i]}") {
-             student {
-               id
-             }
-         }
-     }
-          `,
-      },
-    }).then(console.log);
-  };
-
-  const setFooter = (i: number) => {
-    const head = footers[i];
-    setFootRef(head);
-
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        mutation SetAvatar {
-          setStudentAvatar(avatarTypeOf:4, studentId:1, avatarUrl: "${footers[i]}") {
-             student {
-               id
-             }
-         }
-     }
-          `,
-      },
-    }).then(console.log);
-  };
-
-  useEffect(() => {
-    console.log('accesory');
-    console.log(accesoryRef);
-  }, [accesoryRef]);
-
-  useEffect(() => {
-    console.log('directory');
-    console.log(bodies);
-  }, [bodies]);
-
   useEffect(() => {
     width > 420 ? setIconSize(80) : setIconSize(30);
     width > 420 ? setAtomSize(113) : setIconSize(83);
@@ -216,10 +46,7 @@ export const WardrobeSelector: FC = () => {
           <WardrobeScroll>
             {accessories.map((item, i) => (
               <WardrobeAtom
-                onClick={() => {
-                  setAccessory(i);
-                  setAccessoryIndex(i);
-                }}
+                onClick={() => setAccessoryIndex(i)}
                 style={
                   accessoryIndex === i
                     ? {
@@ -232,7 +59,7 @@ export const WardrobeSelector: FC = () => {
                 }
               >
                 <AtomImg
-                  src={item}
+                  src={serverUrl + item.image}
                   style={
                     accessoryIndex === i
                       ? {
@@ -254,10 +81,7 @@ export const WardrobeSelector: FC = () => {
           <WardrobeScroll>
             {headers.map((item, i) => (
               <WardrobeAtom
-                onClick={() => {
-                  setHeader(i);
-                  setHeaderIndex(i);
-                }}
+                onClick={() => setHeaderIndex(i)}
                 style={
                   headerIndex === i
                     ? {
@@ -270,7 +94,7 @@ export const WardrobeSelector: FC = () => {
                 }
               >
                 <AtomImg
-                  src={item}
+                  src={serverUrl + item.image}
                   style={
                     headerIndex === i
                       ? {
@@ -290,12 +114,9 @@ export const WardrobeSelector: FC = () => {
       case 3:
         return (
           <WardrobeScroll>
-            {bodies.map((item: string, i: number) => (
+            {bodies.map((item, i) => (
               <WardrobeAtom
-                onClick={() => {
-                  setBodyIndex(i);
-                  setBody(i);
-                }}
+                onClick={() => setBodyIndex(i)}
                 style={
                   bodyIndex === i
                     ? {
@@ -308,7 +129,7 @@ export const WardrobeSelector: FC = () => {
                 }
               >
                 <AtomImg
-                  src={item}
+                  src={serverUrl + item.image}
                   style={
                     bodyIndex === i
                       ? {
@@ -330,10 +151,7 @@ export const WardrobeSelector: FC = () => {
           <WardrobeScroll>
             {footers.map((item, i) => (
               <WardrobeAtom
-                onClick={() => {
-                  setFooterIndex(i);
-                  setFooter(i);
-                }}
+                onClick={() => setFooterIndex(i)}
                 style={
                   footerIndex === i
                     ? {
@@ -346,7 +164,7 @@ export const WardrobeSelector: FC = () => {
                 }
               >
                 <AtomImg
-                  src={item}
+                  src={serverUrl + item.image}
                   style={
                     footerIndex === i
                       ? {
@@ -379,23 +197,23 @@ export const WardrobeSelector: FC = () => {
       <SelectorGrid>
         <CurrentAvatar>
           <CurrentAccessory
-            src={accesoryRef}
+            src={serverUrl + accessories[accessoryIndex].image}
             style={{
-              width: 1 * 160 + 'px',
-              top: '-35px',
-              left: '0px',
+              width: accessories[accessoryIndex].scale * 160 + 'px',
+              top: accessories[accessoryIndex].top + 'px',
+              left: accessories[accessoryIndex].left + 'px',
             }}
           />
           <CurrentHeader
-            src={headRef}
-            // style={{
-            //   width: headers[headerIndex].scale * 160 + 'px',
-            //   top: headers[headerIndex].top + 'px',
-            //   left: headers[headerIndex].left + 'px',
-            // }}
+            src={serverUrl + headers[headerIndex].image}
+            style={{
+              width: headers[headerIndex].scale * 160 + 'px',
+              top: headers[headerIndex].top + 'px',
+              left: headers[headerIndex].left + 'px',
+            }}
           />
-          <CurrentBody src={bodyRef} />
-          <CurrentFooter src={footRef} />
+          <CurrentBody src={serverUrl + bodies[bodyIndex].image} />
+          <CurrentFooter src={serverUrl + footers[footerIndex].image} />
         </CurrentAvatar>
         <BodyPartWardrobe src={wardrobe}></BodyPartWardrobe>
         <AtomsDrawer>
