@@ -1,11 +1,10 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import { IAnswer } from '../../../app/entities/block';
 import {Lesson} from '../../atoms/Text/Lesson';
 import {ScreenSize} from '../../screenSize';
 
 type ChoiceTextProps = {
-  options: IAnswer[];
+  options: {value: string}[];
 };
 
 export const MultipleChoiceText: FC<ChoiceTextProps> = ({options}) => {
@@ -14,7 +13,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({options}) => {
       <TextOptionsList>
         {options.map((option, i) => (
           <TextOptionItem key={i}>
-            <Lesson>{option.answerText}</Lesson>
+            <Lesson>{option.value}</Lesson>
           </TextOptionItem>
         ))}
       </TextOptionsList>

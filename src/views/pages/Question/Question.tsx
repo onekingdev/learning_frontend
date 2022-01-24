@@ -27,30 +27,34 @@ import assistor from '../../assets/text-to-speech.svg';
 import {IconSize} from '../../atoms/Icon/Size';
 import { get } from '../../../api/queries/get';
 import { BLOCK_PRESENTATION_QUERY } from '../../../api/queries/questions';
-import { IAnswer, IBlockPresentation, IQuestion } from '../../../app/entities/block';
-import { useSelector } from 'react-redux';
+import { IBlockPresentation } from '../../../app/entities/block';
+import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../../app/configureStore';
-import { useParams } from 'react-router-dom';
-//import * as TYPE from '../../../app/types';
-interface RoutePresentationParams {
-  presentationId: string;
-}
+import * as TYPE from '../../../app/types';
+
 
 export const Question: FC = () => {
   // TODO answers and options must come from DB
   // TODO and the type should be much more roboust
   const [value, setValue] = useState('');
-  const {presentationId} = useParams<RoutePresentationParams>();
   const state = useSelector((state: Store) => state)
-  const [isFinished, setIsFinished] = useState(false);
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
-  const [question, setQuestion] = useState<IQuestion>();
-  const [answer, setAnswer] = useState<IAnswer>()
-  const [questionCounter, setQuestionCounter] = useState(0);
+  const [answer, setAnswer] = useState('');
+  const [question, setQuestion] = useState('')
+
   const handleDataa = (data: any) => {
     console.log("Data is", data);
   }
+
+  useEffect(() => {
+    get(
+      `blocksPresentation`,
+      `${BLOCK_PRESENTATION_QUERY}`,
+      handleDataa,
+      handleError
+    );
+  }, []);
 
   const options = [
     {image: apple},
@@ -58,14 +62,20 @@ export const Question: FC = () => {
     {image: apple},
     {image: apple},
   ];
-
+  const answers = [
+    {value: 'apple'},
+    {value: 'apple'},
+    {value: 'apple'},
+    {value: 'apple'},
+  ];
   const optionsText = [
     {value: 'Hello friend'},
-    {value: 'Hello'},
-    {value: 'Hello hella'},
-    {value: 'Hello f'},
+    {value: 'Hello friend'},
+    {value: 'Hello friend'},
+    {value: 'Hello friend'},
   ];
-  const answerText = true;
+  const answerText = false;
+  const questionType = 'image';
   const [showAssistor, setShowAssistor] = useState(false);
   const onChange = (e:any) => {
     setValue(e.target.value);
@@ -77,7 +87,7 @@ export const Question: FC = () => {
   const isLessonFinished = false;
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
-    //dispatch({ type: TYPE.SET_BLOCK_PRESENTATION, payload: data.data.blockPresentationById})
+    dispatch({ type: TYPE.SET_BLOCK_PRESENTATION, payload: data.data.blockPresentationById})
   };
 
   const handleError = (error: any) => {
@@ -85,35 +95,32 @@ export const Question: FC = () => {
   };
   useEffect(() => {
     get(
-      `blockPresentationById(id:"${presentationId}")`,
+      'blockPresentationById(id:"1")',
       BLOCK_PRESENTATION_QUERY,
       handleData,
       handleError
     );
-  }, [presentationId]);
+      console.log(state.blockPresentation,'blokkkkkk')
+  }, [])
 
-  useEffect(() => {
-     setQuestion(blockPresentation?.block.questions[questionCounter])
-     console.log(blockPresentation)
-  },[blockPresentation,questionCounter])
-
-  const handleNextQuestion = () => {
-
-    const counter = questionCounter + 1;
-    setQuestionCounter(counter)
-
+  const handleQuestion = () => {
+    const topics = blockPresentation?.block
+    const questions = topics?.questions[0]
+    const answer = questions?.answeroptionSet[0].answerText
+    console.log(blockPresentation?.block)
+    if(value === answer){
+      console.log('correct')
+    }
   }
   return (
     <Wrapper>
-      {
-        blockPresentation && question ?
-        <StudentMenu>
+      <StudentMenu>
         {showAssistor ? <VideoModalAssistor onClick={closeVideoModal} /> : null}
         <ProgressWrapper>
           <LessonProgress
-            currentQuestion={questionCounter + 1}
+            currentQuestion={1}
             topic={'Math'}
-            totalQuestions={blockPresentation?.block.questions.length}
+            totalQuestions={10}
           />
         </ProgressWrapper>
         {isLessonFinished ? (
@@ -121,11 +128,11 @@ export const Question: FC = () => {
         ) : (
           <Container id="container">
             <BlackBoard>
-              <Lesson>{question.questionText}</Lesson>
-              {blockPresentation?.block.typeOf.name === 'image' ? (
+              <Lesson>{state.blockPresentation?.block.questions[0].questionText}</Lesson>
+              {questionType !== 'image' ? (
                 <MultipleChoiceImage options={options} />
               ) : (
-                <MultipleChoiceText options={question.answeroptionSet} />
+                <MultipleChoiceText options={optionsText} />
               )}
               <AssistorContainer>
                 <Icon image={assistor} />
@@ -136,14 +143,14 @@ export const Question: FC = () => {
                 />
               </AssistorContainer>
             </BlackBoard>
-           { <AnswerWrapper>
+            <AnswerWrapper>
               <Lesson>What is the answer?</Lesson>
               <Answers>
                 {answerText ? (
-                  question.answeroptionSet.map((answer, i) => (
+                  answers.map((answer, i) => (
                     <Button
                       key={i}
-                      value={answer.answerText}
+                      value={answer.value}
                       color={ButtonColor.google}
                       darkText={true}
                     />
@@ -155,15 +162,12 @@ export const Question: FC = () => {
                 )}
               </Answers>
               <Submit>
-                <Button value={'validate'} onClick={handleNextQuestion} />
+                <Button value={'validate'} onClick={handleQuestion} />
               </Submit>
-            </AnswerWrapper>}
+            </AnswerWrapper>
           </Container>
         )}
       </StudentMenu>
-      :
-      <StudentMenu>Loading</StudentMenu>
-    }
     </Wrapper>
   );
 };
