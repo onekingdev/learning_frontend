@@ -1,4 +1,4 @@
-import {IClassmate} from './classmate';
+import {IClassmate} from './classMate';
 
 export interface IGroup {
   groupMembers: Array<IClassmate>;
