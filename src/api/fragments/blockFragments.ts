@@ -37,7 +37,7 @@ export const BLOCK = `
 `;
 
 export const BLOCK_PRESENTATON = `
-    
+    {
         id
         identifier
         isActive
@@ -46,7 +46,7 @@ export const BLOCK_PRESENTATON = `
         errors
         total
         points
-    
+    }
 `;
 
 export const BLOCK_QUESTION = `
