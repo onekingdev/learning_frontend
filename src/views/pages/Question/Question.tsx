@@ -136,7 +136,7 @@ export const Question: FC = () => {
                 <Icon image={videoIcon} onClick={() => setShowAssistor(true)}/>
               </IconVideoContainer>
               <QuestionText>{question.questionText}</QuestionText>
-              <MultipleChoiceText options={question.answeroptionSet}/>
+              {renderTypes(question, blockPresentation.block.typeOf.name)}
               <AssistorContainer>
               <Button value={blockPresentation.block.questions.length < questionCounter + 2 ? 'Finish' : 'Next'} color={ButtonColor.next} onClick={handleNextQuestion} darkText/>
                 <Icon image={assistor} />

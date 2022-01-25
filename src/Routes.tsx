@@ -1,4 +1,9 @@
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
@@ -15,28 +20,36 @@ import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
-import { useSelector } from 'react-redux';
-import { Store } from './app/configureStore'
+import {useSelector} from 'react-redux';
+import {Store} from './app/configureStore';
+import {Wardrobe} from './views/pages/Avatar/Wardrobe';
 
-const PrivateRoute = ({requireAuth=true, ...rest}) => {
-  const user = useSelector((state : Store) => state.user)
+const PrivateRoute = ({requireAuth = true, ...rest}) => {
+
+  const user = useSelector((state: Store) => state.user);
   const isAuthenticated = !!user?.token;
 
   return (
-    <Route
-      {...rest}
-    >
-      {requireAuth ? (isAuthenticated ? rest.children : <Redirect to={{pathname: '/login'}} />) : rest.children}
-      </Route>
-  )
-}
+    <Route {...rest}>
+      {requireAuth ? (
+        isAuthenticated ? (
+          rest.children
+        ) : (
+          <Redirect to={{pathname: '/login'}} />
+        )
+      ) : (
+        rest.children
+      )}
+    </Route>
+  );
+};
 
 export function Routes(props: any) {
   return (
     <Router>
       <Switch>
         <PrivateRoute exact path="/" requireAuth={false}>
-            <Welcome />
+          <Welcome />
         </PrivateRoute>
         <PrivateRoute path="/login" requireAuth={false}>
           <LogIn />
@@ -46,6 +59,9 @@ export function Routes(props: any) {
         </PrivateRoute>
         <PrivateRoute path="/avatar">
           <Avatar />
+        </PrivateRoute>
+        <PrivateRoute path="/wardrobe">
+          <Wardrobe />
         </PrivateRoute>
         <PrivateRoute path="/collectibles/category_:categoryId/:collectibleId">
           <CardCollectible />
@@ -92,4 +108,3 @@ export function Routes(props: any) {
     </Router>
   );
 }
-
