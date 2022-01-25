@@ -4,10 +4,10 @@ import {FC, useEffect} from 'react';
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 
-import { CLabel, LSButtonContainer, LSButton } from './utils/Style';
-import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
+import { CLabel, LSButtonContainer, LSButton } from '../utils/Style';
+import { LSFormControl, LSRadio, LSFormControlLabel } from '../utils/Style';
 
-import { dictionary } from './utils/dictionary';
+import { dictionary } from '../dictionary';
 
 
 interface ICancelFormProps {

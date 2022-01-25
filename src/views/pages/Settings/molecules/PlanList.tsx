@@ -11,8 +11,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { LSBlueTextButton } from '../../pages/Settings/Style';
-import { useDialog } from './utils/useDialog';
+import { LSBlueTextButton } from '../utils/Style';
+import { useDialog } from '../utils/useDialog';
 import { LSDialog } from './LSDialog';
 import { CancelForm } from './CancelForm';
 
@@ -47,6 +47,26 @@ export const PlanList:FC = () => {
 
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+      {/* <FormGroup row>
+        <FormControlLabel
+          control={
+            <Checkbox
+              // checked={dense}
+              onChange={(event) => setDense(event.target.checked)}
+            />
+          }
+          label="Enable dense"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              // checked={secondary}
+              onChange={(event) => setSecondary(event.target.checked)}
+            />
+          }
+          label="Enable secondary text"
+        />
+      </FormGroup> */}
       <Grid container spacing={2}>
         <Grid item xs={12} md={12}>
           <Demo>
@@ -59,6 +79,7 @@ export const PlanList:FC = () => {
                 >
                   <ListItemText
                     primary='1 child combo'
+                    // secondary={secondary ? 'Secondary text' : null}
                   />
                 </ListItem>,
               )}

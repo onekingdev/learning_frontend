@@ -86,9 +86,8 @@ const enhancer = composeWithDevTools(
 );
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-export const store: any = createStore(persistedReducer, enhancer);
 export default function configureStore(onCompletion: any) {
-    // let store: any = createStore(persistedReducer, enhancer);
-    const persistor = persistStore(store);
-    return {store, persistor};
+  const store: any = createStore(persistedReducer, enhancer);
+  const persistor = persistStore(store);
+  return {store, persistor};
 }

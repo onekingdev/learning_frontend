@@ -35,6 +35,7 @@ export const Account: FC = () => {
   const [packagePrice, setPackagePrice] = useState(0);
   const [planType, setPlanType] = useState("month");
   const [path, setPath] = useState()
+  const [showPaymentMethod, setShowPaymentMethod] = useState(false)
 
   const setPackPrice = () => {
     /*------------ get package price data from db -S--------------*/
@@ -49,6 +50,12 @@ export const Account: FC = () => {
     setPackagePrice(gold);
   }
 
+  const onPackageSubmit = (type: string, paths: any) => {
+    setPackageType(type);
+    setPath(paths);
+    setShowPaymentMethod(true)
+  }
+
   useEffect(() => {
     setPackPrice();
   }, []);
@@ -61,8 +68,8 @@ export const Account: FC = () => {
                 <b>Choose your plan</b>
                 <br />
                 <FlexRow style={{flexWrap: 'unset'}}>
-                  <Button bgColor={BasicColor.green} fontSize={24} value="Monthly" onClick={()=>{setPlanType("year")}} />
-                  <Button fontSize={24} variant="outlined" color="black" borderColor="black" value="Yearly" margin="0 0 0 -64px" onClick={()=>{setPlanType("month")}} />
+                  <Button bgColor={BasicColor.green} fontSize={24} value="Monthly" onClick={()=>{setPlanType("month")}} />
+                  <Button fontSize={24} variant="outlined" color="black" borderColor="black" value="Yearly" margin="0 0 0 -64px" onClick={()=>{setPlanType("year")}} />
                 </FlexRow>
               </FlexColumn>
               <FlexColumn>
@@ -78,12 +85,12 @@ export const Account: FC = () => {
               </FlexColumn>
             </SettingContainer>
             <PackageContainer>
-              <PackagePanel type="Gold" price={priceGold} plan={planType} onSubmit={(paths:any) => {setPackageType("Gold"); setPath(paths) }}/>
-              <PackagePanel type="Combo" price={priceCombo} plan={planType} onSubmit={(paths:any) => {setPackageType("Combo"); setPath(paths)}  }/>
-              <PackagePanel type="Sole" price={priceSole} plan={planType} onSubmit={(paths:any) => {setPackageType("Sole");  setPath(paths)} }/>
+              <PackagePanel type="Gold" price={priceGold} plan={planType} onSubmit={(paths:any) => onPackageSubmit("Gold", paths) }/>
+              <PackagePanel type="Combo" price={priceCombo} plan={planType} onSubmit={(paths:any) => onPackageSubmit("Combo", paths) }/>
+              <PackagePanel type="Sole" price={priceSole} plan={planType} onSubmit={(paths:any) => onPackageSubmit("Sole", paths) }/>
             </PackageContainer>
             <Elements stripe={stripePromise}>
-              <PaymentMethod type={packageType} price={packagePrice} path={path} plan={planType}/>
+              {showPaymentMethod && <PaymentMethod type={packageType} price={packagePrice} path={path} plan={planType} kidNum={childrenCount}/> }
             </Elements>
           </>
         </ParentPgContainer>

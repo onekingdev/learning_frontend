@@ -4,14 +4,12 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-import {
-  FormContainer, LSButtonContainer, CGridRow, LSTextField, LSTitle, CText, CLabel,
-  CIntentText,  TextGroup, LSButton,LSBlueTextButton
- } from '../../molecules/Setting/utils/Style';
+import { CIntentText, FormContainer, LSButtonContainer, CGridRow, LSTextField, LSTitle, CText, CLabel, TextGroup} from '../utils/Style';
+import { LSButton,LSBlueTextButton } from '../utils/Style';
 
-import { dictionary } from '../../molecules/Setting/utils/dictionary';
+import {dictionary} from '../dictionary';
 
-import { settingPage } from '../../molecules/Setting/utils/Theme';
+import { settingPage } from '../utils/Theme';
 import { ThemeProvider } from '@mui/material';
 
 

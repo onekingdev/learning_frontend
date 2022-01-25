@@ -18,6 +18,7 @@ import socrates from '../../assets/socrates.svg'
 import Button from '../../molecules/MuiButton'
 import TextField from '../../molecules/MuiTextField'
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
+import { HistoryRounded } from '@mui/icons-material';
 
 const NewKids: FC = () => {
 
@@ -26,15 +27,19 @@ const NewKids: FC = () => {
     const language = 'en';
     const classes = useStyles();
 
-    const [packageName, setPackageName] = useState("Gold")
+    const [availablePackages, setAvailablePackages] = useState<string[]>([]);
+    const [packageName, setPackageName] = useState<string>("Gold");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [confPassword, setConfPassword] = useState("");
     const [grade, setGrade] = useState("");
+    const [childNum, setChildNum] = useState(0);
+    const [childIdx, setChildIdx] = useState(1)
+    const [childs, setChilds] = useState([{}])
 
-    const [validateMsg, setValidateMsg] = useState({
+    const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
         firstName: null,
         lastName: null,
         userId: null,
@@ -47,11 +52,29 @@ const NewKids: FC = () => {
         setValidateMsg({...validateMsg, [field]: errMsg})
     }
 
-    const handleCreate = () => {
+    const handlePrev = () => {
 
     }
-
     const handleNext = () => {
+        if(!formValidation()) return;
+        if(childIdx === childNum) {
+            saveChild();
+            return;
+        }
+
+        const temp = [...availablePackages];
+        const inex = temp.indexOf(packageName)
+        delete temp[inex];
+        setAvailablePackages(temp);
+        setChilds([...childs, {
+            package: packageName,
+            firstName: firstName,
+            lastName: lastName,
+            userId: userId,
+            password: password,
+            grade: grade,
+        }])
+        setChildIdx(childIdx+1);
         setValidateMsg({
             firstName: null,
             lastName: null,
@@ -60,7 +83,7 @@ const NewKids: FC = () => {
             confPassword: null,
             grade: null,
         })
-        setPackageName("Gold")
+        setPackageName(temp[0])
         setFirstName("")
         setLastName("")
         setUserId("")
@@ -69,7 +92,25 @@ const NewKids: FC = () => {
         setGrade("")
     }
 
+    const saveChild = () => {
+        history.push('/kids/list')
+    }
+
+    const formValidation = () => {
+        const validateMsgTemp = {...validateMsg}
+        let valiResult = true;
+        for(const key in validateMsg) {
+          if(validateMsg[key] === null) {
+              validateMsgTemp[key] = "Field is required";
+          }
+          if(validateMsgTemp[key]) valiResult = false;
+        }
+        setValidateMsg(validateMsgTemp);
+        return valiResult;
+    }
   useEffect(() => {
+    setAvailablePackages(["Gold","Sole","Combo"])
+    setChildNum(2);
   }, []);
 
   return (
@@ -100,9 +141,10 @@ const NewKids: FC = () => {
                                     setPackageName(e.target.value);
                                 }}
                             >
-                                <MenuItem value={"Gold"}>Gold</MenuItem>
-                                <MenuItem value={"Combo"}>Combo</MenuItem>
-                                <MenuItem value={"Sole"}>Sole</MenuItem>
+                                {availablePackages.map((value, index) => (
+                                    <MenuItem value={value} key={index}>{value}</MenuItem>
+
+                                ))}
                             </Select>
                         </FormControl>
                     </Grid>
@@ -115,6 +157,7 @@ const NewKids: FC = () => {
                             }}
                             error={!!validateMsg.firstName}
                             helperText={validateMsg.firstName}
+                            value={firstName}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -126,6 +169,7 @@ const NewKids: FC = () => {
                             }}
                             error={!!validateMsg.lastName}
                             helperText={validateMsg.lastName}
+                            value={lastName}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -137,6 +181,7 @@ const NewKids: FC = () => {
                             }}
                             error={!!validateMsg.userId}
                             helperText={validateMsg.userId}
+                            value={userId}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -148,6 +193,7 @@ const NewKids: FC = () => {
                             }}
                             error={!!validateMsg.password}
                             helperText={validateMsg.password}
+                            value={password}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -159,6 +205,7 @@ const NewKids: FC = () => {
                             }}
                             error={!!validateMsg.confPassword}
                             helperText={validateMsg.confPassword}
+                            value={confPassword}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -170,13 +217,14 @@ const NewKids: FC = () => {
                             }}
                             error={!!validateMsg.grade}
                             helperText={validateMsg.grade}
+                            value={grade}
                         />
                     </Grid>
                     <Grid item xs={12} md={12} lg={6}>
-                        <Button value="Create Kid" bgColor={ButtonColor.create} onClick={handleCreate}/>
+                        {childIdx > 1 &&(<Button value="Previous Kid" bgColor={ButtonColor.create} onClick={handlePrev}/>)}
                     </Grid>
                     <Grid item xs={12} md={12} lg={6}>
-                        <Button value="Next Kid" bgColor={ButtonColor.nextKid} onClick={handleNext} align="right" />
+                        <Button value={childNum !== childIdx ? "Next Kid" : "Finish"} bgColor={childNum !== childIdx ? ButtonColor.nextKid : ButtonColor.create} onClick={handleNext} align="right" />
                     </Grid>
                 </Grid>
             </Paper>

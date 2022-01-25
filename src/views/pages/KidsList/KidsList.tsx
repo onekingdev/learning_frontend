@@ -15,6 +15,12 @@ import TextField from '../../molecules/MuiTextField'
 import Button from '../../molecules/MuiButton'
 import {ButtonColor, BasicColor} from '../../Color';
 import { Title, Avatar, Container} from './Style'
+interface kid {
+  username: string;
+  password: string;
+  grade: string;
+  avatar: string
+}
 const KidsList: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
@@ -22,10 +28,9 @@ const KidsList: FC = () => {
   const classes = useStyles();
   const kidAvatars = [kidA, kidB, kidC]
 
-  const [children, setChildren] = useState([{}]);
+  const [children, setChildren] = useState<kid[]>([]);
 
   const handleDelete = (index: number) => {
-    console.log(index)
     const temp:any = [...children];
     temp.pop(temp[index]);
     setChildren(temp)
@@ -41,8 +46,34 @@ const KidsList: FC = () => {
     setChildren(temp)
   }
 
+  const handleSave = () => {
+    console.log(children);
+  }
+
   const Kid = (props:any) => {
-    const [password, setPassword]=  useState(props.password)
+
+    const [username, setUsername] = useState(props.username);
+    const [password, setPassword]=  useState(props.password);
+    const [grade, setGrade] = useState(props.grade)
+
+    const updateUsername = (value: any) => {
+        setUsername(value);
+        children[props.index].username = value;
+        setChildren(children)
+    }
+
+    const updatePassword = (value: any) => {
+      setPassword(value);
+      children[props.index].password = value;
+      setChildren(children)
+    }
+
+    const updateGrade = (value: any) => {
+      setGrade(value);
+      children[props.index].grade = value;
+      setChildren(children)
+    }
+
     return (
     <div className="flex justify-center align-center p-b-50 w-100">
       <Avatar src={props.avatar} />
@@ -50,19 +81,21 @@ const KidsList: FC = () => {
           <Grid item xs={12} md={4}>
             <TextField
               label="User Name"
-              value={props.userName}
+              value={username}
+              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => updateUsername(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} md={3}>
             <TextField
-              label="Password"
-              value={password} onChange={(e)=>{setPassword(e.target.value)}}
+              label="Grade"
+              value={grade} onChange={(e)=>{updateGrade(e.target.value)}}
             />
           </Grid>
           <Grid item xs={12} md={2.5}>
             <Button
                 bgColor={BasicColor.shadeBrown}
-                onClick={(e:any) => handleChgPwd(props.index, password)}
+                // onClick={(e:any) => handleChgPwd(props.index, password)}
                 value="Change Password"
             />
           </Grid>
@@ -88,20 +121,24 @@ const KidsList: FC = () => {
   useEffect(() => {
     setChildren([
       {
-        userName: "armin",
+        username: "armin",
         password: '123456',
+        grade: '1',
         avatar: kidAvatars[0]
       }, {
-        userName: "armin",
+        username: "armin",
         password: '123456',
-        avatar: kidAvatars[1]
+        grade: '1',
+          avatar: kidAvatars[1]
       }, {
-        userName: "armin",
+        username: "armin",
         password: '123456',
+        grade: '1',
         avatar: kidAvatars[2]
       }, {
-        userName: "armin",
+        username: "armin",
         password: '123456',
+        grade: '1',
         avatar: kidAvatars[0]
       },
     ])
@@ -113,6 +150,12 @@ const KidsList: FC = () => {
             {children.map((child, index) => (
               <Kid {...child} index={index} key={index}></Kid>
             ))}
+            <Button
+              bgColor={BasicColor.green}
+              onClick={(e:any) => handleSave()}
+              value="Save"
+              fontSize={25}
+            />
           </Container>
         </ParentPgContainer>
   );

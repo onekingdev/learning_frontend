@@ -1,16 +1,20 @@
 import {FC, useState, useRef} from 'react';
 import Grid from '@mui/material/Grid';
-import { LSBlueTextButton } from '../../pages/Settings/Style';
-import { useDialog } from '../../molecules/Setting/utils/useDialog';
-import { LSShadowContainer, MasterCardImg, CGridRow, LSTitle, CText } from '../../molecules/Setting/utils/Style';
-import { LSDialog } from '../../molecules/Setting/LSDialog';
-import { PaymentForm } from '../../molecules/PaymentMethod/PaymentForm';
+import { MasterCardImg, LSShadowContainer, CGridRow, LSTitle, CText} from '../utils/Style';
+
+import { LSBlueTextButton } from '../utils/Style';
+
+import { useDialog } from '../utils/useDialog';
+import { LSDialog } from '../molecules/LSDialog';
+import { PaymentMethod } from '../../../molecules/PaymentMethod/PaymentMethod';
+import { PaymentForm } from '../../../molecules/PaymentMethod/PaymentForm';
+import { PaymentContainer } from '../../../molecules/PaymentMethod/Style';
 
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
-import masterCard from '../../assets/MasterCard.svg'
-
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
+import masterCard from '../assets/MasterCard.svg';
+
 interface PaymentFormFunc {
   handleOrder(): void;
   handleUpdate(): void;
