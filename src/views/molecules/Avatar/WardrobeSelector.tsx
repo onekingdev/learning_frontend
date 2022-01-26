@@ -11,6 +11,9 @@ import drawer_pants from '../../assets/drawers/drawer_pants.png';
 import {accessories, headers, footers} from '../../pages/Avatar/atoms';
 import {getAvatarAsset, getAvatarDir} from '../../../app/firebase';
 import axios from 'axios';
+import wardrobe_icon from '../../assets/wardrobe.png';
+import {Link} from 'react-router-dom';
+
 // import data from '../../pages/Avatar/atoms';
 export const WardrobeSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
@@ -96,6 +99,9 @@ export const WardrobeSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
+
+      console.log("result", result.data.data)
+
       const accesory = result.data.data.studentById.avatarAccessories.image;
       const head = result.data.data.studentById.avatarHead.image;
       const body = result.data.data.studentById.avatarClothes.image;
@@ -378,6 +384,9 @@ export const WardrobeSelector: FC = () => {
     <WardrobeModule>
       <SelectorGrid>
         <CurrentAvatar>
+          <Link to="/avatar">
+            <ToggleWardrobe src={wardrobe_icon} />
+          </Link>
           <CurrentAccessory
             src={accesoryRef}
             style={{
@@ -673,4 +682,8 @@ const FavoritesCloset = styled.div`
   @media screen and (min-width: ${ScreenSize.phone}) {
     display: none;
   }
+`;
+
+const ToggleWardrobe = styled.img`
+  width: 50px;
 `;

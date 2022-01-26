@@ -40,8 +40,6 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
 
   useEffect(() => {
     setIsAnswered(false);
-    console.log(questionCounter + 1)
-    console.log(totalQuestions)
   }, [question.answeroptionSet])
 
   const handleAnswer = (answer: boolean) => {
