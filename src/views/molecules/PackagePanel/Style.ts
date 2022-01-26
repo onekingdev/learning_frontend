@@ -27,6 +27,15 @@ export const Container = styled.div`
     }
 `;
 
+export const Mask = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #dddddd;
+    z-index: 10;
+    opacity: 0.9;
+`
+
 export const Header = styled.div`
     width: 100%;
     background-color: ${props => props.color === "Gold" ? BasicColor.yellow : props.color === "Combo" ? BasicColor.aqua : BasicColor.greenSoft};

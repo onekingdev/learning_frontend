@@ -91,24 +91,10 @@ export const PREREQUISITES = `
     }
 `;
 
-export const GUARDIANS = `
-    {
-        id
-        identifier
-        isActive
-        randomSlug
-        name
-        lastName
-    }
-`;
 
-export const GUARDIANS_STUDENT = `
-    {
-        id
-        identifier
-        randomSlug
-    }
-`;
+
+export const GUARIDANS_GENDER = `
+`
 
 export const AUDIENCES = `
     {
@@ -118,16 +104,5 @@ export const AUDIENCES = `
         randomSlug
         slug
         name
-    }
-`;
-
-export const WHOAMI = `
-    {
-        id
-        password
-        lastLogin
-        isSuperuser
-        username
-        firstName
     }
 `;

@@ -1,35 +1,28 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { LSTitle, CLabel, MemContainer, CText, LSGridRow} from '../../molecules/Setting/utils/Style';
+import { LSTitle, CLabel, MemContainer, CText, MGridRow} from '../utils/Style';
 
-import {LSBlueTextButton} from '../../molecules/Setting/utils/Style'
-import {dictionary} from '../../pages/Settings/dictionary';
-import { PlanList } from '../../molecules/Setting/PlanList';
-import { LSDialog } from '../../molecules/Setting/LSDialog';
-import { CancelForm } from '../../molecules/Setting/CancelForm';
+import {LSBlueTextButton} from '../utils/Style'
+import {dictionary} from '../dictionary';
+import { PlanList } from '../molecules/PlanList';
+import { LSDialog } from '../molecules/LSDialog';
+import {CancelForm} from '../molecules/CancelForm'
 
-import { AddPlanForm } from '../../molecules/Setting/AddPlanForm';
-
-import { useDialog, useAddDialog } from '../../molecules/Setting/utils/useDialog';
+import { useDialog } from '../utils/useDialog';
 
 export const MembershipDetail:FC = () => {
 
   const {isOpen, open} = useDialog()
-  const {isAddOpen, openAdd} = useAddDialog()
 
   const [reason, setReason] = React.useState<string>('reason1');
 
-  const onAddConfirm = () => {
-    openAdd()
-  }
   const onConfirm = (reason: string) => {
     setReason(reason)
     console.log(reason)
     open()
   }
-  const onAddCancel = () => openAdd();
   const onCancel = () => open();
 
   const language = 'en';
@@ -45,7 +38,7 @@ export const MembershipDetail:FC = () => {
         {words.expiration + 'March 15, 2022'}
       </CText>
       <Box >
-        <LSGridRow container>
+        <MGridRow container>
           <Grid item sm={3} >
             <CLabel>
             {'Plan'}
@@ -64,8 +57,8 @@ export const MembershipDetail:FC = () => {
             {'Change to Yearly'}
             </LSBlueTextButton>
           </Grid>
-        </LSGridRow>
-        <LSGridRow container>
+        </MGridRow>
+        <MGridRow container>
           <Grid item sm={3} >
             <CLabel>
             {'Children'}
@@ -74,25 +67,13 @@ export const MembershipDetail:FC = () => {
           <Grid item sm={9} >
             <PlanList/>
           </Grid>
-        </LSGridRow>
+        </MGridRow>
         <Box sx={{display:'flex', justifyContent:'center', margin:2}}>
-          <LSBlueTextButton onClick={openAdd}>
+          <LSBlueTextButton>
             {'Add a Plan'}
           </LSBlueTextButton>
-          <LSDialog
-          isOpen={isAddOpen}
-          open={openAdd}
-          title = 'Add Plan/or Package'
-          contentText = 'Choose the new plan'
-          dialogContent = {
-            <AddPlanForm
-              onConfirm={onAddConfirm}
-              onCancel={onAddCancel}
-            />
-          }
-          />
         </Box>
-        <LSGridRow container>
+        <MGridRow container>
           <Grid item sm={3} >
             <CLabel>
             {'Price'}
@@ -103,7 +84,7 @@ export const MembershipDetail:FC = () => {
             {'$9.96 Monthly'}
             </CText>
           </Grid>
-        </LSGridRow>
+        </MGridRow>
         <LSBlueTextButton onClick={open}>
           {'Cancel Membership'}
         </LSBlueTextButton>

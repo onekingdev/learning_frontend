@@ -17,45 +17,6 @@ export const dictionary = Object.freeze({
       'Letting your child make mistakes and find out for himself how the world works is a big part of learning.',
       'No two children learn the same way or at the same pace. ',
       'You and your family have a vital role in what your child learns in these early years.',
-    ],
-    planRadios: [
-      {
-        label: 'Gold Package',
-        value: 'gold',
-        price: '$21.99/mo',
-      },
-      {
-        label: 'Combo Package',
-        value: 'combo',
-        price: '$15.99/mo'
-      },
-      {
-        label: 'Solo Package',
-        price: '$4.99/mo',
-        value: 'solo',
-      },
-    ],
-    combo: [
-      {
-        label: 'Math',
-        value: 'combo_math'
-      },
-      {
-        label: 'ELA + Sight Words',
-        value: 'combo_esw'
-      },
-      {
-        label: 'Science',
-        value: 'combo_science'
-      },
-      {
-        label: 'Financial Literacy',
-        value: 'combo_finance'
-      },
-      {
-        label: 'Health & Safety',
-        value: 'combo_health'
-      },
-    ],
+    ]
   },
 });

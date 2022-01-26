@@ -17,6 +17,7 @@ type MuiButtonProps = {
   variant?: any;
   borderColor?: ButtonColor | BasicColor | string;
   margin?: string;
+  disabled?: boolean;
   onHover?: (e: any) => void;
   onClick?: (e: any) => void;
 };
@@ -35,6 +36,7 @@ const MuiButton: FC<MuiButtonProps> = ({
   weight,
   variant="contained",
   margin,
+  disabled=false,
   onHover,
   onClick,
 }) => {
@@ -74,6 +76,7 @@ const MuiButton: FC<MuiButtonProps> = ({
         color="success"
         onClick={onClick}
         onMouseOver={onHover}
+        disabled={disabled}
         fullWidth
     >
         {value}

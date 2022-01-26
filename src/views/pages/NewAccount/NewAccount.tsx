@@ -35,6 +35,7 @@ const NewAccount: FC = () => {
   const handleCreate = () => {
     if(!formValidation()) return;
     console.log("validation ok")
+    history.push('/kids/new');
   }
 
   const formValidation = () => {

@@ -1,13 +1,12 @@
 import { FC } from 'react';
 import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { ThemeProvider } from '@mui/material';
 
-import { settingPage } from './utils/Theme';
+import { settingPage } from '../utils/Theme';
 
-import { LSDialogTitle, LSDialogContent, LSDialogContentText } from './utils/Style';
+import { LSDialogTitle, LSDialogContent, LSDialogContentText } from '../utils/Style';
 
 type LSDialogProps = {
   title?: string
@@ -24,18 +23,15 @@ export const LSDialog:FC<LSDialogProps> = ({
   open,
   dialogContent
 }) => {
-  const fullScreen = useMediaQuery(settingPage.breakpoints.down('md'));
+
   return (
     <ThemeProvider theme={settingPage}>
-      <Dialog open={isOpen} onClose={open} fullScreen={fullScreen} scroll='body'>
+      <Dialog open={isOpen} onClose={open}>
         {title?<LSDialogTitle>{title}</LSDialogTitle>:null}
         <LSDialogContent>
-          {
-            contentText?
-            <LSDialogContentText>
-              {contentText}
-            </LSDialogContentText>: null
-          }
+          <LSDialogContentText>
+            {contentText}
+          </LSDialogContentText>
           {dialogContent}
         </LSDialogContent>
       </Dialog>
