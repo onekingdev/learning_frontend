@@ -99,6 +99,9 @@ export const WardrobeSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
+
+      console.log("result", result.data.data)
+
       const accesory = result.data.data.studentById.avatarAccessories.image;
       const head = result.data.data.studentById.avatarHead.image;
       const body = result.data.data.studentById.avatarClothes.image;

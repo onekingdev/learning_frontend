@@ -12,7 +12,7 @@ import drawer_pants from '../../../assets/drawers/drawer_pants.png';
 // import data from '../../../pages/Avatar/atoms'
 import axios from 'axios';
 
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 import {
   headers,
@@ -71,6 +71,8 @@ export const AvatarSelector: FC = () => {
   const [favHeadRef, setFavHeadRef] = useState('');
   const [favBodyRef, setFavBodyRef] = useState('');
   const [favFootRef, setFavFootRef] = useState('');
+
+  const history = useHistory();
 
   const width = window.screen.width;
   useEffect(() => {
@@ -344,66 +346,72 @@ export const AvatarSelector: FC = () => {
         <FavoriteIcon onClick={setFavorite} src={favoriteImage}></FavoriteIcon>
         <BodyPartWardrobe src={wardrobe}></BodyPartWardrobe>
         <AtomsDrawer>
-          <Link to="wardrobe/accessories">
-            <AtomsRoundIcon
-              onClick={() => currentAtomIndex(1)}
-              src={drawer_accessories}
-              style={
-                atomIndex === 1
-                  ? {
-                      border: 'solid 3px red',
-                      width: iconSize - 6 + 'px',
-                      height: iconSize - 6 + 'px',
-                    }
-                  : {border: 'solid 0px red'}
-              }
-            />
-          </Link>
-          <Link to="wardrobe/head">
-            <AtomsRoundIcon
-              onClick={() => currentAtomIndex(2)}
-              src={drawer_hairs}
-              style={
-                atomIndex === 2
-                  ? {
-                      border: 'solid 3px red',
-                      width: iconSize - 6 + 'px',
-                      height: iconSize - 6 + 'px',
-                    }
-                  : {border: 'solid 0px red'}
-              }
-            />
-          </Link>
-          <Link to="wardrobe/body">
-            <AtomsRoundIcon
-              onClick={() => currentAtomIndex(3)}
-              src={drawer_clothes}
-              style={
-                atomIndex === 3
-                  ? {
-                      border: 'solid 3px red',
-                      width: iconSize - 6 + 'px',
-                      height: iconSize - 6 + 'px',
-                    }
-                  : {border: 'solid 0px red'}
-              }
-            />
-          </Link>
-          <Link to="wardrobe/pants">
-            <AtomsRoundIcon
-              onClick={() => currentAtomIndex(4)}
-              src={drawer_pants}
-              style={
-                atomIndex === 4
-                  ? {
-                      border: 'solid 3px red',
-                      width: iconSize - 6 + 'px',
-                      height: iconSize - 6 + 'px',
-                    }
-                  : {border: 'solid 0px red'}
-              }
-            />
-          </Link>
+          <AtomsRoundIcon
+            onClick={() => {
+              currentAtomIndex(1);
+              history.push('wardrobe/accessories');
+            }}
+            src={drawer_accessories}
+            style={
+              atomIndex === 1
+                ? {
+                    border: 'solid 3px red',
+                    width: iconSize - 6 + 'px',
+                    height: iconSize - 6 + 'px',
+                  }
+                : {border: 'solid 0px red'}
+            }
+          />
+          <AtomsRoundIcon
+            onClick={() => {
+              currentAtomIndex(2);
+              history.push('wardrobe/head');
+            }}
+            src={drawer_hairs}
+            style={
+              atomIndex === 2
+                ? {
+                    border: 'solid 3px red',
+                    width: iconSize - 6 + 'px',
+                    height: iconSize - 6 + 'px',
+                  }
+                : {border: 'solid 0px red'}
+            }
+          />
+
+          <AtomsRoundIcon
+            onClick={() => {
+              currentAtomIndex(3);
+              history.push('wardrobe/body');
+            }}
+            src={drawer_clothes}
+            style={
+              atomIndex === 3
+                ? {
+                    border: 'solid 3px red',
+                    width: iconSize - 6 + 'px',
+                    height: iconSize - 6 + 'px',
+                  }
+                : {border: 'solid 0px red'}
+            }
+          />
+
+          <AtomsRoundIcon
+            onClick={() => {
+              currentAtomIndex(4);
+              history.push('wardrobe/pants');
+            }}
+            src={drawer_pants}
+            style={
+              atomIndex === 4
+                ? {
+                    border: 'solid 3px red',
+                    width: iconSize - 6 + 'px',
+                    height: iconSize - 6 + 'px',
+                  }
+                : {border: 'solid 0px red'}
+            }
+          />
         </AtomsDrawer>
         <AvatarWardrobe src={wardrobe}></AvatarWardrobe>
         <FavoritesDrawer>
