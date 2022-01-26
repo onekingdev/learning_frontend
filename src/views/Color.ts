@@ -21,7 +21,15 @@ export enum BasicColor {
   pink = '#CE2489',
   brown = '#B7784B',
   darkBrown = '#5C2B0C',
+  shadeBrown = "#FB8500",
   background40 = 'rgba(94, 99, 102, 0.4)',
+  lightCyan = '#F0FFFE',
+  lightCyanBlue = '#BCC3C8',
+  veryLightCyanBlue = '#E8F1F8',
+  brightBlue = "#1976D2",
+  ligntBlue = "F0FFF6",
+  paleOrange = '#FFFBF0',
+  paleRed = '#80B1D8'
 }
 
 export enum ButtonColor {
@@ -30,8 +38,11 @@ export enum ButtonColor {
   login = '#21B95C',
   validate = '#26B824',
   join = '#F4C222',
-  next = '#F4C222',
+  next = '#1771B9',
   start = '#22BAAF',
+  support = '#21B95C',
+  create = '#22BAAF',
+  nextKid = '#FFB703',
 }
 
 export enum SettingBarColor {

@@ -1,47 +1,37 @@
 import {FC, useEffect, useState} from 'react';
+import {ScreenSize} from '../../../screenSize';
+import styled from 'styled-components';
+import {BasicColor} from '../../../Color';
 import arrowLeft from '../../../assets/arrows/arrowLeft.svg';
 import arrowRight from '../../../assets/arrows/arrowRight.svg';
 import favoriteEnabled from '../../../assets/favorite_enabled.svg';
 import favoriteDisabled from '../../../assets/favorite_disabled.svg';
 import wardrobe from '../../../assets/wardrobe.svg';
-import {RoundIcon} from '../../../atoms/Icon/Icon';
+import {RoundIcon} from '../../../atoms/Icon/Icon'
 import drawer_accessories from '../../../assets/drawers/drawer_accessories.png';
 import drawer_hairs from '../../../assets/drawers/drawer_hairs.png';
 import drawer_clothes from '../../../assets/drawers/drawer_clothes.png';
 import drawer_pants from '../../../assets/drawers/drawer_pants.png';
 // import data from '../../../pages/Avatar/atoms'
-import axios from 'axios';
-
-import {Link, useHistory} from 'react-router-dom';
-
-import {
-  headers,
-  bodies,
-  footers,
-  accessories,
-} from '../../../pages/Avatar/atoms';
-import {
-  AvatarModule,
-  SelectorGrid,
-  CurrentAvatar,
-  CurrentAccessory,
-  CurrentHeader,
-  CurrentBody,
-  CurrentFooter,
-  LeftArrow,
-  RightArrow,
-  FavoriteIcon,
-  BodyPartWardrobe,
-  AtomsDrawer,
-  AvatarWardrobe,
-  FavoritesCloset,
-  MobileFavoritesDrawer,
-  AtomsRoundIcon,
-  FavoritesDrawer,
-  CenteredRoundIcon,
-} from './Style';
-import {getAvatarAsset} from '../../../../app/firebase';
-import {get} from '../../../../api/queries/get';
+import {headers, bodies, footers, accessories} from '../../../pages/Avatar/atoms'
+import {AvatarModule,
+        SelectorGrid,
+        CurrentAvatar,
+        CurrentAccessory,
+        CurrentHeader,
+        CurrentBody,
+        CurrentFooter,
+        LeftArrow,
+        RightArrow,
+        FavoriteIcon,
+        BodyPartWardrobe,
+        AtomsDrawer,
+        AvatarWardrobe,
+        FavoritesCloset,
+        MobileFavoritesDrawer,
+        AtomsRoundIcon,
+        FavoritesDrawer,
+        CenteredRoundIcon } from './Style'
 export const AvatarSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
   const placeHolder = serverUrl + 'assets/avatars/placeholder.png';
@@ -60,150 +50,11 @@ export const AvatarSelector: FC = () => {
   const [bodyFavorite, setBodyFavorite] = useState(placeHolder);
   const [footerFavorite, setFooterFavorite] = useState(placeHolder);
   const [iconSize, setIconSize] = useState(80);
-  const [testRef, setTestRef] = useState('');
-
-  const [accesoryRef, setAccesoryRef] = useState('');
-  const [headRef, setHeadRef] = useState('');
-  const [bodyRef, setBodyRef] = useState('');
-  const [footRef, setFootRef] = useState('');
-
-  const [favAccesoryRef, setFavAccesoryRef] = useState('');
-  const [favHeadRef, setFavHeadRef] = useState('');
-  const [favBodyRef, setFavBodyRef] = useState('');
-  const [favFootRef, setFavFootRef] = useState('');
-
-  const history = useHistory();
-
   const width = window.screen.width;
   useEffect(() => {
-    // // setSelected avatar
-    // getAvatarAsset('accessories', 'accesories-red-bows.svg', setAccesoryRef);
-    // getAvatarAsset('heads', 'boy face-1.svg', setHeadRef);
-    // getAvatarAsset('bodies', 'tshirt-aqua-large.svg', setBodyRef);
-    // getAvatarAsset('pants', 'pant-black.svg', setFootRef);
-    // // set fav avatar items
-    // getAvatarAsset('accessories', 'accesories-red-bows.svg', setFavAccesoryRef);
-    // getAvatarAsset('heads', 'boy face-1.svg', setFavHeadRef);
-    // getAvatarAsset('bodies', 'tshirt-aqua-large.svg', setFavBodyRef);
-    // getAvatarAsset('pants', 'pant-black.svg', setFavFootRef);
-
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        {
-          studentById(id: "1") {
-            avatarAccessories {
-                image
-            }
-            avatarHead {
-              image
-            }
-            avatarClothes {
-              image
-            }
-            avatarPants {
-              image
-            }
-          }
-        }
-          `,
-      },
-    }).then((result: any) => {
-      const accesory = result.data.data.studentById.avatarAccessories.image;
-      const head = result.data.data.studentById.avatarHead.image;
-      const body = result.data.data.studentById.avatarClothes.image;
-      const foot = result.data.data.studentById.avatarPants.image;
-
-      setAccesoryRef(accesory);
-      setFavAccesoryRef(accesory);
-
-      setHeadRef(head);
-      setFavHeadRef(head);
-
-      setBodyRef(body);
-      setFavBodyRef(body);
-
-      setFootRef(foot);
-      setFavFootRef(foot);
-    });
-
-    // get(
-    //   'students',
-    //   `
-
-    //     id
-    //     students {
-    //       avatarAccessories {
-    //         image
-    //       }
-    //       avatarHead {
-    //         image
-    //       }
-    //       avatarClothes {
-    //         name
-    //       }
-    //       avatarPants {
-    //         name
-    //       }
-    //     }
-
-    //   `,
-    //   console.log,
-    //   console.log
-    // );
-
-    // {
-    //   students {
-    //     avatarAccessories {
-    //       image
-    //     }
-    //     avatarHead {
-    //       image
-    //     }
-    //     avatarClothes {
-    //       name
-    //     }
-    //     avatarPants {
-    //       name
-    //     }
-    //   }
-    // }
-
-    // mutation SetAvatar {
-    //   setStudentAvatar(avatarTypeOf:3, studentId:1, avatarUrl:"clothes.png") {
-    //     student {
-    //       id
-    //       firstName
-    //       lastName
-    //     }
-    //   }
-    // }
-
     width > 420 ? setIconSize(80) : setIconSize(30);
+    console.log(accessories);
   }, []);
-
-  // useEffect(() => {
-  //   console.log('ACCESSROY')
-  //   console.log(accesoryRef)
-  // }, [accesoryRef])
-
-  // useEffect(() => {
-  //   console.log('BODY')
-  //   console.log(bodyRef)
-  // }, [bodyRef])
-
-  // useEffect(() => {
-  //   console.log('HEAD')
-  //   console.log(headRef)
-  // }, [headRef])
-
-  // useEffect(() => {
-  //   console.log('FOOTER')
-  //   console.log(footRef)
-  // }, [footRef])
-
   const currentAtomIndex = (val: any) => {
     setAtomIndex(val);
     switch (val) {
@@ -324,7 +175,7 @@ export const AvatarSelector: FC = () => {
         <LeftArrow onClick={currentIndexPrev} src={arrowLeft}></LeftArrow>
         <CurrentAvatar>
           <CurrentAccessory
-            src={accesoryRef}
+            src={serverUrl + accessories[accessoryIndex].image}
             style={{
               width: accessories[accessoryIndex].scale * 160 + 'px',
               top: accessories[accessoryIndex].top + 'px',
@@ -332,25 +183,22 @@ export const AvatarSelector: FC = () => {
             }}
           />
           <CurrentHeader
-            src={headRef}
+            src={serverUrl + headers[headerIndex].image}
             style={{
               width: headers[headerIndex].scale * 160 + 'px',
               top: headers[headerIndex].top + 'px',
               left: headers[headerIndex].left + 'px',
             }}
           />
-          <CurrentBody src={bodyRef} />
-          <CurrentFooter src={footRef} />
+          <CurrentBody src={serverUrl + bodies[bodyIndex].image} />
+          <CurrentFooter src={serverUrl + footers[footerIndex].image} />
         </CurrentAvatar>
         <RightArrow onClick={currentIndexNext} src={arrowRight}></RightArrow>
         <FavoriteIcon onClick={setFavorite} src={favoriteImage}></FavoriteIcon>
         <BodyPartWardrobe src={wardrobe}></BodyPartWardrobe>
         <AtomsDrawer>
           <AtomsRoundIcon
-            onClick={() => {
-              currentAtomIndex(1);
-              history.push('wardrobe/accessories');
-            }}
+            onClick={() => currentAtomIndex(1)}
             src={drawer_accessories}
             style={
               atomIndex === 1
@@ -363,10 +211,7 @@ export const AvatarSelector: FC = () => {
             }
           />
           <AtomsRoundIcon
-            onClick={() => {
-              currentAtomIndex(2);
-              history.push('wardrobe/head');
-            }}
+            onClick={() => currentAtomIndex(2)}
             src={drawer_hairs}
             style={
               atomIndex === 2
@@ -378,12 +223,8 @@ export const AvatarSelector: FC = () => {
                 : {border: 'solid 0px red'}
             }
           />
-
           <AtomsRoundIcon
-            onClick={() => {
-              currentAtomIndex(3);
-              history.push('wardrobe/body');
-            }}
+            onClick={() => currentAtomIndex(3)}
             src={drawer_clothes}
             style={
               atomIndex === 3
@@ -395,12 +236,8 @@ export const AvatarSelector: FC = () => {
                 : {border: 'solid 0px red'}
             }
           />
-
           <AtomsRoundIcon
-            onClick={() => {
-              currentAtomIndex(4);
-              history.push('wardrobe/pants');
-            }}
+            onClick={() => currentAtomIndex(4)}
             src={drawer_pants}
             style={
               atomIndex === 4
@@ -415,10 +252,10 @@ export const AvatarSelector: FC = () => {
         </AtomsDrawer>
         <AvatarWardrobe src={wardrobe}></AvatarWardrobe>
         <FavoritesDrawer>
-          <CenteredRoundIcon src={favAccesoryRef}></CenteredRoundIcon>
-          <CenteredRoundIcon src={favHeadRef}></CenteredRoundIcon>
-          <CenteredRoundIcon src={favBodyRef}></CenteredRoundIcon>
-          <CenteredRoundIcon src={favFootRef}></CenteredRoundIcon>
+          <CenteredRoundIcon src={accessoryFavorite}></CenteredRoundIcon>
+          <CenteredRoundIcon src={headerFavorite}></CenteredRoundIcon>
+          <CenteredRoundIcon src={bodyFavorite}></CenteredRoundIcon>
+          <CenteredRoundIcon src={footerFavorite}></CenteredRoundIcon>
         </FavoritesDrawer>
       </SelectorGrid>
     </AvatarModule>
