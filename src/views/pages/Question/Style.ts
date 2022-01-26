@@ -3,6 +3,7 @@ import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
+
   background-image: url(${background});
   background-repeat: no-repeat;
   background-size: cover;
@@ -25,16 +26,17 @@ export const BlackBoard = styled.div`
   border: 7px solid #5c2100;
   border-radius: 16px;
   margin: 1rem;
-  padding-top: 2rem;
-  display: grid;
-  grid-template-rows: auto auto;
+  padding-top: 1rem;
+  height: 100%;
   @media (min-width: ${ScreenSize.tablet}) {
     margin: 1rem;
     margin-top: 5rem;
     margin-bottom: 7rem;
+    height: auto;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
-    margin: 1rem;
+    margin: 20px 0;
+    height: 100%;
   }
 `;
 
@@ -93,17 +95,13 @@ export const AnswerWrapper = styled.div`
 `;
 
 export const Container = styled.div`
+  width: 90%;
+  margin: 0 auto;
   text-align: center;
-  display: grid;
-  height: calc(100% - 57px - 33px - 30px - 35px);
+  height: 100%;
+  max-height: 700px;
   @media (min-width: ${ScreenSize.tablet}) {
-    grid-template-columns: 60% 40%;
     max-width: 1366px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @media (min-width: ${ScreenSize.desktop}) {
-    height: unset;
   }
 `;
 
@@ -116,6 +114,13 @@ export const Answers = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+export const IconVideoContainer = styled.div`
+  width: 90%;
+  margin: 5px auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: left;
+`
 
 export const AnswerForm = styled.form`
   grid-column: 1/3;
@@ -131,10 +136,11 @@ export const Submit = styled.div`
 
 export const AssistorContainer = styled.div`
   width: 95%;
+  max-width: 400px;
   height: 40px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   grid-gap: 10px;
-  margin: 0 auto;
+  margin: 30px auto;
 `;
