@@ -44,6 +44,7 @@ export const TOPIC = `
         identifier
         isActive
         randomSlug
+        slug
         lft
         rght
         treeId

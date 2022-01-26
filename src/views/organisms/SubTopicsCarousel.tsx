@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import {Header} from '../atoms/Text/Header';
 import {BasicColor} from '../Color';
@@ -7,52 +7,22 @@ import {ScreenSize} from '../screenSize';
 import rightArrow from '../assets/right-arrow.svg';
 import leftArrow from '../assets/left-arrow.svg';
 import {useHistory} from 'react-router-dom';
-import { ITopic } from '../../app/entities/block';
-import { mutation } from '../../api/queries/get';
-import { BLOCK_PRESENTATION_QUERY } from '../../api/queries/questions';
 
 type SubTopicProps = {
   name: string;
-  subTopics: ITopic[];
-  id: string;
+  subTopics: [];
 };
 
-export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics,id}) => {
-  const [blockPresentationId,setBlockPresentationId] = useState(String);
-  const handleData = (data: any) => {
-    setBlockPresentationId(data.data.createPathBlockPresentation.blockPresentation.id)
-  }
-  const handleError = (error: any) => {
-    console.log(error)
-  }
-  const handleClick = (topicId:string) => {
-    mutation(
-      `createPathBlockPresentation(topicId:"${topicId}",studentId:1)`,
-      'blockPresentation',
-      `${BLOCK_PRESENTATION_QUERY}`,
-      handleData,
-      handleError
-    )
-    if(blockPresentationId){
-      console.log(topicId,'topicId')
-      console.log(blockPresentationId)
-      history.push(`/question/presentation_${blockPresentationId}`)
-    }
-    else {
-      console.log('Los Ids no coinciden')
-    }
-  }
-
+export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics}) => {
   const handleMoveRight = () => {
-    console.log(id)
-    const carousel = document.getElementById(`${id}`);
+    const carousel = document.getElementById(`${name}`);
     if (carousel) {
       return (carousel.scrollLeft += carousel.offsetWidth);
     }
     return;
   };
   const handleMoveLeft = () => {
-    const carousel = document.getElementById(`${id}`);
+    const carousel = document.getElementById(`${name}`);
     if (carousel) {
       return (carousel.scrollLeft -= carousel.offsetWidth);
     }
@@ -69,12 +39,11 @@ export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics,id}) => {
           <CarouselButton onClick={handleMoveLeft}>
             <img src={leftArrow} />
           </CarouselButton>
-          <CarouselStyle id={id}>
-            {subTopics.map((item: {name: string,id:string}, i:any) => (
+          <CarouselStyle id={name}>
+            {subTopics.map((item: {name: string}) => (
               <SubTopicCard
-                onClick={() => handleClick(item.id)}
+                onClick={() => history.push('/question')}
                 name={item.name}
-                key={i}
               />
             ))}
           </CarouselStyle>

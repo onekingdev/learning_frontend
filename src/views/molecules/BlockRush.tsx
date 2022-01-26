@@ -16,6 +16,7 @@ export const BlockRush = ({initialTime, handleFinish, children}: RushProps) => {
       if (time > 0) {
         const x = setTime(time => {
           if (time - 1 === 0) {
+            console.log('Time is up!');
             handleFinish();
             clearInterval(interval);
           }

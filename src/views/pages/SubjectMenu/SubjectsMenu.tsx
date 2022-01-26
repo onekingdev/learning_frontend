@@ -27,6 +27,7 @@ export const SubjectsMenu: FC = () => {
 
   useEffect(() => {
     get('areasOfKnowledge', `{${AREA_OF_KNOWLEDGE}}`, handleData, handleError);
+    console.log(areasOfKnowledge);
   }, []);
 
   return (
