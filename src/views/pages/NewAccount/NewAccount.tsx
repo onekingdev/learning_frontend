@@ -13,11 +13,21 @@ import { IStudent } from '../../../app/entities/student';
 import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
 import SocratesImg from '../../assets/socrates.svg'
 import { Container, FormContainer, ContactContainer, Title, ContactHeader, ContactBody } from './Style'
+import mutationFetch from '../../../api/mutations/get'
+import { CREATE_GUARDIAN } from '../../../api/mutations/guardians'
+import {useParams} from 'react-router-dom';
+import { PanoramaSharp } from '@mui/icons-material';
+
+interface RouteParams {
+    email: string;
+}
+
 const NewAccount: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
   const language = 'en';
+  const { email } = useParams<RouteParams>();
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -34,7 +44,16 @@ const NewAccount: FC = () => {
 
   const handleCreate = () => {
     if(!formValidation()) return;
+    if(!email) return;
     console.log("validation ok")
+    mutationFetch(CREATE_GUARDIAN(email, userName, password), onRequestSuc, onRequestErr)
+  }
+
+  const onRequestErr = () => {
+
+  }
+
+  const onRequestSuc = () => {
     history.push('/kids/new');
   }
 
