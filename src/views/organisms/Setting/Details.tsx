@@ -1,13 +1,16 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import * as React from 'react';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { LSTitle, LSShadowContainer } from '../../molecules/Setting/utils/Style';
+import { LSTitle, MemContainer } from '../../molecules/Setting/utils/Style';
 
 import {LSBlueTextButton} from '../../molecules/Setting/utils/Style'
 import {dictionary} from '../../pages/Settings/dictionary';
 import { LSDialog } from '../../molecules/Setting/LSDialog';
 import { CancelForm } from '../../molecules/Setting/CancelForm';
+
 import { AddPlanForm } from '../../molecules/Setting/AddPlanForm';
+
 import { useDialog, useAddDialog } from '../../molecules/Setting/utils/useDialog';
 import { PlanTable } from '../../molecules/Setting/PlanTable';
 
@@ -15,7 +18,6 @@ export const MembershipDetail:FC = () => {
 
   const {isOpen, open} = useDialog()
   const {isAddOpen, openAdd} = useAddDialog()
-
 
   const [reason, setReason] = React.useState<string>('reason1');
 
@@ -35,7 +37,7 @@ export const MembershipDetail:FC = () => {
 
   return (
   <Box>
-    <LSShadowContainer width={624} >
+    <MemContainer >
       <LSTitle>
         {words.title}
       </LSTitle>
@@ -76,7 +78,7 @@ export const MembershipDetail:FC = () => {
           }
           />
       </Box>
-    </LSShadowContainer>
+    </MemContainer>
   </Box>
   );
 }

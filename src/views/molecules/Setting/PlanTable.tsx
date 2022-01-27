@@ -8,11 +8,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
-import { LSLabel, LSText, LSBlueTextButton } from './utils/Style';
+import { CLabel, CText, LSBlueTextButton } from './utils/Style';
 import { LSDialog } from './LSDialog';
 import { CancelForm } from './CancelForm';
 import { useDialog } from './utils/useDialog';
-import { Upgrade } from './Upgrade';
+
 const data = [
   {
     id: 0,
@@ -45,11 +45,6 @@ const data = [
 ]
 
 export const PlanTable:FC = () => {
-
-  // for change to yearly dialog
-  const [isUpdateOpen, update] = useState(false)
-  const openUpdate = () => update(!isUpdateOpen);
-
   const {isOpen, open} = useDialog()
   const [tag, seTag] = useState(0)
 
@@ -57,13 +52,10 @@ export const PlanTable:FC = () => {
     seTag(id)
     open()
   }
-  const onUpgradeBtnClick = (id: number) => {
-    seTag(id)
-    openUpdate()
+  const onConfirm = (reason: string) => {
+    open()
   }
-
   const onCancel = () => open()
-  const onCancelUpgrade = () => openUpdate()
 
   return (
     <div>
@@ -85,26 +77,22 @@ export const PlanTable:FC = () => {
             <TableRow
               hover
               key={row.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ border: 0 }}
             >
               <TableCell component="th" scope="row" >
                 <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                  <LSLabel>{row.package}</LSLabel>
+                  <CLabel>{row.package}</CLabel>
                   <LSBlueTextButton onClick = {() => onBtnClick(row.id)}>Cancel Plan</LSBlueTextButton>
                 </Box>
               </TableCell>
               <TableCell align="center">
                 <Box sx={{display: 'flex', alignItems: 'center', justifyContent:'space-evenly'}}>
-                  <LSLabel>{row.period}</LSLabel>
-                  <LSText>{row.expiration}</LSText>
-                  <LSText>{row.price}</LSText>
+                  <CLabel>{row.period}</CLabel>
+                  <CText>{row.expiration}</CText>
+                  <CText>{row.price}</CText>
                 </Box>
-                  <LSBlueTextButton
-                    disabled = {row.period === 'Monthly' ? false : true}
-                    onClick = {() => onUpgradeBtnClick(row.id)}
-                  >{'Change to Yearly'}
-                  </LSBlueTextButton>
-
+                  <LSBlueTextButton disabled = {row.period === 'Monthly'?false:true}>Change to Yearly</LSBlueTextButton>
               </TableCell>
             </TableRow>
           ))}
@@ -123,19 +111,7 @@ export const PlanTable:FC = () => {
         onCancel={onCancel}
       />
     }
-    />
-    <LSDialog
-    isOpen = {isUpdateOpen}
-    open = {openUpdate}
-    title = {'Upgrade'}
-    dialogContent = {
-      <Upgrade
-      tag={tag}
-      onConfirm={openUpdate}
-      onCancel={onCancelUpgrade}
-    />
-    }
-    />
+  />
   </div>
   );
 }

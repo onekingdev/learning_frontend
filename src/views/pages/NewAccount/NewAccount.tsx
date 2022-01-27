@@ -13,11 +13,29 @@ import { IStudent } from '../../../app/entities/student';
 import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
 import SocratesImg from '../../assets/socrates.svg'
 import { Container, FormContainer, ContactContainer, Title, ContactHeader, ContactBody } from './Style'
+import mutationFetch from '../../../api/mutations/get'
+import { CREATE_GUARDIAN } from '../../../api/mutations/guardians'
+import {useParams} from 'react-router-dom';
+import { PanoramaSharp } from '@mui/icons-material';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+
+
+interface RouteParams {
+    email: string;
+}
+
 const NewAccount: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
+  const { email } = useParams<RouteParams>();
+
   const language = 'en';
+
+//   const handleClickVariant = (variant: VariantType) => () => {
+//     // variant could be success, error, warning, info, or default
+//   };
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -27,14 +45,42 @@ const NewAccount: FC = () => {
       password: null,
       confPassword: null
   });
+  const [errMsg, setErrMsg] = useState('')
+  const [loading, setLoading] = useState(false);
 
   const handleFormChange = (field: string, errMsg: string) => {
     setValidateMsg({...validateMsg, [field]: errMsg})
   }
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
+
     if(!formValidation()) return;
-    console.log("validation ok")
+    if(!email) return;
+
+    setLoading(true);
+
+    const res:any = await mutationFetch(CREATE_GUARDIAN(email, userName, password)).catch(e => ({success: 'false'}));
+
+    setLoading(false);
+
+    if(res.success === false) {
+        setErrMsg("Network Error!");
+        enqueueSnackbar(`Network Error!`, { variant: "error" });
+        return;
+    }
+
+    const result:any = await res.json();
+
+    if(result.errors) {
+        setErrMsg(result.errors[0].message);
+        enqueueSnackbar(`Creation Failed! ${result.errors[0].message}`, { variant: "error" });
+        return;
+    }
+
+    enqueueSnackbar('Successfully Created!', { variant: "success" });
+
+    const { guardian, user, profile, token, refreshToken } = result.data.createGuardian
+    dispatch({ type: TYPES.USER_SET_DATA, payload: {...user, token: token, refreshToken: refreshToken } })
     history.push('/kids/new');
   }
 
@@ -52,7 +98,8 @@ const NewAccount: FC = () => {
   }
 
   useEffect(() => {
-  }, []);
+    if(!errMsg) return;
+  }, [errMsg]);
 
   return (
         <ParentPgContainer onlyLogoImgNav={true}>
@@ -102,6 +149,7 @@ const NewAccount: FC = () => {
                             onClick={handleCreate}
                             value="Create Account"
                             margin="45px 0 0 0"
+                            loading={loading}
                         />
                     </div>
                     <div className="p-b-95 p-t-30 font-s-15 inline">By clicking Create Account, you aggree to Learn With Socrates’s <div className="font-w-9 inline">User Agreement, Privacy Policy,</div> and  <div className="font-w-9 inline">Cookie Policy</div></div>

@@ -44,7 +44,7 @@ export const EditPaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) =>
   const elements = useElements();
   const { isUpdate } = props
 
-  const [paymentMethod, setPaymentMethod] = useState('card')
+  const [paymentMethod, setPaymentMethod] = useState("card")
   const [validateRst, setValidateRst] = useState({
     fullName: null,
     cardNumber: null,
@@ -67,7 +67,7 @@ export const EditPaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) =>
   }
 
   const handleOrder = () => {
-    console.log('order')
+    console.log("order")
   }
 
   const handleUpdate = () => {
@@ -90,14 +90,14 @@ export const EditPaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) =>
         <Grid container spacing={4}>
             <Grid item xs={12}>
                 <TextField
-                    label='Card Number'
+                    label="Card Number"
                     InputProps={{
                         inputProps: {
                             component: CardNumberElement
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange('cardNumber',e['error'] ? e['error']['message'] : null)}
+                    onChange={(e: any) => handleFormChange("cardNumber",e['error'] ? e['error']['message'] : null)}
                     error={validateRst.cardNumber !== null}
                     helperText={validateRst.cardNumber}
                     focused
@@ -105,14 +105,14 @@ export const EditPaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) =>
             </Grid>
             <Grid item xs={12} md={6}>
                 <TextField
-                    label='Expiry Date'
+                    label="Expiry Date"
                     InputProps={{
                         inputProps: {
                         component: CardExpiryElement
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange('expiryDate',e['error'] ? e['error']['message'] : null)}
+                    onChange={(e: any) => handleFormChange("expiryDate",e['error'] ? e['error']['message'] : null)}
                     focused
                     error={validateRst.expiryDate !== null}
                     helperText={validateRst.expiryDate}
@@ -120,14 +120,14 @@ export const EditPaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) =>
             </Grid>
             <Grid item xs={12} md={6}>
                 <TextField
-                    label='CVC/CVV'
+                    label="CVC/CVV"
                     InputProps={{
                         inputProps: {
                         component: CardCvcElement
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange('cvc',e['error'] ? e['error']['message'] : null)}
+                    onChange={(e: any) => handleFormChange("cvc",e['error'] ? e['error']['message'] : null)}
                     focused
                     error={validateRst.cvc !== null}
                     helperText={validateRst.cvc}
@@ -135,56 +135,56 @@ export const EditPaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) =>
             </Grid>
             <Grid item xs={12}>
                 <TextField
-                    label='Address Line 1'
-                    onChange={(e: any) => handleFormChange('addressOne',e.target.value.length === 0 ? 'Field is required' : '') }
+                    label="Address Line 1"
+                    onChange={(e: any) => handleFormChange("addressOne",e.target.value.length === 0 ? "Field is required" : "") }
                     error={!!validateRst.addressOne}
                     helperText={validateRst.addressOne}
                 />
             </Grid>
             <Grid item xs={12}>
                 <TextField
-                    label='Address Line 2'
-                    onChange={(e: any) => handleFormChange('addressTwo',e.target.value.length === 0 ? 'Field is required' : '') }
+                    label="Address Line 2"
+                    onChange={(e: any) => handleFormChange("addressTwo",e.target.value.length === 0 ? "Field is required" : "") }
                     error={!!validateRst.addressTwo}
                     helperText={validateRst.addressTwo}
                 />
             </Grid>
             <Grid item xs={6} md={6}>
                 <TextField
-                    label='City'
-                    onChange={(e: any) => handleFormChange('city',e.target.value.length === 0 ? 'Field is required' : '') }
+                    label="City"
+                    onChange={(e: any) => handleFormChange("city",e.target.value.length === 0 ? "Field is required" : "") }
                     error={!!validateRst.city}
                     helperText={validateRst.city}
                 />
             </Grid>
             <Grid item xs={6} md={6}>
                 <TextField
-                    label='State/ Province'
-                    onChange={(e: any) => handleFormChange('state',e.target.value.length === 0 ? 'Field is required' : '') }
+                    label="State/ Province"
+                    onChange={(e: any) => handleFormChange("state",e.target.value.length === 0 ? "Field is required" : "") }
                     error={!!validateRst.state}
                     helperText={validateRst.state}
                 />
             </Grid>
             <Grid item xs={6} md={6}>
                 <TextField
-                    label='Zip /Postal Code'
-                    onChange={(e: any) => handleFormChange('zip',e.target.value.length === 0 ? 'Field is required' : '') }
+                    label="Zip /Postal Code"
+                    onChange={(e: any) => handleFormChange("zip",e.target.value.length === 0 ? "Field is required" : "") }
                     error={!!validateRst.zip}
                     helperText={validateRst.zip}
                 />
             </Grid>
             <Grid item xs={6} md={6}>
                 <TextField
-                    label='Country'
-                    onChange={(e: any) => handleFormChange('country',e.target.value.length === 0 ? 'Field is required' : '') }
+                    label="Country"
+                    onChange={(e: any) => handleFormChange("country",e.target.value.length === 0 ? "Field is required" : "") }
                     error={!!validateRst.country}
                     helperText={validateRst.country}
                 />
             </Grid>
             <Grid item xs={12} md={12}>
                 <TextField
-                    label='Phone'
-                    onChange={(e: any) => handleFormChange('phone',e.target.value.length === 0 ? 'Field is required' : '') }
+                    label="Phone"
+                    onChange={(e: any) => handleFormChange("phone",e.target.value.length === 0 ? "Field is required" : "") }
                     error={!!validateRst.phone}
                     helperText={validateRst.phone}
                 />
@@ -194,16 +194,16 @@ export const EditPaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) =>
                     <Button
                         bgColor={BasicColor.green}
                         onClick={handleOrder}
-                        align='left'
-                        value='Update'
+                        align="left"
+                        value="Update"
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Button
                         bgColor={BasicColor.gray60}
                         onClick={handleOrder}
-                        align='right'
-                        value='Return'
+                        align="right"
+                        value="Return"
                     />
                 </Grid>
             </>)}
