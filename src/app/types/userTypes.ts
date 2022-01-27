@@ -1,0 +1,2 @@
+export const USER_SET_DATA = 'STUDENT_SET_DATA';
+export const USER_RESET = 'STUDENT_SET_RESET';

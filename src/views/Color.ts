@@ -27,7 +27,7 @@ export enum BasicColor {
   lightCyanBlue = '#BCC3C8',
   veryLightCyanBlue = '#E8F1F8',
   brightBlue = "#1976D2",
-  ligntBlue = "F0FFF6",
+  ligntBlue = "#F0FFF6",
   paleOrange = '#FFFBF0',
   paleRed = '#80B1D8'
 }

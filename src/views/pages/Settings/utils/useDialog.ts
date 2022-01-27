@@ -9,13 +9,3 @@ export const useDialog = () =>{
     open
   }
 }
-
-export const useAddDialog = () =>{
-
-  const [isAddOpen, setAddOpen] = useState<boolean>(false);
-  const openAdd = () => setAddOpen(!isAddOpen);
-  return {
-    isAddOpen,
-    openAdd
-  }
-}

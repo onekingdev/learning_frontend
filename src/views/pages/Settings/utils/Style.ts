@@ -105,11 +105,17 @@ export const LSBlueTextButton = styled(Button)`
 /*--------------------------------------------------------------------------------------------*/
 /*                                           GRID                                             */
 /*--------------------------------------------------------------------------------------------*/
-export const LSGridRow = styled(Grid)`
+export const CGridRow = styled(Grid)`
 justify-content: center;
-padding: 5px 7px 0px 15px;
+padding: 5px 7px 5px 15px;
 align-items: center;
 margin-top: 8px;
+`
+export const MGridRow = styled(Grid)`
+justify-content: center;
+padding: 0px 7px 0px 15px;
+align-items: center;
+margin: 15px;
 `
 export const LSShadowContainer = styled.div`
 box-shadow: 0px 2px 10px 0px #00000040;

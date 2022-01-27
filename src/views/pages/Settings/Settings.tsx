@@ -1,18 +1,12 @@
 import {FC, useEffect} from 'react';
+import { SettingForm } from './organisms/Profile';
 import { useDispatch } from 'react-redux'
-
-import Box from '@mui/material/Box';
-
+import { Title } from './utils/Style';
 import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
-
-import { Title } from '../../molecules/Setting/utils/Style';
-import { TextGroup, CLabel, CText, LSBlueTextButton  } from '../../molecules/Setting/utils/Style';
-
-import { SettingForm } from '../../organisms/Setting/Profile';
-import { Payment } from '../../organisms/Setting/Payment'
-import { MembershipDetail } from '../../organisms/Setting/Details';
-
+import Box from '@mui/material/Box';
+import { MembershipDetail } from './organisms/Details';
 import { CssBaseline } from '@mui/material';
+import { Payment } from './organisms/Payment';
 
 export const Settings: FC = () => {
   const dispatch = useDispatch()
@@ -27,14 +21,9 @@ export const Settings: FC = () => {
         <Box sx={{display:'flex', justifyContent:'center'}}>
           <div>
           <SettingForm/>
-          <Payment/>
-          <TextGroup>
-            <CLabel>{'Questions? '}</CLabel>
-            <CText>{' Reach us and we will help you'}</CText>
-            <LSBlueTextButton href='#'>{' Contact'}</LSBlueTextButton>
-          </TextGroup>
           </div>
           <div>
+          <Payment/>
           <MembershipDetail/>
           </div>
         </Box>

@@ -4,14 +4,12 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-import {
-  FormContainer, LSButtonContainer, LSGridRow, LSTextField, LSTitle, CText, CLabel,
-  CIntentText,  TextGroup, LSButton,LSBlueTextButton
- } from '../../molecules/Setting/utils/Style';
+import { CIntentText, FormContainer, LSButtonContainer, CGridRow, LSTextField, LSTitle, CText, CLabel, TextGroup} from '../utils/Style';
+import { LSButton,LSBlueTextButton } from '../utils/Style';
 
-import { dictionary } from '../../molecules/Setting/utils/dictionary';
+import {dictionary} from '../dictionary';
 
-import { settingPage } from '../../molecules/Setting/utils/Theme';
+import { settingPage } from '../utils/Theme';
 import { ThemeProvider } from '@mui/material';
 
 
@@ -37,19 +35,43 @@ export const SettingForm:FC = () => {
           {'Profile and settings'}
         </LSTitle>
         <Box component='form' onSubmit={handleSubmit} noValidate sx={{ flexGrow: 1 }}>
-          <LSGridRow container>
+          <CGridRow container>
             <Grid item lg={4} sm={12}>
               <CLabel>
-              {'Name'}
+              {'First Name'}
               </CLabel>
             </Grid>
             <Grid item lg={8} sm={12}>
-              <CIntentText>
-                {'Lana Taylor James'}
-              </CIntentText>
+              <LSTextField
+              margin='normal'
+              required
+              size='small'
+              id='first_name'
+              label={'First Name'}
+              name='firstName'
+              autoFocus
+              />
             </Grid>
-          </LSGridRow>
-          <LSGridRow container>
+          </CGridRow>
+          <CGridRow container>
+            <Grid item lg={4} sm={12}>
+              <CLabel>
+              {'Last Name'}
+              </CLabel>
+            </Grid>
+            <Grid item lg={8} sm={12}>
+              <LSTextField
+              margin='normal'
+              required
+              size='small'
+              variant='outlined'
+              id='last_name'
+              label={'Last Name'}
+              name='lastName'
+              />
+            </Grid>
+          </CGridRow>
+          <CGridRow container>
             <Grid item lg={4} sm={12}>
               <CLabel>
               {'Current e-mail'}
@@ -60,11 +82,11 @@ export const SettingForm:FC = () => {
               {words.currentEmail}
               </CIntentText>
             </Grid>
-          </LSGridRow>
-          <LSGridRow container>
+          </CGridRow>
+          <CGridRow container>
             <Grid item lg={4} sm={12}>
               <CLabel >
-              {'Change E-Mail'}
+              {'E-Mail Address'}
               </CLabel>
             </Grid>
             <Grid item lg={8} sm={12}>
@@ -78,8 +100,8 @@ export const SettingForm:FC = () => {
               autoComplete='email'
               />
             </Grid>
-          </LSGridRow>
-          <LSGridRow container>
+          </CGridRow>
+          <CGridRow container>
             <Grid item lg={4} sm={12}>
               <CLabel >
               {'Password'}
@@ -90,7 +112,7 @@ export const SettingForm:FC = () => {
               {'Change Password'}
               </LSBlueTextButton>
             </Grid>
-          </LSGridRow>
+          </CGridRow>
           <LSButtonContainer>
             <LSButton
               type='submit'
@@ -107,6 +129,11 @@ export const SettingForm:FC = () => {
           </LSButtonContainer>
         </Box>
       </FormContainer>
+        <TextGroup>
+          <CLabel>{'Questions? '}</CLabel>
+          <CText>{' Reach us and we will help you'}</CText>
+          <LSBlueTextButton href='#'>{' Contact'}</LSBlueTextButton>
+        </TextGroup>
       </Box>
     </ThemeProvider>
   );

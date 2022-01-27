@@ -5,20 +5,17 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import { LSBlueTextButton } from '../../pages/Settings/Style';
-import { useDialog } from './utils/useDialog';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { LSBlueTextButton } from '../utils/Style';
+import { useDialog } from '../utils/useDialog';
 import { LSDialog } from './LSDialog';
 import { CancelForm } from './CancelForm';
 
-
-interface ChildProps {
-  id: Number
-  package: string
-  period: string
-  expiration: string
-  price: string
-}
 
 export const PlanList:FC = () => {
 
@@ -48,9 +45,28 @@ export const PlanList:FC = () => {
     backgroundColor: theme.palette.background.paper,
   }));
 
-  // const ListRow =
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+      {/* <FormGroup row>
+        <FormControlLabel
+          control={
+            <Checkbox
+              // checked={dense}
+              onChange={(event) => setDense(event.target.checked)}
+            />
+          }
+          label="Enable dense"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              // checked={secondary}
+              onChange={(event) => setSecondary(event.target.checked)}
+            />
+          }
+          label="Enable secondary text"
+        />
+      </FormGroup> */}
       <Grid container spacing={2}>
         <Grid item xs={12} md={12}>
           <Demo>
@@ -63,6 +79,7 @@ export const PlanList:FC = () => {
                 >
                   <ListItemText
                     primary='1 child combo'
+                    // secondary={secondary ? 'Secondary text' : null}
                   />
                 </ListItem>,
               )}
@@ -85,5 +102,4 @@ export const PlanList:FC = () => {
     </Box>
   );
 }
-
 

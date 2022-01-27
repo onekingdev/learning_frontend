@@ -15,7 +15,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
+import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement, CardElement } from '@stripe/react-stripe-js';
 import {
   useStyles,
   PayPal,
@@ -31,7 +31,7 @@ type PaymentFormProps = {
   isUpdate: boolean
 };
 interface PaymentFormFunc {
-    handleOrder(): void;
+    handleOrder(coupon: string, price: number): void;
     handleUpdate(): void;
 }
 export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
@@ -43,8 +43,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   const { isUpdate } = props
 
   const [paymentMethod, setPaymentMethod] = useState("card")
-  const [validateRst, setValidateRst] = useState({
-    fullName: null,
+  const [validateRst, setValidateRst] = useState<{ [key: string]: any }>({
+    firstName: null,
+    lastName: null,
     cardNumber: null,
     expiryDate: null,
     cvc: null,
@@ -55,30 +56,93 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     zip: null,
     country: null,
     phone: null,
+    email: null,
   });
+
+  const [data, setData] = useState({
+    paymentMethod: 'card',
+    firstName: '',
+    lastName: '',
+    addressOne: '',
+    addressTwo: '',
+    state: '',
+    city: '',
+    zip: '',
+    country: '',
+    phone: '',
+    couponCode: '',
+    email: '',
+    price: 0
+  })
+
+  const formValidation = () => {
+    const validateMsgTemp = {...validateRst}
+    let valiResult = true;
+    for(const key in validateRst) {
+      if(validateRst[key] === null) {
+          validateMsgTemp[key] = "Field is required";
+      }
+      if(validateMsgTemp[key]) {
+        console.log(key)
+
+          valiResult = false;
+      }
+    }
+    setValidateRst(validateMsgTemp);
+    return valiResult;
+}
 
   const handleFormChange = (field: string, errMsg: string) => {
       setValidateRst({...validateRst, [field]: errMsg})
   }
+
   const handleReturn = (event: any) => {
 
   }
 
-  const handleOrder = () => {
-    console.log("order")
+  const handleOrder = async () => {
+    if(!formValidation()) return {success: false, result: "Validation Failed"};
+    if(!stripe) return {success: false, result: "Can't get stripe"};
+    if(!elements) return {success: false, result: "Can't get element"};
+    if(!elements.getElement(CardNumberElement)) return {success: false, result: "Can't get card number element"};
+
+    const cardElement:any = elements.getElement(CardNumberElement);
+    const result:any = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+        billing_details: {
+            email: data.email,
+        },
+    }).catch(console.log);
+
+    if(result.error) return {success: false, result: "Can't create payment method"};
+    /*------------------------ send request to backend to create payment -S-----------------------------*/
+
+    /*------------------------ send request to backend to create payment -E-----------------------------*/
+    result.email = data.email;
+    return {success: true, result: result};
   }
 
-  const handleUpdate = () => {
-
+  const handleUpdate = async () => {
+    if(!formValidation()) return {success: false, result: "Validation Failed"};
+    /*------------------------ send request to backend to create payment -S-----------------------------*/
+    const result = {};
+    /*------------------------ send request to backend to create payment -E-----------------------------*/
+    return {success: true, result: result};
   }
 
   useImperativeHandle(ref, () => ({
-    handleOrder () {
-        handleOrder();
+    async handleOrder (couponCode, price) {
+        data.couponCode = couponCode;
+        data.price = price;
+        setData(data);
+        const result = await handleOrder();
+        return result;
     },
 
-    handleUpdate () {
-        handleUpdate();
+    async handleUpdate () {
+        const result = await handleUpdate();
+        return result;
     }
   }))
   useEffect(() => {
@@ -91,8 +155,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="female"
                 name="radio-buttons-group"
-                value={paymentMethod}
-                onChange={(e)=> setPaymentMethod(e.target.value)}
+                value={data.paymentMethod}
+                onChange={(e)=> setData({...data, paymentMethod: e.target.value})}
             >
                 <FlexRow>
                     <FormControlLabel value="paypal" control={<Radio className={classes.radio} disabled/>} label=""></FormControlLabel>
@@ -111,12 +175,28 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         </FormControl>
         <div style={{fontSize: '24px', fontWeight: '700', paddingTop: '15px', paddingBottom: '15px'}}>Billing Information</div>
         <Grid container spacing={4}>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
                 <TextField
-                    label="Full Name"
-                    onChange={(e: any) => handleFormChange("fullName",e.target.value.length === 0 ? "Field is required" : "") }
-                    error={!!validateRst.fullName}
-                    helperText={validateRst.fullName}
+                    label="First Name"
+                    onChange={(e: any) => {
+                        handleFormChange("firstName",e.target.value.length === 0 ? "Field is required" : "")
+                        setData({...data, firstName: e.target.value})
+                    } }
+                    error={!!validateRst.firstName}
+                    helperText={validateRst.firstName}
+                    value={data.firstName}
+                />
+            </Grid>
+            <Grid item xs={6}>
+                <TextField
+                    label="Last Name"
+                    onChange={(e: any) => {
+                        handleFormChange("lastName",e.target.value.length === 0 ? "Field is required" : "")
+                        setData({...data, lastName: e.target.value})
+                    } }
+                    error={!!validateRst.lastName}
+                    helperText={validateRst.lastName}
+                    value={data.lastName}
                 />
             </Grid>
             <Grid item xs={12}>
@@ -128,8 +208,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange("cardNumber",e['error'] ? e['error']['message'] : null)}
-                    error={validateRst.cardNumber !== null}
+                    onChange={(e: any) => handleFormChange("cardNumber",e['error'] ? e['error']['message'] : "")}
+                    error={validateRst.cardNumber !== ""}
                     helperText={validateRst.cardNumber}
                     focused
                 />
@@ -143,9 +223,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange("expiryDate",e['error'] ? e['error']['message'] : null)}
+                    onChange={(e: any) => handleFormChange("expiryDate",e['error'] ? e['error']['message'] : "")}
                     focused
-                    error={validateRst.expiryDate !== null}
+                    error={validateRst.expiryDate !== ""}
                     helperText={validateRst.expiryDate}
                 />
             </Grid>
@@ -158,66 +238,107 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange("cvc",e['error'] ? e['error']['message'] : null)}
+                    onChange={(e: any) => handleFormChange("cvc",e['error'] ? e['error']['message'] : "")}
                     focused
-                    error={validateRst.cvc !== null}
+                    error={validateRst.cvc !== ""}
                     helperText={validateRst.cvc}
                 />
             </Grid>
             <Grid item xs={12}>
                 <TextField
                     label="Address Line 1"
-                    onChange={(e: any) => handleFormChange("addressOne",e.target.value.length === 0 ? "Field is required" : "") }
+                    onChange={(e: any) => {
+                        handleFormChange("addressOne",e.target.value.length === 0 ? "Field is required" : "")
+                        setData({...data, addressOne: e.target.value})
+                    } }
                     error={!!validateRst.addressOne}
                     helperText={validateRst.addressOne}
+                    value={data.addressOne}
                 />
             </Grid>
             <Grid item xs={12}>
                 <TextField
                     label="Address Line 2"
-                    onChange={(e: any) => handleFormChange("addressTwo",e.target.value.length === 0 ? "Field is required" : "") }
+                    onChange={(e: any) => {
+                        handleFormChange("addressTwo",e.target.value.length === 0 ? "Field is required" : "");
+                        setData({...data, addressTwo: e.target.value});
+                    } }
                     error={!!validateRst.addressTwo}
                     helperText={validateRst.addressTwo}
+                    value={data.addressTwo}
                 />
             </Grid>
             <Grid item xs={6} md={6}>
                 <TextField
                     label="City"
-                    onChange={(e: any) => handleFormChange("city",e.target.value.length === 0 ? "Field is required" : "") }
+                    onChange={(e: any) => {
+                        handleFormChange("city",e.target.value.length === 0 ? "Field is required" : "");
+                        setData({...data, city: e.target.value});
+                    } }
                     error={!!validateRst.city}
                     helperText={validateRst.city}
+                    value={data.city}
                 />
             </Grid>
             <Grid item xs={6} md={6}>
                 <TextField
                     label="State/ Province"
-                    onChange={(e: any) => handleFormChange("state",e.target.value.length === 0 ? "Field is required" : "") }
+                    onChange={(e: any) => {
+                        handleFormChange("state",e.target.value.length === 0 ? "Field is required" : "");
+                        setData({...data, state: e.target.value})
+                    } }
                     error={!!validateRst.state}
                     helperText={validateRst.state}
+                    value={data.state}
                 />
             </Grid>
             <Grid item xs={6} md={6}>
                 <TextField
                     label="Zip /Postal Code"
-                    onChange={(e: any) => handleFormChange("zip",e.target.value.length === 0 ? "Field is required" : "") }
+                    onChange={(e: any) => {
+                        handleFormChange("zip",e.target.value.length === 0 ? "Field is required" : "")
+                        setData({...data, zip: e.target.value})
+                    } }
                     error={!!validateRst.zip}
                     helperText={validateRst.zip}
+                    value={data.zip}
                 />
             </Grid>
             <Grid item xs={6} md={6}>
                 <TextField
                     label="Country"
-                    onChange={(e: any) => handleFormChange("country",e.target.value.length === 0 ? "Field is required" : "") }
+                    onChange={(e: any) => {
+                        handleFormChange("country",e.target.value.length === 0 ? "Field is required" : "");
+                        setData({...data, country: e.target.value})
+
+                    } }
                     error={!!validateRst.country}
                     helperText={validateRst.country}
+                    value={data.country}
+                />
+            </Grid>
+            <Grid item xs={12} md={12}>
+                <TextField
+                    label="Email"
+                    onChange={(e: any) => {
+                        handleFormChange("email",e.target.value.length === 0 ? "Field is required" : "")
+                        setData({...data, email: e.target.value})
+                    } }
+                    error={!!validateRst.email}
+                    helperText={validateRst.email}
+                    value={data.email}
                 />
             </Grid>
             <Grid item xs={12} md={12}>
                 <TextField
                     label="Phone"
-                    onChange={(e: any) => handleFormChange("phone",e.target.value.length === 0 ? "Field is required" : "") }
+                    onChange={(e: any) => {
+                        handleFormChange("phone",e.target.value.length === 0 ? "Field is required" : "")
+                        setData({...data, phone: e.target.value})
+                    } }
                     error={!!validateRst.phone}
                     helperText={validateRst.phone}
+                    value={data.phone}
                 />
             </Grid>
             {isUpdate && (<>

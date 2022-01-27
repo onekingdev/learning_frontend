@@ -1,7 +1,8 @@
-import {FC} from 'react';
+import {FC, useEffect, ReactChildren, ReactChild} from 'react';
 import {ButtonColor, shadeColor, BasicColor} from '../Color';
 import { makeStyles } from '@mui/styles'
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
+import Button from '@mui/lab/LoadingButton';
 
 type MuiButtonProps = {
   value: string;
@@ -17,6 +18,9 @@ type MuiButtonProps = {
   variant?: any;
   borderColor?: ButtonColor | BasicColor | string;
   margin?: string;
+  disabled?: boolean;
+  loading?: boolean;
+  startIcon?: ReactChild | ReactChildren;
   onHover?: (e: any) => void;
   onClick?: (e: any) => void;
 };
@@ -35,6 +39,9 @@ const MuiButton: FC<MuiButtonProps> = ({
   weight,
   variant="contained",
   margin,
+  disabled=false,
+  loading=false,
+  startIcon=<></>,
   onHover,
   onClick,
 }) => {
@@ -74,6 +81,10 @@ const MuiButton: FC<MuiButtonProps> = ({
         color="success"
         onClick={onClick}
         onMouseOver={onHover}
+        disabled={disabled}
+        loading={loading}
+        loadingPosition="start"
+        startIcon={startIcon}
         fullWidth
     >
         {value}

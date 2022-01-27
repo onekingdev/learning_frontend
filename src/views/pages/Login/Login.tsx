@@ -16,7 +16,7 @@ import {get} from '../../../api/queries/get'
 import { useDispatch } from 'react-redux'
 import * as TYPES from '../../../app/types'
 import {MockStore} from '../../../app/configureStore'
-import { IStudent } from '../../../app/entities/student';
+import { IUser } from '../../../app/entities/user';
 export const LogIn: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
@@ -40,8 +40,8 @@ export const LogIn: FC = () => {
     onLoginSuccess(MockStore.user);
   }
 
-  const onLoginSuccess = (data: IStudent) => {
-    dispatch({ type: TYPES.STUDENT_SET_DATA, payload: data })
+  const onLoginSuccess = (data: IUser) => {
+    dispatch({ type: TYPES.USER_SET_DATA, payload: data })
     history.push('/home')
   }
 

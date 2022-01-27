@@ -24,9 +24,8 @@ import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgC
 
 // for bruce test
 import {Settings} from './views/pages/Settings/Settings';
-
-
 import NewKids from './views/pages/NewKids/NewKids'
+
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
   const user = useSelector((state : Store) => state.user)
   const isAuthenticated = !!user?.token;
@@ -98,7 +97,7 @@ export function Routes(props: any) {
         <PrivateRoute path="/parent/account">
           <Account />
         </PrivateRoute>
-        <PrivateRoute path="/parent/create">
+        <PrivateRoute path="/parent/create/:email">
           <NewAccount />
         </PrivateRoute>
         <PrivateRoute path="/kids/list">
