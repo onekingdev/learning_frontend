@@ -17,6 +17,8 @@ import mutationFetch from '../../../api/mutations/get'
 import { CREATE_GUARDIAN } from '../../../api/mutations/guardians'
 import {useParams} from 'react-router-dom';
 import { PanoramaSharp } from '@mui/icons-material';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+
 
 interface RouteParams {
     email: string;
@@ -26,8 +28,14 @@ const NewAccount: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
-  const language = 'en';
+  const { enqueueSnackbar } = useSnackbar();
   const { email } = useParams<RouteParams>();
+
+  const language = 'en';
+
+//   const handleClickVariant = (variant: VariantType) => () => {
+//     // variant could be success, error, warning, info, or default
+//   };
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -55,14 +63,21 @@ const NewAccount: FC = () => {
 
     setLoading(false);
 
-    if(res.success === false) return;
+    if(res.success === false) {
+        setErrMsg("Network Error!");
+        enqueueSnackbar(`Network Error!`, { variant: "error" });
+        return;
+    }
 
     const result:any = await res.json();
 
     if(result.errors) {
         setErrMsg(result.errors[0].message);
+        enqueueSnackbar(`Creation Failed! ${result.errors[0].message}`, { variant: "error" });
         return;
     }
+
+    enqueueSnackbar('Successfully Created!', { variant: "success" });
 
     const { guardian, user, profile, token, refreshToken } = result.data.createGuardian
     dispatch({ type: TYPES.USER_SET_DATA, payload: {...user, token: token, refreshToken: refreshToken } })
@@ -83,7 +98,8 @@ const NewAccount: FC = () => {
   }
 
   useEffect(() => {
-  }, []);
+    if(!errMsg) return;
+  }, [errMsg]);
 
   return (
         <ParentPgContainer onlyLogoImgNav={true}>
