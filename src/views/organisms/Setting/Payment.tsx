@@ -1,20 +1,16 @@
 import {FC, useState, useRef} from 'react';
 import Grid from '@mui/material/Grid';
-import { MasterCardImg, LSShadowContainer, CGridRow, LSTitle, CText} from '../utils/Style';
-
-import { LSBlueTextButton } from '../utils/Style';
-
-import { useDialog } from '../utils/useDialog';
-import { LSDialog } from '../molecules/LSDialog';
-import { PaymentMethod } from '../../../molecules/PaymentMethod/PaymentMethod';
-import { PaymentForm } from '../../../molecules/PaymentMethod/PaymentForm';
-import { PaymentContainer } from '../../../molecules/PaymentMethod/Style';
+import { useDialog } from '../../molecules/Setting/utils/useDialog';
+import { LSShadowContainer, MasterCardImg, LSGridRow, LSTitle, LSText, LSBlueTextButton } from '../../molecules/Setting/utils/Style';
+import { LSDialog } from '../../molecules/Setting/LSDialog';
+import { PaymentForm } from '../../molecules/PaymentMethod/PaymentForm';
+import { EditPaymentForm } from '../../molecules/Setting/EditPaymentForm';
 
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
-const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
-import masterCard from '../assets/MasterCard.svg';
+import masterCard from '../../assets/MasterCard.svg'
 
+const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 interface PaymentFormFunc {
   handleOrder(): void;
   handleUpdate(): void;
@@ -22,6 +18,13 @@ interface PaymentFormFunc {
 
 export const Payment:FC = () => {
   const {isOpen, open} = useDialog()
+  const [isEdit, edit] = useState(false)
+
+  const openEdit = () => edit(!isEdit);
+
+  const onEditConfirm = () => {
+    openEdit()
+  }
   const paymentFormRef = useRef<PaymentFormFunc>(null)
 
   const handleOrder = (event: any) => {
@@ -42,21 +45,21 @@ export const Payment:FC = () => {
       <LSTitle>
         {'Your payment method'}
       </LSTitle>
-        <CGridRow container>
+        <LSGridRow container>
           <Grid item lg={2} sm={12}>
             <MasterCardImg src={masterCard}/>
           </Grid>
           <Grid item lg={10} sm={12}>
-            <CText>
+            <LSText>
               {'Mastercard ending in 4583'}
-            </CText>
-            <CText>
+            </LSText>
+            <LSText>
               {'Expires 3/25 Josie Turner'}
-            </CText>
+            </LSText>
           </Grid>
-        </CGridRow>
-        <CGridRow container>
-          <Grid item lg={2} sm={12}>
+        </LSGridRow>
+        <LSGridRow container>
+          <Grid item lg={4} sm={12}>
             <LSBlueTextButton onClick={open}>
               {'Add new'}
             </LSBlueTextButton>
@@ -70,10 +73,20 @@ export const Payment:FC = () => {
             }
             />
           </Grid>
-          <Grid item lg={10} sm={12}>
-            <LSBlueTextButton>{'Edit'}</LSBlueTextButton>
+          <Grid item lg={8} sm={12}>
+            <LSBlueTextButton onClick={() => edit(true)}>{'Edit'}</LSBlueTextButton>
           </Grid>
-        </CGridRow>
+          <LSDialog
+            isOpen = {isEdit}
+            title = {'Edit Payment Method'}
+            open = {openEdit}
+            dialogContent = {
+              <Elements stripe={stripePromise}>
+                <EditPaymentForm isUpdate={true} ref={paymentFormRef} handleOrder= {onConfirm} handleUpdate = {onCancel}/>
+              </Elements>
+            }
+            />
+        </LSGridRow>
     </LSShadowContainer>
   );
 }

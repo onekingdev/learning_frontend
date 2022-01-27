@@ -4,23 +4,26 @@ import {FC, useEffect} from 'react';
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 
-import { CLabel, LSButtonContainer, LSButton } from '../utils/Style';
-import { LSFormControl, LSRadio, LSFormControlLabel } from '../utils/Style';
+import { LSLabel, LSButtonContainer, LSButton } from './utils/Style';
+import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
 
-import { dictionary } from '../dictionary';
+import { dictionary } from './utils/dictionary';
 
 
 interface ICancelFormProps {
   onConfirm: (arg: string) => void
   onCancel: () => void
+  tag?: Number
 }
 
-export const CancelForm:FC<ICancelFormProps> = ({ onConfirm, onCancel}) => {
+export const CancelForm:FC<ICancelFormProps> = ({ onConfirm, onCancel, tag}) => {
   const radiotexts = dictionary.en.randomText
   const [value, setValue] = React.useState('reason1');
 
   const onSubmit = () => {
     onConfirm(value)
+    console.log(tag)
+    console.log(value)
   }
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +33,7 @@ export const CancelForm:FC<ICancelFormProps> = ({ onConfirm, onCancel}) => {
   return (
     <LSFormControl variant='standard'>
       <FormLabel id="canceling-reason-label">
-        <CLabel>{'Please tell us why are you canceling.'}</CLabel>
+        <LSLabel>{'Please tell us why are you canceling.'}</LSLabel>
       </FormLabel>
       <RadioGroup
         aria-labelledby="canceling-reason-label"

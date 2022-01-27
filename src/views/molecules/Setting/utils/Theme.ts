@@ -1,9 +1,10 @@
 import { createTheme } from '@mui/material/styles';
+import { BasicColor } from '../../../Color';
 
 export const settingPage = createTheme({
   palette: {
     primary: {
-      main: '#21B95C',
+      main: BasicColor.green,
       contrastText: '#ffffff',
     },
     secondary: {
