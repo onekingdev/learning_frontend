@@ -66,6 +66,7 @@ type ScoreRecord = {
 
 const StudentRecord = ({data}: any) => {
   useEffect(() => {
+    console.log('data', data);
   });
   return (
     <>

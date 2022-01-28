@@ -27,6 +27,7 @@ export const SubjectsMenu: FC = () => {
 
   useEffect(() => {
     get('areasOfKnowledge', `{${AREA_OF_KNOWLEDGE}}`, handleData, handleError);
+    console.log(areasOfKnowledge);
   }, []);
 
   return (
@@ -45,7 +46,7 @@ export const SubjectsMenu: FC = () => {
                 id: any;
               }) => (
                 <TopicCard
-                  image={`https://api.withsocrates.com/media/${areaOfKnowledge.image}`}
+                  image={areaOfKnowledge.image}
                   background={areaOfKnowledge.hexColor}
                   subject={areaOfKnowledge.name}
                   onClick={() => history.push(`/topic/${areaOfKnowledge.id}`)}

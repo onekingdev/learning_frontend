@@ -5,6 +5,7 @@ import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 import {IStudent} from './entities/student';
+import {IUser} from './entities/user';
 import {IGroup} from './entities/group';
 import {IWallet} from './entities/wallet';
 import {IBlock, IBlockPresentation} from './entities/block';
@@ -14,7 +15,7 @@ import { ICollectibleCategory } from './entities/collectibles';
 import { IAreasOfKnowledge } from './entities/areasOfKnowledge';
 
 export type Store = {
-    user: IStudent;
+    user: IUser;
     group: IGroup;
     wallet: IWallet;
     block?: IBlock;
@@ -25,7 +26,7 @@ export type Store = {
 
 export const MockStore: Store = {
     user: {
-      userName: 'Juanpa',
+      username: 'Juanpa',
       avatar: 'string',
       avatarFavorites: [],
       gender: Gender.male,
@@ -41,6 +42,12 @@ export const MockStore: Store = {
         experience: 217,
         level: 5,
       },
+      lastLogin: new Date(),
+      isStaff: false,
+      isSuperuser: false,
+      isActive: true,
+      dateJoined: new Date(),
+      refreshToken: 'string'
     },
     group: {
       groupMembers: [
@@ -86,9 +93,8 @@ const enhancer = composeWithDevTools(
 );
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-export const store: any = createStore(persistedReducer, enhancer);
 export default function configureStore(onCompletion: any) {
-    // let store: any = createStore(persistedReducer, enhancer);
-    const persistor = persistStore(store);
-    return {store, persistor};
+  const store: any = createStore(persistedReducer, enhancer);
+  const persistor = persistStore(store);
+  return {store, persistor};
 }
