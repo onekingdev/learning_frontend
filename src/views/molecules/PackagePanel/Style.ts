@@ -7,7 +7,7 @@ import {ButtonColor, BasicColor} from '../../Color';
 export const Container = styled.div`
     position: relative;
     width: 384px;
-    height: 500px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     background-color: ${props => props.color === "Gold" ? BasicColor.paleOrange : BasicColor.ligntBlue};
@@ -57,7 +57,6 @@ export const PriceContainer = styled.div`
     font-weight: 700;
     display: flex;
     align-items: end;
-    padding-top: 30px;
     padding-bottom: 27px;
 `
 
@@ -89,6 +88,13 @@ export const Subject = styled.div`
 
 export const SubjectIcon = styled.img`
 
+`
+
+export const Tip = styled.div`
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    weight: 500;
 `
 
 export const SubjectTitle = styled.div`
