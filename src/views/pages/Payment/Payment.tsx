@@ -13,7 +13,7 @@ import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper
 import { PaymentMethod } from '../../molecules/PaymentMethod/PaymentMethod';
 import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
 import { PackagePanel } from '../../molecules/PackagePanel/PackagePanel'
-import { TipContainer, FlexColumn, FlexRow, PackageContainer, Subject, SubjectContainer } from './Style'
+import { SettingContainer, FlexColumn, FlexRow, PackageContainer } from './Style'
 import math from '../../assets/packageIcons/math_gold.svg'
 import ela from '../../assets/packageIcons/ela_gold.svg'
 import science from '../../assets/packageIcons/science_gold.svg'
@@ -69,22 +69,12 @@ export const Payment: FC = () => {
         <ParentPgContainer onlyLogoImgNav={true}>
           <>
             <ParentPgStepper step={1}/>
-            <TipContainer>
-              <Alert severity="info">
-                In Socrates, students can get mutiple Areas of Knowledge depend of the package they will have All, Two Areas or a Solo Area! Choose the best package for your kids!
-                <br />
-                <SubjectContainer>
-                    <div className="flex align-center"><Subject src={math} />&nbsp;Math</div>
-                    <div className="flex align-center"><Subject src={ela} />&nbsp;ELA + SIGHT WORDS</div>
-                    <div className="flex align-center"><Subject src={science} />&nbsp;SCIENCE</div>
-                </SubjectContainer>
-                <SubjectContainer>
-                  <div className="flex align-center"><Subject src={financial} />&nbsp;FINANCIAL LITERACY</div>
-                  <div className="flex align-center"><Subject src={health} />&nbsp;HEALTH & SAFETY</div>
-                </SubjectContainer>
-              </Alert>
-            </TipContainer>
-            {/* <FlexColumn>
+            <Alert severity="info">
+              In Socrates, students can get mutiple Areas of Knowledge depend of the package they will have All, Two Areas or a Solo Area! Choose the best package for your kids!
+              <br />
+            </Alert>
+            <SettingContainer>
+              <FlexColumn>
                 <b>Choose your plan</b>
                 <br />
                 <FlexRow style={{flexWrap: 'unset'}}>
@@ -102,7 +92,8 @@ export const Payment: FC = () => {
                   <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={50} width={50} value="+" onClick={() => setChildrenCount(childrenCount + 1)} />
                 </ButtonGroup>
                 </FlexRow>
-              </FlexColumn> */}
+              </FlexColumn>
+            </SettingContainer>
             <PackageContainer>
               <PackagePanel type="Gold" price={priceGold} plan={planType} onSubmit={(paths:any) => onPackageSubmit("Gold", paths) }/>
               <PackagePanel type="Combo" price={priceCombo} plan={planType} onSubmit={(paths:any) => onPackageSubmit("Combo", paths) }/>

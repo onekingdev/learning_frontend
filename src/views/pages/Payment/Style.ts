@@ -3,7 +3,7 @@ import background from '../../assets/colored-shapes-bg.svg';
 import {ScreenSize} from '../../screenSize';
 import { makeStyles } from '@mui/styles'
 
-export const TipContainer = styled.div`
+export const SettingContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -20,14 +20,6 @@ export const TipContainer = styled.div`
     width: unset;
   }
 `;
-
-export const SubjectContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: space-around;
-  padding-top: 25px;
-`
 
 export const FlexColumn = styled.div`
   display: flex;
