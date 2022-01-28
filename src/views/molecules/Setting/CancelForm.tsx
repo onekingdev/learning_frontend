@@ -3,8 +3,9 @@ import {FC, useEffect} from 'react';
 
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
+import {BasicColor} from '../../Color';
 
-import { CLabel, LSButtonContainer, LSButton } from './utils/Style';
+import { LSLabel, LSButtonContainer, LSButton } from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
 
 import { dictionary } from './utils/dictionary';
@@ -33,12 +34,12 @@ export const CancelForm:FC<ICancelFormProps> = ({ onConfirm, onCancel, tag}) => 
   return (
     <LSFormControl variant='standard'>
       <FormLabel id="canceling-reason-label">
-        <CLabel>{'Please tell us why are you canceling.'}</CLabel>
+        <LSLabel>{'Please tell us why are you canceling.'}</LSLabel>
       </FormLabel>
       <RadioGroup
         aria-labelledby="canceling-reason-label"
         name="radio-buttons-group"
-        color='success'
+        color={BasicColor.green}
         value={value}
         onChange={handleRadioChange}
       >
@@ -58,6 +59,7 @@ export const CancelForm:FC<ICancelFormProps> = ({ onConfirm, onCancel, tag}) => 
           <LSButton
             variant = 'contained'
             color="secondary"
+            bgColor={BasicColor.gray60}
             onClick={onCancel}
           >
           {'Cancel'}

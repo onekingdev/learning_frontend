@@ -1,8 +1,7 @@
 import {FC, useState, useRef} from 'react';
 import Grid from '@mui/material/Grid';
-import { LSBlueTextButton } from '../../pages/Settings/Style';
 import { useDialog } from '../../molecules/Setting/utils/useDialog';
-import { LSShadowContainer, MasterCardImg, LSGridRow, LSTitle, CText } from '../../molecules/Setting/utils/Style';
+import { LSShadowContainer, MasterCardImg, LSGridRow, LSTitle, LSText, LSBlueTextButton } from '../../molecules/Setting/utils/Style';
 import { LSDialog } from '../../molecules/Setting/LSDialog';
 import { PaymentForm } from '../../molecules/PaymentMethod/PaymentForm';
 import { EditPaymentForm } from '../../molecules/Setting/EditPaymentForm';
@@ -51,12 +50,12 @@ export const Payment:FC = () => {
             <MasterCardImg src={masterCard}/>
           </Grid>
           <Grid item lg={10} sm={12}>
-            <CText>
+            <LSText>
               {'Mastercard ending in 4583'}
-            </CText>
-            <CText>
+            </LSText>
+            <LSText>
               {'Expires 3/25 Josie Turner'}
-            </CText>
+            </LSText>
           </Grid>
         </LSGridRow>
         <LSGridRow container>

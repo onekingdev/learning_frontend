@@ -1,0 +1,126 @@
+import {FC, useEffect, useState} from 'react';
+import styled from 'styled-components';
+import { BasicColor } from '../../Color';
+import {TopicProgress} from '../../molecules/TopicProgress';
+import {ScreenSize} from '../../screenSize';
+import {dictionary} from '../../pages/Progress/dictionary';
+import {database, getProgress} from '../../../app/firebase';
+
+export const ReportProgress: FC = () => {
+  useEffect(() => {
+    getProgress(setProgress);
+  }, []);
+  const language = 'en';
+  const lessonProps = [
+    {
+      title: dictionary[language].ela,
+      color: BasicColor.red,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+      ],
+    },
+    {
+      title: dictionary[language].math,
+      color: BasicColor.orange,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+      ],
+    },
+    {
+      title: dictionary[language].sight,
+      color: BasicColor.yellow,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+      ],
+    },
+    {
+      title: dictionary[language].science,
+      color: BasicColor.green,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+      ],
+    },
+    {
+      title: dictionary[language].health,
+      color: BasicColor.aqua,
+      progress: [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+      ],
+    },
+  ];
+  const [progress, setProgress] = useState(lessonProps);
+
+
+  return (
+    <>
+      <MyProgressStyle>
+        {progress.map((item, i) => (
+          <TopicProgress
+            points={item.progress}
+            maxPoints={10}
+            title={item.title}
+            color={item.color}
+            key={i}
+          />
+        ))}
+      </MyProgressStyle>
+    </>
+  );
+};
+
+const MyProgressStyle = styled.div`
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 35px 25px;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    height: 400px;
+  }
+`;
