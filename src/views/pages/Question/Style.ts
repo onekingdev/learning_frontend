@@ -3,7 +3,6 @@ import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
-
   background-image: url(${background});
   background-repeat: no-repeat;
   background-size: cover;
@@ -21,6 +20,24 @@ export const ProgressWrapper = styled.div`
   }
 `;
 
+export const BlackBoard = styled.div`
+  background-color: #13705f;
+  border: 7px solid #5c2100;
+  border-radius: 16px;
+  margin: 1rem;
+  padding-top: 2rem;
+  display: grid;
+  grid-template-rows: auto auto;
+  @media (min-width: ${ScreenSize.tablet}) {
+    margin: 1rem;
+    margin-top: 5rem;
+    margin-bottom: 7rem;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    margin: 1rem;
+  }
+`;
+
 export const Options = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -31,7 +48,21 @@ export const Options = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
+export const TextOptionsList = styled.ol`
+  width: 100%;
+  list-style-type: upper-latin;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
 
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    grid-gap: 30px;
+  }
+`;
+export const TextOptionItem = styled.li`
+  width: 100%;
+`;
 export const OptionWrapper = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
@@ -62,18 +93,17 @@ export const AnswerWrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  padding-bottom: 70px;
-  padding-top: 20px;
   text-align: center;
-  max-height: 700px;
+  display: grid;
+  height: calc(100% - 57px - 33px - 30px - 35px);
   @media (min-width: ${ScreenSize.tablet}) {
-    padding-top: 40px;
+    grid-template-columns: 60% 40%;
     max-width: 1366px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: ${ScreenSize.desktop}) {
+    height: unset;
   }
 `;
 
@@ -97,4 +127,14 @@ export const Submit = styled.div`
   padding-right: 2rem;
   padding-bottom: 0;
   padding-top: 1rem;
+`;
+
+export const AssistorContainer = styled.div`
+  width: 95%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  grid-gap: 10px;
+  margin: 0 auto;
 `;

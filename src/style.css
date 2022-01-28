@@ -18,17 +18,8 @@ body {
 .justify-space-between {
     justify-content: space-between;
 }
-.justify-space-around {
-    justify-content: space-around;
-}
 .align-center{
     align-items: center;
-}
-.align-right {
-    float: right !important;
-}
-.align-left {
-    float: left !important;
 }
 .text-center {
     text-align: center;
@@ -277,22 +268,10 @@ body {
     padding-top: 55px;
 }
 .w-67 {
-    width: 67%;
+    width: 67%
 }
 .w-100 {
-    width: 100%;
-}
-.w-600{
-    width: 600px;
-}
-.h-380 {
-    height: 380px;
-}
-.h-400 {
-    height: 400px;
-}
-.h-full {
-    height: 100%;
+    width: 100%
 }
 .inline {
     display: inline;

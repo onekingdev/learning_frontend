@@ -31,18 +31,6 @@ export interface ITopic {
   level: number;
   name: string;
   questionSet: IQuestion[];
-  subTopics: ITopic[];
-  videoAssistor: string;
-}
-
-export interface ITopicGrade {
-  id: string;
-  identifier: string;
-  isActive: boolean;
-  randomSlug: string;
-  topic: ITopic;
-  standardCode: string;
-  blockSet: IBlock[];
 }
 
 export interface IBlockConfigurationKeyword {
@@ -77,7 +65,6 @@ export interface IBlock {
   batteryPointsAvailable: number;
   typeOf: IBlockType;
   questions: IQuestion[];
-  topicGrade: ITopicGrade;
 }
 
 export interface IBlockPresentation {

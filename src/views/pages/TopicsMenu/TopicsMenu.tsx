@@ -6,8 +6,6 @@ import {SubTopicsCarousel} from '../../organisms/SubTopicsCarousel';
 import {get} from '../../../api/queries/get';
 import {AREA_OF_KNOWLEDGE_QUERY} from '../../../api/queries/questions';
 import {useParams} from 'react-router-dom';
-import {IAreasOfKnowledge} from '../../../app/entities/areasOfKnowledge'
-import { ITopic } from '../../../app/entities/block';
 
 interface RouteTopicParams {
   topicId: string;
@@ -15,10 +13,15 @@ interface RouteTopicParams {
 
 export const TopicsMenu: FC = () => {
   const {topicId} = useParams<RouteTopicParams>();
-  const [areaOfKnowledge, setAreaOfKnowledge] = useState<IAreasOfKnowledge>();
+  const [areaOfKnowledge, setAreaOfKnowledge] = useState({
+    name: '',
+    topicSet: [],
+    image: '',
+  });
 
   const handleData = (data: any) => {
     setAreaOfKnowledge(data.data.areaOfKnowledgeById);
+    console.log(areaOfKnowledge);
   };
   const handleError = (error: any) => {
     console.error(error);
@@ -31,31 +34,20 @@ export const TopicsMenu: FC = () => {
       handleData,
       handleError
     );
-    console.log(topicId)
   }, []);
   return (
     <>
       <Wrapper>
         <StudentMenu>
-          {
-            areaOfKnowledge ?
-            <TopicsMenuStyles>
-              <TopicPresentation
-                title={areaOfKnowledge.name}
-                image={areaOfKnowledge.image}
-              />
-              {areaOfKnowledge.topicSet.map((item: ITopic, i:any) => (
-                <SubTopicsCarousel
-                  name={item.name}
-                  subTopics={item.subTopics}
-                  id={item.id}
-                  key={i}
-                />
-              ))}
-           </TopicsMenuStyles>
-            :
-            null
-          }
+          <TopicsMenuStyles>
+            <TopicPresentation
+              title={areaOfKnowledge.name}
+              image={areaOfKnowledge.image}
+            />
+            {areaOfKnowledge.topicSet.map((item: any) => (
+              <SubTopicsCarousel name={item.name} subTopics={item.subTopics} />
+            ))}
+          </TopicsMenuStyles>
         </StudentMenu>
       </Wrapper>
     </>

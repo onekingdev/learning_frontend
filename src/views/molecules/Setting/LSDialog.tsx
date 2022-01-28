@@ -38,7 +38,7 @@ export const LSDialog: FC<LSDialogProps> = ({
   const fullScreen = useMediaQuery(settingPage.breakpoints.down('md'));
   return (
     <ThemeProvider theme={settingPage}>
-      <Dialog open={isOpen} onClose={open} fullScreen={fullWidth ? fullScreen : false} scroll='body'>
+      <Dialog open={isOpen} onClose={open} scroll='body'>
         <IconButton
           aria-label="close"
           onClick={() => {onCrossBtnClick()}}

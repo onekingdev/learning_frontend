@@ -44,22 +44,22 @@ export const TOPIC = `
         identifier
         isActive
         randomSlug
+        slug
         lft
         rght
         treeId
         level
         name
-        videoAssistor
 `;
 
 export const TOPIC_GRADE = `
-    
+    {
         id
         identifier
         isActive
         randomSlug
         standardCode
-    
+    }
 `;
 
 export const QUESTION = `

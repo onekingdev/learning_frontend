@@ -10,23 +10,17 @@ import avatar from '../../assets/avatars/avatar1.svg'
 import kidA from '../../assets/avatars/kid-1.svg'
 import kidB from '../../assets/avatars/kid-2.svg'
 import kidC from '../../assets/avatars/kid-3.svg'
-import license from '../../assets/student-license.svg'
-import logo from '../../assets/logo-learn-white.svg'
-import socrates from '../../assets/socrates.svg'
 import Grid from '@mui/material/Grid';
 import TextField from '../../molecules/MuiTextField'
 import Button from '../../molecules/MuiButton'
-import { LSDialog } from '../../molecules/Setting/LSDialog';
 import {ButtonColor, BasicColor} from '../../Color';
-import { Title, Avatar, Container, LicenseButton, LicenseHeader, LicenseBody, LicenseBottom, LicenseUsername} from './Style'
-import QRCode from "react-qr-code";
+import { Title, Avatar, Container} from './Style'
 interface kid {
   username: string;
   password: string;
   grade: string;
   avatar: string
 }
-
 const KidsList: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
@@ -60,49 +54,11 @@ const KidsList: FC = () => {
     console.log(children);
   }
 
-  const License = (props: any) => {
-    return (
-      <div className="flex flex-col w-600 h-400">
-        <LicenseHeader>
-          <img src={ logo } className='p-b-15'/>
-          LEARNING LICESNE
-        </LicenseHeader>
-        <LicenseBody>
-          <div className="flex justify-space-between align-center">
-            <img src={socrates} />
-            <div className="flex flex-col h-full justify-space-around">
-              <TextField
-                label="Member Since"
-                value={`${props.membership.getFullYear()} - ${props.membership.getMonth() + 1} - ${props.membership.getDate()}`}
-                // onChange={(e) => updateUsername(e.target.value)}
-              />
-              <TextField
-                label="User Name"
-                value={props.username}
-                // onChange={(e) => updateUsername(e.target.value)}
-              />
-            </div>
-            <div className="flex align-center justify-center">
-              <QRCode value={props.username} size={150} style={{padding: "10px"}}/>
-            </div>
-          </div>
-          <div className="flex align-center">
-            <LicenseUsername>{props.parentName}</LicenseUsername>
-            <div className="flex justify-center align-center">
-              www.learnwithsocrates.com
-            </div>
-          </div>
-        </LicenseBody>
-      </div>
-    )
-  }
-
   const Kid = (props:any) => {
 
     const [username, setUsername] = useState(props.username);
     const [password, setPassword]=  useState(props.password);
     const [grade, setGrade] = useState(props.grade)
-    const [openLicense, setOpenLicense] = useState(false)
 
     const updateUsername = (value: any) => {
         setUsername(value);
@@ -124,30 +80,8 @@ const KidsList: FC = () => {
 
     return (
     <div className="flex justify-center align-center p-b-50 w-100">
-      <LSDialog
-        isOpen = {openLicense}
-        open = {() => {}}
-        title = 'Your Child License'
-        dialogContent = {
-          <>
-          <License parentName={props.parentName} username={username} membership={new Date()} />
-          <div className="flex justify-space-between p-t-30">
-            <Button
-              bgColor={BasicColor.green}
-              onClick={(e:any) => handleSave()}
-              value="Download"
-            />
-            <Button
-              bgColor={BasicColor.gray60}
-              onClick={(e:any) => handleSave()}
-              value="Return"
-            />
-          </div>
-          </>
-        }
-      />
       <Avatar src={props.avatar} />
-      <Grid container spacing={5} className="align-center">
+      <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <TextField
               label="User Name"
@@ -182,11 +116,10 @@ const KidsList: FC = () => {
                 value="Delete"
               />
               )} */}
-              {/* <Button
+              <Button
                 onClick={(e:any) => handleBring()}
                 value="Bring"
-              /> */}
-              <LicenseButton src={license} onClick={() => setOpenLicense(true)}/>
+              />
           </Grid>
       </Grid>
     </div>
@@ -222,9 +155,7 @@ const KidsList: FC = () => {
           <Container>
             <Title>Your kids</Title>
             {children.map((child, index) => (
-              <>
-                <Kid {...child} index={index} key={index}></Kid>
-              </>
+              <Kid {...child} index={index} key={index}></Kid>
             ))}
             <Button
               bgColor={BasicColor.green}
