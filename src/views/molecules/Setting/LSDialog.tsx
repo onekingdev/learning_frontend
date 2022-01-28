@@ -4,9 +4,9 @@ import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-
 import { ThemeProvider } from '@mui/material';
 
+import { BasicColor } from '../../Color';
 import { settingPage } from './utils/Theme';
 
 import { LSDialogTitle, LSDialogContent, LSDialogContentText } from './utils/Style';
@@ -28,19 +28,26 @@ export const LSDialog: FC<LSDialogProps> = ({
   dialogContent,
   fullWidth
 }) => {
+
+  const onCrossBtnClick = () => {
+    // Do something here...
+
+    // Close dialog
+    open()
+  }
   const fullScreen = useMediaQuery(settingPage.breakpoints.down('md'));
   return (
     <ThemeProvider theme={settingPage}>
       <Dialog open={isOpen} onClose={open} fullScreen={fullWidth ? fullScreen : false} scroll='body'>
         <IconButton
           aria-label="close"
-          onClick={open}
+          onClick={() => {onCrossBtnClick()}}
           sx={{
             position: 'absolute',
             right: 8,
             top: 8,
-            background: '#21B95C',
-            color: '#FFFFFF',
+            background: BasicColor.green,
+            color: 'white',
           }}
         >
           <CloseIcon />

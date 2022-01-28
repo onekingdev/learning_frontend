@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import {InputBase, Paper} from '@mui/material';
+import {BasicColor} from '../../../Color';
+
 
 import FormControl from '@mui/material/FormControl';
 import {
@@ -21,7 +23,7 @@ import titleBg from '../../../assets/title-kids-background.png';
 
 export const LSDialogTitle = styled(DialogTitle)`
   &.MuiDialogTitle-root {
-    color: #1771b9;
+    color: ${BasicColor.blue};
     font-family: Montserrat;
     font-size: 24px;
     font-style: normal;
@@ -77,7 +79,7 @@ export const LSRadio = styled(Radio)`
     font-size: 40px;
   }
   &.MuiRadio-root {
-    color: #21b95c;
+    color: ${BasicColor.green};
   }
 `;
 export const LSFormControlLabel = styled(FormControlLabel)`
@@ -95,9 +97,11 @@ export const LSFormControlLabel = styled(FormControlLabel)`
 /*--------------------------------------------------------------------------------------------*/
 /*                                          Button                                            */
 /*--------------------------------------------------------------------------------------------*/
-export const LSButton = styled(Button)`
+export const LSButton = styled(Button)<{
+  bgColor?: string
+}>`
   &.MuiButton-root {
-    // background-color: #21B95C;
+    ${props => props.bgColor ? 'background-color:' + props.bgColor + ';':''}
     border-radius: 20px;
     height: 49px;
     width: 215px;
@@ -105,6 +109,9 @@ export const LSButton = styled(Button)`
     font-size: 16px;
     color: white;
     font-family: Montserrat;
+  }
+  &:hover {
+    transform scale(1.01)
   }
 `;
 export const LSButtonContainer = styled.div`
@@ -116,7 +123,7 @@ export const LSBlueTextButton = styled(Button)`
   &.MuiButton-root {
     text-decoration: underline;
     text-transform: unset;
-    color: #1771b9;
+    color: ${BasicColor.blue};
     font-family: Montserrat;
     font-weight: 600;
     font-size: 16px;
@@ -279,33 +286,4 @@ export const LSLabel = styled.p<{
   font-weight: 700;
   letter-spacing: 0.75px;
   text-align: left;
-`;
-
-/*--------------------------------------------------------------------------------------------*/
-/*                                           CALENDAR                                         */
-/*--------------------------------------------------------------------------------------------*/
-export const ReactCalendar = styled.div`
-  width: 400px;
-  max-width: 100%;
-  background-color: #fff;
-  color: #222;
-  border-radius: 8px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.125em;
-`;
-
-export const ReactCalendarNavBtn = styled.button`
-  color: #6f48eb;
-  min-width: 44px;
-  background: none;
-  font-size: 16px;
-  margin-top: 8px;
-  :enabled: hover;
-  :enabled:focus {
-    background-color: #f8f8fa;
-  }
-  :disabled {
-    background-color: #f0f0f0;
-  }
 `;
