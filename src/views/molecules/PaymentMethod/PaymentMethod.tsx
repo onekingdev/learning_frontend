@@ -51,7 +51,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan, 
   const handleOrder = async (event: any) => {
     const result = await paymentFormRef?.current?.handleOrder(couponCode, price);
     console.log(result);
-    if(result.success) history.push('/parent/create')
+    if(result.success) history.push(`/parent/create/${result.result.email}`)
   }
 
   const applyCoupon = (e: any) => {
