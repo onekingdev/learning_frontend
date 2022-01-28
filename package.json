@@ -75,8 +75,7 @@
     "fix": "gts fix",
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
-    "posttest": "yarn run lint",
-    "deploy": "react-scripts build && firebase deploy"
+    "posttest": "yarn run lint"
   },
   "eslintConfig": {
     "extends": [

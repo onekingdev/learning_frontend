@@ -42,7 +42,7 @@ export const TopicsMenu: FC = () => {
             <TopicsMenuStyles>
               <TopicPresentation
                 title={areaOfKnowledge.name}
-                image={`https://api.withsocrates.com/media/${areaOfKnowledge.image}`}
+                image={areaOfKnowledge.image}
               />
               {areaOfKnowledge.topicSet.map((item: ITopic, i:any) => (
                 <SubTopicsCarousel
