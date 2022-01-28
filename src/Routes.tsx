@@ -21,11 +21,11 @@ import KidsList from './views/pages/KidsList/KidsList';
 import { useSelector } from 'react-redux';
 import { Store } from './app/configureStore'
 import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgContainer'
-
-// for bruce test
 import {Settings} from './views/pages/Settings/Settings';
-import NewKids from './views/pages/NewKids/NewKids'
+import {Report} from './views/pages/Report/Report';
 
+
+import NewKids from './views/pages/NewKids/NewKids'
 const PrivateRoute = ({requireAuth=true, ...rest}) => {
   const user = useSelector((state : Store) => state.user)
   const isAuthenticated = !!user?.token;
@@ -94,10 +94,13 @@ export function Routes(props: any) {
         <PrivateRoute path="/parent/setting">
           <Settings />
         </PrivateRoute>
+        <PrivateRoute path="/parent/report">
+          <Report />
+        </PrivateRoute>
         <PrivateRoute path="/parent/account">
           <Account />
         </PrivateRoute>
-        <PrivateRoute path="/parent/create/:email">
+        <PrivateRoute path="/parent/create">
           <NewAccount />
         </PrivateRoute>
         <PrivateRoute path="/kids/list">

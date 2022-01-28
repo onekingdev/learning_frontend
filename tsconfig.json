@@ -26,5 +26,5 @@
     "@molecules": "[views/molucules/]",
     "@assets": "[views/assets/]",
     // "@organims/*": "[]",
-  } 
+  }
 }

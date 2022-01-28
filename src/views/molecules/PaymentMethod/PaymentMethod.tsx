@@ -1,4 +1,4 @@
-import {FC, useEffect, ReactChildren, ReactChild, useState, useRef} from 'react';
+import {FC, useEffect, useState, useRef} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import Grid from '@mui/material/Grid';
@@ -51,7 +51,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan, 
   const handleOrder = async (event: any) => {
     const result = await paymentFormRef?.current?.handleOrder(couponCode, price);
     console.log(result);
-    if(result.success) history.push(`/parent/create/${result.result.email}`)
+    if(result.success) history.push('/parent/create')
   }
 
   const applyCoupon = (e: any) => {

@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 
 import Box from '@mui/material/Box';
@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
 
 import { Title } from '../../molecules/Setting/utils/Style';
-import { TextGroup, CLabel, CText, LSBlueTextButton  } from '../../molecules/Setting/utils/Style';
+import { TextGroup, LSLabel, LSText, LSBlueTextButton } from '../../molecules/Setting/utils/Style';
 
 import { SettingForm } from '../../organisms/Setting/Profile';
 import { Payment } from '../../organisms/Setting/Payment'
@@ -22,20 +22,20 @@ export const Settings: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={false} >
       <>
-      <Title>{'Settings'}</Title>
-        <CssBaseline/>
-        <Box sx={{display:'flex', justifyContent:'center'}}>
+        <Title>{'Settings'}</Title>
+        <CssBaseline />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <div>
-          <SettingForm/>
-          <Payment/>
-          <TextGroup>
-            <CLabel>{'Questions? '}</CLabel>
-            <CText>{' Reach us and we will help you'}</CText>
-            <LSBlueTextButton href='#'>{' Contact'}</LSBlueTextButton>
-          </TextGroup>
+            <SettingForm />
+            <Payment />
+            <TextGroup>
+              <LSLabel>{'Questions? '}</LSLabel>
+              <LSText>{' Reach us and we will help you'}</LSText>
+              <LSBlueTextButton href='#'>{' Contact'}</LSBlueTextButton>
+            </TextGroup>
           </div>
           <div>
-          <MembershipDetail/>
+            <MembershipDetail />
           </div>
         </Box>
       </>

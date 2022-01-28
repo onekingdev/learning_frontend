@@ -119,7 +119,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     /*------------------------ send request to backend to create payment -S-----------------------------*/
 
     /*------------------------ send request to backend to create payment -E-----------------------------*/
-    result.email = data.email;
     return {success: true, result: result};
   }
 
