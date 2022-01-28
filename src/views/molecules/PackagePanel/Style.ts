@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import {ScreenSize} from '../../screenSize';
 import { makeStyles } from '@mui/styles'
 import background from '../../assets/colored-shapes-bg.svg';
-import { BlackBoard } from '../../pages/Question/Style';
 import {ButtonColor, BasicColor} from '../../Color';
 
 export const Container = styled.div`

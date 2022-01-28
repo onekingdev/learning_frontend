@@ -19,7 +19,6 @@ import {useParams} from 'react-router-dom';
 import { PanoramaSharp } from '@mui/icons-material';
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
-
 interface RouteParams {
     email: string;
 }
