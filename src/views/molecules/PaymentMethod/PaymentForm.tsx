@@ -26,7 +26,7 @@ import {
   CardContent
  } from './Style'
  import StripeInput from "./StripeInput";
-import { FlexColumn } from '../../pages/Payment/Style';
+import { FlexColumn } from '../../pages/Account/Style';
 type PaymentFormProps = {
   isUpdate: boolean
 };
