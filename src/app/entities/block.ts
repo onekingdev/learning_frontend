@@ -31,6 +31,7 @@ export interface ITopic {
   level: number;
   name: string;
   questionSet: IQuestion[];
+  subTopics: ITopic[];
   videoAssistor: string;
 }
 

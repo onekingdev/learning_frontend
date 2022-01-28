@@ -66,7 +66,7 @@ export const KnowledgeMap: FC = () => {
             return i % 2 === 0 ? (
               <SubjectEven>
                 <Island
-                  src={areaOfKnowledge.islandImage}
+                  src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
                   onClick={() => history.push('/question')}
                 />
                 <Filler src={fill} />
@@ -75,7 +75,7 @@ export const KnowledgeMap: FC = () => {
               <SubjectOdd>
                 <Filler src={fill} />
                 <Island
-                  src={areaOfKnowledge.islandImage}
+                  src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
                   onClick={() => history.push('/question')}
                 />
               </SubjectOdd>

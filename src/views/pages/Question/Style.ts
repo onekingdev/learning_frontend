@@ -21,25 +21,6 @@ export const ProgressWrapper = styled.div`
   }
 `;
 
-export const BlackBoard = styled.div`
-  background-color: #13705f;
-  border: 7px solid #5c2100;
-  border-radius: 16px;
-  margin: 1rem;
-  padding-top: 1rem;
-  height: 100%;
-  @media (min-width: ${ScreenSize.tablet}) {
-    margin: 1rem;
-    margin-top: 5rem;
-    margin-bottom: 7rem;
-    height: auto;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    margin: 20px 0;
-    height: 100%;
-  }
-`;
-
 export const Options = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -50,21 +31,7 @@ export const Options = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
-export const TextOptionsList = styled.ol`
-  width: 100%;
-  list-style-type: upper-latin;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  grid-gap: 10px;
 
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    grid-gap: 30px;
-  }
-`;
-export const TextOptionItem = styled.li`
-  width: 100%;
-`;
 export const OptionWrapper = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
@@ -96,11 +63,16 @@ export const AnswerWrapper = styled.div`
 
 export const Container = styled.div`
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 0 auto;
+  padding-bottom: 70px;
+  padding-top: 20px;
   text-align: center;
-  height: 100%;
   max-height: 700px;
   @media (min-width: ${ScreenSize.tablet}) {
+    padding-top: 40px;
     max-width: 1366px;
   }
 `;
@@ -114,13 +86,6 @@ export const Answers = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-export const IconVideoContainer = styled.div`
-  width: 90%;
-  margin: 5px auto;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: left;
-`
 
 export const AnswerForm = styled.form`
   grid-column: 1/3;
@@ -132,15 +97,4 @@ export const Submit = styled.div`
   padding-right: 2rem;
   padding-bottom: 0;
   padding-top: 1rem;
-`;
-
-export const AssistorContainer = styled.div`
-  width: 95%;
-  max-width: 400px;
-  height: 40px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  grid-gap: 10px;
-  margin: 30px auto;
 `;
