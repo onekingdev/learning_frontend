@@ -35,13 +35,10 @@ export const LSDialog: FC<LSDialogProps> = ({
     // Close dialog
     open()
   }
-  const fullScreen = useMediaQuery(settingPage.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(settingPage.breakpoints.down('md'));
   return (
     <ThemeProvider theme={settingPage}>
-      <Dialog open={isOpen} onClose={open} scroll='body' fullScreen={fullScreen}
-      sx={{
-        '& .MuiPaper-root': {maxWidth: fullWidth?'100%':'auto'}
-      }}>
+      <Dialog open={isOpen} onClose={open} fullScreen={fullWidth ? fullScreen : false} scroll='body'>
         <IconButton
           aria-label="close"
           onClick={() => {onCrossBtnClick()}}
@@ -51,7 +48,6 @@ export const LSDialog: FC<LSDialogProps> = ({
             top: 8,
             background: BasicColor.green,
             color: 'white',
-            zIndex: 100000
           }}
         >
           <CloseIcon />

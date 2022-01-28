@@ -88,7 +88,7 @@ const KidsList: FC = () => {
     <div className="flex justify-center align-center p-b-50 w-100">
       <LSDialog
         isOpen = {openLicense}
-        open = {() => {setOpenLicense(!openLicense)}}
+        open = {() => {}}
         title = 'Your Child License'
         dialogContent = {
           <>
