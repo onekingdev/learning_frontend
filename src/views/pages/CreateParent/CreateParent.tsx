@@ -23,7 +23,7 @@ interface RouteParams {
     email: string;
 }
 
-const NewAccount: FC = () => {
+const CreateParent: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
@@ -176,4 +176,4 @@ const NewAccount: FC = () => {
         </ParentPgContainer>
   );
 };
-export default NewAccount;
+export default CreateParent;

@@ -22,7 +22,7 @@ import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 import {Wardrobe} from './views/pages/Avatar/Wardrobe';
 import {Account} from './views/pages/Account/Account';
-import NewAccount from './views/pages/NewParent/NewParent';
+import CreateParent from './views/pages/CreateParent/CreateParent';
 import KidsList from './views/pages/KidsList/KidsList';
 import { useSelector } from 'react-redux';
 import { Store } from './app/configureStore'
@@ -118,7 +118,7 @@ export function Routes(props: any) {
           <Account />
         </PrivateRoute>
         <PrivateRoute path="/parent/create/:email">
-          <NewAccount />
+          <CreateParent />
         </PrivateRoute>
         <PrivateRoute path="/kids/list">
           <KidsList />
