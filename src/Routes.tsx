@@ -117,7 +117,7 @@ export function Routes(props: any) {
         <PrivateRoute path="/parent/account">
           <Account />
         </PrivateRoute>
-        <PrivateRoute path="/parent/create/:email">
+        <PrivateRoute path="/parent/create">
           <CreateParent />
         </PrivateRoute>
         <PrivateRoute path="/kids/list">
