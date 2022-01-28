@@ -10,14 +10,14 @@ import {MockStore} from '../../../app/configureStore'
 import { IStudent } from '../../../app/entities/student';
 import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
 import { PaymentMethod } from '../../molecules/PaymentMethod/PaymentMethod';
-import { ParentPgContainer } from '../../../views/molecules/ParentPgContainer/ParentPgContainer'
-import { PackagePanel } from '../../../views/molecules/PackagePanel/PackagePanel'
+import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
+import { PackagePanel } from '../../molecules/PackagePanel/PackagePanel'
 import { SettingContainer, FlexColumn, FlexRow, PackageContainer } from './Style'
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
 import Button from '../../molecules/MuiButton'
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 
-export const Account: FC = () => {
+export const Payment: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const language = 'en';
