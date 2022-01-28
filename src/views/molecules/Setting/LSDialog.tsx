@@ -38,10 +38,7 @@ export const LSDialog: FC<LSDialogProps> = ({
   const fullScreen = useMediaQuery(settingPage.breakpoints.down('md'));
   return (
     <ThemeProvider theme={settingPage}>
-      <Dialog open={isOpen} onClose={open} scroll='body'
-      sx={{
-        '& .MuiPaper-root': {maxWidth: '100%'}
-      }}>
+      <Dialog open={isOpen} onClose={open} fullScreen={fullWidth ? fullScreen : false} scroll='body'>
         <IconButton
           aria-label="close"
           onClick={() => {onCrossBtnClick()}}

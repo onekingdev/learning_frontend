@@ -45,7 +45,7 @@ export const SubjectsMenu: FC = () => {
                 id: any;
               }) => (
                 <TopicCard
-                  image={areaOfKnowledge.image}
+                  image={`https://api.withsocrates.com/media/${areaOfKnowledge.image}`}
                   background={areaOfKnowledge.hexColor}
                   subject={areaOfKnowledge.name}
                   onClick={() => history.push(`/topic/${areaOfKnowledge.id}`)}

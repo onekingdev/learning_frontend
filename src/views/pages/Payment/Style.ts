@@ -45,9 +45,13 @@ export const PackageContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `;
+
 export const PaymentContainer = styled.div`
   padding: 45px;
 `;
+
+export const Subject = styled.img`
+`
 
 export const useStyles = makeStyles({
   groupButton: {

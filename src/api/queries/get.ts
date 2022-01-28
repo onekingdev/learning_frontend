@@ -4,7 +4,7 @@ export const get = (
   handleData: (x: unknown) => void,
   handleError: (x: unknown) => void
 ) => {
-  return fetch('http://143.244.183.24/graphql/', {
+  return fetch('https://api.withsocrates.com/graphql/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export const mutation = (
   handleData: (x: unknown) => void,
   handleError: (x: unknown) => void
 ) => {
-  return fetch('http://143.244.183.24/graphql/', {
+  return fetch('https://api.withsocrates.com/graphql/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
