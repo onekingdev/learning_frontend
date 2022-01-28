@@ -2,6 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import ButtonGroup from '@mui/material/ButtonGroup';
+import Alert from '@mui/material/Alert';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import { useStyles } from './Style';
@@ -13,6 +14,11 @@ import { PaymentMethod } from '../../molecules/PaymentMethod/PaymentMethod';
 import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
 import { PackagePanel } from '../../molecules/PackagePanel/PackagePanel'
 import { SettingContainer, FlexColumn, FlexRow, PackageContainer } from './Style'
+import math from '../../assets/packageIcons/math_gold.svg'
+import ela from '../../assets/packageIcons/ela_gold.svg'
+import science from '../../assets/packageIcons/science_gold.svg'
+import financial from '../../assets/packageIcons/financial_gold.svg'
+import health from '../../assets/packageIcons/health_gold.svg'
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
 import Button from '../../molecules/MuiButton'
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
@@ -63,6 +69,10 @@ export const Payment: FC = () => {
         <ParentPgContainer onlyLogoImgNav={true}>
           <>
             <ParentPgStepper step={1}/>
+            <Alert severity="info">
+              In Socrates, students can get mutiple Areas of Knowledge depend of the package they will have All, Two Areas or a Solo Area! Choose the best package for your kids!
+              <br />
+            </Alert>
             <SettingContainer>
               <FlexColumn>
                 <b>Choose your plan</b>
