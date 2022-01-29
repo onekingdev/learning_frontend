@@ -3,7 +3,6 @@ import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 import { makeStyles } from '@mui/styles'
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
-
 export const Container = styled.div`
   position: relative;
   padding-top: 91px;
