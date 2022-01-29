@@ -36,6 +36,7 @@ export const LicenseUsername = styled.div`
   border-radius: 5px;
   width: 110px;
   min-height: 35px; 
+  text-align: center;
 `
 
 export const useStyles = makeStyles({

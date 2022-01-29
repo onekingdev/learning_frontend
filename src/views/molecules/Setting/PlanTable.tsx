@@ -13,7 +13,6 @@ import { LSDialog } from './LSDialog';
 import { CancelForm } from './CancelForm';
 import { useDialog } from './utils/useDialog';
 import { Upgrade } from './Upgrade';
-
 const data = [
   {
     id: 0,
@@ -45,13 +44,13 @@ const data = [
   },
 ]
 
-export const PlanTable: FC = () => {
+export const PlanTable:FC = () => {
 
   // for change to yearly dialog
   const [isUpdateOpen, update] = useState(false)
   const openUpdate = () => update(!isUpdateOpen);
 
-  const { isOpen, open } = useDialog()
+  const {isOpen, open} = useDialog()
   const [tag, seTag] = useState(0)
 
   const onBtnClick = (id: number) => {
@@ -68,74 +67,75 @@ export const PlanTable: FC = () => {
 
   return (
     <div>
-      <TableContainer component={Paper} >
-        <Table aria-label="simple table" size="small" >
-          <TableHead sx={{ borderTop: 'solid 3px ghostwhite'}}>
-            <TableRow>
-              <TableCell align='center'>
-                <LSLabel fontSize={17} textAlign='center'>{'Area of Knowledge'}</LSLabel>
+    <TableContainer component={Paper} >
+      <Table aria-label="simple table" size="small" >
+        <TableHead sx={{borderTop:'solid 3px ghostwhite'}}>
+          <TableRow>
+            <TableCell align='center'>
+              <h2 style={{fontFamily: 'Montserrat'}}>Area of Knowledge</h2>
+            </TableCell>
+            <TableCell align="center">
+              <h2 style={{fontFamily: 'Montserrat'}}>Plan</h2>
+              <p style={{fontFamily: 'Montserrat'}}>{'safe 50% if you change to Annual'}</p>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow
+              hover
+              key={row.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row" >
+                <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                  <LSLabel>{row.package}</LSLabel>
+                  <LSBlueTextButton onClick = {() => onBtnClick(row.id)}>Cancel Plan</LSBlueTextButton>
+                </Box>
               </TableCell>
               <TableCell align="center">
-                <LSLabel fontSize={17} textAlign='center'>{'Plan'}</LSLabel>
-                <LSText textAlign='center' fontSize={13}>{'(save 3 months if you change to annual plan)'}</LSText>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row) => (
-              <TableRow
-                hover
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row" >
-                  <Box >
-                    <LSLabel >{row.package}</LSLabel>
-                    <LSBlueTextButton onClick={() => onBtnClick(row.id)}>Cancel Plan</LSBlueTextButton>
-                  </Box>
-                </TableCell>
-                <TableCell align="left">
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                    <LSLabel>{row.period}</LSLabel>
-                    <LSText>{row.expiration}</LSText>
-                    <LSText>{row.price}</LSText>
-                  </Box>
+                <Box sx={{display: 'flex', alignItems: 'center', justifyContent:'space-evenly'}}>
+                  <LSLabel>{row.period}</LSLabel>
+                  <LSText>{row.expiration}</LSText>
+                  <LSText>{row.price}</LSText>
+                </Box>
                   <LSBlueTextButton
-                    disabled={row.period === 'Monthly' ? false : true}
-                    onClick={() => onUpgradeBtnClick(row.id)}
+                    disabled = {row.period === 'Monthly' ? false : true}
+                    onClick = {() => onUpgradeBtnClick(row.id)}
                   >{'Change to Yearly'}
                   </LSBlueTextButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <LSDialog
-        isOpen={isOpen}
-        open={open}
-        title='Cancel Childrens plan'
-        contentText='You are cancelling 1 child solo area'
-        dialogContent={
-          <CancelForm
-            tag={tag}
-            onConfirm={open}
-            onCancel={onCancel}
-          />
-        }
+
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    <LSDialog
+    isOpen={isOpen}
+    open={open}
+    title = 'Cancel Childrens plan'
+    contentText = 'You are cancelling 1 child solo area'
+    dialogContent = {
+      <CancelForm
+        tag={tag}
+        onConfirm={open}
+        onCancel={onCancel}
       />
-      <LSDialog
-        isOpen={isUpdateOpen}
-        open={openUpdate}
-        title={'Upgrade'}
-        dialogContent={
-          <Upgrade
-            tag={tag}
-            onConfirm={openUpdate}
-            onCancel={onCancelUpgrade}
-          />
-        }
-      />
-    </div>
+    }
+    />
+    <LSDialog
+    isOpen = {isUpdateOpen}
+    open = {openUpdate}
+    title = {'Upgrade'}
+    dialogContent = {
+      <Upgrade
+      tag={tag}
+      onConfirm={openUpdate}
+      onCancel={onCancelUpgrade}
+    />
+    }
+    />
+  </div>
   );
 }

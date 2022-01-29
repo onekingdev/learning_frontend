@@ -58,8 +58,6 @@ export const LSDialog: FC<LSDialogProps> = ({
   );
 }
 
-
-// Styled components
 interface DialogProps {
   wide?: boolean
 }
@@ -77,7 +75,7 @@ const StyledIconBtn = styled(IconButton)`
     background: ${BasicColor.green};
     color: white;
     &:hover {
-      background: ${BasicColor.green};
+      background-color: rgba(33, 185, 92, 0.9)
     }
   }
 `

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { FC, useEffect } from 'react';
+import {FC, useEffect} from 'react';
 
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
-import { BasicColor } from '../../Color';
+import {BasicColor} from '../../Color';
 
 import { LSLabel, LSButtonContainer, LSButton } from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
@@ -17,36 +17,9 @@ interface ICancelFormProps {
   tag?: Number
 }
 
-const data = [
-  {
-    id: 0,
-    value: 'reason0',
-    label: 'How can we raise a good child, one who will do the right thing, even when no one may see them do it',
-  },
-  {
-    id: 1,
-    value: 'reason1',
-    label: 'To encourage empathy in your child, encourage your child to talk about her feelings and make sure she knows that you care about them.',
-  },
-  {
-    id: 2,
-    value: 'reason2',
-    label: 'No two children learn the same way or at the same pace.',
-  },
-  {
-    id: 3,
-    value: 'reason3',
-    label: 'Babies and young children learn best when they have warm, engaged and responsive relationships with their main carers.',
-  },
-  {
-    id: 4,
-    value: 'reason4',
-    label: 'Letting your child make mistakes and find out for himself how the world works is a big part of learning.',
-  },
-]
-
-export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) => {
-  const [value, setValue] = React.useState(data[0].value);
+export const CancelForm:FC<ICancelFormProps> = ({ onConfirm, onCancel, tag}) => {
+  const radiotexts = dictionary.en.randomText
+  const [value, setValue] = React.useState('reason1');
 
   const onSubmit = () => {
     onConfirm(value)
@@ -70,25 +43,25 @@ export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) =
         value={value}
         onChange={handleRadioChange}
       >
-        {
-          data.map((row, index) => {
-            return <LSFormControlLabel value={row.value} control={<LSRadio />} label={row.label} />
-          })
-        }
+        <LSFormControlLabel value="reason1" control={<LSRadio />} label={radiotexts[0]} />
+        <LSFormControlLabel value="reason2" control={<LSRadio />} label={radiotexts[1]} />
+        <LSFormControlLabel value="reason3" control={<LSRadio />} label={radiotexts[2]} />
+        <LSFormControlLabel value="reason4" control={<LSRadio />} label={radiotexts[3]} />
+        <LSFormControlLabel value="reason5" control={<LSRadio />} label={radiotexts[4]} />
       </RadioGroup>
       <LSButtonContainer>
         <LSButton
-          variant='contained'
+          variant = 'contained'
           onClick={onSubmit}
-        >
+          >
           {'Submit'}
-        </LSButton>
-        <LSButton
-          variant='contained'
-          color="secondary"
-          bgColor={BasicColor.gray60}
-          onClick={onCancel}
-        >
+          </LSButton>
+          <LSButton
+            variant = 'contained'
+            color="secondary"
+            bgColor={BasicColor.gray60}
+            onClick={onCancel}
+          >
           {'Cancel'}
         </LSButton>
       </LSButtonContainer>

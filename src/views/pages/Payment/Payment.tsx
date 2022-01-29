@@ -13,7 +13,7 @@ import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper
 import { PaymentMethod } from '../../molecules/PaymentMethod/PaymentMethod';
 import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
 import { PackagePanel } from '../../molecules/PackagePanel/PackagePanel'
-import { SettingContainer, FlexColumn, FlexRow, PackageContainer } from './Style'
+import { TipContainer, FlexColumn, FlexRow, PackageContainer, Subject, SubjectContainer } from './Style'
 import math from '../../assets/packageIcons/math_gold.svg'
 import ela from '../../assets/packageIcons/ela_gold.svg'
 import science from '../../assets/packageIcons/science_gold.svg'
@@ -33,74 +33,120 @@ export const Payment: FC = () => {
     clientSecret: '{{CLIENT_SECRET}}',
   };
 
-  const [priceGold, setPriceGold] = useState(0);
-  const [priceCombo, setPriceCombo] = useState(0);
-  const [priceSole, setPriceSole] = useState(0)
-  const [childrenCount, setChildrenCount] = useState(1);
-  const [packageType, setPackageType] = useState("Gold");
-  const [packagePrice, setPackagePrice] = useState(0);
-  const [planType, setPlanType] = useState("month");
-  const [path, setPath] = useState()
+  const [prices, setPrices] = useState({
+    Gold:{
+      month: 0,
+      year: 0
+    },
+    Combo: {
+      month: 0,
+      year: 0
+    },
+    Sole: {
+      month: 0,
+      year: 0
+    }
+  })
+
+  const [childrenCount, setChildrenCount] = useState({
+    Gold : 0,
+    Sole : 0,
+    Combo : 0
+  });
+
+  const [planType, setPlanType] = useState({
+    Gold: "month",
+    Sole: "month",
+    Combo: "month"
+  });
+
   const [showPaymentMethod, setShowPaymentMethod] = useState(false)
+  const [offRate, setOffRate] = useState(50);
 
   const setPackPrice = () => {
     /*------------ get package price data from db -S--------------*/
-    const gold = 19.99
-    const combo = 14.99
-    const sole = 5.99;
+    const gold_m = 19.99;
+    const gold_y = 19.99;
+    const combo_m = 14.99;
+    const combo_y = 14.99;
+    const sole_m = 5.99;
+    const sole_y = 5.99;
     /*------------ get package price data from db -E--------------*/
 
-    setPriceGold(gold);
-    setPriceCombo(combo);
-    setPriceSole(sole);
-    setPackagePrice(gold);
+    setPrices({
+      Gold: {
+        month : gold_m,
+        year : gold_y
+      },
+      Combo: {
+        month: combo_m,
+        year: combo_y
+      },
+      Sole: {
+        month: sole_m,
+        year: sole_y
+      }
+    })
+
   }
 
-  const onPackageSubmit = (type: string, paths: any) => {
-    setPackageType(type);
-    setPath(paths);
+  const onChangePackage = (type: string, count: number, plan: string, ) => {
+    console.log("package is changing", type, count, plan)
+    let temp:any = {...childrenCount};
+    temp[type] = count;
+    if(JSON.stringify(temp) !== JSON.stringify(childrenCount)) setChildrenCount(temp);
+
+    temp = {...planType}
+    temp[type] = plan
+    if(JSON.stringify(temp) !== JSON.stringify(planType)) setPlanType(temp);
+
     setShowPaymentMethod(true)
   }
 
   useEffect(() => {
     setPackPrice();
+    setOffRate(50)
   }, []);
   return (
         <ParentPgContainer onlyLogoImgNav={true}>
           <>
             <ParentPgStepper step={1}/>
-            <Alert severity="info">
-              In Socrates, students can get mutiple Areas of Knowledge depend of the package they will have All, Two Areas or a Solo Area! Choose the best package for your kids!
-              <br />
-            </Alert>
-            <SettingContainer>
-              <FlexColumn>
-                <b>Choose your plan</b>
+            <TipContainer>
+              <Alert severity="info">
+                In Socrates, students can get mutiple Areas of Knowledge depend of the package they will have All, Two Areas or a Solo Area! Choose the best package for your kids!
                 <br />
-                <FlexRow style={{flexWrap: 'unset'}}>
-                  <Button bgColor={BasicColor.green} fontSize={24} value="Monthly" onClick={()=>{setPlanType("month")}} />
-                  <Button fontSize={24} variant="outlined" color="black" borderColor="black" value="Yearly" margin="0 0 0 -64px" onClick={()=>{setPlanType("year")}} />
-                </FlexRow>
-              </FlexColumn>
-              <FlexColumn>
-                <b>Number of Children</b>
-                <br />
-                <FlexRow>
-                <ButtonGroup variant="outlined" aria-label="outlined button group">
-                  <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={50} width={50} value="-" onClick={() => childrenCount > 1 && setChildrenCount(childrenCount - 1)} />
-                  <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={50} width={50} value={""+childrenCount} />
-                  <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={50} width={50} value="+" onClick={() => setChildrenCount(childrenCount + 1)} />
-                </ButtonGroup>
-                </FlexRow>
-              </FlexColumn>
-            </SettingContainer>
+                <SubjectContainer>
+                    <div className="flex align-center"><Subject src={math} />&nbsp;Math</div>
+                    <div className="flex align-center"><Subject src={ela} />&nbsp;ELA + SIGHT WORDS</div>
+                    <div className="flex align-center"><Subject src={science} />&nbsp;SCIENCE</div>
+                </SubjectContainer>
+                <SubjectContainer>
+                  <div className="flex align-center"><Subject src={financial} />&nbsp;FINANCIAL LITERACY</div>
+                  <div className="flex align-center"><Subject src={health} />&nbsp;HEALTH & SAFETY</div>
+                </SubjectContainer>
+              </Alert>
+            </TipContainer>
             <PackageContainer>
-              <PackagePanel type="Gold" price={priceGold} plan={planType} onSubmit={(paths:any) => onPackageSubmit("Gold", paths) }/>
-              <PackagePanel type="Combo" price={priceCombo} plan={planType} onSubmit={(paths:any) => onPackageSubmit("Combo", paths) }/>
-              <PackagePanel type="Sole" price={priceSole} plan={planType} onSubmit={(paths:any) => onPackageSubmit("Sole", paths) }/>
+              <PackagePanel type="Gold" price={prices.Gold} onChange={(childrenCount, plan) => onChangePackage("Gold", childrenCount, plan)} />
+              <PackagePanel type="Combo" price={prices.Combo} onChange={(childrenCount, plan) => onChangePackage("Combo", childrenCount, plan)} />
+              <PackagePanel type="Sole" price={prices.Sole} onChange={(childrenCount, plan) => onChangePackage("Sole", childrenCount, plan)} />
             </PackageContainer>
+              <Alert severity="info" className="m-b-35" style={{width: "72%"}}>
+                Add 2nd kid with {offRate}% off
+              </Alert>
             <Elements stripe={stripePromise}>
-              {showPaymentMethod && <PaymentMethod type={packageType} price={packagePrice} path={path} plan={planType} kidNum={childrenCount}/> }
+              {showPaymentMethod &&
+                <PaymentMethod
+                  prices={{
+                    Gold: prices.Gold[planType.Gold==='month' ? 'month' : 'year'],
+                    Combo: prices.Combo[planType.Combo==='month' ? 'month' : 'year'],
+                    Sole: prices.Sole[planType.Sole==='month' ? 'month' : 'year']
+                  }}
+                  plans={planType}
+                  childrenCounts={childrenCount}
+                  offRate={offRate}
+                  />
+               }
             </Elements>
           </>
         </ParentPgContainer>

@@ -6,7 +6,7 @@ import QRCode from "react-qr-code";
 
 const License = (props: any) => {
     return (
-      <div className="flex flex-col w-600 h-400">
+      <div className="flex flex-col w-600 h-400" id="license">
         <LicenseHeader>
           <img src={ logo } className='p-b-15'/>
           LEARNING LICESNE

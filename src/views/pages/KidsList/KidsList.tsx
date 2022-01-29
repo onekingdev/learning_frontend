@@ -20,6 +20,8 @@ import { LSDialog } from '../../molecules/Setting/LSDialog';
 import { ButtonColor, BasicColor } from '../../Color';
 import { Store } from '../../../app/configureStore';
 import { Title, Avatar, Container, LicenseButton, LicenseHeader, LicenseBody, LicenseBottom, LicenseUsername } from './Style'
+import { toPng, toSvg } from 'html-to-image';
+import { saveAs } from 'file-saver'
 import QRCode from "react-qr-code";
 import License from '../../molecules/KidLicense/KidLicense'
 interface kid {
@@ -38,8 +40,6 @@ const KidsList: FC = () => {
   const kidAvatars = [kidA, kidB, kidC]
 
   const [children, setChildren] = useState<kid[]>([]);
-
-
 
   const handleDelete = (index: number) => {
     const temp: any = [...children];
@@ -78,9 +78,13 @@ const KidsList: FC = () => {
     const handleDownloadBtnClicked = () => {
       // Do something ...
       console.log(children);
+      const licenseElm: any= document.querySelector("#license")
+      console.log(licenseElm)
+      toPng(licenseElm).then(function (dataUrl) {
+        saveAs(dataUrl, `${username}-license`);
+      });
 
-      // close dialog
-      open()
+      // open()
     }
     const handleCancelBtnClicked = () => {
       // Do something ...
@@ -116,7 +120,7 @@ const KidsList: FC = () => {
           fullWidth={true}
           dialogContent={
             <>
-              <License parentName={user.username} username={username} membership={new Date()} />
+              { openLicense && <License parentName={user.username} username={username} membership={new Date()}/> }
               <div className="flex justify-space-between p-t-30">
                 <Button
                   bgColor={BasicColor.green}

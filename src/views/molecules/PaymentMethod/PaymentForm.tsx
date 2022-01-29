@@ -1,6 +1,8 @@
 import {FC, useEffect, ReactChildren, ReactChild, useState, forwardRef, useImperativeHandle } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {useHistory} from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { Store } from '../../../app/configureStore';
 import {ParentPgNav} from '../ParentPgNav/ParentPgNav'
 import * as TYPES from '../../../app/types'
 import paypal from '../../assets/paypal.svg'
@@ -40,6 +42,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   const classes = useStyles();
   const stripe = useStripe();
   const elements = useElements();
+  const user = useSelector((state: Store) => state.user)
   const { isUpdate } = props
 
   const [paymentMethod, setPaymentMethod] = useState("card")
@@ -56,7 +59,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     zip: null,
     country: null,
     phone: null,
-    email: null,
   });
 
   const [data, setData] = useState({
@@ -71,7 +73,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     country: '',
     phone: '',
     couponCode: '',
-    email: '',
     price: 0
   })
 
@@ -83,8 +84,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
           validateMsgTemp[key] = "Field is required";
       }
       if(validateMsgTemp[key]) {
-        console.log(key)
-
           valiResult = false;
       }
     }
@@ -101,25 +100,37 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   }
 
   const handleOrder = async () => {
+      console.log('handle order')
     if(!formValidation()) return {success: false, result: "Validation Failed"};
     if(!stripe) return {success: false, result: "Can't get stripe"};
     if(!elements) return {success: false, result: "Can't get element"};
     if(!elements.getElement(CardNumberElement)) return {success: false, result: "Can't get card number element"};
 
     const cardElement:any = elements.getElement(CardNumberElement);
+    console.log(cardElement);
     const result:any = await stripe.createPaymentMethod({
         type: 'card',
         card: cardElement,
         billing_details: {
-            email: data.email,
+            email: user.email,
+            address: {
+                city: data.city,
+                country: data.country,
+                line1: data.addressOne,
+                line2: data.addressTwo,
+                postal_code: data.zip,
+                state: data.state
+            },
+            name: data.firstName + ' ' + data.lastName,
+            phone: data.phone
         },
     }).catch(console.log);
 
-    if(result.error) return {success: false, result: "Can't create payment method"};
+    if(result.error) return {success: false, result: result.error.message};
     /*------------------------ send request to backend to create payment -S-----------------------------*/
 
     /*------------------------ send request to backend to create payment -E-----------------------------*/
-    result.email = data.email;
+    result.email = user.email;
     return {success: true, result: result};
   }
 
@@ -209,7 +220,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                         inputComponent: StripeInput
                     }}
                     onChange={(e: any) => handleFormChange("cardNumber",e['error'] ? e['error']['message'] : "")}
-                    error={validateRst.cardNumber !== ""}
+                    error={!!validateRst.cardNumber}
                     helperText={validateRst.cardNumber}
                     focused
                 />
@@ -225,7 +236,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     }}
                     onChange={(e: any) => handleFormChange("expiryDate",e['error'] ? e['error']['message'] : "")}
                     focused
-                    error={validateRst.expiryDate !== ""}
+                    error={!!validateRst.expiryDate}
                     helperText={validateRst.expiryDate}
                 />
             </Grid>
@@ -240,7 +251,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     }}
                     onChange={(e: any) => handleFormChange("cvc",e['error'] ? e['error']['message'] : "")}
                     focused
-                    error={validateRst.cvc !== ""}
+                    error={!!validateRst.cvc}
                     helperText={validateRst.cvc}
                 />
             </Grid>
@@ -315,18 +326,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     error={!!validateRst.country}
                     helperText={validateRst.country}
                     value={data.country}
-                />
-            </Grid>
-            <Grid item xs={12} md={12}>
-                <TextField
-                    label="Email"
-                    onChange={(e: any) => {
-                        handleFormChange("email",e.target.value.length === 0 ? "Field is required" : "")
-                        setData({...data, email: e.target.value})
-                    } }
-                    error={!!validateRst.email}
-                    helperText={validateRst.email}
-                    value={data.email}
                 />
             </Grid>
             <Grid item xs={12} md={12}>

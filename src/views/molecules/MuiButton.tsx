@@ -14,9 +14,10 @@ type MuiButtonProps = {
   width?: number;
   height?: number;
   fontSize?: number;
-  weight?: number
+  weight?: number;
   variant?: any;
   borderColor?: ButtonColor | BasicColor | string;
+  zIndex?: number;
   margin?: string;
   disabled?: boolean;
   loading?: boolean;
@@ -30,6 +31,7 @@ const MuiButton: FC<MuiButtonProps> = ({
   color,
   bgColor,
   borderColor,
+  zIndex=1,
   radius=20,
   className='',
   align='unset',
@@ -50,6 +52,7 @@ const MuiButton: FC<MuiButtonProps> = ({
         Button: {
             "&.MuiButton-root":{
                 // backgroundColor: '#21B95C',
+                zIndex:zIndex,
                 backgroundColor: variant !== 'outlined' ? bgColor || BasicColor.greenSoft : 'white',
                 borderColor: borderColor || bgColor || BasicColor.greenSoft,
                 borderRadius: radius,
