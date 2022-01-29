@@ -29,6 +29,9 @@ export const Welcome = styled.img`
   bottom: 220px;
   width:34.8vw;
   // height: 397px;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    display: none
+  }
 `
 
 export const Socrates = styled.img`
@@ -39,15 +42,50 @@ export const Socrates = styled.img`
   height:335px;
 `
 
+export const Subjects = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: ${props => props.color === "Gold" ? BasicColor.paleOrange : props.color === "Combo" ? BasicColor.ligntBlue : BasicColor.ligntBlue};
+    border-color: ${props => props.color === "Gold" ? BasicColor.yellow : props.color === "Combo" ? BasicColor.aqua : BasicColor.greenSoft};
+    border-width: 1px;
+    border-style: solid;
+    padding: 5px 30px 20px 30px;
+`
+
+export const Subject = styled.div`
+    padding-top:15px;
+    display: flex;
+`
+
+export const SubjectIcon = styled.img`
+
+`
+
+export const SubjectTitle = styled.div`
+    font-weight: 500;
+    font-size: 16px;
+    padding-left:16px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+`
+
+export const PaperContainer = styled.div`
+  margin-left: 18vw;
+  width: 37vw;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    margin-left: 0vw;
+    width: 100vw;
+  }
+`
+
 export const useStyles = makeStyles({
   paper: {
-    maxWidth: "29.5vw",
     paddingTop:'40px',
     paddingBottom:'40px',
     paddingLeft: '70px',
     paddingRight: '70px',
     backgroundColor: 'white !important',
-    marginLeft: '18vw'
   },
   select: {
     "&.MuiOutlinedInput-root" : {
@@ -57,5 +95,32 @@ export const useStyles = makeStyles({
       borderColor: BasicColor.brightBlue,
       borderWidth: '2px'
     }
+  },
+  goldInput: {
+    "&.MuiInputBase-root" : {
+      backgroundColor: BasicColor.paleOrange,
+      borderColor: `${BasicColor.yellow}`
+    },
+    "&:hover,& fieldset" : {
+      borderColor: `${BasicColor.yellow} !important`,
+    }
+  },
+  comboInput: {
+    "& .MuiInputBase-root" : {
+      backgroundColor: BasicColor.ligntBlue,
+      borderColor: BasicColor.aqua
+    },
+    "&:hover,& fieldset" : {
+      borderColor: `${BasicColor.aqua} !important`,
+    }
+  },
+  soleInput: {
+    "& .MuiInputBase-root" : {
+      backgroundColor: BasicColor.ligntBlue,
+      borderColor: BasicColor.greenSoft
+    },
+    "&:hover,& fieldset" : {
+      borderColor: `${BasicColor.greenSoft} !important`,
+    },
   }
 });

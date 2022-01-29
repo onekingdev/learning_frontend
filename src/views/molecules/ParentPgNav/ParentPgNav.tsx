@@ -23,6 +23,8 @@ import {
   LogoTitle,
   Home,
   NameAvatarGroup,
+  SupportBtnContainer,
+  AvatarContainer,
 } from './Style'
 
 type ParentPgNavProps = {
@@ -51,13 +53,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   else return (
     <Container>
       <Home src={home} />
-      <div style={{width: '200px', height: '50px'}}>
-        {/* <Button
-            value={'Support'}
-            darkText={false}
-            color={ButtonColor.support}
-            onClick={onSupport}
-          /> */}
+      <SupportBtnContainer>
         <Button
           variant="contained"
           className={classes.button}
@@ -71,7 +67,10 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
         >
           Support
         </Button>
-      </div>
+        <Avatar className={classes.questionMarkButton} id="questionMarkButton">
+          <QuestionMarkIcon />
+        </Avatar>
+      </SupportBtnContainer>
       <LogoContainer>
         <LogoImg  src={logoTitle} />
         <LogoTitle><u>Parents Center</u></LogoTitle>
@@ -85,13 +84,16 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
             value={age}
             label="Menu"
             onChange={handleChange}
+            sx={{backgroundColor: 'white'}}
           >
             <MenuItem value={"settings"}>Settings</MenuItem>
             <MenuItem value={"manageKids"}>Manage Kids</MenuItem>
             <MenuItem value={"signOut"}>Sign Out</MenuItem>
           </Select>
         </FormControl>
-        <Avatar sx={{ bgcolor: '#22BAAF', height:'60px', width:'60px', marginLeft: '15px'}} alt="Remy Sharp" src={avatar} />
+        <AvatarContainer>
+          <Avatar sx={{ bgcolor: '#22BAAF', height:'60px', width:'60px', marginLeft: '15px'}} alt="Remy Sharp" src={avatar} />
+        </AvatarContainer>
       </NameAvatarGroup>
     </Container>
   );
