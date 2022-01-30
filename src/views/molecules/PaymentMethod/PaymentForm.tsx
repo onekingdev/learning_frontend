@@ -1,4 +1,4 @@
-import {FC, useEffect, ReactChildren, ReactChild, useState, forwardRef, useImperativeHandle } from 'react';
+import {FC, useEffect, ReactChildren, ReactChild, useState, forwardRef, useImperativeHandle, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {useHistory} from 'react-router-dom';
@@ -29,6 +29,8 @@ import {
  } from './Style'
  import StripeInput from "./StripeInput";
 import { FlexColumn } from '../../pages/Payment/Style';
+import countryList from 'react-select-country-list'
+
 type PaymentFormProps = {
   isUpdate: boolean
 };
@@ -43,6 +45,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   const stripe = useStripe();
   const elements = useElements();
   const user = useSelector((state: Store) => state.user)
+  const options = useMemo(() => countryList().getData(), [])
   const { isUpdate } = props
 
   const [paymentMethod, setPaymentMethod] = useState("card")
@@ -76,6 +79,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     price: 0
   })
 
+  console.log(options);
   const formValidation = () => {
     const validateMsgTemp = {...validateRst}
     let valiResult = true;
@@ -100,7 +104,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   }
 
   const handleOrder = async () => {
-      console.log('handle order')
+
     if(!formValidation()) return {success: false, result: "Validation Failed"};
     if(!stripe) return {success: false, result: "Can't get stripe"};
     if(!elements) return {success: false, result: "Can't get element"};
