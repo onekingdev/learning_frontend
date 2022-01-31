@@ -19,11 +19,17 @@ import {useParams} from 'react-router-dom';
 import { PanoramaSharp } from '@mui/icons-material';
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
-const CreateParent: FC = () => {
+
+interface RouteParams {
+    email: string;
+}
+
+const NewAccount: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const { email } = useParams<RouteParams>();
 
   const language = 'en';
 
@@ -33,10 +39,8 @@ const CreateParent: FC = () => {
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('')
   const [confPassword, setConfPassword] = useState('');
   const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
-      email: null,
       userName: null,
       password: null,
       confPassword: null
@@ -51,6 +55,7 @@ const CreateParent: FC = () => {
   const handleCreate = async () => {
 
     if(!formValidation()) return;
+    if(!email) return;
 
     setLoading(true);
 
@@ -76,7 +81,7 @@ const CreateParent: FC = () => {
 
     const { guardian, user, profile, token, refreshToken } = result.data.createGuardian
     dispatch({ type: TYPES.USER_SET_DATA, payload: {...user, token: token, refreshToken: refreshToken } })
-    history.push('/parent/payment');
+    history.push('/kids/new');
   }
 
   const formValidation = () => {
@@ -104,17 +109,6 @@ const CreateParent: FC = () => {
                 <FormContainer>
                     <Title>Choose your name and password</Title>
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <TextField
-                                label="Email"
-                                onChange={(e) => {
-                                    setEmail(e.target.value);
-                                    handleFormChange("email",e.target.value.length === 0 ? "Field is required" : "");
-                                }}
-                                error={!!validateMsg.email}
-                                helperText={validateMsg.email}
-                            />
-                        </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 label="User Name"
@@ -183,4 +177,4 @@ const CreateParent: FC = () => {
         </ParentPgContainer>
   );
 };
-export default CreateParent;
+export default NewAccount;

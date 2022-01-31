@@ -276,17 +276,11 @@ body {
 .p-t-55 {
     padding-top: 55px;
 }
-.m-b-35 {
-    margin-bottom: 35px;
-}
 .w-67 {
     width: 67%;
 }
 .w-100 {
     width: 100%;
-}
-.w-300 {
-    width: 300px;
 }
 .w-600{
     width: 600px;
@@ -302,20 +296,4 @@ body {
 }
 .inline {
     display: inline;
-}
-.err-text {
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: 400;
-    font-size: 0.75rem;
-    line-height: 1.66;
-    letter-spacing: 0.03333em;
-    text-align: left;
-    margin-top: 3px;
-    margin-right: 14px;
-    margin-bottom: 0;
-    margin-left: 14px;
-    color: #d32f2f;
-}
-.err-border {
-    border-color: #d32f2f !important;
 }

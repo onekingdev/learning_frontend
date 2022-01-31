@@ -21,8 +21,8 @@ import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
 import {Wardrobe} from './views/pages/Avatar/Wardrobe';
-import {Payment} from './views/pages/Payment/Payment';
-import CreateParent from './views/pages/CreateParent/CreateParent';
+import {Account} from './views/pages/Account/Account';
+import NewAccount from './views/pages/NewAccount/NewAccount';
 import KidsList from './views/pages/KidsList/KidsList';
 import { useSelector } from 'react-redux';
 import { Store } from './app/configureStore'
@@ -114,11 +114,11 @@ export function Routes(props: any) {
         <PrivateRoute path="/parent/report">
           <Report />
         </PrivateRoute>
-        <PrivateRoute path="/parent/payment">
-          <Payment />
+        <PrivateRoute path="/parent/account">
+          <Account />
         </PrivateRoute>
-        <PrivateRoute path="/parent/create">
-          <CreateParent />
+        <PrivateRoute path="/parent/create/:email">
+          <NewAccount />
         </PrivateRoute>
         <PrivateRoute path="/kids/list">
           <KidsList />

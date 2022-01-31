@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import styled from 'styled-components';
 import { ThemeProvider } from '@mui/material';
 
 import { BasicColor } from '../../Color';
@@ -24,9 +24,9 @@ export const LSDialog: FC<LSDialogProps> = ({
   title,
   contentText,
   isOpen,
-  dialogContent,
-  fullWidth,
   open,
+  dialogContent,
+  fullWidth
 }) => {
 
   const onCrossBtnClick = () => {
@@ -35,14 +35,23 @@ export const LSDialog: FC<LSDialogProps> = ({
     // Close dialog
     open()
   }
-
+  const fullScreen = useMediaQuery(settingPage.breakpoints.down('md'));
   return (
     <ThemeProvider theme={settingPage}>
-      <div></div>
-      <StyledDialog open={isOpen} onClose={open} scroll='body' wide={fullWidth}>
-        <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} >
+      <Dialog open={isOpen} onClose={open} fullScreen={fullWidth ? fullScreen : false} scroll='body'>
+        <IconButton
+          aria-label="close"
+          onClick={() => {onCrossBtnClick()}}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            background: BasicColor.green,
+            color: 'white',
+          }}
+        >
           <CloseIcon />
-        </StyledIconBtn>
+        </IconButton>
         {title ? <LSDialogTitle>{title}</LSDialogTitle> : null}
         <LSDialogContent>
           {
@@ -53,30 +62,7 @@ export const LSDialog: FC<LSDialogProps> = ({
           }
           {dialogContent}
         </LSDialogContent>
-      </StyledDialog>
+      </Dialog>
     </ThemeProvider>
   );
 }
-
-interface DialogProps {
-  wide?: boolean
-}
-const StyledDialog = styled(Dialog) <DialogProps>`
-& .MuiPaper-root {
-  max-width: ${props => props.wide ? '100%;' : 'auto;'}
-  overflow-y: visible
-}
-`
-const StyledIconBtn = styled(IconButton)`
-  &.MuiIconButton-root{
-    position: absolute;
-    right: -20px;
-    top: -10px;
-    background: ${BasicColor.green};
-    color: white;
-    &:hover {
-      background-color: rgba(33, 185, 92, 0.9)
-    }
-  }
-`
-

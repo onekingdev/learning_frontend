@@ -20,7 +20,6 @@
     "@types/react": "^17.0.0",
     "@types/react-calendar": "^3.4.5",
     "@types/react-dom": "^17.0.0",
-    "@types/react-select-country-list": "^2.2.0",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "axios": "^0.25.0",
@@ -29,9 +28,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "file-saver": "^2.0.5",
     "firebase": "^9.6.3",
-    "html-to-image": "^1.9.0",
     "jsonloader": "^1.0.1",
     "material-ui-stripe-elements": "^1.0.44",
     "moment": "^2.29.1",
@@ -39,11 +36,10 @@
     "react": "^17.0.2",
     "react-calendar": "^3.6.0",
     "react-dom": "^17.0.2",
-    "react-grid-calendar": "^1.0.1",
     "react-qr-code": "^2.0.3",
+    "react-grid-calendar": "^1.0.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
-    "react-select-country-list": "^2.2.3",
     "recharts": "^2.1.8",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
@@ -57,7 +53,6 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
-    "@types/file-saver": "^2.0.5",
     "@types/react-router-dom": "^5.1.7",
     "@types/redux-logger": "^3.0.9",
     "@types/remote-redux-devtools": "^0.5.5",
@@ -80,8 +75,7 @@
     "fix": "gts fix",
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
-    "posttest": "yarn run lint",
-    "deploy": "react-scripts build && firebase deploy"
+    "posttest": "yarn run lint"
   },
   "eslintConfig": {
     "extends": [

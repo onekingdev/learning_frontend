@@ -1,8 +1,6 @@
 import {FC, useEffect, useState, useRef} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
-import moment from 'moment'
 import Grid from '@mui/material/Grid';
 import * as TYPES from '../../../app/types'
 import payOrderLog from '../../assets/pay-order-log.svg'
@@ -26,34 +24,23 @@ import {
   OrderItemContent,
   OrderTip,
  } from './Style'
+ import moment from 'moment'
 type PaymentMethodProps = {
-    prices: {
-        Gold: number,
-        Combo: number,
-        Sole: number,
-    };
-    plans : {
-        Gold: string,
-        Combo: string,
-        Sole: string,
-    };
-    childrenCounts: {
-        Gold: number,
-        Combo: number,
-        Sole: number,
-    };
-    offRate: number;
+  type: string;
+  price: number;
+  path: any;
+  plan: string;
+  kidNum: number
 };
 interface PaymentFormFunc {
     handleOrder(coupon: string, price: number): any;
     handleUpdate(): void;
 }
-export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCounts, offRate}) => {
+export const PaymentMethod: FC<PaymentMethodProps> = ({type, price, path, plan, kidNum}) => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
   const paymentFormRef = useRef<PaymentFormFunc>(null)
-  const { enqueueSnackbar } = useSnackbar();
 
   const [couponCode, setCouponCode] = useState('');
   const [subtotal, setSubtotal] = useState(0);
@@ -62,14 +49,9 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCo
 
 
   const handleOrder = async (event: any) => {
-    const result = await paymentFormRef?.current?.handleOrder(couponCode, 0);
+    const result = await paymentFormRef?.current?.handleOrder(couponCode, price);
     console.log(result);
-    if(result.success) {
-        enqueueSnackbar(`Your subscription has been successfully created!`, { variant: "success" });
-        history.push(`/kids/new`)
-    }
-    else
-        enqueueSnackbar(`Failed! ${result.result}`, { variant: "error" });
+    if(result.success) history.push(`/parent/create/${result.result.email}`)
   }
 
   const applyCoupon = (e: any) => {
@@ -80,11 +62,8 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCo
   }, []);
 
   useEffect(() => {
-        const price_gold = prices.Gold / 100 * offRate * ((childrenCounts.Gold - 1 > 0) ? (childrenCounts.Gold - 1) : 0) + (childrenCounts.Gold > 0 ? 1 : 0 ) * prices.Gold;
-        const price_combo = prices.Combo / 100 * offRate * ((childrenCounts.Combo - 1 > 0) ? (childrenCounts.Combo - 1) : 0) + (childrenCounts.Combo > 0 ? 1 : 0 ) * prices.Combo;
-        const price_sole = prices.Sole / 100 * offRate * ((childrenCounts.Sole - 1 > 0) ? (childrenCounts.Sole - 1) : 0) + (childrenCounts.Sole > 0 ? 1 : 0 ) * prices.Sole;
-        setSubtotal( price_gold + price_combo + price_sole )
-  }, [prices, childrenCounts])
+    setSubtotal( price * kidNum )
+  }, [price, kidNum])
 
   return (
     <Container>
@@ -97,27 +76,13 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCo
                 <OrderTitle>Order Summary</OrderTitle>
             </OrderTitleContainer>
             <OrderBody>
-                {
-                    childrenCounts.Gold > 0 &&
-                    <OrderItem>
-                        <OrderItemTitle>{childrenCounts.Gold} Gold Package </OrderItemTitle>
-                        <OrderItemContent>${prices.Gold} / {plans.Gold}</OrderItemContent>
-                    </OrderItem>
-                }
-                {
-                    childrenCounts.Combo > 0 &&
-                    <OrderItem>
-                        <OrderItemTitle>{childrenCounts.Combo} Combo Package </OrderItemTitle>
-                        <OrderItemContent>${prices.Combo} / {plans.Combo}</OrderItemContent>
-                    </OrderItem>
-                }
-                {
-                    childrenCounts.Sole > 0 &&
-                    <OrderItem>
-                        <OrderItemTitle>{childrenCounts.Sole} Sole Package </OrderItemTitle>
-                        <OrderItemContent>${prices.Sole} / {plans.Sole}</OrderItemContent>
-                    </OrderItem>
-                }
+                <OrderItem>
+                    <OrderItemTitleContainer>
+                        <OrderItemTitle>{kidNum} Child - {type}</OrderItemTitle>
+                        <OrderItemSubtitle>{path.join(" / ")}</OrderItemSubtitle>
+                    </OrderItemTitleContainer>
+                    <OrderItemContent>${ price }</OrderItemContent>
+                </OrderItem>
                 <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>
                     <Grid item md={6} xs={10}>
                     <TextField
