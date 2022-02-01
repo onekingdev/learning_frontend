@@ -107,7 +107,8 @@ export const OrderItem = styled.div`
     }
 `
 export const OrderItemTitleContainer = styled.div`
-    display: unset;
+    display: flex;
+    justify-content: space-between;
     @media screen and (max-width: ${ScreenSize.tablet}) {
        padding-left: 35px;
     }

@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
+import background_mobile from '../../assets/colored-shapes-bg.svg';
 
 export const Container = styled.div`
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        background: url(${background_mobile}), #FFFFFF;
+        background-position-x: right;
+    }
 `;
+
 export const IslandGreen = styled.img`
     position: absolute;
     left: 0;
@@ -15,9 +21,10 @@ export const IslandGreen = styled.img`
         display:none
       }
     @media screen and (max-width: ${ScreenSize.desktop}) {
-    right: 0;
+        right: 0;
     }
-`
+`;
+
 export const IslandYellow = styled.img`
     position: absolute;
     right: 0;
@@ -25,12 +32,14 @@ export const IslandYellow = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-`
+`;
+
 export const LogoTitle = styled.img`
     position: absolute;
     left: 300px;
     top: 90px
-`
+`;
+
 export const Planet = styled.img`
     position: absolute;
     top: 152px;
@@ -38,7 +47,8 @@ export const Planet = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-`
+`;
+
 export const Mess = styled.img`
     position: absolute;
     top: 413px;
@@ -46,7 +56,7 @@ export const Mess = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-`
+`;
 
 export const ColorPanel = styled.img`
     position: absolute;
@@ -55,7 +65,7 @@ export const ColorPanel = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-`
+`;
 
 export const Triangle = styled.img`
     position: absolute;
@@ -64,7 +74,7 @@ export const Triangle = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-`
+`;
 
 export const Pencil = styled.img`
     position: absolute;
@@ -73,7 +83,7 @@ export const Pencil = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-`
+`;
 
 export const GateWay = styled.img`
     position: absolute;

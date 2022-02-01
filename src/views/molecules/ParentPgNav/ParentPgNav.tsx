@@ -10,8 +10,6 @@ import Button from '@mui/material/Button';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMarkRounded';
 import Stack from '@mui/material/Stack';
 import { useStyles } from './Style';
-
-// import { Button } from '../../molecules/Button'
 import * as TYPES from '../../../app/types'
 import logoTitle from '../../assets/logo-learn.svg'
 import home from '../../assets/home_pc.svg'
@@ -23,6 +21,8 @@ import {
   LogoTitle,
   Home,
   NameAvatarGroup,
+  SupportBtnContainer,
+  AvatarContainer,
 } from './Style'
 
 type ParentPgNavProps = {
@@ -32,10 +32,20 @@ type ParentPgNavProps = {
 export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   const history = useHistory();
   const dispatch = useDispatch()
-  const [age, setAge] = useState('');
   const classes = useStyles();
   const handleChange = (event:any) => {
-    setAge(event.target.value);
+    console.log(event.target.value)
+    switch(event.target.value) {
+      case "Settings" :
+        history.push("/parent/setting")
+        break;
+      case "ManageKids" :
+        history.push("/kids/list")
+        break;
+      case "SignOut" :
+        history.push("/")
+        break;
+    }
   };
   const onSupport = () => {
 
@@ -51,13 +61,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   else return (
     <Container>
       <Home src={home} />
-      <div style={{width: '200px', height: '50px'}}>
-        {/* <Button
-            value={'Support'}
-            darkText={false}
-            color={ButtonColor.support}
-            onClick={onSupport}
-          /> */}
+      <SupportBtnContainer>
         <Button
           variant="contained"
           className={classes.button}
@@ -71,7 +75,10 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
         >
           Support
         </Button>
-      </div>
+        <Avatar className={classes.questionMarkButton} id="questionMarkButton">
+          <QuestionMarkIcon />
+        </Avatar>
+      </SupportBtnContainer>
       <LogoContainer>
         <LogoImg  src={logoTitle} />
         <LogoTitle><u>Parents Center</u></LogoTitle>
@@ -82,16 +89,18 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
           <Select
             labelId="menu"
             id="menu-select"
-            value={age}
             label="Menu"
             onChange={handleChange}
+            sx={{backgroundColor: 'white'}}
           >
-            <MenuItem value={"settings"}>Settings</MenuItem>
-            <MenuItem value={"manageKids"}>Manage Kids</MenuItem>
-            <MenuItem value={"signOut"}>Sign Out</MenuItem>
+            <MenuItem value={"Settings"}>Settings</MenuItem>
+            <MenuItem value={"ManageKids"}>Manage Kids</MenuItem>
+            <MenuItem value={"SignOut"}>Sign Out</MenuItem>
           </Select>
         </FormControl>
-        <Avatar sx={{ bgcolor: '#22BAAF', height:'60px', width:'60px', marginLeft: '15px'}} alt="Remy Sharp" src={avatar} />
+        <AvatarContainer>
+          <Avatar sx={{ bgcolor: '#22BAAF', height:'60px', width:'60px', marginLeft: '15px'}} alt="Remy Sharp" src={avatar} />
+        </AvatarContainer>
       </NameAvatarGroup>
     </Container>
   );
