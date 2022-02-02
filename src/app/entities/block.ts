@@ -10,13 +10,6 @@ export interface IAnswer {
   video: string;
 }
 
-export interface IQuestionImageAsset {
-  id: string;
-  image: string;
-  identifier: string;
-  randomSlug: string;
-}
-
 export interface IQuestion {
   id: string;
   identifier: string;
@@ -24,7 +17,6 @@ export interface IQuestion {
   randomSlug: string;
   questionText: string;
   answeroptionSet: IAnswer[];
-  questionImageAssets: IQuestionImageAsset[];
 }
 
 export interface ITopic {

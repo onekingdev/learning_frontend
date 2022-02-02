@@ -66,12 +66,3 @@ export const BLOCK_QUESTION_PRESENTATION = `
         randomSlug
     
 `;
-
-export const QUESTION_IMAGE_ASSETS = `
-{
-        id
-        identifier
-        randomSlug
-        image
-}
-`

@@ -15,7 +15,6 @@ export const SettingContainer = styled.div`
 `;
 
 export const Avatar = styled.img`
-  padding-right: 60px;  
   width: 85px;
   height: 95px;
 `;

@@ -86,24 +86,26 @@ export const Pencil = styled.img`
 `;
 
 export const GateWay = styled.img`
-    position: absolute;
-    top: 600px;
-    right: 90px;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-        display:none
-    }
-`
+  position: absolute;
+  top: 600px;
+  right: 90px;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    display: none;
+  }
+  z-index: -1;
+`;
 export const NoteBook = styled.img`
-    position: absolute;
-    top: 870px;
-    right: 196px;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-        display:none
-    }
-`
+  position: absolute;
+  top: 870px;
+  right: 196px;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    display: none;
+  }
+  z-index: -1;
+`;
 
 export const Center = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

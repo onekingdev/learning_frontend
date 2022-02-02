@@ -25,7 +25,7 @@ export const Settings: FC = () => {
         <Title>{'Settings'}</Title>
         <CssBaseline />
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <div>
+          <div >
             <SettingForm />
             <Payment />
             <TextGroup>
@@ -34,7 +34,7 @@ export const Settings: FC = () => {
               <LSBlueTextButton href='#'>{' Contact'}</LSBlueTextButton>
             </TextGroup>
           </div>
-          <div>
+          <div >
             <MembershipDetail />
           </div>
         </Box>
