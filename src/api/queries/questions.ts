@@ -1,4 +1,4 @@
-import { BLOCK, BLOCK_CONFIGURATION_KEYWORD, BLOCK_PRESENTATON, BLOCK_TYPE, BLOCK_TYPE_CONFIGURATION } from '../fragments/blockFragments';
+import { BLOCK, BLOCK_CONFIGURATION_KEYWORD, BLOCK_PRESENTATON, BLOCK_TYPE, BLOCK_TYPE_CONFIGURATION, QUESTION_IMAGE_ASSETS } from '../fragments/blockFragments';
 import {ANSWER_OPTION, AREA_OF_KNOWLEDGE, QUESTION, TOPIC, TOPIC_GRADE} from '../fragments/questionFragments';
 
 
@@ -31,6 +31,8 @@ export const AREA_OF_KNOWLEDGE_QUERY = `
 export const QUESTION_QUERY = `
     {
       ${QUESTION}
+      questionImageAssets
+      ${QUESTION_IMAGE_ASSETS}
       answeroptionSet
       ${ANSWER_OPTION}
     }
@@ -41,25 +43,22 @@ export const BLOCK_PRESENTATION_QUERY = `
       ${BLOCK_PRESENTATON}
       block{
         ${BLOCK}
-        questions{
-            ${QUESTION}
-            answeroptionSet
-            ${ANSWER_OPTION}
-        }
-        topicGrade{
-          ${TOPIC_GRADE}
-          topic{
-            videoAssistor
-          }
-        }
-        typeOf{
-          ${BLOCK_TYPE}
-            blocktypeconfigurationSet{
-              ${BLOCK_TYPE_CONFIGURATION}
-              key
-              ${BLOCK_CONFIGURATION_KEYWORD}
+          questions
+            ${QUESTION_QUERY}  
+          topicGrade{
+            ${TOPIC_GRADE}
+            topic{
+              videoAssistor
             }
-        }
+          }
+          typeOf{
+            ${BLOCK_TYPE}
+              blocktypeconfigurationSet{
+                ${BLOCK_TYPE_CONFIGURATION}
+                key
+                ${BLOCK_CONFIGURATION_KEYWORD}
+              }
+          }
       }
          
     }

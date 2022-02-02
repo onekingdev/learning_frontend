@@ -97,12 +97,12 @@ export const GUARIDANS_GENDER = `
 `
 
 export const AUDIENCES = `
-    {
+    
         id
         identifier
         isActive
         randomSlug
         slug
         name
-    }
+    
 `;
