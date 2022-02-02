@@ -2,36 +2,38 @@ import {FC, useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Store } from '../../../app/configureStore';
-import { IBlockPresentation, IQuestion } from '../../../app/entities/block';
-import { ButtonColor } from '../../Color';
+import { IAnswer, IQuestion } from '../../../app/entities/block';
+import { Answer } from '../../atoms/Text/Answer';
+import { BasicColor, ButtonColor } from '../../Color';
 import {ScreenSize} from '../../screenSize';
+import { Typography } from '../../atoms/Text/typography';
 import { Question } from '../../atoms/Text/Question';
 import { Icon } from '../../atoms/Icon/Icon';
 import videoIcon from '../../assets/videoIcon.svg';
 import { Button } from '../Button';
 import assistor from '../../assets/text-to-speech.svg';
+import ice from '../../assets/ice-cream.svg';
+import { IconSize } from '../../atoms/Icon/Size';
 import { TextOption } from '../../atoms/QuestionOptions/Textoption';
-import { VideoModalAssistor } from '../../organisms/VideoModalAssistor';
 
 
 
 type ChoiceTextProps = {
   question: IQuestion;
   nextQuestion: () => void;
+  totalQuestions : number;
   questionCounter: number;
-  blockPresentation: IBlockPresentation
 };
 
 export const MultipleChoiceText: FC<ChoiceTextProps> = (
     {
       question,
       nextQuestion,
-      questionCounter,
-      blockPresentation
+      totalQuestions,
+      questionCounter
     }) => {
 
   const state = useSelector((state: Store) => state.blockPresentation)
-  const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false)
   useEffect(() => {
     setIsAnswered(false);
@@ -39,22 +41,11 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
   const handleAnswer = () => {
     setIsAnswered(true)
   };
-  const closeVideoModal = () => {
-    setShowAssistor(!showAssistor);
-  };
 
   return (
     <>
-      {showAssistor ?
-          <VideoModalAssistor
-            onClick={closeVideoModal}
-            source={blockPresentation ? blockPresentation?.block.topicGrade.topic.videoAssistor : ''}
-          />
-          :
-          null
-      }
       <BlackBoard>
-        <IconVideoContainer onClick={closeVideoModal}>
+        <IconVideoContainer>
           <Icon image={videoIcon} />
         </IconVideoContainer>
         <Question>{question.questionText}</Question>
@@ -83,7 +74,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
             darkText
             color={ButtonColor.next}
             onClick={nextQuestion}
-            value={blockPresentation.block.questions.length === questionCounter + 1 ? 'Finish' : 'Next'}/>
+            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'}/>
           <Icon image={assistor}/>
         </AssistorContainer>
       </BlackBoard>

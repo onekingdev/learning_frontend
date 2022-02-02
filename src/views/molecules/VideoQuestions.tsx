@@ -7,14 +7,14 @@ type VideoProps = {
 
 export const VideoQuestion = ({source}: VideoProps) => {
   return (
-    <>
+    <div>
       <VideoStyles src={source} />
-    </>
+    </div>
   );
 };
 
 const VideoStyles = styled.iframe`
-  width: 100%;
-  height: 100%;
+  width: 720px;
+  height: 480px;
   border-radius: 40px;
 `;

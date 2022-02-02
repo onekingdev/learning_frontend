@@ -27,9 +27,8 @@ import {
   Title,
   CardContent
  } from './Style'
- import StripeInput from "./StripeInput";
-import { FlexColumn } from '../../pages/Payment/Style';
-import countryList from 'react-select-country-list'
+import StripeInput from "./StripeInput";
+import countryList from 'react-select-country-list';
 
 type PaymentFormProps = {
   isUpdate: boolean
@@ -116,7 +115,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         type: 'card',
         card: cardElement,
         billing_details: {
-            email: user.email,
+            // email: user.email,
+            email: "mooncode610@gmail.com",
             address: {
                 city: data.city,
                 country: data.country,
@@ -129,7 +129,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
             phone: data.phone
         },
     }).catch(console.log);
-
+    console.log(result);
     if(result.error) return {success: false, result: result.error.message};
     /*------------------------ send request to backend to create payment -S-----------------------------*/
 

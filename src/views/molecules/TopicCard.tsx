@@ -8,6 +8,7 @@ type TopicCardProps = {
   background: string;
   onClick?: () => void;
   isButton: boolean;
+  isActive: boolean;
 };
 
 export const TopicCard: FC<TopicCardProps> = ({
@@ -15,11 +16,18 @@ export const TopicCard: FC<TopicCardProps> = ({
   subject,
   background,
   onClick,
+  isActive,
   isButton,
 }) => {
+  console.log(isActive)
   return (
     <>
-      <TopicCardStyles color={background} onClick={onClick} isButton={isButton}>
+      <TopicCardStyles
+          color={background}
+          onClick={onClick}
+          isButton={isButton}
+          isActive={isActive}
+      >
         <TopicCardImage src={image} />
         <TopicCardText isDark={true}>{subject}</TopicCardText>
       </TopicCardStyles>
@@ -30,11 +38,14 @@ export const TopicCard: FC<TopicCardProps> = ({
 type CardStylesProps = {
   color: string;
   isButton: boolean;
+  isActive: boolean;
 };
 
 const TopicCardStyles = styled.div<CardStylesProps>`
   width: 145px;
   height: 165px;
+  opacity: ${props => props.isActive ? 1 : 0.5};
+  pointer-events: ${props => props.isActive ? 'all' : 'none'};
   background-color: ${p => p.color};
   border-radius: 16px;
   text-align: center;

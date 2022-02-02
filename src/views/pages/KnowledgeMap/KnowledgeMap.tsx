@@ -18,20 +18,21 @@ import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
 import {get} from '../../../api/queries/get';
 import { useDispatch } from 'react-redux';
 import * as TYPE from '../../../app/types';
+import { AUDIENCES_QUERY } from '../../../api/queries/people';
 
 
 export const KnowledgeMap: FC = () => {
   const dispatch = useDispatch();
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
   const handleData = (data: any) => {
-    setAreasOfKnowledge(data.data.areasOfKnowledge);
-    dispatch({type: TYPE.SET_AOK, payload: data.data.areasOfKnowledge});
+    setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
+    dispatch({type: TYPE.SET_AOK, payload: data.data.audienceById.areaofknowledgeSet});
   };
   const handleError = (error: any) => {
     console.error(error);
   };
   useEffect(() => {
-    get('areasOfKnowledge', `{${AREA_OF_KNOWLEDGE}}`, handleData, handleError);
+    get('audienceById(id:"2")', `{${AUDIENCES_QUERY}}`, handleData, handleError);
     console.log(areasOfKnowledge);
   }, []);
 
@@ -59,6 +60,7 @@ export const KnowledgeMap: FC = () => {
           (
             areaOfKnowledge: {
               islandImage: string;
+              isActive: boolean;
             },
             i
           ) => {
@@ -68,6 +70,7 @@ export const KnowledgeMap: FC = () => {
                 <Island
                   src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
                   onClick={() => history.push('/question')}
+                  isActive={areaOfKnowledge.isActive}
                 />
                 <Filler src={fill} />
               </SubjectEven>
@@ -77,6 +80,7 @@ export const KnowledgeMap: FC = () => {
                 <Island
                   src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
                   onClick={() => history.push('/question')}
+                  isActive={areaOfKnowledge.isActive}
                 />
               </SubjectOdd>
             );
@@ -102,8 +106,12 @@ const Ocean = styled.div`
   }
 `;
 
-const Island = styled.img`
+const Island = styled.img<{
+  isActive: boolean;
+}>`
   width: 60%;
+  opacity: ${props => props.isActive ? 1 : 0.5};
+  pointer-events: ${props => props.isActive ? 'all' : 'none'};
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;

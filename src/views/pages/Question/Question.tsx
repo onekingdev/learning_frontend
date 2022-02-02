@@ -5,12 +5,14 @@ import {
   Wrapper,
   ProgressWrapper,
 } from './Style';
+import apple from '../../assets/apple.svg';
 import {FinishLesson} from '../../organisms/FinishLesson';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {MultipleChoiceText} from '../../molecules/QuestionTypes/MultipleChoiceText';
+import {VideoModalAssistor} from '../../organisms/VideoModalAssistor';
 import { get } from '../../../api/queries/get';
 import { BLOCK_PRESENTATION_QUERY } from '../../../api/queries/questions';
-import { IBlockPresentation, IQuestion } from '../../../app/entities/block';
+import { IAnswer, IBlockPresentation, IQuestion } from '../../../app/entities/block';
 import { useSelector } from 'react-redux';
 import { Store } from '../../../app/configureStore';
 import { useParams } from 'react-router-dom';
@@ -22,24 +24,33 @@ interface RoutePresentationParams {
 export const Question: FC = () => {
   // TODO answers and options must come from DB
   // TODO and the type should be much more roboust
+  const [value, setValue] = useState('');
   const {presentationId} = useParams<RoutePresentationParams>();
   const state = useSelector((state: Store) => state)
+  const [isFinished, setIsFinished] = useState(false);
+  const [video, setVideo] = useState<string>();
   //const dispatch = useDispatch();
   const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
   const [question, setQuestion] = useState<IQuestion>();
+  const [answer, setAnswer] = useState<IAnswer>()
   const [questionCounter, setQuestionCounter] = useState(Number);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
 
-
-  const renderTypes = (question: IQuestion, type: string, blockPresentation: IBlockPresentation) => {
+  const options = [
+    {image: apple},
+    {image: apple},
+    {image: apple},
+    {image: apple},
+  ];
+  const renderTypes = (question: IQuestion, type: string, totalQuestions: number) => {
     const types = [
     {
       type: 'Text',
       component: <MultipleChoiceText
                         question={question}
                         nextQuestion={handleNextQuestion}
+                        totalQuestions={totalQuestions}
                         questionCounter={questionCounter}
-                        blockPresentation={blockPresentation}
                   />
     }]
 
@@ -47,6 +58,15 @@ export const Question: FC = () => {
     return filterType?.component
   }
 
+
+  const [showAssistor, setShowAssistor] = useState(false);
+  const onChange = (e:any) => {
+    setValue(e.target.value);
+  }
+
+  const closeVideoModal = () => {
+    setShowAssistor(!showAssistor);
+  };
 
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
@@ -71,6 +91,7 @@ export const Question: FC = () => {
   }, [presentationId]);
 
   useEffect(() => {
+    setVideo(blockPresentation?.block.topicGrade.topic.videoAssistor)
     setQuestion(blockPresentation?.block.questions[questionCounter])
   },[blockPresentation,questionCounter])
 
@@ -92,6 +113,7 @@ export const Question: FC = () => {
         :
         blockPresentation && question ?
         <StudentMenu>
+        {showAssistor ? <VideoModalAssistor onClick={closeVideoModal} source={video ? video : ''}/> : null}
         <ProgressWrapper>
           <LessonProgress
             currentQuestion={questionCounter + 1}
@@ -103,7 +125,7 @@ export const Question: FC = () => {
               {renderTypes(
                 question,
                 blockPresentation.block.typeOf.name,
-                blockPresentation
+                blockPresentation.block.questions.length
               )}
           </Container>
       </StudentMenu>

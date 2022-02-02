@@ -1,7 +1,9 @@
 import { FC, useEffect } from 'react';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux'
 
 import Box from '@mui/material/Box';
+import { Grid } from '@mui/material';
 
 import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
 
@@ -21,11 +23,13 @@ export const Settings: FC = () => {
   }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={false} >
-      <>
-        <Title>{'Settings'}</Title>
+      <SettingContainer>
+        <TitleContainer>
+          <Title>{'Settings'}</Title>
+        </TitleContainer>
         <CssBaseline />
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <div>
+        <Grid container >
+          <Grid item xs={12} md={6}>
             <SettingForm />
             <Payment />
             <TextGroup>
@@ -33,13 +37,28 @@ export const Settings: FC = () => {
               <LSText>{' Reach us and we will help you'}</LSText>
               <LSBlueTextButton href='#'>{' Contact'}</LSBlueTextButton>
             </TextGroup>
-          </div>
-          <div>
+          </Grid>
+          <Grid item xs={12} md={6}>
             <MembershipDetail />
-          </div>
-        </Box>
-      </>
+          </Grid>
+        </Grid>
+      </SettingContainer>
     </ParentPgContainer>
   );
 };
 export default Settings;
+
+const SettingContainer = styled.div`
+width: 80vw;
+@media screen and (max-width: 540px) {
+  width: 100%;
+  margin-bottom: 20vh;
+}
+`
+const TitleContainer = styled.div`
+display: flex;
+justify-content: center;
+@media screen and (max-width: 540px) {
+  width: 100%;
+}
+`

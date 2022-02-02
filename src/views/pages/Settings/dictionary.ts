@@ -5,7 +5,6 @@ export const dictionary = Object.freeze({
       currentEmail: 'name@learnwithsocrates.com',
       },
     membership:{
-      title: 'Membership details',
       yearIncentive:'(safe 50% if you change to annual)',
       expiration:'Your next payment will be on ',
       mChildernVArray: ['1 child combo', '1 child one area of knowledge'],
