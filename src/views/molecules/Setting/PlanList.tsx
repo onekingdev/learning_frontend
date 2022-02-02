@@ -1,5 +1,7 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { FC, useState } from 'react';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,6 +10,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
+import { Grid } from '@mui/material';
+
 import { LSLabel, LSText, LSBlueTextButton } from './utils/Style';
 import { LSDialog } from './LSDialog';
 import { CancelForm } from './CancelForm';
@@ -45,7 +49,7 @@ const data = [
   },
 ]
 
-export const PlanTable: FC = () => {
+export const PlanList: FC = () => {
 
   // for change to yearly dialog
   const [isUpdateOpen, update] = useState(false)
@@ -70,42 +74,50 @@ export const PlanTable: FC = () => {
     <div>
       <TableContainer component={Paper} >
         <Table aria-label="simple table" size="small" >
-          <TableHead sx={{ borderTop: 'solid 3px ghostwhite'}}>
+          <StyledTableHead >
             <TableRow>
-              <TableCell align='center'>
-                <LSLabel fontSize={17} textAlign='center'>{'Area of Knowledge'}</LSLabel>
-              </TableCell>
               <TableCell align="center">
                 <LSLabel fontSize={17} textAlign='center'>{'Plan'}</LSLabel>
                 <LSText textAlign='center' fontSize={13}>{'(save 3 months if you change to annual plan)'}</LSText>
               </TableCell>
             </TableRow>
-          </TableHead>
+          </StyledTableHead>
           <TableBody>
-            {data.map((row) => (
+            {data.map((row, index) => (
               <TableRow
                 hover
                 key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row" >
-                  <Box >
-                    <LSLabel >{row.package}</LSLabel>
-                    <LSBlueTextButton onClick={() => onBtnClick(row.id)}>Cancel Plan</LSBlueTextButton>
-                  </Box>
-                </TableCell>
-                <TableCell align="left">
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                    <LSLabel>{row.period}</LSLabel>
-                    <LSText>{row.expiration}</LSText>
-                    <LSText>{row.price}</LSText>
-                  </Box>
-                  <LSBlueTextButton
-                    disabled={row.period === 'Monthly' ? false : true}
-                    onClick={() => onUpgradeBtnClick(row.id)}
-                  >{'Change to Yearly'}
-                  </LSBlueTextButton>
-                </TableCell>
+                <StyledTableCell component="th" scope="row" bgcolor={colors[index % 4]}>
+                  <Grid container>
+                    <Grid item md={5} xs={12}>
+                      <LSLabel >{row.package}</LSLabel>
+                    </Grid>
+                    <StyledGrid container item md={7} xs={12} >
+                      <Grid item md={4} xs={4}>
+                        <LSLabel>{row.period}</LSLabel>
+                      </Grid>
+                      <Grid item md={4} xs={4}>
+                        <LSText>{row.expiration}</LSText>
+                      </Grid>
+                      <Grid item md={4} xs={4}>
+                        <LSText>{row.price}</LSText>
+                      </Grid>
+                    </StyledGrid>
+                  </Grid>
+                  <Grid container>
+                    <Grid item md={6} xs={12}>
+                      <LSBlueTextButton
+                        disabled={row.period === 'Monthly' ? false : true}
+                        onClick={() => onUpgradeBtnClick(row.id)}
+                      >{'Change to Yearly'}
+                      </LSBlueTextButton>
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                      <LSBlueTextButton onClick={() => onBtnClick(row.id)}>Cancel Plan</LSBlueTextButton>
+                    </Grid>
+                  </Grid>
+                </StyledTableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -139,3 +151,37 @@ export const PlanTable: FC = () => {
     </div>
   );
 }
+const colors = [
+  'linear-gradient(0deg, rgba(34, 186, 175, 0.2), rgba(34, 186, 175, 0.2)), linear-gradient(0deg, #FFFFFF, #FFFFFF);',
+  'linear-gradient(0deg, rgba(23, 113, 185, 0.2), rgba(23, 113, 185, 0.2)), linear-gradient(0deg, #FFFFFF, #FFFFFF);',
+  'linear-gradient(0deg, rgba(244, 194, 34, 0.2), rgba(244, 194, 34, 0.2)), linear-gradient(0deg, #FFFFFF, #FFFFFF);',
+  'linear-gradient(0deg, rgba(38, 184, 36, 0.2), rgba(38, 184, 36, 0.2)), linear-gradient(0deg, #FFFFFF, #FFFFFF);'
+]
+
+const StyledTableCell = styled(TableCell)<{
+  bgcolor?: string
+}>`
+background: white;
+@media screen and (max-width: 540px) {
+  border-bottom: solid white 20px;
+  border-top: solid white 20px;
+  background: ${props => props.bgcolor}
+}
+`
+
+const StyledTableHead = styled(TableHead)`
+@media screen and (max-width: 540px) {
+  border-bottom: solid white 20px;
+  border-top: solid white 20px;
+  background: #26B824;
+  & .MuiTableCell-root{
+    color: white;
+  }
+}
+`
+
+const StyledGrid = styled(Grid)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`

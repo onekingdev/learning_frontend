@@ -147,23 +147,6 @@ const KidsList: FC = () => {
             <Avatar src={props.avatar} />
           </GridItem>
           <GridItem item xs={6} md={2.5}>
-            {/* {props.isNew === true ? (
-              <Button
-                bgColor={BasicColor.shadeBrown}
-                onClick={(e:any) => handleNew(props.index)}
-                value="New"
-              />
-              ) : (
-              <Button
-                bgColor={BasicColor.red}
-                onClick={(e:any) => handleDelete(props.index)}
-                value="Delete"
-              />
-              )} */}
-            {/* <Button
-                onClick={(e:any) => handleBring()}
-                value="Bring"
-              /> */}
             <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
           </GridItem>
           <GridItem item xs={12} md={2}>
@@ -240,17 +223,17 @@ const KidsList: FC = () => {
 export default KidsList;
 
 const Container = styled.div`
-  // padding-top: 25px;
-  // padding-bottom: 100px;
   z-index: 10;
   display: flex;
+  margin-bottom: 100px;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `
 
 const KidContainer = styled.div`
-margin-bottom: 30px;
+margin: 0 5vw 5vh 5vw;
 width: 100%;
 @media screen and (max-width: 540px) {
   background: linear-gradient(0deg, rgba(23, 113, 185, 0.2), rgba(23, 113, 185, 0.2)), linear-gradient(0deg, #FFFFFF, #FFFFFF);
@@ -261,7 +244,7 @@ const GridContainer = styled(Grid)`
 display: flex;
 justify-content: center;
 &.MuiGrid-root {
-  padding: 15px;
+  padding: 25px;
 }
 `
 const GridItem = styled(Grid)`
