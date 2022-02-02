@@ -4,13 +4,16 @@ import socrates from '../../assets/socrates.svg'
 import TextField from '../MuiTextField'
 import { LicenseHeader, LicenseBody, LicenseUsername} from './Style'
 import QRCode from "react-qr-code";
+import { LSText } from '../Setting/utils/Style';
 
 const License = (props: any) => {
     return (
       <ResponsiveLicense id="license">
         <LicenseHeader>
           <Img src={ logo } />
+          <LSText fontSize={13}>
           LEARNING LICENSE
+          </LSText>
         </LicenseHeader>
         <LicenseBody>
           <div className="flex justify-space-between align-center">
@@ -58,7 +61,7 @@ flex-direction: column;
 
 const Img = styled.img`
 @media screen and (max-width: 540px) {
-  width: 30%;
+  width: 40%;
 }
 `
 const DialogTextField = styled(TextField)`

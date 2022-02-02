@@ -15,6 +15,7 @@ export const LicenseHeader = styled.div`
   border-radius: 10px 10px 0px 0px;
   @media screen and (max-width: 540px) {
     font-size: 1em;
+    padding: 10px;
   }
 `;
 
@@ -45,10 +46,9 @@ export const LicenseUsername = styled.div`
   min-height: 35px; 
   text-align: center;
   @media screen and (max-width: 540px) {
-    width: 300px;
     font-size: 1em;
     padding: 0;
-    margin-right: 2px;
+    margin-right: 20px;
   }
 `
 
