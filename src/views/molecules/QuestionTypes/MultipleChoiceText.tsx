@@ -48,10 +48,12 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
         <IconVideoContainer>
           <Icon image={videoIcon} />
         </IconVideoContainer>
-        <Question>
-          {question.questionText}
+        <AnswerContainer>
+          <Question>
+            {question.questionText}
+          </Question>
           <Icon image={assistor} />
-        </Question>
+        </AnswerContainer>
         <AnswersContainer>
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
@@ -171,5 +173,6 @@ const AssistorContainer = styled.div`
 `;
 const AnswerContainer = styled.div`
 display: flex;
+justify-content: center;
 `;
 
