@@ -1,11 +1,11 @@
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Store } from '../../../app/configureStore';
 import { IAnswer, IQuestion } from '../../../app/entities/block';
 import { Answer } from '../../atoms/Text/Answer';
 import { BasicColor, ButtonColor } from '../../Color';
-import {ScreenSize} from '../../screenSize';
+import { ScreenSize } from '../../screenSize';
 import { Typography } from '../../atoms/Text/typography';
 import { Question } from '../../atoms/Text/Question';
 import { Icon } from '../../atoms/Icon/Icon';
@@ -21,17 +21,17 @@ import { TextOption } from '../../atoms/QuestionOptions/Textoption';
 type ChoiceTextProps = {
   question: IQuestion;
   nextQuestion: () => void;
-  totalQuestions : number;
+  totalQuestions: number;
   questionCounter: number;
 };
 
 export const MultipleChoiceText: FC<ChoiceTextProps> = (
-    {
-      question,
-      nextQuestion,
-      totalQuestions,
-      questionCounter
-    }) => {
+  {
+    question,
+    nextQuestion,
+    totalQuestions,
+    questionCounter
+  }) => {
 
   const state = useSelector((state: Store) => state.blockPresentation)
   const [isAnswered, setIsAnswered] = useState<boolean>(false)
@@ -48,34 +48,39 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
         <IconVideoContainer>
           <Icon image={videoIcon} />
         </IconVideoContainer>
-        <Question>{question.questionText}</Question>
+        <Question>
+          {question.questionText}
+          <Icon image={assistor} />
+        </Question>
         <AnswersContainer>
-        <TextOptionsList>
-          <BlockAnswers isAnswered={isAnswered}/>
-          {question.answeroptionSet.map((option, i) => (
-            <TextOption
-              answer={option.isCorrect}
-              answerText={option.answerText}
-              key={i}
-              onClick={handleAnswer}
-            />
+          <TextOptionsList>
+            <BlockAnswers isAnswered={isAnswered} />
+            {question.answeroptionSet.map((option, i) => (
+              <AnswerContainer>
+                <TextOption
+                  answer={option.isCorrect}
+                  answerText={option.answerText}
+                  key={i}
+                  onClick={handleAnswer}
+                />
+                <Icon image={assistor} />
+              </AnswerContainer>
 
-          ))}
-        </TextOptionsList>
-        <ImageAssetContainer imageLength={question.questionImageAssets.length}>
-          {
-            question.questionImageAssets.map(item =>
-              <ImageAsset src={item.image} alt="" />)
-          }
-        </ImageAssetContainer>
+            ))}
+          </TextOptionsList>
+          <ImageAssetContainer imageLength={question.questionImageAssets.length}>
+            {
+              question.questionImageAssets.map(item =>
+                <ImageAsset src={item.image} alt="" />)
+            }
+          </ImageAssetContainer>
         </AnswersContainer>
         <AssistorContainer>
           <Button
             darkText
             color={ButtonColor.next}
             onClick={nextQuestion}
-            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'}/>
-          <Icon image={assistor}/>
+            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'} />
         </AssistorContainer>
       </BlackBoard>
     </>
@@ -134,7 +139,7 @@ const IconVideoContainer = styled.div`
   }
 `;
 const BlockAnswers = styled.div<{
-  isAnswered:boolean;
+  isAnswered: boolean;
 }>`
   width: 100%;
   height: 100%;
@@ -164,3 +169,7 @@ const AssistorContainer = styled.div`
   grid-gap: 40px;
   margin: 30px auto;
 `;
+const AnswerContainer = styled.div`
+display: flex;
+`;
+
