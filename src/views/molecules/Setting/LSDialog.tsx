@@ -17,7 +17,7 @@ type LSDialogProps = {
   contentText?: string
   open: () => void
   dialogContent?: React.ReactNode
-  fullWidth?: string
+  fullWidth?: boolean
 }
 
 export const LSDialog: FC<LSDialogProps> = ({
@@ -38,6 +38,7 @@ export const LSDialog: FC<LSDialogProps> = ({
 
   return (
     <ThemeProvider theme={settingPage}>
+      <div></div>
       <StyledDialog open={isOpen} onClose={open} scroll='body' wide={fullWidth}>
         <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} >
           <CloseIcon />
@@ -57,14 +58,12 @@ export const LSDialog: FC<LSDialogProps> = ({
   );
 }
 
-
-// Styled components
 interface DialogProps {
-  wide?: string
+  wide?: boolean
 }
 const StyledDialog = styled(Dialog) <DialogProps>`
 & .MuiPaper-root {
-  max-width: ${props => props.wide === 'true' ? '100%;' : 'auto;'}
+  max-width: ${props => props.wide ? '100%;' : 'auto;'}
   overflow-y: visible
 }
 `
@@ -76,7 +75,7 @@ const StyledIconBtn = styled(IconButton)`
     background: ${BasicColor.green};
     color: white;
     &:hover {
-      background: ${BasicColor.green};
+      background-color: rgba(33, 185, 92, 0.9)
     }
   }
 `

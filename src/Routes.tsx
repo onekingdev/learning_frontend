@@ -34,6 +34,7 @@ import {Report} from './views/pages/Report/Report';
 import NewKids from './views/pages/NewKids/NewKids'
 
 const PrivateRoute = ({requireAuth = true, ...rest}) => {
+
   const user = useSelector((state: Store) => state.user);
   const isAuthenticated = !!user?.token;
 
@@ -62,10 +63,7 @@ export function Routes(props: any) {
         <PrivateRoute path="/login" requireAuth={false}>
           <LogIn />
         </PrivateRoute>
-        <PrivateRoute
-          path="/question/presentation_:presentationId"
-          requireAuth={false}
-        >
+        <PrivateRoute path="/question/presentation_:presentationId" requireAuth={false}>
           <Question />
         </PrivateRoute>
         <PrivateRoute path="/avatar">

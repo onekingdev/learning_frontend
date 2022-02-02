@@ -32,42 +32,42 @@ export const SettingForm: FC = () => {
   return (
     <ThemeProvider theme={settingPage}>
       <Box>
-        <LSShadowContainer >
+        <LSShadowContainer width={624} left={303} top={312}>
           <LSTitle>
             {'Profile and settings'}
           </LSTitle>
           <Box component='form' onSubmit={handleSubmit} noValidate sx={{ flexGrow: 1 }}>
             <LSGridRow container>
-              <Grid item lg={4} xs={12}>
+              <Grid item lg={4} sm={12}>
                 <LSLabel>
                   {'Name'}
                 </LSLabel>
               </Grid>
-              <Grid item lg={8} xs={12}>
+              <Grid item lg={8} sm={12}>
                 <LSText pl={20} >
                   {'Lana Taylor James'}
                 </LSText>
               </Grid>
             </LSGridRow>
             <LSGridRow container>
-              <Grid item lg={4} xs={12}>
+              <Grid item lg={4} sm={12}>
                 <LSLabel>
                   {'Current e-mail'}
                 </LSLabel>
               </Grid>
-              <Grid item lg={8} xs={12}>
+              <Grid item lg={8} sm={12}>
                 <LSText pl={20}>
                   {words.currentEmail}
                 </LSText>
               </Grid>
             </LSGridRow>
             <LSGridRow container>
-              <Grid item lg={4} xs={12}>
+              <Grid item lg={4} sm={12}>
                 <LSLabel >
                   {'Change E-Mail'}
                 </LSLabel>
               </Grid>
-              <Grid item lg={8} xs={12}>
+              <Grid item lg={8} sm={12}>
                 <LSTextField
                   margin='normal'
                   required
@@ -80,12 +80,12 @@ export const SettingForm: FC = () => {
               </Grid>
             </LSGridRow>
             <LSGridRow container>
-              <Grid item lg={4} xs={12}>
+              <Grid item lg={4} sm={12}>
                 <LSLabel >
                   {'Password'}
                 </LSLabel>
               </Grid>
-              <Grid item lg={8} xs={12}>
+              <Grid item lg={8} sm={12}>
                 <LSBlueTextButton >
                   {'Change Password'}
                 </LSBlueTextButton>

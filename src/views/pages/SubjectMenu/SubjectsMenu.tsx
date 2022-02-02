@@ -6,20 +6,19 @@ import {RibbonText} from '../../molecules/RibbonText';
 import {dictionary} from './dictionary';
 import {useHistory} from 'react-router-dom';
 import {get} from '../../../api/queries/get';
+import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
 import { useDispatch } from 'react-redux';
 import * as TYPE from '../../../app/types';
-import { AUDIENCES_QUERY } from '../../../api/queries/people';
-import { IAreasOfKnowledge } from '../../../app/entities/areasOfKnowledge';
 
 export const SubjectsMenu: FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const language = 'en';
-  const [areasOfKnowledge, setTopics] = useState<IAreasOfKnowledge[]>([]);
+  const [areasOfKnowledge, setTopics] = useState([]);
 
   const handleData = (data: any) => {
-    setTopics(data.data.audienceById.areaofknowledgeSet);
-    dispatch({type: TYPE.SET_AOK, payload: data.data.audienceById.areaofknowledgeSet});
+    setTopics(data.data.areasOfKnowledge);
+    dispatch({type: TYPE.SET_AOK, payload: data.data.areasOfKnowledge});
   };
 
   const handleError = (error: any) => {
@@ -27,7 +26,7 @@ export const SubjectsMenu: FC = () => {
   };
 
   useEffect(() => {
-    get('audienceById(id:"2")', `{${AUDIENCES_QUERY}}`, handleData, handleError);
+    get('areasOfKnowledge', `{${AREA_OF_KNOWLEDGE}}`, handleData, handleError);
   }, []);
 
   return (
@@ -39,14 +38,18 @@ export const SubjectsMenu: FC = () => {
           </TitleContainer>
           <SubjectsCardsContainer>
             {areasOfKnowledge.map(
-              (areaOfKnowledge: IAreasOfKnowledge) => (
+              (areaOfKnowledge: {
+                name: string;
+                image: string;
+                hexColor: string;
+                id: any;
+              }) => (
                 <TopicCard
                   image={`https://api.withsocrates.com/media/${areaOfKnowledge.image}`}
                   background={areaOfKnowledge.hexColor}
                   subject={areaOfKnowledge.name}
                   onClick={() => history.push(`/topic/${areaOfKnowledge.id}`)}
                   isButton={true}
-                  isActive={areaOfKnowledge.isActive}
                 />
               )
             )}

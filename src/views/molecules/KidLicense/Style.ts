@@ -13,10 +13,6 @@ export const LicenseHeader = styled.div`
   font-size: 33px;
   padding: 25px;
   border-radius: 10px 10px 0px 0px;
-  @media screen and (max-width: 540px) {
-    font-size: 1em;
-    padding: 10px;
-  }
 `;
 
 export const LicenseBody = styled.div`
@@ -26,10 +22,6 @@ export const LicenseBody = styled.div`
   height: 100%;
   border-radius: 0px 0px 10px 10px;
   padding: 35px;
-  @media screen and (max-width: 540px) {
-    font-size: 1em;
-    padding: 3px;
-  }
 `;
 
 export const LicenseUsername = styled.div`
@@ -45,11 +37,6 @@ export const LicenseUsername = styled.div`
   width: 110px;
   min-height: 35px; 
   text-align: center;
-  @media screen and (max-width: 540px) {
-    font-size: 1em;
-    padding: 0;
-    margin-right: 20px;
-  }
 `
 
 export const useStyles = makeStyles({

@@ -1,4 +1,3 @@
-import { IAreasOfKnowledge } from './areasOfKnowledge';
 import {Gender} from './gender';
 
 export interface IUser {
@@ -24,14 +23,4 @@ export interface IUser {
         experience: number;
         level: number;
       }
-}
-
-export interface IAudience {
-  id: string;
-  identifier: string;
-  isActive: boolean;
-  randomSlug: string;
-  slug: string;
-  name: string;
-  areaofknowledgeSet: IAreasOfKnowledge[];
 }

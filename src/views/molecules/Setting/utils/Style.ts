@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import {Box, InputBase, Paper} from '@mui/material';
+import {InputBase, Paper} from '@mui/material';
 import {BasicColor} from '../../../Color';
+
 
 import FormControl from '@mui/material/FormControl';
 import {
@@ -29,15 +30,12 @@ export const LSDialogTitle = styled(DialogTitle)`
     font-weight: 700;
     letter-spacing: 0.25px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 45px;
   }
 `;
 export const LSDialogContent = styled(DialogContent)`
   &.MuiDialogContent-root {
     padding: 40px;
-    @media screen and (max-width: 540px) {
-      padding: 5px;
-    }
   }
 `;
 export const LSDialogContentText = styled(DialogContentText)`
@@ -100,10 +98,10 @@ export const LSFormControlLabel = styled(FormControlLabel)`
 /*                                          Button                                            */
 /*--------------------------------------------------------------------------------------------*/
 export const LSButton = styled(Button)<{
-  bgColor?: string;
+  bgColor?: string
 }>`
   &.MuiButton-root {
-    ${props => (props.bgColor ? 'background-color:' + props.bgColor + ';' : '')}
+    ${props => props.bgColor ? 'background-color:' + props.bgColor + ';':''}
     border-radius: 20px;
     height: 49px;
     width: 215px;
@@ -111,9 +109,6 @@ export const LSButton = styled(Button)<{
     font-size: 16px;
     color: white;
     font-family: Montserrat;
-    @media screen and (max-width: 540px) {
-      margin: 10px;
-    }
   }
   &:hover {
     transform scale(1.01)
@@ -123,11 +118,6 @@ export const LSButtonContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 20px 0px 20px 0px;
-  @media screen and (max-width: 540px) {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
 `;
 export const LSBlueTextButton = styled(Button)`
   &.MuiButton-root {
@@ -136,11 +126,8 @@ export const LSBlueTextButton = styled(Button)`
     color: ${BasicColor.blue};
     font-family: Montserrat;
     font-weight: 600;
-    font-size: 14px;
-    @media screen and (max-width: 540px) {
-      font-size: 0.8em;
-    }
-  }  
+    font-size: 16px;
+  }
 `;
 
 /*--------------------------------------------------------------------------------------------*/
@@ -151,11 +138,8 @@ export const LSGridRow = styled(Grid)`
   padding: 5px 7px 0px 15px;
   align-items: center;
   margin-top: 8px;
-  @media screen and (max-width: 540px) {
-    padding: 2px;
-  }
 `;
-export const LSShadowContainer = styled(Box)<{
+export const LSShadowContainer = styled.div<{
   width?: number;
   height?: number;
   left?: number;
@@ -170,7 +154,6 @@ export const LSShadowContainer = styled(Box)<{
   flex-direction: ${props => props.flexDirection};
   box-shadow: 0px 2px 10px 0px #00000040;
   border-radius: 10px;
-  background-color: white;
   font-family: Montserrat;
   margin: 16px;
   padding: 20px 32px 20px 32px;
@@ -179,11 +162,32 @@ export const LSShadowContainer = styled(Box)<{
   ${props => (props.left ? 'left:' + props.left + 'px;' : '')}
   ${props => (props.top ? 'top:' + props.top + 'px;' : '')}
   display: ${props => props.display};
-  @media screen and (max-width: 540px) {
-    padding: 10px 22px 10px 22px;
-  }
 `;
 
+export const LSText = styled.p<{
+  fontSize?: number;
+  fontStyle?: string;
+  fontWeight?: number;
+  lineHeight?: number;
+  textAlign?: string;
+  margin?: number;
+  mt?: number;
+  mb?: number;
+  pl?: number;
+}>`
+  font-family: Montserrat;
+  ${props => (props.fontSize ? 'font-size:' + props.fontSize + 'px;' : '')}
+  ${props =>
+    props.lineHeight ? 'line-height:' + props.lineHeight + 'px;' : ''}
+  margin: ${props => props.margin || 0}px;
+  margin-top: ${props => props.mt || 0}px;
+  margin-bottom: ${props => props.mb || 0}px;
+  padding-left: ${props => props.pl || 0}px;
+  font-weight: ${props => props.fontWeight || 500};
+  text-align: ${props => props.textAlign};
+  font-style: ${props => props.fontStyle};
+  letter-spacing: 1px;
+`;
 export const LSTextField = styled(TextField)`
   height: 44px;
   width: 100%;
@@ -207,7 +211,7 @@ export const LSTitle = styled.p<{
   ml?: number;
 }>`
   font-family: Montserrat;
-  font-size: 1.3em;
+  font-size: 24px;
   margin-top: ${props => props.mt || 5}px;
   margin-bottom: ${props => props.mb || 5}px;
   margin-left: ${props => props.ml || 5}px;
@@ -216,13 +220,9 @@ export const LSTitle = styled.p<{
   line-height: 30px;
   letter-spacing: 0.25px;
   text-align: left;
-  @media screen and (max-width: 540px) {
-    font-size: 1.3em;
-  }
 `;
 export const Title = styled.div`
-  font-size: 2em;
-  font-family: Montserrat;
+  font-size: 40px;
   line-height: 50px;
   font-weight: 700;
   color: white;
@@ -233,18 +233,16 @@ export const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 4vh;
-  @media screen and (max-width: 540px) {
-    width: 60%;
-    font-size: 1.5em;
-    margin-top: 10px;
-    margin-bottom: 0;
-  }
+  margin-bottom: 70px;
 `;
 export const TextGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+export const MasterCardImg = styled.img`
+  width: 50px;
+  height: 30px;
 `;
 
 /*--------------------------------------------------------------------------------------------*/
@@ -271,53 +269,21 @@ export const LSLabel = styled.p<{
   mt?: number;
   mb?: number;
   ml?: number;
-  textAlign?: string;
   margin?: number;
 }>`
   font-family: Montserrat;
-  font-size: ${props => (props.fontSize ? props.fontSize + 'px;' : '15px;')}
+  ${props => (props.fontSize ? 'font-size:' + props.fontSize + 'px;' : '')}
   margin: ${props =>
-    props.margin === 0 || props.margin ? props.margin + 'px;' : '0px;'}
+    props.margin === 0 || props.margin ? props.margin + 'px;' : '10px;'}
   margin-top: ${props =>
-    props.mt === 0 || props.mt ? props.mt + 'px;' : '5px;'}
+    props.mt === 0 || props.mt ? props.mt + 'px;' : '10px;'}
   margin-bottom: ${props =>
-    props.mb === 0 || props.mb ? props.mb + 'px;' : '5px;'}
+    props.mb === 0 || props.mb ? props.mb + 'px;' : '10px;'}
   margin-left: ${props =>
-    props.ml === 0 || props.ml ? props.ml + 'px;' : '5px;'}
+    props.ml === 0 || props.ml ? props.ml + 'px;' : '10px;'}
   color: ${props => props.color};
   font-style: normal;
-  text-align: ${props => props.textAlign?props.textAlign + ';':'left;'}
   font-weight: 700;
   letter-spacing: 0.75px;
-`;
-
-export const LSText = styled.p<{
-  fontSize?: number;
-  fontStyle?: string;
-  fontWeight?: number;
-  textAlign?: string;
-  margin?: number;
-  mt?: number;
-  mb?: number;
-  pl?: number;
-  ml?: number;
-}>`
-  font-family: Montserrat;
-  font-size: ${props => (props.fontSize ? props.fontSize + 'px;' : '15px;')}
-  margin: ${props =>
-    props.margin === 0 || props.margin ? props.margin + 'px;' : '0px;'}
-  margin-top: ${props =>
-    props.mt === 0 || props.mt ? props.mt + 'px;' : ''}
-  margin-bottom: ${props =>
-    props.mb === 0 || props.mb ? props.mb + 'px;' : ''}
-  margin-left: ${props =>
-    props.ml === 0 || props.ml ? props.ml + 'px;' : ''}
-  padding-left: ${props =>
-    props.pl === 0 || props.pl ? props.pl + 'px;' : ''}
-  font-weight: ${props => props.fontWeight + ';' || '500;'}
-  text-align: ${props => props.textAlign?props.textAlign + ';':'left;'}
-  letter-spacing: 1px;
-  @media screen and (max-width: 540px) {
-    font-size: 0.8em;
-  }
+  text-align: left;
 `;

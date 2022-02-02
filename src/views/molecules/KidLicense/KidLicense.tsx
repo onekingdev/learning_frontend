@@ -1,74 +1,44 @@
 import logo from '../../assets/logo-learn-white.svg'
-import styled from 'styled-components';
 import socrates from '../../assets/socrates.svg'
 import TextField from '../MuiTextField'
 import { LicenseHeader, LicenseBody, LicenseUsername} from './Style'
 import QRCode from "react-qr-code";
-import { LSText } from '../Setting/utils/Style';
 
 const License = (props: any) => {
     return (
-      <ResponsiveLicense id="license">
+      <div className="flex flex-col w-600 h-400" id="license">
         <LicenseHeader>
-          <Img src={ logo } />
-          <LSText fontSize={13}>
-          LEARNING LICENSE
-          </LSText>
+          <img src={ logo } className='p-b-15'/>
+          LEARNING LICESNE
         </LicenseHeader>
         <LicenseBody>
           <div className="flex justify-space-between align-center">
-            <Img src={socrates} />
-            <div className="flex flex-col h-full justify-space-between">
-              <DialogTextField
+            <img src={socrates} />
+            <div className="flex flex-col h-full justify-space-around">
+              <TextField
                 label="Member Since"
-                value={`${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}`}
+                value={`${props.membership.getFullYear()} - ${props.membership.getMonth() + 1} - ${props.membership.getDate()}`}
                 // onChange={(e) => updateUsername(e.target.value)}
               />
-              <DialogTextField
+              <TextField
                 label="User Name"
                 value={props.username}
                 // onChange={(e) => updateUsername(e.target.value)}
               />
             </div>
-            <div >
-              <QRCode value={props.username} size={100} />
+            <div className="flex align-center justify-center">
+              <QRCode value={props.username} size={150} style={{padding: "10px"}}/>
             </div>
           </div>
           <div className="flex align-center">
             <LicenseUsername>{props.parentName}</LicenseUsername>
-            <div>
+            <div className="flex justify-center align-center">
               www.learnwithsocrates.com
             </div>
           </div>
         </LicenseBody>
-      </ResponsiveLicense>
+      </div>
     )
 }
 
 export default License
-
-const ResponsiveLicense = styled.div`
-width: 100%;
-heigth: 100%;
-display: flex;
-flex-direction: column;
-@media screen and (max-width: 540px) {
-  font-size: 1em;
-  padding: 0;
-  margin: 0;
-}
-`
-
-const Img = styled.img`
-@media screen and (max-width: 540px) {
-  width: 40%;
-}
-`
-const DialogTextField = styled(TextField)`
-&.MuiTextField-root {
-  margin-top: 10px;
-}
-@media screen and (max-width: 540px) {
-  width: 30%;
-}
-`
