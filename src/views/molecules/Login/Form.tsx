@@ -8,9 +8,7 @@ import {ScreenSize} from '../../screenSize';
 type FormProps = {
   login: string;
   email: string;
-  handleEmail: Function;
   password: string;
-  handlePassword: Function;
   passwordValidator?: (str: string) => boolean;
   wrongPasswordMessage?: string;
   forgot: string;
@@ -19,9 +17,7 @@ type FormProps = {
 export const Form: FC<FormProps> = ({
   login,
   email,
-  handleEmail,
   password,
-  handlePassword,
   passwordValidator,
   wrongPasswordMessage,
   forgot,
@@ -34,16 +30,12 @@ export const Form: FC<FormProps> = ({
         </Field>
 
         <Field>
-          <TextInput
-            label={email}
-            onChange={e => handleEmail(e.target.value)}
-          />
+          <TextInput label={email} />
         </Field>
 
         <Field>
           <TextInput
             label={password}
-            onChange={e => handlePassword(e.target.value)}
             validate={passwordValidator}
             errMsg={wrongPasswordMessage}
             isSecret={true}
