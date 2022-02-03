@@ -18,6 +18,11 @@ const INITIAL_STATE = {
     dateJoined: null,
     token: null,
     refreshToken: null,
+    wallet: {
+      balance: null,
+      experience: null,
+      level: null
+    }
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUser}) => {

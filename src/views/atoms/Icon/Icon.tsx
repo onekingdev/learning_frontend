@@ -21,7 +21,6 @@ const IconStyle = styled.img<{
 }>`
   width: ${p => p.size};
   height: ${p => p.size};
-  margin-left: 1vw;
 `;
 
 export const RoundIcon = styled(IconStyle)`

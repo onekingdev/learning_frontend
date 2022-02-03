@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { InputBase } from '@mui/material';
 
 
-import { LSButtonContainer, LSButton, LSText, LSPaperMoney, LSLabel, LSInputBase } from './utils/Style';
+import { LSButtonContainer, LSButton, LSText, MasterCardImg, LSPaperMoney, LSLabel, LSInputBase } from './utils/Style';
 import masterCard from '../../assets/MasterCard.svg'
 
 interface IUpgradeProps {
@@ -52,7 +52,7 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, tag }) => {
         border_radius={10}
         pl={10}
         value='1154 4525 7889 1458'
-        endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
+        endAdornment={<MasterCardImg src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
       />
       <LSButtonContainer style={{ marginTop: '32px' }}>
         <LSButton

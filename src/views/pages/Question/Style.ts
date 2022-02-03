@@ -70,8 +70,9 @@ export const Container = styled.div`
   padding-bottom: 70px;
   padding-top: 20px;
   text-align: center;
-  
+  max-height: 700px;
   @media (min-width: ${ScreenSize.tablet}) {
+    padding-top: 40px;
     max-width: 1366px;
   }
 `;

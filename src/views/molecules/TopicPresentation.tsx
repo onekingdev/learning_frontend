@@ -33,7 +33,6 @@ export const TopicPresentation: FC<TopicPresentationProps> = ({
           background={BasicColor.orange}
           subject={title}
           isButton={false}
-          isActive={true}
         />
       </TopicPresentationStyles>
     </>

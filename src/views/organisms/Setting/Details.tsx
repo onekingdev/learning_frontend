@@ -1,5 +1,4 @@
 import {FC, useState} from 'react';
-import styled from 'styled-components';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { LSTitle, LSShadowContainer } from '../../molecules/Setting/utils/Style';
@@ -10,7 +9,7 @@ import { LSDialog } from '../../molecules/Setting/LSDialog';
 import { CancelForm } from '../../molecules/Setting/CancelForm';
 import { AddPlanForm } from '../../molecules/Setting/AddPlanForm';
 import { useDialog, useAddDialog } from '../../molecules/Setting/utils/useDialog';
-import { PlanList } from '../../molecules/Setting/PlanList';
+import { PlanTable } from '../../molecules/Setting/PlanTable';
 
 export const MembershipDetail:FC = () => {
 
@@ -36,9 +35,9 @@ export const MembershipDetail:FC = () => {
 
   return (
   <Box>
-    <LSShadowContainer >
+    <LSShadowContainer width={624} >
       <LSTitle>
-        Membership Details
+        {words.title}
       </LSTitle>
       <Box >
         <Box sx={{display:'flex', justifyContent:'center', margin:2}}>
@@ -55,15 +54,15 @@ export const MembershipDetail:FC = () => {
           }
           />
         </Box>
-        <PlanList />
-        <BtnContainer >
+        <PlanTable />
+        <Box sx={{display: 'flex', justifyContent:'space-evenly', margin: 2}}>
           <LSBlueTextButton onClick={openAdd}>
               {'Add a Plan'}
             </LSBlueTextButton>
           <LSBlueTextButton onClick={open}>
             {'Cancel Membership'}
           </LSBlueTextButton>
-        </BtnContainer>
+        </Box>
         <LSDialog
           isOpen={isOpen}
           open={open}
@@ -81,12 +80,4 @@ export const MembershipDetail:FC = () => {
   </Box>
   );
 }
-const BtnContainer = styled.div`
-display: flex;
-padding: 20px;
-flex-direction: column;
-align-items: flex-start;
-@media screen and (max-width: 540px) {
-  width: 100%;
-}
-`
+

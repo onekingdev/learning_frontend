@@ -1,5 +1,4 @@
 import {FC, useEffect, useState} from 'react';
-import styled from 'styled-components';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import InputLabel from '@mui/material/InputLabel';
@@ -10,15 +9,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMarkRounded';
 import Stack from '@mui/material/Stack';
-
-import { BasicColor } from '../../Color';
-import {ScreenSize} from '../../screenSize';
 import { useStyles } from './Style';
 import * as TYPES from '../../../app/types'
 import logoTitle from '../../assets/logo-learn.svg'
 import home from '../../assets/home_pc.svg'
 import avatar from '../../assets/avatars/avatar1.svg'
 import {
+  Container,
   LogoContainer,
   LogoImg,
   LogoTitle,
@@ -108,27 +105,3 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
     </Container>
   );
 };
-
-export const Container = styled.div`
-  position: relative;
-  min-height: 65px;
-  padding-top: 40px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  @media screen and (max-width: ${ScreenSize.desktop}) {
-    padding-top: 4.2vw;
-    padding-bottom: 1.7vw;
-  }
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: ${BasicColor.blue};
-    position: absolute;
-    bottom: 0px;
-    z-index: 1000;
-    width: 100%;
-    border-radius: 8px 8px 0 0;
-  }
-`;
-

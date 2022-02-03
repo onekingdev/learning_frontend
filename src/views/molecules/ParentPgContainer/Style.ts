@@ -5,7 +5,7 @@ import background_mobile from '../../assets/colored-shapes-bg.svg';
 
 export const Container = styled.div`
     position: relative;
-    width: 100%;
+    width: 100vw;
     min-height: 100vh;
     @media screen and (max-width: ${ScreenSize.tablet}) {
         background: url(${background_mobile}), #FFFFFF;
@@ -23,7 +23,6 @@ export const IslandGreen = styled.img`
     @media screen and (max-width: ${ScreenSize.desktop}) {
         right: 0;
     }
-    z-index: -1;
 `;
 
 export const IslandYellow = styled.img`
@@ -33,7 +32,6 @@ export const IslandYellow = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-    z-index: -1;
 `;
 
 export const LogoTitle = styled.img`
@@ -49,7 +47,6 @@ export const Planet = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-    z-index: -1;
 `;
 
 export const Mess = styled.img`
@@ -59,7 +56,6 @@ export const Mess = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-    z-index: -1;
 `;
 
 export const ColorPanel = styled.img`
@@ -69,7 +65,6 @@ export const ColorPanel = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-    z-index: -1;
 `;
 
 export const Triangle = styled.img`
@@ -79,7 +74,6 @@ export const Triangle = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-    z-index: -1;
 `;
 
 export const Pencil = styled.img`
@@ -89,30 +83,27 @@ export const Pencil = styled.img`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
     }
-    z-index: -1;
 `;
 
 export const GateWay = styled.img`
-  position: absolute;
-  top: 600px;
-  right: 90px;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    display: none;
-  }
-  z-index: -1;
-`;
+    position: absolute;
+    top: 600px;
+    right: 90px;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        display:none
+    }
+`
 export const NoteBook = styled.img`
-  position: absolute;
-  top: 870px;
-  right: 196px;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    display: none;
-  }
-  z-index: -1;
-`;
+    position: absolute;
+    top: 870px;
+    right: 196px;
+    @media screen and (max-width: ${ScreenSize.tablet}) {
+        display:none
+    }
+`
 
 export const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`

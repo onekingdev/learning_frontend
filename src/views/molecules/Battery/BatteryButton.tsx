@@ -8,6 +8,7 @@ type BatteryButtonProps = {
 };
 
 const BatteryButtonStyle = styled.button`
+  width: 86px;
   height: 40px;
   background-color: #26b824;
   border: none;

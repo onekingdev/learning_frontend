@@ -1,4 +1,3 @@
-import { IAreasOfKnowledge } from './areasOfKnowledge';
 import {Gender} from './gender';
 
 export interface IUser {
@@ -19,14 +18,9 @@ export interface IUser {
     dateJoined: Date;
     token: string;
     refreshToken: string;
-}
-
-export interface IAudience {
-  id: string;
-  identifier: string;
-  isActive: boolean;
-  randomSlug: string;
-  slug: string;
-  name: string;
-  areaofknowledgeSet: IAreasOfKnowledge[];
+    wallet: {
+        balance: number;
+        experience: number;
+        level: number;
+      }
 }

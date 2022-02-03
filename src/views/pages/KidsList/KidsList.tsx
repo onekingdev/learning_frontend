@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useStyles } from './Style';
@@ -20,7 +19,7 @@ import Button from '../../molecules/MuiButton'
 import { LSDialog } from '../../molecules/Setting/LSDialog';
 import { ButtonColor, BasicColor } from '../../Color';
 import { Store } from '../../../app/configureStore';
-import { Title, Avatar, LicenseButton, LicenseHeader, LicenseBody, LicenseBottom, LicenseUsername } from './Style'
+import { Title, Avatar, Container, LicenseButton, LicenseHeader, LicenseBody, LicenseBottom, LicenseUsername } from './Style'
 import { toPng, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver'
 import QRCode from "react-qr-code";
@@ -79,7 +78,7 @@ const KidsList: FC = () => {
     const handleDownloadBtnClicked = () => {
       // Do something ...
       console.log(children);
-      const licenseElm: any = document.querySelector("#license")
+      const licenseElm: any= document.querySelector("#license")
       console.log(licenseElm)
       toPng(licenseElm).then(function (dataUrl) {
         saveAs(dataUrl, `${username}-license`);
@@ -113,65 +112,74 @@ const KidsList: FC = () => {
     }
 
     return (
-      <KidContainer >
+      <div className="flex justify-center align-center p-b-50 w-100">
         <LSDialog
           isOpen={openLicense}
           open={open}
           title='Your Child License'
-          fullWidth='true'
+          fullWidth={true}
           dialogContent={
             <>
-              {openLicense && <License parentName={user.username} username={username} membership={new Date()} />}
-              <GridContainer container>
-                <GridItem item md={6} xs={12}>
-                  <Button
-                    bgColor={BasicColor.green}
-                    onClick={(e: any) => handleDownloadBtnClicked()}
-                    value="Download"
-                  />
-                </GridItem>
-                <GridItem item md={6} xs={12}>
-                  <Button
-                    bgColor={BasicColor.gray60}
-                    onClick={(e: any) => handleCancelBtnClicked()}
-                    value="Return"
-                  />
-                </GridItem>
-              </GridContainer>
+              { openLicense && <License parentName={user.username} username={username} membership={new Date()}/> }
+              <div className="flex justify-space-between p-t-30">
+                <Button
+                  bgColor={BasicColor.green}
+                  onClick={(e: any) => handleDownloadBtnClicked()}
+                  value="Download"
+                />
+                <Button
+                  bgColor={BasicColor.gray60}
+                  onClick={(e: any) => handleCancelBtnClicked()}
+                  value="Return"
+                />
+              </div>
             </>
           }
         />
-
-        <GridContainer container className="align-center" >
-          <GridItem item xs={6} md={2} >
-            <Avatar src={props.avatar} />
-          </GridItem>
-          <GridItem item xs={6} md={2.5}>
-            <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
-          </GridItem>
-          <GridItem item xs={12} md={2}>
+        <Avatar src={props.avatar} />
+        <Grid container spacing={5} className="align-center">
+          <Grid item xs={12} md={4}>
             <TextField
               label="User Name"
               value={username}
             // onChange={(e) => updateUsername(e.target.value)}
             />
-          </GridItem>
-          <GridItem item xs={12} md={3}>
+          </Grid>
+          <Grid item xs={12} md={3}>
             <TextField
               label="Grade"
               value={grade} onChange={(e) => { updateGrade(e.target.value) }}
             />
-          </GridItem>
-          <GridItem item xs={12} md={2.5} >
+          </Grid>
+          <Grid item xs={12} md={2.5}>
             <Button
               bgColor={BasicColor.shadeBrown}
               // onClick={(e:any) => handleChgPwd(props.index, password)}
               value="Change Password"
             />
-          </GridItem>
-
-        </GridContainer>
-      </KidContainer>
+          </Grid>
+          <Grid item xs={12} md={2.5}>
+            {/* {props.isNew === true ? (
+              <Button
+                bgColor={BasicColor.shadeBrown}
+                onClick={(e:any) => handleNew(props.index)}
+                value="New"
+              />
+              ) : (
+              <Button
+                bgColor={BasicColor.red}
+                onClick={(e:any) => handleDelete(props.index)}
+                value="Delete"
+              />
+              )} */}
+            {/* <Button
+                onClick={(e:any) => handleBring()}
+                value="Bring"
+              /> */}
+            <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
+          </Grid>
+        </Grid>
+      </div>
     )
   };
 
@@ -221,37 +229,3 @@ const KidsList: FC = () => {
 };
 
 export default KidsList;
-
-const Container = styled.div`
-  z-index: 10;
-  display: flex;
-  margin-bottom: 100px;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
-const KidContainer = styled.div`
-margin: 0 5vw 5vh 5vw;
-width: 100%;
-@media screen and (max-width: 540px) {
-  background: linear-gradient(0deg, rgba(23, 113, 185, 0.2), rgba(23, 113, 185, 0.2)), linear-gradient(0deg, #FFFFFF, #FFFFFF);
-}
-`
-
-const GridContainer = styled(Grid)`
-display: flex;
-justify-content: center;
-&.MuiGrid-root {
-  padding: 25px;
-}
-`
-const GridItem = styled(Grid)`
-display: flex;
-justify-content: center;
-padding: 10px;
-&.MuiGrid-root {
-  padding-top: 5px;
-}
-`

@@ -1,16 +1,20 @@
 import {Gender} from './gender';
 
 export interface IStudent {
-  createTimestamp: Date;
-  updateTimestamp: Date;
+  userName: string;
+  avatar: string;
+  avatarFavorites: string[];
+  gender: Gender;
   firstName: string;
   lastName: string;
-  fullName: string;
-  dob: Date;
-  gender: Gender;
   activeGroupId: string;
-  levelId: string;
+  DoB: Date;
   guardianId: string;
-  schoolId: string;
-  balance: number
+  email: string;
+  token: string;
+  wallet: {
+    balance: number;
+    experience: number;
+    level: number;
+  }
 }

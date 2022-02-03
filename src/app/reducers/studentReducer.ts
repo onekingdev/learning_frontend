@@ -1,21 +1,20 @@
 import * as TYPE from '../types';
 import {IStudent} from '../entities/student';
 import {IGroup} from '../entities/group';
+import {IWallet} from '../entities/wallet';
 import {IBlock} from '../entities/block';
-
 const INITIAL_STATE = {
-  createTimestamp: null,
-  updateTimestamp: null,
+  userName: null,
+  avatar: null,
+  avatarFavorites: [],
+  gender: null,
   firstName: null,
   lastName: null,
-  fullName: null,
-  dob: null,
-  gender: null,
   activeGroupId: null,
-  levelId: null,
+  DoB: null,
   guardianId: null,
-  schoolId: null,
-  balance: null
+  email: null,
+  token: null,
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {
@@ -57,7 +56,7 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: I
     case TYPE.STUDENT_AUTH:
       return {
         ...state,
-        student: action.payload,
+        token: action.payload,
       };
     case TYPE.STUDENT_SELECT_CARD:
       return {

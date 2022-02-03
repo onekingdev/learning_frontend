@@ -7,6 +7,7 @@ import rootReducer from './rootReducer';
 import {IStudent} from './entities/student';
 import {IUser} from './entities/user';
 import {IGroup} from './entities/group';
+import {IWallet} from './entities/wallet';
 import {IBlock, IBlockPresentation} from './entities/block';
 import {Gender} from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -16,7 +17,7 @@ import { IAreasOfKnowledge } from './entities/areasOfKnowledge';
 export type Store = {
     user: IUser;
     group: IGroup;
-    student: IStudent;
+    wallet: IWallet;
     block?: IBlock;
     collectibles?: ICollectibleCategory;
     areasOfKnowLedge?: IAreasOfKnowledge;
@@ -36,6 +37,11 @@ export const MockStore: Store = {
       guardianId: 'string',
       email: 'string',
       token: 'string',
+      wallet: {
+        balance: 0,
+        experience: 217,
+        level: 5,
+      },
       lastLogin: new Date(),
       isStaff: false,
       isSuperuser: false,
@@ -53,20 +59,11 @@ export const MockStore: Store = {
       grade: 'string',
       areasOfKnowledge: ['', '', ''],
     },
-    student: {
-      createTimestamp: new Date(),
-      updateTimestamp: new Date(),
-      firstName: "string",
-      lastName: "last name",
-      fullName: "full name",
-      dob: new Date(),
-      gender: Gender.male,
-      activeGroupId: "activeGroupId",
-      levelId: "levelId",
-      guardianId: "guardianId",
-      schoolId: "schoolId",
-      balance: 4444422
-    }
+    wallet: {
+      balance: 1,
+      experience: 2,
+      level: 3,
+    },
     // block: {
     //   questions: ['hello'],
     //   config: {name: 'sdscd'},
