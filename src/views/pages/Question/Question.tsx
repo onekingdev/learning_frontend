@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { LessonProgress } from '../../molecules/LessonProgress/LessonProgress';
 import {
   Container,
@@ -13,10 +14,10 @@ import { VideoModalAssistor } from '../../organisms/VideoModalAssistor';
 import { get } from '../../../api/queries/get';
 import { BLOCK_PRESENTATION_QUERY } from '../../../api/queries/questions';
 import { IAnswer, IBlockPresentation, IQuestion } from '../../../app/entities/block';
-import { useSelector } from 'react-redux';
 import { Store } from '../../../app/configureStore';
 import { useParams } from 'react-router-dom';
 import * as TYPE from '../../../app/types';
+
 interface RoutePresentationParams {
   presentationId: string;
 }
@@ -29,7 +30,7 @@ export const Question: FC = () => {
   const state = useSelector((state: Store) => state)
   const [isFinished, setIsFinished] = useState(false);
   const [video, setVideo] = useState<string>();
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
   const [question, setQuestion] = useState<IQuestion>();
   const [answer, setAnswer] = useState<IAnswer>()
@@ -62,6 +63,11 @@ export const Question: FC = () => {
 
 
   const [showAssistor, setShowAssistor] = useState(false);
+
+  useEffect(() => {
+    upgradeEnergy();
+  }, [answerResult])
+
   const onChange = (e: any) => {
     setValue(e.target.value);
   }
@@ -73,6 +79,24 @@ export const Question: FC = () => {
   const onAnswer = (result: boolean) => {
     console.log("answered", result)
     setAnswerResult([...answerResult, result]);
+  }
+
+  const upgradeEnergy = () => {
+    if(!answerResult[answerResult.length - 1]) {
+      dispatch({ type: TYPE.EARNING_ENERGY_RESET})
+      return;
+    }
+    let corrCount = 0;
+    for(let i = answerResult.length - 1; i >=0; i--) {
+      console.log(answerResult[i])
+      if(answerResult[i]) {
+        corrCount = answerResult.length - i;
+      }
+      else break;
+    }
+    if(corrCount < 1) corrCount = 1;
+    dispatch({ type: TYPE.EARNING_ENERGY_SET, payload: corrCount - 1})
+
   }
 
   const handleData = (data: any) => {

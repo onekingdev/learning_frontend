@@ -22,6 +22,11 @@ const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         ...state,
         energyCharge: state.energyCharge + 1
       }
+    case TYPE.EARNING_ENERGY_SET:
+      return {
+        ...state,
+        energyCharge: action.payload
+      }
     case TYPE.EARNING_ENERGY_RESET:
       return {
         ...state,
