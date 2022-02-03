@@ -1,0 +1,2 @@
+export const EARNING_SET_DATA = 'EARNING_SET_DATA';
+export const EARNING_RESET = 'EARNING_SET_RESET';

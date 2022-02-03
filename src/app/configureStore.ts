@@ -17,6 +17,7 @@ import { IAreasOfKnowledge } from './entities/areasOfKnowledge';
 export type Store = {
     user: IUser;
     group: IGroup;
+    student: IStudent;
     wallet: IWallet;
     block?: IBlock;
     collectibles?: ICollectibleCategory;
@@ -37,11 +38,6 @@ export const MockStore: Store = {
       guardianId: 'string',
       email: 'string',
       token: 'string',
-      wallet: {
-        balance: 0,
-        experience: 217,
-        level: 5,
-      },
       lastLogin: new Date(),
       isStaff: false,
       isSuperuser: false,
@@ -64,6 +60,20 @@ export const MockStore: Store = {
       experience: 2,
       level: 3,
     },
+    student: {
+      createTimestamp: new Date(),
+      updateTimestamp: new Date(),
+      firstName: "string",
+      lastName: "last name",
+      fullName: "full name",
+      dob: new Date(),
+      gender: Gender.male,
+      activeGroupId: "activeGroupId",
+      levelId: "levelId",
+      guardianId: "guardianId",
+      schoolId: "schoolId",
+      walletId: "walletId"
+    }
     // block: {
     //   questions: ['hello'],
     //   config: {name: 'sdscd'},

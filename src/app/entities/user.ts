@@ -19,11 +19,6 @@ export interface IUser {
     dateJoined: Date;
     token: string;
     refreshToken: string;
-    wallet: {
-        balance: number;
-        experience: number;
-        level: number;
-      }
 }
 
 export interface IAudience {

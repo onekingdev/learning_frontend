@@ -10,6 +10,8 @@ import * as TYPES from '../../app/types'
 
 export const StudentMenu: FC = ({children}) => {
   const user = useSelector((state:any) => state.user)
+  const student = useSelector((state:any) => state.student)
+  const wallet = useSelector((state:any) => state.wallet)
   const dispatch = useDispatch()
   const setStudent = (student:any) => {
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload:student })
@@ -17,15 +19,17 @@ export const StudentMenu: FC = ({children}) => {
 
   useEffect(() => {
     // setStudent(student);
+    // console.log(user)
+    console.log(wallet)
   },[]);
 
   return (
     <Template>
       <TopMenu
         rank={42}
-        level={user?.wallet.level || 12}
-        exp={user?.wallet.experience || 9000}
-        expMax={user?.wallet.experience || 9001}
+        level={wallet.level || 12}
+        exp={wallet.experience || 9000}
+        expMax={wallet.experience || 9001}
         icon={user?.avatar || avatarPlaceHolder}
         userName={user?.userName || 'Champ!'}
         progress={1}
