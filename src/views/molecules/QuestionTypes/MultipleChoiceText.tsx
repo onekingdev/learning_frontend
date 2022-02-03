@@ -10,13 +10,11 @@ import { Typography } from '../../atoms/Text/typography';
 import { Question } from '../../atoms/Text/Question';
 import { Icon } from '../../atoms/Icon/Icon';
 import videoIcon from '../../assets/videoIcon.svg';
-import { Button } from '../Button';
 import assistor from '../../assets/text-to-speech.svg';
 import ice from '../../assets/ice-cream.svg';
 import { IconSize } from '../../atoms/Icon/Size';
 import { TextOption } from '../../atoms/QuestionOptions/Textoption';
-
-
+import Button from '../../molecules/MuiButton'
 
 type ChoiceTextProps = {
   question: IQuestion;
@@ -82,10 +80,13 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
         </AnswersContainer>
         <AssistorContainer>
           <Button
-            darkText
-            color={ButtonColor.next}
+            bgColor={ButtonColor.next}
             onClick={nextQuestion}
-            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'} />
+            disabled={!isAnswered}
+            fullWidth={true}
+            color={BasicColor.black}
+            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'}
+          />
         </AssistorContainer>
       </BlackBoard>
     </>
