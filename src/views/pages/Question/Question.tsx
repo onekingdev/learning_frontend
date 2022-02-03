@@ -35,6 +35,7 @@ export const Question: FC = () => {
   const [answer, setAnswer] = useState<IAnswer>()
   const [questionCounter, setQuestionCounter] = useState(Number);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
+  const [answerResult, setAnswerResult] = useState<boolean[]>([]);
 
   const options = [
     { image: apple },
@@ -51,6 +52,7 @@ export const Question: FC = () => {
           nextQuestion={handleNextQuestion}
           totalQuestions={totalQuestions}
           questionCounter={questionCounter}
+          onAnswer={onAnswer}
         />
       }]
 
@@ -67,6 +69,11 @@ export const Question: FC = () => {
   const closeVideoModal = () => {
     setShowAssistor(!showAssistor);
   };
+
+  const onAnswer = (result: boolean) => {
+    console.log("answered", result)
+    setAnswerResult([...answerResult, result]);
+  }
 
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
@@ -119,6 +126,7 @@ export const Question: FC = () => {
                   currentQuestion={questionCounter + 1}
                   topic={'Math'}
                   totalQuestions={blockPresentation.block.questions.length}
+                  answerResult={answerResult}
                 />
               </ProgressWrapper>
               <Container id="container">

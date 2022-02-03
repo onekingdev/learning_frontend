@@ -23,6 +23,7 @@ type ChoiceTextProps = {
   nextQuestion: () => void;
   totalQuestions: number;
   questionCounter: number;
+  onAnswer: (result: boolean) => void
 };
 
 export const MultipleChoiceText: FC<ChoiceTextProps> = (
@@ -30,7 +31,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
     question,
     nextQuestion,
     totalQuestions,
-    questionCounter
+    questionCounter,
+    onAnswer
   }) => {
 
   const state = useSelector((state: Store) => state.blockPresentation)
@@ -38,8 +40,9 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
   useEffect(() => {
     setIsAnswered(false);
   }, [question.answeroptionSet])
-  const handleAnswer = () => {
+  const handleAnswer = (result: boolean) => {
     setIsAnswered(true)
+    onAnswer(result);
   };
 
   return (

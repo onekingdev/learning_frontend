@@ -58,7 +58,7 @@ const BatteryStyles = styled.div`
   border-radius: 5px;
 `;
 const BatteryContainer = styled.div`
-  width: 210px;
+  width: 195px;
   height: 60px;
   display: flex;
   justify-items: left;
