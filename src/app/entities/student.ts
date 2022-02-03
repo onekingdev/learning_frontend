@@ -12,5 +12,5 @@ export interface IStudent {
   levelId: string;
   guardianId: string;
   schoolId: string;
-  walletId: string
+  balance: number
 }

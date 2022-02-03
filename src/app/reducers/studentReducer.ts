@@ -1,7 +1,6 @@
 import * as TYPE from '../types';
 import {IStudent} from '../entities/student';
 import {IGroup} from '../entities/group';
-import {IWallet} from '../entities/wallet';
 import {IBlock} from '../entities/block';
 
 const INITIAL_STATE = {
@@ -16,7 +15,7 @@ const INITIAL_STATE = {
   levelId: null,
   guardianId: null,
   schoolId: null,
-  walletId: null
+  balance: null
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {

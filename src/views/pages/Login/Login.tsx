@@ -18,7 +18,6 @@ import * as TYPES from '../../../app/types'
 import {MockStore} from '../../../app/configureStore'
 import { IUser } from '../../../app/entities/user';
 import { IStudent } from '../../../app/entities/student';
-import { IWallet } from '../../../app/entities/wallet';
 export const LogIn: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
@@ -39,13 +38,21 @@ export const LogIn: FC = () => {
     //   onLoginSuccess,
     //   onLoginError
     // );
-    onLoginSuccess(MockStore.user, MockStore.student, MockStore.wallet);
+    onLoginSuccess(MockStore.user, MockStore.student);
   }
 
-  const onLoginSuccess = (user: IUser, student: IStudent, wallet: IWallet) => {
+  const onLoginSuccess = (user: IUser, student: IStudent) => {
     dispatch({ type: TYPES.USER_SET_DATA, payload: user })
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
-
+    dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
+      rank: 1,
+      level: 1,
+      exp: 1,
+      expMax: 5,
+      progress: 1,
+      energyCharge: 1,
+      balance: 1,
+    }})
     history.push('/home')
   }
 

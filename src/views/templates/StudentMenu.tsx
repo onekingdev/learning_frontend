@@ -12,6 +12,7 @@ export const StudentMenu: FC = ({children}) => {
   const user = useSelector((state:any) => state.user)
   const student = useSelector((state:any) => state.student)
   const wallet = useSelector((state:any) => state.wallet)
+  const earning = useSelector((state:any) => state.earning)
   const dispatch = useDispatch()
   const setStudent = (student:any) => {
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload:student })
@@ -20,21 +21,25 @@ export const StudentMenu: FC = ({children}) => {
   useEffect(() => {
     // setStudent(student);
     // console.log(user)
-    console.log(wallet)
+    // console.log(wallet)
+    console.log(earning)
   },[]);
 
   return (
     <Template>
+      {
+        console.log(earning)
+      }
       <TopMenu
-        rank={42}
-        level={wallet.level || 12}
-        exp={wallet.experience || 9000}
-        expMax={wallet.experience || 9001}
+        rank={earning.rank}
+        level={earning.level || 12}
+        exp={earning.experience || 9000}
+        expMax={earning.experience || 9001}
         icon={user?.avatar || avatarPlaceHolder}
-        userName={user?.userName || 'Champ!'}
-        progress={1}
-        energyCharge={4}
-        balance={user?.wallet.balance || 0}
+        userName={user?.username || 'Champ!'}
+        progress={earning.progress}
+        energyCharge={earning.energyCharge}
+        balance={user?.balance || 0}
       />
       <div>{children}</div>
       <MobileMenu />
