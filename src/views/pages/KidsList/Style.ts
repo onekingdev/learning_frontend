@@ -15,7 +15,6 @@ export const SettingContainer = styled.div`
 `;
 
 export const Avatar = styled.img`
-  padding-right: 60px;  
   width: 85px;
   height: 95px;
 `;
@@ -68,6 +67,7 @@ export const LicenseUsername = styled.div`
 export const Title = styled.div`
   font-Size: 40px;
   line-height: 50px;
+  font-family: Montserrat;
   font-weight: 700;
   color: white;
   width: 385px;
@@ -78,7 +78,11 @@ export const Title = styled.div`
   justify-content: center;
   align-items: center;
   margin-top:20px;
-  margin-bottom: 70px;
+  margin-bottom: 3vh;
+  @media screen and (max-width: 540px) {
+    width: 60%;
+    font-size: 32px;
+  }
 `
 export const Container = styled.div`
   padding-top: 25px;

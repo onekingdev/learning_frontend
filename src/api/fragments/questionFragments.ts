@@ -31,6 +31,7 @@ export const UNIVERSAL_TOPIC = `
 export const AREA_OF_KNOWLEDGE = `
         id
         identifier
+        isActive
         randomSlug
         hexColor
         slug

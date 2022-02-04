@@ -7,7 +7,7 @@ type BatteryProps = {
 };
 
 export const Battery: FC<BatteryProps> = ({charge}) => {
-  const chargeArray = [false, false, false, false, false, false, false, false];
+  const chargeArray = [false, false, false, false, false, false, false, false, false, false];
   const IncreaseCharge = () => {
     for (let i = 0; i < charge; i++) {
       chargeArray[i] = true;
@@ -45,7 +45,7 @@ const ChargeItem = styled.div<ChargeItemProps>`
 `;
 
 const BatteryStyles = styled.div`
-  width: 163px;
+  width: 100%;
   height: 60px;
   display: flex;
   justify-content: space-around;
@@ -58,7 +58,7 @@ const BatteryStyles = styled.div`
   border-radius: 5px;
 `;
 const BatteryContainer = styled.div`
-  width: 180px;
+  width: 195px;
   height: 60px;
   display: flex;
   justify-items: left;

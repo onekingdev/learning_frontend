@@ -3,6 +3,9 @@ export const USER_PROFILE = `
     role
 `
 
+export const USER_LANGUAGE=`
+`
+
 export const USER = `
     id
     password
@@ -15,4 +18,5 @@ export const USER = `
     isStaff
     isActive
     dateJoined
+    language
 `

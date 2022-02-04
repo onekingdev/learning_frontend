@@ -1,23 +1,24 @@
 import * as TYPE from '../types';
 import {IStudent} from '../entities/student';
 import {IGroup} from '../entities/group';
-import {IWallet} from '../entities/wallet';
 import {IBlock} from '../entities/block';
+
 const INITIAL_STATE = {
-  userName: null,
-  avatar: null,
-  avatarFavorites: [],
-  gender: null,
+  createTimestamp: null,
+  updateTimestamp: null,
   firstName: null,
   lastName: null,
+  fullName: null,
+  dob: null,
+  gender: null,
   activeGroupId: null,
-  DoB: null,
+  levelId: null,
   guardianId: null,
-  email: null,
-  token: null,
+  schoolId: null,
+  balance: null
 };
-// const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
-const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {
+const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
+// const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {
   switch (action.type) {
     case TYPE.STUDENT_SET_DATA:
       return {

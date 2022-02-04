@@ -9,28 +9,37 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as TYPES from '../../app/types'
 
 export const StudentMenu: FC = ({children}) => {
-  const student = useSelector((state:any) => state.user)
+  const user = useSelector((state:any) => state.user)
+  const student = useSelector((state:any) => state.student)
+  const wallet = useSelector((state:any) => state.wallet)
+  const earning = useSelector((state:any) => state.earning)
   const dispatch = useDispatch()
   const setStudent = (student:any) => {
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload:student })
   }
 
   useEffect(() => {
-    setStudent(student);
+    // setStudent(student);
+    // console.log(user)
+    // console.log(wallet)
+    console.log(earning)
   },[]);
 
   return (
     <Template>
+      {
+        console.log(earning)
+      }
       <TopMenu
-        rank={42}
-        level={student?.wallet.level || 12}
-        exp={student?.wallet.experience || 9000}
-        expMax={student?.wallet.experience || 9001}
-        icon={student?.avatar || avatarPlaceHolder}
-        userName={student?.userName || 'Champ!'}
-        progress={1}
-        energyCharge={4}
-        balance={student?.wallet.balance || 0}
+        rank={earning.rank}
+        level={earning.level || 12}
+        exp={earning.experience || 9000}
+        expMax={earning.experience || 9001}
+        icon={user?.avatar || avatarPlaceHolder}
+        userName={user?.username || 'Champ!'}
+        progress={earning.progress}
+        energyCharge={earning.energyCharge}
+        balance={user?.balance || 0}
       />
       <div>{children}</div>
       <MobileMenu />
