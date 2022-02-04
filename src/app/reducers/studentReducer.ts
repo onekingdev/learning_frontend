@@ -57,7 +57,7 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: a
     case TYPE.STUDENT_AUTH:
       return {
         ...state,
-        student: action.payload,
+        token: action.payload,
       };
     case TYPE.STUDENT_SELECT_CARD:
       return {
