@@ -1,20 +1,28 @@
 import * as TYPE from '../types';
 import {IUser} from '../entities/user';
 const INITIAL_STATE = {
-  lastLogin: null,
-  isSuperuser: null,
-  username: null,
-  firstName: null,
-  lastName: null,
-  email: null,
-  isStaff: null,
-  isActive: null,
-  dateJoined: null,
-  language: null,
-  profile: {
-    role: null,
-  },
-  token: null
+    username: null,
+    avatar: null,
+    avatarFavorites: null,
+    gender: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    activeGroupId: null,
+    DoB: null,
+    guardianId: null,
+    lastLogin: null,
+    isSuperuser: null,
+    isStaff: null,
+    isActive: null,
+    dateJoined: null,
+    token: null,
+    refreshToken: null,
+    wallet: {
+      balance: null,
+      experience: null,
+      level: null
+    }
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUser}) => {

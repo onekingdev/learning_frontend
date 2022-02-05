@@ -1,28 +1,29 @@
 import { IAreasOfKnowledge } from './areasOfKnowledge';
 import {Gender} from './gender';
-import {IStudent} from './student'
+
 export interface IUser {
-  lastLogin: Date;
-  isSuperuser: boolean;
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  isStaff: boolean;
-  isActive: boolean;
-  dateJoined: Date;
-  language: string
-  // student: IStudent;
-  // guardian: IStudent;
-  profile: {
-    role: string,
-  }
-  token: string;
-  // gender: Gender;
-  // avatar: string;
-  // avatarFavorites: string[];
-  // activeGroupId: string;
-  // DoB: Date;
+    username: string;
+    gender: Gender;
+    avatar: string;
+    avatarFavorites: string[];
+    firstName: string;
+    lastName: string;
+    email: string;
+    activeGroupId: string;
+    DoB: Date;
+    guardianId: string;
+    lastLogin: Date;
+    isSuperuser: boolean;
+    isStaff: boolean;
+    isActive: boolean;
+    dateJoined: Date;
+    token: string;
+    refreshToken: string;
+    wallet: {
+        balance: number;
+        experience: number;
+        level: number;
+      }
 }
 
 export interface IAudience {

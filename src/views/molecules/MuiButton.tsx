@@ -22,7 +22,6 @@ type MuiButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   startIcon?: ReactChild | ReactChildren;
-  fullWidth?: boolean;
   onHover?: (e: any) => void;
   onClick?: (e: any) => void;
 };
@@ -45,7 +44,6 @@ const MuiButton: FC<MuiButtonProps> = ({
   disabled=false,
   loading=false,
   startIcon=<></>,
-  fullWidth=false,
   onHover,
   onClick,
 }) => {
@@ -61,7 +59,7 @@ const MuiButton: FC<MuiButtonProps> = ({
                 borderStyle: 'solid',
                 borderWidth: 1,
                 height: height || '49px',
-                width: fullWidth ? "100%" : width || '215px',
+                width: width || '215px',
                 textTransform: 'unset',
                 fontSize: fontSize || '16px',
                 fontWeight: weight || 500,

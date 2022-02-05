@@ -10,7 +10,7 @@ import audioError from '../../assets/audios/error.wav';
 type TextOptionProps = {
     answer: boolean;
     answerText: string
-    onClick: (result: boolean) => void
+    onClick: () => void
 }
 
 export const TextOption:FC<TextOptionProps> = ({answer, answerText,onClick}) => {
@@ -25,7 +25,7 @@ export const TextOption:FC<TextOptionProps> = ({answer, answerText,onClick}) => 
     const handleAnswer = (answer: boolean) => {
         setIsCorrect(answer)
         setIsAnswered(!isAnswered);
-        onClick(answer)
+        onClick()
       }
 
     return(
@@ -41,7 +41,7 @@ export const TextOption:FC<TextOptionProps> = ({answer, answerText,onClick}) => 
               isCorrect={answer}
               isAnswered={isAnswered}
             >
-              <Answer isDark>{answerText}</Answer>
+              <Answer isDark >{answerText}</Answer>
             </TextOptionStyles>
         </>
     )

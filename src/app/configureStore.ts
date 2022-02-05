@@ -7,18 +7,17 @@ import rootReducer from './rootReducer';
 import {IStudent} from './entities/student';
 import {IUser} from './entities/user';
 import {IGroup} from './entities/group';
+import {IWallet} from './entities/wallet';
 import {IBlock, IBlockPresentation} from './entities/block';
 import {Gender} from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { ICollectibleCategory } from './entities/collectibles';
 import { IAreasOfKnowledge } from './entities/areasOfKnowledge';
-import { AnyTxtRecord } from 'dns';
 
 export type Store = {
     user: IUser;
     group: IGroup;
-    // student: IStudent;
-    student: any;
+    wallet: IWallet;
     block?: IBlock;
     collectibles?: ICollectibleCategory;
     areasOfKnowLedge?: IAreasOfKnowledge;
@@ -27,20 +26,28 @@ export type Store = {
 
 export const MockStore: Store = {
     user: {
-      lastLogin: new Date(),
-      isSuperuser: true,
-      username: "string",
-      firstName: "string",
-      lastName: "string",
+      username: 'Juanpa',
+      avatar: 'string',
+      avatarFavorites: [],
+      gender: Gender.male,
+      firstName: 'string',
+      lastName: 'string',
+      activeGroupId: 'string',
+      DoB: new Date(),
+      guardianId: 'string',
       email: 'string',
+      token: 'string',
+      wallet: {
+        balance: 0,
+        experience: 217,
+        level: 5,
+      },
+      lastLogin: new Date(),
       isStaff: false,
+      isSuperuser: false,
       isActive: true,
       dateJoined: new Date(),
-      language: "string",
-      profile: {
-        role: "STUDENT",
-      },
-      token: "string",
+      refreshToken: 'string'
     },
     group: {
       groupMembers: [
@@ -52,20 +59,11 @@ export const MockStore: Store = {
       grade: 'string',
       areasOfKnowledge: ['', '', ''],
     },
-    student: {
-      createTimestamp: new Date(),
-      updateTimestamp: new Date(),
-      firstName: "string",
-      lastName: "last name",
-      fullName: "full name",
-      dob: new Date(),
-      gender: Gender.male,
-      activeGroupId: "activeGroupId",
-      levelId: "levelId",
-      guardianId: "guardianId",
-      schoolId: "schoolId",
-      balance: 4444422
-    }
+    wallet: {
+      balance: 1,
+      experience: 2,
+      level: 3,
+    },
     // block: {
     //   questions: ['hello'],
     //   config: {name: 'sdscd'},

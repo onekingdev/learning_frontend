@@ -10,7 +10,16 @@ import './style.css'
 export default () => {
   const [loading, setLoading] = useState(true);
   const [persist] = useState(store(() => setLoading(false)));
+  // const { enqueueSnackbar } = useSnackbar();
 
+  // const handleClick = () => {
+  //   enqueueSnackbar('I love snacks.');
+  // };
+
+  // const handleClickVariant = (variant: VariantType) => () => {
+  //   // variant could be success, error, warning, info, or default
+  //   enqueueSnackbar('This is a success message!', { variant });
+  // };
   return (
     <Provider store={persist.store}>
         <PersistGate loading={loading} persistor={persist.persistor}>
