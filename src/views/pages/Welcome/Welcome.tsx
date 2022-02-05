@@ -8,7 +8,7 @@ import {ButtonColor} from '../../Color';
 import {Icon} from '../../atoms/Text/Icon';
 import {dictionary} from '../Welcome/dictionary';
 import {Modal} from '../../atoms/Modal';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 import {
   Wrapper,
@@ -28,6 +28,7 @@ export const Welcome: FC = () => {
   const language = 'en';
   const [joinModal, setJoinModal] = useState(false);
   const [deployModal, setDeployModal] = useState(false);
+  const history = useHistory();
   const sendEmail = () => {
     setJoinModal(!joinModal);
   };
@@ -85,7 +86,8 @@ export const Welcome: FC = () => {
           value={dictionary[language].join}
           color={ButtonColor.join}
           darkText={true}
-          onClick={() => setDeployModal(true)}
+          // onClick={() => setDeployModal(true)}
+          onClick={() => history.push("/parent/create")}
         />
       </Actions>
 

@@ -85,9 +85,12 @@ export const LogIn: FC = () => {
     enqueueSnackbar('Successfully Logined!', { variant: "success" });
 
     const user = result_who.data.whoami;
-    const {guardion, student} = result_who.data.whoami;
+    const {guardian, student} = result_who.data.whoami;
     const user_redux:any = (({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language,profile }) => ({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language, profile}))(user)
     dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
+
+    console.log("guardion", guardian);
+    console.log("student", student);
 
     if(student) {
       dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
@@ -104,8 +107,9 @@ export const LogIn: FC = () => {
       history.push('/home')
       console.log(student)
     }
-    else if(guardion) {
-      console.log(guardion)
+    else if(guardian) {
+      history.push('/kids/list')
+      console.log(guardian)
     }
     else {
       console.log("else")
