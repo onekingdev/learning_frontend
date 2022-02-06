@@ -22,6 +22,11 @@ const IconStyle = styled.img<{
   width: ${p => p.size};
   height: ${p => p.size};
   margin-left: 1vw;
+  &: hover {
+    cursor: pointer;
+    transform: rotate(15deg);
+    transition-duration: 1s;
+  }
 `;
 
 export const RoundIcon = styled(IconStyle)`

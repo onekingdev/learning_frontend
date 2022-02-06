@@ -4,7 +4,7 @@ export const get =  (
   token?: string,
 ) => {
   if(token)
-  return fetch('https://api.withsocrates.com/graphql/', {
+  return fetch('http://143.244.183.24/graphql/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const get =  (
     }),
   })
   else
-  return fetch('https://api.withsocrates.com/graphql/', {
+  return fetch('http://143.244.183.24/graphql/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import useSound from 'use-sound'
+
 import styled from 'styled-components';
 import { Store } from '../../../app/configureStore';
 import { IBlockPresentation } from '../../../app/entities/block';
@@ -36,9 +38,19 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
     onAnswer
   }) => {
 
+  const soundURI = 'http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/bonus.wav'
   const state = useSelector((state: Store) => state.blockPresentation)
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false)
+  const [play] = useSound(
+    soundURI
+    )
+
+  const playSound = (soundSrc:Number) => {
+    console.log(soundSrc)
+    play()
+  }
+
   useEffect(() => {
     setIsAnswered(false);
   }, [question.answeroptionSet])
@@ -75,16 +87,16 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
             {question.answeroptionSet.map((option, i) => (
-              <AnswerContainer>
+              <AnswerContainer
+                key={i}
+              >
                 <TextOption
                   answer={option.isCorrect}
                   answerText={option.answerText}
-                  key={i}
                   onClick={handleAnswer}
                 />
-                <Icon image={assistor} />
+                <Icon image={assistor} onClick={() => playSound(i)}/>
               </AnswerContainer>
-
             ))}
           </TextOptionsList>
           <ImageAssetContainer imageLength={question.questionImageAssets.length}>
