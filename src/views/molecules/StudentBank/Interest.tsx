@@ -22,7 +22,7 @@ interface Column {
 
 const columns: readonly Column[] = [
   { id: 'title', label: 'Savings Title', minWidth: 100 },
-  { id: 'value', label: 'Value', minWidth: 60, format: (value: number) => value.toLocaleString('en-US'), },
+  { id: 'value', label: 'Value', minWidth: 70, format: (value: number) => value.toLocaleString('en-US'), },
   {
     id: 'interest',
     label: 'Interest% \n (Per Week)',
@@ -78,7 +78,7 @@ export const Interest: FC = () => {
                 <TableCell
                   key={column.id}
                   align='center'
-                  style={{ minWidth: column.minWidth, backgroundColor: BasicColor.blue, color: 'white', fontSize: 18, fontFamily: 'Montserrat' }}
+                  style={{ minWidth: column.minWidth,maxWidth: 90, backgroundColor: BasicColor.blue, color: 'white', fontSize: 18, fontFamily: 'Montserrat' }}
                 >
                   {column.label}
                 </TableCell>

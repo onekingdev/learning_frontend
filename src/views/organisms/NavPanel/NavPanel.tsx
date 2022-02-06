@@ -8,6 +8,8 @@ import progress from '../../assets/progress mobile.svg';
 import collectibles from '../../assets/collectibles mobile.svg';
 import avatar from '../../assets/user-mobile.svg';
 import homework from '../../assets/homework.svg';
+import bank from '../../assets/bank.svg'
+
 import {
   NavPanelStyles,
   IconContainer,
@@ -48,6 +50,12 @@ export const NavPanel: FC<NavPanelProps> = ({isClose, deploySideBar}) => {
           <Icon
             image={collectibles}
             onClick={() => history.push('/backpack')}
+          />
+        </IconContainer>
+        <IconContainer>
+          <Icon
+            image={bank}
+            onClick={() => history.push('/bank')}
           />
         </IconContainer>
         <IconResponsiveContainer>

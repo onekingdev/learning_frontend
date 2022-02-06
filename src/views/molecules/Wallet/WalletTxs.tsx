@@ -15,7 +15,7 @@ import { BasicColor } from '../../Color';
 import { LSLabel } from '../Setting/utils/Style';
 
 interface Column {
-  id: 'date' | 'type' | 'amount' | 'interest';
+  id: 'description' | 'type' | 'amount' ;
   label: string;
   minWidth?: number;
   align?: string;
@@ -23,7 +23,7 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'date', label: 'Date', minWidth: 100},
+  { id: 'description', label: 'Description', minWidth: 100},
   { id: 'type', label: 'Type', minWidth: 60 },
   {
     id: 'amount',
@@ -32,61 +32,62 @@ const columns: readonly Column[] = [
     minWidth: 60,
     format: (value: number) => value.toLocaleString('en-US'),
   },
-  // {
-  //   id: 'interest',
-  //   label: 'Interest(%)',
-  //   align: 'right',
-  //   minWidth: 60,
-  //   format: (value: number) => value.toLocaleString('en-US'),
-  // },
 ];
 
-const txData = [
+const data = [
   {
-    date: '2022-02-04',
-    type: 'Withdraw',
-    amount: '+5000',
-    interest: 10,
-    id: 1
+    description: 'Block 1',
+    amount: '+10',
+    type: 'Shopping',
   },
   {
-    date: '2022-02-04',
-    type: 'Withdraw',
-    amount: '-5000',
-    interest: 10,
-    id: 2
+    description: 'Play Game',
+    amount: '-100',
+    type: 'Received',
   },
   {
-    date: '2022-02-04',
-    type: 'Withdraw',
-    amount: '-5000',
-    interest: 10,
-    id: 3
+    description: 'Block 1',
+    amount: '+10',
+    type: 'Save',
   },
   {
-    date: '2022-02-04',
-    type: 'Withdraw',
-    amount: '-5000',
-    interest: 10,
-    id: 4
+    description: 'Play Game',
+    amount: '-100',
+    type: 'Shopping',
   },
   {
-    date: '2022-02-04',
-    type: 'Withdraw',
-    amount: '-5000',
-    interest: 10,
-    id: 5
+    description: 'Block 1',
+    amount: '+10',
+    type: 'Received',
   },
   {
-    date: '2022-02-04',
-    type: 'Withdraw',
-    amount: '-5000',
-    interest: 10,
-    id: 6
+    description: 'Play Game',
+    amount: '-100',
+    type: 'Shopping',
   },
-]
+  {
+    description: 'Block 1',
+    amount: '+10',
+    type: 'Shopping',
+  },
+  {
+    description: 'Play Game',
+    amount: '-100',
+    type: 'Received',
+  },
+  {
+    description: 'Block 1',
+    amount: '+10',
+    type: 'Save',
+  },
+  {
+    description: 'Play Game',
+    amount: '-100',
+    type: 'Save',
+  },
+];
 
-export const TxHistoryTable: FC = () => {
+export const WalletTxHistory: FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -101,21 +102,16 @@ export const TxHistoryTable: FC = () => {
 
   return (
 
-      <Paper sx={{ width: '500px', overflow: 'hidden', backgroundColor: BasicColor.blue, color: 'white', padding: 4,paddingBottom: 2, borderRadius: 5}}>
-
-        <LSLabel fontSize={20}><PaidIcon />Latest Transactions</LSLabel>
+      <Paper sx={{ width: '500px', overflow: 'hidden'}}>
         <TableContainer sx={{ maxHeight: 440, minHeight: 340 }}>
           <Table stickyHeader aria-label="sticky table" >
             <TableHead>
-              <TableRow sx={{'& .MuiTableRow-root' : {
-                backgroundColor: BasicColor.blue,
-                color: 'white'
-              }}}>
+              <TableRow >
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
                     align='center'
-                    style={{ minWidth: column.minWidth, backgroundColor: BasicColor.blue, color: 'white', fontSize: 18, fontFamily: 'Montserrat' }}
+                    style={{ minWidth: column.minWidth, backgroundColor: BasicColor.green, color: 'white', fontSize: 18, fontFamily: 'Montserrat' }}
                   >
                     {column.label}
                   </TableCell>
@@ -123,7 +119,7 @@ export const TxHistoryTable: FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {txData
+              {data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, idx) => {
                   return (
@@ -131,7 +127,7 @@ export const TxHistoryTable: FC = () => {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align='center' sx={{color:'white', fontSize: 15, fontFamily: 'Montserrat'}}>
+                          <TableCell key={column.id} align='center' sx={{ fontFamily: 'Montserrat'}}>
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
@@ -147,14 +143,13 @@ export const TxHistoryTable: FC = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25, 100]}
           component="div"
-          count={txData.length}
+          count={data.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
           sx={{
             '&.MuiTablePagination-root': {
-              color: 'white',
               paddingBottom: 0
             }
           }}

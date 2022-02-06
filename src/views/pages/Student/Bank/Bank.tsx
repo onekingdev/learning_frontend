@@ -39,9 +39,9 @@ export const Bank: FC = () => {
         <CardTitle>
           <Title>Bank</Title>
         </CardTitle>
-      <Box sx={{ display: 'flex', flexDirection: 'row', width: 1600 }}>
-        <Grid container>
-          <GridItem item md={6} xs={12}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', width: 1600,paddingBottom:5 }}>
+        <Grid container sx={{}}>
+          <GridItem item md={6} xs={12} align='end'>
             <img src={Cartera} />
             <AccountBalance balance={2000}/>
             <TxBox />
