@@ -49,3 +49,23 @@ export const mutation = (
     .then(handleData)
     .catch(handleError);
 };
+
+export const get_async =  (
+  queryName: string,
+  query: string,
+  token?: string
+) => {
+  return fetch('https://api.withsocrates.com/graphql/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      query: `{
+        ${queryName} ${query}
+      }`,
+    }),
+  })
+};
+export default get_async;

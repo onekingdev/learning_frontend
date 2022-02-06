@@ -1,20 +1,33 @@
 import {Gender} from './gender';
 
 export interface IStudent {
-  userName: string;
-  avatar: string;
-  avatarFavorites: string[];
-  gender: Gender;
+  deletedTimestamp: Date;
+  randomSlug: string;
+  createTimestamp: Date;
+  updateTimestamp: Date;
   firstName: string;
   lastName: string;
+  fullName: string;
+  dob: Date;
+  gender: Gender;
   activeGroupId: string;
-  DoB: Date;
+  levelId: string;
   guardianId: string;
-  email: string;
-  token: string;
-  wallet: {
-    balance: number;
-    experience: number;
-    level: number;
-  }
+  schoolId: string;
+  balance: number;
+  studentPlan: IStudentPlan[];
+  activeStudentPlan: IStudentPlan;
+  avatarAccessories: []
+}
+export interface IStudentPlan {
+  deletedTimestamp: Date;
+  randomgSlug: string;
+  createTimestamp: Date;
+  updateTimestamp:Date;
+  name: string;
+  slug: string;
+  audience: object;
+  topicGrade: [];
+  organizationSet: [];
+  schoolSet: [];
 }

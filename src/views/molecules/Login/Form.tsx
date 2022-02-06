@@ -12,6 +12,8 @@ type FormProps = {
   passwordValidator?: (str: string) => boolean;
   wrongPasswordMessage?: string;
   forgot: string;
+  setUsername: (str: string) => void;
+  setPassword: (str: string) => void;
 };
 
 export const Form: FC<FormProps> = ({
@@ -21,6 +23,8 @@ export const Form: FC<FormProps> = ({
   passwordValidator,
   wrongPasswordMessage,
   forgot,
+  setUsername,
+  setPassword
 }) => {
   return (
     <>
@@ -30,7 +34,9 @@ export const Form: FC<FormProps> = ({
         </Field>
 
         <Field>
-          <TextInput label={email} />
+          <TextInput label={email}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </Field>
 
         <Field>
@@ -39,6 +45,7 @@ export const Form: FC<FormProps> = ({
             validate={passwordValidator}
             errMsg={wrongPasswordMessage}
             isSecret={true}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Field>
         <Link>{forgot}</Link>

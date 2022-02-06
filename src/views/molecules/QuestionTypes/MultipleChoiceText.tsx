@@ -4,6 +4,7 @@ import useSound from 'use-sound'
 
 import styled from 'styled-components';
 import { Store } from '../../../app/configureStore';
+import { IBlockPresentation } from '../../../app/entities/block';
 import { IAnswer, IQuestion } from '../../../app/entities/block';
 import { Answer } from '../../atoms/Text/Answer';
 import { BasicColor, ButtonColor } from '../../Color';
@@ -12,19 +13,19 @@ import { Typography } from '../../atoms/Text/typography';
 import { Question } from '../../atoms/Text/Question';
 import { Icon } from '../../atoms/Icon/Icon';
 import videoIcon from '../../assets/videoIcon.svg';
-import { Button } from '../Button';
 import assistor from '../../assets/text-to-speech.svg';
-import ice from '../../assets/ice-cream.svg';
-import { IconSize } from '../../atoms/Icon/Size';
 import { TextOption } from '../../atoms/QuestionOptions/Textoption';
-
-
+import { VideoModalAssistor } from '../../organisms/VideoModalAssistor';
+import ice from '../../assets/ice-cream.svg';
+import Button from '../../molecules/MuiButton'
 
 type ChoiceTextProps = {
   question: IQuestion;
   nextQuestion: () => void;
   totalQuestions: number;
   questionCounter: number;
+  blockPresentation: IBlockPresentation;
+  onAnswer: (result: boolean) => void
 };
 
 export const MultipleChoiceText: FC<ChoiceTextProps> = (
@@ -32,11 +33,14 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
     question,
     nextQuestion,
     totalQuestions,
-    questionCounter
+    questionCounter,
+    blockPresentation,
+    onAnswer
   }) => {
 
   const soundURI = 'http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/bonus.wav'
   const state = useSelector((state: Store) => state.blockPresentation)
+  const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false)
   const [play] = useSound(
     soundURI
@@ -50,14 +54,27 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
   useEffect(() => {
     setIsAnswered(false);
   }, [question.answeroptionSet])
-  const handleAnswer = () => {
+  const handleAnswer = (result: boolean) => {
     setIsAnswered(true)
+    onAnswer(result);
   };
+  const closeVideoModal = () => {
+    setShowAssistor(!showAssistor);
+  };
+
 
   return (
     <>
+      {showAssistor ?
+          <VideoModalAssistor
+            onClick={closeVideoModal}
+            source={blockPresentation ? blockPresentation?.block.topicGrade.topic.videoAssistor : ''}
+          />
+          :
+          null
+      }
       <BlackBoard>
-        <IconVideoContainer>
+        <IconVideoContainer onClick={closeVideoModal}>
           <Icon image={videoIcon} />
         </IconVideoContainer>
         <AnswerContainer>
@@ -91,10 +108,13 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
         </AnswersContainer>
         <AssistorContainer>
           <Button
-            darkText
-            color={ButtonColor.next}
+            bgColor={ButtonColor.next}
             onClick={nextQuestion}
-            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'} />
+            disabled={!isAnswered}
+            fullWidth={true}
+            color={BasicColor.black}
+            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'}
+          />
         </AssistorContainer>
       </BlackBoard>
     </>

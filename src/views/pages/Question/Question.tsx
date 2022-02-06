@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { LessonProgress } from '../../molecules/LessonProgress/LessonProgress';
 import {
   Container,
@@ -13,10 +14,10 @@ import { VideoModalAssistor } from '../../organisms/VideoModalAssistor';
 import { get } from '../../../api/queries/get';
 import { BLOCK_PRESENTATION_QUERY } from '../../../api/queries/questions';
 import { IAnswer, IBlockPresentation, IQuestion } from '../../../app/entities/block';
-import { useSelector } from 'react-redux';
 import { Store } from '../../../app/configureStore';
 import { useParams } from 'react-router-dom';
 import * as TYPE from '../../../app/types';
+
 interface RoutePresentationParams {
   presentationId: string;
 }
@@ -24,25 +25,17 @@ interface RoutePresentationParams {
 export const Question: FC = () => {
   // TODO answers and options must come from DB
   // TODO and the type should be much more roboust
-  const [value, setValue] = useState('');
   const { presentationId } = useParams<RoutePresentationParams>();
   const state = useSelector((state: Store) => state)
   const [isFinished, setIsFinished] = useState(false);
-  const [video, setVideo] = useState<string>();
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
   const [question, setQuestion] = useState<IQuestion>();
-  const [answer, setAnswer] = useState<IAnswer>()
   const [questionCounter, setQuestionCounter] = useState(Number);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
+  const [answerResult, setAnswerResult] = useState<boolean[]>([]);
 
-  const options = [
-    { image: apple },
-    { image: apple },
-    { image: apple },
-    { image: apple },
-  ];
-  const renderTypes = (question: IQuestion, type: string, totalQuestions: number) => {
+  const renderTypes = (question: IQuestion, type: string, totalQuestions: number, blockPresentation: IBlockPresentation) => {
     const types = [
       {
         type: 'Text',
@@ -51,6 +44,8 @@ export const Question: FC = () => {
           nextQuestion={handleNextQuestion}
           totalQuestions={totalQuestions}
           questionCounter={questionCounter}
+          onAnswer={onAnswer}
+          blockPresentation={blockPresentation}
         />
       }]
 
@@ -58,15 +53,33 @@ export const Question: FC = () => {
     return filterType?.component
   }
 
+  useEffect(() => {
+    upgradeEnergy();
+  }, [answerResult])
 
-  const [showAssistor, setShowAssistor] = useState(false);
-  const onChange = (e: any) => {
-    setValue(e.target.value);
+
+  const onAnswer = (result: boolean) => {
+    console.log("answered", result)
+    setAnswerResult([...answerResult, result]);
   }
 
-  const closeVideoModal = () => {
-    setShowAssistor(!showAssistor);
-  };
+  const upgradeEnergy = () => {
+    if(!answerResult[answerResult.length - 1]) {
+      dispatch({ type: TYPE.EARNING_ENERGY_RESET})
+      return;
+    }
+    let corrCount = 0;
+    for(let i = answerResult.length - 1; i >=0; i--) {
+      console.log(answerResult[i])
+      if(answerResult[i]) {
+        corrCount = answerResult.length - i;
+      }
+      else break;
+    }
+    if(corrCount < 1) corrCount = 1;
+    dispatch({ type: TYPE.EARNING_ENERGY_SET, payload: corrCount - 1})
+
+  }
 
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
@@ -91,7 +104,6 @@ export const Question: FC = () => {
   }, [presentationId]);
 
   useEffect(() => {
-    setVideo(blockPresentation?.block.topicGrade.topic.videoAssistor)
     setQuestion(blockPresentation?.block.questions[questionCounter])
   }, [blockPresentation, questionCounter])
 
@@ -113,19 +125,20 @@ export const Question: FC = () => {
           :
           blockPresentation && question ?
             <StudentMenu>
-              {showAssistor ? <VideoModalAssistor onClick={closeVideoModal} source={video ? video : ''} /> : null}
               <ProgressWrapper>
                 <LessonProgress
                   currentQuestion={questionCounter + 1}
                   topic={'Math'}
                   totalQuestions={blockPresentation.block.questions.length}
+                  answerResult={answerResult}
                 />
               </ProgressWrapper>
               <Container id="container">
                 {renderTypes(
                   question,
                   blockPresentation.block.typeOf.name,
-                  blockPresentation.block.questions.length
+                  blockPresentation.block.questions.length,
+                    blockPresentation
                 )}
               </Container>
             </StudentMenu>

@@ -27,9 +27,8 @@ import {
   Title,
   CardContent
  } from './Style'
- import StripeInput from "./StripeInput";
-import { FlexColumn } from '../../pages/Payment/Style';
-import countryList from 'react-select-country-list'
+import StripeInput from "./StripeInput";
+import countryList from 'react-select-country-list';
 
 type PaymentFormProps = {
   isUpdate: boolean

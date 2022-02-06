@@ -29,6 +29,7 @@ import { Store } from './app/configureStore'
 import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgContainer'
 import {Settings} from './views/pages/Settings/Settings';
 import {Report} from './views/pages/Report/Report';
+import {Bank} from './views/pages/Student/Bank/Bank';
 
 
 import NewKids from './views/pages/NewKids/NewKids'
@@ -79,6 +80,9 @@ export function Routes(props: any) {
         </PrivateRoute>
         <PrivateRoute path="/collectibles/category_:categoryId">
           <CardCollectible />
+        </PrivateRoute>
+        <PrivateRoute path="/bank">
+          <Bank />
         </PrivateRoute>
         <PrivateRoute path="/profile">
           <MyProfile />
