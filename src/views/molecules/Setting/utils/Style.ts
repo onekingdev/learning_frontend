@@ -129,25 +129,11 @@ export const LSButtonContainer = styled.div`
     align-items: center;
   }
 `;
-
 export const LSBlueTextButton = styled(Button)`
   &.MuiButton-root {
     text-decoration: underline;
     text-transform: unset;
     color: ${BasicColor.blue};
-    font-family: Montserrat;
-    font-weight: 600;
-    font-size: 14px;
-    @media screen and (max-width: 540px) {
-      font-size: 0.8em;
-    }
-  }  
-`;
-
-export const LSWhiteTextButton = styled(Button)`
-  &.MuiButton-root {
-    text-transform: unset;
-    color: white;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;

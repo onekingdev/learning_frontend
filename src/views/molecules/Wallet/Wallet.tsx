@@ -7,15 +7,14 @@ import styled from 'styled-components';
 import {IconSize} from '../../atoms/Icon/Size';
 import {ScreenSize} from '../../screenSize';
 import {UserInfo} from '../../atoms/Text/UserInfo';
-import { LSDialog } from '../Setting/LSDialog';
-import {WalletTxHistory} from './WalletTxs'
+import dropDownArrow from '../../assets/drop-down-arrow.svg';
 
 type WalletProps = {
   balance: number;
 };
 
 export const Wallet: FC<WalletProps> = ({balance}) => {
-  const [isDeploy, setIsDeploy] = useState(false);
+  const [isDeploy, getIsDeploy] = useState(Boolean);
   const userTransactions = [
     {
       description: 'Block 1',
@@ -70,38 +69,37 @@ export const Wallet: FC<WalletProps> = ({balance}) => {
   ];
 
   const deployDropdown = () => {
-    setIsDeploy(!isDeploy);
+    getIsDeploy(!isDeploy);
   };
   return (
     <>
       <WalletContainer>
         <WalletStyle>
           <IconContainer>
-            <Icon image={coins} size={IconSize.medium} onClick={deployDropdown} />
+            <Icon image={coins} size={IconSize.medium} />
           </IconContainer>
           <Balance>{balance}</Balance>
-          {/* <DropdownIcon src={dropDownArrow} /> */}
+          <DropdownIcon src={dropDownArrow} onClick={deployDropdown} />
         </WalletStyle>
         {isDeploy ? (
-          <LSDialog isOpen={isDeploy} open={deployDropdown} dialogContent={<WalletTxHistory/>} fullWidth='true' title='Transactions on this wallet'/>
-          // <WalletDropdownContainer>
-          //   <WalletDropdown>
-          //     {userTransactions.map((item, i) => (
-          //       <WalletTransaction key={i}>
-          //         <ExtendUserInfo
-          //           color={item.type ? BasicColor.green : BasicColor.red}
-          //         >
-          //           {item.description}
-          //         </ExtendUserInfo>
-          //         <ExtendUserInfo
-          //           color={item.type ? BasicColor.green : BasicColor.red}
-          //         >
-          //           {item.amount}
-          //         </ExtendUserInfo>
-          //       </WalletTransaction>
-          //     ))}
-          //   </WalletDropdown>
-          // </WalletDropdownContainer>
+          <WalletDropdownContainer>
+            <WalletDropdown>
+              {userTransactions.map((item, i) => (
+                <WalletTransaction key={i}>
+                  <ExtendUserInfo
+                    color={item.type ? BasicColor.green : BasicColor.red}
+                  >
+                    {item.description}
+                  </ExtendUserInfo>
+                  <ExtendUserInfo
+                    color={item.type ? BasicColor.green : BasicColor.red}
+                  >
+                    {item.amount}
+                  </ExtendUserInfo>
+                </WalletTransaction>
+              ))}
+            </WalletDropdown>
+          </WalletDropdownContainer>
         ) : null}
       </WalletContainer>
     </>
