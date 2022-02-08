@@ -37,16 +37,17 @@ export const login = async (username: string, password: string, dispatch: any) =
     dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
     const {guardian, student} = result_who.data.whoami;
     if(student) {
+        console.log(user.level);
         dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
         dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
         dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
           rank: 1,
-          level: user.level.name,
+          level: student.level.name,
           exp: 1,
           expMax: 5,
           progress: 1,
           energyCharge: 1,
-          balance: user.coinWallet.balance,
+          balance: student.coinWallet.balance,
         }})
         return {success: true, msg: 'Successfully Logined!', userType: "student"}
       }

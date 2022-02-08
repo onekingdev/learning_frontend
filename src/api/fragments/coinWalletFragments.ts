@@ -1,11 +1,10 @@
-export const COINWALLET = `
+export const COIN_WALLET = `
     id
     identifier
     randomSlug
     createTimestamp
     updateTimestamp
     name
-    gender
-    positiveSlide
+    positiveSide
     balance
 `
