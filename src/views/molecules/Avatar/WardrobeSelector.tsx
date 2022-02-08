@@ -16,6 +16,8 @@ import {Link} from 'react-router-dom';
 
 // import data from '../../pages/Avatar/atoms';
 export const WardrobeSelector: FC = () => {
+  const serverUrl = 'http://91.92.109.140/';
+  const placeHolder = serverUrl + 'assets/avatars/placeholder.png';
   // const accessories_max = accessories.length;
   // const headers_max = headers.length;
   // const bodies_max = bodies.length;
@@ -389,11 +391,10 @@ export const WardrobeSelector: FC = () => {
             src={accesoryRef}
             style={{
               width: 1 * 160 + 'px',
-              top: '-55px',
+              top: '-35px',
               left: '0px',
             }}
           />
-          {console.log("header",headers)}
           <CurrentHeader
             src={headRef}
             // style={{
@@ -520,7 +521,6 @@ const CurrentHeader = styled.img`
   position: relative;
   width: 160px;
   margin: auto;
-  top: -50px;
   grid-row: 1 / 2;
   grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { ScreenSize } from '../../screenSize';
 import styled from 'styled-components';
 
 import Paper from '@mui/material/Paper';
@@ -63,10 +64,10 @@ export const Interest: FC = () => {
 
   return (
 
-    <Paper sx={{ width: '500px', overflow: 'hidden', backgroundColor: BasicColor.blue, color: 'white', padding: 4, borderRadius: 5, margin: 5 }}>
+    <StyledTxContainer >
       <LSLabel fontSize={20}>Interests {' & '} levels</LSLabel>
-      <TableContainer sx={{ maxHeight: 430 }}>
-        <Table stickyHeader aria-label="sticky table" >
+      <StyledTableContainer >
+        <Table >
           <TableHead>
             <TableRow sx={{
               '& .MuiTableRow-root': {
@@ -78,7 +79,7 @@ export const Interest: FC = () => {
                 <TableCell
                   key={column.id}
                   align='center'
-                  style={{ minWidth: column.minWidth,maxWidth: 90, backgroundColor: BasicColor.blue, color: 'white', fontSize: 18, fontFamily: 'Montserrat' }}
+                  style={{ minWidth: column.minWidth,maxWidth: 90, backgroundColor: BasicColor.blue, color: 'white', fontFamily: 'Montserrat' }}
                 >
                   {column.label}
                 </TableCell>
@@ -93,7 +94,7 @@ export const Interest: FC = () => {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align='center' sx={{ color: 'white', fontSize: 15, fontFamily: 'Montserrat' }}>
+                        <TableCell key={column.id} align='center' sx={{ color: 'white', fontFamily: 'Montserrat' }}>
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}
@@ -105,12 +106,30 @@ export const Interest: FC = () => {
               })}
           </TableBody>
         </Table>
-      </TableContainer>
-    </Paper>
+      </StyledTableContainer>
+    </StyledTxContainer>
   );
 }
 
-const StyledTableCell = styled(TableCell) <{
-}>`
+const StyledTxContainer = styled.div`
+  width: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  background: ${BasicColor.blue};
+  color: white;
+  padding: 30px 20px 30px 20px;
+  paddingBottom: 2px;
+  margin-bottom: 60px;
+  border-radius: 15px;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    width: 85vw;
+    padding: 15px;
+  }
+`;
 
+const StyledTableContainer = styled(TableContainer)`
+  max-height: 440px;
+  min-height: 330px;
 `;

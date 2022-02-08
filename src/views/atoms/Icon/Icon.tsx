@@ -24,8 +24,8 @@ const IconStyle = styled.img<{
   margin-left: 1vw;
   &: hover {
     cursor: pointer;
-    transform: rotate(15deg);
-    transition-duration: 1s;
+    transition: 0.70s;
+    transform: rotate(360deg);
   }
 `;
 
