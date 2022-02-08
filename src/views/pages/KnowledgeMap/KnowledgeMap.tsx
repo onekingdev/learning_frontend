@@ -4,7 +4,6 @@ import {StudentMenu} from '../../templates/StudentMenu';
 import ocean from '../../assets/islands/ocean.svg';
 import boatIcon from '../../assets/boat.svg';
 import boat from '../../assets/islands/fillers/boat.svg';
-import boat_sound from '../../assets/audios/boat.mp3';
 
 import barrell from '../../assets/islands/fillers/barril.svg';
 import dragon from '../../assets/islands/fillers/dragon.svg';
@@ -17,31 +16,23 @@ import {ScreenSize} from '../../screenSize';
 import {useHistory} from 'react-router-dom';
 import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
 import {get} from '../../../api/queries/get';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as TYPE from '../../../app/types';
-import background from '../../assets/colored-shapes-bg.svg';
-import {AUDIENCES_QUERY} from '../../../api/queries/people';
+import { AUDIENCES_QUERY } from '../../../api/queries/people';
+
 
 export const KnowledgeMap: FC = () => {
   const dispatch = useDispatch();
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
   const handleData = (data: any) => {
     setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
-    dispatch({
-      type: TYPE.SET_AOK,
-      payload: data.data.audienceById.areaofknowledgeSet,
-    });
+    dispatch({type: TYPE.SET_AOK, payload: data.data.audienceById.areaofknowledgeSet});
   };
   const handleError = (error: any) => {
     console.error(error);
   };
   useEffect(() => {
-    get(
-      'audienceById(id:"2")',
-      `{${AUDIENCES_QUERY}}`,
-      handleData,
-      handleError
-    );
+    get('audienceById(id:"2")', `{${AUDIENCES_QUERY}}`, handleData, handleError);
     console.log(areasOfKnowledge);
   }, []);
 
@@ -53,20 +44,6 @@ export const KnowledgeMap: FC = () => {
     console.log(getRandomNumber(3));
   }, []);
 
-  const [coords, setCoords] = useState({x: 15, y: 15});
-
-  const animateBoat = (e: any, route?: string) => {
-    const audio = new Audio(boat_sound);
-    audio.play();
-    setCoords({
-      x: e.clientX,
-      y: e.clientY,
-    });
-    setTimeout(() => {
-      history.push(`/question/presentation_${route || ""}`);
-    }, 3300);
-  };
-
   const getFiller = () => {
     const uniqueFillers = [boat, barrell, dragon];
     const fillers = [isle, rock, boulder, rock2];
@@ -77,115 +54,79 @@ export const KnowledgeMap: FC = () => {
   };
   const history = useHistory();
   return (
-    <Wrapper>
-      <StudentMenu>
-        <Ocean>
-          <Boat id="boat" src={boat} coords={coords} />
-          {areasOfKnowledge.map(
-            (
-              areaOfKnowledge: {
-                islandImage: string;
-                isActive: boolean;
-              },
-              i
-            ) => {
-              const fill = getFiller();
-              return i % 2 === 0 ? (
-                <SubjectEven>
-                  <Island
-                    src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
-                    onClick={e => {
-                      animateBoat(e);
-                    }}
-                    isActive={areaOfKnowledge.isActive}
-                  />
-                  <Filler src={fill} />
-                </SubjectEven>
-              ) : (
-                <SubjectOdd>
-                  <Filler src={fill} />
-                  <Island
-                    src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
-                    onClick={() => history.push('/question')}
-                    isActive={areaOfKnowledge.isActive}
-                  />
-                </SubjectOdd>
-              );
-            }
-          )}
-        </Ocean>
-      </StudentMenu>
-    </Wrapper>
+    <StudentMenu>
+      <Ocean>
+        {areasOfKnowledge.map(
+          (
+            areaOfKnowledge: {
+              islandImage: string;
+              isActive: boolean;
+            },
+            i
+          ) => {
+            const fill = getFiller();
+            return i % 2 === 0 ? (
+              <SubjectEven>
+                <Island
+                  src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
+                  onClick={() => history.push('/question')}
+                  isActive={areaOfKnowledge.isActive}
+                />
+                <Filler src={fill} />
+              </SubjectEven>
+            ) : (
+              <SubjectOdd>
+                <Filler src={fill} />
+                <Island
+                  src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
+                  onClick={() => history.push('/question')}
+                  isActive={areaOfKnowledge.isActive}
+                />
+              </SubjectOdd>
+            );
+          }
+        )}
+      </Ocean>
+    </StudentMenu>
   );
 };
-
-const Wrapper = styled.div`
-  background-image: url(${background});
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
-
-type Coords = {
-  x: number;
-  y: number;
-};
-
-type BoatCoords = {
-  coords: Coords;
-};
-
-const Boat = styled.img<BoatCoords>`
-  z-index: 1;
-  position: absolute;
-  bottom: ${props => props.coords.x + 140}px;
-  left: ${props => props.coords.y + 140}px;
-  height: 280px;
-  transition: bottom 6s, left 3s;
-`;
 
 const Ocean = styled.div`
   min-height: 100vh;
   background-image: url(${ocean});
   background-repeat: no-repeat;
   background-size: cover;
-  /* max-width: 1600px; */
+  max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
+  cursor: url(${boatIcon}), auto;
   @media (min-width: ${ScreenSize.desktop}) {
     min-height: unset;
-    margin-top: 65px;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-top: 75px;
   }
 `;
 
 const Island = styled.img<{
   isActive: boolean;
 }>`
-  width: 100%;
-  opacity: ${props => (props.isActive ? 1 : 0.5)};
-  pointer-events: ${props => (props.isActive ? 'all' : 'none')};
+  width: 60%;
+  opacity: ${props => props.isActive ? 1 : 0.5};
+  pointer-events: ${props => props.isActive ? 'all' : 'none'};
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
-  &:hover {
+  &: hover {
     transform: scale(1.1);
-  }
-  @media (min-width: ${ScreenSize.desktop}) {
-    width: 80%;
-  }
-  @media (min-width: ${ScreenSize.desktop}) {
-    width: 45%;
   }
 `;
 
 const Filler = styled.img`
-  width: 100%;
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
   @media (min-width: ${ScreenSize.desktop}) {
     margin-top: 30%;
-    width: 65%;
+    width: 40%;
   }
 `;
 

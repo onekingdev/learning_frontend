@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import * as React from 'react';
-import { ScreenSize } from '../../screenSize';
 import styled from 'styled-components';
 
 import Paper from '@mui/material/Paper';
@@ -24,7 +23,7 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'date', label: 'Date', minWidth: 60 },
+  { id: 'date', label: 'Date', minWidth: 100},
   { id: 'type', label: 'Type', minWidth: 60 },
   {
     id: 'amount',
@@ -102,102 +101,69 @@ export const TxHistoryTable: FC = () => {
 
   return (
 
-    <StyledTxContainer >
-      <div style={{display: 'flex', alignItems:'center'}}>
-      <PaidIcon />
-      <LSLabel fontSize={20}>Latest Transactions</LSLabel>
-      </div>
-      <StyledTableContainer >
-        <Table >
-          <TableHead>
-            <TableRow sx={{
-              '& .MuiTableRow-root': {
+      <Paper sx={{ width: '500px', overflow: 'hidden', backgroundColor: BasicColor.blue, color: 'white', padding: 4,paddingBottom: 2, borderRadius: 5, margin: 5}}>
+
+        <LSLabel fontSize={20}><PaidIcon />Latest Transactions</LSLabel>
+        <TableContainer sx={{ maxHeight: 440, minHeight: 340 }}>
+          <Table stickyHeader aria-label="sticky table" >
+            <TableHead>
+              <TableRow sx={{'& .MuiTableRow-root' : {
                 backgroundColor: BasicColor.blue,
                 color: 'white'
-              }
-            }}>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align='center'
-                  style={{ minWidth: column.minWidth, backgroundColor: BasicColor.blue, color: 'white', fontFamily: 'Montserrat' }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {txData
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, idx) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={idx}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align='center' sx={{ color: 'white', fontFamily: 'Montserrat' }}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </StyledTableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25, 100]}
-        component="div"
-        count={txData.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        sx={{
-          '&.MuiTablePagination-root': {
-            color: 'white',
-            paddingBottom: 0,
-
-            '@media screen and (max-width: 720px)' :{
-              '& .MuiInputBase-root' : {
-                margin: 0
-              },
-              '& .MuiTablePagination-selectLabel' :{
-                display: 'none'
-              }
+              }}}>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align='center'
+                    style={{ minWidth: column.minWidth, backgroundColor: BasicColor.blue, color: 'white', fontSize: 18, fontFamily: 'Montserrat' }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {txData
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, idx) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={idx}>
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align='center' sx={{color:'white', fontSize: 15, fontFamily: 'Montserrat'}}>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25, 100]}
+          component="div"
+          count={txData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          sx={{
+            '&.MuiTablePagination-root': {
+              color: 'white',
+              paddingBottom: 0
             }
-          },
-        }}
-      />
-    </StyledTxContainer>
+          }}
+        />
+      </Paper>
   );
 }
 
-const StyledTxContainer = styled.div`
-  width: 500px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  overflow: hidden;
-  background: ${BasicColor.blue};
-  color: white;
-  padding: 30px 20px 30px 20px;
-  paddingBottom: 2px;
-  border-radius: 15px;
-  margin-bottom: 3vh;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 85vw;
-    margin-bottom: 1vh;
-    padding: 15px;
-  }
-`;
+const StyledTableCell = styled(TableCell) <{
+}>`
 
-const StyledTableContainer = styled(TableContainer)`
-  max-height: 440px;
-  min-height: 330px;
 `;
-

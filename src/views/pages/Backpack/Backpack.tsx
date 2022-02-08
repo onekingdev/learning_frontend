@@ -48,8 +48,7 @@ export const Backpack: FC = () => {
                     />
                   </AvatarButtonContainer>
                   <BackpackButton
-                    // onClick={() => history.push('/collectibles/category_1')}
-                    onClick={() => history.push('/collectibles/cards')}
+                    onClick={() => history.push('/collectibles/category_1')}
                     image={cardsButton}
                     width={100}
                     height={70}
