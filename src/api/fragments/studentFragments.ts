@@ -1,4 +1,5 @@
 import {LEVEL} from './levelFragments'
+import {COIN_WALLET} from './coinWalletFragments'
 export const STUDENT_TOPIC_MASTERY = `
         id
         identifier
@@ -134,7 +135,7 @@ export const STUDENT = `
             id
         }
         coinWallet {
-            id
+            ${COIN_WALLET}
         }
         studentcollectibleSet {
             id
