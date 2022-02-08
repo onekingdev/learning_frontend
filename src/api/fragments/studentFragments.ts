@@ -1,3 +1,4 @@
+import {LEVEL} from './levelFragments'
 export const STUDENT_TOPIC_MASTERY = `
         id
         identifier
@@ -109,7 +110,7 @@ export const STUDENT = `
             id
         }
         level {
-            id
+            ${LEVEL}
         }
         studenttopicmasterySet {
             id
