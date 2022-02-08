@@ -178,7 +178,7 @@ export const TxHistoryTable: FC = () => {
 }
 
 const StyledTxContainer = styled.div`
-  width: 500px;
+  width: 450px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -191,6 +191,11 @@ const StyledTxContainer = styled.div`
   margin-bottom: 3vh;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     width: 85vw;
+    margin-bottom: 1vh;
+    padding: 15px;
+  }
+  @media screen and (min-width: ${ScreenSize.tablet}) (max-width: ${ScreenSize.desktop}) {
+    width: 45vw;
     margin-bottom: 1vh;
     padding: 15px;
   }
