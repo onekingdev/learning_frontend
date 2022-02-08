@@ -1,8 +1,9 @@
 import { FC } from 'react';
+import styled from 'styled-components';
+import {ScreenSize} from '../../screenSize';
 import { BasicColor } from '../../Color';
 
 import SavingsIcon from '@mui/icons-material/Savings';
-import { BankPaper } from './Style';
 import { LSText, LSLabel } from '../Setting/utils/Style';
 
 interface BalanceProp {
@@ -24,3 +25,26 @@ export const AccountBalance: FC<BalanceProp> = ({ balance }) => {
     </BankPaper>
   );
 };
+
+const BankPaper = styled.div<{
+  flex_direction: string;
+  bg_color: string;
+  width?: number;
+}>`
+  margin-top: 1vh;
+  padding: 30px 20px 30px 20px;
+  width: ${p => (p.width ? p.width + 'px;' : 'auto;')}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: ${p => p.flex_direction};
+  color: white;
+  background-color: ${BasicColor.blue};
+  background-color: ${p => p.bg_color};
+  border-radius: 20px;
+
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    width: 40vw;
+    padding: 20px 35px 20px 35px;
+  }
+`;
