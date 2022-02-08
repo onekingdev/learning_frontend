@@ -66,7 +66,10 @@ export const TopMenu: FC<TopMenuProps> = ({
             icon={modality}
             options={[
               {name: 'AI', action: () => history.push('/map')},
-              {name: 'Choose your path', action: () => history.push('/subjects')}
+              {
+                name: 'Choose your path',
+                action: () => history.push('/subjects'),
+              },
             ]}
           />
         </ModalityContainer>
@@ -90,8 +93,10 @@ type ToggleButtonProps = {
 };
 const TopMenuStyles = styled.div`
   display: none;
-
   @media screen and (min-width: ${ScreenSize.tablet}) {
+    position: fixed;
+    top: 0;
+    z-index: 100;
     width: 98%;
     margin: 10px auto;
     display: flex;

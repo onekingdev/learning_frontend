@@ -8,30 +8,35 @@ type LessonProgressBarProps = {
 };
 
 export const LessonProgressBar: FC<LessonProgressBarProps> = ({bgColor}) => {
-  const [fullWidth, setFullWidth] = useState(false)
+  const [fullWidth, setFullWidth] = useState(false);
 
-  useEffect(()=> {
-    if(bgColor) {
-      setFullWidth(true)
+  useEffect(() => {
+    if (bgColor) {
+      setFullWidth(true);
     }
-  }, [bgColor])
-  return(
+  }, [bgColor]);
+  return (
     <Container>
-      <StyledLessonProgressBar bgColor={bgColor} width={fullWidth ? "100%" : "0"}></StyledLessonProgressBar>
+      <StyledLessonProgressBar
+        bgColor={bgColor}
+        width={fullWidth ? '100%' : '0'}
+      ></StyledLessonProgressBar>
     </Container>
-  )
+  );
 };
 
-const StyledLessonProgressBar = styled.div<{bgColor: string | null, width: string}>`
+const StyledLessonProgressBar = styled.div<{
+  bgColor: string | null;
+  width: string;
+}>`
   width: ${props => props.width};
   height: 100%;
   background-color: ${props => props.bgColor};
   transition: width 1000ms;
-
 `;
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${BasicColor.gray80};
-`
+`;
