@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 import logo from '../../assets/socrates-logo.svg';
 import {Header} from '../../atoms/Text/Header';
 import {Subheader} from '../../atoms/Text/Subheader';
@@ -9,7 +9,8 @@ import {Icon} from '../../atoms/Text/Icon';
 import {dictionary} from '../Welcome/dictionary';
 import {Modal} from '../../atoms/Modal';
 import {Link, useHistory} from 'react-router-dom';
-
+import { resetReducer } from '../../../app/actions/userActions'
+import { useDispatch } from 'react-redux'
 import {
   Wrapper,
   Logo,
@@ -29,9 +30,13 @@ export const Welcome: FC = () => {
   const [joinModal, setJoinModal] = useState(false);
   const [deployModal, setDeployModal] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch()
   const sendEmail = () => {
     setJoinModal(!joinModal);
   };
+  useEffect(() => {
+    resetReducer(dispatch)
+  }, [])
   return (
     <Wrapper>
       <Logo src={logo} alt="Learn with Socrates logo" />

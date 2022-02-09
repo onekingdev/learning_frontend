@@ -1,36 +1,37 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components'
 
-type CardProps = {
+interface CardProps {
   imgUrl: string
   alt?: string
-  title?: string
+  title: string
   content?: string
-  id: number
-  openCardGroup: (id: number) => (void)
 }
+const Card: FC<CardProps> = ({
+  imgUrl, alt, title, content
+}) => (
+  <StyledCard>
+    <img src={imgUrl}
+      alt={alt || 'Image'} />
+    <StyledContent >
+      <h2>{title}</h2>
+      <p>{content}</p>
+    </StyledContent>
+  </StyledCard>
+)
+export const CardSlider: FC = () => {
 
-export const Card: FC<CardProps> = ({
-  imgUrl, alt, title, content, id, openCardGroup
-}) => {
-  const onCardClick = () => {
 
-    // This is prop from parent component, when card is clicked, this calls function of parent.
-    openCardGroup(id)
-  }
+  useEffect(() => {
+  }, []);
+
   return (
-    <StyledCard onClick={() => onCardClick()} >
-      <img src={imgUrl}
-        alt={alt || 'Image'} />
-      <h2 style={{ textAlign: 'center', margin: 0 }}>{title}</h2>
-      {/* <p>{content}</p> */}
-    </StyledCard>
-  )
-}
-
+    <div></div>
+  );
+};
 
 const StyledCard = styled.div`
-flex: 1 0 160px;
+flex: 1 0 250px;
 box-shadow: 0 1px 1rem -4px #000;
 background: #fff;
 margin: 1rem;
@@ -40,16 +41,17 @@ cursor: pointer;
 transition: all 250ms ease-in-out;
 
 img {
-  width: 160px;
-  height: 210px;
+  width: 250px;
+  height: 250px;
   object-fit: center;
 }
 
 &:hover {
   box-shadow: 0 4px 1rem -4px #000;
-  transform: translateY(-5px);
-  box-shadow: 5px 5px rgba(82, 119, 192, 0.4), 10px 10px rgba(82, 119, 192, 0.3),
-    15px 15px rgba(82, 119, 192, 0.2), 20px 20px rgba(82, 119, 192, 0.1),
-    25px 25px rgba(82, 119, 192, 0.05);
+  transform: translateY(-3px);
 }
+`
+
+const StyledContent = styled.div`
+  padding: 1rem;
 `
