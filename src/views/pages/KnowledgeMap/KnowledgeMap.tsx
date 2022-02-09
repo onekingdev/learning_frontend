@@ -67,7 +67,7 @@ export const KnowledgeMap: FC = () => {
       y: e.clientY,
     });
     setTimeout(() => {
-      history.push(`/question/presentation_${route || ""}`);
+      history.push(`/question/presentation_${route || "1"}`);
     }, 3300);
   };
 
