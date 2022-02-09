@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {StudentMenu} from '../../templates/StudentMenu';
 import ocean from '../../assets/islands/ocean.svg';
@@ -49,23 +49,19 @@ export const KnowledgeMap: FC = () => {
     return Math.floor(Math.random() * max);
   };
 
-  useEffect(() => {
-    console.log(getRandomNumber(3));
-  }, []);
-
-  const [coords, setCoords] = useState({x: 15, y: 15});
-
   const animateBoat = (e: any, route?: string) => {
     const audio = new Audio(boat_sound);
     audio.play();
-    setCoords({
-      x: e.clientX,
-      y: e.clientY,
-    });
+    const boat = document.getElementById('boat');
+    boat!.style.top = `${e.clientY - 140}px`;
+    boat!.style.left = `${e.clientX - 140}px`;
     setTimeout(() => {
-      history.push(`/question/presentation_${route || ""}`);
+      history.push("/question/presentation_1")
     }, 3300);
   };
+
+  const randRange = (max: number, min: number) =>
+    Math.round(Math.random() * (max - min)) + min;
 
   const getFiller = () => {
     const uniqueFillers = [boat, barrell, dragon];
@@ -76,11 +72,13 @@ export const KnowledgeMap: FC = () => {
     return fillers[getRandomNumber(3)];
   };
   const history = useHistory();
+  const dragonNum = randRange(0, areasOfKnowledge.length);
+  const coords = {x: 12, y: 12};
   return (
     <Wrapper>
       <StudentMenu>
+        <Boat id="boat" src={boat} />
         <Ocean>
-          <Boat id="boat" src={boat} coords={coords} />
           {areasOfKnowledge.map(
             (
               areaOfKnowledge: {
@@ -90,8 +88,9 @@ export const KnowledgeMap: FC = () => {
               i
             ) => {
               const fill = getFiller();
+
               return i % 2 === 0 ? (
-                <SubjectEven>
+                <Subject>
                   <Island
                     src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
@@ -99,17 +98,24 @@ export const KnowledgeMap: FC = () => {
                     }}
                     isActive={areaOfKnowledge.isActive}
                   />
-                  <Filler src={fill} />
-                </SubjectEven>
+                  <>
+                    {i === dragonNum ? <Filler src={dragon} /> : null}
+                    <Filler src={fill} />
+                    {i % 3 === 0 ? <Filler src={fill} /> : null}
+                  </>
+                </Subject>
               ) : (
-                <SubjectOdd>
-                  <Filler src={fill} />
+                <div>
+                  {i === dragonNum ? <Filler src={dragon} /> : null}
                   <Island
                     src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
-                    onClick={() => history.push('/question')}
+                    onClick={e => {
+                      animateBoat(e);
+                    }}
                     isActive={areaOfKnowledge.isActive}
                   />
-                </SubjectOdd>
+                  {i % 5 === 0 ? <Filler src={fill} /> : null}
+                </div>
               );
             }
           )}
@@ -130,25 +136,26 @@ type Coords = {
   y: number;
 };
 
-type BoatCoords = {
-  coords: Coords;
-};
-
-const Boat = styled.img<BoatCoords>`
+const Boat = styled.img`
   z-index: 1;
   position: absolute;
-  bottom: ${props => props.coords.x + 140}px;
-  left: ${props => props.coords.y + 140}px;
-  height: 280px;
-  transition: bottom 6s, left 3s;
+  top: ${window.innerHeight / 2}px;
+  left: ${window.innerWidth / 2}px;
+  height: 140px;
+  transition: top 6s, left 4s;
+  @media (min-width: ${ScreenSize.desktop}) {
+    height: 280px;
+  }
 `;
 
 const Ocean = styled.div`
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 60% 40%;
   min-height: 100vh;
   background-image: url(${ocean});
   background-repeat: no-repeat;
   background-size: cover;
-  /* max-width: 1600px; */
   margin-left: auto;
   margin-right: auto;
   @media (min-width: ${ScreenSize.desktop}) {
@@ -156,6 +163,11 @@ const Ocean = styled.div`
     margin-top: 65px;
     margin-left: 100px;
     margin-right: 100px;
+    padding: 2rem;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    display: grid;
+    grid-template-columns: 60% 40%;
   }
 `;
 
@@ -167,31 +179,35 @@ const Island = styled.img<{
   pointer-events: ${props => (props.isActive ? 'all' : 'none')};
   margin-left: auto;
   margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem;
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
   }
-  @media (min-width: ${ScreenSize.desktop}) {
-    width: 80%;
+  @media (min-width: ${ScreenSize.tablet}) {
+    width: 30vw;
   }
   @media (min-width: ${ScreenSize.desktop}) {
-    width: 45%;
+    width: unset;
   }
 `;
 
 const Filler = styled.img`
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 60%;
+  @media (min-width: ${ScreenSize.tablet}) {
+    width: 15vw;
+  }
   @media (min-width: ${ScreenSize.desktop}) {
-    margin-top: 30%;
-    width: 65%;
+    width: unset;
   }
 `;
 
 const Subject = styled.div`
   display: grid;
-  padding: 2rem;
+  grid-template-columns: 70% 30%;
 `;
 
 const SubjectEven = styled(Subject)`

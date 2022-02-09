@@ -17,6 +17,7 @@ import { IAnswer, IBlockPresentation, IQuestion } from '../../../app/entities/bl
 import { Store } from '../../../app/configureStore';
 import { useParams } from 'react-router-dom';
 import * as TYPE from '../../../app/types';
+import { Spinner } from '../../atoms/Spinner';
 
 interface RoutePresentationParams {
   presentationId: string;
@@ -143,7 +144,7 @@ export const Question: FC = () => {
               </Container>
             </StudentMenu>
             :
-            <StudentMenu>Loading</StudentMenu>
+            <Spinner />
       }
     </Wrapper>
   );
