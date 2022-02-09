@@ -23,7 +23,7 @@ import query from '../../../api/queries/get'
 import {WHOAMI_QUERY} from '../../../api/queries/users'
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 import { TOKEN_AUTH } from '../../../api/mutations/users'
-import { login, resetReducer } from '../../../app/actions/userActions'
+
 export const LogIn: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
@@ -42,33 +42,112 @@ export const LogIn: FC = () => {
 
   const loginAction = async () => {
 
-    setLoading(true);
-    const result:any = await login(username, password, dispatch);
-    setLoading(false);
+    // onLoginSuccess(MockStore.user, MockStore.student);
 
-    if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: "error" });
+    setLoading(true);
+
+    const res:any = await mutation(TOKEN_AUTH( username, password )).catch(e => ({success: false}));
+    if(res.success === false) {
+        setErrMsg("Network Error!");
+        enqueueSnackbar(`Network Error!`, { variant: "error" });
+        return;
+    }
+
+    const result:any = await res.json();
+
+    if(result.errors) {
+        setErrMsg(result.errors[0].message);
+        enqueueSnackbar(`Login Failed! ${result.errors[0].message}`, { variant: "error" });
+        return;
+    }
+
+    const { token } = result.data.tokenAuth
+
+    const res_who:any = await query("whoami", WHOAMI_QUERY, token).catch(e => ({success: false}));
+
+    if(res_who.success === false) {
+      setErrMsg("Network Error!");
+      enqueueSnackbar(`Network Error!`, { variant: "error" });
       return;
     }
-    switch(result.userType) {
-      case "student" :
-        history.push('/home')
+
+    const result_who:any = await res_who.json();
+
+    console.log(result_who);
+    if(result_who.errors && !result_who.data) {
+        setErrMsg(result_who.errors[0].message);
+        enqueueSnackbar(`Login Failed! ${result_who.errors[0].message}`, { variant: "error" });
         return;
-      case "guardian" :
-        history.push('/kids/list')
-        return;
-      case "teacher" :
-        history.push('/kids/list')
-        return;
-      default:
-        history.push('/home')
     }
+
+    setLoading(false);
+
+    enqueueSnackbar('Successfully Logined!', { variant: "success" });
+
+    const user = result_who.data.whoami;
+    const {guardian, student} = result_who.data.whoami;
+    const user_redux:any = (({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language,profile }) => ({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language, profile}))(user)
+    dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
+
+    console.log("guardion", guardian);
+    console.log("student", student);
+
+    if(student) {
+      dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
+      dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
+      dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
+        rank: 1,
+        level: 1,
+        exp: 1,
+        expMax: 5,
+        progress: 1,
+        energyCharge: 1,
+        balance: 1,
+      }})
+      history.push('/home')
+      console.log(student)
+    }
+    else if(guardian) {
+      history.push('/kids/list')
+      console.log(guardian)
+    }
+    else {
+      console.log("else")
+    }
+    // get(
+    //   `mutation`,
+    //   `{
+    //     tokenAuth(username: "armin", password: "123456") {
+    //       token
+    //     }
+    //   }`,
+    //   onLoginSuccess,
+    //   onLoginError
+    // );
+  }
+
+  const onLoginSuccess = (user: IUser, student: IStudent) => {
+    dispatch({ type: TYPES.USER_SET_DATA, payload: user })
+    dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
+    dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
+      rank: 1,
+      level: 1,
+      exp: 1,
+      expMax: 5,
+      progress: 1,
+      energyCharge: 1,
+      balance: 1,
+    }})
+    history.push('/home')
+  }
+
+  const onLoginError = (error: any) => {
+    console.log('login error')
   }
 
   useEffect(() => {
-    resetReducer(dispatch)
+    dispatch({type:TYPES.STUDENT_RESET})
   }, []);
-
   return (
     <Login>
       <Greet

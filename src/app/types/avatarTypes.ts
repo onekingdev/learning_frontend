@@ -1,2 +1,0 @@
-export const AVATAR_SET_DATA = 'AVATAR_SET_DATA';
-export const AVATAR_RESET = 'AVATAR_SET_RESET';
