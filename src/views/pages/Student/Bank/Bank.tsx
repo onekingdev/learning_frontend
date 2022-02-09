@@ -44,7 +44,7 @@ export const Bank: FC = () => {
         </BankTitle>
         <div >
           <Grid container >
-            <Grid container item xs={12} md={6} sx={{'&.MuiGrid-root': {alignContent: 'space-evenly'}}}>
+            <Grid container item xs={12} md={6} sx={{'&.MuiGrid-root': {alignContent: 'flex-start'}}}>
               <GridItem item md={12} xs={4}>
                 <Img src={Cartera} />
               </GridItem>
@@ -55,7 +55,7 @@ export const Bank: FC = () => {
                 <TxBox />
               </GridItem>
             </Grid>
-            <GridItem container item xs={12} md={6} align='start'>
+            <GridItem container item xs={12} md={6}>
               <Grid item >
                 <TxHistoryTable />
               </Grid>
@@ -81,7 +81,6 @@ const GridItem = styled(Grid) <{
   padding: 15px;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     padding: 10px 0 10px 0;
-    align-items: center;
   }
   }
 `;
@@ -89,7 +88,6 @@ const GridItem = styled(Grid) <{
 const Img = styled.img`
 @media screen and (max-width: ${ScreenSize.tablet}) {
     width: 30vw;
-    margin-left: 5vw;
   }
 `;
 const Wrapper = styled.div`

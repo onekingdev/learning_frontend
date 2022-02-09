@@ -331,14 +331,14 @@ export const AvatarSelector: FC = () => {
               left: accessories[accessoryIndex].left + 'px',
             }}
           />
-          <CurrentHeader
+          {/* <CurrentHeader
             src={headRef}
             style={{
               width: headers[headerIndex].scale * 160 + 'px',
               top: headers[headerIndex].top + 'px',
               left: headers[headerIndex].left + 'px',
             }}
-          />
+          /> */}
           <CurrentBody src={bodyRef} />
           <CurrentFooter src={footRef} />
         </CurrentAvatar>
