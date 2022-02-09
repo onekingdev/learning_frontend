@@ -67,7 +67,7 @@ export const KnowledgeMap: FC = () => {
       y: e.clientY,
     });
     setTimeout(() => {
-      history.push(`/question/presentation_${route || "1"}`);
+      history.push(`/question/presentation_${route || '1'}`);
     }, 3300);
   };
 
@@ -165,6 +165,7 @@ const Boat = styled.img<BoatCoords>`
 `;
 
 const Ocean = styled.div`
+  padding: 1rem;
   display: grid;
   grid-template-columns: 60% 40%;
   min-height: 100vh;
@@ -181,13 +182,15 @@ const Ocean = styled.div`
     padding: 2rem;
     padding-top: 3em;
     padding-bottom: 3em;
+    display: grid;
+    grid-template-columns: 60% 40%;
   }
 `;
 
 const Island = styled.img<{
   isActive: boolean;
 }>`
-  /* width: 100%; */
+  width: 100%;
   opacity: ${props => (props.isActive ? 1 : 0.5)};
   pointer-events: ${props => (props.isActive ? 'all' : 'none')};
   margin-left: auto;
@@ -195,23 +198,26 @@ const Island = styled.img<{
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 4rem;
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
   }
   @media (min-width: ${ScreenSize.tablet}) {
-    /* width: 80%; */
+    width: 30vw;
   }
   @media (min-width: ${ScreenSize.desktop}) {
-    /* width: 45%; */
+    width: unset;
   }
 `;
 
 const Filler = styled.img`
-  float: right;
+  width: 60%;
   @media (min-width: ${ScreenSize.tablet}) {
+    width: 15vw;
   }
   @media (min-width: ${ScreenSize.desktop}) {
+    width: unset;
   }
 `;
 
