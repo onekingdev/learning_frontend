@@ -16,7 +16,7 @@ export const AccountBalance: FC<BalanceProp> = ({ balance }) => {
   }
 
   return (
-    <BankPaper flex_direction='row' bg_color={BasicColor.blue} width={500}>
+    <BankPaper flex_direction='row' bg_color={BasicColor.blue} width={450}>
       <SavingsIcon />
       <LSText fontSize={24}>
         current account:
@@ -44,6 +44,11 @@ const BankPaper = styled.div<{
   border-radius: 20px;
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
+    width: 40vw;
+    padding: 20px 35px 20px 35px;
+  }
+  
+  @media screen and (min-width: ${ScreenSize.tablet}) (max-width: ${ScreenSize.desktop}) {
     width: 40vw;
     padding: 20px 35px 20px 35px;
   }

@@ -55,7 +55,7 @@ export const Bank: FC = () => {
                 <TxBox />
               </GridItem>
             </Grid>
-            <GridItem container item xs={12} md={6}>
+            <GridItem container item xs={12} md={6} align='start'>
               <Grid item >
                 <TxHistoryTable />
               </Grid>
@@ -81,6 +81,7 @@ const GridItem = styled(Grid) <{
   padding: 15px;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     padding: 10px 0 10px 0;
+    align-items: center;
   }
   }
 `;
@@ -88,6 +89,7 @@ const GridItem = styled(Grid) <{
 const Img = styled.img`
 @media screen and (max-width: ${ScreenSize.tablet}) {
     width: 30vw;
+    margin-left: 5vw;
   }
 `;
 const Wrapper = styled.div`

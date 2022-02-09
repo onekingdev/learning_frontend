@@ -53,13 +53,9 @@ export const KnowledgeMap: FC = () => {
     console.log(getRandomNumber(3));
   }, []);
 
-  const [coords, setCoords] = useState({
-    y: window.innerHeight / 2,
-    x: window.innerWidth / 2,
-  });
+  const [coords, setCoords] = useState({x: 15, y: 15});
 
   const animateBoat = (e: any, route?: string) => {
-    console.log(e.clientX, e.clientY, e);
     const audio = new Audio(boat_sound);
     audio.play();
     setCoords({
@@ -67,7 +63,7 @@ export const KnowledgeMap: FC = () => {
       y: e.clientY,
     });
     setTimeout(() => {
-      // history.push(`/question/presentation_${route || ""}`);
+      history.push(`/question/presentation_${route || ""}`);
     }, 3300);
   };
 
@@ -141,15 +137,10 @@ type BoatCoords = {
 const Boat = styled.img<BoatCoords>`
   z-index: 1;
   position: absolute;
-  top: ${props => props.coords.y - 70}px;
-  left: ${props => props.coords.x - 70}px;
-  height: 140px;
-  transition: top 6s, left 4s;
-  @media (min-width: ${ScreenSize.desktop}) {
-    height: 280px;
-    top: ${props => props.coords.y - 140}px;
-    left: ${props => props.coords.x - 140}px;
-  }
+  bottom: ${props => props.coords.x + 140}px;
+  left: ${props => props.coords.y + 140}px;
+  height: 280px;
+  transition: bottom 6s, left 3s;
 `;
 
 const Ocean = styled.div`
@@ -180,7 +171,7 @@ const Island = styled.img<{
   &:hover {
     transform: scale(1.1);
   }
-  @media (min-width: ${ScreenSize.tablet}) {
+  @media (min-width: ${ScreenSize.desktop}) {
     width: 80%;
   }
   @media (min-width: ${ScreenSize.desktop}) {
@@ -192,12 +183,9 @@ const Filler = styled.img`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: ${ScreenSize.tablet}) {
-    width: 80%;
-  }
   @media (min-width: ${ScreenSize.desktop}) {
     margin-top: 30%;
-    width: 75%;
+    width: 65%;
   }
 `;
 
