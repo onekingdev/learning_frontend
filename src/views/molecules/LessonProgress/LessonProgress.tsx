@@ -22,7 +22,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   currentQuestion,
   totalQuestions,
   finished,
-  answerResult=[],
+  answerResult = [],
 }) => {
   // !! Added bar array builder function
   const buildBars = (totalQuestions: number, answerResult: boolean[]) => {
@@ -30,17 +30,14 @@ export const LessonProgress: FC<LessonProgressProps> = ({
     // TODO add logic inside this loop to build a
     // TODO proper progress bar
     for (let i = 0; i < totalQuestions; i++) {
-      if(answerResult[i] === true)
-        bars.push({color: BasicColor.green})
-      else if(answerResult[i] === false)  bars.push({color: BasicColor.red})
-      else
-        bars.push({color: null});
+      if (answerResult[i] === true) bars.push({color: BasicColor.green});
+      else if (answerResult[i] === false) bars.push({color: BasicColor.red});
+      else bars.push({color: null});
     }
     return bars;
   };
 
-  useEffect(()=> {
-  }, [currentQuestion])
+  useEffect(() => {}, [currentQuestion]);
 
   return (
     <StyledLessonProgressWrapper>
@@ -51,15 +48,19 @@ export const LessonProgress: FC<LessonProgressProps> = ({
         finished={finished}
       ></LessonProgressTitle>
       <StyledLessonProgressBarWrapper>
-        {buildBars(totalQuestions, answerResult).map((bar: ProgressBar, i: number) => (
-          <LessonProgressBar bgColor={bar.color} key={i}></LessonProgressBar>
-        ))}
+        {buildBars(totalQuestions, answerResult).map(
+          (bar: ProgressBar, i: number) => (
+            <LessonProgressBar bgColor={bar.color} key={i}></LessonProgressBar>
+          )
+        )}
       </StyledLessonProgressBarWrapper>
     </StyledLessonProgressWrapper>
   );
 };
 
 const StyledLessonProgressWrapper = styled.div`
+  position: fixed;
+  z-index: 100;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
