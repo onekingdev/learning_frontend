@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   levelId: null,
   guardianId: null,
   schoolId: null,
+  balance: null
 };
 const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {

@@ -1,6 +1,3 @@
-import {LEVEL} from './levelFragments'
-import {COIN_WALLET} from './coinWalletFragments'
-import {AVATAR} from './avatarFragments'
 export const STUDENT_TOPIC_MASTERY = `
         id
         identifier
@@ -94,16 +91,16 @@ export const STUDENT = `
             ${STUDENT_PLAN}
         }
         avatarAccessories {
-            ${AVATAR}
+            id
         }
         avatarHead {
-            ${AVATAR}
+            id
         }
         avatarClothes {
-            ${AVATAR}
+            id
         }
         avatarPants {
-            ${AVATAR}
+            id
         }
         group {
             id
@@ -112,7 +109,7 @@ export const STUDENT = `
             id
         }
         level {
-            ${LEVEL}
+            id
         }
         studenttopicmasterySet {
             id
@@ -136,7 +133,7 @@ export const STUDENT = `
             id
         }
         coinWallet {
-            ${COIN_WALLET}
+            id
         }
         studentcollectibleSet {
             id

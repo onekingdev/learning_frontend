@@ -112,7 +112,7 @@ export const Interest: FC = () => {
 }
 
 const StyledTxContainer = styled.div`
-  width: 450px;
+  width: 500px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -125,11 +125,6 @@ const StyledTxContainer = styled.div`
   border-radius: 15px;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     width: 85vw;
-    padding: 15px;
-  }
-  @media screen and (min-width: ${ScreenSize.tablet}) (max-width: ${ScreenSize.desktop}) {
-    width: 45vw;
-    margin-bottom: 1vh;
     padding: 15px;
   }
 `;

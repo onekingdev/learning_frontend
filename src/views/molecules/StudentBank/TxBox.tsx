@@ -49,7 +49,7 @@ export const TxBox: FC = () => {
   }, []);
 
   return (
-    <BankPaper flex_direction='column' bg_color={BasicColor.green} width={450}>
+    <BankPaper flex_direction='column' bg_color={BasicColor.green} width={500}>
       <Grid container >
         <GridItem item md={8} xs={8}>
           <Input
@@ -98,12 +98,8 @@ const BankPaper = styled.div<{
   border-radius: 20px;
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
+    // width: 270px;
     width: 85vw;
     padding: 15px;
-  }
-
-  @media screen and (min-width: ${ScreenSize.tablet}) (max-width: ${ScreenSize.desktop}) {
-    // width: 400px;
-    padding: 20px 35px 20px 35px;
   }
 `;

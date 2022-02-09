@@ -16,10 +16,6 @@ export const Wrapper = styled.div`
 `;
 
 export const ProgressWrapper = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin-bottom:120px;
   @media (min-width: ${ScreenSize.desktop}) {
     margin-top: 1rem;
   }
