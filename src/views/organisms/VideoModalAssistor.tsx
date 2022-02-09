@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import {Modal} from '../atoms/Modal';
 import {Typography} from '../atoms/Text/typography';
@@ -30,8 +30,8 @@ export const VideoModalAssistor: FC<VideoModalProps> = ({onClick, source}) => {
 const ModalContainer = styled.div`
   width: 100%;
   height: 100vh;
-  position: absolute;
-  z-index: 10;
+  position: fixed;
+  z-index: 210;
   display: flex;
   align-items: center;
   top: 0;
@@ -60,13 +60,23 @@ const VideoModalContainer = styled.div`
 const CloseButton = styled.div`
   font-size: 30px;
   font-weight: bold;
-  position:absolute;
-  right: 15px;
+  text-align: center;
+  position: absolute;
+  width: 30px;
+  right: 10px;
   top: 10px;
+
   font-family: ${Typography.primary};
   border-radius: 10px;
   letter-spacing: 0.25px;
   cursor: pointer;
-  @media screen and (min-width: ${ScreenSize.tablet}){
+  background-color: ${BasicColor.red};
+  z- @media screen and (min-width: ${ScreenSize.tablet}) {
     font-size: 35px;
+    right: 15px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 `;

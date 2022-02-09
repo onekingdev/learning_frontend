@@ -96,9 +96,9 @@ const TopMenuStyles = styled.div`
   @media screen and (min-width: ${ScreenSize.tablet}) {
     position: fixed;
     top: 0;
-    z-index: 100;
+    z-index: 200;
     width: 98%;
-    margin: 10px auto;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
