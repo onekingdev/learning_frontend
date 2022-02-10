@@ -97,8 +97,7 @@ export const WardrobeSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
-
-      console.log("result", result.data.data)
+      console.log('result', result.data.data);
 
       const accesory = result.data.data.studentById.avatarAccessories.image;
       const head = result.data.data.studentById.avatarHead.image;
@@ -393,7 +392,7 @@ export const WardrobeSelector: FC = () => {
               left: '0px',
             }}
           />
-          {console.log("header",headers)}
+          {console.log('header', headers)}
           <CurrentHeader
             src={headRef}
             // style={{
@@ -520,6 +519,7 @@ const CurrentHeader = styled.img`
   position: relative;
   width: 160px;
   margin: auto;
+  z-index: 100;
   top: -50px;
   grid-row: 1 / 2;
   grid-column: 1 / 2;
@@ -531,25 +531,25 @@ const CurrentHeader = styled.img`
 `;
 
 const CurrentBody = styled.img`
-  height: 100px;
+  height: 105px;
   margin: auto;
   z-index: 99;
   grid-row: 2 / 3;
   grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    height: 100px;
+    height: 105px;
     grid-row: 2 / 3;
     grid-column: 1 / 2;
   }
 `;
 
 const CurrentFooter = styled.img`
-  height: 138px;
+  height: 140px;
   margin: auto;
   grid-row: 3 / 4;
   grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    height: 138px;
+    height: 140px;
     grid-row: 3 / 4;
     grid-column: 1 / 2;
   }

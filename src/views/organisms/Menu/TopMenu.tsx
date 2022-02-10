@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import home from '../../assets/home.svg';
 import {Icon} from '../../atoms/Icon/Icon';
@@ -12,6 +12,7 @@ import {ScreenSize} from '../../screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
 import {IconDropDown} from '../../molecules/IconDropDown';
 import {useHistory} from 'react-router-dom';
+import {BasicColor} from '../../Color';
 
 type TopMenuProps = {
   rank: number;
@@ -37,14 +38,25 @@ export const TopMenu: FC<TopMenuProps> = ({
   balance,
 }) => {
   const [openSidebar, setOpenSidebar] = useState(Boolean);
+  const [scroll, setScroll] = useState(Boolean)
   const deploySidebar = () => {
     setOpenSidebar(!openSidebar);
   };
+  useEffect(() => {
+    document.addEventListener('scroll', (event) => {
+      if(document.documentElement.scrollTop > 15){
+        setScroll(true)
+      }
+      else{
+        setScroll(false)
+      }
+    });
+  },[document.documentElement.scrollTop])
 
   const history = useHistory();
   return (
     <>
-      <TopMenuStyles>
+      <TopMenuStyles isScrolled={scroll}>
         <NavPanel isClose={openSidebar} deploySideBar={deploySidebar} />
         <ToggleButtonContainer isClose={openSidebar}>
           <Icon
@@ -66,7 +78,10 @@ export const TopMenu: FC<TopMenuProps> = ({
             icon={modality}
             options={[
               {name: 'AI', action: () => history.push('/map')},
-              {name: 'Choose your path', action: () => history.push('/subjects')}
+              {
+                name: 'Choose your path',
+                action: () => history.push('/subjects'),
+              },
             ]}
           />
         </ModalityContainer>
@@ -88,20 +103,26 @@ export const TopMenu: FC<TopMenuProps> = ({
 type ToggleButtonProps = {
   isClose: boolean;
 };
-const TopMenuStyles = styled.div`
+const TopMenuStyles = styled.div<{
+  isScrolled: boolean;
+}>`
   display: none;
-
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    width: 98%;
-    margin: 10px auto;
+    position: fixed;
+    top: 0;
+    z-index: 200;
+    width: 100%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: ${props => props.isScrolled ? BasicColor.white : 'transparent'};
+    transition: 0.5s;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
     margin: 0 auto;
-    padding: 15px 0;
-    max-width: 1024px;
+    padding-top: 15px;
+    max-width: 1366px;
   }
 `;
 const ToggleButtonContainer = styled.div<ToggleButtonProps>`
