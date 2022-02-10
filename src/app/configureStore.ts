@@ -38,16 +38,6 @@ export const MockStore: Store = {
       },
       token: "string",
     },
-    group: {
-      groupMembers: [
-        {
-          avatarURL: 'string',
-          name: 'string',
-        },
-      ],
-      grade: 'string',
-      areasOfKnowledge: ['', '', ''],
-    },
     student: {
       createTimestamp: new Date(),
       updateTimestamp: new Date(),
@@ -61,13 +51,11 @@ export const MockStore: Store = {
       guardianId: "guardianId",
       schoolId: "schoolId",
       balance: 4444422
+    },
+    earning: {
+    },
+    avatar: {
     }
-    // block: {
-    //   questions: ['hello'],
-    //   config: {name: 'sdscd'},
-    //   chosenAnswer: '2',
-    //   isCorrect: true,
-    // },
 };
 
 const persistConfig = {
