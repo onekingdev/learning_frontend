@@ -35,6 +35,9 @@ export const Question: FC = () => {
   const [questionCounter, setQuestionCounter] = useState(Number);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
   const [answerResult, setAnswerResult] = useState<boolean[]>([]);
+  const [pointUnit, setPointUnit] = useState<number>(0);
+  const [points, setPoints] = useState<number>(0);
+  const [bonus, setBonus] = useState<number>(0);
 
   const renderTypes = (question: IQuestion, type: string, totalQuestions: number, blockPresentation: IBlockPresentation) => {
     const types = [
@@ -62,6 +65,7 @@ export const Question: FC = () => {
   const onAnswer = (result: boolean) => {
     console.log("answered", result)
     setAnswerResult([...answerResult, result]);
+    if(result) setPoints(points + pointUnit);
   }
 
   const upgradeEnergy = () => {
@@ -84,6 +88,7 @@ export const Question: FC = () => {
 
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
+    setPointUnit(data.data.blockPresentationById.points)
     try {
       dispatch({ type: TYPE.SET_BLOCK_PRESENTATION, payload: data.data.blockPresentationById })
     } catch (error) {
@@ -106,6 +111,7 @@ export const Question: FC = () => {
 
   useEffect(() => {
     setQuestion(blockPresentation?.block.questions[questionCounter])
+    console.log("question is ",blockPresentation?.block.questions[questionCounter])
   }, [blockPresentation, questionCounter])
 
   const handleNextQuestion = () => {
@@ -121,7 +127,7 @@ export const Question: FC = () => {
     <Wrapper>
       {
         isLessonFinished ? <StudentMenu>
-          <FinishLesson tokens={10} energy={10} />
+          <FinishLesson tokens={points} energy={state.earning.energyCharge * pointUnit * 10 / 100} />
         </StudentMenu>
           :
           blockPresentation && question ?

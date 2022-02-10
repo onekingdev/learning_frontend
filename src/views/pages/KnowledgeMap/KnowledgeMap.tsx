@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {StudentMenu} from '../../templates/StudentMenu';
 import ocean from '../../assets/islands/ocean.svg';
@@ -49,21 +49,14 @@ export const KnowledgeMap: FC = () => {
     return Math.floor(Math.random() * max);
   };
 
-  const [coords, setCoords] = useState({
-    y: window.innerHeight / 2,
-    x: window.innerWidth / 2,
-  });
-
   const animateBoat = (e: any, route?: string) => {
-    console.log(e.clientX, e.clientY, e);
     const audio = new Audio(boat_sound);
     audio.play();
-    setCoords({
-      x: e.clientX,
-      y: e.clientY,
-    });
+    const boat = document.getElementById('boat');
+    boat!.style.top = `${e.clientY - 140}px`;
+    boat!.style.left = `${e.clientX - 140}px`;
     setTimeout(() => {
-      history.push(`/question/presentation_${route || '1'}`);
+      history.push("/question/presentation_1")
     }, 3300);
   };
 
@@ -80,10 +73,11 @@ export const KnowledgeMap: FC = () => {
   };
   const history = useHistory();
   const dragonNum = randRange(0, areasOfKnowledge.length);
+  const coords = {x: 12, y: 12};
   return (
     <Wrapper>
       <StudentMenu>
-        <Boat id="boat" src={boat} coords={coords} />
+        <Boat id="boat" src={boat} />
         <Ocean>
           {areasOfKnowledge.map(
             (
@@ -142,21 +136,15 @@ type Coords = {
   y: number;
 };
 
-type BoatCoords = {
-  coords: Coords;
-};
-
-const Boat = styled.img<BoatCoords>`
+const Boat = styled.img`
   z-index: 1;
   position: absolute;
-  top: ${props => props.coords.y - 70}px;
-  left: ${props => props.coords.x - 70}px;
+  top: ${window.innerHeight / 2}px;
+  left: ${window.innerWidth / 2}px;
   height: 140px;
   transition: top 6s, left 4s;
   @media (min-width: ${ScreenSize.desktop}) {
     height: 280px;
-    top: ${props => props.coords.y - 140}px;
-    left: ${props => props.coords.x - 140}px;
   }
 `;
 

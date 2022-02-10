@@ -16,13 +16,9 @@ import { AnyTxtRecord } from 'dns';
 
 export type Store = {
     user: IUser;
-    group: IGroup;
-    // student: IStudent;
     student: any;
-    block?: IBlock;
-    collectibles?: ICollectibleCategory;
-    areasOfKnowLedge?: IAreasOfKnowledge;
-    blockPresentation?: IBlockPresentation;
+    earning: any;
+    avatar: any;
   };
 
 export const MockStore: Store = {
