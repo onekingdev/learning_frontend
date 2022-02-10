@@ -20,15 +20,16 @@
     "types": ["node"],
     "baseUrl": "./src",
     "paths": {
-      "@app": ["app"],
-      "@views": ["views"],
-      "@assets": ["app/assets"],
-      "@atoms": ["app/atoms"],
-      "@moleclues": ["app/moleclues"],
-      "@organisms": ["app/organisms"],
-      "@pages": ["app/pages"],
-      "@templates": ["app/templates"],
-
+      "@app/*": ["app/*"],
+      "@actions/*": ["app/actions/*"],
+      "@api/*": ["api/*"],
+      "@views/*": ["./views/*"],
+      "@assets/*": ["./views/assets/*"],
+      "@atoms/*": ["./views/atoms/*"],
+      "@molecules/*": ["./views/molecules/*"],
+      "@organisms/*": ["views/organisms/*"],
+      "@pages/*": ["views/pages/*"],
+      "@templates/*": ["views/templates/*"],
     }
   },
 }
