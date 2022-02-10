@@ -38,14 +38,25 @@ export const TopMenu: FC<TopMenuProps> = ({
   balance,
 }) => {
   const [openSidebar, setOpenSidebar] = useState(Boolean);
+  const [scroll, setScroll] = useState(Boolean)
   const deploySidebar = () => {
     setOpenSidebar(!openSidebar);
   };
+  useEffect(() => {
+    document.addEventListener('scroll', (event) => {
+      if(document.documentElement.scrollTop > 15){
+        setScroll(true)
+      }
+      else{
+        setScroll(false)
+      }
+    });
+  },[document.documentElement.scrollTop])
 
   const history = useHistory();
   return (
     <>
-      <TopMenuStyles>
+      <TopMenuStyles isScrolled={scroll}>
         <NavPanel isClose={openSidebar} deploySideBar={deploySidebar} />
         <ToggleButtonContainer isClose={openSidebar}>
           <Icon
@@ -92,7 +103,9 @@ export const TopMenu: FC<TopMenuProps> = ({
 type ToggleButtonProps = {
   isClose: boolean;
 };
-const TopMenuStyles = styled.div`
+const TopMenuStyles = styled.div<{
+  isScrolled: boolean;
+}>`
   display: none;
   @media screen and (min-width: ${ScreenSize.tablet}) {
     position: fixed;
@@ -103,7 +116,8 @@ const TopMenuStyles = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: ${BasicColor.white};
+    background-color: ${props => props.isScrolled ? "#ffffffe0" : 'transparent'};
+    transition: 0.5s;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
     margin: 0 auto;
