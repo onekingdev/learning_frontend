@@ -1,35 +1,43 @@
 import styled from 'styled-components';
-import {Grid, Paper} from '@mui/material';
-import {BasicColor} from '../../Color';
-import {ScreenSize} from '../../screenSize';
+import { Grid, Paper } from '@mui/material';
+import { BasicColor } from '../../Color';
 
+export const BankPaper = styled(Paper) <{
+  flex_direction: string,
+  bg_color: string,
+  width?: number
+}>`
+margin-top: 5vh;
+&.MuiPaper-root {
+  padding: 30px 0 30px 0;
+  width: ${p => p.width?p.width + 'px':'auto'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: ${p => p.flex_direction};
+  color: white;
+  background-color: ${BasicColor.blue};
+  background-color: ${p => p.bg_color};
+  border-radius: 20px;
+  }
+`;
 
-export const GridItem = styled(Grid)<{
-  align?: string;
+export const GridItem = styled(Grid) <{
+  align?: string
 }>`
 &.MuiGrid-root {
   display: flex;
   justify-content: center;
-  align-items: ${p => (p.align ? p.align : 'center')};
+  align-items: ${p => p.align ? p.align : 'center'};
   flex-direction: column;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    align-items: center;
   }
 `;
 
 export const Input = styled.input`
-  margin: 15px;
-  border-radius: 14px;
-  height: 54px;
-  border-collapse: collapse;
-  outline: none;
-  font-size: 18px;
-  padding-left: 5vw;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    font-size: 0.9em;
-  }
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    height: 30px;
-    width: 150px;
-  }
+margin: 15px;
+border-radius: 14px;
+height: 54px;
+outline: none;
+font-size: 18px;
 `;
+

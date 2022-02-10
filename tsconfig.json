@@ -17,14 +17,18 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": "./src",
+    "paths": {
+      "@app": ["app"],
+      "@views": ["views"],
+      "@assets": ["app/assets"],
+      "@atoms": ["app/atoms"],
+      "@moleclues": ["app/moleclues"],
+      "@organisms": ["app/organisms"],
+      "@pages": ["app/pages"],
+      "@templates": ["app/templates"],
+
+    }
   },
-  "include": ["src"],
-  "baseUrl": "src",
-  "paths": {
-    "@atoms": "[views/atoms/]",
-    "@molecules": "[views/molucules/]",
-    "@assets": "[views/assets/]",
-    // "@organims/*": "[]",
-  }
 }

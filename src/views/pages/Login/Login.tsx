@@ -23,7 +23,7 @@ import query from '../../../api/queries/get'
 import {WHOAMI_QUERY} from '../../../api/queries/users'
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 import { TOKEN_AUTH } from '../../../api/mutations/users'
-import { login } from '../../../app/actions/userActions'
+import { login, resetReducer } from '../../../app/actions/userActions'
 export const LogIn: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
@@ -66,8 +66,9 @@ export const LogIn: FC = () => {
   }
 
   useEffect(() => {
-    dispatch({type:TYPES.STUDENT_RESET})
+    resetReducer(dispatch)
   }, []);
+
   return (
     <Login>
       <Greet
