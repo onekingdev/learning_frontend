@@ -18,18 +18,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["node"],
-    "baseUrl": "./src",
-    "paths": {
-      "@app/*": ["app/*"],
-      "@actions/*": ["app/actions/*"],
-      "@api/*": ["api/*"],
-      "@views/*": ["./views/*"],
-      "@assets/*": ["./views/assets/*"],
-      "@atoms/*": ["./views/atoms/*"],
-      "@molecules/*": ["./views/molecules/*"],
-      "@organisms/*": ["views/organisms/*"],
-      "@pages/*": ["views/pages/*"],
-      "@templates/*": ["views/templates/*"],
-    }
+    "baseUrl": "src",
   },
+  "include": ["src"]
 }

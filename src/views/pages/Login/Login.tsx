@@ -2,17 +2,17 @@ import {FC, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useDispatch } from 'react-redux'
-import { login, resetReducer } from '@app/actions/userActions'
-import {Header} from '@atoms/Text/Header';
-import {Subheader} from '@atoms/Text/Subheader';
-import {Button as ButtonText} from '@atoms/Text/Button';
-import {ButtonColor} from '@views/Color';
-import logo from '@assets/socrates-logo.svg';
-import classroom from '@assets/teacher-and-children.svg';
-import greeting from '@assets/greeting.svg';
-import {Actions} from '@molecules/Login/Actions';
-import {Form} from '@molecules/Login/Form';
-import {Greet} from '@molecules/Login/Greet';
+import { login, resetReducer } from 'app/actions/userActions'
+import {Header} from 'views/atoms/Text/Header';
+import {Subheader} from 'views/atoms/Text/Subheader';
+import {Button as ButtonText} from 'views/atoms/Text/Button';
+import {ButtonColor} from 'views/Color';
+import logo from 'views/assets/socrates-logo.svg';
+import classroom from 'views/assets/teacher-and-children.svg';
+import greeting from 'views/assets/greeting.svg';
+import {Actions} from 'views/molecules/Login/Actions';
+import {Form} from 'views/molecules/Login/Form';
+import {Greet} from 'views/molecules/Login/Greet';
 import {Login, Card, Legal, LoginWrapper, DesktopWelcome} from './Style';
 import {dictionary} from './dictionary';
 
