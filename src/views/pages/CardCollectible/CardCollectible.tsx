@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState, useContext} from 'react';
 import {
   CardCollectibleContainer,
   Wrapper,
@@ -18,6 +18,7 @@ import {Modal} from '../../atoms/Modal';
 import {useParams, useHistory} from 'react-router-dom';
 import {get} from '../../../api/queries/get';
 import {COLLECTIBLE_QUERY} from '../../../api/queries/progress';
+import {LoadingContext} from 'react-router-loading';
 
 interface RouteCollectibleParams {
   collectibleId: string;
@@ -31,6 +32,7 @@ interface collectibleProps {
 }
 
 export const CardCollectible: FC = () => {
+  const loadingContext = useContext(LoadingContext);
   const history = useHistory();
   const {collectibleId, categoryId} = useParams<RouteCollectibleParams>();
   const [collectible, setCollectible] = useState<collectibleProps>();
@@ -40,6 +42,7 @@ export const CardCollectible: FC = () => {
   };
   const handleData = (data: any) => {
     setCollectible(data.data.collectibleById);
+    loadingContext.done();
   };
 
   const handleError = (error: any) => {

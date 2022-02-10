@@ -3,7 +3,7 @@ import styled, {keyframes} from 'styled-components';
 import socrates from '../assets/socrates.svg';
 import shapes from '../assets/colored-shapes-bg.svg';
 
-export const Spinner = () => {
+export const Spinner: any = () => {
   return (
     <Shapes>
       <Icon src={socrates} />

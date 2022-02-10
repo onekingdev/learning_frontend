@@ -1,7 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Redirect,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect} from 'react-router-dom';
 import {Route, Switch} from 'react-router-loading';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
@@ -32,13 +29,25 @@ import {Bank} from './views/pages/Student/Bank/Bank';
 import {Cards} from './views/pages/Student/Collectibles/Cards';
 
 import NewKids from './views/pages/NewKids/NewKids';
-import { Spinner } from 'views/atoms/Spinner';
+import {Spinner} from 'views/atoms/Spinner';
 
-const PrivateRoute = ({requireAuth = true, ...rest}) => {
+const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
   const isAuthenticated = !!user?.token;
 
-  return (
+  return loading ? (
+    <Route loading {...rest}>
+      {requireAuth ? (
+        isAuthenticated ? (
+          rest.children
+        ) : (
+          <Redirect to={{pathname: '/login'}} />
+        )
+      ) : (
+        rest.children
+      )}
+    </Route>
+  ) : (
     <Route {...rest}>
       {requireAuth ? (
         isAuthenticated ? (
@@ -57,8 +66,7 @@ export function Routes(props: any) {
   return (
     <Router>
       {/* this is the problem */}
-      {/* <Switch loadingScreen={Spinner}> */}
-      <Switch>
+      <Switch loadingScreen={Spinner}>
         <PrivateRoute exact path="/" requireAuth={false}>
           <Welcome />
         </PrivateRoute>
@@ -66,24 +74,25 @@ export function Routes(props: any) {
           <LogIn />
         </PrivateRoute>
         <PrivateRoute
+          loading={true}
           path="/question/presentation_:presentationId"
           requireAuth={false}
         >
           <Question />
         </PrivateRoute>
-        <PrivateRoute path="/avatar">
+        <PrivateRoute path="/avatar" loading={true}>
           <Avatar />
         </PrivateRoute>
-        <PrivateRoute path="/wardrobe">
+        <PrivateRoute path="/wardrobe" loading={true}>
           <Wardrobe />
         </PrivateRoute>
-        <PrivateRoute path="/collectibles/category_:categoryId/:collectibleId">
+        <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute path="/collectibles/category_:categoryId">
+        <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute path="/collectibles/cards">
+        <PrivateRoute  loading={true} path="/collectibles/cards">
           <Cards />
         </PrivateRoute>
         <PrivateRoute path="/bank">

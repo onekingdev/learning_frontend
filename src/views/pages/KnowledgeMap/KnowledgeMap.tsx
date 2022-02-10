@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
 import {StudentMenu} from '../../templates/StudentMenu';
 import ocean from '../../assets/islands/ocean.svg';
