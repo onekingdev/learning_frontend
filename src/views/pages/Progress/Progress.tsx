@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect} from 'react';
+import {FC} from 'react';
 import {RibbonText} from '../../molecules/RibbonText';
 import {MyProgress} from '../../organisms/MyProgress';
 import {StudentMenu} from '../../templates/StudentMenu';
@@ -11,14 +11,9 @@ import {
   ProgressTitle,
 } from './Styles';
 import {Rank} from '../../organisms/Rank';
-import {LoadingContext} from 'react-router-loading';
 
 export const Progress: FC = () => {
-  const loadingContext = useContext(LoadingContext);
   const language = 'en';
-  useEffect(() => {
-    loadingContext.done();
-  }, []);
   return (
     <>
       <ProgressBackground>

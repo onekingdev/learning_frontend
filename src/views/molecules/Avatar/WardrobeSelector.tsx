@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, SetStateAction, useEffect, useState} from 'react';
 import {ScreenSize} from '../../screenSize';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
@@ -13,11 +13,9 @@ import {getAvatarAsset, getAvatarDir} from '../../../app/firebase';
 import axios from 'axios';
 import wardrobe_icon from '../../assets/wardrobe.png';
 import {Link} from 'react-router-dom';
-import {LoadingContext} from 'react-router-loading';
 
 // import data from '../../pages/Avatar/atoms';
 export const WardrobeSelector: FC = () => {
-  const loadingContext = useContext(LoadingContext);
   // const accessories_max = accessories.length;
   // const headers_max = headers.length;
   // const bodies_max = bodies.length;
@@ -99,8 +97,8 @@ export const WardrobeSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
-      loadingContext.done()
-      console.log('result', result.data.data);
+
+      console.log("result", result.data.data)
 
       const accesory = result.data.data.studentById.avatarAccessories.image;
       const head = result.data.data.studentById.avatarHead.image;
@@ -395,7 +393,7 @@ export const WardrobeSelector: FC = () => {
               left: '0px',
             }}
           />
-          {console.log('header', headers)}
+          {console.log("header",headers)}
           <CurrentHeader
             src={headRef}
             // style={{

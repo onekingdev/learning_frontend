@@ -1,5 +1,9 @@
-import {BrowserRouter as Router, Redirect} from 'react-router-dom';
-import {Route, Switch} from 'react-router-loading';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
@@ -20,34 +24,22 @@ import {Wardrobe} from './views/pages/Avatar/Wardrobe';
 import {Payment} from './views/pages/Payment/Payment';
 import CreateParent from './views/pages/CreateParent/CreateParent';
 import KidsList from './views/pages/KidsList/KidsList';
-import {useSelector} from 'react-redux';
-import {Store} from './app/configureStore';
-import {ParentPgContainer} from './views/molecules/ParentPgContainer/ParentPgContainer';
+import { useSelector } from 'react-redux';
+import { Store } from './app/configureStore'
+import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgContainer'
 import {Settings} from './views/pages/Settings/Settings';
 import {Report} from './views/pages/Report/Report';
 import {Bank} from './views/pages/Student/Bank/Bank';
 import {Cards} from './views/pages/Student/Collectibles/Cards';
 
-import NewKids from './views/pages/NewKids/NewKids';
-import {Spinner} from 'views/atoms/Spinner';
 
-const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
+import NewKids from './views/pages/NewKids/NewKids'
+
+const PrivateRoute = ({requireAuth = true, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
   const isAuthenticated = !!user?.token;
 
-  return loading ? (
-    <Route loading {...rest}>
-      {requireAuth ? (
-        isAuthenticated ? (
-          rest.children
-        ) : (
-          <Redirect to={{pathname: '/login'}} />
-        )
-      ) : (
-        rest.children
-      )}
-    </Route>
-  ) : (
+  return (
     <Route {...rest}>
       {requireAuth ? (
         isAuthenticated ? (
@@ -65,8 +57,7 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
 export function Routes(props: any) {
   return (
     <Router>
-      {/* this is the problem */}
-      <Switch loadingScreen={Spinner}>
+      <Switch>
         <PrivateRoute exact path="/" requireAuth={false}>
           <Welcome />
         </PrivateRoute>
@@ -74,76 +65,75 @@ export function Routes(props: any) {
           <LogIn />
         </PrivateRoute>
         <PrivateRoute
-          loading={true}
           path="/question/presentation_:presentationId"
           requireAuth={false}
         >
           <Question />
         </PrivateRoute>
-        <PrivateRoute path="/avatar" loading={true}>
+        <PrivateRoute path="/avatar">
           <Avatar />
         </PrivateRoute>
-        <PrivateRoute path="/wardrobe" loading={true}>
+        <PrivateRoute path="/wardrobe">
           <Wardrobe />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
+        <PrivateRoute path="/collectibles/category_:categoryId/:collectibleId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
+        <PrivateRoute path="/collectibles/category_:categoryId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute  loading={true} path="/collectibles/cards">
+        <PrivateRoute path="/collectibles/cards">
           <Cards />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/bank">
+        <PrivateRoute path="/bank">
           <Bank />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/profile">
+        <PrivateRoute path="/profile">
           <MyProfile />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/home">
+        <PrivateRoute path="/home">
           <StudentHome />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/progress">
+        <PrivateRoute path="/progress">
           <Progress />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/backpack">
+        <PrivateRoute path="/backpack">
           <Backpack />
         </PrivateRoute>
-        <PrivateRoute loadin={true} path="/games/categories">
+        <PrivateRoute path="/games/categories">
           <Games />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/games">
+        <PrivateRoute path="/games">
           <GamesMenu />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/map">
+        <PrivateRoute path="/map">
           <KnowledgeMap />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/confirmation">
+        <PrivateRoute path="/confirmation">
           <ConfirmAccount />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/subjects">
+        <PrivateRoute path="/subjects">
           <SubjectsMenu />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/topic/:topicId">
+        <PrivateRoute path="/topic/:topicId">
           <TopicsMenu />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/parent/setting">
+        <PrivateRoute path="/parent/setting">
           <Settings />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/parent/report">
+        <PrivateRoute path="/parent/report">
           <Report />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/parent/payment">
+        <PrivateRoute path="/parent/payment">
           <Payment />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/parent/create">
+        <PrivateRoute path="/parent/create">
           <CreateParent />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/kids/list">
+        <PrivateRoute path="/kids/list">
           <KidsList />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/kids/new">
+        <PrivateRoute path="/kids/new">
           <NewKids />
         </PrivateRoute>
         {process.env.NODE_ENV === 'development' ? (

@@ -1,4 +1,4 @@
-import {FC, useEffect, useState, useContext} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Wrapper, TopicsMenuStyles} from './Style';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {TopicPresentation} from '../../molecules/TopicPresentation';
@@ -6,21 +6,19 @@ import {SubTopicsCarousel} from '../../organisms/SubTopicsCarousel';
 import {get} from '../../../api/queries/get';
 import {AREA_OF_KNOWLEDGE_QUERY} from '../../../api/queries/questions';
 import {useParams} from 'react-router-dom';
-import {IAreasOfKnowledge} from '../../../app/entities/areasOfKnowledge';
-import {ITopic} from '../../../app/entities/block';
-import {LoadingContext} from 'react-router-loading';
+import {IAreasOfKnowledge} from '../../../app/entities/areasOfKnowledge'
+import { ITopic } from '../../../app/entities/block';
+
 interface RouteTopicParams {
   topicId: string;
 }
 
 export const TopicsMenu: FC = () => {
-  const loadingContext = useContext(LoadingContext);
   const {topicId} = useParams<RouteTopicParams>();
   const [areaOfKnowledge, setAreaOfKnowledge] = useState<IAreasOfKnowledge>();
 
   const handleData = (data: any) => {
     setAreaOfKnowledge(data.data.areaOfKnowledgeById);
-    loadingContext.done();
   };
   const handleError = (error: any) => {
     console.error(error);
@@ -33,19 +31,20 @@ export const TopicsMenu: FC = () => {
       handleData,
       handleError
     );
-    console.log(topicId);
+    console.log(topicId)
   }, []);
   return (
     <>
       <Wrapper>
         <StudentMenu>
-          {areaOfKnowledge ? (
+          {
+            areaOfKnowledge ?
             <TopicsMenuStyles>
               <TopicPresentation
                 title={areaOfKnowledge.name}
                 image={`https://api.withsocrates.com/media/${areaOfKnowledge.image}`}
               />
-              {areaOfKnowledge.topicSet.map((item: ITopic, i: any) => (
+              {areaOfKnowledge.topicSet.map((item: ITopic, i:any) => (
                 <SubTopicsCarousel
                   name={item.name}
                   subTopics={item.subTopics}
@@ -53,8 +52,10 @@ export const TopicsMenu: FC = () => {
                   key={i}
                 />
               ))}
-            </TopicsMenuStyles>
-          ) : null}
+           </TopicsMenuStyles>
+            :
+            null
+          }
         </StudentMenu>
       </Wrapper>
     </>
