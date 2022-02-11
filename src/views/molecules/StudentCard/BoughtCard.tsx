@@ -1,15 +1,22 @@
-import { FC, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-import { BasicColor } from "../../Color";
-import ReactLoading from "react-loading";
-
+import { FC, useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { BasicColor } from '../../Color';
+import ReactLoading from 'react-loading';
+import useSound from 'use-sound'
+import purchaseSound from '../../assets/audios/mixkit-coin-win-notification.wav'
 type CardProps = {
   imgUrl: string;
 };
 
+
+  /**
+   * @author BruceLee
+   */
 export const BoughtCard: FC<CardProps> = ({ imgUrl }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
+
+  const [play, { stop }] = useSound(purchaseSound);
 
   // state to know that image is loaded, rotating effect only works when image is fully loaded
   const [loaded, setLoaded] = useState(false);
@@ -20,17 +27,17 @@ export const BoughtCard: FC<CardProps> = ({ imgUrl }) => {
           ?
           <>
           <StyledImg
-              style={ loaded ? {} : { display: "none" }}
+              style={ loaded ? {} : { display: 'none' }}
               src={imgUrl}
-              loading="eager"
-              onLoad={() => setLoaded(true)}
+              loading='eager'
+              onLoad={() => {setLoaded(true), play()}}
             />
-            <div style={ loaded ? {display: 'none'} : { display: 'flex', alignItems: 'center'}}>
+            <div style={ loaded ? {display: 'none'} : { display: 'flex', alignItems: 'center'}} >
               <ReactLoading type='spokes' color={BasicColor.green} />
             </div>
           </>
           : <StyledP>?</StyledP>
-        : <ReactLoading type="spinningBubbles" color={BasicColor.green} />}
+        : <ReactLoading type='spinningBubbles' color={BasicColor.green} />}
     </StyledCard>
   );
 };

@@ -60,6 +60,7 @@
     "typescript": "^4.5.4",
     "typescript-eslint": "0.0.1-alpha.0",
     "use-sound": "^4.0.1",
+    "use-state-if-mounted": "^1.0.4",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {

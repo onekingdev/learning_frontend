@@ -40,7 +40,7 @@ const MuiButton: FC<MuiButtonProps> = ({
   height,
   fontSize,
   weight,
-  variant='contained',
+  variant="contained",
   margin,
   disabled=false,
   loading=false,
@@ -52,7 +52,7 @@ const MuiButton: FC<MuiButtonProps> = ({
 
     const useStyles = makeStyles({
         Button: {
-            '&.MuiButton-root':{
+            "&.MuiButton-root":{
                 // backgroundColor: '#21B95C',
                 zIndex:zIndex,
                 backgroundColor: variant !== 'outlined' ? bgColor || BasicColor.greenSoft : 'white',
@@ -61,7 +61,7 @@ const MuiButton: FC<MuiButtonProps> = ({
                 borderStyle: 'solid',
                 borderWidth: 1,
                 height: height || '49px',
-                width: fullWidth ? '100%' : width || '215px',
+                width: fullWidth ? "100%" : width || '215px',
                 textTransform: 'unset',
                 fontSize: fontSize || '16px',
                 fontWeight: weight || 500,
@@ -69,7 +69,7 @@ const MuiButton: FC<MuiButtonProps> = ({
                 float: align,
                 margin: margin || 'unset',
             },
-            '&:hover': {
+            "&:hover": {
                 background: `${shadeColor(bgColor || BasicColor.greenSoft, 10)}
                     radial-gradient(circle, transparent 1%, ${bgColor} 1%)
                     center/15000% !important`

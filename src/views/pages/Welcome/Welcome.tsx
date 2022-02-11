@@ -92,7 +92,7 @@ export const Welcome: FC = () => {
           color={ButtonColor.join}
           darkText={true}
           // onClick={() => setDeployModal(true)}
-          onClick={() => history.push('/parent/create')}
+          onClick={() => history.push("/parent/create")}
         />
       </Actions>
 

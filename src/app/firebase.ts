@@ -157,37 +157,67 @@ export const getAvatarDir = async (dir: any, setDir: any) => {
   });
 };
 
-export const getBoughtCards = async (dir: any, setBuyLinks: any, setBuyIds: any) => {
+
+/**
+ * Get image download urls with ids
+ * @author BruceLee
+ * @param randIds array of numbers
+ * @param dir bought category
+ * @param setBuyLinks get links of bought cards
+ */
+export const getBoughtCards = async (
+  dir: any,
+  setBuyLinks: any,
+) => {
   const storage = getStorage();
   const listRef = assetRef(storage, `assets/collectible/${dir}`);
+  const res = await listAll(listRef);
 
-  const res = await listAll(listRef)
   const length = res.items.length
-
-  // Get random 3 urls of current category
   const randomIds = []
   for(let i = 0; i < 3; i ++)
   randomIds.push(Math.floor(Math.random() * length))
 
-  const links = []
+  const links = [];
   for (const row of randomIds) {
-    links.push(await getDownloadURL(res.items[row]))
+    links.push(await getDownloadURL(res.items[row]));
   }
 
-  setBuyLinks(links)
-  setBuyIds(randomIds)
+  setBuyLinks(links);
 };
 
-export const getCardCategories = async ( setCateItems: any) => {
+/**
+ * Card collectible page, when user buys a pack of 3 cards, download files from firebase
+ * @author BruceLee
+ * @param filenames links from db
+ * @param dir directory name in firebase currently bought
+ * @param getBoughtCards function to set states with image urls
+ */
+export const buyCardsWithFilenames = async (
+  filenames: Array<string>,
+  dir: string,
+  getBoughtCards: any
+) => {
+  const storage = getStorage();
+  const links = []
+
+  for (const filename of filenames) {
+    const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename}`);
+    links.push(await getDownloadURL(fileRef))
+  }
+  getBoughtCards(links)
+};
+
+export const getCardCategories = async (setCateItems: any) => {
   const storage = getStorage();
   const listRef = assetRef(storage, `assets/collectible/Categories`);
 
-  const res = await listAll(listRef)
+  const res = await listAll(listRef);
 
-  const links = []
+  const links = [];
   for (const row of res.items) {
-    links.push(await getDownloadURL(row))
+    links.push(await getDownloadURL(row));
   }
 
-  setCateItems(links)
+  setCateItems(links);
 };

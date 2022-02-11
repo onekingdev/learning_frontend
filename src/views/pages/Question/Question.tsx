@@ -66,7 +66,7 @@ export const Question: FC = () => {
 
 
   const onAnswer = (result: boolean) => {
-    console.log('answered', result)
+    console.log("answered", result)
     setAnswerResult([...answerResult, result]);
     if(result) setPoints(points + pointUnit);
   }

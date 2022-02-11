@@ -8,3 +8,4 @@ export interface IAvatar {
     fullName: string;
     dob: Date;
   }
+  

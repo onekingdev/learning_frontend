@@ -8,7 +8,7 @@ export const login = async (username: string, password: string, dispatch: any) =
 
     const res:any = await mutation(TOKEN_AUTH( username, password )).catch(e => ({success: false}));
     if(res.success === false) {
-        return {success: false, msg: 'Network Error'};
+        return {success: false, msg: "Network Error"};
     }
 
     const result:any = await res.json();
@@ -19,10 +19,10 @@ export const login = async (username: string, password: string, dispatch: any) =
 
     const { token } = result.data.tokenAuth
 
-    const res_who:any = await query('whoami', WHOAMI_QUERY, token).catch(e => ({success: false}));
+    const res_who:any = await query("whoami", WHOAMI_QUERY, token).catch(e => ({success: false}));
 
     if(res_who.success === false) {
-      return {success: false, msg: 'Network Error!'};
+      return {success: false, msg: "Network Error!"};
     }
 
     const result_who:any = await res_who.json();
@@ -56,15 +56,15 @@ export const login = async (username: string, password: string, dispatch: any) =
           clothes: student.avatarClothes,
           pants: student.avatarPants
         }})
-        return {success: true, msg: 'Successfully Logined!', userType: 'student'}
+        return {success: true, msg: 'Successfully Logined!', userType: "student"}
       }
       else if(guardian) {
         // dispatch({ type: TYPES.PARENT_SET_DATA, payload: guardian })
-        return {success: true, msg: 'Successfully Logined!', userType: 'guardian'}
+        return {success: true, msg: 'Successfully Logined!', userType: "guardian"}
       }
       else {
         // dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
-        return {success: true, msg: 'Successfully Logined!', userType: 'teacher'}
+        return {success: true, msg: 'Successfully Logined!', userType: "teacher"}
       }
 }
 

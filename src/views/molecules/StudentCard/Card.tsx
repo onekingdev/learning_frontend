@@ -8,16 +8,13 @@ import ReactLoading from 'react-loading'
 type CardProps = {
   imgUrl: string
   category: string
-  alt?: string
-  title?: string
-  content?: string
   id: number
   price: number
   buy: (imgUrl: string) => (void)
 }
 
 export const Card: FC<CardProps> = ({
-  imgUrl, alt, title, content, id, buy, price, category
+  imgUrl, id, buy, price, category
 }) => {
   const onCardClick = () => {
 
@@ -28,7 +25,7 @@ export const Card: FC<CardProps> = ({
     <StyledCard >
       <StyledCardTitle>{category}</StyledCardTitle>
       {imgUrl ?
-        <StyledImg src={imgUrl} alt={alt || 'Image'} />
+        <StyledImg src={imgUrl} alt={'Category Image'} />
         :
         <ReactLoading type='spinningBubbles' color={BasicColor.green} />}
       <PriceBadge price={price} />
@@ -77,7 +74,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-height: 250px;
+height: 230px;
 width: 160px;
 min-width: 100px;
 position: relative;
@@ -139,8 +136,8 @@ const StyledPrice = styled.div`
   object-fit: center;
   box-shadow: 0 1px 1rem -3px orange;
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  bottom: 0;
+  right: 0;
 `
 
 const StyledBuyBtn = styled.div`
