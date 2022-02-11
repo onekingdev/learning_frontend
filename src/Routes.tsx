@@ -1,9 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect} from 'react-router-dom';
+import {Route, Switch} from 'react-router-loading';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
@@ -24,22 +20,34 @@ import {Wardrobe} from './views/pages/Avatar/Wardrobe';
 import {Payment} from './views/pages/Payment/Payment';
 import CreateParent from './views/pages/CreateParent/CreateParent';
 import KidsList from './views/pages/KidsList/KidsList';
-import { useSelector } from 'react-redux';
-import { Store } from './app/configureStore'
-import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgContainer'
+import {useSelector} from 'react-redux';
+import {Store} from './app/configureStore';
+import {ParentPgContainer} from './views/molecules/ParentPgContainer/ParentPgContainer';
 import {Settings} from './views/pages/Settings/Settings';
 import {Report} from './views/pages/Report/Report';
 import {Bank} from './views/pages/Student/Bank/Bank';
 import {Cards} from './views/pages/Student/Collectibles/Cards';
 
+import NewKids from './views/pages/NewKids/NewKids';
+import {Spinner} from 'views/atoms/Spinner';
 
-import NewKids from './views/pages/NewKids/NewKids'
-
-const PrivateRoute = ({requireAuth = true, ...rest}) => {
+const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
   const isAuthenticated = !!user?.token;
 
-  return (
+  return loading ? (
+    <Route loading {...rest}>
+      {requireAuth ? (
+        isAuthenticated ? (
+          rest.children
+        ) : (
+          <Redirect to={{pathname: '/login'}} />
+        )
+      ) : (
+        rest.children
+      )}
+    </Route>
+  ) : (
     <Route {...rest}>
       {requireAuth ? (
         isAuthenticated ? (
@@ -57,7 +65,8 @@ const PrivateRoute = ({requireAuth = true, ...rest}) => {
 export function Routes(props: any) {
   return (
     <Router>
-      <Switch>
+      {/* this is the problem */}
+      <Switch loadingScreen={Spinner}>
         <PrivateRoute exact path="/" requireAuth={false}>
           <Welcome />
         </PrivateRoute>
@@ -65,75 +74,76 @@ export function Routes(props: any) {
           <LogIn />
         </PrivateRoute>
         <PrivateRoute
+          loading={true}
           path="/question/presentation_:presentationId"
           requireAuth={false}
         >
           <Question />
         </PrivateRoute>
-        <PrivateRoute path="/avatar">
+        <PrivateRoute path="/avatar" loading={true}>
           <Avatar />
         </PrivateRoute>
-        <PrivateRoute path="/wardrobe">
+        <PrivateRoute path="/wardrobe" loading={true}>
           <Wardrobe />
         </PrivateRoute>
-        <PrivateRoute path="/collectibles/category_:categoryId/:collectibleId">
+        <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute path="/collectibles/category_:categoryId">
+        <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute path="/collectibles/cards">
+        <PrivateRoute  loading={true} path="/collectibles/cards">
           <Cards />
         </PrivateRoute>
-        <PrivateRoute path="/bank">
+        <PrivateRoute loading={true} path="/bank">
           <Bank />
         </PrivateRoute>
-        <PrivateRoute path="/profile">
+        <PrivateRoute loading={true} path="/profile">
           <MyProfile />
         </PrivateRoute>
-        <PrivateRoute path="/home">
+        <PrivateRoute loading={true} path="/home">
           <StudentHome />
         </PrivateRoute>
-        <PrivateRoute path="/progress">
+        <PrivateRoute loading={true} path="/progress">
           <Progress />
         </PrivateRoute>
-        <PrivateRoute path="/backpack">
+        <PrivateRoute loading={true} path="/backpack">
           <Backpack />
         </PrivateRoute>
-        <PrivateRoute path="/games/categories">
+        <PrivateRoute loadin={true} path="/games/categories">
           <Games />
         </PrivateRoute>
-        <PrivateRoute path="/games">
+        <PrivateRoute loading={true} path="/games">
           <GamesMenu />
         </PrivateRoute>
-        <PrivateRoute path="/map">
+        <PrivateRoute loading={true} path="/map">
           <KnowledgeMap />
         </PrivateRoute>
-        <PrivateRoute path="/confirmation">
+        <PrivateRoute loading={true} path="/confirmation">
           <ConfirmAccount />
         </PrivateRoute>
-        <PrivateRoute path="/subjects">
+        <PrivateRoute loading={true} path="/subjects">
           <SubjectsMenu />
         </PrivateRoute>
-        <PrivateRoute path="/topic/:topicId">
+        <PrivateRoute loading={true} path="/topic/:topicId">
           <TopicsMenu />
         </PrivateRoute>
-        <PrivateRoute path="/parent/setting">
+        <PrivateRoute loading={true} path="/parent/setting">
           <Settings />
         </PrivateRoute>
-        <PrivateRoute path="/parent/report">
+        <PrivateRoute loading={true} path="/parent/report">
           <Report />
         </PrivateRoute>
-        <PrivateRoute path="/parent/payment">
+        <PrivateRoute loading={true} path="/parent/payment">
           <Payment />
         </PrivateRoute>
-        <PrivateRoute path="/parent/create">
+        <PrivateRoute loading={true} path="/parent/create">
           <CreateParent />
         </PrivateRoute>
-        <PrivateRoute path="/kids/list">
+        <PrivateRoute loading={true} path="/kids/list">
           <KidsList />
         </PrivateRoute>
-        <PrivateRoute path="/kids/new">
+        <PrivateRoute loading={true} path="/kids/new">
           <NewKids />
         </PrivateRoute>
         {process.env.NODE_ENV === 'development' ? (

@@ -34,10 +34,11 @@ export const login = async (username: string, password: string, dispatch: any) =
 
     const user = result_who.data.whoami;
     const user_redux:any = (({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language,profile }) => ({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language, profile}))(user)
-    dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
     const {guardian, student} = result_who.data.whoami;
+
+    dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
+
     if(student) {
-        console.log(user.level);
         dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
         dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
         dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
@@ -65,4 +66,11 @@ export const login = async (username: string, password: string, dispatch: any) =
         // dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
         return {success: true, msg: 'Successfully Logined!', userType: "teacher"}
       }
+}
+
+export const resetReducer =  async (dispatch: any) => {
+  dispatch({type: TYPES.USER_RESET});
+  dispatch({type: TYPES.STUDENT_RESET});
+  dispatch({type: TYPES.EARNING_RESET});
+  dispatch({type: TYPES.AVATAR_RESET});
 }
