@@ -84,92 +84,92 @@ export function Routes(props: any) {
          }}
       >
         <Switch loadingScreen={Spinner} location={location}>
-          <PrivateRoute exact path="/" requireAuth={false}>
-            <Welcome />
-          </PrivateRoute>
-          <PrivateRoute path="/login" requireAuth={false}>
-            <LogIn />
-          </PrivateRoute>
-          <PrivateRoute
-            loading={true}
-            path="/question/presentation_:presentationId"
-            requireAuth={false}
-          >
-            <Question />
-          </PrivateRoute>
-          <PrivateRoute path="/avatar" loading={true}>
-            <Avatar />
-          </PrivateRoute>
-          <PrivateRoute path="/wardrobe" loading={true}>
-            <Wardrobe />
-          </PrivateRoute>
-          <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
-            <CardCollectible />
-          </PrivateRoute>
-          <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
-            <CardCollectible />
-          </PrivateRoute>
-          <PrivateRoute  loading={true} path="/collectibles/cards">
-            <Cards />
-          </PrivateRoute>
-          <PrivateRoute path="/bank">
-            <Bank />
-          </PrivateRoute>
-          <PrivateRoute path="/profile">
-            <MyProfile />
-          </PrivateRoute>
-          <PrivateRoute path="/home">
-            <StudentHome />
-          </PrivateRoute>
-          <PrivateRoute path="/progress">
-            <Progress />
-          </PrivateRoute>
-          <PrivateRoute path="/backpack">
-            <Backpack />
-          </PrivateRoute>
-          <PrivateRoute path="/games/categories">
-            <Games />
-          </PrivateRoute>
-          <PrivateRoute path="/games">
-            <GamesMenu />
-          </PrivateRoute>
-          <PrivateRoute path="/map">
-            <KnowledgeMap />
-          </PrivateRoute>
-          <PrivateRoute path="/confirmation">
-            <ConfirmAccount />
-          </PrivateRoute>
-          <PrivateRoute path="/subjects">
-            <SubjectsMenu />
-          </PrivateRoute>
-          <PrivateRoute path="/topic/:topicId">
-            <TopicsMenu />
-          </PrivateRoute>
-          <PrivateRoute path="/parent/setting">
-            <Settings />
-          </PrivateRoute>
-          <PrivateRoute path="/parent/report">
-            <Report />
-          </PrivateRoute>
-          <PrivateRoute path="/parent/payment">
-            <Payment />
-          </PrivateRoute>
-          <PrivateRoute path="/parent/create">
-            <CreateParent />
-          </PrivateRoute>
-          <PrivateRoute path="/kids/list">
-            <KidsList />
-          </PrivateRoute>
-          <PrivateRoute path="/kids/new">
-            <NewKids />
-          </PrivateRoute>
-          {process.env.NODE_ENV === 'development' ? (
-            <Route path="/testing">
-              <Testing />
-            </Route>
-          ) : null}
+        <PrivateRoute exact path="/" requireAuth={false}>
+          <Welcome />
+        </PrivateRoute>
+        <PrivateRoute path="/login" requireAuth={false}>
+          <LogIn />
+        </PrivateRoute>
+        <PrivateRoute
+          loading={true}
+          path="/question/presentation_:presentationId"
+          requireAuth={false}
+        >
+          <Question />
+        </PrivateRoute>
+        <PrivateRoute path="/avatar" loading={true}>
+          <Avatar />
+        </PrivateRoute>
+        <PrivateRoute path="/wardrobe" loading={true}>
+          <Wardrobe />
+        </PrivateRoute>
+        <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
+          <CardCollectible />
+        </PrivateRoute>
+        <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
+          <CardCollectible />
+        </PrivateRoute>
+        <PrivateRoute  loading={true} path="/collectibles/cards">
+          <Cards />
+        </PrivateRoute>
+        <PrivateRoute path="/bank">
+          <Bank />
+        </PrivateRoute>
+        <PrivateRoute path="/profile">
+          <MyProfile />
+        </PrivateRoute>
+        <PrivateRoute loading={true} path="/home">
+          <StudentHome />
+        </PrivateRoute>
+        <PrivateRoute path="/progress">
+          <Progress />
+        </PrivateRoute>
+        <PrivateRoute loading={true} path="/backpack">
+          <Backpack />
+        </PrivateRoute>
+        <PrivateRoute path="/games/categories">
+          <Games />
+        </PrivateRoute>
+        <PrivateRoute path="/games">
+          <GamesMenu />
+        </PrivateRoute>
+        <PrivateRoute loading={true} path="/map">
+          <KnowledgeMap />
+        </PrivateRoute>
+        <PrivateRoute path="/confirmation">
+          <ConfirmAccount />
+        </PrivateRoute>
+        <PrivateRoute loading={true} path="/subjects">
+          <SubjectsMenu />
+        </PrivateRoute>
+        <PrivateRoute loading={true} path="/topic/:topicId">
+          <TopicsMenu />
+        </PrivateRoute>
+        <PrivateRoute path="/parent/setting">
+          <Settings />
+        </PrivateRoute>
+        <PrivateRoute path="/parent/report">
+          <Report />
+        </PrivateRoute>
+        <PrivateRoute path="/parent/payment">
+          <Payment />
+        </PrivateRoute>
+        <PrivateRoute path="/parent/create">
+          <CreateParent />
+        </PrivateRoute>
+        <PrivateRoute path="/kids/list">
+          <KidsList />
+        </PrivateRoute>
+        <PrivateRoute path="/kids/new">
+          <NewKids />
+        </PrivateRoute>
+        {process.env.NODE_ENV === 'development' ? (
+          <Route path="/testing">
+            <Testing />
+          </Route>
+        ) : null}
         </Switch>
       </CSSTransition >
-      </TransitionGroup>
+    </TransitionGroup>
   );
 }

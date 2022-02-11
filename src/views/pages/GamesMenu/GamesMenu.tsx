@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useContext, useEffect} from 'react';
 import {GamesMenuContainer, GamesMenuTitleContainer, Wrapper} from './Styles';
 import {GameCardPresentation} from '../../molecules/GameCardPresentation';
 import imagen from '../../assets/apple.svg';
@@ -7,8 +7,10 @@ import arcade from '../../assets/arcade.svg';
 import {BasicColor} from '../../Color';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {dictionary} from './dictionary';
+import {LoadingContext} from 'react-router-loading';
 
 export const GamesMenu: FC = () => {
+  const loadingContext = useContext(LoadingContext);
   const gameCards = [
     {
       gameTitle: 'PRINCESS GOLDBLADE',
@@ -67,6 +69,9 @@ export const GamesMenu: FC = () => {
     },
   ];
   const lenguage = 'en';
+  useEffect(() => {
+    loadingContext.done();
+  }, []);
   return (
     <>
       <Wrapper>

@@ -1,5 +1,6 @@
 body {
     color: #3F3F3F;
+    overflow: hidden;
 }
 .flex{
     display: flex;
@@ -321,6 +322,7 @@ body {
 }
 .my-node-enter {
     opacity: 0;
+    overflow: hidden;
   }
 
 .my-node-enter-active {
@@ -335,6 +337,7 @@ body {
 
 .my-node-exit {
     opacity: 1;
+    overflow: hidden;
 }
 .my-node-exit-active {
     /* width: 0px; */
