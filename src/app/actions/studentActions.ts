@@ -1,3 +1,5 @@
+import { mutation } from 'api/queries/get';
+import axios from 'axios';
 import * as TYPES from '../types'
 export const studentSetData = (payload: any) => {
   return {
@@ -83,3 +85,75 @@ export const setBlockPresentation = (payload: string) => ({
   type: 'SET_BLOCK_PRESENTATION',
   payload
 })
+
+export const setAccesoryAvatar = (payload: string, dispatch: any) => {
+  axios({
+    url: 'http://143.244.183.24/graphql/',
+    method: 'post',
+    data: {
+      query: `
+      mutation SetAvatar {
+        setStudentAvatar(avatarTypeOf:1, studentId:1, avatarUrl: "${payload}") {
+           student {
+             id
+           }
+       }
+   }
+        `,
+    },
+  }).then(data => dispatch({type: TYPES.AVATAR_SET_ACCESORY, payload: data}));
+}
+
+export const setHeadAvatar = (payload: string, dispatch: any) => {
+  axios({
+    url: 'http://143.244.183.24/graphql/',
+    method: 'post',
+    data: {
+      query: `
+      mutation SetAvatar {
+        setStudentAvatar(avatarTypeOf:2, studentId:1, avatarUrl: "${payload}") {
+           student {
+             id
+           }
+       }
+   }
+        `,
+    },
+  }).then(data => dispatch({type: TYPES.AVATAR_SET_HEAD, payload: data}));
+};
+
+export const setBodyAvatar = (payload: string, dispatch: any) => {
+  axios({
+    url: 'http://143.244.183.24/graphql/',
+    method: 'post',
+    data: {
+      query: `
+      mutation SetAvatar {
+        setStudentAvatar(avatarTypeOf:3, studentId:1, avatarUrl: "${payload}") {
+           student {
+             id
+           }
+       }
+   }
+        `,
+    },
+  }).then(data => dispatch({type: TYPES.AVATAR_SET_BODY, payload: data}));
+};
+
+export const setFooterAvatar = (payload: string, dispatch: any) => {
+  axios({
+    url: 'http://143.244.183.24/graphql/',
+    method: 'post',
+    data: {
+      query: `
+      mutation SetAvatar {
+        setStudentAvatar(avatarTypeOf:4, studentId:1, avatarUrl: "${payload}") {
+           student {
+             id
+           }
+       }
+   }
+        `,
+    },
+  }).then(data => dispatch({type: TYPES.AVATAR_SET_FOOTERS, payload: data}));
+};

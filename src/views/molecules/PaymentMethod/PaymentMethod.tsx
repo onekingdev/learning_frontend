@@ -65,11 +65,11 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCo
     const result = await paymentFormRef?.current?.handleOrder(couponCode, 0);
     console.log(result);
     if(result.success) {
-        enqueueSnackbar(`Your subscription has been successfully created!`, { variant: "success" });
-        history.push(`/kids/new`)
+        enqueueSnackbar('Your subscription has been successfully created!', { variant: 'success' });
+        history.push('/kids/new')
     }
     else
-        enqueueSnackbar(`Failed! ${result.result}`, { variant: "error" });
+        enqueueSnackbar(`Failed! ${result.result}`, { variant: 'error' });
   }
 
   const applyCoupon = (e: any) => {
@@ -153,7 +153,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCo
                         <OrderItemTitle>Total</OrderItemTitle>
                     </OrderItemTitleContainer>
                     <OrderItemContent>
-                        <div style={{display: "flex"}}>${(subtotal - couponPrice).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div>
+                        <div style={{display: 'flex'}}>${(subtotal - couponPrice).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div>
                         <div style={{fontWeight: 400, lineHeight: '12px', fontSize: '10px'}}>First Renewal : {moment(new Date()).format('YYYY-MM-DD')}</div>
                     </OrderItemContent>
                 </OrderItem>

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { useTheme } from "@mui/styles";
-import { InputBaseComponentProps } from "@mui/material/InputBase";
+import * as React from 'react';
+import { useTheme } from '@mui/styles';
+import { InputBaseComponentProps } from '@mui/material/InputBase';
 
 const StripeInput = React.forwardRef<any, InputBaseComponentProps>(
   function StripeInput(props, ref) {
@@ -24,8 +24,8 @@ const StripeInput = React.forwardRef<any, InputBaseComponentProps>(
           style: {
             base: {
               color: 'blue',
-              fontSize: "16px",
-              lineHeight: "1.4375em", // 23px
+              fontSize: '16px',
+              lineHeight: '1.4375em', // 23px
             //   fontFamily: theme.typography.fontFamily,
             //   "::placeholder": {
             //     color: alpha(theme.palette.text.primary, 0.42)

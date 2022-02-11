@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect} from 'react';
+import {FC} from 'react';
 import {
   Wrapper,
   AvatarButtonContainer,
@@ -23,14 +23,9 @@ import backpackLeft from '../../assets/backpack-left.svg';
 import backpackRight from '../../assets/backpack-right.svg';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {useHistory} from 'react-router-dom';
-import {LoadingContext} from 'react-router-loading';
 
 export const Backpack: FC = () => {
-  const loadingContext = useContext(LoadingContext);
   const history = useHistory();
-  useEffect(() => {
-    loadingContext.done();
-  }, []);
   return (
     <>
       <Wrapper>

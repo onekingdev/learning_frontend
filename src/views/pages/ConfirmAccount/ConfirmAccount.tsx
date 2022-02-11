@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect} from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import {GeneralText} from '../../atoms/Text/GeneralText';
 import {Header} from '../../atoms/Text/Header';
@@ -10,13 +10,8 @@ import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 import {Body} from '../../atoms/Text/Body';
 import logo from '../../assets/socrates-logo.svg';
-import {LoadingContext} from 'react-router-loading';
 
 export const ConfirmAccount: FC = () => {
-  const loadingContext = useContext(LoadingContext);
-  useEffect(() => {
-    loadingContext.done();
-  }, []);
   return (
     <ConfirmationContainer>
       <Logo src={logo} />

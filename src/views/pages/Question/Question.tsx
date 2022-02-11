@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { LessonProgress } from '../../molecules/LessonProgress/LessonProgress';
 import {
@@ -18,8 +18,6 @@ import { Store } from '../../../app/configureStore';
 import { useParams } from 'react-router-dom';
 import * as TYPE from '../../../app/types';
 import { Spinner } from '../../atoms/Spinner';
-import { LoadingContext } from "react-router-loading";
-
 
 interface RoutePresentationParams {
   presentationId: string;
@@ -37,10 +35,6 @@ export const Question: FC = () => {
   const [questionCounter, setQuestionCounter] = useState(Number);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
   const [answerResult, setAnswerResult] = useState<boolean[]>([]);
-  const [pointUnit, setPointUnit] = useState<number>(0);
-  const [points, setPoints] = useState<number>(0);
-  const [bonus, setBonus] = useState<number>(0);
-  const loadingContext = useContext(LoadingContext);
 
   const renderTypes = (question: IQuestion, type: string, totalQuestions: number, blockPresentation: IBlockPresentation) => {
     const types = [
@@ -66,9 +60,8 @@ export const Question: FC = () => {
 
 
   const onAnswer = (result: boolean) => {
-    console.log("answered", result)
+    console.log('answered', result)
     setAnswerResult([...answerResult, result]);
-    if(result) setPoints(points + pointUnit);
   }
 
   const upgradeEnergy = () => {
@@ -91,8 +84,6 @@ export const Question: FC = () => {
 
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
-    setPointUnit(data.data.blockPresentationById.points)
-    // loadingContext.done()
     try {
       dispatch({ type: TYPE.SET_BLOCK_PRESENTATION, payload: data.data.blockPresentationById })
     } catch (error) {
@@ -115,7 +106,6 @@ export const Question: FC = () => {
 
   useEffect(() => {
     setQuestion(blockPresentation?.block.questions[questionCounter])
-    console.log("question is ",blockPresentation?.block.questions[questionCounter])
   }, [blockPresentation, questionCounter])
 
   const handleNextQuestion = () => {
@@ -131,7 +121,7 @@ export const Question: FC = () => {
     <Wrapper>
       {
         isLessonFinished ? <StudentMenu>
-          <FinishLesson tokens={points} energy={state.earning.energyCharge * pointUnit * 10 / 100} />
+          <FinishLesson tokens={10} energy={10} />
         </StudentMenu>
           :
           blockPresentation && question ?
@@ -154,7 +144,7 @@ export const Question: FC = () => {
               </Container>
             </StudentMenu>
             :
-            null
+            <Spinner />
       }
     </Wrapper>
   );

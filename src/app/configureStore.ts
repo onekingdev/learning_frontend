@@ -16,49 +16,62 @@ import { AnyTxtRecord } from 'dns';
 
 export type Store = {
     user: IUser;
+    group: IGroup;
+    // student: IStudent;
     student: any;
-    earning: any;
-    avatar: any;
-    blockPresentation: any;
+    block?: IBlock;
+    collectibles?: ICollectibleCategory;
+    areasOfKnowLedge?: IAreasOfKnowledge;
+    blockPresentation?: IBlockPresentation;
   };
 
 export const MockStore: Store = {
     user: {
       lastLogin: new Date(),
       isSuperuser: true,
-      username: "string",
-      firstName: "string",
-      lastName: "string",
+      username: 'string',
+      firstName: 'string',
+      lastName: 'string',
       email: 'string',
       isStaff: false,
       isActive: true,
       dateJoined: new Date(),
-      language: "string",
+      language: 'string',
       profile: {
-        role: "STUDENT",
+        role: 'STUDENT',
       },
-      token: "string",
+      token: 'string',
+    },
+    group: {
+      groupMembers: [
+        {
+          avatarURL: 'string',
+          name: 'string',
+        },
+      ],
+      grade: 'string',
+      areasOfKnowledge: ['', '', ''],
     },
     student: {
       createTimestamp: new Date(),
       updateTimestamp: new Date(),
-      firstName: "string",
-      lastName: "last name",
-      fullName: "full name",
+      firstName: 'string',
+      lastName: 'last name',
+      fullName: 'full name',
       dob: new Date(),
       gender: Gender.male,
-      activeGroupId: "activeGroupId",
-      levelId: "levelId",
-      guardianId: "guardianId",
-      schoolId: "schoolId",
+      activeGroupId: 'activeGroupId',
+      levelId: 'levelId',
+      guardianId: 'guardianId',
+      schoolId: 'schoolId',
       balance: 4444422
-    },
-    earning: {
-    },
-    avatar: {
-    },
-    blockPresentation: {
     }
+    // block: {
+    //   questions: ['hello'],
+    //   config: {name: 'sdscd'},
+    //   chosenAnswer: '2',
+    //   isCorrect: true,
+    // },
 };
 
 const persistConfig = {

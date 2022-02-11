@@ -1,6 +1,5 @@
 body {
     color: #3F3F3F;
-    overflow: hidden;
 }
 .flex{
     display: flex;
@@ -319,34 +318,4 @@ body {
 }
 .err-border {
     border-color: #d32f2f !important;
-}
-.my-node-enter {
-    opacity: 0;
-    overflow: hidden;
-  }
-
-.my-node-enter-active {
-    opacity: 1;
-    transition: opacity 1000ms;
-    /* animation-name: slideInRight;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-delay: 0s;
-    animation-direction: forwards; */
-}
-
-.my-node-exit {
-    opacity: 1;
-    overflow: hidden;
-}
-.my-node-exit-active {
-    /* width: 0px; */
-    /* transition: width 3s; */
-    /* animation-name: slideOutLeft;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-delay: 0s;
-    animation-direction: forwards; */
-    opacity: 0;
-    transition: opacity 1000ms;
 }
