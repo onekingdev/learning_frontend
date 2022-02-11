@@ -17,14 +17,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": "src",
   },
-  "include": ["src"],
-  "baseUrl": "src",
-  "paths": {
-    "@atoms": "[views/atoms/]",
-    "@molecules": "[views/molucules/]",
-    "@assets": "[views/assets/]",
-    // "@organims/*": "[]",
-  }
+  "include": ["src"]
 }

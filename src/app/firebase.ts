@@ -156,38 +156,3 @@ export const getAvatarDir = async (dir: any, setDir: any) => {
     Promise.all(res.items.map(getDownloadURL)).then(setDir);
   });
 };
-
-export const getBoughtCards = async (dir: any, setBuyLinks: any, setBuyIds: any) => {
-  const storage = getStorage();
-  const listRef = assetRef(storage, `assets/collectible/${dir}`);
-
-  const res = await listAll(listRef)
-  const length = res.items.length
-
-  // Get random 3 urls of current category
-  const randomIds = []
-  for(let i = 0; i < 3; i ++)
-  randomIds.push(Math.floor(Math.random() * length))
-
-  const links = []
-  for (const row of randomIds) {
-    links.push(await getDownloadURL(res.items[row]))
-  }
-
-  setBuyLinks(links)
-  setBuyIds(randomIds)
-};
-
-export const getCardCategories = async ( setCateItems: any) => {
-  const storage = getStorage();
-  const listRef = assetRef(storage, `assets/collectible/Categories`);
-
-  const res = await listAll(listRef)
-
-  const links = []
-  for (const row of res.items) {
-    links.push(await getDownloadURL(row))
-  }
-
-  setCateItems(links)
-};

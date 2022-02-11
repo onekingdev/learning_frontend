@@ -5,6 +5,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import React, { useState, Fragment } from 'react';
 import Button from '@mui/material/Button';
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+import {BrowserRouter as Router, Redirect, useLocation } from 'react-router-dom';
+
 import './style.css'
 // require("dotenv").config();
 export default () => {
@@ -15,7 +17,9 @@ export default () => {
     <Provider store={persist.store}>
         <PersistGate loading={loading} persistor={persist.persistor}>
           <SnackbarProvider maxSnack={3}>
+            <Router>
               <Routes />
+            </Router>
           </SnackbarProvider>
         </PersistGate>
       </Provider>

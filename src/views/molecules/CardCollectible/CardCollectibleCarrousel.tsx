@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState, useContext} from 'react';
 import styled from 'styled-components';
 import arrowLeft from '../../assets/arrows/arrowLeft.svg';
 import arrowRight from '../../assets/arrows/arrowRight.svg';
@@ -7,6 +7,7 @@ import {CardCollectible} from './CardCollectible';
 import {get} from '../../../api/queries/get';
 import {useParams, useHistory} from 'react-router-dom';
 import {COLLECTIBLE_CATEGORY_QUERY} from '../../../api/queries/progress';
+import {LoadingContext} from 'react-router-loading';
 
 type CarouselProps = {
   onClick?: () => void;
@@ -24,11 +25,13 @@ interface CollectibleCategoryProps {
 }
 
 export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
+  const loadingContext = useContext(LoadingContext);
   const [collectibles, getCollectibles] = useState<CollectibleCategoryProps>();
   const {categoryId} = useParams<RouteCollectibleParams>();
   const history = useHistory();
   const handleData = (data: any) => {
     getCollectibles(data.data.collectibleCategoryById);
+    loadingContext.done();
   };
   const handleError = (error: any) => {
     console.error(error);
@@ -121,7 +124,7 @@ const LeftArrow = styled.img`
     display: initial;
     cursor: pointer;
     margin: 0 20px;
-    &: hover {
+    &:hover {
       transform: scale(1.1);
     }
   }
@@ -134,7 +137,7 @@ const RightArrow = styled.img`
     display: initial;
     cursor: pointer;
     margin: 0 20px;
-    &: hover {
+    &:hover {
       transform: scale(1.1);
     }
   }
