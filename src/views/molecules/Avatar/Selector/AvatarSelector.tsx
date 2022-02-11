@@ -11,7 +11,7 @@ import drawer_clothes from '../../../assets/drawers/drawer_clothes.png';
 import drawer_pants from '../../../assets/drawers/drawer_pants.png';
 // import data from '../../../pages/Avatar/atoms'
 import axios from 'axios';
-
+import {SkinToneSelector} from '../../SkinToneSelector';
 import {Link, useHistory} from 'react-router-dom';
 
 import {
@@ -42,6 +42,8 @@ import {
 } from './Style';
 import {getAvatarAsset} from '../../../../app/firebase';
 import {get} from '../../../../api/queries/get';
+import { Avatar } from 'views/atoms/Avatar';
+import { SkinToneButton } from 'views/atoms/SkinToneButton';
 export const AvatarSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
   const placeHolder = serverUrl + 'assets/avatars/placeholder.png';
@@ -321,7 +323,6 @@ export const AvatarSelector: FC = () => {
         </MobileFavoritesDrawer>
       </FavoritesCloset>
       <SelectorGrid>
-        <LeftArrow onClick={currentIndexPrev} src={arrowLeft}></LeftArrow>
         <CurrentAvatar>
           <CurrentAccessory
             src={accesoryRef}
@@ -342,9 +343,9 @@ export const AvatarSelector: FC = () => {
           <CurrentBody src={bodyRef} />
           <CurrentFooter src={footRef} />
         </CurrentAvatar>
-        <RightArrow onClick={currentIndexNext} src={arrowRight}></RightArrow>
         <FavoriteIcon onClick={setFavorite} src={favoriteImage}></FavoriteIcon>
         <BodyPartWardrobe src={wardrobe}></BodyPartWardrobe>
+
         <AtomsDrawer>
           <AtomsRoundIcon
             onClick={() => {
