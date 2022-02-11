@@ -120,6 +120,7 @@ export const AvatarSelector: FC = () => {
 
       setFootRef(foot);
       setFavFootRef(foot);
+      loadingContext.done()
     });
 
     // get(
