@@ -44,15 +44,9 @@ export const Bank: FC = () => {
         <BankTitle>
           <Title>Bank</Title>
         </BankTitle>
-        <div>
-          <Grid container>
-            <Grid
-              container
-              item
-              xs={12}
-              md={6}
-              sx={{'&.MuiGrid-root': {alignContent: 'flex-start'}}}
-            >
+        <div >
+          <Grid container >
+            <Grid container item xs={12} md={6} sx={{'&.MuiGrid-root': {alignContent: 'space-evenly'}}}>
               <GridItem item md={12} xs={4}>
                 <Img src={Cartera} />
               </GridItem>
