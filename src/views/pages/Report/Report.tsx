@@ -1,4 +1,5 @@
 import {FC, useEffect, useContext} from 'react';
+import {useDispatch} from 'react-redux';
 import {Box, Grid} from '@mui/material';
 
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
@@ -13,6 +14,8 @@ import {LoadingContext} from 'react-router-loading';
 
 export const Report: FC = () => {
   const loadingContext = useContext(LoadingContext);
+  const dispatch = useDispatch();
+  const today = new Date();
 
   useEffect(() => {
     loadingContext.done();

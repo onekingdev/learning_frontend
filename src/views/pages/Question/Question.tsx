@@ -2,15 +2,22 @@ import {FC, useEffect, useState, useContext} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
 import {Container, Wrapper, ProgressWrapper} from './Style';
+import apple from '../../assets/apple.svg';
 import {FinishLesson} from '../../organisms/FinishLesson';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {MultipleChoiceText} from '../../molecules/QuestionTypes/MultipleChoiceText';
+import {VideoModalAssistor} from '../../organisms/VideoModalAssistor';
 import {get} from '../../../api/queries/get';
 import {BLOCK_PRESENTATION_QUERY} from '../../../api/queries/questions';
-import {IBlockPresentation, IQuestion} from '../../../app/entities/block';
+import {
+  IAnswer,
+  IBlockPresentation,
+  IQuestion,
+} from '../../../app/entities/block';
 import {Store} from '../../../app/configureStore';
 import {useParams} from 'react-router-dom';
 import * as TYPE from '../../../app/types';
+import {Spinner} from '../../atoms/Spinner';
 import {LoadingContext} from 'react-router-loading';
 
 interface RoutePresentationParams {
@@ -22,6 +29,7 @@ export const Question: FC = () => {
   // TODO and the type should be much more roboust
   const {presentationId} = useParams<RoutePresentationParams>();
   const state = useSelector((state: Store) => state);
+  const [isFinished, setIsFinished] = useState(false);
   const dispatch = useDispatch();
   const [blockPresentation, setBlockPresentation] =
     useState<IBlockPresentation>();
@@ -31,6 +39,7 @@ export const Question: FC = () => {
   const [answerResult, setAnswerResult] = useState<boolean[]>([]);
   const [pointUnit, setPointUnit] = useState<number>(0);
   const [points, setPoints] = useState<number>(0);
+  const [bonus, setBonus] = useState<number>(0);
   const loadingContext = useContext(LoadingContext);
 
   const renderTypes = (
@@ -94,7 +103,7 @@ export const Question: FC = () => {
         type: TYPE.SET_BLOCK_PRESENTATION,
         payload: data.data.blockPresentationById,
       });
-      loadingContext.done()
+      loadingContext.done();
     } catch (error) {
       console.log('Error de dispatch', error);
     }
@@ -162,3 +171,6 @@ export const Question: FC = () => {
     </Wrapper>
   );
 };
+function dispatch(arg0: {type: string; payload: any}) {
+  throw new Error('Function not implemented.');
+}

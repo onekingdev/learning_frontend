@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import socrates from '../../assets/socrates.svg'
 import TextField from '../MuiTextField'
 import { LicenseHeader, LicenseBody, LicenseUsername} from './Style'
-import QRCode from "react-qr-code";
+import QRCode from 'react-qr-code';
 import { LSText } from '../Setting/utils/Style';
 
 const License = (props: any) => {

@@ -109,10 +109,10 @@ export function Routes(props: any) {
         <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute  loading={true} path="/collectibles/cards">
+        <PrivateRoute loading={false} path="/collectibles/cards">
           <Cards />
         </PrivateRoute>
-        <PrivateRoute path="/bank">
+        <PrivateRoute loading={true} path="/bank">
           <Bank />
         </PrivateRoute>
         <PrivateRoute path="/profile">

@@ -1,16 +1,22 @@
 import {FC, useEffect, useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import Alert from '@mui/material/Alert';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import {useStyles} from './Style';
+import * as TYPES from '../../../app/types';
+import {MockStore} from '../../../app/configureStore';
+import {IStudent} from '../../../app/entities/student';
 import {ParentPgStepper} from '../../molecules/ParentPgStepper/ParentPgStepper';
 import {PaymentMethod} from '../../molecules/PaymentMethod/PaymentMethod';
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
 import {PackagePanel} from '../../molecules/PackagePanel/PackagePanel';
 import {
   TipContainer,
+  FlexColumn,
+  FlexRow,
   PackageContainer,
   Subject,
   SubjectContainer,
@@ -20,11 +26,21 @@ import ela from '../../assets/packageIcons/ela_gold.svg';
 import science from '../../assets/packageIcons/science_gold.svg';
 import financial from '../../assets/packageIcons/financial_gold.svg';
 import health from '../../assets/packageIcons/health_gold.svg';
+import {ButtonColor, shadeColor, BasicColor} from '../../Color';
+import Button from '../../molecules/MuiButton';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 import {LoadingContext} from 'react-router-loading';
 
 export const Payment: FC = () => {
   const loadingContext = useContext(LoadingContext);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const language = 'en';
+  const classes = useStyles();
+  const stripeOptions = {
+    // passing the client secret obtained from the server
+    clientSecret: '{{CLIENT_SECRET}}',
+  };
 
   const [prices, setPrices] = useState({
     Gold: {

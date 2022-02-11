@@ -1,5 +1,8 @@
 import {FC, useEffect, useContext} from 'react';
 import styled from 'styled-components';
+import {useDispatch} from 'react-redux';
+
+import Box from '@mui/material/Box';
 import {Grid} from '@mui/material';
 
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
@@ -21,6 +24,7 @@ import {LoadingContext} from 'react-router-loading';
 
 export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     loadingContext.done();
