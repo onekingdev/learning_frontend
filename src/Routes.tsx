@@ -69,30 +69,18 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
 
 export function Routes(props: any) {
   const location = useLocation();
-  const [displayLocation, setDisplayLocation] = useState(location);
-  const [transitionStage, setTransistionStage] = useState("fadeIn");
-  console.log(location);
-  useEffect(() => {
-    if (location !== displayLocation) setTransistionStage("fadeOut");
-  }, [location]);
+
   return (
     <TransitionGroup component={null}>
       <CSSTransition
         key={location.key}
         appear={true}
         timeout={{enter: 1000, exit: 1000}}
-        // classNames="my-node"
         classNames={{
-          // appear: 'my-appear',
-          // appearActive: 'my-active-appear',
-          // appearDone: 'my-done-appear',
           enter: 'my-node-enter',
           enterActive: 'my-node-enter-active',
-          // enterActive: 'animate__bounceInDown',
-          // enterDone: 'my-done-enter',
           exit: 'my-node-exit',
           exitActive: 'my-node-exit-active',
-          // exitDone: 'my-done-exit',
          }}
       >
         <Switch loadingScreen={Spinner} location={location}>
