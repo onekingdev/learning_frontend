@@ -1,31 +1,40 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import {useDispatch} from 'react-redux';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Alert from '@mui/material/Alert';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
-import { useStyles } from './Style';
-import * as TYPES from '../../../app/types'
-import {MockStore} from '../../../app/configureStore'
-import { IStudent } from '../../../app/entities/student';
-import { ParentPgStepper } from '../../molecules/ParentPgStepper/ParentPgStepper';
-import { PaymentMethod } from '../../molecules/PaymentMethod/PaymentMethod';
-import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
-import { PackagePanel } from '../../molecules/PackagePanel/PackagePanel'
-import { TipContainer, FlexColumn, FlexRow, PackageContainer, Subject, SubjectContainer } from './Style'
-import math from '../../assets/packageIcons/math_gold.svg'
-import ela from '../../assets/packageIcons/ela_gold.svg'
-import science from '../../assets/packageIcons/science_gold.svg'
-import financial from '../../assets/packageIcons/financial_gold.svg'
-import health from '../../assets/packageIcons/health_gold.svg'
+import {useStyles} from './Style';
+import * as TYPES from '../../../app/types';
+import {MockStore} from '../../../app/configureStore';
+import {IStudent} from '../../../app/entities/student';
+import {ParentPgStepper} from '../../molecules/ParentPgStepper/ParentPgStepper';
+import {PaymentMethod} from '../../molecules/PaymentMethod/PaymentMethod';
+import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
+import {PackagePanel} from '../../molecules/PackagePanel/PackagePanel';
+import {
+  TipContainer,
+  FlexColumn,
+  FlexRow,
+  PackageContainer,
+  Subject,
+  SubjectContainer,
+} from './Style';
+import math from '../../assets/packageIcons/math_gold.svg';
+import ela from '../../assets/packageIcons/ela_gold.svg';
+import science from '../../assets/packageIcons/science_gold.svg';
+import financial from '../../assets/packageIcons/financial_gold.svg';
+import health from '../../assets/packageIcons/health_gold.svg';
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
-import Button from '../../molecules/MuiButton'
+import Button from '../../molecules/MuiButton';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
+import {LoadingContext} from 'react-router-loading';
 
 export const Payment: FC = () => {
+  const loadingContext = useContext(LoadingContext);
   const history = useHistory();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const language = 'en';
   const classes = useStyles();
   const stripeOptions = {
@@ -34,33 +43,33 @@ export const Payment: FC = () => {
   };
 
   const [prices, setPrices] = useState({
-    Gold:{
+    Gold: {
       month: 0,
-      year: 0
+      year: 0,
     },
     Combo: {
       month: 0,
-      year: 0
+      year: 0,
     },
     Sole: {
       month: 0,
-      year: 0
-    }
-  })
+      year: 0,
+    },
+  });
 
   const [childrenCount, setChildrenCount] = useState({
-    Gold : 0,
-    Sole : 0,
-    Combo : 0
+    Gold: 0,
+    Sole: 0,
+    Combo: 0,
   });
 
   const [planType, setPlanType] = useState({
     Gold: 'month',
     Sole: 'month',
-    Combo: 'month'
+    Combo: 'month',
   });
 
-  const [showPaymentMethod, setShowPaymentMethod] = useState(false)
+  const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [offRate, setOffRate] = useState(50);
 
   const setPackPrice = () => {
@@ -75,80 +84,117 @@ export const Payment: FC = () => {
 
     setPrices({
       Gold: {
-        month : gold_m,
-        year : gold_y
+        month: gold_m,
+        year: gold_y,
       },
       Combo: {
         month: combo_m,
-        year: combo_y
+        year: combo_y,
       },
       Sole: {
         month: sole_m,
-        year: sole_y
-      }
-    })
+        year: sole_y,
+      },
+    });
+  };
 
-  }
-
-  const onChangePackage = (type: string, count: number, plan: string, ) => {
-    console.log('package is changing', type, count, plan)
-    let temp:any = {...childrenCount};
+  const onChangePackage = (type: string, count: number, plan: string) => {
+    console.log('package is changing', type, count, plan);
+    let temp: any = {...childrenCount};
     temp[type] = count;
-    if(JSON.stringify(temp) !== JSON.stringify(childrenCount)) setChildrenCount(temp);
+    if (JSON.stringify(temp) !== JSON.stringify(childrenCount))
+      setChildrenCount(temp);
 
-    temp = {...planType}
-    temp[type] = plan
-    if(JSON.stringify(temp) !== JSON.stringify(planType)) setPlanType(temp);
+    temp = {...planType};
+    temp[type] = plan;
+    if (JSON.stringify(temp) !== JSON.stringify(planType)) setPlanType(temp);
 
-    setShowPaymentMethod(true)
-  }
+    setShowPaymentMethod(true);
+  };
 
   useEffect(() => {
     setPackPrice();
-    setOffRate(50)
+    setOffRate(50);
+    loadingContext.done();
   }, []);
   return (
-        <ParentPgContainer onlyLogoImgNav={true}>
-          <>
-            <ParentPgStepper step={1}/>
-            <TipContainer>
-              <Alert severity="info">
-                In Socrates, students can get mutiple Areas of Knowledge depend of the package they will have All, Two Areas or a Solo Area! Choose the best package for your kids!
-                <br />
-                <SubjectContainer>
-                    <div className="flex align-center"><Subject src={math} />&nbsp;Math</div>
-                    <div className="flex align-center"><Subject src={ela} />&nbsp;ELA + SIGHT WORDS</div>
-                    <div className="flex align-center"><Subject src={science} />&nbsp;SCIENCE</div>
-                </SubjectContainer>
-                <SubjectContainer>
-                  <div className="flex align-center"><Subject src={financial} />&nbsp;FINANCIAL LITERACY</div>
-                  <div className="flex align-center"><Subject src={health} />&nbsp;HEALTH & SAFETY</div>
-                </SubjectContainer>
-              </Alert>
-            </TipContainer>
-            <PackageContainer>
-              <PackagePanel type="Gold" price={prices.Gold} onChange={(childrenCount, plan) => onChangePackage('Gold', childrenCount, plan)} />
-              <PackagePanel type="Combo" price={prices.Combo} onChange={(childrenCount, plan) => onChangePackage('Combo', childrenCount, plan)} />
-              <PackagePanel type="Sole" price={prices.Sole} onChange={(childrenCount, plan) => onChangePackage('Sole', childrenCount, plan)} />
-            </PackageContainer>
-              <Alert severity="info" className="m-b-35" style={{width: '72%'}}>
-                Add 2nd kid with {offRate}% off
-              </Alert>
-            <Elements stripe={stripePromise}>
-              {showPaymentMethod &&
-                <PaymentMethod
-                  prices={{
-                    Gold: prices.Gold[planType.Gold==='month' ? 'month' : 'year'],
-                    Combo: prices.Combo[planType.Combo==='month' ? 'month' : 'year'],
-                    Sole: prices.Sole[planType.Sole==='month' ? 'month' : 'year']
-                  }}
-                  plans={planType}
-                  childrenCounts={childrenCount}
-                  offRate={offRate}
-                  />
-               }
-            </Elements>
-          </>
-        </ParentPgContainer>
+    <ParentPgContainer onlyLogoImgNav={true}>
+      <>
+        <ParentPgStepper step={1} />
+        <TipContainer>
+          <Alert severity="info">
+            In Socrates, students can get mutiple Areas of Knowledge depend of
+            the package they will have All, Two Areas or a Solo Area! Choose the
+            best package for your kids!
+            <br />
+            <SubjectContainer>
+              <div className="flex align-center">
+                <Subject src={math} />
+                &nbsp;Math
+              </div>
+              <div className="flex align-center">
+                <Subject src={ela} />
+                &nbsp;ELA + SIGHT WORDS
+              </div>
+              <div className="flex align-center">
+                <Subject src={science} />
+                &nbsp;SCIENCE
+              </div>
+            </SubjectContainer>
+            <SubjectContainer>
+              <div className="flex align-center">
+                <Subject src={financial} />
+                &nbsp;FINANCIAL LITERACY
+              </div>
+              <div className="flex align-center">
+                <Subject src={health} />
+                &nbsp;HEALTH & SAFETY
+              </div>
+            </SubjectContainer>
+          </Alert>
+        </TipContainer>
+        <PackageContainer>
+          <PackagePanel
+            type="Gold"
+            price={prices.Gold}
+            onChange={(childrenCount, plan) =>
+              onChangePackage('Gold', childrenCount, plan)
+            }
+          />
+          <PackagePanel
+            type="Combo"
+            price={prices.Combo}
+            onChange={(childrenCount, plan) =>
+              onChangePackage('Combo', childrenCount, plan)
+            }
+          />
+          <PackagePanel
+            type="Sole"
+            price={prices.Sole}
+            onChange={(childrenCount, plan) =>
+              onChangePackage('Sole', childrenCount, plan)
+            }
+          />
+        </PackageContainer>
+        <Alert severity="info" className="m-b-35" style={{width: '72%'}}>
+          Add 2nd kid with {offRate}% off
+        </Alert>
+        <Elements stripe={stripePromise}>
+          {showPaymentMethod && (
+            <PaymentMethod
+              prices={{
+                Gold: prices.Gold[planType.Gold === 'month' ? 'month' : 'year'],
+                Combo:
+                  prices.Combo[planType.Combo === 'month' ? 'month' : 'year'],
+                Sole: prices.Sole[planType.Sole === 'month' ? 'month' : 'year'],
+              }}
+              plans={planType}
+              childrenCounts={childrenCount}
+              offRate={offRate}
+            />
+          )}
+        </Elements>
+      </>
+    </ParentPgContainer>
   );
 };

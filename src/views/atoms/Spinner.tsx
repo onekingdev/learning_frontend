@@ -1,10 +1,21 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import socrates from '../assets/socrates.svg';
+import shapes from '../assets/colored-shapes-bg.svg';
 
-export const Spinner = () => {
-  return <Icon src={socrates} />;
+export const Spinner: any = () => {
+  return (
+    <Shapes>
+      <Icon src={socrates} />
+    </Shapes>
+  );
 };
+
+const Shapes = styled.div`
+  background-image: url(${shapes});
+  width: 100vw;
+  height: 100vh;
+`;
 
 const rotate = keyframes`
   from {

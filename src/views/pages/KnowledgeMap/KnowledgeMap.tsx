@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
 import {StudentMenu} from '../../templates/StudentMenu';
 import ocean from '../../assets/islands/ocean.svg';
@@ -21,8 +21,10 @@ import {useDispatch} from 'react-redux';
 import * as TYPE from '../../../app/types';
 import background from '../../assets/colored-shapes-bg.svg';
 import {AUDIENCES_QUERY} from '../../../api/queries/people';
+import {LoadingContext} from 'react-router-loading';
 
 export const KnowledgeMap: FC = () => {
+  const loadingContext = useContext(LoadingContext);
   const dispatch = useDispatch();
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
   const handleData = (data: any) => {
@@ -31,6 +33,7 @@ export const KnowledgeMap: FC = () => {
       type: TYPE.SET_AOK,
       payload: data.data.audienceById.areaofknowledgeSet,
     });
+    loadingContext.done();
   };
   const handleError = (error: any) => {
     console.error(error);
@@ -56,7 +59,7 @@ export const KnowledgeMap: FC = () => {
     boat!.style.top = `${e.clientY - 140}px`;
     boat!.style.left = `${e.clientX - 140}px`;
     setTimeout(() => {
-      history.push('/question/presentation_1')
+      history.push('/question/presentation_1');
     }, 3300);
   };
 

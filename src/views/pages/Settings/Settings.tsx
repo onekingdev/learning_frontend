@@ -1,41 +1,49 @@
-import { FC, useEffect } from 'react';
+import {FC, useEffect, useContext} from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux'
+import {useDispatch} from 'react-redux';
 
 import Box from '@mui/material/Box';
-import { Grid } from '@mui/material';
+import {Grid} from '@mui/material';
 
-import { ParentPgContainer } from '../../molecules/ParentPgContainer/ParentPgContainer'
+import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
 
-import { Title } from '../../molecules/Setting/utils/Style';
-import { TextGroup, LSLabel, LSText, LSBlueTextButton } from '../../molecules/Setting/utils/Style';
+import {Title} from '../../molecules/Setting/utils/Style';
+import {
+  TextGroup,
+  LSLabel,
+  LSText,
+  LSBlueTextButton,
+} from '../../molecules/Setting/utils/Style';
 
-import { SettingForm } from '../../organisms/Setting/Profile';
-import { Payment } from '../../organisms/Setting/Payment'
-import { MembershipDetail } from '../../organisms/Setting/Details';
+import {SettingForm} from '../../organisms/Setting/Profile';
+import {Payment} from '../../organisms/Setting/Payment';
+import {MembershipDetail} from '../../organisms/Setting/Details';
 
-import { CssBaseline } from '@mui/material';
+import {CssBaseline} from '@mui/material';
+import {LoadingContext} from 'react-router-loading';
 
 export const Settings: FC = () => {
-  const dispatch = useDispatch()
+  const loadingContext = useContext(LoadingContext);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    loadingContext.done();
   }, []);
   return (
-    <ParentPgContainer onlyLogoImgNav={false} >
+    <ParentPgContainer onlyLogoImgNav={false}>
       <SettingContainer>
         <TitleContainer>
           <Title>{'Settings'}</Title>
         </TitleContainer>
         <CssBaseline />
-        <Grid container >
+        <Grid container>
           <Grid item xs={12} md={6}>
             <SettingForm />
             <Payment />
             <TextGroup>
               <LSLabel>{'Questions? '}</LSLabel>
               <LSText>{' Reach us and we will help you'}</LSText>
-              <LSBlueTextButton href='#'>{' Contact'}</LSBlueTextButton>
+              <LSBlueTextButton href="#">{' Contact'}</LSBlueTextButton>
             </TextGroup>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -49,16 +57,16 @@ export const Settings: FC = () => {
 export default Settings;
 
 const SettingContainer = styled.div`
-width: 80vw;
-@media screen and (max-width: 540px) {
-  width: 100%;
-  margin-bottom: 20vh;
-}
-`
+  width: 80vw;
+  @media screen and (max-width: 540px) {
+    width: 100%;
+    margin-bottom: 20vh;
+  }
+`;
 const TitleContainer = styled.div`
-display: flex;
-justify-content: center;
-@media screen and (max-width: 540px) {
-  width: 100%;
-}
-`
+  display: flex;
+  justify-content: center;
+  @media screen and (max-width: 540px) {
+    width: 100%;
+  }
+`;

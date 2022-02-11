@@ -1,4 +1,4 @@
-import {FC, SetStateAction, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {ScreenSize} from '../../screenSize';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
@@ -14,10 +14,17 @@ import axios from 'axios';
 import wardrobe_icon from '../../assets/wardrobe.png';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import { setAccesoryAvatar, setBodyAvatar, setFooterAvatar, setHeadAvatar } from 'app/actions';
+import {
+  setAccesoryAvatar,
+  setBodyAvatar,
+  setFooterAvatar,
+  setHeadAvatar,
+} from 'app/actions';
+import {LoadingContext} from 'react-router-loading';
 
 // import data from '../../pages/Avatar/atoms';
 export const WardrobeSelector: FC = () => {
+  const loadingContext = useContext(LoadingContext);
   // const accessories_max = accessories.length;
   // const headers_max = headers.length;
   // const bodies_max = bodies.length;
@@ -41,7 +48,7 @@ export const WardrobeSelector: FC = () => {
   const [headers, setHeaders] = useState([]);
   const [bodies, setBodies] = useState([]);
   const [footers, setFooters] = useState([]);
-  const selector = useSelector(store => store)
+  const selector = useSelector(store => store);
 
   useEffect(() => {
     // setSelected avatar
@@ -99,6 +106,7 @@ export const WardrobeSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
+      loadingContext.done();
       console.log('result', result.data.data);
 
       const accesory = result.data.data.studentById.avatarAccessories.image;
@@ -112,11 +120,11 @@ export const WardrobeSelector: FC = () => {
       setFootRef(foot);
     });
   }, []);
-  console.log(selector)
+  console.log(selector);
   const setAccessory = (i: number) => {
     const head = accessories[i];
     setAccesoryRef(head);
-    setAccesoryAvatar(accessories[i],dispatch)
+    setAccesoryAvatar(accessories[i], dispatch);
     // axios({
     //   url: 'http://143.244.183.24/graphql/',
     //   method: 'post',
@@ -158,7 +166,7 @@ export const WardrobeSelector: FC = () => {
   const setBody = (i: number) => {
     const head = bodies[i];
     setBodyRef(head);
-    setBodyAvatar(bodies[i],dispatch);
+    setBodyAvatar(bodies[i], dispatch);
     // axios({
     //   url: 'http://143.244.183.24/graphql/',
     //   method: 'post',
