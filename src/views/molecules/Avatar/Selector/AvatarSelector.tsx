@@ -1,4 +1,4 @@
-import {FC, useEffect, useState, useContext} from 'react';
+import {FC, useEffect, useState} from 'react';
 import arrowLeft from '../../../assets/arrows/arrowLeft.svg';
 import arrowRight from '../../../assets/arrows/arrowRight.svg';
 import favoriteEnabled from '../../../assets/favorite_enabled.svg';
@@ -11,7 +11,6 @@ import drawer_clothes from '../../../assets/drawers/drawer_clothes.png';
 import drawer_pants from '../../../assets/drawers/drawer_pants.png';
 // import data from '../../../pages/Avatar/atoms'
 import axios from 'axios';
-import { LoadingContext } from "react-router-loading";
 
 import {Link, useHistory} from 'react-router-dom';
 
@@ -75,10 +74,19 @@ export const AvatarSelector: FC = () => {
 
   const history = useHistory();
 
-  const loadingContext = useContext(LoadingContext);
-
   const width = window.screen.width;
   useEffect(() => {
+    // // setSelected avatar
+    // getAvatarAsset('accessories', 'accesories-red-bows.svg', setAccesoryRef);
+    // getAvatarAsset('heads', 'boy face-1.svg', setHeadRef);
+    // getAvatarAsset('bodies', 'tshirt-aqua-large.svg', setBodyRef);
+    // getAvatarAsset('pants', 'pant-black.svg', setFootRef);
+    // // set fav avatar items
+    // getAvatarAsset('accessories', 'accesories-red-bows.svg', setFavAccesoryRef);
+    // getAvatarAsset('heads', 'boy face-1.svg', setFavHeadRef);
+    // getAvatarAsset('bodies', 'tshirt-aqua-large.svg', setFavBodyRef);
+    // getAvatarAsset('pants', 'pant-black.svg', setFavFootRef);
+
     axios({
       url: 'http://143.244.183.24/graphql/',
       method: 'post',
@@ -103,7 +111,6 @@ export const AvatarSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
-      loadingContext.done()
       const accesory = result.data.data.studentById.avatarAccessories.image;
       const head = result.data.data.studentById.avatarHead.image;
       const body = result.data.data.studentById.avatarClothes.image;

@@ -25,7 +25,6 @@ import { toPng, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver'
 import QRCode from "react-qr-code";
 import License from '../../molecules/KidLicense/KidLicense'
-
 interface kid {
   username: string;
   password: string;

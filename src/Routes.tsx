@@ -1,5 +1,9 @@
-import {BrowserRouter as Router, Redirect} from 'react-router-dom';
-import {Route, Switch} from 'react-router-loading';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
@@ -20,34 +24,22 @@ import {Wardrobe} from './views/pages/Avatar/Wardrobe';
 import {Payment} from './views/pages/Payment/Payment';
 import CreateParent from './views/pages/CreateParent/CreateParent';
 import KidsList from './views/pages/KidsList/KidsList';
-import {useSelector} from 'react-redux';
-import {Store} from './app/configureStore';
-import {ParentPgContainer} from './views/molecules/ParentPgContainer/ParentPgContainer';
+import { useSelector } from 'react-redux';
+import { Store } from './app/configureStore'
+import { ParentPgContainer } from './views/molecules/ParentPgContainer/ParentPgContainer'
 import {Settings} from './views/pages/Settings/Settings';
 import {Report} from './views/pages/Report/Report';
 import {Bank} from './views/pages/Student/Bank/Bank';
 import {Cards} from './views/pages/Student/Collectibles/Cards';
 
-import NewKids from './views/pages/NewKids/NewKids';
-import {Spinner} from 'views/atoms/Spinner';
 
-const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
+import NewKids from './views/pages/NewKids/NewKids'
+
+const PrivateRoute = ({requireAuth = true, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
   const isAuthenticated = !!user?.token;
 
-  return loading ? (
-    <Route loading {...rest}>
-      {requireAuth ? (
-        isAuthenticated ? (
-          rest.children
-        ) : (
-          <Redirect to={{pathname: '/login'}} />
-        )
-      ) : (
-        rest.children
-      )}
-    </Route>
-  ) : (
+  return (
     <Route {...rest}>
       {requireAuth ? (
         isAuthenticated ? (
@@ -65,8 +57,7 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
 export function Routes(props: any) {
   return (
     <Router>
-      {/* this is the problem */}
-      <Switch loadingScreen={Spinner}>
+      <Switch>
         <PrivateRoute exact path="/" requireAuth={false}>
           <Welcome />
         </PrivateRoute>
@@ -74,25 +65,24 @@ export function Routes(props: any) {
           <LogIn />
         </PrivateRoute>
         <PrivateRoute
-          loading={true}
           path="/question/presentation_:presentationId"
           requireAuth={false}
         >
           <Question />
         </PrivateRoute>
-        <PrivateRoute path="/avatar" loading={true}>
+        <PrivateRoute path="/avatar">
           <Avatar />
         </PrivateRoute>
-        <PrivateRoute path="/wardrobe" loading={true}>
+        <PrivateRoute path="/wardrobe">
           <Wardrobe />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
+        <PrivateRoute path="/collectibles/category_:categoryId/:collectibleId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
+        <PrivateRoute path="/collectibles/category_:categoryId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute  loading={true} path="/collectibles/cards">
+        <PrivateRoute path="/collectibles/cards">
           <Cards />
         </PrivateRoute>
         <PrivateRoute path="/bank">

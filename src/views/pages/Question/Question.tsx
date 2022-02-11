@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { LessonProgress } from '../../molecules/LessonProgress/LessonProgress';
 import {
@@ -17,9 +17,6 @@ import { IAnswer, IBlockPresentation, IQuestion } from '../../../app/entities/bl
 import { Store } from '../../../app/configureStore';
 import { useParams } from 'react-router-dom';
 import * as TYPE from '../../../app/types';
-import { Spinner } from '../../atoms/Spinner';
-import { LoadingContext } from "react-router-loading";
-
 
 interface RoutePresentationParams {
   presentationId: string;
@@ -37,7 +34,6 @@ export const Question: FC = () => {
   const [questionCounter, setQuestionCounter] = useState(Number);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
   const [answerResult, setAnswerResult] = useState<boolean[]>([]);
-  const loadingContext = useContext(LoadingContext);
 
   const renderTypes = (question: IQuestion, type: string, totalQuestions: number, blockPresentation: IBlockPresentation) => {
     const types = [
@@ -87,7 +83,6 @@ export const Question: FC = () => {
 
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
-    loadingContext.done()
     try {
       dispatch({ type: TYPE.SET_BLOCK_PRESENTATION, payload: data.data.blockPresentationById })
     } catch (error) {
@@ -148,7 +143,7 @@ export const Question: FC = () => {
               </Container>
             </StudentMenu>
             :
-            null
+            <StudentMenu>Loading</StudentMenu>
       }
     </Wrapper>
   );
