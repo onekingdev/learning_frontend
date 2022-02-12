@@ -63,7 +63,7 @@ export const Subject = styled.img`
 
 export const useStyles = makeStyles({
   groupButton: {
-    '&.MuiButton-root':{
+    "&.MuiButton-root":{
       height: '50px',
       width: '50px',
       fontSize: '24px',

@@ -10,7 +10,7 @@ export const Container = styled.div`
     height: 450px;
     display: flex;
     flex-direction: column;
-    background-color: ${props => props.color === 'Gold' ? BasicColor.paleOrange : BasicColor.ligntBlue};
+    background-color: ${props => props.color === "Gold" ? BasicColor.paleOrange : BasicColor.ligntBlue};
     margin: 38px;
     @media screen and (max-width: ${'500px'}) {
         margin-left:10px;
@@ -37,7 +37,7 @@ export const Mask = styled.div`
 
 export const Header = styled.div`
     width: 100%;
-    background-color: ${props => props.color === 'Gold' ? BasicColor.yellow : props.color === 'Combo' ? BasicColor.aqua : BasicColor.greenSoft};
+    background-color: ${props => props.color === "Gold" ? BasicColor.yellow : props.color === "Combo" ? BasicColor.aqua : BasicColor.greenSoft};
     height: 88px;
     border-radius: 10px;
     display: flex;

@@ -8,7 +8,7 @@ const data01 = [
   { name: 'Group B', value: 300, color: '#21B95C' },
   { name: 'Group C', value: 300, color: '#EC5858' },
 ]
-const colors = ['#F4C222', '#21B95C', '#EC5858', '#CC5B1D']
+const colors = ["#F4C222", "#21B95C", "#EC5858", "#CC5B1D"]
 export const SocratesPie: FC = () => {
 
   return (

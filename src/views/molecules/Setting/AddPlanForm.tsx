@@ -57,7 +57,7 @@ export const AddPlanForm: FC<IAddPlanProps> = ({ onConfirm, onCancel }) => {
     }
     else if (parentState === 'combo') {
       if (checked.indexOf(true) === -1)
-        console.log('No data')
+        console.log("No data")
       else {
         let combo = ''
         for (let i = 0; i < checked.length; i++) {

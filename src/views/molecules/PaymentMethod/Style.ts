@@ -158,7 +158,7 @@ export const OrderTip = styled.div`
 
 export const Header = styled.div`
     width: 100%;
-    background-color: ${props => props.color === 'Gold' ? BasicColor.yellow : props.color === 'Combo' ? BasicColor.aqua : BasicColor.greenSoft};
+    background-color: ${props => props.color === "Gold" ? BasicColor.yellow : props.color === "Combo" ? BasicColor.aqua : BasicColor.greenSoft};
     height: 88px;
     border-radius: 10px;
     display: flex;
@@ -206,7 +206,7 @@ export const FlexRow = styled.div`
 
 export const useStyles = makeStyles({
     radio: {
-        '& .MuiSvgIcon-root':{
+        "& .MuiSvgIcon-root":{
             height: '30px',
             width: '30px',
           }
@@ -216,12 +216,12 @@ export const useStyles = makeStyles({
         marginBottom: '30px !important'
     },
     codeInput: {
-        '&.MuiOutlinedInput-root': {
+        "&.MuiOutlinedInput-root": {
             height: '50px'
         },
-        '& .MuiInputLabel-root': {
+        "& .MuiInputLabel-root": {
         },
-        '& .Mui-focused': {
+        "& .Mui-focused": {
             color: 'black !important'
         }
     },

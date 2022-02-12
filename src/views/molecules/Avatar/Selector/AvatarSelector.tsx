@@ -11,8 +11,7 @@ import drawer_clothes from '../../../assets/drawers/drawer_clothes.png';
 import drawer_pants from '../../../assets/drawers/drawer_pants.png';
 // import data from '../../../pages/Avatar/atoms'
 import axios from 'axios';
-import {SkinToneSelector} from '../../SkinToneSelector';
-import {LoadingContext} from 'react-router-loading';
+import { LoadingContext } from "react-router-loading";
 
 import {Link, useHistory} from 'react-router-dom';
 
@@ -44,8 +43,6 @@ import {
 } from './Style';
 import {getAvatarAsset} from '../../../../app/firebase';
 import {get} from '../../../../api/queries/get';
-import {Avatar} from 'views/atoms/Avatar';
-import {SkinToneButton} from 'views/atoms/SkinToneButton';
 export const AvatarSelector: FC = () => {
   const serverUrl = 'http://91.92.109.140/';
   const placeHolder = serverUrl + 'assets/avatars/placeholder.png';
@@ -106,7 +103,7 @@ export const AvatarSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
-      loadingContext.done();
+      loadingContext.done()
       const accesory = result.data.data.studentById.avatarAccessories.image;
       const head = result.data.data.studentById.avatarHead.image;
       const body = result.data.data.studentById.avatarClothes.image;
@@ -123,7 +120,6 @@ export const AvatarSelector: FC = () => {
 
       setFootRef(foot);
       setFavFootRef(foot);
-      loadingContext.done();
     });
 
     // get(
@@ -318,6 +314,7 @@ export const AvatarSelector: FC = () => {
         </MobileFavoritesDrawer>
       </FavoritesCloset>
       <SelectorGrid>
+        <LeftArrow onClick={currentIndexPrev} src={arrowLeft}></LeftArrow>
         <CurrentAvatar>
           <CurrentAccessory
             src={accesoryRef}
@@ -327,10 +324,18 @@ export const AvatarSelector: FC = () => {
               left: accessories[accessoryIndex].left + 'px',
             }}
           />
+          {/* <CurrentHeader
+            src={headRef}
+            style={{
+              width: headers[headerIndex].scale * 160 + 'px',
+              top: headers[headerIndex].top + 'px',
+              left: headers[headerIndex].left + 'px',
+            }}
+          /> */}
           <CurrentBody src={bodyRef} />
           <CurrentFooter src={footRef} />
         </CurrentAvatar>
-        <SkinToneSelector />
+        <RightArrow onClick={currentIndexNext} src={arrowRight}></RightArrow>
         <FavoriteIcon onClick={setFavorite} src={favoriteImage}></FavoriteIcon>
         <BodyPartWardrobe src={wardrobe}></BodyPartWardrobe>
         <AtomsDrawer>

@@ -22,14 +22,14 @@ export const ParentPgStepper: FC<ParentPgStepperProps> = ({step}) => {
 
   return (
     <Container>
-        <Point color={'#21B95C'} isCurrent={step === 1}> <b>1</b> </Point>
+        <Point color={"#21B95C"} isCurrent={step === 1}> <b>1</b> </Point>
         <StepContent>Choose your plan</StepContent>
         <Line />
-        <Point color={'#1771B9'} isCurrent={step === 2}> 2 </Point>
-        <StepContent color={'#1771B9'}>Set up your account</StepContent>
+        <Point color={"#1771B9"} isCurrent={step === 2}> 2 </Point>
+        <StepContent color={"#1771B9"}>Set up your account</StepContent>
         <Line />
-        <Point color={'#22BAAF'} isCurrent={step === 3}> 3 </Point>
-        <StepContent color={'#22BAAF'}>Ready</StepContent>
+        <Point color={"#22BAAF"} isCurrent={step === 3}> 3 </Point>
+        <StepContent color={"#22BAAF"}>Ready</StepContent>
     </Container>
   );
 };
