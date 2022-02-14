@@ -27,7 +27,7 @@ import {
   Title,
   CardContent
  } from './Style'
-import StripeInput from "./StripeInput";
+import StripeInput from './StripeInput';
 import countryList from 'react-select-country-list';
 
 type PaymentFormProps = {
@@ -47,7 +47,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   const options = useMemo(() => countryList().getData(), [])
   const { isUpdate } = props
 
-  const [paymentMethod, setPaymentMethod] = useState("card")
+  const [paymentMethod, setPaymentMethod] = useState('card')
   const [validateRst, setValidateRst] = useState<{ [key: string]: any }>({
     firstName: null,
     lastName: null,
@@ -84,7 +84,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     let valiResult = true;
     for(const key in validateRst) {
       if(validateRst[key] === null) {
-          validateMsgTemp[key] = "Field is required";
+          validateMsgTemp[key] = 'Field is required';
       }
       if(validateMsgTemp[key]) {
           valiResult = false;
@@ -104,7 +104,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
 
   const handleOrder = async () => {
 
-    if(!formValidation()) return {success: false, result: "Validation Failed"};
+    if(!formValidation()) return {success: false, result: 'Validation Failed'};
     if(!stripe) return {success: false, result: "Can't get stripe"};
     if(!elements) return {success: false, result: "Can't get element"};
     if(!elements.getElement(CardNumberElement)) return {success: false, result: "Can't get card number element"};
@@ -116,7 +116,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         card: cardElement,
         billing_details: {
             // email: user.email,
-            email: "mooncode610@gmail.com",
+            email: 'mooncode610@gmail.com',
             address: {
                 city: data.city,
                 country: data.country,
@@ -139,7 +139,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   }
 
   const handleUpdate = async () => {
-    if(!formValidation()) return {success: false, result: "Validation Failed"};
+    if(!formValidation()) return {success: false, result: 'Validation Failed'};
     /*------------------------ send request to backend to create payment -S-----------------------------*/
     const result = {};
     /*------------------------ send request to backend to create payment -E-----------------------------*/
@@ -194,7 +194,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="First Name"
                     onChange={(e: any) => {
-                        handleFormChange("firstName",e.target.value.length === 0 ? "Field is required" : "")
+                        handleFormChange('firstName',e.target.value.length === 0 ? 'Field is required' : '')
                         setData({...data, firstName: e.target.value})
                     } }
                     error={!!validateRst.firstName}
@@ -206,7 +206,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="Last Name"
                     onChange={(e: any) => {
-                        handleFormChange("lastName",e.target.value.length === 0 ? "Field is required" : "")
+                        handleFormChange('lastName',e.target.value.length === 0 ? 'Field is required' : '')
                         setData({...data, lastName: e.target.value})
                     } }
                     error={!!validateRst.lastName}
@@ -223,7 +223,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange("cardNumber",e['error'] ? e['error']['message'] : "")}
+                    onChange={(e: any) => handleFormChange('cardNumber',e['error'] ? e['error']['message'] : '')}
                     error={!!validateRst.cardNumber}
                     helperText={validateRst.cardNumber}
                     focused
@@ -238,7 +238,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange("expiryDate",e['error'] ? e['error']['message'] : "")}
+                    onChange={(e: any) => handleFormChange('expiryDate',e['error'] ? e['error']['message'] : '')}
                     focused
                     error={!!validateRst.expiryDate}
                     helperText={validateRst.expiryDate}
@@ -253,7 +253,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => handleFormChange("cvc",e['error'] ? e['error']['message'] : "")}
+                    onChange={(e: any) => handleFormChange('cvc',e['error'] ? e['error']['message'] : '')}
                     focused
                     error={!!validateRst.cvc}
                     helperText={validateRst.cvc}
@@ -263,7 +263,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="Address Line 1"
                     onChange={(e: any) => {
-                        handleFormChange("addressOne",e.target.value.length === 0 ? "Field is required" : "")
+                        handleFormChange('addressOne',e.target.value.length === 0 ? 'Field is required' : '')
                         setData({...data, addressOne: e.target.value})
                     } }
                     error={!!validateRst.addressOne}
@@ -275,7 +275,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="Address Line 2"
                     onChange={(e: any) => {
-                        handleFormChange("addressTwo",e.target.value.length === 0 ? "Field is required" : "");
+                        handleFormChange('addressTwo',e.target.value.length === 0 ? 'Field is required' : '');
                         setData({...data, addressTwo: e.target.value});
                     } }
                     error={!!validateRst.addressTwo}
@@ -287,7 +287,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="City"
                     onChange={(e: any) => {
-                        handleFormChange("city",e.target.value.length === 0 ? "Field is required" : "");
+                        handleFormChange('city',e.target.value.length === 0 ? 'Field is required' : '');
                         setData({...data, city: e.target.value});
                     } }
                     error={!!validateRst.city}
@@ -299,7 +299,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="State/ Province"
                     onChange={(e: any) => {
-                        handleFormChange("state",e.target.value.length === 0 ? "Field is required" : "");
+                        handleFormChange('state',e.target.value.length === 0 ? 'Field is required' : '');
                         setData({...data, state: e.target.value})
                     } }
                     error={!!validateRst.state}
@@ -311,7 +311,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="Zip /Postal Code"
                     onChange={(e: any) => {
-                        handleFormChange("zip",e.target.value.length === 0 ? "Field is required" : "")
+                        handleFormChange('zip',e.target.value.length === 0 ? 'Field is required' : '')
                         setData({...data, zip: e.target.value})
                     } }
                     error={!!validateRst.zip}
@@ -323,7 +323,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="Country"
                     onChange={(e: any) => {
-                        handleFormChange("country",e.target.value.length === 0 ? "Field is required" : "");
+                        handleFormChange('country',e.target.value.length === 0 ? 'Field is required' : '');
                         setData({...data, country: e.target.value})
 
                     } }
@@ -336,7 +336,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="Phone"
                     onChange={(e: any) => {
-                        handleFormChange("phone",e.target.value.length === 0 ? "Field is required" : "")
+                        handleFormChange('phone',e.target.value.length === 0 ? 'Field is required' : '')
                         setData({...data, phone: e.target.value})
                     } }
                     error={!!validateRst.phone}

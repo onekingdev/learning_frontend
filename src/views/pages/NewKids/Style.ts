@@ -45,8 +45,8 @@ export const Socrates = styled.img`
 export const Subjects = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: ${props => props.color === "Gold" ? BasicColor.paleOrange : props.color === "Combo" ? BasicColor.ligntBlue : BasicColor.ligntBlue};
-    border-color: ${props => props.color === "Gold" ? BasicColor.yellow : props.color === "Combo" ? BasicColor.aqua : BasicColor.greenSoft};
+    background-color: ${props => props.color === 'Gold' ? BasicColor.paleOrange : props.color === 'Combo' ? BasicColor.ligntBlue : BasicColor.ligntBlue};
+    border-color: ${props => props.color === 'Gold' ? BasicColor.yellow : props.color === 'Combo' ? BasicColor.aqua : BasicColor.greenSoft};
     border-width: 1px;
     border-style: solid;
     padding: 5px 30px 20px 30px;
@@ -88,38 +88,38 @@ export const useStyles = makeStyles({
     backgroundColor: 'white !important',
   },
   select: {
-    "&.MuiOutlinedInput-root" : {
-      borderRadius: "25px",
+    '&.MuiOutlinedInput-root' : {
+      borderRadius: '25px',
     },
-    "& fieldset" : {
+    '& fieldset' : {
       borderColor: BasicColor.brightBlue,
       borderWidth: '2px'
     }
   },
   goldInput: {
-    "&.MuiInputBase-root" : {
+    '&.MuiInputBase-root' : {
       backgroundColor: BasicColor.paleOrange,
       borderColor: `${BasicColor.yellow}`
     },
-    "&:hover,& fieldset" : {
+    '&:hover,& fieldset' : {
       borderColor: `${BasicColor.yellow} !important`,
     }
   },
   comboInput: {
-    "& .MuiInputBase-root" : {
+    '& .MuiInputBase-root' : {
       backgroundColor: BasicColor.ligntBlue,
       borderColor: BasicColor.aqua
     },
-    "&:hover,& fieldset" : {
+    '&:hover,& fieldset' : {
       borderColor: `${BasicColor.aqua} !important`,
     }
   },
   soleInput: {
-    "& .MuiInputBase-root" : {
+    '& .MuiInputBase-root' : {
       backgroundColor: BasicColor.ligntBlue,
       borderColor: BasicColor.greenSoft
     },
-    "&:hover,& fieldset" : {
+    '&:hover,& fieldset' : {
       borderColor: `${BasicColor.greenSoft} !important`,
     },
   }

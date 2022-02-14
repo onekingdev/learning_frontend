@@ -24,9 +24,9 @@ export const LogIn: FC = () => {
   const language = 'en';
 
   const [loading, setLoading] = useState(false);
-  const [errMsg, setErrMsg] = useState("")
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const validatePassword = (password: string) => {
     return password !== 'test';
@@ -39,17 +39,17 @@ export const LogIn: FC = () => {
     setLoading(false);
 
     if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: "error" });
+      enqueueSnackbar(result.msg, { variant: 'error' });
       return;
     }
     switch(result.userType) {
-      case "student" :
+      case 'student' :
         history.push('/home')
         return;
-      case "guardian" :
+      case 'guardian' :
         history.push('/kids/list')
         return;
-      case "teacher" :
+      case 'teacher' :
         history.push('/kids/list')
         return;
       default:
