@@ -39,14 +39,14 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   const handleChange = (event:any) => {
     console.log(event.target.value)
     switch(event.target.value) {
-      case "Settings" :
-        history.push("/parent/setting")
+      case 'Settings' :
+        history.push('/parent/setting')
         break;
-      case "ManageKids" :
-        history.push("/kids/list")
+      case 'ManageKids' :
+        history.push('/kids/list')
         break;
-      case "SignOut" :
-        history.push("/")
+      case 'SignOut' :
+        history.push('/')
         break;
     }
   };
@@ -96,9 +96,9 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
             onChange={handleChange}
             sx={{backgroundColor: 'white'}}
           >
-            <MenuItem value={"Settings"}>Settings</MenuItem>
-            <MenuItem value={"ManageKids"}>Manage Kids</MenuItem>
-            <MenuItem value={"SignOut"}>Sign Out</MenuItem>
+            <MenuItem value={'Settings'}>Settings</MenuItem>
+            <MenuItem value={'ManageKids'}>Manage Kids</MenuItem>
+            <MenuItem value={'SignOut'}>Sign Out</MenuItem>
           </Select>
         </FormControl>
         <AvatarContainer>

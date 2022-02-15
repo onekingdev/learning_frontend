@@ -13,6 +13,13 @@ import {getAvatarAsset, getAvatarDir} from '../../../app/firebase';
 import axios from 'axios';
 import wardrobe_icon from '../../assets/wardrobe.png';
 import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  setAccesoryAvatar,
+  setBodyAvatar,
+  setFooterAvatar,
+  setHeadAvatar,
+} from 'app/actions';
 import {LoadingContext} from 'react-router-loading';
 
 // import data from '../../pages/Avatar/atoms';
@@ -22,7 +29,7 @@ export const WardrobeSelector: FC = () => {
   // const headers_max = headers.length;
   // const bodies_max = bodies.length;
   // const footers_max = footers.length;
-
+  const dispatch = useDispatch();
   const [accessoryIndex, setAccessoryIndex] = useState(1);
   const [headerIndex, setHeaderIndex] = useState(1);
   const [bodyIndex, setBodyIndex] = useState(1);
@@ -41,6 +48,7 @@ export const WardrobeSelector: FC = () => {
   const [headers, setHeaders] = useState([]);
   const [bodies, setBodies] = useState([]);
   const [footers, setFooters] = useState([]);
+  const selector = useSelector(store => store);
 
   useEffect(() => {
     // setSelected avatar
@@ -67,7 +75,6 @@ export const WardrobeSelector: FC = () => {
       default:
         break;
     }
-
     console.log(params);
 
     getAvatarDir('accessories', setAccessories);
@@ -76,7 +83,7 @@ export const WardrobeSelector: FC = () => {
     getAvatarDir('pants', setFooters);
 
     axios({
-      url: 'http://143.244.183.24/graphql/',
+      url: 'https://api.withsocrates.com/graphql/',
       method: 'post',
       data: {
         query: `
@@ -99,7 +106,7 @@ export const WardrobeSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
-      loadingContext.done()
+      loadingContext.done();
       console.log('result', result.data.data);
 
       const accesory = result.data.data.studentById.avatarAccessories.image;
@@ -113,88 +120,89 @@ export const WardrobeSelector: FC = () => {
       setFootRef(foot);
     });
   }, []);
-
+  console.log(selector);
   const setAccessory = (i: number) => {
     const head = accessories[i];
     setAccesoryRef(head);
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        mutation SetAvatar {
-          setStudentAvatar(avatarTypeOf:1, studentId:1, avatarUrl: "${accessories[i]}") {
-             student {
-               id
-             }
-         }
-     }
-          `,
-      },
-    }).then(console.log);
+    setAccesoryAvatar(accessories[i], dispatch);
+    // axios({
+    //   url: 'https://api.withsocrates.com/graphql/',
+    //   method: 'post',
+    //   data: {
+    //     query: `
+    //     mutation SetAvatar {
+    //       setStudentAvatar(avatarTypeOf:1, studentId:1, avatarUrl: "${accessories[i]}") {
+    //          student {
+    //            id
+    //          }
+    //      }
+    //  }
+    //       `,
+    //   },
+    // }).then(console.log);
   };
 
   const setHeader = (i: number) => {
     const head = headers[i];
     setHeadRef(head);
-
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        mutation SetAvatar {
-          setStudentAvatar(avatarTypeOf:2, studentId:1, avatarUrl: "${headers[i]}") {
-             student {
-               id
-             }
-         }
-     }
-          `,
-      },
-    }).then(console.log);
+    setHeadAvatar(headers[i], dispatch);
+    // axios({
+    //   url: 'https://api.withsocrates.com/graphql/',
+    //   method: 'post',
+    //   data: {
+    //     query: `
+    //     mutation SetAvatar {
+    //       setStudentAvatar(avatarTypeOf:2, studentId:1, avatarUrl: "${headers[i]}") {
+    //          student {
+    //            id
+    //          }
+    //      }
+    //  }
+    //       `,
+    //   },
+    // }).then(console.log);
   };
 
   const setBody = (i: number) => {
     const head = bodies[i];
     setBodyRef(head);
-
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        mutation SetAvatar {
-          setStudentAvatar(avatarTypeOf:3, studentId:1, avatarUrl: "${bodies[i]}") {
-             student {
-               id
-             }
-         }
-     }
-          `,
-      },
-    }).then(console.log);
+    setBodyAvatar(bodies[i], dispatch);
+    // axios({
+    //   url: 'https://api.withsocrates.com/graphql/',
+    //   method: 'post',
+    //   data: {
+    //     query: `
+    //     mutation SetAvatar {
+    //       setStudentAvatar(avatarTypeOf:3, studentId:1, avatarUrl: "${bodies[i]}") {
+    //          student {
+    //            id
+    //          }
+    //      }
+    //  }
+    //       `,
+    //   },
+    // }).then(console.log);
   };
 
   const setFooter = (i: number) => {
     const head = footers[i];
     setFootRef(head);
-
-    axios({
-      url: 'http://143.244.183.24/graphql/',
-      method: 'post',
-      data: {
-        query: `
-        mutation SetAvatar {
-          setStudentAvatar(avatarTypeOf:4, studentId:1, avatarUrl: "${footers[i]}") {
-             student {
-               id
-             }
-         }
-     }
-          `,
-      },
-    }).then(console.log);
+    setFooterAvatar(footers[i], dispatch);
+    // axios({
+    //   url: 'https://api.withsocrates.com/graphql/',
+    //   method: 'post',
+    //   data: {
+    //     query: `
+    //     mutation SetAvatar {
+    //       setStudentAvatar(avatarTypeOf:4, studentId:1, avatarUrl: "${footers[i]}") {
+    //          student {
+    //            id
+    //          }
+    //      }
+    //  }
+    //       `,
+    //   },
+    // }).then(console.log);
   };
 
   useEffect(() => {
@@ -522,6 +530,7 @@ const CurrentHeader = styled.img`
   position: relative;
   width: 160px;
   margin: auto;
+  z-index: 100;
   top: -50px;
   grid-row: 1 / 2;
   grid-column: 1 / 2;
@@ -533,25 +542,25 @@ const CurrentHeader = styled.img`
 `;
 
 const CurrentBody = styled.img`
-  height: 100px;
+  height: 105px;
   margin: auto;
   z-index: 99;
   grid-row: 2 / 3;
   grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    height: 100px;
+    height: 105px;
     grid-row: 2 / 3;
     grid-column: 1 / 2;
   }
 `;
 
 const CurrentFooter = styled.img`
-  height: 138px;
+  height: 140px;
   margin: auto;
   grid-row: 3 / 4;
   grid-column: 1 / 2;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    height: 138px;
+    height: 140px;
     grid-row: 3 / 4;
     grid-column: 1 / 2;
   }

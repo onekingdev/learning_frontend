@@ -79,6 +79,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "source $HOME/.nvm/nvm.sh; nvm use;nvm use 14 && react-scripts start",
     "build": "react-scripts build",
     "build-github": "CI=false && react-scripts build",
     "build-win": "set CI=false&&react-scripts build",

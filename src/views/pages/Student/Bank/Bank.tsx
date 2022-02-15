@@ -1,17 +1,13 @@
-import {FC, useEffect, useState, useContext} from 'react';
-import {useHistory} from 'react-router-dom';
+import {FC, useEffect, useContext} from 'react';
 import {ScreenSize} from '../../../screenSize';
 import styled from 'styled-components';
 
-import {Grid, Paper, Box} from '@mui/material';
+import {Grid} from '@mui/material';
 
 import {StudentMenu} from '../../../templates/StudentMenu';
 import {Title} from '../../../atoms/Text/Title';
 import background from '../../../assets/colored-shapes-bg.svg';
 import ribbon from '../../../assets/ribbon.svg';
-// import { CardTitle } from './Style';
-// import CardTitle
-import {BasicColor} from '../../../Color';
 import Cartera from '../../../assets/Cartera.svg';
 
 import {AccountBalance} from '../../../molecules/StudentBank/AccountBalance';
@@ -22,11 +18,6 @@ import {LoadingContext} from 'react-router-loading';
 
 export const Bank: FC = () => {
   const loadingContext = useContext(LoadingContext);
-  const history = useHistory();
-
-  const handleError = (error: any) => {
-    console.error(error);
-  };
 
   useEffect(() => {
     // get(

@@ -125,7 +125,7 @@ export function Routes(props: any) {
         <PrivateRoute loading={true} path="/home">
           <StudentHome />
         </PrivateRoute>
-        <PrivateRoute path="/progress">
+        <PrivateRoute loading={true} path="/progress">
           <Progress />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/backpack">
