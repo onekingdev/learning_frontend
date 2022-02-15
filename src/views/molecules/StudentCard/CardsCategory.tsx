@@ -43,6 +43,7 @@ const CardContainer: FC<CardPropArray> = ({ cards }) => {
   // This function is called from child, this is passed as prop to child component
   const callback = (category: string) => {
     setCard(category);
+    // toggle state to make sure buy card every time user clicks buy button.
     setBuy(!buy)
   }
 

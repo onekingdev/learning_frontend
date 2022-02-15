@@ -31,7 +31,7 @@ export const Line = styled.div`
 export const StepContent = styled.div`
     font-size: 24px;
     padding-left: 10px;
-    color: ${props => props.color || '#21B95C'};
+    color: ${props => props.color || "#21B95C"};
     @media screen and (max-width: ${ScreenSize.phone}) {
         display: none
     }
@@ -43,15 +43,15 @@ export const StepContent = styled.div`
 export const Point = styled.div`
     width: 40px;
     height: 40px;
-    background-color:  ${(props: pointProps) => props.isCurrent && props.color || 'unset'};
+    background-color:  ${(props: pointProps) => props.isCurrent && props.color || "unset"};
     display: flex;
     align-items: center;
     justify-content: center;
     border-width: 1px;
     border-radius: 100%;
     font-size: 24px;
-    color: ${(props: pointProps) => props.isCurrent && 'white' || props.color};
-    border-color: ${props => props.color || '#21B95C'};
+    color: ${(props: pointProps) => props.isCurrent && "white" || props.color};
+    border-color: ${props => props.color || "#21B95C"};
     border-style: solid;
     @media screen and (max-width: ${ScreenSize.tablet}) {
         margin-left: 15px;

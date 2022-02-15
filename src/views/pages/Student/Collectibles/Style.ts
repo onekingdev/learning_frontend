@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import background from '../../../assets/colored-shapes-bg.svg';
 import {ScreenSize} from '../../../screenSize';
+import {BasicColor} from '../../../Color';
+import {UserInfo} from '../../../atoms/Text/UserInfo';
+import {Title} from '../../../atoms/Text/Title';
+import {Typography} from '../../../atoms/Text/typography';
 
 export const Wrapper = styled.div`
   background-image: url(${background});

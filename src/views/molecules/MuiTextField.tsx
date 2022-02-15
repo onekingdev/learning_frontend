@@ -27,7 +27,7 @@ const MuiTextField: FC<MuiButtonProps> = ({
   error,
   helperText,
   label,
-  variant='outlined',
+  variant="outlined",
   bgColor,
   borderColor,
   radius=25,
@@ -39,21 +39,21 @@ const MuiTextField: FC<MuiButtonProps> = ({
 
     const useStyles = makeStyles({
         input: {
-            '& fieldset': {
+            "& fieldset": {
                 borderColor: borderColor || bgColor || BasicColor.brightBlue,
                 borderRadius: radius,
                 borderWidth: '2px'
             },
-            '& MuiFormControl-root': {
+            "& MuiFormControl-root": {
                 borderRadius: radius,
                 borderWidth: '2px'
             },
-            '& input': {
+            "& input": {
                 backgroundColor: variant !== 'outlined' ? bgColor || BasicColor.greenSoft : 'white',
                 borderRadius: radius,
                 borderWidth: '2px'
             },
-            '& .MuiInputBase-input': {
+            "& .MuiInputBase-input": {
                 backgroundColor: variant !== 'outlined' ? bgColor || BasicColor.greenSoft : 'white',
                 borderRadius: radius,
                 borderWidth: '2px'

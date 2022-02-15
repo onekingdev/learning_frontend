@@ -35,7 +35,7 @@ export const Payment: FC = () => {
   const onConfirm = (reason: string) => {
     // setReason(reason)
 
-    console.log('Uhhahaha')
+    console.log("Uhhahaha")
     open()
   }
 

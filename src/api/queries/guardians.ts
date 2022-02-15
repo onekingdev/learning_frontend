@@ -15,7 +15,7 @@ export const GUARDIANS_QUERY = `
 
     }
 `;
-
+  
 export const WHOAMI_QUERY = `
     {
         ${USER}

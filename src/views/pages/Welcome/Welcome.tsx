@@ -9,8 +9,8 @@ import {Icon} from '../../atoms/Text/Icon';
 import {dictionary} from '../Welcome/dictionary';
 import {Modal} from '../../atoms/Modal';
 import {Link, useHistory} from 'react-router-dom';
-import {resetReducer} from '../../../app/actions/userActions';
-import {useDispatch} from 'react-redux';
+import { resetReducer } from '../../../app/actions/userActions'
+import { useDispatch } from 'react-redux'
 import {
   Wrapper,
   Logo,
@@ -28,15 +28,15 @@ import {TextInput} from '../../atoms/Text/TextInput';
 export const Welcome: FC = () => {
   const language = 'en';
   const [joinModal, setJoinModal] = useState(false);
-  const [deployModal] = useState(false);
+  const [deployModal, setDeployModal] = useState(false);
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const sendEmail = () => {
     setJoinModal(!joinModal);
   };
   useEffect(() => {
-    resetReducer(dispatch);
-  }, []);
+    resetReducer(dispatch)
+  }, [])
   return (
     <Wrapper>
       <Logo src={logo} alt="Learn with Socrates logo" />
@@ -92,7 +92,7 @@ export const Welcome: FC = () => {
           color={ButtonColor.join}
           darkText={true}
           // onClick={() => setDeployModal(true)}
-          onClick={() => history.push('/parent/create')}
+          onClick={() => history.push("/parent/create")}
         />
       </Actions>
 

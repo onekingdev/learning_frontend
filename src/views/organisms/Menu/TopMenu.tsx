@@ -116,7 +116,7 @@ const TopMenuStyles = styled.div<{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: ${props => props.isScrolled ? '#ffffffe0' : 'transparent'};
+    background-color: ${props => props.isScrolled ? "#ffffffe0" : 'transparent'};
     transition: 0.5s;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {

@@ -14,11 +14,6 @@ const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: IE
         ...state,
         ...action.payload
       };
-    case TYPE.AVATAR_SET_ACCESORY:
-      return {
-        ...state,
-        accessories: action.payload
-      };
     case TYPE.AVATAR_RESET:
       return INITIAL_STATE;
     default:

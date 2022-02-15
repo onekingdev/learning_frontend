@@ -4,11 +4,19 @@ import {MobileMenu} from '../organisms/Menu/MobileMenu';
 import avatarPlaceHolder from '../assets/avatars/avatar1.svg';
 import styled from 'styled-components';
 import {ScreenSize} from '../screenSize';
-import {useSelector} from 'react-redux';
+
+import {useDispatch, useSelector} from 'react-redux';
+import * as TYPES from '../../app/types';
 
 export const StudentMenu: FC = ({children}) => {
   const user = useSelector((state: any) => state.user);
+  const student = useSelector((state: any) => state.student);
+  const wallet = useSelector((state: any) => state.wallet);
   const earning = useSelector((state: any) => state.earning);
+  const dispatch = useDispatch();
+  const setStudent = (student: any) => {
+    dispatch({type: TYPES.STUDENT_SET_DATA, payload: student});
+  };
 
   useEffect(() => {
     // setStudent(student);
