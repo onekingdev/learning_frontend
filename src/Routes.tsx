@@ -5,7 +5,7 @@ import {
   TransitionGroup,
   CSSTransition,
   Transition
-} from 'react-transition-group';
+} from "react-transition-group";
 import 'animate.css';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
@@ -34,6 +34,7 @@ import {Settings} from './views/pages/Settings/Settings';
 import {Report} from './views/pages/Report/Report';
 import {Bank} from './views/pages/Student/Bank/Bank';
 import {Cards} from './views/pages/Student/Collectibles/Cards';
+import { MyCardCollection } from 'views/pages/Student/Collectibles/MyCards';
 import NewKids from './views/pages/NewKids/NewKids';
 import {Spinner} from 'views/atoms/Spinner';
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
@@ -112,6 +113,9 @@ export function Routes(props: any) {
         <PrivateRoute loading={false} path="/collectibles/cards">
           <Cards />
         </PrivateRoute>
+        <PrivateRoute loading={false} path="/collectibles/mycards">
+          <MyCardCollection />
+        </PrivateRoute>
         <PrivateRoute loading={true} path="/bank">
           <Bank />
         </PrivateRoute>
@@ -121,7 +125,7 @@ export function Routes(props: any) {
         <PrivateRoute loading={true} path="/home">
           <StudentHome />
         </PrivateRoute>
-        <PrivateRoute path="/progress">
+        <PrivateRoute loading={true} path="/progress">
           <Progress />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/backpack">

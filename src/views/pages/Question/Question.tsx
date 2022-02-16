@@ -22,6 +22,7 @@ export const Question: FC = () => {
   // TODO and the type should be much more roboust
   const {presentationId} = useParams<RoutePresentationParams>();
   const state = useSelector((state: Store) => state);
+  const [isFinished, setIsFinished] = useState(false);
   const dispatch = useDispatch();
   const [blockPresentation, setBlockPresentation] =
     useState<IBlockPresentation>();
@@ -94,7 +95,7 @@ export const Question: FC = () => {
         type: TYPE.SET_BLOCK_PRESENTATION,
         payload: data.data.blockPresentationById,
       });
-      loadingContext.done()
+      loadingContext.done();
     } catch (error) {
       console.log('Error de dispatch', error);
     }
@@ -162,3 +163,6 @@ export const Question: FC = () => {
     </Wrapper>
   );
 };
+function dispatch(arg0: {type: string; payload: any}) {
+  throw new Error('Function not implemented.');
+}

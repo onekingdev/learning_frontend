@@ -157,7 +157,6 @@ export const getAvatarDir = async (dir: any, setDir: any) => {
   });
 };
 
-
 /**
  * Get image download urls with ids
  * @author BruceLee
@@ -210,7 +209,7 @@ export const buyCardsWithFilenames = async (
 
 export const getCardCategories = async (setCateItems: any) => {
   const storage = getStorage();
-  const listRef = assetRef(storage, 'assets/collectible/Categories');
+  const listRef = assetRef(storage, `assets/collectible/Categories`);
 
   const res = await listAll(listRef);
 
@@ -220,4 +219,69 @@ export const getCardCategories = async (setCateItems: any) => {
   }
 
   setCateItems(links);
+};
+
+/**
+ * Get total images of current category by file names
+ * @author BruceLee
+ * @param dir currently selected category
+ * @param setAllCards set links for all cards of current category
+ */
+ export const getAllCards = async (
+  filenames: Array<string>,
+  dir: string,
+  setAllCards: any
+) => {
+  const storage = getStorage();
+  const links = []
+
+  for (const filename of filenames) {
+    const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename}`);
+    links.push(await getDownloadURL(fileRef))
+  }
+  setAllCards(links)
+};
+
+/**
+ * Get all images of current gem, this is for test.
+ * @author BruceLee
+ * @param dir currently selected category
+ * @param setAllCards set links for all cards of current category
+ */
+ export const getGemCards = async (
+  card: string,
+  gem: string,
+  setGemCards: any
+) => {
+  const storage = getStorage();
+
+  console.log('firebase: card', card, 'gem', gem)
+  const listRef = assetRef(storage, `assets/collectible/${card}`);
+
+  const res = await listAll(listRef);
+  const links = [];
+  const length = res.items.length
+
+  switch(gem) {
+    case 'Epic':
+      for(let i = 0; i < length / 4; i ++)
+      links.push(await getDownloadURL(res.items[i]));
+      break;
+    case 'Legendary' :
+      for(let i = Math.floor(length / 4); i < Math.floor(length / 2) ; i ++)
+      links.push(await getDownloadURL(res.items[i]));
+      break;
+    case 'Rare' :
+      for(let i = Math.floor(length / 2); i < Math.floor(length / 4 * 3) ; i ++)
+      links.push(await getDownloadURL(res.items[i]));
+      break;
+    case 'Common' :
+      for(let i = Math.floor(length / 4 * 3); i < length ; i ++)
+      links.push(await getDownloadURL(res.items[i]));
+      break;
+    default :
+      break;
+  }
+  console.log('firebase:',links)
+  setGemCards(links);
 };
