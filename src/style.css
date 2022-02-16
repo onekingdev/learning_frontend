@@ -1,5 +1,6 @@
 body {
     color: #3F3F3F;
+    overflow: hidden;
 }
 .flex{
     display: flex;

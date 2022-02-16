@@ -74,7 +74,7 @@ const CreateParent: FC = () => {
 
     if (res.success === false) {
       setErrMsg('Network Error!');
-      enqueueSnackbar(`Network Error!`, {variant: 'error'});
+      enqueueSnackbar('Network Error!', {variant: 'error'});
       return;
     }
 

@@ -5,7 +5,7 @@ import {
   TransitionGroup,
   CSSTransition,
   Transition
-} from "react-transition-group";
+} from 'react-transition-group';
 import 'animate.css';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
@@ -121,7 +121,7 @@ export function Routes(props: any) {
         <PrivateRoute loading={true} path="/home">
           <StudentHome />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/progress">
+        <PrivateRoute path="/progress">
           <Progress />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/backpack">

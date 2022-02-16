@@ -1,5 +1,3 @@
-import { mutation } from 'api/queries/get';
-import axios from 'axios';
 import * as TYPES from '../types'
 export const studentSetData = (payload: any) => {
   return {
@@ -85,27 +83,3 @@ export const setBlockPresentation = (payload: string) => ({
   type: 'SET_BLOCK_PRESENTATION',
   payload
 })
-
-export const setAvatar = (payload: any, dispatch: any) => {
-  axios({
-    url: 'https://api.withsocrates.com/graphql/',
-    method: 'post',
-    data: {
-      query: `
-      mutation setFavoriteAvatarCollection {
-        setFavoriteAvatarCollection(
-              avatarAccessorie: ${payload.accessory},
-              avatarClothes: ${payload.clothes}, 
-              avatarHead: ${payload.head},
-              avatarPants: ${payload.pants}
-              studentId:1
-            ) {
-              favoriteAvatarCollection {
-                  id
-              }
-       }
-   }
-        `
-  }
-  })
-}

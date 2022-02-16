@@ -210,7 +210,7 @@ export const buyCardsWithFilenames = async (
 
 export const getCardCategories = async (setCateItems: any) => {
   const storage = getStorage();
-  const listRef = assetRef(storage, `assets/collectible/Categories`);
+  const listRef = assetRef(storage, 'assets/collectible/Categories');
 
   const res = await listAll(listRef);
 
