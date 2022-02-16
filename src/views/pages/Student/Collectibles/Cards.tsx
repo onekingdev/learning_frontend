@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import {useHistory} from 'react-router-dom';
 import {
   CardCollectibleContainer,
   Wrapper,
@@ -12,12 +11,10 @@ import { StudentMenu } from '../../../templates/StudentMenu';
 import { CardCategory } from '../../../molecules/StudentCard/CardsCategory'
 
 export const Cards: FC = () => {
-  const history = useHistory();
-
   return (
     <Wrapper>
       <StudentMenu>
-        <Button onClick={() => history.push('/collectibles/mycards')}>MY COLLECTION</Button>
+        <Button >MY COLLECTION</Button>
         <CardCollectibleContainer>
           <CardCollectibleTitle />
           <CardCategory />

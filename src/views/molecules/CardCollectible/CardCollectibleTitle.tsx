@@ -11,13 +11,6 @@ export const CardCollectibleTitle: FC = () => {
     </CardTitle>
   );
 };
-export const CardCollectibleTitle2: FC = () => {
-  return (
-    <CardTitle>
-      <Title isDark={true}>MY COLLECTION</Title>
-    </CardTitle>
-  );
-};
 
 const CardTitle = styled.div`
   margin-top: 3vh;

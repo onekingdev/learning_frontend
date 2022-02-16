@@ -94,8 +94,9 @@ transition: all 250ms ease-in-out;
 }
 `
 const StyledImg = styled.img`
+  height: 100%;
   margin-top: 30px;
-  object-fit: fill;
+  object-fit: contain;
 `
 
 const StyledP = styled.p`

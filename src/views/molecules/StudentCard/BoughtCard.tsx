@@ -11,8 +11,6 @@ type CardProps = {
 
   /**
    * @author BruceLee
-   * Displaying a bought package of 3 cards when a user pressed bought button
-   * Turn around image effect and sound effect added
    */
 export const BoughtCard: FC<CardProps> = ({ imgUrl }) => {
   // state updates when user clicks an image
@@ -23,7 +21,7 @@ export const BoughtCard: FC<CardProps> = ({ imgUrl }) => {
   // state to know that image is loaded, rotating effect only works when image is fully loaded
   const [loaded, setLoaded] = useState(false);
   return (
-    <StyledCard onClick={() => setOpen(true)}>
+    <StyledCard onClick={() => setOpen(!open)}>
       {imgUrl
         ? open
           ?

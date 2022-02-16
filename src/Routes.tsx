@@ -34,7 +34,6 @@ import {Settings} from './views/pages/Settings/Settings';
 import {Report} from './views/pages/Report/Report';
 import {Bank} from './views/pages/Student/Bank/Bank';
 import {Cards} from './views/pages/Student/Collectibles/Cards';
-import { MyCardCollection } from 'views/pages/Student/Collectibles/MyCards';
 import NewKids from './views/pages/NewKids/NewKids';
 import {Spinner} from 'views/atoms/Spinner';
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
@@ -112,9 +111,6 @@ export function Routes(props: any) {
         </PrivateRoute>
         <PrivateRoute loading={false} path="/collectibles/cards">
           <Cards />
-        </PrivateRoute>
-        <PrivateRoute loading={false} path="/collectibles/mycards">
-          <MyCardCollection />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/bank">
           <Bank />
