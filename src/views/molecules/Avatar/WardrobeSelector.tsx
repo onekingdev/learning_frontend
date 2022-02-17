@@ -8,6 +8,8 @@ import drawer_accessories from '../../assets/drawers/drawer_accessories.png';
 import drawer_hairs from '../../assets/drawers/drawer_hairs.png';
 import drawer_clothes from '../../assets/drawers/drawer_clothes.png';
 import drawer_pants from '../../assets/drawers/drawer_pants.png';
+import {accessories, headers, footers} from '../../pages/Avatar/atoms';
+import {getAvatarAsset, getAvatarDir} from '../../../app/firebase';
 import axios from 'axios';
 import wardrobe_icon from '../../assets/wardrobe.png';
 import {Link} from 'react-router-dom';
@@ -18,9 +20,6 @@ import {
 import arrowUp from '../../assets/arrows/arrowUp.svg';
 import priceflag from '../../assets/price-flag.svg';
 import {LoadingContext} from 'react-router-loading';
-import { get } from 'api/queries/get';
-import { AVATAR } from 'api/fragments/avatarFragments';
-import { tableFooterClasses } from '@mui/material';
 
 // import data from '../../pages/Avatar/atoms';
 export const WardrobeSelector: FC = () => {
@@ -38,7 +37,7 @@ export const WardrobeSelector: FC = () => {
   const [iconSize, setIconSize] = useState(80);
   const [atomSize, setAtomSize] = useState(113);
   const width = window.screen.width;
-  const [avatarItems, setAvatarItems] = useState([]);
+
   const [accesoryRef, setAccesoryRef] = useState('');
   const [headRef, setHeadRef] = useState('');
   const [bodyRef, setBodyRef] = useState('');
@@ -50,15 +49,7 @@ export const WardrobeSelector: FC = () => {
   const [footers, setFooters] = useState([]);
   const selector = useSelector(store => store);
 
-  const handleData = (data: any) => {
-    setAvatarItems(data.data.avatars)
-  }
-  const handleError = (error: any) => {
-    console.log(error);
-  }
-
   useEffect(() => {
-    get('avatars',`{${AVATAR}}`,handleData,handleError)
     const params = window.location.pathname.split('/')[2];
 
     switch (params) {
@@ -77,18 +68,14 @@ export const WardrobeSelector: FC = () => {
       default:
         break;
     }
-  },[])
-  useEffect(() => {
-    const accessoriesArray = avatarItems.filter((item:any) => item.typeOf === 'ACCESSORIES')
-    const headersArray = avatarItems.filter((item:any) => item.typeOf === 'HEAD')
-    const bodiesArray = avatarItems.filter((item:any) => item.typeOf === 'CLOTHES')
-    const footersArray = avatarItems.filter((item:any) => item.typeOf === 'PANTS')
-    setAccessories(accessoriesArray)
-    setHeaders(headersArray)
-    setBodies(bodiesArray)
-    setFooters(footersArray)
+    console.log(params);
 
-     axios({
+    getAvatarDir('accessories', setAccessories);
+    getAvatarDir('heads', setHeaders);
+    getAvatarDir('bodies', setBodies);
+    getAvatarDir('pants', setFooters);
+
+    axios({
       url: 'https://api.withsocrates.com/graphql/',
       method: 'post',
       data: {
@@ -112,7 +99,7 @@ export const WardrobeSelector: FC = () => {
           `,
       },
     }).then((result: any) => {
-       loadingContext.done();
+      loadingContext.done();
       console.log('result', result.data.data);
 
       const accesory = result.data.data.studentById.avatarAccessories.image;
@@ -125,7 +112,7 @@ export const WardrobeSelector: FC = () => {
       setBodyRef(body);
       setFootRef(foot);
     });
-  }, [avatarItems]);
+  }, []);
   console.log(selector);
   const setAccessory = (i: number) => {
     const head = accessories[i];
@@ -160,7 +147,7 @@ export const WardrobeSelector: FC = () => {
       case 1:
         return (
           <WardrobeScroll>
-            {accessories.map((item:any, i) => (
+            {accessories.map((item, i) => (
               <WardrobeAtom
                 onClick={() => {
                   setAccessory(i);
@@ -168,7 +155,7 @@ export const WardrobeSelector: FC = () => {
                 }}
                 isSelected={accessoryIndex === i ? true: false}
               >
-                <AtomImg src={item.image}/>
+                <AtomImg src={item}/>
                 <PriceContainer>
                   <PriceFlag src={priceflag}/>
                 </PriceContainer>
@@ -179,7 +166,7 @@ export const WardrobeSelector: FC = () => {
       case 2:
         return (
           <WardrobeScroll>
-            {headers.map((item:any, i) => (
+            {headers.map((item, i) => (
               <WardrobeAtom
                 onClick={() => {
                   setHeader(i);
@@ -188,7 +175,7 @@ export const WardrobeSelector: FC = () => {
                 isSelected={headerIndex === i ? true: false}
               >
                 <AtomImg
-                  src={item.image}
+                  src={item}
                 />
               </WardrobeAtom>
             ))}
@@ -197,7 +184,7 @@ export const WardrobeSelector: FC = () => {
       case 3:
         return (
           <WardrobeScroll>
-            {bodies.map((item: any, i: number) => (
+            {bodies.map((item: string, i: number) => (
               <WardrobeAtom
                 onClick={() => {
                   setBodyIndex(i);
@@ -206,7 +193,7 @@ export const WardrobeSelector: FC = () => {
                 isSelected={bodyIndex === i ? true: false}
               >
                 <AtomImg
-                  src={item.image}
+                  src={item}
                 />
               </WardrobeAtom>
             ))}
@@ -215,7 +202,7 @@ export const WardrobeSelector: FC = () => {
       case 4:
         return (
           <WardrobeScroll>
-            {footers.map((item: any, i) => (
+            {footers.map((item, i) => (
               <WardrobeAtom
                 onClick={() => {
                   setFooterIndex(i);
@@ -224,7 +211,7 @@ export const WardrobeSelector: FC = () => {
                 isSelected={footerIndex === i ? true: false}
               >
                 <AtomImg
-                  src={item.image}
+                  src={item}
                 />
               </WardrobeAtom>
             ))}
@@ -496,7 +483,7 @@ const WardrobeAtom = styled.div<{
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: 100px;
+  height: 90%;
   background-color: ${props => props.isSelected ? BasicColor.gray40 : BasicColor.white};
   border: solid 8px ${props => props.isSelected ? BasicColor.greenSoft : BasicColor.white};
 `;
