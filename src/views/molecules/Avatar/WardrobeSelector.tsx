@@ -15,10 +15,11 @@ import wardrobe_icon from '../../assets/wardrobe.png';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  setAvatar
+  setAccesoryAvatar,
+  setBodyAvatar,
+  setFooterAvatar,
+  setHeadAvatar,
 } from 'app/actions';
-import arrowUp from '../../assets/arrows/arrowUp.svg';
-import priceflag from '../../assets/price-flag.svg';
 import {LoadingContext} from 'react-router-loading';
 
 // import data from '../../pages/Avatar/atoms';
@@ -50,6 +51,12 @@ export const WardrobeSelector: FC = () => {
   const selector = useSelector(store => store);
 
   useEffect(() => {
+    // setSelected avatar
+    // getAvatarAsset('accessories', 'bear_hat.svg', setAccesoryRef);
+    // getAvatarAsset('heads', 'boy1.svg', setHeadRef);
+    // getAvatarAsset('bodies', 'tshirt1.svg', setBodyRef);
+    // getAvatarAsset('pants', 'pants1.svg', setFootRef);
+
     const params = window.location.pathname.split('/')[2];
 
     switch (params) {
@@ -117,22 +124,96 @@ export const WardrobeSelector: FC = () => {
   const setAccessory = (i: number) => {
     const head = accessories[i];
     setAccesoryRef(head);
+    setAccesoryAvatar(accessories[i], dispatch);
+    // axios({
+    //   url: 'https://api.withsocrates.com/graphql/',
+    //   method: 'post',
+    //   data: {
+    //     query: `
+    //     mutation SetAvatar {
+    //       setStudentAvatar(avatarTypeOf:1, studentId:1, avatarUrl: "${accessories[i]}") {
+    //          student {
+    //            id
+    //          }
+    //      }
+    //  }
+    //       `,
+    //   },
+    // }).then(console.log);
   };
 
   const setHeader = (i: number) => {
     const head = headers[i];
     setHeadRef(head);
+    setHeadAvatar(headers[i], dispatch);
+    // axios({
+    //   url: 'https://api.withsocrates.com/graphql/',
+    //   method: 'post',
+    //   data: {
+    //     query: `
+    //     mutation SetAvatar {
+    //       setStudentAvatar(avatarTypeOf:2, studentId:1, avatarUrl: "${headers[i]}") {
+    //          student {
+    //            id
+    //          }
+    //      }
+    //  }
+    //       `,
+    //   },
+    // }).then(console.log);
   };
 
   const setBody = (i: number) => {
     const head = bodies[i];
     setBodyRef(head);
+    setBodyAvatar(bodies[i], dispatch);
+    // axios({
+    //   url: 'https://api.withsocrates.com/graphql/',
+    //   method: 'post',
+    //   data: {
+    //     query: `
+    //     mutation SetAvatar {
+    //       setStudentAvatar(avatarTypeOf:3, studentId:1, avatarUrl: "${bodies[i]}") {
+    //          student {
+    //            id
+    //          }
+    //      }
+    //  }
+    //       `,
+    //   },
+    // }).then(console.log);
   };
 
   const setFooter = (i: number) => {
     const head = footers[i];
     setFootRef(head);
+    setFooterAvatar(footers[i], dispatch);
+    // axios({
+    //   url: 'https://api.withsocrates.com/graphql/',
+    //   method: 'post',
+    //   data: {
+    //     query: `
+    //     mutation SetAvatar {
+    //       setStudentAvatar(avatarTypeOf:4, studentId:1, avatarUrl: "${footers[i]}") {
+    //          student {
+    //            id
+    //          }
+    //      }
+    //  }
+    //       `,
+    //   },
+    // }).then(console.log);
   };
+
+  useEffect(() => {
+    console.log('accesory');
+    console.log(accesoryRef);
+  }, [accesoryRef]);
+
+  useEffect(() => {
+    console.log('directory');
+    console.log(bodies);
+  }, [bodies]);
 
   useEffect(() => {
     width > 420 ? setIconSize(80) : setIconSize(30);
@@ -153,12 +234,31 @@ export const WardrobeSelector: FC = () => {
                   setAccessory(i);
                   setAccessoryIndex(i);
                 }}
-                isSelected={accessoryIndex === i ? true: false}
+                style={
+                  accessoryIndex === i
+                    ? {
+                        border: 'solid 5px red',
+                        width: atomSize - 10 + 'px',
+                        height: atomSize - 10 + 'px',
+                        backgroundColor: '#ccc',
+                      }
+                    : {border: 'solid 0px red'}
+                }
               >
-                <AtomImg src={item}/>
-                <PriceContainer>
-                  <PriceFlag src={priceflag}/>
-                </PriceContainer>
+                <AtomImg
+                  src={item}
+                  style={
+                    accessoryIndex === i
+                      ? {
+                          width: atomSize - 20 + 'px',
+                          height: atomSize - 20 + 'px',
+                        }
+                      : {
+                          width: atomSize - 10 + 'px',
+                          height: atomSize - 10 + 'px',
+                        }
+                  }
+                />
               </WardrobeAtom>
             ))}
           </WardrobeScroll>
@@ -172,10 +272,30 @@ export const WardrobeSelector: FC = () => {
                   setHeader(i);
                   setHeaderIndex(i);
                 }}
-                isSelected={headerIndex === i ? true: false}
+                style={
+                  headerIndex === i
+                    ? {
+                        border: 'solid 5px red',
+                        width: atomSize - 10 + 'px',
+                        height: atomSize - 10 + 'px',
+                        backgroundColor: '#ccc',
+                      }
+                    : {border: 'solid 0px red'}
+                }
               >
                 <AtomImg
                   src={item}
+                  style={
+                    headerIndex === i
+                      ? {
+                          width: atomSize - 20 + 'px',
+                          height: atomSize - 20 + 'px',
+                        }
+                      : {
+                          width: atomSize - 10 + 'px',
+                          height: atomSize - 10 + 'px',
+                        }
+                  }
                 />
               </WardrobeAtom>
             ))}
@@ -190,10 +310,30 @@ export const WardrobeSelector: FC = () => {
                   setBodyIndex(i);
                   setBody(i);
                 }}
-                isSelected={bodyIndex === i ? true: false}
+                style={
+                  bodyIndex === i
+                    ? {
+                        border: 'solid 5px red',
+                        width: atomSize - 10 + 'px',
+                        height: atomSize - 10 + 'px',
+                        backgroundColor: '#ccc',
+                      }
+                    : {border: 'solid 0px red'}
+                }
               >
                 <AtomImg
                   src={item}
+                  style={
+                    bodyIndex === i
+                      ? {
+                          width: atomSize - 20 + 'px',
+                          height: atomSize - 20 + 'px',
+                        }
+                      : {
+                          width: atomSize - 10 + 'px',
+                          height: atomSize - 10 + 'px',
+                        }
+                  }
                 />
               </WardrobeAtom>
             ))}
@@ -208,10 +348,30 @@ export const WardrobeSelector: FC = () => {
                   setFooterIndex(i);
                   setFooter(i);
                 }}
-                isSelected={footerIndex === i ? true: false}
+                style={
+                  footerIndex === i
+                    ? {
+                        border: 'solid 5px red',
+                        width: atomSize - 10 + 'px',
+                        height: atomSize - 10 + 'px',
+                        backgroundColor: '#ccc',
+                      }
+                    : {border: 'solid 0px red'}
+                }
               >
                 <AtomImg
                   src={item}
+                  style={
+                    footerIndex === i
+                      ? {
+                          width: atomSize - 20 + 'px',
+                          height: atomSize - 20 + 'px',
+                        }
+                      : {
+                          width: atomSize - 10 + 'px',
+                          height: atomSize - 10 + 'px',
+                        }
+                  }
                 />
               </WardrobeAtom>
             ))}
@@ -246,6 +406,11 @@ export const WardrobeSelector: FC = () => {
           {console.log('header', headers)}
           <CurrentHeader
             src={headRef}
+            // style={{
+            //   width: headers[headerIndex].scale * 160 + 'px',
+            //   top: headers[headerIndex].top + 'px',
+            //   left: headers[headerIndex].left + 'px',
+            // }}
           />
           <CurrentBody src={bodyRef} />
           <CurrentFooter src={footRef} />
@@ -305,12 +470,7 @@ export const WardrobeSelector: FC = () => {
             }
           />
         </AtomsDrawer>
-        <WardrobeDrawer>
-          {renderSwitch(atomIndex)}
-          <ArrowsContainer>
-            <ArrowImage src={arrowUp}/>
-          </ArrowsContainer>
-        </WardrobeDrawer>
+        <WardrobeDrawer>{renderSwitch(atomIndex)}</WardrobeDrawer>
       </SelectorGrid>
     </WardrobeModule>
   );
@@ -445,15 +605,13 @@ const AtomsDrawer = styled.div`
 const WardrobeDrawer = styled.div`
   display: none;
   background-color: #5c2b0c;
+  width: 420px;
   height: 420px;
   align-self: end;
   margin: 10px 20px;
-  @media screen and (min-width: ${ScreenSize.phone}) {  
-    width: 90%;  
-    max-width: 550px;
-    display: grid;
+  @media screen and (min-width: ${ScreenSize.phone}) {
     grid-template-rows: repeat(4, 1fr);
-    grid-template-columns: 1fr 60px;
+    display: grid;
     align-content: center;
     justify-content: start;
     grid-row: 1 / 2;
@@ -466,42 +624,32 @@ const WardrobeScroll = styled.div`
   height: 400px;
   margin: 10px;
   display: grid;
-  justify-items:center;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  grid-template-columns: auto auto auto;
+  max-height: 400px;
   overflow-y: auto;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
-const WardrobeAtom = styled.div<{
-  isSelected?:boolean
-}>`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: 90%;
-  background-color: ${props => props.isSelected ? BasicColor.gray40 : BasicColor.white};
-  border: solid 8px ${props => props.isSelected ? BasicColor.greenSoft : BasicColor.white};
+const WardrobeAtom = styled.div`
+  margin: auto;
+  position: relative;
+  z-index: 999;
+  width: 113px;
+  height: 113px;
+  background-color: #fff;
+  margin: 10px;
 `;
 
 const AtomImg = styled.img`
-  margin: 0 auto;
-  width: 80px;
-  height: 80px;
-`;
-
-const PriceContainer = styled.div`
-  width: 100%;
+  margin: auto;
   position: relative;
-`
-const PriceFlag = styled.img`
-  width:55px;
-  height: 25px;
-`
+  z-index: 999;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+`;
 
 const CenteredRoundIcon = styled(RoundIcon)`
   background-color: #fff;
@@ -550,15 +698,3 @@ const FavoritesCloset = styled.div`
 const ToggleWardrobe = styled.img`
   width: 50px;
 `;
-
-const ArrowsContainer = styled.div`
-  width: 40px;
-  display:grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
-  align-items: center;
-`;
-
-const ArrowImage = styled.img`
-  width:30px;
-`

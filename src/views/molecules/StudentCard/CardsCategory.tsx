@@ -88,7 +88,7 @@ const CardContainer: FC<CardPropArray> = ({ cards }) => {
           />
         ))}
       </StyledCardContainer>
-      <div style={{ height: 300, display: 'flex', alignItems: 'center' }}>
+      <PurchasedCardsContainer >
         {
           isLoading && card ?
             <ReactLoading type='bars' color={BasicColor.green} /> :
@@ -103,7 +103,7 @@ const CardContainer: FC<CardPropArray> = ({ cards }) => {
               :
               <p>Please select card category you want to buy!</p>
         }
-      </div>
+      </PurchasedCardsContainer>
     </div>
   );
 };
@@ -155,13 +155,34 @@ const StyledCardContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 1rem;
+  margin: 1rem;
   position: relative;
 
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    display: grid;
+    width: 80vw;
+    place-items: center;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+`;
+const PurchasedCardsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  heigth: 300px;
+  margin: 1rem;
+  position: relative;
   &::-webkit-scrollbar {
     display: none;
   }
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    margin: 0;
+    display: grid;
+    width: 80vw;
+    place-items: center;
+    padding: 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 15vh;
   }
 `;

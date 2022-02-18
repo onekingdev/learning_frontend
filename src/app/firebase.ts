@@ -164,18 +164,15 @@ export const getAvatarDir = async (dir: any, setDir: any) => {
  * @param dir bought category
  * @param setBuyLinks get links of bought cards
  */
-export const getBoughtCards = async (
-  dir: any,
-  setBuyLinks: any,
-) => {
+export const getBoughtCards = async (dir: any, setBuyLinks: any) => {
   const storage = getStorage();
   const listRef = assetRef(storage, `assets/collectible/${dir}`);
   const res = await listAll(listRef);
 
-  const length = res.items.length
-  const randomIds = []
-  for(let i = 0; i < 3; i ++)
-  randomIds.push(Math.floor(Math.random() * length))
+  const length = res.items.length;
+  const randomIds = [];
+  for (let i = 0; i < 3; i++)
+    randomIds.push(Math.floor(Math.random() * length));
 
   const links = [];
   for (const row of randomIds) {
@@ -198,27 +195,58 @@ export const buyCardsWithFilenames = async (
   getBoughtCards: any
 ) => {
   const storage = getStorage();
-  const links = []
+  const links = [];
 
   for (const filename of filenames) {
     const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename}`);
-    links.push(await getDownloadURL(fileRef))
+    links.push(await getDownloadURL(fileRef));
   }
-  getBoughtCards(links)
+  getBoughtCards(links);
 };
 
-export const getCardCategories = async (setCateItems: any) => {
+/**
+ * Get firebase storage file download urls for categories
+ * @author BruceLee
+ * @param setCateItems set states with image urls
+ */
+export const getCardCategories = async (
+  setCateItems: Function
+) => {
   const storage = getStorage();
   const listRef = assetRef(storage, `assets/collectible/Categories`);
 
-  const res = await listAll(listRef);
+  try{
 
-  const links = [];
-  for (const row of res.items) {
-    links.push(await getDownloadURL(row));
+    const res = await listAll(listRef);
+    const links1 = [];
+    for (const row of res.items) {
+      links1.push(await getDownloadURL(row));
+    }
+
+    setCateItems(links1);
+  } catch(e) {
+    console.log(e)
   }
+};
 
-  setCateItems(links);
+export const getCardBacks = async (
+  setCateBacks: Function
+) => {
+  const storage = getStorage();
+  const backRef = assetRef(storage, `assets/collectible/CategoriesBack`);
+
+  try{
+
+    const res2 = await listAll(backRef)
+    const links2 = []
+    for (const row of res2.items) {
+      links2.push(await getDownloadURL(row))
+    }
+
+    setCateBacks(links2)
+  } catch(e) {
+    console.log(e)
+  }
 };
 
 /**
@@ -227,19 +255,19 @@ export const getCardCategories = async (setCateItems: any) => {
  * @param dir currently selected category
  * @param setAllCards set links for all cards of current category
  */
- export const getAllCards = async (
+export const getAllCards = async (
   filenames: Array<string>,
   dir: string,
   setAllCards: any
 ) => {
   const storage = getStorage();
-  const links = []
+  const links = [];
 
   for (const filename of filenames) {
     const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename}`);
-    links.push(await getDownloadURL(fileRef))
+    links.push(await getDownloadURL(fileRef));
   }
-  setAllCards(links)
+  setAllCards(links);
 };
 
 /**
@@ -248,40 +276,44 @@ export const getCardCategories = async (setCateItems: any) => {
  * @param dir currently selected category
  * @param setAllCards set links for all cards of current category
  */
- export const getGemCards = async (
+export const getGemCards = async (
   card: string,
   gem: string,
   setGemCards: any
 ) => {
   const storage = getStorage();
 
-  console.log('firebase: card', card, 'gem', gem)
+  console.log('firebase: card', card, 'gem', gem);
   const listRef = assetRef(storage, `assets/collectible/${card}`);
 
   const res = await listAll(listRef);
   const links = [];
-  const length = res.items.length
+  const length = res.items.length;
 
-  switch(gem) {
+  switch (gem) {
     case 'Epic':
-      for(let i = 0; i < length / 4; i ++)
-      links.push(await getDownloadURL(res.items[i]));
+      for (let i = 0; i < length / 4; i++)
+        links.push(await getDownloadURL(res.items[i]));
       break;
-    case 'Legendary' :
-      for(let i = Math.floor(length / 4); i < Math.floor(length / 2) ; i ++)
-      links.push(await getDownloadURL(res.items[i]));
+    case 'Legendary':
+      for (let i = Math.floor(length / 4); i < Math.floor(length / 2); i++)
+        links.push(await getDownloadURL(res.items[i]));
       break;
-    case 'Rare' :
-      for(let i = Math.floor(length / 2); i < Math.floor(length / 4 * 3) ; i ++)
-      links.push(await getDownloadURL(res.items[i]));
+    case 'Rare':
+      for (
+        let i = Math.floor(length / 2);
+        i < Math.floor((length / 4) * 3);
+        i++
+      )
+        links.push(await getDownloadURL(res.items[i]));
       break;
-    case 'Common' :
-      for(let i = Math.floor(length / 4 * 3); i < length ; i ++)
-      links.push(await getDownloadURL(res.items[i]));
+    case 'Common':
+      for (let i = Math.floor((length / 4) * 3); i < length; i++)
+        links.push(await getDownloadURL(res.items[i]));
       break;
-    default :
+    default:
       break;
   }
-  console.log('firebase:',links)
+  console.log('firebase:', links);
   setGemCards(links);
 };
