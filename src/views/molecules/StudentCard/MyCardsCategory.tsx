@@ -11,11 +11,7 @@ import ProgressBar from '@ramonak/react-progress-bar';
 import {ScreenSize} from '../../screenSize';
 
 // Get file storage link
-import {
-  getCardBacks,
-  getCardCategories,
-  getGemCards,
-} from '../../../app/firebase';
+import {getCardCategories, getGemCards} from '../../../app/firebase';
 import {MyCard} from './MyCard';
 import {BasicColor} from 'views/Color';
 import {Gems} from './Gems';
@@ -54,12 +50,11 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
   const [cateItems, setCateItems] = useState([]);
 
   // state to store image links for img next to progress bar
-  const [cateBacks, setCateBacks] = useState([]);
+  const [cateProgressImgs, setProgressImgs] = useState([]);
 
   // This function is called from child, this is passed as prop to child component
   const callback = (category: string) => {
     setCard(category);
-    // setGem('')
   };
 
   // This function is called from child, this is passed as prop to child component
@@ -72,24 +67,17 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
   };
 
   // Get gem images after u click one of gems.
-  const fetchGemCards = async () => {
+  const fetchData = async () => {
     setIsLoading(true);
 
     await getGemCards(card, gem, setGemcards);
     setIsLoading(false);
   };
-
-  // Get gem images after u click one of gems.
-  const fetchCateCards = async () => {
-    // Get urls for images
-    await getCardCategories(setCateItems);
-    await getCardBacks(setCateBacks);
-  };
   // download category images from firebase
   useEffect(() => {
     // to avoid react error "Warning: Can't perform a React state update on an unmounted component."
     // Download files for category image links on component loading
-    fetchCateCards().catch(console.error)
+    getCardCategories(setCateItems);
   }, []);
 
   // set gem image links when gem is selected
@@ -100,8 +88,8 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
 
     // this is just for test
 
-    fetchGemCards().catch(console.error);
-  }, [gem, card]);
+    fetchData().catch(console.error);
+  }, [gem]);
 
   // get data for progress bar
   useEffect(() => {
@@ -130,7 +118,14 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
           />
         ))}
       </StyledCardContainer>
-      <ProgressBarContainer >
+      <div
+        style={{
+          width: '500px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+        }}
+      >
         <div>
           <StyledProgressLabel>
             {gainedCount}/{totalCount}
@@ -145,35 +140,40 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
           >
             <ProgressBar
               completed={gainedCount}
-              width="40vw"
+              width="20vw"
               bgColor={BasicColor.green}
               baseBgColor={BasicColor.gray40}
-              height="30px"
+              height="40px"
               maxCompleted={totalCount}
               isLabelVisible={false}
               animateOnRender={true}
             />
           </div>
         </div>
-        <img src={cateBacks[cards.findIndex(item => item.category === card)]} style={{width: '60px', margin: '5px'}} />
-      </ProgressBarContainer>
+        <img src={cateItems[0]} style={{width: '60px', margin: '5px'}} />
+      </div>
       <Gems select={callbackGem} />
-      <div>
+      <div
+
+      >
         {isLoading && card && gem ? (
-          <div style={{margin: '5em'}}>
+          <div style={{margin: '10em'}}>
             <ReactLoading type="bars" color={BasicColor.green} />
           </div>
         ) : card && gem ? (
-          <GemsContainer >
+          <div
+          style={{
+            display: 'grid',
+            width: '80vw',
+            placeItems: 'center',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(11rem, 1fr))',
+          }}
+          >
             {gemcards.map((card, index) => (
-              <Gemcard
-                key={index}
-                imgUrl={card}
-                purchased={index % 2 === 0 ? true : false}
-              />
+              <Gemcard key={index} imgUrl={card} purchased={index % 2 === 0 ? true : false}/>
             ))}
-          </GemsContainer>
-        ) : <div style={{minHeight: 100}}></div>}
+          </div>
+        ) : null}
       </div>
     </div>
   );
@@ -223,44 +223,18 @@ export const MyCardCategory: FC = () => {
 };
 
 const StyledCardContainer = styled.div`
-display: flex;
-justify-content: center;
-padding: 1rem;
-margin: 1rem;
-position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
 
-@media screen and (max-width: ${ScreenSize.tablet}) {
-  display: grid;
-  width: 80vw;
-  place-items: center;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 0;
-  margin: 0;
-}
-`;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
-const ProgressBarContainer = styled.div`
-display: flex;
-justify-content: space-evenly;
-align-items: flex-end;
-padding: 1rem;
-margin: 1rem;
-position: relative;
-@media screen and (max-width: ${ScreenSize.tablet}) {
-  margin: 5px;
-}
-`;
-
-const GemsContainer = styled.div`
-display: grid;
-place-items: center;
-grid-template-columns: repeat(6, 1fr);
-
-@media screen and (max-width: ${ScreenSize.tablet}) {
-  margin-bottom: 10vh;
-  grid-template-columns: repeat(3, 1fr);
-  min-height: 20vh;
-}
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    margin: 0;
+  }
 `;
 
 const StyledProgressLabel = styled.p`

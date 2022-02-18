@@ -1,12 +1,11 @@
-import {FC, useState} from 'react';
+import {FC, useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
 import ReactLoading from 'react-loading';
-import {Grid} from '@mui/material';
-import {ScreenSize} from '../../screenSize';
-import {CardDialog} from './CardDialog';
-import {useHistory} from 'react-router-dom';
-
+import useSound from 'use-sound';
+import purchaseSound from '../../assets/audios/mixkit-coin-win-notification.wav';
+import {LSDialog} from '../Setting/LSDialog';
+import { Grid } from '@mui/material';
 type CardProps = {
   imgUrl: string;
   purchased?: boolean;
@@ -20,28 +19,18 @@ type CardProps = {
 export const Gemcard: FC<CardProps> = ({imgUrl, purchased}) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
-  const [openBuy, setOpenBuy] = useState(false);
-
-  const history = useHistory();
 
   // state to know that image is loaded, rotating effect only works when image is fully loaded
   const [loaded, setLoaded] = useState(false);
-  const [dgImgloaded, setDgImgLoaded] = useState(false);
 
   // action when image is clicked
   const onImgClicked = () => {
-    console.log('enabled');
-    setOpen(!open);
-  };
-
-  // open dialog with buy button when disabled image is clicked.
-  const onDisabledImgClicked = () => {
-    console.log('disabled');
-    setOpenBuy(!openBuy);
+    // setOpen(!open);
+    console.log(imgUrl);
   };
   return (
     <StyledCard>
-      <img
+      <StyledImg
         style={loaded ? {objectFit: 'fill'} : {display: 'none'}}
         className="loaded"
         src={imgUrl}
@@ -51,82 +40,29 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased}) => {
         }}
         onClick={() => onImgClicked()}
       />
-      <StyledOverlay
-        style={purchased ? {} : {display: 'none'}}
-        onClick={() => {
-          onDisabledImgClicked();
-        }}
-      />
+      <StyledOverlay style={purchased ? {} : {display: 'none'}} />
       <div
         style={
-          loaded
-            ? {display: 'none'}
-            : {display: 'flex', alignItems: 'center', justifyContent: 'center'}
+          loaded ? {display: 'none'} : {display: 'flex', alignItems: 'center'}
         }
       >
         <ReactLoading type="spinningBubbles" color={BasicColor.green} />
       </div>
-      <CardDialog
+      <LSDialog
+        title="title"
+        contentText="content"
         dialogContent={
-          <Grid container sx={{padding: 0}}>
-            <StyledGrid
-              item
-              md={6}
-              xs={12}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <img
-                src={imgUrl}
-                onLoad={() => {
-                  setDgImgLoaded(true);
-                }}
-              />
-              <div
-                style={
-                  dgImgloaded
-                    ? {display: 'none'}
-                    : {
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }
-                }
-              >
-                <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-              </div>
-            </StyledGrid>
-            <StyledGrid item md={6} xs={12}>
-              <h1>Cronos</h1>
-              <p>Roman Name: Saturn</p>
-              <p>Job: Titan of ther Harvest</p>
-              <p>Symbol(s): Sickle, Grain Snak</p>
-              <p>
-                Family: Rhea(wift), Zeus, Hera, Poseidon, Hades, Hestia,
-                Chiron(Children)
-              </p>
-              <p>Fact1: Leader of Titans</p>
-              <p>Fact2: There is a start named after him</p>
-            </StyledGrid>
+        <Grid container >
+          <Grid item md={6}>
+          <img src={imgUrl} style={{width: 200}} />
           </Grid>
+          <Grid item md={6}>
+          <p>Cronos ddddddddddd</p>
+          </Grid>
+        </Grid>
         }
         open={onImgClicked}
         isOpen={open}
-      />
-      <CardDialog
-        contentText="Not collected yet!"
-        dialogContent={
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-            <Button onClick={() => history.push('/collectibles/cards')}>
-              BUY!
-            </Button>
-          </div>
-        }
-        open={onDisabledImgClicked}
-        isOpen={openBuy}
       />
     </StyledCard>
   );
@@ -140,45 +76,14 @@ const StyledOverlay = styled.div`
   border-radius: inherit;
 `;
 
-const Button = styled.button`
-  background: ${BasicColor.green};
-  border: 0;
-  border-radius: 5px;
-  padding: 10px;
-  color: white;
-  width: 100px;
-
+const StyledImg = styled.img`
   &:hover {
-    pointer: cursor;
-    box-shadow: 0 1px 1rem -3px orange;
+    box-shadow: 0px 1px 20px 0px #fb8500;
+    cursor: pointer;
     transform: translateY(-5px);
   }
-`;
-
-const StyledGrid = styled(Grid)`
-  &.MuiGrid-root {
-    font-family: Montserrat;
-    padding-left: 20px;
-
-    img {
-      width: 250px;
-    }
-
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-      padding: 10px;
-      img {
-        margin-top: 30px;
-        height: 250px;
-        width: auto;
-      }
-      p {
-        margin: 1px;
-      }
-
-      h1 {
-        margin-top: 0;
-      }
-    }
+  &.loaded {
+    border-radius: inherit;
   }
 `;
 
@@ -193,25 +98,4 @@ const StyledCard = styled.div`
   margin: 1rem;
   border-radius: 15px;
   transition: all 250ms ease-in-out;
-  cursor: pointer;
-
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 26vw;
-    height: auto;
-    min-height: 100px;
-    margin: 5px;
-    img {
-      width: 25vw;
-    }
-  }
-
-  img {
-    &:hover {
-      box-shadow: 0px 1px 20px 0px #fb8500;
-      transform: translateY(-5px);
-    }
-    &.loaded {
-      border-radius: inherit;
-    }
-  }
 `;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import background from '../../assets/colored-shapes-bg.svg';
-import {ScreenSize} from '../../screenSize';
 
 export const Wrapper = styled.div`
   background-image: url(${background});
@@ -9,13 +8,7 @@ export const Wrapper = styled.div`
   height: 100vh;
 `;
 export const AvatarContainer = styled.div`
-  display: grid;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    width: auto;
-    grid-template-rows: 186px auto;
-  }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    width: auto;
-    grid-template-rows: 100px 1fr;
-  }
+  width: 100%;
+  margin: 40px 0;
+  
 `;

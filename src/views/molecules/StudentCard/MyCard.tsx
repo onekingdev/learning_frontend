@@ -2,7 +2,6 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { BasicColor } from '../../Color';
 import ReactLoading from 'react-loading'
-import {ScreenSize} from '../../screenSize';
 
 type CardProps = {
   imgUrl: string
@@ -22,75 +21,52 @@ export const MyCard: FC<CardProps> = ({
     select(category)
   }
   return (
-    <CardContainer style={ isSelected ? {boxShadow: '0px 1px 20px 0px #FB8500'} : {}}>
-      <h2>{category}</h2>
-
-    <StyledCard >
+    <StyledCard style={ isSelected ? {boxShadow: '0px 1px 20px 0px #FB8500'} : {}}>
+      <StyledCardTitle>{category}</StyledCardTitle>
       {imgUrl ?
-        <img src={imgUrl} alt={'Category Image'} onClick={() => onCardSelect()}/>
+        <StyledImg src={imgUrl} alt={'Category Image'} onClick={() => onCardSelect()}/>
         :
         <ReactLoading type='spinningBubbles' color={BasicColor.green} />}
     </StyledCard>
-    </CardContainer>
   )
 }
 
-const CardContainer = styled.div`
-  width: 160px;
-  min-height: 220px;
-  margin: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 1px 1rem -4px #000;
-  background: #fff;
-  margin-top: 0;
-  overflow: hidden;
-  transition: all 250ms ease-in-out;
-
-  h2 {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 0px;
-    font-family: Montserrat;
-    color: white;
-    background-color: ${BasicColor.green};
-  }
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 5px 5px rgba(82, 119, 192, 0.4),
-      10px 10px rgba(82, 119, 192, 0.3), 15px 15px rgba(82, 119, 192, 0.2),
-      20px 20px rgba(82, 119, 192, 0.1), 25px 25px rgba(82, 119, 192, 0.05);
-  }
-
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 26vw;
-    min-height: 120px;
-    h2 {
-      font-size: 14px;
-      height: 20px;
-    }
-    margin: 3vw;
-  }
-`;
-
-const StyledCard = styled.div`
-background: #fff;
-position: relative;
-width: 100%;
-height: 100%;
+const StyledCardTitle = styled.h2`
+position: absolute;
+top: 0;
 display: flex;
+width: 100%;
 align-items: center;
 justify-content: center;
-img {
-  object-fit: fill;
-  width: 100%;
-  height: 100%;
-}
+text-align: center;
+margin: 0px;
+font-family: Montserrat;
+color: white;
+background-color: ${BasicColor.green};
+`
 
+const StyledCard = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 230px;
+width: 160px;
+min-width: 100px;
+position: relative;
+// box-shadow: 0 1px 1rem -4px #000;
+background: #fff;
+margin: 1rem;
+overflow: hidden;
+border-radius: 6px;
+transition: all 250ms ease-in-out;
+
+&:hover {
+  transform: translateY(-5px);
+}
+`
+const StyledImg = styled.img`
+  height: 100%;
+  margin-top: 30px;
+  object-fit: contain;
 `
