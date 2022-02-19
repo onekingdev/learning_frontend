@@ -5,7 +5,7 @@ import {TopicProgress} from '../molecules/TopicProgress';
 import {ScreenSize} from '../screenSize';
 import {Title} from '../atoms/Text/Title';
 import {dictionary} from '../pages/Progress/dictionary';
-import {getProgress} from '../../app/firebase';
+import {database, getProgress} from '../../app/firebase';
 
 export const MyProgress: FC = () => {
   useEffect(() => {

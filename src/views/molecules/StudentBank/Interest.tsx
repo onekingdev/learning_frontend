@@ -14,7 +14,7 @@ import { BasicColor } from '../../Color';
 import { LSLabel } from '../Setting/utils/Style';
 
 interface Column {
-  id: 'name' | 'requireCoin' | 'amount';
+  id: 'title' | 'value' | 'interest';
   label: string;
   minWidth?: number;
   align?: string;
@@ -22,10 +22,10 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Savings Title', minWidth: 100 },
-  { id: 'requireCoin', label: 'Value', minWidth: 70, format: (value: number) => value.toLocaleString('en-US'), },
+  { id: 'title', label: 'Savings Title', minWidth: 100 },
+  { id: 'value', label: 'Value', minWidth: 70, format: (value: number) => value.toLocaleString('en-US'), },
   {
-    id: 'amount',
+    id: 'interest',
     label: 'Interest% \n (Per Week)',
     align: 'right',
     minWidth: 60,
@@ -33,11 +33,35 @@ const columns: readonly Column[] = [
   },
 ];
 
-interface InterestProp {
-  interests: []
-}
-export const Interest: FC<InterestProp> = ({interests}) => {
-  console.log(interests)
+const txData = [
+  {
+    title: 'Bronze',
+    value: 10000,
+    interest: 10,
+    id: 1
+  },
+  {
+    title: 'Silver',
+    value: 20000,
+    interest: 20,
+    id: 2
+  },
+  {
+    title: 'Gold',
+    value: 50000,
+    interest: 30,
+    id: 3
+  },
+  {
+    title: 'Plantium',
+    value: 100000,
+    interest: 40,
+    id: 4
+  }
+]
+
+export const Interest: FC = () => {
+
   return (
 
     <StyledTxContainer >
@@ -63,7 +87,7 @@ export const Interest: FC<InterestProp> = ({interests}) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {interests
+            {txData
               .map((row, idx) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={idx}>

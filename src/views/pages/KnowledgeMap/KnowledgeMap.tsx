@@ -2,6 +2,7 @@ import {FC, useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
 import {StudentMenu} from '../../templates/StudentMenu';
 import ocean from '../../assets/islands/ocean.svg';
+import boatIcon from '../../assets/boat.svg';
 import boat from '../../assets/islands/fillers/boat.svg';
 import boat_sound from '../../assets/audios/boat.mp3';
 
@@ -14,6 +15,7 @@ import rock2 from '../../assets/islands/fillers/rock-2.svg';
 import boulder from '../../assets/islands/fillers/rocxk.svg';
 import {ScreenSize} from '../../screenSize';
 import {useHistory} from 'react-router-dom';
+import {AREA_OF_KNOWLEDGE} from '../../../api/fragments/questionFragments';
 import {get} from '../../../api/queries/get';
 import {useDispatch} from 'react-redux';
 import * as TYPE from '../../../app/types';
@@ -74,6 +76,7 @@ export const KnowledgeMap: FC = () => {
   };
   const history = useHistory();
   const dragonNum = randRange(0, areasOfKnowledge.length);
+  const coords = {x: 12, y: 12};
   return (
     <Wrapper>
       <StudentMenu>
@@ -130,6 +133,11 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 `;
+
+type Coords = {
+  x: number;
+  y: number;
+};
 
 const Boat = styled.img`
   z-index: 1;
@@ -203,4 +211,12 @@ const Filler = styled.img`
 const Subject = styled.div`
   display: grid;
   grid-template-columns: 70% 30%;
+`;
+
+const SubjectEven = styled(Subject)`
+  grid-template-columns: 70% 30%;
+`;
+
+const SubjectOdd = styled(Subject)`
+  grid-template-columns: 30% 70%;
 `;

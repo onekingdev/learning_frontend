@@ -1,3 +1,4 @@
+import { mutation } from 'api/queries/get';
 import axios from 'axios';
 import * as TYPES from '../types'
 export const studentSetData = (payload: any) => {

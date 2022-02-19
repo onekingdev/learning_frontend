@@ -1,24 +1,37 @@
 import {FC, useEffect, useState, useContext} from 'react';
 import styled from 'styled-components';
+import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+import {useStyles} from './Style';
+import * as TYPES from '../../../app/types';
+import {MockStore} from '../../../app/configureStore';
+import {IStudent} from '../../../app/entities/student';
+import avatar from '../../assets/avatars/avatar1.svg';
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
 import kidA from '../../assets/avatars/kid-1.svg';
 import kidB from '../../assets/avatars/kid-2.svg';
 import kidC from '../../assets/avatars/kid-3.svg';
 import license from '../../assets/student-license.svg';
+import logo from '../../assets/logo-learn-white.svg';
+import socrates from '../../assets/socrates.svg';
 import Grid from '@mui/material/Grid';
 import TextField from '../../molecules/MuiTextField';
 import Button from '../../molecules/MuiButton';
 import {LSDialog} from '../../molecules/Setting/LSDialog';
-import { BasicColor} from '../../Color';
+import {ButtonColor, BasicColor} from '../../Color';
 import {Store} from '../../../app/configureStore';
 import {
   Title,
   Avatar,
   LicenseButton,
+  LicenseHeader,
+  LicenseBody,
+  LicenseBottom,
+  LicenseUsername,
 } from './Style';
-import { toPng } from 'html-to-image';
+import {toPng, toSvg} from 'html-to-image';
 import {saveAs} from 'file-saver';
+import QRCode from 'react-qr-code';
 import License from '../../molecules/KidLicense/KidLicense';
 import {LoadingContext} from 'react-router-loading';
 
@@ -31,8 +44,10 @@ interface kid {
 
 const KidsList: FC = () => {
   const loadingContext = useContext(LoadingContext);
+  const history = useHistory();
   const dispatch = useDispatch();
   const language = 'en';
+  const classes = useStyles();
   const user = useSelector((state: Store) => state.user);
   const kidAvatars = [kidA, kidB, kidC];
 
@@ -128,7 +143,7 @@ const KidsList: FC = () => {
                 <GridItem item md={6} xs={12}>
                   <Button
                     bgColor={BasicColor.green}
-                    onClick={handleDownloadBtnClicked}
+                    onClick={(e: any) => handleDownloadBtnClicked()}
                     value="Download"
                   />
                 </GridItem>

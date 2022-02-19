@@ -8,5 +8,4 @@ export const LEVEL = `
     updateTimestamp
     pointsRequired
     name
-    amount
 `;

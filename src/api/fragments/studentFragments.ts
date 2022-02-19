@@ -1,8 +1,6 @@
 import {LEVEL} from './levelFragments'
 import {COIN_WALLET} from './coinWalletFragments'
 import {AVATAR} from './avatarFragments'
-import {BANK_WALLET} from './bankFragments'
-
 export const STUDENT_TOPIC_MASTERY = `
         id
         identifier
@@ -89,8 +87,6 @@ export const STUDENT = `
         fullName
         dob
         gender
-        points
-        intPeriodStartAt
         studentPlan {
             ${STUDENT_PLAN}
         }
@@ -141,9 +137,6 @@ export const STUDENT = `
         }
         coinWallet {
             ${COIN_WALLET}
-        }
-        bankWallet {
-            ${BANK_WALLET}
         }
         studentcollectibleSet {
             id
