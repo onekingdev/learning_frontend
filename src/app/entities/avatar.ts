@@ -1,4 +1,5 @@
 export interface IAvatar {
+    image: any;
     deletedTimestamp: Date;
     randomSlug: string;
     createTimestamp: Date;
