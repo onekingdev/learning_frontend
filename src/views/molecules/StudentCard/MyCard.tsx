@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components'
 import { BasicColor } from '../../Color';
 import ReactLoading from 'react-loading'

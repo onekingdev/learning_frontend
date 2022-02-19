@@ -100,7 +100,7 @@ const CardContainer = styled.div`
   }
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 35vw;
+    width: 26vw;
     min-height: 120px;
     h2 {
       font-size: 14px;

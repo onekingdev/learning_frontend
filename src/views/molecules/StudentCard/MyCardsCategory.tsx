@@ -5,7 +5,6 @@
 
 import {FC, useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import ReactLoading from 'react-loading';
 import ProgressBar from '@ramonak/react-progress-bar';
 import {ScreenSize} from '../../screenSize';
@@ -131,7 +130,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
         ))}
       </StyledCardContainer>
       <ProgressBarContainer >
-        <div style={{width: '80%'}}>
+        <div>
           <StyledProgressLabel>
             {gainedCount}/{totalCount}
           </StyledProgressLabel>
@@ -141,12 +140,11 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
               borderRadius: '50px',
               padding: '2px',
               margin: '5px',
-              width: '100%'
             }}
           >
             <ProgressBar
               completed={gainedCount}
-              width="100%"
+              width="40vw"
               bgColor={BasicColor.green}
               baseBgColor={BasicColor.gray40}
               height="30px"
@@ -247,11 +245,8 @@ align-items: flex-end;
 padding: 1rem;
 margin: 1rem;
 position: relative;
-width: 40vw;
 @media screen and (max-width: ${ScreenSize.tablet}) {
-  flex-direction: column-reverse;
-  width: 100%;
-  align-items: center;
+  margin: 5px;
 }
 `;
 
@@ -273,8 +268,4 @@ const StyledProgressLabel = styled.p`
   margin: 0;
   font-weight: 700;
   margin-right: 3vw;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    text-align: center;
-    margin: 0;
-  }
 `;

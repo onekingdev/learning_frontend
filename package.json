@@ -116,5 +116,6 @@
     "hooks": {
       "pre-commit": "gts check"
     }
-  }
+  },
+  "proxy": "https://143.244.183.24/"
 }

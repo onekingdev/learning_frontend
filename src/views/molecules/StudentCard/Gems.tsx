@@ -54,7 +54,7 @@ const StyledGems = styled.div`
     display: grid;
     width: 80vw;
     place-items: center;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
@@ -68,8 +68,7 @@ const StyledGem = styled.div`
     margin: 0;
     position: absolute;
     top: 45%;
-    color: black;
-    font-weight: 700;
+    color: white;
   }
 
   &:hover {
@@ -78,10 +77,16 @@ const StyledGem = styled.div`
   }
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 140px;
+    width: 80px;
 
     img {
       width: 100%;
+    }
+
+    p {
+      font-size: 12px;
+      top: 100%;
+      color: black;
     }
   }
 `;

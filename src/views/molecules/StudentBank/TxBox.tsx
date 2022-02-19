@@ -7,11 +7,22 @@ import { Grid } from '@mui/material';
 import { GridItem, Input } from './Style';
 import { LSWhiteTextButton } from '../Setting/utils/Style';
 import { BasicColor } from '../../Color';
+import { withDraw, deposit } from '../../../app/actions/bankActions'
+import { useDispatch } from 'react-redux'
+import {useSelector} from 'react-redux';
+import { useSnackbar } from 'notistack';
+import Button from '../../molecules/MuiButton';
 
 export const TxBox: FC = () => {
 
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const user = useSelector((state: any) => state.user);
+
   const [depositAmount, setDepositAmount] = useState(0)
   const [withdrawAmount, setWithdrawAmount] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   const onDepositChange = (x: string) => {
 
@@ -29,14 +40,22 @@ export const TxBox: FC = () => {
     else setWithdrawAmount(+x)
   }
 
-  const onDepositBtnClicked = () => {
-
-    console.log(depositAmount)
+  const onDepositBtnClicked = async() => {
+    if(depositAmount === 0) return enqueueSnackbar("Amount is empty", { variant: 'error' });
+    setLoading(true)
+    const result = await deposit(depositAmount, user.token, dispatch)
+    setLoading(false)
+    if(result.success) return enqueueSnackbar(result.msg, { variant: 'success' });
+    return enqueueSnackbar(result.msg, { variant: 'error' });
   }
 
-  const onWithdrawBtnClicked = () => {
-
-    console.log(withdrawAmount)
+  const onWithdrawBtnClicked = async() => {
+    if(withdrawAmount === 0) return enqueueSnackbar("Amount is empty", { variant: 'error' });
+    setLoading(true)
+    const result = await withDraw(withdrawAmount, user.token, dispatch)
+    setLoading(false)
+    if(result.success) return enqueueSnackbar(result.msg, { variant: 'success' });
+    return enqueueSnackbar(result.msg, { variant: 'error' });
   }
 
   useEffect(() => {
@@ -58,9 +77,14 @@ export const TxBox: FC = () => {
           />
         </GridItem>
         <GridItem item md={4} xs={4} align='start'>
-          <LSWhiteTextButton
+          <Button
+            bgColor={BasicColor.green}
             onClick={onDepositBtnClicked}
-          >Deposit</LSWhiteTextButton>
+            value="Deposit"
+            fullWidth={true}
+            // margin="45px 0 0 0"
+            loading={loading}
+          />
         </GridItem>
       </Grid>
       <Grid container >
@@ -71,9 +95,14 @@ export const TxBox: FC = () => {
           />
         </GridItem>
         <GridItem item md={4} xs={4} align='start'>
-          <LSWhiteTextButton
+          <Button
+            bgColor={BasicColor.green}
             onClick={onWithdrawBtnClicked}
-          >Withdraw</LSWhiteTextButton>
+            value="Widthdraw"
+            fullWidth={true}
+            // margin="45px 0 0 0"
+            loading={loading}
+          />
         </GridItem>
       </Grid>
     </BankPaper>

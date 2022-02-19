@@ -9,11 +9,17 @@ export const Wrapper = styled.div`
   height: 100vh;
 `;
 export const CardCollectibleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  // width: 90%;
   margin: 0 auto;
+  grid-template-rows: 60px 4fr 5fr;
+  height: 100%;
   @media screen and (min-width: ${ScreenSize.tablet}) {
+    grid-template-rows: 85px 200px 400px;
+    margin: 0;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    grid-template-rows: 85px 200px 1fr;
     margin: 0;
   }
 `;

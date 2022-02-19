@@ -4,12 +4,9 @@ import {useDispatch} from 'react-redux';
 import Button from '../../molecules/MuiButton';
 import TextField from '../../molecules/MuiTextField';
 import Grid from '@mui/material/Grid';
-import {useStyles} from './Style';
-import {ButtonColor, BasicColor} from '../../Color';
+import { BasicColor } from '../../Color';
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
 import * as TYPES from '../../../app/types';
-import {MockStore} from '../../../app/configureStore';
-import {IStudent} from '../../../app/entities/student';
 import {ParentPgStepper} from '../../molecules/ParentPgStepper/ParentPgStepper';
 import SocratesImg from '../../assets/socrates.svg';
 import {
@@ -22,16 +19,13 @@ import {
 } from './Style';
 import mutationFetch from '../../../api/mutations/get';
 import {CREATE_GUARDIAN} from '../../../api/mutations/guardians';
-import {useParams} from 'react-router-dom';
-import {PanoramaSharp} from '@mui/icons-material';
-import {SnackbarProvider, VariantType, useSnackbar} from 'notistack';
+import { useSnackbar } from 'notistack';
 import {LoadingContext} from 'react-router-loading';
 
 const CreateParent: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
   const dispatch = useDispatch();
-  const classes = useStyles();
   const {enqueueSnackbar} = useSnackbar();
 
   const language = 'en';
@@ -68,13 +62,13 @@ const CreateParent: FC = () => {
 
     const res: any = await mutationFetch(
       CREATE_GUARDIAN(email, userName, password)
-    ).catch(e => ({success: 'false'}));
+    ).catch(() => ({success: 'false'}));
 
     setLoading(false);
 
     if (res.success === false) {
       setErrMsg('Network Error!');
-      enqueueSnackbar(`Network Error!`, {variant: 'error'});
+      enqueueSnackbar('Network Error!', {variant: 'error'});
       return;
     }
 
@@ -90,7 +84,7 @@ const CreateParent: FC = () => {
 
     enqueueSnackbar('Successfully Created!', {variant: 'success'});
 
-    const {guardian, user, profile, token, refreshToken} =
+    const { user, token, refreshToken} =
       result.data.createGuardian;
     dispatch({
       type: TYPES.USER_SET_DATA,
