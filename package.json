@@ -117,5 +117,5 @@
       "pre-commit": "gts check"
     }
   },
-  "proxy": "http://localhost:8000"
+  "proxy": "https://143.244.183.24/"
 }
