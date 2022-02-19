@@ -3,150 +3,161 @@
  * Component of buying collectible cards page
  */
 
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import {FC, useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import { Card } from './Card';
+import {Card} from './Card';
 import axios from 'axios';
-import ReactLoading from 'react-loading'
-import { ScreenSize } from '../../screenSize';
+import ReactLoading from 'react-loading';
+import {ScreenSize} from '../../screenSize';
+import {useSelector} from 'react-redux';
 
 // Get file storage link
-import { buyCardsWithFilenames, getBoughtCards, getCardCategories } from '../../../app/firebase';
-import { BasicColor } from '../../Color';
-import { BoughtCard } from './BoughtCard';
+import {
+  buyCardsWithFilenames,
+  getBoughtCards,
+  getCardCategories,
+} from 'app/firebase';
+import {BasicColor} from '../../Color';
+import {BoughtCard} from './BoughtCard';
 
+import mutation from 'api/mutations/get';
+import query from 'api/queries/get';
+import {COLLECTIBLE_CATEGORY_QUERY} from 'api/queries/collectibles';
+import {PURCHASE_CARD_PACK} from 'api/mutations/collectibles';
 interface CardPropArray {
   cards: {
-    category: string
-    id: number
-    price: number
+    name: string;
+    id: number;
+    price: number;
   }[];
 }
 
-const CardContainer: FC<CardPropArray> = ({ cards }) => {
+const CardContainer: FC<CardPropArray> = ({cards}) => {
+  const user = useSelector((state: any) => state.user);
 
   // Toggle state when user clicks buy button to make sure send request again.
-  const [buy, setBuy] = useState(false)
+  const [buy, setBuy] = useState(false);
 
   // State to store currently selected card
   const [card, setCard] = useState('');
 
   // state used for card categories
-  const [cateItems, setCateItems] = useState([])
+  const [cateItems, setCateItems] = useState([]);
 
   // states used for bought cards
-  const [purchasedItems, setPurchasedItems] = useState([])
+  const [purchasedItems, setPurchasedItems] = useState([]);
 
   // loading state for card categories
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   // This function is called from child, this is passed as prop to child component
   const callback = (category: string) => {
     setCard(category);
+
     // toggle state to make sure buy card every time user clicks buy button.
-    setBuy(!buy)
-  }
+    setBuy(!buy);
+  };
 
   // Get category images after u click one of category images.
   const fetchData = async (card: string) => {
-    setIsLoading(true)
-
+    setIsLoading(true);
+    // send mutation for purchase
+    console.log('user:', user);
+    try {
+      const res: any = await mutation(PURCHASE_CARD_PACK(9, 3, 1), user.token);
+      const names = await res.json();
+      if (names.data){
+        await buyCardsWithFilenames(
+          names.data.purchaseCollectiblePack,
+          card,
+          setPurchasedItems
+        )
+      }
+      else {
+        setPurchasedItems([])
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    setIsLoading(false);
     // Buy cards with file names
     // const filenames = ['ARIES.png', 'ASTROID.png']
-    // const dirname = 'Space'
-    // buyCardsWithFilenames(filenames, dirname, setPurchasedItems)
+    // buyCardsWithFilenames(names.data.purchaseCollectibleCategory, card, setPurchasedItems)
 
     // Get random 3 urls of current category
-    await getBoughtCards(card, setPurchasedItems)
-    setIsLoading(false)
-  }
+    // await getBoughtCards(card, setPurchasedItems)
+  };
 
   useEffect(() => {
     // to avoid react error "Warning: Can't perform a React state update on an unmounted component."
     // Download files for category image links on component loading
-    getCardCategories(setCateItems)
+    getCardCategories(setCateItems);
 
     // only fetch image data when current state card is set
-    if (card)
-      fetchData(card).catch(console.error)
-
+    if (card) fetchData(card).catch(console.error);
   }, [buy]);
 
   return (
     <div
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: 'auto' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        margin: 'auto',
+      }}
     >
       <StyledCardContainer>
         {cards.map((card, index) => (
           <Card
             key={index}
             id={card.id}
-            price={card.price}
+            price={200}
             buy={callback}
             imgUrl={cateItems[index]}
-            category={card.category}
+            category={card.name}
           />
         ))}
       </StyledCardContainer>
-      <div style={{ height: 300, display: 'flex', alignItems: 'center' }}>
-        {
-          isLoading && card ?
-            <ReactLoading type='bars' color={BasicColor.green} /> :
-            card ?
-              purchasedItems.map(
-                (
-                  (category: string, index: number) => (
-                    <BoughtCard key={index} imgUrl={category} />
-                  )
-                )
-              )
-              :
-              <p>Please select card category you want to buy!</p>
-        }
-      </div>
+      <PurchasedCardsContainer>
+        {isLoading && card ? (
+          <ReactLoading type="bars" color={BasicColor.green} />
+        ) : purchasedItems && card ? (
+          purchasedItems.map((category: string, index: number) => (
+            <BoughtCard key={index} imgUrl={category} />
+          ))
+        ) : null}
+      </PurchasedCardsContainer>
     </div>
   );
 };
 
 export const CardCategory: FC = () => {
-  const cardsData = [
-    {
-      id: 1,
-      category: 'Dinosaur',
-      price: 200,
-    },
-    {
-      id: 2,
-      category: 'Dragon',
-      price: 300,
-    },
-    {
-      id: 3,
-      category: 'Healthcare',
-      price: 400,
-    },
-    {
-      id: 4,
-      category: 'Mythology',
-      price: 500,
-    },
-    {
-      id: 5,
-      category: 'President',
-      price: 250,
-    },
-    {
-      id: 6,
-      category: 'Space',
-      price: 350,
-    },
-  ];
+  const user = useSelector((state: any) => state.user);
+  const [categories, setCategories] = useState([]);
 
-  useEffect(() => { }, []);
+  const fetchCategories = async () => {
+    const res: any = await query(
+      'collectiblesCategory',
+      COLLECTIBLE_CATEGORY_QUERY,
+      user.token
+    ).catch(e => ({success: false}));
+
+    const result = await res.json();
+    if (result.errors) {
+      console.log('error:', result.errors);
+      setCategories([]);
+    } else {
+      setCategories(result.data.collectiblesCategory);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories().catch(console.error);
+  }, []);
 
   return (
     <>
-      <CardContainer cards={cardsData} />
+      <CardContainer cards={categories} />
     </>
   );
 };
@@ -155,13 +166,33 @@ const StyledCardContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 1rem;
+  margin: 1rem;
   position: relative;
 
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    display: grid;
+    width: 80vw;
+    place-items: center;
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+const PurchasedCardsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  heigth: 300px;
+  margin: 1rem;
+  position: relative;
   &::-webkit-scrollbar {
     display: none;
   }
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    margin: 0;
+    display: grid;
+    width: 80vw;
+    place-items: center;
+    padding: 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 15vh;
   }
 `;
