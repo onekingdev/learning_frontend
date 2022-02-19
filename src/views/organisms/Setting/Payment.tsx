@@ -28,7 +28,7 @@ export const Payment: FC = () => {
   }
   const paymentFormRef = useRef<PaymentFormFunc>(null)
 
-  const handleOrder = (event: any) => {
+  const handleOrder = () => {
     paymentFormRef?.current?.handleOrder()
   }
 

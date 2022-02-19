@@ -3,14 +3,14 @@
  * Gems and owner collectible cards
  */
 
-import {FC, useEffect, useState} from 'react';
+import {FC, useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {ScreenSize} from '../../screenSize';
 
-import gem_legendary from '../../assets/gems_card_collectible/gem_legendary.png';
-import gem_epic from '../../assets/gems_card_collectible/gem_epic.png';
-import gem_common from '../../assets/gems_card_collectible/gem_common.png';
-import gem_rare from '../../assets/gems_card_collectible/gem_rare.png';
+import gem_legendary from '../../assets/gems_card_collectible/gem_legendary.svg';
+import gem_epic from '../../assets/gems_card_collectible/gem_epic.svg';
+import gem_common from '../../assets/gems_card_collectible/gem_common.svg';
+import gem_rare from '../../assets/gems_card_collectible/gem_rare.svg';
 import gem_disabled from '../../assets/gems_card_collectible/gem_disabled.png';
 
 interface GemsProps {
@@ -47,15 +47,9 @@ export const Gems: FC<GemsProps> = ({select}) => {
 
 const StyledGems = styled.div`
   display: flex;
-  margin-bottom: 1rem;
+  margin: 0;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    display: grid;
-    width: 80vw;
-    place-items: center;
-    grid-template-columns: repeat(4, 1fr);
-  }
 `;
 
 const StyledGem = styled.div`
@@ -74,19 +68,5 @@ const StyledGem = styled.div`
   &:hover {
     cursor: pointer;
     transform: translateY(-5px);
-  }
-
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 80px;
-
-    img {
-      width: 100%;
-    }
-
-    p {
-      font-size: 12px;
-      top: 100%;
-      color: black;
-    }
   }
 `;

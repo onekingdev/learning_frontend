@@ -33,7 +33,7 @@ export const login = async (username: string, password: string, dispatch: any) =
     }
 
     const user = result_who.data.whoami;
-    const user_redux:any = (({id, lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language,profile }) => ({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language, profile}))(user)
+    const user_redux:any = (({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language,profile }) => ({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language, profile}))(user)
     const {guardian, student} = result_who.data.whoami;
 
     dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })

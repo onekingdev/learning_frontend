@@ -1,5 +1,5 @@
-import {FC, useEffect, useContext, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {FC, useEffect, useContext} from 'react';
+import {ScreenSize} from '../../../screenSize';
 import styled from 'styled-components';
 
 import {Grid} from '@mui/material';
@@ -10,41 +10,23 @@ import background from '../../../assets/colored-shapes-bg.svg';
 import ribbon from '../../../assets/ribbon.svg';
 import Cartera from '../../../assets/Cartera.svg';
 
-import {ScreenSize} from '../../../screenSize';
-
 import {AccountBalance} from '../../../molecules/StudentBank/AccountBalance';
 import {TxBox} from '../../../molecules/StudentBank/TxBox';
 import {TxHistoryTable} from '../../../molecules/StudentBank/TxHistoryTable';
 import {Interest} from '../../../molecules/StudentBank/Interest';
 import {LoadingContext} from 'react-router-loading';
 
-import mutation from 'api/mutations/get';
-import query from 'api/queries/get';
-
 export const Bank: FC = () => {
-  // const loadingContext = useContext(LoadingContext);
+  const loadingContext = useContext(LoadingContext);
 
-  // state to store current account balance
-  const [balance, setBalance] = useState(0)
-  const user = useSelector((state: any) => state.user);
-
-  const fetchData = async () => {
-    try {
-
-      const res: any = await query(
-        `studentBankBalanceById(student: ${9})`,
-        '{balance}',
-        user.token
-      ).catch(e => ({success: false}));
-
-      const result = await res.json();
-      setBalance(result.data.studentBankBalanceById.balance)
-    } catch(e) {
-      setBalance(100)
-    }
-  }
   useEffect(() => {
-    fetchData().catch(console.error)
+    // get(
+    //   // `collectibleById(id:"${collectibleId}")`,
+    //   // COLLECTIBLE_QUERY,
+    //   // handleData,
+    //   // handleError
+    // );
+    loadingContext.done();
   }, []);
 
   return (
@@ -60,7 +42,7 @@ export const Bank: FC = () => {
                 <Img src={Cartera} />
               </GridItem>
               <GridItem item md={12} xs={8}>
-                <AccountBalance balance={balance} />
+                <AccountBalance balance={2000} />
               </GridItem>
               <GridItem item md={12} xs={12}>
                 <TxBox />

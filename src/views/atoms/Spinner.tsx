@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import socrates from '../assets/socrates.svg';
 import shapes from '../assets/colored-shapes-bg.svg';

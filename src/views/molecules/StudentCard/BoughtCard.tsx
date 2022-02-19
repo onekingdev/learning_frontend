@@ -1,62 +1,64 @@
-import {FC, useCallback, useEffect, useState} from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {BasicColor} from '../../Color';
+import { BasicColor } from '../../Color';
 import ReactLoading from 'react-loading';
-import useSound from 'use-sound';
-import purchaseSound from '../../assets/audios/mixkit-coin-win-notification.wav';
-import {ScreenSize} from '../../screenSize';
-import { ImageAspectRatio } from '@mui/icons-material';
-
+import useSound from 'use-sound'
+import purchaseSound from '../../assets/audios/mixkit-coin-win-notification.wav'
 type CardProps = {
   imgUrl: string;
 };
 
-/**
- * @author BruceLee
- * Displaying a bought package of 3 cards when a user pressed bought button
- * Turn around image effect and sound effect added
- */
-export const BoughtCard: FC<CardProps> = ({imgUrl}) => {
+
+  /**
+   * @author BruceLee
+   * Displaying a bought package of 3 cards when a user pressed bought button
+   * Turn around image effect and sound effect added
+   */
+export const BoughtCard: FC<CardProps> = ({ imgUrl }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
 
-  const [play, {stop}] = useSound(purchaseSound);
+  const [play, { stop }] = useSound(purchaseSound);
 
   // state to know that image is loaded, rotating effect only works when image is fully loaded
   const [loaded, setLoaded] = useState(false);
   return (
     <StyledCard onClick={() => setOpen(true)}>
-      {imgUrl ? (
-        open ? (
+      {imgUrl
+        ? open
+          ?
           <>
-            <img
-              style={loaded ? {} : {display: 'none'}}
+          <StyledImg
+              style={ loaded ? {} : { display: 'none' }}
               src={imgUrl}
-              loading="eager"
-              onLoad={() => {
-                setLoaded(true), play();
-              }}
+              loading='eager'
+              onLoad={() => {setLoaded(true), play()}}
             />
-            <div
-              style={
-                loaded
-                  ? {display: 'none'}
-                  : {display: 'flex', alignItems: 'center'}
-              }
-            >
-              <ReactLoading type="spokes" color={BasicColor.green} />
+            <div style={ loaded ? {display: 'none'} : { display: 'flex', alignItems: 'center'}} >
+              <ReactLoading type='spokes' color={BasicColor.green} />
             </div>
           </>
-        ) : (
-          <p>?</p>
-        )
-      ) : (
-        <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-      )}
+          : <StyledP>?</StyledP>
+        : <ReactLoading type='spinningBubbles' color={BasicColor.green} />}
     </StyledCard>
   );
 };
 
+const StyledImg = styled.img`
+  height: 100%;
+  transform: rotateY(0);
+  animation: rotateAnimation 0.5s linear;
+
+  /* Adding keyframes for animation */
+  @keyframes rotateAnimation {
+    from {
+      transform: rotateY(180deg);
+    }
+    to {
+      transform: rotateY(360deg);
+    }
+  }
+`;
 const StyledCard = styled.div`
   display: flex;
   justify-content: center;
@@ -68,41 +70,13 @@ const StyledCard = styled.div`
   overflow: hidden;
   border-radius: 6px;
   transition: all 250ms ease-in-out;
-
   &:hover {
     transform: translateY(-5px) translateX(-5px);
   }
+`;
 
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 27vw;
-    height: 36vw;
-    margin: 2vw;
-  }
-
-  p {
-    cursor: pointer;
-    font-size: 200px;
-    margin: auto;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-      font-size: 100px;
-    }
-  }
-
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: fill;
-    transform: rotateY(0);
-    animation: rotateAnimation 0.5s linear;
-  
-    /* Adding keyframes for animation */
-    @keyframes rotateAnimation {
-      from {
-        transform: rotateY(180deg);
-      }
-      to {
-        transform: rotateY(360deg);
-      }
-    }
-  }
+const StyledP = styled.p`
+  cursor: pointer;
+  font-size: 200px;
+  margin: auto;
 `;

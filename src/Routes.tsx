@@ -4,8 +4,7 @@ import {Route, Switch} from 'react-router-loading';
 import {
   TransitionGroup,
   CSSTransition,
-  Transition
-} from "react-transition-group";
+} from 'react-transition-group';
 import 'animate.css';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
@@ -29,7 +28,6 @@ import CreateParent from './views/pages/CreateParent/CreateParent';
 import KidsList from './views/pages/KidsList/KidsList';
 import {useSelector} from 'react-redux';
 import {Store} from './app/configureStore';
-import {ParentPgContainer} from './views/molecules/ParentPgContainer/ParentPgContainer';
 import {Settings} from './views/pages/Settings/Settings';
 import {Report} from './views/pages/Report/Report';
 import {Bank} from './views/pages/Student/Bank/Bank';
@@ -116,7 +114,7 @@ export function Routes(props: any) {
         <PrivateRoute loading={false} path="/collectibles/mycards">
           <MyCardCollection />
         </PrivateRoute>
-        <PrivateRoute loading={false} path="/bank">
+        <PrivateRoute loading={true} path="/bank">
           <Bank />
         </PrivateRoute>
         <PrivateRoute path="/profile">
@@ -172,6 +170,7 @@ export function Routes(props: any) {
             <Testing />
           </Route>
         ) : null}
+        <Redirect from="/" to="/login" />
         </Switch>
       </CSSTransition >
     </TransitionGroup>

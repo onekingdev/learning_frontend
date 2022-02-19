@@ -2,8 +2,7 @@ import {Routes} from './Routes'
 import { Provider } from 'react-redux';
 import store from './app/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
-import React, { useState, Fragment } from 'react';
-import Button from '@mui/material/Button';
+import { useState } from 'react';
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 import {BrowserRouter as Router, Redirect, useLocation } from 'react-router-dom';
 
