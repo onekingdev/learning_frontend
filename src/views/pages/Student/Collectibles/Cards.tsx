@@ -9,25 +9,34 @@ import {ScreenSize} from 'views/screenSize';
 import {CardCollectibleTitle} from '../../../molecules/CardCollectible/CardCollectibleTitle';
 import {StudentMenu} from '../../../templates/StudentMenu';
 import {CardCategory} from '../../../molecules/StudentCard/CardsCategory';
+import {getDividerUtilityClass} from '@mui/material';
 export const Cards: FC = () => {
   const history = useHistory();
 
   return (
     <Wrapper>
       <StudentMenu>
-        <CardCollectibleContainer>
+        <div>
           <CardCollectibleTitle />
-          <Button onClick={() => history.push('/collectibles/mycards')}>
-            MY COLLECTION
-          </Button>
+          <BtnContainer>
+            <Button onClick={() => history.push('/collectibles/mycards')}>
+              MY COLLECTION
+            </Button>
+          </BtnContainer>
           <CardCategory />
-        </CardCollectibleContainer>
+        </div>
       </StudentMenu>
     </Wrapper>
   );
 };
 
-const Button = styled.button`
+export const BtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 3vh;
+`
+
+export const Button = styled.button`
   border: none;
   width: 200px;
   height: 40px;
@@ -44,10 +53,7 @@ const Button = styled.button`
     box-shadow: 0 4px 1rem -4px #000;
   }
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    position: fixed;
-    top: auto;
-    right: 10px;
-    bottom: 14%;
+    position: inherit;
     z-index: 1;
   }
 `;

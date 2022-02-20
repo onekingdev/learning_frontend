@@ -74,9 +74,9 @@ const StyledCard = styled.div`
   }
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 27vw;
-    height: 36vw;
-    margin: 2vw;
+    width: 30vw;
+    height: 40vw;
+    margin: 5vw;
   }
 
   p {

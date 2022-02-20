@@ -1,38 +1,42 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
-import { Title } from '../../atoms/Text/Title';
+import {Title} from '../../atoms/Text/Title';
 import ribbon from '../../assets/ribbon.svg';
-import { ScreenSize } from '../../screenSize';
+import {ScreenSize} from '../../screenSize';
 
 export const CardCollectibleTitle: FC = () => {
   return (
     <CardTitle>
-      <Title isDark={true}>Collectible Cards</Title>
+      <h1>Collectible Cards</h1>
     </CardTitle>
   );
 };
 export const CardCollectibleTitle2: FC = () => {
   return (
     <CardTitle>
-      <Title isDark={true}>MY COLLECTION</Title>
+      <h1>MY COLLECTION</h1>
     </CardTitle>
   );
 };
 
 const CardTitle = styled.div`
-  margin-top: 3vh;
-  display: grid;
-  height: 90%;
-  text-align: center;
-  align-content: center;
+  display: flex;
+  justify-content: center;
   background-image: url(${ribbon});
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 268px 33px;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    background-size: 296px 58px;
+  background-size: contain;
+  padding: 15px;
+  margin-top: 3vh;
+  h1 {
+    font-family: Montserrat;
+    margin: 0;
   }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    background-size: 400px 60px;
+
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    h1 {
+      font-size: 18px;
+    }
+    padding: 10px;
   }
 `;
