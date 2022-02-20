@@ -67,7 +67,7 @@ export const CardCollectible: FC = () => {
               <ModalStyles>
                 <CloseButton onClick={closeModal}>X</CloseButton>
                 <ModalImage
-                  src={`http://143.244.183.24/media/${collectible.image}`}
+                  src={`https://api.withsocrates.com/media/${collectible.image}`}
                 />
                 <ModalTextContainer>
                   <ModalTitle>{collectible.name}</ModalTitle>
