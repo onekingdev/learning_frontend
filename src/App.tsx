@@ -11,7 +11,7 @@ import './style.css'
 export default () => {
   const [loading, setLoading] = useState(true);
   const [persist] = useState(store(() => setLoading(false)));
-  console.log('test')
+  console.log(process.env.NODE_ENV)
   return (
     <Provider store={persist.store}>
         <PersistGate loading={loading} persistor={persist.persistor}>
