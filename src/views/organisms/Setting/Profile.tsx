@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import * as React from 'react';
 
 import Grid from '@mui/material/Grid';
@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 
 import {
   LSShadowContainer, LSButtonContainer, LSGridRow, LSTextField, LSTitle, LSText, LSLabel,
-  LSButton, LSBlueTextButton
+  TextGroup, LSButton, LSBlueTextButton
 } from '../../molecules/Setting/utils/Style';
 
 import { dictionary } from '../../molecules/Setting/utils/dictionary';

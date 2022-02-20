@@ -5,11 +5,15 @@ import {useDispatch} from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {useStyles, Subjects, Subject, SubjectIcon, SubjectTitle} from './Style';
+import * as TYPES from '../../../app/types';
+import {MockStore} from '../../../app/configureStore';
+import {IStudent} from '../../../app/entities/student';
 import {
   Title,
   Tip,
   Container,
   Welcome,
+  Socrates,
   PaperContainer,
 } from './Style';
 import welcome from '../../assets/welcome-kid-new.svg';
@@ -19,9 +23,12 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import socrates from '../../assets/socrates.svg';
 import Button from '../../molecules/MuiButton';
 import TextField from '../../molecules/MuiTextField';
-import {ButtonColor, BasicColor} from '../../Color';
+import {ButtonColor, shadeColor, BasicColor} from '../../Color';
+import {HistoryRounded} from '@mui/icons-material';
 import math_gold from '../../assets/packageIcons/math_gold.svg';
 import ela_gold from '../../assets/packageIcons/ela_gold.svg';
 import science_gold from '../../assets/packageIcons/science_gold.svg';

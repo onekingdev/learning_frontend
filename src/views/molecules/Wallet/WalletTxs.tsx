@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
+
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,7 +10,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import PaidIcon from '@mui/icons-material/Paid';
 import { BasicColor } from '../../Color';
+import { LSLabel } from '../Setting/utils/Style';
 
 interface Column {
   id: 'description' | 'type' | 'amount' ;
@@ -154,3 +157,8 @@ export const WalletTxHistory: FC = () => {
       </Paper>
   );
 }
+
+const StyledTableCell = styled(TableCell) <{
+}>`
+
+`;

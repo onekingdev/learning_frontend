@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { BasicColor } from '../../Color';
 import ReactLoading from 'react-loading'
@@ -69,7 +69,7 @@ const CardContainer = styled.div`
   }
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 26vw;
+    width: 35vw;
     min-height: 120px;
     h2 {
       font-size: 14px;

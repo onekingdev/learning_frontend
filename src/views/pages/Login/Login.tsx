@@ -24,6 +24,7 @@ export const LogIn: FC = () => {
   const language = 'en';
 
   const [loading, setLoading] = useState(false);
+  const [errMsg, setErrMsg] = useState('')
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

@@ -12,6 +12,7 @@ import {ScreenSize} from '../../screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
 import {IconDropDown} from '../../molecules/IconDropDown';
 import {useHistory} from 'react-router-dom';
+import {BasicColor} from '../../Color';
 
 type TopMenuProps = {
   rank: number;
@@ -42,7 +43,7 @@ export const TopMenu: FC<TopMenuProps> = ({
     setOpenSidebar(!openSidebar);
   };
   useEffect(() => {
-    document.addEventListener('scroll', () => {
+    document.addEventListener('scroll', (event) => {
       if(document.documentElement.scrollTop > 15){
         setScroll(true)
       }

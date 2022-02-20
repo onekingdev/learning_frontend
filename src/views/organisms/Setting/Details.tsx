@@ -18,7 +18,7 @@ export const MembershipDetail:FC = () => {
   const {isAddOpen, openAdd} = useAddDialog()
 
 
-  const [reason, setReason] = useState<string>('reason1');
+  const [reason, setReason] = React.useState<string>('reason1');
 
   const onAddConfirm = () => {
     openAdd()

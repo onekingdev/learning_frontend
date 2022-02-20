@@ -5,6 +5,7 @@
 
 import {FC, useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import ReactLoading from 'react-loading';
 import ProgressBar from '@ramonak/react-progress-bar';
 import {ScreenSize} from '../../screenSize';
@@ -233,7 +234,7 @@ position: relative;
   display: grid;
   width: 80vw;
   place-items: center;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   padding: 0;
   margin: 0;
 }
@@ -261,7 +262,7 @@ grid-template-columns: repeat(6, 1fr);
 
 @media screen and (max-width: ${ScreenSize.tablet}) {
   margin-bottom: 10vh;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   min-height: 20vh;
 }
 `;

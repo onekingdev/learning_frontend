@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Header} from '../atoms/Text/Header';
 import {BasicColor} from '../Color';

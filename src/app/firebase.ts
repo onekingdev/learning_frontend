@@ -214,7 +214,7 @@ export const getCardCategories = async (
   setCateItems: Function
 ) => {
   const storage = getStorage();
-  const listRef = assetRef(storage, 'assets/collectible/Categories');
+  const listRef = assetRef(storage, `assets/collectible/Categories`);
 
   try{
 

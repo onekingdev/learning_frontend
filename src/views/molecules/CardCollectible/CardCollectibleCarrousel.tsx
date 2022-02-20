@@ -76,7 +76,7 @@ export const CardCollectibleCarrousel: FC<CarouselProps> = ({onClick}) => {
             {collectibles.collectibleSet.map((item: {image: ''}, i: any) => (
               <CardCollectible
                 onClick={() => handleClick(item)}
-                image={`https://api.withsocrates.com/media/${item.image}`}
+                image={`http://143.244.183.24/media/${item.image}`}
                 key={i}
               />
             ))}

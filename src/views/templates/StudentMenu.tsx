@@ -23,14 +23,14 @@ export const StudentMenu: FC = ({children}) => {
       <TopMenuContainer>
         <TopMenu
           rank={earning.rank}
-          level={earning.level || 0}
-          exp={earning.exp || 0}
-          expMax={earning.expMax || 0}
+          level={earning.level || 12}
+          exp={earning.experience || 9000}
+          expMax={earning.experience || 9001}
           icon={user?.avatar || avatarPlaceHolder}
-          userName={user?.username || 'None'}
+          userName={user?.username || 'Champ!'}
           progress={earning.progress}
           energyCharge={earning.energyCharge}
-          balance={earning.balance || 0}
+          balance={user?.balance || 0}
         />
       </TopMenuContainer>
       <div>{children}</div>

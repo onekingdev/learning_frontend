@@ -1,13 +1,29 @@
-import {FC, useEffect, useState, forwardRef, useImperativeHandle } from 'react';
+import {FC, useEffect, ReactChildren, ReactChild, useState, forwardRef, useImperativeHandle } from 'react';
 import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
+import {ParentPgNav} from '../ParentPgNav/ParentPgNav'
+import * as TYPES from '../../../app/types'
+import paypal from '../../assets/paypal.svg'
+import apple from '../../assets/apple-pay.svg'
+import visacard from '../../assets/visacard.svg'
 import Button from '../MuiButton'
 import TextField from '../MuiTextField'
-import {BasicColor} from '../../Color';
+import {ButtonColor, shadeColor, BasicColor} from '../../Color';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import {
   useStyles,
+  PayPal,
+  CardType,
+  Apple,
+  FlexRow,
+  Title,
+  CardContent
  } from '../PaymentMethod/Style'
 
 import StripeInput from '../PaymentMethod/StripeInput';
