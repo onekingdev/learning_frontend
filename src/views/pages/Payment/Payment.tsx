@@ -1,10 +1,7 @@
 import {FC, useEffect, useState, useContext} from 'react';
-import {useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
 import Alert from '@mui/material/Alert';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
-import {useStyles} from './Style';
 import {ParentPgStepper} from '../../molecules/ParentPgStepper/ParentPgStepper';
 import {PaymentMethod} from '../../molecules/PaymentMethod/PaymentMethod';
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';

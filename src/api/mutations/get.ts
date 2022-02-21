@@ -4,7 +4,7 @@ export const get =  (
   token?: string,
 ) => {
   if(token)
-  return fetch('https://api.withsocrates.com/graphql/', {
+  return fetch(process.env.NODE_ENV==="development" ?'/graphql/' : 'https://api.withsocrates.com/graphql/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const get =  (
     }),
   })
   else
-  return fetch('https://api.withsocrates.com/graphql/', {
+  return fetch(process.env.NODE_ENV==="development" ?'/graphql/' : 'https://api.withsocrates.com/graphql/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

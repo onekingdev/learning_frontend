@@ -4,15 +4,9 @@ import storage from 'redux-persist/lib/storage';
 import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
-import {IStudent} from './entities/student';
 import {IUser} from './entities/user';
-import {IGroup} from './entities/group';
-import {IBlock, IBlockPresentation} from './entities/block';
 import {Gender} from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { ICollectibleCategory } from './entities/collectibles';
-import { IAreasOfKnowledge } from './entities/areasOfKnowledge';
-import { AnyTxtRecord } from 'dns';
 
 export type Store = {
     user: IUser;

@@ -7,11 +7,22 @@ import { Grid } from '@mui/material';
 import { GridItem, Input } from './Style';
 import { LSWhiteTextButton } from '../Setting/utils/Style';
 import { BasicColor } from '../../Color';
+import { withDraw, deposit } from 'app/actions/bankActions'
+import { useDispatch } from 'react-redux'
+import {useSelector} from 'react-redux';
+import { useSnackbar } from 'notistack';
+import Button from '../../molecules/MuiButton';
 
 export const TxBox: FC = () => {
 
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const user = useSelector((state: any) => state.user);
+
   const [depositAmount, setDepositAmount] = useState(0)
   const [withdrawAmount, setWithdrawAmount] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   const onDepositChange = (x: string) => {
 
@@ -29,27 +40,29 @@ export const TxBox: FC = () => {
     else setWithdrawAmount(+x)
   }
 
-  const onDepositBtnClicked = () => {
-
-    console.log(depositAmount)
+  const onDepositBtnClicked = async() => {
+    if(depositAmount === 0) return enqueueSnackbar("Amount is empty", { variant: 'error' });
+    setLoading(true)
+    const result = await deposit(depositAmount, user.token, dispatch)
+    setLoading(false)
+    if(result.success) return enqueueSnackbar(result.msg, { variant: 'success' });
+    return enqueueSnackbar(result.msg, { variant: 'error' });
   }
 
-  const onWithdrawBtnClicked = () => {
-
-    console.log(withdrawAmount)
+  const onWithdrawBtnClicked = async() => {
+    if(withdrawAmount === 0) return enqueueSnackbar("Amount is empty", { variant: 'error' });
+    setLoading(true)
+    const result = await withDraw(withdrawAmount, user.token, dispatch)
+    setLoading(false)
+    if(result.success) return enqueueSnackbar(result.msg, { variant: 'success' });
+    return enqueueSnackbar(result.msg, { variant: 'error' });
   }
 
   useEffect(() => {
-    // get(
-    //   // `collectibleById(id:"${collectibleId}")`,
-    //   // COLLECTIBLE_QUERY,
-    //   // handleData,
-    //   // handleError
-    // );
   }, []);
 
   return (
-    <BankPaper flex_direction='column' bg_color={BasicColor.green} width={450}>
+    <BankPaper >
       <Grid container >
         <GridItem item md={8} xs={8}>
           <Input
@@ -58,9 +71,13 @@ export const TxBox: FC = () => {
           />
         </GridItem>
         <GridItem item md={4} xs={4} align='start'>
-          <LSWhiteTextButton
+          <Button
+            bgColor={BasicColor.green}
             onClick={onDepositBtnClicked}
-          >Deposit</LSWhiteTextButton>
+            value="Deposit"
+            fullWidth={true}
+            loading={loading}
+          />
         </GridItem>
       </Grid>
       <Grid container >
@@ -71,30 +88,29 @@ export const TxBox: FC = () => {
           />
         </GridItem>
         <GridItem item md={4} xs={4} align='start'>
-          <LSWhiteTextButton
+          <Button
+            bgColor={BasicColor.green}
             onClick={onWithdrawBtnClicked}
-          >Withdraw</LSWhiteTextButton>
+            value="Widthdraw"
+            fullWidth={true}
+            loading={loading}
+          />
         </GridItem>
       </Grid>
     </BankPaper>
   );
 };
 
-const BankPaper = styled.div<{
-  flex_direction: string;
-  bg_color: string;
-  width?: number;
-}>`
+const BankPaper = styled.div`
   margin-top: 0;
   padding: 30px 20px 30px 20px;
-  width: ${p => (p.width ? p.width + 'px;' : 'auto;')}
+  width: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: ${p => p.flex_direction};
+  flex-direction: column;
   color: white;
-  background-color: ${BasicColor.blue};
-  background-color: ${p => p.bg_color};
+  background-color: ${BasicColor.green};
   border-radius: 20px;
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
@@ -103,7 +119,6 @@ const BankPaper = styled.div<{
   }
 
   @media screen and (min-width: ${ScreenSize.tablet}) (max-width: ${ScreenSize.desktop}) {
-    // width: 400px;
     padding: 20px 35px 20px 35px;
   }
 `;

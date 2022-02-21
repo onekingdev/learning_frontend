@@ -22,29 +22,14 @@ import mutation from 'api/mutations/get';
 import query from 'api/queries/get';
 
 export const Bank: FC = () => {
-  // const loadingContext = useContext(LoadingContext);
 
-  // state to store current account balance
-  const [balance, setBalance] = useState(0)
+  const store = useSelector((state: any) => state)
   const user = useSelector((state: any) => state.user);
+  const student = useSelector((state: any) =>state.student)
+  const interests = useSelector((state: any) => state.interests.interests)
+  const bankMovement = student.bankWallet.bankmovementSet
 
-  const fetchData = async () => {
-    try {
-
-      const res: any = await query(
-        `studentBankBalanceById(student: ${9})`,
-        '{balance}',
-        user.token
-      ).catch(e => ({success: false}));
-
-      const result = await res.json();
-      setBalance(result.data.studentBankBalanceById.balance)
-    } catch(e) {
-      setBalance(100)
-    }
-  }
   useEffect(() => {
-    fetchData().catch(console.error)
   }, []);
 
   return (
@@ -60,7 +45,7 @@ export const Bank: FC = () => {
                 <Img src={Cartera} />
               </GridItem>
               <GridItem item md={12} xs={8}>
-                <AccountBalance balance={balance} />
+                <AccountBalance balance={student.bankWallet.balance} />
               </GridItem>
               <GridItem item md={12} xs={12}>
                 <TxBox />
@@ -68,10 +53,10 @@ export const Bank: FC = () => {
             </Grid>
             <GridItem container item xs={12} md={6} align="start">
               <Grid item>
-                <TxHistoryTable />
+                <TxHistoryTable movement={bankMovement}/>
               </Grid>
               <Grid item>
-                <Interest />
+                <Interest interests={interests} />
               </Grid>
             </GridItem>
           </Grid>

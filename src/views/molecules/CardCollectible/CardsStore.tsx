@@ -37,7 +37,7 @@ export const CardsStore: FC = () => {
         {collectiblesCategory.map((item: {image: ''; id: ''}, i: number) => (
           <CardCollectibleStore
             key={i}
-            image={`http://143.244.183.24/media/${item.image}`}
+            image={`https://api.withsocrates.com/media/${item.image}`}
             id={item.id}
           />
         ))}

@@ -1,4 +1,4 @@
-export const LEVEL = `
+export const INTEREST = `
     id
     identifier
     isActive
@@ -6,7 +6,8 @@ export const LEVEL = `
     randomSlug
     createTimestamp
     updateTimestamp
-    pointsRequired
     name
+    period
+    requireCoin
     amount
 `;

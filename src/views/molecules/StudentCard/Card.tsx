@@ -11,13 +11,14 @@ type CardProps = {
   category: string;
   id: number;
   price: number;
-  buy: (imgUrl: string) => void;
+  buy: (imgUrl: string, id: number) => void;
 };
 
 export const Card: FC<CardProps> = ({imgUrl, id, buy, price, category}) => {
   const onCardClick = () => {
     // This is prop from parent component, when card is clicked, this calls function of parent.
-    buy(category);
+    buy(category, id);
+    console.log('card:', category, 'id:', id)
   };
   return (
     <CardContainer>

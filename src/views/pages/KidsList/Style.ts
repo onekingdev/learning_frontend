@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
 import { makeStyles } from '@mui/styles'
 import titleBg from '../../assets/title-kids-background.png'
-import {ButtonColor, BasicColor} from '../../Color';
+import {BasicColor} from '../../Color';
 
 export const SettingContainer = styled.div`
   display: flex;

@@ -5,7 +5,6 @@
 
 import {FC, useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import ReactLoading from 'react-loading';
 import ProgressBar from '@ramonak/react-progress-bar';
 import {ScreenSize} from '../../screenSize';
