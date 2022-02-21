@@ -1,48 +1,15 @@
-import {GUARDIAN_STUDENT} from '../fragments/guardianFragments';
-import axios from 'axios';
+import { GUARDIAN_STUDENT } from "../fragments/guardianFragments";
 
 export const PURCHASE_CARD_PACK = (
-  collectibleCategory: number,
-  packSize: number,
-  student_id: number
+    collectibleCategory: number,
+    packSize: number,
+    student_id: number
 ) => `
 purchaseCollectiblePack(
     collectibleCategory: ${collectibleCategory}, packSize: ${packSize}, student: ${student_id}
     ) {
         collectiblePackPurchaseTransaction{
-            collectibles {
-                image
-            }
-        }
+            amount
+           }
     }
 `;
-
-export const sendMutaion = async (mutation: string, token?: string) => {
-  try {
-    const response = await axios.post(
-      process.env.NODE_ENV === 'development'
-        ? '/graphql/'
-        : 'https://api.withsocrates.com/graphql/',
-      {
-        query: `mutation {
-            ${mutation}
-          }`,
-      },
-      token
-        ? {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        : {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-    );
-    return response.data;
-  } catch (e) {
-    console.log(e);
-  }
-};

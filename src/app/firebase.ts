@@ -158,84 +158,96 @@ export const getAvatarDir = async (dir: any, setDir: any) => {
 };
 
 /**
+ * Get image download urls with ids
+ * @author BruceLee
+ * @param randIds array of numbers
+ * @param dir bought category
+ * @param setBuyLinks get links of bought cards
+ */
+export const getBoughtCards = async (dir: any, setBuyLinks: any) => {
+  const storage = getStorage();
+  const listRef = assetRef(storage, `assets/collectible/${dir}`);
+  const res = await listAll(listRef);
+
+  const length = res.items.length;
+  const randomIds = [];
+  for (let i = 0; i < 3; i++)
+    randomIds.push(Math.floor(Math.random() * length));
+
+  const links = [];
+  for (const row of randomIds) {
+    links.push(await getDownloadURL(res.items[row]));
+  }
+
+  setBuyLinks(links);
+};
+
+/**
  * Card collectible page, when user buys a pack of 3 cards, download files from firebase
  * @author BruceLee
- * @param filenames filenames from backend
+ * @param filenames links from db
  * @param dir directory name in firebase currently bought
  * @param getBoughtCards function to set states with image urls
  */
 export const buyCardsWithFilenames = async (
-  filenames: Array<{image: string}>,
+  filenames: Array<string>,
   dir: string,
   getBoughtCards: any
 ) => {
   const storage = getStorage();
   const links = [];
 
-  try {
-    for (const filename of filenames) {
-      const fileRef = assetRef(
-        storage,
-        `assets/collectible/${dir}/${filename.image}`
-      );
-      links.push(await getDownloadURL(fileRef));
-    }
-    getBoughtCards(links);
-  } catch (e) {
-    console.log(e);
-    getBoughtCards([]);
+  for (const filename of filenames) {
+    const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename}`);
+    links.push(await getDownloadURL(fileRef));
   }
+  console.log(links)
+  getBoughtCards(links);
 };
 
 /**
- * @author Bruce Lee
- * @description Get firebase storage file download urls for categories
+ * Get firebase storage file download urls for categories
+ * @author BruceLee
  * @param setCateItems set states with image urls
  */
 export const getCardCategories = async (
-  setCateItems: Function,
-  filenames: Array<{name: string}>
+  setCateItems: Function
 ) => {
   const storage = getStorage();
-  const links = [];
-  for (const filename of filenames) {
-    try {
-      const fileRef = assetRef(
-        storage,
-        `assets/collectible/Categories/${filename.name}.png`
-      );
-      links.push(await getDownloadURL(fileRef));
-    } catch {
-      links.push('No image');
+  const listRef = assetRef(storage, 'assets/collectible/Categories');
+
+  try{
+
+    const res = await listAll(listRef);
+    const links1 = [];
+    for (const row of res.items) {
+      links1.push(await getDownloadURL(row));
     }
+
+    setCateItems(links1);
+  } catch(e) {
+    console.log(e)
   }
-  setCateItems(links);
 };
 
-/**
- * Get firebase storage file download urls for category backs
- * @author BruceLee
- * @param setCateBacks set states with image urls
- */
 export const getCardBacks = async (
-  setCateBacks: Function,
-  filenames: Array<{name: string}>
+  setCateBacks: Function
 ) => {
   const storage = getStorage();
-  const links = [];
+  const backRef = assetRef(storage, `assets/collectible/CategoriesBack`);
 
-  for (const filename of filenames) {
-    try {
-      const fileRef = assetRef(
-        storage,
-        `assets/collectible/CategoriesBack/back${filename.name}.png`
-      );
-      links.push(await getDownloadURL(fileRef));
-    } catch (e) {
-      links.push('No Image');
+  try{
+
+    const res2 = await listAll(backRef)
+    const links2 = []
+    for (const row of res2.items) {
+      links2.push(await getDownloadURL(row))
     }
+
+    setCateBacks(links2)
+  } catch(e) {
+    console.log(e)
   }
-  setCateBacks(links);
 };
 
 /**
@@ -253,15 +265,8 @@ export const getAllCards = async (
   const links = [];
 
   for (const filename of filenames) {
-    try {
-      const fileRef = assetRef(
-        storage,
-        `assets/collectible/${dir}/${filename}`
-      );
-      links.push(await getDownloadURL(fileRef));
-    } catch {
-      links.push('No Image');
-    }
+    const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename}`);
+    links.push(await getDownloadURL(fileRef));
   }
   setAllCards(links);
 };

@@ -7,7 +7,7 @@ import { Grid } from '@mui/material';
 import { GridItem, Input } from './Style';
 import { LSWhiteTextButton } from '../Setting/utils/Style';
 import { BasicColor } from '../../Color';
-import { withDraw, deposit } from 'app/actions/bankActions'
+import { withDraw, deposit } from '../../../app/actions/bankActions'
 import { useDispatch } from 'react-redux'
 import {useSelector} from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -59,10 +59,16 @@ export const TxBox: FC = () => {
   }
 
   useEffect(() => {
+    // get(
+    //   // `collectibleById(id:"${collectibleId}")`,
+    //   // COLLECTIBLE_QUERY,
+    //   // handleData,
+    //   // handleError
+    // );
   }, []);
 
   return (
-    <BankPaper >
+    <BankPaper flex_direction='column' bg_color={BasicColor.green} width={450}>
       <Grid container >
         <GridItem item md={8} xs={8}>
           <Input
@@ -76,6 +82,7 @@ export const TxBox: FC = () => {
             onClick={onDepositBtnClicked}
             value="Deposit"
             fullWidth={true}
+            // margin="45px 0 0 0"
             loading={loading}
           />
         </GridItem>
@@ -93,6 +100,7 @@ export const TxBox: FC = () => {
             onClick={onWithdrawBtnClicked}
             value="Widthdraw"
             fullWidth={true}
+            // margin="45px 0 0 0"
             loading={loading}
           />
         </GridItem>
@@ -101,16 +109,21 @@ export const TxBox: FC = () => {
   );
 };
 
-const BankPaper = styled.div`
+const BankPaper = styled.div<{
+  flex_direction: string;
+  bg_color: string;
+  width?: number;
+}>`
   margin-top: 0;
   padding: 30px 20px 30px 20px;
-  width: 450px;
+  width: ${p => (p.width ? p.width + 'px;' : 'auto;')}
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: ${p => p.flex_direction};
   color: white;
-  background-color: ${BasicColor.green};
+  background-color: ${BasicColor.blue};
+  background-color: ${p => p.bg_color};
   border-radius: 20px;
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
@@ -119,6 +132,7 @@ const BankPaper = styled.div`
   }
 
   @media screen and (min-width: ${ScreenSize.tablet}) (max-width: ${ScreenSize.desktop}) {
+    // width: 400px;
     padding: 20px 35px 20px 35px;
   }
 `;

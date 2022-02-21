@@ -196,12 +196,12 @@ const StyledCard = styled.div`
   cursor: pointer;
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 36vw;
+    width: 26vw;
     height: auto;
     min-height: 100px;
-    margin: 10px;
+    margin: 5px;
     img {
-      width: 35vw;
+      width: 25vw;
     }
   }
 
