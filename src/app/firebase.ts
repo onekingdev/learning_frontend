@@ -158,30 +158,51 @@ export const getAvatarDir = async (dir: any, setDir: any) => {
 };
 
 /**
+ * Get image download urls with ids
+ * @author BruceLee
+ * @param randIds array of numbers
+ * @param dir bought category
+ * @param setBuyLinks get links of bought cards
+ */
+export const getBoughtCards = async (dir: any, setBuyLinks: any) => {
+  const storage = getStorage();
+  const listRef = assetRef(storage, `assets/collectible/${dir}`);
+  const res = await listAll(listRef);
+
+  const length = res.items.length;
+  const randomIds = [];
+  for (let i = 0; i < 3; i++)
+    randomIds.push(Math.floor(Math.random() * length));
+
+  const links = [];
+  for (const row of randomIds) {
+    links.push(await getDownloadURL(res.items[row]));
+  }
+
+  setBuyLinks(links);
+};
+
+/**
  * Card collectible page, when user buys a pack of 3 cards, download files from firebase
  * @author BruceLee
- * @param filenames filenames from backend
+ * @param filenames links from db
  * @param dir directory name in firebase currently bought
  * @param getBoughtCards function to set states with image urls
  */
 export const buyCardsWithFilenames = async (
-  filenames: Array<{image: string}>,
+  filenames: Array<string>,
   dir: string,
   getBoughtCards: any
 ) => {
   const storage = getStorage();
   const links = [];
 
-  try{
-    for (const filename of filenames) {
-      const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename.image}`);
-      links.push(await getDownloadURL(fileRef));
-    }
-    getBoughtCards(links);
-  } catch(e) {
-    console.log(e)
-    getBoughtCards([])
+  for (const filename of filenames) {
+    const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename}`);
+    links.push(await getDownloadURL(fileRef));
   }
+  console.log(links)
+  getBoughtCards(links);
 };
 
 /**
@@ -198,12 +219,12 @@ export const getCardCategories = async (
   try{
 
     const res = await listAll(listRef);
-    const links = [];
+    const links1 = [];
     for (const row of res.items) {
-      links.push(await getDownloadURL(row));
+      links1.push(await getDownloadURL(row));
     }
 
-    setCateItems(links);
+    setCateItems(links1);
   } catch(e) {
     console.log(e)
   }

@@ -27,7 +27,7 @@ export const mutation = (
   handleData: (x: unknown) => void,
   handleError: (x: unknown) => void
 ) => {
-  return fetch(process.env.NODE_ENV==="development" ?'/graphql/' : 'https://api.withsocrates.com/graphql/', {
+  return fetch(process.env.NODE_ENV==="development" ? '/graphql/' : 'https://api.withsocrates.com/graphql/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export const get_async =  (
   query: string,
   token?: string
 ) => {
-  return fetch(process.env.NODE_ENV==="development" ?'/graphql/' : 'https://api.withsocrates.com/graphql/', {
+  return fetch(process.env.NODE_ENV==="development" ? '/graphql/' : 'https://api.withsocrates.com/graphql/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

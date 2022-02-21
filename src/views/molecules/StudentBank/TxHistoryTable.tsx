@@ -149,6 +149,7 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
                           //   row[column.id] = "Interest";
                         }
                       }
+                      console.log(row[column.id])
                       if(column.id ==="updateTimestamp"){
                         let temp = new Date(row[column.id]);
                         temp = new Date();

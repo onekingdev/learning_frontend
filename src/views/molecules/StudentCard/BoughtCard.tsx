@@ -25,7 +25,7 @@ export const BoughtCard: FC<CardProps> = ({imgUrl}) => {
   // state to know that image is loaded, rotating effect only works when image is fully loaded
   const [loaded, setLoaded] = useState(false);
   return (
-    <StyledCard onClick={() => setOpen(!open)}>
+    <StyledCard onClick={() => setOpen(true)}>
       {imgUrl ? (
         open ? (
           <>

@@ -25,15 +25,16 @@ export const BLOCK_TYPE_CONFIGURATION = `
 `;
 
 export const BLOCK = `
-    
         id
         identifier
         isActive
         randomSlug
-        engangementPointsAvailable
+        createTimestamp
+        updateTimestamp
+        modality
+        blockSize
+        experiencePointsAvailable
         coinsAvailable
-        batteryPointsAvailable
-    
 `;
 
 export const BLOCK_PRESENTATON = `
