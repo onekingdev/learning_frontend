@@ -28,7 +28,7 @@ export const StudentMenu: FC = ({children}) => {
           expMax={earning.expMax || 0}
           icon={user?.avatar || avatarPlaceHolder}
           userName={user?.username || 'None'}
-          progress={earning.exp / earning.expMax * 100}
+          progress={earning.progress}
           energyCharge={earning.energyCharge}
           balance={earning.balance || 0}
         />
