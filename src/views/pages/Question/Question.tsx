@@ -82,12 +82,13 @@ export const Question: FC = () => {
       } else break;
     }
     if (corrCount < 1) corrCount = 1;
+    if (corrCount > 11) return;
     dispatch({type: TYPE.EARNING_ENERGY_SET, payload: corrCount - 1});
   };
 
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
-    setPointUnit(data.data.blockPresentationById.points);
+    setPointUnit(10);
     // loadingContext.done()
     try {
       dispatch({
@@ -134,7 +135,7 @@ export const Question: FC = () => {
           if(data) correctCount ++;
           else wrongCount ++;
         }
-        const result = await finishBlock(blockPresentation.id, correctCount, wrongCount, state.user.token, dispatch )
+        const result = await finishBlock(blockPresentation.id, correctCount, wrongCount, (state.earning.energyCharge * pointUnit * 10) / 100, state.earning, state.user.token, dispatch )
         setLoading(false)
       }
     }

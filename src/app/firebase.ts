@@ -177,6 +177,8 @@ export const getBoughtCards = async (dir: any, setBuyLinks: any) => {
   const links = [];
   for (const row of randomIds) {
     links.push(await getDownloadURL(res.items[row]));
+    console.log("down load url is ", links)
+
   }
 
   setBuyLinks(links);
@@ -200,6 +202,7 @@ export const buyCardsWithFilenames = async (
   for (const filename of filenames) {
     const fileRef = assetRef(storage, `assets/collectible/${dir}/${filename}`);
     links.push(await getDownloadURL(fileRef));
+    console.log("down load url is ", links)
   }
   console.log(links)
   getBoughtCards(links);
