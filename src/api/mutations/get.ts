@@ -14,8 +14,9 @@ export const get =  (
       query: `mutation {
         ${mutation}
       }`,
-    }),
-  })
+        }),
+      }
+    );
   else
   return fetch(<string>process.env.REACT_APP_SERVER_URL, {
     method: 'POST',
@@ -26,7 +27,8 @@ export const get =  (
       query: `mutation {
         ${mutation}
       }`,
-    }),
-  })
+        }),
+      }
+    );
 };
 export default get;
