@@ -7,7 +7,7 @@ export const BLOCK_CONFIGURATION_KEYWORD = `
 `;
 
 export const BLOCK_TYPE = `
-    
+
         id
         identifier
         isActive

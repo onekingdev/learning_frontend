@@ -8,8 +8,11 @@ import {CardDialog} from './CardDialog';
 import {useHistory} from 'react-router-dom';
 
 type CardProps = {
-  imgUrl: string;
-  purchased?: boolean;
+  imgUrl: string
+  purchased?: boolean
+  amount: number
+  description?: string
+  name?: string
 };
 
 /**
@@ -17,7 +20,7 @@ type CardProps = {
  * Displaying a bought package of 3 cards when a user pressed bought button
  * Turn around image effect and sound effect added
  */
-export const Gemcard: FC<CardProps> = ({imgUrl, purchased}) => {
+export const Gemcard: FC<CardProps> = ({imgUrl, purchased, amount, description, name}) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
   const [openBuy, setOpenBuy] = useState(false);
@@ -40,6 +43,7 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased}) => {
     setOpenBuy(!openBuy);
   };
   return (
+  <Container>
     <StyledCard>
       <img
         style={loaded ? {objectFit: 'fill'} : {display: 'none'}}
@@ -52,7 +56,7 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased}) => {
         onClick={() => onImgClicked()}
       />
       <StyledOverlay
-        style={purchased ? {} : {display: 'none'}}
+        style={purchased ? {display: 'none'} : {}}
         onClick={() => {
           onDisabledImgClicked();
         }}
@@ -100,16 +104,8 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased}) => {
               </div>
             </StyledGrid>
             <StyledGrid item md={6} xs={12}>
-              <h1>Cronos</h1>
-              <p>Roman Name: Saturn</p>
-              <p>Job: Titan of ther Harvest</p>
-              <p>Symbol(s): Sickle, Grain Snak</p>
-              <p>
-                Family: Rhea(wift), Zeus, Hera, Poseidon, Hades, Hestia,
-                Chiron(Children)
-              </p>
-              <p>Fact1: Leader of Titans</p>
-              <p>Fact2: There is a start named after him</p>
+              <h1>{name ? name: 'No name'}</h1>
+              <p>{description ? description : 'No description for this card'}</p>
             </StyledGrid>
           </Grid>
         }
@@ -129,9 +125,21 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased}) => {
         isOpen={openBuy}
       />
     </StyledCard>
+    <p>{amount} / 1</p>
+  </Container>
   );
 };
 
+const Container = styled.div`
+
+p {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0;
+  text-align: center;
+}
+`
 const StyledOverlay = styled.div`
   position: absolute;
   background: ${BasicColor.gray80};

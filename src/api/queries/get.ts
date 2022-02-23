@@ -68,4 +68,34 @@ export const get_async =  (
     }),
   })
 };
+
+export const sendRawQuery = async (
+  query: string,
+  token?: string
+) => {
+  const res:any = await fetch(<string>process.env.REACT_APP_SERVER_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      query: `
+        ${query}
+      `,
+    }),
+  }).catch(e => {
+    return {success: false, msg: e.message}
+  })
+
+  if(res.success === false)
+  return {success: false, msg: res.error}
+
+  const result = await res.json()
+  if(result.errors) {
+    return {success: false, msg: result.errors[0].message};
+  }
+
+  else return result
+};
 export default get_async;
