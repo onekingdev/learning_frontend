@@ -10,6 +10,8 @@ import axios from 'axios';
 import ReactLoading from 'react-loading';
 import {ScreenSize} from '../../screenSize';
 import {useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux'
+
 
 // Get file storage link
 import {
@@ -32,6 +34,8 @@ interface CardPropArray {
 }
 
 const CardContainer: FC<CardPropArray> = ({cards}) => {
+  const dispatch = useDispatch();
+
   const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) => state.student);
 
@@ -64,9 +68,10 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
 
   // Get category images after u click one of category images.
   const fetchData = async () => {
+    const cardPrice = cards.find(x => x.name === card)?.price
     setIsLoading(true);
     try{
-      const names = await purchaseCardPack(cardId, student.id, user.token);
+      const names = await purchaseCardPack(cardId, student.id, user.token, dispatch, cardPrice ? cardPrice: 0);
       if (names.msg) {
         setPurchasedItems([]);
         console.log(names.msg);
@@ -151,6 +156,8 @@ export const CardCategory: FC = () => {
 
     const fetchCategories = async () => {
       const names = await getCardPacksInfo(user.token);
+
+      // make sure to update state when component is mounted.
       if(!ignore){
         if (names.msg) {
           setCategories([]);

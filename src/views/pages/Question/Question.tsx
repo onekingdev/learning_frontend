@@ -12,7 +12,7 @@ import {Store} from '../../../app/configureStore';
 import {useParams} from 'react-router-dom';
 import * as TYPE from '../../../app/types';
 import {LoadingContext} from 'react-router-loading';
-import {finishBlock} from '../../../app/actions/blockActions'
+
 interface RoutePresentationParams {
   presentationId: string;
 }
@@ -32,7 +32,7 @@ export const Question: FC = () => {
   const [pointUnit, setPointUnit] = useState<number>(0);
   const [points, setPoints] = useState<number>(0);
   const loadingContext = useContext(LoadingContext);
-  const [loading, setLoading] = useState(false)
+
   const renderTypes = (
     question: IQuestion,
     type: string,
@@ -82,13 +82,12 @@ export const Question: FC = () => {
       } else break;
     }
     if (corrCount < 1) corrCount = 1;
-    if (corrCount > 11) return;
     dispatch({type: TYPE.EARNING_ENERGY_SET, payload: corrCount - 1});
   };
 
   const handleData = (data: any) => {
     setBlockPresentation(data.data.blockPresentationById);
-    setPointUnit(10);
+    setPointUnit(data.data.blockPresentationById.points);
     // loadingContext.done()
     try {
       dispatch({
@@ -122,21 +121,10 @@ export const Question: FC = () => {
     );
   }, [blockPresentation, questionCounter]);
 
-  const handleNextQuestion = async() => {
+  const handleNextQuestion = () => {
     if (blockPresentation) {
       if (blockPresentation.block.questions.length < questionCounter + 2) {
         setIsLessonFinished(true);
-        setLoading(true)
-        let correctCount = 0;
-        let wrongCount = 0;
-        console.log(answerResult)
-        for(const data of answerResult) {
-          console.log(data)
-          if(data) correctCount ++;
-          else wrongCount ++;
-        }
-        const result = await finishBlock(blockPresentation.id, correctCount, wrongCount, (state.earning.energyCharge * pointUnit * 10) / 100, state.earning, state.user.token, dispatch )
-        setLoading(false)
       }
     }
     const counter = questionCounter + 1;

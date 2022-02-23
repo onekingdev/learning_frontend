@@ -6,15 +6,17 @@ export const PURCHASE_CARD_PACK = (
   packSize: number,
   student_id: number
 ) => `
-purchaseCollectiblePack(
-    collectibleCategory: ${collectibleCategory}, packSize: ${packSize}, student: ${student_id}
-    ) {
-        collectiblePackPurchaseTransaction{
-            collectibles {
-                image
-            }
-        }
+mutation {
+  purchaseCollectiblePack(
+  collectibleCategory: ${collectibleCategory}, packSize: ${packSize}, student: ${student_id}
+  ) {
+    collectiblePackPurchaseTransaction{
+      collectibles {
+          image
+      }
     }
+  }
+}
 `;
 
 export const sendMutaion = async (mutation: string, token?: string) => {
