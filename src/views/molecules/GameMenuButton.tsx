@@ -35,13 +35,13 @@ type CardGameProps = {
 
 const CardGame = styled.div<CardGameProps>`
   width: 65%;
-  max-width: 350px;
+  max-width: 280px;
   height: 70px;
   background-color: ${p => p.color};
   margin: 0 auto;
   border-radius: 9px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 0 10px;
   cursor: ${p => (p.isButton ? 'pointer' : 'default')};
@@ -51,6 +51,8 @@ const CardGame = styled.div<CardGameProps>`
   }
   @media screen and (min-width: ${ScreenSize.tablet}) {
     padding: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
     margin: 20px;
   }
 `;

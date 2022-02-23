@@ -15,12 +15,11 @@ import gem_disabled from '../../assets/gems_card_collectible/gem_disabled.png';
 
 interface GemsProps {
   select: (gemCate: string) => (void)
-  actives: Array<boolean>
 }
-export const Gems: FC<GemsProps> = ({select, actives}) => {
+export const Gems: FC<GemsProps> = ({select}) => {
 
   const gems = [gem_legendary, gem_epic, gem_rare, gem_common]
-  const gemTitles = ['LEGENDARY', 'EPIC', 'RARE', 'COMMON']
+  const gemTitles = ['Legendary', 'Epic', 'Rare', 'Common']
 
   // state to make gem color gray when not selected
   const [selected, setSelected] = useState('')
@@ -37,7 +36,7 @@ export const Gems: FC<GemsProps> = ({select, actives}) => {
       {
         gems.map((gem, index) => (
           <StyledGem onClick={() => onGemClick(index)} key={index}>
-            <img src={actives[index] ? gem : gem_disabled} style={gemTitles[index] === selected ? {transform: 'rotate(90deg)'}: {}}/>
+            <img src={gemTitles[index] === selected ? gem : gem_disabled} />
             <p>{gemTitles[index]}</p>
           </StyledGem>
         ))

@@ -3,18 +3,18 @@
  * Component of buying collectible cards page
  */
 
-import {FC, useEffect, useState} from 'react';
+import {FC, useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {Card} from './Card';
+import axios from 'axios';
 import ReactLoading from 'react-loading';
 import {ScreenSize} from '../../screenSize';
 import {useSelector} from 'react-redux';
-import { useDispatch } from 'react-redux'
-
 
 // Get file storage link
 import {
   buyCardsWithFilenames,
+  getCardCategories,
 } from 'app/firebase';
 import {BasicColor} from '../../Color';
 import {BoughtCard} from './BoughtCard';
@@ -32,8 +32,6 @@ interface CardPropArray {
 }
 
 const CardContainer: FC<CardPropArray> = ({cards}) => {
-  const dispatch = useDispatch();
-
   const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) => state.student);
 
@@ -43,6 +41,9 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
   // State to store currently selected card
   const [card, setCard] = useState('');
   const [cardId, setCardId] = useState(0);
+
+  // state used for card categories
+  const [cateItems, setCateItems] = useState([]);
 
   // states used for bought cards
   const [purchasedItems, setPurchasedItems] = useState([]);
@@ -63,10 +64,9 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
 
   // Get category images after u click one of category images.
   const fetchData = async () => {
-    const cardPrice = cards.find(x => x.name === card)?.price
     setIsLoading(true);
     try{
-      const names = await purchaseCardPack(cardId, student.id, user.token, dispatch, cardPrice ? cardPrice: 0);
+      const names = await purchaseCardPack(cardId, student.id, user.token);
       if (names.msg) {
         setPurchasedItems([]);
         console.log(names.msg);
@@ -96,7 +96,7 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
   useEffect(() => {
     // to avoid react error "Warning: Can't perform a React state update on an unmounted component."
     // Download files for category image links
-    // getCardCategories(setCateItems, cards);
+    getCardCategories(setCateItems, cards);
   },[cards])
   return (
     <div
@@ -114,12 +114,13 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
             : {}
         }
       >
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <Card
-            key={card.id}
+            key={index}
             id={card.id}
             price={card.price}
             buy={callback}
+            imgUrl={cateItems[index]}
             category={card.name}
           />
         ))}
@@ -150,8 +151,6 @@ export const CardCategory: FC = () => {
 
     const fetchCategories = async () => {
       const names = await getCardPacksInfo(user.token);
-
-      // make sure to update state when component is mounted.
       if(!ignore){
         if (names.msg) {
           setCategories([]);

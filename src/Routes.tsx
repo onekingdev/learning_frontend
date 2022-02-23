@@ -132,7 +132,7 @@ export function Routes(props: any) {
         <PrivateRoute path="/games/categories">
           <Games />
         </PrivateRoute>
-        <PrivateRoute path="/games">
+        <PrivateRoute path="/games/:category">
           <GamesMenu />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/map">

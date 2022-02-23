@@ -1,45 +1,31 @@
-import {FC, useState, useEffect} from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import coin from '../../assets/coin.svg';
 import ReactLoading from 'react-loading';
-import {getDownUrlByFilename} from 'app/firebase';
 
 import {BasicColor} from '../../Color';
 import {ScreenSize} from '../../screenSize';
 
 type CardProps = {
+  imgUrl: string;
   category: string;
   id: number;
   price: number;
   buy: (imgUrl: string, id: number) => void;
 };
 
-export const Card: FC<CardProps> = ({id, buy, price, category}) => {
+export const Card: FC<CardProps> = ({imgUrl, id, buy, price, category}) => {
   const onCardClick = () => {
     // This is prop from parent component, when card is clicked, this calls function of parent.
     buy(category, id);
+    console.log('card:', category, 'id:', id)
   };
-
-  const [imgurl, setImgurl] = useState('');
-
-  const fetchFirebaseUrls = async () => {
-    const link = await getDownUrlByFilename(
-      'Categories',
-      category ? category + '.png' : ''
-    );
-    if (link === 'NO_IMAGE') setImgurl('');
-    else setImgurl(link);
-  };
-
-  useEffect(() => {
-    fetchFirebaseUrls();
-  }, []);
   return (
-    <CardContainer >
+    <CardContainer>
       <h2>{category}</h2>
       <StyledCard>
-        {imgurl ? (
-          <img src={imgurl} alt={'Category Image'} />
+        {imgUrl ? (
+          <img src={imgUrl} alt={'Category Image'} />
         ) : (
           <ReactLoading type="spinningBubbles" color={BasicColor.green} />
         )}
@@ -50,6 +36,7 @@ export const Card: FC<CardProps> = ({id, buy, price, category}) => {
           <p className="dollars">${price}</p>
           <button onClick={() => onCardClick()}>BUY</button>
         </StyledBg>
+        {/* <p>{content}</p> */}
       </StyledCard>
     </CardContainer>
   );

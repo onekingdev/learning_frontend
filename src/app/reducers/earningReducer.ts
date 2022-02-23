@@ -32,13 +32,6 @@ const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         ...state,
         energyCharge: 0
       }
-
-    case TYPE.PURCHASE_CARDS:
-      return {
-        ...state,
-        balance: state.balance - action.payload.price
-      }
-
     case TYPE.EARNING_RESET:
       return INITIAL_STATE;
     default:
