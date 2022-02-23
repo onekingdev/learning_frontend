@@ -3,11 +3,8 @@
  * Component of selecteding collectible cards page
  */
 
-import {FC, useEffect, useState} from 'react';
+import {FC, useRef, useEffect} from 'react';
 import styled from 'styled-components';
-// import usePromise from 'promise-hook'
-import {getDownUrlByFilename} from 'app/firebase';
-
 import ReactLoading from 'react-loading';
 import {ScreenSize} from '../../screenSize';
 import {Gemcard} from './GemCard';
@@ -15,6 +12,7 @@ import {BasicColor} from 'views/Color';
 
 interface TierCardProp {
   cards: {
+    id: string;
     name: string;
     amount: number;
     image: string;
@@ -25,72 +23,54 @@ interface TierCardProp {
       name: string;
     };
   }[];
-  title: string
 }
 
-export const TierCards: FC<TierCardProp> = ({cards, title}) => {
-  const [urls, setUrls] = useState<Array<string>>([]);
-  const [loading, setLoading] = useState(false);
 
+export const TierCards: FC<TierCardProp> = ({cards}) => {
+    // using ref to auto scroll to current component
+    const loadingRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-
-  const fetchFirebaseUrls = async () => {
-    setLoading(true);
-    const firebaseUrls = [];
-
-    // const myurls = cards.map(async card => await getDownUrlByFilename(card))
-    for (const card of cards) {
-      firebaseUrls.push(await getDownUrlByFilename(card));
-    }
-
-    setUrls(firebaseUrls);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchFirebaseUrls();
-  }, [cards]);
-
+    useEffect(() => {
+      if (loadingRef.current) {
+        window.scrollTo({
+          behavior: 'smooth',
+          top: loadingRef.current.offsetTop + 100,
+        });
+      }
+    }, [cards]);
   return (
-    <Container >
-      <p>{title}</p>
-      {loading ? (
-        <ReactLoading
-          type="spinningBubbles"
-          color={BasicColor.green}
-          height={200}
-        />
-      ) : (
-        <GemCardsContainer>
-          {cards.map((card, index) => {
-            return (
-              <Gemcard
-                key={index}
-                imgUrl={urls[index]}
-                purchased={card.owned}
-                amount={card.amount}
-                name={card.name}
-                description={card.description}
-              />
-            );
-          })}
-        </GemCardsContainer>
-      )}
+    <Container>
+      <p>{cards[0] ? cards[0].tier : null}</p>
+      <GemCardsContainer ref={loadingRef}>
+        {cards.map(card => {
+          return (
+            <Gemcard
+              key={card.id}
+              category={card.category.name}
+              imgUrl={card.image}
+              purchased={card.owned}
+              amount={card.amount}
+              name={card.name}
+              description={card.description}
+            />
+          );
+        })}
+      </GemCardsContainer>
     </Container>
   );
 };
 
 const Container = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-p {
-  text-align: center;
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 20px;
-}
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    text-align: center;
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 20px;
+  }
+`;
 const GemCardsContainer = styled.div`
   display: grid;
   place-items: center;

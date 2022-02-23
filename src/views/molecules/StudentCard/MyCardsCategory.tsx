@@ -7,14 +7,13 @@
  * Gem images
  */
 
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
 import {ScreenSize} from 'views/screenSize';
 
 // Get file storage link from firebase
-import {getCardBacks, getCardCategories} from 'app/firebase';
 
 import {MyCard} from './MyCard';
 import {Gems} from './Gems';
@@ -80,21 +79,6 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
     setGemcards(tiers);
   };
 
-  // state used for card categories fore&back image
-  const [cateFores, setCateFores] = useState([]);
-  const [cateBacks, setCateBacks] = useState([]);
-
-  const fetchCateCards = async () => {
-    // Get urls for images
-    await getCardCategories(setCateFores, cards);
-    await getCardBacks(setCateBacks, cards);
-  };
-
-  useEffect(() => {
-    // Download category image links on component loading
-    fetchCateCards().catch(console.error);
-  }, [cards]);
-
   // get total count and gained count of selected category, this is for progress bar
   const fetchProgressData = async (category: string) => {
     const card_id = cards.find(x => x.name === category)?.id;
@@ -134,17 +118,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
   const [gainedCount, setGainedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
 
-  // using ref to auto scroll to current component
-  const loadingRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  useEffect(() => {
-    if (loadingRef.current) {
-      window.scrollTo({
-        behavior: 'smooth',
-        top: loadingRef.current.offsetTop,
-      });
-    }
-  }, [gemcards]);
 
   return (
     <div
@@ -156,12 +130,10 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
       }}
     >
       <StyledCardContainer>
-        {cards.map((item, index) => (
+        {cards.map((item) => (
           <MyCard
-            key={index}
-            id={item.id}
+            key={item.id}
             select={callbackCardSelect}
-            imgUrl={cateFores[index]}
             category={item.name}
             purchased={allCards.some(
               onecard => onecard.category.name === item.name
@@ -173,11 +145,10 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
       <GemProgressBar
         totalCount={totalCount}
         gainedCount={gainedCount}
-        imgUrl={cateBacks[cards.findIndex(item => item.name === card)]}
+        category={card}
       />
       <Gems select={callbackGem} actives={gemActives} />
-      <div ref={loadingRef}></div>
-      <TierCards cards={gemcards} title={card} />
+      <TierCards cards={gemcards} />
     </div>
   );
 };

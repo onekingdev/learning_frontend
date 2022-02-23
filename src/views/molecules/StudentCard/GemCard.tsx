@@ -1,18 +1,20 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
 import ReactLoading from 'react-loading';
 import {Grid} from '@mui/material';
 import {ScreenSize} from '../../screenSize';
 import {CardDialog} from './CardDialog';
+import {getDownUrlByFilename} from 'app/firebase';
 import {useHistory} from 'react-router-dom';
 
 type CardProps = {
-  imgUrl: string
-  purchased?: boolean
-  amount: number
-  description?: string
-  name?: string
+  category: string;
+  imgUrl: string;
+  purchased?: boolean;
+  amount: number;
+  description?: string;
+  name?: string;
 };
 
 /**
@@ -20,10 +22,19 @@ type CardProps = {
  * Displaying a bought package of 3 cards when a user pressed bought button
  * Turn around image effect and sound effect added
  */
-export const Gemcard: FC<CardProps> = ({imgUrl, purchased, amount, description, name}) => {
+export const Gemcard: FC<CardProps> = ({
+  imgUrl,
+  purchased,
+  amount,
+  description,
+  name,
+  category,
+}) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
   const [openBuy, setOpenBuy] = useState(false);
+
+  const [img, setImg] = useState('');
 
   const history = useHistory();
 
@@ -33,113 +44,128 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased, amount, description, 
 
   // action when image is clicked
   const onImgClicked = () => {
-    console.log('enabled');
     setOpen(!open);
   };
 
   // open dialog with buy button when disabled image is clicked.
   const onDisabledImgClicked = () => {
-    console.log('disabled');
     setOpenBuy(!openBuy);
   };
+
+  const fetchFirebaseUrls = async () => {
+    const link = await getDownUrlByFilename(category, imgUrl);
+    setImg(link);
+  };
+
+  useEffect(() => {
+    fetchFirebaseUrls();
+  }, []);
   return (
-  <Container>
-    <StyledCard>
-      <img
-        style={loaded ? {objectFit: 'fill'} : {display: 'none'}}
-        className="loaded"
-        src={imgUrl}
-        loading="eager"
-        onLoad={() => {
-          setLoaded(true);
-        }}
-        onClick={() => onImgClicked()}
-      />
-      <StyledOverlay
-        style={purchased ? {display: 'none'} : {}}
-        onClick={() => {
-          onDisabledImgClicked();
-        }}
-      />
-      <div
-        style={
-          loaded
-            ? {display: 'none'}
-            : {display: 'flex', alignItems: 'center', justifyContent: 'center'}
-        }
-      >
-        <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-      </div>
-      <CardDialog
-        dialogContent={
-          <Grid container sx={{padding: 0}}>
-            <StyledGrid
-              item
-              md={6}
-              xs={12}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <img
-                src={imgUrl}
-                onLoad={() => {
-                  setDgImgLoaded(true);
-                }}
-              />
-              <div
-                style={
-                  dgImgloaded
-                    ? {display: 'none'}
-                    : {
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }
+    <Container style={img ? {} : {display: 'none'}}>
+      <StyledCard >
+        <img
+          style={loaded ? {objectFit: 'fill'} : {display: 'none'}}
+          className="loaded"
+          src={img}
+          loading="eager"
+          onLoad={() => {
+            setLoaded(true);
+          }}
+          onClick={() => onImgClicked()}
+        />
+        <StyledOverlay
+          style={purchased ? {display: 'none'} : {}}
+          onClick={() => {
+            onDisabledImgClicked();
+          }}
+        />
+        <div
+          style={
+            loaded
+              ? {display: 'none'}
+              : {
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }
+          }
+        >
+          <ReactLoading type="spinningBubbles" color={BasicColor.green} />
+        </div>
+        <CardDialog
+          dialogContent={
+            <Grid container sx={{padding: 0}}>
+              <StyledGrid
+                item
+                md={6}
+                xs={12}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
               >
-                <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-              </div>
-            </StyledGrid>
-            <StyledGrid item md={6} xs={12}>
-              <h1>{name ? name: 'No name'}</h1>
-              <p>{description ? description : 'No description for this card'}</p>
-            </StyledGrid>
-          </Grid>
-        }
-        open={onImgClicked}
-        isOpen={open}
-      />
-      <CardDialog
-        contentText="Not collected yet!"
-        dialogContent={
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-            <Button onClick={() => history.push('/collectibles/cards')}>
-              BUY!
-            </Button>
-          </div>
-        }
-        open={onDisabledImgClicked}
-        isOpen={openBuy}
-      />
-    </StyledCard>
-    <p>{amount} / 1</p>
-  </Container>
+                <img
+                  src={img}
+                  onLoad={() => {
+                    setDgImgLoaded(true);
+                  }}
+                />
+                <div
+                  style={
+                    dgImgloaded
+                      ? {display: 'none'}
+                      : {
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }
+                  }
+                >
+                  <ReactLoading
+                    type="spinningBubbles"
+                    color={BasicColor.green}
+                  />
+                </div>
+              </StyledGrid>
+              <StyledGrid item md={6} xs={12}>
+                <h1>{name ? name : 'No name'}</h1>
+                <p>
+                  {description ? description : 'No description for this card'}
+                </p>
+              </StyledGrid>
+            </Grid>
+          }
+          open={onImgClicked}
+          isOpen={open}
+        />
+        <CardDialog
+          contentText="Not collected yet!"
+          dialogContent={
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <Button onClick={() => history.push('/collectibles/cards')}>
+                BUY!
+              </Button>
+            </div>
+          }
+          open={onDisabledImgClicked}
+          isOpen={openBuy}
+        />
+      </StyledCard>
+      <p>{amount} / 1</p>
+    </Container>
   );
 };
 
 const Container = styled.div`
-
-p {
-  font-family: Montserrat;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 0;
-  text-align: center;
-}
-`
+  p {
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0;
+    text-align: center;
+  }
+`;
 const StyledOverlay = styled.div`
   position: absolute;
   background: ${BasicColor.gray80};

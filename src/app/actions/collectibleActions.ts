@@ -28,7 +28,6 @@ export const purchaseCardPack = async (pack_id: number, student_id: number, toke
   try {
     const res: any = await sendRawQuery(PURCHASE_CARD_PACK(pack_id, 3, student_id), token)
     if(!res.msg){
-      console.log('purchasing 3 cards for:', price)
       dispatch({ type: PURCHASE_CARDS, payload: {price: price} })
       return res.data.purchaseCollectiblePack.collectiblePackPurchaseTransaction.collectibles;
     }

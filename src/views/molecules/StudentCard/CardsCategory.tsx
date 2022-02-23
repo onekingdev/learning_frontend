@@ -3,10 +3,9 @@
  * Component of buying collectible cards page
  */
 
-import {FC, useCallback, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Card} from './Card';
-import axios from 'axios';
 import ReactLoading from 'react-loading';
 import {ScreenSize} from '../../screenSize';
 import {useSelector} from 'react-redux';
@@ -16,7 +15,6 @@ import { useDispatch } from 'react-redux'
 // Get file storage link
 import {
   buyCardsWithFilenames,
-  getCardCategories,
 } from 'app/firebase';
 import {BasicColor} from '../../Color';
 import {BoughtCard} from './BoughtCard';
@@ -45,9 +43,6 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
   // State to store currently selected card
   const [card, setCard] = useState('');
   const [cardId, setCardId] = useState(0);
-
-  // state used for card categories
-  const [cateItems, setCateItems] = useState([]);
 
   // states used for bought cards
   const [purchasedItems, setPurchasedItems] = useState([]);
@@ -101,7 +96,7 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
   useEffect(() => {
     // to avoid react error "Warning: Can't perform a React state update on an unmounted component."
     // Download files for category image links
-    getCardCategories(setCateItems, cards);
+    // getCardCategories(setCateItems, cards);
   },[cards])
   return (
     <div
@@ -119,13 +114,12 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
             : {}
         }
       >
-        {cards.map((card, index) => (
+        {cards.map((card) => (
           <Card
-            key={index}
+            key={card.id}
             id={card.id}
             price={card.price}
             buy={callback}
-            imgUrl={cateItems[index]}
             category={card.name}
           />
         ))}

@@ -1,8 +1,6 @@
 import {
   COLLECTIBLE_CATEGORY,
-  COLLECTIBLE_OWNED_CARD,
 } from '../fragments/collectibleFragments';
-import axios from 'axios';
 
 export const COLLECTIBLE_CATEGORY_QUERY = `{
   collectiblesCategory {
@@ -14,6 +12,7 @@ export const COLLECTIBLE_CATEGORY_QUERY = `{
 export const OWNED_CARDS_QUERY = `{
   collectibles
   {
+    id
     name
     tier
     description

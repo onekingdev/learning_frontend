@@ -4,27 +4,40 @@
  * Display category image
  */
 
-import {FC} from 'react';
+import {FC, useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 import ProgressBar from '@ramonak/react-progress-bar';
 import {ScreenSize} from '../../screenSize';
+import {getDownUrlByFilename} from 'app/firebase';
 
 import {BasicColor} from 'views/Color';
 
 interface ProgressBarProps {
   totalCount: number;
   gainedCount: number;
-  imgUrl?: string;
+  category: string;
 }
 
 export const GemProgressBar: FC<ProgressBarProps> = ({
   totalCount,
   gainedCount,
-  imgUrl,
+  category,
 }) => {
-  // states to store total purchased and current purchased amount
+  const [imgurl, setImgurl] = useState('');
 
+  const fetchFirebaseUrls = async () => {
+    const link = await getDownUrlByFilename(
+      'CategoriesBack',
+      category ? 'back' + category + '.png' : ''
+    );
+    if (link === 'NO_IMAGE') setImgurl('');
+    else setImgurl(link);
+  };
+
+  useEffect(() => {
+    fetchFirebaseUrls();
+  }, [category]);
   return (
     <ProgressBarContainer>
       <div style={{width: '80%'}}>
@@ -52,8 +65,8 @@ export const GemProgressBar: FC<ProgressBarProps> = ({
           />
         </div>
       </div>
-      {imgUrl ? (
-        <img src={imgUrl} style={{width: '60px', margin: '5px'}} />
+      {imgurl ? (
+        <img src={imgurl} style={{width: '60px', margin: '5px'}} />
       ) : null}
     </ProgressBarContainer>
   );

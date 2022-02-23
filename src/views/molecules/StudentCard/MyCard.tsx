@@ -1,21 +1,36 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components'
 import { BasicColor } from '../../Color';
 import ReactLoading from 'react-loading'
+import {getDownUrlByFilename} from 'app/firebase';
 import {ScreenSize} from '../../screenSize';
 
 type CardProps = {
-  imgUrl: string
   category: string
-  id: number
-  select: (imgUrl: string) => (void)
+  select: (name: string) => (void)
   isSelected?: boolean
   purchased: boolean
 }
 
 export const MyCard: FC<CardProps> = ({
-  imgUrl, id, select, category, isSelected, purchased
+  select, category, isSelected, purchased
 }) => {
+
+  const [imgurl, setImgurl] = useState('')
+
+  const fetchFirebaseUrls = async () => {
+    const link = await getDownUrlByFilename(
+      'Categories',
+      category ? category + '.png' : ''
+    );
+    if (link === 'NO_IMAGE') setImgurl('');
+    else setImgurl(link);
+  };
+
+  useEffect(() => {
+    fetchFirebaseUrls();
+  }, []);
+
   const onCardSelect = () => {
 
     // This is prop from parent component, when card is clicked, this calls function of parent.
@@ -26,8 +41,8 @@ export const MyCard: FC<CardProps> = ({
       <h2>{category}</h2>
     <StyledOverlay style={ purchased ? {display: 'none'} : {} }/>
     <StyledCard >
-      {imgUrl ?
-        <img src={imgUrl} alt={'Category Image'} onClick={() => onCardSelect()}/>
+      {imgurl ?
+        <img src={imgurl} alt={'Category Image'} onClick={() => onCardSelect()}/>
         :
         <ReactLoading type='spinningBubbles' color={BasicColor.green} />}
     </StyledCard>
