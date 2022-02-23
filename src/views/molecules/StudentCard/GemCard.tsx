@@ -8,9 +8,8 @@ import {CardDialog} from './CardDialog';
 import {useHistory} from 'react-router-dom';
 
 type CardProps = {
-  imgUrl: string
-  purchased?: boolean
-  amount: number
+  imgUrl: string;
+  purchased?: boolean;
 };
 
 /**
@@ -18,7 +17,7 @@ type CardProps = {
  * Displaying a bought package of 3 cards when a user pressed bought button
  * Turn around image effect and sound effect added
  */
-export const Gemcard: FC<CardProps> = ({imgUrl, purchased, amount}) => {
+export const Gemcard: FC<CardProps> = ({imgUrl, purchased}) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
   const [openBuy, setOpenBuy] = useState(false);
@@ -41,7 +40,6 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased, amount}) => {
     setOpenBuy(!openBuy);
   };
   return (
-  <Container>
     <StyledCard>
       <img
         style={loaded ? {objectFit: 'fill'} : {display: 'none'}}
@@ -54,7 +52,7 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased, amount}) => {
         onClick={() => onImgClicked()}
       />
       <StyledOverlay
-        style={purchased ? {display: 'none'} : {}}
+        style={purchased ? {} : {display: 'none'}}
         onClick={() => {
           onDisabledImgClicked();
         }}
@@ -131,21 +129,9 @@ export const Gemcard: FC<CardProps> = ({imgUrl, purchased, amount}) => {
         isOpen={openBuy}
       />
     </StyledCard>
-    <p>{amount} / 1</p>
-  </Container>
   );
 };
 
-const Container = styled.div`
-
-p {
-  font-family: Montserrat;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 0;
-  text-align: center;
-}
-`
 const StyledOverlay = styled.div`
   position: absolute;
   background: ${BasicColor.gray80};

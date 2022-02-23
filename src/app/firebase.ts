@@ -313,38 +313,3 @@ export const getGemCards = async (
   console.log('firebase:', links);
   setGemCards(links);
 };
-
-/**
- * @author Bruce Lee
- * @description Get firebase storage file download url with file name
- * @param setCateItems set states with image urls
- */
-export const getDownUrlByFilename = async (file: {image: string, category:{name: string}}) => {
-  const storage = getStorage();
-
-  // console.log('firebase items:', file)
-  // getDownloadURL(assetRef(storage, `assets/collectible/${file.category.name}/${file.image}`))
-  // .then(url => {
-  //   console.log('firebase url:', url)
-  //   // func(url)
-  //   return url
-  // })
-  // .catch(err => {
-  //   //console.log('Error in pic getting', err);
-  //   // func('Firebase: no image')
-  //   return 'no-image'
-  // });
-
-
-  try {
-    const fileRef = assetRef(
-      storage,
-      `assets/collectible/${file.category.name}/${file.image}`
-    );
-    const url = await getDownloadURL(fileRef);
-    return url
-  } catch (e) {
-    console.log('error from firebase:', e)
-    return 'No-image'
-  }
-};
