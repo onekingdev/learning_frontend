@@ -12,28 +12,13 @@ export const COLLECTIBLE_CATEGORY_QUERY = `
 
 export const OWNED_CARDS_QUERY = `
 {
-  name
-  tier
-  category {
-    id
-    backImage
-    name
+  studentcollectibleSet{
+    collectible{
+      id
+      image
+      tier
+    }
   }
-  owned
-  amount
-  image
-}
-`;
-
-export const COLLECTIBLE_PACK_COUNT = (category: number) => `
-query CollectibleCount {
-  collectibleCountByCategory(categoryId: ${category})
-}
-`;
-
-export const COLLECTIBLE_PURCHASED_COUNT = (category: number) => `
-query CollectiblePurchasedCount {
-  purchasedCollectibleCountByCategory(categoryId: ${category})
 }
 `;
 

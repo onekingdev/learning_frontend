@@ -87,7 +87,7 @@ export const setBlockPresentation = (payload: string) => ({
 
 export const setAvatar = (payload: any, dispatch: any) => {
   axios({
-    url: 'https://api.withsocrates.com/graphql/',
+    url: <string>process.env.REACT_APP_SERVER_URL,
     method: 'post',
     data: {
       query: `

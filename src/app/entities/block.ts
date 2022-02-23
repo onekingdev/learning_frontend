@@ -8,6 +8,7 @@ export interface IAnswer {
   image: string;
   audioFile: string;
   video: string;
+  answerAudioUrl: string;
 }
 
 export interface IQuestionImageAsset {
@@ -23,6 +24,7 @@ export interface IQuestion {
   isActive: boolean;
   randomSlug: string;
   questionText: string;
+  questionAudioUrl: string;
   answeroptionSet: IAnswer[];
   questionImageAssets: IQuestionImageAsset[];
 }

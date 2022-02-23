@@ -70,6 +70,7 @@ export const QUESTION = `
         isActive
         randomSlug
         questionText
+        questionAudioUrl
     
 `;
 
@@ -84,5 +85,6 @@ export const ANSWER_OPTION = `
         image
         audioFile
         video
+        answerAudioUrl
     }
 `;

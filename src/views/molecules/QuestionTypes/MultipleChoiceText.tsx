@@ -38,30 +38,34 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
     onAnswer
   }) => {
 
-  const soundURI = 'http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/bonus.wav'
   const state = useSelector((state: Store) => state.blockPresentation)
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false)
-  const [play] = useSound(
-    soundURI
-    )
-
-  const playSound = (soundSrc:Number) => {
-    console.log(soundSrc)
-    play()
-  }
+  const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`
 
   useEffect(() => {
     setIsAnswered(false);
   }, [question.answeroptionSet])
+
   const handleAnswer = (result: boolean) => {
     setIsAnswered(true)
     onAnswer(result);
   };
+
   const closeVideoModal = () => {
     setShowAssistor(!showAssistor);
   };
 
+  const readQuestion = () => {
+    const audio = new Audio(questionSoundURI)
+    audio.play();
+  }
+
+  const readAnswer = (answerOption: any) => {
+    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`
+    const audio = new Audio(answerSoundURI)
+    audio.play();
+  }
 
   return (
     <>
@@ -81,22 +85,22 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = (
           <Question>
             {question.questionText}
           </Question>
-          <Icon image={assistor} />
+          <Icon image={assistor} onClick={ readQuestion }/>
         </AnswerContainer>
         <AnswersContainer>
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
             {question.answeroptionSet.map((option, i) => (
-              <AnswerContainer
-                key={i}
-              >
-                <TextOption
-                  answer={option.isCorrect}
-                  answerText={option.answerText}
-                  onClick={handleAnswer}
-                />
-                <Icon image={assistor} onClick={() => playSound(i)}/>
-              </AnswerContainer>
+                <AnswerContainer
+                  key={i}
+                >
+                  <TextOption
+                    answer={option.isCorrect}
+                    answerText={option.answerText}
+                    onClick={handleAnswer}
+                  />
+                  <Icon image={assistor} onClick={()=>{readAnswer(option)}}/>
+                </AnswerContainer>
             ))}
           </TextOptionsList>
           <ImageAssetContainer imageLength={question.questionImageAssets.length}>

@@ -4,7 +4,7 @@ export const get = (
   handleData: (x: unknown) => void,
   handleError: (x: unknown) => void
 ) => {
-  return fetch(process.env.NODE_ENV==="development" ?'/graphql/' : 'https://api.withsocrates.com/graphql/', {
+  return fetch(<string>process.env.REACT_APP_SERVER_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export const mutation = (
   handleData: (x: unknown) => void,
   handleError: (x: unknown) => void
 ) => {
-  return fetch(process.env.NODE_ENV==="development" ?'/graphql/' : 'https://api.withsocrates.com/graphql/', {
+  return fetch(<string>process.env.REACT_APP_SERVER_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export const get_async =  (
   query: string,
   token?: string
 ) => {
-  return fetch(process.env.NODE_ENV==="development" ?'/graphql/' : 'https://api.withsocrates.com/graphql/', {
+  return fetch(<string>process.env.REACT_APP_SERVER_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -67,35 +67,5 @@ export const get_async =  (
       }`,
     }),
   })
-};
-
-export const sendRawQuery = async (
-  query: string,
-  token?: string
-) => {
-  const res:any = await fetch(process.env.NODE_ENV==="development" ?'/graphql/' : 'https://api.withsocrates.com/graphql/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      query: `
-        ${query}
-      `,
-    }),
-  }).catch(e => {
-    return {success: false, msg: e.message}
-  })
-
-  if(res.success === false)
-  return {success: false, msg: res.error}
-
-  const result = await res.json()
-  if(result.errors) {
-    return {success: false, msg: result.errors[0].message};
-  }
-
-  else return result
 };
 export default get_async;
