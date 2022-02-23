@@ -7,7 +7,7 @@
  * Gem images
  */
 
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
@@ -39,7 +39,9 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
   const user = useSelector((state: any) => state.user);
 
   // state to store all links for current category cards
-  const [allCards, setAllCards] = useState<Array<{tier: string; category: {name: string}}>>([]);
+  const [allCards, setAllCards] = useState<
+    Array<{tier: string; category: {name: string}}>
+  >([]);
 
   // get all cards from server on page loading
   useEffect(() => {
@@ -70,7 +72,6 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
 
   // set gem state when user clicks one of 4 gems
   const callbackGem = (gem: string) => {
-
     const tiers = allCards.filter(
       (gemcard: {tier: string; category: {name: string}}) => {
         return gemcard.tier === gem && gemcard.category.name === card;
@@ -96,34 +97,54 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
 
   // get total count and gained count of selected category, this is for progress bar
   const fetchProgressData = async (category: string) => {
-    const card_id = cards.find(x => x.name === category)?.id
-    const total = await getProgressTotalCount(card_id ? card_id: 0, user.token)
-    const purchased = await getProgressPurchasedCount(card_id ? card_id: 0, user.token)
-    total.msg ? setTotalCount(0) : setTotalCount(total)
-    purchased.msg ? setGainedCount(0) : setGainedCount(purchased)
-  }
+    const card_id = cards.find(x => x.name === category)?.id;
+    const total = await getProgressTotalCount(
+      card_id ? card_id : 0,
+      user.token
+    );
+    const purchased = await getProgressPurchasedCount(
+      card_id ? card_id : 0,
+      user.token
+    );
+    total.msg ? setTotalCount(0) : setTotalCount(total);
+    purchased.msg ? setGainedCount(0) : setGainedCount(purchased);
+  };
 
-  const [gemActives, setGemActives] = useState<Array<boolean>>([])
+  const [gemActives, setGemActives] = useState<Array<boolean>>([]);
   const getGemActiveStatus = () => {
-     const gemTitles = ['LEGENDARY', 'EPIC', 'RARE', 'COMMON']
-    const tempActives = []
-     for (const gemtitle of gemTitles) {
-       const active: boolean = allCards.some(allcard => allcard.tier === gemtitle)
-       tempActives.push(active)
-     }
-    setGemActives(tempActives)
-  }
+    const gemTitles = ['LEGENDARY', 'EPIC', 'RARE', 'COMMON'];
+    const tempActives = [];
+    for (const gemtitle of gemTitles) {
+      const active: boolean = allCards.some(
+        allcard => allcard.tier === gemtitle
+      );
+      tempActives.push(active);
+    }
+    setGemActives(tempActives);
+  };
   // This function is called from child, this is passed as prop to child component
   const callbackCardSelect = (category: string) => {
-    setCard(category)
-    setGemcards([])
-    fetchProgressData(category)
-    getGemActiveStatus()
+    setCard(category);
+    setGemcards([]);
+    fetchProgressData(category);
+    getGemActiveStatus();
   };
 
   // states to store total purchased and current purchased amount
   const [gainedCount, setGainedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
+
+  // using ref to auto scroll to current component
+  const loadingRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+  useEffect(() => {
+    if (loadingRef.current) {
+      window.scrollTo({
+        behavior: 'smooth',
+        top: loadingRef.current.offsetTop,
+      });
+    }
+  }, [gemcards]);
 
   return (
     <div
@@ -142,7 +163,9 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
             select={callbackCardSelect}
             imgUrl={cateFores[index]}
             category={item.name}
-            purchased={allCards.some(onecard => onecard.category.name === item.name)}
+            purchased={allCards.some(
+              onecard => onecard.category.name === item.name
+            )}
             isSelected={item.name === card}
           />
         ))}
@@ -152,8 +175,9 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
         gainedCount={gainedCount}
         imgUrl={cateBacks[cards.findIndex(item => item.name === card)]}
       />
-      <Gems select={callbackGem} actives={gemActives}/>
-      <TierCards cards={gemcards} title={card}/>
+      <Gems select={callbackGem} actives={gemActives} />
+      <div ref={loadingRef}></div>
+      <TierCards cards={gemcards} title={card} />
     </div>
   );
 };

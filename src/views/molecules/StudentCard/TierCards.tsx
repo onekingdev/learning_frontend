@@ -32,8 +32,9 @@ export const TierCards: FC<TierCardProp> = ({cards, title}) => {
   const [urls, setUrls] = useState<Array<string>>([]);
   const [loading, setLoading] = useState(false);
 
+
+
   const fetchFirebaseUrls = async () => {
-    console.log('tiercard:', cards);
     setLoading(true);
     const firebaseUrls = [];
 
@@ -51,7 +52,7 @@ export const TierCards: FC<TierCardProp> = ({cards, title}) => {
   }, [cards]);
 
   return (
-    <Container>
+    <Container >
       <p>{title}</p>
       {loading ? (
         <ReactLoading
