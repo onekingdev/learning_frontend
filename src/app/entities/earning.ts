@@ -7,4 +7,5 @@ export interface IEarning {
     progress: number;
     energyCharge: number;
     balance: number;
+    price: number
 }
