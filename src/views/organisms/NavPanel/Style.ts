@@ -38,13 +38,21 @@ export const ClosedContainer = styled.div`
 `;
 export const IconContainer = styled.div`
   width: 100%;
-  height: 65px;
+  height: 70px;
   margin-top: 15px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
+  }
+  p {
+    font-size: 12px;
+    font-family: Montserrat;
+    margin: 0;
+    font-weight: 700;
   }
 `;
 export const IconResponsiveContainer = styled.div`

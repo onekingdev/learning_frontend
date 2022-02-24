@@ -19,9 +19,9 @@ export const Icon: FC<iconProps> = ({image, onClick, size}) => {
 const IconStyle = styled.img<{
   size?: IconSize.small | IconSize.medium | IconSize.large;
 }>`
-  width: ${p => p.size};
+
   height: ${p => p.size};
-  margin-left: 1vw;
+  width: ${p => p.size};
   &: hover {
     cursor: pointer;
     transition: 0.70s;
