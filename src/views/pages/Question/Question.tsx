@@ -214,7 +214,7 @@ export const Question: FC = () => {
               topic={'Math'}
               totalQuestions={blockPresentation.block.questions.length}
               answerResult={answerResult}
-              combo={combo}
+              combocount={state.earning.energyCharge}
             />
           </ProgressWrapper>
           <button onClick={congratulations}>CONGRATULATIONS</button>

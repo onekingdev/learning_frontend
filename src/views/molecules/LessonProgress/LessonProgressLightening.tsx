@@ -2,45 +2,68 @@ import {FC, useEffect, useState} from 'react';
 import styled, {keyframes, css} from 'styled-components';
 import lightening from 'views/assets/lightning.svg';
 import {rubberBand} from 'react-animations';
-import {wobble} from 'react-animations';
+import {bounceInLeft} from 'react-animations';
+import {zoomIn} from 'react-animations';
 
 interface LighteningProps {
-  animate: boolean;
-  duration?: number;
+  combocount: number;
 }
-export const LessonProgressLightening: FC<LighteningProps> = ({
-  animate,
-  duration,
-}) => {
-  const [iswobble, setIswobble] = useState(false);
+export const LessonProgressLightening: FC<LighteningProps> = ({combocount}) => {
+  const [animate, setAnimate] = useState(false);
 
   const triggerAnimation = () => {
-    setIswobble(!iswobble);
+    setAnimate(!animate);
   };
   useEffect(() => {
-    triggerAnimation();
-  }, [animate]);
-
+    if (combocount) triggerAnimation();
+  }, [combocount]);
   return (
-    <Wobble animationWobble={iswobble}>
-      <Wobble animationWobble={!iswobble}>
-        <img src={lightening} alt={'lightening'} />
+    <Energy>
+      <Combocount animate={animate} className="count">
+        <Combocount animate={!animate} >
+          <p>+{combocount}</p>
+        </Combocount>
+      </Combocount>
+      <Wobble animate={animate}>
+        <Wobble animate={!animate}>
+          <img src={lightening} alt={'lightening'} />
+        </Wobble>
       </Wobble>
-    </Wobble>
+    </Energy>
   );
 };
 
-const Lightening = styled.div`
-  animation: 0.5s ${keyframes`${rubberBand}`};
+const Energy = styled.div`
+  display: flex;
+  .count {
+    align-self: center;
+    p {
+      color: white;
+      font-family: Montserrat;
+      font-size: 30px;
+      margin: auto;
+    }
+  }
 `;
 
 const Wobble = styled.div<{
-  animationWobble: boolean;
+  animate: boolean;
 }>`
   ${props =>
-    props.animationWobble
+    props.animate
       ? css`
-          animation: 0.5s ${keyframes`${wobble}`};
+          animation: 0.5s ${keyframes`${bounceInLeft}`};
+        `
+      : null}
+`;
+
+const Combocount = styled.div<{
+  animate: boolean;
+}>`
+  ${props =>
+    props.animate
+      ? css`
+          animation: 0.5s ${keyframes`${zoomIn}`};
         `
       : null}
 `;

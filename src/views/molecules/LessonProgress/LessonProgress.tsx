@@ -13,7 +13,7 @@ type LessonProgressProps = {
   totalQuestions: number;
   finished?: boolean;
   answerResult?: boolean[];
-  combo: boolean
+  combocount: number;
 };
 
 type ProgressBar = {
@@ -26,7 +26,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   totalQuestions,
   finished,
   answerResult = [],
-  combo
+  combocount
 }) => {
   // !! Added bar array builder function
   const buildBars = (totalQuestions: number, answerResult: boolean[]) => {
@@ -40,20 +40,6 @@ export const LessonProgress: FC<LessonProgressProps> = ({
     }
     return bars;
   };
-
-  const [animation, setAnimation] = useState(true)
-  const triggerAnimation = () => {
-    setAnimation(!animation)
-  }
-
-  const [combocount, setCombocount] = useState(0)
-  useEffect(() => {
-    if(combo){
-      setCombocount(combocount + 1)
-      triggerAnimation()
-    }
-    else setCombocount(0)
-  },[answerResult])
 
   useEffect(() => {}, [currentQuestion]);
 
@@ -71,9 +57,8 @@ export const LessonProgress: FC<LessonProgressProps> = ({
             <LessonProgressBar bgColor={bar.color} key={i}></LessonProgressBar>
           )
         )}
-        <div className='lightening'>
-          <p>+{combocount}</p>
-          <LessonProgressLightening animate={animation}/>
+        <div className='lightening' style={combocount?{}:{display: 'none'}}>
+          <LessonProgressLightening combocount={combocount}/>
         </div>
       </StyledLessonProgressBarWrapper>
     </StyledLessonProgressWrapper>
@@ -97,12 +82,6 @@ const StyledLessonProgressBarWrapper = styled.div`
   display: flex;
   grid-gap: 1px;
   position: relative;
-
-  p {
-    color: white;
-    font-family: Montserrat;
-    font-size: 18px;
-  }
 
   .lightening {
     display: flex;
