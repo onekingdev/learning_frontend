@@ -188,57 +188,6 @@ export const buyCardsWithFilenames = async (
 };
 
 /**
- * @author Bruce Lee
- * @description Get firebase storage file download urls for categories
- * @param setCateItems set states with image urls
- */
-export const getCardCategories = async (
-  setCateItems: Function,
-  filenames: Array<{name: string}>
-) => {
-  const storage = getStorage();
-  const links = [];
-  for (const filename of filenames) {
-    try {
-      const fileRef = assetRef(
-        storage,
-        `assets/collectible/Categories/${filename.name}.png`
-      );
-      links.push(await getDownloadURL(fileRef));
-    } catch {
-      links.push('No image');
-    }
-  }
-  setCateItems(links);
-};
-
-/**
- * Get firebase storage file download urls for category backs
- * @author BruceLee
- * @param setCateBacks set states with image urls
- */
-export const getCardBacks = async (
-  setCateBacks: Function,
-  filenames: Array<{name: string}>
-) => {
-  const storage = getStorage();
-  const links = [];
-
-  for (const filename of filenames) {
-    try {
-      const fileRef = assetRef(
-        storage,
-        `assets/collectible/CategoriesBack/back${filename.name}.png`
-      );
-      links.push(await getDownloadURL(fileRef));
-    } catch (e) {
-      links.push('No Image');
-    }
-  }
-  setCateBacks(links);
-};
-
-/**
  * Get total images of current category by file names
  * @author BruceLee
  * @param dir currently selected category
@@ -267,49 +216,26 @@ export const getAllCards = async (
 };
 
 /**
- * Get all images of current gem, this is for test.
- * @author BruceLee
- * @param dir currently selected category
- * @param setAllCards set links for all cards of current category
+ * @author Bruce Lee
+ * @description Get firebase storage file download url with file name
+ * @param setCateItems set states with image urls
  */
-export const getGemCards = async (
-  card: string,
-  gem: string,
-  setGemCards: any
-) => {
+export const getDownUrlByFilename = async (dir: string, filename: string) => {
   const storage = getStorage();
 
-  console.log('firebase: card', card, 'gem', gem);
-  const listRef = assetRef(storage, `assets/collectible/${card}`);
+  try {
+    if((filename && dir) !== ''){
 
-  const res = await listAll(listRef);
-  const links = [];
-  const length = res.items.length;
-
-  switch (gem) {
-    case 'Epic':
-      for (let i = 0; i < length / 4; i++)
-        links.push(await getDownloadURL(res.items[i]));
-      break;
-    case 'Legendary':
-      for (let i = Math.floor(length / 4); i < Math.floor(length / 2); i++)
-        links.push(await getDownloadURL(res.items[i]));
-      break;
-    case 'Rare':
-      for (
-        let i = Math.floor(length / 2);
-        i < Math.floor((length / 4) * 3);
-        i++
-      )
-        links.push(await getDownloadURL(res.items[i]));
-      break;
-    case 'Common':
-      for (let i = Math.floor((length / 4) * 3); i < length; i++)
-        links.push(await getDownloadURL(res.items[i]));
-      break;
-    default:
-      break;
+      const fileRef = assetRef(
+        storage,
+        `assets/collectible/${dir}/${filename}`
+      );
+      const url = await getDownloadURL(fileRef);
+      return url
+    }
+    else return 'NO_IMAGE'
+  } catch (e) {
+    console.log('error from firebase:', e)
+    return 'NO_IMAGE'
   }
-  console.log('firebase:', links);
-  setGemCards(links);
 };

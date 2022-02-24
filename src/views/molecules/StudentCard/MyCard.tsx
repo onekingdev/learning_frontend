@@ -1,33 +1,48 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components'
 import { BasicColor } from '../../Color';
 import ReactLoading from 'react-loading'
+import {getDownUrlByFilename} from 'app/firebase';
 import {ScreenSize} from '../../screenSize';
 
 type CardProps = {
-  imgUrl: string
   category: string
-  id: number
-  price: number
-  select: (imgUrl: string) => (void)
+  select: (name: string) => (void)
   isSelected?: boolean
+  purchased: boolean
 }
 
 export const MyCard: FC<CardProps> = ({
-  imgUrl, id, select, price, category, isSelected
+  select, category, isSelected, purchased
 }) => {
+
+  const [imgurl, setImgurl] = useState('')
+
+  const fetchFirebaseUrls = async () => {
+    const link = await getDownUrlByFilename(
+      'Categories',
+      category ? category + '.png' : ''
+    );
+    if (link === 'NO_IMAGE') setImgurl('');
+    else setImgurl(link);
+  };
+
+  useEffect(() => {
+    fetchFirebaseUrls();
+  }, []);
+
   const onCardSelect = () => {
 
     // This is prop from parent component, when card is clicked, this calls function of parent.
     select(category)
   }
   return (
-    <CardContainer style={ isSelected ? {boxShadow: '0px 1px 20px 0px #FB8500'} : {}}>
+    <CardContainer style={ isSelected ? {boxShadow: '0px 1px 20px 0px #FB8500'} : {} }>
       <h2>{category}</h2>
-
+    <StyledOverlay style={ purchased ? {display: 'none'} : {} }/>
     <StyledCard >
-      {imgUrl ?
-        <img src={imgUrl} alt={'Category Image'} onClick={() => onCardSelect()}/>
+      {imgurl ?
+        <img src={imgurl} alt={'Category Image'} onClick={() => onCardSelect()}/>
         :
         <ReactLoading type='spinningBubbles' color={BasicColor.green} />}
     </StyledCard>
@@ -39,6 +54,7 @@ const CardContainer = styled.div`
   width: 160px;
   min-height: 220px;
   margin: 1rem;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -94,3 +110,11 @@ img {
 }
 
 `
+const StyledOverlay = styled.div`
+  position: absolute;
+  background: ${BasicColor.gray80};
+  inset: -2px;
+  opacity: 0.7;
+  border-radius: inherit;
+  z-index: 1;
+`;
