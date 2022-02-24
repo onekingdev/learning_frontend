@@ -16,20 +16,15 @@ export const LessonProgressLightening: FC<LighteningProps> = ({
 
   const triggerAnimation = () => {
     setIswobble(!iswobble);
-    console.log('wobble:', iswobble);
   };
   useEffect(() => {
-    triggerAnimation();
     triggerAnimation();
   }, [animate]);
 
   return (
-    // <Lightening>
-    //   <img src={lightening} alt={'lightening'} />;{/* </Lightening> */}
-    // </Lightening>
     <Wobble animationWobble={iswobble}>
       <Wobble animationWobble={!iswobble}>
-        <img src={lightening} alt={'lightening'} />;{/* </Lightening> */}
+        <img src={lightening} alt={'lightening'} />
       </Wobble>
     </Wobble>
   );
