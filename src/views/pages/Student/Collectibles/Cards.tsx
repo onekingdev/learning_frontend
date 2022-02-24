@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useHistory} from 'react-router-dom';
-import {CardCollectibleContainer, Wrapper} from './Style';
+import {Wrapper} from './Style';
 import styled from 'styled-components';
 
 import {BasicColor} from '../../../Color';
@@ -9,7 +9,7 @@ import {ScreenSize} from 'views/screenSize';
 import {CardCollectibleTitle} from '../../../molecules/CardCollectible/CardCollectibleTitle';
 import {StudentMenu} from '../../../templates/StudentMenu';
 import {CardCategory} from '../../../molecules/StudentCard/CardsCategory';
-import {getDividerUtilityClass} from '@mui/material';
+
 export const Cards: FC = () => {
   const history = useHistory();
 

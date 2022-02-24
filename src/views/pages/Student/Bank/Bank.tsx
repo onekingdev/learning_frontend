@@ -1,4 +1,4 @@
-import {FC, useEffect, useContext, useState} from 'react';
+import {FC, useEffect } from 'react';
 import {useSelector} from 'react-redux';
 import styled from 'styled-components';
 
@@ -18,13 +18,8 @@ import {TxHistoryTable} from '../../../molecules/StudentBank/TxHistoryTable';
 import {Interest} from '../../../molecules/StudentBank/Interest';
 import {LoadingContext} from 'react-router-loading';
 
-import mutation from 'api/mutations/get';
-import query from 'api/queries/get';
-
 export const Bank: FC = () => {
 
-  const store = useSelector((state: any) => state)
-  const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) =>state.student)
   const interests = useSelector((state: any) => state.interests.interests)
   const bankMovement = student.bankWallet.bankmovementSet
