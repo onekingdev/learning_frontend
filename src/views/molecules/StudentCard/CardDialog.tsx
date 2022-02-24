@@ -37,7 +37,7 @@ export const CardDialog: FC<LSDialogProps> = ({
 
   return (
       <StyledDialog open={isOpen} onClose={open} scroll='body' wide={fullWidth}>
-        <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} >
+        <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} sx={{zIndex: 2}}>
           <CloseIcon />
         </StyledIconBtn>
         {title ? <LSDialogTitle>{title}</LSDialogTitle> : null}
@@ -62,8 +62,8 @@ interface DialogProps {
 const StyledDialog = styled(Dialog) <DialogProps>`
 & .MuiPaper-root {
   max-width: ${props => props.wide === 'true' ? '100%;' : 'auto;'}
-  overflow-y: visible;
   border-radius: 30px;
+  overflow: hidden;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     width: 90vw;
   }

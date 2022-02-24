@@ -1,9 +1,11 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {LessonProgressTitle} from './LessonProgressTitle';
 import {LessonProgressBar} from './LessonProgressBar';
 import {ScreenSize} from '../../screenSize';
 import {BasicColor} from '../../Color';
+import lightening from 'views/assets/lightning.svg';
+import { LessonProgressLightening } from './LessonProgressLightening';
 
 type LessonProgressProps = {
   topic: string;
@@ -11,6 +13,7 @@ type LessonProgressProps = {
   totalQuestions: number;
   finished?: boolean;
   answerResult?: boolean[];
+  combo: boolean
 };
 
 type ProgressBar = {
@@ -23,6 +26,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   totalQuestions,
   finished,
   answerResult = [],
+  combo
 }) => {
   // !! Added bar array builder function
   const buildBars = (totalQuestions: number, answerResult: boolean[]) => {
@@ -36,6 +40,20 @@ export const LessonProgress: FC<LessonProgressProps> = ({
     }
     return bars;
   };
+
+  const [animation, setAnimation] = useState(true)
+  const triggerAnimation = () => {
+    setAnimation(!animation)
+  }
+
+  const [combocount, setCombocount] = useState(0)
+  useEffect(() => {
+    if(combo){
+      setCombocount(combocount + 1)
+      triggerAnimation()
+    }
+    else setCombocount(0)
+  },[answerResult])
 
   useEffect(() => {}, [currentQuestion]);
 
@@ -53,6 +71,10 @@ export const LessonProgress: FC<LessonProgressProps> = ({
             <LessonProgressBar bgColor={bar.color} key={i}></LessonProgressBar>
           )
         )}
+        <div className='lightening'>
+          <p>+{combocount}</p>
+          <LessonProgressLightening animate={animation}/>
+        </div>
       </StyledLessonProgressBarWrapper>
     </StyledLessonProgressWrapper>
   );
@@ -74,6 +96,20 @@ const StyledLessonProgressBarWrapper = styled.div`
   height: 30px;
   display: flex;
   grid-gap: 1px;
+  position: relative;
+
+  p {
+    color: white;
+    font-family: Montserrat;
+    font-size: 18px;
+  }
+
+  .lightening {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    right: 0;
+  }
   @media screen and (min-width: ${ScreenSize.phone}) {
     height: 57px;
   }

@@ -6,6 +6,5 @@ export const dictionary = Object.freeze({
     adventure: 'Adventure',
     sport: 'Sport',
     skill: 'Skill',
-    strategy: 'Strategy',
   },
 });

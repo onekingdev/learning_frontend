@@ -39,6 +39,19 @@ const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         balance: state.balance - action.payload.price
       }
 
+    case TYPE.EXP_UPDATE:
+      return {
+        ...state,
+        exp: action.payload.exp,
+        expMax: action.payload.expMax
+      }
+
+    case TYPE.EXP_LEVEL_UP:
+      return {
+        ...state,
+        level: state.level + 1
+      }
+
     case TYPE.EARNING_RESET:
       return INITIAL_STATE;
     default:

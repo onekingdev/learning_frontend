@@ -1,8 +1,9 @@
 import mutation from '../../api/mutations/get'
 import { TOKEN_AUTH } from '../../api/mutations/users'
-import query from '../../api/queries/get'
+import query, { sendRawQuery } from '../../api/queries/get'
 import {WHOAMI_QUERY} from '../../api/queries/users'
 import {INTEREST_QUERY} from '../../api/queries/interests'
+import { NEXT_LEVEL_QUERY } from 'api/queries/questions'
 
 import * as TYPES from '../../app/types'
 
@@ -84,6 +85,14 @@ export const login = async (username: string, password: string, dispatch: any) =
         // dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
         return {success: true, msg: 'Successfully Logined!', userType: 'teacher'}
       }
+}
+
+export const getNextLevelExpMax = async (currLevel: number,token: string) => {
+  const res = await sendRawQuery(NEXT_LEVEL_QUERY(currLevel), token)
+  if(!res.msg){
+    return res.data.nextLevel.pointsRequired;
+  }
+  else return {msg: res.msg}
 }
 
 export const resetReducer =  async (dispatch: any) => {

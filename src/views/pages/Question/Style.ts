@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
+import {BasicColor} from 'views/Color';
 
 export const Wrapper = styled.div`
-
   background-image: url(${background});
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,7 +19,7 @@ export const ProgressWrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  margin-bottom:120px;
+  margin-bottom: 120px;
   @media (min-width: ${ScreenSize.desktop}) {
     margin-top: 1rem;
   }
@@ -74,7 +74,7 @@ export const Container = styled.div`
   padding-bottom: 70px;
   padding-top: 20px;
   text-align: center;
-  
+
   @media (min-width: ${ScreenSize.tablet}) {
     max-width: 1366px;
   }
@@ -100,4 +100,78 @@ export const Submit = styled.div`
   padding-right: 2rem;
   padding-bottom: 0;
   padding-top: 1rem;
+`;
+
+export const CongratsDgContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 50vw;
+  height: 80vh;
+  justify-content: space-evenly;
+
+  .background {
+    position: absolute;
+    inset: -5px;
+  }
+
+  .icons-container {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 2;
+  }
+
+  img {
+    z-index: 1;
+  }
+  .icons {
+    width: 133px;
+    height: 84px;
+
+    img {
+      z-index: 3;
+      display: block;
+      margin: 0 auto; /* the fastest way to center anything */
+    }
+
+    p {
+      text-align: center;
+      font-family: Montserrat;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: 0em;
+    }
+  }
+
+  h1 {
+    font-family: Montserrat;
+    font-size: 72px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 90px;
+    letter-spacing: -1.5px;
+    text-align: center;
+    z-index: 1;
+  }
+
+  button {
+    background: ${BasicColor.shadeBrown};
+    border: 0;
+    border-radius: 20px;
+    color: white;
+    width: 215px;
+    height: 45px;
+    z-index: 1;
+    font-size: 18px;
+
+    &:hover {
+      pointer: cursor;
+      box-shadow: 0 1px 1rem -3px orange;
+      cursor: pointer;
+    }
+  }
 `;

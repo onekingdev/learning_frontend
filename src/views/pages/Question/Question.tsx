@@ -1,7 +1,11 @@
 import {FC, useEffect, useState, useContext} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
-import {Container, Wrapper, ProgressWrapper} from './Style';
+import {
+  Container,
+  Wrapper,
+  ProgressWrapper,
+} from './Style';
 import {FinishLesson} from '../../organisms/FinishLesson';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {MultipleChoiceText} from '../../molecules/QuestionTypes/MultipleChoiceText';
@@ -12,12 +16,22 @@ import {Store} from '../../../app/configureStore';
 import {useParams} from 'react-router-dom';
 import * as TYPE from '../../../app/types';
 import {LoadingContext} from 'react-router-loading';
-import {finishBlock} from '../../../app/actions/blockActions'
+import {finishBlock} from '../../../app/actions/blockActions';
+import {CardDialog} from 'views/molecules/StudentCard/CardDialog';
+
+import {LevelUpDgContent} from 'views/atoms/ParticlgBg';
+import { getNextLevelExpMax } from 'app/actions/userActions';
+
 interface RoutePresentationParams {
   presentationId: string;
 }
 
+const EXP_UNIT = 5;
+
 export const Question: FC = () => {
+  const earning = useSelector((state: any) => state.earning);
+  const user = useSelector((state: any) => state.user);
+
   // TODO answers and options must come from DB
   // TODO and the type should be much more roboust
   const {presentationId} = useParams<RoutePresentationParams>();
@@ -32,7 +46,7 @@ export const Question: FC = () => {
   const [pointUnit, setPointUnit] = useState<number>(0);
   const [points, setPoints] = useState<number>(0);
   const loadingContext = useContext(LoadingContext);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const renderTypes = (
     question: IQuestion,
     type: string,
@@ -63,10 +77,43 @@ export const Question: FC = () => {
     upgradeEnergy();
   }, [answerResult]);
 
+
+  const [combo, setCombo] = useState(false)
+
+  const [nextMaxExp, setNextMaxExp] = useState(0)
+  const fetchNextLevelMaxpoint = () => {
+    const res:any = getNextLevelExpMax(earning.level, user.token)
+    if(res.msg) setNextMaxExp(earning.expMax)
+    else setNextMaxExp(res)
+  }
+  useEffect(() => {
+    fetchNextLevelMaxpoint()
+  }, [])
+
   const onAnswer = (result: boolean) => {
-    console.log('answered', result);
+    increaseExp();
     setAnswerResult([...answerResult, result]);
-    if (result) setPoints(points + pointUnit);
+    if (result) {
+      setPoints(points + pointUnit);
+      setCombo(true)
+    }
+    else setCombo(false)
+  };
+
+  const increaseExp = () => {
+    const currentExp = earning.exp + EXP_UNIT;
+    const expMax = earning.expMax
+
+    if (currentExp > expMax) {
+      dispatch({type: TYPE.EXP_UPDATE, payload: {exp: currentExp - expMax, expMax: nextMaxExp}});
+      dispatch({type: TYPE.EXP_LEVEL_UP});
+      congratulations();
+    } else dispatch({type: TYPE.EXP_UPDATE, payload: {exp: currentExp, expMax: expMax}});
+  };
+
+  const [openDg, setOpenDg] = useState(false);
+  const congratulations = () => {
+    setOpenDg(!openDg);
   };
 
   const upgradeEnergy = () => {
@@ -76,7 +123,7 @@ export const Question: FC = () => {
     }
     let corrCount = 0;
     for (let i = answerResult.length - 1; i >= 0; i--) {
-      console.log(answerResult[i]);
+      // console.log(answerResult[i]);
       if (answerResult[i]) {
         corrCount = answerResult.length - i;
       } else break;
@@ -107,7 +154,7 @@ export const Question: FC = () => {
 
   useEffect(() => {
     get(
-      `blockPresentationById(id:"${presentationId}")`,
+      `blockPresentationById(id:${presentationId})`,
       BLOCK_PRESENTATION_QUERY,
       handleData,
       handleError
@@ -122,21 +169,29 @@ export const Question: FC = () => {
     );
   }, [blockPresentation, questionCounter]);
 
-  const handleNextQuestion = async() => {
+  const handleNextQuestion = async () => {
     if (blockPresentation) {
       if (blockPresentation.block.questions.length < questionCounter + 2) {
         setIsLessonFinished(true);
-        setLoading(true)
+        setLoading(true);
         let correctCount = 0;
         let wrongCount = 0;
-        console.log(answerResult)
-        for(const data of answerResult) {
-          console.log(data)
-          if(data) correctCount ++;
-          else wrongCount ++;
+        console.log(answerResult);
+        for (const data of answerResult) {
+          console.log(data);
+          if (data) correctCount++;
+          else wrongCount++;
         }
-        const result = await finishBlock(blockPresentation.id, correctCount, wrongCount, (state.earning.energyCharge * pointUnit * 10) / 100, state.earning, state.user.token, dispatch )
-        setLoading(false)
+        const result = await finishBlock(
+          blockPresentation.id,
+          correctCount,
+          wrongCount,
+          (state.earning.energyCharge * pointUnit * 10) / 100,
+          state.earning,
+          state.user.token,
+          dispatch
+        );
+        setLoading(false);
       }
     }
     const counter = questionCounter + 1;
@@ -159,8 +214,16 @@ export const Question: FC = () => {
               topic={'Math'}
               totalQuestions={blockPresentation.block.questions.length}
               answerResult={answerResult}
+              combo={combo}
             />
           </ProgressWrapper>
+          <button onClick={congratulations}>CONGRATULATIONS</button>
+          <CardDialog
+            isOpen={openDg}
+            open={congratulations}
+            dialogContent={<LevelUpDgContent token={200} energy={100}/>}
+            fullWidth="true"
+          />
           <Container id="container">
             {renderTypes(
               question,

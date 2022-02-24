@@ -38,6 +38,16 @@ export const QUESTION_QUERY = `
     }
 `;
 
+export const NEXT_LEVEL_QUERY = (amount: number) => `
+    query {
+      nextLevel(amount: ${amount}){
+        id
+        name
+        pointsRequired
+      }
+    }
+`;
+
 export const BLOCK_PRESENTATION_QUERY = `
     {
       ${BLOCK_PRESENTATON}
