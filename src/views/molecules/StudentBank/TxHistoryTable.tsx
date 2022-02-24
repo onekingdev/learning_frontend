@@ -136,24 +136,25 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={idx}>
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      let value = row[column.id];
                       if(column.id === "side"){
-                        switch(row[column.id]){
+                        switch(value){
                           case 'R' :
-                            row[column.id] = "Deposit";
+                            value = "Deposit";
                             break;
                           case 'L' :
-                            row[column.id] = "Withdraw";
+                            value = "Withdraw";
                             break;
+                          case 'I' :
+                            value = "Interest"
                           // default :
                           //   row[column.id] = "Interest";
                         }
                       }
-                      console.log(row[column.id])
                       if(column.id ==="updateTimestamp"){
-                        let temp = new Date(row[column.id]);
+                        let temp = new Date(value);
                         temp = new Date();
-                        row[column.id] = temp.toLocaleDateString("en-US")
+                        value = temp.toLocaleDateString("en-US")
                       }
                       return (
                         <TableCell key={column.id} align='center' sx={{ color: 'white', fontFamily: 'Montserrat' }}>
