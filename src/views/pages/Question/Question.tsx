@@ -20,7 +20,7 @@ import {finishBlock} from '../../../app/actions/blockActions';
 import {CardDialog} from 'views/molecules/StudentCard/CardDialog';
 
 import {LevelUpDgContent} from 'views/atoms/ParticlgBg';
-import { getNextLevelExpMax } from 'app/actions/userActions';
+import { getNextLevel } from 'app/actions/userActions';
 
 interface RoutePresentationParams {
   presentationId: string;
@@ -31,6 +31,7 @@ const EXP_UNIT = 5;
 export const Question: FC = () => {
   const earning = useSelector((state: any) => state.earning);
   const user = useSelector((state: any) => state.user);
+  const student = useSelector((state: any) => state.student)
 
   // TODO answers and options must come from DB
   // TODO and the type should be much more roboust
@@ -81,13 +82,14 @@ export const Question: FC = () => {
   const [combo, setCombo] = useState(false)
 
   const [nextMaxExp, setNextMaxExp] = useState(0)
-  const fetchNextLevelMaxpoint = () => {
-    const res:any = getNextLevelExpMax(earning.level, user.token)
+  const updateNextLevel = async (currentLevelAmount: number) => {
+    const res:any = await getNextLevel(currentLevelAmount, user.token, dispatch)
     if(res.msg) setNextMaxExp(earning.expMax)
     else setNextMaxExp(res)
   }
   useEffect(() => {
-    fetchNextLevelMaxpoint()
+    setNextMaxExp(student.nextLevel.pointsRequired)
+    // fetchNextLevelMaxpoint()
   }, [])
 
   const onAnswer = (result: boolean) => {
@@ -100,7 +102,7 @@ export const Question: FC = () => {
     else setCombo(false)
   };
 
-  const increaseExp = () => {
+  const increaseExp = async () => {
     const currentExp = earning.exp + EXP_UNIT;
     const expMax = earning.expMax
 
@@ -108,9 +110,15 @@ export const Question: FC = () => {
       dispatch({type: TYPE.EXP_UPDATE, payload: {exp: currentExp - expMax, expMax: nextMaxExp}});
       dispatch({type: TYPE.EXP_LEVEL_UP});
       congratulations();
+
+      const nextLevelMax: any = await updateNextLevel(earning.level)
+      if(nextLevelMax.msg) {
+        console.log('fetch next level max exp failed.')
+      } else setNextMaxExp(nextLevelMax)
     } else dispatch({type: TYPE.EXP_UPDATE, payload: {exp: currentExp, expMax: expMax}});
   };
 
+  // state to open and close congratulations pop up
   const [openDg, setOpenDg] = useState(false);
   const congratulations = () => {
     setOpenDg(!openDg);
@@ -163,10 +171,10 @@ export const Question: FC = () => {
 
   useEffect(() => {
     setQuestion(blockPresentation?.block.questions[questionCounter]);
-    console.log(
-      'question is ',
-      blockPresentation?.block.questions[questionCounter]
-    );
+    // console.log(
+    //   'question is ',
+    //   blockPresentation?.block.questions[questionCounter]
+    // );
   }, [blockPresentation, questionCounter]);
 
   const handleNextQuestion = async () => {
@@ -182,7 +190,7 @@ export const Question: FC = () => {
           if (data) correctCount++;
           else wrongCount++;
         }
-        const result = await finishBlock(
+        await finishBlock(
           blockPresentation.id,
           correctCount,
           wrongCount,
@@ -221,7 +229,7 @@ export const Question: FC = () => {
           <CardDialog
             isOpen={openDg}
             open={congratulations}
-            dialogContent={<LevelUpDgContent token={200} energy={100}/>}
+            dialogContent={<LevelUpDgContent token={200} energy={100} close={congratulations}/>}
             fullWidth="true"
           />
           <Container id="container">

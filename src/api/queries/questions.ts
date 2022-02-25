@@ -1,6 +1,6 @@
 import { BLOCK, BLOCK_CONFIGURATION_KEYWORD, BLOCK_PRESENTATON, BLOCK_TYPE, BLOCK_TYPE_CONFIGURATION, QUESTION_IMAGE_ASSETS } from '../fragments/blockFragments';
 import {ANSWER_OPTION, AREA_OF_KNOWLEDGE, QUESTION, TOPIC, TOPIC_GRADE} from '../fragments/questionFragments';
-
+import { LEVEL } from 'api/fragments/levelFragments';
 
 export const TOPICS_QUERY = `
    { 
@@ -40,10 +40,8 @@ export const QUESTION_QUERY = `
 
 export const NEXT_LEVEL_QUERY = (amount: number) => `
     query {
-      nextLevel(amount: ${amount}){
-        id
-        name
-        pointsRequired
+      nextLevelByAmount(amount: ${amount}){
+        ${LEVEL}
       }
     }
 `;

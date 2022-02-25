@@ -1,5 +1,6 @@
 import {FC, useEffect} from 'react';
 import {CongratsDgContainer} from 'views/pages/Question/Style';
+import {useSelector} from 'react-redux';
 
 import img_congats from 'views/assets/level-up-congrats.png';
 import coin from 'views/assets/coin.svg';
@@ -15,9 +16,13 @@ import {flip} from 'react-animations'
 interface Props {
   token: number;
   energy: number;
+  close: () => (void)
 }
-export const LevelUpDgContent: FC<Props> = ({token, energy}) => {
+export const LevelUpDgContent: FC<Props> = ({token, energy, close}) => {
   const [play] = useSound(fireworkSfx);
+
+  const earning = useSelector((state: any) => state.earning);
+
 
   const config = {
     num: [1, 10],
@@ -48,9 +53,10 @@ export const LevelUpDgContent: FC<Props> = ({token, energy}) => {
         </Flip>
         <BounceIn>
         <h1>LEVEL UP!</h1>
+        <h5> Your level is now: {earning.level}</h5>
         </BounceIn>
-        <button>Continue</button>
-        <div className="icons-container">
+        <button onClick={close}>Continue</button>
+        {/* <div className="icons-container">
           <div className="icons">
             <img src={coin} alt={'coin'} />
             <p>{token} Tokens</p>
@@ -59,7 +65,7 @@ export const LevelUpDgContent: FC<Props> = ({token, energy}) => {
             <img src={lightening} alt={'lightening'} />
             <p>{energy} energy</p>
           </div>
-        </div>
+        </div> */}
       </CongratsDgContainer>
     </div>
   );

@@ -118,6 +118,9 @@ export const STUDENT = `
         level {
             ${LEVEL}
         }
+        nextLevel {
+            ${LEVEL}
+        }
         studenttopicmasterySet {
             id
         }

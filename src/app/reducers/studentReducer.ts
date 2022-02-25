@@ -114,6 +114,11 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: a
         ...state,
         blockPresentation: action.payload
       };
+    case TYPE.STUDENT_SET_NEXT_LEVEL:
+      return {
+        ...state,
+        nextLevel: action.payload
+      }
     default:
       return state;
   }

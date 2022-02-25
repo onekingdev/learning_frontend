@@ -4,7 +4,6 @@ import query, { sendRawQuery } from '../../api/queries/get'
 import {WHOAMI_QUERY} from '../../api/queries/users'
 import {INTEREST_QUERY} from '../../api/queries/interests'
 import { NEXT_LEVEL_QUERY } from 'api/queries/questions'
-
 import * as TYPES from '../../app/types'
 
 export const login = async (username: string, password: string, dispatch: any) => {
@@ -87,10 +86,11 @@ export const login = async (username: string, password: string, dispatch: any) =
       }
 }
 
-export const getNextLevelExpMax = async (currLevel: number,token: string) => {
-  const res = await sendRawQuery(NEXT_LEVEL_QUERY(currLevel), token)
+export const getNextLevel = async (currentLevelAmount: number,token: string, dispatch: any ) => {
+  const res: any = await sendRawQuery(NEXT_LEVEL_QUERY(currentLevelAmount), token)
   if(!res.msg){
-    return res.data.nextLevel.pointsRequired;
+    dispatch({type: TYPES.STUDENT_SET_NEXT_LEVEL, payload: res.data.nextLevelByAmount});
+    return res.data.nextLevelByAmount;
   }
   else return {msg: res.msg}
 }

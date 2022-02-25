@@ -152,10 +152,21 @@ export const CongratsDgContainer = styled.div`
     font-size: 72px;
     font-style: normal;
     font-weight: 700;
-    line-height: 90px;
     letter-spacing: -1.5px;
     text-align: center;
     z-index: 1;
+    margin: 0
+  }
+  h5 {
+    margin-top: 0;
+    font-family: Montserrat;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    text-align: center;
+    z-index: 1;
+    color: ${BasicColor.green}
   }
 
   button {
