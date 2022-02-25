@@ -4,7 +4,7 @@ import {
   Wrapper,
 } from './Style';
 import {useHistory} from 'react-router-dom';
-import { CardCollectibleTitle2 } from '../../../molecules/CardCollectible/CardCollectibleTitle';
+import { PageTitle } from 'views/molecules/PageTitle';
 import { StudentMenu } from '../../../templates/StudentMenu';
 import { MyCardCategory } from 'views/molecules/StudentCard/MyCardsCategory';
 import { BtnContainer } from './Cards';
@@ -16,7 +16,7 @@ export const MyCardCollection: FC = () => {
     <Wrapper>
       <StudentMenu>
         <CardCollectibleContainer>
-          <CardCollectibleTitle2 />
+        <PageTitle title='MY CARDS'/>
           <BtnContainer>
             <Button onClick={() => history.push('/collectibles/cards')}>
               BUY CARDS

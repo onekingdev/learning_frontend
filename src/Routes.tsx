@@ -1,5 +1,4 @@
 import {BrowserRouter as Router, Redirect, useLocation } from 'react-router-dom';
-import {FC, useEffect, useState} from 'react';
 import {Route, Switch} from 'react-router-loading';
 import {
   TransitionGroup,
@@ -11,7 +10,7 @@ import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
 import {Question} from './views/pages/Question/Question';
 import {Avatar} from './views/pages/Avatar/Avatar';
-import {CardCollectible} from './views/pages/CardCollectible/CardCollectible';
+// import {CardCollectible} from './views/pages/CardCollectible/CardCollectible';
 import {MyProfile} from './views/pages/MyProfile/MyProfile';
 import {Backpack} from './views/pages/Backpack/Backpack';
 import {Games} from './views/pages/Games/Games';
@@ -102,12 +101,12 @@ export function Routes(props: any) {
         <PrivateRoute path="/wardrobe" loading={true}>
           <Wardrobe />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
+        {/* <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
+        <PrivateRoute loading={false} path="/collectibles/category_:categoryId">
           <CardCollectible />
-        </PrivateRoute>
+        </PrivateRoute> */}
         <PrivateRoute loading={false} path="/collectibles/cards">
           <Cards />
         </PrivateRoute>
