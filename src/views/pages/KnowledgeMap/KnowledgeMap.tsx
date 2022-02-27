@@ -25,17 +25,25 @@ export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const dispatch = useDispatch();
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
+  const [loadedImgNum,  setLoadedImgNum] = useState(0)
   const handleData = (data: any) => {
     setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
     dispatch({
       type: TYPE.SET_AOK,
       payload: data.data.audienceById.areaofknowledgeSet,
     });
-    loadingContext.done();
   };
   const handleError = (error: any) => {
+    loadingContext.done();
     console.error(error);
   };
+
+  const onImgLoad = (e: any) => {
+    setLoadedImgNum(loadedImgNum+1)
+    if(loadedImgNum >= areasOfKnowledge.length - 1)
+      loadingContext.done();
+  }
+
   useEffect(() => {
     get(
       'audienceById(id:"2")',
@@ -97,6 +105,8 @@ export const KnowledgeMap: FC = () => {
                       animateBoat(e);
                     }}
                     isActive={areaOfKnowledge.isActive}
+                    onLoad={onImgLoad}
+                    onError={onImgLoad}
                   />
                   <>
                     {i === dragonNum ? <Filler src={dragon} /> : null}
@@ -113,6 +123,8 @@ export const KnowledgeMap: FC = () => {
                       animateBoat(e);
                     }}
                     isActive={areaOfKnowledge.isActive}
+                    onLoad={onImgLoad}
+                    onError={onImgLoad}
                   />
                   {i % 5 === 0 ? <Filler src={fill} /> : null}
                 </div>
