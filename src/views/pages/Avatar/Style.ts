@@ -10,4 +10,5 @@ export const Wrapper = styled.div`
 export const AvatarContainer = styled.div`
   width: 100%;
   margin: 40px 0;
+  
 `;

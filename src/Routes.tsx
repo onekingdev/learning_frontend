@@ -1,16 +1,20 @@
 import {BrowserRouter as Router, Redirect, useLocation } from 'react-router-dom';
+import {FC, useEffect, useState} from 'react';
 import {Route, Switch} from 'react-router-loading';
 import {
   TransitionGroup,
   CSSTransition,
 } from 'react-transition-group';
+import {bounceInUp, bounceOutDown, flip, fadeIn} from 'react-animations';
+import styled, {keyframes} from 'styled-components';
+
 import 'animate.css';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
 import {Question} from './views/pages/Question/Question';
 import {Avatar} from './views/pages/Avatar/Avatar';
-// import {CardCollectible} from './views/pages/CardCollectible/CardCollectible';
+import {CardCollectible} from './views/pages/CardCollectible/CardCollectible';
 import {MyProfile} from './views/pages/MyProfile/MyProfile';
 import {Backpack} from './views/pages/Backpack/Backpack';
 import {Games} from './views/pages/Games/Games';
@@ -67,10 +71,14 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
 
 export function Routes(props: any) {
   const location = useLocation();
+  const FadeIn = styled.div`
+    animation: 1s ${keyframes`${fadeIn}`} ;
+  `;
 
   return (
-    <TransitionGroup component={null}>
-      <CSSTransition
+    <FadeIn>
+    {/* <TransitionGroup component={null}> */}
+      {/* <CSSTransition
         key={location.key}
         appear={true}
         timeout={{enter: 1000, exit: 1000}}
@@ -80,7 +88,7 @@ export function Routes(props: any) {
           exit: 'my-node-exit',
           exitActive: 'my-node-exit-active',
          }}
-      >
+      > */}
         <Switch loadingScreen={Spinner} location={location}>
         <PrivateRoute exact path="/" requireAuth={false}>
           <Welcome />
@@ -101,12 +109,12 @@ export function Routes(props: any) {
         <PrivateRoute path="/wardrobe" loading={true}>
           <Wardrobe />
         </PrivateRoute>
-        {/* <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
+        <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
           <CardCollectible />
         </PrivateRoute>
-        <PrivateRoute loading={false} path="/collectibles/category_:categoryId">
+        <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
           <CardCollectible />
-        </PrivateRoute> */}
+        </PrivateRoute>
         <PrivateRoute loading={false} path="/collectibles/cards">
           <Cards />
         </PrivateRoute>
@@ -131,7 +139,7 @@ export function Routes(props: any) {
         <PrivateRoute path="/games/categories">
           <Games />
         </PrivateRoute>
-        <PrivateRoute path="/games/:category">
+        <PrivateRoute  loading={true} exact path="/games/:category">
           <GamesMenu />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/map">
@@ -171,7 +179,9 @@ export function Routes(props: any) {
         ) : null}
         <Redirect from="/" to="/login" />
         </Switch>
-      </CSSTransition >
-    </TransitionGroup>
+       {/* </CSSTransition > */}
+    {/* </TransitionGroup> */}
+    </FadeIn>
+
   );
 }
