@@ -24,8 +24,11 @@ import {LoadingContext} from 'react-router-loading';
 export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
   const [loadedImgNum,  setLoadedImgNum] = useState(0)
+
   const handleData = (data: any) => {
     setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
     dispatch({
@@ -33,6 +36,7 @@ export const KnowledgeMap: FC = () => {
       payload: data.data.audienceById.areaofknowledgeSet,
     });
   };
+
   const handleError = (error: any) => {
     loadingContext.done();
     console.error(error);
@@ -80,7 +84,7 @@ export const KnowledgeMap: FC = () => {
     }
     return fillers[getRandomNumber(3)];
   };
-  const history = useHistory();
+
   const dragonNum = randRange(0, areasOfKnowledge.length);
   return (
     <Wrapper>
@@ -100,7 +104,7 @@ export const KnowledgeMap: FC = () => {
               return i % 2 === 0 ? (
                 <Subject>
                   <Island
-                    src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
+                    src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
                       animateBoat(e);
                     }}
@@ -118,7 +122,7 @@ export const KnowledgeMap: FC = () => {
                 <div>
                   {i === dragonNum ? <Filler src={dragon} /> : null}
                   <Island
-                    src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
+                    src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
                       animateBoat(e);
                     }}
