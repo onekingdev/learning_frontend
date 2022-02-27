@@ -1,25 +1,25 @@
 import {FC, useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
+import {LoadingContext} from 'react-router-loading';
+import {useHistory} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+
 import {StudentMenu} from '../../templates/StudentMenu';
+import boat_sound from '../../assets/audios/boat.mp3';
 import ocean from '../../assets/islands/ocean.svg';
 import boat from '../../assets/islands/fillers/boat.svg';
-import boat_sound from '../../assets/audios/boat.mp3';
-
 import barrell from '../../assets/islands/fillers/barril.svg';
 import dragon from '../../assets/islands/fillers/dragon.svg';
-
 import isle from '../../assets/islands/fillers/island.svg';
 import rock from '../../assets/islands/fillers/rock.svg';
 import rock2 from '../../assets/islands/fillers/rock-2.svg';
 import boulder from '../../assets/islands/fillers/rocxk.svg';
-import {ScreenSize} from '../../screenSize';
-import {useHistory} from 'react-router-dom';
-import {get} from '../../../api/queries/get';
-import {useDispatch} from 'react-redux';
-import * as TYPE from '../../../app/types';
 import background from '../../assets/colored-shapes-bg.svg';
+
+import {ScreenSize} from '../../screenSize';
+import {get} from '../../../api/queries/get';
+import * as TYPE from '../../../app/types';
 import {AUDIENCES_QUERY} from '../../../api/queries/people';
-import {LoadingContext} from 'react-router-loading';
 
 export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -102,7 +102,7 @@ export const KnowledgeMap: FC = () => {
               const fill = getFiller();
 
               return i % 2 === 0 ? (
-                <Subject>
+                <Subject key={i}>
                   <Island
                     src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
@@ -119,7 +119,7 @@ export const KnowledgeMap: FC = () => {
                   </>
                 </Subject>
               ) : (
-                <div>
+                <div key={i}>
                   {i === dragonNum ? <Filler src={dragon} /> : null}
                   <Island
                     src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
