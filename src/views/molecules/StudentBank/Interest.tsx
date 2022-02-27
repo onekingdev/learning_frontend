@@ -37,9 +37,7 @@ interface InterestProp {
   interests: []
 }
 export const Interest: FC<InterestProp> = ({interests}) => {
-  console.log(interests)
   return (
-
     <StyledTxContainer >
       <LSLabel fontSize={20}>Interests {' & '} levels</LSLabel>
       <StyledTableContainer >
@@ -47,15 +45,16 @@ export const Interest: FC<InterestProp> = ({interests}) => {
           <TableHead>
             <TableRow sx={{
               '& .MuiTableRow-root': {
-                backgroundColor: BasicColor.blue,
-                color: 'white'
+                backgroundColor: BasicColor.white,
+                color: 'black',
+                borderColor: 'black'
               }
             }}>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align='center'
-                  style={{ minWidth: column.minWidth,maxWidth: 90, backgroundColor: BasicColor.blue, color: 'white', fontFamily: 'Montserrat' }}
+                  style={{ minWidth: column.minWidth,maxWidth: 90, backgroundColor: BasicColor.white, color: 'black', fontFamily: 'Montserrat' }}
                 >
                   {column.label}
                 </TableCell>
@@ -70,7 +69,7 @@ export const Interest: FC<InterestProp> = ({interests}) => {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align='center' sx={{ color: 'white', fontFamily: 'Montserrat' }}>
+                        <TableCell key={column.id} align='center' sx={{ color: 'black', fontFamily: 'Montserrat' }}>
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}
@@ -93,12 +92,15 @@ const StyledTxContainer = styled.div`
   align-items: center;
   flex-direction: column;
   overflow: hidden;
-  background: ${BasicColor.blue};
-  color: white;
+  background: ${BasicColor.white};
+  border-color: ${BasicColor.blue};
+  color: black;
   padding: 30px 20px 30px 20px;
   paddingBottom: 2px;
   margin-bottom: 60px;
   border-radius: 15px;
+  border-width: 1px;
+  border-style: solid;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     width: 85vw;
     padding: 15px;
