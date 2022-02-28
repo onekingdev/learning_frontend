@@ -13,7 +13,10 @@ type CardProps = {
   imgUrl: string;
   purchased?: boolean;
   amount: number;
-  description?: string;
+  description?: Array <{
+    key: string
+    value: string
+  }>;
   name?: string;
 };
 
@@ -130,9 +133,9 @@ export const Gemcard: FC<CardProps> = ({
               </StyledGrid>
               <StyledGrid item md={6} xs={12}>
                 <h1>{name ? name : 'No name'}</h1>
-                <p>
-                  {description ? description : 'No description for this card'}
-                </p>
+                {description?.map(item => (
+                  <p key={item.key}>{item.value}</p>
+                ))}
               </StyledGrid>
             </Grid>
           }
