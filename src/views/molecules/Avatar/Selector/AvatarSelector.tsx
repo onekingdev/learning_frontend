@@ -21,7 +21,7 @@ import {
   bodies,
   footers,
   accessories,
-} from '../../../pages/Avatar/atoms';
+} from '../../../pages/Student/Avatar/atoms';
 import {
   AvatarModule,
   SelectorGrid,

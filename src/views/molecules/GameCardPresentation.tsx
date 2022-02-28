@@ -8,24 +8,16 @@ type GameCardProps = {
   gameName: string;
   gameImage: string;
   price: number;
-  gamePath: string;
-  token: string;
 };
 
 export const GameCardPresentation: FC<GameCardProps> = ({
   gameName,
   gameImage,
   price,
-  gamePath,
-  token
 }) => {
-  const handlePlay = () => {
-    const url = process.env.REACT_APP_SERVER_URL + "media/games/" + gamePath + "/index?token=" + token;
-    location.href = url;
-  }
   return (
     <>
-      <GameCardStyles onClick={handlePlay}>
+      <GameCardStyles>
         <GameCardTitleContainer>
           <UserInfo isDark={true}>{gameName}</UserInfo>
         </GameCardTitleContainer>
@@ -77,7 +69,7 @@ const GameCardPriceContainer = styled.div`
 `;
 
 const GameCardPrice = styled.div`
-  width: fit-content;
+  width: 50px;
   height: 20px;
   border-radius: 20px;
   margin: 5px;

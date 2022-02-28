@@ -1,53 +1,41 @@
 import {FC, useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
-import {LoadingContext} from 'react-router-loading';
-import {useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-
 import {StudentMenu} from '../../templates/StudentMenu';
-import boat_sound from '../../assets/audios/boat.mp3';
 import ocean from '../../assets/islands/ocean.svg';
 import boat from '../../assets/islands/fillers/boat.svg';
+import boat_sound from '../../assets/audios/boat.mp3';
+
 import barrell from '../../assets/islands/fillers/barril.svg';
 import dragon from '../../assets/islands/fillers/dragon.svg';
+
 import isle from '../../assets/islands/fillers/island.svg';
 import rock from '../../assets/islands/fillers/rock.svg';
 import rock2 from '../../assets/islands/fillers/rock-2.svg';
 import boulder from '../../assets/islands/fillers/rocxk.svg';
-import background from '../../assets/colored-shapes-bg.svg';
-
 import {ScreenSize} from '../../screenSize';
+import {useHistory} from 'react-router-dom';
 import {get} from '../../../api/queries/get';
+import {useDispatch} from 'react-redux';
 import * as TYPE from '../../../app/types';
+import background from '../../assets/colored-shapes-bg.svg';
 import {AUDIENCES_QUERY} from '../../../api/queries/people';
+import {LoadingContext} from 'react-router-loading';
 
 export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const dispatch = useDispatch();
-  const history = useHistory();
-
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
-  const [loadedImgNum,  setLoadedImgNum] = useState(0)
-
   const handleData = (data: any) => {
     setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
     dispatch({
       type: TYPE.SET_AOK,
       payload: data.data.audienceById.areaofknowledgeSet,
     });
-  };
-
-  const handleError = (error: any) => {
     loadingContext.done();
+  };
+  const handleError = (error: any) => {
     console.error(error);
   };
-
-  const onImgLoad = (e: any) => {
-    setLoadedImgNum(loadedImgNum+1)
-    if(loadedImgNum >= areasOfKnowledge.length - 1)
-      loadingContext.done();
-  }
-
   useEffect(() => {
     get(
       'audienceById(id:"2")',
@@ -84,7 +72,7 @@ export const KnowledgeMap: FC = () => {
     }
     return fillers[getRandomNumber(3)];
   };
-
+  const history = useHistory();
   const dragonNum = randRange(0, areasOfKnowledge.length);
   return (
     <Wrapper>
@@ -102,15 +90,13 @@ export const KnowledgeMap: FC = () => {
               const fill = getFiller();
 
               return i % 2 === 0 ? (
-                <Subject key={i}>
+                <Subject>
                   <Island
-                    src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
+                    src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
                       animateBoat(e);
                     }}
                     isActive={areaOfKnowledge.isActive}
-                    onLoad={onImgLoad}
-                    onError={onImgLoad}
                   />
                   <>
                     {i === dragonNum ? <Filler src={dragon} /> : null}
@@ -119,16 +105,14 @@ export const KnowledgeMap: FC = () => {
                   </>
                 </Subject>
               ) : (
-                <div key={i}>
+                <div>
                   {i === dragonNum ? <Filler src={dragon} /> : null}
                   <Island
-                    src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
+                    src={`https://api.withsocrates.com/media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
                       animateBoat(e);
                     }}
                     isActive={areaOfKnowledge.isActive}
-                    onLoad={onImgLoad}
-                    onError={onImgLoad}
                   />
                   {i % 5 === 0 ? <Filler src={fill} /> : null}
                 </div>

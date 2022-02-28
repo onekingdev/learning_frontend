@@ -1,20 +1,12 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import {Title} from '../../atoms/Text/Title';
-import ribbon from '../../assets/ribbon.svg';
-import {ScreenSize} from '../../screenSize';
+import ribbon from 'views/assets/ribbon.svg';
+import {ScreenSize} from 'views/screenSize';
 
-export const CardCollectibleTitle: FC = () => {
+export const PageTitle: FC<{title: string}> = ({title}) => {
   return (
     <CardTitle>
-      <h1>Collectible Cards</h1>
-    </CardTitle>
-  );
-};
-export const CardCollectibleTitle2: FC = () => {
-  return (
-    <CardTitle>
-      <h1>MY COLLECTION</h1>
+      <h1>{title}</h1>
     </CardTitle>
   );
 };
@@ -29,8 +21,12 @@ const CardTitle = styled.div`
   padding: 15px;
   margin-top: 3vh;
   h1 {
-    font-family: Montserrat;
+    font-family: 'Quicksand', sans-serif;
     margin: 0;
+    // font-size: 40px;
+    font-style: normal;
+    letter-spacing: 0.25px;
+    text-align: center;
   }
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
