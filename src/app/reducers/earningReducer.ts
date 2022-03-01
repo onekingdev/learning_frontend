@@ -1,6 +1,5 @@
 import * as TYPE from '../types';
 import {IEarning} from '../entities/earning';
-import { Action } from 'views/molecules/Login/Actions';
 const INITIAL_STATE = {
     rank: 0,
     level: 0,
@@ -33,12 +32,7 @@ const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         ...state,
         energyCharge: 0
       }
-    case TYPE.EARNING_COIN_SET:
-      console.log("in reducer", action.payload)
-      return {
-        ...state,
-        balance: action.payload
-      }
+
     case TYPE.PURCHASE_CARDS:
       return {
         ...state,
