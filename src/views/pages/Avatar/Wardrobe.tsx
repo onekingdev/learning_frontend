@@ -1,15 +1,15 @@
 import {FC} from 'react';
-import {WardrobeSelector} from 'views/molecules/Avatar/WardrobeSelector/WardrobeSelector';
+import {WardrobeTitle} from '../../molecules/Avatar/WardrobeTitle';
+import {WardrobeSelector} from '../../molecules/Avatar/WardrobeSelector/WardrobeSelector';
 import {AvatarContainer, Wrapper} from './Style';
-import {StudentMenu} from 'views/templates/StudentMenu';
-import { PageTitle } from 'views/molecules/PageTitle';
+import {StudentMenu} from '../../templates/StudentMenu';
 
 export const Wardrobe: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
         <AvatarContainer>
-          <PageTitle title='Wardrobe' />
+          <WardrobeTitle />
           <WardrobeSelector />
         </AvatarContainer>
       </StudentMenu>

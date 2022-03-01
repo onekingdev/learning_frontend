@@ -18,10 +18,7 @@ interface TierCardProp {
     image: string;
     owned: boolean;
     tier: string;
-    description?: Array <{
-      key: string
-      value: string
-    }>;
+    description: string;
     category: {
       name: string;
     };
@@ -37,7 +34,7 @@ export const TierCards: FC<TierCardProp> = ({cards}) => {
       if (loadingRef.current) {
         window.scrollTo({
           behavior: 'smooth',
-          top: loadingRef.current.offsetTop + 500,
+          top: loadingRef.current.offsetTop + 100,
         });
       }
     }, [cards]);

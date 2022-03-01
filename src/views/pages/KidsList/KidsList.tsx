@@ -1,7 +1,6 @@
 import {FC, useEffect, useState, useContext} from 'react';
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
 import kidA from '../../assets/avatars/kid-1.svg';
 import kidB from '../../assets/avatars/kid-2.svg';
@@ -18,8 +17,8 @@ import {
   Avatar,
   LicenseButton,
 } from './Style';
-// import { toPng } from 'html-to-image';
-// import {saveAs} from 'file-saver';
+import { toPng } from 'html-to-image';
+import {saveAs} from 'file-saver';
 import License from '../../molecules/KidLicense/KidLicense';
 import {LoadingContext} from 'react-router-loading';
 
@@ -32,26 +31,26 @@ interface kid {
 
 const KidsList: FC = () => {
   const loadingContext = useContext(LoadingContext);
-  // const dispatch = useDispatch();
-  // const language = 'en';
+  const dispatch = useDispatch();
+  const language = 'en';
   const user = useSelector((state: Store) => state.user);
   const kidAvatars = [kidA, kidB, kidC];
 
   const [children, setChildren] = useState<kid[]>([]);
 
-  // const handleDelete = (index: number) => {
-  //   const temp: any = [...children];
-  //   temp.pop(temp[index]);
-  //   setChildren(temp);
-  // };
+  const handleDelete = (index: number) => {
+    const temp: any = [...children];
+    temp.pop(temp[index]);
+    setChildren(temp);
+  };
 
-  // const handleNew = (index: number) => {};
+  const handleNew = (index: number) => {};
 
-  // const handleChgPwd = (index: number, password: string) => {
-  //   const temp: any = [...children];
-  //   temp[index].password = password;
-  //   setChildren(temp);
-  // };
+  const handleChgPwd = (index: number, password: string) => {
+    const temp: any = [...children];
+    temp[index].password = password;
+    setChildren(temp);
+  };
 
   const handleSave = () => {
     // Do something ...
@@ -59,9 +58,8 @@ const KidsList: FC = () => {
     console.log('Save button clicked!');
   };
   const Kid = (props: any) => {
-    const userName = props.username
-    // const [username, setUsername] = useState(props.username);
-    // const [password, setPassword] = useState(props.password);
+    const [username, setUsername] = useState(props.username);
+    const [password, setPassword] = useState(props.password);
     const [grade, setGrade] = useState(props.grade);
 
     // Open or close dialog state
@@ -75,9 +73,9 @@ const KidsList: FC = () => {
       console.log(children);
       const licenseElm: any = document.querySelector('#license');
       console.log(licenseElm);
-      // toPng(licenseElm).then(function (dataUrl) {
-      //   saveAs(dataUrl, `${username}-license`);
-      // });
+      toPng(licenseElm).then(function (dataUrl) {
+        saveAs(dataUrl, `${username}-license`);
+      });
 
       // open()
     };
@@ -88,17 +86,17 @@ const KidsList: FC = () => {
       // close dialog
       open();
     };
-    // const updateUsername = (value: any) => {
-    //   setUsername(value);
-    //   children[props.index].username = value;
-    //   setChildren(children);
-    // };
+    const updateUsername = (value: any) => {
+      setUsername(value);
+      children[props.index].username = value;
+      setChildren(children);
+    };
 
-    // const updatePassword = (value: any) => {
-    //   setPassword(value);
-    //   children[props.index].password = value;
-    //   setChildren(children);
-    // };
+    const updatePassword = (value: any) => {
+      setPassword(value);
+      children[props.index].password = value;
+      setChildren(children);
+    };
 
     const updateGrade = (value: any) => {
       setGrade(value);
@@ -122,8 +120,7 @@ const KidsList: FC = () => {
               {openLicense && (
                 <License
                   parentName={user.username}
-                  // username={username}
-                  username={userName}
+                  username={username}
                   membership={new Date()}
                 />
               )}
@@ -138,7 +135,7 @@ const KidsList: FC = () => {
                 <GridItem item md={6} xs={12}>
                   <Button
                     bgColor={BasicColor.gray60}
-                    onClick={() => handleCancelBtnClicked()}
+                    onClick={(e: any) => handleCancelBtnClicked()}
                     value="Return"
                   />
                 </GridItem>
@@ -157,8 +154,7 @@ const KidsList: FC = () => {
           <GridItem item xs={12} md={2}>
             <TextField
               label="User Name"
-              value={userName}
-              // value={username}
+              value={username}
               // onChange={(e) => updateUsername(e.target.value)}
             />
           </GridItem>
@@ -222,7 +218,7 @@ const KidsList: FC = () => {
         ))}
         <Button
           bgColor={BasicColor.green}
-          onClick={() => handleSave()}
+          onClick={(e: any) => handleSave()}
           value="Save"
           fontSize={25}
         />

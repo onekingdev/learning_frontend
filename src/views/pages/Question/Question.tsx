@@ -47,7 +47,7 @@ export const Question: FC = () => {
   const [pointUnit, setPointUnit] = useState<number>(0);
   const [points, setPoints] = useState<number>(0);
   const loadingContext = useContext(LoadingContext);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const renderTypes = (
     question: IQuestion,
     type: string,
@@ -79,6 +79,8 @@ export const Question: FC = () => {
   }, [answerResult]);
 
 
+  const [combo, setCombo] = useState(false)
+
   const [nextMaxExp, setNextMaxExp] = useState(0)
   const updateNextLevel = async (currentLevelAmount: number) => {
     const res:any = await getNextLevel(currentLevelAmount, user.token, dispatch)
@@ -87,6 +89,7 @@ export const Question: FC = () => {
   }
   useEffect(() => {
     setNextMaxExp(student.nextLevel.pointsRequired)
+    // fetchNextLevelMaxpoint()
   }, [])
 
   const onAnswer = (result: boolean) => {
@@ -94,7 +97,9 @@ export const Question: FC = () => {
     setAnswerResult([...answerResult, result]);
     if (result) {
       setPoints(points + pointUnit);
+      setCombo(true)
     }
+    else setCombo(false)
   };
 
   const increaseExp = async () => {
@@ -176,7 +181,7 @@ export const Question: FC = () => {
     if (blockPresentation) {
       if (blockPresentation.block.questions.length < questionCounter + 2) {
         setIsLessonFinished(true);
-        // setLoading(true);
+        setLoading(true);
         let correctCount = 0;
         let wrongCount = 0;
         console.log(answerResult);
@@ -194,7 +199,7 @@ export const Question: FC = () => {
           state.user.token,
           dispatch
         );
-        // setLoading(false);
+        setLoading(false);
       }
     }
     const counter = questionCounter + 1;

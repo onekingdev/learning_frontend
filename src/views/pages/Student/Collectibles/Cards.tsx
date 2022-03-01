@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import {BasicColor} from '../../../Color';
 import {ScreenSize} from 'views/screenSize';
 
-import {PageTitle} from 'views/molecules/PageTitle';
+import {CardCollectibleTitle} from '../../../molecules/CardCollectible/CardCollectibleTitle';
 import {StudentMenu} from '../../../templates/StudentMenu';
 import {CardCategory} from '../../../molecules/StudentCard/CardsCategory';
 
@@ -17,7 +17,7 @@ export const Cards: FC = () => {
     <Wrapper>
       <StudentMenu>
         <div>
-          <PageTitle title='Collectible Cards'/>
+          <CardCollectibleTitle />
           <BtnContainer>
             <Button onClick={() => history.push('/collectibles/mycards')}>
               MY COLLECTION
