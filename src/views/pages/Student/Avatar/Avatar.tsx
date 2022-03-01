@@ -1,15 +1,15 @@
 import {FC} from 'react';
-import {AvatarFavoritesTitle} from '../../molecules/Avatar/AvatarFavoritesTitle';
-import {AvatarSelector} from '../../molecules/Avatar/Selector/AvatarSelector';
+import {AvatarSelector} from 'views/molecules/Avatar/Selector/AvatarSelector';
 import {AvatarContainer, Wrapper} from './Style';
-import {StudentMenu} from '../../templates/StudentMenu';
+import {StudentMenu} from 'views/templates/StudentMenu';
+import {PageTitle} from 'views/molecules/PageTitle';
 
 export const Avatar: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
         <AvatarContainer>
-          <AvatarFavoritesTitle />
+          <PageTitle title="Your Favorites" />
           <AvatarSelector />
         </AvatarContainer>
       </StudentMenu>

@@ -34,7 +34,7 @@ export const TierCards: FC<TierCardProp> = ({cards}) => {
       if (loadingRef.current) {
         window.scrollTo({
           behavior: 'smooth',
-          top: loadingRef.current.offsetTop + 100,
+          top: loadingRef.current.offsetTop + 500,
         });
       }
     }, [cards]);

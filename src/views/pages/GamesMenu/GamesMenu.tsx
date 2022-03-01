@@ -17,6 +17,7 @@ import {useParams, useHistory} from 'react-router-dom';
 import { getGameByCategory } from '../../../app/actions/gameActions'
 import { setCoinWallet } from '../../../app/actions/studentActions'
 import { useSelector, useDispatch } from 'react-redux'
+import {Spinner} from 'views/atoms/Spinner';
 
 interface GameCategoryParams {
   category: "arcade" | "learning" | "adventure" | "sport" | "skill" | "strategy";
@@ -38,7 +39,10 @@ export const GamesMenu: FC = () => {
   const user = useSelector((state: any) => state.user)
   const student = useSelector((state: any) => state.student)
   const dispatch = useDispatch()
+
+  const [loading, setLoading] = useState(false)
   const [gameCards, setGameCards] = useState<GameCardParam[]>([])
+
   const gameMenuImgs = {
     arcade : arcade,
     learning : learning,
@@ -129,7 +133,10 @@ export const GamesMenu: FC = () => {
     const result = await getGameByCategory(dictionary[lenguage][category], user.token, null)
     setGameCards(result.data)
   }
-
+  if(loading)
+    return (
+      <Spinner />
+    )
   return (
     <>
       <Wrapper>
@@ -150,6 +157,7 @@ export const GamesMenu: FC = () => {
                 gamePath = {item.path}
                 price={item.cost}
                 token={user.token}
+                setLoading={setLoading}
                 key={i}
               />
             ))}

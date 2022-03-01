@@ -1,5 +1,4 @@
 import {BrowserRouter as Router, Redirect, useLocation } from 'react-router-dom';
-import {FC, useEffect, useState} from 'react';
 import {Route, Switch} from 'react-router-loading';
 import {
   TransitionGroup,
@@ -13,8 +12,8 @@ import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
 import {Testing} from './views/pages/Testing/Testing';
 import {Question} from './views/pages/Question/Question';
-import {Avatar} from './views/pages/Avatar/Avatar';
-import {CardCollectible} from './views/pages/CardCollectible/CardCollectible';
+import {Avatar} from './views/pages/Student/Avatar/Avatar';
+// import {CardCollectible} from './views/pages/CardCollectible/CardCollectible';
 import {MyProfile} from './views/pages/MyProfile/MyProfile';
 import {Backpack} from './views/pages/Backpack/Backpack';
 import {Games} from './views/pages/Games/Games';
@@ -25,7 +24,7 @@ import {ConfirmAccount} from './views/pages/ConfirmAccount/ConfirmAccount';
 import {KnowledgeMap} from './views/pages/KnowledgeMap/KnowledgeMap';
 import {SubjectsMenu} from './views/pages/SubjectMenu/SubjectsMenu';
 import {TopicsMenu} from './views/pages/TopicsMenu/TopicsMenu';
-import {Wardrobe} from './views/pages/Avatar/Wardrobe';
+import {Wardrobe} from './views/pages/Student/Avatar/Wardrobe';
 import {Payment} from './views/pages/Payment/Payment';
 import CreateParent from './views/pages/CreateParent/CreateParent';
 import KidsList from './views/pages/KidsList/KidsList';
@@ -109,12 +108,12 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/wardrobe" >
             <Wardrobe />
           </PrivateRoute>
-          <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
+          {/* <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
             <CardCollectible />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
             <CardCollectible />
-          </PrivateRoute>
+          </PrivateRoute> */}
           <PrivateRoute loading={true} path="/collectibles/cards">
             <Cards />
           </PrivateRoute>
