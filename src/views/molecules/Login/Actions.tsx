@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import {Divider} from '../../atoms/Divider';
 import {ButtonColor} from '../../Color';
 import {ScreenSize} from '../../screenSize';
-import {Button} from '../Button';
-
+// import {Button} from '../Button';
+import Button from 'views/molecules/MuiButton';
+import { BasicColor } from '../../Color';
+import LoadingButton from '@mui/lab/LoadingButton';
 type LoginActionsProps = {
   googleText: string;
   googleColor: ButtonColor;
@@ -12,6 +14,7 @@ type LoginActionsProps = {
   or: string;
   loginText: string;
   loginColor: ButtonColor;
+  loading: boolean;
   loginAction: () => void;
 };
 
@@ -23,22 +26,31 @@ export const Actions: FC<LoginActionsProps> = ({
   loginText,
   loginColor,
   loginAction,
+  loading
 }) => {
   return (
     <StyledActions>
       <Action>
         <Button
           value={googleText}
-          darkText={true}
-          color={googleColor}
+          bgColor={googleColor}
+          color={BasicColor.black}
           onClick={googleAction}
+          fullWidth={true}
+          loading={loading}
         />
       </Action>
 
       <Divider value={or} />
-
       <Action>
-        <Button value={loginText} color={loginColor} onClick={loginAction} />
+        <Button
+          value={loginText}
+          bgColor={loginColor}
+          color={BasicColor.white}
+          onClick={loginAction}
+          fullWidth={true}
+          loading={loading}
+        />
       </Action>
     </StyledActions>
   );
