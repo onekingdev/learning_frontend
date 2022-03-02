@@ -91,9 +91,6 @@ export const STUDENT = `
         gender
         points
         intPeriodStartAt
-        studentPlan {
-            ${STUDENT_PLAN}
-        }
         activeStudentPlan {
             ${STUDENT_PLAN}
         }

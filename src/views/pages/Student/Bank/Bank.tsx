@@ -1,30 +1,31 @@
-import {FC, useEffect } from 'react';
-import {useSelector} from 'react-redux';
+import { FC, useEffect, useContext } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Grid } from '@mui/material';
+import { LoadingContext } from 'react-router-loading';
 
-import {Grid} from '@mui/material';
-
-import {StudentMenu} from 'views/templates/StudentMenu';
-import {Title} from 'views/atoms/Text/Title';
+import { StudentMenu } from 'views/templates/StudentMenu';
+import { Title } from 'views/atoms/Text/Title';
 import background from 'views/assets/colored-shapes-bg.svg';
 import ribbon from 'views/assets/ribbon.svg';
 import Cartera from 'views/assets/Cartera.svg';
 
-import {ScreenSize} from 'views/screenSize';
+import { ScreenSize } from 'views/screenSize';
 
-import {AccountBalance} from 'views/molecules/StudentBank/AccountBalance';
-import {TxBox} from 'views/molecules/StudentBank/TxBox';
-import {TxHistoryTable} from 'views/molecules/StudentBank/TxHistoryTable';
-import {Interest} from 'views/molecules/StudentBank/Interest';
-import {LoadingContext} from 'react-router-loading';
+import { AccountBalance } from 'views/molecules/StudentBank/AccountBalance';
+import { TxBox } from 'views/molecules/StudentBank/TxBox';
+import { TxHistoryTable } from 'views/molecules/StudentBank/TxHistoryTable';
+import { Interest } from 'views/molecules/StudentBank/Interest';
 
 export const Bank: FC = () => {
 
   const student = useSelector((state: any) =>state.student)
   const interests = useSelector((state: any) => state.interests.interests)
+  const loadingContext = useContext(LoadingContext);
   const bankMovement = student.bankWallet.bankmovementSet
 
   useEffect(() => {
+    loadingContext.done();
   }, []);
 
   return (

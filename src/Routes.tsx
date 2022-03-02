@@ -4,6 +4,9 @@ import {
   TransitionGroup,
   CSSTransition,
 } from 'react-transition-group';
+import {bounceInUp, bounceOutDown, flip, fadeIn} from 'react-animations';
+import styled, {keyframes} from 'styled-components';
+
 import 'animate.css';
 import {LogIn} from './views/pages/Login/Login';
 import {Welcome} from './views/pages/Welcome/Welcome';
@@ -67,10 +70,14 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
 
 export function Routes(props: any) {
   const location = useLocation();
+  const FadeIn = styled.div`
+    animation: 1.5s ${keyframes`${fadeIn}`} ;
+  `;
 
   return (
-    <TransitionGroup component={null}>
-      <CSSTransition
+    <FadeIn>
+    {/* <TransitionGroup component={null}> */}
+      {/* <CSSTransition
         key={location.key}
         appear={true}
         timeout={{enter: 1000, exit: 1000}}
@@ -80,98 +87,100 @@ export function Routes(props: any) {
           exit: 'my-node-exit',
           exitActive: 'my-node-exit-active',
          }}
-      >
+      > */}
         <Switch loadingScreen={Spinner} location={location}>
-        <PrivateRoute exact path="/" requireAuth={false}>
-          <Welcome />
-        </PrivateRoute>
-        <PrivateRoute path="/login" requireAuth={false}>
-          <LogIn />
-        </PrivateRoute>
-        <PrivateRoute
-          loading={true}
-          path="/question/presentation_:presentationId"
-          requireAuth={false}
-        >
-          <Question />
-        </PrivateRoute>
-        <PrivateRoute path="/avatar" loading={true}>
-          <Avatar />
-        </PrivateRoute>
-        <PrivateRoute path="/wardrobe" loading={true}>
-          <Wardrobe />
-        </PrivateRoute>
-        {/* <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
-          <CardCollectible />
-        </PrivateRoute>
-        <PrivateRoute loading={false} path="/collectibles/category_:categoryId">
-          <CardCollectible />
-        </PrivateRoute> */}
-        <PrivateRoute loading={false} path="/collectibles/cards">
-          <Cards />
-        </PrivateRoute>
-        <PrivateRoute loading={false} path="/collectibles/mycards">
-          <MyCardCollection />
-        </PrivateRoute>
-        <PrivateRoute loading={false} path="/bank">
-          <Bank />
-        </PrivateRoute>
-        <PrivateRoute path="/profile">
-          <MyProfile />
-        </PrivateRoute>
-        <PrivateRoute loading={true} path="/home">
-          <StudentHome />
-        </PrivateRoute>
-        <PrivateRoute loading={true} path="/progress">
-          <Progress />
-        </PrivateRoute>
-        <PrivateRoute loading={true} path="/backpack">
-          <Backpack />
-        </PrivateRoute>
-        <PrivateRoute path="/games/categories">
-          <Games />
-        </PrivateRoute>
-        <PrivateRoute path="/games/:category">
-          <GamesMenu />
-        </PrivateRoute>
-        <PrivateRoute loading={true} path="/map">
-          <KnowledgeMap />
-        </PrivateRoute>
-        <PrivateRoute path="/confirmation">
-          <ConfirmAccount />
-        </PrivateRoute>
-        <PrivateRoute loading={true} path="/subjects">
-          <SubjectsMenu />
-        </PrivateRoute>
-        <PrivateRoute loading={true} path="/topic/:topicId">
-          <TopicsMenu />
-        </PrivateRoute>
-        <PrivateRoute path="/parent/setting">
-          <Settings />
-        </PrivateRoute>
-        <PrivateRoute path="/parent/report">
-          <Report />
-        </PrivateRoute>
-        <PrivateRoute path="/parent/payment">
-          <Payment />
-        </PrivateRoute>
-        <PrivateRoute path="/parent/create">
-          <CreateParent />
-        </PrivateRoute>
-        <PrivateRoute path="/kids/list">
-          <KidsList />
-        </PrivateRoute>
-        <PrivateRoute path="/kids/new">
-          <NewKids />
-        </PrivateRoute>
-        {process.env.NODE_ENV === 'development' ? (
-          <Route path="/testing">
-            <Testing />
-          </Route>
-        ) : null}
-        <Redirect from="/" to="/login" />
+          <PrivateRoute exact path="/" requireAuth={false}>
+            <Welcome />
+          </PrivateRoute>
+          <PrivateRoute path="/login" requireAuth={false}>
+            <LogIn />
+          </PrivateRoute>
+          <PrivateRoute
+            loading={true}
+            path="/question/presentation_:presentationId"
+            requireAuth={false}
+          >
+            <Question />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/avatar" >
+            <Avatar />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/wardrobe" >
+            <Wardrobe />
+          </PrivateRoute>
+          {/* <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
+            <CardCollectible />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
+            <CardCollectible />
+          </PrivateRoute> */}
+          <PrivateRoute loading={true} path="/collectibles/cards">
+            <Cards />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/collectibles/mycards">
+            <MyCardCollection />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/bank">
+            <Bank />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/profile">
+            <MyProfile />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/home">
+            <StudentHome />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/progress">
+            <Progress />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/backpack">
+            <Backpack />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/games/categories">
+            <Games />
+          </PrivateRoute>
+          <PrivateRoute loading={true} exact path="/games/:category">
+            <GamesMenu />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/map">
+            <KnowledgeMap />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/confirmation">
+            <ConfirmAccount />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/subjects">
+            <SubjectsMenu />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/topic/:topicId">
+            <TopicsMenu />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/parent/setting">
+            <Settings />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/parent/report">
+            <Report />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/parent/payment">
+            <Payment />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/parent/create">
+            <CreateParent />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/kids/list">
+            <KidsList />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/kids/new">
+            <NewKids />
+          </PrivateRoute>
+          {process.env.NODE_ENV === 'development' ? (
+            <Route path="/testing">
+              <Testing />
+            </Route>
+          ) : null}
+          <Redirect from="/" to="/login" />
         </Switch>
-      </CSSTransition >
-    </TransitionGroup>
+       {/* </CSSTransition > */}
+    {/* </TransitionGroup> */}
+    </FadeIn>
+
   );
 }
