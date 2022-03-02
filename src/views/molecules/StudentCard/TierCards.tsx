@@ -18,7 +18,10 @@ interface TierCardProp {
     image: string;
     owned: boolean;
     tier: string;
-    description: string;
+    description?: Array <{
+      key: string
+      value: string
+    }>;
     category: {
       name: string;
     };

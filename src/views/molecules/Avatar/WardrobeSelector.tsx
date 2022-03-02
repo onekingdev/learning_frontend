@@ -1,25 +1,27 @@
-import {FC, useContext, useEffect, useState} from 'react';
-import {ScreenSize} from '../../../screenSize';
+import { FC, useContext, useEffect, useState } from 'react';
+import { ScreenSize } from 'views/screenSize';
 import styled from 'styled-components';
-import {BasicColor, ButtonColor} from '../../../Color';
-import wardrobe from '../../../assets/wardrobe.svg';
-import {RoundIcon} from '../../../atoms/Icon/Icon';
-import drawer_accessories from '../../../assets/drawers/drawer_accessories.png';
-import drawer_hairs from '../../../assets/drawers/drawer_hairs.png';
-import drawer_clothes from '../../../assets/drawers/drawer_clothes.png';
-import drawer_pants from '../../../assets/drawers/drawer_pants.png';
-import axios from 'axios';
-import wardrobe_icon from '../../../assets/wardrobe.png';
-import {Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {setAvatar} from 'app/actions';
-import arrowUp from '../../../assets/arrows/arrowUp.svg';
-import priceflag from '../../../assets/price-flag.svg';
-import {LoadingContext} from 'react-router-loading';
-import {get} from 'api/queries/get';
-import {AVATAR} from 'api/fragments/avatarFragments';
-import {Button} from '../../Button';
-import {IAvatar} from 'app/entities/avatar';
+import { BasicColor, ButtonColor } from 'views/Color';
+import wardrobe from 'views/assets/wardrobe.svg';
+import { RoundIcon } from 'views/atoms/Icon/Icon';
+import drawer_accessories from 'views/assets/drawers/drawer_accessories.png';
+import drawer_hairs from 'views/assets/drawers/drawer_hairs.png';
+import drawer_clothes from 'views/assets/drawers/drawer_clothes.png';
+import drawer_pants from 'views/assets/drawers/drawer_pants.png';
+import wardrobe_icon from 'views/assets/wardrobe.png';
+import register from 'views/assets/others/register.png';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAvatar } from 'app/actions';
+import arrowUp from 'views/assets/arrows/arrowUp.svg';
+import priceflag from 'views/assets/price-flag.svg';
+import { LoadingContext } from 'react-router-loading';
+import { get } from 'api/queries/get';
+import { AVATAR } from 'api/fragments/avatarFragments';
+import { IAvatar } from 'app/entities/avatar';
+import { AvatarSet } from './AvatarSet';
+import IconButton from '@mui/material/IconButton';
+import StarIcon from '@mui/icons-material/Star';
 
 export const WardrobeSelector: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -33,6 +35,7 @@ export const WardrobeSelector: FC = () => {
   const [atomSize, setAtomSize] = useState(113);
   const width = window.screen.width;
   const [avatarItems, setAvatarItems] = useState([]);
+
   const [accesoryRef, setAccesoryRef] = useState('');
   const [headRef, setHeadRef] = useState('');
   const [bodyRef, setBodyRef] = useState('');
@@ -107,6 +110,7 @@ export const WardrobeSelector: FC = () => {
           <WardrobeScroll>
             {accessories.map((item: any, i) => (
               <WardrobeAtom
+                key={item.id}
                 onClick={() => {
                   setAccesoryRef(accessories[i].image);
                   setAccessoryIndex(i);
@@ -127,6 +131,7 @@ export const WardrobeSelector: FC = () => {
           <WardrobeScroll>
             {headers.map((item: any, i) => (
               <WardrobeAtom
+                key={item.id}
                 onClick={() => {
                   setHeadRef(headers[i].image);
                   setHeaderIndex(i);
@@ -147,6 +152,7 @@ export const WardrobeSelector: FC = () => {
           <WardrobeScroll>
             {bodies.map((item: any, i: number) => (
               <WardrobeAtom
+                key={item.id}
                 onClick={() => {
                   setBodyIndex(i);
                   setBodyRef(bodies[i].image);
@@ -227,19 +233,30 @@ export const WardrobeSelector: FC = () => {
             <ArrowImage src={arrowUp} />
           </ArrowsContainer>
         </WardrobeDrawer>
-        <PaymentContainer>
-          <p>Price</p>
-          <Link to={'/avatar'}>
-            <ToggleWardrobe src={wardrobe_icon} />
-          </Link>
-        </PaymentContainer>
-        <CurrentAvatar>
-          <CurrentAccessory src={accesoryRef} />
-          <CurrentHeader src={headRef} />
-          <CurrentBody src={bodyRef} />
-          <CurrentFooter src={footRef} />
-          <Button value="Buy" color={ButtonColor.next} darkText />
-        </CurrentAvatar>
+        <AvatarContainer>
+          <div className='register'>
+            <img src={register} />
+          </div>
+          <AvatarSet
+            head={headRef}
+            body={bodyRef}
+            accessory={accesoryRef}
+            pants={footRef}
+            skin={3}
+          />
+          <div className='star'>
+            <IconButton color='success' aria-label='set favorite' component='span'>
+              <Star />
+            </IconButton>
+          </div>
+          <div className='hanger'>
+
+            <Link to={'/avatar'}>
+              <ToggleWardrobe src={wardrobe_icon} />
+            </Link>
+            <Button>Buy</Button>
+          </div>
+        </AvatarContainer>
       </SelectorGrid>
     </WardrobeModule>
   );
@@ -249,6 +266,13 @@ const WardrobeModule = styled.div`
   width: 90%
   margin: 0 auto;
 `;
+
+const Star = styled(StarIcon)`
+// fontSize='inherit' sx={{'&.MuiIconButton-root': {transform: 'scale(2.5)'}}}
+&.MuiIconButton-root {
+  transform: scale(2)
+}
+`
 
 const SelectorGrid = styled.div`
   width: 100%;
@@ -262,81 +286,25 @@ const SelectorGrid = styled.div`
   }
 `;
 
-const PaymentContainer = styled.div`
-  width: 100px;
+const AvatarContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  position: relative;
+  flex-direction: column;
+
+  .hanger {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
 
   @media screen and (min-width: ${ScreenSize.desktop}) {
     flex-direction: column;
   }
-`;
 
-const CurrentAvatar = styled.div`
-  width: 200px;
-  display: grid;
-  position: relative;
-  grid-template-columns: auto;
-  grid-template-rows: 138px 100px 130px;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    grid-row: 1 / 2;
-    grid-column: 3 / 4;
-    width: 200px;
-    align-self: end;
-  }
-`;
-
-const CurrentAccessory = styled.img`
-  width: 160px;
-  margin: auto;
-  position: relative;
-  top: -55px;
-  z-index: 999;
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    grid-row: 1 / 2;
-    grid-column: 1 / 2;
-  }
-`;
-
-const CurrentHeader = styled.img`
-  position: relative;
-  width: 160px;
-  margin: auto;
-  z-index: 100;
-  top: -50px;
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    width: 160px;
-    grid-row: 1 / 2;
-    grid-column: 1 / 2;
-  }
-`;
-
-const CurrentBody = styled.img`
-  height: 105px;
-  margin: auto;
-  z-index: 99;
-  grid-row: 2 / 3;
-  grid-column: 1 / 2;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    height: 105px;
-    grid-row: 2 / 3;
-    grid-column: 1 / 2;
-  }
-`;
-
-const CurrentFooter = styled.img`
-  height: 140px;
-  margin: auto;
-  grid-row: 3 / 4;
-  grid-column: 1 / 2;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    height: 140px;
-    grid-row: 3 / 4;
-    grid-column: 1 / 2;
+  .star {
+    position: absolute;
+    bottom: 70px;
   }
 `;
 
@@ -387,7 +355,7 @@ const WardrobeDrawer = styled.div`
 `;
 
 const WardrobeScroll = styled.div`
-  width: 400px;
+  width: 450px;
   height: 400px;
   margin: 10px;
   display: grid;
@@ -426,7 +394,7 @@ const PriceContainer = styled.div`
   width: 100%;
   height: 25px;
   position: relative;
-  background-image: url('../../assets/price-flag.svg');
+  background-image: url('views/assets/price-flag.svg');
 `;
 const PriceFlag = styled.img`
   width: 55px;
@@ -446,7 +414,7 @@ const Price = styled.p`
   font-weight: 400;
 `;
 
-const AtomsRoundIcon = styled(RoundIcon)<{
+const AtomsRoundIcon = styled(RoundIcon) <{
   isSelected: boolean;
 }>`
   margin: auto;
@@ -476,4 +444,24 @@ const ArrowsContainer = styled.div`
 
 const ArrowImage = styled.img`
   width: 30px;
+`;
+
+
+const Button = styled.button`
+  border: none;
+  width: 100px;
+  height: 40px;
+  background: #FFB703;
+  color: black;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+
+  &:hover {
+    box-shadow: 0 4px 1rem -4px #000;
+  }
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    position: inherit;
+    z-index: 1;
+  }
 `;

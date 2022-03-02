@@ -13,8 +13,6 @@ import greeting from 'views/assets/greeting.svg';
 import {Actions} from 'views/molecules/Login/Actions';
 import {Form} from 'views/molecules/Login/Form';
 import {Greet} from 'views/molecules/Login/Greet';
-import Button from 'views/molecules/MuiButton';
-
 import {Login, Card, Legal, LoginWrapper, DesktopWelcome} from './Style';
 import {dictionary} from './dictionary';
 
@@ -95,7 +93,6 @@ export const LogIn: FC = () => {
             loginText={dictionary[language].login}
             loginColor={ButtonColor.login}
             loginAction={loginAction}
-            loading={loading}
           />
         </LoginWrapper>
         <Legal>
