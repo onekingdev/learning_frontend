@@ -39,7 +39,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
 
   // state to store all links for current category cards
   const [allCards, setAllCards] = useState<
-    Array<{tier: string; category: {name: string}; owned: boolean}>
+    Array<{tier: string; category: {name: string}}>
   >([]);
 
   // get all cards from server on page loading
@@ -53,7 +53,6 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
           setAllCards([]);
         } else {
           setAllCards(collectibles);
-          console.log('collectibles:', allCards)
         }
       }
     };
@@ -101,7 +100,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
     const tempActives = [];
     for (const gemtitle of gemTitles) {
       const active: boolean = allCards.some(
-        allcard => allcard.tier === gemtitle && allcard.owned === true
+        allcard => allcard.tier === gemtitle
       );
       tempActives.push(active);
     }
@@ -137,7 +136,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
             select={callbackCardSelect}
             category={item.name}
             purchased={allCards.some(
-              onecard => onecard.category.name === item.name && onecard.owned === true
+              onecard => onecard.category.name === item.name
             )}
             isSelected={item.name === card}
           />

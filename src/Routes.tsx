@@ -162,7 +162,7 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/parent/payment">
             <Payment />
           </PrivateRoute>
-          <PrivateRoute loading={true} path="/parent/create">
+          <PrivateRoute loading={true} path="/parent/create" requireAuth={false}>
             <CreateParent />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/kids/list">
