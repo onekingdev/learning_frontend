@@ -150,6 +150,7 @@ const CreateParent: FC = () => {
               <Grid item xs={12}>
                 <TextField
                   label="Password"
+                  type="password"
                   onChange={e => {
                     setPassword(e.target.value);
                     handleFormChange(
@@ -164,6 +165,7 @@ const CreateParent: FC = () => {
               <Grid item xs={12} md={12}>
                 <TextField
                   label="Confirm Password"
+                  type="password"
                   onChange={e => {
                     setConfPassword(e.target.value);
                     handleFormChange(
