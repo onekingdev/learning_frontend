@@ -15,10 +15,7 @@ export const OWNED_CARDS_QUERY = `{
     id
     name
     tier
-    description {
-      key
-      value
-    }
+    description
     category {
       name
     }

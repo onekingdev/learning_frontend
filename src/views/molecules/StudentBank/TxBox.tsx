@@ -5,6 +5,7 @@ import {ScreenSize} from '../../screenSize';
 import { Grid } from '@mui/material';
 
 import { GridItem, Input } from './Style';
+import { LSWhiteTextButton } from '../Setting/utils/Style';
 import { BasicColor } from '../../Color';
 import { withDraw, deposit } from 'app/actions/bankActions'
 import { useDispatch } from 'react-redux'
