@@ -1,19 +1,15 @@
 import * as TYPE from '../types';
-import {IEarning} from '../entities/earning';
+
 const INITIAL_STATE = {
-    accessories: null,
+    accessory: null,
     head: null,
     clothes: null,
-    pants: null
+    pants: null,
+    skin: null
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
-const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: IEarning}) => {
+const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: string}) => {
   switch (action.type) {
-    case TYPE.AVATAR_SET_DATA:
-      return {
-        ...state,
-        ...action.payload
-      };
     case TYPE.AVATAR_SET_ACCESORY:
       return {
         ...state,
