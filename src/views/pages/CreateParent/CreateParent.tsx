@@ -18,8 +18,7 @@ import {
   ContactBody,
 } from './Style';
 import mutationFetch from '../../../api/mutations/get';
-import { CREATE_GUARDIAN } from '../../../api/mutations/guardians';
-import { createGuardian } from '../../../app/actions/guardianActions'
+import {CREATE_GUARDIAN} from '../../../api/mutations/guardians';
 import { useSnackbar } from 'notistack';
 import {LoadingContext} from 'react-router-loading';
 
@@ -32,7 +31,6 @@ const CreateParent: FC = () => {
   const language = 'en';
 
   useEffect(() => {
-    console.log("use effect")
     loadingContext.done()
   }, [])
 
@@ -62,46 +60,37 @@ const CreateParent: FC = () => {
 
     setLoading(true);
 
-    // const res: any = await mutationFetch(
-    //   CREATE_GUARDIAN(email, userName, password)
-    // ).catch(() => ({success: 'false'}));
+    const res: any = await mutationFetch(
+      CREATE_GUARDIAN(email, userName, password)
+    ).catch(() => ({success: 'false'}));
 
-    // setLoading(false);
-
-    // if (res.success === false) {
-    //   setErrMsg('Network Error!');
-    //   enqueueSnackbar('Network Error!', {variant: 'error'});
-    //   return;
-    // }
-
-    // const result: any = await res.json();
-
-    // if (result.errors) {
-    //   setErrMsg(result.errors[0].message);
-    //   enqueueSnackbar(`Creation Failed! ${result.errors[0].message}`, {
-    //     variant: 'error',
-    //   });
-    //   return;
-    // }
-
-    // enqueueSnackbar('Successfully Created!', {variant: 'success'});
-
-    // const { user, token, refreshToken} =
-    //   result.data.createGuardian;
-    // dispatch({
-    //   type: TYPES.USER_SET_DATA,
-    //   payload: {...user, token: token, refreshToken: refreshToken},
-    // });
-    // history.push('/parent/payment');
-    const result: any = await createGuardian(email, userName, password, dispatch)
     setLoading(false);
 
-    if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
+    if (res.success === false) {
+      setErrMsg('Network Error!');
+      enqueueSnackbar('Network Error!', {variant: 'error'});
       return;
     }
-    history.push('/parent/payment');
 
+    const result: any = await res.json();
+
+    if (result.errors) {
+      setErrMsg(result.errors[0].message);
+      enqueueSnackbar(`Creation Failed! ${result.errors[0].message}`, {
+        variant: 'error',
+      });
+      return;
+    }
+
+    enqueueSnackbar('Successfully Created!', {variant: 'success'});
+
+    const { user, token, refreshToken} =
+      result.data.createGuardian;
+    dispatch({
+      type: TYPES.USER_SET_DATA,
+      payload: {...user, token: token, refreshToken: refreshToken},
+    });
+    history.push('/parent/payment');
   };
 
   const formValidation = () => {
@@ -160,7 +149,6 @@ const CreateParent: FC = () => {
               <Grid item xs={12}>
                 <TextField
                   label="Password"
-                  type="password"
                   onChange={e => {
                     setPassword(e.target.value);
                     handleFormChange(
@@ -175,7 +163,6 @@ const CreateParent: FC = () => {
               <Grid item xs={12} md={12}>
                 <TextField
                   label="Confirm Password"
-                  type="password"
                   onChange={e => {
                     setConfPassword(e.target.value);
                     handleFormChange(
