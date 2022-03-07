@@ -4,10 +4,10 @@ import { parseSVG, fetchFile } from './ColorUtil'
 
 interface SvgProps {
   url: string
-  skinTone?: number
+  skinTone?: string
 }
 
-export const AvatarWithSkinTone: FC<SvgProps> = ({ url, skinTone }) => {
+export const AvatarItemWithSkinTone: FC<SvgProps> = ({ url, skinTone }) => {
   const [img, setImg] = useState('')
 
   const updateAvatar = async () => {

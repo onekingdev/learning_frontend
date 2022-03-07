@@ -32,13 +32,13 @@ margin: 5px;
 `
 
 interface ColorPickerProp {
-  select: (value: number) => void
+  select: (value: string) => void
 }
 
 export const ColorPickerDropdown: FC<ColorPickerProp> = ({ select }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
-  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(SKIN_PICKER[0].hex);
 
   const onOptionClicked = (value: any) => () => {
     setSelectedOption(value);
@@ -52,15 +52,14 @@ export const ColorPickerDropdown: FC<ColorPickerProp> = ({ select }) => {
         <div style={{display: 'flex', justifyContent: 'center'}}>
           <ArrowDropDownIcon onClick={toggling} sx={isOpen ? {} : {display: 'none'}} color="primary" />
         </div>
-        <ColorCircle style={isOpen ? { display: 'none' } : { background: SKIN_PICKER[selectedOption].hex }} onClick={toggling}></ColorCircle>
+        <ColorCircle style={isOpen ? { display: 'none' } : { background: selectedOption }} onClick={toggling}></ColorCircle>
         {
           isOpen && (
             SKIN_PICKER.map(option => (
-              <ColorCircle style={{ background: option.hex }} onClick={onOptionClicked(option.value)} key={Math.random()}></ColorCircle>
+              <ColorCircle style={{ background: option.hex }} onClick={onOptionClicked(option.hex)} key={option.hex}></ColorCircle>
             ))
           )
         }
-
       </div>
       {
         isOpen ? null : <ArrowDropDownIcon onClick={toggling} color="primary" />

@@ -30,4 +30,11 @@ export const AVATAR = `
         ${AVATAR_PURCHASE_TRANSACTION}
     }
 `
+export const SIMPLE_AVATAR = `
+    id
+    typeOf
+    name
+    image
+    price
+`
 

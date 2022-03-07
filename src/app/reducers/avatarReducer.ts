@@ -7,7 +7,7 @@ const INITIAL_STATE = {
     pants: null,
     skin: null
 };
-// const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
+
 const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: string}) => {
   switch (action.type) {
     case TYPE.AVATAR_SET_ACCESORY:
