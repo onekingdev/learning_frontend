@@ -30,9 +30,7 @@ import {
  } from './Style'
 import StripeInput from './StripeInput';
 import countryList from 'react-select-country-list';
-import jQuery from 'jquery'
-const $: any = jQuery;
-// declare let $: any;
+
 
 type PaymentFormProps = {
   isUpdate: boolean
@@ -133,7 +131,10 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   }
 
   const handleOrder = async (plansDetail:any = null) => {
-    if(!formValidation()) return {success: false, result: 'Validation Failed'};
+
+    if(!formValidation()) {
+        return {success: false, result: 'Validation Failed'};
+    }
     if(!stripe) return {success: false, result: "Can't get stripe"};
     if(!elements) return {success: false, result: "Can't get element"};
     // if(!elements.getElement(CardNumberElement)) return {success: false, result: "Can't get card number element"};

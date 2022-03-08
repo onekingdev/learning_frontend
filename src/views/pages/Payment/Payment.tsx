@@ -57,6 +57,7 @@ export const Payment: FC = () => {
       year: 0,
     },
   });
+  const [isSpecialCode, setIsSpecialCode] = useState(true)
 
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [offRate, setOffRate] = useState(50);
@@ -174,6 +175,7 @@ export const Payment: FC = () => {
             onChange={(childrenCount, plan) =>
               onChangePackage('Gold', childrenCount, plan)
             }
+            isSpecialCode = {isSpecialCode}
           />
           <PackagePanel
             type="Combo"
@@ -181,6 +183,8 @@ export const Payment: FC = () => {
             onChange={(childrenCount, plan) =>
               onChangePackage('Combo', childrenCount, plan)
             }
+            disabled = {isSpecialCode}
+            isSpecialCode = {isSpecialCode}
           />
           <PackagePanel
             type="Sole"
@@ -188,16 +192,21 @@ export const Payment: FC = () => {
             onChange={(childrenCount, plan) =>
               onChangePackage('Sole', childrenCount, plan)
             }
+            disabled = {isSpecialCode}
+            isSpecialCode = {isSpecialCode}
           />
         </PackageContainer>
-        <Alert severity="info" className="m-b-35" style={{width: '72%'}}>
-          Add 2nd kid with {offRate}% off
-        </Alert>
+        {!isSpecialCode &&
+          <Alert severity="info" className="m-b-35" style={{width: '72%'}}>
+            Add 2nd kid with {offRate}% off
+          </Alert>
+        }
         <Elements stripe={stripePromise}>
           {showPaymentMethod && (
             <PaymentMethod
               plans = {plans}
               offRate={offRate}
+              isSpecialCode={isSpecialCode}
             />
           )}
         </Elements>

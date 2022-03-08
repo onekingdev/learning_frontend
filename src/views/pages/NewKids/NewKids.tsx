@@ -63,6 +63,7 @@ const NewKids: FC = () => {
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
   const [grade, setGrade] = useState('');
+  const [specialCode, setSpecialCode] = useState('')
   const [childNum, setChildNum] = useState(0);
   const [childIdx, setChildIdx] = useState(0);
   const [childs, setChilds] = useState([{}]);
@@ -465,7 +466,7 @@ const NewKids: FC = () => {
                     }
                     displayEmpty={true}
                   >
-                    {grades.length && grades.length > 0 && grades.map((value: any, index: number) => (
+                    {grades?.length && grades.length > 0 && grades.map((value: any, index: number) => (
                       <MenuItem value={value} key={index}>
                         {value.name}
                       </MenuItem>
@@ -486,6 +487,16 @@ const NewKids: FC = () => {
                   helperText={validateMsg.grade}
                   value={grade}
                 /> */}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="SPECIAL CODE"
+                  onChange={e => {
+                    setSpecialCode(e.target.value);
+                  }}
+                  value={specialCode}
+                  type="special code"
+                />
               </Grid>
               <Grid item xs={12} md={12} lg={6}>
                 {childIdx > 0 && (

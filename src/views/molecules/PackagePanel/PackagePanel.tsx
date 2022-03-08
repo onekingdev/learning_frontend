@@ -27,9 +27,10 @@ type PackagePanelProps = {
   type: string;
   price: any;
   disabled?: boolean;
+  isSpecialCode: boolean;
   onChange: (childrenCount: number, plan: string) =>void;
 };
-export const PackagePanel: FC<PackagePanelProps> = ({type, price, disabled=false, onChange}) => {
+export const PackagePanel: FC<PackagePanelProps> = ({type, price, isSpecialCode, disabled=false, onChange}) => {
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
@@ -63,14 +64,16 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, price, disabled=false
         {type === 'Sole' && 'Pick one Area of Knowledge'}
         </Tip>
         <>
-        <div className="flex flex-col p-t-10 p-b-15 font-s-20 font-w-7 w-300">
-          <b>Choose your plan</b>
-          <br />
-          <div className="flex flex-row" style={{flexWrap: 'unset'}}>
-            <Button bgColor={type === 'Gold' ? BasicColor.yellow : type === 'Combo' ? BasicColor.aqua : BasicColor.greenSoft} fontSize={16} value="Monthly" zIndex={2} onClick={()=>{setPlan('month')}} />
-            <Button fontSize={16} variant="outlined" color="black" borderColor="black" value="Yearly" margin="0 0 0 -64px" onClick={()=>{setPlan('year')}} />
+        { !isSpecialCode &&
+          <div className="flex flex-col p-t-10 p-b-15 font-s-20 font-w-7 w-300">
+            <b>Choose your plan</b>
+            <br />
+            <div className="flex flex-row" style={{flexWrap: 'unset'}}>
+              <Button bgColor={type === 'Gold' ? BasicColor.yellow : type === 'Combo' ? BasicColor.aqua : BasicColor.greenSoft} fontSize={16} value="Monthly" zIndex={2} onClick={()=>{setPlan('month')}} />
+              <Button fontSize={16} variant="outlined" color="black" borderColor="black" value="Yearly" margin="0 0 0 -64px" onClick={()=>{setPlan('year')}} />
+            </div>
           </div>
-        </div>
+        }
         <div className="flex flex-col p-t-10 p-b-15 font-s-20 font-w-7 w-300">
           <b>Number of Children</b>
           <br />
@@ -83,10 +86,12 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, price, disabled=false
           </div>
         </div>
         </>
-        <PriceContainer>
-          <Price> $ {price}</Price>
-          <Plan>/{plan}</Plan>
-        </PriceContainer>
+        { !isSpecialCode &&
+          <PriceContainer>
+            <Price> $ {price}</Price>
+            <Plan>/{plan}</Plan>
+          </PriceContainer>
+        }
       </Body>
     </Container>
   );

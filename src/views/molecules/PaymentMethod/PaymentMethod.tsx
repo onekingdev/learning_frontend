@@ -35,13 +35,14 @@ type PaymentMethodProps = {
         Sole: any,
     };
     offRate: number;
+    isSpecialCode: boolean;
 };
 interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): any;
     handleUpdate(): void;
 }
 // export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCounts, offRate}) => {
-export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate}) => {
+export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode}) => {
 
   const history = useHistory();
   const dispatch = useDispatch()
@@ -53,10 +54,13 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate}) => {
   const [subtotal, setSubtotal] = useState(0);
   const [couponPrice, setCouponPrice] = useState(0);
   const [agreeLicense, setAgreeLicense] = useState(false)
+  const [loading, setLoading] = useState(false)
 
 
   const handleOrder = async (event: any) => {
+    setLoading(true)
     const result = await paymentFormRef?.current?.handleOrder(plans, couponCode);
+    console.log("result is ", result)
     // test
     // dispatch({
     //     type: TYPES.GUARDIAN_SET_AVAILABLE_PLANS,
@@ -66,6 +70,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate}) => {
     // test end
     if(result.success) {
         enqueueSnackbar('Your subscription has been successfully created!', { variant: 'success' });
+        setLoading(false)
         // dispatch({
         //     type: TYPES.GUARDIAN_SET_AVAILABLE_PLANS,
         //     payload: plans,
@@ -74,6 +79,8 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate}) => {
     }
     else
         enqueueSnackbar(`Failed! ${result.msg}`, { variant: 'error' });
+    setLoading(false)
+
   }
 
   const applyCoupon = (e: any) => {
@@ -89,7 +96,18 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate}) => {
     const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0 ) * plans.Sole.currentPrice;
     setSubtotal( price_gold + price_combo + price_sole )
   }, [plans])
-
+  if(isSpecialCode)
+    return (
+        <Container>
+            <Button
+                bgColor={BasicColor.green}
+                onClick={handleOrder}
+                value="Place an Order"
+                weight={700}
+                loading = {loading}
+            />
+        </Container>
+    )
   return (
     <Container>
         <PaymentContainer>
@@ -174,6 +192,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate}) => {
                     value="Place an Order"
                     weight={700}
                     disabled={!agreeLicense}
+                    loading={loading}
                 />
             </OrderBody>
         </OrderContainer>

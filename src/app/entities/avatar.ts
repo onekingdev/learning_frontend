@@ -7,5 +7,7 @@ export interface IAvatar {
     firstName: string;
     lastName: string;
     fullName: string;
+    typeOf: string
     dob: Date;
+    id: number
   }
