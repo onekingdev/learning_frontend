@@ -57,8 +57,7 @@ export const Payment: FC = () => {
       year: 0,
     },
   });
-  const [isSpecialCode, setIsSpecialCode] = useState(true)
-
+  const [isSpecialCode, setIsSpecialCode] = useState(false)
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [offRate, setOffRate] = useState(50);
 

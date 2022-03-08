@@ -62,7 +62,7 @@ const NewKids: FC = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
-  const [grade, setGrade] = useState('');
+  const [grade, setGrade] = useState<any>();
   const [specialCode, setSpecialCode] = useState('')
   const [childNum, setChildNum] = useState(0);
   const [childIdx, setChildIdx] = useState(0);
@@ -155,7 +155,7 @@ const NewKids: FC = () => {
     setUserId('');
     setPassword('');
     setConfPassword('');
-    setGrade('');
+    setGrade({});
     setLoading(false)
   };
 
@@ -173,6 +173,7 @@ const NewKids: FC = () => {
       currentPackage.id,
       listSubjectId,
       studentPlan,
+      grade.id,
       user.token,
       dispatch
     );

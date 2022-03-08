@@ -142,6 +142,7 @@ export const createStudent = async (
   guardianStudentPlanId: number,
   listSubjectId: number[],
   studentPlan: number,
+  gradeId: number,
   token: string,
   dispatch: any
   ) => {
@@ -154,6 +155,7 @@ export const createStudent = async (
         guardianStudentPlanId,
         listSubjectId,
         studentPlan,
+        gradeId,
       ),
       token
   ).catch(() => ({success: false}));
