@@ -142,7 +142,8 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
 export const CardCategory: FC = () => {
   const user = useSelector((state: any) => state.user);
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true)
+
+
 
   useEffect(() => {
     let ignore = false;
@@ -157,7 +158,6 @@ export const CardCategory: FC = () => {
           console.log('message:', names.msg);
         } else {
           setCategories(names);
-          setLoading(false)
         }
       }
     };
@@ -170,14 +170,7 @@ export const CardCategory: FC = () => {
 
   return (
     <>
-      {
-        loading ?
-        <LoadingContainer>
-          <ReactLoading type="bars" color={BasicColor.green} />
-        </LoadingContainer>
-        :
-        <CardContainer cards={categories} />
-      }
+      <CardContainer cards={categories} />
     </>
   );
 };

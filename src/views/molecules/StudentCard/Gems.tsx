@@ -37,7 +37,7 @@ export const Gems: FC<GemsProps> = ({select, actives}) => {
       {
         gems.map((gem, index) => (
           <StyledGem onClick={() => onGemClick(index)} key={index}>
-            <img src={actives[index] ? gem : gem_disabled} style={gemTitles[index] === selected ? {transform: 'translateY(-5px)'}: {}}/>
+            <img src={actives[index] ? gem : gem_disabled} style={gemTitles[index] === selected ? {transform: 'rotate(90deg)'}: {}}/>
             <p>{gemTitles[index]}</p>
           </StyledGem>
         ))

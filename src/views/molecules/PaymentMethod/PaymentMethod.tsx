@@ -10,6 +10,7 @@ import Button from '../../molecules/MuiButton'
 import TextField from '../../molecules/MuiTextField'
 import {ButtonColor, shadeColor, BasicColor} from '../../Color';
 import {PaymentForm} from './PaymentForm'
+
 import {
   useStyles,
   Container,
@@ -26,29 +27,22 @@ import {
   OrderItemContent,
   OrderTip,
  } from './Style'
+
 type PaymentMethodProps = {
-    prices: {
-        Gold: number,
-        Combo: number,
-        Sole: number,
-    };
     plans : {
-        Gold: string,
-        Combo: string,
-        Sole: string,
-    };
-    childrenCounts: {
-        Gold: number,
-        Combo: number,
-        Sole: number,
+        Gold: any,
+        Combo: any,
+        Sole: any,
     };
     offRate: number;
 };
 interface PaymentFormFunc {
-    handleOrder(coupon: string, price: number): any;
+    handleOrder(plans: any, coupon: string): any;
     handleUpdate(): void;
 }
-export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCounts, offRate}) => {
+// export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCounts, offRate}) => {
+export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate}) => {
+
   const history = useHistory();
   const dispatch = useDispatch()
   const classes = useStyles();
@@ -62,14 +56,24 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCo
 
 
   const handleOrder = async (event: any) => {
-    const result = await paymentFormRef?.current?.handleOrder(couponCode, 0);
-    console.log(result);
+    const result = await paymentFormRef?.current?.handleOrder(plans, couponCode);
+    // test
+    // dispatch({
+    //     type: TYPES.GUARDIAN_SET_AVAILABLE_PLANS,
+    //     payload: plans,
+    // });
+    // history.push('/kids/new')
+    // test end
     if(result.success) {
         enqueueSnackbar('Your subscription has been successfully created!', { variant: 'success' });
+        // dispatch({
+        //     type: TYPES.GUARDIAN_SET_AVAILABLE_PLANS,
+        //     payload: plans,
+        // });
         history.push('/kids/new')
     }
     else
-        enqueueSnackbar(`Failed! ${result.result}`, { variant: 'error' });
+        enqueueSnackbar(`Failed! ${result.msg}`, { variant: 'error' });
   }
 
   const applyCoupon = (e: any) => {
@@ -80,11 +84,11 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCo
   }, []);
 
   useEffect(() => {
-        const price_gold = prices.Gold / 100 * offRate * ((childrenCounts.Gold - 1 > 0) ? (childrenCounts.Gold - 1) : 0) + (childrenCounts.Gold > 0 ? 1 : 0 ) * prices.Gold;
-        const price_combo = prices.Combo / 100 * offRate * ((childrenCounts.Combo - 1 > 0) ? (childrenCounts.Combo - 1) : 0) + (childrenCounts.Combo > 0 ? 1 : 0 ) * prices.Combo;
-        const price_sole = prices.Sole / 100 * offRate * ((childrenCounts.Sole - 1 > 0) ? (childrenCounts.Sole - 1) : 0) + (childrenCounts.Sole > 0 ? 1 : 0 ) * prices.Sole;
-        setSubtotal( price_gold + price_combo + price_sole )
-  }, [prices, childrenCounts])
+    const price_gold = plans.Gold.currentPrice / 100 * offRate * ((plans.Gold.childCount - 1 > 0) ? (plans.Gold.childCount - 1) : 0) + (plans.Gold.childCount > 0 ? 1 : 0 ) * plans.Gold.currentPrice;
+    const price_combo = plans.Combo.currentPrice / 100 * offRate * ((plans.Combo.childCount - 1 > 0) ? (plans.Combo.childCount - 1) : 0) + (plans.Combo.childCount > 0 ? 1 : 0 ) * plans.Combo.currentPrice;
+    const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0 ) * plans.Sole.currentPrice;
+    setSubtotal( price_gold + price_combo + price_sole )
+  }, [plans])
 
   return (
     <Container>
@@ -98,24 +102,24 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCo
             </OrderTitleContainer>
             <OrderBody>
                 {
-                    childrenCounts.Gold > 0 &&
+                    plans.Gold.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{childrenCounts.Gold} Gold Package </OrderItemTitle>
-                        <OrderItemContent>${prices.Gold} / {plans.Gold}</OrderItemContent>
+                        <OrderItemTitle>{plans.Gold.childCount} Gold Package </OrderItemTitle>
+                        <OrderItemContent>${plans.Gold.currentPrice} / {plans.Gold.period}</OrderItemContent>
                     </OrderItem>
                 }
                 {
-                    childrenCounts.Combo > 0 &&
+                   plans.Combo.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{childrenCounts.Combo} Combo Package </OrderItemTitle>
-                        <OrderItemContent>${prices.Combo} / {plans.Combo}</OrderItemContent>
+                        <OrderItemTitle>{plans.Combo.childCount} Combo Package </OrderItemTitle>
+                        <OrderItemContent>${plans.Combo.currentPrice} / {plans.Combo.period}</OrderItemContent>
                     </OrderItem>
                 }
                 {
-                    childrenCounts.Sole > 0 &&
+                    plans.Sole.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{childrenCounts.Sole} Sole Package </OrderItemTitle>
-                        <OrderItemContent>${prices.Sole} / {plans.Sole}</OrderItemContent>
+                        <OrderItemTitle>{plans.Sole.childCount} Sole Package </OrderItemTitle>
+                        <OrderItemContent>${plans.Sole.currentPrice} / {plans.Sole.period}</OrderItemContent>
                     </OrderItem>
                 }
                 <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>

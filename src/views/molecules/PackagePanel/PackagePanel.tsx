@@ -46,7 +46,6 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, price, disabled=false
   }
 
   useEffect(() => {
-    console.log('package panel', childrenCount, plan)
     onChange(childrenCount, plan);
   }, [childrenCount, plan]);
 
@@ -85,7 +84,7 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, price, disabled=false
         </div>
         </>
         <PriceContainer>
-          <Price> $ {price[plan]}</Price>
+          <Price> $ {price}</Price>
           <Plan>/{plan}</Plan>
         </PriceContainer>
       </Body>

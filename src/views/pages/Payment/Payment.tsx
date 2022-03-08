@@ -1,4 +1,5 @@
 import {FC, useEffect, useState, useContext} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Alert from '@mui/material/Alert';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
@@ -18,11 +19,30 @@ import science from '../../assets/packageIcons/science_gold.svg';
 import financial from '../../assets/packageIcons/financial_gold.svg';
 import health from '../../assets/packageIcons/health_gold.svg';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
-import {LoadingContext} from 'react-router-loading';
-
+import { LoadingContext } from 'react-router-loading';
+import { useSnackbar } from 'notistack';
+import { getPlans, createOrder } from '../../../app/actions/paymentActions'
 export const Payment: FC = () => {
   const loadingContext = useContext(LoadingContext);
-
+  const {enqueueSnackbar} = useSnackbar();
+  const user = useSelector((state: any) => state.user);
+  const [plans, setPlans] = useState<any>({
+    Gold: {
+      currentPrice: 0,
+      priceMonth: 0,
+      priceYear: 0
+    },
+    Combo: {
+      currentPrice: 0,
+      priceMonth: 0,
+      priceYear: 0
+    },
+    Sole: {
+      currentPrice: 0,
+      priceMonth: 0,
+      priceYear: 0
+    }
+  })
   const [prices, setPrices] = useState({
     Gold: {
       month: 0,
@@ -38,29 +58,27 @@ export const Payment: FC = () => {
     },
   });
 
-  const [childrenCount, setChildrenCount] = useState({
-    Gold: 0,
-    Sole: 0,
-    Combo: 0,
-  });
-
-  const [planType, setPlanType] = useState({
-    Gold: 'month',
-    Sole: 'month',
-    Combo: 'month',
-  });
-
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [offRate, setOffRate] = useState(50);
 
-  const setPackPrice = () => {
+  const setPackPrice = (plansData: any) => {
+
     /*------------ get package price data from db -S--------------*/
-    const gold_m = 19.99;
-    const gold_y = 19.99;
-    const combo_m = 14.99;
-    const combo_y = 14.99;
-    const sole_m = 5.99;
-    const sole_y = 5.99;
+    let gold_m = 19.99;
+    let gold_y = 19.99;
+    let combo_m = 14.99;
+    let combo_y = 14.99;
+    let sole_m = 5.99;
+    let sole_y = 5.99;
+    gold_m = plansData.Gold?.priceMonth;
+    gold_y = plansData.Gold?.priceYear;
+
+    combo_m = plansData.Combo?.priceMonth;
+    combo_y = plansData.Combo?.priceYear;
+
+    sole_m = plansData.Sole?.priceMonth;
+    sole_y = plansData.Sole?.priceYear;
+
     /*------------ get package price data from db -E--------------*/
 
     setPrices({
@@ -79,24 +97,39 @@ export const Payment: FC = () => {
     });
   };
 
-  const onChangePackage = (type: string, count: number, plan: string) => {
-    console.log('package is changing', type, count, plan);
-    let temp: any = {...childrenCount};
-    temp[type] = count;
-    if (JSON.stringify(temp) !== JSON.stringify(childrenCount))
-      setChildrenCount(temp);
-
-    temp = {...planType};
-    temp[type] = plan;
-    if (JSON.stringify(temp) !== JSON.stringify(planType)) setPlanType(temp);
-
+  const onChangePackage = (type: string, count: number, period: string) => {
+    plans[type].childCount = count;
+    plans[type].period = period;
+    plans[type].currentPrice = (period === "month" ? plans[type].priceMonth : plans[type].priceYear)
+    setPlans({...plans})
     setShowPaymentMethod(true);
   };
 
-  useEffect(() => {
-    setPackPrice();
-    setOffRate(50);
+  const setPlanData = async() => {
+    const result:any = await getPlans(user.token);
+    if(!result.success) {
+      enqueueSnackbar(result.msg, { variant: 'error' });
+      return;
+    }
+    const plans_re_object:any = {
+      Gold : [],
+      Combo: [],
+      Sole : []
+    };
+    for(const plan of result.data){
+      const name: any = plan.name;
+      plans_re_object[name] = plan;
+      plans_re_object[name].currentPrice = plan.priceMonth;
+    }
+    setPlans(plans_re_object)
+    setPackPrice(plans_re_object)
+
     loadingContext.done();
+  }
+
+  useEffect(() => {
+    setOffRate(50);
+    setPlanData();
   }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={true}>
@@ -137,21 +170,21 @@ export const Payment: FC = () => {
         <PackageContainer>
           <PackagePanel
             type="Gold"
-            price={prices.Gold}
+            price={plans.Gold.currentPrice}
             onChange={(childrenCount, plan) =>
               onChangePackage('Gold', childrenCount, plan)
             }
           />
           <PackagePanel
             type="Combo"
-            price={prices.Combo}
+            price={plans.Combo.currentPrice}
             onChange={(childrenCount, plan) =>
               onChangePackage('Combo', childrenCount, plan)
             }
           />
           <PackagePanel
             type="Sole"
-            price={prices.Sole}
+            price={plans.Sole.currentPrice}
             onChange={(childrenCount, plan) =>
               onChangePackage('Sole', childrenCount, plan)
             }
@@ -163,14 +196,7 @@ export const Payment: FC = () => {
         <Elements stripe={stripePromise}>
           {showPaymentMethod && (
             <PaymentMethod
-              prices={{
-                Gold: prices.Gold[planType.Gold === 'month' ? 'month' : 'year'],
-                Combo:
-                  prices.Combo[planType.Combo === 'month' ? 'month' : 'year'],
-                Sole: prices.Sole[planType.Sole === 'month' ? 'month' : 'year'],
-              }}
-              plans={planType}
-              childrenCounts={childrenCount}
+              plans = {plans}
               offRate={offRate}
             />
           )}

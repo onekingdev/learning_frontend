@@ -114,11 +114,9 @@ export const LSButton = styled(Button)<{
     @media screen and (max-width: 540px) {
       margin: 10px;
     }
-    &:hover {
-      // transform scale(1.01)
-      opacity: 0.8;
-      background-color: ${BasicColor.greenShadow}
-    }
+  }
+  &:hover {
+    transform scale(1.01)
   }
 `;
 export const LSButtonContainer = styled.div`
@@ -143,7 +141,7 @@ export const LSBlueTextButton = styled(Button)`
     @media screen and (max-width: 540px) {
       font-size: 0.8em;
     }
-  }
+  }  
 `;
 
 export const LSWhiteTextButton = styled(Button)`
@@ -156,7 +154,7 @@ export const LSWhiteTextButton = styled(Button)`
     @media screen and (max-width: 540px) {
       font-size: 0.8em;
     }
-  }
+  }  
 `;
 
 /*--------------------------------------------------------------------------------------------*/

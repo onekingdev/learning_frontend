@@ -70,7 +70,7 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
 
 export function Routes(props: any) {
   const location = useLocation();
-  const FadeIn = styled.div`
+  const FadeIn = styled.div `
     animation: 1.5s ${keyframes`${fadeIn}`} ;
   `;
 
@@ -114,10 +114,10 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
             <CardCollectible />
           </PrivateRoute> */}
-          <PrivateRoute loading={false} path="/collectibles/cards">
+          <PrivateRoute loading={true} path="/collectibles/cards">
             <Cards />
           </PrivateRoute>
-          <PrivateRoute loading={false} path="/collectibles/mycards">
+          <PrivateRoute loading={true} path="/collectibles/mycards">
             <MyCardCollection />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/bank">
@@ -162,7 +162,7 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/parent/payment">
             <Payment />
           </PrivateRoute>
-          <PrivateRoute loading={true} path="/parent/create">
+          <PrivateRoute loading={true} path="/parent/create" requireAuth={false}>
             <CreateParent />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/kids/list">

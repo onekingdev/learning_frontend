@@ -5,12 +5,15 @@ import { BasicColor } from '../../Color';
 
 import SavingsIcon from '@mui/icons-material/Savings';
 import { LSText, LSLabel } from '../Setting/utils/Style';
-import {numberWithCommas} from 'views/utils'
 
 interface BalanceProp {
   balance: number
 }
 export const AccountBalance: FC<BalanceProp> = ({ balance }) => {
+
+  const numberWithCommas = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 
   return (
     <BankPaper flex_direction='row' bg_color={BasicColor.blue} width={450}>
@@ -44,7 +47,7 @@ const BankPaper = styled.div<{
     width: 40vw;
     padding: 20px 35px 20px 35px;
   }
-
+  
   @media screen and (min-width: ${ScreenSize.tablet}) (max-width: ${ScreenSize.desktop}) {
     width: 40vw;
     padding: 20px 35px 20px 35px;

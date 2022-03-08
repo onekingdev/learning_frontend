@@ -34,6 +34,7 @@ const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         energyCharge: 0
       }
     case TYPE.EARNING_COIN_SET:
+      console.log("in reducer", action.payload)
       return {
         ...state,
         balance: action.payload
@@ -43,6 +44,7 @@ const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         ...state,
         balance: state.balance - action.payload.price
       }
+
     case TYPE.EXP_UPDATE:
       return {
         ...state,
