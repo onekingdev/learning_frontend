@@ -95,8 +95,14 @@ const WardrobeScroll = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   overflow-y: auto;
+
   &::-webkit-scrollbar {
     display: none;
+  }
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    width: 90vw;
+    height: 45vh;
+    grid-gap: 10px;
   }
 `;
 
@@ -118,6 +124,11 @@ const WardrobeAtom = styled.div<{
 
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    font-size: 15px;
+    width: calc( 80vw / 4 );
+    height: calc( 50vh / 4 ) ;
   }
 `;
 

@@ -13,7 +13,7 @@ export const NavPanelStyles = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 0;
+  z-index: 99;
   justify-content: flex-start;
   position: fixed;
   left: ${p => (p.state ? 0 : '-100px')};

@@ -2,6 +2,7 @@ import { FC, useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import wardrobe from 'views/assets/wardrobe.svg';
+import floor from 'views/assets/avatars/floor.png';
 import { LoadingContext } from 'react-router-loading';
 import { ScreenSize } from 'views/screenSize';
 
@@ -11,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import { AvatarFavorites } from './AvatarFavorites';
 import { doFetchFavoriteAvatars } from 'app/actions/avatarActions';
 import { AvatarSet } from '../AvatarSet';
+import { LeftDrawer } from './LeftDrawer';
 
 export const AvatarSelector: FC = () => {
 
@@ -65,20 +67,38 @@ export const AvatarSelector: FC = () => {
 
   return (
     <>
+      <TopDrawer> {/* This is displayed in mobile view only */}
+        <AvatarFavorites select={setCurrentAvatar} favorites={favories} />
+      </TopDrawer>
       <Container>
+        <div onClick={() => history.push('wardrobe')}>
+          <LeftDrawer />
+        </div>
         <Drawer src={wardrobe} onClick={() => history.push('wardrobe')} />
         <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} />
-          <IconButton style={{ position: 'absolute', bottom: '2vh', left: '30%' }} color='warning' aria-label='set favorite' component='span' onClick={setUserAvatar}>
-            <StarIcon style={{ transform: 'scale(2)' }} />
-          </IconButton>
-        <div style={{ position: 'relative' }}>
-          <Drawer src={wardrobe} />
-          <AvatarFavorites select={setCurrentAvatar} favorites={favories} />
+        <IconButton style={{ position: 'absolute', right: '12vw', bottom: '12vh' }} color='warning' aria-label='set favorite' component='span' onClick={setUserAvatar}>
+          <StarIcon style={{ transform: 'scale(2)' }} />
+        </IconButton>
+        <div style={{ position: 'relative' }} className='favorites'>
+          <RightDrawer> {/* This is displayed in desktop view only */}
+            <AvatarFavorites select={setCurrentAvatar} favorites={favories} />
+          </RightDrawer>
+          <Floor src={floor} />
         </div>
       </Container>
     </>
   );
 };
+
+const Floor = styled.img`
+  margin-left: -10px;
+  margin-right: -10px;
+  width: calc( 100% + 20px);
+  height: 15px;
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    display: none;
+  }
+`
 
 const Container = styled.div`
   display: flex;
@@ -86,18 +106,52 @@ const Container = styled.div`
   justify-content: space-evenly;
   margin: 2vh 10vw 2vh 10vw;
   align-items: center;
+  // .favorites {
+  //   @media screen and (max-width: ${ScreenSize.phone}) {
+  //     display:none;
+  //   }
+  // }
   @media screen and (max-width: ${ScreenSize.phone}) {
-
+    margin: 5vh 0 10vh 0;
+    width: 100%;
+    justify-content: center;
   }
 `;
 
+export const TopDrawer = styled.div`
+display: none;
+@media screen and (max-width: ${ScreenSize.phone}) {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: calc((100vw - 30px ) / 4);
+  background: #5C2B0C;
+  width: 100%;
+  column-gap: 10px;
+  z-index: 1;
+}
+`
+
+const RightDrawer = styled.div`
+  display: grid;
+  padding: 10px 15px 10px 15px;
+  min-height: 400px;
+  min-width: 100px;
+  grid-template-rows: repeat(4, 1fr);
+  background: rgb(92,43,12);
+  background: linear-gradient(90deg, rgba(92,43,12,1) 0%, rgba(205,112,53,1) 4%, rgba(92,43,12,1) 15%, rgba(92,43,12,1) 94%, rgba(174,93,42,1) 99%);
+  row-gap: 10px;
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    display: none;
+  }
+`
 const Drawer = styled.img`
-  position: relative;
-  justify-self: end;
-  align-self: end;
-  height: 130px;
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    height: 100%;
-    max-height: 480px;
+  display: none;
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    display: block;
+    height: 130px;
+    position: absolute;
+    left: 10vw;
+    bottom: 10vh;
+    z-index: 20;
   }
 `;

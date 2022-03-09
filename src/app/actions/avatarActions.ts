@@ -16,8 +16,10 @@ export const doPurchaseAvatarItem = async (avatarId: number, studentId: number, 
         PURCHASE_AN_AVATAR_ITEM(avatarId, studentId),
         token
     );
-
-    return res.msg ? false : true;
+    // if(res.msg){
+    //     console.log(res.msg)
+    // }
+    return res.msg ? console.log(res.msg) : true;
 }
 
 export const doSetFavoriteAvatar = async (studentId: number, accessoryId: number, headId: number, clothesId: number, footerId: number, skinTone:string, token: string) => {

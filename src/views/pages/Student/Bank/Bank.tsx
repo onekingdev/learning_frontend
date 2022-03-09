@@ -16,6 +16,7 @@ import { AccountBalance } from 'views/molecules/StudentBank/AccountBalance';
 import { TxBox } from 'views/molecules/StudentBank/TxBox';
 import { TxHistoryTable } from 'views/molecules/StudentBank/TxHistoryTable';
 import { Interest } from 'views/molecules/StudentBank/Interest';
+import { PageTitle } from 'views/molecules/PageTitle';
 
 export const Bank: FC = () => {
 
@@ -31,9 +32,10 @@ export const Bank: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        <BankTitle>
-          <Title>Bank</Title>
-        </BankTitle>
+        {/* <BankTitle> */}
+          <PageTitle title='BANK'/>
+          {/* <Title>Bank</Title> */}
+        {/* </BankTitle> */}
         <div >
           <Grid container >
             <Grid container item xs={12} md={6} sx={{'&.MuiGrid-root': {alignContent: 'space-evenly'}}}>

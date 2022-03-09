@@ -1,7 +1,7 @@
 import {FC, useEffect, useState, useContext} from 'react';
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
 import {useHistory} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {useStyles, Subjects, Subject, SubjectIcon, SubjectTitle} from './Style';
@@ -38,10 +38,6 @@ import science_sole from '../../assets/packageIcons/science_sole.svg';
 import financial_sole from '../../assets/packageIcons/financial_sole.svg';
 import health_sole from '../../assets/packageIcons/health_sole.svg';
 import {LoadingContext} from 'react-router-loading';
-import { createStudent } from '../../../app/actions/studentActions'
-import { getGrades } from '../../../app/actions/gradeActions'
-
-import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 const NewKids: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -50,49 +46,19 @@ const NewKids: FC = () => {
   const dispatch = useDispatch();
   const language = 'en';
   const classes = useStyles();
-  const guardian = useSelector((state:any) => state.guardian)
-  const user = useSelector((state: any) => state.user)
-  const grades = useSelector((state: any) => state.grade)
-  const { enqueueSnackbar } = useSnackbar();
 
-  const [availablePackages, setAvailablePackages] = useState<any[]>([]);
-  const [currentPackage, setCurrentPackage] = useState<any>();
+  const [availablePackages, setAvailablePackages] = useState<string[]>([]);
+  const [packageName, setPackageName] = useState<string>('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
-  const [grade, setGrade] = useState<any>();
-  const [specialCode, setSpecialCode] = useState('')
+  const [grade, setGrade] = useState('');
   const [childNum, setChildNum] = useState(0);
   const [childIdx, setChildIdx] = useState(0);
   const [childs, setChilds] = useState([{}]);
   const [paths, setPaths] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
-
-  const subjectIcons:any = {
-    Gold: {
-      MATH: math_gold,
-      ELA: ela_gold,
-      SCIENCE: science_gold,
-      FINANCIAL: financial_gold,
-      HEALTH: health_gold
-    },
-    Combo: {
-      MATH: math_combo,
-      ELA: ela_combo,
-      SCIENCE: science_combo,
-      FINANCIAL: financial_combo,
-      HEALTH: health_combo
-    },
-    Sole: {
-      MATH: math_sole,
-      ELA: ela_sole,
-      SCIENCE: science_sole,
-      FINANCIAL: financial_sole,
-      HEALTH: health_sole
-    }
-  }
 
   const handleCheckPath = (path: string, isChecked: boolean) => {
     console.log(path, isChecked);
@@ -120,26 +86,28 @@ const NewKids: FC = () => {
   };
 
   const handlePrev = () => {};
-  const handleNext = async () => {
+  const handleNext = () => {
     if (!formValidation()) return;
-    console.log(childIdx)
-    // return;
-    // if (childIdx === childNum) {
-    //   saveChild(childs[childIdx]);
-    //   return;
-    // }
-    setLoading(true)
-
-    if(!await saveChild()) {
-      setLoading(false)
+    if (childIdx === childNum) {
+      saveChild();
       return;
     }
 
     const temp = [...availablePackages];
-    const inex = temp.indexOf(currentPackage);
+    const inex = temp.indexOf(packageName);
     delete temp[inex];
     setAvailablePackages(temp);
-
+    setChilds([
+      ...childs,
+      {
+        package: packageName,
+        firstName: firstName,
+        lastName: lastName,
+        userId: userId,
+        password: password,
+        grade: grade,
+      },
+    ]);
     setChildIdx(childIdx + 1);
     setValidateMsg({
       firstName: null,
@@ -149,54 +117,17 @@ const NewKids: FC = () => {
       confPassword: null,
       grade: null,
     });
-    setCurrentPackage(temp[0]);
+    setPackageName(temp[0]);
     setFirstName('');
     setLastName('');
     setUserId('');
     setPassword('');
     setConfPassword('');
-    setGrade({});
-    setLoading(false)
+    setGrade('');
   };
 
-  const saveChild = async () => {
-    console.log(currentPackage, paths)
-    const listSubjectId: number[] = [];
-    const studentPlan = 1;
-    for(const path of paths)
-      listSubjectId.push(parseInt(path.id));
-    const result:any = await createStudent(
-      firstName,
-      lastName,
-      userId,
-      password,
-      currentPackage.id,
-      listSubjectId,
-      studentPlan,
-      grade.id,
-      user.token,
-      dispatch
-    );
-    if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-    setChilds([
-      ...childs,
-      {
-        package: currentPackage,
-        firstName: firstName,
-        lastName: lastName,
-        userId: userId,
-        password: password,
-        grade: grade,
-        currentPackage_id: currentPackage.id,
-        listSubjectId: listSubjectId,
-        studentPlan: studentPlan,
-      },
-    ]);
-    return true;
-    // history.push('/kids/list');
+  const saveChild = () => {
+    history.push('/kids/list');
   };
 
   const formValidation = () => {
@@ -211,32 +142,11 @@ const NewKids: FC = () => {
     setValidateMsg(validateMsgTemp);
     return valiResult;
   };
-
-  const setGradeData = async () => {
-    const result:any = await getGrades(
-      user.token,
-      dispatch
-    );
-    if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      loadingContext.done();
-      return false;
-    }
-    loadingContext.done();
-    return true;
-  }
   useEffect(() => {
-    const guardianStudentPlans = guardian.guardianstudentplanSet;
-    const temp_availblePlans = [];
-
-    for(const guardianStudentPlan of guardianStudentPlans) {
-      temp_availblePlans.push(guardianStudentPlan.plan)
-    }
-
-    setAvailablePackages(guardianStudentPlans);
-    setChildNum(guardianStudentPlans.length);
-    setGradeData();
-
+    setAvailablePackages(['Gold', 'Sole', 'Combo']);
+    setPackageName(availablePackages[0]);
+    setChildNum(2);
+    loadingContext.done();
   }, []);
 
   return (
@@ -263,20 +173,18 @@ const NewKids: FC = () => {
                   <Select
                     labelId="select-package-label"
                     id="select-package"
-                    value={currentPackage ? currentPackage : ''}
+                    value={packageName ? packageName : ''}
                     label="Select Your Package"
                     className={`${classes.select} ${
-                      currentPackage?.plan?.name === 'Gold'
+                      packageName === 'Gold'
                         ? classes.goldInput
-                        : currentPackage?.plan?.name === 'Combo'
+                        : packageName === 'Combo'
                         ? classes.comboInput
                         : classes.soleInput
                     } err-border`}
                     onChange={e => {
-                      console.log("target", e.target.value, e.target.value.length)
-                      setCurrentPackage(e.target.value);
+                      setPackageName(e.target.value);
                       setPaths([]);
-                      if(e.target.value === 'Gold') setPaths(currentPackage?.plan?.subjects)
                       handleFormChange(
                         'packageName',
                         e.target.value.length === 0 ? 'Field is required' : ''
@@ -295,7 +203,7 @@ const NewKids: FC = () => {
                   >
                     {availablePackages.map((value, index) => (
                       <MenuItem value={value} key={index}>
-                        {value.plan.name}
+                        {value}
                       </MenuItem>
                     ))}
                   </Select>
@@ -303,56 +211,216 @@ const NewKids: FC = () => {
                 </FormControl>
               </Grid>
               <Grid item xs={12} className="font-s-20">
-                {currentPackage?.plan?.name === 'Gold' && ''}
-                {currentPackage?.plan?.name === 'Combo' && 'Pick Two'}
-                {currentPackage?.plan?.name === 'Sole' && 'Pick One'}
+                {packageName === 'Gold' && ''}
+                {packageName === 'Combo' && 'Pick Two'}
+                {packageName === 'Sole' && 'Pick One'}
               </Grid>
-              {currentPackage && (
+              {packageName && (
                 <Grid item xs={12}>
-                  <Subjects color={currentPackage?.plan?.name}>
-                    {currentPackage?.plan?.subjects.map((subject:any, index:number) => (
-                        <Subject key={index}>
-                          {currentPackage?.plan?.name === 'Gold' && (
-                            <SubjectIcon src={subjectIcons.Gold[subject?.name.split(" ")[0].toUpperCase()]} />
-                          )}
-                          {currentPackage?.plan?.name === 'Combo' && (
-                            <>
-                              <Checkbox
-                                sx={{
-                                  color: BasicColor.aqua,
-                                  '&.Mui-checked': {color: BasicColor.aqua},
-                                  padding: '0px',
-                                  paddingLeft: '9px',
-                                  paddingRight: '9px',
-                                }}
-                                onChange={e =>
-                                  handleCheckPath(subject, e.target.checked)
-                                }
-                                checked={paths.indexOf(subject) !== -1}
-                              />
-                              <SubjectIcon src={subjectIcons.Combo[subject?.name.split(" ")[0].toUpperCase()]} />
-                            </>
-                          )}
-                          {currentPackage?.plan?.name === 'Sole' && (
-                            <>
-                              <Radio
-                                value={subject}
-                                onClick={() => setPaths([subject])}
-                                checked={paths[0] === subject}
-                                sx={{
-                                  color: BasicColor.greenSoft,
-                                  '&.Mui-checked': {color: BasicColor.greenSoft},
-                                  padding: '0px',
-                                  paddingLeft: '9px',
-                                  paddingRight: '9px',
-                                }}
-                              />
-                              <SubjectIcon src={subjectIcons.Sole[subject?.name.split(" ")[0].toUpperCase()]} />
-                            </>
-                          )}
-                          <SubjectTitle>{subject.name}</SubjectTitle>
-                        </Subject>
-                        ))}
+                  <Subjects color={packageName}>
+                    <Subject>
+                      {packageName === 'Gold' && (
+                        <SubjectIcon src={math_gold} />
+                      )}
+                      {packageName === 'Combo' && (
+                        <>
+                          <Checkbox
+                            sx={{
+                              color: BasicColor.aqua,
+                              '&.Mui-checked': {color: BasicColor.aqua},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                            onChange={e =>
+                              handleCheckPath('Math', e.target.checked)
+                            }
+                            checked={paths.indexOf('Math') !== -1}
+                          />
+                          <SubjectIcon src={math_combo} />
+                        </>
+                      )}
+                      {packageName === 'Sole' && (
+                        <>
+                          <Radio
+                            value={'Math'}
+                            onClick={() => setPaths(['Math'])}
+                            checked={paths[0] === 'Math'}
+                            sx={{
+                              color: BasicColor.greenSoft,
+                              '&.Mui-checked': {color: BasicColor.greenSoft},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                          />
+                          <SubjectIcon src={math_sole} />
+                        </>
+                      )}
+                      <SubjectTitle>MATH</SubjectTitle>
+                    </Subject>
+                    <Subject>
+                      {packageName === 'Gold' && <SubjectIcon src={ela_gold} />}
+                      {packageName === 'Combo' && (
+                        <>
+                          <Checkbox
+                            sx={{
+                              color: BasicColor.aqua,
+                              '&.Mui-checked': {color: BasicColor.aqua},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                            onChange={e =>
+                              handleCheckPath('Ela', e.target.checked)
+                            }
+                            checked={paths.indexOf('Ela') !== -1}
+                          />
+                          <SubjectIcon src={ela_combo} />
+                        </>
+                      )}
+                      {packageName === 'Sole' && (
+                        <>
+                          <Radio
+                            value={'Ela'}
+                            onClick={() => setPaths(['Ela'])}
+                            checked={paths[0] === 'Ela'}
+                            sx={{
+                              color: BasicColor.greenSoft,
+                              '&.Mui-checked': {color: BasicColor.greenSoft},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                          />
+                          <SubjectIcon src={ela_sole} />
+                        </>
+                      )}
+                      <SubjectTitle>ELA + SIGHT WORDS</SubjectTitle>
+                    </Subject>
+                    <Subject>
+                      {packageName === 'Gold' && (
+                        <SubjectIcon src={science_gold} />
+                      )}
+                      {packageName === 'Combo' && (
+                        <>
+                          <Checkbox
+                            sx={{
+                              color: BasicColor.aqua,
+                              '&.Mui-checked': {color: BasicColor.aqua},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                            onChange={e =>
+                              handleCheckPath('Science', e.target.checked)
+                            }
+                            checked={paths.indexOf('Science') !== -1}
+                          />
+                          <SubjectIcon src={science_combo} />
+                        </>
+                      )}
+                      {packageName === 'Sole' && (
+                        <>
+                          <Radio
+                            value={'Science'}
+                            onClick={() => setPaths(['Science'])}
+                            checked={paths[0] === 'Science'}
+                            sx={{
+                              color: BasicColor.greenSoft,
+                              '&.Mui-checked': {color: BasicColor.greenSoft},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                          />
+                          <SubjectIcon src={science_sole} />
+                        </>
+                      )}
+                      <SubjectTitle>SCIENCE</SubjectTitle>
+                    </Subject>
+                    <Subject>
+                      {packageName === 'Gold' && (
+                        <SubjectIcon src={financial_gold} />
+                      )}
+                      {packageName === 'Combo' && (
+                        <>
+                          <Checkbox
+                            sx={{
+                              color: BasicColor.aqua,
+                              '&.Mui-checked': {color: BasicColor.aqua},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                            onChange={e =>
+                              handleCheckPath('Financial', e.target.checked)
+                            }
+                            checked={paths.indexOf('Financial') !== -1}
+                          />
+                          <SubjectIcon src={financial_combo} />
+                        </>
+                      )}
+                      {packageName === 'Sole' && (
+                        <>
+                          <Radio
+                            value={'Financial'}
+                            onClick={() => setPaths(['Financial'])}
+                            checked={paths[0] === 'Financial'}
+                            sx={{
+                              color: BasicColor.greenSoft,
+                              '&.Mui-checked': {color: BasicColor.greenSoft},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                          />
+                          <SubjectIcon src={financial_sole} />
+                        </>
+                      )}
+                      <SubjectTitle>FINANCIAL LITERACY</SubjectTitle>
+                    </Subject>
+                    <Subject>
+                      {packageName === 'Gold' && (
+                        <SubjectIcon src={health_gold} />
+                      )}
+                      {packageName === 'Combo' && (
+                        <>
+                          <Checkbox
+                            sx={{
+                              color: BasicColor.aqua,
+                              '&.Mui-checked': {color: BasicColor.aqua},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                            onChange={e =>
+                              handleCheckPath('Health', e.target.checked)
+                            }
+                            checked={paths.indexOf('Health') !== -1}
+                          />
+                          <SubjectIcon src={health_combo} />
+                        </>
+                      )}
+                      {packageName === 'Sole' && (
+                        <>
+                          <Radio
+                            value={'Health'}
+                            onClick={() => setPaths(['Health'])}
+                            checked={paths[0] === 'Health'}
+                            sx={{
+                              color: BasicColor.greenSoft,
+                              '&.Mui-checked': {color: BasicColor.greenSoft},
+                              padding: '0px',
+                              paddingLeft: '9px',
+                              paddingRight: '9px',
+                            }}
+                          />
+                          <SubjectIcon src={health_sole} />
+                        </>
+                      )}
+                      <SubjectTitle>HEALTH & SAFETY</SubjectTitle>
+                    </Subject>
                   </Subjects>
                 </Grid>
               )}
@@ -414,7 +482,6 @@ const NewKids: FC = () => {
                   error={!!validateMsg.password}
                   helperText={validateMsg.password}
                   value={password}
-                  type="password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -434,48 +501,10 @@ const NewKids: FC = () => {
                   error={!!validateMsg.confPassword}
                   helperText={validateMsg.confPassword}
                   value={confPassword}
-                  type="password"
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel id="select-grade-label">
-                    Select Your Grade
-                  </InputLabel>
-                  <Select
-                    labelId="select-grade-label"
-                    id="select-grade"
-                    value={grade ? grade : ''}
-                    label="Select Your Grade"
-                    className={`${classes.select} err-border`}
-                    onChange={e => {
-                      setGrade(e.target.value);
-                      console.log(e.target.value === undefined ? 'Field is required' : '')
-                      handleFormChange(
-                        'grade',
-                        ''
-                      );
-                    }}
-                    sx={
-                      validateMsg.grade
-                        ? {
-                            '& fieldset': {
-                              borderColor: `${BasicColor.red} !important`,
-                            },
-                          }
-                        : {}
-                    }
-                    displayEmpty={true}
-                  >
-                    {grades?.length && grades.length > 0 && grades.map((value: any, index: number) => (
-                      <MenuItem value={value} key={index}>
-                        {value.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  <div className="err-text">{validateMsg.grade}</div>
-                </FormControl>
-                {/* <TextField
+                <TextField
                   label="GRADE"
                   onChange={e => {
                     setGrade(e.target.value);
@@ -487,16 +516,6 @@ const NewKids: FC = () => {
                   error={!!validateMsg.grade}
                   helperText={validateMsg.grade}
                   value={grade}
-                /> */}
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="SPECIAL CODE"
-                  onChange={e => {
-                    setSpecialCode(e.target.value);
-                  }}
-                  value={specialCode}
-                  type="special code"
                 />
               </Grid>
               <Grid item xs={12} md={12} lg={6}>
@@ -518,7 +537,6 @@ const NewKids: FC = () => {
                   }
                   onClick={handleNext}
                   align="right"
-                  loading={loading}
                 />
               </Grid>
             </Grid>

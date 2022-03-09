@@ -35,8 +35,6 @@ const KidsList: FC = () => {
   // const dispatch = useDispatch();
   // const language = 'en';
   const user = useSelector((state: Store) => state.user);
-  const guardian = useSelector((state: any) => state.guardian)
-
   const kidAvatars = [kidA, kidB, kidC];
 
   const [children, setChildren] = useState<kid[]>([]);
@@ -61,10 +59,10 @@ const KidsList: FC = () => {
     console.log('Save button clicked!');
   };
   const Kid = (props: any) => {
-    const userName = props.user.username;
+    const userName = props.username
     // const [username, setUsername] = useState(props.username);
     // const [password, setPassword] = useState(props.password);
-    const [grade, setGrade] = useState(props.grade.name);
+    const [grade, setGrade] = useState(props.grade);
 
     // Open or close dialog state
     const [openLicense, setOpenLicense] = useState(false);
@@ -186,12 +184,6 @@ const KidsList: FC = () => {
   };
 
   useEffect(() => {
-
-  const students = guardian.guardianstudentSet
-  for(const guardianStudent of guardian.guardianstudentSet) {
-    setChildren([...children, guardianStudent.student])
-  }
-
     setChildren([
       {
         username: 'armin',
