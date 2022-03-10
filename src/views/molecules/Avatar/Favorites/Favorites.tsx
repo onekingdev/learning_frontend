@@ -110,6 +110,11 @@ const Container = styled.div`
   gap: 30px;
   margin: 2vh 10vw 2vh 10vw;
   align-items: center;
+  // .favorites {
+  //   @media screen and (max-width: ${ScreenSize.phone}) {
+  //     display:none;
+  //   }
+  // }
   @media screen and (max-width: ${ScreenSize.phone}) {
     margin: 5vh 0 10vh 0;
     width: 100%;
