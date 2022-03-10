@@ -45,10 +45,8 @@ export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
 const Drawer = styled.div`
   background: #A66B44;
   width: 120px;
-  height: 100px;
   @media screen and (max-width: ${ScreenSize.phone}) {
     width: 100%;
-    height: auto;
   }
 `
 const CenteredRoundIcon = styled.div`

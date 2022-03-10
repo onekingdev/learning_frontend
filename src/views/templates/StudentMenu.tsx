@@ -42,13 +42,13 @@ export const StudentMenu: FC = ({children}) => {
 const Template = styled.div`
   display: grid;
   grid-template-rows: calc(100vh - 60px) 60px;
-  @media (min-width: ${ScreenSize.phone}) {
+  @media (min-width: ${ScreenSize.tablet}) {
     grid-template-rows: 68px calc(100vh - 68px);
   }
 `;
 const TopMenuContainer = styled.div`
   display: none;
-  @media screen and (min-width: ${ScreenSize.phone}) {
+  @media screen and (min-width: ${ScreenSize.tablet}) {
     width: 100%;
     display: flex;
     justify-content: center;

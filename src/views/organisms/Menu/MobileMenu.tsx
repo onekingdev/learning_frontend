@@ -91,7 +91,6 @@ const MobileMenuStyles = styled.div`
 const MobileMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-  z-index: 100;
 `;
 
 const NavPanelContainer = styled.div`
