@@ -16,25 +16,3 @@ finishBlockPresentation( blockPresentationId: ${block_presentation_id}, errors: 
     }
 }
 `;
-
-export const CREATE_AI_BLOCK_PRESENTATION = (
-    aokId: number,
-    studentId: number,
-) => `
-createAiBlockPresentation( aokId: ${aokId}, studentId: ${studentId}) {
-    blockPresentation{
-        ${BLOCK_PRESENTATON}
-    }
-}
-`;
-
-export const CREATE_PATH_BLOCK_PRESENTATION = (
-    studentId: number,
-    topicId: number,
-) => `
-createPathBlockPresentation( studentId: ${studentId}, topicId: ${topicId}) {
-    blockPresentation{
-        ${BLOCK_PRESENTATON}
-    }
-}
-`;

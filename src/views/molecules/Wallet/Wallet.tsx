@@ -1,20 +1,20 @@
-import {FC, useState} from 'react';
-import {Icon} from '../../atoms/Icon/Icon';
-import {Balance} from '../../atoms/WalletBalance';
-import {BasicColor} from '../../Color';
+import { FC, useState } from 'react';
+import { Icon } from '../../atoms/Icon/Icon';
+import { Balance } from '../../atoms/WalletBalance';
+import { BasicColor } from '../../Color';
 import coins from '../../assets/coins.svg';
 import styled from 'styled-components';
-import {IconSize} from '../../atoms/Icon/Size';
-import {ScreenSize} from '../../screenSize';
-import {UserInfo} from '../../atoms/Text/UserInfo';
+import { IconSize } from '../../atoms/Icon/Size';
+import { ScreenSize } from '../../screenSize';
+import { UserInfo } from '../../atoms/Text/UserInfo';
 import { LSDialog } from '../Setting/LSDialog';
-import {WalletTxHistory} from './WalletTxs'
+import { WalletTxHistory } from './WalletTxs'
 
 type WalletProps = {
   balance: number;
 };
 
-export const Wallet: FC<WalletProps> = ({balance}) => {
+export const Wallet: FC<WalletProps> = ({ balance }) => {
   const [isDeploy, setIsDeploy] = useState(false);
   const userTransactions = [
     {
@@ -83,7 +83,7 @@ export const Wallet: FC<WalletProps> = ({balance}) => {
           {/* <DropdownIcon src={dropDownArrow} /> */}
         </WalletStyle>
         {isDeploy ? (
-          <LSDialog isOpen={isDeploy} open={deployDropdown} dialogContent={<WalletTxHistory/>} fullWidth='true' title='Transactions on this wallet'/>
+          <LSDialog isOpen={isDeploy} open={deployDropdown} dialogContent={<WalletTxHistory />} fullWidth='true' title='Transactions on this wallet' />
           // <WalletDropdownContainer>
           //   <WalletDropdown>
           //     {userTransactions.map((item, i) => (
@@ -111,7 +111,8 @@ type ExtendUserInfoProps = {
   color: string;
 };
 const WalletContainer = styled.div`
-  @media screen and (min-width: ${ScreenSize.tablet}) {
+  position: relative;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
     display: none;
   }
   @media screen and (min-width: ${ScreenSize.desktop}) {
@@ -121,7 +122,10 @@ const WalletContainer = styled.div`
   }
 `;
 const WalletStyle = styled.div`
-  @media screen and (min-width: ${ScreenSize.desktop}) {
+@media screen and (max-width: ${ScreenSize.desktop}) {
+  display: none;
+}
+  @media screen and (min-width: ${ScreenSize.tablet}) {
     width: 100%;
     height: 36px;
     border-radius: 0 13px 13px 0;
@@ -133,45 +137,6 @@ const WalletStyle = styled.div`
     z-index: 2;
     background-color: ${BasicColor.white};
   }
-`;
-const WalletDropdownContainer = styled.div`
-  width: 135px;
-  height: 200px;
-  position: relative;
-`;
-const WalletDropdown = styled.div`
-  width: 130px;
-  height:200px;
-  border-radius 0 0 10px 10px;
-  border: 2px solid ${BasicColor.gray60};
-  border-top: none;
-  background-color: ${BasicColor.white};
-  position: absolute;
-  top: -10px;
-  z-index: 1;
-  right: -1px;
-  padding-top: 15px;
-  display: flex;
-  flex-direction: column;
-   
-`;
-const WalletTransaction = styled.div`
-  width: 90%;
-  margin: 2px auto;
-  display: flex;
-  justify-content: space-between;
-`;
-const DropdownIcon = styled.img`
-  width: 15px;
-  margin: 5px;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-  }
-`;
-const ExtendUserInfo = styled(UserInfo)<ExtendUserInfoProps>`
-  color: ${p => p.color};
-  font-weight: 600;
 `;
 const IconContainer = styled.div`
   position: absolute;

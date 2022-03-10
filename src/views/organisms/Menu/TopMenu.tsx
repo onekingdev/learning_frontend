@@ -1,16 +1,16 @@
 import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import home from '../../assets/home.svg';
-import {Icon} from '../../atoms/Icon/Icon';
-import menu_toggle from '../../assets/Menu Toggle.svg';
-import {Energy} from '../../molecules/Energy/Energy';
-import modality from '../../assets/modality.svg';
-import {Wallet} from '../../molecules/Wallet/Wallet';
+import home from 'views/assets/home.svg';
+import {Icon} from 'views/atoms/Icon/Icon';
+import menu_toggle from 'views/assets/Menu Toggle.svg';
+import {Energy} from 'views/molecules/Energy/Energy';
+import modality from 'views/assets/modality.svg';
+import {Wallet} from 'views/molecules/Wallet/Wallet';
 import {UserProgress} from '../UserProgress';
-import {IconSize} from '../../atoms/Icon/Size';
-import {ScreenSize} from '../../screenSize';
+import {IconSize} from 'views/atoms/Icon/Size';
+import {ScreenSize} from 'views/screenSize';
 import {NavPanel} from '../NavPanel/NavPanel';
-import {IconDropDown} from '../../molecules/IconDropDown';
+// import {IconDropDown} from 'views/molecules/IconDropDown';
 import {useHistory} from 'react-router-dom';
 
 type TopMenuProps = {
@@ -73,16 +73,19 @@ export const TopMenu: FC<TopMenuProps> = ({
         </HomeIcon>
         <Energy charge={energyCharge} />
         <ModalityContainer>
-          <IconDropDown
-            icon={modality}
-            options={[
-              {name: 'AI', action: () => history.push('/map')},
-              {
-                name: 'Choose your path',
-                action: () => history.push('/subjects'),
-              },
-            ]}
-          />
+          <Icon image={modality} onClick={() => history.push('/map')} size={IconSize.medium} />
+          {/* <img src={modality} /> */}
+          {/* <IconDropDown
+            onIconClick={() => history.push('/map')}
+            // icon={modality}
+            // // options={[
+            // //   {name: 'AI', action: () => history.push('/map')},
+            // //   {
+            // //     name: 'Choose your path',
+            // //     action: () => history.push('/subjects'),
+            // //   },
+            // // ]}
+          /> */}
         </ModalityContainer>
         <Wallet balance={balance} />
         <UserProgress
@@ -106,14 +109,15 @@ const TopMenuStyles = styled.div<{
   isScrolled: boolean;
 }>`
   display: none;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
+  @media screen and (min-width: ${ScreenSize.phone}) {
     position: fixed;
     top: 0;
     z-index: 200;
     width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
+    justify-content: center;
     align-items: center;
     background-color: ${props => props.isScrolled ? '#ffffffe0' : 'transparent'};
     transition: 0.5s;

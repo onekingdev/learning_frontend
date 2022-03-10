@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { ScreenSize } from 'views/screenSize';
 import styled from 'styled-components';
 import drawer_accessories from 'views/assets/drawers/drawer_accessories.png';
@@ -7,40 +7,28 @@ import drawer_clothes from 'views/assets/drawers/drawer_clothes.png';
 import drawer_pants from 'views/assets/drawers/drawer_pants.png';
 import floor from 'views/assets/avatars/floor.png';
 
-interface AtomDrawerProps {
-  onAtomClick?: (atomId: number) => (void)
-}
-export const AtomsDrawer: FC<AtomDrawerProps> = ({ onAtomClick }) => {
-
-  const [current, setCurrent] = useState(0)
-
-  const setCurrentAtomId = (val: any) => {
-    if (val < 4) {
-      onAtomClick ? onAtomClick(val) : null
-      setCurrent(val)
-    }
-  };
+export const LeftDrawer: FC = () => {
 
   return (
     <DrawerContainer>
       <Drawer>
         <DrawerItem>
-          <CenteredRoundIcon onClick={() => setCurrentAtomId(0)} style={0 === current ? { background: 'yellow' } : {}}>
+          <CenteredRoundIcon >
             <img src={drawer_accessories} />
           </CenteredRoundIcon>
         </DrawerItem>
         <DrawerItem>
-          <CenteredRoundIcon onClick={() => setCurrentAtomId(1)} style={1 === current ? { background: 'yellow' } : {}}>
+          <CenteredRoundIcon >
             <img src={drawer_head} />
           </CenteredRoundIcon>
         </DrawerItem>
         <DrawerItem>
-          <CenteredRoundIcon onClick={() => setCurrentAtomId(2)} style={2 === current ? { background: 'yellow' } : {}}>
+          <CenteredRoundIcon >
             <img src={drawer_clothes} />
           </CenteredRoundIcon>
         </DrawerItem>
         <DrawerItem>
-          <CenteredRoundIcon onClick={() => setCurrentAtomId(3)} style={3 === current ? { background: 'yellow' } : {}}>
+          <CenteredRoundIcon >
             <img src={drawer_pants} />
           </CenteredRoundIcon>
         </DrawerItem>
@@ -55,9 +43,6 @@ const Floor = styled.img`
   margin-right: -10px;
   width: calc( 100% + 20px);
   height: 15px;
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    display: none;
-  }
 `
 
 const CenteredRoundIcon = styled.div`
@@ -65,20 +50,12 @@ const CenteredRoundIcon = styled.div`
   background-color: #fff;
   width: 100px;
   height: 100px;
-  overflow: hidden;
+
   display: flex;
   justify-content: center;
   align-items: center;
   img {
     transform: scale(0.8);
-  }
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    width: calc(100vw / 4);
-    height: auto;
-    img {
-      width: calc( 100vw / 5 );
-      height: calc( 100vw / 5 );
-    }
   }
 `;
 
@@ -88,9 +65,7 @@ const DrawerItem = styled.div`
   justify-content: center;
   width: 120px;
   @media screen and (max-width: ${ScreenSize.phone}) {
-    width: calc((100vw - 30px) / 4);
-    height: calc((100vw - 30px) / 4);
-    // width: 100%;
+    width: calc((100vw - 50px ) / 4);
   }
 `
 const Drawer = styled.div`
@@ -101,14 +76,12 @@ const Drawer = styled.div`
   background: linear-gradient(90deg, rgba(92,43,12,1) 0%, rgba(205,112,53,1) 4%, rgba(92,43,12,1) 15%, rgba(92,43,12,1) 94%, rgba(174,93,42,1) 99%);
   row-gap: 10px;
   @media screen and (max-width: ${ScreenSize.phone}) {
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 0;
-    column-gap: 10px;
-    width: 100%;
   }
 `
 const DrawerContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    display: none;
+  }
 `
