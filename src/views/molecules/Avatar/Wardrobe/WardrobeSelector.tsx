@@ -1,9 +1,11 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { ScreenSize } from 'views/screenSize';
 import styled from 'styled-components';
+import wardrobe from 'views/assets/wardrobe.svg';
 import wardrobe_icon from 'views/assets/wardrobe.png';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import arrowUp from 'views/assets/arrows/arrowUp.svg';
 import { LoadingContext } from 'react-router-loading';
 import { get } from 'api/queries/get';
 import { AVATAR } from 'api/fragments/avatarFragments';
@@ -16,6 +18,7 @@ import { AtomsDrawer } from './AtomsDrawer';
 import { AtomsSelector } from './AtomsSelector';
 import { doFetchOwnedAvatars, doSetFavoriteAvatar } from 'app/actions/avatarActions';
 import { useSnackbar } from 'notistack';
+import { SKIN } from 'constants/avatar';
 
 export const WardrobeSelector: FC = () => {
 
@@ -114,54 +117,56 @@ export const WardrobeSelector: FC = () => {
 
   return (
     <WardrobeModule>
-      <AtomsDrawer onAtomClick={callbackAtomDrawerClick} />
-      <WardrobeDrawer>
-        {avatarItems && ownedIds &&
-          <AtomsSelector items={atoms[atomIndex]} onItemClick={handleOnAtomSelect} owned={ownedIds} reload={reloadData} />
-        }
-      </WardrobeDrawer>
-      <AvatarContainer >
-        {
-          avatarItems &&
-          <AvatarSet
-            accessory={avatarItems ? avatarItems.find(x => x.id === accessoryIndex)?.image : ''}
-            head={avatarItems ? avatarItems.find(x => x.id === headerIndex)?.image : ''}
-            pants={avatarItems ? avatarItems.find(x => x.id === footerIndex)?.image : ''}
-            body={avatarItems ? avatarItems.find(x => x.id === bodyIndex)?.image : ''}
-            skin={skin}
-          />
-        }
-        <ColorPickerDropdown select={setSkin} />
-        <div className='star'>
-          {
-            headerIndex && bodyIndex && footerIndex ?
-              <IconButton color='secondary' aria-label='set favorite' component='span' onClick={setFavorite}>
-                <Star />
-              </IconButton> :
-              <IconButton color='primary' disabled aria-label='set favorite' component='span' onClick={setFavorite}>
-                <Star />
-              </IconButton>
+      <SelectorGrid>
+        <WardrobeContainer>
+          <BodyPartWardrobe src={wardrobe} />
+          <AtomsDrawer onAtomClick={callbackAtomDrawerClick} />
+        </WardrobeContainer>
+        <WardrobeDrawer>
+          {avatarItems && ownedIds &&
+            <AtomsSelector items={atoms[atomIndex]} onItemClick={handleOnAtomSelect} owned={ownedIds} reload={reloadData} />
           }
-        </div>
-        <div className='hanger'>
-          <Link to={'/avatar'}>
-            <ToggleWardrobe src={wardrobe_icon} />
-          </Link>
-        </div>
-      </AvatarContainer>
+          <ArrowsContainer>
+            <ArrowImage src={arrowUp} />
+          </ArrowsContainer>
+        </WardrobeDrawer>
+        <AvatarContainer >
+          {
+            avatarItems &&
+            <AvatarSet
+              accessory={avatarItems ? avatarItems.find(x => x.id === accessoryIndex)?.image : ''}
+              head={avatarItems ? avatarItems.find(x => x.id === headerIndex)?.image : ''}
+              pants={avatarItems ? avatarItems.find(x => x.id === footerIndex)?.image : ''}
+              body={avatarItems ? avatarItems.find(x => x.id === bodyIndex)?.image : ''}
+              skin={skin}
+            />
+          }
+          <ColorPickerDropdown select={setSkin} />
+          <div className='star'>
+            {
+              headerIndex && bodyIndex && footerIndex ?
+                <IconButton color='secondary' aria-label='set favorite' component='span' onClick={setFavorite}>
+                  <Star />
+                </IconButton> :
+                <IconButton color='primary' disabled aria-label='set favorite' component='span' onClick={setFavorite}>
+                  <Star />
+                </IconButton>
+            }
+          </div>
+          <div className='hanger'>
+            <Link to={'/avatar'}>
+              <ToggleWardrobe src={wardrobe_icon} />
+            </Link>
+          </div>
+        </AvatarContainer>
+      </SelectorGrid>
     </WardrobeModule>
   );
 };
 
 const WardrobeModule = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 2vh;
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-  }
+  width: 90%
+  margin: 0 auto;
 `;
 
 const Star = styled(StarIcon)`
@@ -173,38 +178,45 @@ const Star = styled(StarIcon)`
   }
 `
 
+const SelectorGrid = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  margin-top: 100px;
+  @media screen and (min-width: ${ScreenSize.phone}) {
+    margin-top: 20px;
+  }
+`;
+
 const AvatarContainer = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
 
   .hanger {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
   }
 
-  @media screen and (max-width: ${ScreenSize.phone}) {
+  @media screen and (min-width: ${ScreenSize.desktop}) {
     flex-direction: column;
-    .hanger {
-      position: absolute;
-      top: 0;
-      left: auto;
-      bottom: auto;
-      right: 20px;
-    }
-    margin-bottom: 10vh;
   }
   .register {
     display: flex;
     align-items: flex-end;
+
     img {
       z-index: 20;
       &:hover {
         cursor: pointer;
       }
     }
+
   }
+
   .star {
     position: absolute;
     bottom: 70px;
@@ -212,24 +224,57 @@ const AvatarContainer = styled.div`
   }
 `;
 
+const WardrobeContainer = styled.div`
+  position: relative;
+`;
+const BodyPartWardrobe = styled.img`
+  top: 0;
+  position: absolute;
+  z-index: -1;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  justify-self: end;
+  align-self: end;
+  height: 130px;
+  @media screen and (min-width: ${ScreenSize.phone}) {
+    grid-row: 1 / 2;
+    height: 100%;
+    max-height: 480px;
+  }
+`;
+
 const WardrobeDrawer = styled.div`
-  height: 100%;
-  padding-bottom: 20px;
-  background: rgb(92,43,12);
-  background: linear-gradient(90deg, rgba(92,43,12,1) 0%, rgba(205,112,53,1) 4%, rgba(92,43,12,1) 15%, rgba(92,43,12,1) 94%, rgba(174,93,42,1) 99%);
-  margin-left: 20px;
-  margin-top: 2vh;
-
-@media screen and (max-width: ${ScreenSize.phone}) {
-    // display: none;
-    background-color: #5c2b0c;
-    justify-content: center;
-    margin: 10px 0 20px 0;
-
+  display: none;
+  background-color: #5c2b0c;
+  height: 420px;
+  align-self: end;
+  margin: 10px 20px;
+  @media screen and (min-width: ${ScreenSize.phone}) {
+    width: 90%;
+    max-width: 550px;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 1fr 60px;
+    align-content: center;
+    justify-content: start;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
   }
 `;
 
 
 const ToggleWardrobe = styled.img`
   width: 50px;
+`;
+
+const ArrowsContainer = styled.div`
+  width: 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+`;
+
+const ArrowImage = styled.img`
+  width: 30px;
 `;

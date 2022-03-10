@@ -9,8 +9,21 @@ import  {
 import {PAYMENT_METHOD ,PLAN, GUARDIAN_STUDENT_PLAN, ORDER_DETAIL, ORDER} from '../fragments/paymentFragments'
 import {STUDENT}from '../fragments/studentFragments'
 
-export const CREATE_GUARDIAN = (email: string, username: string, password: string) => `
-	createGuardian(email: "${email}", username: "${username}", password: "${password}") {
+
+export const CREATE_ORDER = (
+    cardCvc: string,
+    cardExpMonth: string,
+    cardExpYear: string,
+    cardFirstName: string,
+    cardLastName: string,
+    cardNumber: string,
+    discountCode: string,
+    guardianId: number,
+    orderDetailInput: {},
+    paymentMethod: string,
+    returnUrl: string,
+) => `
+    createOrder(cardCvc: "${cardCvc}", cardExpMonth: "${cardExpMonth}", cardExpYear: "${cardExpYear}", cardFirstName: "${cardFirstName}", cardLastName: "${cardLastName}", cardNumber: "${cardNumber}", discountCode: "${discountCode}", guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}, paymentMethod: "${paymentMethod}", returnUrl: "${returnUrl}"){
         guardian {
             ${GUARDIAN}
             guardianstudentSet {
@@ -32,31 +45,6 @@ export const CREATE_GUARDIAN = (email: string, username: string, password: strin
                 ${PAYMENT_METHOD}
             }
         }
-        user {
-            ${USER}
-        }
-        profile {
-            ${USER_PROFILE}
-        }
-        token
-        refreshToken
-	}
-`;
-
-export const CREATE_ORDER = (
-    cardCvc: string,
-    cardExpMonth: string,
-    cardExpYear: string,
-    cardFirstName: string,
-    cardLastName: string,
-    cardNumber: string,
-    discountCode: string,
-    guardianId: number,
-    orderDetailInput: {},
-    paymentMethod: string,
-    returnUrl: string,
-) => `
-    createOrder(cardCvc: "${cardCvc}", cardExpMonth: "${cardExpMonth}", cardExpYear: "${cardExpYear}", cardFirstName: "${cardFirstName}", cardLastName: "${cardLastName}", cardNumber: "${cardNumber}", discountCode: "${discountCode}", guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}, paymentMethod: "${paymentMethod}", returnUrl: "${returnUrl}"){
         order{
             ${ORDER}
         }
@@ -69,6 +57,27 @@ export const CONFIRM_PAYMENT_ORDER = (
     orderId: number,
 ) => `
     confirmPaymentOrder(orderId: ${orderId}){
+        guardian {
+            ${GUARDIAN}
+            guardianstudentSet {
+                ${GUARDIAN_STUDENT}
+                student {
+                    ${STUDENT}
+                }
+            }
+            guardianstudentplanSet {
+                ${GUARDIAN_STUDENT_PLAN}
+            }
+            orderSet {
+                ${ORDER}
+            }
+            paymentmethodSet {
+                ${PAYMENT_METHOD}
+            }
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
+        }
         order{
             ${ORDER}
         }

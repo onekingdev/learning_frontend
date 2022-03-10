@@ -2,7 +2,7 @@ import {FC, useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
 import {LoadingContext} from 'react-router-loading';
 import {useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {StudentMenu} from '../../templates/StudentMenu';
 import boat_sound from '../../assets/audios/boat.mp3';
@@ -25,22 +25,23 @@ export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const dispatch = useDispatch();
   const history = useHistory();
+  const student = useSelector((state: any) => state.student);
 
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
   const [loadedImgNum,  setLoadedImgNum] = useState(0)
 
-  const handleData = (data: any) => {
-    setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
-    dispatch({
-      type: TYPE.SET_AOK,
-      payload: data.data.audienceById.areaofknowledgeSet,
-    });
-  };
+  // const handleData = (data: any) => {
+  //   setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
+  //   dispatch({
+  //     type: TYPE.SET_AOK,
+  //     payload: data.data.audienceById.areaofknowledgeSet,
+  //   });
+  // };
 
-  const handleError = (error: any) => {
-    loadingContext.done();
-    console.error(error);
-  };
+  // const handleError = (error: any) => {
+  //   loadingContext.done();
+  //   console.error(error);
+  // };
 
   const onImgLoad = (e: any) => {
     setLoadedImgNum(loadedImgNum+1)
@@ -49,13 +50,16 @@ export const KnowledgeMap: FC = () => {
   }
 
   useEffect(() => {
-    get(
-      'audienceById(id:"2")',
-      `{${AUDIENCES_QUERY}}`,
-      handleData,
-      handleError
-    );
-    console.log(areasOfKnowledge);
+    setAreasOfKnowledge(student.audience.areaofknowledgeSet)
+    // loadingContext.done();
+
+    // get(
+    //   'audienceById(id:"2")',
+    //   `{${AUDIENCES_QUERY}}`,
+    //   handleData,
+    //   handleError
+    // );
+    // console.log(areasOfKnowledge);
   }, []);
 
   const getRandomNumber = (max: number) => {

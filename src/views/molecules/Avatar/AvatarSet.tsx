@@ -64,7 +64,7 @@ const CurrentAvatar = styled.div`
     position: absolute;
     bottom: 0;
     width: 160px;
-    // left: 67px;
+    left: 67px;
     @media screen and (min-width: ${ScreenSize.phone}) {
     }
   }
@@ -74,7 +74,7 @@ const CurrentAccessory = styled.img`
   width: 160px;
   margin: auto;
   position: absolute;
-  top: -75px;
+  top: -82px;
   z-index: 3;
   @media screen and (min-width: ${ScreenSize.phone}) {
   }
