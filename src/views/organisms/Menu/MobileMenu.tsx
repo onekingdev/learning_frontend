@@ -72,20 +72,20 @@ export const MobileMenu: FC = () => {
 };
 
 const MobileMenuStyles = styled.div`
-  width: 100%;
-  height: 60px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  background-color: ${BasicColor.blue};
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 2;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    display: none;
-  }
+  display: none;
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    width: 100%;
+    height: 60px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: ${BasicColor.blue};
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2;
+    }
 `;
 
 const MobileMenuContainer = styled.div`

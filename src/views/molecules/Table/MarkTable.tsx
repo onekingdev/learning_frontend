@@ -83,6 +83,7 @@ const MarkTable = () => {
     return (<div style={{
         display: "flex",
         flexDirection: "column",
+        marginBottom: "4rem",
         color: 'black'
     }}>
         <SingleGroup main={{
