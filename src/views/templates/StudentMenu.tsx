@@ -14,12 +14,12 @@ export const StudentMenu: FC = ({children}) => {
     // setStudent(student);
     // console.log(user)
     // console.log(wallet)
-    // console.log(earning);
+    console.log(earning);
   }, []);
 
   return (
     <Template>
-      {/* {console.log(earning)} */}
+      {console.log(earning)}
       <TopMenuContainer>
         <TopMenu
           rank={earning.rank}
@@ -41,17 +41,17 @@ export const StudentMenu: FC = ({children}) => {
 
 const Template = styled.div`
   display: grid;
-  grid-template-rows: 68px calc(100vh - 68px);
-  @media (max-width: ${ScreenSize.phone}) {
-    grid-template-rows: calc(100vh - 60px) 60px;
+  grid-template-rows: calc(100vh - 60px) 60px;
+  @media (min-width: ${ScreenSize.phone}) {
+    grid-template-rows: 68px calc(100vh - 68px);
   }
 `;
 const TopMenuContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 100px;
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    display: none;
+  display: none;
+  @media screen and (min-width: ${ScreenSize.phone}) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
   }
 `;

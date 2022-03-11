@@ -122,11 +122,11 @@ const TopMenuStyles = styled.div<{
     background-color: ${props => props.isScrolled ? '#ffffffe0' : 'transparent'};
     transition: 0.5s;
   }
-  // @media screen and (min-width: ${ScreenSize.phone}) {
-  //   margin: 0 auto;
-  //   padding-top: 15px;
-  //   max-width: 1366px;
-  // }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    margin: 0 auto;
+    padding-top: 15px;
+    max-width: 1366px;
+  }
 `;
 const ToggleButtonContainer = styled.div<ToggleButtonProps>`
   opacity: ${p => (p.isClose ? 0 : 1)};

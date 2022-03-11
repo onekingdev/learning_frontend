@@ -40,7 +40,7 @@ export const TxBox: FC = () => {
   }
 
   const onDepositBtnClicked = async() => {
-    if(depositAmount === 0) return enqueueSnackbar("Amount is empty", { variant: 'error' });
+    if(depositAmount === 0) return enqueueSnackbar('Amount is empty', { variant: 'error' });
     setLoading(true)
     const result = await deposit(depositAmount, user.token, dispatch)
     setLoading(false)
@@ -49,7 +49,7 @@ export const TxBox: FC = () => {
   }
 
   const onWithdrawBtnClicked = async() => {
-    if(withdrawAmount === 0) return enqueueSnackbar("Amount is empty", { variant: 'error' });
+    if(withdrawAmount === 0) return enqueueSnackbar('Amount is empty', { variant: 'error' });
     setLoading(true)
     const result = await withDraw(withdrawAmount, user.token, dispatch)
     setLoading(false)

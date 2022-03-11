@@ -95,10 +95,6 @@ const WardrobeScroll = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   overflow-y: auto;
-  @media (min-width:${ScreenSize.tablet}) and (max-width:${ScreenSize.desktop}) {
-    grid-template-columns: repeat(2, 1fr);
-    width: 260px;
-  }
 
   &::-webkit-scrollbar {
     display: none;
