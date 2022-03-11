@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 import { makeStyles } from '@mui/styles'
 
 export const TipContainer = styled.div`
@@ -11,7 +11,7 @@ export const TipContainer = styled.div`
   justify-content:space-between;
   padding-top:80px;
   font-size:30px;
-  
+
   @media screen and (max-width: ${ScreenSize.tablet}) {
     justify-content: center;
   }

@@ -19,7 +19,7 @@ export const getGameCategories = async(token: string, dispatch: any) => {
     if(result.errors && !result.data) {
       return {success: false, msg: result.errors[0].message};
     }
-    return {success: true, msg: 'Success', data: result.data}
+    return {success: true, msg: "Success", data: result.data}
 }
 
 export const getGameByCategory = async(categoryName: string, token: string, dispatch: any) => {
@@ -35,7 +35,7 @@ export const getGameByCategory = async(categoryName: string, token: string, disp
     if(result.errors && !result.data) {
       return {success: false, msg: result.errors[0].message};
     }
-    return {success: true, msg: 'Success', data: result.data.gamesByCategoryName}
+    return {success: true, msg: "Success", data: result.data.gamesByCategoryName}
 
 }
 

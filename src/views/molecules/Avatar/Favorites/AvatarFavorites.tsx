@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ScreenSize } from 'views/screenSize';
+import { ScreenSize } from 'constants/screenSize';
 // import placeHolder from 'views/assets/placeholder.png';
 import { AvatarItemWithSkinTone } from '../AvatarItemWithSkinTone';
 

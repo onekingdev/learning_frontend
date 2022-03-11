@@ -9,7 +9,7 @@ import background from 'views/assets/colored-shapes-bg.svg';
 import ribbon from 'views/assets/ribbon.svg';
 import Cartera from 'views/assets/Cartera.svg';
 
-import { ScreenSize } from 'views/screenSize';
+import { ScreenSize } from 'constants/screenSize';
 
 import { AccountBalance } from 'views/molecules/StudentBank/AccountBalance';
 import { TxBox } from 'views/molecules/StudentBank/TxBox';
@@ -90,16 +90,4 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-`;
-
-const BankTitle = styled.div`
-  margin-top: 3vh;
-  text-align: center;
-  display: flex;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-  background: url(${ribbon}) center no-repeat;
-  background-size: contain;
-  margin-bottom: 20px;
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Header} from '../atoms/Text/Header';
 import {BasicColor} from '../Color';
 import {SubTopicCard} from '../molecules/SubTopicCard';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 import rightArrow from '../assets/right-arrow.svg';
 import leftArrow from '../assets/left-arrow.svg';
 import {useHistory} from 'react-router-dom';

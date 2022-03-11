@@ -4,7 +4,7 @@ import {Title} from '../atoms/Text/Title';
 import {UserRank} from '../molecules/UserRank';
 import avatar from '../assets/avatars/avatar1.svg';
 import {BasicColor} from '../Color';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 import {dictionary} from '../pages/Progress/dictionary';
 import {getRanking, writeProgress, writeRanking} from '../../app/firebase';
 

@@ -8,7 +8,7 @@ import energyIcon from '../assets/lightning.svg';
 import {IconSize} from '../atoms/Icon/Size';
 import {ButtonWrapper} from '../atoms/ButtonWrapper';
 import {Button} from '../atoms/Text/Button';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 
 type FinishLessonProps = {
   tokens: number;

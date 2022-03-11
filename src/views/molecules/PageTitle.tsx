@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import ribbon from 'views/assets/ribbon.svg';
-import {ScreenSize} from 'views/screenSize';
+import {ScreenSize} from 'constants/screenSize';
 
 export const PageTitle: FC<{title: string}> = ({title}) => {
   return (

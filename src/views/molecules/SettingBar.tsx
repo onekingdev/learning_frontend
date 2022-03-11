@@ -2,7 +2,7 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {Typography} from '../atoms/Text/typography';
 import {BasicColor, SettingBarColor} from '../Color';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 
 type SettingProps = {
   body: string;

@@ -3,7 +3,7 @@ import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { Answer } from '../Text/Answer';
 import { BasicColor } from '../../Color';
-import { ScreenSize } from '../../screenSize';
+import { ScreenSize } from '../../../constants/screenSize';
 import audioCheck from '../../assets/audios/check.mp3';
 import audioError from '../../assets/audios/error.wav';
 
@@ -56,7 +56,7 @@ const TextOptionStyles = styled.div<{
     font-family: ${Typography.secondary};
     font-weight:500;
     padding:2px;
-    
+
     background-color: ${props => props.isAnswered ?
                         props.isCorrect ? BasicColor.greenSoft :
                         BasicColor.red
@@ -74,7 +74,7 @@ const TextOptionStyles = styled.div<{
       height: 35px;
       line-height: 35px;
       padding: 10px;
-      
+
     }
     @media screen and (min-width: ${ScreenSize.desktop}) {
       height: 40px;

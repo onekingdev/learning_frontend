@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
