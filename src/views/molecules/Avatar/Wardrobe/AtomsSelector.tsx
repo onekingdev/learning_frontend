@@ -4,7 +4,7 @@ import { BasicColor } from 'views/Color';
 import priceflag from 'views/assets/avatars/price-flag.png';
 import ReactLoading from 'react-loading';
 import { IAvatar } from 'app/entities/avatar';
-import { ScreenSize } from 'constants/screenSize';
+import { ScreenSize } from 'views/screenSize';
 import { doPurchaseAvatarItem } from 'app/actions/avatarActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -97,7 +97,7 @@ const WardrobeScroll = styled.div`
   overflow-y: auto;
   @media (min-width:${ScreenSize.tablet}) and (max-width:${ScreenSize.desktop}) {
     grid-template-columns: repeat(2, 1fr);
-    width: 280px;
+    width: 260px;
   }
 
   &::-webkit-scrollbar {

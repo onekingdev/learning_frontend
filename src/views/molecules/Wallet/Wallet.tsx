@@ -5,7 +5,7 @@ import { BasicColor } from 'views/Color';
 import coins from 'views/assets/coins.svg';
 import styled from 'styled-components';
 import { IconSize } from 'views/atoms/Icon/Size';
-import { ScreenSize } from 'constants/screenSize';
+import { ScreenSize } from 'views/screenSize';
 import { LSDialog } from '../Setting/LSDialog';
 import { WalletTxHistory } from './WalletTxs'
 

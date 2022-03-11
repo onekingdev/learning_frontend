@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ScreenSize } from 'constants/screenSize';
+import { ScreenSize } from 'views/screenSize';
 import styled from 'styled-components';
 import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
 

@@ -2,7 +2,7 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {Typography} from '../atoms/Text/typography';
 import {BasicColor} from '../Color';
-import {ScreenSize} from '../../constants/screenSize';
+import {ScreenSize} from '../screenSize';
 
 type RibbonProps = {
   body: string;

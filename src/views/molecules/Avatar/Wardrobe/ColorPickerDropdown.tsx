@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { SKIN_PICKER } from 'constants/avatar';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { ScreenSize } from 'constants/screenSize';
+import { ScreenSize } from 'views/screenSize';
 
 interface ColorPickerProp {
   select: (value: string) => void

@@ -8,7 +8,7 @@ import {FC, useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 import ProgressBar from '@ramonak/react-progress-bar';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import {getDownUrlByFilename} from 'app/firebase';
 
 import {BasicColor} from 'views/Color';

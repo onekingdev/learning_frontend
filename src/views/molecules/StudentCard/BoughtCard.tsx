@@ -4,7 +4,7 @@ import {BasicColor} from '../../Color';
 import ReactLoading from 'react-loading';
 import useSound from 'use-sound';
 import purchaseSound from '../../assets/audios/mixkit-coin-win-notification.wav';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import { ImageAspectRatio } from '@mui/icons-material';
 
 type CardProps = {
@@ -94,7 +94,7 @@ const StyledCard = styled.div`
     object-fit: fill;
     transform: rotateY(0);
     animation: rotateAnimation 0.5s linear;
-
+  
     /* Adding keyframes for animation */
     @keyframes rotateAnimation {
       from {

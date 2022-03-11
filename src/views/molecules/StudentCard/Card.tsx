@@ -5,7 +5,7 @@ import ReactLoading from 'react-loading';
 import {getDownUrlByFilename} from 'app/firebase';
 
 import {BasicColor} from 'views/Color';
-import {ScreenSize} from 'constants/screenSize';
+import {ScreenSize} from 'views/screenSize';
 
 type CardProps = {
   category: string;

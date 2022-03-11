@@ -12,7 +12,7 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMarkRounded';
 import Stack from '@mui/material/Stack';
 
 import { BasicColor } from '../../Color';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import { useStyles } from './Style';
 import * as TYPES from '../../../app/types'
 import logoTitle from '../../assets/logo-learn.svg'

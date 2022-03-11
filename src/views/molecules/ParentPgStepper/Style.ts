@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 import { makeStyles } from '@mui/styles'
 
@@ -25,7 +25,7 @@ export const Line = styled.div`
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display: none
     }
-
+    
 `;
 
 export const StepContent = styled.div`
@@ -59,5 +59,5 @@ export const Point = styled.div`
     @media screen and (max-width: ${ScreenSize.phone}) {
         margin: 15px;
     }
-
+    
 `;

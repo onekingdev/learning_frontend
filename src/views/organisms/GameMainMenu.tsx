@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import {ScreenSize} from '../../constants/screenSize';
+import {ScreenSize} from '../screenSize';
 import {GameMenuButton} from '../molecules/GameMenuButton';
 import {BasicColor} from '../Color';
 import arcade from '../assets/arcade.svg';

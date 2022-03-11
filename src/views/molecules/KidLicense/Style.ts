@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import { makeStyles } from '@mui/styles'
 import titleBg from '../../assets/title-kids-background.png'
 import {ButtonColor, BasicColor} from '../../Color';
@@ -43,7 +43,7 @@ export const LicenseUsername = styled.div`
   margin-top: 10px;
   border-radius: 5px;
   width: 110px;
-  min-height: 35px;
+  min-height: 35px; 
   text-align: center;
   @media screen and (max-width: 540px) {
     font-size: 1em;

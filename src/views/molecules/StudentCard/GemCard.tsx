@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {BasicColor} from '../../Color';
 import ReactLoading from 'react-loading';
 import {Grid} from '@mui/material';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import {CardDialog} from './CardDialog';
 import {getDownUrlByFilename} from 'app/firebase';
 import {useHistory} from 'react-router-dom';

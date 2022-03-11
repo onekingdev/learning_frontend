@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {BasicColor} from '../Color';
 import upArrow from '../assets/upArrow.svg';
 import {Typography} from '../atoms/Text/typography';
-import {ScreenSize} from '../../constants/screenSize';
+import {ScreenSize} from '../screenSize';
 import {dictionary} from '../pages/StudentHome/dictionary';
 
 type StartLessonProps = {

@@ -2,7 +2,7 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {Divider} from '../../atoms/Divider';
 import {ButtonColor} from '../../Color';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 // import {Button} from '../Button';
 import Button from 'views/molecules/MuiButton';
 import { BasicColor } from '../../Color';

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import background from '../../assets/colored-shapes-bg.svg';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 
 export const ProgressBackground = styled.div`
   background-image: url(${background});

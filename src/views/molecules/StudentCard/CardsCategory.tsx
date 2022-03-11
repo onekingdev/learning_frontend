@@ -7,7 +7,7 @@ import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Card} from './Card';
 import ReactLoading from 'react-loading';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import {useSelector} from 'react-redux';
 import { useDispatch } from 'react-redux'
 

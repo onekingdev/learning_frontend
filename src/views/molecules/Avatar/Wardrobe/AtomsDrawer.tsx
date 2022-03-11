@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { ScreenSize } from 'constants/screenSize';
+import { ScreenSize } from 'views/screenSize';
 import styled from 'styled-components';
 import drawer_accessories from 'views/assets/drawers/drawer_accessories.png';
 import drawer_head from 'views/assets/drawers/drawer-head.png';

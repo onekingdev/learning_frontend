@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {LessonProgressTitle} from './LessonProgressTitle';
 import {LessonProgressBar} from './LessonProgressBar';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import {BasicColor} from '../../Color';
 import lightening from 'views/assets/lightning.svg';
 import { LessonProgressLightening } from './LessonProgressLightening';

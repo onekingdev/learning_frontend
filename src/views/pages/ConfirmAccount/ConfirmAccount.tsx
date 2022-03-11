@@ -6,7 +6,7 @@ import {Subheader} from '../../atoms/Text/Subheader';
 import {TextInput} from '../../atoms/Text/TextInput';
 import {BasicColor} from '../../Color';
 import {Button} from '../../molecules/Button';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 import {Body} from '../../atoms/Text/Body';
 import logo from '../../assets/socrates-logo.svg';

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {UserInfo} from '../atoms/Text/UserInfo';
 import {Subheader} from '../atoms/Text/Subheader';
 import {BasicColor} from '../Color';
-import {ScreenSize} from '../../constants/screenSize';
+import {ScreenSize} from '../screenSize';
 
 type SubTopicCardProps = {
   onClick: () => void;

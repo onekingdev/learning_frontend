@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {Lesson} from '../../atoms/Text/Lesson';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 
 type ChoiceImagetProps = {
   options: {image: string}[];

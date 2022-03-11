@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
 import backpackBase from '../../assets/backpack-base.svg';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`

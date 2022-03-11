@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { BasicColor } from '../../Color';
 import {TopicProgress} from '../../molecules/TopicProgress';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import {dictionary} from '../../pages/Progress/dictionary';
 import {database, getProgress} from '../../../app/firebase';
 

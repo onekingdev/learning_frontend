@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 import {makeStyles} from '@mui/styles';
 import { BasicColor} from '../../Color';

@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect, useState } from 'react';
-import { ScreenSize } from 'constants/screenSize';
+import { ScreenSize } from 'views/screenSize';
 import styled from 'styled-components';
 import wardrobe_icon from 'views/assets/wardrobe.png';
 import { Link } from 'react-router-dom';

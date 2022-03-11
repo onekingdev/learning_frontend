@@ -11,7 +11,7 @@ import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
-import {ScreenSize} from 'constants/screenSize';
+import {ScreenSize} from 'views/screenSize';
 
 // Get file storage link from firebase
 

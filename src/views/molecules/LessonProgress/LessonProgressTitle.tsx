@@ -2,7 +2,7 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
 import {LevelUp} from '../../atoms/Text/LevelUp';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 
 type LessonProgressTitleProps = {
   topic: string;

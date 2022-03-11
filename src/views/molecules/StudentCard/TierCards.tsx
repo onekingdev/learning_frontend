@@ -6,7 +6,7 @@
 import {FC, useRef, useEffect} from 'react';
 import styled from 'styled-components';
 import ReactLoading from 'react-loading';
-import {ScreenSize} from '../../../constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import {Gemcard} from './GemCard';
 import {BasicColor} from 'views/Color';
 

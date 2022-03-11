@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import {ScreenSize} from '../../constants/screenSize';
+import {ScreenSize} from '../screenSize';
 import {Header} from '../atoms/Text/Header';
 import {Title} from '../atoms/Text/Title';
 import titleBackground from '../assets/title-games-background.png';

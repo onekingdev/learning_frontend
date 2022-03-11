@@ -9,7 +9,7 @@ import background from 'views/assets/colored-shapes-bg.svg';
 import ribbon from 'views/assets/ribbon.svg';
 import Cartera from 'views/assets/Cartera.svg';
 
-import { ScreenSize } from 'constants/screenSize';
+import { ScreenSize } from 'views/screenSize';
 
 import { AccountBalance } from 'views/molecules/StudentBank/AccountBalance';
 import { TxBox } from 'views/molecules/StudentBank/TxBox';
@@ -19,7 +19,7 @@ import { PageTitle } from 'views/molecules/PageTitle';
 
 export const Bank: FC = () => {
 
-  const student = useSelector((state: any) => state.student)
+  const student = useSelector((state: any) =>state.student)
   const interests = useSelector((state: any) => state.interests.interests)
   const loadingContext = useContext(LoadingContext);
   const bankMovement = student.bankWallet.bankmovementSet
@@ -31,23 +31,26 @@ export const Bank: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        <PageTitle title='BANK' />
+        {/* <BankTitle> */}
+          <PageTitle title='BANK'/>
+          {/* <Title>Bank</Title> */}
+        {/* </BankTitle> */}
         <div >
           <Grid container >
-            <Grid container item xs={12} md={6} sx={{ '&.MuiGrid-root': { alignContent: 'start', padding: '40px' } }}>
-              <GridItem item md={4} xs={4} align='end'>
+            <Grid container item xs={12} md={6} sx={{'&.MuiGrid-root': {alignContent: 'space-evenly'}}}>
+              <GridItem item md={12} xs={4}>
                 <Img src={Cartera} />
               </GridItem>
-              <GridItem item md={8} xs={8}>
+              <GridItem item md={12} xs={8}>
                 <AccountBalance balance={student.bankWallet.balance} />
               </GridItem>
-              <GridItem item md={12} xs={12} align='end'>
+              <GridItem item md={12} xs={12}>
                 <TxBox />
               </GridItem>
             </Grid>
             <GridItem container item xs={12} md={6} align="start">
               <Grid item>
-                <TxHistoryTable movement={bankMovement} />
+                <TxHistoryTable movement={bankMovement}/>
               </Grid>
               <Grid item>
                 <Interest interests={interests} />
@@ -60,7 +63,7 @@ export const Bank: FC = () => {
   );
 };
 
-const GridItem = styled(Grid) <{
+const GridItem = styled(Grid)<{
   align?: string;
 }>`
   &.MuiGrid-root {
@@ -77,9 +80,8 @@ const GridItem = styled(Grid) <{
 `;
 
 const Img = styled.img`
-width: 7vw;
-@media screen and (max-width: ${ScreenSize.tablet}) {
-  width: 15vw;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    width: 30vw;
     margin-left: 5vw;
   }
 `;
@@ -88,4 +90,16 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+`;
+
+const BankTitle = styled.div`
+  margin-top: 3vh;
+  text-align: center;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  background: url(${ribbon}) center no-repeat;
+  background-size: contain;
+  margin-bottom: 20px;
 `;

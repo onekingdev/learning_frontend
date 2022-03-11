@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ScreenSize } from '../../../constants/screenSize';
+import { ScreenSize } from '../../screenSize';
 import styled from 'styled-components';
 
 import Paper from '@mui/material/Paper';
