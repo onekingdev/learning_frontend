@@ -2,7 +2,7 @@ import {FC} from 'react';
 import styled from 'styled-components';
 import {Header} from '../../atoms/Text/Header';
 import {Subheader} from '../../atoms/Text/Subheader';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 
 type GreetProps = {
   header: string;

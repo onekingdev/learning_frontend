@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { BasicColor } from '../../Color';
 import ReactLoading from 'react-loading'
 import {getDownUrlByFilename} from 'app/firebase';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 
 type CardProps = {
   category: string

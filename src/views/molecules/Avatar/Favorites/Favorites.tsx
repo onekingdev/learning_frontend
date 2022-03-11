@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import wardrobe from 'views/assets/wardrobe.svg';
 import floor from 'views/assets/avatars/floor.png';
 import { LoadingContext } from 'react-router-loading';
-import { ScreenSize } from 'views/screenSize';
+import { ScreenSize } from 'constants/screenSize';
 // import IconButton from '@mui/material/IconButton';
 // import StarIcon from '@mui/icons-material/Star';
 import { useHistory } from 'react-router-dom';

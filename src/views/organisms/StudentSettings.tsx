@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {BasicColor, SettingBarColor} from '../Color';
 import {RibbonText} from '../molecules/RibbonText';
 import {SettingBar} from '../molecules/SettingBar';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 
 export const StudentSettings: FC = () => {
   const studentSettingsSpecs = [

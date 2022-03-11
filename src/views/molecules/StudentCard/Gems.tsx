@@ -5,7 +5,7 @@
 
 import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 
 import gem_legendary from '../../assets/gems_card_collectible/gem_legendary.png';
 import gem_epic from '../../assets/gems_card_collectible/gem_epic.png';

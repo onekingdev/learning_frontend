@@ -1,10 +1,11 @@
-import { FC, useState } from 'react';
+import {FC, useState} from 'react';
 import styled from 'styled-components';
+import * as React from 'react';
 import Box from '@mui/material/Box';
 import { LSTitle, LSShadowContainer } from '../../molecules/Setting/utils/Style';
 
-import { LSBlueTextButton } from '../../molecules/Setting/utils/Style'
-import { dictionary } from '../../pages/Settings/dictionary';
+import {LSBlueTextButton} from '../../molecules/Setting/utils/Style'
+import {dictionary} from '../../pages/Settings/dictionary';
 import { LSDialog } from '../../molecules/Setting/LSDialog';
 import { CancelForm } from '../../molecules/Setting/CancelForm';
 import { AddPlanForm } from '../../molecules/Setting/AddPlanForm';
@@ -13,8 +14,8 @@ import { PlanList } from '../../molecules/Setting/PlanList';
 
 export const MembershipDetail:FC = () => {
 
-  const { isOpen, open } = useDialog()
-  const { isAddOpen, openAdd } = useAddDialog()
+  const {isOpen, open} = useDialog()
+  const {isAddOpen, openAdd} = useAddDialog()
 
 
   const [reason, setReason] = useState<string>('reason1');

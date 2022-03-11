@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {BasicColor} from '../../Color';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 import {Typography} from './typography';
 
 type TitleProps = {

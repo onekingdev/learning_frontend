@@ -4,7 +4,7 @@ import welcome from '../assets/welcome.svg';
 import {Title} from '../atoms/Text/Title';
 import locker from '../assets/locker.svg';
 import avatar from '../assets/avatars/girl-11.svg';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 import {dictionary} from '../pages/StudentHome/dictionary';
 type HomeCharacterProps = {
   userName: string;

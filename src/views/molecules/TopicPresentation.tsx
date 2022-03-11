@@ -4,7 +4,7 @@ import {BasicColor} from '../Color';
 import {Header} from '../atoms/Text/Header';
 import {GeneralText} from '../atoms/Text/GeneralText';
 import {TopicCard} from './TopicCard';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 
 type TopicPresentationProps = {
   title: string;

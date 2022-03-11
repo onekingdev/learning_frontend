@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 import {BasicColor} from '../Color';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 
 type DividerProps = {
   value: string;
