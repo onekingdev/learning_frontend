@@ -29,6 +29,7 @@ export const BarChart = () => {
         <div>
             <div style={{
                 display: "flex",
+                justifyContent: "center",
                 alignItems: "center",
                 marginTop: "5rem",
             }}>
@@ -75,11 +76,11 @@ export const BarChart = () => {
                 }} src={ReportChartBg} alt="ReportChartBg" />
                 </div>
                 <Chart
-                    height={300}
+                    height={window.innerHeight - 450}
                     data={chartData}
                 >
                     <ArgumentAxis />
-                    <ValueAxis tickSize={500} showTicks={false} tickFormat={(scale) => (tick) => {console.log(scale, tick); return tick}} >
+                    <ValueAxis tickSize={500} >
                     </ValueAxis>
                     <BarSeries
                         valueField="population"
