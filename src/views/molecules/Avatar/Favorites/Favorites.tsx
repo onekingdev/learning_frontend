@@ -5,8 +5,8 @@ import wardrobe from 'views/assets/wardrobe.svg';
 import floor from 'views/assets/avatars/floor.png';
 import { LoadingContext } from 'react-router-loading';
 import { ScreenSize } from 'views/screenSize';
-import IconButton from '@mui/material/IconButton';
-import StarIcon from '@mui/icons-material/Star';
+// import IconButton from '@mui/material/IconButton';
+// import StarIcon from '@mui/icons-material/Star';
 import { useHistory } from 'react-router-dom';
 import { AvatarFavorites } from './AvatarFavorites';
 import { doFetchFavoriteAvatars } from 'app/actions/avatarActions';
@@ -47,9 +47,11 @@ export const AvatarSelector: FC = () => {
     favories[id].skinTone ? setSkin(favories[id].skinTone) : setSkin('')
   }
 
-  const setUserAvatar = () => {
-    console.log('setted')
-  }
+  // TODO: Do not delete this comment. THIS WILL BE USED IN THE FUTURE
+  // const setUserAvatar = () => {
+  //   console.log('setted')
+  // }
+
   useEffect(() => {
     fetchFavorites()
     loadingContext.done()
@@ -110,11 +112,7 @@ const Container = styled.div`
   gap: 30px;
   margin: 2vh 10vw 2vh 10vw;
   align-items: center;
-  // .favorites {
-  //   @media screen and (max-width: ${ScreenSize.phone}) {
-  //     display:none;
-  //   }
-  // }
+
   @media screen and (max-width: ${ScreenSize.phone}) {
     margin: 5vh 0 10vh 0;
     width: 100%;
@@ -125,7 +123,7 @@ const Container = styled.div`
 
 export const TopDrawer = styled.div`
 display: none;
-@media screen and (max-width: ${ScreenSize.phone}) {
+@media screen and (max-width: ${ScreenSize.phone }) {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: calc((100vw - 30px ) / 4);

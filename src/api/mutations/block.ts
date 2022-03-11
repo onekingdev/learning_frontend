@@ -1,4 +1,4 @@
-import { STUDENT } from '../fragments/studentFragments';
+import { STUDENT } from "../fragments/studentFragments";
 import { BLOCK_PRESENTATON } from '../fragments/blockFragments'
 
 export const FINISH_BLOCK_PRESENTATION = (

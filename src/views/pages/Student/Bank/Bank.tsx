@@ -5,6 +5,7 @@ import { Grid } from '@mui/material';
 import { LoadingContext } from 'react-router-loading';
 
 import { StudentMenu } from 'views/templates/StudentMenu';
+import { Title } from 'views/atoms/Text/Title';
 import background from 'views/assets/colored-shapes-bg.svg';
 import ribbon from 'views/assets/ribbon.svg';
 import Cartera from 'views/assets/Cartera.svg';

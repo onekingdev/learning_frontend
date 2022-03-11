@@ -37,6 +37,9 @@ const CurrentAvatar = styled.div`
   align-items: center;
   justify-content: center;
   width: 300px;
+  @media (min-width:${ScreenSize.tablet}) and (max-width:${ScreenSize.desktop}) {
+    width: 250px;
+  }
   position: relative;
   @media screen and (min-width: ${ScreenSize.phone}) {
   }

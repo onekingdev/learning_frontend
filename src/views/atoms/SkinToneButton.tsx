@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC } from "react";
 import styled from 'styled-components';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from "views/Color";
 
 type SkinToneProps = {
     color: string,
