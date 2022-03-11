@@ -4,7 +4,7 @@ import { InputBase } from '@mui/material';
 
 
 import { LSButtonContainer, LSButton, LSText, LSPaperMoney, LSLabel, LSInputBase } from './utils/Style';
-import masterCard from '../../assets/MasterCard.svg'
+import masterCard from 'views/assets/MasterCard.svg'
 
 interface IUpgradeProps {
   onConfirm: () => void

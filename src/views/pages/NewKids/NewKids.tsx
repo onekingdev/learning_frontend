@@ -1,10 +1,10 @@
-import {FC, useEffect, useState, useContext} from 'react';
-import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
-import {useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { FC, useEffect, useState, useContext } from 'react';
+import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {useStyles, Subjects, Subject, SubjectIcon, SubjectTitle} from './Style';
+import { useStyles, Subjects, Subject, SubjectIcon, SubjectTitle } from './Style';
 import {
   Title,
   Tip,
@@ -12,32 +12,32 @@ import {
   Welcome,
   PaperContainer,
 } from './Style';
-import welcome from '../../assets/welcome-kid-new.svg';
+import welcome from 'views/assets/welcome-kid-new.svg';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
-import Button from '../../molecules/MuiButton';
-import TextField from '../../molecules/MuiTextField';
-import {ButtonColor, BasicColor} from '../../Color';
-import math_gold from '../../assets/packageIcons/math_gold.svg';
-import ela_gold from '../../assets/packageIcons/ela_gold.svg';
-import science_gold from '../../assets/packageIcons/science_gold.svg';
-import financial_gold from '../../assets/packageIcons/financial_gold.svg';
-import health_gold from '../../assets/packageIcons/health_gold.svg';
-import math_combo from '../../assets/packageIcons/math_combo.svg';
-import ela_combo from '../../assets/packageIcons/ela_combo.svg';
-import science_combo from '../../assets/packageIcons/science_combo.svg';
-import financial_combo from '../../assets/packageIcons/financial_combo.svg';
-import health_combo from '../../assets/packageIcons/health_combo.svg';
-import math_sole from '../../assets/packageIcons/math_sole.svg';
-import ela_sole from '../../assets/packageIcons/ela_sole.svg';
-import science_sole from '../../assets/packageIcons/science_sole.svg';
-import financial_sole from '../../assets/packageIcons/financial_sole.svg';
-import health_sole from '../../assets/packageIcons/health_sole.svg';
-import {LoadingContext} from 'react-router-loading';
+import Button from 'views/molecules/MuiButton';
+import TextField from 'views/molecules/MuiTextField';
+import { ButtonColor, BasicColor } from 'views/Color';
+import math_gold from 'views/assets/packageIcons/math_gold.svg';
+import ela_gold from 'views/assets/packageIcons/ela_gold.svg';
+import science_gold from 'views/assets/packageIcons/science_gold.svg';
+import financial_gold from 'views/assets/packageIcons/financial_gold.svg';
+import health_gold from 'views/assets/packageIcons/health_gold.svg';
+import math_combo from 'views/assets/packageIcons/math_combo.svg';
+import ela_combo from 'views/assets/packageIcons/ela_combo.svg';
+import science_combo from 'views/assets/packageIcons/science_combo.svg';
+import financial_combo from 'views/assets/packageIcons/financial_combo.svg';
+import health_combo from 'views/assets/packageIcons/health_combo.svg';
+import math_sole from 'views/assets/packageIcons/math_sole.svg';
+import ela_sole from 'views/assets/packageIcons/ela_sole.svg';
+import science_sole from 'views/assets/packageIcons/science_sole.svg';
+import financial_sole from 'views/assets/packageIcons/financial_sole.svg';
+import health_sole from 'views/assets/packageIcons/health_sole.svg';
+import { LoadingContext } from 'react-router-loading';
 
 const NewKids: FC = () => {
   const loadingContext = useContext(LoadingContext);

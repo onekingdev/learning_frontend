@@ -1,32 +1,35 @@
-import {FC, useEffect, ReactChildren, ReactChild, useState, forwardRef, useImperativeHandle, useMemo } from 'react';
+import { useEffect, useState, forwardRef, useImperativeHandle, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import {useHistory} from 'react-router-dom';
-import { Store } from '../../../app/configureStore';
-import {ParentPgNav} from '../ParentPgNav/ParentPgNav'
-import * as TYPES from '../../../app/types'
-import paypal from '../../assets/paypal.svg'
-import apple from '../../assets/apple-pay.svg'
-import visacard from '../../assets/visacard.svg'
-import Button from '../../molecules/MuiButton'
-import TextField from '../../molecules/MuiTextField'
-import {ButtonColor, shadeColor, BasicColor} from '../../Color';
+import { useHistory } from 'react-router-dom';
+import { Store } from 'app/configureStore';
+import paypal from 'views/assets/paypal.svg';
+import apple from 'views/assets/apple-pay.svg';
+import visacard from 'views/assets/visacard.svg';
+import Button from 'views/molecules/MuiButton';
+import TextField from 'views/molecules/MuiTextField';
+import { BasicColor } from 'views/Color';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement, CardElement } from '@stripe/react-stripe-js';
 import {
-  useStyles,
-  PayPal,
-  CardType,
-  Apple,
-  FlexRow,
-  Title,
-  CardContent
- } from './Style'
+    useStripe,
+    useElements,
+    CardNumberElement,
+    CardExpiryElement,
+    CardCvcElement,
+} from '@stripe/react-stripe-js';
+import {
+    useStyles,
+    PayPal,
+    CardType,
+    Apple,
+    FlexRow,
+    Title,
+    CardContent
+} from './Style'
 import StripeInput from './StripeInput';
 import countryList from 'react-select-country-list';
 

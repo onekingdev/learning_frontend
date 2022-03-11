@@ -1,15 +1,21 @@
 import { FC, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
-import { useDialog } from '../../molecules/Setting/utils/useDialog';
-import { LSShadowContainer, LSGridRow, LSTitle, LSText, LSBlueTextButton } from '../../molecules/Setting/utils/Style';
-import { LSDialog } from '../../molecules/Setting/LSDialog';
-import { PaymentForm } from '../../molecules/PaymentMethod/PaymentForm';
-import { EditPaymentForm } from '../../molecules/Setting/EditPaymentForm';
+import { useDialog } from 'views/molecules/Setting/utils/useDialog';
+import {
+  LSShadowContainer,
+  LSGridRow,
+  LSTitle,
+  LSText,
+  LSBlueTextButton
+} from 'views/molecules/Setting/utils/Style';
+import { LSDialog } from 'views/molecules/Setting/LSDialog';
+import { PaymentForm } from 'views/molecules/PaymentMethod/PaymentForm';
+import { EditPaymentForm } from 'views/molecules/Setting/EditPaymentForm';
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import masterCard from '../../assets/MasterCard.svg'
+import masterCard from 'views/assets/MasterCard.svg'
 
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 interface PaymentFormFunc {

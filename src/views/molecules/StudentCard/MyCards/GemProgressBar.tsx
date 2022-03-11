@@ -4,14 +4,14 @@
  * Display category image
  */
 
-import {FC, useState, useEffect} from 'react';
+import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import ProgressBar from '@ramonak/react-progress-bar';
-import {ScreenSize} from 'constants/screenSize';
-import {getDownUrlByFilename} from 'app/firebase';
+import { ScreenSize } from 'constants/screenSize';
+import { getDownUrlByFilename } from 'app/firebase';
 
-import {BasicColor} from 'views/Color';
+import { BasicColor } from 'views/Color';
 
 interface ProgressBarProps {
   totalCount: number;

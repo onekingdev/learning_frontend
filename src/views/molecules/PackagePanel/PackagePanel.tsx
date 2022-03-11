@@ -1,10 +1,10 @@
-import {FC, useEffect, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import avatar from '../../assets/packageIcons/avatar.svg'
-import Button from '../../molecules/MuiButton'
+import avatar from 'views/assets/packageIcons/avatar.svg'
+import Button from 'views/molecules/MuiButton'
 import ButtonGroup from '@mui/material/ButtonGroup';
-import {BasicColor} from '../../Color';
+import { BasicColor } from 'views/Color';
 
 import {
   useStyles,
@@ -15,10 +15,6 @@ import {
   Price,
   Plan,
   Body,
-  Subjects,
-  Subject,
-  SubjectIcon,
-  SubjectTitle,
   Mask,
   Tip,
  } from './Style'

@@ -1,7 +1,4 @@
 import * as TYPE from '../types';
-import {IStudent} from '../entities/student';
-import {IGroup} from '../entities/group';
-import {IBlock} from '../entities/block';
 
 const INITIAL_STATE = {
   createTimestamp: null,

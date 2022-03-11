@@ -1,24 +1,24 @@
-import {FC, useEffect, useState, useContext} from 'react';
+import { FC, useEffect, useState, useContext } from 'react';
 import Alert from '@mui/material/Alert';
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-import {ParentPgStepper} from '../../molecules/ParentPgStepper/ParentPgStepper';
-import {PaymentMethod} from '../../molecules/PaymentMethod/PaymentMethod';
-import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
-import {PackagePanel} from '../../molecules/PackagePanel/PackagePanel';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
+import { PaymentMethod } from 'views/molecules/PaymentMethod/PaymentMethod';
+import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { PackagePanel } from 'views/molecules/PackagePanel/PackagePanel';
 import {
   TipContainer,
   PackageContainer,
   Subject,
   SubjectContainer,
 } from './Style';
-import math from '../../assets/packageIcons/math_gold.svg';
-import ela from '../../assets/packageIcons/ela_gold.svg';
-import science from '../../assets/packageIcons/science_gold.svg';
-import financial from '../../assets/packageIcons/financial_gold.svg';
-import health from '../../assets/packageIcons/health_gold.svg';
+import math from 'views/assets/packageIcons/math_gold.svg';
+import ela from 'views/assets/packageIcons/ela_gold.svg';
+import science from 'views/assets/packageIcons/science_gold.svg';
+import financial from 'views/assets/packageIcons/financial_gold.svg';
+import health from 'views/assets/packageIcons/health_gold.svg';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
-import {LoadingContext} from 'react-router-loading';
+import { LoadingContext } from 'react-router-loading';
 
 export const Payment: FC = () => {
   const loadingContext = useContext(LoadingContext);

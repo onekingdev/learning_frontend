@@ -1,23 +1,23 @@
-import {FC, useEffect, useContext} from 'react';
+import { FC, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import {Grid} from '@mui/material';
+import { Grid } from '@mui/material';
 
-import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
+import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
 
-import {Title} from '../../molecules/Setting/utils/Style';
+import { Title } from 'views/molecules/Setting/utils/Style';
 import {
   TextGroup,
   LSLabel,
   LSText,
   LSBlueTextButton,
-} from '../../molecules/Setting/utils/Style';
+} from 'views/molecules/Setting/utils/Style';
 
-import {SettingForm} from '../../organisms/Setting/Profile';
-import {Payment} from '../../organisms/Setting/Payment';
-import {MembershipDetail} from '../../organisms/Setting/Details';
+import { SettingForm } from 'views/organisms/Setting/Profile';
+import { Payment } from 'views/organisms/Setting/Payment';
+import { MembershipDetail } from 'views/organisms/Setting/Details';
 
-import {CssBaseline} from '@mui/material';
-import {LoadingContext} from 'react-router-loading';
+import { CssBaseline } from '@mui/material';
+import { LoadingContext } from 'react-router-loading';
 
 export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);

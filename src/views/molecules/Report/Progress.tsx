@@ -1,10 +1,10 @@
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BasicColor } from '../../Color';
-import {TopicProgress} from '../../molecules/TopicProgress';
-import {ScreenSize} from '../../../constants/screenSize';
-import {dictionary} from '../../pages/Progress/dictionary';
-import {database, getProgress} from '../../../app/firebase';
+import {  BasicColor  } from 'views/Color';
+import { TopicProgress } from 'views/molecules/TopicProgress';
+import { ScreenSize } from 'constants/screenSize';
+import { dictionary } from 'views/pages/Progress/dictionary';
+import { getProgress } from 'app/firebase';
 
 export const ReportProgress: FC = () => {
   useEffect(() => {

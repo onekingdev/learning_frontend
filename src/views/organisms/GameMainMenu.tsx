@@ -1,16 +1,16 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import {ScreenSize} from '../../constants/screenSize';
-import {GameMenuButton} from '../molecules/GameMenuButton';
-import {BasicColor} from '../Color';
-import arcade from '../assets/arcade.svg';
-import learning from '../assets/learn.svg';
-import adventure from '../assets/adventure.svg';
-import sport from '../assets/sports.svg';
-import skill from '../assets/skills.svg';
-import strategy from '../assets/strategy.svg'
-import {dictionary} from '../pages/Games/dictionary';
-import {useHistory} from 'react-router-dom';
+import { ScreenSize } from 'constants/screenSize';
+import { GameMenuButton } from 'views/molecules/GameMenuButton';
+import { BasicColor } from 'views/Color';
+import arcade from 'views/assets/arcade.svg';
+import learning from 'views/assets/learn.svg';
+import adventure from 'views/assets/adventure.svg';
+import sport from 'views/assets/sports.svg';
+import skill from 'views/assets/skills.svg';
+import strategy from 'views/assets/strategy.svg'
+import { dictionary } from 'views/pages/Games/dictionary';
+import { useHistory } from 'react-router-dom';
 
 export const GameMainMenu: FC = () => {
   const language = 'en';

@@ -1,17 +1,15 @@
-import {FC, useEffect} from 'react';
-import {CongratsDgContainer} from 'views/pages/Question/Style';
-import {useSelector} from 'react-redux';
+import { FC } from 'react';
+import { CongratsDgContainer } from 'views/pages/Question/Style';
+import { useSelector } from 'react-redux';
 
 import img_congats from 'views/assets/level-up-congrats.png';
-import coin from 'views/assets/coin.svg';
-import lightening from 'views/assets/lightning.svg';
 import ParticlesBg from 'particles-bg';
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import useSound from 'use-sound';
 import fireworkSfx from 'views/assets/audios/mixkit-fireworks-bang-in-sky-2989.wav';
 
-import {bounceInUp} from 'react-animations';
-import {flip} from 'react-animations'
+import { bounceInUp } from 'react-animations';
+import { flip } from 'react-animations'
 
 interface Props {
   token: number;

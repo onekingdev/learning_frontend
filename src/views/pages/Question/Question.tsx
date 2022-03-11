@@ -1,25 +1,25 @@
-import {FC, useEffect, useState, useContext} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
+import { FC, useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { LessonProgress } from 'views/molecules/LessonProgress/LessonProgress';
 import {
   Container,
   Wrapper,
   ProgressWrapper,
-} from './Style';
-import {FinishLesson} from '../../organisms/FinishLesson';
-import {StudentMenu} from '../../templates/StudentMenu';
-import {MultipleChoiceText} from '../../molecules/QuestionTypes/MultipleChoiceText';
-import {get} from '../../../api/queries/get';
-import {BLOCK_PRESENTATION_QUERY} from '../../../api/queries/questions';
-import {IBlockPresentation, IQuestion} from '../../../app/entities/block';
-import {Store} from '../../../app/configureStore';
-import {useParams} from 'react-router-dom';
-import * as TYPE from '../../../app/types';
-import {LoadingContext} from 'react-router-loading';
-import {finishBlock} from '../../../app/actions/blockActions';
-import {CardDialog} from 'views/molecules/StudentCard/CardDialog';
+ } from './Style';
+import { FinishLesson } from 'views/organisms/FinishLesson';
+import { StudentMenu } from 'views/templates/StudentMenu';
+import { MultipleChoiceText } from 'views/molecules/QuestionTypes/MultipleChoiceText';
+import { get } from 'api/queries/get';
+import { BLOCK_PRESENTATION_QUERY } from 'api/queries/questions';
+import { IBlockPresentation, IQuestion } from 'app/entities/block';
+import { Store } from 'app/configureStore';
+import { useParams } from 'react-router-dom';
+import * as TYPE from 'app/types';
+import { LoadingContext } from 'react-router-loading';
+import { finishBlock } from 'app/actions/blockActions';
+import { CardDialog } from 'views/molecules/StudentCard/CardDialog';
 
-import {LevelUpDgContent} from 'views/atoms/ParticlgBg';
+import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
 import { getNextLevel } from 'app/actions/userActions';
 
 interface RoutePresentationParams {

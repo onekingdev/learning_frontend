@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { makeStyles } from '@mui/styles'
-import titleBg from '../../assets/title-kids-background.png'
-import {BasicColor} from '../../Color';
+import titleBg from 'views/assets/title-kids-background.png'
+import { BasicColor } from 'views/Color';
 
 export const SettingContainer = styled.div`
   display: flex;

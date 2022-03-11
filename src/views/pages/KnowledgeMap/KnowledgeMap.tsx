@@ -1,25 +1,25 @@
-import {FC, useEffect, useContext, useState} from 'react';
+import { FC, useEffect, useContext, useState } from 'react';
 import styled from 'styled-components';
-import {LoadingContext} from 'react-router-loading';
-import {useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { LoadingContext } from 'react-router-loading';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import {StudentMenu} from '../../templates/StudentMenu';
-import boat_sound from '../../assets/audios/boat.mp3';
-import ocean from '../../assets/islands/ocean.svg';
-import boat from '../../assets/islands/fillers/boat.svg';
-import barrell from '../../assets/islands/fillers/barril.svg';
-import dragon from '../../assets/islands/fillers/dragon.svg';
-import isle from '../../assets/islands/fillers/island.svg';
-import rock from '../../assets/islands/fillers/rock.svg';
-import rock2 from '../../assets/islands/fillers/rock-2.svg';
-import boulder from '../../assets/islands/fillers/rocxk.svg';
-import background from '../../assets/colored-shapes-bg.svg';
+import { StudentMenu } from 'views/templates/StudentMenu';
+import boat_sound from 'views/assets/audios/boat.mp3';
+import ocean from 'views/assets/islands/ocean.svg';
+import boat from 'views/assets/islands/fillers/boat.svg';
+import barrell from 'views/assets/islands/fillers/barril.svg';
+import dragon from 'views/assets/islands/fillers/dragon.svg';
+import isle from 'views/assets/islands/fillers/island.svg';
+import rock from 'views/assets/islands/fillers/rock.svg';
+import rock2 from 'views/assets/islands/fillers/rock-2.svg';
+import boulder from 'views/assets/islands/fillers/rocxk.svg';
+import background from 'views/assets/colored-shapes-bg.svg';
 
-import {ScreenSize} from '../../../constants/screenSize';
-import {get} from '../../../api/queries/get';
-import * as TYPE from '../../../app/types';
-import {AUDIENCES_QUERY} from '../../../api/queries/people';
+import { ScreenSize } from 'constants/screenSize';
+import { get } from 'api/queries/get';
+import * as TYPE from 'app/types';
+import { AUDIENCES_QUERY } from 'api/queries/people';
 
 export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);

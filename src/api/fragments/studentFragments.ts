@@ -1,7 +1,7 @@
-import {LEVEL} from './levelFragments'
-import {COIN_WALLET} from './coinWalletFragments'
-import {AVATAR} from './avatarFragments'
-import {BANK_WALLET} from './bankFragments'
+import { LEVEL } from './levelFragments'
+import { COIN_WALLET } from './coinWalletFragments'
+import { AVATAR } from './avatarFragments'
+import { BANK_WALLET } from './bankFragments'
 
 export const STUDENT_TOPIC_MASTERY = `
         id

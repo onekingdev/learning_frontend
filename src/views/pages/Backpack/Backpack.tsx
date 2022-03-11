@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect} from 'react';
+import { FC, useContext, useEffect } from 'react';
 import {
   Wrapper,
   AvatarButtonContainer,
@@ -13,17 +13,17 @@ import {
   ControlButtonContainer,
   HookBracket,
 } from './Styles';
-import backpackHook from '../../assets/backpack-hook.svg';
-import {BackpackButton} from '../../atoms/BackpackButton';
-import avatarButton from '../../assets/avatar-button.svg';
-import cardsButton from '../../assets/cards-button.svg';
-import controlButton from '../../assets/control-button.svg';
-import backpackFace from '../../assets/backpack-face.svg';
-import backpackLeft from '../../assets/backpack-left.svg';
-import backpackRight from '../../assets/backpack-right.svg';
-import {StudentMenu} from '../../templates/StudentMenu';
-import {useHistory} from 'react-router-dom';
-import {LoadingContext} from 'react-router-loading';
+import backpackHook from 'views/assets/backpack-hook.svg';
+import { BackpackButton } from 'views/atoms/BackpackButton';
+import avatarButton from 'views/assets/avatar-button.svg';
+import cardsButton from 'views/assets/cards-button.svg';
+import controlButton from 'views/assets/control-button.svg';
+import backpackFace from 'views/assets/backpack-face.svg';
+import backpackLeft from 'views/assets/backpack-left.svg';
+import backpackRight from 'views/assets/backpack-right.svg';
+import { StudentMenu } from 'views/templates/StudentMenu';
+import { useHistory } from 'react-router-dom';
+import { LoadingContext } from 'react-router-loading';
 
 export const Backpack: FC = () => {
   const loadingContext = useContext(LoadingContext);
