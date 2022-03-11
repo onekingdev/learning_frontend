@@ -23,7 +23,7 @@ export const GameCardPresentation: FC<GameCardProps> = ({
 }) => {
   const handlePlay = () => {
     setLoading(true)
-    const url = process.env.REACT_APP_SERVER_URL + "media/games/" + gamePath + "/gamePlay?token=" + token;
+    const url = process.env.REACT_APP_SERVER_URL + 'media/games/' + gamePath + '/gamePlay?token=' + token;
     location.href = url;
   }
   return (

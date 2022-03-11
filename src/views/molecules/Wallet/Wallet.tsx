@@ -1,11 +1,12 @@
 import { FC, useState } from 'react';
-import { Icon } from 'views/atoms/Icon/Icon';
-import { Balance } from 'views/atoms/WalletBalance';
-import { BasicColor } from 'views/Color';
-import coins from 'views/assets/coins.svg';
+import { Icon } from '../../atoms/Icon/Icon';
+import { Balance } from '../../atoms/WalletBalance';
+import { BasicColor } from '../../Color';
+import coins from '../../assets/coins.svg';
 import styled from 'styled-components';
-import { IconSize } from 'views/atoms/Icon/Size';
-import { ScreenSize } from 'views/screenSize';
+import { IconSize } from '../../atoms/Icon/Size';
+import { ScreenSize } from '../../screenSize';
+import { UserInfo } from '../../atoms/Text/UserInfo';
 import { LSDialog } from '../Setting/LSDialog';
 import { WalletTxHistory } from './WalletTxs'
 
@@ -15,6 +16,58 @@ type WalletProps = {
 
 export const Wallet: FC<WalletProps> = ({ balance }) => {
   const [isDeploy, setIsDeploy] = useState(false);
+  const userTransactions = [
+    {
+      description: 'Block 1',
+      amount: '+10',
+      type: true,
+    },
+    {
+      description: 'Play Game',
+      amount: '-100',
+      type: false,
+    },
+    {
+      description: 'Block 1',
+      amount: '+10',
+      type: true,
+    },
+    {
+      description: 'Play Game',
+      amount: '-100',
+      type: false,
+    },
+    {
+      description: 'Block 1',
+      amount: '+10',
+      type: true,
+    },
+    {
+      description: 'Play Game',
+      amount: '-100',
+      type: false,
+    },
+    {
+      description: 'Block 1',
+      amount: '+10',
+      type: true,
+    },
+    {
+      description: 'Play Game',
+      amount: '-100',
+      type: false,
+    },
+    {
+      description: 'Block 1',
+      amount: '+10',
+      type: true,
+    },
+    {
+      description: 'Play Game',
+      amount: '-100',
+      type: false,
+    },
+  ];
 
   const deployDropdown = () => {
     setIsDeploy(!isDeploy);
@@ -27,15 +80,36 @@ export const Wallet: FC<WalletProps> = ({ balance }) => {
             <Icon image={coins} size={IconSize.medium} onClick={deployDropdown} />
           </IconContainer>
           <Balance>{balance}</Balance>
+          {/* <DropdownIcon src={dropDownArrow} /> */}
         </WalletStyle>
         {isDeploy ? (
           <LSDialog isOpen={isDeploy} open={deployDropdown} dialogContent={<WalletTxHistory />} fullWidth='true' title='Transactions on this wallet' />
+          // <WalletDropdownContainer>
+          //   <WalletDropdown>
+          //     {userTransactions.map((item, i) => (
+          //       <WalletTransaction key={i}>
+          //         <ExtendUserInfo
+          //           color={item.type ? BasicColor.green : BasicColor.red}
+          //         >
+          //           {item.description}
+          //         </ExtendUserInfo>
+          //         <ExtendUserInfo
+          //           color={item.type ? BasicColor.green : BasicColor.red}
+          //         >
+          //           {item.amount}
+          //         </ExtendUserInfo>
+          //       </WalletTransaction>
+          //     ))}
+          //   </WalletDropdown>
+          // </WalletDropdownContainer>
         ) : null}
       </WalletContainer>
     </>
   );
 };
-
+type ExtendUserInfoProps = {
+  color: string;
+};
 const WalletContainer = styled.div`
   position: relative;
   @media screen and (min-width: ${ScreenSize.desktop}) {

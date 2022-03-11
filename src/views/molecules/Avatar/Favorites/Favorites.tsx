@@ -5,8 +5,8 @@ import wardrobe from 'views/assets/wardrobe.svg';
 import floor from 'views/assets/avatars/floor.png';
 import { LoadingContext } from 'react-router-loading';
 import { ScreenSize } from 'views/screenSize';
-// import IconButton from '@mui/material/IconButton';
-// import StarIcon from '@mui/icons-material/Star';
+import IconButton from '@mui/material/IconButton';
+import StarIcon from '@mui/icons-material/Star';
 import { useHistory } from 'react-router-dom';
 import { AvatarFavorites } from './AvatarFavorites';
 import { doFetchFavoriteAvatars } from 'app/actions/avatarActions';
@@ -47,11 +47,9 @@ export const AvatarSelector: FC = () => {
     favories[id].skinTone ? setSkin(favories[id].skinTone) : setSkin('')
   }
 
-  // TODO: Do not delete this comment. THIS WILL BE USED IN THE FUTURE
-  // const setUserAvatar = () => {
-  //   console.log('setted')
-  // }
-
+  const setUserAvatar = () => {
+    console.log('setted')
+  }
   useEffect(() => {
     fetchFavorites()
     loadingContext.done()

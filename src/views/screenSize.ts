@@ -1,5 +1,5 @@
 export enum ScreenSize {
   desktop = '1025px',
   tablet = '768px',
-  phone = '760px',
+  phone = '420px',
 }

@@ -1,10 +1,10 @@
-import {BrowserRouter as Router, Redirect, useLocation } from 'react-router-dom';
-import {Route, Switch} from 'react-router-loading';
+import { BrowserRouter as Router, Redirect, useLocation } from 'react-router-dom';
+import { Route, Switch } from 'react-router-loading';
 import {
   TransitionGroup,
   CSSTransition,
 } from 'react-transition-group';
-import {bounceInUp, bounceOutDown, flip, fadeIn} from 'react-animations';
+import { bounceInUp, bounceOutDown, flip, fadeIn } from 'react-animations';
 import styled, {keyframes} from 'styled-components';
 
 import 'animate.css';
@@ -181,6 +181,5 @@ export function Routes(props: any) {
        {/* </CSSTransition > */}
     {/* </TransitionGroup> */}
     </FadeIn>
-
   );
 }
