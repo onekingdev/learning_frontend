@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const GamesMenuContainer = styled.div`
-  width: 95%;
+  width: 75%;
   margin: 10px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);

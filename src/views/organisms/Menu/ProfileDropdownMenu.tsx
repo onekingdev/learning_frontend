@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { ICON_SIZE } from 'constants/icon';
 
 export const ProfileDropDownMenu: FC = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const history = useHistory();
 
   const open = Boolean(anchorEl);
