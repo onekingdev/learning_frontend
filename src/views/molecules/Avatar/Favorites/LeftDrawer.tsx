@@ -1,7 +1,6 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { ScreenSize } from 'views/screenSize';
 import styled from 'styled-components';
-import { RoundIcon } from 'views/atoms/Icon/Icon';
 import drawer_accessories from 'views/assets/drawers/drawer_accessories.png';
 import drawer_head from 'views/assets/drawers/drawer-head.png';
 import drawer_clothes from 'views/assets/drawers/drawer_clothes.png';
@@ -9,14 +8,6 @@ import drawer_pants from 'views/assets/drawers/drawer_pants.png';
 import floor from 'views/assets/avatars/floor.png';
 
 export const LeftDrawer: FC = () => {
-
-  const [current, setCurrent] = useState(0)
-
-  const setCurrentAtomId = (val: any) => {
-    if (val < 4) {
-      setCurrent(val)
-    }
-  };
 
   return (
     <DrawerContainer>
@@ -94,19 +85,3 @@ const DrawerContainer = styled.div`
     display: none;
   }
 `
-
-const AtomsRoundIcon = styled(RoundIcon) <{
-  isSelected: boolean;
-}>`
-  margin: auto;
-  border: ${props => (props.isSelected ? 'solid 3px red' : 'none')};
-  width: ${props => (props.isSelected ? '24px' : '30px')};
-  height: ${props => (props.isSelected ? '24px' : '30px')};
-  @media screen and (min-width: ${ScreenSize.phone}) {
-    margin: auto;
-    width: ${props => (props.isSelected ? '74px' : '80px')};
-    height: ${props => (props.isSelected ? '74px' : '80px')};
-    margin-left: calc(160px / 2 - 80px / 2);
-    margin-right: calc(160px / 2 - 80px / 2);
-  }
-`;

@@ -1,10 +1,10 @@
-import { FC, useEffect, useContext, useState } from 'react';
+import {FC, useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
-import { LoadingContext } from 'react-router-loading';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import {LoadingContext} from 'react-router-loading';
+import {useHistory} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 
-import { StudentMenu } from '../../templates/StudentMenu';
+import {StudentMenu} from '../../templates/StudentMenu';
 import boat_sound from '../../assets/audios/boat.mp3';
 import ocean from '../../assets/islands/ocean.svg';
 import boat from '../../assets/islands/fillers/boat.svg';
@@ -16,10 +16,10 @@ import rock2 from '../../assets/islands/fillers/rock-2.svg';
 import boulder from '../../assets/islands/fillers/rocxk.svg';
 import background from '../../assets/colored-shapes-bg.svg';
 
-import { ScreenSize } from '../../screenSize';
-import { get } from '../../../api/queries/get';
+import {ScreenSize} from '../../screenSize';
+import {get} from '../../../api/queries/get';
 import * as TYPE from '../../../app/types';
-import { AUDIENCES_QUERY } from '../../../api/queries/people';
+import {AUDIENCES_QUERY} from '../../../api/queries/people';
 
 export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);

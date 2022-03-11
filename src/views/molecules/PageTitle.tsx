@@ -30,7 +30,7 @@ const CardTitle = styled.div`
     // padding:inherit;
   }
 
-  @media screen and (max-width: ${ScreenSize.tablet}) {
+  @media screen and (max-width: ${ScreenSize.phone}) {
     h1 {
       font-size: 30px;
     }

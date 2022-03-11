@@ -5,9 +5,8 @@ import wardrobe from 'views/assets/wardrobe.svg';
 import floor from 'views/assets/avatars/floor.png';
 import { LoadingContext } from 'react-router-loading';
 import { ScreenSize } from 'views/screenSize';
-
-import IconButton from '@mui/material/IconButton';
-import StarIcon from '@mui/icons-material/Star';
+// import IconButton from '@mui/material/IconButton';
+// import StarIcon from '@mui/icons-material/Star';
 import { useHistory } from 'react-router-dom';
 import { AvatarFavorites } from './AvatarFavorites';
 import { doFetchFavoriteAvatars } from 'app/actions/avatarActions';
@@ -21,7 +20,9 @@ export const AvatarSelector: FC = () => {
   const student = useSelector((state: any) => state.student)
   const loadingContext = useContext(LoadingContext);
 
-  const [currentAvatarId, setCurrentAvatarId] = useState(0)
+  // TODO-- This state is used to select user avatar from his/her favorites
+  // const [currentAvatarId, setCurrentAvatarId] = useState(0)
+
   const [favories, setFavories] = useState<Array<any>>([])
 
   const [accessory, setAccessory] = useState('')
@@ -38,7 +39,7 @@ export const AvatarSelector: FC = () => {
   }
 
   const setCurrentAvatar = (id: number) => {
-    setCurrentAvatarId(id)
+    // setCurrentAvatarId(id)
     favories[id].avatarAccessorie ? setAccessory(favories[id].avatarAccessorie.image) : setAccessory('')
     setHead(favories[id].avatarHead.image)
     setBody(favories[id].avatarClothes.image)
@@ -46,9 +47,11 @@ export const AvatarSelector: FC = () => {
     favories[id].skinTone ? setSkin(favories[id].skinTone) : setSkin('')
   }
 
-  const setUserAvatar = () => {
-    console.log('setted')
-  }
+  // TODO: Do not delete this comment. THIS WILL BE USED IN THE FUTURE
+  // const setUserAvatar = () => {
+  //   console.log('setted')
+  // }
+
   useEffect(() => {
     fetchFavorites()
     loadingContext.done()
@@ -76,10 +79,12 @@ export const AvatarSelector: FC = () => {
         </div>
         <Drawer src={wardrobe} onClick={() => history.push('wardrobe')} />
         <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} />
-        <IconButton style={{ position: 'absolute', right: '12vw', bottom: '12vh' }} color='warning' aria-label='set favorite' component='span' onClick={setUserAvatar}>
-          <StarIcon style={{ transform: 'scale(2)' }} />
-        </IconButton>
-        <div style={{ position: 'relative' }} className='favorites'>
+        {/* <div style={{ position: 'absolute'}}>
+          <IconButton style={{ position: 'absolute', left: 0, bottom: 0 }} color='warning' aria-label='set favorite' component='span' onClick={setUserAvatar}>
+            <StarIcon style={{ transform: 'scale(2)' }} />
+          </IconButton>
+        </div> */}
+        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
           <RightDrawer> {/* This is displayed in desktop view only */}
             <AvatarFavorites select={setCurrentAvatar} favorites={favories} />
           </RightDrawer>
@@ -103,7 +108,8 @@ const Floor = styled.img`
 const Container = styled.div`
   display: flex;
   position: relative;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 30px;
   margin: 2vh 10vw 2vh 10vw;
   align-items: center;
   // .favorites {
@@ -115,6 +121,7 @@ const Container = styled.div`
     margin: 5vh 0 10vh 0;
     width: 100%;
     justify-content: center;
+    gap: 0;
   }
 `;
 
@@ -152,6 +159,6 @@ const Drawer = styled.img`
     position: absolute;
     left: 10vw;
     bottom: 10vh;
-    z-index: 20;
+    z-index: 10;
   }
 `;

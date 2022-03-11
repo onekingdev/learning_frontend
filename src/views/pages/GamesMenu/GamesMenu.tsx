@@ -1,25 +1,26 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import { GamesMenuContainer, GamesMenuTitleContainer, Wrapper } from './Styles';
-import { GameCardPresentation } from '../../molecules/GameCardPresentation';
-import { GameMenuButton } from '../../molecules/GameMenuButton';
+import {FC, useContext, useEffect, useState} from 'react';
+import {GamesMenuContainer, GamesMenuTitleContainer, Wrapper} from './Styles';
+import {GameCardPresentation} from '../../molecules/GameCardPresentation';
+import imagen from '../../assets/apple.svg';
+import {GameMenuButton} from '../../molecules/GameMenuButton';
 import arcade from '../../assets/arcade.svg';
 import learning from '../../assets/learn.svg';
 import adventure from '../../assets/adventure.svg';
 import sport from '../../assets/sports.svg';
 import skill from '../../assets/skills.svg';
 import strategy from '../../assets/strategy.svg'
-import { BasicColor } from '../../Color';
-import { StudentMenu } from '../../templates/StudentMenu';
-import { dictionary } from './dictionary';
-import { LoadingContext } from 'react-router-loading';
-import {useParams } from 'react-router-dom';
+import {BasicColor} from '../../Color';
+import {StudentMenu} from '../../templates/StudentMenu';
+import {dictionary} from './dictionary';
+import {LoadingContext} from 'react-router-loading';
+import {useParams, useHistory} from 'react-router-dom';
 import { getGameByCategory } from '../../../app/actions/gameActions'
 import { setCoinWallet } from '../../../app/actions/studentActions'
 import { useSelector, useDispatch } from 'react-redux'
-import { Spinner } from 'views/atoms/Spinner';
+import {Spinner} from 'views/atoms/Spinner';
 
 interface GameCategoryParams {
-  category: 'arcade' | 'learning' | 'adventure' | 'sport' | 'skill' | 'strategy';
+  category: "arcade" | "learning" | "adventure" | "sport" | "skill" | "strategy";
 }
 
 interface GameCardParam {
