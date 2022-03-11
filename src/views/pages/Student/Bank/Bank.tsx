@@ -19,7 +19,7 @@ import { PageTitle } from 'views/molecules/PageTitle';
 
 export const Bank: FC = () => {
 
-  const student = useSelector((state: any) =>state.student)
+  const student = useSelector((state: any) => state.student)
   const interests = useSelector((state: any) => state.interests.interests)
   const loadingContext = useContext(LoadingContext);
   const bankMovement = student.bankWallet.bankmovementSet
@@ -31,26 +31,23 @@ export const Bank: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        {/* <BankTitle> */}
-          <PageTitle title='BANK'/>
-          {/* <Title>Bank</Title> */}
-        {/* </BankTitle> */}
+        <PageTitle title='BANK' />
         <div >
           <Grid container >
-            <Grid container item xs={12} md={6} sx={{'&.MuiGrid-root': {alignContent: 'space-evenly'}}}>
-              <GridItem item md={12} xs={4}>
+            <Grid container item xs={12} md={6} sx={{ '&.MuiGrid-root': { alignContent: 'start', padding: '40px' } }}>
+              <GridItem item md={4} xs={4} align='end'>
                 <Img src={Cartera} />
               </GridItem>
-              <GridItem item md={12} xs={8}>
+              <GridItem item md={8} xs={8}>
                 <AccountBalance balance={student.bankWallet.balance} />
               </GridItem>
-              <GridItem item md={12} xs={12}>
+              <GridItem item md={12} xs={12} align='end'>
                 <TxBox />
               </GridItem>
             </Grid>
             <GridItem container item xs={12} md={6} align="start">
               <Grid item>
-                <TxHistoryTable movement={bankMovement}/>
+                <TxHistoryTable movement={bankMovement} />
               </Grid>
               <Grid item>
                 <Interest interests={interests} />
@@ -63,7 +60,7 @@ export const Bank: FC = () => {
   );
 };
 
-const GridItem = styled(Grid)<{
+const GridItem = styled(Grid) <{
   align?: string;
 }>`
   &.MuiGrid-root {
@@ -80,8 +77,9 @@ const GridItem = styled(Grid)<{
 `;
 
 const Img = styled.img`
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 30vw;
+width: 7vw;
+@media screen and (max-width: ${ScreenSize.tablet}) {
+  width: 15vw;
     margin-left: 5vw;
   }
 `;

@@ -103,7 +103,7 @@ export const TxBox: FC = () => {
 const BankPaper = styled.div`
   margin-top: 0;
   padding: 30px 20px 30px 20px;
-  width: 450px;
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;

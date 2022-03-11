@@ -25,7 +25,7 @@ export const Rank: FC = () => {
         <RankUsersContainer>
           {ranking.map((name, i) => {
             return (
-              <UserRank userRank={i + 1} userName={name} userIcon={avatar} />
+              <UserRank userRank={i + 1} userName={name} key={name+i} userIcon={avatar} />
             );
           })}
         </RankUsersContainer>

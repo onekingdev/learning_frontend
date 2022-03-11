@@ -17,6 +17,7 @@ import collectible_icon from 'views/assets/nav-icons/collectibles.png';
 import profile_icon from 'views/assets/nav-icons/profile.png';
 import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
 
 
 export const Sidebar: FC = () => {
@@ -39,7 +40,7 @@ export const Sidebar: FC = () => {
     useEffect(() => {
             // check device is mobile, do mobile view
     const handleResize = () => {
-        if (window.innerWidth > 767) {
+        if (window.innerWidth > 425) {
           setMobile(false);
         } else setMobile(true);
       };
@@ -60,7 +61,7 @@ export const Sidebar: FC = () => {
                 onClose={toggleDrawer(false)}
             >
                 <Box
-                    sx={{ width: 250 }}
+                    sx={{ width: isMobile ? 150 : 250 }}
                     role="presentation"
                     onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}

@@ -13,7 +13,7 @@ interface BalanceProp {
 export const AccountBalance: FC<BalanceProp> = ({ balance }) => {
 
   return (
-    <BankPaper flex_direction='row' bg_color={BasicColor.blue} width={450}>
+    <BankPaper flex_direction='row' bg_color={BasicColor.blue} >
       <SavingsIcon />
       <LSText fontSize={24}>
         current account:
