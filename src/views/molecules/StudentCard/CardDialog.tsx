@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 
 import { BasicColor } from '../../Color';
 

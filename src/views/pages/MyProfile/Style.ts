@@ -1,4 +1,4 @@
-import {ScreenSize} from './../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 import styled from 'styled-components';
 import background from '../../assets/colored-shapes-bg.svg';
 

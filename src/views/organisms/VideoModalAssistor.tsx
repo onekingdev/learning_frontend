@@ -4,7 +4,7 @@ import {Modal} from '../atoms/Modal';
 import {Typography} from '../atoms/Text/typography';
 import {BasicColor} from '../Color';
 import {VideoQuestion} from '../molecules/VideoQuestions';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 
 type VideoModalProps = {
   onClick: () => void;

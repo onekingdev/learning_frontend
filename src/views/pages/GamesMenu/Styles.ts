@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const GamesMenuContainer = styled.div`
-  width: 95%;
+  width: 75%;
   margin: 10px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);

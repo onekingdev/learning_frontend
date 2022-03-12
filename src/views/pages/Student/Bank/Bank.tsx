@@ -5,21 +5,20 @@ import { Grid } from '@mui/material';
 import { LoadingContext } from 'react-router-loading';
 
 import { StudentMenu } from 'views/templates/StudentMenu';
-import { Title } from 'views/atoms/Text/Title';
 import background from 'views/assets/colored-shapes-bg.svg';
-import ribbon from 'views/assets/ribbon.svg';
 import Cartera from 'views/assets/Cartera.svg';
 
-import { ScreenSize } from 'views/screenSize';
+import { ScreenSize } from 'constants/screenSize';
 
 import { AccountBalance } from 'views/molecules/StudentBank/AccountBalance';
 import { TxBox } from 'views/molecules/StudentBank/TxBox';
 import { TxHistoryTable } from 'views/molecules/StudentBank/TxHistoryTable';
 import { Interest } from 'views/molecules/StudentBank/Interest';
+import { PageTitle } from 'views/molecules/PageTitle';
 
 export const Bank: FC = () => {
 
-  const student = useSelector((state: any) =>state.student)
+  const student = useSelector((state: any) => state.student)
   const interests = useSelector((state: any) => state.interests.interests)
   const loadingContext = useContext(LoadingContext);
   const bankMovement = student.bankWallet.bankmovementSet
@@ -31,25 +30,30 @@ export const Bank: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        <BankTitle>
-          <Title>Bank</Title>
-        </BankTitle>
+        <PageTitle title='BANK' />
         <div >
           <Grid container >
-            <Grid container item xs={12} md={6} sx={{'&.MuiGrid-root': {alignContent: 'space-evenly'}}}>
-              <GridItem item md={12} xs={4}>
+            <Grid container item xs={12} md={6}
+            sx={{
+              '&.MuiGrid-root': {
+                alignContent: 'start',
+                padding: '40px',
+                '@media screen and (max-width: 720px)' : { padding: '1vw'}
+              },
+              }}>
+              <GridItem item md={4} xs={4} align='end'>
                 <Img src={Cartera} />
               </GridItem>
-              <GridItem item md={12} xs={8}>
+              <GridItem item md={8} xs={8}>
                 <AccountBalance balance={student.bankWallet.balance} />
               </GridItem>
-              <GridItem item md={12} xs={12}>
+              <GridItem item md={12} xs={12} align='end'>
                 <TxBox />
               </GridItem>
             </Grid>
             <GridItem container item xs={12} md={6} align="start">
               <Grid item>
-                <TxHistoryTable movement={bankMovement}/>
+                <TxHistoryTable movement={bankMovement} />
               </Grid>
               <Grid item>
                 <Interest interests={interests} />
@@ -62,7 +66,7 @@ export const Bank: FC = () => {
   );
 };
 
-const GridItem = styled(Grid)<{
+const GridItem = styled(Grid) <{
   align?: string;
 }>`
   &.MuiGrid-root {
@@ -79,8 +83,9 @@ const GridItem = styled(Grid)<{
 `;
 
 const Img = styled.img`
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 30vw;
+width: 7vw;
+@media screen and (max-width: ${ScreenSize.tablet}) {
+  width: 15vw;
     margin-left: 5vw;
   }
 `;
@@ -89,16 +94,4 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-`;
-
-const BankTitle = styled.div`
-  margin-top: 3vh;
-  text-align: center;
-  display: flex;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-  background: url(${ribbon}) center no-repeat;
-  background-size: contain;
-  margin-bottom: 20px;
 `;

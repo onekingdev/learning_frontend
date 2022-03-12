@@ -5,13 +5,13 @@
 
 import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from 'constants/screenSize';
 
-import gem_legendary from '../../assets/gems_card_collectible/gem_legendary.png';
-import gem_epic from '../../assets/gems_card_collectible/gem_epic.png';
-import gem_common from '../../assets/gems_card_collectible/gem_common.png';
-import gem_rare from '../../assets/gems_card_collectible/gem_rare.png';
-import gem_disabled from '../../assets/gems_card_collectible/gem_disabled.png';
+import gem_legendary from 'views/assets/gems_card_collectible/gem_legendary.png';
+import gem_epic from 'views/assets/gems_card_collectible/gem_epic.png';
+import gem_common from 'views/assets/gems_card_collectible/gem_common.png';
+import gem_rare from 'views/assets/gems_card_collectible/gem_rare.png';
+import gem_disabled from 'views/assets/gems_card_collectible/gem_disabled.png';
 
 interface GemsProps {
   select: (gemCate: string) => (void)

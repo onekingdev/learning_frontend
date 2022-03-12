@@ -4,7 +4,7 @@ import { BasicColor } from 'views/Color';
 import priceflag from 'views/assets/avatars/price-flag.png';
 import ReactLoading from 'react-loading';
 import { IAvatar } from 'app/entities/avatar';
-import { ScreenSize } from 'views/screenSize';
+import { ScreenSize } from 'constants/screenSize';
 import { doPurchaseAvatarItem } from 'app/actions/avatarActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -95,8 +95,18 @@ const WardrobeScroll = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   overflow-y: auto;
+  @media (min-width:${ScreenSize.tablet}) and (max-width:${ScreenSize.desktop}) {
+    grid-template-columns: repeat(2, 1fr);
+    width: 280px;
+  }
+
   &::-webkit-scrollbar {
     display: none;
+  }
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    width: 90vw;
+    height: 45vh;
+    grid-gap: 10px;
   }
 `;
 
@@ -118,6 +128,11 @@ const WardrobeAtom = styled.div<{
 
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    font-size: 15px;
+    width: calc( 80vw / 4 );
+    height: calc( 50vh / 4 ) ;
   }
 `;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 import background from '../../assets/colored-shapes-bg.svg';
 import background_mobile from '../../assets/colored-shapes-bg.svg';
 

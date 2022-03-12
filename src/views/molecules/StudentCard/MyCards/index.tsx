@@ -10,14 +10,9 @@
 import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
-
-import {ScreenSize} from 'views/screenSize';
-
-// Get file storage link from firebase
-
+import {ScreenSize} from 'constants/screenSize';
 import {MyCard} from './MyCard';
 import {Gems} from './Gems';
-
 import {
   getCardPacksInfo,
   getCollectibleCards,
@@ -53,7 +48,6 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
           setAllCards([]);
         } else {
           setAllCards(collectibles);
-          console.log('collectibles:', allCards)
         }
       }
     };
@@ -154,7 +148,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
   );
 };
 
-export const MyCardCategory: FC = () => {
+export const MyCards: FC = () => {
   const user = useSelector((state: any) => state.user);
   const [categories, setCategories] = useState([]);
 

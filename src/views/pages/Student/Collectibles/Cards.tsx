@@ -4,7 +4,7 @@ import {Wrapper} from './Style';
 import styled from 'styled-components';
 
 import {BasicColor} from '../../../Color';
-import {ScreenSize} from 'views/screenSize';
+import {ScreenSize} from 'constants/screenSize';
 
 import {PageTitle} from 'views/molecules/PageTitle';
 import {StudentMenu} from '../../../templates/StudentMenu';

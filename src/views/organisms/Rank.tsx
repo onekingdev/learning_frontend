@@ -4,7 +4,7 @@ import {Title} from '../atoms/Text/Title';
 import {UserRank} from '../molecules/UserRank';
 import avatar from '../assets/avatars/avatar1.svg';
 import {BasicColor} from '../Color';
-import {ScreenSize} from '../screenSize';
+import {ScreenSize} from '../../constants/screenSize';
 import {dictionary} from '../pages/Progress/dictionary';
 import {getRanking, writeProgress, writeRanking} from '../../app/firebase';
 
@@ -25,7 +25,7 @@ export const Rank: FC = () => {
         <RankUsersContainer>
           {ranking.map((name, i) => {
             return (
-              <UserRank userRank={i + 1} userName={name} userIcon={avatar} />
+              <UserRank userRank={i + 1} userName={name} key={name+i} userIcon={avatar} />
             );
           })}
         </RankUsersContainer>

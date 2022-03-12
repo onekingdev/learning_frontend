@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from '../atoms/Modal';
 import { BasicColor, ButtonColor } from '../Color';
-import { ScreenSize } from '../screenSize';
+import { ScreenSize } from '../../constants/screenSize';
 import level from '../assets/level-up.svg';
 import { LevelUp } from '../atoms/Text/LevelUp';
 import { Button } from '../molecules/Button';

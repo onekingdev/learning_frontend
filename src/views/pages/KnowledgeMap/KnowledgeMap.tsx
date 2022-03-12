@@ -16,7 +16,7 @@ import rock2 from '../../assets/islands/fillers/rock-2.svg';
 import boulder from '../../assets/islands/fillers/rocxk.svg';
 import background from '../../assets/colored-shapes-bg.svg';
 
-import {ScreenSize} from '../../screenSize';
+import {ScreenSize} from '../../../constants/screenSize';
 import {get} from '../../../api/queries/get';
 import * as TYPE from '../../../app/types';
 import {AUDIENCES_QUERY} from '../../../api/queries/people';
