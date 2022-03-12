@@ -1,11 +1,11 @@
-import { FC, useState, useEffect } from 'react';
+import {FC, useState, useEffect} from 'react';
 import styled from 'styled-components';
 import coin from 'views/assets/coin.svg';
 import ReactLoading from 'react-loading';
-import { getDownUrlByFilename } from 'app/firebase';
+import {getDownUrlByFilename} from 'app/firebase';
 
-import { BasicColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
+import {BasicColor} from 'views/Color';
+import {ScreenSize} from 'constants/screenSize';
 
 type CardProps = {
   category: string;

@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { BasicColor } from 'views/Color';
-import { H1, H2, H3, H4, H5, H6 } from './Style';
+import {FC} from 'react';
+import {BasicColor} from 'views/Color';
+import {H1, H2, H3, H4, H5, H6} from './Style';
 
 type HeadlineProps = {
   body: string;

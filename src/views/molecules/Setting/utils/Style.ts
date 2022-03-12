@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { Box, InputBase, Paper } from '@mui/material';
-import { BasicColor } from 'views/Color';
+import {Box, InputBase, Paper} from '@mui/material';
+import {BasicColor} from 'views/Color';
 
 import FormControl from '@mui/material/FormControl';
 import {
@@ -14,7 +14,7 @@ import {
   FormControlLabel,
 } from '@mui/material';
 
-import titleBg from 'views/assets/title-kids-background.png';
+import titleBg from '../../../assets/title-kids-background.png';
 
 /*--------------------------------------------------------------------------------------------*/
 /*                                         Dialog                                             */

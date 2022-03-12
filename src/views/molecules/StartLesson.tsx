@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
-import { BasicColor } from 'views/Color';
-import upArrow from 'views/assets/upArrow.svg';
-import { Typography } from 'views/atoms/Text/typography';
-import { ScreenSize } from 'constants/screenSize';
-import { dictionary } from 'views/pages/StudentHome/dictionary';
+import {BasicColor} from '../Color';
+import upArrow from '../assets/upArrow.svg';
+import {Typography} from '../atoms/Text/typography';
+import {ScreenSize} from '../../constants/screenSize';
+import {dictionary} from '../pages/StudentHome/dictionary';
 
 type StartLessonProps = {
   onClick: () => void;

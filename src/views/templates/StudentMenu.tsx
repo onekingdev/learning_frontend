@@ -1,10 +1,10 @@
-import { FC, useEffect } from 'react';
-import { TopMenu } from 'views/organisms/Menu/TopMenu';
-import { MobileMenu } from 'views/organisms/Menu/MobileMenu';
-import avatarPlaceHolder from 'views/assets/avatars/avatar1.svg';
+import {FC, useEffect} from 'react';
+import {TopMenu} from '../organisms/Menu/TopMenu';
+import {MobileMenu} from '../organisms/Menu/MobileMenu';
+import avatarPlaceHolder from '../assets/avatars/avatar1.svg';
 import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import { useSelector } from 'react-redux';
+import {ScreenSize} from '../../constants/screenSize';
+import {useSelector} from 'react-redux';
 
 export const StudentMenu: FC = ({children}) => {
   const user = useSelector((state: any) => state.user);

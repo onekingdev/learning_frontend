@@ -1,8 +1,10 @@
-import mutation from 'api/mutations/get'
-import { PLAY_GAME } from 'api/mutations/game'
-import query from 'api/queries/get'
-import {GAMES_QUERY, GAMES_CATEGORY_QUERY} from 'api/queries/games'
-import * as TYPES from 'app/types'
+import mutation from '../../api/mutations/get'
+import { PLAY_GAME } from '../../api/mutations/game'
+import query from '../../api/queries/get'
+import {GAMES_QUERY, GAMES_BY_CATEGORY_NAME_QUERY, GAMES_CATEGORY_QUERY} from '../../api/queries/games'
+import {INTEREST_QUERY} from '../../api/queries/interests'
+
+import * as TYPES from '../../app/types'
 
 export const getGameCategories = async(token: string, dispatch: any) => {
     const res:any = await query('gamesCategory', GAMES_CATEGORY_QUERY, token).catch(e => ({success: false}));
@@ -17,7 +19,7 @@ export const getGameCategories = async(token: string, dispatch: any) => {
     if(result.errors && !result.data) {
       return {success: false, msg: result.errors[0].message};
     }
-    return {success: true, msg: 'Success', data: result.data}
+    return {success: true, msg: "Success", data: result.data}
 }
 
 export const getGameByCategory = async(categoryName: string, token: string, dispatch: any) => {
@@ -33,7 +35,7 @@ export const getGameByCategory = async(categoryName: string, token: string, disp
     if(result.errors && !result.data) {
       return {success: false, msg: result.errors[0].message};
     }
-    return {success: true, msg: 'Success', data: result.data.gamesByCategoryName}
+    return {success: true, msg: "Success", data: result.data.gamesByCategoryName}
 
 }
 

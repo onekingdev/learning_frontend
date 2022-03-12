@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import {Wrapper} from './Style';
 import styled from 'styled-components';
 
-import {BasicColor} from '../../../Color';
+import {BasicColor} from 'views/Color';
 import {ScreenSize} from 'constants/screenSize';
 
 import {PageTitle} from 'views/molecules/PageTitle';

@@ -1,4 +1,4 @@
-import { COIN_WALLET } from './coinWalletFragments'
+import {COIN_WALLET} from './coinWalletFragments'
 export const AVATAR_PURCHASE_TRANSACTION = `
     id
     identifier

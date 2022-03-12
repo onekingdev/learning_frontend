@@ -1,9 +1,9 @@
-import { FC, useEffect, useState, useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {FC, useEffect, useState, useContext} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
-import { LessonProgress } from 'views/molecules/LessonProgress/LessonProgress';
-import { useParams } from 'react-router-dom';
-import { LoadingContext } from 'react-router-loading';
+import {LessonProgress} from 'views/molecules/LessonProgress/LessonProgress';
+import {useParams} from 'react-router-dom';
+import {LoadingContext} from 'react-router-loading';
 
 import {
   Container,

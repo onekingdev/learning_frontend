@@ -1,14 +1,16 @@
-import { FC, useEffect, useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import {FC, useEffect, useState, useRef} from 'react';
+import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import { useSnackbar } from 'notistack';
-import moment from 'moment';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+import moment from 'moment'
 import Grid from '@mui/material/Grid';
-import payOrderLog from 'views/assets/pay-order-log.svg';
-import Button from 'views/molecules/MuiButton';
-import TextField from 'views/molecules/MuiTextField';
-import { BasicColor } from 'views/Color';
-import { PaymentForm } from './PaymentForm';
+import * as TYPES from '../../../app/types'
+import payOrderLog from '../../assets/pay-order-log.svg'
+import Button from '../../molecules/MuiButton'
+import TextField from '../../molecules/MuiTextField'
+import {ButtonColor, shadeColor, BasicColor} from 'views/Color';
+import {PaymentForm} from './PaymentForm'
+
 import {
   useStyles,
   Container,
@@ -21,9 +23,11 @@ import {
   OrderItem,
   OrderItemTitleContainer,
   OrderItemTitle,
+  OrderItemSubtitle,
   OrderItemContent,
   OrderTip,
-} from './Style';
+ } from './Style'
+
 type PaymentMethodProps = {
     plans : {
         Gold: any,

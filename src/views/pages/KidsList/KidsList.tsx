@@ -1,24 +1,27 @@
-import { FC, useEffect, useState, useContext } from 'react';
+import {FC, useEffect, useState, useContext} from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import kidA from 'views/assets/avatars/kid-1.svg';
-import kidB from 'views/assets/avatars/kid-2.svg';
-import kidC from 'views/assets/avatars/kid-3.svg';
-import license from 'views/assets/student-license.svg';
+import {useSelector} from 'react-redux';
+// import { useDispatch } from 'react-redux';
+import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
+import kidA from '../../assets/avatars/kid-1.svg';
+import kidB from '../../assets/avatars/kid-2.svg';
+import kidC from '../../assets/avatars/kid-3.svg';
+import license from '../../assets/student-license.svg';
 import Grid from '@mui/material/Grid';
-import TextField from 'views/molecules/MuiTextField';
-import Button from 'views/molecules/MuiButton';
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { BasicColor } from 'views/Color';
-import { Store } from 'app/configureStore';
+import TextField from '../../molecules/MuiTextField';
+import Button from '../../molecules/MuiButton';
+import {LSDialog} from '../../molecules/Setting/LSDialog';
+import { BasicColor} from 'views/Color';
+import {Store} from '../../../app/configureStore';
 import {
   Title,
   Avatar,
   LicenseButton,
 } from './Style';
-import License from 'views/molecules/KidLicense/KidLicense';
-import { LoadingContext } from 'react-router-loading';
+// import { toPng } from 'html-to-image';
+// import {saveAs} from 'file-saver';
+import License from '../../molecules/KidLicense/KidLicense';
+import {LoadingContext} from 'react-router-loading';
 
 interface kid {
   username: string;
