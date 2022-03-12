@@ -1,22 +1,18 @@
-import {FC, useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
-
+import { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import {Store} from '../../../app/configureStore';
-import {IBlockPresentation} from '../../../app/entities/block';
-import {IAnswer, IQuestion} from '../../../app/entities/block';
-import {Answer} from '../../atoms/Text/Answer';
-import {BasicColor, ButtonColor} from '../../Color';
-import {ScreenSize} from '../../../constants/screenSize';
-import {Typography} from '../../atoms/Text/typography';
-import {Question} from '../../atoms/Text/Question';
-import {Icon} from '../../atoms/Icon/Icon';
-import videoIcon from '../../assets/videoIcon.svg';
-import assistor from '../../assets/text-to-speech.svg';
-import {TextOption} from '../../atoms/QuestionOptions/Textoption';
-import {VideoModalAssistor} from '../../organisms/VideoModalAssistor';
-import ice from '../../assets/ice-cream.svg';
-import Button from '../../molecules/MuiButton';
+import { Store } from 'app/configureStore';
+import { IBlockPresentation } from 'app/entities/block';
+import { IQuestion } from 'app/entities/block';
+import { BasicColor, ButtonColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
+import { Question } from 'views/atoms/Text/Question';
+import { Icon } from 'views/atoms/Icon/Icon';
+import videoIcon from 'views/assets/videoIcon.svg';
+import assistor from 'views/assets/text-to-speech.svg';
+import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
+import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
+import Button from 'views/molecules/MuiButton';
 
 type ChoiceTextProps = {
   question: IQuestion;

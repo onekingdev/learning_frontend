@@ -1,10 +1,9 @@
 import axios from 'axios';
 import * as TYPES from '../types'
-import query from '../../api/queries/get'
-import {STUDENT_WALLET_QUERY} from '../../api/queries/users'
-import {CREATE_STUDENT} from '../../api/mutations/students'
-import mutation from '../../api/mutations/get'
-
+import query from 'api/queries/get'
+import { STUDENT_WALLET_QUERY } from 'api/queries/users'
+import { CREATE_STUDENT } from 'api/mutations/students'
+import mutation from 'api/mutations/get'
 
 export const studentSetData = (payload: any) => {
   return {
@@ -127,7 +126,7 @@ export const setCoinWallet = async (studentId: number,token: string, dispatch: a
   if(result.errors) {
       return {success: false, msg: result.errors[0].message};
   }
-  console.log("coin result is ", result)
+  console.log('coin result is ', result)
   const coinWallet = result.data.studentById.coinWallet
   console.log(coinWallet)
   dispatch({ type: TYPES.EARNING_COIN_SET, payload: coinWallet.balance})

@@ -1,5 +1,5 @@
 import { sendRawQuery } from 'api/queries/get';
-import {COLLECTIBLE_CATEGORY_QUERY, COLLECTIBLE_PACK_COUNT, COLLECTIBLE_PURCHASED_COUNT, OWNED_CARDS_QUERY} from 'api/queries/collectibles';
+import { COLLECTIBLE_CATEGORY_QUERY, COLLECTIBLE_PACK_COUNT, COLLECTIBLE_PURCHASED_COUNT, OWNED_CARDS_QUERY } from 'api/queries/collectibles';
 import { PURCHASE_CARD_PACK } from 'api/mutations/collectibles';
 import { PURCHASE_CARDS } from '../types';
 

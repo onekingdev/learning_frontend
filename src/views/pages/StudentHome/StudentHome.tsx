@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect} from 'react';
+import { FC, useContext, useEffect } from 'react';
 import {
   Wrapper,
   CharacterContainer,
@@ -6,11 +6,11 @@ import {
   RankContainer,
   StudentHomeStyle,
 } from './Style';
-import {MyProgress} from '../../organisms/MyProgress';
-import {HomeCharacter} from '../../organisms/HomeCharacter';
-import {StudentMenu} from '../../templates/StudentMenu';
-import {Rank} from '../../organisms/Rank';
-import {LoadingContext} from 'react-router-loading';
+import { MyProgress } from 'views/organisms/MyProgress';
+import { HomeCharacter } from 'views/organisms/HomeCharacter';
+import { StudentMenu } from 'views/templates/StudentMenu';
+import { Rank } from 'views/organisms/Rank';
+import { LoadingContext } from 'react-router-loading';
 
 export const StudentHome: FC = () => {
   const loadingContext = useContext(LoadingContext);

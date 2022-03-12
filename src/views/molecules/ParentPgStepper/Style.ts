@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../../constants/screenSize';
-import background from '../../assets/colored-shapes-bg.svg';
-import { makeStyles } from '@mui/styles'
+import { ScreenSize } from 'constants/screenSize';
 
 export interface pointProps {
     color: string,

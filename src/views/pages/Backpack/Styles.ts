@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import {BasicColor} from '../../Color';
-import backpackBase from '../../assets/backpack-base.svg';
-import {ScreenSize} from '../../../constants/screenSize';
-import background from '../../assets/colored-shapes-bg.svg';
+import { BasicColor } from 'views/Color';
+import backpackBase from 'views/assets/backpack-base.svg';
+import { ScreenSize } from 'constants/screenSize';
+import background from 'views/assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
   background-image: url(${background});

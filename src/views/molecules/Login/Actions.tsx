@@ -1,12 +1,11 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import {Divider} from '../../atoms/Divider';
-import {ButtonColor} from '../../Color';
-import {ScreenSize} from '../../../constants/screenSize';
-// import {Button} from '../Button';
+import { Divider } from 'views/atoms/Divider';
+import { ButtonColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
 import Button from 'views/molecules/MuiButton';
-import { BasicColor } from '../../Color';
-import LoadingButton from '@mui/lab/LoadingButton';
+import { BasicColor } from 'views/Color';
+
 type LoginActionsProps = {
   googleText: string;
   googleColor: ButtonColor;

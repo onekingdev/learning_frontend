@@ -1,10 +1,10 @@
-import {FC, useEffect, useState, useContext} from 'react';
-import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
-import {useHistory} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import { FC, useEffect, useState, useContext } from 'react';
+import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {useStyles, Subjects, Subject, SubjectIcon, SubjectTitle} from './Style';
+import { useStyles, Subjects, Subject, SubjectIcon, SubjectTitle } from './Style';
 import {
   Title,
   Tip,
@@ -12,7 +12,7 @@ import {
   Welcome,
   PaperContainer,
 } from './Style';
-import welcome from '../../assets/welcome-kid-new.svg';
+import welcome from 'views/assets/welcome-kid-new.svg';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -21,7 +21,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
 import Button from '../../molecules/MuiButton';
 import TextField from '../../molecules/MuiTextField';
-import {ButtonColor, BasicColor} from '../../Color';
+import {ButtonColor, BasicColor} from 'views/Color';
 import math_gold from '../../assets/packageIcons/math_gold.svg';
 import ela_gold from '../../assets/packageIcons/ela_gold.svg';
 import science_gold from '../../assets/packageIcons/science_gold.svg';

@@ -1,9 +1,9 @@
-import {FC, useEffect, useState, useContext} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { FC, useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
-import {LessonProgress} from 'views/molecules/LessonProgress/LessonProgress';
-import {useParams} from 'react-router-dom';
-import {LoadingContext} from 'react-router-loading';
+import { LessonProgress } from 'views/molecules/LessonProgress/LessonProgress';
+import { useParams } from 'react-router-dom';
+import { LoadingContext } from 'react-router-loading';
 
 import {
   Container,
@@ -42,7 +42,6 @@ export const Question: FC = () => {
   const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) => state.student)
   const state = useSelector((state: Store) => state);
-  const loadingContext = useContext(LoadingContext);
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -54,6 +53,7 @@ export const Question: FC = () => {
   const [answerResult, setAnswerResult] = useState<BlockQuestionInput[]>([]);
   const [pointUnit, setPointUnit] = useState<number>(0);
   const [points, setPoints] = useState<number>(0);
+  const loadingContext = useContext(LoadingContext);
   const [loading, setLoading] = useState(false)
   const [nextMaxExp, setNextMaxExp] = useState(0)
   const [openDg, setOpenDg] = useState(false);

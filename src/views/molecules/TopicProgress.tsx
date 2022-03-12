@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import {Lesson} from '../atoms/Text/Lesson';
-import {BasicColor} from '../Color';
+import { Lesson } from 'views/atoms/Text/Lesson';
+import { BasicColor } from 'views/Color';
 
 type TopicProgressProps = {
   points: boolean[];

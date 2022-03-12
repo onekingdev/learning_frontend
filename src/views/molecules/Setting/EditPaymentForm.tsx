@@ -1,18 +1,16 @@
-import {FC, useEffect, useState, forwardRef, useImperativeHandle } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import Button from '../MuiButton'
-import TextField from '../MuiTextField'
-import {BasicColor} from '../../Color';
+import Button from 'views/molecules/MuiButton'
+import TextField from 'views/molecules/MuiTextField'
+import { BasicColor } from 'views/Color';
 import Grid from '@mui/material/Grid';
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import {
   useStyles,
- } from '../PaymentMethod/Style'
+} from 'views/molecules/PaymentMethod/Style';
+import StripeInput from 'views/molecules/PaymentMethod/StripeInput';
 
-import StripeInput from '../PaymentMethod/StripeInput';
-
-import { FlexColumn } from '../../pages/Payment/Style';
 type PaymentFormProps = {
   isUpdate: boolean
 };

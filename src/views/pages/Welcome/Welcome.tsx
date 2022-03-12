@@ -1,16 +1,16 @@
-import {FC, useState, useEffect} from 'react';
-import logo from '../../assets/socrates-logo.svg';
-import {Header} from '../../atoms/Text/Header';
-import {Subheader} from '../../atoms/Text/Subheader';
-import welcome from '../../assets/welcome-page.svg';
-import {Button} from '../../molecules/Button';
-import {ButtonColor} from '../../Color';
-import {Icon} from '../../atoms/Text/Icon';
-import {dictionary} from '../Welcome/dictionary';
-import {Modal} from '../../atoms/Modal';
-import {Link, useHistory} from 'react-router-dom';
-import {resetReducer} from '../../../app/actions/userActions';
-import {useDispatch} from 'react-redux';
+import { FC, useState, useEffect } from 'react';
+import logo from 'views/assets/socrates-logo.svg';
+import { Header } from 'views/atoms/Text/Header';
+import { Subheader } from 'views/atoms/Text/Subheader';
+import welcome from 'views/assets/welcome-page.svg';
+import { Button } from 'views/molecules/Button';
+import { ButtonColor } from 'views/Color';
+import { TypoIcon } from 'views/atoms/Text';
+import { dictionary } from 'views/pages/Welcome/dictionary';
+import { Modal } from 'views/atoms/Modal';
+import { Link, useHistory } from 'react-router-dom';
+import { resetReducer } from 'app/actions/userActions';
+import { useDispatch } from 'react-redux';
 import {
   Wrapper,
   Logo,
@@ -23,7 +23,7 @@ import {
   ModalStyles,
   ModalItemsContainer,
 } from './Style';
-import {TextInput} from '../../atoms/Text/TextInput';
+import { TextInput } from '../../atoms/Text/TextInput';
 
 export const Welcome: FC = () => {
   const language = 'en';
@@ -97,15 +97,15 @@ export const Welcome: FC = () => {
       </Actions>
 
       <Legal>
-        <Icon style={{textAlign: 'center'}} isDark={true}>
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].about}
-        </Icon>
-        <Icon style={{textAlign: 'center'}} isDark={true}>
+        </TypoIcon >
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].privacy}
-        </Icon>
-        <Icon style={{textAlign: 'center'}} isDark={true}>
+        </TypoIcon >
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].children_privacy}
-        </Icon>
+        </TypoIcon >
       </Legal>
     </Wrapper>
   );

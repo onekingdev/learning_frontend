@@ -1,9 +1,9 @@
-import { FC, useEffect, ReactChildren, ReactChild } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 
-import blueRibbon from '../../assets/blue-ribbon.svg'
-import crocoGirl from '../../assets/croco-girl.svg'
-import { LSTitle } from '../Setting/utils/Style';
+import blueRibbon from 'views/assets/blue-ribbon.svg'
+import crocoGirl from 'views/assets/croco-girl.svg'
+import { LSTitle } from 'views/molecules/Setting/utils/Style';
 
 export const IconTitle: FC = () => {
   return (

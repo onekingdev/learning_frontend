@@ -3,12 +3,10 @@
  * Component of selecteding collectible cards page
  */
 
-import {FC, useRef, useEffect} from 'react';
+import { FC, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ReactLoading from 'react-loading';
-import {ScreenSize} from 'constants/screenSize';
-import {Gemcard} from './GemCard';
-import {BasicColor} from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
+import { Gemcard } from './GemCard';
 
 interface TierCardProp {
   cards: {

@@ -1,5 +1,5 @@
-import {FC} from 'react';
-import {ButtonColor, shadeColor, BasicColor} from '../Color';
+import { FC } from 'react';
+import { ButtonColor, BasicColor } from 'views/Color';
 import { makeStyles } from '@mui/styles'
 import TextField from '@mui/material/TextField';
 

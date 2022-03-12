@@ -1,11 +1,11 @@
 import { Typography } from '../Text/typography';
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Answer } from '../Text/Answer';
-import { BasicColor } from '../../Color';
-import { ScreenSize } from '../../../constants/screenSize';
-import audioCheck from '../../assets/audios/check.mp3';
-import audioError from '../../assets/audios/error.wav';
+import { Answer } from 'views/atoms/Text/Answer';
+import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
+import audioCheck from 'views/assets/audios/check.mp3';
+import audioError from 'views/assets/audios/error.wav';
 
 interface BlockQuestionInput {
   question: number;
