@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
-import { Title } from 'views/atoms/Text/Title';
-import { ScreenSize } from 'constants/screenSize';
+import {Title} from '../atoms/Text/Title';
+import {ScreenSize} from '../screenSize';
 
 type GameButtonProps = {
   gameMode: string;

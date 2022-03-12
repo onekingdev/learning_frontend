@@ -1,24 +1,27 @@
-import { FC, useEffect, useState, useContext } from 'react';
+import {FC, useEffect, useState, useContext} from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import kidA from 'views/assets/avatars/kid-1.svg';
-import kidB from 'views/assets/avatars/kid-2.svg';
-import kidC from 'views/assets/avatars/kid-3.svg';
-import license from 'views/assets/student-license.svg';
+import {useSelector} from 'react-redux';
+// import { useDispatch } from 'react-redux';
+import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
+import kidA from '../../assets/avatars/kid-1.svg';
+import kidB from '../../assets/avatars/kid-2.svg';
+import kidC from '../../assets/avatars/kid-3.svg';
+import license from '../../assets/student-license.svg';
 import Grid from '@mui/material/Grid';
-import TextField from 'views/molecules/MuiTextField';
-import Button from 'views/molecules/MuiButton';
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { BasicColor } from 'views/Color';
-import { Store } from 'app/configureStore';
+import TextField from '../../molecules/MuiTextField';
+import Button from '../../molecules/MuiButton';
+import {LSDialog} from '../../molecules/Setting/LSDialog';
+import { BasicColor} from '../../Color';
+import {Store} from '../../../app/configureStore';
 import {
   Title,
   Avatar,
   LicenseButton,
 } from './Style';
-import License from 'views/molecules/KidLicense/KidLicense';
-import { LoadingContext } from 'react-router-loading';
+// import { toPng } from 'html-to-image';
+// import {saveAs} from 'file-saver';
+import License from '../../molecules/KidLicense/KidLicense';
+import {LoadingContext} from 'react-router-loading';
 
 interface kid {
   username: string;
@@ -32,6 +35,8 @@ const KidsList: FC = () => {
   // const dispatch = useDispatch();
   // const language = 'en';
   const user = useSelector((state: Store) => state.user);
+  const guardian = useSelector((state: any) => state.guardian)
+
   const kidAvatars = [kidA, kidB, kidC];
 
   const [children, setChildren] = useState<kid[]>([]);
@@ -56,10 +61,10 @@ const KidsList: FC = () => {
     console.log('Save button clicked!');
   };
   const Kid = (props: any) => {
-    const userName = props.username
+    const userName = props.user.username;
     // const [username, setUsername] = useState(props.username);
     // const [password, setPassword] = useState(props.password);
-    const [grade, setGrade] = useState(props.grade);
+    const [grade, setGrade] = useState(props.grade.name);
 
     // Open or close dialog state
     const [openLicense, setOpenLicense] = useState(false);
@@ -181,6 +186,14 @@ const KidsList: FC = () => {
   };
 
   useEffect(() => {
+
+    const students = guardian.studentSet
+    console.log("students is ", students)
+    // for(const student of students) {
+      // setChildren([...children, guardianStudent.student])
+    // }
+    setChildren(students)
+
     setChildren([
       {
         username: 'armin',
@@ -207,16 +220,17 @@ const KidsList: FC = () => {
         avatar: kidAvatars[0],
       },
     ]);
+    loadingContext.done();
   }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
         <Title>Your kids</Title>
-        {children.map((child, index) => (
+        {/* {children.map((child, index) => (
           <>
             <Kid {...child} index={index} key={index}></Kid>
           </>
-        ))}
+        ))} */}
         <Button
           bgColor={BasicColor.green}
           onClick={() => handleSave()}

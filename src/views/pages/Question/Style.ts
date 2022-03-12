@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import background from 'views/assets/colored-shapes-bg.svg';
-import { BasicColor } from 'views/Color';
+import {ScreenSize} from '../../screenSize';
+import background from '../../assets/colored-shapes-bg.svg';
+import {BasicColor} from 'views/Color';
 
 export const Wrapper = styled.div`
   background-image: url(${background});

@@ -7,20 +7,25 @@
  * Gem images
  */
 
-import { FC, useEffect, useState } from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { ScreenSize } from 'constants/screenSize';
-import { MyCard } from './MyCard';
-import { Gems } from './Gems';
+import {useSelector} from 'react-redux';
+
+import {ScreenSize} from 'views/screenSize';
+
+// Get file storage link from firebase
+
+import {MyCard} from './MyCard';
+import {Gems} from './Gems';
+
 import {
   getCardPacksInfo,
   getCollectibleCards,
   getProgressPurchasedCount,
   getProgressTotalCount,
 } from 'app/actions/collectibleActions';
-import { TierCards } from './TierCards';
-import { GemProgressBar } from './GemProgressBar';
+import {TierCards} from './TierCards';
+import {GemProgressBar} from './GemProgressBar';
 
 interface CardPropArray {
   cards: {
@@ -48,6 +53,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
           setAllCards([]);
         } else {
           setAllCards(collectibles);
+          console.log('collectibles:', allCards)
         }
       }
     };
@@ -148,7 +154,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
   );
 };
 
-export const MyCards: FC = () => {
+export const MyCardCategory: FC = () => {
   const user = useSelector((state: any) => state.user);
   const [categories, setCategories] = useState([]);
 

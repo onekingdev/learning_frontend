@@ -1,10 +1,11 @@
-import { FC, useState} from 'react';
+import {FC, useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { BasicColor } from 'views/Color';
+import {BasicColor} from '../../Color';
 import ReactLoading from 'react-loading';
 import useSound from 'use-sound';
-import purchaseSound from 'views/assets/audios/mixkit-coin-win-notification.wav';
-import { ScreenSize } from 'views/../constants/screenSize';
+import purchaseSound from '../../assets/audios/mixkit-coin-win-notification.wav';
+import {ScreenSize} from '../../screenSize';
+import { ImageAspectRatio } from '@mui/icons-material';
 
 type CardProps = {
   imgUrl: string;
@@ -93,7 +94,7 @@ const StyledCard = styled.div`
     object-fit: fill;
     transform: rotateY(0);
     animation: rotateAnimation 0.5s linear;
-
+  
     /* Adding keyframes for animation */
     @keyframes rotateAnimation {
       from {

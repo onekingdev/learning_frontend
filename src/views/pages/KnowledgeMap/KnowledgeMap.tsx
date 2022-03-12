@@ -1,46 +1,47 @@
-import { FC, useEffect, useContext, useState } from 'react';
+import {FC, useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
-import { LoadingContext } from 'react-router-loading';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import {LoadingContext} from 'react-router-loading';
+import {useHistory} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 
-import { StudentMenu } from 'views/templates/StudentMenu';
-import boat_sound from 'views/assets/audios/boat.mp3';
-import ocean from 'views/assets/islands/ocean.svg';
-import boat from 'views/assets/islands/fillers/boat.svg';
-import barrell from 'views/assets/islands/fillers/barril.svg';
-import dragon from 'views/assets/islands/fillers/dragon.svg';
-import isle from 'views/assets/islands/fillers/island.svg';
-import rock from 'views/assets/islands/fillers/rock.svg';
-import rock2 from 'views/assets/islands/fillers/rock-2.svg';
-import boulder from 'views/assets/islands/fillers/rocxk.svg';
-import background from 'views/assets/colored-shapes-bg.svg';
+import {StudentMenu} from '../../templates/StudentMenu';
+import boat_sound from '../../assets/audios/boat.mp3';
+import ocean from '../../assets/islands/ocean.svg';
+import boat from '../../assets/islands/fillers/boat.svg';
+import barrell from '../../assets/islands/fillers/barril.svg';
+import dragon from '../../assets/islands/fillers/dragon.svg';
+import isle from '../../assets/islands/fillers/island.svg';
+import rock from '../../assets/islands/fillers/rock.svg';
+import rock2 from '../../assets/islands/fillers/rock-2.svg';
+import boulder from '../../assets/islands/fillers/rocxk.svg';
+import background from '../../assets/colored-shapes-bg.svg';
 
-import { ScreenSize } from 'constants/screenSize';
-import { get } from 'api/queries/get';
-import * as TYPE from 'app/types';
-import { AUDIENCES_QUERY } from 'api/queries/people';
+import {ScreenSize} from '../../screenSize';
+import {get} from '../../../api/queries/get';
+import * as TYPE from '../../../app/types';
+import {AUDIENCES_QUERY} from '../../../api/queries/people';
 
 export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const dispatch = useDispatch();
   const history = useHistory();
+  const student = useSelector((state: any) => state.student);
 
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
   const [loadedImgNum,  setLoadedImgNum] = useState(0)
 
-  const handleData = (data: any) => {
-    setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
-    dispatch({
-      type: TYPE.SET_AOK,
-      payload: data.data.audienceById.areaofknowledgeSet,
-    });
-  };
+  // const handleData = (data: any) => {
+  //   setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
+  //   dispatch({
+  //     type: TYPE.SET_AOK,
+  //     payload: data.data.audienceById.areaofknowledgeSet,
+  //   });
+  // };
 
-  const handleError = (error: any) => {
-    loadingContext.done();
-    console.error(error);
-  };
+  // const handleError = (error: any) => {
+  //   loadingContext.done();
+  //   console.error(error);
+  // };
 
   const onImgLoad = (e: any) => {
     setLoadedImgNum(loadedImgNum+1)
@@ -49,27 +50,31 @@ export const KnowledgeMap: FC = () => {
   }
 
   useEffect(() => {
-    get(
-      'audienceById(id:"2")',
-      `{${AUDIENCES_QUERY}}`,
-      handleData,
-      handleError
-    );
-    console.log(areasOfKnowledge);
+    setAreasOfKnowledge(student.audience.areaofknowledgeSet)
+    // loadingContext.done();
+
+    // get(
+    //   'audienceById(id:"2")',
+    //   `{${AUDIENCES_QUERY}}`,
+    //   handleData,
+    //   handleError
+    // );
+    // console.log(areasOfKnowledge);
   }, []);
 
   const getRandomNumber = (max: number) => {
     return Math.floor(Math.random() * max);
   };
 
-  const animateBoat = (e: any, route?: string) => {
+  const animateBoat = (e: any, route: string) => {
     const audio = new Audio(boat_sound);
     audio.play();
     const boat = document.getElementById('boat');
     boat!.style.top = `${e.clientY - 140}px`;
     boat!.style.left = `${e.clientX - 140}px`;
+    console.log("route is ", route)
     setTimeout(() => {
-      history.push('/question/presentation_1');
+      history.push(route);
     }, 3300);
   };
 
@@ -94,6 +99,7 @@ export const KnowledgeMap: FC = () => {
           {areasOfKnowledge.map(
             (
               areaOfKnowledge: {
+                id: number;
                 islandImage: string;
                 isActive: boolean;
               },
@@ -106,7 +112,7 @@ export const KnowledgeMap: FC = () => {
                   <Island
                     src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
-                      animateBoat(e);
+                      animateBoat(e, `/question/AI/${areaOfKnowledge.id}`);
                     }}
                     isActive={areaOfKnowledge.isActive}
                     onLoad={onImgLoad}
@@ -124,7 +130,7 @@ export const KnowledgeMap: FC = () => {
                   <Island
                     src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
-                      animateBoat(e);
+                      animateBoat(e, `/question/AI/${areaOfKnowledge.id}`);
                     }}
                     isActive={areaOfKnowledge.isActive}
                     onLoad={onImgLoad}

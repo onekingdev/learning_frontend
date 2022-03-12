@@ -1,12 +1,12 @@
-import { FC, useEffect, useState } from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { Title } from 'views/atoms/Text/Title';
-import { UserRank } from 'views/molecules/UserRank';
-import avatar from 'views/assets/avatars/avatar1.svg';
-import { BasicColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
-import { dictionary } from 'views/pages/Progress/dictionary';
-import { getRanking } from 'app/firebase';
+import {Title} from '../atoms/Text/Title';
+import {UserRank} from '../molecules/UserRank';
+import avatar from '../assets/avatars/avatar1.svg';
+import {BasicColor} from '../Color';
+import {ScreenSize} from '../screenSize';
+import {dictionary} from '../pages/Progress/dictionary';
+import {getRanking, writeProgress, writeRanking} from '../../app/firebase';
 
 export const Rank: FC = () => {
   const language = 'en';
@@ -25,7 +25,7 @@ export const Rank: FC = () => {
         <RankUsersContainer>
           {ranking.map((name, i) => {
             return (
-              <UserRank userRank={i + 1} userName={name} key={name+i} userIcon={avatar} />
+              <UserRank userRank={i + 1} userName={name} userIcon={avatar} />
             );
           })}
         </RankUsersContainer>

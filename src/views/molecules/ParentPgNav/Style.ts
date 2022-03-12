@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import { makeStyles } from '@mui/styles';
-import { BasicColor} from 'views/Color';
+import {ScreenSize} from '../../screenSize';
+import background from '../../assets/colored-shapes-bg.svg';
+import {makeStyles} from '@mui/styles';
+import { BasicColor} from '../../Color';
 export const Container = styled.div`
   position: relative;
   min-height: 65px;

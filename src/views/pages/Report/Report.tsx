@@ -1,15 +1,15 @@
-import { FC, useEffect, useContext } from 'react';
-import { Box, Grid } from '@mui/material';
+import {FC, useEffect, useContext} from 'react';
+import {Box, Grid} from '@mui/material';
 
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { LSCheckboxList } from 'views/molecules/Report/CheckList';
-import { IconTitle } from 'views/molecules/Report/IconTitle';
-import { SocratesLine } from 'views/molecules/Report/Line';
-import { SocratesPie } from 'views/molecules/Report/Pie';
-import { LSLabel, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
-import { LSCalendarComponent } from 'views/molecules/Report/Calendar';
-import { ReportProgress } from 'views/molecules/Report/Progress';
-import { LoadingContext } from 'react-router-loading';
+import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
+import {LSCheckboxList} from '../../molecules/Report/CheckList';
+import {IconTitle} from '../../molecules/Report/IconTitle';
+import {SocratesLine} from '../../molecules/Report/Line';
+import {SocratesPie} from '../../molecules/Report/Pie';
+import {LSLabel, LSShadowContainer} from '../../molecules/Setting/utils/Style';
+import {LSCalendarComponent} from '../../molecules/Report/Calendar';
+import {ReportProgress} from '../../molecules/Report/Progress';
+import {LoadingContext} from 'react-router-loading';
 
 export const Report: FC = () => {
   const loadingContext = useContext(LoadingContext);

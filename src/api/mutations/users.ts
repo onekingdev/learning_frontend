@@ -1,6 +1,7 @@
 import {
+    GUARDIAN_STUDENT,
     GUARDIAN,
-} from '../fragments/guardianFragments';
+    } from '../fragments/guardianFragments';
 import  {
     USER,
     USER_PROFILE

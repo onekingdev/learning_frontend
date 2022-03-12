@@ -2,7 +2,34 @@ import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { SKIN_PICKER } from 'constants/avatar';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { ScreenSize } from 'constants/screenSize';
+
+const DropDownContainer = styled.div`
+position: absolute;
+top: -20px;
+right: 0;
+display: flex;
+padding: 5px;
+align-items: center;
+border-radius: 30px;
+z-index: 1000;
+box-shadow: inset 0 0 3px 3px #d2d2d2;
+
+.dropdown-list {
+  flex-direction: column
+}
+}
+`;
+const ColorCircle = styled.div`
+width: 30px;
+height: 30px;
+border-radius: 100%;
+margin: 5px;
+
+&:hover {
+  box-shadow: 0px 1px 10px 0px #FB8500;
+  cursor: pointer;
+}
+`
 
 interface ColorPickerProp {
   select: (value: string) => void
@@ -40,37 +67,3 @@ export const ColorPickerDropdown: FC<ColorPickerProp> = ({ select }) => {
     </DropDownContainer>
   );
 }
-
-
-const DropDownContainer = styled.div`
-  position: absolute;
-  top: -20px;
-  right: 0;
-  display: flex;
-  padding: 5px;
-  align-items: center;
-  border-radius: 30px;
-  z-index: 1;
-  box-shadow: inset 0 0 3px 3px #d2d2d2;
-
-  .dropdown-list {
-    flex-direction: column
-  }
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    left: 5vw;
-    right: auto;
-    top: 0;
-  }
-}
-`;
-const ColorCircle = styled.div`
-width: 30px;
-height: 30px;
-border-radius: 100%;
-margin: 5px;
-
-&:hover {
-  box-shadow: 0px 1px 10px 0px #FB8500;
-  cursor: pointer;
-}
-`

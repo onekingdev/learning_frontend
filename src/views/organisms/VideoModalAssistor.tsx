@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
-import { Modal } from 'views/atoms/Modal';
-import { Typography } from 'views/atoms/Text/typography';
-import { BasicColor } from 'views/Color';
-import { VideoQuestion } from 'views/molecules/VideoQuestions';
-import { ScreenSize } from 'constants/screenSize';
+import {Modal} from '../atoms/Modal';
+import {Typography} from '../atoms/Text/typography';
+import {BasicColor} from '../Color';
+import {VideoQuestion} from '../molecules/VideoQuestions';
+import {ScreenSize} from '../screenSize';
 
 type VideoModalProps = {
   onClick: () => void;

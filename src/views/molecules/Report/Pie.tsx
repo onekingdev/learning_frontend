@@ -1,7 +1,7 @@
-import { Box } from '@mui/material';
-import { FC } from 'react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import { LSText } from 'views/molecules/Setting/utils/Style';
+import { Box } from '@mui/material'
+import { FC } from 'react'
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
+import { LSText } from '../Setting/utils/Style'
 
 const data01 = [
   { name: 'Group A', value: 400, color: '#F4C222'},

@@ -1,14 +1,14 @@
-import { FC, useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import Button from 'views/molecules/MuiButton';
-import TextField from 'views/molecules/MuiTextField';
+import {FC, useEffect, useState, useContext} from 'react';
+import {useHistory} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import Button from '../../molecules/MuiButton';
+import TextField from '../../molecules/MuiTextField';
 import Grid from '@mui/material/Grid';
-import { BasicColor } from 'views/Color';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import * as TYPES from 'app/types';
-import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
-import SocratesImg from 'views/assets/socrates.svg';
+import { BasicColor } from '../../Color';
+import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
+import * as TYPES from '../../../app/types';
+import {ParentPgStepper} from '../../molecules/ParentPgStepper/ParentPgStepper';
+import SocratesImg from '../../assets/socrates.svg';
 import {
   Container,
   FormContainer,
@@ -17,10 +17,11 @@ import {
   ContactHeader,
   ContactBody,
 } from './Style';
-import mutationFetch from 'api/mutations/get';
-import { CREATE_GUARDIAN } from 'api/mutations/guardians';
+import mutationFetch from '../../../api/mutations/get';
+import { CREATE_GUARDIAN } from '../../../api/mutations/guardians';
+import { createGuardian } from '../../../app/actions/guardianActions'
 import { useSnackbar } from 'notistack';
-import { LoadingContext } from 'react-router-loading';
+import {LoadingContext} from 'react-router-loading';
 
 const CreateParent: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -31,6 +32,7 @@ const CreateParent: FC = () => {
   const language = 'en';
 
   useEffect(() => {
+    console.log("use effect")
     loadingContext.done()
   }, [])
 
@@ -51,6 +53,10 @@ const CreateParent: FC = () => {
   const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
+  function validateEmail (email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
+
   const handleFormChange = (field: string, errMsg: string) => {
     setValidateMsg({...validateMsg, [field]: errMsg});
   };
@@ -59,38 +65,15 @@ const CreateParent: FC = () => {
     if (!formValidation()) return;
 
     setLoading(true);
-
-    const res: any = await mutationFetch(
-      CREATE_GUARDIAN(email, userName, password)
-    ).catch(() => ({success: 'false'}));
-
+    const result: any = await createGuardian(email, userName, password, dispatch)
     setLoading(false);
 
-    if (res.success === false) {
-      setErrMsg('Network Error!');
-      enqueueSnackbar('Network Error!', {variant: 'error'});
+    if(!result.success) {
+      enqueueSnackbar(result.msg, { variant: 'error' });
       return;
     }
-
-    const result: any = await res.json();
-
-    if (result.errors) {
-      setErrMsg(result.errors[0].message);
-      enqueueSnackbar(`Creation Failed! ${result.errors[0].message}`, {
-        variant: 'error',
-      });
-      return;
-    }
-
-    enqueueSnackbar('Successfully Created!', {variant: 'success'});
-
-    const { user, token, refreshToken} =
-      result.data.createGuardian;
-    dispatch({
-      type: TYPES.USER_SET_DATA,
-      payload: {...user, token: token, refreshToken: refreshToken},
-    });
     history.push('/parent/payment');
+
   };
 
   const formValidation = () => {
@@ -125,7 +108,7 @@ const CreateParent: FC = () => {
                     setEmail(e.target.value);
                     handleFormChange(
                       'email',
-                      e.target.value.length === 0 ? 'Field is required' : ''
+                      e.target.value.length === 0 ? 'Field is required' : !validateEmail(e.target.value) ? 'This is not email address' : ''
                     );
                   }}
                   error={!!validateMsg.email}
@@ -149,6 +132,7 @@ const CreateParent: FC = () => {
               <Grid item xs={12}>
                 <TextField
                   label="Password"
+                  type="password"
                   onChange={e => {
                     setPassword(e.target.value);
                     handleFormChange(
@@ -163,6 +147,7 @@ const CreateParent: FC = () => {
               <Grid item xs={12} md={12}>
                 <TextField
                   label="Confirm Password"
+                  type="password"
                   onChange={e => {
                     setConfPassword(e.target.value);
                     handleFormChange(

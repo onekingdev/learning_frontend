@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import background from 'views/assets/colored-shapes-bg.svg';
+import {ScreenSize} from '../../screenSize';
+import background from '../../assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
   background-image: url(${background});
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const GamesMenuContainer = styled.div`
-  width: 75%;
+  width: 95%;
   margin: 10px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
+import {IconSize} from './Size';
 
 type iconProps = {
   image: string;
-  size?: string;
+  size?: IconSize.small | IconSize.medium | IconSize.large;
   onClick?: () => void;
 };
 
@@ -16,7 +17,7 @@ export const Icon: FC<iconProps> = ({image, onClick, size}) => {
 };
 
 const IconStyle = styled.img<{
-  size?: string;
+  size?: IconSize.small | IconSize.medium | IconSize.large;
 }>`
 
   height: ${p => p.size};

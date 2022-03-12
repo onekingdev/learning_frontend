@@ -1,18 +1,22 @@
-import { FC, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import {FC, useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
+
 import styled from 'styled-components';
-import { Store } from 'app/configureStore';
-import { IBlockPresentation } from 'app/entities/block';
-import { IQuestion } from 'app/entities/block';
-import { BasicColor, ButtonColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
-import { Question } from 'views/atoms/Text/Question';
-import { Icon } from 'views/atoms/Icon/Icon';
-import videoIcon from 'views/assets/videoIcon.svg';
-import assistor from 'views/assets/text-to-speech.svg';
-import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
-import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
-import Button from 'views/molecules/MuiButton';
+import {Store} from '../../../app/configureStore';
+import {IBlockPresentation} from '../../../app/entities/block';
+import {IAnswer, IQuestion} from '../../../app/entities/block';
+import {Answer} from '../../atoms/Text/Answer';
+import {BasicColor, ButtonColor} from '../../Color';
+import {ScreenSize} from '../../screenSize';
+import {Typography} from '../../atoms/Text/typography';
+import {Question} from '../../atoms/Text/Question';
+import {Icon} from '../../atoms/Icon/Icon';
+import videoIcon from '../../assets/videoIcon.svg';
+import assistor from '../../assets/text-to-speech.svg';
+import {TextOption} from '../../atoms/QuestionOptions/Textoption';
+import {VideoModalAssistor} from '../../organisms/VideoModalAssistor';
+import ice from '../../assets/ice-cream.svg';
+import Button from '../../molecules/MuiButton';
 
 type ChoiceTextProps = {
   question: IQuestion;
@@ -20,8 +24,14 @@ type ChoiceTextProps = {
   totalQuestions: number;
   questionCounter: number;
   blockPresentation: IBlockPresentation;
-  onAnswer: (result: boolean) => void;
+  onAnswer: (result: BlockQuestionInput) => void;
 };
+
+interface BlockQuestionInput {
+  question: number;
+  answerOption: number;
+  isCorrect: boolean;
+}
 
 export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   question,
@@ -40,8 +50,9 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
     setIsAnswered(false);
   }, [question.answeroptionSet]);
 
-  const handleAnswer = (result: boolean) => {
+  const handleAnswer = (result: BlockQuestionInput) => {
     setIsAnswered(true);
+    result.question = parseInt(question.id);
     onAnswer(result);
   };
 
@@ -86,8 +97,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
             {question.answeroptionSet.map((option, i) => (
               <AnswerContainer key={i}>
                 <TextOption
-                  answer={option.isCorrect}
-                  answerText={option.answerText}
+                  answer={option}
                   onClick={handleAnswer}
                 />
                 <Icon

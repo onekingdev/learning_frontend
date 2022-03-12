@@ -1,6 +1,7 @@
-import { FC, ReactChildren, ReactChild } from 'react';
-import { ButtonColor, shadeColor, BasicColor } from 'views/Color';
+import {FC, useEffect, ReactChildren, ReactChild} from 'react';
+import {ButtonColor, shadeColor, BasicColor} from '../Color';
 import { makeStyles } from '@mui/styles'
+// import Button from '@mui/material/Button';
 import Button from '@mui/lab/LoadingButton';
 
 type MuiButtonProps = {

@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
 import ribbon from 'views/assets/ribbon.svg';
-import { ScreenSize } from 'constants/screenSize';
+import {ScreenSize} from 'views/screenSize';
 
 export const PageTitle: FC<{title: string}> = ({title}) => {
   return (
@@ -27,18 +27,12 @@ const CardTitle = styled.div`
     font-style: normal;
     letter-spacing: 0.25px;
     text-align: center;
-    // padding:inherit;
   }
 
-  @media screen and (max-width: ${ScreenSize.phone}) {
+  @media screen and (max-width: ${ScreenSize.tablet}) {
     h1 {
-      font-size: 30px;
+      font-size: 18px;
     }
-    width: 100%;
-    // padding: 10px;
-    margin: 0;
-    padding: 10px 0 10px 0;
-    background-image: none;
-    background-color: orange;
+    padding: 10px;
   }
 `;

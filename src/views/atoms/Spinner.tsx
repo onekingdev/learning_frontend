@@ -1,6 +1,6 @@
 import styled, {keyframes} from 'styled-components';
-import socrates from 'views/assets/socrates.svg';
-import shapes from 'views/assets/colored-shapes-bg.svg';
+import socrates from '../assets/socrates.svg';
+import shapes from '../assets/colored-shapes-bg.svg';
 
 export const Spinner: any = () => {
   return (
