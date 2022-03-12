@@ -7,20 +7,20 @@
  * Gem images
  */
 
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
-import {ScreenSize} from 'constants/screenSize';
-import {MyCard} from './MyCard';
-import {Gems} from './Gems';
+import { useSelector } from 'react-redux';
+import { ScreenSize } from 'constants/screenSize';
+import { MyCard } from './MyCard';
+import { Gems } from './Gems';
 import {
   getCardPacksInfo,
   getCollectibleCards,
   getProgressPurchasedCount,
   getProgressTotalCount,
 } from 'app/actions/collectibleActions';
-import {TierCards} from './TierCards';
-import {GemProgressBar} from './GemProgressBar';
+import { TierCards } from './TierCards';
+import { GemProgressBar } from './GemProgressBar';
 
 interface CardPropArray {
   cards: {

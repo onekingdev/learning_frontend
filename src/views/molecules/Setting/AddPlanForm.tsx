@@ -6,11 +6,9 @@ import { Checkbox, Radio } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import { FormGroup } from '@mui/material';
 import { BasicColor } from 'views/Color';
-
-import Button from '../../molecules/MuiButton'
-import { LSButtonContainer, LSButton, LSRadio, LSFormControlLabel, LSLabel } from './utils/Style';
-
-import { dictionary } from '../../pages/Settings/dictionary';
+import Button from 'views/molecules/MuiButton';
+import { LSButtonContainer, LSRadio, LSFormControlLabel, LSLabel } from './utils/Style';
+import { dictionary } from 'views/pages/Settings/dictionary';
 
 
 interface IAddPlanProps {

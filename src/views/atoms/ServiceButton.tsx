@@ -1,6 +1,6 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import {BasicColor, shadeColor} from '../Color';
+import { BasicColor, shadeColor } from 'views/Color';
 
 type ServiceButtonProps = {
   value: string;

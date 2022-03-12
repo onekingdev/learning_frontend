@@ -1,8 +1,8 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import {Typography} from '../atoms/Text/typography';
-import {BasicColor, SettingBarColor} from '../Color';
-import {ScreenSize} from '../../constants/screenSize';
+import { Typography } from 'views/atoms/Text/typography';
+import { BasicColor, SettingBarColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
 
 type SettingProps = {
   body: string;

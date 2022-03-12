@@ -1,8 +1,6 @@
 import { FC } from 'react';
-import { ScreenSize } from '../../../constants/screenSize';
+import { ScreenSize } from 'constants/screenSize';
 import styled from 'styled-components';
-
-import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import { BasicColor } from 'views/Color';
-import { LSLabel } from '../Setting/utils/Style';
+import { LSLabel } from 'views/molecules/Setting/utils/Style';
 
 interface Column {
   id: 'name' | 'requireCoin' | 'amount';

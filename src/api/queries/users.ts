@@ -2,10 +2,10 @@ import {
     USER,
     USER_PROFILE,
     USER_LANGUAGE,
-    } from '../fragments/userFragments';
-import {STUDENT} from '../fragments/studentFragments'
+} from '../fragments/userFragments';
+import { STUDENT } from '../fragments/studentFragments'
 import { GUARDIAN } from '../fragments/guardianFragments'
-import {COIN_WALLET} from '../fragments/coinWalletFragments'
+import { COIN_WALLET } from '../fragments/coinWalletFragments'
 
 export const USERS_QUERY = `
     {

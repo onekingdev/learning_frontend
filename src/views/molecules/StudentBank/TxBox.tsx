@@ -1,19 +1,16 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {ScreenSize} from 'constants/screenSize';
-
+import { ScreenSize } from 'constants/screenSize';
 import { Grid } from '@mui/material';
-
 import { GridItem, Input } from './Style';
 import { BasicColor } from 'views/Color';
 import { withDraw, deposit } from 'app/actions/bankActions'
 import { useDispatch } from 'react-redux'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import Button from 'views/molecules/MuiButton';
 
 export const TxBox: FC = () => {
-
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -103,7 +100,7 @@ export const TxBox: FC = () => {
 const BankPaper = styled.div`
   margin-top: 0;
   padding: 30px 20px 30px 20px;
-  width: 450px;
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import {Grid, Paper} from '@mui/material';
-import {BasicColor} from 'views/Color';
-import {ScreenSize} from '../../../constants/screenSize';
+import { Grid } from '@mui/material';
+import { ScreenSize } from 'constants/screenSize';
 
 
 export const GridItem = styled(Grid)<{

@@ -2,7 +2,7 @@ import {
     PLAY_GAME_TRANSACTION,
     GAME,
     GAME_CATEGORY
-    } from '../fragments/gameFragments';
+} from '../fragments/gameFragments';
 
 export const GAMES_QUERY = `
     {

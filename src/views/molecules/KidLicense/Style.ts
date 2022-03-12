@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../../constants/screenSize';
 import { makeStyles } from '@mui/styles'
-import titleBg from '../../assets/title-kids-background.png'
-import {ButtonColor, BasicColor} from 'views/Color';
+import { BasicColor} from 'views/Color';
 
 export const LicenseHeader = styled.div`
   background-color: ${BasicColor.blue};

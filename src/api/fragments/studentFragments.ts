@@ -1,7 +1,11 @@
-import {LEVEL} from './levelFragments'
-import {COIN_WALLET} from './coinWalletFragments'
-import {AVATAR} from './avatarFragments'
-import {BANK_WALLET} from './bankFragments'
+import { LEVEL } from './levelFragments'
+import { COIN_WALLET } from './coinWalletFragments'
+import { AVATAR } from './avatarFragments'
+import { BANK_WALLET } from './bankFragments'
+import { AUDIENCES }from './peopleFragments'
+import { AREA_OF_KNOWLEDGE }from './areaOfKnowledgeFragments'
+import { AREA_OF_KNOWLEDGE_QUERY } from 'api/queries/questions'
+import { GRADES } from './peopleFragments'
 
 export const STUDENT_TOPIC_MASTERY = `
         id
@@ -18,7 +22,7 @@ export const STUDENT_GRADE = `
         identifier
         isActive
         randomSlug
-        isFinish
+        isFinished
         percentage
         completeDate
 `;
@@ -152,6 +156,15 @@ export const STUDENT = `
             id
         }
         audience {
-            id
+            ${AUDIENCES}
+            areaofknowledgeSet {
+                ${AREA_OF_KNOWLEDGE}
+            } 
+        }
+        grade {
+            ${STUDENT_GRADE}
+            grade{
+                ${GRADES}
+            }
         }
 `;

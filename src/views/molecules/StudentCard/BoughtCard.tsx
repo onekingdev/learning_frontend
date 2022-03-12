@@ -1,11 +1,10 @@
-import {FC, useCallback, useEffect, useState} from 'react';
+import { FC, useState} from 'react';
 import styled from 'styled-components';
-import {BasicColor} from 'views/Color';
+import { BasicColor } from 'views/Color';
 import ReactLoading from 'react-loading';
 import useSound from 'use-sound';
-import purchaseSound from '../../assets/audios/mixkit-coin-win-notification.wav';
-import {ScreenSize} from '../../../constants/screenSize';
-import { ImageAspectRatio } from '@mui/icons-material';
+import purchaseSound from 'views/assets/audios/mixkit-coin-win-notification.wav';
+import { ScreenSize } from 'views/../constants/screenSize';
 
 type CardProps = {
   imgUrl: string;

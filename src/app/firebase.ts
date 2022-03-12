@@ -1,13 +1,13 @@
-import {initializeApp} from 'firebase/app';
-import {getDatabase, set, ref, onValue} from 'firebase/database';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, set, ref, onValue } from 'firebase/database';
 import {
   getStorage,
   ref as assetRef,
   getDownloadURL,
   listAll,
 } from 'firebase/storage';
-import {BasicColor} from 'views/Color';
-import {dictionary} from '../views/pages/Progress/dictionary';
+import { BasicColor } from 'views/Color';
+import { dictionary } from 'views/pages/Progress/dictionary';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAdf707dGjrJOLJVuES5V-Reu6RuaJuvug',

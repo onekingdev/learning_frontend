@@ -1,31 +1,41 @@
 import { Typography } from '../Text/typography';
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Answer } from '../Text/Answer';
+import { Answer } from 'views/atoms/Text/Answer';
 import { BasicColor } from 'views/Color';
-import { ScreenSize } from '../../../constants/screenSize';
-import audioCheck from '../../assets/audios/check.mp3';
-import audioError from '../../assets/audios/error.wav';
+import { ScreenSize } from 'constants/screenSize';
+import audioCheck from 'views/assets/audios/check.mp3';
+import audioError from 'views/assets/audios/error.wav';
 
-type TextOptionProps = {
-    answer: boolean;
-    answerText: string
-    onClick: (result: boolean) => void
+interface BlockQuestionInput {
+  question: number;
+  answerOption: number;
+  isCorrect: boolean;
 }
 
-export const TextOption:FC<TextOptionProps> = ({answer, answerText,onClick}) => {
+type TextOptionProps = {
+    answer: any;
+    onClick: (result: BlockQuestionInput) => void
+}
+
+export const TextOption:FC<TextOptionProps> = ({answer,onClick}) => {
 
     const [isCorrect, setIsCorrect] = useState(Boolean);
     const [isAnswered, setIsAnswered] = useState(false);
 
     useEffect(() => {
         setIsAnswered(false);
-      }, [answerText])
+      }, [answer.answerText])
 
-    const handleAnswer = (answer: boolean) => {
-        setIsCorrect(answer)
+    const handleAnswer = (e: any) => {
+        setIsCorrect(answer.isCorrect)
         setIsAnswered(!isAnswered);
-        onClick(answer)
+        const inputAnswer:BlockQuestionInput = {
+          question : -1,
+          answerOption: answer.id,
+          isCorrect: answer.isCorrect
+        };
+        onClick(inputAnswer)
       }
 
     return(
@@ -37,11 +47,11 @@ export const TextOption:FC<TextOptionProps> = ({answer, answerText,onClick}) => 
           autoPlay={isAnswered ? true : false}
           />
             <TextOptionStyles
-              onClick={() => handleAnswer(answer)}
-              isCorrect={answer}
+              onClick={(e) => handleAnswer(e)}
+              isCorrect={answer?.isCorrect}
               isAnswered={isAnswered}
             >
-              <Answer isDark >{answerText}</Answer>
+              <Answer isDark >{answer?.answerText}</Answer>
             </TextOptionStyles>
         </>
     )

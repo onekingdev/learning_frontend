@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import titleBackground from '../../assets/title-games-background.png';
-import background from '../../assets/colored-shapes-bg.svg';
+import titleBackground from 'views/assets/title-games-background.png';
+import background from 'views/assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
   background-image: url(${background});

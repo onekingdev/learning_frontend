@@ -1,16 +1,16 @@
-import {FC, useContext, useEffect} from 'react';
+import { FC, useContext, useEffect} from 'react';
 import styled from 'styled-components';
-import {GeneralText} from '../../atoms/Text/GeneralText';
-import {Header} from '../../atoms/Text';
-import {Subheader} from 'views/atoms/Text';
-import {TextInput} from '../../atoms/Text/TextInput';
-import {BasicColor} from 'views/Color';
-import {Button} from '../../molecules/Button';
-import {ScreenSize} from '../../../constants/screenSize';
-import background from '../../assets/colored-shapes-bg.svg';
-import {Body} from '../../atoms/Text/Body';
-import logo from '../../assets/socrates-logo.svg';
-import {LoadingContext} from 'react-router-loading';
+import { GeneralText } from 'views/atoms/Text/GeneralText';
+import { Header } from 'views/atoms/Text/Header';
+import { Subheader } from 'views/atoms/Text/Subheader';
+import { TextInput } from 'views/atoms/Text/TextInput';
+import { BasicColor } from 'views/Color';
+import { Button } from 'views/molecules/Button';
+import { ScreenSize } from 'constants/screenSize';
+import background from 'views/assets/colored-shapes-bg.svg';
+import { Body } from 'views/atoms/Text/Body';
+import logo from 'views/assets/socrates-logo.svg';
+import { LoadingContext } from 'react-router-loading';
 
 export const ConfirmAccount: FC = () => {
   const loadingContext = useContext(LoadingContext);
