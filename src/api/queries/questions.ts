@@ -57,7 +57,6 @@ export const BLOCK_PRESENTATION_QUERY = `
             ${TOPIC_GRADE}
             topic{
               videoAssistor
-              name
             }
           }
           typeOf{
