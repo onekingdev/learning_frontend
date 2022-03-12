@@ -74,7 +74,6 @@ const TextOptionStyles = styled.div<{
                         BasicColor.white20};
     pointer-events: ${props => props.isAnswered ? 'none' : 'all'};
     cursor: pointer;
-    height: 30px;
     line-height: 30px;
     border-radius: 5px;
     &:hover{

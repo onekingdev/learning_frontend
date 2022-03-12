@@ -281,7 +281,7 @@ export const Question: FC = () => {
           <ProgressWrapper>
             <LessonProgress
               currentQuestion={questionCounter + 1}
-              topic={'Math'}
+              topic={blockPresentation?.block?.topicGrade?.topic?.name}
               totalQuestions={blockPresentation.block.questions.length}
               answerResult={answerResult}
               combocount={state.earning.energyCharge}
