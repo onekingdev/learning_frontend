@@ -17,7 +17,6 @@ import collectible_icon from 'views/assets/nav-icons/collectibles.png';
 import profile_icon from 'views/assets/nav-icons/profile.png';
 import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
-import { TypoIcon } from 'views/atoms/Text';
 
 export const Sidebar: FC = () => {
 
@@ -73,7 +72,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     onClick={() => history.push('/login')}
                                 />
-                                <TypoIcon >HOMEWORKS</TypoIcon>
+                                <p>HOMEWORKS</p>
                             </IconContainer>
                         </ListItem>
                         <ListItem >
@@ -83,7 +82,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     onClick={() => history.push('/map')}
                                 />
-                                <TypoIcon >QUESTIONS</TypoIcon >
+                                <p>QUESTIONS</p>
                             </IconContainer>
                         </ListItem>
                         <ListItem >
@@ -93,7 +92,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     onClick={() => history.push('/games/categories')}
                                 />
-                                <TypoIcon >GAMES</TypoIcon >
+                                <p>GAMES</p>
                             </IconContainer>
                         </ListItem>
                         <ListItem >
@@ -103,7 +102,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     onClick={() => history.push('/progress')}
                                 />
-                                <TypoIcon >PROGRESS</TypoIcon >
+                                <p>PROGRESS</p>
                             </IconContainer>
                         </ListItem>
                         <ListItem >
@@ -113,7 +112,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     onClick={() => history.push('/backpack')}
                                 />
-                                <TypoIcon >MY STUFF</TypoIcon >
+                                <p>COLLECTIBLE</p>
                             </IconContainer>
                         </ListItem>
                         <ListItem >
@@ -123,7 +122,7 @@ export const Sidebar: FC = () => {
                                     image={bank_icon}
                                     onClick={() => history.push('/bank')}
                                 />
-                                <TypoIcon >BANK</TypoIcon >
+                                <p>BANK</p>
                             </IconContainer>
                         </ListItem>
                         <ListItem sx={{display: isMobile ? 'block' : 'none'}}>
@@ -133,7 +132,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     onClick={() => history.push('/avatar')}
                                 />
-                                <TypoIcon >PROFILE</TypoIcon >
+                                <p>PROFILE</p>
                             </IconContainer>
                         </ListItem>
                     </List>
@@ -147,10 +146,18 @@ export const Sidebar: FC = () => {
 export const IconContainer = styled.div`
   width: 90%;
   height: 70px;
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
   cursor: pointer;
+  &:hover {
+  }
+  p {
+    font-size: 12px;
+    font-family: Montserrat;
+    margin: 0;
+    font-weight: 700;
+  }
 `;

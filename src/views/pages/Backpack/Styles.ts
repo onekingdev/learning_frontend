@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../Color';
 import backpackBase from '../../assets/backpack-base.svg';
 import {ScreenSize} from '../../../constants/screenSize';
 import background from '../../assets/colored-shapes-bg.svg';

@@ -8,7 +8,7 @@ import * as TYPES from '../../../app/types'
 import payOrderLog from '../../assets/pay-order-log.svg'
 import Button from '../../molecules/MuiButton'
 import TextField from '../../molecules/MuiTextField'
-import {ButtonColor, shadeColor, BasicColor} from 'views/Color';
+import {ButtonColor, shadeColor, BasicColor} from '../../Color';
 import {PaymentForm} from './PaymentForm'
 
 import {

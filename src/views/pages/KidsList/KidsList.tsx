@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '../../molecules/MuiTextField';
 import Button from '../../molecules/MuiButton';
 import {LSDialog} from '../../molecules/Setting/LSDialog';
-import { BasicColor} from 'views/Color';
+import { BasicColor} from '../../Color';
 import {Store} from '../../../app/configureStore';
 import {
   Title,

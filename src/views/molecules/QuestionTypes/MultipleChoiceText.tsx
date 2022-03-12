@@ -6,7 +6,7 @@ import {Store} from '../../../app/configureStore';
 import {IBlockPresentation} from '../../../app/entities/block';
 import {IAnswer, IQuestion} from '../../../app/entities/block';
 import {Answer} from '../../atoms/Text/Answer';
-import {BasicColor, ButtonColor} from 'views/Color';
+import {BasicColor, ButtonColor} from '../../Color';
 import {ScreenSize} from '../../../constants/screenSize';
 import {Typography} from '../../atoms/Text/typography';
 import {Question} from '../../atoms/Text/Question';

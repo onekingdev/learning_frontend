@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Title} from 'views/atoms/Text';
+import {Title} from '../atoms/Text/Title';
 
 type AudioProps = {
   source: string;

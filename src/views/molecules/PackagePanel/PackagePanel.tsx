@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import avatar from '../../assets/packageIcons/avatar.svg'
 import Button from '../../molecules/MuiButton'
 import ButtonGroup from '@mui/material/ButtonGroup';
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../Color';
 
 import {
   useStyles,

@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import Button from '../../molecules/MuiButton';
 import TextField from '../../molecules/MuiTextField';
 import Grid from '@mui/material/Grid';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 import {ParentPgContainer} from '../../molecules/ParentPgContainer/ParentPgContainer';
 import * as TYPES from '../../../app/types';
 import {ParentPgStepper} from '../../molecules/ParentPgStepper/ParentPgStepper';

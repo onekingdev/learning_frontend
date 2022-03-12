@@ -74,6 +74,9 @@ animation: 1.5s ${keyframes`${fadeIn}`} ;
 
 export function Routes(props: any) {
   const location = useLocation();
+  const FadeIn = styled.div `
+    animation: 1.5s ${keyframes`${fadeIn}`} ;
+  `;
 
   return (
     <FadeIn>

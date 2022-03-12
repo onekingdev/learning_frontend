@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import {Box, InputBase, Paper} from '@mui/material';
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../../Color';
 
 import FormControl from '@mui/material/FormControl';
 import {

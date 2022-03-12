@@ -5,7 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { Checkbox, Radio } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import { FormGroup } from '@mui/material';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 
 import Button from '../../molecules/MuiButton'
 import { LSButtonContainer, LSButton, LSRadio, LSFormControlLabel, LSLabel } from './utils/Style';

@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 
 import { LSLabel, LSButtonContainer, LSButton } from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';

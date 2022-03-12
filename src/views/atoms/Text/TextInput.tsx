@@ -1,6 +1,6 @@
 import {FC, useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../Color';
 
 type TextInputProps = {
   label: string;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {Grid, Paper} from '@mui/material';
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../Color';
 import {ScreenSize} from '../../../constants/screenSize';
 
 

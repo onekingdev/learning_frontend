@@ -7,7 +7,7 @@ import level from '../assets/level-up.svg';
 import { LevelUp } from '../atoms/Text/LevelUp';
 import { Button } from '../molecules/Button';
 import { Icon } from '../atoms/Icon/Icon';
-import { TypoIcon } from 'views/atoms/Text';
+import { Icon as IconText} from '../atoms/Text/Icon';
 import coin from '../assets/coin.svg';
 import lightning from '../assets/lightning.svg';
 import { IconSize } from '../atoms/Icon/Size';
@@ -15,41 +15,41 @@ import { Typography } from '../atoms/Text/typography';
 
 
 export const LevelUpModal: FC = () => {
-  const [isClosed, setIsClosed] = useState(false);
-  const handleClose = () => {
-    setIsClosed(!isClosed)
-  }
+    const [isClosed, setIsClosed] = useState(false);
+    const handleClose = () => {
+      setIsClosed(!isClosed)
+    }
 
-  return <>
-    {isClosed ? null
-      :
-      <Modal>
+    return <>
+       {isClosed ? null
+       :
+        <Modal>
         <LevelUpContent>
-          <LevelUpStyles>
-            <CloseButton onClick={handleClose}>X</CloseButton>
-            <LevelUpDisplay>
-              <LevelUpImage src={level} />
-              <LevelUpTitle>Level up!</LevelUpTitle>
-            </LevelUpDisplay>
-            <ButtonContainer>
-              <Button value='Continue' color={ButtonColor.signUp} onClick={handleClose} />
-            </ButtonContainer>
-            <RewardsContainer>
-              <Reward>
-                <Icon image={coin} size={IconSize.small} />
-                <TypoIcon >200 Tokens</TypoIcon>
-              </Reward>
-              <Reward>
-                <Icon image={lightning} size={IconSize.small} />
-                <TypoIcon >40 Energy</TypoIcon>
-              </Reward>
-            </RewardsContainer>
-          </LevelUpStyles>
+            <LevelUpStyles>
+              <CloseButton onClick={handleClose}>X</CloseButton>
+               <LevelUpDisplay>
+                  <LevelUpImage src={level}/>
+                  <LevelUpTitle>Level up!</LevelUpTitle>
+               </LevelUpDisplay>
+               <ButtonContainer>
+                  <Button value='Continue' color={ButtonColor.signUp} onClick={handleClose}/>
+               </ButtonContainer>
+               <RewardsContainer>
+                 <Reward>
+                      <Icon image={coin} size={IconSize.small}/>
+                      <IconText isDark>200 Tokens</IconText>
+                 </Reward>
+                 <Reward>
+                      <Icon image={lightning} size={IconSize.small}/>
+                      <IconText isDark>40 Energy</IconText>
+                 </Reward>
+               </RewardsContainer>
+            </LevelUpStyles>
         </LevelUpContent>
       </Modal>
 
-    }
-  </>
+       }
+    </>
 };
 
 const LevelUpContent = styled.div`

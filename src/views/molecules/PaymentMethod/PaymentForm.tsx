@@ -10,7 +10,7 @@ import apple from '../../assets/apple-pay.svg'
 import visacard from '../../assets/visacard.svg'
 import Button from '../../molecules/MuiButton'
 import TextField from '../../molecules/MuiTextField'
-import {ButtonColor, shadeColor, BasicColor} from 'views/Color';
+import {ButtonColor, shadeColor, BasicColor} from '../../Color';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';

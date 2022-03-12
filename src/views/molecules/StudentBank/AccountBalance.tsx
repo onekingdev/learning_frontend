@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import {ScreenSize} from '../../../constants/screenSize';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 
 import SavingsIcon from '@mui/icons-material/Savings';
 import { LSText, LSLabel } from '../Setting/utils/Style';

@@ -2,7 +2,7 @@ import { Typography } from '../Text/typography';
 import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { Answer } from '../Text/Answer';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 import { ScreenSize } from '../../../constants/screenSize';
 import audioCheck from '../../assets/audios/check.mp3';
 import audioError from '../../assets/audios/error.wav';

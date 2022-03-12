@@ -1,10 +1,10 @@
 import {FC, useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import {GeneralText} from '../../atoms/Text/GeneralText';
-import {Header} from '../../atoms/Text';
-import {Subheader} from 'views/atoms/Text';
+import {Header} from '../../atoms/Text/Header';
+import {Subheader} from '../../atoms/Text/Subheader';
 import {TextInput} from '../../atoms/Text/TextInput';
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../Color';
 import {Button} from '../../molecules/Button';
 import {ScreenSize} from '../../../constants/screenSize';
 import background from '../../assets/colored-shapes-bg.svg';

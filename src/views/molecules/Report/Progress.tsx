@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 import {TopicProgress} from '../../molecules/TopicProgress';
 import {ScreenSize} from '../../../constants/screenSize';
 import {dictionary} from '../../pages/Progress/dictionary';

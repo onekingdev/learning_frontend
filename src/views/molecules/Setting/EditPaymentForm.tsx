@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import Button from '../MuiButton'
 import TextField from '../MuiTextField'
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../Color';
 import Grid from '@mui/material/Grid';
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import {

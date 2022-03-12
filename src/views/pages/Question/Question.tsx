@@ -42,6 +42,7 @@ export const Question: FC = () => {
   const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) => state.student)
   const state = useSelector((state: Store) => state);
+  const loadingContext = useContext(LoadingContext);
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -53,7 +54,6 @@ export const Question: FC = () => {
   const [answerResult, setAnswerResult] = useState<BlockQuestionInput[]>([]);
   const [pointUnit, setPointUnit] = useState<number>(0);
   const [points, setPoints] = useState<number>(0);
-  const loadingContext = useContext(LoadingContext);
   const [loading, setLoading] = useState(false)
   const [nextMaxExp, setNextMaxExp] = useState(0)
   const [openDg, setOpenDg] = useState(false);

@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {Title} from 'views/atoms/Text';
+import {Title} from '../atoms/Text/Title';
 import {UserRank} from '../molecules/UserRank';
 import avatar from '../assets/avatars/avatar1.svg';
 import {BasicColor} from '../Color';

@@ -12,7 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import PaidIcon from '@mui/icons-material/Paid';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 import { LSLabel } from '../Setting/utils/Style';
 
 interface Column {

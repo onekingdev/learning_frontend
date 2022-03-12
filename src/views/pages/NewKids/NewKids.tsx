@@ -21,7 +21,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
 import Button from '../../molecules/MuiButton';
 import TextField from '../../molecules/MuiTextField';
-import {ButtonColor, BasicColor} from 'views/Color';
+import {ButtonColor, BasicColor} from '../../Color';
 import math_gold from '../../assets/packageIcons/math_gold.svg';
 import ela_gold from '../../assets/packageIcons/ela_gold.svg';
 import science_gold from '../../assets/packageIcons/science_gold.svg';

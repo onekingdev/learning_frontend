@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../Color';
 import {Typography} from './typography';
 
 type ButtonProps = {

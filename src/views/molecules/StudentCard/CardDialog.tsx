@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
 import {ScreenSize} from '../../../constants/screenSize';
 
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 
 import { LSDialogTitle, LSDialogContent, LSDialogContentText } from '../Setting/utils/Style';
 

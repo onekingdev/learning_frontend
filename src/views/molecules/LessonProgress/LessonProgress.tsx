@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {LessonProgressTitle} from './LessonProgressTitle';
 import {LessonProgressBar} from './LessonProgressBar';
 import {ScreenSize} from '../../../constants/screenSize';
-import {BasicColor} from 'views/Color';
+import {BasicColor} from '../../Color';
 import lightening from 'views/assets/lightning.svg';
 import { LessonProgressLightening } from './LessonProgressLightening';
 
