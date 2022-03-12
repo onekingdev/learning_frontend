@@ -3,8 +3,8 @@ import {useHistory} from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useDispatch } from 'react-redux'
 import { login, resetReducer } from 'app/actions/userActions'
-import {Header} from 'views/atoms/Text/Header';
-import {Subheader} from 'views/atoms/Text/Subheader';
+import {Header} from 'views/atoms/Text';
+import {Subheader} from 'views/atoms/Text';
 import {Button as ButtonText} from 'views/atoms/Text/Button';
 import {ButtonColor} from 'views/Color';
 import logo from 'views/assets/socrates-logo.svg';

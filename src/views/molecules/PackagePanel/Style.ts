@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {ScreenSize} from '../../../constants/screenSize';
 import { makeStyles } from '@mui/styles'
 import background from '../../assets/colored-shapes-bg.svg';
-import {ButtonColor, BasicColor} from '../../Color';
+import {ButtonColor, BasicColor} from 'views/Color';
 
 export const Container = styled.div`
     position: relative;

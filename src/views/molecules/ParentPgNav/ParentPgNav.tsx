@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMarkRounded';
 import Stack from '@mui/material/Stack';
 
-import { BasicColor } from '../../Color';
+import { BasicColor } from 'views/Color';
 import {ScreenSize} from '../../../constants/screenSize';
 import { useStyles } from './Style';
 import * as TYPES from '../../../app/types'

@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '../../molecules/MuiTextField';
 import Button from '../../molecules/MuiButton';
 import {LSDialog} from '../../molecules/Setting/LSDialog';
-import { BasicColor} from '../../Color';
+import { BasicColor} from 'views/Color';
 import {Store} from '../../../app/configureStore';
 import {
   Title,
@@ -35,8 +35,6 @@ const KidsList: FC = () => {
   // const dispatch = useDispatch();
   // const language = 'en';
   const user = useSelector((state: Store) => state.user);
-  const guardian = useSelector((state: any) => state.guardian)
-
   const kidAvatars = [kidA, kidB, kidC];
 
   const [children, setChildren] = useState<kid[]>([]);
@@ -61,10 +59,10 @@ const KidsList: FC = () => {
     console.log('Save button clicked!');
   };
   const Kid = (props: any) => {
-    const userName = props.user.username;
+    const userName = props.username
     // const [username, setUsername] = useState(props.username);
     // const [password, setPassword] = useState(props.password);
-    const [grade, setGrade] = useState(props.grade.name);
+    const [grade, setGrade] = useState(props.grade);
 
     // Open or close dialog state
     const [openLicense, setOpenLicense] = useState(false);
@@ -186,14 +184,6 @@ const KidsList: FC = () => {
   };
 
   useEffect(() => {
-
-    const students = guardian.studentSet
-    console.log("students is ", students)
-    // for(const student of students) {
-      // setChildren([...children, guardianStudent.student])
-    // }
-    setChildren(students)
-
     setChildren([
       {
         username: 'armin',
@@ -220,17 +210,16 @@ const KidsList: FC = () => {
         avatar: kidAvatars[0],
       },
     ]);
-    loadingContext.done();
   }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
         <Title>Your kids</Title>
-        {/* {children.map((child, index) => (
+        {children.map((child, index) => (
           <>
             <Kid {...child} index={index} key={index}></Kid>
           </>
-        ))} */}
+        ))}
         <Button
           bgColor={BasicColor.green}
           onClick={() => handleSave()}

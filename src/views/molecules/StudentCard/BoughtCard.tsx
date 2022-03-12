@@ -1,6 +1,6 @@
 import {FC, useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {BasicColor} from '../../Color';
+import {BasicColor} from 'views/Color';
 import ReactLoading from 'react-loading';
 import useSound from 'use-sound';
 import purchaseSound from '../../assets/audios/mixkit-coin-win-notification.wav';

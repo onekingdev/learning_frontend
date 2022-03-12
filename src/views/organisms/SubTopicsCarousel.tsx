@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import styled from 'styled-components';
-import {Header} from '../atoms/Text/Header';
+import {Header} from '../atoms/Text';
 import {BasicColor} from '../Color';
 import {SubTopicCard} from '../molecules/SubTopicCard';
 import {ScreenSize} from '../../constants/screenSize';

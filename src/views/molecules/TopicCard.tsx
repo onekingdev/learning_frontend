@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import {Subheader} from '../atoms/Text/Subheader';
+import {Subheader} from 'views/atoms/Text';
 
 type TopicCardProps = {
   image: string;

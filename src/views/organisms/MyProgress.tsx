@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {BasicColor} from '../Color';
 import {TopicProgress} from '../molecules/TopicProgress';
 import {ScreenSize} from '../../constants/screenSize';
-import {Title} from '../atoms/Text/Title';
+import {Title} from 'views/atoms/Text';
 import {dictionary} from '../pages/Progress/dictionary';
 import {getProgress} from '../../app/firebase';
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { makeStyles } from '@mui/styles'
 import titleBg from '../../assets/title-kids-background.png'
-import {BasicColor} from '../../Color';
+import {BasicColor} from 'views/Color';
 
 export const SettingContainer = styled.div`
   display: flex;
@@ -60,7 +60,7 @@ export const LicenseUsername = styled.div`
   margin-top: 10px;
   border-radius: 5px;
   width: 110px;
-  min-height: 35px; 
+  min-height: 35px;
 `
 
 export const Title = styled.div`

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import {ScreenSize} from '../../../constants/screenSize';
-import { BasicColor } from '../../Color';
+import { BasicColor } from 'views/Color';
 
 import SavingsIcon from '@mui/icons-material/Savings';
 import { LSText, LSLabel } from '../Setting/utils/Style';
@@ -13,7 +13,7 @@ interface BalanceProp {
 export const AccountBalance: FC<BalanceProp> = ({ balance }) => {
 
   return (
-    <BankPaper flex_direction='row' bg_color={BasicColor.blue} >
+    <BankPaper flex_direction='row' bg_color={BasicColor.blue} width={450}>
       <SavingsIcon />
       <LSText fontSize={24}>
         current account:

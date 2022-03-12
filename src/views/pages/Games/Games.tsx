@@ -1,5 +1,5 @@
 import {FC, useContext, useEffect} from 'react';
-import {Title} from '../../atoms/Text/Title';
+import {Title} from 'views/atoms/Text';
 import {GamesContainer, GamesTitle, Wrapper} from './Style';
 import {GameMainMenu} from '../../organisms/GameMainMenu';
 import {StudentMenu} from '../../templates/StudentMenu';

@@ -6,7 +6,7 @@ import {Store} from '../../../app/configureStore';
 import {IBlockPresentation} from '../../../app/entities/block';
 import {IAnswer, IQuestion} from '../../../app/entities/block';
 import {Answer} from '../../atoms/Text/Answer';
-import {BasicColor, ButtonColor} from '../../Color';
+import {BasicColor, ButtonColor} from 'views/Color';
 import {ScreenSize} from '../../../constants/screenSize';
 import {Typography} from '../../atoms/Text/typography';
 import {Question} from '../../atoms/Text/Question';
@@ -24,14 +24,8 @@ type ChoiceTextProps = {
   totalQuestions: number;
   questionCounter: number;
   blockPresentation: IBlockPresentation;
-  onAnswer: (result: BlockQuestionInput) => void;
+  onAnswer: (result: boolean) => void;
 };
-
-interface BlockQuestionInput {
-  question: number;
-  answerOption: number;
-  isCorrect: boolean;
-}
 
 export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   question,
@@ -50,9 +44,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
     setIsAnswered(false);
   }, [question.answeroptionSet]);
 
-  const handleAnswer = (result: BlockQuestionInput) => {
+  const handleAnswer = (result: boolean) => {
     setIsAnswered(true);
-    result.question = parseInt(question.id);
     onAnswer(result);
   };
 
@@ -97,7 +90,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
             {question.answeroptionSet.map((option, i) => (
               <AnswerContainer key={i}>
                 <TextOption
-                  answer={option}
+                  answer={option.isCorrect}
+                  answerText={option.answerText}
                   onClick={handleAnswer}
                 />
                 <Icon

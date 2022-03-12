@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux'
 import {
   buyCardsWithFilenames,
 } from 'app/firebase';
-import {BasicColor} from '../../Color';
+import {BasicColor} from 'views/Color';
 import {BoughtCard} from './BoughtCard';
 
 import {

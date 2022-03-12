@@ -1,11 +1,11 @@
 import {FC, useState, useEffect} from 'react';
 import logo from '../../assets/socrates-logo.svg';
-import {Header} from '../../atoms/Text/Header';
-import {Subheader} from '../../atoms/Text/Subheader';
+import {Header} from '../../atoms/Text';
+import {Subheader} from 'views/atoms/Text';
 import welcome from '../../assets/welcome-page.svg';
 import {Button} from '../../molecules/Button';
-import {ButtonColor} from '../../Color';
-import {Icon} from '../../atoms/Text/Icon';
+import {ButtonColor} from 'views/Color';
+import {TypoIcon} from 'views/atoms/Text';
 import {dictionary} from '../Welcome/dictionary';
 import {Modal} from '../../atoms/Modal';
 import {Link, useHistory} from 'react-router-dom';
@@ -97,15 +97,15 @@ export const Welcome: FC = () => {
       </Actions>
 
       <Legal>
-        <Icon style={{textAlign: 'center'}} isDark={true}>
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].about}
-        </Icon>
-        <Icon style={{textAlign: 'center'}} isDark={true}>
+        </TypoIcon >
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].privacy}
-        </Icon>
-        <Icon style={{textAlign: 'center'}} isDark={true}>
+        </TypoIcon >
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].children_privacy}
-        </Icon>
+        </TypoIcon >
       </Legal>
     </Wrapper>
   );

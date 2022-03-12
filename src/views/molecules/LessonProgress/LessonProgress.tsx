@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {LessonProgressTitle} from './LessonProgressTitle';
 import {LessonProgressBar} from './LessonProgressBar';
 import {ScreenSize} from '../../../constants/screenSize';
-import {BasicColor} from '../../Color';
+import {BasicColor} from 'views/Color';
 import lightening from 'views/assets/lightning.svg';
 import { LessonProgressLightening } from './LessonProgressLightening';
 
@@ -12,15 +12,9 @@ type LessonProgressProps = {
   currentQuestion: number;
   totalQuestions: number;
   finished?: boolean;
-  answerResult?: BlockQuestionInput[];
+  answerResult?: boolean[];
   combocount: number;
 };
-
-interface BlockQuestionInput {
-  question: number;
-  answerOption: number;
-  isCorrect: boolean;
-}
 
 type ProgressBar = {
   color: BasicColor | null;
@@ -35,15 +29,15 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   combocount
 }) => {
   // !! Added bar array builder function
-  const buildBars = (totalQuestions: number, answerResult: BlockQuestionInput[]) => {
+  const buildBars = (totalQuestions: number, answerResult: boolean[]) => {
     const bars = [];
     // TODO add logic inside this loop to build a
     // TODO proper progress bar
     for (let i = 0; i < totalQuestions; i++) {
-        if (answerResult[i]?.isCorrect === true) bars.push({color: BasicColor.green});
-        else if (answerResult[i]?.isCorrect === false) bars.push({color: BasicColor.red});
-        else bars.push({color: null});
-      }
+      if (answerResult[i] === true) bars.push({color: BasicColor.green});
+      else if (answerResult[i] === false) bars.push({color: BasicColor.red});
+      else bars.push({color: null});
+    }
     return bars;
   };
 

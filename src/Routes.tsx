@@ -74,9 +74,7 @@ animation: 1.5s ${keyframes`${fadeIn}`} ;
 
 export function Routes(props: any) {
   const location = useLocation();
-  const FadeIn = styled.div `
-    animation: 1.5s ${keyframes`${fadeIn}`} ;
-  `;
+
 
   return (
     <FadeIn>
@@ -101,7 +99,7 @@ export function Routes(props: any) {
           </PrivateRoute>
           <PrivateRoute
             loading={true}
-            path="/question/:mode/:aokId"
+            path="/question/presentation_:presentationId"
             requireAuth={false}
           >
             <Question />
@@ -166,7 +164,7 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/parent/payment">
             <Payment />
           </PrivateRoute>
-          <PrivateRoute loading={true} path="/parent/create" requireAuth={false}>
+          <PrivateRoute loading={true} path="/parent/create">
             <CreateParent />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/kids/list">

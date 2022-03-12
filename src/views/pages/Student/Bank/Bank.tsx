@@ -41,13 +41,13 @@ export const Bank: FC = () => {
                 '@media screen and (max-width: 720px)' : { padding: '1vw'}
               },
               }}>
-              <GridItem item md={4} xs={4} align='end'>
+              <GridItem item md={12} xs={4} align='center'>
                 <Img src={Cartera} />
               </GridItem>
-              <GridItem item md={8} xs={8}>
+              <GridItem item md={12} xs={8}>
                 <AccountBalance balance={student.bankWallet.balance} />
               </GridItem>
-              <GridItem item md={12} xs={12} align='end'>
+              <GridItem item md={12} xs={12} align='center'>
                 <TxBox />
               </GridItem>
             </Grid>
@@ -83,7 +83,7 @@ const GridItem = styled(Grid) <{
 `;
 
 const Img = styled.img`
-width: 7vw;
+// width: 20vw;
 @media screen and (max-width: ${ScreenSize.tablet}) {
   width: 15vw;
     margin-left: 5vw;

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-import {BasicColor} from '../../Color';
+import {BasicColor} from 'views/Color';
 import {LevelUp} from '../../atoms/Text/LevelUp';
 import {ScreenSize} from '../../../constants/screenSize';
 

@@ -9,7 +9,7 @@ import adventure from '../../assets/adventure.svg';
 import sport from '../../assets/sports.svg';
 import skill from '../../assets/skills.svg';
 import strategy from '../../assets/strategy.svg'
-import {BasicColor} from '../../Color';
+import {BasicColor} from 'views/Color';
 import {StudentMenu} from '../../templates/StudentMenu';
 import {dictionary} from './dictionary';
 import {LoadingContext} from 'react-router-loading';

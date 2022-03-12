@@ -10,14 +10,13 @@ import apple from '../../assets/apple-pay.svg'
 import visacard from '../../assets/visacard.svg'
 import Button from '../../molecules/MuiButton'
 import TextField from '../../molecules/MuiTextField'
-import {ButtonColor, shadeColor, BasicColor} from '../../Color';
+import {ButtonColor, shadeColor, BasicColor} from 'views/Color';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { createOrder, confirmPaymentOrder } from '../../../app/actions/paymentActions'
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement, CardElement } from '@stripe/react-stripe-js';
 import {
   useStyles,
@@ -31,12 +30,11 @@ import {
 import StripeInput from './StripeInput';
 import countryList from 'react-select-country-list';
 
-
 type PaymentFormProps = {
   isUpdate: boolean
 };
 interface PaymentFormFunc {
-    handleOrder(plans: any, coupon: string): void;
+    handleOrder(coupon: string, price: number): void;
     handleUpdate(): void;
 }
 export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
@@ -46,81 +44,55 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   const stripe = useStripe();
   const elements = useElements();
   const user = useSelector((state: Store) => state.user)
-  const guardian = useSelector((state: any) => state.guardian)
   const options = useMemo(() => countryList().getData(), [])
   const { isUpdate } = props
 
   const [paymentMethod, setPaymentMethod] = useState('card')
-    const [validateRst, setValidateRst] = useState<{ [key: string]: any }>({
-        firstName: null,
-        lastName: null,
-        cardNumber: null,
-        expiryDate: null,
-        cvc: null,
-        addressOne: null,
-        addressTwo: null,
-        state: null,
-        city: null,
-        zip: null,
-        country: null,
-        phone: null,
-    });
+  const [validateRst, setValidateRst] = useState<{ [key: string]: any }>({
+    firstName: null,
+    lastName: null,
+    cardNumber: null,
+    expiryDate: null,
+    cvc: null,
+    addressOne: null,
+    addressTwo: null,
+    state: null,
+    city: null,
+    zip: null,
+    country: null,
+    phone: null,
+  });
 
-    const [data, setData] = useState({
-        paymentMethod: 'card',
-        firstName: '',
-        lastName: '',
-        cardNumber: '',
-        cardExpMonth: '',
-        cardExpYear: '',
-        cvc: '',
-        addressOne: '',
-        addressTwo: '',
-        state: '',
-        city: '',
-        zip: '',
-        country: '',
-        phone: '',
-        couponCode: '',
-        price: 0
-    })
-    const arrObjToString  = (arrObj: any) => {
-        let str = '[';
-        for(const obj of arrObj){
-            str+= '{'
-            for(const key in obj){
-                str+= key
-                str+= ': '
-                if(typeof(obj[key]) === 'string') str+= '"' + obj[key] + '"'
-                else str+= obj[key]
-                str+= ','
-            }
-            str+='},'
-        }
-        str += ']'
-        return str;
-    }
-    const [plans, setPlans] = useState<any>()
+  const [data, setData] = useState({
+    paymentMethod: 'card',
+    firstName: '',
+    lastName: '',
+    addressOne: '',
+    addressTwo: '',
+    state: '',
+    city: '',
+    zip: '',
+    country: '',
+    phone: '',
+    couponCode: '',
+    price: 0
+  })
 
-    const validatePhoneNumber =  (pNumber: string) => {
-        const regex = new RegExp(/^\+?1?\s*?\(?\d{3}(?:\)|[-|\s])?\s*?\d{3}[-|\s]?\d{4}$/);
-        return regex.test(pNumber);
+  console.log(options);
+  const formValidation = () => {
+    const validateMsgTemp = {...validateRst}
+    let valiResult = true;
+    for(const key in validateRst) {
+      if(validateRst[key] === null) {
+          validateMsgTemp[key] = 'Field is required';
+      }
+      if(validateMsgTemp[key]) {
+          valiResult = false;
+      }
     }
-
-    const formValidation = () => {
-        const validateMsgTemp = {...validateRst}
-        let valiResult = true;
-        for(const key in validateRst) {
-        if(validateRst[key] === null) {
-            validateMsgTemp[key] = 'Field is required';
-        }
-        if(validateMsgTemp[key]) {
-            valiResult = false;
-        }
-        }
-        setValidateRst(validateMsgTemp);
-        return valiResult;
-    }
+    setValidateRst(validateMsgTemp);
+    return valiResult;
+}
 
   const handleFormChange = (field: string, errMsg: string) => {
       setValidateRst({...validateRst, [field]: errMsg})
@@ -130,79 +102,40 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
 
   }
 
-  const handleOrder = async (plansDetail:any = null) => {
+  const handleOrder = async () => {
 
-    if(!formValidation()) {
-        return {success: false, result: 'Validation Failed'};
-    }
+    if(!formValidation()) return {success: false, result: 'Validation Failed'};
     if(!stripe) return {success: false, result: "Can't get stripe"};
     if(!elements) return {success: false, result: "Can't get element"};
-    // if(!elements.getElement(CardNumberElement)) return {success: false, result: "Can't get card number element"};
-    // const cardElement:any = elements.getElement(CardNumberElement);
-    // const result:any = await stripe.createPaymentMethod({
-    //     type: 'card',
-    //     card: cardElement,
-    //     billing_details: {
-    //         // email: user.email,
-    //         email: 'mooncode610@gmail.com',
-    //         address: {
-    //             city: data.city,
-    //             // country: data.country,
-    //             line1: data.addressOne,
-    //             line2: data.addressTwo,
-    //             postal_code: data.zip,
-    //             state: data.state
-    //         },
-    //         name: data.firstName + ' ' + data.lastName,
-    //         phone: data.phone
-    //     },
-    // }).catch(console.log);
-    // if(result.error) return {success: false, result: result.error.message};
-    // /*------------------------ send request to backend to create payment -S-----------------------------*/
-    let orderDetailInputs: any = [];
-    plansDetail = plansDetail !== null ? plansDetail : plans;
-    for(const type in plansDetail) {
-        const plan = plansDetail[type]
-        console.log(plan.childCount)
-        if(plan.childCount < 1 || !plan.childCount) continue;
-        const orderDetailInput:any = {};
-        orderDetailInput.planId = plan.id
-        orderDetailInput.quantity = plan.childCount
-        orderDetailInput.period = plan.period === "month" ? "Monthly" : "Yearly"
-        orderDetailInputs.push(orderDetailInput)
-    }
+    if(!elements.getElement(CardNumberElement)) return {success: false, result: "Can't get card number element"};
 
-    orderDetailInputs =  arrObjToString(orderDetailInputs)
-    const result = await createOrder(
-        data.cvc,
-        data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
-        data.cardExpYear,
-        data.firstName,
-        data.lastName,
-        data.cardNumber,
-        data.couponCode,
-        guardian.id,
-        orderDetailInputs,
-        "Card",
-        "https://",
-        user.token,
-        dispatch
-    )
+    const cardElement:any = elements.getElement(CardNumberElement);
+    console.log(cardElement);
+    const result:any = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+        billing_details: {
+            // email: user.email,
+            email: 'mooncode610@gmail.com',
+            address: {
+                city: data.city,
+                country: data.country,
+                line1: data.addressOne,
+                line2: data.addressTwo,
+                postal_code: data.zip,
+                state: data.state
+            },
+            name: data.firstName + ' ' + data.lastName,
+            phone: data.phone
+        },
+    }).catch(console.log);
+    console.log(result);
+    if(result.error) return {success: false, result: result.error.message};
+    /*------------------------ send request to backend to create payment -S-----------------------------*/
 
-    console.log("result is",result)
-    // // /*------------------------ send request to backend to create payment -E-----------------------------*/
-    if(result.success) {
-        result.data.email = user.email;
-        const result_confirm = await confirmPaymentOrder(
-            result.data.order.id,
-            user.token,
-            dispatch
-        )
-        result.success = result_confirm.success;
-        result.data.order = result_confirm.data.order;
-    }
-    return result;
-
+    /*------------------------ send request to backend to create payment -E-----------------------------*/
+    result.email = user.email;
+    return {success: true, result: result};
   }
 
   const handleUpdate = async () => {
@@ -214,11 +147,11 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   }
 
   useImperativeHandle(ref, () => ({
-    async handleOrder (plansDetail, couponCode) {
+    async handleOrder (couponCode, price) {
         data.couponCode = couponCode;
+        data.price = price;
         setData(data);
-        setPlans(plans)
-        const result = await handleOrder(plansDetail);
+        const result = await handleOrder();
         return result;
     },
 
@@ -282,7 +215,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 />
             </Grid>
             <Grid item xs={12}>
-                {/* <TextField
+                <TextField
                     label="Card Number"
                     InputProps={{
                         inputProps: {
@@ -290,26 +223,14 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                         },
                         inputComponent: StripeInput
                     }}
-                    onChange={(e: any) => {
-                        handleFormChange('cardNumber',e['error'] ? e['error']['message'] : '')
-                    }}
+                    onChange={(e: any) => handleFormChange('cardNumber',e['error'] ? e['error']['message'] : '')}
                     error={!!validateRst.cardNumber}
                     helperText={validateRst.cardNumber}
                     focused
-                /> */}
-                <TextField
-                    label="Card Number ex: (XXXX-XXXX-XXXX-XXXX)"
-                    onChange={(e: any) => {
-                        handleFormChange('cardNumber',e.target.value.length < 15 ? 'Field is required' : '')
-                        // handleFormChange('expiryDate',e.target.value.split("-").length <= 2 ? 'Type is wrong' : '')
-                        setData({...data, cardNumber: e.target.value.replaceAll("-", "")})
-                    } }
-                    error={!!validateRst.cardNumber}
-                    helperText={validateRst.cardNumber}
                 />
             </Grid>
             <Grid item xs={12} md={6}>
-                {/* <TextField
+                <TextField
                     label="Expiry Date"
                     InputProps={{
                         inputProps: {
@@ -321,24 +242,10 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     focused
                     error={!!validateRst.expiryDate}
                     helperText={validateRst.expiryDate}
-                /> */}
-                 <TextField
-                    label="Expiry Date ex: (04/25)"
-                    onChange={(e: any) => {
-                        const expiryDate = e.target.value.split("/");
-                        handleFormChange('expiryDate',e.target.value.length < 5 ? 'Field is required' : expiryDate.length <= 1 ? 'Type is wrong' :  expiryDate[0] >= 13 ? 'Type is wrong' : '')
-                        if(expiryDate.length <= 1 || expiryDate[0] >= 13) return
-                        const cardExpMonth = expiryDate[0]
-                        let cardExpYear = expiryDate[1]
-                        if(cardExpYear.length === 2) cardExpYear = "20" + cardExpYear
-                        setData({...data, cardExpMonth: cardExpMonth, cardExpYear: cardExpYear})
-                    } }
-                    error={!!validateRst.expiryDate}
-                    helperText={validateRst.expiryDate}
                 />
             </Grid>
             <Grid item xs={12} md={6}>
-                {/* <TextField
+                <TextField
                     label="CVC/CVV"
                     InputProps={{
                         inputProps: {
@@ -348,16 +255,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     }}
                     onChange={(e: any) => handleFormChange('cvc',e['error'] ? e['error']['message'] : '')}
                     focused
-                    error={!!validateRst.cvc}
-                    helperText={validateRst.cvc}
-                /> */}
-                <TextField
-                    label="CVC/CVV"
-                    onChange={(e: any) => {
-                        handleFormChange('cvc',e.target.value.length === 0 ? 'Field is required' : '')
-                        setData({...data, cvc: e.target.value})
-
-                    }}
                     error={!!validateRst.cvc}
                     helperText={validateRst.cvc}
                 />
@@ -439,7 +336,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 <TextField
                     label="Phone"
                     onChange={(e: any) => {
-                        handleFormChange('phone',e.target.value.length === 0 ? 'Field is required' : !validatePhoneNumber(e.target.value) ? 'Phone number type is wrong':'')
+                        handleFormChange('phone',e.target.value.length === 0 ? 'Field is required' : '')
                         setData({...data, phone: e.target.value})
                     } }
                     error={!!validateRst.phone}

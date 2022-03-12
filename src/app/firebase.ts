@@ -6,7 +6,7 @@ import {
   getDownloadURL,
   listAll,
 } from 'firebase/storage';
-import {BasicColor} from '../views/Color';
+import {BasicColor} from 'views/Color';
 import {dictionary} from '../views/pages/Progress/dictionary';
 
 const firebaseConfig = {

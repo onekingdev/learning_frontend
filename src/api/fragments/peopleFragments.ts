@@ -1,4 +1,3 @@
-import {AREA_OF_KNOWLEDGE} from './areaOfKnowledgeFragments'
 export const ORGANIZATIONS = `
     {
         id
@@ -30,6 +29,7 @@ export const ORGANIZATIONS_PERSONNEL = `
 `;
 
 export const GROUPS = `
+    {
         id
         identifier
         isActive
@@ -38,6 +38,7 @@ export const GROUPS = `
         internalCode
         population
         slug
+    }
 `;
 
 export const SCHOOLS = `
@@ -68,11 +69,14 @@ export const SCHOOLS_PERSONNEL = `
 `;
 
 export const GRADES = `
-    id
-    identifier
-    randomSlug
-    slug
-    name
+    {
+        id
+        identifier
+        isActive
+        randomSlug
+        slug
+        name
+    }
 `;
 
 export const PREREQUISITES = `
@@ -93,13 +97,12 @@ export const GUARIDANS_GENDER = `
 `
 
 export const AUDIENCES = `
+    
         id
         identifier
         isActive
-        createTimestamp
-        updateTimestamp
         randomSlug
         slug
-        standardCode
         name
+    
 `;

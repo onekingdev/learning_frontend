@@ -1,26 +1,21 @@
 import {FC} from 'react';
 import styled from 'styled-components';
-
-import {GeneralText} from 'views/atoms/Text/GeneralText';
-import {IconSize} from 'views/atoms/Icon/Size';
-import {Icon} from 'views/atoms/Icon/Icon';
-
-import finishLesson from 'views/assets/finish-lesson.svg';
-import energyIcon from 'views/assets/lightning.svg';
-
-import Button from 'views/molecules/MuiButton';
-
-import {ScreenSize} from '../../constants/screenSize';
+import {GeneralText} from '../atoms/Text/GeneralText';
+import finishLesson from '../assets/finish-lesson.svg';
 import {BasicColor, ButtonColor} from '../Color';
+import {Icon} from '../atoms/Icon/Icon';
+import energyIcon from '../assets/lightning.svg';
+import {IconSize} from '../atoms/Icon/Size';
+import {ButtonWrapper} from '../atoms/ButtonWrapper';
+import {Button} from '../atoms/Text/Button';
+import {ScreenSize} from '../../constants/screenSize';
 
 type FinishLessonProps = {
   tokens: number;
   energy: number;
-  loading: boolean;
-  onNextLesson: (e:any) => void;
 };
 
-export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy, loading, onNextLesson}) => {
+export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy}) => {
   return (
     <>
       <FinishLessonStyle>
@@ -43,13 +38,9 @@ export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy, loading, on
           </GeneralText>
         </FinishLessonTextContainer>
         <FinishLessonButtonContainer>
-          <Button
-            onClick={onNextLesson}
-            value="Next Lesson"
-            loading={loading}
-            bgColor={ButtonColor.next}
-            fullWidth={true}
-          />
+          <ButtonWrapper bgColor={ButtonColor.next}>
+            <Button>Next Lesson</Button>
+          </ButtonWrapper>
         </FinishLessonButtonContainer>
       </FinishLessonStyle>
     </>

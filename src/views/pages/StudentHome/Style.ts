@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {BasicColor} from '../../Color';
+import {BasicColor} from 'views/Color';
 import background from '../../assets/colored-shapes-bg.svg';
 import {ScreenSize} from '../../../constants/screenSize';
 

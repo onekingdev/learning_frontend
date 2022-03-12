@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import background from '../../assets/colored-shapes-bg.svg';
-import {BasicColor} from '../../Color';
+import {BasicColor} from 'views/Color';
 import {ScreenSize} from '../../../constants/screenSize';
 
 export const Wrapper = styled.div`
