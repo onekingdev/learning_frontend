@@ -10,6 +10,7 @@ import fireworkSfx from 'views/assets/audios/mixkit-fireworks-bang-in-sky-2989.w
 
 import { bounceInUp } from 'react-animations';
 import { flip } from 'react-animations'
+import { Header, TypoTitle, TypoBtn } from 'views/atoms/Text';
 
 interface Props {
   token: number;
@@ -25,7 +26,7 @@ export const LevelUpDgContent: FC<Props> = ({token, energy, close}) => {
   const config = {
     num: [1, 10],
     rps: 0.1,
-    radius: [10, 30],
+    radius: [2, 10],
     life: [-2, 3],
     v: [2, 3],
     tha: [-40, 40],
@@ -38,32 +39,22 @@ export const LevelUpDgContent: FC<Props> = ({token, energy, close}) => {
     g: 1,
   };
   return (
-    <div onLoad={() => play}>
+    <div onLoad={() => play} style={{display:'flex', justifyContent:'center'}}>
       <CongratsDgContainer>
         <div className="background">
           <ParticlesBg type="custom" config={config} />
         </div>
         <div className="background">
-          <ParticlesBg type="polygon" />
+          <ParticlesBg type="polygon" config={config} />
         </div>
         <Flip>
           <img src={img_congats} />
         </Flip>
         <BounceIn>
-        <h1>LEVEL UP!</h1>
-        <h5> Your level is now: {earning.level}</h5>
+        <Header style={{textAlign: 'center'}}>LEVEL UP!</Header>
+        <TypoTitle style={{textAlign: 'center'}}> Your level is now: {earning.level}</TypoTitle>
         </BounceIn>
-        <button onClick={close}>Continue</button>
-        {/* <div className="icons-container">
-          <div className="icons">
-            <img src={coin} alt={'coin'} />
-            <p>{token} Tokens</p>
-          </div>
-          <div className="icons">
-            <img src={lightening} alt={'lightening'} />
-            <p>{energy} energy</p>
-          </div>
-        </div> */}
+        <button onClick={close}><TypoBtn>Continue</TypoBtn></button>
       </CongratsDgContainer>
     </div>
   );
