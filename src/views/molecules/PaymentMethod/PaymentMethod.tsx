@@ -92,28 +92,17 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0 ) * plans.Sole.currentPrice;
     setSubtotal( price_gold + price_combo + price_sole )
   }, [plans])
-  if(isSpecialCode)
-    return (
-        <Container>
-            <Button
-                bgColor={BasicColor.green}
-                onClick={handleOrder}
-                value="Place an Order"
-                weight={700}
-                loading = {loading}
-            />
-        </Container>
-    )
   return (
     <Container>
         <PaymentContainer>
-            <PaymentForm isUpdate={false} ref={paymentFormRef}/>
+            <PaymentForm isUpdate={false} ref={paymentFormRef} isSpecialCode={isSpecialCode}/>
         </PaymentContainer>
         <OrderContainer>
             <OrderTitleContainer>
                 <OrderTitleLog src={payOrderLog} />
                 <OrderTitle>Order Summary</OrderTitle>
             </OrderTitleContainer>
+            {!isSpecialCode &&
             <OrderBody>
                 {
                     plans.Gold.childCount > 0 &&
@@ -123,7 +112,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     </OrderItem>
                 }
                 {
-                   plans.Combo.childCount > 0 &&
+                plans.Combo.childCount > 0 &&
                     <OrderItem>
                         <OrderItemTitle>{plans.Combo.childCount} Combo Package </OrderItemTitle>
                         <OrderItemContent>${plans.Combo.currentPrice} / {plans.Combo.period}</OrderItemContent>
@@ -191,6 +180,44 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     loading={loading}
                 />
             </OrderBody>
+            }
+            {isSpecialCode &&
+            <OrderBody>
+                {
+                    plans.Gold.childCount > 0 &&
+                    <OrderItem>
+                        <OrderItemTitle>{plans.Gold.childCount} Gold Package </OrderItemTitle>
+                    </OrderItem>
+                }
+                {
+                plans.Combo.childCount > 0 &&
+                    <OrderItem>
+                        <OrderItemTitle>{plans.Combo.childCount} Combo Package </OrderItemTitle>
+                    </OrderItem>
+                }
+                {
+                    plans.Sole.childCount > 0 &&
+                    <OrderItem>
+                        <OrderItemTitle>{plans.Sole.childCount} Sole Package </OrderItemTitle>
+                    </OrderItem>
+                }
+                <OrderTip>
+                    Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in out privacy policy
+                </OrderTip>
+                <OrderTip>
+                    <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)}/>
+                    <div style={{paddingLeft: '20px'}}>I have read and agree to the website terms and conditions*</div>
+                </OrderTip>
+                <Button
+                    bgColor={BasicColor.green}
+                    onClick={handleOrder}
+                    value="Place an Order"
+                    weight={700}
+                    disabled={!agreeLicense}
+                    loading={loading}
+                />
+            </OrderBody>
+            }
         </OrderContainer>
     </Container>
   );

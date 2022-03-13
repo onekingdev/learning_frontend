@@ -1,14 +1,21 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
 import kidA from 'views/assets/avatars/kid-1.svg';
 import kidB from 'views/assets/avatars/kid-2.svg';
 import kidC from 'views/assets/avatars/kid-3.svg';
+import { changeStudentGrade } from 'app/actions/studentActions'
 import license from 'views/assets/student-license.svg';
 import Grid from '@mui/material/Grid';
 import TextField from 'views/molecules/MuiTextField';
 import Button from 'views/molecules/MuiButton';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
+import Radio from '@mui/material/Radio';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { BasicColor } from 'views/Color';
 import { Store } from 'app/configureStore';
@@ -16,9 +23,13 @@ import {
   Title,
   Avatar,
   LicenseButton,
+  useStyles
 } from './Style';
+
 import License from 'views/molecules/KidLicense/KidLicense';
 import { LoadingContext } from 'react-router-loading';
+
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 interface kid {
   username: string;
@@ -29,10 +40,15 @@ interface kid {
 
 const KidsList: FC = () => {
   const loadingContext = useContext(LoadingContext);
+  const classes = useStyles();
+
   // const dispatch = useDispatch();
   // const language = 'en';
   const user = useSelector((state: Store) => state.user);
   const guardian = useSelector((state: any) => state.guardian)
+  const grades = useSelector((state: any) => state.grade)
+  const dispatch = useDispatch()
+  const { enqueueSnackbar } = useSnackbar();
 
   const kidAvatars = [kidA, kidB, kidC];
 
@@ -58,11 +74,11 @@ const KidsList: FC = () => {
     console.log('Save button clicked!');
   };
   const Kid = (props: any) => {
+    console.log("props is", props)
     const userName = props.user.username;
-    // const [username, setUsername] = useState(props.username);
-    // const [password, setPassword] = useState(props.password);
-    const [grade, setGrade] = useState(props.grade.name);
-
+    const parentName = user.username
+    const fullName = props.fullName;
+    const [grade, setGrade] = useState(props.grade.grade);
     // Open or close dialog state
     const [openLicense, setOpenLicense] = useState(false);
     const open = () => {
@@ -123,9 +139,10 @@ const KidsList: FC = () => {
                   parentName={user.username}
                   // username={username}
                   username={userName}
-                  membership={new Date()}
+                  membership={new Date(props?.guardianstudentplanSet[0]?.expiredAt)}
                 />
               )}
+              {console.log("expire at", props?.guardianstudentplanSet[0]?.expiredAt, new Date(props?.guardianstudentplanSet[0]?.expiredAt))}
               <GridContainer container>
                 <GridItem item md={6} xs={12}>
                   <Button
@@ -162,13 +179,41 @@ const KidsList: FC = () => {
             />
           </GridItem>
           <GridItem item xs={12} md={3}>
-            <TextField
+            {/* <TextField
               label="Grade"
               value={grade}
               onChange={e => {
                 updateGrade(e.target.value);
               }}
-            />
+            /> */}
+            <FormControl fullWidth>
+                <InputLabel id="select-grade-label">
+                  Select Your Grade
+                </InputLabel>
+                <Select
+                  labelId="select-grade-label"
+                  id="select-grade"
+                  value={grades[grades.findIndex((item:any) => item.id === grade.id)]}
+                  label="Select Your Grade"
+                  className={`${classes.select} err-border`}
+                  onChange={async (e) => {
+                    setGrade(e.target.value);
+                    console.log(props)
+                    const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
+                    if(!res.success) {
+                      enqueueSnackbar(res.msg, { variant: 'error' });
+                    }
+                  }}
+                  displayEmpty={true}
+                >
+                  {grades?.length && grades.length > 0 && grades.map((value: any, index: number) => (
+                    <MenuItem value={value} key={index}>
+                      {value.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {/* <div className="err-text">{validateMsg.grade}</div> */}
+              </FormControl>
           </GridItem>
           <GridItem item xs={12} md={2.5}>
             <Button
@@ -184,50 +229,55 @@ const KidsList: FC = () => {
 
   useEffect(() => {
 
-    const students = guardian.studentSet
-    console.log("students is ", students)
+    const guardianStudents = guardian.guardianstudentSet
+    const students = [];
+
+    for(const guardianStudent of guardianStudents) {
+      students.push(guardianStudent?.student)
+    }
+
     // for(const student of students) {
       // setChildren([...children, guardianStudent.student])
     // }
     setChildren(students)
 
-    setChildren([
-      {
-        username: 'armin',
-        password: '123456',
-        grade: '1',
-        avatar: kidAvatars[0],
-      },
-      {
-        username: 'armin',
-        password: '123456',
-        grade: '1',
-        avatar: kidAvatars[1],
-      },
-      {
-        username: 'armin',
-        password: '123456',
-        grade: '1',
-        avatar: kidAvatars[2],
-      },
-      {
-        username: 'armin',
-        password: '123456',
-        grade: '1',
-        avatar: kidAvatars[0],
-      },
-    ]);
+    // setChildren([
+    //   {
+    //     username: 'armin',
+    //     password: '123456',
+    //     grade: '1',
+    //     avatar: kidAvatars[0],
+    //   },
+    //   {
+    //     username: 'armin',
+    //     password: '123456',
+    //     grade: '1',
+    //     avatar: kidAvatars[1],
+    //   },
+    //   {
+    //     username: 'armin',
+    //     password: '123456',
+    //     grade: '1',
+    //     avatar: kidAvatars[2],
+    //   },
+    //   {
+    //     username: 'armin',
+    //     password: '123456',
+    //     grade: '1',
+    //     avatar: kidAvatars[0],
+    //   },
+    // ]);
     loadingContext.done();
   }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
         <Title>Your kids</Title>
-        {/* {children.map((child, index) => (
+        {children.map((child, index) => (
           <>
             <Kid {...child} index={index} key={index}></Kid>
           </>
-        ))} */}
+        ))}
         <Button
           bgColor={BasicColor.green}
           onClick={() => handleSave()}

@@ -63,7 +63,6 @@ const NewKids: FC = () => {
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
   const [grade, setGrade] = useState<any>();
-  const [specialCode, setSpecialCode] = useState('')
   const [childNum, setChildNum] = useState(0);
   const [childIdx, setChildIdx] = useState(1);
   const [childs, setChilds] = useState([{}]);
@@ -233,7 +232,7 @@ const NewKids: FC = () => {
     const temp_availblePlans = [];
 
     for(const guardianStudentPlan of guardianStudentPlans) {
-      temp_availblePlans.push(guardianStudentPlan.plan)
+      temp_availblePlans.push(guardianStudentPlan?.plan)
     }
 
     setAvailablePackages(guardianStudentPlans);
@@ -298,7 +297,7 @@ const NewKids: FC = () => {
                   >
                     {availablePackages.map((value, index) => (
                       <MenuItem value={value} key={index}>
-                        {value.plan.name}
+                        {value?.plan?.name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -491,16 +490,6 @@ const NewKids: FC = () => {
                   helperText={validateMsg.grade}
                   value={grade}
                 /> */}
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="SPECIAL CODE"
-                  onChange={e => {
-                    setSpecialCode(e.target.value);
-                  }}
-                  value={specialCode}
-                  type="special code"
-                />
               </Grid>
               <Grid item xs={12} md={12} lg={6}>
                 {childIdx > 0 && (

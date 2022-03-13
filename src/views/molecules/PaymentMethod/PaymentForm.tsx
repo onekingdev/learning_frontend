@@ -51,10 +51,21 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   const user = useSelector((state: Store) => state.user)
   const guardian = useSelector((state: any) => state.guardian)
   const options = useMemo(() => countryList().getData(), [])
-  const { isUpdate } = props
+  const { isUpdate, isSpecialCode } = props
 
   const [paymentMethod, setPaymentMethod] = useState('card')
-    const [validateRst, setValidateRst] = useState<{ [key: string]: any }>({
+    const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(
+    isSpecialCode ? {
+        firstName: null,
+        lastName: null,
+        addressOne: null,
+        addressTwo: null,
+        state: null,
+        city: null,
+        zip: null,
+        country: null,
+        phone: null,
+    } : {
         firstName: null,
         lastName: null,
         cardNumber: null,
@@ -176,21 +187,37 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     }
 
     orderDetailInputs =  arrObjToString(orderDetailInputs)
-    const result = await createOrder(
-        data.cvc,
-        data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
-        data.cardExpYear,
-        data.firstName,
-        data.lastName,
-        data.cardNumber,
-        data.couponCode,
-        guardian.id,
-        orderDetailInputs,
-        "Card",
-        "https://",
-        user.token,
-        dispatch
-    )
+    const result = isSpecialCode ?
+            await createOrder(
+                data.cvc,
+                data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
+                data.cardExpYear,
+                data.firstName,
+                data.lastName,
+                data.cardNumber,
+                data.couponCode,
+                guardian.id,
+                orderDetailInputs,
+                "Card",
+                "https://",
+                user.token,
+                dispatch
+            ) :
+            await createOrder(
+                data.cvc,
+                data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
+                data.cardExpYear,
+                data.firstName,
+                data.lastName,
+                data.cardNumber,
+                data.couponCode,
+                guardian.id,
+                orderDetailInputs,
+                "Card",
+                "https://",
+                user.token,
+                dispatch
+            )
 
     console.log("result is",result)
     // // /*------------------------ send request to backend to create payment -E-----------------------------*/
@@ -234,6 +261,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
   }, []);
   return (
     <>
+        {!isSpecialCode && <>
         <Title>Payment Method</Title>
         <FormControl>
             <RadioGroup
@@ -258,6 +286,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                 </FlexRow>
             </RadioGroup>
         </FormControl>
+        </>}
         <div style={{fontSize: '24px', fontWeight: '700', paddingTop: '15px', paddingBottom: '15px'}}>Billing Information</div>
         <Grid container spacing={4}>
             <Grid item xs={6}>
@@ -284,6 +313,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     value={data.lastName}
                 />
             </Grid>
+            {!isSpecialCode &&
             <Grid item xs={12}>
                 {/* <TextField
                     label="Card Number"
@@ -311,6 +341,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     helperText={validateRst.cardNumber}
                 />
             </Grid>
+            }
+            {!isSpecialCode &&
             <Grid item xs={12} md={6}>
                 {/* <TextField
                     label="Expiry Date"
@@ -340,6 +372,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     helperText={validateRst.expiryDate}
                 />
             </Grid>
+            }
+            {!isSpecialCode &&
             <Grid item xs={12} md={6}>
                 {/* <TextField
                     label="CVC/CVV"
@@ -365,6 +399,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     helperText={validateRst.cvc}
                 />
             </Grid>
+            }
             <Grid item xs={12}>
                 <TextField
                     label="Address Line 1"

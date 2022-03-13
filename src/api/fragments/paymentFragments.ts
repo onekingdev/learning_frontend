@@ -54,6 +54,7 @@ export const GUARDIAN_STUDENT_PLAN = `
     price
     
 `
+
 export const ORDER_DETAIL = `
     id
     identifier

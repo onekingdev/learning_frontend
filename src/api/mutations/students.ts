@@ -27,6 +27,10 @@ export const CREATE_STUDENT = (
                 ${GUARDIAN_STUDENT}
                 student {
                     ${STUDENT}
+                    user{
+                        id
+                        username
+                    }
                 }
             }
             guardianstudentplanSet {
@@ -40,9 +44,6 @@ export const CREATE_STUDENT = (
             }
             paymentMethod {
                 ${PAYMENT_METHOD}
-            }
-            studentSet {
-                ${STUDENT}
             }
         }
         student {
@@ -58,3 +59,41 @@ export const CREATE_STUDENT = (
         refreshToken
 	}
 `;
+
+export const CHANGE_STUDENT_GRADE = (
+    gradeId: string,
+    studentId: string,
+    ) => `
+	createChangeStudentGrade(gradeId: ${gradeId},  studentId: ${studentId}) {
+        guardian {
+            ${GUARDIAN}
+            guardianstudentSet {
+                ${GUARDIAN_STUDENT}
+                student {
+                    ${STUDENT}
+                    user{
+                        id
+                        username
+                    }
+                }
+            }
+            guardianstudentplanSet {
+                ${GUARDIAN_STUDENT_PLAN}
+            }
+            orderSet {
+                ${ORDER}
+            }
+            paymentmethodSet {
+                ${PAYMENT_METHOD}
+            }
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
+        }
+        student {
+            ${STUDENT}
+        }
+       
+	}
+`;
+

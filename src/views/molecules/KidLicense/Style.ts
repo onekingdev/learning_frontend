@@ -43,6 +43,7 @@ export const LicenseUsername = styled.div`
   width: 110px;
   min-height: 35px;
   text-align: center;
+  overflow-wrap: anywhere;
   @media screen and (max-width: 540px) {
     font-size: 1em;
     padding: 0;

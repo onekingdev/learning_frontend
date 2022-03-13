@@ -52,6 +52,7 @@ const CreateParent: FC = () => {
   });
   const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [specialCode, setSpecialCode] = useState('');
 
   function validateEmail (email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -161,6 +162,16 @@ const CreateParent: FC = () => {
                   }}
                   error={!!validateMsg.confPassword}
                   helperText={validateMsg.confPassword}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="SPECIAL CODE"
+                  onChange={e => {
+                    setSpecialCode(e.target.value);
+                  }}
+                  value={specialCode}
+                  type="special code"
                 />
               </Grid>
             </Grid>

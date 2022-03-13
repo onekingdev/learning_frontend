@@ -96,5 +96,13 @@ export const Container = styled.div`
 
 
 export const useStyles = makeStyles({
-
+  select: {
+    '&.MuiOutlinedInput-root' : {
+      borderRadius: '25px',
+    },
+    '& fieldset' : {
+      borderColor: BasicColor.brightBlue,
+      borderWidth: '2px'
+    }
+  },
 });

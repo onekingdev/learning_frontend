@@ -57,7 +57,7 @@ export const Payment: FC = () => {
       year: 0,
     },
   });
-  const [isSpecialCode, setIsSpecialCode] = useState(false)
+  const [isSpecialCode, setIsSpecialCode] = useState(true)
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [offRate, setOffRate] = useState(50);
 
@@ -183,7 +183,7 @@ export const Payment: FC = () => {
               onChangePackage('Combo', childrenCount, plan)
             }
             disabled = {isSpecialCode}
-            isSpecialCode = {isSpecialCode}
+            isSpecialCode = {false}
           />
           <PackagePanel
             type="Sole"
@@ -192,7 +192,7 @@ export const Payment: FC = () => {
               onChangePackage('Sole', childrenCount, plan)
             }
             disabled = {isSpecialCode}
-            isSpecialCode = {isSpecialCode}
+            isSpecialCode = {false}
           />
         </PackageContainer>
         {!isSpecialCode &&
