@@ -11,12 +11,12 @@ type TextProps = {
 
 export const Header = styled.h1<TextProps>`
   font-family: ${Typography.primary};
-  color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
+  color: black;
   font-weight: 700;
   font-size: 40px;
   @media (max-width: ${ScreenSize.phone}) {
     letter-spacing: 0.1px;
-    line-height: 22px;
+    font-size: 22px;
     letter-spacing: 0.1px;
   }
 `;
@@ -47,6 +47,37 @@ export const Title = styled.h2<TextProps>`
   @media (min-width: ${ScreenSize.desktop}) {
     font-size: 34px;
     line-height: 50px;
+  }
+`;
+
+export const TypoTitle = styled.h2`
+  font-family: ${Typography.secondary};
+  font-weight: bold;
+  letter-spacing: 0.25px;
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 50px;
+
+  @media (max-width: ${ScreenSize.phone}) {
+    font-size: 24px;
+    line-height: 28px;
+  }
+`;
+
+export const TypoBtn = styled.p`
+  font-family: ${Typography.primary};
+  font-weight: bold;
+  letter-spacing: 0.25px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 35px;
+
+  @media (max-width: ${ScreenSize.phone}) {
+    font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
   }
 `;
 
