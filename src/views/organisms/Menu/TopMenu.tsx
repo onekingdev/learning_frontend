@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import home from 'views/assets/home.svg';
 import { Icon } from 'views/atoms/Icon/Icon';
@@ -36,21 +36,10 @@ export const TopMenu: FC<TopMenuProps> = ({
   balance,
 }) => {
 
-  const [navOp, setNavOp] = useState(true)
-  const changeNavBarOpacity = () => {
-    if(window.scrollY > 60) {
-      setNavOp(false)
-    } else setNavOp(true)
-  }
-  useEffect(() => {
-    changeNavBarOpacity()
-    window.addEventListener('scroll', changeNavBarOpacity)
-  })
-
   const history = useHistory();
   return (
     <>
-      <TopMenuStyles style={navOp ? {background: '#FFFFFF00'}:{opacity: '#FFFFFF'}}>
+      <TopMenuStyles >
         <Sidebar />
         <Icon
           image={home}
@@ -80,6 +69,7 @@ const TopMenuStyles = styled.div`
   @media screen and (min-width: ${ScreenSize.phone}) {
     position: fixed;
     background: white;
+    opacity: 0.9;
     top: 0;
     z-index: 200;
     width: 100%;
