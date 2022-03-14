@@ -74,6 +74,11 @@ const MuiButton: FC<MuiButtonProps> = ({
                 background: `${shadeColor(bgColor || BasicColor.greenSoft, 10)}
                     radial-gradient(circle, transparent 1%, ${bgColor} 1%)
                     center/15000% !important`
+            },
+            '&:disabled': {
+              color: 'transparent !important',
+              boxShadow: 'none !important',
+              backgroundColor: "rgba(0, 0, 0, 0.12) !important"
             }
         },
     })
