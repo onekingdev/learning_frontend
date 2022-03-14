@@ -6,7 +6,6 @@ import styled, { keyframes } from 'styled-components';
 import 'animate.css';
 import { LogIn } from 'views/pages/Login/Login';
 import { Welcome } from 'views/pages/Welcome/Welcome';
-import { Testing } from 'views/pages/Testing/Testing';
 import { Question } from 'views/pages/Question/Question';
 import { Avatar } from 'views/pages/Student/Avatar/Avatar';
 // import { CardCollectible } from 'views/pages/CardCollectible/CardCollectible';
@@ -33,10 +32,15 @@ import { Cards } from 'views/pages/Student/Collectibles/Cards';
 import {  MyCardCollection  } from 'views/pages/Student/Collectibles/MyCards';
 import NewKids from 'views/pages/NewKids/NewKids';
 import { Spinner } from 'views/atoms/Spinner';
+
+// Testing
+import { ParentReport } from 'views/pages/Testing/ParentReport';
+import { StudentTreasureTrack } from 'views/pages/Testing/StudentTreasureTrack';
+import { StudentProgress } from 'views/pages/Testing/StudentProgress';
+
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
   const isAuthenticated = !!user?.token;
-
   return loading ? (
     <Route loading {...rest}>
       {requireAuth ? (
@@ -169,9 +173,15 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/kids/new">
             <NewKids />
           </PrivateRoute>
+          <Route path="/testing-parent-report">
+            <ParentReport />
+          </Route>
+          <Route path="/testing-student-treasure-track">
+            <StudentTreasureTrack />
+          </Route>
           {process.env.NODE_ENV === 'development' ? (
-            <Route path="/testing">
-              <Testing />
+            <Route path="/testing-student-progress">
+              <StudentProgress />
             </Route>
           ) : null}
           <Redirect from="/" to="/login" />
