@@ -13,6 +13,9 @@ finishBlockPresentation( blockPresentationId: ${block_presentation_id}, errors: 
     blockPresentation{
         ${BLOCK_PRESENTATON}
     }
+    student {
+        ${STUDENT}
+    }
 }
 `;
 

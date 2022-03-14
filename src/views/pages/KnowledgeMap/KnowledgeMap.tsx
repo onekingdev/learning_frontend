@@ -1,4 +1,4 @@
-import { FC, useEffect, useContext, useState } from 'react';
+import { FC, useEffect, useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { LoadingContext } from 'react-router-loading';
 import { useHistory } from 'react-router-dom';
@@ -26,9 +26,10 @@ export const KnowledgeMap: FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const student = useSelector((state: any) => state.student);
+  const islandRef = useRef()
 
   const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
-  const [loadedImgNum,  setLoadedImgNum] = useState(0)
+  const [loadedImgNum, setLoadedImgNum] = useState(0)
 
   // const handleData = (data: any) => {
   //   setAreasOfKnowledge(data.data.audienceById.areaofknowledgeSet);
@@ -44,8 +45,8 @@ export const KnowledgeMap: FC = () => {
   // };
 
   const onImgLoad = (e: any) => {
-    setLoadedImgNum(loadedImgNum+1)
-    if(loadedImgNum >= areasOfKnowledge.length - 1)
+    setLoadedImgNum(loadedImgNum + 1)
+    if (loadedImgNum >= areasOfKnowledge.length - 1)
       loadingContext.done();
   }
 
@@ -60,19 +61,33 @@ export const KnowledgeMap: FC = () => {
     //   handleError
     // );
     // console.log(areasOfKnowledge);
+
   }, []);
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // },[])
 
   const getRandomNumber = (max: number) => {
     return Math.floor(Math.random() * max);
   };
 
+  // states to store position of Boat image
+  const [boatX, setBoatX] = useState(200)
+  const [boatY, setBoatY] = useState(300)
+
   const animateBoat = (e: any, route: string) => {
     const audio = new Audio(boat_sound);
     audio.play();
-    const boat = document.getElementById('boat');
-    boat!.style.top = `${e.clientY - 140}px`;
-    boat!.style.left = `${e.clientX - 140}px`;
-    console.log("route is ", route)
+    setBoatX(e.clientX )
+    setBoatY(e.clientY + window.pageYOffset )
+    // const boat = document.getElementById('boat');
+    // boat!.style.top = `${e.clientY - 140}px`;
+    // boat!.style.left = `${e.clientX - 140}px`;
     setTimeout(() => {
       history.push(route);
     }, 3300);
@@ -94,7 +109,7 @@ export const KnowledgeMap: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        <Boat id="boat" src={boat} />
+        <Boat src={boat} style={{position: 'absolute', left: boatX - 100, top: boatY - 100}}/>
         <Ocean>
           {areasOfKnowledge.map(
             (
@@ -108,7 +123,8 @@ export const KnowledgeMap: FC = () => {
               const fill = getFiller();
 
               return i % 2 === 0 ? (
-                <Subject key={i}>
+                <Subject key={i}
+                >
                   <Island
                     src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
                     onClick={e => {
