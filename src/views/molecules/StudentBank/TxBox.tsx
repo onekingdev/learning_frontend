@@ -18,7 +18,7 @@ export const TxBox: FC = () => {
 
   const [depositAmount, setDepositAmount] = useState(0)
   const [withdrawAmount, setWithdrawAmount] = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const onDepositChange = (x: string) => {
 
@@ -73,7 +73,6 @@ export const TxBox: FC = () => {
             value="Deposit"
             fullWidth={true}
             loading={loading}
-            disabled={loading}
           />
         </GridItem>
       </Grid>
