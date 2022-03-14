@@ -36,21 +36,22 @@ export const TopMenu: FC<TopMenuProps> = ({
   balance,
 }) => {
 
-  const [navOp, setNavOp] = useState(true)
+  const [navOp, setNavOp] = useState(0)
   const changeNavBarOpacity = () => {
-    if(window.scrollY > 60) {
-      setNavOp(false)
-    } else setNavOp(true)
+    const posY = window.scrollY
+    if(posY < 60) {
+      setNavOp(0)
+    } else setNavOp(1)
   }
   useEffect(() => {
     changeNavBarOpacity()
     window.addEventListener('scroll', changeNavBarOpacity)
-  })
+  },[])
 
   const history = useHistory();
   return (
     <>
-      <TopMenuStyles style={navOp ? {background: '#FFFFFF00'}:{opacity: '#FFFFFF'}}>
+      <TopMenuStyles style={{background: `rgba(255, 255, 255, ${navOp})`, transitionDuration: '1s'}}>
         <Sidebar />
         <Icon
           image={home}

@@ -212,7 +212,6 @@ export const Question: FC = () => {
     for(const obj of arrObj){
         str+= '{'
         for(const key in obj){
-            if(key === "isCorrect") continue;
             str+= key
             str+= ': '
             if(typeof(obj[key]) === 'string') str+= '"' + obj[key] + '"'
