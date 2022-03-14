@@ -28,6 +28,8 @@ import {
 
 import License from 'views/molecules/KidLicense/KidLicense';
 import { LoadingContext } from 'react-router-loading';
+import { toPng } from 'html-to-image'
+import { saveAs} from 'file-saver'
 
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
@@ -90,9 +92,9 @@ const KidsList: FC = () => {
       console.log(children);
       const licenseElm: any = document.querySelector('#license');
       console.log(licenseElm);
-      // toPng(licenseElm).then(function (dataUrl) {
-      //   saveAs(dataUrl, `${username}-license`);
-      // });
+      toPng(licenseElm).then(function (dataUrl) {
+        saveAs(dataUrl, `${userName}-license`);
+      });
 
       // open()
     };
