@@ -71,7 +71,7 @@ export const Sidebar: FC = () => {
                                 <Icon
                                     image={homework_icon}
                                     size={ICON_SIZE.medium}
-                                    onClick={() => history.push('/testing-student-treasure-track')}
+                                    onClick={() => history.push('/login')}
                                 />
                                 <TypoIcon >HOMEWORKS</TypoIcon>
                             </IconContainer>

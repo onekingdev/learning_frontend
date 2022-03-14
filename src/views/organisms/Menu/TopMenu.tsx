@@ -68,6 +68,8 @@ const TopMenuStyles = styled.div`
   display: none;
   @media screen and (min-width: ${ScreenSize.phone}) {
     position: fixed;
+    background: white;
+    opacity: 0.9;
     top: 0;
     z-index: 200;
     width: 100%;
