@@ -11,7 +11,6 @@ type LessonProgressProps = {
   currentQuestion: number;
   totalQuestions: number;
   finished?: boolean;
-  questions?: any
   answerResult?: BlockQuestionInput[];
   combocount: number;
 };
@@ -31,7 +30,6 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   currentQuestion,
   totalQuestions,
   finished,
-  questions,
   answerResult = [],
   combocount
 }) => {
@@ -57,7 +55,6 @@ export const LessonProgress: FC<LessonProgressProps> = ({
         currentQuestion={currentQuestion}
         totalQuestions={totalQuestions}
         finished={finished}
-        questions={questions}
       ></LessonProgressTitle>
       <StyledLessonProgressBarWrapper>
         {buildBars(totalQuestions, answerResult).map(

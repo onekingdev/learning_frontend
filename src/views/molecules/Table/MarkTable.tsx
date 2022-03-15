@@ -59,8 +59,8 @@ interface ISingleGroup {
 const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
     const [opened, setOpened] = useState<boolean>(true);
     const toggle = () => setOpened(val => !val);
-    const children = opened ? extra.map((item: ISingleGroup) => {
-        return <SingleGroup main={item.main} extra={item.extra} deep={deep+1} />
+    const children = opened ? extra.map((item: ISingleGroup, id: number) => {
+        return <SingleGroup key={id} main={item.main} extra={item.extra} deep={deep+1} />
     }) : "";
     if (main === {}) {
         return <></>;
