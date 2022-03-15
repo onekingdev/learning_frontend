@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import styled from 'styled-components';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { ScreenSize } from 'constants/screenSize';
+import { TypoBtn } from 'views/atoms/Text';
 
 const colors = [
     '#CC5B1D',
@@ -83,7 +84,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                         }} />
                         <span>{main.item}</span>
                     </> : <>
-                        <button style={{
+                        <TypoBtn style={{
                             background: '#26B824',
                             color: 'black',
                             minWidth: '200px',
@@ -96,7 +97,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                             borderRadius: '1000px',
                             outline: 'none',
                             cursor: 'pointer'
-                        }}>{main.item}</button>
+                        }}>{main.item}</TypoBtn>
                     </> }
                 </Subject>
             </div>

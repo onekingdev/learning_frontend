@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { StudentMenu } from 'views/templates/StudentMenu';
 import styled from 'styled-components';
 import { Title } from 'views/atoms/Text';
@@ -54,8 +54,13 @@ import ProgressPath40 from 'views/assets/student/progress-path-40.png';
 import ProgressPath41 from 'views/assets/student/progress-path-41.png';
 import ProgressPath42 from 'views/assets/student/progress-path-42.png';
 import MarkTableSubject from 'views/molecules/Table/MarkTableSubject';
+import { LoadingContext } from 'react-router-loading';
 
 export const StudentProgress = () => {
+    const loadingContext = useContext(LoadingContext);
+    useEffect(() => {
+      loadingContext.done();
+    }, []);
     const grades = [
         '1st Grade',
         '2st Grade',
