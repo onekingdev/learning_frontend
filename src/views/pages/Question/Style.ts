@@ -21,7 +21,7 @@ export const ProgressWrapper = styled.div`
   justify-content: center;
   margin-bottom: 120px;
   @media (min-width: ${ScreenSize.desktop}) {
-    margin-top: 1rem;
+    // margin-top: 1rem;
   }
 `;
 

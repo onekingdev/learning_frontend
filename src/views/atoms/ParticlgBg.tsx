@@ -10,7 +10,7 @@ import fireworkSfx from 'views/assets/audios/mixkit-fireworks-bang-in-sky-2989.w
 
 import { bounceInUp } from 'react-animations';
 import { flip } from 'react-animations'
-import { Header, TypoTitle, TypoBtn } from 'views/atoms/Text';
+import { TypoHeader, TypoTitle, TypoBtn } from 'views/atoms/Text';
 
 interface Props {
   token: number;
@@ -51,7 +51,7 @@ export const LevelUpDgContent: FC<Props> = ({token, energy, close}) => {
           <img src={img_congats} />
         </Flip>
         <BounceIn>
-        <Header style={{textAlign: 'center'}}>LEVEL UP!</Header>
+        <TypoHeader style={{textAlign: 'center'}}>LEVEL UP!</TypoHeader>
         <TypoTitle style={{textAlign: 'center'}}> Your level is now: {earning.level}</TypoTitle>
         </BounceIn>
         <button onClick={close}><TypoBtn>Continue</TypoBtn></button>
