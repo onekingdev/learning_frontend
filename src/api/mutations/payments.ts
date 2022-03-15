@@ -52,6 +52,47 @@ export const CREATE_ORDER = (
         urlRedirect
     }
 `;
+export const CREATE_ORDER_WITH_OUT_PAY = (
+    cardFirstName: string,
+    cardLastName: string,
+    address1: string,
+    address2: string,
+    city: string,
+    state: string,
+    postCode: string,
+    country: string,
+    phone: string,
+    guardianId: number,
+    orderDetailInput: {},
+) => `
+    createOrderWithOutPay(guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}){
+        guardian {
+            ${GUARDIAN}
+            guardianstudentSet {
+                ${GUARDIAN_STUDENT}
+                student {
+                    ${STUDENT}
+                }
+            }
+            guardianstudentplanSet {
+                ${GUARDIAN_STUDENT_PLAN}
+            }
+            orderSet {
+                ${ORDER}
+            }
+            paymentmethodSet {
+                ${PAYMENT_METHOD}
+            }
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
+        }
+        order{
+            ${ORDER}
+        }
+        status
+    }
+`;
 
 export const CONFIRM_PAYMENT_ORDER = (
     orderId: number,

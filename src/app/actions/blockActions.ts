@@ -7,7 +7,7 @@ import {INTEREST_QUERY} from '../../api/queries/interests'
 import * as TYPES from '../types'
 
 export const finishBlock = async (block_presentation_id: string, hits: number, errors: number, bonusCoins: number, earning: object, questionResults: any, token: string, dispatch: any) => {
-    console.log("bonusCoins",bonusCoins)
+    console.log('bonusCoins',bonusCoins)
     const res:any = await mutation(FINISH_BLOCK_PRESENTATION( block_presentation_id, hits, errors, bonusCoins, questionResults ), token).catch(e => ({success: false}));
     if(res.success === false) {
         return {success: false, msg: 'Network Error'};

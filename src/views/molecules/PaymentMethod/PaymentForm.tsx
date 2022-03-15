@@ -14,7 +14,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { createOrder, confirmPaymentOrder } from 'app/actions/paymentActions'
+import { createOrder, confirmPaymentOrder, createOrderWithOutPay } from 'app/actions/paymentActions'
 import {
     useStripe,
     useElements,
@@ -182,55 +182,63 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         const orderDetailInput:any = {};
         orderDetailInput.planId = plan.id
         orderDetailInput.quantity = plan.childCount
-        orderDetailInput.period = plan.period === "month" ? "Monthly" : "Yearly"
+        orderDetailInput.period = plan.period === 'month' ? 'Monthly' : 'Yearly'
         orderDetailInputs.push(orderDetailInput)
     }
 
     orderDetailInputs =  arrObjToString(orderDetailInputs)
-    const result = isSpecialCode ?
-            await createOrder(
-                data.cvc,
-                data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
-                data.cardExpYear,
-                data.firstName,
-                data.lastName,
-                data.cardNumber,
-                data.couponCode,
-                guardian.id,
-                orderDetailInputs,
-                "Card",
-                "https://",
-                user.token,
-                dispatch
-            ) :
-            await createOrder(
-                data.cvc,
-                data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
-                data.cardExpYear,
-                data.firstName,
-                data.lastName,
-                data.cardNumber,
-                data.couponCode,
-                guardian.id,
-                orderDetailInputs,
-                "Card",
-                "https://",
-                user.token,
-                dispatch
-            )
-
-    console.log("result is",result)
-    // // /*------------------------ send request to backend to create payment -E-----------------------------*/
-    if(result.success) {
-        result.data.email = user.email;
-        const result_confirm = await confirmPaymentOrder(
-            result.data.order.id,
+    let result: any;
+    if(isSpecialCode) {
+        result = await createOrderWithOutPay(
+            data.firstName,
+            data.lastName,
+            'add 1',
+            'add 2',
+            'city',
+            'state',
+            'postcode',
+            'country',
+            'phone',
+            guardian.id,
+            orderDetailInputs,
             user.token,
             dispatch
         )
-        result.success = result_confirm.success;
-        result.data.order = result_confirm.data.order;
+        console.log('this is result, ', result)
+        console.log(user)
+        result.data.email = user.email;
     }
+    else {
+        result = await createOrder(
+            data.cvc,
+            data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
+            data.cardExpYear,
+            data.firstName,
+            data.lastName,
+            data.cardNumber,
+            data.couponCode,
+            guardian.id,
+            orderDetailInputs,
+            'Card',
+            'https://',
+            user.token,
+            dispatch
+        )
+
+        // // /*------------------------ send request to backend to create payment -E-----------------------------*/
+        if(result.success) {
+            result.data.email = user.email;
+            const result_confirm = await confirmPaymentOrder(
+                result.data.order.id,
+                user.token,
+                dispatch
+            )
+            result.success = result_confirm.success;
+            result.data.order = result_confirm.data.order;
+        }
+    }
+
+
     return result;
 
   }
@@ -335,7 +343,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     onChange={(e: any) => {
                         handleFormChange('cardNumber',e.target.value.length < 15 ? 'Field is required' : '')
                         // handleFormChange('expiryDate',e.target.value.split("-").length <= 2 ? 'Type is wrong' : '')
-                        setData({...data, cardNumber: e.target.value.replaceAll("-", "")})
+                        setData({...data, cardNumber: e.target.value.replaceAll('-', '')})
                     } }
                     error={!!validateRst.cardNumber}
                     helperText={validateRst.cardNumber}
@@ -360,12 +368,12 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                  <TextField
                     label="Expiry Date ex: (04/25)"
                     onChange={(e: any) => {
-                        const expiryDate = e.target.value.split("/");
+                        const expiryDate = e.target.value.split('/');
                         handleFormChange('expiryDate',e.target.value.length < 5 ? 'Field is required' : expiryDate.length <= 1 ? 'Type is wrong' :  expiryDate[0] >= 13 ? 'Type is wrong' : '')
                         if(expiryDate.length <= 1 || expiryDate[0] >= 13) return
                         const cardExpMonth = expiryDate[0]
                         let cardExpYear = expiryDate[1]
-                        if(cardExpYear.length === 2) cardExpYear = "20" + cardExpYear
+                        if(cardExpYear.length === 2) cardExpYear = '20' + cardExpYear
                         setData({...data, cardExpMonth: cardExpMonth, cardExpYear: cardExpYear})
                     } }
                     error={!!validateRst.expiryDate}

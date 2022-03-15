@@ -9,7 +9,7 @@ type TextProps = {
   isDark?: boolean;
 };
 
-export const Header = styled.h1<TextProps>`
+export const TypoHeader = styled.h1<TextProps>`
   font-family: ${Typography.primary};
   color: black;
   font-weight: 700;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StudentMenu } from 'views/templates/StudentMenu';
-import styled from "styled-components";
-import { Title } from "views/atoms/Text";
+import styled from 'styled-components';
+import { Title } from 'views/atoms/Text';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,63 +9,63 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-import TitleProgressBackground from "views/assets/title-games-background.png";
-import ProgressMap from "views/assets/student/progress-map.png";
-import ProgressPath01 from "views/assets/student/progress-path-01.png";
-import ProgressPath02 from "views/assets/student/progress-path-02.png";
-import ProgressPath03 from "views/assets/student/progress-path-03.png";
-import ProgressPath04 from "views/assets/student/progress-path-04.png";
-import ProgressPath05 from "views/assets/student/progress-path-05.png";
-import ProgressPath06 from "views/assets/student/progress-path-06.png";
-import ProgressPath07 from "views/assets/student/progress-path-07.png";
-import ProgressPath08 from "views/assets/student/progress-path-08.png";
-import ProgressPath09 from "views/assets/student/progress-path-09.png";
-import ProgressPath10 from "views/assets/student/progress-path-10.png";
-import ProgressPath11 from "views/assets/student/progress-path-11.png";
-import ProgressPath12 from "views/assets/student/progress-path-12.png";
-import ProgressPath13 from "views/assets/student/progress-path-13.png";
-import ProgressPath14 from "views/assets/student/progress-path-14.png";
-import ProgressPath15 from "views/assets/student/progress-path-15.png";
-import ProgressPath16 from "views/assets/student/progress-path-16.png";
-import ProgressPath17 from "views/assets/student/progress-path-17.png";
-import ProgressPath18 from "views/assets/student/progress-path-18.png";
-import ProgressPath19 from "views/assets/student/progress-path-19.png";
-import ProgressPath20 from "views/assets/student/progress-path-20.png";
-import ProgressPath21 from "views/assets/student/progress-path-21.png";
-import ProgressPath22 from "views/assets/student/progress-path-22.png";
-import ProgressPath23 from "views/assets/student/progress-path-23.png";
-import ProgressPath24 from "views/assets/student/progress-path-24.png";
-import ProgressPath25 from "views/assets/student/progress-path-25.png";
-import ProgressPath26 from "views/assets/student/progress-path-26.png";
-import ProgressPath27 from "views/assets/student/progress-path-27.png";
-import ProgressPath28 from "views/assets/student/progress-path-28.png";
-import ProgressPath29 from "views/assets/student/progress-path-29.png";
-import ProgressPath30 from "views/assets/student/progress-path-30.png";
-import ProgressPath31 from "views/assets/student/progress-path-31.png";
-import ProgressPath32 from "views/assets/student/progress-path-32.png";
-import ProgressPath33 from "views/assets/student/progress-path-33.png";
-import ProgressPath34 from "views/assets/student/progress-path-34.png";
-import ProgressPath35 from "views/assets/student/progress-path-35.png";
-import ProgressPath36 from "views/assets/student/progress-path-36.png";
-import ProgressPath37 from "views/assets/student/progress-path-37.png";
-import ProgressPath38 from "views/assets/student/progress-path-38.png";
-import ProgressPath39 from "views/assets/student/progress-path-39.png";
-import ProgressPath40 from "views/assets/student/progress-path-40.png";
-import ProgressPath41 from "views/assets/student/progress-path-41.png";
-import ProgressPath42 from "views/assets/student/progress-path-42.png";
+import TitleProgressBackground from 'views/assets/title-games-background.png';
+import ProgressMap from 'views/assets/student/progress-map.png';
+import ProgressPath01 from 'views/assets/student/progress-path-01.png';
+import ProgressPath02 from 'views/assets/student/progress-path-02.png';
+import ProgressPath03 from 'views/assets/student/progress-path-03.png';
+import ProgressPath04 from 'views/assets/student/progress-path-04.png';
+import ProgressPath05 from 'views/assets/student/progress-path-05.png';
+import ProgressPath06 from 'views/assets/student/progress-path-06.png';
+import ProgressPath07 from 'views/assets/student/progress-path-07.png';
+import ProgressPath08 from 'views/assets/student/progress-path-08.png';
+import ProgressPath09 from 'views/assets/student/progress-path-09.png';
+import ProgressPath10 from 'views/assets/student/progress-path-10.png';
+import ProgressPath11 from 'views/assets/student/progress-path-11.png';
+import ProgressPath12 from 'views/assets/student/progress-path-12.png';
+import ProgressPath13 from 'views/assets/student/progress-path-13.png';
+import ProgressPath14 from 'views/assets/student/progress-path-14.png';
+import ProgressPath15 from 'views/assets/student/progress-path-15.png';
+import ProgressPath16 from 'views/assets/student/progress-path-16.png';
+import ProgressPath17 from 'views/assets/student/progress-path-17.png';
+import ProgressPath18 from 'views/assets/student/progress-path-18.png';
+import ProgressPath19 from 'views/assets/student/progress-path-19.png';
+import ProgressPath20 from 'views/assets/student/progress-path-20.png';
+import ProgressPath21 from 'views/assets/student/progress-path-21.png';
+import ProgressPath22 from 'views/assets/student/progress-path-22.png';
+import ProgressPath23 from 'views/assets/student/progress-path-23.png';
+import ProgressPath24 from 'views/assets/student/progress-path-24.png';
+import ProgressPath25 from 'views/assets/student/progress-path-25.png';
+import ProgressPath26 from 'views/assets/student/progress-path-26.png';
+import ProgressPath27 from 'views/assets/student/progress-path-27.png';
+import ProgressPath28 from 'views/assets/student/progress-path-28.png';
+import ProgressPath29 from 'views/assets/student/progress-path-29.png';
+import ProgressPath30 from 'views/assets/student/progress-path-30.png';
+import ProgressPath31 from 'views/assets/student/progress-path-31.png';
+import ProgressPath32 from 'views/assets/student/progress-path-32.png';
+import ProgressPath33 from 'views/assets/student/progress-path-33.png';
+import ProgressPath34 from 'views/assets/student/progress-path-34.png';
+import ProgressPath35 from 'views/assets/student/progress-path-35.png';
+import ProgressPath36 from 'views/assets/student/progress-path-36.png';
+import ProgressPath37 from 'views/assets/student/progress-path-37.png';
+import ProgressPath38 from 'views/assets/student/progress-path-38.png';
+import ProgressPath39 from 'views/assets/student/progress-path-39.png';
+import ProgressPath40 from 'views/assets/student/progress-path-40.png';
+import ProgressPath41 from 'views/assets/student/progress-path-41.png';
+import ProgressPath42 from 'views/assets/student/progress-path-42.png';
 import MarkTableSubject from 'views/molecules/Table/MarkTableSubject';
 
 export const StudentProgress = () => {
     const grades = [
-        "1st Grade",
-        "2st Grade",
-        "3st Grade",
-        "4st Grade",
+        '1st Grade',
+        '2st Grade',
+        '3st Grade',
+        '4st Grade',
     ]
     const subjects = [
-        "Math",
-        "Computer",
-        "Psychology",
+        'Math',
+        'Computer',
+        'Psychology',
     ]
     const [grade, setGrade] = useState<string>('');
     const [subject, setSubject] = useState<string>('');
@@ -251,77 +251,77 @@ export const StudentProgress = () => {
             left: 8,
             top: 14,
             angle: 108,
-            text: "Conteo"
+            text: 'Conteo'
         },
         {
             left: 0,
             top: 31,
             angle: 71,
-            text: "Geometría"
+            text: 'Geometría'
         },
         {
             left: 3,
             top: 37,
             angle: 48,
-            text: "Sentido Numérico"
+            text: 'Sentido Numérico'
         },
         {
             left: 24,
             top: 29,
             angle: 14,
-            text: "Medición"
+            text: 'Medición'
         },
         {
             left: 1,
             top: 13,
             angle: 349,
-            text: "Suma de números enteros"
+            text: 'Suma de números enteros'
         },
         {
             left: 16,
             top: 38,
             angle: 311,
-            text: "Dinero"
+            text: 'Dinero'
         },
         {
             left: 4,
             top: 12,
             angle: 328,
-            text: "Resta de números enteros"
+            text: 'Resta de números enteros'
         },
         {
             left: 0,
             top: 29,
             angle: 10,
-            text: "Multiplicación de números enteros"
+            text: 'Multiplicación de números enteros'
         },
     ]
     return <StudentMenu>
         <Container>
             <div style={{
-                width: "500px",
-                height: "80px",
-                position: "relative",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
+                width: '500px',
+                height: '80px',
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
             }}>
                 <img style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
                     zIndex: 10,
                 }} src={TitleProgressBackground} alt="TitleProgressBackground" />
                 <Title style={{
                     zIndex: 20,
-                    color: "black",
+                    color: 'black',
                 }}>Treasure Track</Title>
             </div>
             <div style={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-                paddingTop: "1rem"
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                paddingTop: '1rem'
             }}>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
@@ -360,19 +360,19 @@ export const StudentProgress = () => {
                 position: 'relative'
             }}>
                 <img style={{
-                    width: "100%"
+                    width: '100%'
                 }} src={ProgressMap} alt="ProgressMap" />
                 { paths.map((path, id) => <div key={id} style={{
-                    position: "absolute",
+                    position: 'absolute',
                     left: `${path.left}%`,
                     top: `${path.top}%`,
                 }}>
                     { subSubjects.length > id ? <span style={{
-                        position: "absolute",
+                        position: 'absolute',
                         transform: `rotate(${subSubjects[id].angle}deg)`,
                         left: `${subSubjects[id].left}px`,
                         top: `${subSubjects[id].top}px`
-                    }}>{subSubjects[id].text}</span> : "" }
+                    }}>{subSubjects[id].text}</span> : '' }
                     <img width={`${Math.min(1024, window.innerWidth) / 1366 * 100}%`} height={`${Math.min(1024, window.innerWidth) / 1366 * 100}%`} src={path.imgSrc} alt={id.toString()} />
                 </div>) }
             </div>

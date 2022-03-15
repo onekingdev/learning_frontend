@@ -152,6 +152,7 @@ const AnswersContainer = styled.div`
     grid-gap: 10px;
   }
 `;
+
 const ImageAssetContainer = styled.div<{
   imageLength?: number;
 }>`

@@ -38,19 +38,20 @@ export const TopMenu: FC<TopMenuProps> = ({
 
   const [navOp, setNavOp] = useState(true)
   const changeNavBarOpacity = () => {
-    if(window.scrollY > 60) {
-      setNavOp(false)
-    } else setNavOp(true)
+    const posY = window.scrollY
+    if(posY < 60) {
+      setNavOp(true)
+    } else setNavOp(false)
   }
   useEffect(() => {
     changeNavBarOpacity()
     window.addEventListener('scroll', changeNavBarOpacity)
-  })
+  },[])
 
   const history = useHistory();
   return (
     <>
-      <TopMenuStyles style={navOp ? {background: '#FFFFFF00'}:{opacity: '#FFFFFF'}}>
+      <TopMenuStyles style={navOp ? {background: '#FFFFFF00'}:{background: '#FFFFFF', boxShadow:'gray 0px 0px 6px 0px'}}>
         <Sidebar />
         <Icon
           image={home}
@@ -79,6 +80,7 @@ const TopMenuStyles = styled.div`
   display: none;
   @media screen and (min-width: ${ScreenSize.phone}) {
     position: fixed;
+    transition-duration: 1s;
     background: white;
     top: 0;
     z-index: 200;

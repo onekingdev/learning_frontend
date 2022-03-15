@@ -21,3 +21,5 @@ export const LevelUp = styled.h5<LevelUpProps>`
     letter-spacing: 0.75px;
   }
 `;
+
+

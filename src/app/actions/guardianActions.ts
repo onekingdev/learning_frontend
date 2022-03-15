@@ -7,9 +7,9 @@ import mutationFetch from '../../api/mutations/get';
 import { CREATE_GUARDIAN, CREATE_ORDER } from '../../api/mutations/guardians';
 import * as TYPES from '../../app/types'
 
-export const createGuardian = async(email: string, userName: string, password: string, dispatch: any) => {
+export const createGuardian = async(email: string, userName: string, password: string, couponCode: string, dispatch: any) => {
     const res: any = await mutationFetch(
-        CREATE_GUARDIAN(email, userName, password)
+        CREATE_GUARDIAN(email, userName, password, couponCode)
     ).catch(() => ({success: 'false'}));
 
     if (res.success === false) {
@@ -33,6 +33,6 @@ export const createGuardian = async(email: string, userName: string, password: s
         payload: {...user, token: token, refreshToken: refreshToken},
     });
 
-    return {success: true, msg: "Success", data: result.data}
+    return {success: true, msg: 'Success', data: result.data}
 }
 
