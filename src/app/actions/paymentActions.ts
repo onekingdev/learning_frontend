@@ -5,7 +5,7 @@ import { GAMES_QUERY, GAMES_BY_CATEGORY_NAME_QUERY, GAMES_CATEGORY_QUERY } from 
 import { PLAN_QUERY } from '../../api/queries/payments'
 import queryFetch from '../../api/queries/get';
 import { CREATE_GUARDIAN,  } from '../../api/mutations/guardians';
-import { CREATE_ORDER, CONFIRM_PAYMENT_ORDER } from '../../api/mutations/payments';
+import { CREATE_ORDER, CONFIRM_PAYMENT_ORDER, CREATE_ORDER_WITH_OUT_PAY } from '../../api/mutations/payments';
 
 import mutationFetch from '../../api/mutations/get';
 import * as TYPES from '../../app/types'
@@ -53,6 +53,51 @@ export const createOrder = async(
     if(status !== 'success')
         return {success: false, msg: "Failed", data: result.data.createOrder}
     return {success: true, msg: "Success", data: result.data.createOrder}
+}
+
+export const createOrderWithOutPay = async(
+    cardFirstName: string,
+    cardLastName: string,
+    address1: string,
+    address2: string,
+    city: string,
+    state: string,
+    postCode: string,
+    country: string,
+    phone: string,
+    guardianId: number,
+    orderDetailInput: {},
+    token: string,
+    dispatch: any
+) => {
+    const res: any = await mutationFetch(
+        CREATE_ORDER_WITH_OUT_PAY(cardFirstName, cardLastName, address1, address2, city, state, postCode, country, phone, guardianId, orderDetailInput),
+        token
+    ).catch(() => ({success: false}));
+
+    if (res.success === false) {
+        return {success: false, msg: 'Network Error!'};
+    }
+
+    const result: any = await res.json();
+
+    if (result.errors) {
+        return {success: false, msg: result.errors[0].message};
+    }
+    console.log(result.data);
+    const { guardian, order, status } = result.data.createOrderWithOutPay;
+    console.log(guardian);
+    dispatch({
+        type: TYPES.GUARDIAN_SET_DATA,
+        payload: guardian,
+    });
+    // dispatch({
+    //     type: TYPES.GUARDIAN_SET_GUEARDIAN_STUDENT_PLAN,
+    //     payload: order.orderdetailSet.guardianstudentplanSet || []
+    // });
+    if(status !== 'success')
+        return {success: false, msg: "Failed", data: result.data.createOrderWithOutPay}
+    return {success: true, msg: "Success", data: result.data.createOrderWithOutPay}
 }
 
 export const confirmPaymentOrder = async(
