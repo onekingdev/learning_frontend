@@ -11,6 +11,7 @@ import ReportCheckIcon from 'views/assets/parent/report-check.png';
 import ReportCoinIcon from 'views/assets/parent/report-coin.png';
 import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
+import { useEffect, useState } from 'react';
 
 const ChartHeaderContrainer = styled.div`
     display: flex;
@@ -56,21 +57,29 @@ const ChartTitle = styled.span`
     }
 `;
 
+interface IChartInfo {
+    month?: string,
+    population?: number
+}
+
 export const BarChart = () => {
-    const chartData = [
-        { month: '1', population: 750 },
-        { month: '2', population: 200 },
-        { month: '3', population: 1700 },
-        { month: '4', population: 300 },
-        { month: '5', population: 100 },
-        { month: '6', population: 800 },
-        { month: '7', population: 100 },
-        { month: '8', population: 2900 },
-        { month: '9', population: 1600 },
-        { month: '10', population: 800 },
-        { month: '11', population: 600 },
-        { month: '12', population: 1500 },
-    ];
+    const [chartData, setChartData] = useState<IChartInfo[]>([]);
+    useEffect(() => {
+        setChartData([
+            { month: '1', population: 750 },
+            { month: '2', population: 200 },
+            { month: '3', population: 1700 },
+            { month: '4', population: 300 },
+            { month: '5', population: 100 },
+            { month: '6', population: 800 },
+            { month: '7', population: 100 },
+            { month: '8', population: 2900 },
+            { month: '9', population: 1600 },
+            { month: '10', population: 800 },
+            { month: '11', population: 600 },
+            { month: '12', population: 1500 },
+        ])
+    }, []);
     return (
         <div>
             <ChartHeaderContrainer>
@@ -100,11 +109,11 @@ export const BarChart = () => {
                 }} src={ReportChartBg} alt="ReportChartBg" />
                 </div>
                 <Chart
-                    height={window.innerHeight - 450}
+                    height={450}
                     data={chartData}
                 >
                     <ArgumentAxis />
-                    <ValueAxis tickSize={500} >
+                    <ValueAxis >
                     </ValueAxis>
                     <BarSeries
                         valueField="population"

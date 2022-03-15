@@ -161,12 +161,12 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/parent/report">
             <Report />
           </PrivateRoute>
-          <PrivateRoute
+          <Route
             loading={true}
             path="/parent/reporting"
           >
             <ParentReport />
-          </PrivateRoute>
+          </Route>
           <PrivateRoute loading={true} path="/parent/payment">
             <Payment />
           </PrivateRoute>

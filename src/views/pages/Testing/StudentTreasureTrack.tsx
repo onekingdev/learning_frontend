@@ -41,6 +41,8 @@ import FaceGirl11 from 'views/assets/avatars/pieces/faces/girl-11.png';
 import Hair from 'views/assets/avatars/pieces/hairs/hair.png';
 import Pant from 'views/assets/avatars/pieces/pants/black.png';
 import TShirt from 'views/assets/avatars/pieces/shirts/tshirt.png';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 export const StudentTreasureTrack: FC = () => {
     const loadingContext = useContext(LoadingContext);
@@ -94,6 +96,17 @@ export const StudentTreasureTrack: FC = () => {
         '414 COINS EARNED',
         '337 COINS EARNED',
     ]);
+
+    const [menuTitle, setMenuTitle] = useState<string>("Socrates");
+    const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: any) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = (str: string) => {
+        setAnchorEl(null);
+        setMenuTitle(str);
+    };
     return (<StudentMenu>
         <Container>
             <div id="treasure-map" style={{
@@ -187,12 +200,32 @@ export const StudentTreasureTrack: FC = () => {
                                 Honor Roll
                                 </Typography>
                                 <Typography variant="h5" color="text.primary" gutterBottom>
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center'
-                                    }}>
-                                    SOCRATES
-                                    <ArrowDropDownIcon />
+                                    <div>
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center'
+                                        }}
+                                            aria-controls={open ? 'basic-menu' : undefined}
+                                            aria-haspopup="true"
+                                            aria-expanded={open ? 'true' : undefined}
+                                            onClick={handleClick}
+                                        >
+                                            {menuTitle}
+                                            <ArrowDropDownIcon />
+                                        </div>
+                                        <Menu
+                                            id="basic-menu"
+                                            anchorEl={anchorEl}
+                                            open={open}
+                                            onClose={() => handleClose(menuTitle)}
+                                            MenuListProps={{
+                                            'aria-labelledby': 'basic-button',
+                                            }}
+                                        >
+                                            <MenuItem onClick={() => handleClose("Socrates")}>Socrates</MenuItem>
+                                            <MenuItem onClick={() => handleClose("Classroom")}>Classroom</MenuItem>
+                                            <MenuItem onClick={() => handleClose("School")}>School</MenuItem>
+                                        </Menu>
                                     </div>
                                 </Typography>
                                 <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
