@@ -96,12 +96,3 @@ export const ORDER = `
   }
 `
 
-export const COUPON_COODE = `
-  id
-  identifier
-  code
-  percentage
-  trialDay
-  expiredAt
-  stripeCouponId
-`

@@ -18,6 +18,7 @@ import { MembershipDetail } from 'views/organisms/Setting/Details';
 
 import { CssBaseline } from '@mui/material';
 import { LoadingContext } from 'react-router-loading';
+import { TypoTitle } from 'views/atoms/Text';
 
 export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -29,7 +30,7 @@ export const Settings: FC = () => {
     <ParentPgContainer onlyLogoImgNav={false}>
       <SettingContainer>
         <TitleContainer>
-          <Title>{'Settings'}</Title>
+          <Title><TypoTitle>Settings</TypoTitle></Title>
         </TitleContainer>
         <CssBaseline />
         <Grid container>

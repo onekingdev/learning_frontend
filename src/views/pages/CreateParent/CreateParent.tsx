@@ -52,7 +52,7 @@ const CreateParent: FC = () => {
   });
   const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(false);
-  const [couponCode, setCouponCode] = useState('');
+  const [specialCode, setSpecialCode] = useState('');
 
   function validateEmail (email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -66,7 +66,7 @@ const CreateParent: FC = () => {
     if (!formValidation()) return;
 
     setLoading(true);
-    const result: any = await createGuardian(email, userName, password,couponCode, dispatch)
+    const result: any = await createGuardian(email, userName, password, dispatch)
     setLoading(false);
 
     if(!result.success) {
@@ -166,11 +166,11 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="COUPON CODE"
+                  label="SPECIAL CODE"
                   onChange={e => {
-                    setCouponCode(e.target.value);
+                    setSpecialCode(e.target.value);
                   }}
-                  value={couponCode}
+                  value={specialCode}
                   type="special code"
                 />
               </Grid>

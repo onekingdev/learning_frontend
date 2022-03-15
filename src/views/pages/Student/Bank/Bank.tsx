@@ -36,6 +36,7 @@ export const Bank: FC = () => {
             <Grid container item xs={12} md={6}
             sx={{
               '&.MuiGrid-root': {
+                justifyContent: 'center',
                 alignContent: 'start',
                 padding: '40px',
                 '@media screen and (max-width: 720px)' : { padding: '1vw'}
@@ -44,7 +45,7 @@ export const Bank: FC = () => {
               <GridItem item md={12} xs={4} align='center'>
                 <Img src={Cartera} />
               </GridItem>
-              <GridItem item md={8} xs={8}>
+              <GridItem item md={8} xs={8} align='end'>
                 <AccountBalance balance={student.bankWallet.balance} />
               </GridItem>
               <GridItem item md={12} xs={12} align='center'>

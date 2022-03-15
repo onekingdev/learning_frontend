@@ -14,7 +14,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { createOrder, confirmPaymentOrder, createOrderWithOutPay } from 'app/actions/paymentActions'
+import { createOrder, confirmPaymentOrder } from 'app/actions/paymentActions'
 import {
     useStripe,
     useElements,
@@ -187,58 +187,50 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     }
 
     orderDetailInputs =  arrObjToString(orderDetailInputs)
-    let result: any;
-    if(isSpecialCode) {
-        result = await createOrderWithOutPay(
-            data.firstName,
-            data.lastName,
-            "add 1",
-            "add 2",
-            "city",
-            "state",
-            "postcode",
-            "country",
-            "phone",
-            guardian.id,
-            orderDetailInputs,
-            user.token,
-            dispatch
-        )
-        console.log("this is result, ", result)
-        console.log(user)
-        result.data.email = user.email;
-    }
-    else {
-        result = await createOrder(
-            data.cvc,
-            data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
-            data.cardExpYear,
-            data.firstName,
-            data.lastName,
-            data.cardNumber,
-            data.couponCode,
-            guardian.id,
-            orderDetailInputs,
-            "Card",
-            "https://",
-            user.token,
-            dispatch
-        )
-
-        // // /*------------------------ send request to backend to create payment -E-----------------------------*/
-        if(result.success) {
-            result.data.email = user.email;
-            const result_confirm = await confirmPaymentOrder(
-                result.data.order.id,
+    const result = isSpecialCode ?
+            await createOrder(
+                data.cvc,
+                data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
+                data.cardExpYear,
+                data.firstName,
+                data.lastName,
+                data.cardNumber,
+                data.couponCode,
+                guardian.id,
+                orderDetailInputs,
+                "Card",
+                "https://",
+                user.token,
+                dispatch
+            ) :
+            await createOrder(
+                data.cvc,
+                data.cardExpMonth[0] === '0' ? data.cardExpMonth[1] : data.cardExpMonth,
+                data.cardExpYear,
+                data.firstName,
+                data.lastName,
+                data.cardNumber,
+                data.couponCode,
+                guardian.id,
+                orderDetailInputs,
+                "Card",
+                "https://",
                 user.token,
                 dispatch
             )
-            result.success = result_confirm.success;
-            result.data.order = result_confirm.data.order;
-        }
+
+    console.log("result is",result)
+    // // /*------------------------ send request to backend to create payment -E-----------------------------*/
+    if(result.success) {
+        result.data.email = user.email;
+        const result_confirm = await confirmPaymentOrder(
+            result.data.order.id,
+            user.token,
+            dispatch
+        )
+        result.success = result_confirm.success;
+        result.data.order = result_confirm.data.order;
     }
-
-
     return result;
 
   }
