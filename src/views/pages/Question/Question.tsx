@@ -244,7 +244,7 @@ export const Question: FC = () => {
         let correctCount = 0;
         let wrongCount = 0;
         for (const data of answerResult) {
-          if (data) correctCount++;
+          if (data.isCorrect) correctCount++;
           else wrongCount++;
         }
         const finishBlockResult = await finishBlock(
@@ -284,6 +284,7 @@ export const Question: FC = () => {
               currentQuestion={questionCounter + 1}
               topic={blockPresentation?.block?.topicGrade?.topic?.name}
               totalQuestions={blockPresentation.block.questions.length}
+              questions={blockPresentation?.block?.questions}
               answerResult={answerResult}
               combocount={state.earning.energyCharge}
             />

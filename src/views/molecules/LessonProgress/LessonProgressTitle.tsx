@@ -9,6 +9,7 @@ type LessonProgressTitleProps = {
   currentQuestion: number;
   totalQuestions: number;
   finished?: boolean;
+  questions: any;
 };
 
 export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
@@ -16,6 +17,7 @@ export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
   currentQuestion,
   totalQuestions,
   finished,
+  questions,
 }) => {
   const questionText = finished
     ? 'Good job!'
@@ -28,6 +30,8 @@ export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
       <TriangleRight></TriangleRight>
       <LessonProgressQuestion>
         <LevelUp>{questionText}</LevelUp>
+        {currentQuestion > 0 && questions.length > 0 &&
+        <QuestionIdContainer>No.{questions[currentQuestion - 1]?.id}</QuestionIdContainer>}
       </LessonProgressQuestion>
     </LessonProgressTitleWrapper>
   );
@@ -66,6 +70,12 @@ const LessonProgressQuestion = styled.div`
   @media (max-width: ${ScreenSize.phone}) {
     padding-right: 14px;
   }
+`;
+
+export const QuestionIdContainer = styled.div`
+  color: white;
+  display: flex;
+  justify-self: center;
 `;
 
 const LessonProgressTitleWrapper = styled.div`
