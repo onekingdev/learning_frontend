@@ -497,6 +497,7 @@ const NewKids: FC = () => {
                     value="Previous Kid"
                     bgColor={ButtonColor.create}
                     onClick={handlePrev}
+                    disabled={true}
                   />
                 )}
               </Grid>
@@ -509,6 +510,7 @@ const NewKids: FC = () => {
                       : ButtonColor.create
                   }
                   onClick={handleNext}
+                  disabled={availablePackages.length < 1 ? true : false}
                   align="right"
                   loading={loading}
                 />
