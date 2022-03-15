@@ -17,7 +17,6 @@ export const createOrder = async(
     cardFirstName: string,
     cardLastName: string,
     cardNumber: string,
-    discountCode: string,
     guardianId: number,
     orderDetailInput: {},
     paymentMethod: string,
@@ -26,7 +25,7 @@ export const createOrder = async(
     dispatch: any
 ) => {
     const res: any = await mutationFetch(
-        CREATE_ORDER(cardCvc, cardExpMonth, cardExpYear, cardFirstName, cardLastName, cardNumber, discountCode, guardianId, orderDetailInput, paymentMethod, returnUrl),
+        CREATE_ORDER(cardCvc, cardExpMonth, cardExpYear, cardFirstName, cardLastName, cardNumber, guardianId, orderDetailInput, paymentMethod, returnUrl),
         token
     ).catch(() => ({success: false}));
 
@@ -51,8 +50,8 @@ export const createOrder = async(
     //     payload: order.orderdetailSet.guardianstudentplanSet || []
     // });
     if(status !== 'success')
-        return {success: false, msg: 'Failed', data: result.data.createOrder}
-    return {success: true, msg: 'Success', data: result.data.createOrder}
+        return {success: false, msg: "Failed", data: result.data.createOrder}
+    return {success: true, msg: "Success", data: result.data.createOrder}
 }
 
 export const createOrderWithOutPay = async(
@@ -96,8 +95,8 @@ export const createOrderWithOutPay = async(
     //     payload: order.orderdetailSet.guardianstudentplanSet || []
     // });
     if(status !== 'success')
-        return {success: false, msg: 'Failed', data: result.data.createOrderWithOutPay}
-    return {success: true, msg: 'Success', data: result.data.createOrderWithOutPay}
+        return {success: false, msg: "Failed", data: result.data.createOrderWithOutPay}
+    return {success: true, msg: "Success", data: result.data.createOrderWithOutPay}
 }
 
 export const confirmPaymentOrder = async(
@@ -123,7 +122,7 @@ export const confirmPaymentOrder = async(
     const { guardian, order, status } = result.data.confirmPaymentOrder;
 
     if(status !== 'success')
-        return {success: false, msg: 'Cofirmation Failed'}
+        return {success: false, msg: "Cofirmation Failed"}
 
     dispatch({
         type: TYPES.GUARDIAN_SET_DATA,
@@ -131,14 +130,14 @@ export const confirmPaymentOrder = async(
     });
 
     if(status === 'success')
-        return {success: true, msg: 'Success', data: result.data.confirmPaymentOrder}
+        return {success: true, msg: "Success", data: result.data.confirmPaymentOrder}
     else
-        return {success: false, msg: 'Failed'}
+        return {success: false, msg: "Failed"}
 }
 
 export const getPlans = async(token: string) => {
     const res: any = await queryFetch(
-        'plans',
+        "plans",
         PLAN_QUERY,
         token
     ).catch(() => ({success: 'false'}));
@@ -164,6 +163,6 @@ export const getPlans = async(token: string) => {
     //     payload: {...user, token: token, refreshToken: refreshToken},
     // });
 
-    return {success: true, msg: 'Success', data: plans}
+    return {success: true, msg: "Success", data: plans}
 }
 

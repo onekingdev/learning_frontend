@@ -76,7 +76,7 @@ const KidsList: FC = () => {
     console.log('Save button clicked!');
   };
   const Kid = (props: any) => {
-    console.log('props is', props)
+    console.log("props is", props)
     const userName = props.user.username;
     const parentName = user.username
     const fullName = props.fullName;
@@ -144,7 +144,7 @@ const KidsList: FC = () => {
                   membership={new Date(props?.guardianstudentplanSet[0]?.expiredAt)}
                 />
               )}
-              {console.log('expire at', props?.guardianstudentplanSet[0]?.expiredAt, new Date(props?.guardianstudentplanSet[0]?.expiredAt))}
+              {console.log("expire at", props?.guardianstudentplanSet[0]?.expiredAt, new Date(props?.guardianstudentplanSet[0]?.expiredAt))}
               <GridContainer container>
                 <GridItem item md={6} xs={12}>
                   <Button

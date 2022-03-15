@@ -119,7 +119,7 @@ const NewKids: FC = () => {
   };
 
   const handlePrev = () => {};
-  console.log('child num is ', childNum )
+  console.log("child num is ", childNum )
 
   const handleNext = async () => {
     if (!formValidation()) return;
@@ -178,8 +178,8 @@ const NewKids: FC = () => {
       user.token,
       dispatch
     );
-    console.log('result is ', result )
-    console.log('-----------------------------------------')
+    console.log("result is ", result )
+    console.log("-----------------------------------------")
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return false;
@@ -275,7 +275,7 @@ const NewKids: FC = () => {
                         : classes.soleInput
                     } err-border`}
                     onChange={e => {
-                      console.log('target', e.target.value, e.target.value.length)
+                      console.log("target", e.target.value, e.target.value.length)
                       setCurrentPackage(e.target.value);
                       setPaths([]);
                       if(e.target.value === 'Gold') setPaths(currentPackage?.plan?.subjects)
@@ -315,7 +315,7 @@ const NewKids: FC = () => {
                     {currentPackage?.plan?.subjects.map((subject:any, index:number) => (
                         <Subject key={index}>
                           {currentPackage?.plan?.name === 'Gold' && (
-                            <SubjectIcon src={subjectIcons.Gold[subject?.name.split(' ')[0].toUpperCase()]} />
+                            <SubjectIcon src={subjectIcons.Gold[subject?.name.split(" ")[0].toUpperCase()]} />
                           )}
                           {currentPackage?.plan?.name === 'Combo' && (
                             <>
@@ -332,7 +332,7 @@ const NewKids: FC = () => {
                                 }
                                 checked={paths.indexOf(subject) !== -1}
                               />
-                              <SubjectIcon src={subjectIcons.Combo[subject?.name.split(' ')[0].toUpperCase()]} />
+                              <SubjectIcon src={subjectIcons.Combo[subject?.name.split(" ")[0].toUpperCase()]} />
                             </>
                           )}
                           {currentPackage?.plan?.name === 'Sole' && (
@@ -349,7 +349,7 @@ const NewKids: FC = () => {
                                   paddingRight: '9px',
                                 }}
                               />
-                              <SubjectIcon src={subjectIcons.Sole[subject?.name.split(' ')[0].toUpperCase()]} />
+                              <SubjectIcon src={subjectIcons.Sole[subject?.name.split(" ")[0].toUpperCase()]} />
                             </>
                           )}
                           <SubjectTitle>{subject.name}</SubjectTitle>

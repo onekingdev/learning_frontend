@@ -4,14 +4,13 @@ import {
   ArgumentAxis,
   ValueAxis,
 } from '@devexpress/dx-react-chart-material-ui';
-import CrogoGirlsFace from 'views/assets/croco-girl.svg';
-import TitleKidBackground from 'views/assets/title-kids-background.png';
-import ReportChartBg from 'views/assets/parent/report-chart-bg.png';
-import ReportCheckIcon from 'views/assets/parent/report-check.png';
-import ReportCoinIcon from 'views/assets/parent/report-coin.png';
+import CrogoGirlsFace from "views/assets/croco-girl.svg";
+import TitleKidBackground from "views/assets/title-kids-background.png";
+import ReportChartBg from "views/assets/parent/report-chart-bg.png";
+import ReportCheckIcon from "views/assets/parent/report-check.png";
+import ReportCoinIcon from "views/assets/parent/report-coin.png";
 import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
-import { useEffect, useState } from 'react';
 
 const ChartHeaderContrainer = styled.div`
     display: flex;
@@ -57,29 +56,21 @@ const ChartTitle = styled.span`
     }
 `;
 
-interface IChartInfo {
-    month?: string,
-    population?: number
-}
-
 export const BarChart = () => {
-    const [chartData, setChartData] = useState<IChartInfo[]>([]);
-    useEffect(() => {
-        setChartData([
-            { month: '1', population: 750 },
-            { month: '2', population: 200 },
-            { month: '3', population: 1700 },
-            { month: '4', population: 300 },
-            { month: '5', population: 100 },
-            { month: '6', population: 800 },
-            { month: '7', population: 100 },
-            { month: '8', population: 2900 },
-            { month: '9', population: 1600 },
-            { month: '10', population: 800 },
-            { month: '11', population: 600 },
-            { month: '12', population: 1500 },
-        ])
-    }, []);
+    const chartData = [
+        { month: '1', population: 750 },
+        { month: '2', population: 200 },
+        { month: '3', population: 1700 },
+        { month: '4', population: 300 },
+        { month: '5', population: 100 },
+        { month: '6', population: 800 },
+        { month: '7', population: 100 },
+        { month: '8', population: 2900 },
+        { month: '9', population: 1600 },
+        { month: '10', population: 800 },
+        { month: '11', population: 600 },
+        { month: '12', population: 1500 },
+    ];
     return (
         <div>
             <ChartHeaderContrainer>
@@ -92,28 +83,28 @@ export const BarChart = () => {
                 </ChartTitleGroup>
             </ChartHeaderContrainer>
             <div style={{
-                position: 'relative'
+                position: "relative"
             }}>
                 <div style={{
                     zIndex: 0,
-                    position: 'absolute',
-                    width: '100%',
-                    paddingLeft: '3rem',
-                    paddingRight: '0.5rem',
-                    paddingBottom: '2rem',
-                    boxSizing: 'border-box',
+                    position: "absolute",
+                    width: "100%",
+                    paddingLeft: "3rem",
+                    paddingRight: "0.5rem",
+                    paddingBottom: "2rem",
+                    boxSizing: "border-box",
                     bottom: 0
                 }}>
                 <img style={{
-                    width: '100%'
+                    width: "100%"
                 }} src={ReportChartBg} alt="ReportChartBg" />
                 </div>
                 <Chart
-                    height={450}
+                    height={window.innerHeight - 450}
                     data={chartData}
                 >
                     <ArgumentAxis />
-                    <ValueAxis >
+                    <ValueAxis tickSize={500} >
                     </ValueAxis>
                     <BarSeries
                         valueField="population"
@@ -123,25 +114,25 @@ export const BarChart = () => {
                 </Chart>
             </div>
             <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '1rem',
-                marginBottom: '1rem',
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "1rem",
+                marginBottom: "1rem",
             }}>
                 <div style={{
-                    display: 'flex',
-                    alignItems: 'center'
+                    display: "flex",
+                    alignItems: "center"
                 }}>
                     <img src={ReportCheckIcon} alt="ReportCheckIcon" />
-                    <span style={{marginLeft: '0.5rem'}}>correct answers</span>
+                    <span style={{marginLeft: "0.5rem"}}>correct answers</span>
                 </div>
                 <div style={{
-                    display: 'flex',
-                    marginLeft: '3rem',
-                    alignItems: 'center'
+                    display: "flex",
+                    marginLeft: "3rem",
+                    alignItems: "center"
                 }}>
                     <img src={ReportCoinIcon} alt="ReportCoinIcon" />
-                    <span style={{marginLeft: '0.5rem'}}>coins earned</span>
+                    <span style={{marginLeft: "0.5rem"}}>coins earned</span>
                 </div>
             </div>
         </div>

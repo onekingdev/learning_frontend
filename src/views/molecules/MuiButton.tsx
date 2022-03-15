@@ -78,7 +78,7 @@ const MuiButton: FC<MuiButtonProps> = ({
             '&:disabled': {
               color: 'transparent !important',
               boxShadow: 'none !important',
-              backgroundColor: 'rgba(0, 0, 0, 0.12) !important'
+              backgroundColor: "rgba(0, 0, 0, 0.12) !important"
             }
         },
     })
