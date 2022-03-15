@@ -26,6 +26,7 @@ export const Payment: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const {enqueueSnackbar} = useSnackbar();
   const user = useSelector((state: any) => state.user);
+  const guardian = useSelector((state: any) => state.guardian);
   const [plans, setPlans] = useState<any>({
     Gold: {
       currentPrice: 0,
@@ -57,7 +58,7 @@ export const Payment: FC = () => {
       year: 0,
     },
   });
-  const [isSpecialCode, setIsSpecialCode] = useState(true)
+  const [isSpecialCode, setIsSpecialCode] = useState(false)
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [offRate, setOffRate] = useState(50);
 
@@ -128,6 +129,7 @@ export const Payment: FC = () => {
   }
 
   useEffect(() => {
+    if(parseInt(guardian.couponCode.percentage) === 100) setIsSpecialCode(true)
     setOffRate(50);
     setPlanData();
   }, []);

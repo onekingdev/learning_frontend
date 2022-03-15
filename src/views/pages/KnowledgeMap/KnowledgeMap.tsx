@@ -194,6 +194,8 @@ const Ocean = styled.div`
   @media (min-width: ${ScreenSize.desktop}) {
     min-height: unset;
     margin-top: 65px;
+    margin-left: 100px;
+    margin-right: 100px;
     padding: 2rem;
     padding-top: 3em;
     padding-bottom: 3em;

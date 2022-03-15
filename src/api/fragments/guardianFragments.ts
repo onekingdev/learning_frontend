@@ -11,7 +11,7 @@ export const GUARDIAN = `
     randomSlug
     createTimestamp
     updateTimestamp
-    name
+    firstName
     lastName
     gender
 `;

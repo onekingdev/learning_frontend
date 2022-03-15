@@ -2,12 +2,11 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import ribbon from 'views/assets/ribbon.svg';
 import { ScreenSize } from 'constants/screenSize';
-import { TypoHeader, Title } from 'views/atoms/Text';
 
 export const PageTitle: FC<{title: string}> = ({title}) => {
   return (
     <CardTitle>
-      <TypoHeader>{title}</TypoHeader>
+      <h1>{title}</h1>
     </CardTitle>
   );
 };
