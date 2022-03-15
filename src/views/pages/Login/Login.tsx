@@ -78,7 +78,7 @@ export const LogIn: FC = () => {
           </DesktopWelcome>
           <Form
             login={dictionary[language].login}
-            email={dictionary[language].email}
+            email={dictionary[language].userName}
             password={dictionary[language].password}
             forgot={dictionary[language].forgot}
             wrongPasswordMessage={dictionary[language].error}

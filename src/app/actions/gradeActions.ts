@@ -20,5 +20,5 @@ export const getGrades = async(token: string, dispatch: any) => {
     const grades = result.data.grades
     dispatch({ type: TYPES.GRADE_SET_DATA, payload: grades })
 
-    return {success: true, msg: "Success", data: result.data}
+    return {success: true, msg: 'Success', data: result.data}
 }

@@ -56,7 +56,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
   const handleOrder = async (event: any) => {
     setLoading(true)
     const result = await paymentFormRef?.current?.handleOrder(plans, couponCode);
-    console.log("result is ", result)
+    console.log('result is ', result)
     // test
     // dispatch({
     //     type: TYPES.GUARDIAN_SET_AVAILABLE_PLANS,

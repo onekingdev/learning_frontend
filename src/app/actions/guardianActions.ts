@@ -33,6 +33,6 @@ export const createGuardian = async(email: string, firstName:string, lastName:st
         payload: {...user, token: token, refreshToken: refreshToken},
     });
 
-    return {success: true, msg: "Success", data: result.data}
+    return {success: true, msg: 'Success', data: result.data}
 }
 

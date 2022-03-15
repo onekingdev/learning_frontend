@@ -179,7 +179,7 @@ export const createStudent = async (
   //     type: TYPES.GUARDIAN_SET_STUDENT,
   //     payload: student || []
   // });
-  return {success: true, msg: "Success", data: result.data.createOrder}
+  return {success: true, msg: 'Success', data: result.data.createOrder}
 }
 
 export const changeStudentGrade = async (
@@ -216,6 +216,6 @@ export const changeStudentGrade = async (
   //     type: TYPES.GUARDIAN_SET_STUDENT,
   //     payload: student || []
   // });
-  return {success: true, msg: "Success", data: result.data.createOrder}
+  return {success: true, msg: 'Success', data: result.data.createOrder}
 }
 

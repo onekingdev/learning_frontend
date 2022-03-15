@@ -48,7 +48,7 @@ export const TextOption:FC<TextOptionProps> = ({answer,onClick}) => {
           />
             <TextOptionStyles
               onClick={(e) => handleAnswer(e)}
-              isCorrect={answer?.isCorrect}
+              isCorrect={isAnswered && answer?.isCorrect}
               isAnswered={isAnswered}
             >
               <Answer isDark >{answer?.answerText}</Answer>

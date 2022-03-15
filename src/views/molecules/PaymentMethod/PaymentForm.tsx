@@ -182,7 +182,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         const orderDetailInput:any = {};
         orderDetailInput.planId = plan.id
         orderDetailInput.quantity = plan.childCount
-        orderDetailInput.period = plan.period === "month" ? "Monthly" : "Yearly"
+        orderDetailInput.period = plan.period === 'month' ? 'Monthly' : 'Yearly'
         orderDetailInputs.push(orderDetailInput)
     }
 
@@ -192,19 +192,19 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         result = await createOrderWithOutPay(
             data.firstName,
             data.lastName,
-            "add 1",
-            "add 2",
-            "city",
-            "state",
-            "postcode",
-            "country",
-            "phone",
+            'add 1',
+            'add 2',
+            'city',
+            'state',
+            'postcode',
+            'country',
+            'phone',
             guardian.id,
             orderDetailInputs,
             user.token,
             dispatch
         )
-        console.log("this is result, ", result)
+        console.log('this is result, ', result)
         console.log(user)
         result.data.email = user.email;
     }
@@ -218,8 +218,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
             data.cardNumber,
             guardian.id,
             orderDetailInputs,
-            "Card",
-            "https://",
+            'Card',
+            'https://',
             user.token,
             dispatch
         )
@@ -342,7 +342,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     onChange={(e: any) => {
                         handleFormChange('cardNumber',e.target.value.length < 15 ? 'Field is required' : '')
                         // handleFormChange('expiryDate',e.target.value.split("-").length <= 2 ? 'Type is wrong' : '')
-                        setData({...data, cardNumber: e.target.value.replaceAll("-", "")})
+                        setData({...data, cardNumber: e.target.value.replaceAll('-', '')})
                     } }
                     error={!!validateRst.cardNumber}
                     helperText={validateRst.cardNumber}
@@ -367,12 +367,12 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                  <TextField
                     label="Expiry Date ex: (04/25)"
                     onChange={(e: any) => {
-                        const expiryDate = e.target.value.split("/");
+                        const expiryDate = e.target.value.split('/');
                         handleFormChange('expiryDate',e.target.value.length < 5 ? 'Field is required' : expiryDate.length <= 1 ? 'Type is wrong' :  expiryDate[0] >= 13 ? 'Type is wrong' : '')
                         if(expiryDate.length <= 1 || expiryDate[0] >= 13) return
                         const cardExpMonth = expiryDate[0]
                         let cardExpYear = expiryDate[1]
-                        if(cardExpYear.length === 2) cardExpYear = "20" + cardExpYear
+                        if(cardExpYear.length === 2) cardExpYear = '20' + cardExpYear
                         setData({...data, cardExpMonth: cardExpMonth, cardExpYear: cardExpYear})
                     } }
                     error={!!validateRst.expiryDate}

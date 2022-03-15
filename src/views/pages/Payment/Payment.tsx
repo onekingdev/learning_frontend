@@ -101,7 +101,7 @@ export const Payment: FC = () => {
   const onChangePackage = (type: string, count: number, period: string) => {
     plans[type].childCount = count;
     plans[type].period = period;
-    plans[type].currentPrice = (period === "month" ? plans[type].priceMonth : plans[type].priceYear)
+    plans[type].currentPrice = (period === 'month' ? plans[type].priceMonth : plans[type].priceYear)
     setPlans({...plans})
     setShowPaymentMethod(true);
   };

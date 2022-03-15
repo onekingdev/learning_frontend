@@ -19,7 +19,7 @@ const License = (props: any) => {
           <div className="flex justify-space-between align-center">
             <Img src={socrates} />
             <div className="flex flex-col h-full justify-space-between">
-              {console.log("member ship is", props.membership,props.membership.getFullYear())}
+              {console.log('member ship is', props.membership,props.membership.getFullYear())}
               <DialogTextField
                 label="Member Since"
                 value={`${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}`}

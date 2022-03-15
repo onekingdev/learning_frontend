@@ -75,7 +75,7 @@ export const login = async (username: string, password: string, dispatch: any) =
       return {success: true, msg: 'Successfully Logined!', userType: 'student'}
     }
     else if(guardian) {
-      console.log("this is a guardian")
+      console.log('this is a guardian')
       // dispatch({ type: TYPES.PARENT_SET_DATA, payload: guardian })
       return {success: true, msg: 'Successfully Logined!', userType: 'guardian'}
     }

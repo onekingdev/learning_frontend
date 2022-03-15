@@ -32,7 +32,7 @@ const CreateParent: FC = () => {
   const language = 'en';
 
   useEffect(() => {
-    console.log("use effect")
+    console.log('use effect')
     loadingContext.done()
   }, [])
 
