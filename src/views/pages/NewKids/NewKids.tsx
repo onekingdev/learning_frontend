@@ -129,8 +129,8 @@ const NewKids: FC = () => {
     //   saveChild(childs[childIdx]);
     //   return;
     // }
+    console.log("paths is ", paths)
     setLoading(true)
-
     if(!await saveChild()) {
       setLoading(false)
       return;
@@ -277,8 +277,12 @@ const NewKids: FC = () => {
                     onChange={e => {
                       console.log('target', e.target.value, e.target.value.length)
                       setCurrentPackage(e.target.value);
-                      setPaths([]);
-                      if(e.target.value === 'Gold') setPaths(currentPackage?.plan?.subjects)
+                      console.log("target is ", e.target.value);
+                      console.log("set path like that", e.target.value?.plan?.subjects)
+                      console.log("set path like name is ",e.target.value?.plan?.name)
+
+                      if(e.target.value?.plan?.name === 'Gold') setPaths(e.target.value?.plan?.subjects)
+                      else setPaths([]);
                       handleFormChange(
                         'packageName',
                         e.target.value.length === 0 ? 'Field is required' : ''
