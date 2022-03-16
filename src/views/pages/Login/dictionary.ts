@@ -3,7 +3,6 @@ export const dictionary = Object.freeze({
     welcome: 'Welcome back!',
     instructions: 'To log in please enter your email and password',
     email: 'Email',
-    userName: 'User name',
     password: 'Password',
     error: 'Incorrect password. Try again later or reset it.',
     forgot: 'Forgot your password?',

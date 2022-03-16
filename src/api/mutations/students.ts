@@ -30,7 +30,6 @@ export const CREATE_STUDENT = (
                     user{
                         id
                         username
-                        language
                     }
                 }
             }
@@ -95,42 +94,6 @@ export const CHANGE_STUDENT_GRADE = (
             ${STUDENT}
         }
        
-	}
-`;
-
-export const CHANGE_STUDENT_PASSWORD = (
-    password: string,
-    studentId: string,
-    ) => `
-	changeStudentPassword(password: "${password}",  studentId: ${studentId}) {
-        guardian {
-            ${GUARDIAN}
-            guardianstudentSet {
-                ${GUARDIAN_STUDENT}
-                student {
-                    ${STUDENT}
-                    user{
-                        id
-                        username
-                    }
-                }
-            }
-            guardianstudentplanSet {
-                ${GUARDIAN_STUDENT_PLAN}
-            }
-            orderSet {
-                ${ORDER}
-            }
-            paymentmethodSet {
-                ${PAYMENT_METHOD}
-            }
-            paymentMethod {
-                ${PAYMENT_METHOD}
-            }
-        }
-        student {
-            ${STUDENT}
-        }
 	}
 `;
 

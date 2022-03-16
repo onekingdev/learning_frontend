@@ -78,7 +78,7 @@ export const LogIn: FC = () => {
           </DesktopWelcome>
           <Form
             login={dictionary[language].login}
-            email={dictionary[language].userName}
+            email={dictionary[language].email}
             password={dictionary[language].password}
             forgot={dictionary[language].forgot}
             wrongPasswordMessage={dictionary[language].error}
@@ -95,13 +95,12 @@ export const LogIn: FC = () => {
             loginColor={ButtonColor.login}
             loginAction={loginAction}
             loading={loading}
-            disabled={true}
           />
         </LoginWrapper>
         <Legal>
-          <ButtonText onClick={() => location.href="https://www.WithSocrates.com"}>{dictionary[language].about}</ButtonText>
-          <ButtonText onClick={() => location.href="https://www.withsocrates.com/privacy-policy/"}>{dictionary[language].privacy}</ButtonText>
-          <ButtonText onClick={() => location.href="https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en"}>{dictionary[language].children_privacy}</ButtonText>
+          <ButtonText>{dictionary[language].about}</ButtonText>
+          <ButtonText>{dictionary[language].privacy}</ButtonText>
+          <ButtonText>{dictionary[language].children_privacy}</ButtonText>
         </Legal>
       </Card>
     </Login>

@@ -19,21 +19,6 @@ import path07 from 'views/assets/student/treasure-track-path-07.png';
 import path08 from 'views/assets/student/treasure-track-path-08.png';
 import path09 from 'views/assets/student/treasure-track-path-09.png';
 import path10 from 'views/assets/student/treasure-track-path-10.png';
-import path11 from 'views/assets/student/treasure-track-path-11.png';
-import path12 from 'views/assets/student/treasure-track-path-12.png';
-import path13 from 'views/assets/student/treasure-track-path-13.png';
-import path14 from 'views/assets/student/treasure-track-path-14.png';
-import path15 from 'views/assets/student/treasure-track-path-15.png';
-import path16 from 'views/assets/student/treasure-track-path-16.png';
-import path17 from 'views/assets/student/treasure-track-path-17.png';
-import path18 from 'views/assets/student/treasure-track-path-18.png';
-import path19 from 'views/assets/student/treasure-track-path-19.png';
-import path20 from 'views/assets/student/treasure-track-path-20.png';
-import path21 from 'views/assets/student/treasure-track-path-21.png';
-import path22 from 'views/assets/student/treasure-track-path-22.png';
-import path23 from 'views/assets/student/treasure-track-path-23.png';
-import path24 from 'views/assets/student/treasure-track-path-24.png';
-import path25 from 'views/assets/student/treasure-track-path-25.png';
 import pathEnd from 'views/assets/student/treasure-track-path-end.png';
 import Card from '@mui/material/Card';
 import Paper from '@mui/material/Paper';
@@ -58,29 +43,36 @@ import Pant from 'views/assets/avatars/pieces/pants/black.png';
 import TShirt from 'views/assets/avatars/pieces/shirts/tshirt.png';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { UserRankTreasureTrack } from 'views/molecules/UserRank';
-import avatar from 'views/assets/avatars/avatar1.svg';
-import { getRanking } from 'app/firebase';
-
-const avatars = [Boy1, Boy7, Girl5, Girl9, Girl11];
-const imgPaths = [
-    path01, path02, path03, path04, path05, path06, path07, path08, path09, path10, path11, path12, path13, path14, path15, path16, path17, path18, path19, path20, path21, path22, path23, path24, path25
-]
 
 export const StudentTreasureTrack: FC = () => {
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
         loadingContext.done();
     }, []);
-    const [earnedCoin, setEarnedCoin] = useState<number>(Math.ceil(Math.random() * 1000));
+    const [earnedCoin, setEarnedCoin] = useState<number>(Math.ceil(Math.random() * 100));
     const pathComp = useMemo(() => {
         let imgPath;
-        for (let i = 0; i < 25; i ++) {
-            if (1000 / 25 * i <= earnedCoin && 1000 / 25 * (i+1) < earnedCoin) {
-                imgPath = imgPaths[i];
-            }
-        }
-        if (earnedCoin === 1000) {
+        if (0 <= earnedCoin && earnedCoin < 10) {
+            imgPath = path01;
+        } else if (10 <= earnedCoin && earnedCoin < 20) {
+            imgPath = path02;
+        } else if (20 <= earnedCoin && earnedCoin < 30) {
+            imgPath = path03;
+        } else if (30 <= earnedCoin && earnedCoin < 40) {
+            imgPath = path04;
+        } else if (40 <= earnedCoin && earnedCoin < 50) {
+            imgPath = path05;
+        } else if (50 <= earnedCoin && earnedCoin < 60) {
+            imgPath = path06;
+        } else if (60 <= earnedCoin && earnedCoin < 70) {
+            imgPath = path07;
+        } else if (70 <= earnedCoin && earnedCoin < 80) {
+            imgPath = path08;
+        } else if (80 <= earnedCoin && earnedCoin < 90) {
+            imgPath = path09;
+        } else if (90 <= earnedCoin && earnedCoin < 100) {
+            imgPath = path10;
+        } else {
             imgPath = pathEnd;
         }
         return <img style={{
@@ -89,6 +81,21 @@ export const StudentTreasureTrack: FC = () => {
             top: '76px'
         }} src={imgPath} alt="path01" />
     }, [earnedCoin]);
+
+    const [girlsName, setGirlsName] = useState<string[]>([
+        'Marie',
+        'John',
+        'YOU',
+        'Angie',
+        'Mark',
+    ]);
+    const [descriptions, setDescriptions] = useState<string[]>([
+        '570 COINS EARNED',
+        '510 COINS EARNED',
+        '500 COINS EARNED',
+        '414 COINS EARNED',
+        '337 COINS EARNED',
+    ]);
 
     const [menuTitle, setMenuTitle] = useState<string>("Socrates");
     const [anchorEl, setAnchorEl] = useState<Element | null>(null);
@@ -99,18 +106,7 @@ export const StudentTreasureTrack: FC = () => {
     const handleClose = (str: string) => {
         setAnchorEl(null);
         setMenuTitle(str);
-        setEarnedCoin(Math.ceil(Math.random() * 1000));
     };
-
-
-    const mock_ranking = ['Candy', 'Tony', 'Emily', 'Albert', 'Viri'];
-
-    const [ranking, setRanking] = useState(mock_ranking);
-    useEffect(() => {
-        getRanking(setRanking);
-    }, []);
-
-    const initialNumber = Math.ceil(Math.random()*10);
     return (<StudentMenu>
         <Container>
             <div id="treasure-map" style={{
@@ -232,11 +228,44 @@ export const StudentTreasureTrack: FC = () => {
                                         </Menu>
                                     </div>
                                 </Typography>
-                                {ranking.map((name, i) => {
-                                    return (
-                                    <UserRankTreasureTrack active={i === Math.floor(ranking.length / 2)} coinsEarned={i === Math.floor(ranking.length / 2) ? earnedCoin : Math.floor(Math.random() * 1000)} userRank={i + initialNumber} userName={name} key={name+i} userIcon={avatars[i]} />
-                                    );
-                                })}
+                                <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                                    {[Boy1, Boy7, Girl5, Girl9, Girl11].map((value, id) => {
+                                        const labelId = `checkbox-list-secondary-label-${value}`;
+                                        return (
+                                            <div
+                                                key={id}
+                                                style={{
+                                                    paddingLeft: id === 2 ? '0px' : '1rem'
+                                                }}
+                                            >
+                                                <ListItem
+                                                    selected={id === 2}
+                                                    disablePadding
+                                                >
+                                                    <ListItemButton>
+                                                        <Typography variant="inherit" color="text.secondary" gutterBottom>
+                                                        # {id + earnedCoin}
+                                                        </Typography>
+                                                        <ListItemAvatar>
+                                                            <Avatar
+                                                                sx={{ width: 60, height: 60 }}
+                                                                alt={`Avatar n°${id + 1}`}
+                                                                src={value}
+                                                                variant="circular"
+                                                            />
+                                                        </ListItemAvatar>
+                                                        <Typography variant={id === 2 ? 'h4' : 'h6'} color="text.secondary" gutterBottom>
+                                                        {girlsName[id]}
+                                                        </Typography>
+                                                        <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                                                        # {descriptions[id]}
+                                                        </Typography>
+                                                    </ListItemButton>
+                                                </ListItem>
+                                            </div>
+                                        );
+                                    })}
+                                </List>
                             </div>
                         </CardContent>
                     </Card>
