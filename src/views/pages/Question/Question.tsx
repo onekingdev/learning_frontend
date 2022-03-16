@@ -15,8 +15,6 @@ import {FinishLesson} from 'views/organisms/FinishLesson';
 import {StudentMenu} from 'views/templates/StudentMenu';
 import {LevelUpDgContent} from 'views/atoms/ParticlgBg';
 import {MultipleChoiceText} from 'views/molecules/QuestionTypes/MultipleChoiceText';
-import {MultipleChoiceSightWord} from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
-
 import {CardDialog} from 'views/molecules/StudentCard/CardDialog';
 
 import {IBlockPresentation, IQuestion} from 'app/entities/block';
@@ -78,21 +76,8 @@ export const Question: FC = () => {
             onAnswer={onAnswer}
             blockPresentation={blockPresentation}
           />
-        )
-      }, {
-        type: 'SightWord',
-        component: (
-          <MultipleChoiceSightWord
-            question={question}
-            nextQuestion={handleNextQuestion}
-            totalQuestions={totalQuestions}
-            questionCounter={questionCounter}
-            onAnswer={onAnswer}
-            blockPresentation={blockPresentation}
-          />
-        )
+        ),
       },
-
     ];
 
     const filterType = types.find((item: any) => item.type === type);
@@ -315,7 +300,7 @@ export const Question: FC = () => {
             {renderTypes(
               question,
               // blockPresentation.block.typeOf.name,
-              question.questionAudioAssets.length > 0 ? 'SightWord' : 'Text',
+              'Text',
               blockPresentation.block.questions.length,
               blockPresentation
             )}

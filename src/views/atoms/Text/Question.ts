@@ -15,8 +15,6 @@ export const Question = styled.h3<BodyProps>`
   font-style: normal;
   font-weight: 700;
   margin: 0;
-  margin-right: 10px;
-  align-self: center;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 16px;
     line-height: 20px;
