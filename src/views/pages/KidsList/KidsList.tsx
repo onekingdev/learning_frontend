@@ -32,6 +32,9 @@ import { toPng } from 'html-to-image'
 import { saveAs} from 'file-saver'
 
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+import { parseTwoDigitYear } from 'moment';
+import { changeStudentPassword } from 'app/actions/studentActions'
+
 
 interface kid {
   username: string;
@@ -80,31 +83,52 @@ const KidsList: FC = () => {
     const userName = props.user.username;
     const parentName = user.username
     const fullName = props.fullName;
+    const studentId = props.id;
     const [grade, setGrade] = useState(props.grade.grade);
+    const [newPwd, setNewPwd] = useState("");
     // Open or close dialog state
     const [openLicense, setOpenLicense] = useState(false);
-    const open = () => {
+    const [openChangePwd, setOpenChangePwd] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const openLicenseDlg = () => {
       setOpenLicense(!openLicense);
     };
-
+    const openChangePwdDlg = () => {
+      setOpenChangePwd(!openChangePwd);
+    };
     const handleDownloadBtnClicked = () => {
       // Do something ...
-      console.log(children);
+      setLoading(true)
       const licenseElm: any = document.querySelector('#license');
       console.log(licenseElm);
       toPng(licenseElm).then(function (dataUrl) {
         saveAs(dataUrl, `${userName}-license`);
+        setLoading(false)
       });
 
+      // open()
+    };
+    const handleChangePwdBtnClicked = async() => {
+      // Do something ...
+      if (newPwd.length < 1) return;
+
+      setLoading(true);
+      const result: any = await changeStudentPassword(newPwd, studentId, user.token, dispatch)
+      setLoading(false);
+
+      if(!result.success) {
+        enqueueSnackbar(result.msg, { variant: 'error' });
+        return;
+      }
       // open()
     };
     const handleCancelBtnClicked = () => {
       // Do something ...
       console.log(children);
-
-      // close dialog
-      open();
+      setOpenLicense(false);
+      setOpenChangePwd(false)
     };
+
     // const updateUsername = (value: any) => {
     //   setUsername(value);
     //   children[props.index].username = value;
@@ -131,26 +155,64 @@ const KidsList: FC = () => {
       <KidContainer>
         <LSDialog
           isOpen={openLicense}
-          open={open}
+          open={openLicenseDlg}
           title="Your Child License"
           fullWidth="true"
           dialogContent={
             <>
-              {openLicense && (
+              {/* {openLicense && ( */}
                 <License
                   parentName={user.username}
                   // username={username}
                   username={userName}
                   membership={new Date(props?.guardianstudentplanSet[0]?.expiredAt)}
                 />
-              )}
-              {console.log('expire at', props?.guardianstudentplanSet[0]?.expiredAt, new Date(props?.guardianstudentplanSet[0]?.expiredAt))}
+               {/* )} */}
               <GridContainer container>
                 <GridItem item md={6} xs={12}>
                   <Button
                     bgColor={BasicColor.green}
                     onClick={handleDownloadBtnClicked}
+                    loading={loading}
                     value="Download"
+                  />
+                </GridItem>
+                <GridItem item md={6} xs={12}>
+                  <Button
+                    bgColor={BasicColor.gray60}
+                    onClick={() => handleCancelBtnClicked()}
+                    value="Return"
+                  />
+                </GridItem>
+              </GridContainer>
+            </>
+          }
+        />
+        <LSDialog
+          isOpen={openChangePwd}
+          open={openChangePwdDlg}
+          title="Change Your Password"
+          fullWidth="true"
+          dialogContent={
+            <>
+              <GridContainer container>
+                <GridItem item md={12} xs={12}>
+                  <TextField
+                    label="Password"
+                    onChange={e => {
+                      setNewPwd(e.target.value);
+                    }}
+                    error={newPwd.length > 0 ? false : true}
+                    helperText={"Password field is required"}
+                    // value={firstName}
+                  />
+                </GridItem>
+                <GridItem item md={6} xs={12}>
+                  <Button
+                    bgColor={BasicColor.green}
+                    onClick={handleChangePwdBtnClicked}
+                    loading={loading}
+                    value="Change"
                   />
                 </GridItem>
                 <GridItem item md={6} xs={12}>
@@ -220,7 +282,7 @@ const KidsList: FC = () => {
           <GridItem item xs={12} md={2.5}>
             <Button
               bgColor={BasicColor.shadeBrown}
-              // onClick={(e:any) => handleChgPwd(props.index, password)}
+              onClick={ (e: any) => setOpenChangePwd(true) }
               value="Change Password"
             />
           </GridItem>
