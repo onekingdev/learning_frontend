@@ -76,3 +76,13 @@ export const QUESTION_IMAGE_ASSETS = `
         image
 }
 `
+export const QUESTION_AUDIO_ASSETS = `
+{
+        id
+        identifier
+        randomSlug
+        order
+        createTimestamp
+        updateTimestamp
+        audioFile
+}`

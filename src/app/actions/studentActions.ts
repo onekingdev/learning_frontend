@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as TYPES from '../types'
 import query from 'api/queries/get'
 import { STUDENT_WALLET_QUERY } from 'api/queries/users'
-import { CREATE_STUDENT, CHANGE_STUDENT_GRADE } from 'api/mutations/students'
+import { CREATE_STUDENT, CHANGE_STUDENT_GRADE, CHANGE_STUDENT_PASSWORD } from 'api/mutations/students'
 import mutation from 'api/mutations/get'
 
 export const studentSetData = (payload: any) => {
@@ -219,3 +219,39 @@ export const changeStudentGrade = async (
   return {success: true, msg: 'Success', data: result.data.createOrder}
 }
 
+export const changeStudentPassword = async (
+  password: string,
+  studentId: string,
+  token: string,
+  dispatch: any
+  ) => {
+    const res: any = await mutation(
+      CHANGE_STUDENT_PASSWORD(
+        password,
+        studentId,
+      ),
+      token
+  ).catch(() => ({success: false}));
+
+  if (res.success === false) {
+      return {success: false, msg: 'Network Error!'};
+  }
+
+  const result: any = await res.json();
+
+  if (result.errors) {
+      return {success: false, msg: result.errors[0].message};
+  }
+
+  const { guardian, student} = result.data.createChangeStudentGrade;
+
+  dispatch({
+      type: TYPES.GUARDIAN_SET_DATA,
+      payload: guardian,
+  });
+  // dispatch({
+  //     type: TYPES.GUARDIAN_SET_STUDENT,
+  //     payload: student || []
+  // });
+  return {success: true, msg: 'Success', data: result.data.createOrder}
+}

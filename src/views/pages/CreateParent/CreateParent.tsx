@@ -43,9 +43,13 @@ const CreateParent: FC = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [confPassword, setConfPassword] = useState('');
   const [validateMsg, setValidateMsg] = useState<{[key: string]: any}>({
     email: null,
+    firstName: null,
+    lastName: null,
     userName: null,
     password: null,
     confPassword: null,
@@ -66,7 +70,7 @@ const CreateParent: FC = () => {
     if (!formValidation()) return;
 
     setLoading(true);
-    const result: any = await createGuardian(email, userName, password,couponCode, dispatch)
+    const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
     setLoading(false);
 
     if(!result.success) {
@@ -114,6 +118,34 @@ const CreateParent: FC = () => {
                   }}
                   error={!!validateMsg.email}
                   helperText={validateMsg.email}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="First Name"
+                  onChange={e => {
+                    setUserName(e.target.value);
+                    handleFormChange(
+                      'firstName',
+                      e.target.value.length === 0 ? 'Field is required' : ''
+                    );
+                  }}
+                  error={!!validateMsg.firstName}
+                  helperText={validateMsg.firstName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Last Name"
+                  onChange={e => {
+                    setUserName(e.target.value);
+                    handleFormChange(
+                      'lastName',
+                      e.target.value.length === 0 ? 'Field is required' : ''
+                    );
+                  }}
+                  error={!!validateMsg.lastName}
+                  helperText={validateMsg.lastName}
                 />
               </Grid>
               <Grid item xs={12}>

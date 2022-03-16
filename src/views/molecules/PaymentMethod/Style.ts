@@ -224,4 +224,14 @@ export const useStyles = makeStyles({
             color: 'black !important'
         }
     },
+    select: {
+        '&.MuiOutlinedInput-root' : {
+          borderRadius: '25px',
+          backgroundColor: BasicColor.white,
+        },
+        '& fieldset' : {
+          borderColor: BasicColor.brightBlue,
+          borderWidth: '2px'
+        }
+    },
   });

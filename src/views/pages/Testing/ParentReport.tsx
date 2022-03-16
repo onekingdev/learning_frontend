@@ -11,8 +11,7 @@ export const ParentReport: FC = () => {
   }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
-      <div style={{
-      }}>
+      <div>
         <BarChart />
         <MarkTable />
       </div>

@@ -17,13 +17,19 @@ export const CREATE_ORDER = (
     cardFirstName: string,
     cardLastName: string,
     cardNumber: string,
-    discountCode: string,
+    address1: string,
+    address2: string,
+    city: string,
+    state: string,
+    postCode: string,
+    country: string,
+    phone: string,
     guardianId: number,
     orderDetailInput: {},
     paymentMethod: string,
     returnUrl: string,
 ) => `
-    createOrder(cardCvc: "${cardCvc}", cardExpMonth: "${cardExpMonth}", cardExpYear: "${cardExpYear}", cardFirstName: "${cardFirstName}", cardLastName: "${cardLastName}", cardNumber: "${cardNumber}", discountCode: "${discountCode}", guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}, paymentMethod: "${paymentMethod}", returnUrl: "${returnUrl}"){
+    createOrder(address1: "${address1}", address2: "${address2}", cardCvc: "${cardCvc}", cardExpMonth: "${cardExpMonth}", cardExpYear: "${cardExpYear}", cardFirstName: "${cardFirstName}", cardLastName: "${cardLastName}", cardNumber: "${cardNumber}", city: "${city}", country: "${country}", guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}, paymentMethod: "${paymentMethod}", phone: "${phone}", postCode: "${postCode}", returnUrl: "${returnUrl}", state: "${state}"){
         guardian {
             ${GUARDIAN}
             guardianstudentSet {
