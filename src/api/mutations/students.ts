@@ -30,6 +30,7 @@ export const CREATE_STUDENT = (
                     user{
                         id
                         username
+                        language
                     }
                 }
             }

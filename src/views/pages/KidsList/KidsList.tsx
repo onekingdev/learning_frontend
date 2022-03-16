@@ -56,6 +56,12 @@ const KidsList: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const kidAvatars = [kidA, kidB, kidC];
+  const langs = [
+    {
+      name: "English",
+      value: "EN_US"
+    }
+  ]
 
   const [children, setChildren] = useState<kid[]>([]);
 
@@ -81,6 +87,7 @@ const KidsList: FC = () => {
   const Kid = (props: any) => {
     console.log('props is', props)
     const userName = props.user.username;
+    const language = props.user.language
     const parentName = user.username
     const fullName = props.fullName;
     const studentId = props.id;
@@ -90,6 +97,8 @@ const KidsList: FC = () => {
     const [openLicense, setOpenLicense] = useState(false);
     const [openChangePwd, setOpenChangePwd] = useState(false)
     const [loading, setLoading] = useState(false)
+    console.log("kid info is", props)
+    console.log("language is ",language)
     const openLicenseDlg = () => {
       setOpenLicense(!openLicense);
     };
@@ -231,7 +240,7 @@ const KidsList: FC = () => {
           <GridItem item xs={6} md={2}>
             <Avatar src={props.avatar} />
           </GridItem>
-          <GridItem item xs={6} md={2.5}>
+          <GridItem item xs={6} md={2}>
             <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
           </GridItem>
           <GridItem item xs={12} md={2}>
@@ -242,44 +251,67 @@ const KidsList: FC = () => {
               // onChange={(e) => updateUsername(e.target.value)}
             />
           </GridItem>
-          <GridItem item xs={12} md={3}>
-            {/* <TextField
-              label="Grade"
-              value={grade}
-              onChange={e => {
-                updateGrade(e.target.value);
-              }}
-            /> */}
-            <FormControl fullWidth>
-                <InputLabel id="select-grade-label">
-                  Select Your Grade
-                </InputLabel>
-                <Select
-                  labelId="select-grade-label"
-                  id="select-grade"
-                  value={grades[grades.findIndex((item:any) => item.id === grade.id)]}
-                  label="Select Your Grade"
-                  className={`${classes.select} err-border`}
-                  onChange={async (e) => {
-                    setGrade(e.target.value);
-                    console.log(props)
-                    const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
-                    if(!res.success) {
-                      enqueueSnackbar(res.msg, { variant: 'error' });
-                    }
-                  }}
-                  displayEmpty={true}
-                >
-                  {grades?.length && grades.length > 0 && grades.map((value: any, index: number) => (
-                    <MenuItem value={value} key={index}>
-                      {value.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-                {/* <div className="err-text">{validateMsg.grade}</div> */}
-              </FormControl>
-          </GridItem>
           <GridItem item xs={12} md={2.5}>
+            <FormControl fullWidth>
+              <InputLabel id="select-grade-label">
+                Select Your Grade
+              </InputLabel>
+              <Select
+                labelId="select-grade-label"
+                id="select-grade"
+                value={grades[grades.findIndex((item:any) => item.id === grade.id)]}
+                label="Select Your Grade"
+                className={`${classes.select} err-border`}
+                onChange={async (e) => {
+                  setGrade(e.target.value);
+                  console.log(props)
+                  const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
+                  if(!res.success) {
+                    enqueueSnackbar(res.msg, { variant: 'error' });
+                  }
+                }}
+                displayEmpty={true}
+              >
+                {grades?.length && grades.length > 0 && grades.map((value: any, index: number) => (
+                  <MenuItem value={value} key={index}>
+                    {value.name}
+                  </MenuItem>
+                ))}
+              </Select>
+              {/* <div className="err-text">{validateMsg.grade}</div> */}
+            </FormControl>
+          </GridItem>
+          <GridItem item xs={12} md={1.5}>
+            <FormControl fullWidth>
+              <InputLabel id="select-lang-label">
+                Select Your Language
+              </InputLabel>
+              <Select
+                labelId="select-lang-label"
+                id="select-lang"
+                value={langs[langs.findIndex((item:any) => item.value === language)]}
+                label="Select Your Language"
+                className={`${classes.select} err-border`}
+                onChange={async (e) => {
+                  // setGrade(e.target.value);
+                  // console.log(props)
+                  // const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
+                  // if(!res.success) {
+                  //   enqueueSnackbar(res.msg, { variant: 'error' });
+                  // }
+                }}
+                displayEmpty={true}
+              >
+                {langs?.length && langs.length > 0 && langs.map((value: any, index: number) => (
+                  <MenuItem value={value} key={index}>
+                    {value.name}
+                  </MenuItem>
+                ))}
+              </Select>
+              {/* <div className="err-text">{validateMsg.grade}</div> */}
+            </FormControl>
+          </GridItem>
+          <GridItem item xs={12} md={2}>
             <Button
               bgColor={BasicColor.shadeBrown}
               onClick={ (e: any) => setOpenChangePwd(true) }
