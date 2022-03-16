@@ -1,11 +1,11 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import welcome from '../assets/welcome.svg';
-import {Title} from '../atoms/Text/Title';
-import locker from '../assets/locker.svg';
-import avatar from '../assets/avatars/girl-11.svg';
-import {ScreenSize} from '../screenSize';
-import {dictionary} from '../pages/StudentHome/dictionary';
+import welcome from 'views/assets/welcome.svg';
+import { Title } from 'views/atoms/Text/Title';
+import locker from 'views/assets/locker.svg';
+import avatar from 'views/assets/avatars/girl-11.svg';
+import { ScreenSize } from 'constants/screenSize';
+import { dictionary } from 'views/pages/StudentHome/dictionary';
 type HomeCharacterProps = {
   userName: string;
 };

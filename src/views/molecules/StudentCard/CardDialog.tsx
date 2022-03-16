@@ -4,11 +4,11 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
+import { ScreenSize } from 'constants/screenSize';
 
-import { BasicColor } from '../../Color';
+import { BasicColor } from 'views/Color';
 
-import { LSDialogTitle, LSDialogContent, LSDialogContentText } from '../Setting/utils/Style';
+import { LSDialogTitle, LSDialogContent, LSDialogContentText } from 'views/molecules/Setting/utils/Style';
 
 type LSDialogProps = {
   title?: string

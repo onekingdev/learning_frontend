@@ -1,6 +1,5 @@
 import { IAreasOfKnowledge } from './areasOfKnowledge';
-import {Gender} from './gender';
-import {IStudent} from './student'
+
 export interface IUser {
   lastLogin: Date;
   isSuperuser: boolean;

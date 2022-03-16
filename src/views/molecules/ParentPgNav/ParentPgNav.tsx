@@ -1,7 +1,7 @@
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
-import {useHistory} from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { useHistory} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -9,15 +9,12 @@ import Select from '@mui/material/Select';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMarkRounded';
-import Stack from '@mui/material/Stack';
-
-import { BasicColor } from '../../Color';
-import {ScreenSize} from '../../screenSize';
+import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
 import { useStyles } from './Style';
-import * as TYPES from '../../../app/types'
-import logoTitle from '../../assets/logo-learn.svg'
-import home from '../../assets/home_pc.svg'
-import avatar from '../../assets/avatars/avatar1.svg'
+import logoTitle from 'views/assets/logo-learn.svg'
+import home from 'views/assets/home_pc.svg'
+import avatar from 'views/assets/avatars/avatar1.svg'
 import {
   LogoContainer,
   LogoImg,
@@ -26,7 +23,7 @@ import {
   NameAvatarGroup,
   SupportBtnContainer,
   AvatarContainer,
-} from './Style'
+} from './Style';
 
 type ParentPgNavProps = {
   onlyLogoImg: boolean;
@@ -51,7 +48,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
     }
   };
   const onSupport = () => {
-
+    location.href = "https://www.withsocrates.com/contact/"
   }
   useEffect(() => {
   }, []);

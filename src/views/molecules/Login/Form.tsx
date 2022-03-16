@@ -1,9 +1,9 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import {GeneralText} from '../../atoms/Text/GeneralText';
-import {Link} from '../../atoms/Text/Link';
-import {TextInput} from '../../atoms/Text/TextInput';
-import {ScreenSize} from '../../screenSize';
+import { GeneralText } from 'views/atoms/Text/GeneralText';
+import { Link } from 'views/atoms/Text/Link';
+import { TextInput } from 'views/atoms/Text/TextInput';
+import { ScreenSize } from 'constants/screenSize';
 
 type FormProps = {
   login: string;

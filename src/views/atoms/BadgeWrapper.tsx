@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../screenSize';
+import { ScreenSize } from 'constants/screenSize';
 
 export const BadgeWrapper = styled.img`
   background-color: #fff;

@@ -1,5 +1,5 @@
 import { sendRawQuery } from 'api/queries/get';
-import { FETCH_USER_OWNED_AVATAR_ITEMS, FETCH_USER_FAVORITE_AVATARS } from 'api/queries/avatars'
+import { FETCH_USER_OWNED_AVATAR_ITEMS, FETCH_USER_FAVORITE_AVATARS } from 'api/queries/avatars';
 import { PURCHASE_AN_AVATAR_ITEM, SET_FAVORITE } from 'api/mutations/collectibles';
 
 export const doFetchOwnedAvatars = async (studentId: number, token: string) => {
@@ -16,8 +16,10 @@ export const doPurchaseAvatarItem = async (avatarId: number, studentId: number, 
         PURCHASE_AN_AVATAR_ITEM(avatarId, studentId),
         token
     );
-
-    return res.msg ? false : true;
+    // if(res.msg){
+    //     console.log(res.msg)
+    // }
+    return res.msg ? console.log(res.msg) : true;
 }
 
 export const doSetFavoriteAvatar = async (studentId: number, accessoryId: number, headId: number, clothesId: number, footerId: number, skinTone:string, token: string) => {

@@ -1,5 +1,5 @@
-import { BLOCK, BLOCK_CONFIGURATION_KEYWORD, BLOCK_PRESENTATON, BLOCK_TYPE, BLOCK_TYPE_CONFIGURATION, QUESTION_IMAGE_ASSETS } from '../fragments/blockFragments';
-import {ANSWER_OPTION, AREA_OF_KNOWLEDGE, QUESTION, TOPIC, TOPIC_GRADE} from '../fragments/questionFragments';
+import { BLOCK, BLOCK_CONFIGURATION_KEYWORD, BLOCK_PRESENTATON, BLOCK_TYPE, BLOCK_TYPE_CONFIGURATION, QUESTION_IMAGE_ASSETS, QUESTION_AUDIO_ASSETS } from '../fragments/blockFragments';
+import { ANSWER_OPTION, AREA_OF_KNOWLEDGE, QUESTION, TOPIC, TOPIC_GRADE } from '../fragments/questionFragments';
 import { LEVEL } from 'api/fragments/levelFragments';
 
 export const TOPICS_QUERY = `
@@ -33,6 +33,8 @@ export const QUESTION_QUERY = `
       ${QUESTION}
       questionImageAssets
       ${QUESTION_IMAGE_ASSETS}
+      questionAudioAssets
+      ${QUESTION_AUDIO_ASSETS}
       answeroptionSet
       ${ANSWER_OPTION}
     }
@@ -57,6 +59,7 @@ export const BLOCK_PRESENTATION_QUERY = `
             ${TOPIC_GRADE}
             topic{
               videoAssistor
+              name
             }
           }
           typeOf{

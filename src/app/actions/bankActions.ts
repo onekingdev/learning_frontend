@@ -1,8 +1,5 @@
-import mutation from '../../api/mutations/get'
-import { WITHDRAW, DEPOSIT } from '../../api/mutations/bank'
-import query from '../../api/queries/get'
-import {WHOAMI_QUERY} from '../../api/queries/users'
-import {INTEREST_QUERY} from '../../api/queries/interests'
+import mutation from '../../api/mutations/get';
+import { WITHDRAW, DEPOSIT } from '../../api/mutations/bank';
 
 import * as TYPES from '../../app/types'
 

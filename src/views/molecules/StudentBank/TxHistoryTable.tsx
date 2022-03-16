@@ -1,9 +1,7 @@
 import { FC } from 'react';
 import * as React from 'react';
-import { ScreenSize } from '../../screenSize';
+import { ScreenSize } from 'constants/screenSize';
 import styled from 'styled-components';
-
-import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,8 +10,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import PaidIcon from '@mui/icons-material/Paid';
-import { BasicColor } from '../../Color';
-import { LSLabel } from '../Setting/utils/Style';
+import { BasicColor } from 'views/Color';
+import { LSLabel } from 'views/molecules/Setting/utils/Style';
 
 interface Column {
   id: 'updateTimestamp' | 'side' | 'amount';
@@ -137,24 +135,24 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
                   <TableRow hover role="checkbox" tabIndex={-1} key={idx}>
                     {columns.map((column) => {
                       let value = row[column.id];
-                      if(column.id === "side"){
+                      if(column.id === 'side'){
                         switch(value){
                           case 'R' :
-                            value = "Deposit";
+                            value = 'Deposit';
                             break;
                           case 'L' :
-                            value = "Withdraw";
+                            value = 'Withdraw';
                             break;
                           case 'I' :
-                            value = "Interest"
+                            value = 'Interest'
                           // default :
                           //   row[column.id] = "Interest";
                         }
                       }
-                      if(column.id ==="updateTimestamp"){
+                      if(column.id ==='updateTimestamp'){
                         let temp = new Date(value);
                         temp = new Date();
-                        value = temp.toLocaleDateString("en-US")
+                        value = temp.toLocaleDateString('en-US')
                       }
                       return (
                         <TableCell key={column.id} align='center' sx={{ color: 'white', fontFamily: 'Montserrat' }}>

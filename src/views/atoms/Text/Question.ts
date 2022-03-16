@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
-import {BasicColor} from '../../Color';
-import {Typography} from './typography';
+import { ScreenSize } from 'constants/screenSize';
+import { BasicColor } from 'views/Color';
+import { Typography } from './typography';
 
 type BodyProps = {
   isDark?: boolean;
@@ -15,6 +15,8 @@ export const Question = styled.h3<BodyProps>`
   font-style: normal;
   font-weight: 700;
   margin: 0;
+  margin-right: 10px;
+  align-self: center;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 16px;
     line-height: 20px;

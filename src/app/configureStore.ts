@@ -1,11 +1,11 @@
-import {applyMiddleware, compose, createStore} from 'redux';
-import {persistStore, persistReducer} from 'redux-persist';
+import { applyMiddleware, createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {createLogger} from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
-import {IUser} from './entities/user';
-import {Gender} from './entities/gender';
+import { IUser } from './entities/user';
+import { Gender } from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 export type Store = {
@@ -14,7 +14,7 @@ export type Store = {
     earning: any;
     avatar: any;
     blockPresentation: any;
-  };
+};
 
 export const MockStore: Store = {
     user: {

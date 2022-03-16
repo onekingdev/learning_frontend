@@ -1,7 +1,6 @@
-import {FC, useEffect, ReactChildren, ReactChild} from 'react';
-import {ButtonColor, shadeColor, BasicColor} from '../Color';
+import { FC, ReactChildren, ReactChild } from 'react';
+import { ButtonColor, shadeColor, BasicColor } from 'views/Color';
 import { makeStyles } from '@mui/styles'
-// import Button from '@mui/material/Button';
 import Button from '@mui/lab/LoadingButton';
 
 type MuiButtonProps = {
@@ -75,6 +74,11 @@ const MuiButton: FC<MuiButtonProps> = ({
                 background: `${shadeColor(bgColor || BasicColor.greenSoft, 10)}
                     radial-gradient(circle, transparent 1%, ${bgColor} 1%)
                     center/15000% !important`
+            },
+            '&:disabled': {
+              color: 'transparent !important',
+              boxShadow: 'none !important',
+              backgroundColor: 'rgba(0, 0, 0, 0.12) !important'
             }
         },
     })

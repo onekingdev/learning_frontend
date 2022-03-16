@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
-import background from '../../assets/colored-shapes-bg.svg';
-import {BasicColor} from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
+import background from 'views/assets/colored-shapes-bg.svg';
+import { BasicColor } from 'views/Color';
 
 export const Wrapper = styled.div`
   background-image: url(${background});
@@ -21,7 +21,7 @@ export const ProgressWrapper = styled.div`
   justify-content: center;
   margin-bottom: 120px;
   @media (min-width: ${ScreenSize.desktop}) {
-    margin-top: 1rem;
+    // margin-top: 1rem;
   }
 `;
 
@@ -105,6 +105,7 @@ export const Submit = styled.div`
 export const CongratsDgContainer = styled.div`
   display: flex;
   align-items: center;
+  overflow: hidden;
   flex-direction: column;
   width: 50vw;
   height: 80vh;
@@ -125,48 +126,10 @@ export const CongratsDgContainer = styled.div`
 
   img {
     z-index: 1;
-  }
-  .icons {
-    width: 133px;
-    height: 84px;
-
-    img {
-      z-index: 3;
-      display: block;
-      margin: 0 auto; /* the fastest way to center anything */
+    width: 150px;
+    @media (max-width: ${ScreenSize.phone}) {
+      width: 30vw;
     }
-
-    p {
-      text-align: center;
-      font-family: Montserrat;
-      font-size: 22px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 28px;
-      letter-spacing: 0em;
-    }
-  }
-
-  h1 {
-    font-family: Montserrat;
-    font-size: 72px;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: -1.5px;
-    text-align: center;
-    z-index: 1;
-    margin: 0
-  }
-  h5 {
-    margin-top: 0;
-    font-family: Montserrat;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: -1.5px;
-    text-align: center;
-    z-index: 1;
-    color: ${BasicColor.green}
   }
 
   button {
@@ -174,13 +137,16 @@ export const CongratsDgContainer = styled.div`
     border: 0;
     border-radius: 20px;
     color: white;
-    width: 215px;
     height: 45px;
+    padding: 0 20px 0 20px;
     z-index: 1;
     font-size: 18px;
-
+    @media (max-width: ${ScreenSize.phone}) {
+      padding: 0 10px 0 10px;
+    }
     &:hover {
       pointer: cursor;
+
       box-shadow: 0 1px 1rem -3px orange;
       cursor: pointer;
     }

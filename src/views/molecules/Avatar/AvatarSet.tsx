@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ScreenSize } from 'views/screenSize';
+import { ScreenSize } from 'constants/screenSize';
 import styled from 'styled-components';
 import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
 
@@ -37,6 +37,9 @@ const CurrentAvatar = styled.div`
   align-items: center;
   justify-content: center;
   width: 300px;
+  @media (min-width:${ScreenSize.tablet}) and (max-width:${ScreenSize.desktop}) {
+    width: 250px;
+  }
   position: relative;
   @media screen and (min-width: ${ScreenSize.phone}) {
   }
@@ -64,7 +67,7 @@ const CurrentAvatar = styled.div`
     position: absolute;
     bottom: 0;
     width: 160px;
-    left: 67px;
+    // left: 67px;
     @media screen and (min-width: ${ScreenSize.phone}) {
     }
   }
@@ -74,7 +77,7 @@ const CurrentAccessory = styled.img`
   width: 160px;
   margin: auto;
   position: absolute;
-  top: -82px;
+  top: -75px;
   z-index: 3;
   @media screen and (min-width: ${ScreenSize.phone}) {
   }

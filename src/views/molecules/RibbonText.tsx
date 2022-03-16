@@ -1,8 +1,8 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import {Typography} from '../atoms/Text/typography';
-import {BasicColor} from '../Color';
-import {ScreenSize} from '../screenSize';
+import { Typography } from 'views/atoms/Text/typography';
+import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
 
 type RibbonProps = {
   body: string;

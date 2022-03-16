@@ -1,12 +1,11 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import {Divider} from '../../atoms/Divider';
-import {ButtonColor} from '../../Color';
-import {ScreenSize} from '../../screenSize';
-// import {Button} from '../Button';
+import { Divider } from 'views/atoms/Divider';
+import { ButtonColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
 import Button from 'views/molecules/MuiButton';
-import { BasicColor } from '../../Color';
-import LoadingButton from '@mui/lab/LoadingButton';
+import { BasicColor } from 'views/Color';
+
 type LoginActionsProps = {
   googleText: string;
   googleColor: ButtonColor;
@@ -15,6 +14,7 @@ type LoginActionsProps = {
   loginText: string;
   loginColor: ButtonColor;
   loading: boolean;
+  disabled?: boolean;
   loginAction: () => void;
 };
 
@@ -26,7 +26,8 @@ export const Actions: FC<LoginActionsProps> = ({
   loginText,
   loginColor,
   loginAction,
-  loading
+  loading,
+  disabled = false
 }) => {
   return (
     <StyledActions>
@@ -38,6 +39,7 @@ export const Actions: FC<LoginActionsProps> = ({
           onClick={googleAction}
           fullWidth={true}
           loading={loading}
+          disabled={disabled}
         />
       </Action>
 

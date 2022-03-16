@@ -1,17 +1,16 @@
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import home from '../../assets/home.svg';
-import {Icon} from '../../atoms/Icon/Icon';
-import menu_toggle from '../../assets/Menu Toggle.svg';
-import {Energy} from '../../molecules/Energy/Energy';
-import modality from '../../assets/modality.svg';
-import {Wallet} from '../../molecules/Wallet/Wallet';
-import {UserProgress} from '../UserProgress';
-import {IconSize} from '../../atoms/Icon/Size';
-import {ScreenSize} from '../../screenSize';
-import {NavPanel} from '../NavPanel/NavPanel';
-import {IconDropDown} from '../../molecules/IconDropDown';
-import {useHistory} from 'react-router-dom';
+import home from 'views/assets/home.svg';
+import { Icon } from 'views/atoms/Icon/Icon';
+import { Energy } from 'views/molecules/Energy/Energy';
+import modality from 'views/assets/modality.svg';
+import { Wallet } from 'views/molecules/Wallet/Wallet';
+import { UserProgress } from '../UserProgress';
+import { IconSize } from 'views/atoms/Icon/Size';
+import { ScreenSize } from 'constants/screenSize';
+import { useHistory } from 'react-router-dom';
+import { Sidebar } from 'views/organisms/Menu/Sidebar';
+import { ProfileDropDownMenu } from 'views/organisms/Menu/ProfileDropdownMenu';
 
 type TopMenuProps = {
   rank: number;
@@ -36,54 +35,31 @@ export const TopMenu: FC<TopMenuProps> = ({
   energyCharge,
   balance,
 }) => {
-  const [openSidebar, setOpenSidebar] = useState(Boolean);
-  const [scroll, setScroll] = useState(Boolean)
-  const deploySidebar = () => {
-    setOpenSidebar(!openSidebar);
-  };
+
+  const [navOp, setNavOp] = useState(true)
+  const changeNavBarOpacity = () => {
+    const posY = window.scrollY
+    if(posY < 60) {
+      setNavOp(true)
+    } else setNavOp(false)
+  }
   useEffect(() => {
-    document.addEventListener('scroll', () => {
-      if(document.documentElement.scrollTop > 15){
-        setScroll(true)
-      }
-      else{
-        setScroll(false)
-      }
-    });
-  },[document.documentElement.scrollTop])
+    changeNavBarOpacity()
+    window.addEventListener('scroll', changeNavBarOpacity)
+  },[])
 
   const history = useHistory();
   return (
     <>
-      <TopMenuStyles isScrolled={scroll}>
-        <NavPanel isClose={openSidebar} deploySideBar={deploySidebar} />
-        <ToggleButtonContainer isClose={openSidebar}>
-          <Icon
-            image={menu_toggle}
-            size={IconSize.small}
-            onClick={deploySidebar}
-          />
-        </ToggleButtonContainer>
-        <HomeIcon>
-          <Icon
-            image={home}
-            size={IconSize.medium}
-            onClick={() => history.push('/home')}
-          />
-        </HomeIcon>
+      <TopMenuStyles style={navOp ? {background: '#FFFFFF00'}:{background: '#FFFFFF', boxShadow:'gray 0px 0px 6px 0px'}}>
+        <Sidebar />
+        <Icon
+          image={home}
+          size={IconSize.medium}
+          onClick={() => history.push('/home')}
+        />
         <Energy charge={energyCharge} />
-        <ModalityContainer>
-          <IconDropDown
-            icon={modality}
-            options={[
-              {name: 'AI', action: () => history.push('/map')},
-              {
-                name: 'Choose your path',
-                action: () => history.push('/subjects'),
-              },
-            ]}
-          />
-        </ModalityContainer>
+        <Icon image={modality} onClick={() => history.push('/map')} size={IconSize.medium} />
         <Wallet balance={balance} />
         <UserProgress
           rank={rank}
@@ -94,43 +70,24 @@ export const TopMenu: FC<TopMenuProps> = ({
           userName={userName}
           progress={progress}
         />
+        <ProfileDropDownMenu />
       </TopMenuStyles>
     </>
   );
 };
 
-type ToggleButtonProps = {
-  isClose: boolean;
-};
-const TopMenuStyles = styled.div<{
-  isScrolled: boolean;
-}>`
+const TopMenuStyles = styled.div`
   display: none;
-  @media screen and (min-width: ${ScreenSize.tablet}) {
+  @media screen and (min-width: ${ScreenSize.phone}) {
     position: fixed;
+    transition-duration: 1s;
+    background: white;
     top: 0;
     z-index: 200;
     width: 100%;
-    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
+    justify-content: center;
     align-items: center;
-    background-color: ${props => props.isScrolled ? '#ffffffe0' : 'transparent'};
-    transition: 0.5s;
   }
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    margin: 0 auto;
-    padding-top: 15px;
-    max-width: 1366px;
-  }
-`;
-const ToggleButtonContainer = styled.div<ToggleButtonProps>`
-  opacity: ${p => (p.isClose ? 0 : 1)};
-`;
-
-const ModalityContainer = styled.div`
-  width: 60px;
-`;
-const HomeIcon = styled.div`
-  cursor: pointer;
 `;

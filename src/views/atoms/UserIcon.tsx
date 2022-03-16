@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {BasicColor} from '../Color';
+import { BasicColor } from 'views/Color';
 
 export const UserIcon = styled.img`
   width: 53px;

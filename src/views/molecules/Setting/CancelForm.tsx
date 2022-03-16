@@ -1,15 +1,9 @@
-import * as React from 'react';
-import { FC, useEffect } from 'react';
-
+import { FC, useState } from 'react';
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
-import { BasicColor } from '../../Color';
-
+import { BasicColor } from 'views/Color';
 import { LSLabel, LSButtonContainer, LSButton } from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
-
-import { dictionary } from './utils/dictionary';
-
 
 interface ICancelFormProps {
   onConfirm: (arg: string) => void
@@ -46,7 +40,7 @@ const data = [
 ]
 
 export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) => {
-  const [value, setValue] = React.useState(data[0].value);
+  const [value, setValue] = useState(data[0].value);
 
   const onSubmit = () => {
     onConfirm(value)

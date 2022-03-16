@@ -1,5 +1,5 @@
-import {FC, useEffect, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import {
   Container,

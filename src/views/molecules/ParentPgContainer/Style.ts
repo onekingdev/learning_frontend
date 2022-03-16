@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import {ScreenSize} from '../../screenSize';
-import background from '../../assets/colored-shapes-bg.svg';
-import background_mobile from '../../assets/colored-shapes-bg.svg';
+import { ScreenSize } from 'constants/screenSize';
+import background_mobile from 'views/assets/colored-shapes-bg.svg';
 
 export const Container = styled.div`
     position: relative;
     width: 100%;
     min-height: 100vh;
+    overflow: hidden;
     @media screen and (max-width: ${ScreenSize.tablet}) {
         background: url(${background_mobile}), #FFFFFF;
         background-position-x: right;
@@ -17,6 +17,7 @@ export const IslandGreen = styled.img`
     position: absolute;
     left: 0;
     top: 0;
+    max-width: 100vw;
     @media screen and (max-width: ${ScreenSize.tablet}) {
         display:none
       }
