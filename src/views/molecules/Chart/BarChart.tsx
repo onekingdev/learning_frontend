@@ -1,17 +1,21 @@
-import {
-  Chart,
-  BarSeries,
-  ArgumentAxis,
-  ValueAxis,
-} from '@devexpress/dx-react-chart-material-ui';
 import CrogoGirlsFace from 'views/assets/croco-girl.svg';
 import TitleKidBackground from 'views/assets/title-kids-background.png';
-import ReportChartBg from 'views/assets/parent/report-chart-bg.png';
 import ReportCheckIcon from 'views/assets/parent/report-check.png';
 import ReportCoinIcon from 'views/assets/parent/report-coin.png';
 import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
 import { useEffect, useState } from 'react';
+import 'react-vis/dist/style.css';
+import {
+    XYPlot,
+    LineSeries,
+    VerticalBarSeries,
+    AreaSeries,
+    XAxis,
+    YAxis,
+    VerticalGridLines,
+    HorizontalGridLines,
+} from 'react-vis';
 
 const ChartHeaderContrainer = styled.div`
     display: flex;
@@ -57,31 +61,75 @@ const ChartTitle = styled.span`
     }
 `;
 
-interface IChartInfo {
-    month?: string,
-    population?: number
+const MONTHS = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+]
+
+interface iChartData {
+    x: number,
+    y: number
 }
 
 export const BarChart = () => {
-    const [chartData, setChartData] = useState<IChartInfo[]>([]);
+    const [barChartData, setBarChartData] = useState<iChartData[]>([]);
+    const [areaChartData, setAreaChartData] = useState<iChartData[]>([]);
+    const data: iChartData[] = [
+        {x: 0, y: 750},
+        {x: 1, y: 200},
+        {x: 2, y: 1700},
+        {x: 3, y: 300},
+        {x: 4, y: 100},
+        {x: 5, y: 800},
+        {x: 6, y: 100},
+        {x: 7, y: 2900},
+        {x: 8, y: 1600},
+        {x: 9, y: 800},
+        {x: 10, y: 600},
+        {x: 11, y: 1500},
+    ];
     useEffect(() => {
-        setChartData([
-            { month: '1', population: 750 },
-            { month: '2', population: 200 },
-            { month: '3', population: 1700 },
-            { month: '4', population: 300 },
-            { month: '5', population: 100 },
-            { month: '6', population: 800 },
-            { month: '7', population: 100 },
-            { month: '8', population: 2900 },
-            { month: '9', population: 1600 },
-            { month: '10', population: 800 },
-            { month: '11', population: 600 },
-            { month: '12', population: 1500 },
-        ])
+        setBarChartData([
+            {x: 0, y: 750},
+            {x: 1, y: 200},
+            {x: 2, y: 1700},
+            {x: 3, y: 300},
+            {x: 4, y: 100},
+            {x: 5, y: 800},
+            {x: 6, y: 100},
+            {x: 7, y: 2900},
+            {x: 8, y: 1600},
+            {x: 9, y: 800},
+            {x: 10, y: 600},
+            {x: 11, y: 1500},
+        ]);
+        setAreaChartData([
+            {x: 0, y: 375},
+            {x: 1, y: 100},
+            {x: 2, y: 850},
+            {x: 3, y: 150},
+            {x: 4, y: 50},
+            {x: 5, y: 400},
+            {x: 6, y: 50},
+            {x: 7, y: 1450},
+            {x: 8, y: 800},
+            {x: 9, y: 400},
+            {x: 10, y: 300},
+            {x: 11, y: 750},
+        ]);
     }, []);
     return (
-        <div>
+        <div style={{ position: "relative"}}>
             <ChartHeaderContrainer>
                 <CrocoGirlImg style={{
                     zIndex: 20
@@ -92,35 +140,28 @@ export const BarChart = () => {
                 </ChartTitleGroup>
             </ChartHeaderContrainer>
             <div style={{
-                position: 'relative'
+                position: 'relative',
+                width: "100%",
+                maxWidth: "95vw",
+                overflowX: "auto"
             }}>
-                <div style={{
-                    zIndex: 0,
-                    position: 'absolute',
-                    width: '100%',
-                    paddingLeft: '3rem',
-                    paddingRight: '0.5rem',
-                    paddingBottom: '2rem',
-                    boxSizing: 'border-box',
-                    bottom: 0
-                }}>
-                <img style={{
-                    width: '100%'
-                }} src={ReportChartBg} alt="ReportChartBg" />
-                </div>
-                <Chart
-                    height={450}
-                    data={chartData}
-                >
-                    <ArgumentAxis />
-                    <ValueAxis >
-                    </ValueAxis>
-                    <BarSeries
-                        valueField="population"
-                        argumentField="month"
-                    />
-                    {/* <Animation /> */}
-                </Chart>
+                <XYPlot height={450} width={parseInt(ScreenSize.tablet.slice(0,-2))}>
+                    <VerticalGridLines />
+                    <HorizontalGridLines />
+                    <XAxis style={{
+                        text: {
+                            fontSize: "1.2rem"
+                        }
+                    }} tickLabelAngle={0} tickFormat={v => MONTHS[v]} />
+                    <YAxis style={{
+                        text: {
+                            fontSize: "1rem"
+                        }
+                    }} width={52}/>
+                    <AreaSeries fill={"#F4C222"} opacity={0.54} data={areaChartData} curve={"curveMonotoneX"} />
+                    <LineSeries fill={"#F4C222"} opacity={0.54} data={areaChartData} curve={"curveMonotoneX"} />
+                    <VerticalBarSeries color="#28D764" barWidth={0.7} data={barChartData} opacity={0.6} />
+                </XYPlot>
             </div>
             <div style={{
                 display: 'flex',

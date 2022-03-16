@@ -48,7 +48,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
     }
   };
   const onSupport = () => {
-    location.href = "https://www.withsocrates.com/contact/"
+
   }
   useEffect(() => {
   }, []);

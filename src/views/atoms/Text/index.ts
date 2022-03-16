@@ -88,8 +88,6 @@ export const TypoIcon = styled.p`
   font-weight: 500;
   line-height: 14px;
   letter-spacing: 1.5px;
-  text-align: center;
-  cursor: pointer;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 9px;
   }

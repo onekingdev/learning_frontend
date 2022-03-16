@@ -17,13 +17,7 @@ export const createOrder = async(
     cardFirstName: string,
     cardLastName: string,
     cardNumber: string,
-    address1: string,
-    address2: string,
-    city: string,
-    state: string,
-    postCode: string,
-    country: string,
-    phone: string,
+    discountCode: string,
     guardianId: number,
     orderDetailInput: {},
     paymentMethod: string,
@@ -32,25 +26,7 @@ export const createOrder = async(
     dispatch: any
 ) => {
     const res: any = await mutationFetch(
-        CREATE_ORDER(
-            cardCvc,
-            cardExpMonth,
-            cardExpYear,
-            cardFirstName,
-            cardLastName,
-            cardNumber,
-            address1,
-            address2,
-            city,
-            state,
-            postCode,
-            country,
-            phone,
-            guardianId,
-            orderDetailInput,
-            paymentMethod,
-            returnUrl
-        ),
+        CREATE_ORDER(cardCvc, cardExpMonth, cardExpYear, cardFirstName, cardLastName, cardNumber, discountCode, guardianId, orderDetailInput, paymentMethod, returnUrl),
         token
     ).catch(() => ({success: false}));
 

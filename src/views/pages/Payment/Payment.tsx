@@ -129,7 +129,7 @@ export const Payment: FC = () => {
   }
 
   useEffect(() => {
-    if(parseInt(guardian?.couponCode?.percentage) === 100) setIsSpecialCode(true)
+    if(parseInt(guardian.couponCode.percentage) === 100) setIsSpecialCode(true)
     setOffRate(50);
     setPlanData();
   }, []);

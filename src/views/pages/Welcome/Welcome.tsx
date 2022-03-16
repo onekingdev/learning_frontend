@@ -24,7 +24,6 @@ import {
   ModalItemsContainer,
 } from './Style';
 import { TextInput } from '../../atoms/Text/TextInput';
-import { Divider } from 'views/atoms/Divider';
 
 export const Welcome: FC = () => {
   const language = 'en';
@@ -98,13 +97,13 @@ export const Welcome: FC = () => {
       </Actions>
 
       <Legal>
-        <TypoIcon onClick={() => location.href="https://www.WithSocrates.com"}>
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].about}
         </TypoIcon >
-        <TypoIcon onClick={() => location.href="https://www.withsocrates.com/privacy-policy/"} >
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].privacy}
         </TypoIcon >
-        <TypoIcon onClick={() => location.href="https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en"} >
+        <TypoIcon  style={{textAlign: 'center'}} >
           {dictionary[language].children_privacy}
         </TypoIcon >
       </Legal>
