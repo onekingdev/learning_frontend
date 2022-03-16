@@ -1,45 +1,7 @@
-import { LEVEL } from './levelFragments'
-import { COIN_WALLET } from './coinWalletFragments'
-import { AVATAR } from './avatarFragments'
-import { BANK_WALLET } from './bankFragments'
-import { AUDIENCES }from './peopleFragments'
-import { AREA_OF_KNOWLEDGE }from './areaOfKnowledgeFragments'
-import { GRADES } from './peopleFragments'
-
-export const GUARIDAN_STUDENT_PLAN_RAW = `
-    id
-    identifier
-    randomSlug
-    slug
-    cancelReason
-    isCancel
-    isPaid
-    expiredAt
-    period
-    price
-`
-
-
-export const ORDER_DETAIL_RAW = `
-    id
-    identifier
-    createTimestamp
-    updateTimestamp
-    paymentMethodPlanId
-    subscriptionId
-    quantity
-    period
-    updateFromDetailId
-    status
-    onDiscount
-    discount
-    expiredAt
-    isPaid
-    cancelReason
-    isCancel
-    slug
-    total
-`
+import {LEVEL} from './levelFragments'
+import {COIN_WALLET} from './coinWalletFragments'
+import {AVATAR} from './avatarFragments'
+import {BANK_WALLET} from './bankFragments'
 
 export const STUDENT_TOPIC_MASTERY = `
         id
@@ -56,7 +18,7 @@ export const STUDENT_GRADE = `
         identifier
         isActive
         randomSlug
-        isFinished
+        isFinish
         percentage
         completeDate
 `;
@@ -168,12 +130,6 @@ export const STUDENT = `
         guardianstudentSet {
             id
         }
-        guardianstudentplanSet{
-            ${GUARIDAN_STUDENT_PLAN_RAW}
-            orderDetail {
-                ${ORDER_DETAIL_RAW}
-            }
-        }
         blockSet {
             id
         }
@@ -196,15 +152,6 @@ export const STUDENT = `
             id
         }
         audience {
-            ${AUDIENCES}
-            areaofknowledgeSet {
-                ${AREA_OF_KNOWLEDGE}
-            } 
-        }
-        grade {
-            ${STUDENT_GRADE}
-            grade{
-                ${GRADES}
-            }
+            id
         }
 `;

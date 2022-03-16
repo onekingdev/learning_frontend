@@ -5,20 +5,13 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 import {
-  LSShadowContainer,
-  LSButtonContainer,
-  LSGridRow,
-  LSTextField,
-  LSTitle,
-  LSText,
-  LSLabel,
-  LSButton,
-  LSBlueTextButton
-} from 'views/molecules/Setting/utils/Style';
+  LSShadowContainer, LSButtonContainer, LSGridRow, LSTextField, LSTitle, LSText, LSLabel,
+  LSButton, LSBlueTextButton
+} from '../../molecules/Setting/utils/Style';
 
-import { dictionary } from 'views/molecules/Setting/utils/dictionary';
+import { dictionary } from '../../molecules/Setting/utils/dictionary';
 
-import { settingPage } from 'views/molecules/Setting/utils/Theme';
+import { settingPage } from '../../molecules/Setting/utils/Theme';
 import { ThemeProvider } from '@mui/material';
 
 

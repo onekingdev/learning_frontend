@@ -1,16 +1,17 @@
-import { FC } from 'react';
-import { CongratsDgContainer } from 'views/pages/Question/Style';
-import { useSelector } from 'react-redux';
+import {FC, useEffect} from 'react';
+import {CongratsDgContainer} from 'views/pages/Question/Style';
+import {useSelector} from 'react-redux';
 
 import img_congats from 'views/assets/level-up-congrats.png';
+import coin from 'views/assets/coin.svg';
+import lightening from 'views/assets/lightning.svg';
 import ParticlesBg from 'particles-bg';
-import styled, { keyframes } from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import useSound from 'use-sound';
 import fireworkSfx from 'views/assets/audios/mixkit-fireworks-bang-in-sky-2989.wav';
 
-import { bounceInUp } from 'react-animations';
-import { flip } from 'react-animations'
-import { TypoHeader, TypoTitle, TypoBtn } from 'views/atoms/Text';
+import {bounceInUp} from 'react-animations';
+import {flip} from 'react-animations'
 
 interface Props {
   token: number;
@@ -26,7 +27,7 @@ export const LevelUpDgContent: FC<Props> = ({token, energy, close}) => {
   const config = {
     num: [1, 10],
     rps: 0.1,
-    radius: [2, 10],
+    radius: [10, 30],
     life: [-2, 3],
     v: [2, 3],
     tha: [-40, 40],
@@ -39,22 +40,32 @@ export const LevelUpDgContent: FC<Props> = ({token, energy, close}) => {
     g: 1,
   };
   return (
-    <div onLoad={() => play} style={{display:'flex', justifyContent:'center'}}>
+    <div onLoad={() => play}>
       <CongratsDgContainer>
         <div className="background">
           <ParticlesBg type="custom" config={config} />
         </div>
         <div className="background">
-          <ParticlesBg type="polygon" config={config} />
+          <ParticlesBg type="polygon" />
         </div>
         <Flip>
           <img src={img_congats} />
         </Flip>
         <BounceIn>
-        <TypoHeader style={{textAlign: 'center'}}>LEVEL UP!</TypoHeader>
-        <TypoTitle style={{textAlign: 'center'}}> Your level is now: {earning.level}</TypoTitle>
+        <h1>LEVEL UP!</h1>
+        <h5> Your level is now: {earning.level}</h5>
         </BounceIn>
-        <button onClick={close}><TypoBtn>Continue</TypoBtn></button>
+        <button onClick={close}>Continue</button>
+        {/* <div className="icons-container">
+          <div className="icons">
+            <img src={coin} alt={'coin'} />
+            <p>{token} Tokens</p>
+          </div>
+          <div className="icons">
+            <img src={lightening} alt={'lightening'} />
+            <p>{energy} energy</p>
+          </div>
+        </div> */}
       </CongratsDgContainer>
     </div>
   );

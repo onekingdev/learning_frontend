@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
-import { UserInfo } from 'views/atoms/Text/UserInfo';
-import { BasicColor } from 'views/Color';
-import coin from 'views/assets/coin.svg';
+import {UserInfo} from '../atoms/Text/UserInfo';
+import {BasicColor} from '../Color';
+import coin from '../assets/coin.svg';
 
 type GameCardProps = {
   gameName: string;
@@ -23,7 +23,7 @@ export const GameCardPresentation: FC<GameCardProps> = ({
 }) => {
   const handlePlay = () => {
     setLoading(true)
-    const url = process.env.REACT_APP_SERVER_URL + 'media/games/' + gamePath + '/gamePlay?token=' + token;
+    const url = process.env.REACT_APP_SERVER_URL + "media/games/" + gamePath + "/gamePlay?token=" + token;
     location.href = url;
   }
   return (

@@ -1,5 +1,6 @@
 import * as TYPE from '../types';
-import { IEarning } from '../entities/earning';
+import {IEarning} from '../entities/earning';
+import { Action } from 'views/molecules/Login/Actions';
 const INITIAL_STATE = {
     rank: 0,
     level: 0,

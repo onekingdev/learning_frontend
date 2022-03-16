@@ -1,5 +1,5 @@
 import * as TYPE from '../types';
-import { IUser } from '../entities/user';
+import {IUser} from '../entities/user';
 const INITIAL_STATE = {
   lastLogin: null,
   isSuperuser: null,

@@ -1,21 +1,22 @@
-import { FC, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import {FC, useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useDispatch } from 'react-redux'
 import { login, resetReducer } from 'app/actions/userActions'
-import { Header } from 'views/atoms/Text/Header';
-import { Subheader } from 'views/atoms/Text/Subheader';
-import { Button as ButtonText } from 'views/atoms/Text/Button';
-import { ButtonColor } from 'views/Color';
+import {Header} from 'views/atoms/Text/Header';
+import {Subheader} from 'views/atoms/Text/Subheader';
+import {Button as ButtonText} from 'views/atoms/Text/Button';
+import {ButtonColor} from 'views/Color';
 import logo from 'views/assets/socrates-logo.svg';
 import classroom from 'views/assets/teacher-and-children.svg';
 import greeting from 'views/assets/greeting.svg';
-import { Actions } from 'views/molecules/Login/Actions';
-import { Form } from 'views/molecules/Login/Form';
-import { Greet } from 'views/molecules/Login/Greet';
+import {Actions} from 'views/molecules/Login/Actions';
+import {Form} from 'views/molecules/Login/Form';
+import {Greet} from 'views/molecules/Login/Greet';
+import Button from 'views/molecules/MuiButton';
 
-import { Login, Card, Legal, LoginWrapper, DesktopWelcome } from './Style';
-import { dictionary } from './dictionary';
+import {Login, Card, Legal, LoginWrapper, DesktopWelcome} from './Style';
+import {dictionary} from './dictionary';
 
 export const LogIn: FC = () => {
   const history = useHistory();
@@ -78,7 +79,7 @@ export const LogIn: FC = () => {
           </DesktopWelcome>
           <Form
             login={dictionary[language].login}
-            email={dictionary[language].userName}
+            email={dictionary[language].email}
             password={dictionary[language].password}
             forgot={dictionary[language].forgot}
             wrongPasswordMessage={dictionary[language].error}
@@ -98,9 +99,9 @@ export const LogIn: FC = () => {
           />
         </LoginWrapper>
         <Legal>
-          <ButtonText onClick={() => location.href="https://www.WithSocrates.com"}>{dictionary[language].about}</ButtonText>
-          <ButtonText onClick={() => location.href="https://www.withsocrates.com/privacy-policy/"}>{dictionary[language].privacy}</ButtonText>
-          <ButtonText onClick={() => location.href="https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en"}>{dictionary[language].children_privacy}</ButtonText>
+          <ButtonText>{dictionary[language].about}</ButtonText>
+          <ButtonText>{dictionary[language].privacy}</ButtonText>
+          <ButtonText>{dictionary[language].children_privacy}</ButtonText>
         </Legal>
       </Card>
     </Login>

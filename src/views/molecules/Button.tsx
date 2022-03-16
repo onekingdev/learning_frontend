@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { ButtonColor } from 'views/Color';
-import { Button as ButtonText } from 'views/atoms/Text/Button';
-import { ButtonWrapper } from 'views/atoms/ButtonWrapper';
+import {FC} from 'react';
+import {ButtonColor} from '../Color';
+import {Button as ButtonText} from '../atoms/Text/Button';
+import {ButtonWrapper} from '../atoms/ButtonWrapper';
 
 type ButtonProps = {
   value: string;

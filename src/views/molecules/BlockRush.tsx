@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { LevelUp } from 'views/atoms/Text/LevelUp';
-import { BasicColor } from 'views/Color';
+import {LevelUp} from '../atoms/Text/LevelUp';
+import {BasicColor} from '../Color';
 
 type RushProps = {
   initialTime: number;

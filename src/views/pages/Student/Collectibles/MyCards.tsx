@@ -5,8 +5,8 @@ import {
 } from './Style';
 import {useHistory} from 'react-router-dom';
 import { PageTitle } from 'views/molecules/PageTitle';
-import { StudentMenu } from 'views/templates/StudentMenu';
-import { MyCards } from 'views/molecules/StudentCard/MyCards';
+import { StudentMenu } from '../../../templates/StudentMenu';
+import { MyCardCategory } from 'views/molecules/StudentCard/MyCardsCategory';
 import { BtnContainer } from './Cards';
 import { Button } from './Cards';
 export const MyCardCollection: FC = () => {
@@ -22,7 +22,7 @@ export const MyCardCollection: FC = () => {
               BUY CARDS
             </Button>
           </BtnContainer>
-          <MyCards />
+          <MyCardCategory />
         </CardCollectibleContainer>
       </StudentMenu>
     </Wrapper>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { BasicColor } from 'views/Color';
-import { Typography } from './typography';
+import {BasicColor} from '../../Color';
+import {Typography} from './typography';
 
 type ButtonProps = {
   isDark?: boolean;
@@ -15,5 +15,4 @@ export const Button = styled.span<ButtonProps>`
   letter-spacing: 0.75px;
   text-transform: capitalize;
   margin: 0;
-  cursor: pointer;
 `;

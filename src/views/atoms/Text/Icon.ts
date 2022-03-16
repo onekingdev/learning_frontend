@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import { BasicColor } from 'views/Color';
-import { Typography } from './typography';
+import {ScreenSize} from './../../screenSize';
+import {BasicColor} from '../../Color';
+import {Typography} from './typography';
 
 type IconUpProps = {
   isDark?: boolean;
 };
 
-export const sIcon = styled.span<IconUpProps>`
+export const Icon = styled.span<IconUpProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-weight: 500;

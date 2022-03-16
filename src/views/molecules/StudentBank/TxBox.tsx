@@ -1,16 +1,19 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
+import {ScreenSize} from '../../screenSize';
+
 import { Grid } from '@mui/material';
+
 import { GridItem, Input } from './Style';
-import { BasicColor } from 'views/Color';
+import { BasicColor } from '../../Color';
 import { withDraw, deposit } from 'app/actions/bankActions'
 import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import { useSnackbar } from 'notistack';
-import Button from 'views/molecules/MuiButton';
+import Button from '../../molecules/MuiButton';
 
 export const TxBox: FC = () => {
+
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -37,7 +40,7 @@ export const TxBox: FC = () => {
   }
 
   const onDepositBtnClicked = async() => {
-    if(depositAmount === 0) return enqueueSnackbar('Amount is empty', { variant: 'error' });
+    if(depositAmount === 0) return enqueueSnackbar("Amount is empty", { variant: 'error' });
     setLoading(true)
     const result = await deposit(depositAmount, user.token, dispatch)
     setLoading(false)
@@ -46,7 +49,7 @@ export const TxBox: FC = () => {
   }
 
   const onWithdrawBtnClicked = async() => {
-    if(withdrawAmount === 0) return enqueueSnackbar('Amount is empty', { variant: 'error' });
+    if(withdrawAmount === 0) return enqueueSnackbar("Amount is empty", { variant: 'error' });
     setLoading(true)
     const result = await withDraw(withdrawAmount, user.token, dispatch)
     setLoading(false)
@@ -87,7 +90,7 @@ export const TxBox: FC = () => {
           <Button
             bgColor={BasicColor.green}
             onClick={onWithdrawBtnClicked}
-            value="Withdraw"
+            value="Widthdraw"
             fullWidth={true}
             loading={loading}
           />
@@ -100,7 +103,7 @@ export const TxBox: FC = () => {
 const BankPaper = styled.div`
   margin-top: 0;
   padding: 30px 20px 30px 20px;
-  width: 80%;
+  width: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,7 +113,7 @@ const BankPaper = styled.div`
   border-radius: 20px;
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 80vw;
+    width: 85vw;
     padding: 15px;
   }
 

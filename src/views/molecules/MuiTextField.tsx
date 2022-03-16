@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import { ButtonColor, BasicColor } from 'views/Color';
+import {FC} from 'react';
+import {ButtonColor, shadeColor, BasicColor} from '../Color';
 import { makeStyles } from '@mui/styles'
 import TextField from '@mui/material/TextField';
 
-type MuiTextFieldProps = {
+type MuiButtonProps = {
   value?: string;
   InputProps?: any;
   variant?: any;
@@ -15,13 +15,12 @@ type MuiTextFieldProps = {
   radius?: number
   className?: string;
   borderColor?: ButtonColor | BasicColor | string;
-  type?: string;
   onHover?: (e: any) => void;
   onClick?: (e: any) => void;
   onChange?: (e: any) => void;
 };
 
-const MuiTextField: FC<MuiTextFieldProps> = ({
+const MuiTextField: FC<MuiButtonProps> = ({
   value,
   InputProps,
   focused,
@@ -33,7 +32,6 @@ const MuiTextField: FC<MuiTextFieldProps> = ({
   borderColor,
   radius=25,
   className='',
-  type='text',
   onHover,
   onClick,
   onChange
@@ -79,7 +77,6 @@ const MuiTextField: FC<MuiTextFieldProps> = ({
         onChange={onChange}
         fullWidth
         value={value}
-        type={type}
     />
   );
 };

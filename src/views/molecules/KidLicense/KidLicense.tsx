@@ -1,10 +1,10 @@
-import logo from 'views/assets/logo-learn-white.svg'
+import logo from '../../assets/logo-learn-white.svg'
 import styled from 'styled-components';
-import socrates from 'views/assets/socrates.svg'
-import TextField from 'views/molecules/MuiTextField'
-import { LicenseHeader, LicenseBody, LicenseUsername } from './Style'
+import socrates from '../../assets/socrates.svg'
+import TextField from '../MuiTextField'
+import { LicenseHeader, LicenseBody, LicenseUsername} from './Style'
 import QRCode from 'react-qr-code';
-import { LSText } from 'views/molecules/Setting/utils/Style';
+import { LSText } from '../Setting/utils/Style';
 
 const License = (props: any) => {
     return (
@@ -19,7 +19,6 @@ const License = (props: any) => {
           <div className="flex justify-space-between align-center">
             <Img src={socrates} />
             <div className="flex flex-col h-full justify-space-between">
-              {console.log('member ship is', props.membership,props.membership.getFullYear())}
               <DialogTextField
                 label="Member Since"
                 value={`${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}`}

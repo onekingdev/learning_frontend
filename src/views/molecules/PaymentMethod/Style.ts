@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
+import {ScreenSize} from '../../screenSize';
 import { makeStyles } from '@mui/styles'
-import { BasicColor } from 'views/Color';
+import background from '../../assets/colored-shapes-bg.svg';
+import {ButtonColor, BasicColor} from '../../Color';
 
 export const Container = styled.div`
     position: relative;
@@ -118,7 +119,7 @@ export const OrderItemTitle = styled.div`
     font-size: 16px;
     line-height: 20px;
     display: flex;
-
+    
 `
 export const OrderItemSubtitle = styled.div`
     color: white;
@@ -222,16 +223,6 @@ export const useStyles = makeStyles({
         },
         '& .Mui-focused': {
             color: 'black !important'
-        }
-    },
-    select: {
-        '&.MuiOutlinedInput-root' : {
-          borderRadius: '25px',
-          backgroundColor: BasicColor.white,
-        },
-        '& fieldset' : {
-          borderColor: BasicColor.brightBlue,
-          borderWidth: '2px'
         }
     },
   });

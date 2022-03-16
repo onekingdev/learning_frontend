@@ -1,9 +1,7 @@
 import axios from 'axios';
 import * as TYPES from '../types'
-import query from 'api/queries/get'
-import { STUDENT_WALLET_QUERY } from 'api/queries/users'
-import { CREATE_STUDENT, CHANGE_STUDENT_GRADE, CHANGE_STUDENT_PASSWORD } from 'api/mutations/students'
-import mutation from 'api/mutations/get'
+import query from '../../api/queries/get'
+import {STUDENT_WALLET_QUERY} from '../../api/queries/users'
 
 export const studentSetData = (payload: any) => {
   return {
@@ -126,132 +124,9 @@ export const setCoinWallet = async (studentId: number,token: string, dispatch: a
   if(result.errors) {
       return {success: false, msg: result.errors[0].message};
   }
-  console.log('coin result is ', result)
+  console.log("coin result is ", result)
   const coinWallet = result.data.studentById.coinWallet
   console.log(coinWallet)
   dispatch({ type: TYPES.EARNING_COIN_SET, payload: coinWallet.balance})
   return {success: true, msg: 'Success!'}
-}
-
-export const createStudent = async (
-  firstName: string,
-  lastName: string,
-  username: string,
-  password: string,
-  guardianStudentPlanId: number,
-  listSubjectId: number[],
-  studentPlan: number,
-  gradeId: number,
-  token: string,
-  dispatch: any
-  ) => {
-    const res: any = await mutation(
-      CREATE_STUDENT(
-        firstName,
-        lastName,
-        username,
-        password,
-        guardianStudentPlanId,
-        listSubjectId,
-        studentPlan,
-        gradeId,
-      ),
-      token
-  ).catch(() => ({success: false}));
-
-  if (res.success === false) {
-      return {success: false, msg: 'Network Error!'};
-  }
-
-  const result: any = await res.json();
-
-  if (result.errors) {
-      return {success: false, msg: result.errors[0].message};
-  }
-
-  const { guardian, student, user, profile, refreshToken } = result.data.createStudent;
-
-  dispatch({
-      type: TYPES.GUARDIAN_SET_DATA,
-      payload: guardian,
-  });
-  // dispatch({
-  //     type: TYPES.GUARDIAN_SET_STUDENT,
-  //     payload: student || []
-  // });
-  return {success: true, msg: 'Success', data: result.data.createOrder}
-}
-
-export const changeStudentGrade = async (
-  gradeId: string,
-  studentId: string,
-  token: string,
-  dispatch: any
-  ) => {
-    const res: any = await mutation(
-      CHANGE_STUDENT_GRADE(
-        gradeId,
-        studentId,
-      ),
-      token
-  ).catch(() => ({success: false}));
-
-  if (res.success === false) {
-      return {success: false, msg: 'Network Error!'};
-  }
-
-  const result: any = await res.json();
-
-  if (result.errors) {
-      return {success: false, msg: result.errors[0].message};
-  }
-
-  const { guardian, student} = result.data.createChangeStudentGrade;
-
-  dispatch({
-      type: TYPES.GUARDIAN_SET_DATA,
-      payload: guardian,
-  });
-  // dispatch({
-  //     type: TYPES.GUARDIAN_SET_STUDENT,
-  //     payload: student || []
-  // });
-  return {success: true, msg: 'Success', data: result.data.createOrder}
-}
-
-export const changeStudentPassword = async (
-  password: string,
-  studentId: string,
-  token: string,
-  dispatch: any
-  ) => {
-    const res: any = await mutation(
-      CHANGE_STUDENT_PASSWORD(
-        password,
-        studentId,
-      ),
-      token
-  ).catch(() => ({success: false}));
-
-  if (res.success === false) {
-      return {success: false, msg: 'Network Error!'};
-  }
-
-  const result: any = await res.json();
-
-  if (result.errors) {
-      return {success: false, msg: result.errors[0].message};
-  }
-
-  const { guardian, student} = result.data.createChangeStudentGrade;
-
-  dispatch({
-      type: TYPES.GUARDIAN_SET_DATA,
-      payload: guardian,
-  });
-  // dispatch({
-  //     type: TYPES.GUARDIAN_SET_STUDENT,
-  //     payload: student || []
-  // });
-  return {success: true, msg: 'Success', data: result.data.createOrder}
 }

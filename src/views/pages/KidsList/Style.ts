@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { makeStyles } from '@mui/styles'
-import titleBg from 'views/assets/title-kids-background.png'
-import { BasicColor } from 'views/Color';
+import titleBg from '../../assets/title-kids-background.png'
+import {BasicColor} from '../../Color';
 
 export const SettingContainer = styled.div`
   display: flex;
@@ -60,7 +60,7 @@ export const LicenseUsername = styled.div`
   margin-top: 10px;
   border-radius: 5px;
   width: 110px;
-  min-height: 35px;
+  min-height: 35px; 
 `
 
 export const Title = styled.div`
@@ -96,13 +96,5 @@ export const Container = styled.div`
 
 
 export const useStyles = makeStyles({
-  select: {
-    '&.MuiOutlinedInput-root' : {
-      borderRadius: '25px',
-    },
-    '& fieldset' : {
-      borderColor: BasicColor.brightBlue,
-      borderWidth: '2px'
-    }
-  },
+
 });

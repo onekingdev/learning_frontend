@@ -1,8 +1,10 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import styled from 'styled-components';
-import { BasicColor } from 'views/Color';
-import { UserProgressBar } from 'views/molecules/UserProgressBar';
-import { Typography } from 'views/atoms/Text/typography';
+import {BasicColor} from '../Color';
+import {UserProgressBar} from '../molecules/UserProgressBar';
+import {UserIcon} from '../atoms/UserIcon';
+import {Typography} from '../atoms/Text/typography';
+import { useHistory } from 'react-router-dom';
 
 type UserProgressProps = {
   rank: number;
@@ -17,26 +19,33 @@ type UserProgressProps = {
 export const UserProgress: FC<UserProgressProps> = ({
   rank,
   level,
+  icon,
   exp,
   expMax,
   progress,
   userName,
 }) => {
+  const history = useHistory();
   return (
-    <UserProgressStyle>
-      <RangeContainer color={BasicColor.greenSoft}>
-        Rank <Range>#{rank}</Range>
-      </RangeContainer>
-      <RangeContainer color={BasicColor.blue}>
-        Level <Range>{level}</Range>
-      </RangeContainer>
-      <Name color={BasicColor.black}>{userName}</Name>
-      <ExpContainer>
-        <Name color={BasicColor.greenSoft}>{exp}</Name>
-        <Name color={BasicColor.black}>/{expMax}XP</Name>
-      </ExpContainer>
-      <UserProgressBar progress={progress} />
-    </UserProgressStyle>
+    <>
+      <UserProgressContainer>
+        <UserProgressStyle>
+          <RangeContainer color={BasicColor.greenSoft}>
+            Rank <Range>#{rank}</Range>
+          </RangeContainer>
+          <RangeContainer color={BasicColor.blue}>
+            Level <Range>{level}</Range>
+          </RangeContainer>
+          <Name color={BasicColor.black}>{userName}</Name>
+          <ExpContainer>
+            <Name color={BasicColor.greenSoft}>{exp}</Name>
+            <Name color={BasicColor.black}>/{expMax}XP</Name>
+          </ExpContainer>
+          <UserProgressBar progress={progress} />
+        </UserProgressStyle>
+        <UserIcon src={icon} onClick={() => history.push('/avatar')}/>
+      </UserProgressContainer>
+    </>
   );
 };
 
@@ -47,6 +56,14 @@ type RangeContainerProps = {
 type NameProps = {
   color: BasicColor.black | BasicColor.greenSoft;
 };
+
+const UserProgressContainer = styled.div`
+  width: 262px;
+  height: 69px;
+  display: grid;
+  grid-template-columns: 1fr 65px;
+  justify-content: center;
+`;
 
 const UserProgressStyle = styled.div`
   width: 186px;

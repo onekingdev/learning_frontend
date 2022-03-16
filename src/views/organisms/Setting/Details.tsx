@@ -1,20 +1,21 @@
-import { FC, useState } from 'react';
+import {FC, useState} from 'react';
 import styled from 'styled-components';
+import * as React from 'react';
 import Box from '@mui/material/Box';
-import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
+import { LSTitle, LSShadowContainer } from '../../molecules/Setting/utils/Style';
 
-import { LSBlueTextButton } from 'views/molecules/Setting/utils/Style'
-import { dictionary } from 'views/pages/Settings/dictionary';
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { CancelForm } from 'views/molecules/Setting/CancelForm';
-import { AddPlanForm } from 'views/molecules/Setting/AddPlanForm';
-import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
-import { PlanList } from 'views/molecules/Setting/PlanList';
+import {LSBlueTextButton} from '../../molecules/Setting/utils/Style'
+import {dictionary} from '../../pages/Settings/dictionary';
+import { LSDialog } from '../../molecules/Setting/LSDialog';
+import { CancelForm } from '../../molecules/Setting/CancelForm';
+import { AddPlanForm } from '../../molecules/Setting/AddPlanForm';
+import { useDialog, useAddDialog } from '../../molecules/Setting/utils/useDialog';
+import { PlanList } from '../../molecules/Setting/PlanList';
 
 export const MembershipDetail:FC = () => {
 
-  const { isOpen, open } = useDialog()
-  const { isAddOpen, openAdd } = useAddDialog()
+  const {isOpen, open} = useDialog()
+  const {isAddOpen, openAdd} = useAddDialog()
 
 
   const [reason, setReason] = useState<string>('reason1');

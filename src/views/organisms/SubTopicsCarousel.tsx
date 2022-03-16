@@ -1,15 +1,15 @@
-import { FC, useState } from 'react';
+import {FC, useState} from 'react';
 import styled from 'styled-components';
-import { Header } from 'views/atoms/Text/Header';
-import { BasicColor } from 'views/Color';
-import { SubTopicCard } from 'views/molecules/SubTopicCard';
-import { ScreenSize } from 'constants/screenSize';
-import rightArrow from 'views/assets/right-arrow.svg';
-import leftArrow from 'views/assets/left-arrow.svg';
-import { useHistory } from 'react-router-dom';
-import { ITopic } from 'app/entities/block';
-import { mutation } from 'api/queries/get';
-import { BLOCK_PRESENTATION_QUERY } from 'api/queries/questions';
+import {Header} from '../atoms/Text/Header';
+import {BasicColor} from '../Color';
+import {SubTopicCard} from '../molecules/SubTopicCard';
+import {ScreenSize} from '../screenSize';
+import rightArrow from '../assets/right-arrow.svg';
+import leftArrow from '../assets/left-arrow.svg';
+import {useHistory} from 'react-router-dom';
+import { ITopic } from '../../app/entities/block';
+import { mutation } from '../../api/queries/get';
+import { BLOCK_PRESENTATION_QUERY } from '../../api/queries/questions';
 
 type SubTopicProps = {
   name: string;

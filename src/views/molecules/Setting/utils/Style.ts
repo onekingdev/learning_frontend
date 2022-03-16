@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { Box, InputBase, Paper } from '@mui/material';
-import { BasicColor } from 'views/Color';
-import {Typography} from 'views/atoms/Text/typography';
+import {Box, InputBase, Paper} from '@mui/material';
+import {BasicColor} from '../../../Color';
+
 import FormControl from '@mui/material/FormControl';
 import {
   DialogContent,
@@ -14,7 +14,7 @@ import {
   FormControlLabel,
 } from '@mui/material';
 
-import titleBg from 'views/assets/title-kids-background.png';
+import titleBg from '../../../assets/title-kids-background.png';
 
 /*--------------------------------------------------------------------------------------------*/
 /*                                         Dialog                                             */
@@ -23,7 +23,7 @@ import titleBg from 'views/assets/title-kids-background.png';
 export const LSDialogTitle = styled(DialogTitle)`
   &.MuiDialogTitle-root {
     color: ${BasicColor.blue};
-    font-family: ${Typography.primary};
+    font-family: Montserrat;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -43,7 +43,7 @@ export const LSDialogContent = styled(DialogContent)`
 export const LSDialogContentText = styled(DialogContentText)`
   &.MuiDialogContentText-root {
     padding: 20px;
-    font-family: ${Typography.primary};
+    font-family: Montserrat;
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -69,7 +69,7 @@ interface InputBaseProps {
   pl?: number;
 }
 export const LSInputBase = styled(InputBase)<InputBaseProps>`
-  font-family: ${Typography.primary};
+  font-family: Montserrat;
   border: solid 2px cornflowerblue;
   border-radius: ${props => props.border_radius || 0}px;
   margin-top: ${props => props.mt || 0}px;
@@ -86,7 +86,7 @@ export const LSRadio = styled(Radio)`
 `;
 export const LSFormControlLabel = styled(FormControlLabel)`
   & .MuiTypography-root {
-    font-family: ${Typography.primary};
+    font-family: Montserrat;
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -110,7 +110,7 @@ export const LSButton = styled(Button)<{
     text-transform: unset;
     font-size: 16px;
     color: white;
-    font-family: ${Typography.primary};
+    font-family: Montserrat;
     @media screen and (max-width: 540px) {
       margin: 10px;
     }
@@ -137,7 +137,7 @@ export const LSBlueTextButton = styled(Button)`
     text-decoration: underline;
     text-transform: unset;
     color: ${BasicColor.blue};
-    font-family: ${Typography.primary};
+    font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     @media screen and (max-width: 540px) {
@@ -150,7 +150,7 @@ export const LSWhiteTextButton = styled(Button)`
   &.MuiButton-root {
     text-transform: unset;
     color: white;
-    font-family: ${Typography.primary};
+    font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     @media screen and (max-width: 540px) {
@@ -187,7 +187,7 @@ export const LSShadowContainer = styled(Box)<{
   box-shadow: 0px 2px 10px 0px #00000040;
   border-radius: 10px;
   background-color: white;
-  font-family: ${Typography.primary};
+  font-family: Montserrat;
   margin: 16px;
   padding: 20px 32px 20px 32px;
   ${props => (props.width ? 'width:' + props.width + 'px;' : '')}
@@ -222,7 +222,7 @@ export const LSTitle = styled.p<{
   mb?: number;
   ml?: number;
 }>`
-  font-family: ${Typography.primary};
+  font-family: Montserrat;
   font-size: 1.3em;
   margin-top: ${props => props.mt || 5}px;
   margin-bottom: ${props => props.mb || 5}px;
@@ -237,7 +237,10 @@ export const LSTitle = styled.p<{
   }
 `;
 export const Title = styled.div`
+  font-size: 2em;
+  font-family: Montserrat;
   line-height: 50px;
+  font-weight: 700;
   color: white;
   width: 385px;
   height: 81px;
@@ -249,6 +252,7 @@ export const Title = styled.div`
   margin-bottom: 4vh;
   @media screen and (max-width: 540px) {
     width: 60%;
+    font-size: 1.5em;
     margin-top: 10px;
     margin-bottom: 0;
   }
@@ -286,7 +290,7 @@ export const LSLabel = styled.p<{
   textAlign?: string;
   margin?: number;
 }>`
-  font-family: ${Typography.primary};
+  font-family: Montserrat;
   font-size: ${props => (props.fontSize ? props.fontSize + 'px;' : '15px;')}
   margin: ${props =>
     props.margin === 0 || props.margin ? props.margin + 'px;' : '0px;'}
@@ -314,7 +318,7 @@ export const LSText = styled.p<{
   pl?: number;
   ml?: number;
 }>`
-  font-family: ${Typography.primary};
+  font-family: Montserrat;
   font-size: ${props => (props.fontSize ? props.fontSize + 'px;' : '15px;')}
   margin: ${props =>
     props.margin === 0 || props.margin ? props.margin + 'px;' : '0px;'}

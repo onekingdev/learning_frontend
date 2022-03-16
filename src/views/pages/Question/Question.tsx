@@ -1,65 +1,53 @@
-import { FC, useEffect, useState, useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
-import { LessonProgress } from 'views/molecules/LessonProgress/LessonProgress';
-import { useParams } from 'react-router-dom';
-import { LoadingContext } from 'react-router-loading';
-
+import {FC, useEffect, useState, useContext} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {LessonProgress} from '../../molecules/LessonProgress/LessonProgress';
 import {
   Container,
   Wrapper,
   ProgressWrapper,
 } from './Style';
-
-import {FinishLesson} from 'views/organisms/FinishLesson';
-import {StudentMenu} from 'views/templates/StudentMenu';
-import {LevelUpDgContent} from 'views/atoms/ParticlgBg';
-import {MultipleChoiceText} from 'views/molecules/QuestionTypes/MultipleChoiceText';
-import {MultipleChoiceSightWord} from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
-
+import {FinishLesson} from '../../organisms/FinishLesson';
+import {StudentMenu} from '../../templates/StudentMenu';
+import {MultipleChoiceText} from '../../molecules/QuestionTypes/MultipleChoiceText';
+import {get} from '../../../api/queries/get';
+import {BLOCK_PRESENTATION_QUERY} from '../../../api/queries/questions';
+import {IBlockPresentation, IQuestion} from '../../../app/entities/block';
+import {Store} from '../../../app/configureStore';
+import {useParams} from 'react-router-dom';
+import * as TYPE from '../../../app/types';
+import {LoadingContext} from 'react-router-loading';
+import {finishBlock} from '../../../app/actions/blockActions';
 import {CardDialog} from 'views/molecules/StudentCard/CardDialog';
 
-import {IBlockPresentation, IQuestion} from 'app/entities/block';
-import {Store} from 'app/configureStore';
-import * as TYPE from 'app/types';
-import {finishBlock, createAiBlockPresentation, createPathBlockPresentation} from 'app/actions/blockActions';
+import {LevelUpDgContent} from 'views/atoms/ParticlgBg';
 import { getNextLevel } from 'app/actions/userActions';
 
 interface RoutePresentationParams {
-  mode: string;
-  aokId: string;
-}
-
-interface BlockQuestionInput {
-  question: number;
-  answerOption: number;
-  isCorrect: boolean;
+  presentationId: string;
 }
 
 const EXP_UNIT = 5;
 
 export const Question: FC = () => {
-
   const earning = useSelector((state: any) => state.earning);
   const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) => state.student)
-  const state = useSelector((state: Store) => state);
-  const loadingContext = useContext(LoadingContext);
-  const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
 
-  const {mode, aokId} = useParams<RoutePresentationParams>();
-  const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
+  // TODO answers and options must come from DB
+  // TODO and the type should be much more roboust
+  const {presentationId} = useParams<RoutePresentationParams>();
+  const state = useSelector((state: Store) => state);
+  const dispatch = useDispatch();
+  const [blockPresentation, setBlockPresentation] =
+    useState<IBlockPresentation>();
   const [question, setQuestion] = useState<IQuestion>();
   const [questionCounter, setQuestionCounter] = useState(Number);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
-  const [answerResult, setAnswerResult] = useState<BlockQuestionInput[]>([]);
+  const [answerResult, setAnswerResult] = useState<boolean[]>([]);
   const [pointUnit, setPointUnit] = useState<number>(0);
   const [points, setPoints] = useState<number>(0);
-  const [loading, setLoading] = useState(false)
-  const [nextMaxExp, setNextMaxExp] = useState(0)
-  const [openDg, setOpenDg] = useState(false);
-
+  const loadingContext = useContext(LoadingContext);
+  // const [loading, setLoading] = useState(false);
   const renderTypes = (
     question: IQuestion,
     type: string,
@@ -78,21 +66,8 @@ export const Question: FC = () => {
             onAnswer={onAnswer}
             blockPresentation={blockPresentation}
           />
-        )
-      }, {
-        type: 'SightWord',
-        component: (
-          <MultipleChoiceSightWord
-            question={question}
-            nextQuestion={handleNextQuestion}
-            totalQuestions={totalQuestions}
-            questionCounter={questionCounter}
-            onAnswer={onAnswer}
-            blockPresentation={blockPresentation}
-          />
-        )
+        ),
       },
-
     ];
 
     const filterType = types.find((item: any) => item.type === type);
@@ -100,29 +75,24 @@ export const Question: FC = () => {
   };
 
   useEffect(() => {
-    setNextMaxExp(student.nextLevel.pointsRequired)
-    if(mode === 'AI') setQuestionsInAI()
-    if(mode ==='PATH') setQuestionsInPath();
-  }, [])
-
-  useEffect(() => {
-    setQuestion(blockPresentation?.block.questions[questionCounter]);
-  }, [blockPresentation, questionCounter]);
-
-  useEffect(() => {
     upgradeEnergy();
   }, [answerResult]);
 
+
+  const [nextMaxExp, setNextMaxExp] = useState(0)
   const updateNextLevel = async (currentLevelAmount: number) => {
     const res:any = await getNextLevel(currentLevelAmount, user.token, dispatch)
     if(res.msg) setNextMaxExp(earning.expMax)
     else setNextMaxExp(res)
   }
+  useEffect(() => {
+    setNextMaxExp(student.nextLevel.pointsRequired)
+  }, [])
 
-  const onAnswer = (result: BlockQuestionInput) => {
+  const onAnswer = (result: boolean) => {
     increaseExp();
     setAnswerResult([...answerResult, result]);
-    if (result.isCorrect) {
+    if (result) {
       setPoints(points + pointUnit);
     }
   };
@@ -143,6 +113,8 @@ export const Question: FC = () => {
     } else dispatch({type: TYPE.EXP_UPDATE, payload: {exp: currentExp, expMax: expMax}});
   };
 
+  // state to open and close congratulations pop up
+  const [openDg, setOpenDg] = useState(false);
   const congratulations = () => {
     setOpenDg(!openDg);
   };
@@ -154,7 +126,8 @@ export const Question: FC = () => {
     }
     let corrCount = 0;
     for (let i = answerResult.length - 1; i >= 0; i--) {
-      if (answerResult[i].isCorrect) {
+      // console.log(answerResult[i]);
+      if (answerResult[i]) {
         corrCount = answerResult.length - i;
       } else break;
     }
@@ -182,114 +155,58 @@ export const Question: FC = () => {
     console.error(error);
   };
 
-  const setQuestionsInAI = async () => {
-    const result:any = await createAiBlockPresentation(
-      parseInt(aokId),
-      user.token,
-      dispatch
+  useEffect(() => {
+    get(
+      `blockPresentationById(id:${presentationId})`,
+      BLOCK_PRESENTATION_QUERY,
+      handleData,
+      handleError
     );
-    if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-    setBlockPresentation(result.data);
-    setPointUnit(10);
-    loadingContext.done()
-    return true;
-  }
+  }, [presentationId]);
 
-  const setQuestionsInPath = async () => {
-    const result:any = await createPathBlockPresentation(
-      student.id,
-      parseInt(aokId),
-      user.token,
-      dispatch
-    );
-    if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-    setBlockPresentation(result.data);
-    setPointUnit(10);
-    loadingContext.done()
-    return true;
-  }
-
-  const onNextLesson = () => {
-    setQuestionCounter(0);
-    setIsLessonFinished(false)
-    setAnswerResult([]);
-    setPoints(0)
-  }
-
-  const arrObjToString  = (arrObj: any) => {
-    let str = '[';
-    for(const obj of arrObj){
-        str+= '{'
-        for(const key in obj){
-            if(key === 'isCorrect') continue;
-            str+= key
-            str+= ': '
-            if(typeof(obj[key]) === 'string') str+= '"' + obj[key] + '"'
-            else str+= obj[key]
-            str+= ','
-        }
-        str+='},'
-    }
-    str += ']'
-    return str;
-  }
-  // useEffect(() => {
-
-  //   setQuestionsInAI();
-  //   // get(
-  //   //   `blockPresentationById(id:${presentationId})`,
-  //   //   BLOCK_PRESENTATION_QUERY,
-  //   //   handleData,
-  //   //   handleError
-  //   // );
-  // }, [presentationId]);
+  useEffect(() => {
+    setQuestion(blockPresentation?.block.questions[questionCounter]);
+    // console.log(
+    //   'question is ',
+    //   blockPresentation?.block.questions[questionCounter]
+    // );
+  }, [blockPresentation, questionCounter]);
 
   const handleNextQuestion = async () => {
     if (blockPresentation) {
       if (blockPresentation.block.questions.length < questionCounter + 2) {
-        setLoading(true)
         setIsLessonFinished(true);
         // setLoading(true);
         let correctCount = 0;
         let wrongCount = 0;
+        console.log(answerResult);
         for (const data of answerResult) {
-          if (data.isCorrect) correctCount++;
+          console.log(data);
+          if (data) correctCount++;
           else wrongCount++;
         }
-        const finishBlockResult = await finishBlock(
+        await finishBlock(
           blockPresentation.id,
           correctCount,
           wrongCount,
           (state.earning.energyCharge * pointUnit * 10) / 100,
           state.earning,
-          arrObjToString(answerResult),
           state.user.token,
           dispatch
         );
-        if(mode === 'AI') await setQuestionsInAI();
-        else await setQuestionsInPath();
-        setLoading(false);
+        // setLoading(false);
       }
     }
     const counter = questionCounter + 1;
     setQuestionCounter(counter);
   };
-
   return (
     <Wrapper>
       {isLessonFinished ? (
         <StudentMenu>
           <FinishLesson
-            loading={loading}
             tokens={points}
             energy={(state.earning.energyCharge * pointUnit * 10) / 100}
-            onNextLesson = {onNextLesson}
           />
         </StudentMenu>
       ) : blockPresentation && question ? (
@@ -297,9 +214,8 @@ export const Question: FC = () => {
           <ProgressWrapper>
             <LessonProgress
               currentQuestion={questionCounter + 1}
-              topic={blockPresentation?.block?.topicGrade?.topic?.name}
+              topic={'Math'}
               totalQuestions={blockPresentation.block.questions.length}
-              questions={blockPresentation?.block?.questions}
               answerResult={answerResult}
               combocount={state.earning.energyCharge}
             />
@@ -314,8 +230,7 @@ export const Question: FC = () => {
           <Container id="container">
             {renderTypes(
               question,
-              // blockPresentation.block.typeOf.name,
-              question.questionAudioAssets.length > 0 ? 'SightWord' : 'Text',
+              blockPresentation.block.typeOf.name,
               blockPresentation.block.questions.length,
               blockPresentation
             )}

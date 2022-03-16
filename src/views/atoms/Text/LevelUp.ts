@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import { BasicColor } from 'views/Color';
-import { Typography } from './typography';
+import {ScreenSize} from './../../screenSize';
+import {BasicColor} from '../../Color';
+import {Typography} from './typography';
 
 type LevelUpProps = {
   isDark?: boolean;
@@ -21,5 +21,3 @@ export const LevelUp = styled.h5<LevelUpProps>`
     letter-spacing: 0.75px;
   }
 `;
-
-
