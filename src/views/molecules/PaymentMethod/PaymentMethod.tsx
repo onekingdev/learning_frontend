@@ -125,7 +125,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                         <OrderItemContent>${plans.Sole.currentPrice} / {plans.Sole.period}</OrderItemContent>
                     </OrderItem>
                 }
-                <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>
+                {/* <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>
                     <Grid item md={6} xs={10}>
                     <TextField
                         label="Coupon code"
@@ -142,7 +142,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                             value="Apply Coupon"
                         />
                     </Grid>
-                </Grid>
+                </Grid> */}
                 <OrderItem>
                     <OrderItemTitleContainer>
                         <OrderItemTitle>Subtotal</OrderItemTitle>

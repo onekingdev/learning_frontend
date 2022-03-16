@@ -73,7 +73,8 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
             <div style={{
                 display: 'flex',
                 backgroundColor: colors[deep],
-                cursor: 'pointer'
+                cursor: 'pointer',
+                border: "1px solid black"
             }} onClick={toggle}>
                 <Subject style={{
                     paddingLeft: `${deep}rem`,
