@@ -1,3 +1,5 @@
+import { AnyStyledComponent } from "styled-components";
+
 export interface IAnswer {
   id: string;
   identifier: string;
@@ -26,6 +28,7 @@ export interface IQuestion {
   questionText: string;
   questionAudioUrl: string;
   answeroptionSet: IAnswer[];
+  questionAudioAssets: any;
   questionImageAssets: IQuestionImageAsset[];
 }
 

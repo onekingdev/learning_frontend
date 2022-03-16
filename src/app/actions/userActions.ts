@@ -95,9 +95,11 @@ export const getNextLevel = async (currentLevelAmount: number,token: string, dis
 }
 
 export const resetReducer =  async (dispatch: any) => {
-  dispatch({type: TYPES.USER_RESET});
-  dispatch({type: TYPES.STUDENT_RESET});
-  dispatch({type: TYPES.EARNING_RESET});
   dispatch({type: TYPES.AVATAR_RESET});
+  dispatch({type: TYPES.EARNING_RESET});
+  dispatch({type: TYPES.GRADE_RESET});
+  dispatch({type: TYPES.GUARDIAN_RESET});
   dispatch({type: TYPES.INTEREST_RESET})
+  dispatch({type: TYPES.STUDENT_RESET});
+  dispatch({type: TYPES.USER_RESET});
 }
