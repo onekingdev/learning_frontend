@@ -65,7 +65,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         firstName: null,
         lastName: null,
         addressOne: null,
-        addressTwo: null,
+        // addressTwo: null,
         state: null,
         city: null,
         zip: null,
@@ -78,7 +78,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         expiryDate: null,
         cvc: null,
         addressOne: null,
-        addressTwo: null,
+        // addressTwo: null,
         state: null,
         city: null,
         zip: null,
@@ -436,7 +436,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
                     <TextField
                         label="Address Line 2"
                         onChange={(e: any) => {
-                            handleFormChange('addressTwo',e.target.value.length === 0 ? 'Field is required' : '');
+                            // handleFormChange('addressTwo',e.target.value.length === 0 ? 'Field is required' : '');
                             setData({...data, addressTwo: e.target.value});
                         } }
                         error={!!validateRst.addressTwo}
