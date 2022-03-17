@@ -23,7 +23,7 @@ export const Input = styled.input`
   border-collapse: collapse;
   outline: none;
   font-size: 18px;
-  padding-left: 5vw;
+  width: 230px;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     font-size: 0.9em;
   }
