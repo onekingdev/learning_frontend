@@ -61,6 +61,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { UserRankTreasureTrack } from 'views/molecules/UserRank';
 import avatar from 'views/assets/avatars/avatar1.svg';
 import { getRanking } from 'app/firebase';
+import { ScreenSize } from 'constants/screenSize';
 
 const avatars = [Boy1, Boy7, Girl5, Girl9, Girl11];
 const imgPaths = [
@@ -113,143 +114,194 @@ export const StudentTreasureTrack: FC = () => {
     const initialNumber = Math.ceil(Math.random()*10);
     return (<StudentMenu>
         <Container>
-            <div id="treasure-map" style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}>
-                <div id='title' style={{
-                    position: 'relative',
-                    width: '450px',
-                    height: '80px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <img style={{
-                        position: 'absolute',
-                        zIndex: 10,
-                        width: '100%',
-                        height: '80px'
-                    }} src={welcome} alt="Welcome" />
-                    <Title style={{
-                        zIndex: 20,
-                    }}>Treasure Track</Title>
-                </div>
+            <MapWrapper>
                 <div style={{
-                    position: 'relative',
-                    width: '660px',
-                    height: '510px'
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
                 }}>
-                    <img src={treasureMap} alt="treasureMap" />
-                    <img style={{
-                        position: 'absolute',
-                        left: '80px',
-                        top: '60px'
-                    }} src={treasureTrackIsland01} alt="treasureTrackIsland01" />
-                    <img style={{
-                        position: 'absolute',
-                        right: '100px',
-                        top: '57px'
-                    }} src={treasureTrackIsland02} alt="treasureTrackIsland02" />
-                    <img style={{
-                        position: 'absolute',
-                        left: '100px',
-                        bottom: '160px'
-                    }} src={treasureTrackIsland03} alt="treasureTrackIsland03" />
-                    <img style={{
-                        position: 'absolute',
-                        right: '110px',
-                        bottom: '106px'
-                    }} src={treasureTrackIsland04} alt="treasureTrackIsland04" />
-                    { pathComp }
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        position: 'absolute',
-                        left: '-6.5rem',
-                        bottom: '-5rem'
-                    }}>
-                        <img src={Hair} alt="hair" />
-                        <img style={{
-                            marginTop: '-2rem'
-                        }} src={TShirt} alt="tshirt" />
-                        <img src={Pant} alt="pant" />
+                    <MapTitleViewer>
                         <img style={{
                             position: 'absolute',
-                            top: '2rem'
-                        }} src={FaceGirl11} alt="pant" />
-                    </div>
+                            zIndex: 10,
+                            width: '100%',
+                            height: '80px'
+                        }} src={welcome} alt="Welcome" />
+                        <Title style={{
+                            zIndex: 20,
+                        }}>Treasure Track</Title>
+                    </MapTitleViewer>
+                    <MapViewer>
+                        <div style={{
+                            position: "relative",
+                            width: "660px",
+                            margin: "auto",
+                        }}>
+                            <img src={treasureMap} alt="treasureMap" />
+                            <img style={{
+                                position: 'absolute',
+                                left: '80px',
+                                top: '60px'
+                            }} src={treasureTrackIsland01} alt="treasureTrackIsland01" />
+                            <img style={{
+                                position: 'absolute',
+                                right: '100px',
+                                top: '57px'
+                            }} src={treasureTrackIsland02} alt="treasureTrackIsland02" />
+                            <img style={{
+                                position: 'absolute',
+                                left: '100px',
+                                bottom: '160px'
+                            }} src={treasureTrackIsland03} alt="treasureTrackIsland03" />
+                            <img style={{
+                                position: 'absolute',
+                                right: '110px',
+                                bottom: '106px'
+                            }} src={treasureTrackIsland04} alt="treasureTrackIsland04" />
+                            { pathComp }
+                        </div>
+                    </MapViewer>
                 </div>
-            </div>
-            <div style={{
-                borderRadius: '2rem',
-                overflow: 'hidden',
-                padding: '1rem',
-                flexGrow: '1',
-                flexShrink: '1',
-            }}>
-                <Paper elevation={3}>
-                    <Card>
-                        <CardContent>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                marginLeft: '-1rem',
-                                marginRight: '-1rem',
-                            }}>
-                                <Typography variant="h4" color="text.primary" gutterBottom>
-                                Honor Roll
-                                </Typography>
-                                <Typography variant="h5" color="text.primary" gutterBottom>
-                                    <div>
-                                        <div style={{
-                                            display: 'flex',
-                                            alignItems: 'center'
-                                        }}
-                                            aria-controls={open ? 'basic-menu' : undefined}
-                                            aria-haspopup="true"
-                                            aria-expanded={open ? 'true' : undefined}
-                                            onClick={handleClick}
-                                        >
-                                            {menuTitle}
-                                            <ArrowDropDownIcon />
-                                        </div>
-                                        <Menu
-                                            id="basic-menu"
-                                            anchorEl={anchorEl}
-                                            open={open}
-                                            onClose={() => handleClose(menuTitle)}
-                                            MenuListProps={{
-                                            'aria-labelledby': 'basic-button',
-                                            }}
-                                        >
-                                            <MenuItem onClick={() => handleClose("Socrates")}>Socrates</MenuItem>
-                                            <MenuItem onClick={() => handleClose("Classroom")}>Classroom</MenuItem>
-                                            <MenuItem onClick={() => handleClose("School")}>School</MenuItem>
-                                        </Menu>
+                <CharactorViewer>
+                    <img src={Hair} alt="hair" />
+                    <img style={{
+                        marginTop: '-2rem'
+                    }} src={TShirt} alt="tshirt" />
+                    <img src={Pant} alt="pant" />
+                    <img style={{
+                        position: 'absolute',
+                        top: '2rem'
+                    }} src={FaceGirl11} alt="pant" />
+                </CharactorViewer>
+            </MapWrapper>
+            <PanelWrapper>
+                <Card>
+                    <CardContent>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            marginLeft: '-1rem',
+                            marginRight: '-1rem',
+                        }}>
+                            <Typography variant="h4" color="text.primary" gutterBottom>
+                            Honor Roll
+                            </Typography>
+                            <Typography variant="h5" color="text.primary" gutterBottom>
+                                <div>
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }}
+                                        aria-controls={open ? 'basic-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                        onClick={handleClick}
+                                    >
+                                        {menuTitle}
+                                        <ArrowDropDownIcon />
                                     </div>
-                                </Typography>
-                                {ranking.map((name, i) => {
-                                    return (
-                                    <UserRankTreasureTrack active={i === Math.floor(ranking.length / 2)} coinsEarned={i === Math.floor(ranking.length / 2) ? earnedCoin : Math.floor(Math.random() * 1000)} userRank={i + initialNumber} userName={name} key={name+i} userIcon={avatars[i]} />
-                                    );
-                                })}
-                            </div>
-                        </CardContent>
-                    </Card>
-                </Paper>
-            </div>
+                                    <Menu
+                                        id="basic-menu"
+                                        anchorEl={anchorEl}
+                                        open={open}
+                                        onClose={() => handleClose(menuTitle)}
+                                        MenuListProps={{
+                                        'aria-labelledby': 'basic-button',
+                                        }}
+                                    >
+                                        <MenuItem onClick={() => handleClose("Socrates")}>Socrates</MenuItem>
+                                        <MenuItem onClick={() => handleClose("Classroom")}>Classroom</MenuItem>
+                                        <MenuItem onClick={() => handleClose("School")}>School</MenuItem>
+                                    </Menu>
+                                </div>
+                            </Typography>
+                            {ranking.map((name, i) => {
+                                return (
+                                <UserRankTreasureTrack additionalPl={i%2 === 1 ? "0px" : "10px"} active={i === Math.floor(ranking.length / 2)} coinsEarned={i === Math.floor(ranking.length / 2) ? earnedCoin : Math.floor(Math.random() * 1000)} userRank={i + initialNumber} userName={name} key={name+i} userIcon={avatars[i]} />
+                                );
+                            })}
+                        </div>
+                    </CardContent>
+                </Card>
+            </PanelWrapper>
         </Container>
     </StudentMenu>)
 }
 
 const Container = styled.div`
     display: flex;
-    max-width: 1024px;
+    flex-direction: row;
+    max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px;
+    width: 100%;
     margin: auto;
     align-items: flex-end;
     margin-top: 2rem;
+    box-sizing: border-box;
+    @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
+        flex-direction: column;
+        max-width: 100vw;
+        padding: 0.5rem;
+    }
+`;
+
+const panelWidth = 390;
+const MapWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+    position: relative;
+    margin: auto;
+    width: 100%;
+    @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
+        width: calc(100% - 1rem);
+    }
+`;
+
+const PanelWrapper = styled.div`
+    margin: 1rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px #0000003f;
+    min-width: ${panelWidth}px;
+    @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
+        margin: auto;
+        margin-bottom: 1rem;
+        width: calc(100% - 1rem);
+        min-width: calc(${panelWidth}px - 1rem);
+    }
+    @media (max-width: ${ ScreenSize.tablet }) {
+        margin-bottom: 5rem;
+    }
+`;
+
+const CharactorViewer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: -6.5rem;
+    bottom: -5rem;
+    @media (max-width: ${ScreenSize.tablet}) {
+        display: none;
+    }
+`;
+
+const MapTitleViewer = styled.div`
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const MapViewer = styled.div`
+    position: relative;
+    overflow: auto;
+    width: 100%;
 `;
