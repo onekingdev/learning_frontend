@@ -218,7 +218,7 @@ export const StudentTreasureTrack: FC = () => {
                             </Typography>
                             {ranking.map((name, i) => {
                                 return (
-                                <UserRankTreasureTrack active={i === Math.floor(ranking.length / 2)} coinsEarned={i === Math.floor(ranking.length / 2) ? earnedCoin : Math.floor(Math.random() * 1000)} userRank={i + initialNumber} userName={name} key={name+i} userIcon={avatars[i]} />
+                                <UserRankTreasureTrack additionalPl={i%2 === 1 ? "0px" : "10px"} active={i === Math.floor(ranking.length / 2)} coinsEarned={i === Math.floor(ranking.length / 2) ? earnedCoin : Math.floor(Math.random() * 1000)} userRank={i + initialNumber} userName={name} key={name+i} userIcon={avatars[i]} />
                                 );
                             })}
                         </div>
@@ -237,9 +237,11 @@ const Container = styled.div`
     margin: auto;
     align-items: flex-end;
     margin-top: 2rem;
+    box-sizing: border-box;
     @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
         flex-direction: column;
         max-width: 100vw;
+        padding: 0.5rem;
     }
 `;
 
@@ -253,6 +255,9 @@ const MapWrapper = styled.div`
     position: relative;
     margin: auto;
     width: 100%;
+    @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
+        width: calc(100% - 1rem);
+    }
 `;
 
 const PanelWrapper = styled.div`
@@ -266,9 +271,11 @@ const PanelWrapper = styled.div`
     @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
         margin: auto;
         margin-bottom: 1rem;
+        width: calc(100% - 1rem);
+        min-width: calc(${panelWidth}px - 1rem);
     }
     @media (max-width: ${ ScreenSize.tablet }) {
-        margin-bottom: 3rem;
+        margin-bottom: 5rem;
     }
 `;
 
@@ -279,6 +286,9 @@ const CharactorViewer = styled.div`
     position: absolute;
     left: -6.5rem;
     bottom: -5rem;
+    @media (max-width: ${ScreenSize.tablet}) {
+        display: none;
+    }
 `;
 
 const MapTitleViewer = styled.div`
