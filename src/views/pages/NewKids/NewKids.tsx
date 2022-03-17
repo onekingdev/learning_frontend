@@ -40,7 +40,6 @@ import health_sole from '../../assets/packageIcons/health_sole.svg';
 import {LoadingContext} from 'react-router-loading';
 import { createStudent } from '../../../app/actions/studentActions'
 import { getGrades } from '../../../app/actions/gradeActions'
-import { getAudiencesWithGrades} from 'app/actions/audienceActions'
 
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
@@ -69,7 +68,6 @@ const NewKids: FC = () => {
   const [childs, setChilds] = useState([{}]);
   const [paths, setPaths] = useState<any>([]);
   const [loading, setLoading] = useState(false);
-  const [audiences, setAudiences] = useState([]);
 
   const subjectIcons:any = {
     Gold: {
@@ -216,18 +214,6 @@ const NewKids: FC = () => {
     return valiResult;
   };
 
-  const setAudienceData = async () => {
-    const result:any = await getAudiencesWithGrades(
-      user.token,
-      dispatch
-    );
-    if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-    setAudiences(result.data);
-    return true;
-  }
   const setGradeData = async () => {
     const result:any = await getGrades(
       user.token,
@@ -235,12 +221,13 @@ const NewKids: FC = () => {
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
+      loadingContext.done();
       return false;
     }
+    loadingContext.done();
     return true;
   }
-
-  const onPageInit = async () => {
+  useEffect(() => {
     const guardianStudentPlans = guardian.guardianstudentplanSet;
     const temp_availblePlans = [];
 
@@ -250,13 +237,8 @@ const NewKids: FC = () => {
 
     setAvailablePackages(guardianStudentPlans);
     setChildNum(guardianStudentPlans.length);
-    await setGradeData();
-    await setAudienceData();
-    loadingContext.done();
+    setGradeData();
 
-  }
-  useEffect(() => {
-    onPageInit();
   }, []);
 
   return (
