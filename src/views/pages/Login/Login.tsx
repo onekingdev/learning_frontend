@@ -95,7 +95,6 @@ export const LogIn: FC = () => {
             loginColor={ButtonColor.login}
             loginAction={loginAction}
             loading={loading}
-            disabled={true}
           />
         </LoginWrapper>
         <Legal>

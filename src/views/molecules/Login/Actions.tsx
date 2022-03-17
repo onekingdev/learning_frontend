@@ -14,7 +14,6 @@ type LoginActionsProps = {
   loginText: string;
   loginColor: ButtonColor;
   loading: boolean;
-  disabled?: boolean;
   loginAction: () => void;
 };
 
@@ -26,8 +25,7 @@ export const Actions: FC<LoginActionsProps> = ({
   loginText,
   loginColor,
   loginAction,
-  loading,
-  disabled = false
+  loading
 }) => {
   return (
     <StyledActions>
@@ -39,7 +37,6 @@ export const Actions: FC<LoginActionsProps> = ({
           onClick={googleAction}
           fullWidth={true}
           loading={loading}
-          disabled={disabled}
         />
       </Action>
 
