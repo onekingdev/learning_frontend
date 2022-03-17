@@ -11,52 +11,55 @@ import Select from '@mui/material/Select';
 
 import TitleProgressBackground from 'views/assets/title-games-background.png';
 import ProgressMap from 'views/assets/student/progress-map.png';
-import ProgressPath01 from 'views/assets/student/progress-path-01.png';
-import ProgressPath02 from 'views/assets/student/progress-path-02.png';
-import ProgressPath03 from 'views/assets/student/progress-path-03.png';
-import ProgressPath04 from 'views/assets/student/progress-path-04.png';
-import ProgressPath05 from 'views/assets/student/progress-path-05.png';
-import ProgressPath06 from 'views/assets/student/progress-path-06.png';
-import ProgressPath07 from 'views/assets/student/progress-path-07.png';
-import ProgressPath08 from 'views/assets/student/progress-path-08.png';
-import ProgressPath09 from 'views/assets/student/progress-path-09.png';
-import ProgressPath10 from 'views/assets/student/progress-path-10.png';
-import ProgressPath11 from 'views/assets/student/progress-path-11.png';
-import ProgressPath12 from 'views/assets/student/progress-path-12.png';
-import ProgressPath13 from 'views/assets/student/progress-path-13.png';
-import ProgressPath14 from 'views/assets/student/progress-path-14.png';
-import ProgressPath15 from 'views/assets/student/progress-path-15.png';
-import ProgressPath16 from 'views/assets/student/progress-path-16.png';
-import ProgressPath17 from 'views/assets/student/progress-path-17.png';
-import ProgressPath18 from 'views/assets/student/progress-path-18.png';
-import ProgressPath19 from 'views/assets/student/progress-path-19.png';
-import ProgressPath20 from 'views/assets/student/progress-path-20.png';
-import ProgressPath21 from 'views/assets/student/progress-path-21.png';
-import ProgressPath22 from 'views/assets/student/progress-path-22.png';
-import ProgressPath23 from 'views/assets/student/progress-path-23.png';
-import ProgressPath24 from 'views/assets/student/progress-path-24.png';
-import ProgressPath25 from 'views/assets/student/progress-path-25.png';
-import ProgressPath26 from 'views/assets/student/progress-path-26.png';
-import ProgressPath27 from 'views/assets/student/progress-path-27.png';
-import ProgressPath28 from 'views/assets/student/progress-path-28.png';
-import ProgressPath29 from 'views/assets/student/progress-path-29.png';
-import ProgressPath30 from 'views/assets/student/progress-path-30.png';
-import ProgressPath31 from 'views/assets/student/progress-path-31.png';
-import ProgressPath32 from 'views/assets/student/progress-path-32.png';
-import ProgressPath33 from 'views/assets/student/progress-path-33.png';
-import ProgressPath34 from 'views/assets/student/progress-path-34.png';
-import ProgressPath35 from 'views/assets/student/progress-path-35.png';
-import ProgressPath36 from 'views/assets/student/progress-path-36.png';
-import ProgressPath37 from 'views/assets/student/progress-path-37.png';
-import ProgressPath38 from 'views/assets/student/progress-path-38.png';
-import ProgressPath39 from 'views/assets/student/progress-path-39.png';
-import ProgressPath40 from 'views/assets/student/progress-path-40.png';
-import ProgressPath41 from 'views/assets/student/progress-path-41.png';
-import ProgressPath42 from 'views/assets/student/progress-path-42.png';
+import ProgressPath01 from 'views/assets/student/process/01.svg';
+import ProgressPath02 from 'views/assets/student/process/02.svg';
+import ProgressPath03 from 'views/assets/student/process/03.svg';
+import ProgressPath04 from 'views/assets/student/process/04.svg';
+import ProgressPath05 from 'views/assets/student/process/05.svg';
+import ProgressPath06 from 'views/assets/student/process/06.svg';
+import ProgressPath07 from 'views/assets/student/process/07.svg';
+import ProgressPath08 from 'views/assets/student/process/08.svg';
+import ProgressPath09 from 'views/assets/student/process/09.svg';
+import ProgressPath10 from 'views/assets/student/process/10.svg';
+import ProgressPath11 from 'views/assets/student/process/11.svg';
+import ProgressPath12 from 'views/assets/student/process/12.svg';
+import ProgressPath13 from 'views/assets/student/process/13.svg';
+import ProgressPath14 from 'views/assets/student/process/14.svg';
+import ProgressPath15 from 'views/assets/student/process/15.svg';
+import ProgressPath16 from 'views/assets/student/process/16.svg';
+import ProgressPath17 from 'views/assets/student/process/17.svg';
+import ProgressPath18 from 'views/assets/student/process/18.svg';
+import ProgressPath19 from 'views/assets/student/process/19.svg';
+import ProgressPath20 from 'views/assets/student/process/20.svg';
+import ProgressPath21 from 'views/assets/student/process/21.svg';
+import ProgressPath22 from 'views/assets/student/process/22.svg';
+import ProgressPath23 from 'views/assets/student/process/23.svg';
+import ProgressPath24 from 'views/assets/student/process/24.svg';
+import ProgressPath25 from 'views/assets/student/process/25.svg';
+import ProgressPath26 from 'views/assets/student/process/26.svg';
+import ProgressPath27 from 'views/assets/student/process/27.svg';
+import ProgressPath28 from 'views/assets/student/process/28.svg';
+import ProgressPath29 from 'views/assets/student/process/29.svg';
+import ProgressPath30 from 'views/assets/student/process/30.svg';
+import ProgressPath31 from 'views/assets/student/process/31.svg';
+import ProgressPath32 from 'views/assets/student/process/32.svg';
+import ProgressPath33 from 'views/assets/student/process/33.svg';
+import ProgressPath34 from 'views/assets/student/process/34.svg';
+import ProgressPath35 from 'views/assets/student/process/35.svg';
+import ProgressPath36 from 'views/assets/student/process/36.svg';
+import ProgressPath37 from 'views/assets/student/process/37.svg';
+import ProgressPath38 from 'views/assets/student/process/38.svg';
+import ProgressPath39 from 'views/assets/student/process/39.svg';
+import ProgressPath40 from 'views/assets/student/process/40.svg';
+import ProgressPath41 from 'views/assets/student/process/41.svg';
+import ProgressPath42 from 'views/assets/student/process/42.svg';
 import MarkTableSubject from 'views/molecules/Table/MarkTableSubject';
 import { LoadingContext } from 'react-router-loading';
+import { ScreenSize } from 'constants/screenSize';
 
-export const StudentProgress = () => {
+
+
+export const KidsProgress = () => {
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
       loadingContext.done();
@@ -495,7 +498,8 @@ export const StudentProgress = () => {
             <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                width: '100%',
+                width: '90%',
+                margin: "auto",
                 paddingTop: '1rem'
             }}>
                 <Box sx={{ minWidth: 120 }}>
@@ -532,10 +536,13 @@ export const StudentProgress = () => {
                 </Box>
             </div>
             <div style={{
-                position: 'relative'
+                position: 'relative',
+                width: "90%",
+                margin: "auto",
+                overflow: "auto"
             }}>
                 <img style={{
-                    width: '100%'
+                    width: ScreenSize.desktop
                 }} src={ProgressMap} alt="ProgressMap" />
                 { paths.map((path, id) => <div key={id} style={{
                     position: 'absolute',
@@ -563,6 +570,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     max-width: 1024px;
+    width: 100vw;
     margin: auto;
     margin-top: 2rem;
 `;

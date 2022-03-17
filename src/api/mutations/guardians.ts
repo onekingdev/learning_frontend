@@ -1,16 +1,16 @@
 import {
     GUARDIAN_STUDENT,
     GUARDIAN,
-    } from '../fragments/guardianFragments';
+} from '../fragments/guardianFragments';
 import {
     COUPON_COODE,
-    } from '../fragments/paymentFragments';
-import  {
+} from '../fragments/paymentFragments';
+import {
     USER,
     USER_PROFILE
 } from '../fragments/userFragments'
-import {PAYMENT_METHOD ,PLAN, GUARDIAN_STUDENT_PLAN, ORDER_DETAIL, ORDER} from '../fragments/paymentFragments'
-import {STUDENT}from '../fragments/studentFragments'
+import { PAYMENT_METHOD, PLAN, GUARDIAN_STUDENT_PLAN, ORDER_DETAIL, ORDER } from '../fragments/paymentFragments'
+import { STUDENT } from '../fragments/studentFragments'
 
 export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string) => `
 	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}") {
@@ -80,7 +80,7 @@ export const CONFIRM_PAYMENT_ORDER = (
         }
         status
     }
-    
+
 `
 
 export const CHANGE_PAYMENT_METHOD = (
@@ -168,3 +168,19 @@ export const CANCEL_MEMBERSHIP = (
     }
 `
 
+export const UPDATE_EMAIL_PASSWORD = (
+    email: string,
+    username: string,
+    password: string
+) => `
+mutation {
+    changeGuardianEmailPassword(email: "${email}", username: "${username}", password: "${password}"){
+      guardian {
+        user {
+          email
+          username
+        }
+      }
+    }
+}
+`
