@@ -20,16 +20,20 @@ type TextOptionProps = {
 
 export const TextOption:FC<TextOptionProps> = ({answer,onClick}) => {
 
-    const [isCorrect, setIsCorrect] = useState(Boolean);
     const [isAnswered, setIsAnswered] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(false);
 
     useEffect(() => {
         setIsAnswered(false);
-      }, [answer.answerText])
+      }, [answer])
 
+    useEffect(() => {
+      console.log("initialized text option, isAnswered: ", isAnswered, "answer is ", answer)
+    }, [answer])
     const handleAnswer = (e: any) => {
+        console.log("handle answer")
         setIsCorrect(answer.isCorrect)
-        setIsAnswered(!isAnswered);
+        setIsAnswered(true);
         const inputAnswer:BlockQuestionInput = {
           question : -1,
           answerOption: answer.id,

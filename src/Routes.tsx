@@ -179,12 +179,12 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/kids/new">
             <NewKids />
           </PrivateRoute>
-          <Route
+          <PrivateRoute
             loading={true}
             path="/kids/treasure-track"
           >
             <StudentTreasureTrack />
-          </Route>
+          </PrivateRoute>
           <PrivateRoute
             loading={true}
             path="/kids/student-progress"
