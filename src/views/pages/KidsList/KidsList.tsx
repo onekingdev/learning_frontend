@@ -238,10 +238,10 @@ const KidsList: FC = () => {
         />
 
         <GridContainer container className="align-center">
-          <GridItem item xs={6} md={2}>
+          <GridItem item xs={6} md={0.7}>
             <Avatar src={props.avatar} />
           </GridItem>
-          <GridItem item xs={6} md={2}>
+          <GridItem item xs={6} md={1.3}>
             <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
           </GridItem>
           <GridItem item xs={12} md={2}>
@@ -250,7 +250,7 @@ const KidsList: FC = () => {
               value={userName}
             />
           </GridItem>
-          <GridItem item xs={12} md={2.5}>
+          <GridItem item xs={12} md={2}>
             <FormControl fullWidth>
               <InputLabel id="select-grade-label">
                 Select Your Grade
@@ -279,7 +279,7 @@ const KidsList: FC = () => {
               </Select>
             </FormControl>
           </GridItem>
-          <GridItem item xs={12} md={1.5}>
+          <GridItem item xs={12} md={2}>
             <FormControl fullWidth>
               <InputLabel id="select-lang-label">
                 Select Your Language
@@ -309,7 +309,7 @@ const KidsList: FC = () => {
               {/* <div className="err-text">{validateMsg.grade}</div> */}
             </FormControl>
           </GridItem>
-          <GridItem item xs={12} md={2}>
+          <GridItem item xs={12} md={1.5}>
             <Button
               bgColor={BasicColor.shadeBrown}
               onClick={ (e: any) => setOpenChangePwd(true) }
