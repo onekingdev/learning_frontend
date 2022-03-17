@@ -157,6 +157,7 @@ const KidsList: FC = () => {
     };
 
     useEffect(() => {
+
       loadingContext.done();
     }, []);
 
@@ -247,8 +248,6 @@ const KidsList: FC = () => {
             <TextField
               label="User Name"
               value={userName}
-              // value={username}
-              // onChange={(e) => updateUsername(e.target.value)}
             />
           </GridItem>
           <GridItem item xs={12} md={2.5}>
@@ -259,7 +258,7 @@ const KidsList: FC = () => {
               <Select
                 labelId="select-grade-label"
                 id="select-grade"
-                value={grades[grades.findIndex((item:any) => item.id === grade.id)]}
+                value={grades?.length > 0 ? grades[grades.findIndex((item:any) => item.id === grade.id)] : ""}
                 label="Select Your Grade"
                 className={`${classes.select} err-border`}
                 onChange={async (e) => {
@@ -272,13 +271,12 @@ const KidsList: FC = () => {
                 }}
                 displayEmpty={true}
               >
-                {grades?.length && grades.length > 0 && grades.map((value: any, index: number) => (
+                {grades?.length > 0 && grades.map((value: any, index: number) => (
                   <MenuItem value={value} key={index}>
-                    {value.name}
+                    {value?.name}
                   </MenuItem>
                 ))}
               </Select>
-              {/* <div className="err-text">{validateMsg.grade}</div> */}
             </FormControl>
           </GridItem>
           <GridItem item xs={12} md={1.5}>
@@ -370,9 +368,7 @@ const KidsList: FC = () => {
       <Container>
         <Title>Your kids</Title>
         {children.map((child, index) => (
-          <>
             <Kid {...child} index={index} key={index}></Kid>
-          </>
         ))}
         <Button
           bgColor={BasicColor.green}
