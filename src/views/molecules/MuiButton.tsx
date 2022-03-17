@@ -23,6 +23,7 @@ type MuiButtonProps = {
   startIcon?: ReactChild | ReactChildren;
   fullWidth?: boolean;
   loadingPosition?: string;
+  sx?:any;
   onHover?: (e: any) => void;
   onClick?: (e: any) => void;
 };
@@ -47,6 +48,7 @@ const MuiButton: FC<MuiButtonProps> = ({
   loading=false,
   startIcon=<></>,
   fullWidth=false,
+  sx=null,
   onHover,
   onClick,
 }) => {
@@ -96,6 +98,7 @@ const MuiButton: FC<MuiButtonProps> = ({
         loading={loading}
         loadingPosition="center"
         startIcon={startIcon}
+        sx={{sx}}
         // fullWidth
     >
         {value}

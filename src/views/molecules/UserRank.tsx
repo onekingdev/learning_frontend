@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Button } from 'views/atoms/Text/Button';
+import { Subheader } from 'views/atoms/Text/Subheader';
+import { GeneralText } from 'views/atoms/Text/GeneralText';
 import { UserIcon } from 'views/atoms/UserIcon';
-import { ScreenSize } from 'constants/screenSize';
 
 type UserRankProps = {
   userRank: number;
@@ -13,7 +14,6 @@ type UserRankProps = {
 interface UserRankTreasureTrackProps extends UserRankProps {
   active?: boolean;
   coinsEarned?: string | number;
-  additionalPl?: string;
 }
 
 export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
@@ -28,19 +28,19 @@ export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
   );
 };
 
-export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userIcon, active=false, coinsEarned="0", additionalPl="" }) => {
+export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userIcon, active=false, coinsEarned="0" }) => {
   return active ? (
     <>
       <UserRankTreasureTrackStylesActive >
         <Button isDark={true}>#{userRank}</Button>
         <UserIcon src={userIcon} />
-        <Button fontSize="24px" isDark={true}>YOU</Button>
+        <Button isDark={true}>{userName}</Button>
         <Button isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStylesActive>
     </>
   ) : (
     <>
-      <UserRankTreasureTrackStyles pl={additionalPl} >
+      <UserRankTreasureTrackStyles >
         <Button isDark={true}>#{userRank}</Button>
         <UserIcon src={userIcon} />
         <Button isDark={true}>{userName}</Button>
@@ -62,28 +62,13 @@ const UserRankStyles = styled.div`
   align-items: center;
 `;
 
-type IUserRankTreasureTrackStyles = {
-  pl?: string;
-}
-
-const UserRankTreasureTrackStyles = styled(UserRankStyles)<IUserRankTreasureTrackStyles>`
+const UserRankTreasureTrackStyles = styled(UserRankStyles)`
   grid-template-columns: 40px 1fr 1fr 4fr;
-  margin-left: 16px;
-  padding-left: ${ props => props.pl ? props.pl : "0px"};
-  width: ${ props => props.pl ? `calc(100% - ${parseInt(props.pl.slice(0,-2)) + 16}px)` : "calc(100% - 16px)"};
-  @media (max-width: ${ScreenSize.desktop}) {
-    padding-left: 0px;
-    width: 100%;
-  }
+  margin-left: 1rem;
 `;
 
 const UserRankTreasureTrackStylesActive = styled(UserRankStyles)`
   grid-template-columns: 40px 1fr 1fr 4fr;
-  padding-left: 6px;
+  margin-left: 0;
   background: #21B95C33;
-  width: calc(100% - 6px);
-  @media (max-width: ${ScreenSize.desktop}) {
-    padding-left: 16px;
-    width: 100%;
-  }
 `;

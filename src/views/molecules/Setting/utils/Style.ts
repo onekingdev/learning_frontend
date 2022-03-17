@@ -100,10 +100,10 @@ export const LSFormControlLabel = styled(FormControlLabel)`
 /*                                          Button                                            */
 /*--------------------------------------------------------------------------------------------*/
 export const LSButton = styled(Button)<{
-  bgcolor?: string;
+  bgColor?: string;
 }>`
   &.MuiButton-root {
-    ${props => (props.bgcolor ? 'background-color:' + props.bgcolor + ';' : '')}
+    ${props => (props.bgColor ? 'background-color:' + props.bgColor + ';' : '')}
     border-radius: 20px;
     height: 49px;
     width: 215px;
