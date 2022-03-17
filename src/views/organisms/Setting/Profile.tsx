@@ -1,8 +1,11 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import * as React from 'react';
-
+import { doUpdateGuardianEmailPassword } from 'app/actions/guardianActions';
+// import { validate } from 'email-validator';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import validator from 'validator'
+import {GUARDIAN_UPDATE_EMAIL_PWD} from 'app/types'
 
 import {
   LSShadowContainer,
@@ -19,21 +22,44 @@ import {
 import { dictionary } from 'views/molecules/Setting/utils/dictionary';
 
 import { settingPage } from 'views/molecules/Setting/utils/Theme';
+import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
+import { LSDialog } from 'views/molecules/Setting/LSDialog';
+import { PwdResetForm } from './PwdResetFrom';
+import { useSnackbar } from 'notistack';
 
 
 export const SettingForm: FC = () => {
   const language = 'en';
   const words = dictionary[language].form
+  const user = useSelector((state: any) => state.user);
+  const [openPwdRstDg, setOpenPwdRstDg] = useState(false)
+  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const toggleOpenPwdRstDg = () => {
+    setOpenPwdRstDg(!openPwdRstDg)
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const email = data.get('email')?.toString()
+    const newEmail = email ? email : ''
+    if (validator.isEmail(newEmail)) {
+      const res: any = await doUpdateGuardianEmailPassword(newEmail, user.username, 'pwd.password', user.token)
+      if (res === null)
+        enqueueSnackbar('Email is not valid! ', { variant: 'error' })
+      else {
+        dispatch({
+          type: GUARDIAN_UPDATE_EMAIL_PWD,
+          payload: { email: newEmail }
+        });
+        enqueueSnackbar('Email updated successfully! ', { variant: 'success' })
+      }
+    }
+    else
+      enqueueSnackbar('Email is not valid! ', { variant: 'error' })
   };
 
   return (
@@ -52,7 +78,7 @@ export const SettingForm: FC = () => {
               </Grid>
               <Grid item lg={8} xs={12}>
                 <LSText pl={20} >
-                  {'Lana Taylor James'}
+                  {user.username}
                 </LSText>
               </Grid>
             </LSGridRow>
@@ -64,7 +90,7 @@ export const SettingForm: FC = () => {
               </Grid>
               <Grid item lg={8} xs={12}>
                 <LSText pl={20}>
-                  {words.currentEmail}
+                  {user.email}
                 </LSText>
               </Grid>
             </LSGridRow>
@@ -93,7 +119,16 @@ export const SettingForm: FC = () => {
                 </LSLabel>
               </Grid>
               <Grid item lg={8} xs={12}>
-                <LSBlueTextButton >
+                <LSDialog
+                  isOpen={openPwdRstDg}
+                  open={toggleOpenPwdRstDg}
+                  title='Change Password'
+                  // contentText='Input new password'
+                  dialogContent={
+                    <PwdResetForm open={toggleOpenPwdRstDg} />
+                  }
+                />
+                <LSBlueTextButton onClick={toggleOpenPwdRstDg}>
                   {'Change Password'}
                 </LSBlueTextButton>
               </Grid>

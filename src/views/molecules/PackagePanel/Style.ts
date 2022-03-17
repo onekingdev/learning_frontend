@@ -6,7 +6,7 @@ import { BasicColor } from 'views/Color';
 export const Container = styled.div`
     position: relative;
     width: 384px;
-    height: 420px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     background-color: ${props => props.color === 'Gold' ? BasicColor.paleOrange : BasicColor.ligntBlue};
@@ -67,11 +67,11 @@ export const Body = styled.div`
 `
 
 export const Price = styled.div`
-    font-size: 24px !important;
+    font-size: 40px;
 `
 
 export const Plan = styled.div`
-    font-size: 12px !important;
+    font-size: 30px;
 `
 
 export const Subjects = styled.div`

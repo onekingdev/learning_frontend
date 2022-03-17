@@ -24,6 +24,11 @@ const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUse
         ...state,
         ...action.payload
       };
+    case TYPE.GUARDIAN_UPDATE_EMAIL_PWD:
+      return {
+        ...state,
+        email: action.payload.email
+      };
     case TYPE.USER_RESET:
       return INITIAL_STATE;
     default:

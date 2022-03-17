@@ -168,10 +168,7 @@ export const STUDENT = `
         guardianstudentSet {
             id
         }
-        guardianstudentplan{
-            subject {
-                ${AREA_OF_KNOWLEDGE}
-            }
+        guardianstudentplanSet{
             ${GUARIDAN_STUDENT_PLAN_RAW}
             orderDetail {
                 ${ORDER_DETAIL_RAW}
