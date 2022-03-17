@@ -1,6 +1,7 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
 import kidA from 'views/assets/avatars/kid-1.svg';
 import kidB from 'views/assets/avatars/kid-2.svg';
@@ -52,6 +53,7 @@ const KidsList: FC = () => {
   const user = useSelector((state: Store) => state.user);
   const guardian = useSelector((state: any) => state.guardian)
   const grades = useSelector((state: any) => state.grade)
+  const history = useHistory();
   const dispatch = useDispatch()
   const { enqueueSnackbar } = useSnackbar();
 
@@ -239,7 +241,7 @@ const KidsList: FC = () => {
 
         <GridContainer container className="align-center">
           <GridItem item xs={6} md={0.7}>
-            <Avatar src={props.avatar} />
+            <Avatar src={props.avatar} onClick={() => history.push("/parent/reporting")}/>
           </GridItem>
           <GridItem item xs={6} md={1.3}>
             <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
