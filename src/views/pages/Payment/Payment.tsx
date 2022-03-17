@@ -136,7 +136,7 @@ export const Payment: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={true}>
       <>
-        <ParentPgStepper step={1} />
+        <ParentPgStepper step={2} />
         <TipContainer>
           <Alert severity="info">
             In Socrates, students can get mutiple Areas of Knowledge depend of
