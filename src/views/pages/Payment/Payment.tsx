@@ -198,7 +198,7 @@ export const Payment: FC = () => {
           />
         </PackageContainer>
         {!isSpecialCode &&
-          <Alert severity="info" className="m-b-35" style={{width: '72%'}}>
+          <Alert severity="info" className="m-b-35" style={{width: '72%', fontSize: "40px", justifyContent: "center", alignItems: "center", maxWidth: "1414px"}}>
             Add 2nd kid with {offRate}% off
           </Alert>
         }

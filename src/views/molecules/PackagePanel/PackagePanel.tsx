@@ -75,9 +75,9 @@ export const PackagePanel: FC<PackagePanelProps> = ({type, price, isSpecialCode,
           <br />
           <div className="flex flex-row">
             <ButtonGroup variant="outlined" aria-label="outlined button group">
-              <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={50} width={50} value="-" onClick={() => childrenCount > 0 && setChildrenCount(childrenCount - 1)} />
-              <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={50} width={50} value={''+childrenCount} />
-              <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={50} width={50} value="+" onClick={() => setChildrenCount(childrenCount + 1)} />
+              <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={35} width={35} value="-" onClick={() => childrenCount > 0 && setChildrenCount(childrenCount - 1)} />
+              <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={35} width={35} value={''+childrenCount} />
+              <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={35} width={35} value="+" onClick={() => setChildrenCount(childrenCount + 1)} />
             </ButtonGroup>
           </div>
         </div>
