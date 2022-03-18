@@ -66,7 +66,7 @@ export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) =
       >
         {
           data.map((row, index) => {
-            return <LSFormControlLabel key={row.id} value={row.value} control={<LSRadio />} label={row.label} />
+            return <LSFormControlLabel value={row.value} control={<LSRadio />} label={row.label} />
           })
         }
       </RadioGroup>
@@ -80,7 +80,7 @@ export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) =
         <LSButton
           variant='contained'
           color="secondary"
-          bgcolor={BasicColor.gray60}
+          bgColor={BasicColor.gray60}
           onClick={onCancel}
         >
           {'Cancel'}

@@ -34,9 +34,9 @@ import NewKids from 'views/pages/NewKids/NewKids';
 import { Spinner } from 'views/atoms/Spinner';
 
 // Testing
-import { ParentReporting } from 'views/pages/Parent/Reporting';
-import { KidsTreasureTrack } from 'views/pages/Kids/TreasureTrack';
-import { KidsProgress } from 'views/pages/Kids/Progress';
+import { ParentReport } from 'views/pages/Testing/ParentReport';
+import { StudentTreasureTrack } from 'views/pages/Testing/StudentTreasureTrack';
+import { StudentProgress } from 'views/pages/Testing/StudentProgress';
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
@@ -165,7 +165,7 @@ export function Routes(props: any) {
             loading={true}
             path="/parent/reporting"
           >
-            <ParentReporting />
+            <ParentReport />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/parent/payment">
             <Payment />
@@ -179,24 +179,24 @@ export function Routes(props: any) {
           <PrivateRoute loading={true} path="/kids/new">
             <NewKids />
           </PrivateRoute>
-          <Route
+          <PrivateRoute
             loading={true}
             path="/kids/treasure-track"
           >
-            <KidsTreasureTrack />
-          </Route>
+            <StudentTreasureTrack />
+          </PrivateRoute>
           <PrivateRoute
             loading={true}
-            path="/kids/progress"
+            path="/kids/student-progress"
           >
-            <KidsProgress />
+            <StudentProgress />
           </PrivateRoute>
           {/* <Route path="/testing-student-treasure-track">
             <StudentTreasureTrack />
           </Route> */}
           {process.env.NODE_ENV === 'development' ? (
             <Route path="/testing-student-progress">
-              {/* <StudentProgress /> */}
+              <StudentProgress />
             </Route>
           ) : null}
           <Redirect from="/" to="/login" />

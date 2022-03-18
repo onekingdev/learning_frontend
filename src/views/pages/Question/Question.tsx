@@ -121,6 +121,9 @@ export const Question: FC = () => {
 
   const onAnswer = (result: BlockQuestionInput) => {
     increaseExp();
+    //for test
+    result.isCorrect = true;
+
     setAnswerResult([...answerResult, result]);
     if (result.isCorrect) {
       setPoints(points + pointUnit);
