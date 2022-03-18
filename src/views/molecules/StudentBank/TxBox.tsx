@@ -108,7 +108,7 @@ const BankPaper = styled.div`
   color: white;
   background-color: ${BasicColor.green};
   border-radius: 20px;
-
+  max-width: 415px;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     width: 80vw;
     padding: 15px;

@@ -47,6 +47,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   }, [question.answeroptionSet]);
 
   const handleAnswer = (result: BlockQuestionInput) => {
+    console.log("answered, result is ", result)
     setIsAnswered(true);
     result.question = parseInt(question.id);
     onAnswer(result);
@@ -80,13 +81,11 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
         />
       ) : null}
       <BlackBoard>
-        <IconVideoContainer onClick={closeVideoModal}>
+        <QuestionContainer onClick={closeVideoModal}>
           <Icon image={videoIcon} />
-        </IconVideoContainer>
-        <AnswerContainer>
           <Question>{question.questionText}</Question>
           <Icon image={assistor} onClick={readQuestion} />
-        </AnswerContainer>
+        </QuestionContainer>
         <AnswersContainer>
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
@@ -169,7 +168,7 @@ const ImageAssetContainer = styled.div<{
 const ImageAsset = styled.img`
   width: 100%;
 `;
-const IconVideoContainer = styled.div`
+const QuestionContainer = styled.div`
   width: 90%;
   margin: 5px auto;
   margin-bottom: 20px;
@@ -196,7 +195,7 @@ const TextOptionsList = styled.div`
   text-align: left;
   @media screen and (min-width: ${ScreenSize.desktop}) {
     height: 50%;
-    margin: 50px auto;
+    margin: 20px auto;
     width: 70%;
   }
 `;

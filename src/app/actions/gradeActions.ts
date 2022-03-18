@@ -5,7 +5,7 @@ import {GRADES_QUERY} from '../../api/queries/people'
 import * as TYPES from '../../app/types'
 
 export const getGrades = async(token: string, dispatch: any) => {
-    const res:any = await query('grades', GRADES_QUERY, token).catch(e => ({success: false}));
+    const res:any = await query('grades', GRADES_QUERY).catch(e => ({success: false}));
 
     if(res.success === false) {
       return {success: false, msg: 'Network Error!'};

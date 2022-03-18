@@ -101,7 +101,7 @@ const CreateParent: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={true}>
       <>
-        <ParentPgStepper step={2} />
+        <ParentPgStepper step={1} />
         <Container>
           <FormContainer>
             <Title>Choose your name and password</Title>
