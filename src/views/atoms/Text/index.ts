@@ -76,8 +76,8 @@ export const TypoBtn = styled.p`
 
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 16px;
-    font-weight: 500;
-    line-height: 18px;
+  font-weight: 500;
+  line-height: 18px;
   }
 `;
 

@@ -76,7 +76,7 @@ export const login = async (username: string, password: string, dispatch: any) =
     }
     else if(guardian) {
       console.log('this is a guardian')
-      dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian })
+      // dispatch({ type: TYPES.PARENT_SET_DATA, payload: guardian })
       return {success: true, msg: 'Successfully Logined!', userType: 'guardian'}
     }
     else {
@@ -95,11 +95,9 @@ export const getNextLevel = async (currentLevelAmount: number,token: string, dis
 }
 
 export const resetReducer =  async (dispatch: any) => {
-  dispatch({type: TYPES.AVATAR_RESET});
-  dispatch({type: TYPES.EARNING_RESET});
-  dispatch({type: TYPES.GRADE_RESET});
-  dispatch({type: TYPES.GUARDIAN_RESET});
-  dispatch({type: TYPES.INTEREST_RESET})
-  dispatch({type: TYPES.STUDENT_RESET});
   dispatch({type: TYPES.USER_RESET});
+  dispatch({type: TYPES.STUDENT_RESET});
+  dispatch({type: TYPES.EARNING_RESET});
+  dispatch({type: TYPES.AVATAR_RESET});
+  dispatch({type: TYPES.INTEREST_RESET})
 }
