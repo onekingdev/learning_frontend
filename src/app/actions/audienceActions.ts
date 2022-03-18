@@ -1,11 +1,11 @@
 import mutation from '../../api/mutations/get'
 import query from '../../api/queries/get'
-import {GRADES_QUERY} from '../../api/queries/people'
+import {AUDIENCES_WITH_GRADE_QUERY} from '../../api/queries/people'
 
 import * as TYPES from '../../app/types'
 
-export const getGrades = async(token: string, dispatch: any) => {
-    const res:any = await query('grades', GRADES_QUERY).catch(e => ({success: false}));
+export const getAudiencesWithGrades = async(token: string, dispatch: any) => {
+    const res:any = await query('audiences', AUDIENCES_WITH_GRADE_QUERY).catch(e => ({success: false}));
 
     if(res.success === false) {
       return {success: false, msg: 'Network Error!'};
@@ -17,8 +17,7 @@ export const getGrades = async(token: string, dispatch: any) => {
       return {success: false, msg: result.errors[0].message};
     }
 
-    const grades = result.data.grades
-    dispatch({ type: TYPES.GRADE_SET_DATA, payload: grades })
+    const audiences = result.data.audiences
 
-    return {success: true, msg: 'Success', data: result.data}
+    return {success: true, msg: 'Success', data: audiences}
 }

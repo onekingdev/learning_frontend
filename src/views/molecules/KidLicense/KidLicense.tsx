@@ -19,24 +19,23 @@ const License = (props: any) => {
           <div className="flex justify-space-between align-center">
             <Img src={socrates} />
             <div className="flex flex-col h-full justify-space-between">
-              {console.log('member ship is', props.membership,props.membership.getFullYear())}
               <DialogTextField
                 label="Member Since"
-                value={`${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}`}
+                value={typeof(props?.membership) === 'object' ? `${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}` : ''}
                 // onChange={(e) => updateUsername(e.target.value)}
               />
               <DialogTextField
                 label="User Name"
-                value={props.username}
+                value={props?.username}
                 // onChange={(e) => updateUsername(e.target.value)}
               />
             </div>
             <div >
-              <QRCode value={props.username} size={100} />
+              <QRCode value={props?.username} size={100} />
             </div>
           </div>
           <div className="flex align-center">
-            <LicenseUsername>{props.parentName}</LicenseUsername>
+            <LicenseUsername>{props?.parentName}</LicenseUsername>
             <div>
               www.learnwithsocrates.com
             </div>

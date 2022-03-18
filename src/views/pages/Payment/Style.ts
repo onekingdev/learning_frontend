@@ -7,7 +7,7 @@ export const TipContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   // width: 45vw;
-  width: 850px;
+  width: 740px;
   justify-content:space-between;
   padding-top:80px;
   font-size:30px;

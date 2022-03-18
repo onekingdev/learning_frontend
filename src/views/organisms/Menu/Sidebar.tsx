@@ -66,7 +66,7 @@ export const Sidebar: FC = () => {
                     onKeyDown={toggleDrawer(false)}
                 >
                     <List>
-                        <ListItem >
+                        {/* <ListItem >
                             <IconContainer>
                                 <Icon
                                     image={homework_icon}
@@ -75,7 +75,7 @@ export const Sidebar: FC = () => {
                                 />
                                 <TypoIcon >HOMEWORKS</TypoIcon>
                             </IconContainer>
-                        </ListItem>
+                        </ListItem> */}
                         <ListItem >
                             <IconContainer>
                                 <Icon
