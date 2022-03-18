@@ -37,7 +37,7 @@ const MarkTableDiv = styled.div`
     flex-direction: column;
     margin-bottom: 6rem;
     color: black;
-    max-width: 95vw;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
@@ -67,7 +67,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
         return <div style={{
             display: 'flex',
             flexDirection: 'column',
-            width: '760px',
+            width: '100%',
         }}>
             <div style={{
                 display: 'flex',
@@ -83,7 +83,10 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                             transform: opened ? 'rotate(90deg)' : 'rotate(0deg)',
                             opacity: extra.length > 0 ? '100' : '0'
                         }} />
-                        <span>{main.item}</span>
+                        <span style={{
+                            paddingLeft: "5px",
+                            paddingRight: "5px",
+                        }}>{main.item}</span>
                     </> : <>
                         <TypoBtn style={{
                             background: '#26B824',
