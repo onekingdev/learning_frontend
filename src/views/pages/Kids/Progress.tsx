@@ -477,7 +477,7 @@ export const KidsProgress = () => {
     return <StudentMenu>
         <Container>
             <div style={{
-                maxWidth: '500px',
+                width: '500px',
                 height: '80px',
                 position: 'relative',
                 display: 'flex',
@@ -493,8 +493,6 @@ export const KidsProgress = () => {
                 <Title style={{
                     zIndex: 20,
                     color: 'black',
-                    paddingLeft: '1rem',
-                    paddingRight: '1rem',
                 }}>Treasure Track</Title>
             </div>
             <div style={{
