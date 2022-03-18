@@ -243,7 +243,7 @@ export const changeStudentPassword = async (
       return {success: false, msg: result.errors[0].message};
   }
 
-  const { guardian, student} = result.data.changeStudentPassword;
+  const { guardian, student} = result.data.createChangeStudentGrade;
 
   dispatch({
       type: TYPES.GUARDIAN_SET_DATA,

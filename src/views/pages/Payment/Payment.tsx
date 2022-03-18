@@ -13,11 +13,11 @@ import {
   Subject,
   SubjectContainer,
 } from './Style';
-import math from 'views/assets/math-elements.svg';
-import ela from 'views/assets/ela-elements.svg';
-import science from 'views/assets/science-elements.svg';
-import financial from 'views/assets/financial_elements.svg';
-import health from 'views/assets/health-elements.svg';
+import math from 'views/assets/packageIcons/math_gold.svg';
+import ela from 'views/assets/packageIcons/ela_gold.svg';
+import science from 'views/assets/packageIcons/science_gold.svg';
+import financial from 'views/assets/packageIcons/financial_gold.svg';
+import health from 'views/assets/packageIcons/health_gold.svg';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 import { LoadingContext } from 'react-router-loading';
 import { useSnackbar } from 'notistack';
@@ -136,7 +136,7 @@ export const Payment: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={true}>
       <>
-        <ParentPgStepper step={2} />
+        <ParentPgStepper step={1} />
         <TipContainer>
           <Alert severity="info">
             In Socrates, students can get mutiple Areas of Knowledge depend of
@@ -198,7 +198,7 @@ export const Payment: FC = () => {
           />
         </PackageContainer>
         {!isSpecialCode &&
-          <Alert severity="info" className="m-b-35" style={{width: '72%', fontSize: "40px", justifyContent: "center", alignItems: "center", maxWidth: "1414px"}}>
+          <Alert severity="info" className="m-b-35" style={{width: '72%'}}>
             Add 2nd kid with {offRate}% off
           </Alert>
         }

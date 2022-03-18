@@ -2,7 +2,6 @@ export const dictionary = Object.freeze({
   en: {
     form:{
       title: 'Profile and settings',
-      currentEmail: 'name@learnwithsocrates.com',
       },
     membership:{
       title: 'Membership details',

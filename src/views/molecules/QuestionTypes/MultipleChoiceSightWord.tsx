@@ -88,6 +88,8 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
         />
       ) : null}
       <BlackBoard>
+        <IconVideoContainer onClick={closeVideoModal}>
+        </IconVideoContainer>
         <AnswerContainer>
           <Question>{question.questionText}</Question>
           <Icon image={soundAssistorIcon} onClick={readQuestionAudioAsset} />
@@ -134,7 +136,6 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
   );
 };
 
-
 const BlackBoard = styled.div`
   background-color: #13705f;
   border: 7px solid #5c2100;
@@ -176,7 +177,7 @@ const ImageAssetContainer = styled.div<{
 const ImageAsset = styled.img`
   width: 100%;
 `;
-const QuestionContainer = styled.div`
+const IconVideoContainer = styled.div`
   width: 90%;
   margin: 5px auto;
   margin-bottom: 20px;
@@ -203,7 +204,7 @@ const TextOptionsList = styled.div`
   text-align: left;
   @media screen and (min-width: ${ScreenSize.desktop}) {
     height: 50%;
-    margin: 20px auto;
+    margin: 50px auto;
     width: 70%;
   }
 `;

@@ -45,7 +45,7 @@ export const Bank: FC = () => {
               <GridItem item md={12} xs={4} align='center'>
                 <Img src={Cartera} />
               </GridItem>
-              <GridItem item md={8} xs={8} align='center'>
+              <GridItem item md={8} xs={8} align='end'>
                 <AccountBalance balance={student.bankWallet.balance} />
               </GridItem>
               <GridItem item md={12} xs={12} align='center'>
