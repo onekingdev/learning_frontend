@@ -1,7 +1,6 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
 import kidA from 'views/assets/avatars/kid-1.svg';
 import kidB from 'views/assets/avatars/kid-2.svg';
@@ -53,7 +52,6 @@ const KidsList: FC = () => {
   const user = useSelector((state: Store) => state.user);
   const guardian = useSelector((state: any) => state.guardian)
   const grades = useSelector((state: any) => state.grade)
-  const history = useHistory();
   const dispatch = useDispatch()
   const { enqueueSnackbar } = useSnackbar();
 
@@ -159,7 +157,6 @@ const KidsList: FC = () => {
     };
 
     useEffect(() => {
-
       loadingContext.done();
     }, []);
 
@@ -177,7 +174,7 @@ const KidsList: FC = () => {
                   parentName={user.username}
                   // username={username}
                   username={userName}
-                  membership={props?.guardianstudentplanSet?.legnth > 0 ? new Date(props?.guardianstudentplanSet[0]?.expiredAt) : ""}
+                  membership={new Date(props?.guardianstudentplanSet[0]?.expiredAt)}
                 />
                {/* )} */}
               <GridContainer container>
@@ -240,19 +237,21 @@ const KidsList: FC = () => {
         />
 
         <GridContainer container className="align-center">
-          <GridItem item xs={6} md={0.7}>
-            <Avatar src={props.avatar} onClick={() => history.push("/parent/reporting")}/>
+          <GridItem item xs={6} md={2}>
+            <Avatar src={props.avatar} />
           </GridItem>
-          <GridItem item xs={6} md={1.3}>
+          <GridItem item xs={6} md={2}>
             <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
           </GridItem>
           <GridItem item xs={12} md={2}>
             <TextField
               label="User Name"
               value={userName}
+              // value={username}
+              // onChange={(e) => updateUsername(e.target.value)}
             />
           </GridItem>
-          <GridItem item xs={12} md={2}>
+          <GridItem item xs={12} md={2.5}>
             <FormControl fullWidth>
               <InputLabel id="select-grade-label">
                 Select Your Grade
@@ -260,7 +259,7 @@ const KidsList: FC = () => {
               <Select
                 labelId="select-grade-label"
                 id="select-grade"
-                value={grades?.length > 0 ? grades[grades.findIndex((item:any) => item.id === grade.id)] : ""}
+                value={grades[grades.findIndex((item:any) => item.id === grade.id)]}
                 label="Select Your Grade"
                 className={`${classes.select} err-border`}
                 onChange={async (e) => {
@@ -273,15 +272,16 @@ const KidsList: FC = () => {
                 }}
                 displayEmpty={true}
               >
-                {grades?.length > 0 && grades.map((value: any, index: number) => (
+                {grades?.length && grades.length > 0 && grades.map((value: any, index: number) => (
                   <MenuItem value={value} key={index}>
-                    {value?.name}
+                    {value.name}
                   </MenuItem>
                 ))}
               </Select>
+              {/* <div className="err-text">{validateMsg.grade}</div> */}
             </FormControl>
           </GridItem>
-          <GridItem item xs={12} md={2}>
+          <GridItem item xs={12} md={1.5}>
             <FormControl fullWidth>
               <InputLabel id="select-lang-label">
                 Select Your Language
@@ -311,7 +311,7 @@ const KidsList: FC = () => {
               {/* <div className="err-text">{validateMsg.grade}</div> */}
             </FormControl>
           </GridItem>
-          <GridItem item xs={12} md={1.5}>
+          <GridItem item xs={12} md={2}>
             <Button
               bgColor={BasicColor.shadeBrown}
               onClick={ (e: any) => setOpenChangePwd(true) }
@@ -370,7 +370,9 @@ const KidsList: FC = () => {
       <Container>
         <Title>Your kids</Title>
         {children.map((child, index) => (
+          <>
             <Kid {...child} index={index} key={index}></Kid>
+          </>
         ))}
         <Button
           bgColor={BasicColor.green}

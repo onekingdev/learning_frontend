@@ -55,23 +55,11 @@ export const get_async =  (
   query: string,
   token?: string
 ) => {
-  if(token)
-    return fetch(<string>process.env.REACT_APP_SERVER_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        query: `{
-          ${queryName} ${query}
-        }`,
-      }),
-    })
   return fetch(<string>process.env.REACT_APP_SERVER_URL, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify({
       query: `{

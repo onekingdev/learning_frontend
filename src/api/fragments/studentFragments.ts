@@ -111,7 +111,7 @@ export const STUDENTS = `
         isActive
         randomSlug
         firstName
-        fullName 
+        fullName
 `;
 
 export const STUDENT = `
@@ -169,9 +169,6 @@ export const STUDENT = `
             id
         }
         guardianstudentplan{
-            subject {
-                ${AREA_OF_KNOWLEDGE}
-            }
             ${GUARIDAN_STUDENT_PLAN_RAW}
             orderDetail {
                 ${ORDER_DETAIL_RAW}
@@ -202,7 +199,7 @@ export const STUDENT = `
             ${AUDIENCES}
             areaofknowledgeSet {
                 ${AREA_OF_KNOWLEDGE}
-            } 
+            }
         }
         grade {
             ${STUDENT_GRADE}

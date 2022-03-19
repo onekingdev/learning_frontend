@@ -40,7 +40,6 @@ import health_sole from '../../assets/packageIcons/health_sole.svg';
 import {LoadingContext} from 'react-router-loading';
 import { createStudent } from '../../../app/actions/studentActions'
 import { getGrades } from '../../../app/actions/gradeActions'
-import { getAudiencesWithGrades} from 'app/actions/audienceActions'
 
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
@@ -53,19 +52,16 @@ const NewKids: FC = () => {
   const classes = useStyles();
   const guardian = useSelector((state:any) => state.guardian)
   const user = useSelector((state: any) => state.user)
-  // const grades = useSelector((state: any) => state.grade)
+  const grades = useSelector((state: any) => state.grade)
   const { enqueueSnackbar } = useSnackbar();
 
   const [availablePackages, setAvailablePackages] = useState<any[]>([]);
-  const [audiences, setAudiences] = useState([]);
-  const [grades, setGrades] = useState([]);
   const [currentPackage, setCurrentPackage] = useState<any>();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
-  const [audience, setAudience] = useState();
   const [grade, setGrade] = useState<any>();
   const [childNum, setChildNum] = useState(0);
   const [childIdx, setChildIdx] = useState(1);
@@ -115,7 +111,6 @@ const NewKids: FC = () => {
     userId: null,
     password: null,
     confPassword: null,
-    audience: null,
     grade: null,
   });
 
@@ -210,7 +205,6 @@ const NewKids: FC = () => {
     const validateMsgTemp = {...validateMsg};
     let valiResult = true;
     for (const key in validateMsg) {
-      console.log("key is ", key, validateMsgTemp[key])
       if (validateMsg[key] === null) {
         validateMsgTemp[key] = 'Field is required';
       }
@@ -220,18 +214,6 @@ const NewKids: FC = () => {
     return valiResult;
   };
 
-  const setAudienceData = async () => {
-    const result:any = await getAudiencesWithGrades(
-      user.token,
-      dispatch
-    );
-    if(!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-    setAudiences(result.data);
-    return true;
-  }
   const setGradeData = async () => {
     const result:any = await getGrades(
       user.token,
@@ -239,12 +221,13 @@ const NewKids: FC = () => {
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
+      loadingContext.done();
       return false;
     }
+    loadingContext.done();
     return true;
   }
-
-  const onPageInit = async () => {
+  useEffect(() => {
     const guardianStudentPlans = guardian.guardianstudentplanSet;
     const temp_availblePlans = [];
 
@@ -254,13 +237,8 @@ const NewKids: FC = () => {
 
     setAvailablePackages(guardianStudentPlans);
     setChildNum(guardianStudentPlans.length);
-    await setGradeData();
-    await setAudienceData();
-    loadingContext.done();
+    setGradeData();
 
-  }
-  useEffect(() => {
-    onPageInit();
   }, []);
 
   return (
@@ -467,45 +445,6 @@ const NewKids: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="select-audience-label">
-                    Select Your Audience
-                  </InputLabel>
-                  <Select
-                    labelId="select-audience-label"
-                    id="select-audience"
-                    value={audience ? audience : {}}
-                    label="Select Your Audience"
-                    className={`${classes.select} err-border`}
-                    onChange={(e: any) => {
-                      setAudience(e.target.value);
-                      setGrades(e.target.value.gradeSet)
-                      setGrade({})
-                      validateMsg.grade = null
-                      validateMsg.audience = "";
-                      setValidateMsg({...validateMsg});
-                    }}
-                    sx={
-                      validateMsg.audience
-                        ? {
-                            '& fieldset': {
-                              borderColor: `${BasicColor.red} !important`,
-                            },
-                          }
-                        : {}
-                    }
-                    displayEmpty={true}
-                  >
-                    {audiences?.length > 0 && audiences.map((value: any, index: number) => (
-                      <MenuItem value={value} key={index}>
-                        {value.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  <div className="err-text">{validateMsg.audience}</div>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth>
                   <InputLabel id="select-grade-label">
                     Select Your Grade
                   </InputLabel>
@@ -534,7 +473,7 @@ const NewKids: FC = () => {
                     }
                     displayEmpty={true}
                   >
-                    {grades?.length > 0 && grades.map((value: any, index: number) => (
+                    {grades?.length && grades.length > 0 && grades.map((value: any, index: number) => (
                       <MenuItem value={value} key={index}>
                         {value.name}
                       </MenuItem>
@@ -542,6 +481,19 @@ const NewKids: FC = () => {
                   </Select>
                   <div className="err-text">{validateMsg.grade}</div>
                 </FormControl>
+                {/* <TextField
+                  label="GRADE"
+                  onChange={e => {
+                    setGrade(e.target.value);
+                    handleFormChange(
+                      'grade',
+                      e.target.value.length === 0 ? 'Field is required' : ''
+                    );
+                  }}
+                  error={!!validateMsg.grade}
+                  helperText={validateMsg.grade}
+                  value={grade}
+                /> */}
               </Grid>
               <Grid item xs={12} md={12} lg={6}>
                 {childIdx > 0 && (
