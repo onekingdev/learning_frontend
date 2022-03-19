@@ -51,7 +51,7 @@ export const MobileMenu: FC = () => {
 
 const MobileMenuStyles = styled.div`
   display: none;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
+  @media screen and (max-width: ${ScreenSize.phone}) {
     width: 100%;
     height: 60px;
     border-top-left-radius: 10px;

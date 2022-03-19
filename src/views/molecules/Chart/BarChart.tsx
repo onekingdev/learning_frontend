@@ -4,7 +4,7 @@ import ReportCheckIcon from 'views/assets/parent/report-check.png';
 import ReportCoinIcon from 'views/assets/parent/report-coin.png';
 import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-vis/dist/style.css';
 import {
     XYPlot,
@@ -16,21 +16,15 @@ import {
     VerticalGridLines,
     HorizontalGridLines,
 } from 'react-vis';
-import TitleGameBackground from "views/assets/title-games-background.png";
 
 const ChartHeaderContrainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
-    background: #D1E3F1;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    @media (min-width: ${ScreenSize.phone}) {
+    margin-top: 5rem;
+    @media (min-width: ${ScreenSize.tablet}) {
         flex-direction: row;
-        background: transparent;
-        margin-top: 5rem;
     }
 `;
 const CrocoGirlImg = styled.img``;
@@ -45,15 +39,13 @@ const ChartTitleBG = styled.img`
     margin-left: 0;
     width: 100%;
     z-index: 10;
-    display: none;
-    @media (min-width: ${ScreenSize.phone}) {
+    @media (min-width: ${ScreenSize.tablet}) {
         margin-left: -10rem;
-        display: block
     }
 `;
 const ChartTitle = styled.span`
     z-index: 20;
-    color: #3F3F3F;
+    color: white;
     position: relative;
     font-weight: 700;
     font-style: normal;
@@ -63,10 +55,9 @@ const ChartTitle = styled.span`
     padding-left: 3rem;
     text-align: center;
     width: 100%;
-    @media (min-width: ${ScreenSize.phone}) {
+    @media (min-width: ${ScreenSize.tablet}) {
         padding-right: 10rem;
         padding-left: 0;
-        color: white;
     }
 `;
 
@@ -137,48 +128,8 @@ export const BarChart = () => {
             {x: 11, y: 750},
         ]);
     }, []);
-
-    const chartContainerRef = useRef<HTMLDivElement>(null);
-    const [chartWidth, setChartWidth] = useState<number>(0);
-    useEffect(() => {
-        const timer = setInterval(() => {
-            if (chartContainerRef.current?.clientWidth) {
-                setChartWidth(val => {
-                    if (val === chartContainerRef.current?.clientWidth) {
-                        clearInterval(timer);
-                        return val
-                    } else {
-                        return chartContainerRef.current?.clientWidth || 0
-                    }
-                });
-            }
-        }, 1000);
-    }, []);
     return (
-        <div style={{ position: "relative", maxWidth: "768px", margin: "auto"}}>
-            <MobileCom>
-                <img style={{
-                    position: "absolute",
-                    height: "100%",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    zIndex: 10,
-                }} src={TitleGameBackground} alt="TitleGameBackground"></img>
-                <h3 style={{
-                    position: "relative",
-                    width: "100%",
-                    fontWeight: 700,
-                    fontSize: "24px",
-                    lineHeight: "28px",
-                    color: "#3F3F3F",
-                    display: "flex",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    paddingTop: "1rem",
-                    paddingBottom: "1rem",
-                    zIndex: 20,
-                }}>Your Childs</h3>
-            </MobileCom>
+        <div style={{ position: "relative"}}>
             <ChartHeaderContrainer>
                 <CrocoGirlImg style={{
                     zIndex: 20
@@ -188,19 +139,18 @@ export const BarChart = () => {
                     <ChartTitle>Sophie Turner Report</ChartTitle>
                 </ChartTitleGroup>
             </ChartHeaderContrainer>
-            <div ref={chartContainerRef} style={{
+            <div style={{
                 position: 'relative',
-                width: "calc(100% - 2rem)",
-                marginLeft: "1rem",
-                marginRight: "1rem",
+                width: "100%",
+                maxWidth: "95vw",
                 overflowX: "auto"
             }}>
-                <XYPlot height={450} width={chartWidth}>
+                <XYPlot height={450} width={parseInt(ScreenSize.tablet.slice(0,-2))}>
                     <VerticalGridLines />
                     <HorizontalGridLines />
                     <XAxis style={{
                         text: {
-                            fontSize: chartWidth < 576 ? "0.8rem" : "1.2rem"
+                            fontSize: "1.2rem"
                         }
                     }} tickLabelAngle={0} tickFormat={v => MONTHS[v]} />
                     <YAxis style={{
@@ -238,19 +188,3 @@ export const BarChart = () => {
         </div>
     )
 }
-
-export const MobileCom = styled.div`
-    display: none;
-    position: relative;
-    @media (max-width: ${ScreenSize.phone}) {
-        display: block;
-    }
-`;
-
-export const PcCom = styled.div`
-    display: block;
-    position: relative;
-    @media (max-width: ${ScreenSize.phone}) {
-        display: none;
-    }
-`;

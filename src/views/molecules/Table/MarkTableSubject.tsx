@@ -37,9 +37,9 @@ const MarkTableDiv = styled.div`
     flex-direction: column;
     margin-bottom: 6rem;
     color: black;
-    width: calc(100% - 2rem);
-    margin-left: 1rem;
-    margin-right: 1rem;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     overflow: auto;
     @media (min-width: ${ScreenSize.tablet}) {
         margin-bottom: 2rem;

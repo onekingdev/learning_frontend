@@ -349,21 +349,3 @@ body {
     opacity: 0;
     transition: opacity 1000ms;
 }
-
-*::-webkit-scrollbar-thumb {
-    /* background: rgb(138, 52, 220); */
-    /* background: rgba(6, 6, 12, var(--tw-bg-opacity)); */
-    background: #9975F6;
-    border-radius: 10px;
-  }
-  
-  *::-webkit-scrollbar-track {
-    box-shadow: rgb(20, 17, 24) 0px 0px 5px inset;
-    border-radius: 10px;
-  }
-  
-  *::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    border-radius: 10px;
-  }

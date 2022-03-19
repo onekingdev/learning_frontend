@@ -1,5 +1,6 @@
 import * as TYPE from '../types';
 import {IEarning} from '../entities/earning';
+import { PaymentMethod } from 'views/molecules/PaymentMethod/PaymentMethod';
 const INITIAL_STATE = {
     id: null,
     identifier: null,
@@ -11,9 +12,12 @@ const INITIAL_STATE = {
     name: null,
     lastName: null,
     gender: null,
+    cardExpMonth: null,
+    cardExpYear: null,
+    paymentMethod: {},
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
-const guardianReducer = (state = INITIAL_STATE, action: {type: string, payload: IEarning}) => {
+const guardianReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
   switch (action.type) {
     case TYPE.GUARDIAN_SET_DATA:
       return {
@@ -29,6 +33,11 @@ const guardianReducer = (state = INITIAL_STATE, action: {type: string, payload: 
       return{
         ...state,
         availablePlans: action.payload
+      }
+    case TYPE.GUARDIAN_PAYMENT_METHOD_INFO:
+      return{
+        ...state,
+        paymentMethod: {...state.paymentMethod, ...action.payload}
       }
     case TYPE.GUARDIAN_SET_GUEARDIAN_STUDENT_PLAN:
       return{

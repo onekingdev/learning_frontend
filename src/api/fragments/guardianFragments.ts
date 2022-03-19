@@ -3,6 +3,7 @@ export const GUARDIAN_STUDENT = `
     identifier
     randomSlug
 `;
+
 export const GUARDIAN = `
     id
     identifier

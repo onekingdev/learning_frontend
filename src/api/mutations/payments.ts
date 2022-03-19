@@ -1,13 +1,13 @@
 import {
     GUARDIAN_STUDENT,
     GUARDIAN,
-    } from '../fragments/guardianFragments';
-import  {
+} from '../fragments/guardianFragments';
+import {
     USER,
     USER_PROFILE
 } from '../fragments/userFragments'
-import {PAYMENT_METHOD ,PLAN, GUARDIAN_STUDENT_PLAN, ORDER_DETAIL, ORDER} from '../fragments/paymentFragments'
-import {STUDENT}from '../fragments/studentFragments'
+import { PAYMENT_METHOD, PLAN, GUARDIAN_STUDENT_PLAN, ORDER_DETAIL, ORDER } from '../fragments/paymentFragments'
+import { STUDENT } from '../fragments/studentFragments'
 
 
 export const CREATE_ORDER = (
@@ -130,7 +130,7 @@ export const CONFIRM_PAYMENT_ORDER = (
         }
         status
     }
-    
+
 `
 
 export const CHANGE_PAYMENT_METHOD = (
@@ -216,5 +216,42 @@ export const CANCEL_MEMBERSHIP = (
     ) {
         status
     }
+`
+export const FETCH_PAYMENT_METHOD = (
+    guardianId: number,
+) => `
+query {
+    guardianById(id: "${guardianId}") {
+      paymentMethod {
+        ${PAYMENT_METHOD}
+      }
+    }
+  }
+`
+
+export const CHANGE_PAYMENT_METHOD_INFO = (
+    guardianId: number,
+    paymentMethodInfo: any,
+) => `
+mutation changePaymentMethod {
+    changePaymentMethod(
+        address1: "${paymentMethodInfo.address1}",
+        address2: "${paymentMethodInfo.address2}",
+        cardCvc: "${paymentMethodInfo.cardCvc}",
+        cardExpMonth: "${paymentMethodInfo.cardExpiryDate.slice(0, 2)}",
+        cardExpYear: "${paymentMethodInfo.cardExpiryDate.slice(-2)}",
+        cardNumber: "${paymentMethodInfo.cardNumber}",
+        city: "${paymentMethodInfo.city}",
+        country: "${paymentMethodInfo.country}",
+        firstName: "${paymentMethodInfo.firstName}",
+        guardianId: "${guardianId}",
+        lastName: "${paymentMethodInfo.lastName}",
+        phone: "${paymentMethodInfo.phone}",
+        method: "CARD",
+        postCode: "${paymentMethodInfo.postCode}",
+    ) {
+        status
+    }
+  }
 `
 

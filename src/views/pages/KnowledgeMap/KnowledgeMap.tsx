@@ -51,7 +51,7 @@ export const KnowledgeMap: FC = () => {
   }
 
   useEffect(() => {
-    setAreasOfKnowledge(student?.guardianstudentplan?.subject)
+    setAreasOfKnowledge(student.audience.areaofknowledgeSet)
     // loadingContext.done();
 
     // get(

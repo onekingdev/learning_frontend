@@ -14,7 +14,7 @@ import { ScreenSize } from 'constants/screenSize';
 import { useStyles } from './Style';
 import logoTitle from 'views/assets/logo-learn.svg'
 import home from 'views/assets/home_pc.svg'
-import avatar from 'views/assets/socrates-icon.svg'
+import avatar from 'views/assets/avatars/avatar1.svg'
 import {
   LogoContainer,
   LogoImg,
