@@ -8,7 +8,6 @@ import { toPng }          from 'html-to-image'
 import { saveAs}          from 'file-saver'
 import { useHistory }     from 'react-router-dom';
 
-import Grid           from '@mui/material/Grid';
 import InputLabel     from '@mui/material/InputLabel';
 import MenuItem       from '@mui/material/MenuItem';
 import FormControl    from '@mui/material/FormControl';
@@ -34,7 +33,11 @@ import {
   Title,
   Avatar,
   LicenseButton,
-  useStyles
+  useStyles,
+  Container,
+  KidContainer,
+  GridContainer,
+  GridItem,
 } from './Style';
 
 interface kid {
@@ -77,23 +80,30 @@ const KidsList: FC = () => {
     const [openChangePwd, setOpenChangePwd] = useState(false);
 
     const openLicenseDlg    = () => {
+
       setOpenLicense(!openLicense);
+
     };
 
     const openChangePwdDlg  = () => {
+
       setOpenChangePwd(!openChangePwd);
+
     };
 
     const handleDownloadBtnClicked  = () => {
+
       setLoading(true)
       const licenseElm: any = document.querySelector('#license');
       toPng(licenseElm).then(function (dataUrl) {
         saveAs(dataUrl, `${userName}-license`);
         setLoading(false)
       });
+
     };
 
     const handleChangePwdBtnClicked = async() => {
+
       if (newPwd.length < 1) return;
 
       setLoading(true);
@@ -104,45 +114,50 @@ const KidsList: FC = () => {
         enqueueSnackbar(result.msg, { variant: 'error' });
         return;
       }
+
     };
 
     const handleCancelBtnClicked    = () => {
+
       setOpenLicense(false);
-      setOpenChangePwd(false)
+      setOpenChangePwd(false);
+
     };
 
     useEffect(() => {
+
       loadingContext.done();
+
     }, []);
 
     return (
       <KidContainer>
         <LSDialog
-          isOpen={openLicense}
-          open={openLicenseDlg}
-          title="Your Child License"
-          fullWidth="true"
-          dialogContent={
+          isOpen  = {openLicense}
+          open    = {openLicenseDlg}
+          title   = "Your Child License"
+          fullWidth     = "true"
+          dialogContent = {
             <>
-                <License
-                  parentName={user.username}
-                  username={userName}
-                  membership={props?.guardianstudentplanSet?.legnth > 0 ? new Date(props?.guardianstudentplanSet[0]?.expiredAt) : ""}
-                />
+              <License
+                parentName  = {user.username}
+                username    = {userName}
+                membership  = {props?.guardianstudentplanSet?.legnth > 0 ? new Date(props?.guardianstudentplanSet[0]?.expiredAt) : ""}
+              />
               <GridContainer container>
                 <GridItem item md={6} xs={12}>
                   <Button
-                    bgColor={BasicColor.green}
-                    onClick={handleDownloadBtnClicked}
-                    loading={loading}
-                    value="Download"
+                    bgColor = {BasicColor.green}
+                    onClick = {handleDownloadBtnClicked}
+                    loading = {loading}
+                    value   = "Download"
                   />
                 </GridItem>
                 <GridItem item md={6} xs={12}>
                   <Button
-                    bgColor={BasicColor.gray60}
-                    onClick={() => handleCancelBtnClicked()}
-                    value="Return"
+                    bgColor = {BasicColor.gray60}
+                    onClick = {() => handleCancelBtnClicked()}
+                    value   = "Return"
                   />
                 </GridItem>
               </GridContainer>
@@ -150,37 +165,36 @@ const KidsList: FC = () => {
           }
         />
         <LSDialog
-          isOpen={openChangePwd}
-          open={openChangePwdDlg}
-          title="Change Your Password"
-          fullWidth="true"
-          dialogContent={
+          isOpen  = {openChangePwd}
+          open    = {openChangePwdDlg}
+          title   = "Change Your Password"
+          fullWidth     = "true"
+          dialogContent = {
             <>
               <GridContainer container>
                 <GridItem item md={12} xs={12}>
                   <TextField
-                    label="Password"
-                    onChange={e => {
+                    label     = "Password"
+                    onChange  = {e => {
                       setNewPwd(e.target.value);
                     }}
-                    error={newPwd.length > 0 ? false : true}
-                    helperText={"Password field is required"}
-                    // value={firstName}
+                    error     = {newPwd.length > 0 ? false : true}
+                    helperText= {"Password field is required"}
                   />
                 </GridItem>
                 <GridItem item md={6} xs={12}>
                   <Button
-                    bgColor={BasicColor.green}
-                    onClick={handleChangePwdBtnClicked}
-                    loading={loading}
-                    value="Change"
+                    bgColor = {BasicColor.green}
+                    onClick = {handleChangePwdBtnClicked}
+                    loading = {loading}
+                    value   = "Change"
                   />
                 </GridItem>
                 <GridItem item md={6} xs={12}>
                   <Button
-                    bgColor={BasicColor.gray60}
-                    onClick={() => handleCancelBtnClicked()}
-                    value="Return"
+                    bgColor = {BasicColor.gray60}
+                    onClick = {() => handleCancelBtnClicked()}
+                    value   = "Return"
                   />
                 </GridItem>
               </GridContainer>
@@ -197,8 +211,8 @@ const KidsList: FC = () => {
           </GridItem>
           <GridItem item xs={12} md={2}>
             <TextField
-              label="User Name"
-              value={userName}
+              label = "User Name"
+              value = {userName}
             />
           </GridItem>
           <GridItem item xs={12} md={2}>
@@ -207,14 +221,13 @@ const KidsList: FC = () => {
                 Select Your Grade
               </InputLabel>
               <Select
-                labelId="select-grade-label"
-                id="select-grade"
-                value={grades?.length > 0 ? grades[grades.findIndex((item:any) => item.id === grade.id)] : ""}
-                label="Select Your Grade"
-                className={`${classes.select} err-border`}
-                onChange={async (e) => {
+                labelId   = "select-grade-label"
+                id        = "select-grade"
+                value     = {grades?.length > 0 ? grades[grades.findIndex((item:any) => item.id === grade.id)] : ""}
+                label     = "Select Your Grade"
+                className = {`${classes.select} err-border`}
+                onChange  = {async (e) => {
                   setGrade(e.target.value);
-                  console.log(props)
                   const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
                   if(!res.success) {
                     enqueueSnackbar(res.msg, { variant: 'error' });
@@ -236,12 +249,12 @@ const KidsList: FC = () => {
                 Select Your Language
               </InputLabel>
               <Select
-                labelId="select-lang-label"
-                id="select-lang"
-                value={langs[langs.findIndex((item:any) => item.value === language)]}
-                label="Select Your Language"
-                className={`${classes.select} err-border`}
-                onChange={async (e) => {
+                labelId   = "select-lang-label"
+                id        = "select-lang"
+                value     = {langs[langs.findIndex((item:any) => item.value === language)]}
+                label     = "Select Your Language"
+                className = {`${classes.select} err-border`}
+                onChange  = {async (e) => {
                   // setGrade(e.target.value);
                   // console.log(props)
                   // const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
@@ -261,9 +274,9 @@ const KidsList: FC = () => {
           </GridItem>
           <GridItem item xs={12} md={1.5}>
             <Button
-              bgColor={BasicColor.shadeBrown}
-              onClick={ (e: any) => setOpenChangePwd(true) }
-              value="Change Password"
+              bgColor = {BasicColor.shadeBrown}
+              onClick = { (e: any) => setOpenChangePwd(true) }
+              value   = "Change Password"
             />
           </GridItem>
         </GridContainer>
@@ -295,42 +308,3 @@ const KidsList: FC = () => {
 };
 
 export default KidsList;
-
-const Container = styled.div`
-  z-index: 10;
-  display: flex;
-  margin-bottom: 100px;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const KidContainer = styled.div`
-  margin: 0 5vw 5vh 5vw;
-  width: 100%;
-  @media screen and (max-width: 540px) {
-    background: linear-gradient(
-        0deg,
-        rgba(23, 113, 185, 0.2),
-        rgba(23, 113, 185, 0.2)
-      ),
-      linear-gradient(0deg, #ffffff, #ffffff);
-  }
-`;
-
-const GridContainer = styled(Grid)`
-  display: flex;
-  justify-content: center;
-  &.MuiGrid-root {
-    padding: 25px;
-  }
-`;
-const GridItem = styled(Grid)`
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  &.MuiGrid-root {
-    padding-top: 5px;
-  }
-`;
