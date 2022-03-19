@@ -65,45 +65,49 @@ export const GamesMenu: FC = () => {
   const lenguage = 'en';
 
   useEffect(() => {
+
     onComponentLoad();
+
   }, []);
 
   const onComponentLoad = async() => {
+
     await setCoinWallet(student.id, user.token, dispatch)
     await getGamesList();
     loadingContext.done();
+
   }
 
   const getGamesList = async () => {
+
     const result = await getGameByCategory(dictionary[lenguage][category], user.token, null)
     setGameCards(result.data)
+
   }
-  if(loading)
-    return (
-      <Spinner />
-    )
+
+  if(loading) return (<Spinner />)
   return (
     <>
       <Wrapper>
         <StudentMenu>
           <GamesMenuTitleContainer>
             <GameMenuButton
-              gameMode={dictionary[lenguage][category]}
-              gameModeImage={gameMenuImgs[category]}
-              color={gameMenuColor[category]}
-              isButton={false}
+              gameMode      = {dictionary[lenguage][category]}
+              gameModeImage = {gameMenuImgs[category]}
+              color         = {gameMenuColor[category]}
+              isButton      = {false}
             />
           </GamesMenuTitleContainer>
           <GamesMenuContainer>
             {gameCards.map((item, i) => (
               <GameCardPresentation
-                gameName={item.name}
-                gameImage={item.image}
-                gamePath = {item.path}
-                price={item.cost}
-                token={user.token}
-                setLoading={setLoading}
-                key={i}
+                gameName  = {item.name}
+                gameImage = {item.image}
+                gamePath  = {item.path}
+                price     = {item.cost}
+                token     = {user.token}
+                setLoading= {setLoading}
+                key       = {i}
               />
             ))}
           </GamesMenuContainer>
