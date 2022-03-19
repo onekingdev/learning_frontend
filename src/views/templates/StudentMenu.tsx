@@ -42,7 +42,7 @@ export const StudentMenu: FC = ({children}) => {
 const Template = styled.div`
   display: grid;
   grid-template-rows: 68px calc(100vh - 68px);
-  @media (max-width: ${ScreenSize.phone}) {
+  @media (max-width: ${ScreenSize.tablet}) {
     grid-template-rows: calc(100vh - 60px) 60px;
   }
 `;
@@ -51,7 +51,7 @@ const TopMenuContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 100px;
-  @media screen and (max-width: ${ScreenSize.phone}) {
+  @media screen and (max-width: ${ScreenSize.tablet}) {
     display: none;
   }
 `;
