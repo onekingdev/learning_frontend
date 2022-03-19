@@ -1,5 +1,6 @@
 import { FC, useContext, useEffect} from 'react';
 import styled from 'styled-components';
+import { LoadingContext } from 'react-router-loading';
 import { GeneralText } from 'views/atoms/Text/GeneralText';
 import { Header } from 'views/atoms/Text/Header';
 import { Subheader } from 'views/atoms/Text/Subheader';
@@ -10,7 +11,6 @@ import { ScreenSize } from 'constants/screenSize';
 import background from 'views/assets/colored-shapes-bg.svg';
 import { Body } from 'views/atoms/Text/Body';
 import logo from 'views/assets/socrates-logo.svg';
-import { LoadingContext } from 'react-router-loading';
 
 export const ConfirmAccount: FC = () => {
   const loadingContext = useContext(LoadingContext);

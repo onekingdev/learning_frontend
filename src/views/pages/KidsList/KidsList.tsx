@@ -1,25 +1,35 @@
-import { FC, useEffect, useState, useContext } from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import kidA from 'views/assets/avatars/kid-1.svg';
-import kidB from 'views/assets/avatars/kid-2.svg';
-import kidC from 'views/assets/avatars/kid-3.svg';
+import { FC, useEffect, useState, useContext }  from 'react';
+import { useSelector, useDispatch }             from 'react-redux';
+
+import { LoadingContext } from 'react-router-loading';
+import { useSnackbar }    from 'notistack';
+import styled             from 'styled-components';
+import { toPng }          from 'html-to-image'
+import { saveAs}          from 'file-saver'
+import { useHistory }     from 'react-router-dom';
+
+import Grid           from '@mui/material/Grid';
+import InputLabel     from '@mui/material/InputLabel';
+import MenuItem       from '@mui/material/MenuItem';
+import FormControl    from '@mui/material/FormControl';
+import Select         from '@mui/material/Select';
+
+import kidA       from 'views/assets/avatars/kid-1.svg';
+import kidB       from 'views/assets/avatars/kid-2.svg';
+import kidC       from 'views/assets/avatars/kid-3.svg';
+import license    from 'views/assets/student-license.svg';
+
+import License                from 'views/molecules/KidLicense/KidLicense';
+import TextField              from 'views/molecules/MuiTextField';
+import Button                 from 'views/molecules/MuiButton';
+import { ParentPgContainer }  from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { LSDialog }           from 'views/molecules/Setting/LSDialog';
+import { BasicColor }         from 'views/Color';
+
+import { Store }              from 'app/configureStore';
 import { changeStudentGrade } from 'app/actions/studentActions'
-import license from 'views/assets/student-license.svg';
-import Grid from '@mui/material/Grid';
-import TextField from 'views/molecules/MuiTextField';
-import Button from 'views/molecules/MuiButton';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
-import Radio from '@mui/material/Radio';
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { BasicColor } from 'views/Color';
-import { Store } from 'app/configureStore';
+import { changeStudentPassword } from 'app/actions/studentActions'
+
 import {
   Title,
   Avatar,
@@ -27,100 +37,63 @@ import {
   useStyles
 } from './Style';
 
-import License from 'views/molecules/KidLicense/KidLicense';
-import { LoadingContext } from 'react-router-loading';
-import { toPng } from 'html-to-image'
-import { saveAs} from 'file-saver'
-
-import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
-import { parseTwoDigitYear } from 'moment';
-import { changeStudentPassword } from 'app/actions/studentActions'
-
-
 interface kid {
   username: string;
   password: string;
-  grade: string;
-  avatar: string;
+  grade:    string;
+  avatar:   string;
 }
 
 const KidsList: FC = () => {
-  const loadingContext = useContext(LoadingContext);
-  const classes = useStyles();
-
-  // const dispatch = useDispatch();
-  // const language = 'en';
-  const user = useSelector((state: Store) => state.user);
-  const guardian = useSelector((state: any) => state.guardian)
-  const grades = useSelector((state: any) => state.grade)
-  const history = useHistory();
-  const dispatch = useDispatch()
+  const loadingContext      = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
-
-  const kidAvatars = [kidA, kidB, kidC];
-  const langs = [
-    {
-      name: "English",
-      value: "EN_US"
-    }
-  ]
+  const classes   = useStyles();
+  const user      = useSelector((state: Store) => state.user);
+  const guardian  = useSelector((state: any) => state.guardian)
+  const grades    = useSelector((state: any) => state.grade)
+  const history   = useHistory();
+  const dispatch  = useDispatch()
 
   const [children, setChildren] = useState<kid[]>([]);
 
-  // const handleDelete = (index: number) => {
-  //   const temp: any = [...children];
-  //   temp.pop(temp[index]);
-  //   setChildren(temp);
-  // };
+  const language    = 'en';
+  const langs       = [{
+                          name:   "English",
+                          value:  "EN_US"
+                      }]
 
-  // const handleNew = (index: number) => {};
-
-  // const handleChgPwd = (index: number, password: string) => {
-  //   const temp: any = [...children];
-  //   temp[index].password = password;
-  //   setChildren(temp);
-  // };
-
-  const handleSave = () => {
-    // Do something ...
-
-    console.log('Save button clicked!');
-  };
   const Kid = (props: any) => {
-    console.log('props is', props)
-    const userName = props.user.username;
-    const language = props.user.language
-    const parentName = user.username
-    const fullName = props.fullName;
-    const studentId = props.id;
-    const [grade, setGrade] = useState(props.grade.grade);
-    const [newPwd, setNewPwd] = useState("");
-    // Open or close dialog state
-    const [openLicense, setOpenLicense] = useState(false);
-    const [openChangePwd, setOpenChangePwd] = useState(false)
-    const [loading, setLoading] = useState(false)
-    console.log("kid info is", props)
-    console.log("language is ",language)
-    const openLicenseDlg = () => {
+
+    const userName    = props.user.username;
+    const language    = props.user.language;
+    const parentName  = user.username;
+    const fullName    = props.fullName;
+    const studentId   = props.id;
+
+    const [grade,         setGrade]         = useState(props.grade.grade);
+    const [newPwd,        setNewPwd]        = useState("");
+    const [loading,       setLoading]       = useState(false);
+    const [openLicense,   setOpenLicense]   = useState(false);
+    const [openChangePwd, setOpenChangePwd] = useState(false);
+
+    const openLicenseDlg    = () => {
       setOpenLicense(!openLicense);
     };
-    const openChangePwdDlg = () => {
+
+    const openChangePwdDlg  = () => {
       setOpenChangePwd(!openChangePwd);
     };
-    const handleDownloadBtnClicked = () => {
-      // Do something ...
+
+    const handleDownloadBtnClicked  = () => {
       setLoading(true)
       const licenseElm: any = document.querySelector('#license');
-      console.log(licenseElm);
       toPng(licenseElm).then(function (dataUrl) {
         saveAs(dataUrl, `${userName}-license`);
         setLoading(false)
       });
-
-      // open()
     };
+
     const handleChangePwdBtnClicked = async() => {
-      // Do something ...
       if (newPwd.length < 1) return;
 
       setLoading(true);
@@ -131,35 +104,14 @@ const KidsList: FC = () => {
         enqueueSnackbar(result.msg, { variant: 'error' });
         return;
       }
-      // open()
     };
-    const handleCancelBtnClicked = () => {
-      // Do something ...
-      console.log(children);
+
+    const handleCancelBtnClicked    = () => {
       setOpenLicense(false);
       setOpenChangePwd(false)
     };
 
-    // const updateUsername = (value: any) => {
-    //   setUsername(value);
-    //   children[props.index].username = value;
-    //   setChildren(children);
-    // };
-
-    // const updatePassword = (value: any) => {
-    //   setPassword(value);
-    //   children[props.index].password = value;
-    //   setChildren(children);
-    // };
-
-    const updateGrade = (value: any) => {
-      setGrade(value);
-      children[props.index].grade = value;
-      setChildren(children);
-    };
-
     useEffect(() => {
-
       loadingContext.done();
     }, []);
 
@@ -172,14 +124,11 @@ const KidsList: FC = () => {
           fullWidth="true"
           dialogContent={
             <>
-              {/* {openLicense && ( */}
                 <License
                   parentName={user.username}
-                  // username={username}
                   username={userName}
                   membership={props?.guardianstudentplanSet?.legnth > 0 ? new Date(props?.guardianstudentplanSet[0]?.expiredAt) : ""}
                 />
-               {/* )} */}
               <GridContainer container>
                 <GridItem item md={6} xs={12}>
                   <Button
@@ -308,7 +257,6 @@ const KidsList: FC = () => {
                   </MenuItem>
                 ))}
               </Select>
-              {/* <div className="err-text">{validateMsg.grade}</div> */}
             </FormControl>
           </GridItem>
           <GridItem item xs={12} md={1.5}>
@@ -324,45 +272,14 @@ const KidsList: FC = () => {
   };
 
   useEffect(() => {
-
-    const guardianStudents = guardian.guardianstudentSet
-    const students = [];
+    const guardianStudents  = guardian.guardianstudentSet
+    const students          = [];
 
     for(const guardianStudent of guardianStudents) {
       students.push(guardianStudent?.student)
     }
-
-    // for(const student of students) {
-      // setChildren([...children, guardianStudent.student])
-    // }
     setChildren(students)
 
-    // setChildren([
-    //   {
-    //     username: 'armin',
-    //     password: '123456',
-    //     grade: '1',
-    //     avatar: kidAvatars[0],
-    //   },
-    //   {
-    //     username: 'armin',
-    //     password: '123456',
-    //     grade: '1',
-    //     avatar: kidAvatars[1],
-    //   },
-    //   {
-    //     username: 'armin',
-    //     password: '123456',
-    //     grade: '1',
-    //     avatar: kidAvatars[2],
-    //   },
-    //   {
-    //     username: 'armin',
-    //     password: '123456',
-    //     grade: '1',
-    //     avatar: kidAvatars[0],
-    //   },
-    // ]);
     loadingContext.done();
   }, []);
   return (
@@ -372,12 +289,6 @@ const KidsList: FC = () => {
         {children.map((child, index) => (
             <Kid {...child} index={index} key={index}></Kid>
         ))}
-        <Button
-          bgColor={BasicColor.green}
-          onClick={() => handleSave()}
-          value="Save"
-          fontSize={25}
-        />
       </Container>
     </ParentPgContainer>
   );
