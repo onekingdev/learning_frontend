@@ -11,9 +11,12 @@ import Select from '@mui/material/Select';
 
 import TitleProgressBackground from 'views/assets/title-games-background.png';
 import ProgressMap from 'views/assets/student/process/map.svg';
+import ProgressMapMobile from 'views/assets/student/process/progress-map-mobile.svg';
 import MarkTableSubject from 'views/molecules/Table/MarkTableSubject';
 import { LoadingContext } from 'react-router-loading';
 import { ScreenSize } from 'constants/screenSize';
+
+import { MobileCom, PcCom } from './TreasureTrack';
 
 type IProcessPathSvg = {
     bgColor?: string;
@@ -297,18 +300,100 @@ export const KidsProgress = () => {
             active: true
         },
     ];
+    const subSubjectsMobile = [
+        {
+            left: 10.39,
+            top: 2.01,
+            width: 63.03,
+            angle: 121,
+            tX: 0,
+            tY: 0,
+            text: 'Conteo',
+            bgColor: "#28D764"
+        },
+        {
+            left: 3.5,
+            top: 6.4,
+            width: 78.38,
+            angle: 107,
+            tX: 0,
+            tY: 0,
+            text: 'Geometría',
+            bgColor: "#28D764"
+        },
+        {
+            left: 2.41,
+            top: 11.21,
+            width: 72.24,
+            angle: 79,
+            tX: 0,
+            tY: 0,
+            text: 'Sentido Numérico',
+            bgColor: "#28D764"
+        },
+        {
+            left: 6.97,
+            top: 16.37,
+            width: 78.8,
+            angle: 45,
+            tX: 0,
+            tY: 0,
+            text: 'Medición',
+            bgColor: "#28D764"
+        },
+        {
+            left: 23.98,
+            top: 18.28,
+            width: 74.84,
+            angle: 16,
+            tX: 0,
+            tY: 0,
+            text: 'Suma de números enteros',
+            bgColor: "#FFD814"
+        },
+        {
+            left: 44,
+            top: 19.24,
+            width: 78.63,
+            angle: 340,
+            tX: 0,
+            tY: 0,
+            text: 'Dinero',
+            bgColor: "#FF1940"
+        },
+        {
+            left: 59.45,
+            top: 16.24,
+            width: 72.37,
+            angle:350,
+            tX: 0,
+            tY: 0,
+            text: 'Resta de números enteros',
+            bgColor: "#28D764"
+        },
+        {
+            left: 76.46,
+            top: 16.5,
+            width: 97.44,
+            angle: 31,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+    ];
 
-    const mapBgRef = useRef<HTMLImageElement>(null);
+    const mapBgRef = useRef<HTMLDivElement>(null);
     const [mapWidth, setMapWidth] = useState<number>(1366);
     useEffect(() => {
         const timer = setInterval(() => {
-            if (mapBgRef.current?.width) {
+            if (mapBgRef.current?.clientWidth) {
                 setMapWidth(val => {
-                    if (val === mapBgRef.current?.width) {
+                    if (val === mapBgRef.current?.clientWidth) {
                         clearInterval(timer);
                         return val
                     } else {
-                        return mapBgRef.current?.width || 0
+                        return mapBgRef.current?.clientWidth || 0
                     }
                 });
             }
@@ -945,6 +1030,764 @@ export const KidsProgress = () => {
             </svg>
         )
     }
+
+    const pathsMobile = [{
+        left: 4.75,
+        top: 0,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile01Svg {...props} />
+    }, {
+        left: 0,
+        top: 4.17,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile02Svg {...props} />
+    }, {
+        left: 0,
+        top: 10.41,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile03Svg {...props} />
+    }, {
+        left: 3.52,
+        top: 14.8,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile04Svg {...props} />
+    }, {
+        left: 20.13,
+        top: 17.99,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile05Svg {...props} />
+    }, {
+        left: 39.9,
+        top: 17.2,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile06Svg {...props} />
+    }, {
+        left: 56.29,
+        top: 16,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile07Svg {...props} />
+    }, {
+        left: 72.76,
+        top: 15.9,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile08Svg {...props} />
+    }, {
+        left: 83.81,
+        top: 21,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile09Svg {...props} />
+    }, {
+        left: 75.09,
+        top: 27,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile10Svg {...props} />
+    }, {
+        left: 57.63,
+        top: 30.3,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile11Svg {...props} />
+    }, {
+        left: 40,
+        top: 28.8,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile12Svg {...props} />
+    }, {
+        left: 28.77,
+        top: 25,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile13Svg {...props} />
+    }, {
+        left: 10.77,
+        top: 23.92,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile14Svg {...props} />
+    }, {
+        left: -1.32,
+        top: 25,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile15Svg {...props} />
+    }, {
+        left: -1.63,
+        top: 31.32,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile16Svg {...props} />
+    }, {
+        left: 3.97,
+        top: 37.3,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile17Svg {...props} />
+    }, {
+        left: 13.85,
+        top: 40.92,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile18Svg {...props} />
+    }, {
+        left: 33.53,
+        top: 42.3,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile19Svg {...props} />
+    }, {
+        left: 56.32,
+        top: 41,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile20Svg {...props} />
+    }, {
+        left: 80.39,
+        top: 41,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile21Svg {...props} />
+    }, {
+        left: 85.5,
+        top: 45.8,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile22Svg {...props} />
+    }, {
+        left: 77.18,
+        top: 52,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile23Svg {...props} />
+    }, {
+        left: 58.75,
+        top: 55.29,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile24Svg {...props} />
+    }, {
+        left: 41,
+        top: 54.3,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile25Svg {...props} />
+    }, {
+        left: 21.57,
+        top: 54.33,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile26Svg {...props} />
+    }, {
+        left: 10.87,
+        top: 56.93,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile27Svg {...props} />
+    }, {
+        left: 10,
+        top: 62.21,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile28Svg {...props} />
+    }, {
+        left: 14.21,
+        top: 67.2,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile29Svg {...props} />
+    }, {
+        left: 31.99,
+        top: 68.7,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile30Svg {...props} />
+    }, {
+        left: 49.1,
+        top: 65.61,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile31Svg {...props} />
+    }, {
+        left: 65.02,
+        top: 64.84,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile32Svg {...props} />
+    }, {
+        left: 80.78,
+        top: 65.3,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile33Svg {...props} />
+    }, {
+        left: 89.44,
+        top: 71.1,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile34Svg {...props} />
+    }, {
+        left: 85,
+        top: 75.7,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile35Svg {...props} />
+    }, {
+        left: 71.47,
+        top: 81.36,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile36Svg {...props} />
+    }, {
+        left: 50.5,
+        top: 81.38,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile37Svg {...props} />
+    }, {
+        left: 35.9,
+        top: 78.68,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile38Svg {...props} />
+    }, {
+        left: 17.56,
+        top: 78.32,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile39Svg {...props} />
+    }, {
+        left: 10.74,
+        top: 81,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile40Svg {...props} />
+    }, {
+        left: 11.64,
+        top: 87.1,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile41Svg {...props} />
+    }, {
+        left: 22.7,
+        top: 90.48,
+        imgSrc: (props: IProcessPathSvg) => <ProcessPathMobile42Svg {...props} />
+    }, ]
+    const ProcessPathMobile01Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="65" height="70" viewBox="0 0 65 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M39.1047 0.858452C38.6145 1.21372 27.3942 13.044 26.9418 13.4397C26.0129 14.2422 25.1217 15.0851 24.2285 15.9722C21.0593 19.1065 18.0748 22.4724 15.3002 26.0414L14.2308 27.3418L13.2611 28.712L11.3596 31.4927L9.43583 34.2402C8.79299 35.1427 8.19703 36.0824 7.65154 37.0537C5.34903 40.8166 3.23978 44.7047 1.33588 48.6959C1.01332 49.3786 0.682043 50.0798 0.350765 50.781L33.9787 69.8963C37.3058 61.3955 42.3158 53.6397 48.5901 47.2768C49.0574 46.8063 49.5019 46.3078 49.921 45.7839C50.1293 45.5438 50.3153 45.2705 50.5255 44.9861C50.7357 44.7017 50.9575 44.5131 51.1745 44.2545C52.0008 43.268 63.5059 30.7146 64.1762 29.4965L39.1047 0.858452Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile02Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="50" height="87" viewBox="0 0 50 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40.2452 74.5274C40.2906 71.5018 40.2169 68.4876 40.3998 65.5721L40.5934 61.1494C40.6747 59.653 40.8578 58.182 40.942 56.7999C41.8718 44.418 44.7439 32.0222 49.4267 20.1808L15.9209 0.807068C15.3106 2.09872 14.7091 3.37191 14.1163 4.62666L11.7664 10.6037C11.3906 11.5998 10.9595 12.5925 10.6234 13.5848L9.66157 16.5837L7.80571 22.4782C7.25942 24.4772 6.74413 26.4908 6.22884 28.5045C5.71355 30.5181 5.16726 32.5171 4.83021 34.4344C4.0883 38.3724 3.20303 42.3329 2.71687 46.2111L1.86072 52.0362C1.63411 53.9605 1.48693 55.8772 1.30003 57.7978C1.11313 59.7183 0.968865 61.7492 0.87884 63.6252L0.613608 69.3232C0.367686 73.1344 0.419157 76.8378 0.408629 80.5118C0.382538 82.3729 0.418448 84.2633 0.485356 86.1683L40.2529 75.0728C40.2452 74.8885 40.2374 74.7043 40.2452 74.5274Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile03Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="49" height="71" viewBox="0 0 49 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.150413 11.8611C0.116528 12.4545 1.48782 28.2926 1.60602 28.845C1.58475 30.0538 1.6342 31.2735 1.76115 32.5297C1.97196 36.8468 2.47334 41.0973 3.26117 45.2461L3.52472 46.8152L3.92485 48.3359L4.71834 51.3516L5.52733 54.3746C5.77755 55.3794 6.08888 56.3558 6.45934 57.2978C7.75189 61.1132 9.27073 64.8009 11.0069 68.3393L11.8992 70.1828L48.7011 47.1455C44.5191 40.2551 42.0273 32.1118 41.4348 23.3986C41.3966 22.7585 41.3212 22.1273 41.209 21.5089L41.0201 20.5845L40.8864 19.6636C40.6868 18.4408 38.9261 2.10262 38.4707 0.939514L0.150413 11.8611Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile04Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="73" height="76" viewBox="0 0 73 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M72.4798 32.9104C70.2458 31.539 67.9286 30.2636 65.8197 28.7481L62.585 26.5653C61.5252 25.8389 60.5332 25.0091 59.4996 24.2273C50.8099 17.8863 43.405 9.7195 37.624 0.101184L0.804682 23.1754C1.36367 24.3198 1.92266 25.4641 2.54075 26.5236L5.45386 31.3532C5.9489 32.1514 6.42651 32.9865 6.95449 33.755L8.56652 35.9612L11.7974 40.3993C12.9318 41.7704 14.0991 43.1119 15.2423 44.4645C16.3854 45.8172 17.5421 47.2213 18.7879 48.3968C21.2447 50.8215 23.6385 53.4196 26.226 55.5675L30.0817 58.9239C31.4486 60.0437 32.7128 60.9796 34.0283 62.0074C35.3439 63.0352 36.6662 64.0888 38.0254 65.0244L42.1116 67.8126C44.8124 69.7206 47.646 71.3076 50.4272 73.0054C51.8058 73.8598 53.2501 74.6551 54.7275 75.4208L72.8595 33.2704L72.4798 32.9104Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile05Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="74" height="57" viewBox="0 0 74 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M60.2717 12.3539C55.4413 12.3398 50.6731 11.8835 46.014 10.9897C41.2247 9.93359 36.5564 8.48231 32.0449 6.64695C30.8679 6.24886 29.7664 5.57046 28.5826 5.14659C27.3988 4.72273 26.3196 4.07744 25.1726 3.53554L21.7704 1.74758C20.7629 1.27159 19.74 0.788272 18.7664 0.0800119L0.590739 42.3226L4.99851 44.6308C6.54849 45.3631 8.09847 46.0954 9.55545 46.7838C11.0124 47.4721 12.5779 48.2118 14.1976 48.7965C20.5916 51.3625 27.2149 53.36 34.0121 54.7723C40.987 56.1167 48.1314 56.7815 55.3695 56.7598C60.3636 56.6873 65.3902 56.2732 70.4215 55.5199L73.8977 10.8015C69.3511 11.7103 64.7954 12.2293 60.2717 12.3539V12.3539Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile06Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="68" height="65" viewBox="0 0 68 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M56.6243 1.31652C43.9274 6.03901 32.3078 11.0899 21.4214 14.7492C15.776 16.6823 10.0698 18.1944 4.343 19.275L0.928837 64.0227C10.0283 62.6107 19.1071 60.3379 28.0654 57.2294C41.2408 52.7782 53.2654 47.5123 64.4733 43.3729L67.1741 42.3918L57.717 0.929928L56.6243 1.31652Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile07Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="70" height="54" viewBox="0 0 70 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M61.9508 1.2318C54.865 0.664592 47.6691 0.767875 40.4374 1.54059C27.0501 3.21734 13.6738 6.6157 0.5778 11.6672L10.0088 53.1845C19.517 49.5977 29.2154 47.1761 38.92 45.9656C43.908 45.413 48.8728 45.3202 53.7637 45.6882C55.9927 45.82 58.1939 46.1062 60.355 46.5452L69.5117 2.1632C66.9988 1.74338 64.4356 1.39006 61.9508 1.2318Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile08Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="82" height="74" viewBox="0 0 83 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M72.8562 39.4515C62.2625 24.7956 48.4823 13.3508 32.4768 5.91551C27.1526 3.52811 21.6046 1.6227 15.8817 0.216062L0.622672 52.6448C16.5183 57.7245 29.5956 68.75 37.7954 83.9851L82.1529 54.9618C79.4251 49.5046 76.3187 44.3219 72.8562 39.4515V39.4515Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile09Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="47" height="78" viewBox="0 0 47 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M46.9058 31.1201C46.6638 20.3221 44.8315 9.90179 41.471 0.212155L1.71082 18.9719C4.09198 25.2549 5.39486 32.0813 5.56804 39.182C5.75664 48.2328 3.89389 57.563 0.126479 66.4378L37.7253 77.5017C44.0564 62.3835 47.1964 46.52 46.9058 31.1201V31.1201Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile10Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="69" height="72" viewBox="0 0 69 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M37.0778 56.7695C43.2012 50.7076 48.8046 44.0959 53.798 37.0404C58.8825 29.9504 63.2449 22.3957 66.7961 14.5302C67.2793 13.4588 67.7094 12.3721 68.1656 11.2798L30.5667 0.215895C30.3501 0.719311 30.147 1.23323 29.9304 1.73664C27.7784 6.49587 25.1273 11.0631 22.033 15.3419C18.9394 19.7094 15.4739 23.8063 11.6904 27.5688C8.18744 30.9632 4.40594 34.0135 0.410163 36.6679L18.4003 71.8319C25.0164 67.4384 31.2778 62.389 37.0778 56.7695V56.7695Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile11Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="80" height="56" viewBox="0 0 80 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.17604 55.1854C23.4451 56.606 39.4032 54.3812 54.9082 48.6704C63.2907 45.5025 71.4279 41.2842 79.1231 36.1176L61.1329 0.953541C56.6362 3.94344 51.893 6.39839 47.0103 8.26307C37.5573 11.7053 27.8371 13.0314 18.5392 12.1473C16.9573 12.0058 15.3722 11.7843 13.811 11.504L0.329796 54.088C2.93622 54.5587 5.52592 54.939 8.17604 55.1854Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile12Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="76" height="70" viewBox="0 0 76 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.12814 30.1567C2.21289 31.5145 3.27039 32.9027 4.30587 34.1614C6.59808 36.7404 8.77197 39.3228 11.255 41.6891C13.7381 44.0555 16.2621 46.3762 18.8406 48.6363C21.4191 50.8963 24.2021 52.9285 27.1351 54.7937C30.0681 56.6589 33.0283 58.4938 36.0704 60.2375C39.1124 61.9812 42.4135 63.4364 45.8237 64.77C50.1752 66.5098 54.6707 67.9632 59.2865 69.1224L75.8088 27.6236C72.7363 26.8727 69.7457 25.9189 66.854 24.7677C64.6095 23.9319 62.5056 22.8111 60.3882 21.7055C58.2707 20.5999 56.2104 19.3536 54.2601 17.9592C52.3097 16.5647 50.3748 15.1019 48.4525 13.6505C46.5303 12.199 44.748 10.4892 43.0056 8.76044C41.2633 7.03168 39.6573 5.15107 37.984 3.31975C37.1746 2.37371 36.4334 1.35174 35.6641 0.386783L35.2686 0.0317732L0.508339 29.4357L1.12814 30.1567Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile13Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="73" height="70" viewBox="0 0 73 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.68788 39.9548C6.1145 41.7549 10.2784 44.0194 14.1211 46.7162C16.0163 48.0889 17.9096 49.488 19.6436 51.0741C20.5564 51.8213 21.4218 52.6222 22.2364 53.4738C23.0809 54.3019 23.852 55.0581 24.9414 56.1263C29.1558 60.5449 33.2315 65.056 37.197 69.6306L72.6897 40.7814C67.8594 35.13 62.8882 29.5978 57.7354 24.2019C56.7195 23.2057 55.3976 21.9095 54.1491 20.6852C52.9007 19.461 51.6277 18.2127 50.265 17.105C47.6436 14.7345 44.8058 12.6092 41.9108 10.5421C36.0955 6.47484 29.7988 3.05688 23.108 0.335656L22.8264 0.231036L0.0902935 39.3314L1.68788 39.9548Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile14Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="86" height="49" viewBox="0 0 86 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M55.5088 1.38973C66.2014 2.91376 76.33 5.97185 85.5514 10.4604L62.9999 49C62.9999 49 55.0228 43.5 42.9999 43.5C30.977 43.5 22.1127 47.7084 22.1127 47.7084L0.612663 10.4604C20.1127 0.39573 40.2526 -0.729522 55.5088 1.38973Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile15Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="63" height="79" viewBox="0 0 63 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.9462 23.8557C23.9792 14.897 31.1469 7.11472 39.2065 0.772435L62.5479 38.0281C57.1518 42.0313 52.3698 47.0743 48.3908 52.9579C43.346 60.4747 39.8772 69.3342 38.2574 78.8385L0.635257 67.8542C3.46738 51.7104 9.38811 36.662 17.9462 23.8557V23.8557Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile16Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="52" height="90" viewBox="0 0 52 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M51.0532 64.4013C49.971 61.5755 48.7824 58.8045 47.8688 56.0298L46.405 51.8519C45.9244 50.4324 45.5477 48.9988 45.1122 47.6843C41.374 35.8437 39.4339 23.2683 39.3809 10.5347L1.59434 0.500046C1.50779 1.92598 0.903031 7.8314 0.818964 9.21659L0.858548 15.6389C0.879817 16.7033 0.848516 17.785 0.905243 18.8312L1.12676 21.9728L1.59432 28.1348C1.83003 30.1937 2.09995 32.2546 2.36988 34.3155C2.63981 36.3765 2.87551 38.4353 3.27511 40.3406C4.04977 44.2722 4.69971 48.2781 5.6896 52.0592L7.0595 57.7853C7.56424 59.656 8.13989 61.4902 8.68008 63.3426C9.22028 65.195 9.84108 67.1342 10.4547 68.9093L12.3259 74.2978C13.5139 77.9274 14.938 81.3464 16.2936 84.7613C16.961 86.4988 17.6968 88.2404 18.4669 89.9841L51.2631 64.9047C51.1874 64.7366 51.1118 64.5684 51.0532 64.4013Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile17Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="60" height="75" viewBox="0 0 60 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.890359 25.1964C1.07942 25.7599 8.23831 39.9542 8.55334 40.4231C8.9828 41.5532 9.48195 42.6671 10.0666 43.7862C11.8667 47.7158 13.9117 51.4755 16.185 55.0345L17.0127 56.3933L17.9493 57.6564L19.8067 60.1612L21.6812 62.6671C22.2869 63.5069 22.9388 64.2977 23.6327 65.0346C26.2506 68.0964 29.0311 70.9556 31.9579 73.5953L33.4713 74.9753L59.0765 39.9114C52.6334 35.0686 47.2938 28.4345 43.5058 20.5655C43.2324 19.9854 42.9278 19.4274 42.5939 18.8949L42.075 18.107L41.6086 17.3017C40.9689 16.2406 33.2626 1.7269 32.4076 0.816302L0.890359 25.1964Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile18Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="77" height="64" viewBox="0 0 77 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M51.0714 13.4257C42.3362 10.0937 34.1051 5.66292 26.5241 0.211912L0.467648 37.7792C10.4968 45.0413 21.3967 50.9436 32.9714 55.3801C43.7612 59.4382 55.0617 62.2268 66.7032 63.704L76.1683 19.6958C67.5126 18.5433 59.1073 16.4433 51.0714 13.4257V13.4257Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile19Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="83" height="51" viewBox="0 0 83 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M74.6974 1.51902L65.9423 2.90677L61.6047 3.63469L57.287 4.11646L48.6566 5.10624C37.462 6.07626 26.3402 6.13969 15.3821 5.29601C13.6371 5.11379 11.8972 4.88758 10.1522 4.70536L0.687089 48.7135C2.51181 48.9638 4.3465 49.1963 6.05157 49.3796C19.1706 50.4289 32.4919 50.3693 45.9022 49.2013L55.7142 47.9612L60.6302 47.3935L65.5063 46.6164L75.2436 45.0538C77.7315 44.6463 80.1995 44.1342 82.6675 43.622L77.4147 0.912633C76.5023 1.17342 75.5899 1.36401 74.6974 1.51902Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile20Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="87" height="58" viewBox="0 0 87 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M43.9999 4C29.5968 6.45047 0.370034 15.0807 0.370034 15.0807L5.62286 57.7901C5.62286 57.7901 37.4999 47 43.9999 45.5C50.4999 44 81.3886 38.1526 81.3886 38.1526L86.4999 0.500001C86.4999 0.500001 58.403 1.54953 43.9999 4Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile21Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="59" height="70" viewBox="0 0 59 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M38.9998 19C20.9998 1.00006 12.2228 1.90662 6.49981 0.499985L-1.53903e-05 38C9.99991 46.5001 20.4999 63.5001 18.6607 69.9852L58.9999 50C58.9999 50 56.9998 37 38.9998 19Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile22Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="48" height="78" viewBox="0 0 48 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M47.7711 31.1201C47.529 20.3221 45.6967 9.90179 42.3363 0.212153L2.57605 18.9719C4.95722 25.2548 6.26009 32.0813 6.43327 39.182C6.62188 48.2328 4.75912 57.563 0.991713 66.4378L38.5906 77.5017C44.9217 62.3835 48.0616 46.52 47.7711 31.1201V31.1201Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile23Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="69" height="72" viewBox="0 0 69 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M36.9431 56.7695C43.0664 50.7076 48.6699 44.0959 53.6632 37.0404C58.7478 29.9504 63.1101 22.3957 66.6613 14.5302C67.1446 13.4588 67.5747 12.3721 68.0308 11.2798L30.4319 0.215903C30.2153 0.719319 30.0122 1.23323 29.7956 1.73665C27.6437 6.49588 24.9925 11.0631 21.8982 15.3419C18.8046 19.7094 15.3391 23.8063 11.5557 27.5688C8.05268 30.9633 4.27118 34.0135 0.275398 36.6679L18.2655 71.8319C24.8817 67.4385 31.143 62.389 36.9431 56.7695V56.7695Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile24Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="81" height="53" viewBox="0 0 81 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.39626 51.4108C23.5573 53.7139 39.6175 52.4177 55.4274 47.615C63.9794 44.9382 72.3475 41.1986 80.3291 36.4866L64.407 0.33908C59.7446 3.06336 54.8671 5.23931 49.8845 6.8179C40.2479 9.70652 30.4672 10.4671 21.2362 9.04562C19.6651 8.81264 18.0955 8.49972 16.5532 8.1294L0.626799 49.8606C3.20156 50.4815 5.76487 51.0113 8.39626 51.4108Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile25Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.56756 44.9495C6.73677 45.0118 11.8653 45.446 16.9237 46.2496C19.5006 46.5717 22.0242 47.1766 24.6787 47.6517C27.3332 48.1267 29.8546 48.7951 32.4394 49.5478C42.1549 52.2098 51.6544 55.5908 60.8821 59.6708L79.8121 18.032C68.4933 12.9436 56.8209 8.75432 44.8702 5.49126C41.8299 4.53043 38.6176 3.94329 35.4871 3.21081C32.3567 2.47833 29.1443 1.89119 25.8603 1.47403C22.0328 0.842309 18.1213 0.419478 14.1442 0.147154L0.19611 44.9656L1.56756 44.9495Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile26Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="79" height="62" viewBox="0 0 79 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M37.8909 51.1581C42.3339 49.2571 46.8993 47.9214 51.5003 47.1762C55.9678 46.4269 60.4442 46.0462 64.8946 46.037L78.8427 1.21862C76.096 1.03546 73.3369 0.891234 70.5308 0.839129C63.5278 0.738608 56.4718 1.3003 49.4328 2.51867C42.0587 3.75344 34.7439 5.91346 27.6212 8.95952C20.1893 12.1006 13.0522 16.3217 6.39455 21.5138C4.39019 23.0207 2.40394 24.8115 0.468853 26.5543L22.1274 61.5008C26.8842 57.0307 32.2268 53.5253 37.8909 51.1581V51.1581Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile27Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="59" height="73" viewBox="0 0 59 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M37.8819 69.4891C39.3642 64.4964 41.3158 59.6567 43.6998 55.0616C46.13 50.3696 48.9232 45.9129 52.0409 41.7525C54.0293 39.3189 56.1604 37.0447 58.4158 34.9493L36.7573 0.00273562C32.3348 4.01506 28.1889 8.43428 24.3675 13.2094C19.1609 19.91 14.5091 27.1387 10.4841 34.7835C6.63177 42.2171 3.45094 50.0314 0.997336 58.0894L36.8507 72.8659C37.1747 71.7269 37.5252 70.6177 37.8819 69.4891Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile28Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="47" height="83" viewBox="0 0 47 83" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40.548 39.4685C38.8037 31.5562 38.9279 23.0474 40.9083 14.7765L5.05493 0C4.94424 0.350268 4.83354 0.700552 4.72284 1.05082C2.148 9.83178 0.636642 18.8664 0.234042 27.8839C-0.156024 36.9724 0.606064 45.9448 2.49621 54.5176C4.7743 64.7512 8.49352 74.336 13.5145 82.9125L46.5363 54.8233C43.8315 50.1727 41.8115 44.9933 40.548 39.4685V39.4685Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile29Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="69" height="74" viewBox="0 0 69 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M65.6291 27.7062C64.5666 27.3704 63.5042 27.0346 62.4153 26.4978C53.9496 22.9806 46.3601 17.4522 40.0996 10.2423C37.6497 7.4105 35.4563 4.29561 33.5476 0.937555L0.525808 29.0268C3.57609 34.2976 7.05853 39.1944 10.9316 43.6588C20.7765 55.0464 32.7381 63.7635 46.0901 69.2809C47.6693 69.9726 49.4939 70.5706 51.1856 71.1908C52.8773 71.8111 54.6836 72.2963 56.4326 72.849L58.6681 73.3415L68.0401 28.5537C67.3189 28.2187 66.4729 27.9943 65.6291 27.7062Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile30Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="69" height="59" viewBox="0 0 69 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M54.0862 1.0064C45.0995 7.26793 36.6966 11.3608 27.859 12.7502C23.3095 13.5245 18.7399 13.7089 14.2347 13.3001L12.5008 13.1833L10.7163 12.9077L7.17128 12.4041L6.48733 12.2422L0.437216 57.5983L3.36287 58.0392L5.9549 58.4011L8.62258 58.5922C15.8615 59.2295 23.2016 58.9202 30.509 57.67C32.3605 57.2903 34.1791 57.0497 36.0635 56.531L41.6145 55.0348L47.0546 53.1138C48.8671 52.4523 50.6124 51.6281 52.3937 50.8753C58.066 48.2608 63.5905 45.1511 68.9174 41.5743L55.0578 0.250705L54.0862 1.0064Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile31Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="63" height="78" viewBox="0 0 63 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M48.2807 3.00457C42.0275 6.49387 35.91 10.355 29.9551 14.5709C18.9766 22.2308 9.3452 29.7814 0.238902 35.2721L11.0195 77.5036C12.1135 76.8862 13.2014 76.2883 14.2852 75.6463C27.0172 68.0696 37.7062 59.5049 47.6743 52.5958C52.4395 49.2217 57.335 46.1318 62.3392 43.3399L52.7629 0.654179C51.2457 1.41605 49.7877 2.21807 48.2807 3.00457Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile32Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="67" height="53" viewBox="0 0 67 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M63.4732 3.3276L60.8996 2.76496L55.8021 1.70214L50.3936 1.02336C48.6606 0.758124 46.8552 0.683697 44.9769 0.559732C43.0985 0.435766 41.4094 0.296304 39.5315 0.412632C32.1001 0.412464 24.5951 1.36993 17.1578 3.26697C11.5102 4.70294 5.91706 6.61428 0.426379 8.98461L7.56097 52.1457C12.0502 49.9695 16.6661 48.2787 21.3424 47.0977C30.6448 44.8034 40.0422 44.7484 48.9097 46.9363L50.6065 47.2969L52.2453 47.8102L66.0167 4.16264L63.4732 3.3276Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile33Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="70" height="80" viewBox="0 0 70 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M61.4864 40.8112C57.8102 33.3943 53.1683 26.7296 47.6974 21.0135C46.2813 19.6243 44.9711 18.1007 43.4345 16.884C41.8978 15.6673 40.4454 14.3735 38.932 13.1438C35.8314 10.8959 32.5928 8.87856 29.2337 7.10275C25.9423 5.36027 22.5476 3.83776 19.0649 2.54211L13.8776 0.943143L0.106164 44.5907L3.39101 45.5981C5.42175 46.3627 7.40319 47.2537 9.32711 48.2674C11.1756 49.2425 12.9614 50.3435 14.6761 51.565L17.0382 53.5536C17.8259 54.2109 18.5693 54.9307 19.2637 55.7087C25.098 61.9825 29.1802 70.1082 31.0953 79.2601L69.3005 63.2078C67.5247 55.311 64.9017 47.7928 61.4864 40.8112V40.8112Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile34Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="43" height="57" viewBox="0 0 43 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42.2625 48.2408C43.546 32.0486 42.534 16.0291 39.2654 0.800666L39.0821 0.0761199L0.876865 16.1283L1.0044 16.6134C3.25384 26.5272 3.91682 44.9636 3.10626 56.706L42.2625 48.2408Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile35Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="58" height="91" viewBox="0 0 58 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M36.4848 79.8392C41.215 72.4026 45.2329 64.4643 48.4586 56.1822C51.5141 47.9452 53.8152 39.4582 55.3221 30.868C56.6778 22.4196 57.308 13.9355 57.2035 5.53913C57.1773 3.87007 57.0652 2.23388 56.9764 0.584708L17.6416 9.37507C17.7159 10.1085 17.7522 10.8512 17.7504 11.5994C17.8057 16.8274 17.4276 22.1068 16.6208 27.3684C15.6969 32.4681 14.3297 37.5076 12.5403 42.4097C10.6758 47.1758 8.36178 51.746 5.64298 56.0318C3.98862 58.5905 2.17163 61.0175 0.209281 63.2896L28.315 90.9697C31.24 87.45 33.9698 83.7309 36.4848 79.8392V79.8392Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile36Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="75" height="67" viewBox="0 0 75 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24.0141 62.4717C31.3441 60.0872 38.5311 56.9008 45.469 52.9595C52.536 48.8693 59.2528 43.9036 65.4834 38.163C68.4439 35.3749 71.29 32.4261 74.0096 29.3291L46.8872 0.363414C45.5693 1.80575 44.2032 3.22985 42.7948 4.57234C39.1317 7.92048 35.1886 10.818 31.0434 13.2074L27.8305 14.956C26.76 15.5536 25.6192 15.9499 24.4991 16.485C22.2589 17.5553 19.9568 18.2091 17.6712 19.1093C11.9419 20.8383 6.13951 21.9116 0.354478 22.3124L3.2633 66.7501C10.2065 65.9869 17.1485 64.5556 24.0141 62.4717V62.4717Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile37Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="75" height="66" viewBox="0 0 75 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.14358 45.5853C7.97456 47.1735 10.8526 48.6928 13.7069 50.2245C25.5372 56.3357 38.1465 60.7334 51.2696 63.3251C58.3493 64.6421 65.5809 65.3019 72.8957 65.2983L74.226 20.4318C70.2213 20.2736 66.2597 19.8326 62.3638 19.1114C52.2711 17.0784 42.5718 13.6744 33.4648 8.96921L26.511 5.19325L19.6968 0.989173L19.4908 0.90413L0.384298 42.6932L5.14358 45.5853Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile38Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="69" height="72" viewBox="0 0 69 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.68261 41.0229C12.3881 46.3544 21.8297 52.46 31.0524 58.9611L34.4895 61.462L36.2041 62.6996L38.1724 64.0863C40.8152 65.9059 43.4267 67.801 46.1087 69.5705L49.6307 71.731L68.7372 29.942C66.571 28.4957 64.4197 26.9231 62.2771 25.4645L60.5945 24.2842L58.7131 22.9114L54.9585 20.1912C44.8232 13.0705 34.4057 6.31908 23.4632 0.300273L22.8452 0.0451528L0.431465 39.9169L2.68261 41.0229Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile39Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="85" height="57" viewBox="0 0 85 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45.9999 44.5002C54.4999 41.0001 62.9999 44.5002 62.9999 44.5002L84.9999 4.5001C84.9999 4.5001 55.4997 -4.49974 33.4998 4.50008C11.4998 13.4999 0.548883 30.3023 0.548883 30.3023L29.0785 56.5677C34.9022 48.5855 37.4999 48.0003 45.9999 44.5002Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile40Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="52" height="81" viewBox="0 0 52 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42.516 49.4494C43.6161 41.4221 46.6756 33.4815 51.3945 26.4061L22.865 0.140625C22.64 0.430987 22.415 0.721362 22.1899 1.01172C16.7369 8.36012 12.1939 16.3143 8.69716 24.6361C5.18763 33.0287 2.79933 41.7108 1.60766 50.4083C0.205523 60.7982 0.380017 71.0778 2.12465 80.8617L42.8238 65.9278C41.8945 60.6286 41.7906 55.0702 42.516 49.4494V49.4494Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile41Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="65" height="77" viewBox="0 0 65 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M62.1272 36.5396C61.2465 35.8571 60.3657 35.1745 59.5297 34.2943C52.803 28.0661 47.5941 20.2538 44.2139 11.3235C42.8946 7.81912 41.914 4.13784 41.2846 0.326869L0.58542 15.2608C1.62437 21.2613 3.19815 27.0604 5.288 32.5888C10.5865 46.6787 18.7948 58.9952 29.4143 68.7902C30.6568 69.9854 32.162 71.1776 33.5347 72.3447C34.9075 73.5117 36.4345 74.5918 37.8844 75.7154L39.8116 76.9506L64.0962 38.1687C63.5354 37.605 62.8193 37.1018 62.1272 36.5396Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
+    const ProcessPathMobile42Svg: FC<IProcessPathSvg> = ({
+        bgColor="#28D764",
+        active=false,
+    }) => {
+        return (
+            <svg width="75" height="55" viewBox="0 0 75 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M72.9153 9.6926C62.1427 11.6718 52.7993 11.9186 44.1794 9.52465C39.7175 8.34597 35.4815 6.62204 31.5498 4.38481L30.0198 3.56061L28.5095 2.57093L25.4911 0.644915L24.9355 0.214387L0.650837 38.9963L3.13148 40.6088L5.34111 42.0113L7.69034 43.2897C14.0159 46.8667 20.8255 49.624 27.9948 51.5112C29.8373 51.9321 31.5924 52.466 33.5225 52.774L39.1949 53.7101L44.9422 54.2137C46.8659 54.3619 48.7959 54.3342 50.729 54.3864C56.9748 54.3549 63.2909 53.8113 69.6207 52.7607L74.1126 9.40695L72.9153 9.6926Z"
+            fill={bgColor}
+            stroke="#ffffff"
+            strokeWidth={active?"5":"0"}
+            />
+            </svg>
+        )
+    }
     return <StudentMenu>
         <Container>
             <div style={{
@@ -1008,21 +1851,29 @@ export const KidsProgress = () => {
                     </FormControl>
                 </Box>
             </div>
-            <div style={{
+            <div ref={mapBgRef} style={{
                 position: 'relative',
                 width: "100%",
-                paddingLeft: "5px",
-                paddingRight: "5px",
-                overflow: "hidden"
+                paddingLeft: "0px",
+                paddingRight: "0px",
+                overflow: "hidden",
+                background: "#EB7738"
             }}>
                 {/* <div style={{
                     position: "relative",
                     width: ScreenSize.widescreen
                 }}> */}
-                    <img ref={mapBgRef} style={{
-                        width: "100%"
-                    }} src={ProgressMap} alt="ProgressMap" />
-                    { paths.map((path, id) => <div key={id} style={{
+                    <PcCom>
+                        <img style={{
+                            width: "100%"
+                        }} src={ProgressMap} alt="ProgressMap" />
+                    </PcCom>
+                    <MobileCom>
+                        <img style={{
+                            width: "100%"
+                        }} src={ProgressMapMobile} alt="ProgressMapMobile" />
+                    </MobileCom>
+                    { paths.map((path, id) => <PcCom key={id} style={{
                         position: 'absolute',
                         left: `${path.left}%`,
                         top: `${path.top}%`,
@@ -1031,8 +1882,18 @@ export const KidsProgress = () => {
                             bgColor: subSubjects.length > id ? subSubjects[id].bgColor : "#C6CACC",
                             active: subSubjects.length > id ? subSubjects[id].active : false,
                         })}
-                    </div>) }
-                    { subSubjects.map((subSubject, id) => <span key={id} style={{
+                    </PcCom>) }
+                    { pathsMobile.map((path, id) => <MobileCom key={id} style={{
+                        position: 'absolute',
+                        left: `${path.left}%`,
+                        top: `${path.top}%`,
+                    }}>
+                        {path.imgSrc({
+                            bgColor: subSubjects.length > id ? subSubjects[id].bgColor : "#C6CACC",
+                            active: subSubjects.length > id ? subSubjects[id].active : false,
+                        })}
+                    </MobileCom>) }
+                    { subSubjects.map((subSubject, id) => <><PcCom key={id} style={{
                         position: 'absolute',
                         transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
                         left: `${subSubject.left}%`,
@@ -1040,7 +1901,17 @@ export const KidsProgress = () => {
                         fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
                         fontWeight: subSubject.active ? "600" : "400",
                         width: `${subSubject.width * mapWidth / 1366}px`,
-                    }}>{subSubject.text}</span>)}
+                    }}>{subSubject.text}</PcCom></>)}
+                    { subSubjectsMobile.map((subSubject, id) => <><MobileCom key={id} style={{
+                        position: 'absolute',
+                        transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
+                        left: `${subSubject.left}%`,
+                        top: `${subSubject.top}%`,
+                        fontSize: `11px`,
+                        fontWeight: subSubject.active ? "600" : "400",
+                        width: `${subSubject.width * mapWidth / 1366}px`,
+                        zIndex: 20,
+                    }}>{subSubject.text}</MobileCom></>)}
                 {/* </div> */}
             </div>
         </Container>
@@ -1061,7 +1932,7 @@ const Container = styled.div`
     padding: 0;
     box-sizing: border-box;
     @media (max-width: ${ ScreenSize.widescreen}) {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 0rem;
+        padding-right: 0rem;
     }
 `;

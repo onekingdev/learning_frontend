@@ -6,32 +6,6 @@ import { Title } from 'views/atoms/Text';
 import welcome from 'views/assets/welcome.svg';
 import treasureMapPc from 'views/assets/student/treasure-track-map-pc.png';
 import treasureMapMobile from 'views/assets/student/treasure-track-map-mobile.png';
-import path01 from 'views/assets/student/treasure-track-path-01.png';
-import path02 from 'views/assets/student/treasure-track-path-02.png';
-import path03 from 'views/assets/student/treasure-track-path-03.png';
-import path04 from 'views/assets/student/treasure-track-path-04.png';
-import path05 from 'views/assets/student/treasure-track-path-05.png';
-import path06 from 'views/assets/student/treasure-track-path-06.png';
-import path07 from 'views/assets/student/treasure-track-path-07.png';
-import path08 from 'views/assets/student/treasure-track-path-08.png';
-import path09 from 'views/assets/student/treasure-track-path-09.png';
-import path10 from 'views/assets/student/treasure-track-path-10.png';
-import path11 from 'views/assets/student/treasure-track-path-11.png';
-import path12 from 'views/assets/student/treasure-track-path-12.png';
-import path13 from 'views/assets/student/treasure-track-path-13.png';
-import path14 from 'views/assets/student/treasure-track-path-14.png';
-import path15 from 'views/assets/student/treasure-track-path-15.png';
-import path16 from 'views/assets/student/treasure-track-path-16.png';
-import path17 from 'views/assets/student/treasure-track-path-17.png';
-import path18 from 'views/assets/student/treasure-track-path-18.png';
-import path19 from 'views/assets/student/treasure-track-path-19.png';
-import path20 from 'views/assets/student/treasure-track-path-20.png';
-import path21 from 'views/assets/student/treasure-track-path-21.png';
-import path22 from 'views/assets/student/treasure-track-path-22.png';
-import path23 from 'views/assets/student/treasure-track-path-23.png';
-import path24 from 'views/assets/student/treasure-track-path-24.png';
-import path25 from 'views/assets/student/treasure-track-path-25.png';
-import pathEnd from 'views/assets/student/treasure-track-path-end.png';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -53,9 +27,6 @@ import { getRanking } from 'app/firebase';
 import { ScreenSize } from 'constants/screenSize';
 
 const avatars = [Boy1, Boy7, Girl5, Girl9, Girl11];
-const imgPaths = [
-    path01, path02, path03, path04, path05, path06, path07, path08, path09, path10, path11, path12, path13, path14, path15, path16, path17, path18, path19, path20, path21, path22, path23, path24, path25
-]
 
 type IPathComp = {
     bgColor?: string;
@@ -2843,14 +2814,14 @@ const ImgMobile = styled.img`
     }
 `;
 
-const MobileCom = styled.div`
+export const MobileCom = styled.div`
     display: none;
     @media (max-width: ${ScreenSize.phone}) {
         display: block;
     }
 `;
 
-const PcCom = styled.div`
+export const PcCom = styled.div`
     display: block;
     @media (max-width: ${ScreenSize.phone}) {
         display: none;
