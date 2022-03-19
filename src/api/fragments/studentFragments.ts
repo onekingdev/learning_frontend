@@ -169,6 +169,9 @@ export const STUDENT = `
             id
         }
         guardianstudentplan{
+            subject {
+                ${AREA_OF_KNOWLEDGE}
+            }
             ${GUARIDAN_STUDENT_PLAN_RAW}
             orderDetail {
                 ${ORDER_DETAIL_RAW}

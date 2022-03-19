@@ -4,6 +4,8 @@ import query, { sendRawQuery } from 'api/queries/get'
 import { WHOAMI_QUERY } from 'api/queries/users'
 import { INTEREST_QUERY } from 'api/queries/interests'
 import { NEXT_LEVEL_QUERY } from 'api/queries/questions'
+import { getGrades } from 'app/actions/gradeActions'
+
 import * as TYPES from 'app/types'
 
 export const login = async (username: string, password: string, dispatch: any) => {
@@ -77,6 +79,14 @@ export const login = async (username: string, password: string, dispatch: any) =
     else if(guardian) {
       console.log('this is a guardian')
       dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian })
+      const result:any = await getGrades(
+        user.token,
+        dispatch
+      );
+      // if(!result.success) {
+      //   return false;
+      // }
+      // return true;
       return {success: true, msg: 'Successfully Logined!', userType: 'guardian'}
     }
     else {
