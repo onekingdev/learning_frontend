@@ -77,7 +77,7 @@ const UserRankTreasureTrackStyles = styled(UserRankStyles)<IUserRankTreasureTrac
   }
   @media (max-width: ${ScreenSize.phone}) {
     margin-left: 5px;
-    grid-template-columns: 25px 1fr 1fr 4fr;
+    grid-template-columns: 35px 1fr 1fr 4fr;
   }
 `;
 
@@ -92,6 +92,6 @@ const UserRankTreasureTrackStylesActive = styled(UserRankStyles)`
   }
   @media (max-width: ${ScreenSize.phone}) {
     padding-left: 5px;
-    grid-template-columns: 25px 1fr 1fr 4fr;
+    grid-template-columns: 35px 1fr 1fr 4fr;
   }
 `;
