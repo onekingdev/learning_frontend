@@ -3,7 +3,7 @@ name: Deploy to heroku when pull request
 on:
   pull_request:
     branches:
-      - dev
+      - dev_staging
 
 jobs:
   build:
