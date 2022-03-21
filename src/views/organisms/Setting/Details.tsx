@@ -6,11 +6,10 @@ import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style'
 import { LSBlueTextButton } from 'views/molecules/Setting/utils/Style'
 import { dictionary } from 'views/pages/Settings/dictionary';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { CancelPlanForm } from 'views/molecules/Setting/CancelPlanForm';
-import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanForm';
+import { CancelForm } from 'views/molecules/Setting/CancelForm';
+import { AddPlanForm } from 'views/molecules/Setting/AddPlanForm';
 import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
 import { PlanList } from 'views/molecules/Setting/PlanList';
-import { CancelMembershipForm } from 'views/molecules/Setting/CancelMembershipForm';
 
 export const MembershipDetail:FC = () => {
 
@@ -18,12 +17,18 @@ export const MembershipDetail:FC = () => {
   const { isAddOpen, openAdd } = useAddDialog()
 
 
-  // State to refresh component
-  const [value, setValue] = useState(false);
-  const refresh = () => {
-    // it re-renders the component
-    setValue(!value);
+  const [reason, setReason] = useState<string>('reason1');
+
+  const onAddConfirm = () => {
+    openAdd()
   }
+  const onConfirm = (reason: string) => {
+    setReason(reason)
+    console.log(reason)
+    open()
+  }
+  const onAddCancel = () => openAdd();
+  const onCancel = () => open();
 
   const language = 'en';
   const words = dictionary[language].membership
@@ -42,14 +47,14 @@ export const MembershipDetail:FC = () => {
           title = 'Add Plan/or Package'
           contentText = 'Choose the new plan'
           dialogContent = {
-            <AddSimplePlanForm
-              open={openAdd}
-              refresh={refresh}
+            <AddPlanForm
+              onConfirm={onAddConfirm}
+              onCancel={onAddCancel}
             />
           }
           />
         </Box>
-        <PlanList refresh={value}/>
+        <PlanList />
         <BtnContainer >
           <LSBlueTextButton onClick={openAdd}>
               {'Add a Plan'}
@@ -64,9 +69,9 @@ export const MembershipDetail:FC = () => {
           title = 'Cancel Membership'
           contentText = 'Thank you for your plan. We are sorry to see you go'
           dialogContent = {
-            <CancelMembershipForm
-              open={open}
-              refresh={refresh}
+            <CancelForm
+              onConfirm={onConfirm}
+              onCancel={onCancel}
             />
           }
           />

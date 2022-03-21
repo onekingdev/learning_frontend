@@ -1,5 +1,6 @@
+import * as React from 'react';
 import styled from 'styled-components';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,14 +11,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
 import { Grid } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux'
 
 import { LSLabel, LSText, LSBlueTextButton } from './utils/Style';
 import { LSDialog } from './LSDialog';
-import { CancelPlanForm } from './CancelPlanForm';
+import { CancelForm } from './CancelForm';
 import { useDialog } from './utils/useDialog';
 import { Upgrade } from './Upgrade';
-import { doFetchAvailableBroughtPlans } from 'app/actions/guardianActions'
 
 const data = [
   {
@@ -50,60 +49,26 @@ const data = [
   },
 ]
 
-interface IPlanList {
-  refresh: boolean
-}
-
-export const PlanList: FC<IPlanList> = ({refresh}) => {
+export const PlanList: FC = () => {
 
   // for change to yearly dialog
   const [isUpdateOpen, update] = useState(false)
   const openUpdate = () => update(!isUpdateOpen);
-  const user = useSelector((state: any) => state.user);
-  const guardian = useSelector((state: any) => state.guardian);
+
   const { isOpen, open } = useDialog()
   const [tag, seTag] = useState(0)
-  const [plans, setPlans] = useState<Array<any>>([])
-  const [changed, setChanged] = useState(false)
-
-  const toggleChanged = () => {
-    setChanged(!changed)
-  }
 
   const onBtnClick = (id: number) => {
     seTag(id)
     open()
   }
-
   const onUpgradeBtnClick = (id: number) => {
     seTag(id)
-    console.log('plan id:',id)
     openUpdate()
   }
 
+  const onCancel = () => open()
   const onCancelUpgrade = () => openUpdate()
-
-  const fetchAvailableBrougthPlans = async (mounted: boolean) => {
-    console.log('refreshing....')
-    setPlans([])
-    const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
-    if (res !== null) {
-      if (mounted) {
-        setPlans(
-          res
-        )
-      } else return
-    }
-  }
-
-  useEffect(() => {
-    let mounted = true
-    console.log(refresh)
-    fetchAvailableBrougthPlans(mounted)
-    return () => {
-      mounted = false
-    }
-  }, [refresh, changed]);
 
   return (
     <div>
@@ -118,44 +83,43 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {plans.length > 0 ? plans.map((row, index) => (
-              // row.status &&
+            {data.map((row, index) => (
               <TableRow
                 hover
                 key={row.id}
               >
                 <StyledTableCell component="th" scope="row" bgcolor={colors[index % 4]}>
                   <Grid container>
-                    <Grid item md={3} xs={12}>
-                      <LSLabel >{row.plan.name}</LSLabel>
+                    <Grid item md={5} xs={12}>
+                      <LSLabel >{row.package}</LSLabel>
                     </Grid>
-                    <StyledGrid container item md={9} xs={12} >
+                    <StyledGrid container item md={7} xs={12} >
                       <Grid item md={4} xs={4}>
                         <LSLabel>{row.period}</LSLabel>
                       </Grid>
                       <Grid item md={4} xs={4}>
-                        <LSLabel>{row.expiredAt?.slice(0, 10)}</LSLabel>
+                        <LSText>{row.expiration}</LSText>
                       </Grid>
                       <Grid item md={4} xs={4}>
-                        <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth:row.plan.priceYear} {row.plan.currency}</LSLabel>
+                        <LSText>{row.price}</LSText>
                       </Grid>
                     </StyledGrid>
                   </Grid>
                   <Grid container>
                     <Grid item md={6} xs={12}>
                       <LSBlueTextButton
-                        disabled={row.period === 'MONTHLY' ? false : true}
-                        onClick={() => onUpgradeBtnClick(index)}
+                        disabled={row.period === 'Monthly' ? false : true}
+                        onClick={() => onUpgradeBtnClick(row.id)}
                       >{'Change to Yearly'}
                       </LSBlueTextButton>
                     </Grid>
                     <Grid item md={6} xs={12}>
-                      <LSBlueTextButton onClick={() => onBtnClick(index)}>Cancel Plan</LSBlueTextButton>
+                      <LSBlueTextButton onClick={() => onBtnClick(row.id)}>Cancel Plan</LSBlueTextButton>
                     </Grid>
                   </Grid>
                 </StyledTableCell>
               </TableRow>
-            )): null}
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -165,10 +129,10 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
         title='Cancel Childrens plan'
         contentText='You are cancelling 1 child solo area'
         dialogContent={
-          <CancelPlanForm
-            plan={plans[tag]}
-            open={open}
-            refresh={toggleChanged}
+          <CancelForm
+            tag={tag}
+            onConfirm={open}
+            onCancel={onCancel}
           />
         }
       />
@@ -178,10 +142,9 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
         title={'Upgrade'}
         dialogContent={
           <Upgrade
-            plan={plans[tag]}
+            tag={tag}
             onConfirm={openUpdate}
             onCancel={onCancelUpgrade}
-            refresh={toggleChanged}
           />
         }
       />
@@ -195,7 +158,7 @@ const colors = [
   'linear-gradient(0deg, rgba(38, 184, 36, 0.2), rgba(38, 184, 36, 0.2)), linear-gradient(0deg, #FFFFFF, #FFFFFF);'
 ]
 
-const StyledTableCell = styled(TableCell) <{
+const StyledTableCell = styled(TableCell)<{
   bgcolor?: string
 }>`
 background: white;

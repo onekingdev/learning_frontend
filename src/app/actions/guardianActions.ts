@@ -4,16 +4,7 @@ import query from '../../api/queries/get'
 import { GAMES_QUERY, GAMES_BY_CATEGORY_NAME_QUERY, GAMES_CATEGORY_QUERY } from '../../api/queries/games'
 import { INTEREST_QUERY } from '../../api/queries/interests'
 import mutationFetch from 'api/mutations/get';
-import { CREATE_GUARDIAN,
-    CREATE_ORDER ,
-    UPDATE_EMAIL_PASSWORD,
-    FETCH_GUARDIAN_AVAILABLE_BOUGHT_PLANS,
-    UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN,
-    CANCEL_GUARDIAN_BOUGHT_PLAN,
-    FETCH_PLANS,
-    ADD_STUDENT_PLAN_PACKAGE,
-    CANCEL_MEMBERSHIP
- } from 'api/mutations/guardians';
+import { CREATE_GUARDIAN, CREATE_ORDER ,UPDATE_EMAIL_PASSWORD } from 'api/mutations/guardians';
 import { sendRawQuery } from 'api/queries/get';
 import * as TYPES from 'app/types'
 
@@ -53,77 +44,5 @@ export const doUpdateGuardianEmailPassword = async (email: string, username: str
     );
 
     return res.msg ? null : res.data.changeGuardianEmailPassword.user;
-}
-
-export const doFetchAvailableBroughtPlans = async (guardianId: number, token: string) => {
-    const res: any = await sendRawQuery(
-        FETCH_GUARDIAN_AVAILABLE_BOUGHT_PLANS(guardianId),
-        token
-    );
-    return res.msg ? null : res.data.guardianAvailableBroughtPlan;
-}
-
-export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: number, token: string) => {
-    try {
-        const res: any = await sendRawQuery(
-            UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN(guardianId, orderDetailId),
-            token
-        );
-        return res.msg ? {status: false} : res.data.updateGuardianPlan;
-    }
-    catch {
-        return {status: false}
-    }
-}
-
-export const doFetchPlans = async ( token: string) => {
-    try {
-        const res: any = await sendRawQuery(
-            FETCH_PLANS,
-            token
-        );
-        return res.msg ? {status: false} : res.data.plans;
-    }
-    catch {
-        return {status: false}
-    }
-}
-
-export const doCancelBroughtPlan = async ( orderDetailId: number, reason: string, token: string) => {
-    try {
-        const res: any = await sendRawQuery(
-            CANCEL_GUARDIAN_BOUGHT_PLAN( orderDetailId, reason),
-            token
-        );
-        return res.msg ? {status: false} : res.data.cancelGuardianPlan;
-    }
-    catch {
-        return {status: false}
-    }
-}
-
-export const doAddStudentPlan = async ( guardianId: number, planId: number, token: string) => {
-    try {
-        const res: any = await sendRawQuery(
-            ADD_STUDENT_PLAN_PACKAGE( guardianId, planId),
-            token
-        );
-        return res.msg ? {status: false} : {...res.data.cancelGuardianPlan, status: true};
-    }
-    catch {
-        return {status: false}
-    }
-}
-export const doCancelMembership = async ( guardianId: number, reason: string, token: string) => {
-    try {
-        const res: any = await sendRawQuery(
-            CANCEL_MEMBERSHIP( guardianId, reason),
-            token
-        );
-        return res.msg ? {status: false} : res.data.cancelMemberShip ;
-    }
-    catch {
-        return {status: false}
-    }
 }
 

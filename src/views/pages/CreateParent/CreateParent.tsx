@@ -1,14 +1,16 @@
 import { FC, useEffect, useState, useContext } from 'react';
+import { LoadingContext } from 'react-router-loading';
+import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Grid from '@mui/material/Grid';
 import Button from 'views/molecules/MuiButton';
 import TextField from 'views/molecules/MuiTextField';
-import Grid from '@mui/material/Grid';
 import { BasicColor } from 'views/Color';
 import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import * as TYPES from 'app/types';
 import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
 import SocratesImg from 'views/assets/socrates.svg';
+import { createGuardian } from 'app/actions/guardianActions'
 import {
   Container,
   FormContainer,
@@ -17,29 +19,12 @@ import {
   ContactHeader,
   ContactBody,
 } from './Style';
-import mutationFetch from '../../../api/mutations/get';
-import { CREATE_GUARDIAN } from '../../../api/mutations/guardians';
-import { createGuardian } from '../../../app/actions/guardianActions'
-import { useSnackbar } from 'notistack';
-import { LoadingContext } from 'react-router-loading';
 
 const CreateParent: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
   const dispatch = useDispatch();
   const {enqueueSnackbar} = useSnackbar();
-
-  const language = 'en';
-
-  useEffect(() => {
-    console.log('use effect')
-    loadingContext.done()
-  }, [])
-
-  //   const handleClickVariant = (variant: VariantType) => () => {
-  //     // variant could be success, error, warning, info, or default
-  //   };
-
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -58,9 +43,15 @@ const CreateParent: FC = () => {
   const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState('');
 
+  const language = 'en';
+
   function validateEmail (email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
+
+  useEffect(() => {
+    loadingContext.done()
+  }, [])
 
   const handleFormChange = (field: string, errMsg: string) => {
     setValidateMsg({...validateMsg, [field]: errMsg});
@@ -124,7 +115,7 @@ const CreateParent: FC = () => {
                 <TextField
                   label="First Name"
                   onChange={e => {
-                    setUserName(e.target.value);
+                    setFirstName(e.target.value);
                     handleFormChange(
                       'firstName',
                       e.target.value.length === 0 ? 'Field is required' : ''
@@ -138,7 +129,7 @@ const CreateParent: FC = () => {
                 <TextField
                   label="Last Name"
                   onChange={e => {
-                    setUserName(e.target.value);
+                    setLastName(e.target.value);
                     handleFormChange(
                       'lastName',
                       e.target.value.length === 0 ? 'Field is required' : ''
