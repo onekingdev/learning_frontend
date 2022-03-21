@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn && yarn build-github &&yarn add firebase-admin && firebase deploy --token "1//0c3wkH3_y-Ks6CgYIARAAGAwSNwF-L9Ir_ZwxqWumb26KQIA2tEXy3LPkAtOvSMKb26McTaG4e890zv-GiDbRdaBTZW7ZpzL9AOU"
+      - run: yarn && yarn build-github && sudo yarn add -g firebase-tools && firebase use firebase deploy --token "1//0c3wkH3_y-Ks6CgYIARAAGAwSNwF-L9Ir_ZwxqWumb26KQIA2tEXy3LPkAtOvSMKb26McTaG4e890zv-GiDbRdaBTZW7ZpzL9AOU"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: >-
-            ${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEARNINGWITHSOCRATES_FRONTEND
+            ${{ secrets.FIREBASE_SERVICE_LEARNINGFRONTEND_PRODUCTION
             }}
           projectId: learn-with-socrates-production
