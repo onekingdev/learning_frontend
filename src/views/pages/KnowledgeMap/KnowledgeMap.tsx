@@ -91,9 +91,9 @@ export const KnowledgeMap: FC = () => {
           {areasOfKnowledge.map(
             (
               areaOfKnowledge: {
-                id: number;
+                id:          number;
                 islandImage: string;
-                isActive: boolean;
+                isActive:    boolean;
               },
               i
               ) => {
