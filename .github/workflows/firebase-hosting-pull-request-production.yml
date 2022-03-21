@@ -6,6 +6,8 @@ name: Deploy to Production Site Hosting on PR
   pull_request:
     branches:
       - master
+    tags:
+      - release*
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest

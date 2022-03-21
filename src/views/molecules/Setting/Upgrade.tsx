@@ -1,15 +1,19 @@
 import { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { InputBase } from '@mui/material';
-
-
+import { useDispatch, useSelector } from 'react-redux'
 import { LSButtonContainer, LSButton, LSText, LSPaperMoney, LSLabel, LSInputBase } from './utils/Style';
 import masterCard from 'views/assets/MasterCard.svg'
+import { doUpdateBroughtPlan } from 'app/actions/guardianActions';
+import { useSnackbar } from 'notistack';
+import { LoadingContainer } from 'views/atoms/Loading'
+import ReactLoading from 'react-loading';
+import { BasicColor } from 'views/Color';
+import LoadingOverlay from 'react-loading-overlay';
 
 interface IUpgradeProps {
   onConfirm: () => void
   onCancel: () => void
-  tag?: Number
+  plan: any
 }
 
 const text = [
@@ -18,10 +22,20 @@ const text = [
   'You are already have an active agreement, you only need to confirm your payment',
 ]
 
-export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, tag }) => {
+export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan }) => {
+  const guardian = useSelector((state: any) => state.guardian);
+  const user = useSelector((state: any) => state.user);
+  const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState(false)
 
-  const onSubmitBtnClicked = () => {
-    console.log(tag)
+  const onSubmitBtnClicked = async () => {
+    setLoading(true)
+    const res: any = await doUpdateBroughtPlan(guardian.id, plan.id, user.token)
+    if (res.status) {
+      enqueueSnackbar('Student Package updated successfully', { variant: 'success' })
+    } else
+      enqueueSnackbar('Student Package update failed', { variant: 'error' })
+    setLoading(false)
     onConfirm()
   }
 
@@ -33,13 +47,18 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, tag }) => {
   }, [])
 
   return (
-    <div >
+    <LoadingOverlay
+      active={loading}
+      spinner
+      text='Updating plan...'
+    >
+          <div >
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <LSText >{text[0]}</LSText>
         <LSLabel mt={0}>{'Annual Plan'}</LSLabel>
         <LSLabel >{'Do you have any coupon?'}</LSLabel >
         <LSPaperMoney elevation={6}>
-          <LSLabel fontSize={24} color='darkblue' >{'$59.99 USD '}<span style={{ fontSize: '14px', color: 'black' }}>{'/year'}</span></LSLabel>
+          <LSLabel fontSize={24} color='darkblue' >{plan.plan.priceYear}{plan.plan.currency}<span style={{ fontSize: '14px', color: 'black' }}>{'/year'}</span></LSLabel>
         </LSPaperMoney>
         <LSText mt={15} mb={20} textAlign='center'>{text[1]}</LSText>
         <LSText fontSize={15} margin={0} textAlign='center'>{text[2]}</LSText>
@@ -51,8 +70,8 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, tag }) => {
         border='solid 2px darkblue'
         border_radius={10}
         pl={10}
-        value='1154 4525 7889 1458'
-        endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
+        value={guardian.paymentMethod.cardNumber}
+      // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
       />
       <LSButtonContainer style={{ marginTop: '32px' }}>
         <LSButton
@@ -70,5 +89,11 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, tag }) => {
         </LSButton>
       </LSButtonContainer>
     </div>
+    </LoadingOverlay>
+    // loading ?
+    // <LoadingContainer>
+    //   <ReactLoading type="spinningBubbles" color={BasicColor.green} />
+    // </LoadingContainer> :
+
   );
 }

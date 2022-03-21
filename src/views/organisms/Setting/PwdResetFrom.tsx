@@ -53,9 +53,9 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
         // Call Userfront.resetPassword()
         setLoading(true)
         const res: any = await doUpdateGuardianEmailPassword('', user.username, pwd.password, user.token)
-        if(res === null)
+        if (res === null)
             enqueueSnackbar('Password reset error! ', { variant: 'error' })
-            else enqueueSnackbar('Password reset success! ', { variant: 'success' });
+        else enqueueSnackbar('Password reset success! ', { variant: 'success' });
         setLoading(false)
         open()
     }
