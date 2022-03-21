@@ -47,23 +47,23 @@ export const KnowledgeMap: FC = () => {
   }
 
   const getRandomNumber = (max: number) => Math.floor(Math.random() * max);
-  
+
   const animateBoat     = (e: any, route: string) => {
-    
+
     const audio = new Audio(boat_sound);
     audio.play();
-    
+
     setBoatX(e.clientX )
     setBoatY(e.clientY + window.pageYOffset )
-    
+
     setTimeout(() => {
       history.push(route);
     }, 3300);
-    
+
   };
-  
+
   const randRange       = (max: number, min: number) => Math.round(Math.random() * (max - min)) + min;
-  
+
   const getFiller       = () => {
 
     const uniqueFillers = [boat, barrell, dragon];
@@ -72,17 +72,17 @@ export const KnowledgeMap: FC = () => {
       return uniqueFillers[getRandomNumber(2)];
     }
     return fillers[getRandomNumber(3)];
-    
+
   };
-  
+
   const dragonNum       = randRange(0, areasOfKnowledge.length);
-  
+
   useEffect(() => {
 
     setAreasOfKnowledge(student?.guardianstudentplan?.subject)
 
   }, []);
-  
+
   return (
     <Wrapper>
       <StudentMenu>
@@ -98,7 +98,7 @@ export const KnowledgeMap: FC = () => {
               i
               ) => {
                 const fill = getFiller();
-                
+
                 return i % 2 === 0 ? (
                   <Subject key={i}
                 >
