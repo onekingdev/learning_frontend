@@ -14,6 +14,7 @@ export const SettingContainer = styled.div`
 `;
 
 export const Avatar = styled.img`
+  cursor: pointer;
   width: 85px;
   height: 95px;
 `;

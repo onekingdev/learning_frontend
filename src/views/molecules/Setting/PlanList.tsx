@@ -64,6 +64,11 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
   const { isOpen, open } = useDialog()
   const [tag, seTag] = useState(0)
   const [plans, setPlans] = useState<Array<any>>([])
+  const [changed, setChanged] = useState(false)
+
+  const toggleChanged = () => {
+    setChanged(!changed)
+  }
 
   const onBtnClick = (id: number) => {
     seTag(id)
@@ -76,16 +81,14 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
     openUpdate()
   }
 
-  const onCancel = () => open()
-
   const onCancelUpgrade = () => openUpdate()
 
   const fetchAvailableBrougthPlans = async (mounted: boolean) => {
     console.log('refreshing....')
+    setPlans([])
     const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
     if (res !== null) {
       if (mounted) {
-        // setPlans([])
         setPlans(
           res
         )
@@ -95,11 +98,12 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
 
   useEffect(() => {
     let mounted = true
+    console.log(refresh)
     fetchAvailableBrougthPlans(mounted)
     return () => {
       mounted = false
     }
-  }, [refresh]);
+  }, [refresh, changed]);
 
   return (
     <div>
@@ -114,7 +118,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {plans.map((row, index) => (
+            {plans.length > 0 ? plans.map((row, index) => (
               // row.status &&
               <TableRow
                 hover
@@ -151,7 +155,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
                   </Grid>
                 </StyledTableCell>
               </TableRow>
-            ))}
+            )): null}
           </TableBody>
         </Table>
       </TableContainer>
@@ -164,7 +168,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
           <CancelPlanForm
             plan={plans[tag]}
             open={open}
-            // onCancel={onCancel}
+            refresh={toggleChanged}
           />
         }
       />
@@ -177,6 +181,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
             plan={plans[tag]}
             onConfirm={openUpdate}
             onCancel={onCancelUpgrade}
+            refresh={toggleChanged}
           />
         }
       />

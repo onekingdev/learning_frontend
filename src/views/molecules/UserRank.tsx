@@ -35,7 +35,7 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         <Button isDark={true}>#{userRank}</Button>
         <UserIcon src={userIcon} />
         <Button fontSize="24px" isDark={true}>YOU</Button>
-        <Button isDark={true}>{coinsEarned} COINS EARNED</Button>
+        <Button fontSize="14px" isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStylesActive>
     </>
   ) : (
@@ -44,7 +44,7 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         <Button isDark={true}>#{userRank}</Button>
         <UserIcon src={userIcon} />
         <Button isDark={true}>{userName}</Button>
-        <Button isDark={true}>{coinsEarned} COINS EARNED</Button>
+        <Button fontSize="14px" isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStyles>
     </>
   );
@@ -75,6 +75,10 @@ const UserRankTreasureTrackStyles = styled(UserRankStyles)<IUserRankTreasureTrac
     padding-left: 0px;
     width: 100%;
   }
+  @media (max-width: ${ScreenSize.phone}) {
+    margin-left: 5px;
+    grid-template-columns: 35px 1fr 1fr 4fr;
+  }
 `;
 
 const UserRankTreasureTrackStylesActive = styled(UserRankStyles)`
@@ -85,5 +89,9 @@ const UserRankTreasureTrackStylesActive = styled(UserRankStyles)`
   @media (max-width: ${ScreenSize.desktop}) {
     padding-left: 16px;
     width: 100%;
+  }
+  @media (max-width: ${ScreenSize.phone}) {
+    padding-left: 5px;
+    grid-template-columns: 35px 1fr 1fr 4fr;
   }
 `;

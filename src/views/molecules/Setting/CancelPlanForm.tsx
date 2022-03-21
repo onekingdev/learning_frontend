@@ -16,6 +16,7 @@ interface ICancelFormProps {
   open: () => void
   tag?: Number
   plan: any
+  refresh: () => void
 }
 
 const data = [
@@ -46,7 +47,7 @@ const data = [
   },
 ]
 
-export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan }) => {
+export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan, refresh }) => {
   const [value, setValue] = useState(data[0].value);
   const user = useSelector((state: any) => state.user);
   const [loading, setLoading] = useState(false)
@@ -58,6 +59,7 @@ export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan }) => {
     const res:any = await doCancelBroughtPlan(plan.id, reason?reason:'', user.token)
     if(res.status){
       enqueueSnackbar('Cancel children plan successfully', { variant: 'success' })
+      refresh()
     } else{
       enqueueSnackbar('Cancel children plan failed', { variant: 'error' })
     }

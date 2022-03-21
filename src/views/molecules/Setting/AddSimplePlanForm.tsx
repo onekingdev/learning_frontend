@@ -79,23 +79,6 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
       enqueueSnackbar('Student Package add failed', { variant: 'error' })
 
     setLoading(false)
-    // if (parentState === 'solo') {
-
-    //   console.log(soloState)
-    // }
-    // else if (parentState === 'combo') {
-    //   if (checked.indexOf(true) === -1)
-    //     console.log('No data')
-    //   else {
-    //     let combo = ''
-    //     for (let i = 0; i < checked.length; i++) {
-    //       if (checked[i] === true) combo += i + ','
-    //     }
-    //     console.log(combo)
-    //   }
-    // }
-    // else console.log(parentState)
-
     open()
   }
 
@@ -187,12 +170,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
   }
 
   return (
-    <LoadingOverlay
-    active={loading}
-    spinner
-    text='Adding plan...'
-  >
-    {plans.length ?
+    !loading && plans.length ?
       <div >
         <RadioGroup
           aria-labelledby="canceling-reason-label"
@@ -231,7 +209,6 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
       </div> :
       <LoadingContainer>
         <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-      </LoadingContainer>}
-    </LoadingOverlay>
+      </LoadingContainer>
   );
 }

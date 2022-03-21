@@ -25,10 +25,15 @@ const Mark = styled.div`
     flex-grow: 0;
     flex-shrink: 0;
     width: 135px;
-    height: 28px;
+    min-height: 28px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+    @media (max-width: ${ScreenSize.phone}) {
+        width: 100%;
+        justify-content: start;
+    }
 `;
 
 const MarkTableDiv = styled.div`
@@ -36,13 +41,21 @@ const MarkTableDiv = styled.div`
     flex-direction: column;
     margin-bottom: 6rem;
     color: black;
-    max-width: 95vw;
+    max-width: 760px;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
-    @media (min-width: ${ScreenSize.tablet}) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    @media (min-width: ${ScreenSize.phone}) {
         margin-bottom: 2rem;
+        width: 100%;
     }
+`;
+
+const SingleLineContainer = styled.div`
+    display: grid;
+    grid-template-columns: 4;
 `;
 
 interface ISingleGroup {
@@ -59,6 +72,8 @@ interface ISingleGroup {
 const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
     const [opened, setOpened] = useState<boolean>(true);
     const toggle = () => setOpened(val => !val);
+    const [markOpened, setMarkOpened] = useState<boolean>(false);
+    const toggleMark = () => setMarkOpened(val => !val);
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {
         return <SingleGroup key={id} main={item.main} extra={item.extra} deep={deep+1} />
     }) : '';
@@ -68,10 +83,8 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
         return <div style={{
             display: 'flex',
             flexDirection: 'column',
-            width: '760px',
         }}>
-            <div style={{
-                display: 'flex',
+            <PcCom style={{
                 backgroundColor: colors[deep],
                 cursor: 'pointer',
                 border: "1px solid black"
@@ -88,7 +101,39 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                 <Mark>{main.item2}</Mark>
                 <Mark>{main.item3}</Mark>
                 <Mark>{main.item4}</Mark>
-            </div>
+            </PcCom>
+            <MobileCom style={{
+                backgroundColor: colors[deep],
+                cursor: 'pointer',
+            }}>
+                <Subject style={{
+                    paddingLeft: `${deep}rem`,
+                    border: "1px solid black"
+                }} onClick={toggle}>
+                    <ArrowRightIcon style={{
+                        transform: opened ? 'rotate(90deg)' : 'rotate(0deg)',
+                        opacity: extra.length > 0 ? '100' : '0'
+                    }} />
+                    <span>{main.item1}</span>
+                </Subject>
+                { main.item2 !== "Accuracy" ? <Mark style={{
+                    paddingLeft: `${deep + 1.5}rem`,
+                    border: "1px solid black"
+                }} onClick={toggleMark}>
+                    <ArrowRightIcon style={{
+                        transform: markOpened ? 'rotate(90deg)' : 'rotate(0deg)',
+                    }} />
+                    <div>
+                        <div>Accuracy {main.item2}</div>
+                        { markOpened ? <>
+                            <span style={{
+                                marginRight: "1rem"
+                            }}>Correct {main.item3}</span>
+                            <span>Total {main.item4}</span>
+                        </> : "" }
+                    </div>
+                </Mark> : "" }
+            </MobileCom>
             { children }
         </div>
     }
@@ -175,3 +220,17 @@ const MarkTable = () => {
 };
 
 export default MarkTable;
+
+export const MobileCom = styled.div`
+    display: none;
+    @media (max-width: ${ScreenSize.phone}) {
+        display: block;
+    }
+`;
+
+export const PcCom = styled.div`
+    display: flex;
+    @media (max-width: ${ScreenSize.phone}) {
+        display: none;
+    }
+`;

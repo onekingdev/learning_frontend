@@ -20,4 +20,3 @@ yarn-debug.log*
 yarn-error.log*
 
 /.firebase
-.env.development

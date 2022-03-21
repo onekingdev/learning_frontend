@@ -14,6 +14,7 @@ interface IUpgradeProps {
   onConfirm: () => void
   onCancel: () => void
   plan: any
+  refresh: () => void
 }
 
 const text = [
@@ -22,7 +23,7 @@ const text = [
   'You are already have an active agreement, you only need to confirm your payment',
 ]
 
-export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan }) => {
+export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan, refresh }) => {
   const guardian = useSelector((state: any) => state.guardian);
   const user = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
@@ -33,6 +34,7 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan }) => {
     const res: any = await doUpdateBroughtPlan(guardian.id, plan.id, user.token)
     if (res.status) {
       enqueueSnackbar('Student Package updated successfully', { variant: 'success' })
+      refresh()
     } else
       enqueueSnackbar('Student Package update failed', { variant: 'error' })
     setLoading(false)
@@ -52,43 +54,43 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan }) => {
       spinner
       text='Updating plan...'
     >
-          <div >
-      <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-        <LSText >{text[0]}</LSText>
-        <LSLabel mt={0}>{'Annual Plan'}</LSLabel>
-        <LSLabel >{'Do you have any coupon?'}</LSLabel >
-        <LSPaperMoney elevation={6}>
-          <LSLabel fontSize={24} color='darkblue' >{plan.plan.priceYear}{plan.plan.currency}<span style={{ fontSize: '14px', color: 'black' }}>{'/year'}</span></LSLabel>
-        </LSPaperMoney>
-        <LSText mt={15} mb={20} textAlign='center'>{text[1]}</LSText>
-        <LSText fontSize={15} margin={0} textAlign='center'>{text[2]}</LSText>
-      </Box>
-      <LSLabel >{'Card Number'}</LSLabel>
-      <LSInputBase
-        fullWidth
-        disabled
-        border='solid 2px darkblue'
-        border_radius={10}
-        pl={10}
-        value={guardian.paymentMethod.cardNumber}
-      // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
-      />
-      <LSButtonContainer style={{ marginTop: '32px' }}>
-        <LSButton
-          variant='contained'
-          onClick={onSubmitBtnClicked}
-        >
-          {'Upgrade'}
-        </LSButton>
-        <LSButton
-          variant='contained'
-          color="secondary"
-          onClick={onCancelBtnClicked}
-        >
-          {'Cancel'}
-        </LSButton>
-      </LSButtonContainer>
-    </div>
+      <div >
+        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+          <LSText >{text[0]}</LSText>
+          <LSLabel mt={0}>{'Annual Plan'}</LSLabel>
+          <LSLabel >{'Do you have any coupon?'}</LSLabel >
+          <LSPaperMoney elevation={6}>
+            <LSLabel fontSize={24} color='darkblue' >{plan?.plan.priceYear}{plan?.plan.currency}<span style={{ fontSize: '14px', color: 'black' }}>{'/year'}</span></LSLabel>
+          </LSPaperMoney>
+          <LSText mt={15} mb={20} textAlign='center'>{text[1]}</LSText>
+          <LSText fontSize={15} margin={0} textAlign='center'>{text[2]}</LSText>
+        </Box>
+        <LSLabel >{'Card Number'}</LSLabel>
+        <LSInputBase
+          fullWidth
+          disabled
+          border='solid 2px darkblue'
+          border_radius={10}
+          pl={10}
+          value={guardian.paymentMethod.cardNumber}
+        // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
+        />
+        <LSButtonContainer style={{ marginTop: '32px' }}>
+          <LSButton
+            variant='contained'
+            onClick={onSubmitBtnClicked}
+          >
+            {'Upgrade'}
+          </LSButton>
+          <LSButton
+            variant='contained'
+            color="secondary"
+            onClick={onCancelBtnClicked}
+          >
+            {'Cancel'}
+          </LSButton>
+        </LSButtonContainer>
+      </div>
     </LoadingOverlay>
     // loading ?
     // <LoadingContainer>
