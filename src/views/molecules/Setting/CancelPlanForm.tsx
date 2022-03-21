@@ -4,11 +4,17 @@ import RadioGroup from '@mui/material/RadioGroup';
 import { BasicColor } from 'views/Color';
 import { LSLabel, LSButtonContainer, LSButton } from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
+import { doCancelBroughtPlan } from 'app/actions/guardianActions';
+import { useSelector } from 'react-redux'
+import { useSnackbar } from 'notistack';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 interface ICancelFormProps {
-  onConfirm: (arg: string) => void
-  onCancel: () => void
+  // onConfirm: (arg: string) => void
+  open: () => void
   tag?: Number
+  plan: any
+  refresh: () => void
 }
 
 const data = [
@@ -39,13 +45,24 @@ const data = [
   },
 ]
 
-export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) => {
+export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan, refresh }) => {
   const [value, setValue] = useState(data[0].value);
+  const user = useSelector((state: any) => state.user);
+  const [loading, setLoading] = useState(false)
+  const { enqueueSnackbar } = useSnackbar();
 
-  const onSubmit = () => {
-    onConfirm(value)
-    console.log(tag)
-    console.log(value)
+  const onSubmit = async () => {
+    const reason = data.find(element => element.value === value)?.label
+    setLoading(true)
+    const res:any = await doCancelBroughtPlan(plan.id, reason?reason:'', user.token)
+    if(res.status){
+      enqueueSnackbar('Cancel children plan successfully', { variant: 'success' })
+      refresh()
+    } else{
+      enqueueSnackbar('Cancel children plan failed', { variant: 'error' })
+    }
+    setLoading(false)
+    open()
   }
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +70,9 @@ export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) =
   };
 
   return (
+    loading ?
+    <LoadingSpinner />
+     :
     <LSFormControl variant='standard'>
       <FormLabel id="canceling-reason-label">
         <LSLabel>{'Please tell us why are you canceling.'}</LSLabel>
@@ -65,7 +85,7 @@ export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) =
         onChange={handleRadioChange}
       >
         {
-          data.map((row, index) => {
+          data.map((row) => {
             return <LSFormControlLabel key={row.id} value={row.value} control={<LSRadio />} label={row.label} />
           })
         }
@@ -81,7 +101,7 @@ export const CancelForm: FC<ICancelFormProps> = ({ onConfirm, onCancel, tag }) =
           variant='contained'
           color="secondary"
           bgcolor={BasicColor.gray60}
-          onClick={onCancel}
+          onClick={open}
         >
           {'Cancel'}
         </LSButton>

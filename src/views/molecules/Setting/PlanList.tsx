@@ -1,6 +1,5 @@
-import * as React from 'react';
 import styled from 'styled-components';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,66 +8,70 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box } from '@mui/material';
 import { Grid } from '@mui/material';
+import { useSelector } from 'react-redux'
 
 import { LSLabel, LSText, LSBlueTextButton } from './utils/Style';
 import { LSDialog } from './LSDialog';
-import { CancelForm } from './CancelForm';
+import { CancelPlanForm } from './CancelPlanForm';
 import { useDialog } from './utils/useDialog';
 import { Upgrade } from './Upgrade';
+import { doFetchAvailableBroughtPlans } from 'app/actions/guardianActions'
 
-const data = [
-  {
-    id: 0,
-    package: 'Math/Financial Literacy',
-    period: 'Monthly',
-    expiration: 'Mar-10-2022',
-    price: '$5.99',
-  },
-  {
-    id: 1,
-    package: 'Math',
-    period: 'Yearly',
-    expiration: 'Mar-11-2023',
-    price: '$19.89',
-  },
-  {
-    id: 2,
-    package: 'ELA + Sight Words',
-    period: 'Monthly',
-    expiration: 'Mar-10-2022',
-    price: '$5.99',
-  },
-  {
-    id: 3,
-    package: 'Science',
-    period: 'Monthly',
-    expiration: 'Mar-10-2022',
-    price: '$5.99',
-  },
-]
+interface IPlanList {
+  refresh: boolean
+}
 
-export const PlanList: FC = () => {
+export const PlanList: FC<IPlanList> = ({refresh}) => {
 
   // for change to yearly dialog
   const [isUpdateOpen, update] = useState(false)
   const openUpdate = () => update(!isUpdateOpen);
-
+  const user = useSelector((state: any) => state.user);
+  const guardian = useSelector((state: any) => state.guardian);
   const { isOpen, open } = useDialog()
   const [tag, seTag] = useState(0)
+  const [plans, setPlans] = useState<Array<any>>([])
+  const [changed, setChanged] = useState(false)
+
+  const toggleChanged = () => {
+    setChanged(!changed)
+  }
 
   const onBtnClick = (id: number) => {
     seTag(id)
     open()
   }
+
   const onUpgradeBtnClick = (id: number) => {
     seTag(id)
+    console.log('plan id:',id)
     openUpdate()
   }
 
-  const onCancel = () => open()
   const onCancelUpgrade = () => openUpdate()
+
+  const fetchAvailableBrougthPlans = async (mounted: boolean) => {
+    console.log('refreshing....')
+    setPlans([])
+    const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
+    if (res !== null) {
+      if (mounted) {
+        setPlans(
+          res
+        )
+      } else return
+    }
+  }
+
+  useEffect(() => {
+    let mounted = true
+    console.log(refresh)
+    fetchAvailableBrougthPlans(mounted)
+    return () => {
+      mounted = false
+    }
+  }, [refresh, changed]);
 
   return (
     <div>
@@ -83,43 +86,44 @@ export const PlanList: FC = () => {
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {data.map((row, index) => (
+            {plans.length > 0 ? plans.map((row, index) => (
+              // row.status &&
               <TableRow
                 hover
                 key={row.id}
               >
                 <StyledTableCell component="th" scope="row" bgcolor={colors[index % 4]}>
                   <Grid container>
-                    <Grid item md={5} xs={12}>
-                      <LSLabel >{row.package}</LSLabel>
+                    <Grid item md={3} xs={12}>
+                      <LSLabel >{row.plan.name}</LSLabel>
                     </Grid>
-                    <StyledGrid container item md={7} xs={12} >
+                    <StyledGrid container item md={9} xs={12} >
                       <Grid item md={4} xs={4}>
                         <LSLabel>{row.period}</LSLabel>
                       </Grid>
                       <Grid item md={4} xs={4}>
-                        <LSText>{row.expiration}</LSText>
+                        <LSLabel>{row.expiredAt?.slice(0, 10)}</LSLabel>
                       </Grid>
                       <Grid item md={4} xs={4}>
-                        <LSText>{row.price}</LSText>
+                        <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth:row.plan.priceYear} {row.plan.currency}</LSLabel>
                       </Grid>
                     </StyledGrid>
                   </Grid>
                   <Grid container>
                     <Grid item md={6} xs={12}>
                       <LSBlueTextButton
-                        disabled={row.period === 'Monthly' ? false : true}
-                        onClick={() => onUpgradeBtnClick(row.id)}
+                        disabled={row.period === 'MONTHLY' ? false : true}
+                        onClick={() => onUpgradeBtnClick(index)}
                       >{'Change to Yearly'}
                       </LSBlueTextButton>
                     </Grid>
                     <Grid item md={6} xs={12}>
-                      <LSBlueTextButton onClick={() => onBtnClick(row.id)}>Cancel Plan</LSBlueTextButton>
+                      <LSBlueTextButton onClick={() => onBtnClick(index)}>Cancel Plan</LSBlueTextButton>
                     </Grid>
                   </Grid>
                 </StyledTableCell>
               </TableRow>
-            ))}
+            )): null}
           </TableBody>
         </Table>
       </TableContainer>
@@ -129,10 +133,10 @@ export const PlanList: FC = () => {
         title='Cancel Childrens plan'
         contentText='You are cancelling 1 child solo area'
         dialogContent={
-          <CancelForm
-            tag={tag}
-            onConfirm={open}
-            onCancel={onCancel}
+          <CancelPlanForm
+            plan={plans[tag]}
+            open={open}
+            refresh={toggleChanged}
           />
         }
       />
@@ -142,9 +146,10 @@ export const PlanList: FC = () => {
         title={'Upgrade'}
         dialogContent={
           <Upgrade
-            tag={tag}
+            plan={plans[tag]}
             onConfirm={openUpdate}
             onCancel={onCancelUpgrade}
+            refresh={toggleChanged}
           />
         }
       />
@@ -158,7 +163,7 @@ const colors = [
   'linear-gradient(0deg, rgba(38, 184, 36, 0.2), rgba(38, 184, 36, 0.2)), linear-gradient(0deg, #FFFFFF, #FFFFFF);'
 ]
 
-const StyledTableCell = styled(TableCell)<{
+const StyledTableCell = styled(TableCell) <{
   bgcolor?: string
 }>`
 background: white;

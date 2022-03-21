@@ -34,6 +34,7 @@ const CurrentAvatar = styled.div`
   height: 400px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
   width: 300px;
@@ -41,7 +42,8 @@ const CurrentAvatar = styled.div`
     width: 250px;
   }
   position: relative;
-  @media screen and (min-width: ${ScreenSize.phone}) {
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    width: 65vw;
   }
 
   .header {

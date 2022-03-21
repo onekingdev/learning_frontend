@@ -4,13 +4,19 @@ import query from '../../api/queries/get'
 import { GAMES_QUERY, GAMES_BY_CATEGORY_NAME_QUERY, GAMES_CATEGORY_QUERY } from '../../api/queries/games'
 import { PLAN_QUERY } from '../../api/queries/payments'
 import queryFetch from '../../api/queries/get';
-import { CREATE_GUARDIAN,  } from '../../api/mutations/guardians';
-import { CREATE_ORDER, CONFIRM_PAYMENT_ORDER, CREATE_ORDER_WITH_OUT_PAY } from '../../api/mutations/payments';
-
+import { CREATE_GUARDIAN, } from '../../api/mutations/guardians';
+import {
+    CREATE_ORDER,
+    CONFIRM_PAYMENT_ORDER,
+    CREATE_ORDER_WITH_OUT_PAY,
+    FETCH_PAYMENT_METHOD,
+    CHANGE_PAYMENT_METHOD_INFO
+} from 'api/mutations/payments';
+import { sendRawQuery } from 'api/queries/get';
 import mutationFetch from '../../api/mutations/get';
 import * as TYPES from '../../app/types'
 
-export const createOrder = async(
+export const createOrder = async (
     cardCvc: string,
     cardExpMonth: string,
     cardExpYear: string,
@@ -52,16 +58,16 @@ export const createOrder = async(
             returnUrl
         ),
         token
-    ).catch(() => ({success: false}));
+    ).catch(() => ({ success: false }));
 
     if (res.success === false) {
-        return {success: false, msg: 'Network Error!'};
+        return { success: false, msg: 'Network Error!' };
     }
 
     const result: any = await res.json();
 
     if (result.errors) {
-        return {success: false, msg: result.errors[0].message};
+        return { success: false, msg: result.errors[0].message };
     }
 
     const { guardian, order, status, urlRedirect } = result.data.createOrder;
@@ -74,12 +80,12 @@ export const createOrder = async(
     //     type: TYPES.GUARDIAN_SET_GUEARDIAN_STUDENT_PLAN,
     //     payload: order.orderdetailSet.guardianstudentplanSet || []
     // });
-    if(status !== 'success')
-        return {success: false, msg: 'Failed', data: result.data.createOrder}
-    return {success: true, msg: 'Success', data: result.data.createOrder}
+    if (status !== 'success')
+        return { success: false, msg: 'Failed', data: result.data.createOrder }
+    return { success: true, msg: 'Success', data: result.data.createOrder }
 }
 
-export const createOrderWithOutPay = async(
+export const createOrderWithOutPay = async (
     cardFirstName: string,
     cardLastName: string,
     address1: string,
@@ -97,16 +103,16 @@ export const createOrderWithOutPay = async(
     const res: any = await mutationFetch(
         CREATE_ORDER_WITH_OUT_PAY(cardFirstName, cardLastName, address1, address2, city, state, postCode, country, phone, guardianId, orderDetailInput),
         token
-    ).catch(() => ({success: false}));
+    ).catch(() => ({ success: false }));
 
     if (res.success === false) {
-        return {success: false, msg: 'Network Error!'};
+        return { success: false, msg: 'Network Error!' };
     }
 
     const result: any = await res.json();
 
     if (result.errors) {
-        return {success: false, msg: result.errors[0].message};
+        return { success: false, msg: result.errors[0].message };
     }
     console.log(result.data);
     const { guardian, order, status } = result.data.createOrderWithOutPay;
@@ -119,12 +125,12 @@ export const createOrderWithOutPay = async(
     //     type: TYPES.GUARDIAN_SET_GUEARDIAN_STUDENT_PLAN,
     //     payload: order.orderdetailSet.guardianstudentplanSet || []
     // });
-    if(status !== 'success')
-        return {success: false, msg: 'Failed', data: result.data.createOrderWithOutPay}
-    return {success: true, msg: 'Success', data: result.data.createOrderWithOutPay}
+    if (status !== 'success')
+        return { success: false, msg: 'Failed', data: result.data.createOrderWithOutPay }
+    return { success: true, msg: 'Success', data: result.data.createOrderWithOutPay }
 }
 
-export const confirmPaymentOrder = async(
+export const confirmPaymentOrder = async (
     orderId: number,
     token: string,
     dispatch: any
@@ -132,49 +138,49 @@ export const confirmPaymentOrder = async(
     const res: any = await mutationFetch(
         CONFIRM_PAYMENT_ORDER(orderId),
         token
-    ).catch(() => ({success: false}));
+    ).catch(() => ({ success: false }));
 
     if (res.success === false) {
-        return {success: false, msg: 'Network Error!'};
+        return { success: false, msg: 'Network Error!' };
     }
 
     const result: any = await res.json();
 
     if (result.errors) {
-        return {success: false, msg: result.errors[0].message};
+        return { success: false, msg: result.errors[0].message };
     }
 
     const { guardian, order, status } = result.data.confirmPaymentOrder;
 
-    if(status !== 'success')
-        return {success: false, msg: 'Cofirmation Failed'}
+    if (status !== 'success')
+        return { success: false, msg: 'Cofirmation Failed' }
 
     dispatch({
         type: TYPES.GUARDIAN_SET_DATA,
         payload: guardian,
     });
 
-    if(status === 'success')
-        return {success: true, msg: 'Success', data: result.data.confirmPaymentOrder}
+    if (status === 'success')
+        return { success: true, msg: 'Success', data: result.data.confirmPaymentOrder }
     else
-        return {success: false, msg: 'Failed'}
+        return { success: false, msg: 'Failed' }
 }
 
-export const getPlans = async(token: string) => {
+export const getPlans = async (token: string) => {
     const res: any = await queryFetch(
         'plans',
         PLAN_QUERY,
         token
-    ).catch(() => ({success: 'false'}));
+    ).catch(() => ({ success: 'false' }));
 
     if (res.success === false) {
-        return {success: false, msg: 'Network Error!'};
+        return { success: false, msg: 'Network Error!' };
     }
 
     const result: any = await res.json();
 
     if (result.errors) {
-        return {success: false, msg: result.errors[0].message};
+        return { success: false, msg: result.errors[0].message };
     }
 
     const plans = result.data.plans;
@@ -188,6 +194,30 @@ export const getPlans = async(token: string) => {
     //     payload: {...user, token: token, refreshToken: refreshToken},
     // });
 
-    return {success: true, msg: 'Success', data: plans}
+    return { success: true, msg: 'Success', data: plans }
 }
 
+export const doFetchPaymentMethod = async (guradianId: number, token: string) => {
+    try {
+        const res: any = await sendRawQuery(
+            FETCH_PAYMENT_METHOD(guradianId),
+            token
+        );
+        return res.msg ? null : res.data.guardianById.paymentMethod;
+    } catch {
+        return null
+    }
+}
+
+export const doChangePaymentMethod = async (guradianId: number, paymentInfo: any, token: string) => {
+    try {
+        console.log(paymentInfo)
+        const res: any = await sendRawQuery(
+            CHANGE_PAYMENT_METHOD_INFO(guradianId, paymentInfo),
+            token
+        );
+        return res.msg ? {status: false} : res.data.changePaymentMethod;
+    } catch {
+        return { status: false }
+    }
+}

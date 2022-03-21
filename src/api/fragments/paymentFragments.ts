@@ -12,6 +12,13 @@ export const PAYMENT_METHOD = `
   cardExpMonth
   cardExpYear
   cardCvc
+  address1
+  address2
+  city
+  state
+  postCode
+  country
+  phone
   isDefault
   slug
 `
@@ -52,7 +59,7 @@ export const GUARDIAN_STUDENT_PLAN = `
     expiredAt
     period
     price
-    
+
 `
 
 export const ORDER_DETAIL = `
