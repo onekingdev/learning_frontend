@@ -5,11 +5,12 @@ import { LSGridRow, LSLabel, LSTextField } from 'views/molecules/Setting/utils/S
 import { Grid } from '@mui/material';
 import { LSButtonContainer, LSButton } from 'views/molecules/Setting/utils/Style';
 import styled from 'styled-components';
+import ReactLoading from 'react-loading';
 import { ScreenSize } from 'constants/screenSize';
+import { BasicColor } from 'views/Color';
 import { doUpdateGuardianEmailPassword } from 'app/actions/guardianActions';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { LoadingSpinner } from 'views/atoms/Spinner';
 
 interface DialogProps {
     open: () => (void)
@@ -52,15 +53,17 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
         // Call Userfront.resetPassword()
         setLoading(true)
         const res: any = await doUpdateGuardianEmailPassword('', user.username, pwd.password, user.token)
-        if (res === null)
+        if(res === null)
             enqueueSnackbar('Password reset error! ', { variant: 'error' })
-        else enqueueSnackbar('Password reset success! ', { variant: 'success' });
+            else enqueueSnackbar('Password reset success! ', { variant: 'success' });
         setLoading(false)
         open()
     }
     return (
         loading ?
-            <LoadingSpinner />
+            <LoadingContainer>
+                <ReactLoading type="spinningBubbles" color={BasicColor.green} />
+            </LoadingContainer>
             :
             <ThemeProvider theme={settingPage}>
                 <LSGridRow container spacing={3}>
@@ -121,3 +124,14 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
     );
 }
 
+const LoadingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  alignItems: center;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    height: 80vh;
+  }
+`;

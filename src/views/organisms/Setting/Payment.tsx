@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect } from 'react';
+import { FC, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
 import { useDialog } from 'views/molecules/Setting/utils/useDialog';
@@ -15,10 +15,7 @@ import { EditPaymentForm } from 'views/molecules/Setting/EditPaymentForm';
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { useDispatch, useSelector } from 'react-redux'
 import masterCard from 'views/assets/MasterCard.svg'
-import payment from 'views/assets/payment/payment.jpg'
-import creditCardType from 'credit-card-type'
 
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 interface PaymentFormFunc {
@@ -29,9 +26,6 @@ interface PaymentFormFunc {
 export const Payment: FC = () => {
   const { isOpen, open } = useDialog()
   const [isEdit, edit] = useState(false)
-  const guardian = useSelector((state: any) => state.guardian);
-  const cardType = creditCardType(guardian.paymentMethod.cardNumber)
-
 
   const openEdit = () => edit(!isEdit);
 
@@ -47,6 +41,7 @@ export const Payment: FC = () => {
   const onConfirm = (reason: string) => {
     // setReason(reason)
 
+    console.log('Uhhahaha')
     open()
   }
 
@@ -59,14 +54,14 @@ export const Payment: FC = () => {
       </LSTitle>
       <LSGridRow container>
         <Grid item lg={4} xs={4}>
-          <MasterCardImg src={payment} />
+          <MasterCardImg src={masterCard} />
         </Grid>
         <Grid item lg={8} xs={8}>
           <LSText>
-            {cardType[0].niceType + ' card ending in ' + guardian.paymentMethod.cardNumber.slice(-4)}
+            {'Mastercard ending in 4583'}
           </LSText>
           <LSText>
-            {'Expires ' + guardian.paymentMethod.cardExpMonth + '/' + guardian.paymentMethod.cardExpYear}
+            {'Expires 3/25 Josie Turner'}
           </LSText>
         </Grid>
       </LSGridRow>
@@ -94,7 +89,7 @@ export const Payment: FC = () => {
           open={openEdit}
           dialogContent={
             <Elements stripe={stripePromise}>
-              <EditPaymentForm open={openEdit} />
+              <EditPaymentForm isUpdate={true} ref={paymentFormRef} handleOrder={onConfirm} handleUpdate={onCancel} />
             </Elements>
           }
         />
@@ -104,5 +99,6 @@ export const Payment: FC = () => {
 }
 
 const MasterCardImg = styled.img`
-  height: 60px;
+  @media screen and (max-width: 540px) {
+  }
 `;
