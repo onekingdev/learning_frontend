@@ -1,0 +1,81 @@
+[debug] [2022-03-21T21:23:31.970Z] ----------------------------------------------------------------------
+[debug] [2022-03-21T21:23:31.972Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Mooni\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --token 1//0cG8aUoYQftz_CgYIARAAGAwSNwF-L9IrbkPKjqtZD7feSVBbt90DKEv_E2CdL-OjswoG_R66ZGQw4e_JF0XZwiHzJaCkdAQx_ug
+[debug] [2022-03-21T21:23:31.972Z] CLI Version:   10.2.1
+[debug] [2022-03-21T21:23:31.972Z] Platform:      win32
+[debug] [2022-03-21T21:23:31.972Z] Node Version:  v14.17.3
+[debug] [2022-03-21T21:23:31.973Z] Time:          Mon Mar 21 2022 22:23:31 GMT+0100 (Central European Standard Time)
+[debug] [2022-03-21T21:23:31.973Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-21T21:23:32.026Z] Object ".remoteconfig" in "firebase.json" is missing required property: {"missingProperty":"template"}
+[debug] [2022-03-21T21:23:32.030Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-21T21:23:32.030Z] > authorizing via --token option
+[debug] [2022-03-21T21:23:32.030Z] [iam] checking project learn-with-socrates-production for permissions ["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-03-21T21:23:32.031Z] > refreshing access token with scopes: []
+[debug] [2022-03-21T21:23:32.031Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-21T21:23:33.439Z] <<< HTTP RESPONSE 200 {"date":"Mon, 21 Mar 2022 21:26:43 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-03-21T21:23:33.443Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions [none]
+[debug] [2022-03-21T21:23:33.443Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions {"permissions":["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-03-21T21:23:35.501Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions 200
+[debug] [2022-03-21T21:23:35.501Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions {"permissions":["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-03-21T21:23:35.502Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production [none]
+[debug] [2022-03-21T21:23:56.703Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production
+[debug] [2022-03-21T21:23:58.009Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production
+    at RetryOperation._fn (C:\Users\Mooni\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:240:31)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+[error] 
+[error] Error: Failed to get Firebase project learn-with-socrates-production. Please make sure the project exists and your account has permission to access it.
+[debug] [2022-03-21T21:24:08.762Z] ----------------------------------------------------------------------
+[debug] [2022-03-21T21:24:08.764Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Mooni\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --token 1//0cG8aUoYQftz_CgYIARAAGAwSNwF-L9IrbkPKjqtZD7feSVBbt90DKEv_E2CdL-OjswoG_R66ZGQw4e_JF0XZwiHzJaCkdAQx_ug
+[debug] [2022-03-21T21:24:08.764Z] CLI Version:   10.2.1
+[debug] [2022-03-21T21:24:08.765Z] Platform:      win32
+[debug] [2022-03-21T21:24:08.765Z] Node Version:  v14.17.3
+[debug] [2022-03-21T21:24:08.765Z] Time:          Mon Mar 21 2022 22:24:08 GMT+0100 (Central European Standard Time)
+[debug] [2022-03-21T21:24:08.766Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-21T21:24:08.821Z] Object ".remoteconfig" in "firebase.json" is missing required property: {"missingProperty":"template"}
+[debug] [2022-03-21T21:24:08.824Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-21T21:24:08.824Z] > authorizing via --token option
+[debug] [2022-03-21T21:24:08.824Z] [iam] checking project learn-with-socrates-production for permissions ["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-03-21T21:24:08.826Z] > refreshing access token with scopes: []
+[debug] [2022-03-21T21:24:08.826Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-21T21:24:10.230Z] <<< HTTP RESPONSE 200 {"date":"Mon, 21 Mar 2022 21:27:20 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-03-21T21:24:10.232Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions [none]
+[debug] [2022-03-21T21:24:10.233Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions {"permissions":["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-03-21T21:24:12.296Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions 200
+[debug] [2022-03-21T21:24:12.296Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions {"permissions":["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-03-21T21:24:12.297Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production [none]
+[debug] [2022-03-21T21:24:33.348Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production
+[debug] [2022-03-21T21:24:34.642Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production
+    at RetryOperation._fn (C:\Users\Mooni\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:240:31)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+[error] 
+[error] Error: Failed to get Firebase project learn-with-socrates-production. Please make sure the project exists and your account has permission to access it.
+[debug] [2022-03-21T21:24:45.218Z] ----------------------------------------------------------------------
+[debug] [2022-03-21T21:24:45.221Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Mooni\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --token 1//0cG8aUoYQftz_CgYIARAAGAwSNwF-L9IrbkPKjqtZD7feSVBbt90DKEv_E2CdL-OjswoG_R66ZGQw4e_JF0XZwiHzJaCkdAQx_ug
+[debug] [2022-03-21T21:24:45.221Z] CLI Version:   10.2.1
+[debug] [2022-03-21T21:24:45.221Z] Platform:      win32
+[debug] [2022-03-21T21:24:45.221Z] Node Version:  v14.17.3
+[debug] [2022-03-21T21:24:45.222Z] Time:          Mon Mar 21 2022 22:24:45 GMT+0100 (Central European Standard Time)
+[debug] [2022-03-21T21:24:45.222Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-21T21:24:45.293Z] Object ".remoteconfig" in "firebase.json" is missing required property: {"missingProperty":"template"}
+[debug] [2022-03-21T21:24:45.297Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-21T21:24:45.297Z] > authorizing via --token option
+[debug] [2022-03-21T21:24:45.297Z] [iam] checking project learn-with-socrates-production for permissions ["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-03-21T21:24:45.298Z] > refreshing access token with scopes: []
+[debug] [2022-03-21T21:24:45.299Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-21T21:24:46.679Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Mon, 21 Mar 2022 21:27:57 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-03-21T21:24:46.682Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions [none]
+[debug] [2022-03-21T21:24:46.682Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions {"permissions":["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-03-21T21:24:48.749Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions 200
+[debug] [2022-03-21T21:24:48.749Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/learn-with-socrates-production:testIamPermissions {"permissions":["cloudconfig.configs.get","cloudconfig.configs.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-03-21T21:24:48.750Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production [none]
+[debug] [2022-03-21T21:25:09.776Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production
+[debug] [2022-03-21T21:25:11.075Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/learn-with-socrates-production
+    at RetryOperation._fn (C:\Users\Mooni\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:240:31)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+[error] 
+[error] Error: Failed to get Firebase project learn-with-socrates-production. Please make sure the project exists and your account has permission to access it.
