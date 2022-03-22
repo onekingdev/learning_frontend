@@ -3,7 +3,7 @@ name: Deploy to heroku when merge
 on:
   push:
     branches:
-      - dev_staging
+      - dev
 
 jobs:
   build:
