@@ -53,11 +53,6 @@ const MarkTableDiv = styled.div`
     }
 `;
 
-const SingleLineContainer = styled.div`
-    display: grid;
-    grid-template-columns: 4;
-`;
-
 interface ISingleGroup {
     main?: {
         item1?: string,
@@ -87,7 +82,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
             <PcCom style={{
                 backgroundColor: colors[deep],
                 cursor: 'pointer',
-                border: "1px solid black"
+                border: '1px solid black'
             }} onClick={toggle}>
                 <Subject style={{
                     paddingLeft: `${deep}rem`,
@@ -108,7 +103,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
             }}>
                 <Subject style={{
                     paddingLeft: `${deep}rem`,
-                    border: "1px solid black"
+                    border: '1px solid black'
                 }} onClick={toggle}>
                     <ArrowRightIcon style={{
                         transform: opened ? 'rotate(90deg)' : 'rotate(0deg)',
@@ -116,9 +111,9 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                     }} />
                     <span>{main.item1}</span>
                 </Subject>
-                { main.item2 !== "Accuracy" ? <Mark style={{
+                { main.item2 !== 'Accuracy' ? <Mark style={{
                     paddingLeft: `${deep + 1.5}rem`,
-                    border: "1px solid black"
+                    border: '1px solid black'
                 }} onClick={toggleMark}>
                     <ArrowRightIcon style={{
                         transform: markOpened ? 'rotate(90deg)' : 'rotate(0deg)',
@@ -127,12 +122,12 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                         <div>Accuracy {main.item2}</div>
                         { markOpened ? <>
                             <span style={{
-                                marginRight: "1rem"
+                                marginRight: '1rem'
                             }}>Correct {main.item3}</span>
                             <span>Total {main.item4}</span>
-                        </> : "" }
+                        </> : '' }
                     </div>
-                </Mark> : "" }
+                </Mark> : '' }
             </MobileCom>
             { children }
         </div>

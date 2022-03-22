@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {  BasicColor  } from 'views/Color';
 import { TopicProgress } from 'views/molecules/TopicProgress';
 import { ScreenSize } from 'constants/screenSize';
-import { dictionary } from 'views/pages/Progress/dictionary';
+import { dictionary } from 'views/pages/Student/Progress/dictionary';
 import { getProgress } from 'app/firebase';
 
 export const ReportProgress: FC = () => {

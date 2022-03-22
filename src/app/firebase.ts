@@ -7,7 +7,7 @@ import {
   listAll,
 } from 'firebase/storage';
 import { BasicColor } from 'views/Color';
-import { dictionary } from 'views/pages/Progress/dictionary';
+import { dictionary } from 'views/pages/Student/Progress/dictionary';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAdf707dGjrJOLJVuES5V-Reu6RuaJuvug',

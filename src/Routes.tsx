@@ -6,37 +6,36 @@ import styled, { keyframes } from 'styled-components';
 import 'animate.css';
 import { LogIn } from 'views/pages/Login/Login';
 import { Welcome } from 'views/pages/Welcome/Welcome';
-import { Question } from 'views/pages/Question/Question';
+import { Question } from 'views/pages/Student/Question/Question';
 import { Avatar } from 'views/pages/Student/Avatar/Avatar';
-// import { CardCollectible } from 'views/pages/CardCollectible/CardCollectible';
-import { MyProfile } from 'views/pages/MyProfile/MyProfile';
-import { Backpack } from 'views/pages/Backpack/Backpack';
-import { Games } from 'views/pages/Games/Games';
-import { GamesMenu } from 'views/pages/GamesMenu/GamesMenu';
-import { StudentHome } from 'views/pages/StudentHome/StudentHome';
-import { Progress } from 'views/pages/Progress/Progress';
+import { MyProfile } from 'views/pages/Student/MyProfile/MyProfile';
+import { Backpack } from 'views/pages/Student/Backpack/Backpack';
+import { Games } from 'views/pages/Student/Games/Games';
+import { GamesMenu } from 'views/pages/Student/Games/GamesMenu/GamesMenu';
+import { StudentHome } from 'views/pages/Student/StudentHome/StudentHome';
+import { Progress } from 'views/pages/Student/Progress/Progress';
 import { ConfirmAccount } from 'views/pages/ConfirmAccount/ConfirmAccount';
-import { KnowledgeMap } from 'views/pages/KnowledgeMap/KnowledgeMap';
-import { SubjectsMenu } from 'views/pages/SubjectMenu/SubjectsMenu';
-import { TopicsMenu } from 'views/pages/TopicsMenu/TopicsMenu';
+import { KnowledgeMap } from 'views/pages/Student/KnowledgeMap/KnowledgeMap';
+import { SubjectsMenu } from 'views/pages/Student/Menus/SubjectMenu/SubjectsMenu';
+import { TopicsMenu } from 'views/pages/Student/Menus/TopicsMenu/TopicsMenu';
 import { Wardrobe } from 'views/pages/Student/Avatar/Wardrobe';
-import { Payment } from 'views/pages/Payment/Payment';
-import CreateParent from 'views/pages/CreateParent/CreateParent';
-import KidsList from 'views/pages/KidsList/KidsList';
+import { Payment } from 'views/pages/Parent/Payment/Payment';
+import CreateParent from 'views/pages/Parent/CreateParent/CreateParent';
+import KidsList from 'views/pages/Parent/KidsList/KidsList';
 import { useSelector } from 'react-redux';
 import { Store } from 'app/configureStore';
-import { Settings } from 'views/pages/Settings/Settings';
-import { Report } from 'views/pages/Report/Report';
+import { Settings } from 'views/pages/Parent/Settings/Settings';
+import { Report } from 'views/pages/Parent/Report/Report';
 import { Bank } from 'views/pages/Student/Bank/Bank';
 import { Cards } from 'views/pages/Student/Collectibles/Cards';
 import {  MyCardCollection  } from 'views/pages/Student/Collectibles/MyCards';
-import NewKids from 'views/pages/NewKids/NewKids';
+import NewKids from 'views/pages/Parent/NewKids/NewKids';
 import { Spinner } from 'views/atoms/Spinner';
 
 // Testing
 import { ParentReporting } from 'views/pages/Parent/Reporting';
-import { KidsTreasureTrack } from 'views/pages/Kids/TreasureTrack';
-import { KidsProgress } from 'views/pages/Kids/Progress';
+import { KidsTreasureTrack } from 'views/pages/Student/Kids/TreasureTrack';
+import { KidsProgress } from 'views/pages/Student/Kids/Progress';
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
@@ -68,13 +67,14 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   );
 };
 
+const FadeIn = styled.div`
+animation: 1.5s ${keyframes`${fadeIn}`} ;
+`;
 
-export function Routes(props: any) {
+export function Routes() {
   const location = useLocation();
 
-  const FadeIn = styled.div`
-  animation: 1.5s ${keyframes`${fadeIn}`} ;
-  `;
+
 
   return (
     <FadeIn>

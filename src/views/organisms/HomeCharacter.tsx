@@ -5,7 +5,7 @@ import { Title } from 'views/atoms/Text/Title';
 import locker from 'views/assets/locker.svg';
 import avatar from 'views/assets/avatars/girl-11.svg';
 import { ScreenSize } from 'constants/screenSize';
-import { dictionary } from 'views/pages/StudentHome/dictionary';
+import { dictionary } from 'views/pages/Student/StudentHome/dictionary';
 type HomeCharacterProps = {
   userName: string;
 };

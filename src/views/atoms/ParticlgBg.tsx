@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CongratsDgContainer } from 'views/pages/Question/Style';
+import { CongratsDgContainer } from 'views/pages/Student/Question/Style';
 import { useSelector } from 'react-redux';
 
 import img_congats from 'views/assets/level-up-congrats.png';
@@ -13,11 +13,9 @@ import { flip } from 'react-animations'
 import { TypoHeader, TypoTitle, TypoBtn } from 'views/atoms/Text';
 
 interface Props {
-  token: number;
-  energy: number;
   close: () => (void)
 }
-export const LevelUpDgContent: FC<Props> = ({token, energy, close}) => {
+export const LevelUpDgContent: FC<Props> = ({ close}) => {
   const [play] = useSound(fireworkSfx);
 
   const earning = useSelector((state: any) => state.earning);

@@ -7,7 +7,7 @@ import {BasicColor} from 'views/Color';
 import {ScreenSize} from 'constants/screenSize';
 
 import {PageTitle} from 'views/molecules/PageTitle';
-import {StudentMenu} from '../../../templates/StudentMenu';
+import {StudentMenu} from '../Menus/StudentMenu';
 import {CardCategory} from '../../../molecules/StudentCard/CardsCategory';
 
 export const Cards: FC = () => {

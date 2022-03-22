@@ -9,7 +9,7 @@ import adventure from 'views/assets/adventure.svg';
 import sport from 'views/assets/sports.svg';
 import skill from 'views/assets/skills.svg';
 import strategy from 'views/assets/strategy.svg'
-import { dictionary } from 'views/pages/Games/dictionary';
+import { dictionary } from 'views/pages/Student/Games/dictionary';
 import { useHistory } from 'react-router-dom';
 
 export const GameMainMenu: FC = () => {

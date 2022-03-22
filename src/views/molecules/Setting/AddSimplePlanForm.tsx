@@ -8,7 +8,7 @@ import { FormGroup } from '@mui/material';
 import { BasicColor } from 'views/Color';
 import Button from 'views/molecules/MuiButton';
 import { LSButtonContainer, LSRadio, LSFormControlLabel, LSLabel } from './utils/Style';
-import { dictionary } from 'views/pages/Settings/dictionary';
+import { dictionary } from 'views/pages/Parent/Settings/dictionary';
 import { doAddStudentPlan, doFetchPlans } from 'app/actions/guardianActions';
 import { useSelector } from 'react-redux'
 import { useSnackbar } from 'notistack';

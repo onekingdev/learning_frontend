@@ -4,7 +4,7 @@ import { BasicColor } from 'views/Color';
 import { TopicProgress } from 'views/molecules/TopicProgress';
 import { ScreenSize } from 'constants/screenSize';
 import { Title } from 'views/atoms/Text/Title';
-import { dictionary } from 'views/pages/Progress/dictionary';
+import { dictionary } from 'views/pages/Student/Progress/dictionary';
 import { getProgress } from 'app/firebase';
 
 export const MyProgress: FC = () => {

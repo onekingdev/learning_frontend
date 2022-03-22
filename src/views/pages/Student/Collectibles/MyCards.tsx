@@ -5,7 +5,7 @@ import {
 } from './Style';
 import {useHistory} from 'react-router-dom';
 import { PageTitle } from 'views/molecules/PageTitle';
-import { StudentMenu } from 'views/templates/StudentMenu';
+import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { MyCards } from 'views/molecules/StudentCard/MyCards';
 import { BtnContainer } from './Cards';
 import { Button } from './Cards';

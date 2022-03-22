@@ -4,9 +4,8 @@ import Box from '@mui/material/Box';
 import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
 
 import { LSBlueTextButton } from 'views/molecules/Setting/utils/Style'
-import { dictionary } from 'views/pages/Settings/dictionary';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { CancelPlanForm } from 'views/molecules/Setting/CancelPlanForm';
+// import { CancelPlanForm } from 'views/molecules/Setting/CancelPlanForm';
 import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanForm';
 import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
 import { PlanList } from 'views/molecules/Setting/PlanList';
@@ -24,9 +23,6 @@ export const MembershipDetail:FC = () => {
     // it re-renders the component
     setValue(!value);
   }
-
-  const language = 'en';
-  const words = dictionary[language].membership
 
   return (
   <Box>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Grid } from '@mui/material';
 import { LoadingContext } from 'react-router-loading';
 
-import { StudentMenu } from 'views/templates/StudentMenu';
+import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import background from 'views/assets/colored-shapes-bg.svg';
 import Cartera from 'views/assets/Cartera.svg';
 

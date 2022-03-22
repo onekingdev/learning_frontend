@@ -4,7 +4,7 @@ import { BasicColor } from 'views/Color';
 import upArrow from 'views/assets/upArrow.svg';
 import { Typography } from 'views/atoms/Text/typography';
 import { ScreenSize } from 'constants/screenSize';
-import { dictionary } from 'views/pages/StudentHome/dictionary';
+import { dictionary } from 'views/pages/Student/StudentHome/dictionary';
 
 type StartLessonProps = {
   onClick: () => void;

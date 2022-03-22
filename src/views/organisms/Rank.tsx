@@ -5,7 +5,7 @@ import { UserRank } from 'views/molecules/UserRank';
 import avatar from 'views/assets/avatars/avatar1.svg';
 import { BasicColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';
-import { dictionary } from 'views/pages/Progress/dictionary';
+import { dictionary } from 'views/pages/Student/Progress/dictionary';
 import { getRanking } from 'app/firebase';
 
 export const Rank: FC = () => {
