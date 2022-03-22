@@ -132,18 +132,6 @@ export const STUDENT = `
         activeStudentPlan {
             ${STUDENT_PLAN}
         }
-        avatarAccessories {
-            ${AVATAR}
-        }
-        avatarHead {
-            ${AVATAR}
-        }
-        avatarClothes {
-            ${AVATAR}
-        }
-        avatarPants {
-            ${AVATAR}
-        }
         group {
             id
         }
