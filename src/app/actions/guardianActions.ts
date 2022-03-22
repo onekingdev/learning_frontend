@@ -1,11 +1,5 @@
-import mutation from '../../api/mutations/get'
-import { PLAY_GAME } from '../../api/mutations/game'
-import query from '../../api/queries/get'
-import { GAMES_QUERY, GAMES_BY_CATEGORY_NAME_QUERY, GAMES_CATEGORY_QUERY } from '../../api/queries/games'
-import { INTEREST_QUERY } from '../../api/queries/interests'
 import mutationFetch from 'api/mutations/get';
 import { CREATE_GUARDIAN,
-    CREATE_ORDER ,
     UPDATE_EMAIL_PASSWORD,
     FETCH_GUARDIAN_AVAILABLE_BOUGHT_PLANS,
     UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN,
@@ -108,10 +102,11 @@ export const doAddStudentPlan = async ( guardianId: number, planId: number, toke
             ADD_STUDENT_PLAN_PACKAGE( guardianId, planId),
             token
         );
-        return res.msg ? {status: false} : {...res.data.cancelGuardianPlan, status: true};
+
+        return res.msg ? {msg: res.msg, status: false} : {...res.data.cancelGuardianPlan, status: true};
     }
-    catch {
-        return {status: false}
+    catch(e) {
+        return {msg:e, status: false}
     }
 }
 export const doCancelMembership = async ( guardianId: number, reason: string, token: string) => {

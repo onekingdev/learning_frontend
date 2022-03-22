@@ -8,9 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box } from '@mui/material';
 import { Grid } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { LSLabel, LSText, LSBlueTextButton } from './utils/Style';
 import { LSDialog } from './LSDialog';
@@ -18,37 +17,6 @@ import { CancelPlanForm } from './CancelPlanForm';
 import { useDialog } from './utils/useDialog';
 import { Upgrade } from './Upgrade';
 import { doFetchAvailableBroughtPlans } from 'app/actions/guardianActions'
-
-const data = [
-  {
-    id: 0,
-    package: 'Math/Financial Literacy',
-    period: 'Monthly',
-    expiration: 'Mar-10-2022',
-    price: '$5.99',
-  },
-  {
-    id: 1,
-    package: 'Math',
-    period: 'Yearly',
-    expiration: 'Mar-11-2023',
-    price: '$19.89',
-  },
-  {
-    id: 2,
-    package: 'ELA + Sight Words',
-    period: 'Monthly',
-    expiration: 'Mar-10-2022',
-    price: '$5.99',
-  },
-  {
-    id: 3,
-    package: 'Science',
-    period: 'Monthly',
-    expiration: 'Mar-10-2022',
-    price: '$5.99',
-  },
-]
 
 interface IPlanList {
   refresh: boolean
@@ -64,6 +32,11 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
   const { isOpen, open } = useDialog()
   const [tag, seTag] = useState(0)
   const [plans, setPlans] = useState<Array<any>>([])
+  const [changed, setChanged] = useState(false)
+
+  const toggleChanged = () => {
+    setChanged(!changed)
+  }
 
   const onBtnClick = (id: number) => {
     seTag(id)
@@ -76,16 +49,14 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
     openUpdate()
   }
 
-  const onCancel = () => open()
-
   const onCancelUpgrade = () => openUpdate()
 
   const fetchAvailableBrougthPlans = async (mounted: boolean) => {
     console.log('refreshing....')
+    setPlans([])
     const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
     if (res !== null) {
       if (mounted) {
-        // setPlans([])
         setPlans(
           res
         )
@@ -95,11 +66,12 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
 
   useEffect(() => {
     let mounted = true
+    console.log(refresh)
     fetchAvailableBrougthPlans(mounted)
     return () => {
       mounted = false
     }
-  }, [refresh]);
+  }, [refresh, changed]);
 
   return (
     <div>
@@ -114,7 +86,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {plans.map((row, index) => (
+            {plans.length > 0 ? plans.map((row, index) => (
               // row.status &&
               <TableRow
                 hover
@@ -151,7 +123,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
                   </Grid>
                 </StyledTableCell>
               </TableRow>
-            ))}
+            )): null}
           </TableBody>
         </Table>
       </TableContainer>
@@ -164,7 +136,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
           <CancelPlanForm
             plan={plans[tag]}
             open={open}
-            // onCancel={onCancel}
+            refresh={toggleChanged}
           />
         }
       />
@@ -177,6 +149,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
             plan={plans[tag]}
             onConfirm={openUpdate}
             onCancel={onCancelUpgrade}
+            refresh={toggleChanged}
           />
         }
       />

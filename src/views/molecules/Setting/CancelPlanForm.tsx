@@ -5,17 +5,16 @@ import { BasicColor } from 'views/Color';
 import { LSLabel, LSButtonContainer, LSButton } from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
 import { doCancelBroughtPlan } from 'app/actions/guardianActions';
-import { token } from 'api/fragments/tokenFragments';
-import { useDispatch, useSelector } from 'react-redux'
-import ReactLoading from 'react-loading';
-import {LoadingContainer} from 'views/atoms/Loading'
+import { useSelector } from 'react-redux'
 import { useSnackbar } from 'notistack';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 interface ICancelFormProps {
   // onConfirm: (arg: string) => void
   open: () => void
   tag?: Number
   plan: any
+  refresh: () => void
 }
 
 const data = [
@@ -46,7 +45,7 @@ const data = [
   },
 ]
 
-export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan }) => {
+export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan, refresh }) => {
   const [value, setValue] = useState(data[0].value);
   const user = useSelector((state: any) => state.user);
   const [loading, setLoading] = useState(false)
@@ -58,6 +57,7 @@ export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan }) => {
     const res:any = await doCancelBroughtPlan(plan.id, reason?reason:'', user.token)
     if(res.status){
       enqueueSnackbar('Cancel children plan successfully', { variant: 'success' })
+      refresh()
     } else{
       enqueueSnackbar('Cancel children plan failed', { variant: 'error' })
     }
@@ -71,9 +71,8 @@ export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan }) => {
 
   return (
     loading ?
-    <LoadingContainer>
-      <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-    </LoadingContainer> :
+    <LoadingSpinner />
+     :
     <LSFormControl variant='standard'>
       <FormLabel id="canceling-reason-label">
         <LSLabel>{'Please tell us why are you canceling.'}</LSLabel>
@@ -86,7 +85,7 @@ export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan }) => {
         onChange={handleRadioChange}
       >
         {
-          data.map((row, index) => {
+          data.map((row) => {
             return <LSFormControlLabel key={row.id} value={row.value} control={<LSRadio />} label={row.label} />
           })
         }

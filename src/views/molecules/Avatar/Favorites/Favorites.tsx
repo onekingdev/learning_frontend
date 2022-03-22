@@ -1,26 +1,33 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import wardrobe from 'views/assets/wardrobe.svg';
 import floor from 'views/assets/avatars/floor.png';
 import { LoadingContext } from 'react-router-loading';
 import { ScreenSize } from 'constants/screenSize';
 import { useHistory } from 'react-router-dom';
 import { AvatarFavorites } from './AvatarFavorites';
-import { doFetchFavoriteAvatars } from 'app/actions/avatarActions';
+import { doFetchFavoriteAvatars, doSetUserAvatar } from 'app/actions/avatarActions';
 import { AvatarSet } from '../AvatarSet';
 import { LeftDrawer } from './LeftDrawer';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import IconButton from '@mui/material/IconButton';
+import { useSnackbar } from 'notistack';
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { AVATAR_SET_DEFAULT } from 'app/types'
 
 export const AvatarSelector: FC = () => {
 
   const history = useHistory();
+  const dispatch = useDispatch()
   const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) => state.student)
   const loadingContext = useContext(LoadingContext);
+  const [loading, setLoading] = useState(false)
 
   // TODO-- This state is used to select user avatar from his/her favorites
-  // const [currentAvatarId, setCurrentAvatarId] = useState(0)
-
+  const [currentAvatarId, setCurrentAvatarId] = useState(0)
+  const { enqueueSnackbar } = useSnackbar();
   const [favories, setFavories] = useState<Array<any>>([])
 
   const [accessory, setAccessory] = useState('')
@@ -37,7 +44,7 @@ export const AvatarSelector: FC = () => {
   }
 
   const setCurrentAvatar = (id: number) => {
-    // setCurrentAvatarId(id)
+    setCurrentAvatarId(id)
     favories[id].avatarAccessorie ? setAccessory(favories[id].avatarAccessorie.image) : setAccessory('')
     setHead(favories[id].avatarHead.image)
     setBody(favories[id].avatarClothes.image)
@@ -46,9 +53,17 @@ export const AvatarSelector: FC = () => {
   }
 
   // TODO: Do not delete this comment. THIS WILL BE USED IN THE FUTURE
-  // const setUserAvatar = () => {
-  //   console.log('setted')
-  // }
+  const setUserAvatar = async () => {
+    setLoading(true)
+    const res: any = await doSetUserAvatar(student.id, favories[currentAvatarId].id, user.token)
+    if (res.status) {
+      dispatch({ type: AVATAR_SET_DEFAULT, payload: res })
+      enqueueSnackbar('Set user avatar successfully!', { variant: 'success' })
+    } else {
+      enqueueSnackbar(res.msg, { variant: 'error' })
+    }
+    setLoading(false)
+  }
 
   useEffect(() => {
     fetchFavorites()
@@ -67,6 +82,7 @@ export const AvatarSelector: FC = () => {
   }, [favories])
 
   return (
+    favories &&
     <>
       <TopDrawer> {/* This is displayed in mobile view only */}
         <AvatarFavorites select={setCurrentAvatar} favorites={favories} />
@@ -76,12 +92,28 @@ export const AvatarSelector: FC = () => {
           <LeftDrawer />
         </div>
         <Drawer src={wardrobe} onClick={() => history.push('wardrobe')} />
-        <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} />
-        {/* <div style={{ position: 'absolute'}}>
-          <IconButton style={{ position: 'absolute', left: 0, bottom: 0 }} color='warning' aria-label='set favorite' component='span' onClick={setUserAvatar}>
-            <StarIcon style={{ transform: 'scale(2)' }} />
-          </IconButton>
-        </div> */}
+        <AvatarGrid >
+          <div />
+          {
+            loading &&
+            <LoadingSpinner />}
+
+          <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} />
+          <div style={{ display: 'flex', alignItems: 'start' }}>
+            <IconButton color='warning'
+              aria-label='set favorite'
+              component='span'
+              onClick={setUserAvatar}
+              sx={{
+                '&.MuiIconButton-root': {
+                  color: 'gold',
+                }
+              }}
+            >
+              <StarRoundedIcon fontSize='large' />
+            </IconButton>
+          </div>
+        </AvatarGrid>
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
           <RightDrawer> {/* This is displayed in desktop view only */}
             <AvatarFavorites select={setCurrentAvatar} favorites={favories} />
@@ -121,7 +153,7 @@ const Container = styled.div`
 
 export const TopDrawer = styled.div`
 display: none;
-@media screen and (max-width: ${ScreenSize.phone }) {
+@media screen and (max-width: ${ScreenSize.phone}) {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: calc((100vw - 30px ) / 4);
@@ -143,6 +175,14 @@ const RightDrawer = styled.div`
   row-gap: 10px;
   @media screen and (max-width: ${ScreenSize.phone}) {
     display: none;
+  }
+`
+
+const AvatarGrid = styled.div`
+  display: grid;
+  min-width: 25vw;
+  grid-template-columns: 2vw 1fr 2vw;
+  @media screen and (max-width: ${ScreenSize.phone}) {
   }
 `
 const Drawer = styled.img`

@@ -10,11 +10,9 @@ import Button from 'views/molecules/MuiButton';
 import { LSButtonContainer, LSRadio, LSFormControlLabel, LSLabel } from './utils/Style';
 import { dictionary } from 'views/pages/Settings/dictionary';
 import { doAddStudentPlan, doFetchPlans } from 'app/actions/guardianActions';
-import { useDispatch, useSelector } from 'react-redux'
-import ReactLoading from 'react-loading';
-import { LoadingContainer } from 'views/atoms/Loading'
+import { useSelector } from 'react-redux'
 import { useSnackbar } from 'notistack';
-import LoadingOverlay from 'react-loading-overlay';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 interface IAddPlanProps {
   open: () => void
@@ -50,7 +48,6 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
   const guardian = useSelector((state: any) => state.guardian);
   const { enqueueSnackbar } = useSnackbar();
   const comboChildren = dictionary.en.combo
-  const parents = dictionary.en.planRadios
   const [plans, setPlans] = useState<Array<any>>([])
 
   const [parentState, setParentState] = useState('')
@@ -76,26 +73,9 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
       enqueueSnackbar('Student Package added successfully', { variant: 'success' })
       refresh()
     } else
-      enqueueSnackbar('Student Package add failed', { variant: 'error' })
+      enqueueSnackbar(res.msg, { variant: 'error' })
 
     setLoading(false)
-    // if (parentState === 'solo') {
-
-    //   console.log(soloState)
-    // }
-    // else if (parentState === 'combo') {
-    //   if (checked.indexOf(true) === -1)
-    //     console.log('No data')
-    //   else {
-    //     let combo = ''
-    //     for (let i = 0; i < checked.length; i++) {
-    //       if (checked[i] === true) combo += i + ','
-    //     }
-    //     console.log(combo)
-    //   }
-    // }
-    // else console.log(parentState)
-
     open()
   }
 
@@ -187,12 +167,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
   }
 
   return (
-    <LoadingOverlay
-    active={loading}
-    spinner
-    text='Adding plan...'
-  >
-    {plans.length ?
+    !loading && plans.length ?
       <div >
         <RadioGroup
           aria-labelledby="canceling-reason-label"
@@ -229,9 +204,6 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
           />
         </LSButtonContainer>
       </div> :
-      <LoadingContainer>
-        <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-      </LoadingContainer>}
-    </LoadingOverlay>
+      <LoadingSpinner />
   );
 }

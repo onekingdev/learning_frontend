@@ -1,7 +1,6 @@
-import { useEffect, useState, FC } from 'react';
+import { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import Button from 'views/molecules/MuiButton'
-import styled from 'styled-components';
 import TextField from 'views/molecules/MuiTextField'
 import { css } from 'styled-components';
 import { BasicColor } from 'views/Color';
@@ -9,8 +8,8 @@ import Grid from '@mui/material/Grid';
 import { doChangePaymentMethod, doFetchPaymentMethod } from 'app/actions/paymentActions';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
 import { useSnackbar } from 'notistack';
-import ReactLoading from 'react-loading';
 import { GUARDIAN_PAYMENT_METHOD_INFO } from 'app/types'
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 interface DialogProps {
     open: () => (void)
@@ -161,9 +160,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
     return (
         <>
             {loading &&
-                <LoadingContainer>
-                    <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-                </LoadingContainer>
+                <LoadingSpinner />
             }
             {!loading &&
                 <Grid container spacing={2} marginTop={1}>
@@ -305,11 +302,3 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
         </>
     );
 }
-
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  alignItems: center;
-`;

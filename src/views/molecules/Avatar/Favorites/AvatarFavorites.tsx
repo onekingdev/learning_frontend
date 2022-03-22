@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
-// import placeHolder from 'views/assets/placeholder.png';
 import { AvatarItemWithSkinTone } from '../AvatarItemWithSkinTone';
 
 interface FavoritProps {
@@ -52,6 +51,7 @@ const Drawer = styled.div`
   }
 `
 const CenteredRoundIcon = styled.div`
+  overflow: hidden;
   .head {
     position: absolute;
     width: 80px;

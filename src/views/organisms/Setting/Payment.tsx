@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect } from 'react';
+import { FC, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
 import { useDialog } from 'views/molecules/Setting/utils/useDialog';
@@ -15,8 +15,7 @@ import { EditPaymentForm } from 'views/molecules/Setting/EditPaymentForm';
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { useDispatch, useSelector } from 'react-redux'
-import masterCard from 'views/assets/MasterCard.svg'
+import { useSelector } from 'react-redux'
 import payment from 'views/assets/payment/payment.jpg'
 import creditCardType from 'credit-card-type'
 
@@ -35,18 +34,13 @@ export const Payment: FC = () => {
 
   const openEdit = () => edit(!isEdit);
 
-  const onEditConfirm = () => {
-    openEdit()
-  }
+  // const onEditConfirm = () => {
+  //   openEdit()
+  // }
   const paymentFormRef = useRef<PaymentFormFunc>(null)
 
-  const handleOrder = () => {
-    paymentFormRef?.current?.handleOrder()
-  }
 
-  const onConfirm = (reason: string) => {
-    // setReason(reason)
-
+  const onConfirm = () => {
     open()
   }
 
@@ -63,10 +57,10 @@ export const Payment: FC = () => {
         </Grid>
         <Grid item lg={8} xs={8}>
           <LSText>
-            {cardType[0].niceType + ' card ending in ' + guardian.paymentMethod.cardNumber.slice(-4)}
+            {cardType[0]?.niceType + ' card ending in ' + guardian.paymentMethod.cardNumber?.slice(-4)}
           </LSText>
           <LSText>
-            {'Expires ' + guardian.paymentMethod.cardExpMonth + '/' + guardian.paymentMethod.cardExpYear}
+            {'Expires ' + guardian.paymentMethod?.cardExpMonth + '/' + guardian.paymentMethod?.cardExpYear}
           </LSText>
         </Grid>
       </LSGridRow>

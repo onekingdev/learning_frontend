@@ -4,11 +4,10 @@ import RadioGroup from '@mui/material/RadioGroup';
 import { BasicColor } from 'views/Color';
 import { LSLabel, LSButtonContainer, LSButton } from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
-import ReactLoading from 'react-loading';
-import { LoadingContainer } from 'views/atoms/Loading'
 import { doCancelMembership } from 'app/actions/guardianActions'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useSnackbar } from 'notistack';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 interface ICancelFormProps {
   open: () => void
@@ -72,9 +71,8 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
 
   return (
     loading ?
-      <LoadingContainer>
-        <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-      </LoadingContainer> :
+      <LoadingSpinner />
+      :
       <LSFormControl variant='standard'>
         <FormLabel id="canceling-reason-label">
           <LSLabel>{'Please tell us why are you canceling.'}</LSLabel>

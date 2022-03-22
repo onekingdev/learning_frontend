@@ -3,9 +3,9 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import icon from 'views/assets/avatars/kid-2.svg';
 import { useHistory } from 'react-router-dom';
 import { ICON_SIZE } from 'constants/icon';
+import { ImageAvatar } from 'views/molecules/Avatar/DefaultAvatar';
 
 export const ProfileDropDownMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -28,7 +28,8 @@ export const ProfileDropDownMenu: FC = () => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <img style={{width: ICON_SIZE.medium}} src={icon} />
+        <ImageAvatar />
+        {/* <img style={{width: ICON_SIZE.medium}} src={icon} /> */}
       </Button>
       <Menu
         id="basic-menu"

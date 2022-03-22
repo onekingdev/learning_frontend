@@ -8,12 +8,20 @@ const INITIAL_STATE = {
     skin: null
 };
 
-const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: string}) => {
+const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
   switch (action.type) {
     case TYPE.AVATAR_SET_ACCESORY:
       return {
         ...state,
         accessories: action.payload
+      };
+    case TYPE.AVATAR_SET_DEFAULT:
+      return {
+        ...state,
+        accessory: action.payload.avatarAccessorie.image,
+        head: action.payload.avatarHead,
+        clothes: action.payload.avatarClothes,
+        pants: action.payload.avatarPants,
       };
     case TYPE.AVATAR_RESET:
       return INITIAL_STATE;

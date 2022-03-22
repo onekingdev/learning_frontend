@@ -22,6 +22,16 @@ const Subject = styled.div`
     align-items: center;
 `;
 
+const Mark = styled.div`
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 135px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 const MarkTableDiv = styled.div`
     display: flex;
     flex-direction: column;
@@ -63,7 +73,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                 display: 'flex',
                 backgroundColor: colors[deep],
                 cursor: 'pointer',
-                border: '1px solid black'
+                border: "1px solid black"
             }} onClick={toggle}>
                 <Subject style={{
                     paddingLeft: `${deep}rem`,
@@ -74,8 +84,8 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                             opacity: extra.length > 0 ? '100' : '0'
                         }} />
                         <span style={{
-                            paddingLeft: '5px',
-                            paddingRight: '5px',
+                            paddingLeft: "5px",
+                            paddingRight: "5px",
                         }}>{main.item}</span>
                     </> : <>
                         <TypoBtn style={{
