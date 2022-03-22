@@ -22,6 +22,7 @@ const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: an
         head: action.payload.avatarHead,
         clothes: action.payload.avatarClothes,
         pants: action.payload.avatarPants,
+        skin: action.payload.skinTone
       };
     case TYPE.AVATAR_RESET:
       return INITIAL_STATE;

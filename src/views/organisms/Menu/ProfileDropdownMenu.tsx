@@ -4,12 +4,14 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useHistory } from 'react-router-dom';
-import { ICON_SIZE } from 'constants/icon';
 import { ImageAvatar } from 'views/molecules/Avatar/DefaultAvatar';
+import { useSelector } from 'react-redux'
 
 export const ProfileDropDownMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const history = useHistory();
+  const student = useSelector((state: any) => state.student);
+  const avatar = useSelector((state: any) => state.avatar);
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,7 +30,13 @@ export const ProfileDropDownMenu: FC = () => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <ImageAvatar />
+        <ImageAvatar
+         firstName={student.firstName}
+         lastName={student.lastName}
+         accessory={avatar.accessory?avatar.accessory:null}
+         head={avatar.head?avatar.head:null}
+         skinTone={avatar.skin?avatar.skin:null}
+         />
         {/* <img style={{width: ICON_SIZE.medium}} src={icon} /> */}
       </Button>
       <Menu

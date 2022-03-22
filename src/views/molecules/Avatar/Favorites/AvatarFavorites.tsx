@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
-import { AvatarItemWithSkinTone } from '../AvatarItemWithSkinTone';
+import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
 
 interface FavoritProps {
   select: (id: number) => (void)
@@ -58,7 +58,7 @@ const CenteredRoundIcon = styled.div`
     margin: auto;
     z-index: 2;
     inset: 0;
-    top: -30px;
+    top: -20px;
 
     @media screen and (max-width: ${ScreenSize.phone}) {
       width: auto;
@@ -83,7 +83,7 @@ const CenteredRoundIcon = styled.div`
 const CurrentAccessory = styled.img`
   width: 80px;
   position: absolute;
-  top: -27px;
+  top: -20px;
   z-index: 3;
   @media screen and (max-width: ${ScreenSize.phone}) {
     width: 70px;
