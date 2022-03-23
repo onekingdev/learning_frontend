@@ -9,12 +9,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './style.css'
 // require("dotenv").config();
 export default () => {
-  const [loading, setLoading] = useState(true);
-  const [persist] = useState(store(() => setLoading(false)));
+  // const [loading, setLoading] = useState(true);
+  // const [persist] = useState(store(() => setLoading(false)));
+  const [persist] = useState(store());
   console.log(process.env)
   return (
     <Provider store={persist.store}>
-      <PersistGate loading={loading} persistor={persist.persistor}>
+      {/* <PersistGate loading={loading} persistor={persist.persistor}> */}
+      <PersistGate loading={true} persistor={persist.persistor}>
         <SnackbarProvider maxSnack={3}>
           <Router>
             <Routes />

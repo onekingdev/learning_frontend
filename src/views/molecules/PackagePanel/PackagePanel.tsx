@@ -1,13 +1,10 @@
 import { FC, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
 import avatar from 'views/assets/packageIcons/avatar.svg'
 import Button from 'views/molecules/MuiButton'
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { BasicColor } from 'views/Color';
 
 import {
-  useStyles,
   Container,
   Header,
   Avatar,
@@ -27,20 +24,16 @@ type PackagePanelProps = {
   onChange: (childrenCount: number, plan: string) =>void;
 };
 export const PackagePanel: FC<PackagePanelProps> = ({type, price, isSpecialCode, disabled=false, onChange}) => {
-  const history = useHistory();
-  const dispatch = useDispatch()
-  const classes = useStyles();
-  const [paths, setPaths] = useState<any>([]);
   const [childrenCount, setChildrenCount] = useState(0);
   const [plan, setPlan] = useState('month');
 
-  const handleCheckPath = (path: string, isChecked: boolean) => {
-    let temp:any = [];
-    temp = [...paths];
-    if(isChecked) temp.push(path)
-    else temp.pop(path)
-    setPaths(temp)
-  }
+  // const handleCheckPath = (path: string, isChecked: boolean) => {
+  //   let temp:any = [];
+  //   temp = [...paths];
+  //   if(isChecked) temp.push(path)
+  //   else temp.pop(path)
+  //   setPaths(temp)
+  // }
 
   useEffect(() => {
     onChange(childrenCount, plan);

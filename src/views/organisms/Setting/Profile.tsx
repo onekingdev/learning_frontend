@@ -6,7 +6,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import validator from 'validator'
 import {GUARDIAN_UPDATE_EMAIL_PWD} from 'app/types'
-
 import {
   LSShadowContainer,
   LSButtonContainer,
@@ -18,9 +17,6 @@ import {
   LSButton,
   LSBlueTextButton
 } from 'views/molecules/Setting/utils/Style';
-
-import { dictionary } from 'views/molecules/Setting/utils/dictionary';
-
 import { settingPage } from 'views/molecules/Setting/utils/Theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
@@ -30,8 +26,6 @@ import { useSnackbar } from 'notistack';
 
 
 export const SettingForm: FC = () => {
-  const language = 'en';
-  const words = dictionary[language].form
   const user = useSelector((state: any) => state.user);
   const [openPwdRstDg, setOpenPwdRstDg] = useState(false)
   const { enqueueSnackbar } = useSnackbar();

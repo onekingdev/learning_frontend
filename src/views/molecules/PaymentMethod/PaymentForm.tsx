@@ -1,6 +1,5 @@
-import { useEffect, useState, forwardRef, useImperativeHandle, useMemo } from 'react';
+import { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { Store } from 'app/configureStore';
 import paypal from 'views/assets/paypal.svg';
 import apple from 'views/assets/apple-pay.svg';
@@ -21,9 +20,9 @@ import { createOrder, confirmPaymentOrder, createOrderWithOutPay } from 'app/act
 import {
     useStripe,
     useElements,
-    CardNumberElement,
-    CardExpiryElement,
-    CardCvcElement,
+    // CardNumberElement,
+    // CardExpiryElement,
+    // CardCvcElement,
 } from '@stripe/react-stripe-js';
 import {
     useStyles,
@@ -34,22 +33,21 @@ import {
     Title,
     CardContent
 } from './Style'
-import StripeInput from './StripeInput';
-import countryList from 'react-select-country-list';
-import { Country, State, City }  from 'country-state-city';
+// import StripeInput from './StripeInput';
+// import countryList from 'react-select-country-list';
+import { Country, State }  from 'country-state-city';
 
 console.log(Country.getAllCountries())
 console.log(State.getAllStates())
 
-type PaymentFormProps = {
-  isUpdate: boolean
-};
+// type PaymentFormProps = {
+//   isUpdate: boolean
+// };
 interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): void;
     handleUpdate(): void;
 }
 export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
-    const history = useHistory();
     const dispatch = useDispatch()
     const classes = useStyles();
     const stripe = useStripe();
@@ -59,7 +57,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
 
-    const [paymentMethod, setPaymentMethod] = useState('card')
+    // const [paymentMethod, setPaymentMethod] = useState('card')
     const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(
     isSpecialCode ? {
         firstName: null,
@@ -146,9 +144,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any> ((props, ref) => {
         setValidateRst({...validateRst, [field]: errMsg})
     }
 
-    const handleReturn = (event: any) => {
+    // const handleReturn = (event: any) => {
 
-    }
+    // }
 
     const handleOrder = async (plansDetail:any = null) => {
 
