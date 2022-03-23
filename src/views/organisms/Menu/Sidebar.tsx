@@ -9,7 +9,6 @@ import { BasicColor } from 'views/Color';
 import ListItem from '@mui/material/ListItem';
 import { Icon } from 'views/atoms/Icon/Icon';
 import progress_icon from 'views/assets/nav-icons/Progress.png';
-import homework_icon from 'views/assets/nav-icons/homework.png';
 import question_icon from 'views/assets/nav-icons/question.png';
 import game_icon from 'views/assets/nav-icons/game.png';
 import bank_icon from 'views/assets/nav-icons/bank.png';

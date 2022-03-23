@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -31,7 +31,7 @@ type ParentPgNavProps = {
 
 export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   const history = useHistory();
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const classes = useStyles();
   const handleChange = (event:any) => {
     console.log(event.target.value)
@@ -48,7 +48,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
     }
   };
   const onSupport = () => {
-    location.href = "https://www.withsocrates.com/contact/"
+    location.href = 'https://www.withsocrates.com/contact/'
   }
   useEffect(() => {
   }, []);
@@ -63,19 +63,19 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
       <Home src={home} />
       <SupportBtnContainer>
         <Button
-          variant="contained"
+          variant='contained'
           className={classes.button}
           startIcon={(
             <Avatar className={classes.questionMark}>
               <QuestionMarkIcon />
             </Avatar>
           )}
-          color="success"
+          color='success'
           onClick={onSupport}
         >
           Support
         </Button>
-        <Avatar className={classes.questionMarkButton} id="questionMarkButton">
+        <Avatar className={classes.questionMarkButton} id='questionMarkButton'>
           <QuestionMarkIcon />
         </Avatar>
       </SupportBtnContainer>
@@ -85,11 +85,11 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
       </LogoContainer>
       <NameAvatarGroup>
         <FormControl className={classes.formControl}>
-          <InputLabel id="menu">Menu</InputLabel>
+          <InputLabel id='menu'>Menu</InputLabel>
           <Select
-            labelId="menu"
-            id="menu-select"
-            label="Menu"
+            labelId='menu'
+            id='menu-select'
+            label='Menu'
             onChange={handleChange}
             sx={{backgroundColor: 'white'}}
           >
@@ -99,7 +99,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
           </Select>
         </FormControl>
         <AvatarContainer>
-          <Avatar sx={{ bgcolor: '#22BAAF', height:'60px', width:'60px', marginLeft: '15px'}} alt="Remy Sharp" src={avatar} />
+          <Avatar sx={{ bgcolor: '#22BAAF', height:'60px', width:'60px', marginLeft: '15px'}} alt='Remy Sharp' src={avatar} />
         </AvatarContainer>
       </NameAvatarGroup>
     </Container>

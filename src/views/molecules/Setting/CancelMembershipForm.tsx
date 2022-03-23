@@ -85,7 +85,7 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
           onChange={handleRadioChange}
         >
           {
-            data.map((row, index) => {
+            data.map((row) => {
               return <LSFormControlLabel key={row.id} value={row.value} control={<LSRadio />} label={row.label} />
             })
           }

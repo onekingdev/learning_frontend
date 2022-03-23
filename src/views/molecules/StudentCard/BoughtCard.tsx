@@ -19,7 +19,7 @@ export const BoughtCard: FC<CardProps> = ({imgUrl}) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
 
-  const [play, {stop}] = useSound(purchaseSound);
+  const [play] = useSound(purchaseSound);
 
   // state to know that image is loaded, rotating effect only works when image is fully loaded
   const [loaded, setLoaded] = useState(false);

@@ -171,7 +171,7 @@ const NewKids: FC = () => {
     for(const path of paths)
       listSubjectId.push(parseInt(path.id));
     const result:any = await createStudent(
-      audience.id,
+      audience!.id,
       firstName,
       lastName,
       userId,
@@ -222,8 +222,8 @@ const NewKids: FC = () => {
 
   const setAudienceData = async () => {
     const result:any = await getAudiencesWithGrades(
-      user.token,
-      dispatch
+      // user.token,
+      // dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
