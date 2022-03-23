@@ -11,6 +11,7 @@ import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgCon
 import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
 import SocratesImg from 'views/assets/socrates.svg';
 import { createGuardian } from 'app/actions/guardianActions'
+import { Button as ButtonText } from 'views/atoms/Text/Button';
 import {
   Container,
   FormContainer,
@@ -233,15 +234,9 @@ const CreateParent: FC = () => {
                   We're happy to help you
                 </div>
                 <div className="flex justify-space-between">
-                  <div className="p-l-10">
-                    <u>Contact Us</u>
-                  </div>
-                  <div>
-                    <u>FAQ</u>
-                  </div>
-                  <div className="p-r-10">
-                    <u>Plans</u>
-                  </div>
+                  <ButtonText className="p-1-10" onClick={() => location.href='https://www.withsocrates.com/contact/'}>Contact Us</ButtonText>
+                  <ButtonText onClick={() => location.href='https://www.withsocrates.com/faq/'}>FAQ</ButtonText>
+                  <ButtonText className="p-r-10" onClick={() => location.href='https://www.withsocrates.com/membership/'}>Plans</ButtonText>
                 </div>
               </div>
             </ContactBody>

@@ -7,7 +7,7 @@ type VideoProps = {
 export const VideoQuestion = ({source}: VideoProps) => {
   return (
     <>
-      <VideoStyles src={source} />
+      <VideoStyles src={source} allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"/>
     </>
   );
 };

@@ -81,8 +81,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
         />
       ) : null}
       <BlackBoard>
-        <QuestionContainer onClick={closeVideoModal}>
-          <Icon image={videoIcon} />
+        <QuestionContainer>
+          <Icon image={videoIcon} onClick={closeVideoModal}/>
           <Question>{question.questionText}</Question>
           <Icon image={assistor} onClick={readQuestion} />
         </QuestionContainer>
