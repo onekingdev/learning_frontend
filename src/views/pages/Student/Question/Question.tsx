@@ -259,12 +259,12 @@ export const Question: FC = () => {
         setLoading(true)
         setIsLessonFinished(true);
         // setLoading(true);
-        let correctCount = 0;
-        let wrongCount = 0;
-        for (const data of answerResult) {
-          if (data.isCorrect) correctCount++;
-          else wrongCount++;
-        }
+        // let correctCount = 0;
+        // let wrongCount = 0;
+        // for (const data of answerResult) {
+        //   if (data.isCorrect) correctCount++;
+        //   else wrongCount++;
+        // }
         // const finishBlockResult = await finishBlock(
         //   blockPresentation.id,
         //   correctCount,
