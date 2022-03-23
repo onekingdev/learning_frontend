@@ -189,7 +189,7 @@ export const Question: FC = () => {
     const result:any = await createAiBlockPresentation(
       parseInt(aokId),
       user.token,
-      dispatch
+      // dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
@@ -206,7 +206,7 @@ export const Question: FC = () => {
       student.id,
       parseInt(aokId),
       user.token,
-      dispatch
+      // dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
@@ -259,12 +259,12 @@ export const Question: FC = () => {
         setLoading(true)
         setIsLessonFinished(true);
         // setLoading(true);
-        let correctCount = 0;
-        let wrongCount = 0;
-        for (const data of answerResult) {
-          if (data.isCorrect) correctCount++;
-          else wrongCount++;
-        }
+        // let correctCount = 0;
+        // let wrongCount = 0;
+        // for (const data of answerResult) {
+        //   if (data.isCorrect) correctCount++;
+        //   else wrongCount++;
+        // }
         // const finishBlockResult = await finishBlock(
         //   blockPresentation.id,
         //   correctCount,

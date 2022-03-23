@@ -1,6 +1,6 @@
 import { STUDENT } from '../fragments/studentFragments';
-import { BLOCK_PRESENTATON, BLOCK } from '../fragments/blockFragments'
-import { QUESTION } from '../fragments/questionFragments'
+import { BLOCK_PRESENTATON } from '../fragments/blockFragments'
+// import { QUESTION } from '../fragments/questionFragments'
 import { BLOCK_PRESENTATION_QUERY } from '../queries/questions'
 export const FINISH_BLOCK_PRESENTATION = (
     block_presentation_id: string,

@@ -2,11 +2,7 @@ import {
     GUARDIAN_STUDENT,
     GUARDIAN,
 } from '../fragments/guardianFragments';
-import {
-    USER,
-    USER_PROFILE
-} from '../fragments/userFragments'
-import { PAYMENT_METHOD, PLAN, GUARDIAN_STUDENT_PLAN, ORDER_DETAIL, ORDER } from '../fragments/paymentFragments'
+import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
 import { STUDENT } from '../fragments/studentFragments'
 
 

@@ -90,7 +90,8 @@ export const setBlockPresentation = (payload: string) => ({
   payload
 })
 
-export const setAvatar = (payload: any, dispatch: any) => {
+// export const setAvatar = (payload: any, dispatch: any) => {
+export const setAvatar = (payload: any) => {
   axios({
     url: <string>process.env.REACT_APP_SERVER_URL,
     method: 'post',
@@ -99,7 +100,7 @@ export const setAvatar = (payload: any, dispatch: any) => {
       mutation setFavoriteAvatarCollection {
         setFavoriteAvatarCollection(
               avatarAccessorie: ${payload.accessory},
-              avatarClothes: ${payload.clothes}, 
+              avatarClothes: ${payload.clothes},
               avatarHead: ${payload.head},
               avatarPants: ${payload.pants}
               studentId:1
@@ -115,7 +116,7 @@ export const setAvatar = (payload: any, dispatch: any) => {
 }
 
 export const setCoinWallet = async (studentId: number,token: string, dispatch: any) => {
-  const res:any = await query(`studentById(id: "${studentId}")`, STUDENT_WALLET_QUERY, token).catch(e => ({success: false}));
+  const res:any = await query(`studentById(id: "${studentId}")`, STUDENT_WALLET_QUERY, token).catch(() => ({success: false}));
 
   if(res.success === false) {
       return {success: false, msg: 'Network Error'};
@@ -171,7 +172,7 @@ export const createStudent = async (
       return {success: false, msg: result.errors[0].message};
   }
 
-  const { guardian, student, user, profile, refreshToken } = result.data.createStudent;
+  const { guardian } = result.data.createStudent;
 
   dispatch({
       type: TYPES.GUARDIAN_SET_DATA,
@@ -208,7 +209,7 @@ export const changeStudentGrade = async (
       return {success: false, msg: result.errors[0].message};
   }
 
-  const { guardian, student} = result.data.createChangeStudentGrade;
+  const { guardian } = result.data.createChangeStudentGrade;
 
   dispatch({
       type: TYPES.GUARDIAN_SET_DATA,
@@ -245,7 +246,8 @@ export const changeStudentPassword = async (
       return {success: false, msg: result.errors[0].message};
   }
 
-  const { guardian, student} = result.data.changeStudentPassword;
+  // const { guardian, student} = result.data.changeStudentPassword;
+  const { guardian } = result.data.changeStudentPassword;
 
   dispatch({
       type: TYPES.GUARDIAN_SET_DATA,

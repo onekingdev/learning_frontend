@@ -222,8 +222,8 @@ const NewKids: FC = () => {
 
   const setAudienceData = async () => {
     const result:any = await getAudiencesWithGrades(
-      user.token,
-      dispatch
+      // user.token,
+      // dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });

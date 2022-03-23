@@ -4,7 +4,7 @@ import { WITHDRAW, DEPOSIT } from '../../api/mutations/bank';
 import * as TYPES from '../../app/types'
 
 export const withDraw = async (amount: number,token: string, dispatch: any) => {
-    const res:any = await mutation(WITHDRAW( amount ), token).catch(e => ({success: false}));
+    const res:any = await mutation(WITHDRAW( amount ), token).catch(() => ({success: false}));
     if(res.success === false) {
         return {success: false, msg: 'Network Error'};
     }
@@ -15,7 +15,7 @@ export const withDraw = async (amount: number,token: string, dispatch: any) => {
         return {success: false, msg: result.errors[0].message};
     }
 
-    const { student, bankMovement } = result.data.BankAccountWithdraw
+    const { student } = result.data.BankAccountWithdraw
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
     dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
         rank: 1,
@@ -31,7 +31,7 @@ export const withDraw = async (amount: number,token: string, dispatch: any) => {
 }
 
 export const deposit = async (amount: number,token: string, dispatch: any) => {
-    const res:any = await mutation(DEPOSIT( amount ), token).catch(e => ({success: false}));
+    const res:any = await mutation(DEPOSIT( amount ), token).catch(() => ({success: false}));
     if(res.success === false) {
         return {success: false, msg: 'Network Error'};
     }
@@ -42,7 +42,7 @@ export const deposit = async (amount: number,token: string, dispatch: any) => {
         return {success: false, msg: result.errors[0].message};
     }
 
-    const { student, bankMovement } = result.data.BankAccountDeposit
+    const { student } = result.data.BankAccountDeposit
 
     dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
     dispatch({ type: TYPES.EARNING_SET_DATA, payload: {

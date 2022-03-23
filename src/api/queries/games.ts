@@ -1,5 +1,4 @@
 import {
-    PLAY_GAME_TRANSACTION,
     GAME,
     GAME_CATEGORY
 } from '../fragments/gameFragments';

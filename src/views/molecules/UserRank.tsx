@@ -28,14 +28,14 @@ export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
   );
 };
 
-export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userIcon, active=false, coinsEarned="0", additionalPl="" }) => {
+export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userIcon, active=false, coinsEarned='0', additionalPl='' }) => {
   return active ? (
     <>
       <UserRankTreasureTrackStylesActive >
         <Button isDark={true}>#{userRank}</Button>
         <UserIcon src={userIcon} />
-        <Button fontSize="24px" isDark={true}>YOU</Button>
-        <Button fontSize="14px" isDark={true}>{coinsEarned} COINS EARNED</Button>
+        <Button fontSize='24px' isDark={true}>YOU</Button>
+        <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStylesActive>
     </>
   ) : (
@@ -44,7 +44,7 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         <Button isDark={true}>#{userRank}</Button>
         <UserIcon src={userIcon} />
         <Button isDark={true}>{userName}</Button>
-        <Button fontSize="14px" isDark={true}>{coinsEarned} COINS EARNED</Button>
+        <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStyles>
     </>
   );
@@ -69,8 +69,8 @@ type IUserRankTreasureTrackStyles = {
 const UserRankTreasureTrackStyles = styled(UserRankStyles)<IUserRankTreasureTrackStyles>`
   grid-template-columns: 40px 1fr 1fr 4fr;
   margin-left: 16px;
-  padding-left: ${ props => props.pl ? props.pl : "0px"};
-  width: ${ props => props.pl ? `calc(100% - ${parseInt(props.pl.slice(0,-2)) + 16}px)` : "calc(100% - 16px)"};
+  padding-left: ${ props => props.pl ? props.pl : '0px'};
+  width: ${ props => props.pl ? `calc(100% - ${parseInt(props.pl.slice(0,-2)) + 16}px)` : 'calc(100% - 16px)'};
   @media (max-width: ${ScreenSize.desktop}) {
     padding-left: 0px;
     width: 100%;

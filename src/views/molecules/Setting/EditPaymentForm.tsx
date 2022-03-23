@@ -5,7 +5,7 @@ import TextField from 'views/molecules/MuiTextField'
 import { css } from 'styled-components';
 import { BasicColor } from 'views/Color';
 import Grid from '@mui/material/Grid';
-import { doChangePaymentMethod, doFetchPaymentMethod } from 'app/actions/paymentActions';
+import { doChangePaymentMethod } from 'app/actions/paymentActions';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
 import { useSnackbar } from 'notistack';
 import { GUARDIAN_PAYMENT_METHOD_INFO } from 'app/types'
@@ -23,7 +23,6 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
     const guardian = useSelector((state: any) => state.guardian);
     const {
         wrapperProps,
-        getCardImageProps,
         getCardNumberProps,
         getExpiryDateProps,
         getCVCProps
@@ -111,20 +110,20 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
         phone: guardian.paymentMethod.phone,
     })
 
-    const fetchPaymentData = async (mounted: boolean) => {
-        const guardianId = guardian.id
-        const res = await doFetchPaymentMethod(guardianId, user.token)
-        if (res !== null) {
-            if (mounted)
-                setPaymentMethodInfo(
-                    {
-                        ...validateRst,
-                        cardExpiryDate: (+res.cardExpMonth < 10 ? '0' + res.cardExpMonth : res.cardExpMonth) + ' / ' + res.cardExpYear.slice(-2),
-                        ...res
-                    }
-                )
-        } else return
-    }
+    // const fetchPaymentData = async (mounted: boolean) => {
+    //     const guardianId = guardian.id
+    //     const res = await doFetchPaymentMethod(guardianId, user.token)
+    //     if (res !== null) {
+    //         if (mounted)
+    //             setPaymentMethodInfo(
+    //                 {
+    //                     ...validateRst,
+    //                     cardExpiryDate: (+res.cardExpMonth < 10 ? '0' + res.cardExpMonth : res.cardExpMonth) + ' / ' + res.cardExpYear.slice(-2),
+    //                     ...res
+    //                 }
+    //             )
+    //     } else return
+    // }
 
     const handleFormChange = (field: string, errMsg: string) => {
         setValidateRst({ ...validateRst, [field]: errMsg })

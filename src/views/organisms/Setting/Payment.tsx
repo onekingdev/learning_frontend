@@ -47,6 +47,7 @@ export const Payment: FC = () => {
   const onCancel = () => open();
 
   return (
+    guardian.cardNumber ?
     <LSShadowContainer>
       <LSTitle>
         {'Your payment method'}
@@ -93,7 +94,7 @@ export const Payment: FC = () => {
           }
         />
       </LSGridRow>
-    </LSShadowContainer>
+    </LSShadowContainer> : null
   );
 }
 
