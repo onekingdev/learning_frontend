@@ -1,4 +1,6 @@
 import { FC, useEffect, ReactChildren, ReactChild } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 import { ParentPgNav } from 'views/molecules/ParentPgNav/ParentPgNav'
 import colorpanel from 'views/assets/colorPannel.svg';
 import mess from 'views/assets/mess.svg';
@@ -29,6 +31,8 @@ type ParentPgContainerProps = {
 };
 
 export const ParentPgContainer: FC<ParentPgContainerProps> = ({onlyLogoImgNav, children=(<></>)}) => {
+  const history = useHistory();
+  const dispatch = useDispatch()
 
   useEffect(() => {
   }, []);

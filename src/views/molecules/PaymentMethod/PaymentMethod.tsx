@@ -1,14 +1,16 @@
 import { FC, useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 import { useSnackbar } from 'notistack';
 import moment from 'moment';
-// import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid';
 import payOrderLog from 'views/assets/pay-order-log.svg';
 import Button from 'views/molecules/MuiButton';
-// import TextField from 'views/molecules/MuiTextField';
+import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
 import { PaymentForm } from './PaymentForm';
 import {
+  useStyles,
   Container,
   PaymentContainer,
   OrderContainer,
@@ -39,20 +41,21 @@ interface PaymentFormFunc {
 export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode}) => {
 
   const history = useHistory();
+  const dispatch = useDispatch()
+  const classes = useStyles();
   const paymentFormRef = useRef<PaymentFormFunc>(null)
   const { enqueueSnackbar } = useSnackbar();
 
-//   const [couponCode, setCouponCode] = useState('');
+  const [couponCode, setCouponCode] = useState('');
   const [subtotal, setSubtotal] = useState(0);
-//   const [couponPrice, setCouponPrice] = useState(0);
+  const [couponPrice, setCouponPrice] = useState(0);
   const [agreeLicense, setAgreeLicense] = useState(false)
   const [loading, setLoading] = useState(false)
 
 
-  const handleOrder = async () => {
+  const handleOrder = async (event: any) => {
     setLoading(true)
-    // const result = await paymentFormRef?.current?.handleOrder(plans, couponCode);
-    const result = await paymentFormRef?.current?.handleOrder(plans, '');
+    const result = await paymentFormRef?.current?.handleOrder(plans, couponCode);
     console.log('result is ', result)
     // test
     // dispatch({
@@ -76,9 +79,9 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
 
   }
 
-//   const applyCoupon = (e: any) => {
-//     setCouponPrice(5);
-//   }
+  const applyCoupon = (e: any) => {
+    setCouponPrice(5);
+  }
 
   useEffect(() => {
   }, []);
@@ -150,16 +153,14 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     <OrderItemTitleContainer>
                         <OrderItemTitle>Coupon:<div style={{fontWeight: 400, fontSize: '16px'}}>&nbsp;Year</div></OrderItemTitle>
                     </OrderItemTitleContainer>
-                    {/* <OrderItemContent>${couponPrice.toFixed(2)}</OrderItemContent> */}
-                    <OrderItemContent>${0.00}</OrderItemContent>
+                    <OrderItemContent>${couponPrice.toFixed(2)}</OrderItemContent>
                 </OrderItem>
                 <OrderItem>
                     <OrderItemTitleContainer>
                         <OrderItemTitle>Total</OrderItemTitle>
                     </OrderItemTitleContainer>
                     <OrderItemContent>
-                        {/* <div style={{display: 'flex'}}>${(subtotal - couponPrice).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div> */}
-                        <div style={{display: 'flex'}}>${(subtotal).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div>
+                        <div style={{display: 'flex'}}>${(subtotal - couponPrice).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div>
                         <div style={{fontWeight: 400, lineHeight: '12px', fontSize: '10px'}}>First Renewal : {moment(new Date()).format('YYYY-MM-DD')}</div>
                     </OrderItemContent>
                 </OrderItem>

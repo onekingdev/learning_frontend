@@ -3,7 +3,7 @@ import  {
     USER,
     USER_PROFILE
 } from '../fragments/userFragments'
-import {PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER} from '../fragments/paymentFragments'
+import {PAYMENT_METHOD ,PLAN, GUARDIAN_STUDENT_PLAN, ORDER_DETAIL, ORDER} from '../fragments/paymentFragments'
 import {STUDENT}from '../fragments/studentFragments'
 import {
     GUARDIAN_STUDENT,
@@ -11,6 +11,7 @@ import {
     } from '../fragments/guardianFragments';
 
 export const CREATE_STUDENT = (
+    audience: string,
     firstName: string,
     lastName: string,
     username: string,
@@ -20,7 +21,7 @@ export const CREATE_STUDENT = (
     studentPlan: number,
     gradeId: number,
     ) => `
-	createStudent(firstName: "${firstName}",  guardianStudentPlanId: ${guardianStudentPlanId}, lastName: "${lastName}", listSubjectId: [${listSubjectId}], password: "${password}", studentPlan: ${studentPlan}, username: "${username}", grade: ${gradeId}) {
+	createStudent(audience: "${audience}", firstName: "${firstName}",  guardianStudentPlanId: ${guardianStudentPlanId}, lastName: "${lastName}", listSubjectId: [${listSubjectId}], password: "${password}", studentPlan: ${studentPlan}, username: "${username}", grade: ${gradeId}) {
         guardian {
             ${GUARDIAN}
             guardianstudentSet {
@@ -94,7 +95,7 @@ export const CHANGE_STUDENT_GRADE = (
         student {
             ${STUDENT}
         }
-
+       
 	}
 `;
 

@@ -1,4 +1,6 @@
 import * as TYPE from '../types';
+import {IEarning} from '../entities/earning';
+import { PaymentMethod } from 'views/molecules/PaymentMethod/PaymentMethod';
 const INITIAL_STATE = {
     id: null,
     identifier: null,

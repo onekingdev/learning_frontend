@@ -12,7 +12,7 @@ export const ParentReporting: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <div style={{
-        width: '100%'
+        width: "100%"
       }}>
         <BarChart />
         <MarkTable />

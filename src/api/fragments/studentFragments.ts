@@ -1,5 +1,6 @@
 import { LEVEL } from './levelFragments'
 import { COIN_WALLET } from './coinWalletFragments'
+import { AVATAR } from './avatarFragments'
 import { BANK_WALLET } from './bankFragments'
 import { AUDIENCES }from './peopleFragments'
 import { AREA_OF_KNOWLEDGE }from './areaOfKnowledgeFragments'
@@ -196,5 +197,17 @@ export const STUDENT = `
             grade{
                 ${GRADES}
             }
+        }
+        currentAvatarHead {
+            ${AVATAR}
+        }
+        currentAvatarAccessories {
+            ${AVATAR}
+        }
+        currentAvatarClothes {
+            ${AVATAR}
+        }
+        currentAvatarPants {
+            ${AVATAR}
         }
 `;

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { FC } from 'react';
-import { PieChart, Pie, Cell, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { LSText } from 'views/molecules/Setting/utils/Style';
 
 const data01 = [
@@ -26,7 +26,7 @@ export const SocratesPie: FC = () => {
           label
         >
           {
-            data01.map((entry) => <Cell fill={entry.color}/>)
+            data01.map((entry, index) => <Cell fill={entry.color}/>)
           }
         </Pie>
         <Tooltip />

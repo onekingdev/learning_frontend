@@ -1,4 +1,4 @@
-import { SIMPLE_AVATAR } from 'api/fragments/avatarFragments';
+import { AVATAR, SIMPLE_AVATAR } from 'api/fragments/avatarFragments';
 
 export const FETCH_USER_OWNED_AVATAR_ITEMS = (studentId: number) => `
   query {
