@@ -198,4 +198,16 @@ export const STUDENT = `
                 ${GRADES}
             }
         }
+        currentAvatarHead {
+            ${AVATAR}
+        }
+        currentAvatarAccessories {
+            ${AVATAR}
+        }
+        currentAvatarClothes {
+            ${AVATAR}
+        }
+        currentAvatarPants {
+            ${AVATAR}
+        }
 `;
