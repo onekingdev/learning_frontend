@@ -24,6 +24,7 @@ import {
   ModalItemsContainer,
 } from './Style';
 import { TextInput } from '../../atoms/Text/TextInput';
+import { Divider } from 'views/atoms/Divider';
 
 export const Welcome: FC = () => {
   const language = 'en';
@@ -39,7 +40,7 @@ export const Welcome: FC = () => {
   }, []);
   return (
     <Wrapper>
-      <Logo src={logo} alt='Learn with Socrates logo' />
+      <Logo src={logo} alt="Learn with Socrates logo" />
       {deployModal ? (
         <Modal>
           <ModalContent>
@@ -78,7 +79,7 @@ export const Welcome: FC = () => {
         </Description>
       </Body>
 
-      <Illustration src={welcome} alt='' />
+      <Illustration src={welcome} alt="" />
 
       <Actions>
         <Link to={'/login'}>
@@ -97,13 +98,13 @@ export const Welcome: FC = () => {
       </Actions>
 
       <Legal>
-        <TypoIcon onClick={() => location.href='https://www.WithSocrates.com'}>
+        <TypoIcon onClick={() => location.href="https://www.WithSocrates.com"}>
           {dictionary[language].about}
         </TypoIcon >
-        <TypoIcon onClick={() => location.href='https://www.withsocrates.com/privacy-policy/'} >
+        <TypoIcon onClick={() => location.href="https://www.withsocrates.com/privacy-policy/"} >
           {dictionary[language].privacy}
         </TypoIcon >
-        <TypoIcon onClick={() => location.href='https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'} >
+        <TypoIcon onClick={() => location.href="https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en"} >
           {dictionary[language].children_privacy}
         </TypoIcon >
       </Legal>

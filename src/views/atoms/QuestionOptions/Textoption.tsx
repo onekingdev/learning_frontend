@@ -28,10 +28,10 @@ export const TextOption:FC<TextOptionProps> = ({answer,onClick}) => {
       }, [answer])
 
     useEffect(() => {
-      console.log('initialized text option, isAnswered: ', isAnswered, 'answer is ', answer)
+      console.log("initialized text option, isAnswered: ", isAnswered, "answer is ", answer)
     }, [answer])
-    const handleAnswer = () => {
-        console.log('handle answer')
+    const handleAnswer = (e: any) => {
+        console.log("handle answer")
         setIsCorrect(answer.isCorrect)
         setIsAnswered(true);
         const inputAnswer:BlockQuestionInput = {
@@ -51,7 +51,7 @@ export const TextOption:FC<TextOptionProps> = ({answer,onClick}) => {
           autoPlay={isAnswered ? true : false}
           />
             <TextOptionStyles
-              onClick={() => handleAnswer()}
+              onClick={(e) => handleAnswer(e)}
               isCorrect={isAnswered && answer?.isCorrect}
               isAnswered={isAnswered}
             >

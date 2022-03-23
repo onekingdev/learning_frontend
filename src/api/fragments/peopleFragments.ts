@@ -1,3 +1,4 @@
+import {AREA_OF_KNOWLEDGE} from './areaOfKnowledgeFragments'
 export const ORGANIZATIONS = `
     {
         id
@@ -48,7 +49,7 @@ export const SCHOOLS = `
         name
         slug
         internalCode
-        typeOf
+        typeOf 
     }
 `;
 

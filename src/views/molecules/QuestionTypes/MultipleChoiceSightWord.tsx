@@ -1,13 +1,17 @@
 import { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Store } from 'app/configureStore';
 import { IBlockPresentation } from 'app/entities/block';
 import { IQuestion } from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';
 import { Question } from 'views/atoms/Text/Question';
 import { Icon } from 'views/atoms/Icon/Icon';
+import videoIcon from 'views/assets/videoIcon.svg';
 import videoAssistorIcon from 'views/assets/video.svg'
 import soundAssistorIcon from 'views/assets/play-sound.svg'
+import assistor from 'views/assets/text-to-speech.svg';
 import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
@@ -35,10 +39,10 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
   blockPresentation,
   onAnswer,
 }) => {
-  // const state = useSelector((state: Store) => state.blockPresentation);
+  const state = useSelector((state: Store) => state.blockPresentation);
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
-  // const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
+  const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
 
   useEffect(() => {
     setIsAnswered(false);
@@ -54,10 +58,10 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
     setShowAssistor(!showAssistor);
   };
 
-  // const readQuestion = () => {
-  //   const audio = new Audio(questionSoundURI);
-  //   audio.play();
-  // };
+  const readQuestion = () => {
+    const audio = new Audio(questionSoundURI);
+    audio.play();
+  };
 
   const readQuestionAudioAsset = () => {
     const audio = new Audio(question.questionAudioAssets[0].audioFile);
@@ -65,11 +69,11 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
   };
 
 
-  // const readAnswer = (answerOption: any) => {
-  //   const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
-  //   const audio = new Audio(answerSoundURI);
-  //   audio.play();
-  // };
+  const readAnswer = (answerOption: any) => {
+    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
+    const audio = new Audio(answerSoundURI);
+    audio.play();
+  };
 
   return (
     <>
@@ -172,17 +176,17 @@ const ImageAssetContainer = styled.div<{
 const ImageAsset = styled.img`
   width: 100%;
 `;
-// const QuestionContainer = styled.div`
-//   width: 90%;
-//   margin: 5px auto;
-//   margin-bottom: 20px;
-//   display: flex;
-//   justify-content: center;
+const QuestionContainer = styled.div`
+  width: 90%;
+  margin: 5px auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
 
-//   @media screen and (min-width: ${ScreenSize.desktop}) {
-//     justify-content: left;
-//   }
-// `;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    justify-content: left;
+  }
+`;
 const BlockAnswers = styled.div<{
   isAnswered: boolean;
 }>`

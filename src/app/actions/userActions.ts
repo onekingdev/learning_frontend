@@ -4,11 +4,12 @@ import query, { sendRawQuery } from 'api/queries/get'
 import { WHOAMI_QUERY } from 'api/queries/users'
 import { INTEREST_QUERY } from 'api/queries/interests'
 import { NEXT_LEVEL_QUERY } from 'api/queries/questions'
+import { getGrades } from 'app/actions/gradeActions'
 
 import * as TYPES from 'app/types'
 
 export const login = async (username: string, password: string, dispatch: any) => {
-  const res:any = await mutation(TOKEN_AUTH( username, password )).catch(() => ({success: false}));
+  const res:any = await mutation(TOKEN_AUTH( username, password )).catch(e => ({success: false}));
   if(res.success === false) {
       return {success: false, msg: 'Network Error'};
   }
@@ -21,7 +22,7 @@ export const login = async (username: string, password: string, dispatch: any) =
 
   const { token } = result.data.tokenAuth
 
-  const res_who:any = await query('whoami', WHOAMI_QUERY, token).catch(() => ({success: false}));
+  const res_who:any = await query('whoami', WHOAMI_QUERY, token).catch(e => ({success: false}));
 
   if(res_who.success === false) {
     return {success: false, msg: 'Network Error!'};
@@ -34,7 +35,7 @@ export const login = async (username: string, password: string, dispatch: any) =
     return {success: false, msg: result_who.errors[0].message};
   }
 
-  const res_interests:any = await query('interests', INTEREST_QUERY, token).catch(() => ({success: false}));
+  const res_interests:any = await query('interests', INTEREST_QUERY, token).catch(e => ({success: false}));
   if(res_interests.success === false) {
     return {success: false, msg: 'Network Error!'};
   }
@@ -47,7 +48,7 @@ export const login = async (username: string, password: string, dispatch: any) =
   const interests = result_interests.data.interests
   console.log(interests)
   const user = result_who.data.whoami;
-  const user_redux:any = (({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language,profile }) => ({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language, profile}))(user)
+  const user_redux:any = (({id, lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language,profile }) => ({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language, profile}))(user)
   const {guardian, student} = result_who.data.whoami;
 
   dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
@@ -78,10 +79,10 @@ export const login = async (username: string, password: string, dispatch: any) =
     else if(guardian) {
       console.log('this is a guardian')
       dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian })
-      // const result:any = await getGrades(
-      //   user.token,
-      //   dispatch
-      // );
+      const result:any = await getGrades(
+        user.token,
+        dispatch
+      );
       // if(!result.success) {
       //   return false;
       // }

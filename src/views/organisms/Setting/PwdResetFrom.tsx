@@ -4,6 +4,8 @@ import { ThemeProvider } from '@mui/material';
 import { LSGridRow, LSLabel, LSTextField } from 'views/molecules/Setting/utils/Style';
 import { Grid } from '@mui/material';
 import { LSButtonContainer, LSButton } from 'views/molecules/Setting/utils/Style';
+import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
 import { doUpdateGuardianEmailPassword } from 'app/actions/guardianActions';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';

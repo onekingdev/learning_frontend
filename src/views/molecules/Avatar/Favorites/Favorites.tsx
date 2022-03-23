@@ -28,7 +28,7 @@ export const AvatarSelector: FC = () => {
   // TODO-- This state is used to select user avatar from his/her favorites
   const [currentAvatarId, setCurrentAvatarId] = useState(0)
   const { enqueueSnackbar } = useSnackbar();
-  const [favorites, setfavorites] = useState<Array<any>>([])
+  const [favories, setFavories] = useState<Array<any>>([])
 
   const [accessory, setAccessory] = useState('')
   const [head, setHead] = useState('')
@@ -40,30 +40,27 @@ export const AvatarSelector: FC = () => {
 
   const fetchFavorites = async () => {
     const res: any = await doFetchFavoriteAvatars(student.id, user.token)
-    res.msg ? console.log('error:', res.msg) : setfavorites(res)
+    res.msg ? console.log('error:', res.msg) : setFavories(res)
   }
 
   const setCurrentAvatar = (id: number) => {
     setCurrentAvatarId(id)
-    favorites[id].avatarAccessorie ? setAccessory(favorites[id].avatarAccessorie.image) : setAccessory('')
-    setHead(favorites[id].avatarHead.image)
-    setBody(favorites[id].avatarClothes.image)
-    setFooter(favorites[id].avatarPants.image)
-    favorites[id].skinTone ? setSkin(favorites[id].skinTone) : setSkin('')
+    favories[id].avatarAccessorie ? setAccessory(favories[id].avatarAccessorie.image) : setAccessory('')
+    setHead(favories[id].avatarHead.image)
+    setBody(favories[id].avatarClothes.image)
+    setFooter(favories[id].avatarPants.image)
+    favories[id].skinTone ? setSkin(favories[id].skinTone) : setSkin('')
   }
 
   // TODO: Do not delete this comment. THIS WILL BE USED IN THE FUTURE
   const setUserAvatar = async () => {
     setLoading(true)
-    if (favorites.length) {
-
-      const res: any = await doSetUserAvatar(student.id, favorites[currentAvatarId].id, user.token)
-      if (res.status) {
-        dispatch({ type: AVATAR_SET_DEFAULT, payload: res })
-        enqueueSnackbar('Set user avatar successfully!', { variant: 'success' })
-      } else {
-        enqueueSnackbar(res.msg, { variant: 'error' })
-      }
+    const res: any = await doSetUserAvatar(student.id, favories[currentAvatarId].id, user.token)
+    if (res.status) {
+      dispatch({ type: AVATAR_SET_DEFAULT, payload: res })
+      enqueueSnackbar('Set user avatar successfully!', { variant: 'success' })
+    } else {
+      enqueueSnackbar(res.msg, { variant: 'error' })
     }
     setLoading(false)
   }
@@ -74,21 +71,21 @@ export const AvatarSelector: FC = () => {
   }, [])
 
   useEffect(() => {
-    if (favorites.length) {
+    if (favories.length) {
 
-      favorites[0].avatarAccessorie ? setAccessory(favorites[0].avatarAccessorie.image) : setAccessory('')
-      setHead(favorites[0].avatarHead.image)
-      setBody(favorites[0].avatarClothes.image)
-      setFooter(favorites[0].avatarPants.image)
-      favorites[0].skinTone ? setSkin(favorites[0].skinTone) : setSkin('')
+      favories[0].avatarAccessorie ? setAccessory(favories[0].avatarAccessorie.image) : setAccessory('')
+      setHead(favories[0].avatarHead.image)
+      setBody(favories[0].avatarClothes.image)
+      setFooter(favories[0].avatarPants.image)
+      favories[0].skinTone ? setSkin(favories[0].skinTone) : setSkin('')
     }
-  }, [favorites])
+  }, [favories])
 
   return (
-    favorites &&
+    favories &&
     <>
       <TopDrawer> {/* This is displayed in mobile view only */}
-        <AvatarFavorites select={setCurrentAvatar} favorites={favorites} />
+        <AvatarFavorites select={setCurrentAvatar} favorites={favories} />
       </TopDrawer>
       <Container>
         <div onClick={() => history.push('wardrobe')}>
@@ -119,7 +116,7 @@ export const AvatarSelector: FC = () => {
         </AvatarGrid>
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
           <RightDrawer> {/* This is displayed in desktop view only */}
-            <AvatarFavorites select={setCurrentAvatar} favorites={favorites} />
+            <AvatarFavorites select={setCurrentAvatar} favorites={favories} />
           </RightDrawer>
           <Floor src={floor} />
         </div>
