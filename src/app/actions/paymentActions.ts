@@ -1,10 +1,5 @@
-import mutation from '../../api/mutations/get'
-import { PLAY_GAME } from '../../api/mutations/game'
-import query from '../../api/queries/get'
-import { GAMES_QUERY, GAMES_BY_CATEGORY_NAME_QUERY, GAMES_CATEGORY_QUERY } from '../../api/queries/games'
 import { PLAN_QUERY } from '../../api/queries/payments'
 import queryFetch from '../../api/queries/get';
-import { CREATE_GUARDIAN, } from '../../api/mutations/guardians';
 import {
     CREATE_ORDER,
     CONFIRM_PAYMENT_ORDER,
@@ -70,7 +65,7 @@ export const createOrder = async (
         return { success: false, msg: result.errors[0].message };
     }
 
-    const { guardian, order, status, urlRedirect } = result.data.createOrder;
+    const { guardian,  status  } = result.data.createOrder;
 
     dispatch({
         type: TYPES.GUARDIAN_SET_DATA,
@@ -115,7 +110,7 @@ export const createOrderWithOutPay = async (
         return { success: false, msg: result.errors[0].message };
     }
     console.log(result.data);
-    const { guardian, order, status } = result.data.createOrderWithOutPay;
+    const { guardian,  status } = result.data.createOrderWithOutPay;
     console.log(guardian);
     dispatch({
         type: TYPES.GUARDIAN_SET_DATA,
@@ -150,7 +145,7 @@ export const confirmPaymentOrder = async (
         return { success: false, msg: result.errors[0].message };
     }
 
-    const { guardian, order, status } = result.data.confirmPaymentOrder;
+    const { guardian,  status } = result.data.confirmPaymentOrder;
 
     if (status !== 'success')
         return { success: false, msg: 'Cofirmation Failed' }

@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
 
@@ -12,13 +12,13 @@ type TextInputProps = {
 
 export const TextInput: FC<TextInputProps> = ({
   label,
-  validate = (_: string) => true || _,
-  errMsg = '',
+  // validate = (_: string) => true || _,
+  // errMsg = '',
   isSecret = false,
   onChange
 }) => {
   //const [value, setValue] = useState('');
-  const [isValid, setIsValid] = useState<boolean>(true);
+  // const [isValid, setIsValid] = useState<boolean>(true);
  /* useEffect(() => {
     if (validate(value) && isValid === false) {
       setIsValid(true);
@@ -30,14 +30,14 @@ export const TextInput: FC<TextInputProps> = ({
 
   return (
     <>
-      <Wrapper isValid={isValid}>
+      <Wrapper isValid={true}>
         <Label>{label}</Label>
         <StyledInput
           onChange={onChange}
           type={isSecret ? 'password' : 'text'}
         />
       </Wrapper>
-      <Warning>{!isValid ? errMsg : ''}</Warning>
+      {/* <Warning>{!isValid ? errMsg : ''}</Warning> */}
     </>
   );
 };
@@ -77,11 +77,11 @@ const Label = styled.label`
   padding: 3px 8px;
 `;
 
-const Warning = styled.label`
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 11px;
-  line-height: 13px;
-  color: ${BasicColor.yellow};
-  padding: 0 8px;
-`;
+// const Warning = styled.label`
+//   font-family: Montserrat;
+//   font-weight: 700;
+//   font-size: 11px;
+//   line-height: 13px;
+//   color: ${BasicColor.yellow};
+//   padding: 0 8px;
+// `;

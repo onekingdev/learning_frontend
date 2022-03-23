@@ -62,41 +62,41 @@ export const Payment: FC = () => {
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [offRate, setOffRate] = useState(50);
 
-  const setPackPrice = (plansData: any) => {
+  // const setPackPrice = (plansData: any) => {
 
-    /*------------ get package price data from db -S--------------*/
-    let gold_m = 19.99;
-    let gold_y = 19.99;
-    let combo_m = 14.99;
-    let combo_y = 14.99;
-    let sole_m = 5.99;
-    let sole_y = 5.99;
-    gold_m = plansData.Gold?.priceMonth;
-    gold_y = plansData.Gold?.priceYear;
+  //   /*------------ get package price data from db -S--------------*/
+  //   // let gold_m = 19.99;
+  //   // let gold_y = 19.99;
+  //   // let combo_m = 14.99;
+  //   // let combo_y = 14.99;
+  //   // let sole_m = 5.99;
+  //   // let sole_y = 5.99;
+  //   // gold_m = plansData.Gold?.priceMonth;
+  //   // gold_y = plansData.Gold?.priceYear;
 
-    combo_m = plansData.Combo?.priceMonth;
-    combo_y = plansData.Combo?.priceYear;
+  //   // combo_m = plansData.Combo?.priceMonth;
+  //   // combo_y = plansData.Combo?.priceYear;
 
-    sole_m = plansData.Sole?.priceMonth;
-    sole_y = plansData.Sole?.priceYear;
+  //   // sole_m = plansData.Sole?.priceMonth;
+  //   // sole_y = plansData.Sole?.priceYear;
 
-    /*------------ get package price data from db -E--------------*/
+  //   /*------------ get package price data from db -E--------------*/
 
-    // setPrices({
-    //   Gold: {
-    //     month: gold_m,
-    //     year: gold_y,
-    //   },
-    //   Combo: {
-    //     month: combo_m,
-    //     year: combo_y,
-    //   },
-    //   Sole: {
-    //     month: sole_m,
-    //     year: sole_y,
-    //   },
-    // });
-  };
+  //   // setPrices({
+  //   //   Gold: {
+  //   //     month: gold_m,
+  //   //     year: gold_y,
+  //   //   },
+  //   //   Combo: {
+  //   //     month: combo_m,
+  //   //     year: combo_y,
+  //   //   },
+  //   //   Sole: {
+  //   //     month: sole_m,
+  //   //     year: sole_y,
+  //   //   },
+  //   // });
+  // };
 
   const onChangePackage = (type: string, count: number, period: string) => {
     plans[type].childCount = count;
@@ -123,7 +123,7 @@ export const Payment: FC = () => {
       plans_re_object[name].currentPrice = plan.priceMonth;
     }
     setPlans(plans_re_object)
-    setPackPrice(plans_re_object)
+    // setPackPrice(plans_re_object)
 
     loadingContext.done();
   }
