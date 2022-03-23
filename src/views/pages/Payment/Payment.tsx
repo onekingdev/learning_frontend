@@ -1,0 +1,217 @@
+import { FC, useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Alert from '@mui/material/Alert';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
+import { PaymentMethod } from 'views/molecules/PaymentMethod/PaymentMethod';
+import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { PackagePanel } from 'views/molecules/PackagePanel/PackagePanel';
+import {
+  TipContainer,
+  PackageContainer,
+  Subject,
+  SubjectContainer,
+} from './Style';
+import math from 'views/assets/math-elements.svg';
+import ela from 'views/assets/ela-elements.svg';
+import science from 'views/assets/science-elements.svg';
+import financial from 'views/assets/financial_elements.svg';
+import health from 'views/assets/health-elements.svg';
+const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
+import { LoadingContext } from 'react-router-loading';
+import { useSnackbar } from 'notistack';
+import { getPlans, createOrder } from 'app/actions/paymentActions'
+export const Payment: FC = () => {
+  const loadingContext = useContext(LoadingContext);
+  const {enqueueSnackbar} = useSnackbar();
+  const user = useSelector((state: any) => state.user);
+  const guardian = useSelector((state: any) => state.guardian);
+  const [plans, setPlans] = useState<any>({
+    Gold: {
+      currentPrice: 0,
+      priceMonth: 0,
+      priceYear: 0
+    },
+    Combo: {
+      currentPrice: 0,
+      priceMonth: 0,
+      priceYear: 0
+    },
+    Sole: {
+      currentPrice: 0,
+      priceMonth: 0,
+      priceYear: 0
+    }
+  })
+  const [prices, setPrices] = useState({
+    Gold: {
+      month: 0,
+      year: 0,
+    },
+    Combo: {
+      month: 0,
+      year: 0,
+    },
+    Sole: {
+      month: 0,
+      year: 0,
+    },
+  });
+  const [isSpecialCode, setIsSpecialCode] = useState(false)
+  const [showPaymentMethod, setShowPaymentMethod] = useState(false);
+  const [offRate, setOffRate] = useState(50);
+
+  const setPackPrice = (plansData: any) => {
+
+    /*------------ get package price data from db -S--------------*/
+    let gold_m = 19.99;
+    let gold_y = 19.99;
+    let combo_m = 14.99;
+    let combo_y = 14.99;
+    let sole_m = 5.99;
+    let sole_y = 5.99;
+    gold_m = plansData.Gold?.priceMonth;
+    gold_y = plansData.Gold?.priceYear;
+
+    combo_m = plansData.Combo?.priceMonth;
+    combo_y = plansData.Combo?.priceYear;
+
+    sole_m = plansData.Sole?.priceMonth;
+    sole_y = plansData.Sole?.priceYear;
+
+    /*------------ get package price data from db -E--------------*/
+
+    setPrices({
+      Gold: {
+        month: gold_m,
+        year: gold_y,
+      },
+      Combo: {
+        month: combo_m,
+        year: combo_y,
+      },
+      Sole: {
+        month: sole_m,
+        year: sole_y,
+      },
+    });
+  };
+
+  const onChangePackage = (type: string, count: number, period: string) => {
+    plans[type].childCount = count;
+    plans[type].period = period;
+    plans[type].currentPrice = (period === 'month' ? plans[type].priceMonth : plans[type].priceYear)
+    setPlans({...plans})
+    setShowPaymentMethod(true);
+  };
+
+  const setPlanData = async() => {
+    const result:any = await getPlans(user.token);
+    if(!result.success) {
+      enqueueSnackbar(result.msg, { variant: 'error' });
+      return;
+    }
+    const plans_re_object:any = {
+      Gold : [],
+      Combo: [],
+      Sole : []
+    };
+    for(const plan of result.data){
+      const name: any = plan.name;
+      plans_re_object[name] = plan;
+      plans_re_object[name].currentPrice = plan.priceMonth;
+    }
+    setPlans(plans_re_object)
+    setPackPrice(plans_re_object)
+
+    loadingContext.done();
+  }
+
+  useEffect(() => {
+    if(parseInt(guardian?.couponCode?.percentage) === 100) setIsSpecialCode(true)
+    setOffRate(50);
+    setPlanData();
+  }, []);
+  return (
+    <ParentPgContainer onlyLogoImgNav={true}>
+      <>
+        <ParentPgStepper step={2} />
+        <TipContainer>
+          <Alert severity="info">
+            In Socrates, students can get mutiple Areas of Knowledge depend of
+            the package they will have All, Two Areas or a Solo Area! Choose the
+            best package for your kids!
+            <br />
+            <SubjectContainer>
+              <div className="flex align-center">
+                <Subject src={math} />
+                &nbsp;Math
+              </div>
+              <div className="flex align-center">
+                <Subject src={ela} />
+                &nbsp;ELA + SIGHT WORDS
+              </div>
+              <div className="flex align-center">
+                <Subject src={science} />
+                &nbsp;SCIENCE
+              </div>
+            </SubjectContainer>
+            <SubjectContainer>
+              <div className="flex align-center">
+                <Subject src={financial} />
+                &nbsp;FINANCIAL LITERACY
+              </div>
+              <div className="flex align-center">
+                <Subject src={health} />
+                &nbsp;HEALTH & SAFETY
+              </div>
+            </SubjectContainer>
+          </Alert>
+        </TipContainer>
+        <PackageContainer>
+          <PackagePanel
+            type="Gold"
+            price={plans.Gold.currentPrice}
+            onChange={(childrenCount, plan) =>
+              onChangePackage('Gold', childrenCount, plan)
+            }
+            isSpecialCode = {isSpecialCode}
+          />
+          <PackagePanel
+            type="Combo"
+            price={plans.Combo.currentPrice}
+            onChange={(childrenCount, plan) =>
+              onChangePackage('Combo', childrenCount, plan)
+            }
+            disabled = {isSpecialCode}
+            isSpecialCode = {false}
+          />
+          <PackagePanel
+            type="Sole"
+            price={plans.Sole.currentPrice}
+            onChange={(childrenCount, plan) =>
+              onChangePackage('Sole', childrenCount, plan)
+            }
+            disabled = {isSpecialCode}
+            isSpecialCode = {false}
+          />
+        </PackageContainer>
+        {!isSpecialCode &&
+          <Alert severity="info" className="m-b-35" style={{width: '72%', fontSize: "40px", justifyContent: "center", alignItems: "center", maxWidth: "1414px"}}>
+            Add 2nd kid with {offRate}% off
+          </Alert>
+        }
+        <Elements stripe={stripePromise}>
+          {showPaymentMethod && (
+            <PaymentMethod
+              plans = {plans}
+              offRate={offRate}
+              isSpecialCode={isSpecialCode}
+            />
+          )}
+        </Elements>
+      </>
+    </ParentPgContainer>
+  );
+};
