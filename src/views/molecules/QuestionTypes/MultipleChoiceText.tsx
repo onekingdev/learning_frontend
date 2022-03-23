@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Store } from 'app/configureStore';
 import { IBlockPresentation } from 'app/entities/block';
 import { IQuestion } from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
@@ -35,6 +37,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   blockPresentation,
   onAnswer,
 }) => {
+  const state = useSelector((state: Store) => state.blockPresentation);
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
@@ -44,7 +47,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   }, [question.answeroptionSet]);
 
   const handleAnswer = (result: BlockQuestionInput) => {
-    console.log('answered, result is ', result)
+    console.log("answered, result is ", result)
     setIsAnswered(true);
     result.question = parseInt(question.id);
     onAnswer(result);
@@ -105,7 +108,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
             imageLength={question.questionImageAssets.length}
           >
             {question.questionImageAssets.map(item => (
-              <ImageAsset src={item.image} alt='' />
+              <ImageAsset src={item.image} alt="" />
             ))}
           </ImageAssetContainer>
         </AnswersContainer>

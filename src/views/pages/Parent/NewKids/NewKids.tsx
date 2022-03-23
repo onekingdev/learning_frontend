@@ -64,7 +64,7 @@ const NewKids: FC = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
-  const [audience, setAudience] = useState();
+  const [audience, setAudience] = useState<any>();
   const [grade, setGrade] = useState<any>();
   const [childNum, setChildNum] = useState(0);
   const [childIdx, setChildIdx] = useState(1);
@@ -171,6 +171,7 @@ const NewKids: FC = () => {
     for(const path of paths)
       listSubjectId.push(parseInt(path.id));
     const result:any = await createStudent(
+      audience.id,
       firstName,
       lastName,
       userId,
@@ -221,8 +222,8 @@ const NewKids: FC = () => {
 
   const setAudienceData = async () => {
     const result:any = await getAudiencesWithGrades(
-      // user.token,
-      // dispatch
+      user.token,
+      dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });

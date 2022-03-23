@@ -1,10 +1,11 @@
 import {
     USER,
     USER_PROFILE,
+    USER_LANGUAGE,
 } from '../fragments/userFragments';
 import { STUDENT } from '../fragments/studentFragments'
 import { COIN_WALLET } from '../fragments/coinWalletFragments'
-import {PAYMENT_METHOD , GUARDIAN_STUDENT_PLAN, ORDER} from '../fragments/paymentFragments'
+import {PAYMENT_METHOD ,PLAN, GUARDIAN_STUDENT_PLAN, ORDER_DETAIL, ORDER} from '../fragments/paymentFragments'
 import {
     GUARDIAN_STUDENT,
     GUARDIAN,

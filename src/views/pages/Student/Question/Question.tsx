@@ -189,7 +189,7 @@ export const Question: FC = () => {
     const result:any = await createAiBlockPresentation(
       parseInt(aokId),
       user.token,
-      // dispatch
+      dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
@@ -206,7 +206,7 @@ export const Question: FC = () => {
       student.id,
       parseInt(aokId),
       user.token,
-      // dispatch
+      dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
