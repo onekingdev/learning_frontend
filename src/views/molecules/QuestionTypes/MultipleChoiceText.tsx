@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { IBlockPresentation } from 'app/entities/block';
 import { IQuestion } from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
@@ -11,6 +12,7 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
+import { Store } from 'app/configureStore';
 
 type ChoiceTextProps = {
   question: IQuestion;
@@ -35,6 +37,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   blockPresentation,
   onAnswer,
 }) => {
+  const state = useSelector((state: Store) => state.blockPresentation);
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;

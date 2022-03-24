@@ -21,7 +21,7 @@ export const CREATE_STUDENT = (
     studentPlan: number,
     gradeId: number,
     ) => `
-	createStudent(audience: ${audience}, firstName: "${firstName}",  guardianStudentPlanId: ${guardianStudentPlanId}, lastName: "${lastName}", listSubjectId: [${listSubjectId}], password: "${password}", studentPlan: ${studentPlan}, username: "${username}", grade: ${gradeId}) {
+	createStudent(audience: "${audience}", firstName: "${firstName}",  guardianStudentPlanId: ${guardianStudentPlanId}, lastName: "${lastName}", listSubjectId: [${listSubjectId}], password: "${password}", studentPlan: ${studentPlan}, username: "${username}", grade: ${gradeId}) {
         guardian {
             ${GUARDIAN}
             guardianstudentSet {

@@ -171,7 +171,7 @@ const NewKids: FC = () => {
     for(const path of paths)
       listSubjectId.push(parseInt(path.id));
     const result:any = await createStudent(
-      audience?.id,
+      audience!.id,
       firstName,
       lastName,
       userId,

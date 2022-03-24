@@ -28,8 +28,8 @@ export const finishBlock = async (block_presentation_id: string, hits: number, e
     return {success: true, msg: 'Success!'}
 }
 
-// export const createAiBlockPresentation = async (aokId: number, token: string, dispatch?: any) => {
-export const createAiBlockPresentation = async (aokId: number, token: string) => {
+export const createAiBlockPresentation = async (aokId: number, token: string, dispatch?: any) => {
+// export const createAiBlockPresentation = async (aokId: number, token: string) => {
     const res:any = await mutation(CREATE_AI_BLOCK_PRESENTATION( aokId), token).catch(() => ({success: false}));
     if(res.success === false) {
         return {success: false, msg: 'Network Error'};
@@ -54,8 +54,8 @@ export const createAiBlockPresentation = async (aokId: number, token: string) =>
     return {success: true, msg: 'Success!', data: blockPresentation}
 }
 
-// export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string, dispatch: any) => {
-export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string) => {
+export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string, dispatch: any) => {
+// export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string) => {
     const res:any = await mutation(CREATE_PATH_BLOCK_PRESENTATION( studentId, topicId ), token).catch(() => ({success: false}));
     if(res.success === false) {
         return {success: false, msg: 'Network Error'};
