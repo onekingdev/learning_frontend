@@ -1,6 +1,7 @@
-import mutation              from 'api/mutations/get';
-import { WITHDRAW, DEPOSIT } from 'api/mutations/bank';
-import * as TYPES            from 'app/types'
+import mutation from '../../api/mutations/get';
+import { WITHDRAW, DEPOSIT } from '../../api/mutations/bank';
+
+import * as TYPES from '../../app/types'
 
 export const withDraw = async (amount: number,token: string, dispatch: any) => {
     const res:any = await mutation(WITHDRAW( amount ), token).catch(() => ({success: false}));

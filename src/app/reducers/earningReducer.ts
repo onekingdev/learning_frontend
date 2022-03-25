@@ -1,4 +1,4 @@
-import * as TYPE    from '../types';
+import * as TYPE from '../types';
 import { IEarning } from '../entities/earning';
 const INITIAL_STATE = {
     rank: 0,

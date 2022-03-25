@@ -1,9 +1,9 @@
-import { FC }                          from 'react';
-import styled                          from 'styled-components';
+import { FC } from 'react';
+import styled from 'styled-components';
 import { BasicColor, SettingBarColor } from 'views/Color';
-import { RibbonText }                  from 'views/molecules/RibbonText';
-import { SettingBar }                  from 'views/molecules/SettingBar';
-import { ScreenSize }                  from 'constants/screenSize';
+import { RibbonText } from 'views/molecules/RibbonText';
+import { SettingBar } from 'views/molecules/SettingBar';
+import { ScreenSize } from 'constants/screenSize';
 
 export const StudentSettings: FC = () => {
   const studentSettingsSpecs = [

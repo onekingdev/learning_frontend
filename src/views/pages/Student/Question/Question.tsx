@@ -1,27 +1,29 @@
-import { FC, useEffect, useState, useContext }            from     'react';
-import { useDispatch, useSelector }                       from     'react-redux';
-import { useSnackbar }                                    from     'notistack';
-import { LessonProgress }                                 from     'views/molecules/LessonProgress/LessonProgress';
-import { useParams }                                      from     'react-router-dom';
-import { LoadingContext }                                 from     'react-router-loading';
+import { FC, useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
+import { LessonProgress } from 'views/molecules/LessonProgress/LessonProgress';
+import { useParams } from 'react-router-dom';
+import { LoadingContext } from 'react-router-loading';
+
 import {
   Container,
   Wrapper,
   ProgressWrapper,
-}                                                         from     './Style';
-import {FinishLesson}                                     from     'views/organisms/FinishLesson';
-import {StudentMenu}                                      from     'views/pages/Student/Menus/StudentMenu';
-import {LevelUpDgContent}                                 from     'views/atoms/ParticlgBg';
-import {MultipleChoiceText}                               from     'views/molecules/QuestionTypes/MultipleChoiceText';
-import {MultipleChoiceSightWord}                          from     'views/molecules/QuestionTypes/MultipleChoiceSightWord';
-import {CardDialog}                                       from     'views/molecules/StudentCard/CardDialog';
-import { finishBlock }                                    from     'app/actions/blockActions';
-import {IBlockPresentation, IQuestion}                    from     'app/entities/block';
-import {Store}                                            from     'app/configureStore';
-import * as TYPE                                          from     'app/types';
-import { createAiBlockPresentation,
-  createPathBlockPresentation}                            from     'app/actions/blockActions';
-import { getNextLevel }                                   from     'app/actions/userActions';
+} from './Style';
+
+import {FinishLesson} from 'views/organisms/FinishLesson';
+import {StudentMenu} from 'views/pages/Student/Menus/StudentMenu';
+import {LevelUpDgContent} from 'views/atoms/ParticlgBg';
+import {MultipleChoiceText} from 'views/molecules/QuestionTypes/MultipleChoiceText';
+import {MultipleChoiceSightWord} from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
+
+import {CardDialog} from 'views/molecules/StudentCard/CardDialog';
+
+import {IBlockPresentation, IQuestion} from 'app/entities/block';
+import {Store} from 'app/configureStore';
+import * as TYPE from 'app/types';
+import { createAiBlockPresentation, createPathBlockPresentation} from 'app/actions/blockActions';
+import { getNextLevel } from 'app/actions/userActions';
 
 interface RoutePresentationParams {
   mode: string;
@@ -187,7 +189,7 @@ export const Question: FC = () => {
     const result:any = await createAiBlockPresentation(
       parseInt(aokId),
       user.token,
-      dispatch
+      // dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
@@ -204,7 +206,7 @@ export const Question: FC = () => {
       student.id,
       parseInt(aokId),
       user.token,
-      dispatch
+      // dispatch
     );
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
@@ -223,23 +225,23 @@ export const Question: FC = () => {
     setPoints(0)
   }
 
-  const arrObjToString  = (arrObj: any) => {
-    let str = '[';
-    for(const obj of arrObj){
-        str+= '{'
-        for(const key in obj){
-            if(key === 'isCorrect') continue;
-            str+= key
-            str+= ': '
-            if(typeof(obj[key]) === 'string') str+= '"' + obj[key] + '"'
-            else str+= obj[key]
-            str+= ','
-        }
-        str+='},'
-    }
-    str += ']'
-    return str;
-  }
+  // const arrObjToString  = (arrObj: any) => {
+  //   let str = '[';
+  //   for(const obj of arrObj){
+  //       str+= '{'
+  //       for(const key in obj){
+  //           if(key === 'isCorrect') continue;
+  //           str+= key
+  //           str+= ': '
+  //           if(typeof(obj[key]) === 'string') str+= '"' + obj[key] + '"'
+  //           else str+= obj[key]
+  //           str+= ','
+  //       }
+  //       str+='},'
+  //   }
+  //   str += ']'
+  //   return str;
+  // }
   // useEffect(() => {
 
   //   setQuestionsInAI();
@@ -256,23 +258,23 @@ export const Question: FC = () => {
       if (blockPresentation.block.questions.length < questionCounter + 2) {
         setLoading(true)
         setIsLessonFinished(true);
-        setLoading(true);
-        let correctCount = 0;
-        let wrongCount = 0;
-        for (const data of answerResult) {
-          if (data.isCorrect) correctCount++;
-          else wrongCount++;
-        }
-        const finishBlockResult = await finishBlock(
-          blockPresentation.id,
-          correctCount,
-          wrongCount,
-          (state.earning.energyCharge * pointUnit * 10) / 100,
-          state.earning,
-          arrObjToString(answerResult),
-          state.user.token,
-          dispatch
-        );
+        // setLoading(true);
+        // let correctCount = 0;
+        // let wrongCount = 0;
+        // for (const data of answerResult) {
+        //   if (data.isCorrect) correctCount++;
+        //   else wrongCount++;
+        // }
+        // const finishBlockResult = await finishBlock(
+        //   blockPresentation.id,
+        //   correctCount,
+        //   wrongCount,
+        //   (state.earning.energyCharge * pointUnit * 10) / 100,
+        //   state.earning,
+        //   arrObjToString(answerResult),
+        //   state.user.token,
+        //   dispatch
+        // );
         if(mode === 'AI') await setQuestionsInAI();
         else await setQuestionsInPath();
         setLoading(false);

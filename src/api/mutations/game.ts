@@ -1,5 +1,5 @@
 import { GAME, PLAY_GAME_TRANSACTION} from '../fragments/gameFragments';
-import { STUDENT }                    from '../fragments/studentFragments'
+import { STUDENT } from '../fragments/studentFragments'
 
 export const PLAY_GAME = (
   gameId: number,

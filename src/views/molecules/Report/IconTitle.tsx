@@ -1,7 +1,8 @@
-import { FC }      from 'react';
-import styled      from 'styled-components';
-import blueRibbon  from 'views/assets/blue-ribbon.svg'
-import crocoGirl   from 'views/assets/croco-girl.svg'
+import { FC } from 'react';
+import styled from 'styled-components';
+
+import blueRibbon from 'views/assets/blue-ribbon.svg'
+import crocoGirl from 'views/assets/croco-girl.svg'
 import { LSTitle } from 'views/molecules/Setting/utils/Style';
 
 export const IconTitle: FC = () => {

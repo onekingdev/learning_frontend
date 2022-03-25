@@ -1,9 +1,9 @@
-import CrogoGirlsFace                  from 'views/assets/croco-girl.svg';
-import TitleKidBackground              from 'views/assets/title-kids-background.png';
-import ReportCheckIcon                 from 'views/assets/parent/report-check.png';
-import ReportCoinIcon                  from 'views/assets/parent/report-coin.png';
-import styled                          from 'styled-components';
-import { ScreenSize }                  from 'constants/screenSize';
+import CrogoGirlsFace from 'views/assets/croco-girl.svg';
+import TitleKidBackground from 'views/assets/title-kids-background.png';
+import ReportCheckIcon from 'views/assets/parent/report-check.png';
+import ReportCoinIcon from 'views/assets/parent/report-coin.png';
+import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
 import { useEffect, useRef, useState } from 'react';
 import 'react-vis/dist/style.css';
 import {
@@ -15,8 +15,8 @@ import {
     YAxis,
     VerticalGridLines,
     HorizontalGridLines,
-}                                      from 'react-vis';
-import TitleGameBackground             from 'views/assets/title-games-background.png';
+} from 'react-vis';
+import TitleGameBackground from 'views/assets/title-games-background.png';
 
 const ChartHeaderContrainer = styled.div`
     display: flex;

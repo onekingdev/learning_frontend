@@ -1,5 +1,5 @@
-import styled                                   from 'styled-components';
-import { BasicColor, ButtonColor, shadeColor }  from 'views/Color';
+import styled from 'styled-components';
+import { BasicColor, ButtonColor, shadeColor } from 'views/Color';
 
 type ButtonWrapperProps = {
   bgColor?: ButtonColor;

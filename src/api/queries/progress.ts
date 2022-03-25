@@ -1,4 +1,7 @@
-import { COLLECTIBLE, COLLECTIBLE_CATEGORY, } from '../fragments/progressFragments';
+import {
+  COLLECTIBLE,
+  COLLECTIBLE_CATEGORY,
+} from '../fragments/progressFragments';
 
 export const COLLECTIBLE_QUERY = `
     {

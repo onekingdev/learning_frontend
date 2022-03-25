@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-import styled, {keyframes, css }   from 'styled-components';
-import lightening                  from 'views/assets/lightning.svg';
-import { bounceInLeft }            from 'react-animations';
-import { zoomIn }                  from 'react-animations';
+import styled, {keyframes, css } from 'styled-components';
+import lightening from 'views/assets/lightning.svg';
+import { bounceInLeft } from 'react-animations';
+import { zoomIn } from 'react-animations';
 
 interface LighteningProps {
   combocount: number;

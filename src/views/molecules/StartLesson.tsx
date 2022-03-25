@@ -1,7 +1,7 @@
-import { FC }         from 'react';
-import styled         from 'styled-components';
+import { FC } from 'react';
+import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
-import upArrow        from 'views/assets/upArrow.svg';
+import upArrow from 'views/assets/upArrow.svg';
 import { Typography } from 'views/atoms/Text/typography';
 import { ScreenSize } from 'constants/screenSize';
 import { dictionary } from 'views/pages/Student/StudentHome/dictionary';

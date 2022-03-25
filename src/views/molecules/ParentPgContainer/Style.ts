@@ -1,6 +1,6 @@
-import styled               from 'styled-components';
-import { ScreenSize }       from 'constants/screenSize';
-import background_mobile    from 'views/assets/colored-shapes-bg.svg';
+import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
+import background_mobile from 'views/assets/colored-shapes-bg.svg';
 
 export const Container = styled.div`
     position: relative;

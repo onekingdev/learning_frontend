@@ -1,11 +1,14 @@
-import { USER, USER_PROFILE, }                          from '../fragments/userFragments';
-import { STUDENT }                                      from '../fragments/studentFragments'
-import { COIN_WALLET }                                  from '../fragments/coinWalletFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
+import {
+    USER,
+    USER_PROFILE,
+} from '../fragments/userFragments';
+import { STUDENT } from '../fragments/studentFragments'
+import { COIN_WALLET } from '../fragments/coinWalletFragments'
+import {PAYMENT_METHOD , GUARDIAN_STUDENT_PLAN, ORDER} from '../fragments/paymentFragments'
 import {
     GUARDIAN_STUDENT,
     GUARDIAN,
-} from '../fragments/guardianFragments';
+    } from '../fragments/guardianFragments';
 export const USERS_QUERY = `
     {
         ${USER}

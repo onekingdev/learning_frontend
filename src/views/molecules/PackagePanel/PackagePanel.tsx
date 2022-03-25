@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-import avatar                      from 'views/assets/packageIcons/avatar.svg'
-import Button                      from 'views/molecules/MuiButton'
-import ButtonGroup                 from '@mui/material/ButtonGroup';
-import { BasicColor }              from 'views/Color';
+import avatar from 'views/assets/packageIcons/avatar.svg'
+import Button from 'views/molecules/MuiButton'
+import ButtonGroup from '@mui/material/ButtonGroup';
+import { BasicColor } from 'views/Color';
 
 import {
   Container,

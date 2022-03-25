@@ -1,22 +1,24 @@
-import query            from 'api/queries/get'
-import { GRADES_QUERY } from 'api/queries/people'
-import * as TYPES       from 'app/types'
+import mutation from '../../api/mutations/get'
+import query from '../../api/queries/get'
+import {GRADES_QUERY} from '../../api/queries/people'
 
-export const getGrades = async (token: string, dispatch: any) => {
-  const res: any = await query('grades', GRADES_QUERY).catch(e => ({ success: false }));
+import * as TYPES from '../../app/types'
 
-  if (res.success === false) {
-    return { success: false, msg: 'Network Error!' };
-  }
+export const getGrades = async(token: string, dispatch: any) => {
+    const res:any = await query('grades', GRADES_QUERY).catch(e => ({success: false}));
 
-  const result: any = await res.json();
+    if(res.success === false) {
+      return {success: false, msg: 'Network Error!'};
+    }
 
-  if (result.errors && !result.data) {
-    return { success: false, msg: result.errors[0].message };
-  }
+    const result:any = await res.json();
 
-  const grades = result.data.grades
-  dispatch({ type: TYPES.GRADE_SET_DATA, payload: grades })
+    if(result.errors && !result.data) {
+      return {success: false, msg: result.errors[0].message};
+    }
 
-  return { success: true, msg: 'Success', data: result.data }
+    const grades = result.data.grades
+    dispatch({ type: TYPES.GRADE_SET_DATA, payload: grades })
+
+    return {success: true, msg: 'Success', data: result.data}
 }

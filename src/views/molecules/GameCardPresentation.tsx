@@ -1,8 +1,8 @@
-import { FC }         from 'react';
-import styled         from 'styled-components';
-import { UserInfo }   from 'views/atoms/Text/UserInfo';
+import { FC } from 'react';
+import styled from 'styled-components';
+import { UserInfo } from 'views/atoms/Text/UserInfo';
 import { BasicColor } from 'views/Color';
-import coin           from 'views/assets/coin.svg';
+import coin from 'views/assets/coin.svg';
 
 type GameCardProps = {
   gameName: string;

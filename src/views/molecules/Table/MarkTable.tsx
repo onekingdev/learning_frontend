@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
-import styled           from 'styled-components';
-import ArrowRightIcon   from '@mui/icons-material/ArrowRight';
-import { ScreenSize }   from 'constants/screenSize';
+import styled from 'styled-components';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { ScreenSize } from 'constants/screenSize';
 
 const colors = [
     '#CC5B1D',
