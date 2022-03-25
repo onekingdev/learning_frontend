@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import Avatar from '@mui/material/Avatar';
+import { FC }                     from 'react';
+import Avatar                     from '@mui/material/Avatar';
 import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
-import styled from 'styled-components';
-import { deepPurple } from '@mui/material/colors';
-import { ScreenSize } from 'constants/screenSize';
+import styled                     from 'styled-components';
+import { deepPurple }             from '@mui/material/colors';
+import { ScreenSize }             from 'constants/screenSize';
 
 interface AvatarProps {
     accessory?: any,

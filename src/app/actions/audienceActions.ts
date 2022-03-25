@@ -1,4 +1,4 @@
-import query from '../../api/queries/get'
+import query                        from '../../api/queries/get'
 import {AUDIENCES_WITH_GRADE_QUERY} from '../../api/queries/people'
 
 export const getAudiencesWithGrades = async() => {

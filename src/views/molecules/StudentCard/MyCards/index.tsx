@@ -1,18 +1,9 @@
-/**
- * @author BruceLee
- * @description Display My collectible page.
- * Card categories
- * Progress bar
- * Gems
- * Gem images
- */
-
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { ScreenSize } from 'constants/screenSize';
-import { MyCard } from './MyCard';
-import { Gems } from './Gems';
+import styled                      from 'styled-components';
+import { useSelector }             from 'react-redux';
+import { ScreenSize }              from 'constants/screenSize';
+import { MyCard }                  from './MyCard';
+import { Gems }                    from './Gems';
 import {
   getCardPacksInfo,
   getCollectibleCards,

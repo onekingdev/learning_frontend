@@ -1,14 +1,12 @@
-import { FC } from 'react';
-import * as React from 'react';
-import Dialog from '@mui/material/Dialog';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import styled from 'styled-components';
-import { ThemeProvider } from '@mui/material';
-
-import { BasicColor } from 'views/Color';
-import { settingPage } from './utils/Theme';
-
+import { FC }                                                  from 'react';
+import * as React                                              from 'react';
+import Dialog                                                  from '@mui/material/Dialog';
+import IconButton                                              from '@mui/material/IconButton';
+import CloseIcon                                               from '@mui/icons-material/Close';
+import styled                                                  from 'styled-components';
+import { ThemeProvider }                                       from '@mui/material';
+import { BasicColor }                                          from 'views/Color';
+import { settingPage }                                         from './utils/Theme';
 import { LSDialogTitle, LSDialogContent, LSDialogContentText } from './utils/Style';
 
 type LSDialogProps = {

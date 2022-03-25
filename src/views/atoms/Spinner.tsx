@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC }                from 'react';
 import styled, { keyframes } from 'styled-components';
-import socrates from 'views/assets/socrates.svg';
-import shapes from 'views/assets/colored-shapes-bg.svg';
-import ReactLoading from 'react-loading';
-import { LoadingContainer } from 'views/atoms/Loading'
-import { BasicColor } from 'views/Color';
+import socrates              from 'views/assets/socrates.svg';
+import shapes                from 'views/assets/colored-shapes-bg.svg';
+import ReactLoading          from 'react-loading';
+import { LoadingContainer }  from 'views/atoms/Loading'
+import { BasicColor }        from 'views/Color';
 
 export const LoadingSpinner: FC = () => (
   <LoadingContainer>

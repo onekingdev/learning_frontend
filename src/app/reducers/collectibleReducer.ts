@@ -1,7 +1,3 @@
-/**
- * @author BruceLee
- */
-
 import { SET_CARD_CATEGORIES } from 'app/types';
 
 const INITIAL_STATE = {

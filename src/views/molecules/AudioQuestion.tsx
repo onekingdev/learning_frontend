@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Title } from 'views/atoms/Text/Title';
+import styled     from 'styled-components';
+import { Title }  from 'views/atoms/Text/Title';
 
 type AudioProps = {
   source: string;

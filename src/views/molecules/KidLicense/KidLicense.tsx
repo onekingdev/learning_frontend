@@ -1,10 +1,10 @@
-import logo from 'views/assets/logo-learn-white.svg'
-import styled from 'styled-components';
-import socrates from 'views/assets/socrates.svg'
-import TextField from 'views/molecules/MuiTextField'
+import logo                                            from 'views/assets/logo-learn-white.svg'
+import styled                                          from 'styled-components';
+import socrates                                        from 'views/assets/socrates.svg'
+import TextField                                       from 'views/molecules/MuiTextField'
 import { LicenseHeader, LicenseBody, LicenseUsername } from './Style'
-import QRCode from 'react-qr-code';
-import { LSText } from 'views/molecules/Setting/utils/Style';
+import QRCode                                          from 'react-qr-code';
+import { LSText }                                      from 'views/molecules/Setting/utils/Style';
 
 const License = (props: any) => {
     return (

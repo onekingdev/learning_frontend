@@ -1,9 +1,9 @@
-import mutation from 'api/mutations/get'
-import { TOKEN_AUTH } from 'api/mutations/users'
+import mutation                from 'api/mutations/get'
+import { TOKEN_AUTH }          from 'api/mutations/users'
 import query, { sendRawQuery } from 'api/queries/get'
-import { WHOAMI_QUERY } from 'api/queries/users'
-import { INTEREST_QUERY } from 'api/queries/interests'
-import { NEXT_LEVEL_QUERY } from 'api/queries/questions'
+import { WHOAMI_QUERY }        from 'api/queries/users'
+import { INTEREST_QUERY }      from 'api/queries/interests'
+import { NEXT_LEVEL_QUERY }    from 'api/queries/questions'
 
 import * as TYPES from 'app/types'
 

@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import { Icon } from 'views/atoms/Icon/Icon';
-import lightning from 'views/assets/lightning.svg';
-import { Battery } from 'views/molecules/Battery/Battery';
-import { IconSize } from 'views/atoms/Icon/Size';
-import styled from 'styled-components';
+import { FC }            from 'react';
+import { Icon }          from 'views/atoms/Icon/Icon';
+import lightning         from 'views/assets/lightning.svg';
+import { Battery }       from 'views/molecules/Battery/Battery';
+import { IconSize }      from 'views/atoms/Icon/Size';
+import styled            from 'styled-components';
 import { BatteryButton } from 'views/molecules/Battery/BatteryButton';
 
 type EnergyProps = {

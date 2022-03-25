@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
+import styled                      from 'styled-components';
+import { ScreenSize }              from 'constants/screenSize';
+import { AvatarItemWithSkinTone }  from 'views/molecules/Avatar/AvatarItemWithSkinTone';
 
 interface FavoritProps {
   select: (id: number) => (void)

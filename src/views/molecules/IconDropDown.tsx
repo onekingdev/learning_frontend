@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import styled from 'styled-components';
-import { UserInfo } from 'views/atoms/Text/UserInfo';
+import { FC }         from 'react';
+import styled         from 'styled-components';
+import { UserInfo }   from 'views/atoms/Text/UserInfo';
 import { BasicColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';
 

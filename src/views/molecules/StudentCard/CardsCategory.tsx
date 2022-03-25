@@ -1,27 +1,17 @@
-/**
- * @author BruceLee
- * Component of buying collectible cards page
- */
-
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import {Card} from './Card';
-import ReactLoading from 'react-loading';
-import { ScreenSize } from 'constants/screenSize';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux'
-
-// Get file storage link
-import {
-  buyCardsWithFilenames,
-} from 'app/firebase';
-import { BasicColor } from 'views/Color';
-import { BoughtCard } from './BoughtCard';
-
+import styled                      from 'styled-components';
+import {Card}                      from './Card';
+import ReactLoading                from 'react-loading';
+import { ScreenSize }              from 'constants/screenSize';
+import { useSelector }             from 'react-redux';
+import { useDispatch }             from 'react-redux'
+import { buyCardsWithFilenames,}   from 'app/firebase';
+import { BasicColor }              from 'views/Color';
+import { BoughtCard }              from './BoughtCard';
 import {
   getCardPacksInfo,
   purchaseCardPack,
-} from 'app/actions/collectibleActions';
+}                                  from 'app/actions/collectibleActions';
 
 interface CardPropArray {
   cards: {

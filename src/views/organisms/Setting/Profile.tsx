@@ -4,7 +4,7 @@ import { doUpdateGuardianEmailPassword } from 'app/actions/guardianActions';
 // import { validate } from 'email-validator';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import validator from 'validator'
+import validator                   from 'validator'
 import {GUARDIAN_UPDATE_EMAIL_PWD} from 'app/types'
 import {
   LSShadowContainer,
@@ -17,12 +17,12 @@ import {
   LSButton,
   LSBlueTextButton
 } from 'views/molecules/Setting/utils/Style';
-import { settingPage } from 'views/molecules/Setting/utils/Theme';
-import { useDispatch, useSelector } from 'react-redux';
-import { ThemeProvider } from '@mui/material';
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { PwdResetForm } from './PwdResetFrom';
-import { useSnackbar } from 'notistack';
+import { settingPage }             from 'views/molecules/Setting/utils/Theme';
+import { useDispatch, useSelector }from 'react-redux';
+import { ThemeProvider }           from '@mui/material';
+import { LSDialog }                from 'views/molecules/Setting/LSDialog';
+import { PwdResetForm }            from './PwdResetFrom';
+import { useSnackbar }             from 'notistack';
 
 
 export const SettingForm: FC = () => {

@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import styled from 'styled-components';
-import { Lesson } from 'views/atoms/Text/Lesson';
+import { FC }         from 'react';
+import styled         from 'styled-components';
+import { Lesson }     from 'views/atoms/Text/Lesson';
 import { BasicColor } from 'views/Color';
 
 type TopicProgressProps = {

@@ -1,20 +1,20 @@
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { IBlockPresentation } from 'app/entities/block';
-import { IQuestion } from 'app/entities/block';
+import styled                      from 'styled-components';
+import { IBlockPresentation }      from 'app/entities/block';
+import { IQuestion }               from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
-import { Question } from 'views/atoms/Text/Question';
-import { Icon } from 'views/atoms/Icon/Icon';
-import videoAssistorIcon from 'views/assets/video.svg'
-import soundAssistorIcon from 'views/assets/play-sound.svg'
-import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
-import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
-import Button from 'views/molecules/MuiButton';
-import { useSelector } from 'react-redux';
-import { Store } from 'app/configureStore';
-import videoIcon from 'views/assets/videoIcon.svg';
-import assistor from 'views/assets/text-to-speech.svg';
+import { ScreenSize }              from 'constants/screenSize';
+import { Question }                from 'views/atoms/Text/Question';
+import { Icon }                    from 'views/atoms/Icon/Icon';
+import videoAssistorIcon           from 'views/assets/video.svg'
+import soundAssistorIcon           from 'views/assets/play-sound.svg'
+import { TextOption }              from 'views/atoms/QuestionOptions/Textoption';
+import { VideoModalAssistor }      from 'views/organisms/VideoModalAssistor';
+import Button                      from 'views/molecules/MuiButton';
+import { useSelector }             from 'react-redux';
+import { Store }                   from 'app/configureStore';
+import videoIcon                   from 'views/assets/videoIcon.svg';
+import assistor                    from 'views/assets/text-to-speech.svg';
 
 type ChoiceTextProps = {
   question: IQuestion;

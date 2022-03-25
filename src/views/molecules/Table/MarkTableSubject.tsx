@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
-import styled from 'styled-components';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import { ScreenSize } from 'constants/screenSize';
-import { TypoBtn } from 'views/atoms/Text';
+import styled           from 'styled-components';
+import ArrowRightIcon   from '@mui/icons-material/ArrowRight';
+import { ScreenSize }   from 'constants/screenSize';
+import { TypoBtn }      from 'views/atoms/Text';
 
 const colors = [
     '#CC5B1D',

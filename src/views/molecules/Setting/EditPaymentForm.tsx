@@ -1,15 +1,15 @@
-import { useState, FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import Button from 'views/molecules/MuiButton'
-import TextField from 'views/molecules/MuiTextField'
-import { css } from 'styled-components';
-import { BasicColor } from 'views/Color';
-import Grid from '@mui/material/Grid';
-import { doChangePaymentMethod } from 'app/actions/paymentActions';
+import { useState, FC }                           from 'react';
+import { useDispatch, useSelector }               from 'react-redux'
+import Button                                     from 'views/molecules/MuiButton'
+import TextField                                  from 'views/molecules/MuiTextField'
+import { css }                                    from 'styled-components';
+import { BasicColor }                             from 'views/Color';
+import Grid                                       from '@mui/material/Grid';
+import { doChangePaymentMethod }                  from 'app/actions/paymentActions';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
-import { useSnackbar } from 'notistack';
-import { GUARDIAN_PAYMENT_METHOD_INFO } from 'app/types'
-import { LoadingSpinner } from 'views/atoms/Spinner';
+import { useSnackbar }                            from 'notistack';
+import { GUARDIAN_PAYMENT_METHOD_INFO }           from 'app/types'
+import { LoadingSpinner }                         from 'views/atoms/Spinner';
 
 interface DialogProps {
     open: () => (void)

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
-import isSvg from 'is-svg'
-import { parseSVG, fetchFile } from './ColorUtil'
+import isSvg                       from 'is-svg'
+import { parseSVG, fetchFile }     from './ColorUtil'
 
 interface SvgProps {
   url: string

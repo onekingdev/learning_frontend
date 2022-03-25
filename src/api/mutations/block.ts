@@ -1,7 +1,7 @@
-import { STUDENT } from '../fragments/studentFragments';
-import { BLOCK_PRESENTATON } from '../fragments/blockFragments'
+import { STUDENT }                      from '../fragments/studentFragments';
+import { BLOCK_PRESENTATON }            from '../fragments/blockFragments'
+import { BLOCK_PRESENTATION_QUERY }     from '../queries/questions'
 // import { QUESTION } from '../fragments/questionFragments'
-import { BLOCK_PRESENTATION_QUERY } from '../queries/questions'
 export const FINISH_BLOCK_PRESENTATION = (
     block_presentation_id: string,
     hits: number,

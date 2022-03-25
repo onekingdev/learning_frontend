@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled         from 'styled-components';
 import { BasicColor } from 'views/Color';
 
 export const UserIcon = styled.img`
