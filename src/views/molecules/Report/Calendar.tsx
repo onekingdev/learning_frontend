@@ -1,11 +1,11 @@
-import { useState, useEffect, FC } from 'react';
-import styled, { css } from 'styled-components';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CircleIcon from '@mui/icons-material/Circle';
-import { LSLabel } from 'views/molecules/Setting/utils/Style';
+import { useState, useEffect, FC }      from 'react';
+import styled, { css }                  from 'styled-components';
+import IconButton                       from '@mui/material/IconButton';
+import ArrowBackIosNewIcon              from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon              from '@mui/icons-material/ArrowForwardIos';
+import CheckCircleIcon                  from '@mui/icons-material/CheckCircle';
+import CircleIcon                       from '@mui/icons-material/Circle';
+import { LSLabel }                      from 'views/molecules/Setting/utils/Style';
 
 const Frame = styled.div`
   margin-bottom: 20px;

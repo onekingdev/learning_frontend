@@ -1,16 +1,16 @@
-import { FC, useState, useEffect } from 'react';
-import logo from 'views/assets/socrates-logo.svg';
-import { Header } from 'views/atoms/Text/Header';
-import { Subheader } from 'views/atoms/Text/Subheader';
-import welcome from 'views/assets/welcome-page.svg';
-import { Button } from 'views/molecules/Button';
-import { ButtonColor } from 'views/Color';
-import { TypoIcon } from 'views/atoms/Text';
-import { dictionary } from 'views/pages/Welcome/dictionary';
-import { Modal } from 'views/atoms/Modal';
-import { Link, useHistory } from 'react-router-dom';
-import { resetReducer } from 'app/actions/userActions';
-import { useDispatch } from 'react-redux';
+import { FC, useState, useEffect }         from 'react';
+import logo                                from 'views/assets/socrates-logo.svg';
+import { Header }                          from 'views/atoms/Text/Header';
+import { Subheader }                       from 'views/atoms/Text/Subheader';
+import welcome                             from 'views/assets/welcome-page.svg';
+import { Button }                          from 'views/molecules/Button';
+import { ButtonColor }                     from 'views/Color';
+import { TypoIcon }                        from 'views/atoms/Text';
+import { dictionary }                      from 'views/pages/Welcome/dictionary';
+import { Modal }                           from 'views/atoms/Modal';
+import { Link, useHistory }                from 'react-router-dom';
+import { resetReducer }                    from 'app/actions/userActions';
+import { useDispatch }                     from 'react-redux';
 import {
   Wrapper,
   Logo,
@@ -78,7 +78,7 @@ export const Welcome: FC = () => {
         </Description>
       </Body>
 
-      <Illustration src={welcome} alt='' />
+      <Illustration src={welcome} alt=''                           />
 
       <Actions>
         <Link to={'/login'}>
