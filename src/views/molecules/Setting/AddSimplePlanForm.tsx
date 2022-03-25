@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { FC, useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { Checkbox, Radio } from '@mui/material';
-import RadioGroup from '@mui/material/RadioGroup';
-import { FormGroup } from '@mui/material';
-import { BasicColor } from 'views/Color';
-import Button from 'views/molecules/MuiButton';
+import * as React                                                  from 'react';
+import { FC, useEffect, useState }                                 from 'react';
+import Box                                                         from '@mui/material/Box';
+import FormControlLabel                                            from '@mui/material/FormControlLabel';
+import { Checkbox, Radio }                                         from '@mui/material';
+import RadioGroup                                                  from '@mui/material/RadioGroup';
+import { FormGroup }                                               from '@mui/material';
+import { BasicColor }                                              from 'views/Color';
+import Button                                                      from 'views/molecules/MuiButton';
 import { LSButtonContainer, LSRadio, LSFormControlLabel, LSLabel } from './utils/Style';
-import { dictionary } from 'views/pages/Parent/Settings/dictionary';
-import { doAddStudentPlan, doFetchPlans } from 'app/actions/guardianActions';
-import { useSelector } from 'react-redux'
-import { useSnackbar } from 'notistack';
-import { LoadingSpinner } from 'views/atoms/Spinner';
+import { dictionary }                                              from 'views/pages/Parent/Settings/dictionary';
+import { doAddStudentPlan, doFetchPlans }                          from 'app/actions/guardianActions';
+import { useSelector }                                             from 'react-redux'
+import { useSnackbar }                                             from 'notistack';
+import { LoadingSpinner }                                          from 'views/atoms/Spinner';
 
 interface IAddPlanProps {
   open: () => void

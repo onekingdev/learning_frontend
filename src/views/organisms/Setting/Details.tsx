@@ -1,15 +1,13 @@
-import { FC, useState } from 'react';
-import styled from 'styled-components';
-import Box from '@mui/material/Box';
+import { FC, useState }               from 'react';
+import styled                         from 'styled-components';
+import Box                            from '@mui/material/Box';
 import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
-
-import { LSBlueTextButton } from 'views/molecules/Setting/utils/Style'
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
-// import { CancelPlanForm } from 'views/molecules/Setting/CancelPlanForm';
-import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanForm';
-import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
-import { PlanList } from 'views/molecules/Setting/PlanList';
-import { CancelMembershipForm } from 'views/molecules/Setting/CancelMembershipForm';
+import { LSBlueTextButton }           from 'views/molecules/Setting/utils/Style'
+import { LSDialog }                   from 'views/molecules/Setting/LSDialog';
+import { AddSimplePlanForm }          from 'views/molecules/Setting/AddSimplePlanForm';
+import { useDialog, useAddDialog }    from 'views/molecules/Setting/utils/useDialog';
+import { PlanList }                   from 'views/molecules/Setting/PlanList';
+import { CancelMembershipForm }       from 'views/molecules/Setting/CancelMembershipForm';
 
 export const MembershipDetail:FC = () => {
 

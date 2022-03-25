@@ -1,14 +1,13 @@
-import {FC} from 'react';
-import {useHistory} from 'react-router-dom';
-import {Wrapper} from './Style';
-import styled from 'styled-components';
+import {FC}             from 'react';
+import {useHistory}     from 'react-router-dom';
+import {Wrapper}        from './Style';
+import styled           from 'styled-components';
+import {BasicColor}     from 'views/Color';
+import {ScreenSize}     from 'constants/screenSize';
+import {PageTitle}      from 'views/molecules/PageTitle';
+import {StudentMenu}    from '../Menus/StudentMenu';
+import {CardCategory}   from 'views/molecules/StudentCard/CardsCategory';
 
-import {BasicColor} from 'views/Color';
-import {ScreenSize} from 'constants/screenSize';
-
-import {PageTitle} from 'views/molecules/PageTitle';
-import {StudentMenu} from '../Menus/StudentMenu';
-import {CardCategory} from '../../../molecules/StudentCard/CardsCategory';
 
 export const Cards: FC = () => {
   const history = useHistory();

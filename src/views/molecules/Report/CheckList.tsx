@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import { LSLabel } from 'views/molecules/Setting/utils/Style';
+import List             from '@mui/material/List';
+import ListItem         from '@mui/material/ListItem';
+import ListItemButton   from '@mui/material/ListItemButton';
+import ListItemText     from '@mui/material/ListItemText';
+import Checkbox         from '@mui/material/Checkbox';
+import { LSLabel }      from 'views/molecules/Setting/utils/Style';
 
 const randomText = [
   'How can we raise a good child, one who will do the right thing, even when no one may see them do it',

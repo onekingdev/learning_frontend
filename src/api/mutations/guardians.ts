@@ -1,16 +1,8 @@
-import {
-    GUARDIAN_STUDENT,
-    GUARDIAN,
-} from '../fragments/guardianFragments';
-import {
-    COUPON_COODE,
-} from '../fragments/paymentFragments';
-import {
-    USER,
-    USER_PROFILE
-} from '../fragments/userFragments'
+import { GUARDIAN_STUDENT, GUARDIAN, }                  from '../fragments/guardianFragments';
+import { COUPON_COODE, }                                from '../fragments/paymentFragments';
+import { USER, USER_PROFILE }                           from '../fragments/userFragments'
 import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
-import { STUDENT } from '../fragments/studentFragments'
+import { STUDENT }                                      from '../fragments/studentFragments'
 
 export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string) => `
 	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}") {

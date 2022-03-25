@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { Title } from 'views/atoms/Text/Title';
-import { UserRank } from 'views/molecules/UserRank';
-import avatar from 'views/assets/avatars/avatar1.svg';
-import { BasicColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
-import { dictionary } from 'views/pages/Student/Progress/dictionary';
-import { getRanking } from 'app/firebase';
+import styled                      from 'styled-components';
+import { Title }                   from 'views/atoms/Text/Title';
+import { UserRank }                from 'views/molecules/UserRank';
+import avatar                      from 'views/assets/avatars/avatar1.svg';
+import { BasicColor }              from 'views/Color';
+import { ScreenSize }              from 'constants/screenSize';
+import { dictionary }              from 'views/pages/Student/Progress/dictionary';
+import { getRanking }              from 'app/firebase';
 
 export const Rank: FC = () => {
   const language = 'en';

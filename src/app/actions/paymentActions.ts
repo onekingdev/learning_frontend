@@ -1,15 +1,15 @@
-import { PLAN_QUERY } from '../../api/queries/payments'
-import queryFetch from '../../api/queries/get';
+import { PLAN_QUERY }   from 'api/queries/payments'
+import queryFetch       from 'api/queries/get';
 import {
     CREATE_ORDER,
     CONFIRM_PAYMENT_ORDER,
     CREATE_ORDER_WITH_OUT_PAY,
     FETCH_PAYMENT_METHOD,
     CHANGE_PAYMENT_METHOD_INFO
-} from 'api/mutations/payments';
+}                       from 'api/mutations/payments';
 import { sendRawQuery } from 'api/queries/get';
-import mutationFetch from '../../api/mutations/get';
-import * as TYPES from '../../app/types'
+import mutationFetch    from 'api/mutations/get';
+import * as TYPES       from 'app/types'
 
 export const createOrder = async (
     cardCvc: string,
@@ -65,7 +65,7 @@ export const createOrder = async (
         return { success: false, msg: result.errors[0].message };
     }
 
-    const { guardian,  status  } = result.data.createOrder;
+    const { guardian, status } = result.data.createOrder;
 
     dispatch({
         type: TYPES.GUARDIAN_SET_DATA,
@@ -110,7 +110,7 @@ export const createOrderWithOutPay = async (
         return { success: false, msg: result.errors[0].message };
     }
     console.log(result.data);
-    const { guardian,  status } = result.data.createOrderWithOutPay;
+    const { guardian, status } = result.data.createOrderWithOutPay;
     console.log(guardian);
     dispatch({
         type: TYPES.GUARDIAN_SET_DATA,
@@ -145,7 +145,7 @@ export const confirmPaymentOrder = async (
         return { success: false, msg: result.errors[0].message };
     }
 
-    const { guardian,  status } = result.data.confirmPaymentOrder;
+    const { guardian, status } = result.data.confirmPaymentOrder;
 
     if (status !== 'success')
         return { success: false, msg: 'Cofirmation Failed' }
@@ -211,7 +211,7 @@ export const doChangePaymentMethod = async (guradianId: number, paymentInfo: any
             CHANGE_PAYMENT_METHOD_INFO(guradianId, paymentInfo),
             token
         );
-        return res.msg ? {status: false} : res.data.changePaymentMethod;
+        return res.msg ? { status: false } : res.data.changePaymentMethod;
     } catch {
         return { status: false }
     }

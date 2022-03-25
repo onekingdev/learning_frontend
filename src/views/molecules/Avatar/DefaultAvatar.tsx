@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import Avatar from '@mui/material/Avatar';
+import { FC }                     from 'react';
+import Avatar                     from '@mui/material/Avatar';
 import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
-import styled from 'styled-components';
-import { deepPurple } from '@mui/material/colors';
-import { ScreenSize } from 'constants/screenSize';
+import styled                     from 'styled-components';
+import { deepPurple }             from '@mui/material/colors';
+import { ScreenSize }             from 'constants/screenSize';
 
 interface AvatarProps {
     accessory?: any,
@@ -28,7 +28,7 @@ export const ImageAvatar: FC<AvatarProps> = ({ accessory, head, skinTone, firstN
 
 const CurrentAccessory = styled.img`
   position: absolute;
-  top: -14px;
+  top: -17px;
   width: 100%;
   z-index: 3;
   @media screen and (max-width: ${ScreenSize.phone}) {

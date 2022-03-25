@@ -1,20 +1,17 @@
-import { FC, useEffect, useContext } from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { Grid } from '@mui/material';
-import { LoadingContext } from 'react-router-loading';
-
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
-import background from 'views/assets/colored-shapes-bg.svg';
-import Cartera from 'views/assets/Cartera.svg';
-
-import { ScreenSize } from 'constants/screenSize';
-
-import { AccountBalance } from 'views/molecules/StudentBank/AccountBalance';
-import { TxBox } from 'views/molecules/StudentBank/TxBox';
-import { TxHistoryTable } from 'views/molecules/StudentBank/TxHistoryTable';
-import { Interest } from 'views/molecules/StudentBank/Interest';
-import { PageTitle } from 'views/molecules/PageTitle';
+import { FC, useEffect, useContext }          from 'react';
+import { useSelector }                        from 'react-redux';
+import styled                                 from 'styled-components';
+import { Grid }                               from '@mui/material';
+import { LoadingContext }                     from 'react-router-loading';
+import { StudentMenu }                        from 'views/pages/Student/Menus/StudentMenu';
+import background                             from 'views/assets/colored-shapes-bg.svg';
+import Cartera                                from 'views/assets/Cartera.svg';
+import { ScreenSize }                         from 'constants/screenSize';
+import { AccountBalance }                     from 'views/molecules/StudentBank/AccountBalance';
+import { TxBox }                              from 'views/molecules/StudentBank/TxBox';
+import { TxHistoryTable }                     from 'views/molecules/StudentBank/TxHistoryTable';
+import { Interest }                           from 'views/molecules/StudentBank/Interest';
+import { PageTitle }                          from 'views/molecules/PageTitle';
 
 export const Bank: FC = () => {
 

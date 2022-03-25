@@ -1,20 +1,20 @@
-import { FC, useEffect, useState, useContext } from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import wardrobe from 'views/assets/wardrobe.svg';
-import floor from 'views/assets/avatars/floor.png';
-import { LoadingContext } from 'react-router-loading';
-import { ScreenSize } from 'constants/screenSize';
-import { useHistory } from 'react-router-dom';
-import { AvatarFavorites } from './AvatarFavorites';
+import { FC, useEffect, useState, useContext }     from 'react';
+import styled                                      from 'styled-components';
+import { useSelector, useDispatch }                from 'react-redux';
+import wardrobe                                    from 'views/assets/wardrobe.svg';
+import floor                                       from 'views/assets/avatars/floor.png';
+import { LoadingContext }                          from 'react-router-loading';
+import { ScreenSize }                              from 'constants/screenSize';
+import { useHistory }                              from 'react-router-dom';
+import { AvatarFavorites }                         from './AvatarFavorites';
 import { doFetchFavoriteAvatars, doSetUserAvatar } from 'app/actions/avatarActions';
-import { AvatarSet } from '../AvatarSet';
-import { LeftDrawer } from './LeftDrawer';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
-import IconButton from '@mui/material/IconButton';
-import { useSnackbar } from 'notistack';
-import { LoadingSpinner } from 'views/atoms/Spinner';
-import { AVATAR_SET_DEFAULT } from 'app/types'
+import { AvatarSet }                               from '../AvatarSet';
+import { LeftDrawer }                              from './LeftDrawer';
+import StarRoundedIcon                             from '@mui/icons-material/StarRounded';
+import IconButton                                  from '@mui/material/IconButton';
+import { useSnackbar }                             from 'notistack';
+import { LoadingSpinner }                          from 'views/atoms/Spinner';
+import { AVATAR_SET_DEFAULT }                      from 'app/types'
 
 export const AvatarSelector: FC = () => {
 

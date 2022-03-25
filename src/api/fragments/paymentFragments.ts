@@ -1,5 +1,5 @@
 import {AREA_OF_KNOWLEDGE} from './areaOfKnowledgeFragments'
-import {STUDENT} from './studentFragments'
+import {STUDENT}           from './studentFragments'
 export const PAYMENT_METHOD = `
   id
   randomSlug

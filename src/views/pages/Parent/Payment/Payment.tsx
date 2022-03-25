@@ -1,27 +1,23 @@
-import { FC, useEffect, useState, useContext } from 'react';
-import { useSelector } from 'react-redux';
-import Alert from '@mui/material/Alert';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
-import { PaymentMethod } from 'views/molecules/PaymentMethod/PaymentMethod';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { PackagePanel } from 'views/molecules/PackagePanel/PackagePanel';
-import {
-  TipContainer,
-  PackageContainer,
-  Subject,
-  SubjectContainer,
-} from './Style';
-import math from 'views/assets/math-elements.svg';
-import ela from 'views/assets/ela-elements.svg';
-import science from 'views/assets/science-elements.svg';
-import financial from 'views/assets/financial_elements.svg';
-import health from 'views/assets/health-elements.svg';
+import { FC, useEffect, useState, useContext }    from 'react';
+import { useSelector }                            from 'react-redux';
+import Alert                                      from '@mui/material/Alert';
+import { Elements }                               from '@stripe/react-stripe-js';
+import { loadStripe }                             from '@stripe/stripe-js';
+import { ParentPgStepper }                        from 'views/molecules/ParentPgStepper/ParentPgStepper';
+import { PaymentMethod }                          from 'views/molecules/PaymentMethod/PaymentMethod';
+import { ParentPgContainer }                      from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { PackagePanel }                           from 'views/molecules/PackagePanel/PackagePanel';
+import {  TipContainer,  PackageContainer,
+  Subject,  SubjectContainer,}                   from './Style';
+import math                                      from 'views/assets/math-elements.svg';
+import ela                                       from 'views/assets/ela-elements.svg';
+import science                                    from 'views/assets/science-elements.svg';
+import financial                                  from 'views/assets/financial_elements.svg';
+import health                                     from 'views/assets/health-elements.svg';
+import { LoadingContext }                         from 'react-router-loading';
+import { getPlans }                               from 'app/actions/paymentActions'
+import { useSnackbar }                            from 'notistack';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
-import { LoadingContext } from 'react-router-loading';
-import { useSnackbar } from 'notistack';
-import { getPlans } from 'app/actions/paymentActions'
 export const Payment: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const {enqueueSnackbar} = useSnackbar();
@@ -126,7 +122,7 @@ export const Payment: FC = () => {
     // setPackPrice(plans_re_object)
 
     loadingContext.done();
-  }
+}
 
   useEffect(() => {
     if(parseInt(guardian?.couponCode?.percentage) === 100) setIsSpecialCode(true)

@@ -1,5 +1,5 @@
-import { createTheme } from '@mui/material/styles';
-import { BasicColor } from 'views/Color';
+import { createTheme }  from '@mui/material/styles';
+import { BasicColor }   from 'views/Color';
 
 export const settingPage = createTheme({
   palette: {

@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import styled from 'styled-components';
-import { BasicColor } from 'views/Color';
+import { FC }              from 'react';
+import styled              from 'styled-components';
+import { BasicColor }      from 'views/Color';
 import { UserProgressBar } from 'views/molecules/UserProgressBar';
-import { Typography } from 'views/atoms/Text/typography';
+import { Typography }      from 'views/atoms/Text/typography';
 
 type UserProgressProps = {
   rank: number;

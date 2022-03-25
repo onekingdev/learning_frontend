@@ -1,17 +1,9 @@
-/**
- * @author BruceLee
- * Display total count of given tier and purchased with progress bar.
- * Display category image
- */
-
 import { FC, useState, useEffect } from 'react';
-import styled from 'styled-components';
-
-import ProgressBar from '@ramonak/react-progress-bar';
-import { ScreenSize } from 'constants/screenSize';
-import { getDownUrlByFilename } from 'app/firebase';
-
-import { BasicColor } from 'views/Color';
+import styled                      from 'styled-components';
+import ProgressBar                 from '@ramonak/react-progress-bar';
+import { ScreenSize }              from 'constants/screenSize';
+import { getDownUrlByFilename }    from 'app/firebase';
+import { BasicColor }              from 'views/Color';
 
 interface ProgressBarProps {
   totalCount: number;

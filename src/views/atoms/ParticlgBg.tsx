@@ -1,21 +1,19 @@
-import { FC } from 'react';
-import { CongratsDgContainer } from 'views/pages/Student/Question/Style';
-import { useSelector } from 'react-redux';
-
-import img_congats from 'views/assets/level-up-congrats.png';
-import ParticlesBg from 'particles-bg';
-import styled, { keyframes } from 'styled-components';
-import useSound from 'use-sound';
-import fireworkSfx from 'views/assets/audios/mixkit-fireworks-bang-in-sky-2989.wav';
-
-import { bounceInUp } from 'react-animations';
-import { flip } from 'react-animations'
+import { FC }                             from 'react';
+import { CongratsDgContainer }            from 'views/pages/Student/Question/Style';
+import { useSelector }                    from 'react-redux';
+import img_congats                        from 'views/assets/level-up-congrats.png';
+import ParticlesBg                        from 'particles-bg';
+import styled, { keyframes }              from 'styled-components';
+import useSound                           from 'use-sound';
+import fireworkSfx                        from 'views/assets/audios/mixkit-fireworks-bang-in-sky-2989.wav';
+import { bounceInUp }                     from 'react-animations';
+import { flip }                           from 'react-animations'
 import { TypoHeader, TypoTitle, TypoBtn } from 'views/atoms/Text';
 
 interface Props {
   close: () => (void)
 }
-export const LevelUpDgContent: FC<Props> = ({ close}) => {
+export const LevelUpDgContent: FC<Props> = ({ close }) => {
   const [play] = useSound(fireworkSfx);
 
   const earning = useSelector((state: any) => state.earning);
@@ -37,7 +35,7 @@ export const LevelUpDgContent: FC<Props> = ({ close}) => {
     g: 1,
   };
   return (
-    <div onLoad={() => play} style={{display:'flex', justifyContent:'center'}}>
+    <div onLoad={() => play} style={{ display: 'flex', justifyContent: 'center' }}>
       <CongratsDgContainer>
         <div className="background">
           <ParticlesBg type="custom" config={config} />
@@ -49,8 +47,8 @@ export const LevelUpDgContent: FC<Props> = ({ close}) => {
           <img src={img_congats} />
         </Flip>
         <BounceIn>
-        <TypoHeader style={{textAlign: 'center'}}>LEVEL UP!</TypoHeader>
-        <TypoTitle style={{textAlign: 'center'}}> Your level is now: {earning.level}</TypoTitle>
+          <TypoHeader style={{ textAlign: 'center' }}>LEVEL UP!</TypoHeader>
+          <TypoTitle style={{ textAlign: 'center' }}> Your level is now: {earning.level}</TypoTitle>
         </BounceIn>
         <button onClick={close}><TypoBtn>Continue</TypoBtn></button>
       </CongratsDgContainer>

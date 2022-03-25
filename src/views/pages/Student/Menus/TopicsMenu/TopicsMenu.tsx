@@ -1,14 +1,14 @@
-import { FC, useEffect, useState, useContext } from 'react';
-import { Wrapper, TopicsMenuStyles } from './Style';
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
-import { TopicPresentation } from 'views/molecules/TopicPresentation';
-import { SubTopicsCarousel } from 'views/organisms/SubTopicsCarousel';
-import { get } from 'api/queries/get';
-import { AREA_OF_KNOWLEDGE_QUERY } from 'api/queries/questions';
-import { useParams } from 'react-router-dom';
-import { IAreasOfKnowledge } from 'app/entities/areasOfKnowledge';
-import { ITopic } from 'app/entities/block';
-import { LoadingContext } from 'react-router-loading';
+import { FC, useEffect, useState, useContext }      from 'react';
+import { Wrapper, TopicsMenuStyles }                from './Style';
+import { StudentMenu }                              from 'views/pages/Student/Menus/StudentMenu';
+import { TopicPresentation }                        from 'views/molecules/TopicPresentation';
+import { SubTopicsCarousel }                        from 'views/organisms/SubTopicsCarousel';
+import { get }                                      from 'api/queries/get';
+import { AREA_OF_KNOWLEDGE_QUERY }                  from 'api/queries/questions';
+import { useParams }                                from 'react-router-dom';
+import { IAreasOfKnowledge }                        from 'app/entities/areasOfKnowledge';
+import { ITopic }                                   from 'app/entities/block';
+import { LoadingContext }                           from 'react-router-loading';
 interface RouteTopicParams {
   topicId: string;
 }

@@ -1,9 +1,9 @@
-import { Routes } from 'Routes';
-import { Provider } from 'react-redux';
-import store from './app/configureStore';
-import { PersistGate } from 'redux-persist/integration/react';
-import { useState } from 'react';
-import { SnackbarProvider } from 'notistack';
+import { Routes }                  from 'Routes';
+import { Provider }                from 'react-redux';
+import store                       from './app/configureStore';
+import { PersistGate }             from 'redux-persist/integration/react';
+import { useState }                from 'react';
+import { SnackbarProvider }        from 'notistack';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import './style.css'

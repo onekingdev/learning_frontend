@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import styled from 'styled-components';
-import { Button } from 'views/atoms/Text/Button';
-import { UserIcon } from 'views/atoms/UserIcon';
-import { ScreenSize } from 'constants/screenSize';
+import { FC }           from 'react';
+import styled           from 'styled-components';
+import { Button }       from 'views/atoms/Text/Button';
+import { UserIcon }     from 'views/atoms/UserIcon';
+import { ScreenSize }   from 'constants/screenSize';
 
 type UserRankProps = {
   userRank: number;

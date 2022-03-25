@@ -1,13 +1,11 @@
-import { FC } from 'react';
-import * as React from 'react';
-import Dialog from '@mui/material/Dialog';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import styled from 'styled-components';
+import { FC }         from 'react';
+import * as React     from 'react';
+import Dialog         from '@mui/material/Dialog';
+import IconButton     from '@mui/material/IconButton';
+import CloseIcon      from '@mui/icons-material/Close';
+import styled         from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
-
 import { BasicColor } from 'views/Color';
-
 import { LSDialogTitle, LSDialogContent, LSDialogContentText } from 'views/molecules/Setting/utils/Style';
 
 type LSDialogProps = {

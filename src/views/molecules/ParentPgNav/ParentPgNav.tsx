@@ -1,20 +1,20 @@
 import { FC, useEffect } from 'react';
-import styled from 'styled-components';
-import { useHistory} from 'react-router-dom';
+import styled            from 'styled-components';
+import { useHistory}     from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMarkRounded';
-import { BasicColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
-import { useStyles } from './Style';
-import logoTitle from 'views/assets/logo-learn.svg'
-import home from 'views/assets/home_pc.svg'
-import avatar from 'views/assets/socrates-icon.svg'
+import InputLabel        from '@mui/material/InputLabel';
+import MenuItem          from '@mui/material/MenuItem';
+import FormControl       from '@mui/material/FormControl';
+import Select            from '@mui/material/Select';
+import Avatar            from '@mui/material/Avatar';
+import Button            from '@mui/material/Button';
+import QuestionMarkIcon  from '@mui/icons-material/QuestionMarkRounded';
+import { BasicColor }    from 'views/Color';
+import { ScreenSize }    from 'constants/screenSize';
+import { useStyles }     from './Style';
+import logoTitle         from 'views/assets/logo-learn.svg'
+import home              from 'views/assets/home_pc.svg'
+import avatar            from 'views/assets/socrates-icon.svg'
 import {
   LogoContainer,
   LogoImg,
