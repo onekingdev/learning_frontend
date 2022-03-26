@@ -1,15 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-import Box                         from '@mui/material/Box';
-import { useSelector }             from 'react-redux'
-import {
-  LSButtonContainer, LSButton, LSText,
-  LSPaperMoney, LSLabel, LSInputBase
-}                                  from './utils/Style';
-import { doUpdateBroughtPlan }     from 'app/actions/guardianActions';
-import { useSnackbar }             from 'notistack';
-import { LoadingContainer }        from 'views/atoms/Loading'
-import ReactLoading                from 'react-loading';
-import { BasicColor }              from 'views/Color';
+import Box from '@mui/material/Box';
+import { useSelector } from 'react-redux'
+import { LSButtonContainer, LSButton, LSText, LSPaperMoney, LSLabel, LSInputBase } from './utils/Style';
+import { doUpdateBroughtPlan } from 'app/actions/guardianActions';
+import { useSnackbar } from 'notistack';
+import { LoadingContainer } from 'views/atoms/Loading'
+import ReactLoading from 'react-loading';
+import { BasicColor } from 'views/Color';
 
 interface IUpgradeProps {
   onConfirm: () => void

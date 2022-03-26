@@ -1,27 +1,29 @@
-import { FC, useEffect, useState, useContext }            from     'react';
-import { useDispatch, useSelector }                       from     'react-redux';
-import { useSnackbar }                                    from     'notistack';
-import { LessonProgress }                                 from     'views/molecules/LessonProgress/LessonProgress';
-import { useParams }                                      from     'react-router-dom';
-import { LoadingContext }                                 from     'react-router-loading';
+import { FC, useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
+import { LessonProgress } from 'views/molecules/LessonProgress/LessonProgress';
+import { useParams } from 'react-router-dom';
+import { LoadingContext } from 'react-router-loading';
+
 import {
   Container,
   Wrapper,
   ProgressWrapper,
-}                                                         from     './Style';
-import {FinishLesson}                                     from     'views/organisms/FinishLesson';
-import {StudentMenu}                                      from     'views/pages/Student/Menus/StudentMenu';
-import {LevelUpDgContent}                                 from     'views/atoms/ParticlgBg';
-import {MultipleChoiceText}                               from     'views/molecules/QuestionTypes/MultipleChoiceText';
-import {MultipleChoiceSightWord}                          from     'views/molecules/QuestionTypes/MultipleChoiceSightWord';
-import {CardDialog}                                       from     'views/molecules/StudentCard/CardDialog';
-import { finishBlock }                                    from     'app/actions/blockActions';
-import {IBlockPresentation, IQuestion}                    from     'app/entities/block';
-import {Store}                                            from     'app/configureStore';
-import * as TYPE                                          from     'app/types';
-import { createAiBlockPresentation,
-  createPathBlockPresentation}                            from     'app/actions/blockActions';
-import { getNextLevel }                                   from     'app/actions/userActions';
+} from './Style';
+
+import {FinishLesson} from 'views/organisms/FinishLesson';
+import {StudentMenu} from 'views/pages/Student/Menus/StudentMenu';
+import {LevelUpDgContent} from 'views/atoms/ParticlgBg';
+import {MultipleChoiceText} from 'views/molecules/QuestionTypes/MultipleChoiceText';
+import {MultipleChoiceSightWord} from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
+
+import {CardDialog} from 'views/molecules/StudentCard/CardDialog';
+import { finishBlock } from 'app/actions/blockActions';
+import {IBlockPresentation, IQuestion} from 'app/entities/block';
+import {Store} from 'app/configureStore';
+import * as TYPE from 'app/types';
+import { createAiBlockPresentation, createPathBlockPresentation} from 'app/actions/blockActions';
+import { getNextLevel } from 'app/actions/userActions';
 
 interface RoutePresentationParams {
   mode: string;

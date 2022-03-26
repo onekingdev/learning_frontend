@@ -1,22 +1,22 @@
-import { FC, useState, useEffect }  from 'react';
-import { useHistory }               from 'react-router-dom';
-import { ICON_SIZE }                from 'constants/icon';
-import Box                          from '@mui/material/Box';
-import Drawer                       from '@mui/material/Drawer';
-import Button                       from '@mui/material/Button';
-import List                         from '@mui/material/List';
-import { BasicColor }               from 'views/Color';
-import ListItem                     from '@mui/material/ListItem';
-import { Icon }                     from 'views/atoms/Icon/Icon';
-import progress_icon                from 'views/assets/nav-icons/Progress.png';
-import question_icon                from 'views/assets/nav-icons/question.png';
-import game_icon                    from 'views/assets/nav-icons/game.png';
-import bank_icon                    from 'views/assets/nav-icons/bank.png';
-import collectible_icon             from 'views/assets/nav-icons/collectibles.png';
-import profile_icon                 from 'views/assets/nav-icons/profile.png';
-import menu_toggle                  from 'views/assets/Menu Toggle.svg';
-import styled                       from 'styled-components';
-import { TypoIcon }                 from 'views/atoms/Text';
+import { FC, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { ICON_SIZE } from 'constants/icon';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import { BasicColor } from 'views/Color';
+import ListItem from '@mui/material/ListItem';
+import { Icon } from 'views/atoms/Icon/Icon';
+import progress_icon from 'views/assets/nav-icons/Progress.png';
+import question_icon from 'views/assets/nav-icons/question.png';
+import game_icon from 'views/assets/nav-icons/game.png';
+import bank_icon from 'views/assets/nav-icons/bank.png';
+import collectible_icon from 'views/assets/nav-icons/collectibles.png';
+import profile_icon from 'views/assets/nav-icons/profile.png';
+import menu_toggle from 'views/assets/Menu Toggle.svg';
+import styled from 'styled-components';
+import { TypoIcon } from 'views/atoms/Text';
 
 export const Sidebar: FC = () => {
 

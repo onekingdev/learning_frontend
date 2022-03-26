@@ -1,13 +1,13 @@
-import { FC, useState }                    from 'react';
-import { settingPage }                     from 'views/molecules/Setting/utils/Theme';
-import { ThemeProvider }                   from '@mui/material';
+import { FC, useState } from 'react';
+import { settingPage } from 'views/molecules/Setting/utils/Theme';
+import { ThemeProvider } from '@mui/material';
 import { LSGridRow, LSLabel, LSTextField } from 'views/molecules/Setting/utils/Style';
-import { Grid }                            from '@mui/material';
-import { LSButtonContainer, LSButton }     from 'views/molecules/Setting/utils/Style';
-import { doUpdateGuardianEmailPassword }   from 'app/actions/guardianActions';
-import { useSelector }                     from 'react-redux';
-import { useSnackbar }                     from 'notistack';
-import { LoadingSpinner }                  from 'views/atoms/Spinner';
+import { Grid } from '@mui/material';
+import { LSButtonContainer, LSButton } from 'views/molecules/Setting/utils/Style';
+import { doUpdateGuardianEmailPassword } from 'app/actions/guardianActions';
+import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 interface DialogProps {
     open: () => (void)

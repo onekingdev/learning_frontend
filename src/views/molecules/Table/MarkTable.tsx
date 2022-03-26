@@ -1,7 +1,8 @@
-import { FC, useState } from 'react';
-import styled           from 'styled-components';
-import ArrowRightIcon   from '@mui/icons-material/ArrowRight';
-import { ScreenSize }   from 'constants/screenSize';
+import { FC, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { ScreenSize } from 'constants/screenSize';
+import { useSelector } from 'react-redux';
 
 const colors = [
     '#CC5B1D',
@@ -59,13 +60,14 @@ interface ISingleGroup {
         item2?: string,
         item3?: string,
         item4?: string,
+        mastery?: string,
     },
     extra?: ISingleGroup[],
     deep?: number,
 }
 
 const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
-    const [opened, setOpened] = useState<boolean>(true);
+    const [opened, setOpened] = useState<boolean>(false);
     const toggle = () => setOpened(val => !val);
     const [markOpened, setMarkOpened] = useState<boolean>(false);
     const toggleMark = () => setMarkOpened(val => !val);
@@ -134,77 +136,136 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
     }
 }
 
-const MarkTable = () => {
+const MarkTable = ({
+    activeSubjectId=-1,
+    onChangeActiveIdHandler=()=>{},
+    data=[],
+    areasOfKnowledge=[],
+    studentId=-1,
+    setStudentId=()=>{},
+}: {
+    activeSubjectId: number;
+    onChangeActiveIdHandler: (x: number) => void;
+    data: any;
+    areasOfKnowledge: any[];
+    studentId: number;
+    setStudentId: (x: number) => void;
+}) => {
+    const guardian = useSelector((state: any) => state.guardian);
+    useEffect(() => {
+        if (areasOfKnowledge && typeof areasOfKnowledge === "object" && areasOfKnowledge.length > 0) {
+            onChangeActiveIdHandler(areasOfKnowledge[0].id)
+        }
+    }, [areasOfKnowledge]);
     return (<MarkTableDiv>
-        <SingleGroup main={{
-            item1: 'Math',
-            item2: 'Accuracy',
-            item3: 'Correct',
-            item4: 'Total',
-        }} extra={[{
-            main: {
-                item1: 'Conteo',
-                item2: '93%',
-                item3: '538',
-                item4: '686',
-            }
-        }, {
-            main: {
-                item1: 'Geometría',
-                item2: '86%',
-                item3: '491',
-                item4: '1,031',
-            }
-        }, {
-            main: {
-                item1: 'Sentido numérico',
-                item2: '96%',
-                item3: '859',
-                item4: '1,285',
-            }
-        }, {
-            main: {
-                item1: 'Medición',
-                item2: '91%',
-                item3: '793',
-                item4: '1,153',
-            }
-        }, {
-            main: {
-                item1: 'Suma de números enteros',
-                item2: '75%',
-                item3: '265',
-                item4: '449',
-            },
-            extra: [{
+        <div style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "end"
+        }}>
+            <div>
+                Student |
+            </div>
+            <select
+                style={{
+                    minHeight: "28px",
+                    background: "transparent",
+                    width: "auto",
+                    height: "100%",
+                    border: "none",
+                    outline: "none",
+                }} name="" id="" value={studentId} onChange={e => setStudentId(parseInt(e.target.value))}>
+            { guardian && guardian.guardianstudentSet && guardian.guardianstudentSet.length > 0 ? guardian.guardianstudentSet.map((studentObj: any, id: number) => (
+                <option key={id} value={studentObj.id}>{ studentObj?.student?.fullName || "Unset" }</option>
+            )) : "" }
+            </select>
+        </div>
+        <PcCom style={{
+            backgroundColor: colors[0],
+            cursor: 'pointer',
+            border: '1px solid black'
+        }}>
+            <select
+                style={{
+                    flexGrow: 1,
+                    flexShrink: 1,
+                    minHeight: "28px",
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    paddingLeft: `${1}rem`,
+                    background: "transparent",
+                    width: "100%",
+                    height: "100%",
+                    border: "none",
+                    outline: "none",
+                }} name="" id="" value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
+            { areasOfKnowledge && typeof areasOfKnowledge === "object" && areasOfKnowledge.length > 0 ? areasOfKnowledge.map((subject, id) => (
+                <option key={id} value={subject?.id}>{ subject?.name }</option>
+            )) : "" }
+            </select>
+            <Mark>Accuracy</Mark>
+            <Mark>Correct</Mark>
+            <Mark>Total</Mark>
+        </PcCom>
+        <MobileCom style={{
+            backgroundColor: colors[0],
+            cursor: 'pointer',
+        }}>
+            <select style={{
+                flexGrow: 1,
+                flexShrink: 1,
+                minHeight: "28px",
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+                paddingLeft: `${0}rem`,
+                background: "transparent",
+                width: "100%",
+                height: "100%",
+                border: "none",
+                outline: "none",
+            }} name="" id="" value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
+            { areasOfKnowledge.map((subject, id) => (
+                <option key={id} value={subject?.id}>{ subject?.name }</option>
+            )) }
+            </select>
+        </MobileCom>
+        { data && data.rootTopicsByAok && data.rootTopicsByAok.length > 0 ? data?.rootTopicsByAok?.map((aok: any, id: number) => (
+            <SingleGroup key={id} main={{
+                item1: aok?.name,
+                item2: aok?.report ? "" : "",
+                item3: aok?.report ? "" : "",
+                item4: aok?.report ? "" : "",
+                mastery: aok?.mastery
+            }} extra={aok?.subTopics.map((subTopic1: any) => ({
                 main: {
-                    item1: 'Dinero:',
-                    item2: '56%',
-                    item3: '135',
-                    item4: '170'
+                    item1: subTopic1?.name,
+                    item2: subTopic1?.report ? "" : "",
+                    item3: subTopic1?.report ? "" : "",
+                    item4: subTopic1?.report ? "" : "",
+                    mastery: subTopic1?.mastery
                 },
-            }, {
-                main: {
-                    item1: 'Conceptos de la moneda-2 Comparar valores de monedas',
-                    item2: '56%',
-                    item3: '33',
-                },
-                extra: [{
+                extra: subTopic1?.subTopics.map((subTopic2: any) => ({
                     main: {
-                        item1: 'Representar el valor de una moneda con una cantidad de una moneda diferente',
-                        item2: '56%',
-                        item3: '5'
-                    }
-                }]
-            }, ]
-        }, {
-            main: {
-                item1: 'Conceptos de la moneda-2 Comparar valores de monedas',
-                item2: '89%',
-                item3: '645',
-                item4: '820',
-            }
-        }, ]} deep={0}/>
+                        item1: subTopic2?.name,
+                        item2: subTopic2?.report ? "" : "",
+                        item3: subTopic2?.report ? "" : "",
+                        item4: subTopic2?.report ? "" : "",
+                        mastery: subTopic2?.mastery
+                    },
+                    extra: subTopic1?.subTopics.map((subTopic3: any) => ({
+                        main: {
+                            item1: subTopic3?.name,
+                            item2: subTopic3?.report ? "" : "",
+                            item3: subTopic3?.report ? "" : "",
+                            item4: subTopic3?.report ? "" : "",
+                            mastery: subTopic3?.mastery
+                        },
+                    }))
+                }))
+            }))} deep={1} />
+        )) : "" }
         <SingleGroup main={{
             item1: 'Resta de números enteros',
             item2: '-%',

@@ -74,9 +74,7 @@ export const KnowledgeMap: FC = () => {
   const dragonNum       = randRange(0, areasOfKnowledge.length);
 
   useEffect(() => {
-
-    setAreasOfKnowledge(student?.guardianstudentplan?.subject)
-
+    setAreasOfKnowledge(student?.guardianstudentplan?.subject);
   }, []);
 
   return (

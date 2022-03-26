@@ -1,9 +1,10 @@
-import { FC }               from 'react';
-import styled               from 'styled-components';
-import { ScreenSize }       from 'constants/screenSize';
-import { BasicColor }       from 'views/Color';
-import SavingsIcon          from '@mui/icons-material/Savings';
-import { LSText, LSLabel }  from 'views/molecules/Setting/utils/Style';
+import { FC } from 'react';
+import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
+import { BasicColor } from 'views/Color';
+
+import SavingsIcon from '@mui/icons-material/Savings';
+import { LSText, LSLabel } from 'views/molecules/Setting/utils/Style';
 import { numberWithCommas } from 'views/utils'
 
 interface BalanceProp {

@@ -1,11 +1,11 @@
-import { Typography }              from '../Text/typography';
+import { Typography } from '../Text/typography';
 import { FC, useEffect, useState } from 'react';
-import styled                      from 'styled-components';
-import { Answer }                  from 'views/atoms/Text/Answer';
-import { BasicColor }              from 'views/Color';
-import { ScreenSize }              from 'constants/screenSize';
-import audioCheck                  from 'views/assets/audios/check.mp3';
-import audioError                  from 'views/assets/audios/error.wav';
+import styled from 'styled-components';
+import { Answer } from 'views/atoms/Text/Answer';
+import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
+import audioCheck from 'views/assets/audios/check.mp3';
+import audioError from 'views/assets/audios/error.wav';
 
 interface BlockQuestionInput {
   question: number;
@@ -14,57 +14,57 @@ interface BlockQuestionInput {
 }
 
 type TextOptionProps = {
-  answer: any;
-  onClick: (result: BlockQuestionInput) => void
+    answer: any;
+    onClick: (result: BlockQuestionInput) => void
 }
 
-export const TextOption: FC<TextOptionProps> = ({ answer, onClick }) => {
+export const TextOption:FC<TextOptionProps> = ({answer,onClick}) => {
 
-  const [isAnswered, setIsAnswered] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
+    const [isAnswered, setIsAnswered] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(false);
 
-  useEffect(() => {
-    setIsAnswered(false);
-  }, [answer])
+    useEffect(() => {
+        setIsAnswered(false);
+      }, [answer])
 
-  useEffect(() => {
-    console.log('initialized text option, isAnswered: ', isAnswered, 'answer is ', answer)
-  }, [answer])
-  const handleAnswer = () => {
-    console.log('handle answer')
-    setIsCorrect(answer.isCorrect)
-    setIsAnswered(true);
-    const inputAnswer: BlockQuestionInput = {
-      question: -1,
-      answerOption: answer.id,
-      isCorrect: answer.isCorrect
-    };
-    onClick(inputAnswer)
-  }
+    useEffect(() => {
+      console.log('initialized text option, isAnswered: ', isAnswered, 'answer is ', answer)
+    }, [answer])
+    const handleAnswer = () => {
+        console.log('handle answer')
+        setIsCorrect(answer.isCorrect)
+        setIsAnswered(true);
+        const inputAnswer:BlockQuestionInput = {
+          question : -1,
+          answerOption: answer.id,
+          isCorrect: answer.isCorrect
+        };
+        onClick(inputAnswer)
+      }
 
-  return (
-    <>
-      <audio
-        src={isAnswered ?
-          isCorrect ? audioCheck : audioError
-          : ''}
-        autoPlay={isAnswered ? true : false}
-      />
-      <TextOptionStyles
-        onClick={() => handleAnswer()}
-        isCorrect={isAnswered && answer?.isCorrect}
-        isAnswered={isAnswered}
-      >
-        <Answer isDark >{answer?.answerText}</Answer>
-      </TextOptionStyles>
-    </>
-  )
+    return(
+        <>
+        <audio
+          src={isAnswered ?
+                isCorrect ? audioCheck : audioError
+                : ''}
+          autoPlay={isAnswered ? true : false}
+          />
+            <TextOptionStyles
+              onClick={() => handleAnswer()}
+              isCorrect={isAnswered && answer?.isCorrect}
+              isAnswered={isAnswered}
+            >
+              <Answer isDark >{answer?.answerText}</Answer>
+            </TextOptionStyles>
+        </>
+    )
 }
 
 const TextOptionStyles = styled.div<{
-  isCorrect?: boolean;
-  isAnswered?: boolean;
-}>`
+    isCorrect?:boolean;
+    isAnswered?:boolean;
+  }>`
     width: 90%;
     margin: 20px auto;
     font-family: ${Typography.secondary};
@@ -72,10 +72,10 @@ const TextOptionStyles = styled.div<{
     padding:2px;
 
     background-color: ${props => props.isAnswered ?
-    props.isCorrect ? BasicColor.greenSoft :
-      BasicColor.red
-    :
-    BasicColor.white20};
+                        props.isCorrect ? BasicColor.greenSoft :
+                        BasicColor.red
+                        :
+                        BasicColor.white20};
     pointer-events: ${props => props.isAnswered ? 'none' : 'all'};
     cursor: pointer;
     line-height: 30px;

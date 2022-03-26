@@ -1,10 +1,10 @@
-import { FC }          from 'react';
-import styled          from 'styled-components';
-import { BasicColor }  from 'views/Color';
-import { Header }      from 'views/atoms/Text/Header';
+import { FC } from 'react';
+import styled from 'styled-components';
+import { BasicColor } from 'views/Color';
+import { Header } from 'views/atoms/Text/Header';
 import { GeneralText } from 'views/atoms/Text/GeneralText';
-import { TopicCard }   from './TopicCard';
-import { ScreenSize }  from 'constants/screenSize';
+import { TopicCard } from './TopicCard';
+import { ScreenSize } from 'constants/screenSize';
 
 type TopicPresentationProps = {
   title: string;

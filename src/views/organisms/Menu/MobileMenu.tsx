@@ -1,18 +1,18 @@
-import { FC }           from 'react';
-import styled           from 'styled-components';
-import { Icon }         from 'views/atoms/Icon/Icon';
-import { BasicColor }   from 'views/Color';
-import home             from 'views/assets/home.svg';
-import energyButton     from 'views/assets/lightning.svg';
-import walletIcon       from 'views/assets/coins-mobile.svg';
-import { IconSize }     from 'views/atoms/Icon/Size';
-import { useState }     from 'react';
-import { ScreenSize }   from 'constants/screenSize';
-import { StartLesson }  from 'views/molecules/StartLesson';
+import { FC } from 'react';
+import styled from 'styled-components';
+import { Icon } from 'views/atoms/Icon/Icon';
+import { BasicColor } from 'views/Color';
+import home from 'views/assets/home.svg';
+import energyButton from 'views/assets/lightning.svg';
+import walletIcon from 'views/assets/coins-mobile.svg';
+import { IconSize } from 'views/atoms/Icon/Size';
+import { useState } from 'react';
+import { ScreenSize } from 'constants/screenSize';
+import { StartLesson } from 'views/molecules/StartLesson';
 import { IconDropDown } from 'views/molecules/IconDropDown';
-import { Sidebar }      from 'views/organisms/Menu/Sidebar';
-import { useHistory }   from 'react-router-dom';
-import modality         from 'views/assets/modality.svg';
+import { Sidebar } from 'views/organisms/Menu/Sidebar';
+import { useHistory } from 'react-router-dom';
+import modality from 'views/assets/modality.svg';
 
 export const MobileMenu: FC = () => {
   const [closeStartButton, setCloseStartButton] = useState(Boolean);

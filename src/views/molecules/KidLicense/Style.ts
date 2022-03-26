@@ -1,6 +1,6 @@
-import styled         from 'styled-components';
+import styled from 'styled-components';
 import { makeStyles } from '@mui/styles'
-import { BasicColor}  from 'views/Color';
+import { BasicColor} from 'views/Color';
 
 export const LicenseHeader = styled.div`
   background-color: ${BasicColor.blue};

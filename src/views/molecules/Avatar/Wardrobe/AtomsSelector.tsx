@@ -1,14 +1,14 @@
-import { FC, useEffect, useState }  from 'react';
-import styled                       from 'styled-components';
-import { BasicColor }               from 'views/Color';
-import priceflag                    from 'views/assets/avatars/price-flag.png';
-import ReactLoading                 from 'react-loading';
-import { IAvatar }                  from 'app/entities/avatar';
-import { ScreenSize }               from 'constants/screenSize';
-import { doPurchaseAvatarItem }     from 'app/actions/avatarActions';
+import { FC, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { BasicColor } from 'views/Color';
+import priceflag from 'views/assets/avatars/price-flag.png';
+import ReactLoading from 'react-loading';
+import { IAvatar } from 'app/entities/avatar';
+import { ScreenSize } from 'constants/screenSize';
+import { doPurchaseAvatarItem } from 'app/actions/avatarActions';
 import { useSelector, useDispatch } from 'react-redux';
-import { useSnackbar }              from 'notistack';
-import * as TYPES                   from 'app/types'
+import { useSnackbar } from 'notistack';
+import * as TYPES from 'app/types'
 
 interface AtomsProps {
   items: Array<IAvatar>

@@ -1,6 +1,6 @@
-import { FC, useEffect }               from 'react';
+import { FC, useEffect } from 'react';
 import { ReactComponent as AvatarSvg } from 'views/assets/avatars/girl-11.svg';
-import { shadeColor }                  from 'views/Color';
+import { shadeColor } from 'views/Color';
 
 type AvatarProps = {
   skin: string;

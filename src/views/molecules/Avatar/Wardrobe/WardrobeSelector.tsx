@@ -1,21 +1,21 @@
-import { FC, useContext, useEffect, useState }      from 'react';
-import { ScreenSize }                               from 'constants/screenSize';
-import styled                                       from 'styled-components';
-import wardrobe_icon                                from 'views/assets/wardrobe.png';
-import { Link }                                     from 'react-router-dom';
-import { useSelector }                              from 'react-redux';
-import { LoadingContext }                           from 'react-router-loading';
-import { get }                                      from 'api/queries/get';
-import { AVATAR }                                   from 'api/fragments/avatarFragments';
-import { IAvatar }                                  from 'app/entities/avatar';
-import { AvatarSet }                                from '../AvatarSet';
-import IconButton                                   from '@mui/material/IconButton';
-import StarIcon                                     from '@mui/icons-material/Star';
-import { ColorPickerDropdown }                      from 'views/molecules/Avatar/Wardrobe/ColorPickerDropdown';
-import { AtomsDrawer }                              from './AtomsDrawer';
-import { AtomsSelector }                            from './AtomsSelector';
+import { FC, useContext, useEffect, useState } from 'react';
+import { ScreenSize } from 'constants/screenSize';
+import styled from 'styled-components';
+import wardrobe_icon from 'views/assets/wardrobe.png';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { LoadingContext } from 'react-router-loading';
+import { get } from 'api/queries/get';
+import { AVATAR } from 'api/fragments/avatarFragments';
+import { IAvatar } from 'app/entities/avatar';
+import { AvatarSet } from '../AvatarSet';
+import IconButton from '@mui/material/IconButton';
+import StarIcon from '@mui/icons-material/Star';
+import { ColorPickerDropdown } from 'views/molecules/Avatar/Wardrobe/ColorPickerDropdown';
+import { AtomsDrawer } from './AtomsDrawer';
+import { AtomsSelector } from './AtomsSelector';
 import { doFetchOwnedAvatars, doSetFavoriteAvatar } from 'app/actions/avatarActions';
-import { useSnackbar }                              from 'notistack';
+import { useSnackbar } from 'notistack';
 
 export const WardrobeSelector: FC = () => {
 

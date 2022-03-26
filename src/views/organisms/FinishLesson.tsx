@@ -1,13 +1,17 @@
-import { FC }                   from 'react';
-import styled                   from 'styled-components';
-import {GeneralText}            from 'views/atoms/Text/GeneralText';
-import {IconSize}               from 'views/atoms/Icon/Size';
-import {Icon}                   from 'views/atoms/Icon/Icon';
-import finishLesson             from 'views/assets/finish-lesson.svg';
-import energyIcon               from 'views/assets/lightning.svg';
-import Button                   from 'views/molecules/MuiButton';
-import {ScreenSize}             from '../../constants/screenSize';
-import {BasicColor, ButtonColor}from '../Color';
+import { FC } from 'react';
+import styled from 'styled-components';
+
+import {GeneralText} from 'views/atoms/Text/GeneralText';
+import {IconSize} from 'views/atoms/Icon/Size';
+import {Icon} from 'views/atoms/Icon/Icon';
+
+import finishLesson from 'views/assets/finish-lesson.svg';
+import energyIcon from 'views/assets/lightning.svg';
+
+import Button from 'views/molecules/MuiButton';
+
+import {ScreenSize} from '../../constants/screenSize';
+import {BasicColor, ButtonColor} from '../Color';
 
 type FinishLessonProps = {
   tokens: number;

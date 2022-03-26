@@ -37,4 +37,3 @@ export const SIMPLE_AVATAR = `
     image
     price
 `
-

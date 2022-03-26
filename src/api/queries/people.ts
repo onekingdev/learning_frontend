@@ -1,6 +1,6 @@
-import { AUDIENCES }               from '../fragments/peopleFragments';
+import { AUDIENCES } from '../fragments/peopleFragments';
 import { AREA_OF_KNOWLEDGE_QUERY } from './questions';
-import { GRADES }                  from '../fragments/peopleFragments';
+import { GRADES } from '../fragments/peopleFragments';
 
 export const AUDIENCES_QUERY = `
     ${AUDIENCES}

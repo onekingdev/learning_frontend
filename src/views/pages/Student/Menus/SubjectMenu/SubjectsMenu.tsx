@@ -1,17 +1,16 @@
-import { FC, useEffect, useState, useContext }    from 'react';
-import { TopicCard }                              from 'views/molecules/TopicCard';
-import { Wrapper,
-  SubjectsCardsContainer, TitleContainer }        from './Style';
-import { StudentMenu }                            from 'views/pages/Student/Menus/StudentMenu';
-import { RibbonText }                             from 'views/molecules/RibbonText';
-import { dictionary }                             from './dictionary';
-import { useHistory }                             from 'react-router-dom';
-import { get }                                    from 'api/queries/get';
-import { useDispatch }                            from 'react-redux';
-import * as TYPE                                  from 'app/types';
-import { AUDIENCES_QUERY }                        from 'api/queries/people';
-import { IAreasOfKnowledge }                      from 'app/entities/areasOfKnowledge';
-import { LoadingContext }                         from 'react-router-loading';
+import { FC, useEffect, useState, useContext } from 'react';
+import { TopicCard } from 'views/molecules/TopicCard';
+import { Wrapper, SubjectsCardsContainer, TitleContainer } from './Style';
+import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
+import { RibbonText } from 'views/molecules/RibbonText';
+import { dictionary } from './dictionary';
+import { useHistory } from 'react-router-dom';
+import { get } from 'api/queries/get';
+import { useDispatch } from 'react-redux';
+import * as TYPE from 'app/types';
+import { AUDIENCES_QUERY } from 'api/queries/people';
+import { IAreasOfKnowledge } from 'app/entities/areasOfKnowledge';
+import { LoadingContext } from 'react-router-loading';
 
 export const SubjectsMenu: FC = () => {
   const loadingContext = useContext(LoadingContext);

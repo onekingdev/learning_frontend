@@ -1,8 +1,8 @@
-import { FC }                               from 'react';
-import styled                               from 'styled-components';
+import { FC } from 'react';
+import styled from 'styled-components';
 import { BadgeWrapper, LockedBadgeWrapper } from 'views/atoms/BadgeWrapper';
-import question                             from 'views/assets/question-mark.svg';
-import { RibbonText }                       from './RibbonText';
+import question from 'views/assets/question-mark.svg';
+import { RibbonText } from './RibbonText';
 
 export const BadgeContainer: FC = () => {
   const badges = [

@@ -1,10 +1,10 @@
-import { LEVEL }             from './levelFragments'
-import { COIN_WALLET }       from './coinWalletFragments'
-import { BANK_WALLET }       from './bankFragments'
-import { AUDIENCES }         from './peopleFragments'
-import { AREA_OF_KNOWLEDGE } from './areaOfKnowledgeFragments'
-import { GRADES }            from './peopleFragments'
-import {AVATAR}              from './avatarFragments'
+import { LEVEL } from './levelFragments'
+import { COIN_WALLET } from './coinWalletFragments'
+import { BANK_WALLET } from './bankFragments'
+import { AUDIENCES }from './peopleFragments'
+import { AREA_OF_KNOWLEDGE }from './areaOfKnowledgeFragments'
+import { GRADES } from './peopleFragments'
+import {AVATAR} from './avatarFragments'
 
 export const GUARIDAN_STUDENT_PLAN_RAW = `
     id

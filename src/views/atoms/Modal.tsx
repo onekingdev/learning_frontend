@@ -1,4 +1,4 @@
-import { FC }           from 'react';
+import { FC } from 'react';
 import { createPortal } from 'react-dom';
 
 export const Modal: FC = ({children}) => {

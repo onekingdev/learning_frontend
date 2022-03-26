@@ -1,17 +1,17 @@
-import { FC, useState }            from 'react';
-import styled                      from 'styled-components';
-import { Modal }                   from 'views/atoms/Modal';
+import { FC, useState } from 'react';
+import styled from 'styled-components';
+import { Modal } from 'views/atoms/Modal';
 import { BasicColor, ButtonColor } from 'views/Color';
-import { ScreenSize }              from 'constants/screenSize';
-import level                       from 'views/assets/level-up.svg';
-import { LevelUp }                 from 'views/atoms/Text/LevelUp';
-import { Button }                  from 'views/molecules/Button';
-import { Icon }                    from 'views/atoms/Icon/Icon';
-import { TypoIcon }                from 'views/atoms/Text';
-import coin                        from 'views/assets/coin.svg';
-import lightning                   from 'views/assets/lightning.svg';
-import { IconSize }                from 'views/atoms/Icon/Size';
-import { Typography }              from 'views/atoms/Text/typography';
+import { ScreenSize } from 'constants/screenSize';
+import level from 'views/assets/level-up.svg';
+import { LevelUp } from 'views/atoms/Text/LevelUp';
+import { Button } from 'views/molecules/Button';
+import { Icon } from 'views/atoms/Icon/Icon';
+import { TypoIcon } from 'views/atoms/Text';
+import coin from 'views/assets/coin.svg';
+import lightning from 'views/assets/lightning.svg';
+import { IconSize } from 'views/atoms/Icon/Size';
+import { Typography } from 'views/atoms/Text/typography';
 
 
 export const LevelUpModal: FC = () => {

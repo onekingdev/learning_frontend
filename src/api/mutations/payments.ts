@@ -1,6 +1,9 @@
-import { GUARDIAN_STUDENT, GUARDIAN, }                  from '../fragments/guardianFragments';
+import {
+    GUARDIAN_STUDENT,
+    GUARDIAN,
+} from '../fragments/guardianFragments';
 import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
-import { STUDENT }                                      from '../fragments/studentFragments'
+import { STUDENT } from '../fragments/studentFragments'
 
 
 export const CREATE_ORDER = (
