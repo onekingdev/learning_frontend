@@ -50,6 +50,7 @@ const KidsList: FC = () => {
   const classes = useStyles();
   const user = useSelector((state: Store) => state.user);
   const guardian = useSelector((state: any) => state.guardian)
+  const student = useSelector((state: any) => state.student)
   const grades = useSelector((state: any) => state.grade)
 
   const history = useHistory();
@@ -208,9 +209,9 @@ const KidsList: FC = () => {
               }}}
               >
             <ImageAvatar
-              firstName={'firstName'}
-              lastName={'lastName'}
-              accessory={props.currentAvatarAccessories.image ? props.currentAvatarAccessories.image : null}
+              firstName={student.firstName? student.firstName:'F'}
+              lastName={student.lastName? student.lastName:'L'}
+              accessory={props.currentAvatarAccessories ? props.currentAvatarAccessories : null}
               head={props.currentAvatarHead ? props.currentAvatarHead : null}
             // skinTone={null}
             />

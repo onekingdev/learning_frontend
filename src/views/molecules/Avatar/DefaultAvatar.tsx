@@ -22,7 +22,7 @@ export const ImageAvatar: FC<AvatarProps> = ({ accessory, head, skinTone, firstN
                 <AvatarItemWithSkinTone url={head.image} skinTone={skinTone ? skinTone : ''} />
             </div>
         </Avatar>:
-        <Avatar sx={{ bgcolor: deepPurple[500] }}>{firstName.charAt(0)}{lastName.charAt(0)}</Avatar>
+        <Avatar sx={{ bgcolor: deepPurple[500] }}>{firstName.charAt(0).toUpperCase()}{lastName.charAt(0).toUpperCase()}</Avatar>
     )
 }
 
