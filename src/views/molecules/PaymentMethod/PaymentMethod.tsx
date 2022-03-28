@@ -118,7 +118,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                 {
                     plans.Sole.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{plans.Sole.childCount} Sole Package </OrderItemTitle>
+                        <OrderItemTitle>{plans.Sole.childCount} Solo Package </OrderItemTitle>
                         <OrderItemContent>${plans.Sole.currentPrice} / {plans.Sole.period}</OrderItemContent>
                     </OrderItem>
                 }
@@ -164,7 +164,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     </OrderItemContent>
                 </OrderItem>
                 <OrderTip>
-                    Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in out privacy policy
+                Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy </b></a>by clicking the link below.
                 </OrderTip>
                 <OrderTip>
                     <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)}/>
@@ -197,11 +197,11 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                 {
                     plans.Sole.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{plans.Sole.childCount} Sole Package </OrderItemTitle>
+                        <OrderItemTitle>{plans.Sole.childCount} Solo Package </OrderItemTitle>
                     </OrderItem>
                 }
                 <OrderTip>
-                    Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in out privacy policy
+                Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy </b></a>by clicking the link below.
                 </OrderTip>
                 <OrderTip>
                     <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)}/>

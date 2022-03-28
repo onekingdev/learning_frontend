@@ -207,11 +207,11 @@ const CreateParent: FC = () => {
               />
             </div>
             <div className="p-b-95 p-t-30 font-s-15 inline">
-              By clicking Create Account, you aggree to Learn With Socrates’s{' '}
+              By clicking Create Account, you agree to Learn With Socrates’s{' '}
               <div className="font-w-9 inline">
-                User Agreement, Privacy Policy,
+                Privacy Policy, Terms & Conditions
               </div>{' '}
-              and <div className="font-w-9 inline">Cookie Policy</div>
+              and <div className="font-w-9 inline">Children’s Privacy Policy</div>
             </div>
           </FormContainer>
           <ContactContainer>
