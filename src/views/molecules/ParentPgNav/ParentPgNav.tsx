@@ -81,7 +81,6 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
       </SupportBtnContainer>
       <LogoContainer>
         <LogoImg  src={logoTitle} />
-        <LogoTitle><u>Parents Center</u></LogoTitle>
       </LogoContainer>
       <NameAvatarGroup>
         <FormControl className={classes.formControl}>

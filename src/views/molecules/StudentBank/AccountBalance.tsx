@@ -15,7 +15,7 @@ export const AccountBalance: FC<BalanceProp> = ({ balance }) => {
     <BankPaper flex_direction='row' bg_color={BasicColor.blue} >
       <SavingsIcon />
       <LSText fontSize={24}>
-        current account:
+        Account Balance:
       </LSText>
       <LSLabel ml={10} fontSize={24}>${numberWithCommas(balance)}</LSLabel>
     </BankPaper>
