@@ -160,7 +160,7 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute
             loading={true}
-            path="/parent/reporting/:studentId"
+            path="/parent/reporting"
           >
             <ParentReporting />
           </PrivateRoute>
