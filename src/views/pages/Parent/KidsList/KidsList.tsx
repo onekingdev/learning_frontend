@@ -2,8 +2,8 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { LoadingContext }           from 'react-router-loading';
 import { useSnackbar }              from 'notistack';
-import { toPng }                    from 'html-to-image'
-import { saveAs }                   from 'file-saver'
+import { toPng }                    from 'html-to-image';
+import { saveAs }                   from 'file-saver';
 import { useHistory }               from 'react-router-dom';
 import InputLabel                   from '@mui/material/InputLabel';
 import MenuItem                     from '@mui/material/MenuItem';
@@ -17,8 +17,8 @@ import { ParentPgContainer }        from 'views/molecules/ParentPgContainer/Pare
 import { LSDialog }                 from 'views/molecules/Setting/LSDialog';
 import { BasicColor }               from 'views/Color';
 import { Store }                    from 'app/configureStore';
-import { changeStudentGrade }       from 'app/actions/studentActions'
-import { changeStudentPassword }    from 'app/actions/studentActions'
+import { changeStudentGrade }       from 'app/actions/studentActions';
+import { changeStudentPassword }    from 'app/actions/studentActions';
 import { ImageAvatar }              from 'views/molecules/Avatar/DefaultAvatar';
 
 import {
@@ -198,10 +198,13 @@ const KidsList: FC = () => {
 
         <GridContainer container className='align-center'>
           <GridItem item xs={6} md={0.7}
-              onClick={() => history.push('/parent/reporting')}
-              sx={{marginRight: 2, '&:hover': {
-                cursor: 'pointer'
-              }}}
+              onClick={() => history.push('/parent/reporting/' + studentId)}
+              sx={{
+                marginRight: 2,
+                '&:hover': {
+                  cursor: 'pointer'
+                }
+              }}
               >
             <ImageAvatar
               firstName ={student.firstName? student.firstName:'F'}
