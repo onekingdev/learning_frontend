@@ -16,44 +16,44 @@ export type Store = {
     blockPresentation: any;
 };
 
-export const MockStore: Store = {
-    user: {
-      lastLogin: new Date(),
-      isSuperuser: true,
-      username: 'string',
-      firstName: 'string',
-      lastName: 'string',
-      email: 'string',
-      isStaff: false,
-      isActive: true,
-      dateJoined: new Date(),
-      language: 'string',
-      profile: {
-        role: 'STUDENT',
-      },
-      token: 'string',
-    },
-    student: {
-      createTimestamp: new Date(),
-      updateTimestamp: new Date(),
-      firstName: 'string',
-      lastName: 'last name',
-      fullName: 'full name',
-      dob: new Date(),
-      gender: Gender.male,
-      activeGroupId: 'activeGroupId',
-      levelId: 'levelId',
-      guardianId: 'guardianId',
-      schoolId: 'schoolId',
-      balance: 4444422
-    },
-    earning: {
-    },
-    avatar: {
-    },
-    blockPresentation: {
-    }
-};
+// export const MockStore: Store = {
+//     user: {
+//       lastLogin: new Date(),
+//       isSuperuser: true,
+//       username: 'string',
+//       firstName: 'string',
+//       lastName: 'string',
+//       email: 'string',
+//       isStaff: false,
+//       isActive: true,
+//       dateJoined: new Date(),
+//       language: 'string',
+//       profile: {
+//         role: 'STUDENT',
+//       },
+//       token: 'string',
+//     },
+//     student: {
+//       createTimestamp: new Date(),
+//       updateTimestamp: new Date(),
+//       firstName: 'string',
+//       lastName: 'last name',
+//       fullName: 'full name',
+//       dob: new Date(),
+//       gender: Gender.male,
+//       activeGroupId: 'activeGroupId',
+//       levelId: 'levelId',
+//       guardianId: 'guardianId',
+//       schoolId: 'schoolId',
+//       balance: 4444422
+//     },
+//     earning: {
+//     },
+//     avatar: {
+//     },
+//     blockPresentation: {
+//     }
+// };
 
 const persistConfig = {
     key: 'root',
