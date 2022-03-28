@@ -4,7 +4,7 @@ export const dictionary = Object.freeze({
     arcade    : 'Arcade',
     learning  : 'Learning',
     adventure : 'Adventure',
-    sport     : 'Sports',
+    sport     : 'Sport',
     skill     : 'Skill',
     strategy  : 'Strategy',
   },

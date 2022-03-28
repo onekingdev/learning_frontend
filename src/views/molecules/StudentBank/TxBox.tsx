@@ -87,7 +87,7 @@ export const TxBox: FC = () => {
           <Button
             bgColor={BasicColor.green}
             onClick={onWithdrawBtnClicked}
-            value="Withdrawal"
+            value="Withdraw"
             fullWidth={true}
             loading={loading}
           />

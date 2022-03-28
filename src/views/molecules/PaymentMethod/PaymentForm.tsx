@@ -385,7 +385,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                         helperText={validateRst.expiryDate}
                     /> */}
                         <TextField
-                            label="Expiration Date ex: (04/25)"
+                            label="Expiry Date ex: (04/25)"
                             onChange={(e: any) => {
                                 const expiryDate = e.target.value.split('/');
                                 handleFormChange('expiryDate', e.target.value.length < 5 ? 'Field is required' : expiryDate.length <= 1 ? 'Type is wrong' : expiryDate[0] >= 13 ? 'Type is wrong' : '')
@@ -571,7 +571,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                     </Grid>
                 </>)}
             </Grid>
-            <div style={{ color: BasicColor.lightCyanBlue, fontSize: '14px', paddingTop: '30px', paddingBottom: '30px' }}>Your transaction is secured through SSL Encryption through Stripe</div>
+            <div style={{ color: BasicColor.lightCyanBlue, fontSize: '14px', paddingTop: '30px', paddingBottom: '30px' }}>Your transactions is secured SSL encryption</div>
         </>
     );
 });

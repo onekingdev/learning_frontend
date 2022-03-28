@@ -36,7 +36,7 @@ interface InterestProp {
 export const Interest: FC<InterestProp> = ({interests}) => {
   return (
     <StyledTxContainer >
-      <LSLabel fontSize={20}>Interest {' & '} levels</LSLabel>
+      <LSLabel fontSize={20}>Interests {' & '} levels</LSLabel>
       <StyledTableContainer >
         <Table >
           <TableHead>

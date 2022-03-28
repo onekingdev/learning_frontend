@@ -135,8 +135,9 @@ export const Payment: FC = () => {
         <ParentPgStepper step={2} />
         <TipContainer>
           <Alert severity='info'>
-            When signing up for Socrates, children can get one or more areas of knowledge to learn from our growing selection.
-            Choose the Solo package for one area, Combo package for any two, or Gold Package to get it all!
+            In Socrates, students can get mutiple Areas of Knowledge depend of
+            the package they will have All, Two Areas or a Solo Area! Choose the
+            best package for your kids!
             <br />
             <SubjectContainer>
               <div className='flex align-center'>
@@ -194,7 +195,7 @@ export const Payment: FC = () => {
         </PackageContainer>
         {!isSpecialCode &&
           <Alert severity='info' className='m-b-35' style={{width: '72%', fontSize: '40px', justifyContent: 'center', alignItems: 'center', maxWidth: '1414px'}}>
-            Receive {offRate}% off these prices for each additional child on your account
+            Add 2nd kid with {offRate}% off
           </Alert>
         }
         <Elements stripe={stripePromise}>

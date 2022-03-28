@@ -262,8 +262,8 @@ const NewKids: FC = () => {
       <Container>
         <PaperContainer>
           <Paper elevation={3} className={classes.paper}>
-            <Title>Adding a New Child</Title>
-            <Tip>Please complete the following to get your child started</Tip>
+            <Title>Adding a New Kid</Title>
+            <Tip>Please introduce the next information</Tip>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 {/* <TextField label='Select Your Package' variant='outlined' fullWidth sx={{backgroundColor: 'white'}} value={packageName}
@@ -462,7 +462,7 @@ const NewKids: FC = () => {
               <Grid item xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id='select-audience-label'>
-                    Select Your curriculum
+                    Select Your Audience
                   </InputLabel>
                   <Select
                     labelId   ='select-audience-label'

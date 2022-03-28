@@ -63,7 +63,7 @@ export const ConfirmAccount: FC = () => {
         </StudentRegister>
         <Disclaimer>
           <Body style={{ fontSize: '14px' }}>
-            By clicking Create Account, you agree to Learn With Socrates’s User
+            By clicking Create Account, you aggree to Learn With Socrates’s User
             Agreement, Privacy Policy, and Cookie Policy
           </Body>
         </Disclaimer>
