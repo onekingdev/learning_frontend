@@ -1,30 +1,25 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { LoadingContext } from 'react-router-loading';
-import { useSnackbar } from 'notistack';
-import { toPng } from 'html-to-image'
-import { saveAs } from 'file-saver'
-import { useHistory } from 'react-router-dom';
-
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
-import license from 'views/assets/student-license.svg';
-
-import License from 'views/molecules/KidLicense/KidLicense';
-import TextField from 'views/molecules/MuiTextField';
-import Button from 'views/molecules/MuiButton';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { BasicColor } from 'views/Color';
-
-import { Store } from 'app/configureStore';
-import { changeStudentGrade } from 'app/actions/studentActions'
-import { changeStudentPassword } from 'app/actions/studentActions'
-import { ImageAvatar } from 'views/molecules/Avatar/DefaultAvatar';
+import { LoadingContext }           from 'react-router-loading';
+import { useSnackbar }              from 'notistack';
+import { toPng }                    from 'html-to-image'
+import { saveAs }                   from 'file-saver'
+import { useHistory }               from 'react-router-dom';
+import InputLabel                   from '@mui/material/InputLabel';
+import MenuItem                     from '@mui/material/MenuItem';
+import FormControl                  from '@mui/material/FormControl';
+import Select                       from '@mui/material/Select';
+import license                      from 'views/assets/student-license.svg';
+import License                      from 'views/molecules/KidLicense/KidLicense';
+import TextField                    from 'views/molecules/MuiTextField';
+import Button                       from 'views/molecules/MuiButton';
+import { ParentPgContainer }        from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { LSDialog }                 from 'views/molecules/Setting/LSDialog';
+import { BasicColor }               from 'views/Color';
+import { Store }                    from 'app/configureStore';
+import { changeStudentGrade }       from 'app/actions/studentActions'
+import { changeStudentPassword }    from 'app/actions/studentActions'
+import { ImageAvatar }              from 'views/molecules/Avatar/DefaultAvatar';
 
 import {
   Title,

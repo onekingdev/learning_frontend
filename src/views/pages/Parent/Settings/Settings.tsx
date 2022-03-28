@@ -1,5 +1,4 @@
 import { FC, useEffect, useContext } from 'react';
-import styled                        from 'styled-components';
 import { Grid }                      from '@mui/material';
 import { ParentPgContainer }         from 'views/molecules/ParentPgContainer/ParentPgContainer';
 import { Title }                     from 'views/molecules/Setting/utils/Style';
@@ -15,7 +14,10 @@ import { MembershipDetail } from 'views/organisms/Setting/Details';
 import { CssBaseline }      from '@mui/material';
 import { LoadingContext }   from 'react-router-loading';
 import { TypoTitle }        from 'views/atoms/Text';
-
+import {
+  SettingContainer,
+  TitleContainer,
+ } from './Styles';
 export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);
 
@@ -48,18 +50,3 @@ export const Settings: FC = () => {
   );
 };
 export default Settings;
-
-const SettingContainer = styled.div`
-  width: 80vw;
-  @media screen and (max-width: 540px) {
-    width: 100%;
-    margin-bottom: 20vh;
-  }
-`;
-const TitleContainer = styled.div`
-  display         : flex;
-  justify-content : center;
-  @media screen and (max-width: 540px) {
-    width: 100%;
-  }
-`;

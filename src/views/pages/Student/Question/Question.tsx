@@ -24,69 +24,69 @@ import { createAiBlockPresentation,
 import { getNextLevel }                from 'app/actions/userActions';
 
 interface RoutePresentationParams {
-  mode: string;
-  aokId: string;
+  mode  : string;
+  aokId : string;
 }
 
 interface BlockQuestionInput {
-  question: number;
-  answerOption: number;
-  isCorrect: boolean;
+  question     : number;
+  answerOption : number;
+  isCorrect    : boolean;
 }
 
 const EXP_UNIT = 5;
 
 export const Question: FC = () => {
 
-  const earning = useSelector((state: any) =>   state.earning);
-  const user =    useSelector((state: any) =>   state.user);
-  const student = useSelector((state: any) =>   state.student)
-  const state =   useSelector((state: Store) => state);
-  const loadingContext = useContext(LoadingContext);
-  const dispatch = useDispatch();
+  const earning         = useSelector((state: any) =>   state.earning);
+  const user            = useSelector((state: any) =>   state.user);
+  const student         = useSelector((state: any) =>   state.student)
+  const state           = useSelector((state: Store) => state);
+  const loadingContext  = useContext(LoadingContext);
+  const dispatch        = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
   const {mode, aokId} = useParams<RoutePresentationParams>();
   const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
-  const [question, setQuestion] =                   useState<IQuestion>();
-  const [questionCounter, setQuestionCounter] =     useState(Number);
-  const [isLessonFinished, setIsLessonFinished] =   useState(false);
-  const [answerResult, setAnswerResult] =           useState<BlockQuestionInput[]>([]);
-  const [pointUnit, setPointUnit] =                 useState<number>(0);
-  const [points, setPoints] =                       useState<number>(0);
-  const [loading, setLoading] =                     useState(false)
-  const [nextMaxExp, setNextMaxExp] =               useState(0)
-  const [openDg, setOpenDg] =                       useState(false);
+  const [question, setQuestion]                   = useState<IQuestion>();
+  const [questionCounter, setQuestionCounter]     = useState(Number);
+  const [isLessonFinished, setIsLessonFinished]   = useState(false);
+  const [answerResult, setAnswerResult]           = useState<BlockQuestionInput[]>([]);
+  const [pointUnit, setPointUnit]                 = useState<number>(0);
+  const [points, setPoints]                       = useState<number>(0);
+  const [loading, setLoading]                     = useState(false)
+  const [nextMaxExp, setNextMaxExp]               = useState(0)
+  const [openDg, setOpenDg]                       = useState(false);
 
   const renderTypes = (
-    question:          IQuestion,
-    type:              string,
-    totalQuestions:    number,
-    blockPresentation: IBlockPresentation
+    question           : IQuestion,
+    type               : string,
+    totalQuestions     : number,
+    blockPresentation  : IBlockPresentation
   ) => {
     const types = [
       {
         type: 'Text',
         component: (
           <MultipleChoiceText
-            question=          {question}
-            nextQuestion=      {handleNextQuestion}
-            totalQuestions=    {totalQuestions}
-            questionCounter=   {questionCounter}
-            onAnswer=          {onAnswer}
-            blockPresentation= {blockPresentation}
+            question          = {question}
+            nextQuestion      = {handleNextQuestion}
+            totalQuestions    = {totalQuestions}
+            questionCounter   = {questionCounter}
+            onAnswer          = {onAnswer}
+            blockPresentation = {blockPresentation}
           />
         )
       }, {
         type: 'SightWord',
         component: (
           <MultipleChoiceSightWord
-            question=          {question}
-            nextQuestion=      {handleNextQuestion}
-            totalQuestions=    {totalQuestions}
-            questionCounter=   {questionCounter}
-            onAnswer=          {onAnswer}
-            blockPresentation= {blockPresentation}
+            question          = {question}
+            nextQuestion      = {handleNextQuestion}
+            totalQuestions    = {totalQuestions}
+            questionCounter   = {questionCounter}
+            onAnswer          = {onAnswer}
+            blockPresentation = {blockPresentation}
           />
         )
       },

@@ -61,12 +61,12 @@ export const ParentReporting: FC = () => {
       }}>
         <BarChart />
         <MarkTable
-          areasOfKnowledge={areasOfKnowledge}
-          data={data}
-          activeSubjectId={activeSubjectId}
-          onChangeActiveIdHandler={setActiveSubjectId}
-          studentId={studentId}
-          setStudentId={setStudentId}
+          areasOfKnowledge        = {areasOfKnowledge}
+          data                    = {data}
+          activeSubjectId         = {activeSubjectId}
+          onChangeActiveIdHandler = {setActiveSubjectId}
+          studentId               = {studentId}
+          setStudentId            = {setStudentId}
         />
       </div>
     </ParentPgContainer>

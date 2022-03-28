@@ -1,6 +1,5 @@
 import { FC, useEffect, useContext }  from 'react';
 import { Box, Grid }                  from '@mui/material';
-
 import { ParentPgContainer }          from 'views/molecules/ParentPgContainer/ParentPgContainer';
 import { LSCheckboxList }             from 'views/molecules/Report/CheckList';
 import { IconTitle }                  from 'views/molecules/Report/IconTitle';
@@ -28,10 +27,10 @@ export const Report: FC = () => {
                 <Box sx={{display: 'flex', flexDirection: 'row'}}>
                   <Box
                     sx={{
-                      display:        'flex',
-                      paddingLeft:    '30px',
-                      flexDirection:  'column',
-                      justifyContent: 'center',
+                      display        : 'flex',
+                      paddingLeft    : '30px',
+                      flexDirection  : 'column',
+                      justifyContent : 'center',
                     }}
                   >
                     <LSLabel mb={0} color="#21B95C" fontSize={32}>

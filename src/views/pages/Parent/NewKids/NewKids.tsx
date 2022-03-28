@@ -71,32 +71,31 @@ const NewKids: FC = () => {
 
   const subjectIcons:any = {
     Gold: {
-      MATH:      math_gold,
-      ELA:       ela_gold,
-      SCIENCE:   science_gold,
-      FINANCIAL: financial_gold,
-      HEALTH:    health_gold
+      MATH      : math_gold,
+      ELA       : ela_gold,
+      SCIENCE   : science_gold,
+      FINANCIAL : financial_gold,
+      HEALTH    : health_gold
     },
     Combo: {
-      MATH:      math_combo,
-      ELA:       ela_combo,
-      SCIENCE:   science_combo,
-      FINANCIAL: financial_combo,
-      HEALTH:    health_combo
+      MATH      : math_combo,
+      ELA       : ela_combo,
+      SCIENCE   : science_combo,
+      FINANCIAL : financial_combo,
+      HEALTH    : health_combo
     },
     Sole: {
-      MATH:      math_sole,
-      ELA:       ela_sole,
-      SCIENCE:   science_sole,
-      FINANCIAL: financial_sole,
-      HEALTH:    health_sole
+      MATH      : math_sole,
+      ELA       : ela_sole,
+      SCIENCE   : science_sole,
+      FINANCIAL : financial_sole,
+      HEALTH    : health_sole
     }
   }
 
   const handleCheckPath = (path: string, isChecked: boolean) => {
-    console.log(path, isChecked);
     let temp: any = [];
-    temp = [...paths];
+    temp          = [...paths];
     if (isChecked) {
       temp.push(path);
       if (temp.length > 2) temp.shift();
@@ -105,14 +104,14 @@ const NewKids: FC = () => {
   };
 
   const [validateMsg, setValidateMsg] = useState<{[key: string]: any}>({
-    packageName:  null,
-    firstName:    null,
-    lastName:     null,
-    userId:       null,
-    password:     null,
-    confPassword: null,
-    audience:     null,
-    grade:        null,
+    packageName  : null,
+    firstName    : null,
+    lastName     : null,
+    userId       : null,
+    password     : null,
+    confPassword : null,
+    audience     : null,
+    grade        : null,
   });
 
   const handleFormChange = (field: string, errMsg: string) => {
@@ -144,12 +143,12 @@ const NewKids: FC = () => {
 
     setChildIdx(childIdx + 1);
     setValidateMsg({
-      firstName:    null,
-      lastName:     null,
-      userId:       null,
-      password:     null,
-      confPassword: null,
-      grade:        null,
+      firstName    : null,
+      lastName     : null,
+      userId       : null,
+      password     : null,
+      confPassword : null,
+      grade        : null,
     });
     setCurrentPackage(temp[0]);
     setFirstName('');
@@ -180,8 +179,6 @@ const NewKids: FC = () => {
       user.token,
       dispatch
     );
-    console.log('result is ', result )
-    console.log('-----------------------------------------')
     if(!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return false;
@@ -189,15 +186,15 @@ const NewKids: FC = () => {
     setChilds([
       ...childs,
       {
-        package:           currentPackage,
-        firstName:         firstName,
-        lastName:          lastName,
-        userId:            userId,
-        password:          password,
-        grade:             grade,
-        currentPackage_id: currentPackage.id,
-        listSubjectId:     listSubjectId,
-        studentPlan:       studentPlan,
+        package           : currentPackage,
+        firstName         : firstName,
+        lastName          : lastName,
+        userId            : userId,
+        password          : password,
+        grade             : grade,
+        currentPackage_id : currentPackage.id,
+        listSubjectId     : listSubjectId,
+        studentPlan       : studentPlan,
       },
     ]);
     return true;
@@ -242,8 +239,8 @@ const NewKids: FC = () => {
   }
 
   const onPageInit = async () => {
-    const guardianStudentPlans = guardian.guardianstudentplanSet;
-    const temp_availblePlans = [];
+    const guardianStudentPlans  = guardian.guardianstudentplanSet;
+    const temp_availblePlans    = [];
 
     for(const guardianStudentPlan of guardianStudentPlans) {
       temp_availblePlans.push(guardianStudentPlan?.plan)
