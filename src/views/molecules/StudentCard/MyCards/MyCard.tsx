@@ -10,10 +10,11 @@ type CardProps = {
   select: (name: string) => (void)
   isSelected?: boolean
   purchased: boolean
+  firebaseName: string
 }
 
 export const MyCard: FC<CardProps> = ({
-  select, category, isSelected, purchased
+  select, category, isSelected, purchased, firebaseName
 }) => {
 
   const [imgurl, setImgurl] = useState('')
@@ -21,7 +22,7 @@ export const MyCard: FC<CardProps> = ({
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(
       'Categories',
-      category ? category + '.png' : ''
+      firebaseName ? firebaseName + '.png' : ''
     );
     if (link === 'NO_IMAGE') setImgurl('');
     else setImgurl(link);
