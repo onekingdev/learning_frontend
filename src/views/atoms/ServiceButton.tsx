@@ -23,7 +23,6 @@ export const ServiceButton: FC<ServiceButtonProps> = ({
 const StyledServiceButton = styled.button<{icon: string}>`
   background-color: ${BasicColor.white};
   color: ${BasicColor.black};
-  font-family: Montserrat;
   width: 262px;
   height: 49px;
   border-radius: 20px;

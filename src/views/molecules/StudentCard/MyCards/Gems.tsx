@@ -59,7 +59,6 @@ const StyledGem = styled.div`
   align-items: center;
   position: relative;
   p {
-    font-family: Montserrat;
     margin: 0;
     position: absolute;
     top: 45%;
