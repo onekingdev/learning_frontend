@@ -10,11 +10,10 @@ type CardProps = {
   category: string;
   id: number;
   price: number;
-  firebaseName: string;
   buy: (imgUrl: string, id: number) => void;
 };
 
-export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) => {
+export const Card: FC<CardProps> = ({id, buy, price, category}) => {
   const onCardClick = () => {
     // This is prop from parent component, when card is clicked, this calls function of parent.
     buy(category, id);
@@ -25,7 +24,7 @@ export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) =>
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(
       'Categories',
-      firebaseName ? firebaseName + '.png' : ''
+      category ? category + '.png' : ''
     );
     if (link === 'NO_IMAGE') setImgurl('');
     else setImgurl(link);

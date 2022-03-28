@@ -129,7 +129,7 @@ export const Question: FC = () => {
   };
 
   const increaseExp = async (isCorrect:boolean) => {
-    const currentExp  = earning.exp + isCorrect ? EXP_UNIT : 1;
+    const currentExp  = earning.exp + (isCorrect ? EXP_UNIT : 1);
     const expMax      = earning.expMax
 
     if (currentExp > expMax) {

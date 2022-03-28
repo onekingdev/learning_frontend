@@ -18,7 +18,6 @@ interface CardPropArray {
     name: string;
     id: number;
     price: number;
-    firebaseName: string
   }[];
 }
 
@@ -107,7 +106,6 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
       >
         {cards.map((card) => (
           <Card
-            firebaseName={card.firebaseName}
             key={card.id}
             id={card.id}
             price={card.price}

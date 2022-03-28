@@ -17,8 +17,6 @@ interface CardPropArray {
   cards: {
     name: string;
     id: number;
-    owned: boolean
-    firebaseName: string
   }[];
 }
 
@@ -123,9 +121,10 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
             key={item.id}
             select={callbackCardSelect}
             category={item.name}
-            purchased={item.owned}
+            purchased={allCards.some(
+              onecard => onecard.category.name === item.name && onecard.owned === true
+            )}
             isSelected={item.name === card}
-            firebaseName={item.firebaseName}
           />
         ))}
       </StyledCardContainer>
