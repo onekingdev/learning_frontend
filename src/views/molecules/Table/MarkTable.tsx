@@ -153,31 +153,31 @@ const MarkTable = ({
 }) => {
     const guardian = useSelector((state: any) => state.guardian);
     useEffect(() => {
-        if (areasOfKnowledge && typeof areasOfKnowledge === "object" && areasOfKnowledge.length > 0) {
+        if (areasOfKnowledge && typeof areasOfKnowledge === 'object' && areasOfKnowledge.length > 0) {
             onChangeActiveIdHandler(areasOfKnowledge[0].id)
         }
     }, [areasOfKnowledge]);
     return (<MarkTableDiv>
         <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "end"
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'end'
         }}>
             <div>
                 Student |
             </div>
             <select
                 style={{
-                    minHeight: "28px",
-                    background: "transparent",
-                    width: "auto",
-                    height: "100%",
-                    border: "none",
-                    outline: "none",
-                }} name="" id="" value={studentId} onChange={e => setStudentId(parseInt(e.target.value))}>
+                    minHeight: '28px',
+                    background: 'transparent',
+                    width: 'auto',
+                    height: '100%',
+                    border: 'none',
+                    outline: 'none',
+                }} name='' id='' value={studentId} onChange={e => setStudentId(parseInt(e.target.value))}>
             { guardian && guardian.guardianstudentSet && guardian.guardianstudentSet.length > 0 ? guardian.guardianstudentSet.map((studentObj: any, id: number) => (
-                <option key={id} value={studentObj.id}>{ studentObj?.student?.fullName || "Unset" }</option>
-            )) : "" }
+                <option key={id} value={studentObj.id}>{ studentObj?.student?.fullName || 'Unset' }</option>
+            )) : '' }
             </select>
         </div>
         <PcCom style={{
@@ -189,20 +189,20 @@ const MarkTable = ({
                 style={{
                     flexGrow: 1,
                     flexShrink: 1,
-                    minHeight: "28px",
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "center",
+                    minHeight: '28px',
+                    display: 'flex',
+                    justifyContent: 'start',
+                    alignItems: 'center',
                     paddingLeft: `${1}rem`,
-                    background: "transparent",
-                    width: "100%",
-                    height: "100%",
-                    border: "none",
-                    outline: "none",
-                }} name="" id="" value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
-            { areasOfKnowledge && typeof areasOfKnowledge === "object" && areasOfKnowledge.length > 0 ? areasOfKnowledge.map((subject, id) => (
+                    background: 'transparent',
+                    width: '100%',
+                    height: '100%',
+                    border: 'none',
+                    outline: 'none',
+                }} name='' id='' value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
+            { areasOfKnowledge && typeof areasOfKnowledge === 'object' && areasOfKnowledge.length > 0 ? areasOfKnowledge.map((subject, id) => (
                 <option key={id} value={subject?.id}>{ subject?.name }</option>
-            )) : "" }
+            )) : '' }
             </select>
             <Mark>Accuracy</Mark>
             <Mark>Correct</Mark>
@@ -215,17 +215,17 @@ const MarkTable = ({
             <select style={{
                 flexGrow: 1,
                 flexShrink: 1,
-                minHeight: "28px",
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
+                minHeight: '28px',
+                display: 'flex',
+                justifyContent: 'start',
+                alignItems: 'center',
                 paddingLeft: `${0}rem`,
-                background: "transparent",
-                width: "100%",
-                height: "100%",
-                border: "none",
-                outline: "none",
-            }} name="" id="" value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
+                background: 'transparent',
+                width: '100%',
+                height: '100%',
+                border: 'none',
+                outline: 'none',
+            }} name='' id='' value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
             { areasOfKnowledge.map((subject, id) => (
                 <option key={id} value={subject?.id}>{ subject?.name }</option>
             )) }
@@ -234,38 +234,38 @@ const MarkTable = ({
         { data && data.rootTopicsByAok && data.rootTopicsByAok.length > 0 ? data?.rootTopicsByAok?.map((aok: any, id: number) => (
             <SingleGroup key={id} main={{
                 item1: aok?.name,
-                item2: aok?.report ? "" : "",
-                item3: aok?.report ? "" : "",
-                item4: aok?.report ? "" : "",
+                item2: aok?.report ? '' : '',
+                item3: aok?.report ? '' : '',
+                item4: aok?.report ? '' : '',
                 mastery: aok?.mastery
             }} extra={aok?.subTopics.map((subTopic1: any) => ({
                 main: {
                     item1: subTopic1?.name,
-                    item2: subTopic1?.report ? "" : "",
-                    item3: subTopic1?.report ? "" : "",
-                    item4: subTopic1?.report ? "" : "",
+                    item2: subTopic1?.report ? '' : '',
+                    item3: subTopic1?.report ? '' : '',
+                    item4: subTopic1?.report ? '' : '',
                     mastery: subTopic1?.mastery
                 },
                 extra: subTopic1?.subTopics.map((subTopic2: any) => ({
                     main: {
                         item1: subTopic2?.name,
-                        item2: subTopic2?.report ? "" : "",
-                        item3: subTopic2?.report ? "" : "",
-                        item4: subTopic2?.report ? "" : "",
+                        item2: subTopic2?.report ? '' : '',
+                        item3: subTopic2?.report ? '' : '',
+                        item4: subTopic2?.report ? '' : '',
                         mastery: subTopic2?.mastery
                     },
                     extra: subTopic1?.subTopics.map((subTopic3: any) => ({
                         main: {
                             item1: subTopic3?.name,
-                            item2: subTopic3?.report ? "" : "",
-                            item3: subTopic3?.report ? "" : "",
-                            item4: subTopic3?.report ? "" : "",
+                            item2: subTopic3?.report ? '' : '',
+                            item3: subTopic3?.report ? '' : '',
+                            item4: subTopic3?.report ? '' : '',
                             mastery: subTopic3?.mastery
                         },
                     }))
                 }))
             }))} deep={1} />
-        )) : "" }
+        )) : '' }
         <SingleGroup main={{
             item1: 'Resta de números enteros',
             item2: '-%',

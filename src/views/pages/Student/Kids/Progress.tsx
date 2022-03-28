@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext, FC, useRef } from 'react';
 import { StudentMenu }         from 'views/pages/Student/Menus/StudentMenu';
-import styled                  from 'styled-components';
 import { Title }               from 'views/atoms/Text';
 import Box                     from '@mui/material/Box';
 import InputLabel              from '@mui/material/InputLabel';
@@ -14,6 +13,7 @@ import MarkTableSubject        from 'views/molecules/Table/MarkTableSubject';
 import { LoadingContext }      from 'react-router-loading';
 import { ScreenSize }          from 'constants/screenSize';
 import { MobileCom, PcCom }    from './TreasureTrack';
+import {Container }            from './Style'
 
 type IProcessPathSvg = {
     bgColor?: string;
@@ -1917,19 +1917,3 @@ export const KidsProgress = () => {
         </Container>
     </StudentMenu>
 }
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: ${ScreenSize.widescreen};
-    width: 100vw;
-    margin: auto;
-    margin-top: 2rem;
-    padding: 0;
-    box-sizing: border-box;
-    @media (max-width: ${ ScreenSize.widescreen}) {
-        padding-left: 0rem;
-        padding-right: 0rem;
-    }
-`;

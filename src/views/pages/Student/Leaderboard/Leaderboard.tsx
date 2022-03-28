@@ -1,8 +1,7 @@
-import { FC } from          'react';
-import styled from          'styled-components';
-import { ScoreBoard } from  'views/organisms/ScoreBoard';
-import { ScreenSize } from  'constants/screenSize';
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
+import { FC }           from 'react';
+import { ScoreBoard }   from 'views/organisms/ScoreBoard';
+import { StudentMenu }  from 'views/pages/Student/Menus/StudentMenu';
+import { Wrapper }      from './Style';
 
 export const Leaderboard: FC = () => {
   return (
@@ -14,13 +13,4 @@ export const Leaderboard: FC = () => {
   );
 };
 
-const Wrapper = styled.div`
-  background-repeat: no-repeat;
-  background-size: cover;
-  @media (max-width: ${ScreenSize.tablet}) {
-    height: 100vh;
-  }
-  @media (min-width: ${ScreenSize.desktop}) {
-    height: 100vh;
-  }
-`;
+

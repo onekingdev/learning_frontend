@@ -1,18 +1,15 @@
 import { FC, useEffect, useContext } from 'react';
 import { useSelector }               from 'react-redux';
-import styled                        from 'styled-components';
 import { Grid }                      from '@mui/material';
 import { LoadingContext }            from 'react-router-loading';
 import { StudentMenu }               from 'views/pages/Student/Menus/StudentMenu';
-import background                    from 'views/assets/colored-shapes-bg.svg';
 import Cartera                       from 'views/assets/Cartera.svg';
-import { ScreenSize }                from 'constants/screenSize';
 import { AccountBalance }            from 'views/molecules/StudentBank/AccountBalance';
 import { TxBox }                     from 'views/molecules/StudentBank/TxBox';
 import { TxHistoryTable }            from 'views/molecules/StudentBank/TxHistoryTable';
 import { Interest }                  from 'views/molecules/StudentBank/Interest';
 import { PageTitle }                 from 'views/molecules/PageTitle';
-
+import { Wrapper, GridItem, Img }    from './Styles';
 export const Bank: FC = () => {
 
   const student = useSelector((state: any) => state.student)
@@ -64,32 +61,4 @@ export const Bank: FC = () => {
   );
 };
 
-const GridItem = styled(Grid) <{
-  align?: string;
-}>`
-  &.MuiGrid-root {
-    display:         flex;
-    justify-content: center;
-    align-items:     ${p => (p.align ? p.align : 'center')};
-    flex-direction:  column;
-    padding:         15px;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-      padding: 10px 0 10px 0;
-      align-items: center;
-    }
-  }
-`;
 
-const Img = styled.img`
-// width: 20vw;
-@media screen and (max-width: ${ScreenSize.tablet}) {
-    width       : 15vw;
-    margin-left : 5vw;
-  }
-`;
-const Wrapper = styled.div`
-  background-image  : url(${background});
-  background-repeat : no-repeat;
-  background-size   : cover;
-  height            : 100vh;
-`;

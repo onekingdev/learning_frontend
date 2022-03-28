@@ -20,7 +20,6 @@ export const MyProfile: FC = () => {
             <Head>
               <AvatarBadge />
             </Head>
-
             <BadgeContainer />
           </div>
           <div>

@@ -21,7 +21,6 @@ export const Progress: FC = () => {
   }, []);
   return (
     <>
-
       <ProgressBackground>
         <StudentMenu>
           <ProgressTitle>

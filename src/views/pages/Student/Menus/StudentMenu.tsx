@@ -1,25 +1,16 @@
-import { FC, useEffect } from 'react';
-import { TopMenu } from 'views/organisms/Menu/TopMenu';
-import { MobileMenu } from 'views/organisms/Menu/MobileMenu';
-import avatarPlaceHolder from 'views/assets/avatars/avatar1.svg';
-import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import { useSelector } from 'react-redux';
+import { FC }                         from 'react';
+import { TopMenu }                    from 'views/organisms/Menu/TopMenu';
+import { MobileMenu }                 from 'views/organisms/Menu/MobileMenu';
+import avatarPlaceHolder              from 'views/assets/avatars/avatar1.svg';
+import { useSelector }                from 'react-redux';
+import { Template, TopMenuContainer } from './Style';
 
 export const StudentMenu: FC = ({children}) => {
   const user = useSelector((state: any) => state.user);
   const earning = useSelector((state: any) => state.earning);
 
-  useEffect(() => {
-    // setStudent(student);
-    // console.log(user)
-    // console.log(wallet)
-    // console.log(earning);
-  }, []);
-
   return (
     <Template>
-      {/* {console.log(earning)} */}
       <TopMenuContainer>
         <TopMenu
           rank  ={earning.rank}
@@ -39,19 +30,3 @@ export const StudentMenu: FC = ({children}) => {
   );
 };
 
-const Template = styled.div`
-  display:            grid;
-  grid-template-rows: 68px calc(100vh - 68px);
-  @media (max-width:  ${ScreenSize.tablet}) {
-    grid-template-rows: calc(100vh - 60px) 60px;
-  }
-`;
-const TopMenuContainer = styled.div`
-  width:           100%;
-  display:         flex;
-  justify-content: center;
-  margin-bottom:   100px;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    display: none;
-  }
-`;

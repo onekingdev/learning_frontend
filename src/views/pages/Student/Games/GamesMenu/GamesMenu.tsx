@@ -25,13 +25,13 @@ interface GameCategoryParams {
 }
 
 interface GameCardParam {
-  id:         number,
-  randomSlug: string
-  image:      string
-  cost:       number,
-  playStats:  number,
-  name:       string,
-  path:       string
+  id         : number,
+  randomSlug : string
+  image      : string
+  cost       : number,
+  playStats  : number,
+  name       : string,
+  path       : string
 }
 export const GamesMenu: FC = () => {
 
@@ -45,21 +45,21 @@ export const GamesMenu: FC = () => {
   const [gameCards, setGameCards] = useState<GameCardParam[]>([])
 
   const gameMenuImgs = {
-    arcade :    arcade,
-    learning :  learning,
+    arcade    : arcade,
+    learning  : learning,
     adventure : adventure,
-    sport :     sport,
-    skill :     skill,
-    strategy :  strategy,
+    sport     : sport,
+    skill     : skill,
+    strategy  : strategy,
   }
 
   const gameMenuColor = {
-    arcade :    BasicColor.red,
-    learning :  BasicColor.green,
-    adventure : BasicColor.aqua,
-    sport :     BasicColor.blue,
-    skill :     BasicColor.purple,
-    strategy:   BasicColor.yellow,
+    arcade     : BasicColor.red,
+    learning   : BasicColor.green,
+    adventure  : BasicColor.aqua,
+    sport      : BasicColor.blue,
+    skill      : BasicColor.purple,
+    strategy   : BasicColor.yellow,
   }
 
   const lenguage = 'en';

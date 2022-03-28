@@ -52,12 +52,12 @@ export const SubjectsMenu: FC = () => {
           <SubjectsCardsContainer>
             {areasOfKnowledge.map((areaOfKnowledge: IAreasOfKnowledge) => (
               <TopicCard
-                image=      {`https://api.withsocrates.com/media/${areaOfKnowledge.image}`}
-                background= {areaOfKnowledge.hexColor}
-                subject=    {areaOfKnowledge.name}
-                onClick=    {() => history.push(`/topic/${areaOfKnowledge.id}`)}
-                isButton=   {true}
-                isActive=   {areaOfKnowledge.isActive}
+                image      =  {`https://api.withsocrates.com/media/${areaOfKnowledge.image}`}
+                background =  {areaOfKnowledge.hexColor}
+                subject    =  {areaOfKnowledge.name}
+                onClick    =  {() => history.push(`/topic/${areaOfKnowledge.id}`)}
+                isButton   =  {true}
+                isActive   =  {areaOfKnowledge.isActive}
               />
             ))}
           </SubjectsCardsContainer>
