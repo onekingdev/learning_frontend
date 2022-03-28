@@ -10,11 +10,10 @@ type CardProps = {
   category: string;
   id: number;
   price: number;
-  firebaseName: string;
   buy: (imgUrl: string, id: number) => void;
 };
 
-export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) => {
+export const Card: FC<CardProps> = ({id, buy, price, category}) => {
   const onCardClick = () => {
     // This is prop from parent component, when card is clicked, this calls function of parent.
     buy(category, id);
@@ -25,7 +24,7 @@ export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) =>
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(
       'Categories',
-      firebaseName ? firebaseName + '.png' : ''
+      category ? category + '.png' : ''
     );
     if (link === 'NO_IMAGE') setImgurl('');
     else setImgurl(link);
@@ -101,6 +100,7 @@ const CardContainer = styled.div`
     justify-content: center;
     text-align: center;
     margin: 0px;
+    font-family: Montserrat;
     color: white;
     background-color: ${BasicColor.green};
   }
@@ -145,6 +145,7 @@ const StyledBg = styled.div`
   p {
     text-align: center;
     font-weight: 700;
+    font-family: Montserrat;
     margin: 0;
     font-size: 15px;
     @media screen and (max-width: ${ScreenSize.tablet}) {
@@ -161,6 +162,7 @@ const StyledBg = styled.div`
     border-radius: 20px;
     display: flex;
     align-items: center;
+    font-family: Montserrat;
     justify-content: center;
     &:hover {
       box-shadow: 0 1px 1rem -3px orange;
@@ -178,6 +180,7 @@ const StyledBg = styled.div`
 `;
 
 const StyledPrice = styled.div`
+  font-family: Montserrat;
   background-color: ${BasicColor.blue};
   height: 40px;
   width: 100px;

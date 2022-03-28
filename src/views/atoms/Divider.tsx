@@ -22,6 +22,7 @@ const StyledDivider = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   text-align: center;
   color: ${BasicColor.white};
+  font-family: Montserrat;
   font-weight: 700;
   font-size: 14px;
   padding-left: 3rem;

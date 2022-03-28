@@ -141,13 +141,45 @@ const MarkTable = ({
     onChangeActiveIdHandler=()=>{},
     data=[],
     areasOfKnowledge=[],
+    studentId=-1,
+    setStudentId=()=>{},
 }: {
     activeSubjectId: number;
     onChangeActiveIdHandler: (x: number) => void;
     data: any;
     areasOfKnowledge: any[];
+    studentId: number;
+    setStudentId: (x: number) => void;
 }) => {
+    const guardian = useSelector((state: any) => state.guardian);
+    useEffect(() => {
+        if (areasOfKnowledge && typeof areasOfKnowledge === 'object' && areasOfKnowledge.length > 0) {
+            onChangeActiveIdHandler(areasOfKnowledge[0].id)
+        }
+    }, [areasOfKnowledge]);
     return (<MarkTableDiv>
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'end'
+        }}>
+            <div>
+                Student |
+            </div>
+            <select
+                style={{
+                    minHeight: '28px',
+                    background: 'transparent',
+                    width: 'auto',
+                    height: '100%',
+                    border: 'none',
+                    outline: 'none',
+                }} name='' id='' value={studentId} onChange={e => setStudentId(parseInt(e.target.value))}>
+            { guardian && guardian.guardianstudentSet && guardian.guardianstudentSet.length > 0 ? guardian.guardianstudentSet.map((studentObj: any, id: number) => (
+                <option key={id} value={studentObj.id}>{ studentObj?.student?.fullName || 'Unset' }</option>
+            )) : '' }
+            </select>
+        </div>
         <PcCom style={{
             backgroundColor: colors[0],
             cursor: 'pointer',

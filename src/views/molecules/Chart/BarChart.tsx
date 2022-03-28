@@ -100,7 +100,7 @@ interface iChartData {
     y: number
 }
 
-export const BarChart = ({ student }: { student: any }) => {
+export const BarChart = () => {
     const [barChartData, setBarChartData] = useState<iChartData[]>([]);
     const [barChartData2, setBarChartData2] = useState<iChartData[]>([]);
     const [areaChartData, setAreaChartData] = useState<iChartData[]>([]);
@@ -196,7 +196,7 @@ export const BarChart = ({ student }: { student: any }) => {
                 }} src={CrogoGirlsFace} alt='CrogoGirls' />
                 <ChartTitleGroup>
                     <ChartTitleBG src={TitleKidBackground} alt='Kid Title Bg' />
-                    <ChartTitle>{ student?.fullName } Turner Report</ChartTitle>
+                    <ChartTitle>Sophie Turner Report</ChartTitle>
                 </ChartTitleGroup>
             </ChartHeaderContrainer>
             <div ref={chartContainerRef} style={{
@@ -221,8 +221,8 @@ export const BarChart = ({ student }: { student: any }) => {
                     }} width={52}/>
                     {/* <AreaSeries fill={'#F4C222'} opacity={0.54} data={areaChartData} curve={'curveMonotoneX'} />
                     <LineSeries fill={'#F4C222'} opacity={0.54} data={areaChartData} curve={'curveMonotoneX'} /> */}
-                    <VerticalBarSeries color='#26B824' barWidth={0.7} data={barChartData} opacity={0.6} />
-                    <VerticalBarSeries color='#F4C222' barWidth={0.7} data={barChartData2} opacity={0.6} />
+                    <VerticalBarSeries color='#28D764' barWidth={0.7} data={barChartData} opacity={0.6} />
+                    <VerticalBarSeries color='#CC5B1D' barWidth={0.7} data={barChartData2} opacity={0.6} />
                 </XYPlot>
             </div>
             <div style={{

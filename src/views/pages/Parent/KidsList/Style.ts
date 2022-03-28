@@ -21,6 +21,7 @@ export const LicenseButton  = styled.img`
 export const Title          = styled.div`
   font-Size   :    40px;
   line-height :  50px;
+  font-family :  Montserrat;
   font-weight :  700;
   color           : white;
   width           : 385px;

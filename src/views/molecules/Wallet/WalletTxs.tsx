@@ -107,7 +107,7 @@ export const WalletTxHistory: FC = () => {
                   <TableCell
                     key={column.id}
                     align='center'
-                    style={{ minWidth: column.minWidth, backgroundColor: BasicColor.green, color: 'white', fontSize: 18}}
+                    style={{ minWidth: column.minWidth, backgroundColor: BasicColor.green, color: 'white', fontSize: 18, fontFamily: 'Montserrat' }}
                   >
                     {column.label}
                   </TableCell>
@@ -123,7 +123,7 @@ export const WalletTxHistory: FC = () => {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align='center' >
+                          <TableCell key={column.id} align='center' sx={{ fontFamily: 'Montserrat'}}>
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
