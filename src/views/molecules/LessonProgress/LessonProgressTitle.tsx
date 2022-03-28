@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import styled from 'styled-components';
+import { FC }         from 'react';
+import styled         from 'styled-components';
 import { BasicColor } from 'views/Color';
-import { LevelUp } from 'views/atoms/Text/LevelUp';
+import { LevelUp }    from 'views/atoms/Text/LevelUp';
 import { ScreenSize } from 'constants/screenSize';
 
 type LessonProgressTitleProps = {

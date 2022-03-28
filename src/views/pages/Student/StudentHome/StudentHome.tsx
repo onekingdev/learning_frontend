@@ -5,11 +5,11 @@ import {
   MyProgressContainer,
   RankContainer,
   StudentHomeStyle,
-} from './Style';
-import { MyProgress } from 'views/organisms/MyProgress';
-import { HomeCharacter } from 'views/organisms/HomeCharacter';
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
-import { Rank } from 'views/organisms/Rank';
+}                         from './Style';
+import { MyProgress }     from 'views/organisms/MyProgress';
+import { HomeCharacter }  from 'views/organisms/HomeCharacter';
+import { StudentMenu }    from 'views/pages/Student/Menus/StudentMenu';
+import { Rank }           from 'views/organisms/Rank';
 import { LoadingContext } from 'react-router-loading';
 
 export const StudentHome: FC = () => {

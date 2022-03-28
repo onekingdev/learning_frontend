@@ -1,11 +1,11 @@
-import { FC, useState } from 'react';
-import { ScreenSize } from 'constants/screenSize';
-import styled from 'styled-components';
+import { FC, useState }   from 'react';
+import { ScreenSize }     from 'constants/screenSize';
+import styled             from 'styled-components';
 import drawer_accessories from 'views/assets/drawers/drawer_accessories.png';
-import drawer_head from 'views/assets/drawers/drawer-head.png';
-import drawer_clothes from 'views/assets/drawers/drawer_clothes.png';
-import drawer_pants from 'views/assets/drawers/drawer_pants.png';
-import floor from 'views/assets/avatars/floor.png';
+import drawer_head        from 'views/assets/drawers/drawer-head.png';
+import drawer_clothes     from 'views/assets/drawers/drawer_clothes.png';
+import drawer_pants       from 'views/assets/drawers/drawer_pants.png';
+import floor              from 'views/assets/avatars/floor.png';
 
 interface AtomDrawerProps {
   onAtomClick?: (atomId: number) => (void)

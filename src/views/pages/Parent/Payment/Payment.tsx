@@ -1,47 +1,43 @@
-import { FC, useEffect, useState, useContext } from 'react';
-import { useSelector } from 'react-redux';
-import Alert from '@mui/material/Alert';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
-import { PaymentMethod } from 'views/molecules/PaymentMethod/PaymentMethod';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { PackagePanel } from 'views/molecules/PackagePanel/PackagePanel';
-import {
-  TipContainer,
-  PackageContainer,
-  Subject,
-  SubjectContainer,
-} from './Style';
-import math from 'views/assets/math-elements.svg';
-import ela from 'views/assets/ela-elements.svg';
-import science from 'views/assets/science-elements.svg';
-import financial from 'views/assets/financial_elements.svg';
-import health from 'views/assets/health-elements.svg';
+import { FC, useEffect, useState, useContext }    from 'react';
+import { useSelector }                            from 'react-redux';
+import Alert                                      from '@mui/material/Alert';
+import { Elements }                               from '@stripe/react-stripe-js';
+import { loadStripe }                             from '@stripe/stripe-js';
+import { ParentPgStepper }                        from 'views/molecules/ParentPgStepper/ParentPgStepper';
+import { PaymentMethod }                          from 'views/molecules/PaymentMethod/PaymentMethod';
+import { ParentPgContainer }                      from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { PackagePanel }                           from 'views/molecules/PackagePanel/PackagePanel';
+import {  TipContainer,  PackageContainer,
+  Subject,  SubjectContainer,}                   from './Style';
+import math                                      from 'views/assets/math-elements.svg';
+import ela                                       from 'views/assets/ela-elements.svg';
+import science                                    from 'views/assets/science-elements.svg';
+import financial                                  from 'views/assets/financial_elements.svg';
+import health                                     from 'views/assets/health-elements.svg';
+import { LoadingContext }                         from 'react-router-loading';
+import { getPlans }                               from 'app/actions/paymentActions'
+import { useSnackbar }                            from 'notistack';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
-import { LoadingContext } from 'react-router-loading';
-import { useSnackbar } from 'notistack';
-import { getPlans } from 'app/actions/paymentActions'
 export const Payment: FC = () => {
-  const loadingContext = useContext(LoadingContext);
+  const loadingContext    = useContext(LoadingContext);
   const {enqueueSnackbar} = useSnackbar();
-  const user = useSelector((state: any) => state.user);
-  const guardian = useSelector((state: any) => state.guardian);
+  const user              = useSelector((state: any) => state.user);
+  const guardian          = useSelector((state: any) => state.guardian);
   const [plans, setPlans] = useState<any>({
     Gold: {
-      currentPrice: 0,
-      priceMonth: 0,
-      priceYear: 0
+      currentPrice : 0,
+      priceMonth   : 0,
+      priceYear    : 0
     },
     Combo: {
-      currentPrice: 0,
-      priceMonth: 0,
-      priceYear: 0
+      currentPrice : 0,
+      priceMonth   : 0,
+      priceYear    : 0
     },
     Sole: {
-      currentPrice: 0,
-      priceMonth: 0,
-      priceYear: 0
+      currentPrice : 0,
+      priceMonth   : 0,
+      priceYear    : 0
     }
   })
   // const [prices, setPrices] = useState({
@@ -58,9 +54,9 @@ export const Payment: FC = () => {
   //     year: 0,
   //   },
   // });
-  const [isSpecialCode, setIsSpecialCode] = useState(false)
+  const [isSpecialCode, setIsSpecialCode]         = useState(false)
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
-  const [offRate, setOffRate] = useState(50);
+  const [offRate, setOffRate]                     = useState(50);
 
   // const setPackPrice = (plansData: any) => {
 
@@ -99,9 +95,9 @@ export const Payment: FC = () => {
   // };
 
   const onChangePackage = (type: string, count: number, period: string) => {
-    plans[type].childCount = count;
-    plans[type].period = period;
-    plans[type].currentPrice = (period === 'month' ? plans[type].priceMonth : plans[type].priceYear)
+    plans[type].childCount    = count;
+    plans[type].period        = period;
+    plans[type].currentPrice  = (period === 'month' ? plans[type].priceMonth : plans[type].priceYear)
     setPlans({...plans})
     setShowPaymentMethod(true);
   };
@@ -118,7 +114,7 @@ export const Payment: FC = () => {
       Sole : []
     };
     for(const plan of result.data){
-      const name: any = plan.name;
+      const name: any       = plan.name;
       plans_re_object[name] = plan;
       plans_re_object[name].currentPrice = plan.priceMonth;
     }
@@ -126,7 +122,7 @@ export const Payment: FC = () => {
     // setPackPrice(plans_re_object)
 
     loadingContext.done();
-  }
+}
 
   useEffect(() => {
     if(parseInt(guardian?.couponCode?.percentage) === 100) setIsSpecialCode(true)
@@ -171,29 +167,29 @@ export const Payment: FC = () => {
         </TipContainer>
         <PackageContainer>
           <PackagePanel
-            type='Gold'
-            price={plans.Gold.currentPrice}
-            onChange={(childrenCount, plan) =>
+            type          ='Gold'
+            price         ={plans.Gold.currentPrice}
+            onChange      ={(childrenCount, plan) =>
               onChangePackage('Gold', childrenCount, plan)
             }
             isSpecialCode = {isSpecialCode}
           />
           <PackagePanel
-            type='Combo'
-            price={plans.Combo.currentPrice}
-            onChange={(childrenCount, plan) =>
+            type          ='Combo'
+            price         ={plans.Combo.currentPrice}
+            onChange      ={(childrenCount, plan) =>
               onChangePackage('Combo', childrenCount, plan)
             }
-            disabled = {isSpecialCode}
+            disabled      = {isSpecialCode}
             isSpecialCode = {false}
           />
           <PackagePanel
-            type='Sole'
-            price={plans.Sole.currentPrice}
-            onChange={(childrenCount, plan) =>
+            type          ='Sole'
+            price         ={plans.Sole.currentPrice}
+            onChange      ={(childrenCount, plan) =>
               onChangePackage('Sole', childrenCount, plan)
             }
-            disabled = {isSpecialCode}
+            disabled      = {isSpecialCode}
             isSpecialCode = {false}
           />
         </PackageContainer>
@@ -205,9 +201,9 @@ export const Payment: FC = () => {
         <Elements stripe={stripePromise}>
           {showPaymentMethod && (
             <PaymentMethod
-              plans = {plans}
-              offRate={offRate}
-              isSpecialCode={isSpecialCode}
+              plans         = {plans}
+              offRate       ={offRate}
+              isSpecialCode ={isSpecialCode}
             />
           )}
         </Elements>

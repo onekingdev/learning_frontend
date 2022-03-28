@@ -1,9 +1,9 @@
-import { FC, useEffect } from 'react';
-import styled from 'styled-components';
-import { LessonProgressTitle } from './LessonProgressTitle';
-import { LessonProgressBar } from './LessonProgressBar';
-import { ScreenSize } from 'constants/screenSize';
-import { BasicColor } from 'views/Color';
+import { FC, useEffect }            from 'react';
+import styled                       from 'styled-components';
+import { LessonProgressTitle }      from './LessonProgressTitle';
+import { LessonProgressBar }        from './LessonProgressBar';
+import { ScreenSize }               from 'constants/screenSize';
+import { BasicColor }               from 'views/Color';
 import { LessonProgressLightening } from './LessonProgressLightening';
 
 type LessonProgressProps = {

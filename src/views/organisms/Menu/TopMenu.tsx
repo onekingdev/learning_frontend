@@ -1,16 +1,16 @@
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import home from 'views/assets/home.svg';
-import { Icon } from 'views/atoms/Icon/Icon';
-import { Energy } from 'views/molecules/Energy/Energy';
-import modality from 'views/assets/modality.svg';
-import { Wallet } from 'views/molecules/Wallet/Wallet';
-import { UserProgress } from '../UserProgress';
-import { IconSize } from 'views/atoms/Icon/Size';
-import { ScreenSize } from 'constants/screenSize';
-import { useHistory } from 'react-router-dom';
-import { Sidebar } from 'views/organisms/Menu/Sidebar';
-import { ProfileDropDownMenu } from 'views/organisms/Menu/ProfileDropdownMenu';
+import styled                      from 'styled-components';
+import home                        from 'views/assets/home.svg';
+import { Icon }                    from 'views/atoms/Icon/Icon';
+import { Energy }                  from 'views/molecules/Energy/Energy';
+import modality                    from 'views/assets/modality.svg';
+import { Wallet }                  from 'views/molecules/Wallet/Wallet';
+import { UserProgress }            from '../UserProgress';
+import { IconSize }                from 'views/atoms/Icon/Size';
+import { ScreenSize }              from 'constants/screenSize';
+import { useHistory }              from 'react-router-dom';
+import { Sidebar }                 from 'views/organisms/Menu/Sidebar';
+import { ProfileDropDownMenu }     from 'views/organisms/Menu/ProfileDropdownMenu';
 
 type TopMenuProps = {
   rank: number;

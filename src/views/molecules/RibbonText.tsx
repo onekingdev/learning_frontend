@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import styled from 'styled-components';
+import { FC }         from 'react';
+import styled         from 'styled-components';
 import { Typography } from 'views/atoms/Text/typography';
 import { BasicColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';

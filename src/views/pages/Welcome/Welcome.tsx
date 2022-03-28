@@ -1,16 +1,16 @@
-import { FC, useState, useEffect }         from 'react';
-import logo                                from 'views/assets/socrates-logo.svg';
-import { Header }                          from 'views/atoms/Text/Header';
-import { Subheader }                       from 'views/atoms/Text/Subheader';
-import welcome                             from 'views/assets/welcome-page.svg';
-import { Button }                          from 'views/molecules/Button';
-import { ButtonColor }                     from 'views/Color';
-import { TypoIcon }                        from 'views/atoms/Text';
-import { dictionary }                      from 'views/pages/Welcome/dictionary';
-import { Modal }                           from 'views/atoms/Modal';
-import { Link, useHistory }                from 'react-router-dom';
-import { resetReducer }                    from 'app/actions/userActions';
-import { useDispatch }                     from 'react-redux';
+import { FC, useState, useEffect } from 'react';
+import logo                 from 'views/assets/socrates-logo.svg';
+import { Header }           from 'views/atoms/Text/Header';
+import { Subheader }        from 'views/atoms/Text/Subheader';
+import welcome              from 'views/assets/welcome-page.svg';
+import { Button }           from 'views/molecules/Button';
+import { ButtonColor }      from 'views/Color';
+import { TypoIcon }         from 'views/atoms/Text';
+import { dictionary }       from 'views/pages/Welcome/dictionary';
+import { Modal }            from 'views/atoms/Modal';
+import { Link, useHistory } from 'react-router-dom';
+import { resetReducer }     from 'app/actions/userActions';
+import { useDispatch }      from 'react-redux';
 import {
   Wrapper,
   Logo,
@@ -26,12 +26,12 @@ import {
 import { TextInput } from '../../atoms/Text/TextInput';
 
 export const Welcome: FC = () => {
-  const language = 'en';
   const [joinModal, setJoinModal] = useState(false);
+  const language      = 'en';
   const [deployModal] = useState(false);
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const sendEmail = () => {
+  const history       = useHistory();
+  const dispatch      = useDispatch();
+  const sendEmail     = () => {
     setJoinModal(!joinModal);
   };
   useEffect(() => {
@@ -88,11 +88,11 @@ export const Welcome: FC = () => {
           />
         </Link>
         <Button
-          value={dictionary[language].join}
-          color={ButtonColor.join}
-          darkText={true}
+          value    ={dictionary[language].join}
+          color    ={ButtonColor.join}
+          darkText ={true}
           // onClick={() => setDeployModal(true)}
-          onClick={() => history.push('/parent/create')}
+          onClick  ={() => history.push('/parent/create')}
         />
       </Actions>
 

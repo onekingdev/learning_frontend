@@ -1,13 +1,13 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp }                  from 'firebase/app';
 import { getDatabase, set, ref, onValue } from 'firebase/database';
 import {
   getStorage,
   ref as assetRef,
   getDownloadURL,
   listAll,
-} from 'firebase/storage';
-import { BasicColor } from 'views/Color';
-import { dictionary } from 'views/pages/Student/Progress/dictionary';
+}                                         from 'firebase/storage';
+import { BasicColor }                     from 'views/Color';
+import { dictionary }                     from 'views/pages/Student/Progress/dictionary';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAdf707dGjrJOLJVuES5V-Reu6RuaJuvug',
@@ -165,7 +165,7 @@ export const getAvatarDir = async (dir: any, setDir: any) => {
  * @param getBoughtCards function to set states with image urls
  */
 export const buyCardsWithFilenames = async (
-  filenames: Array<{image: string}>,
+  filenames: Array<{ image: string }>,
   dir: string,
   getBoughtCards: any
 ) => {
@@ -224,7 +224,7 @@ export const getDownUrlByFilename = async (dir: string, filename: string) => {
   const storage = getStorage();
 
   try {
-    if((filename && dir) !== ''){
+    if ((filename && dir) !== '') {
 
       const fileRef = assetRef(
         storage,

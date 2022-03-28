@@ -1,12 +1,12 @@
-import { FC, useState } from 'react';
-import { Icon } from 'views/atoms/Icon/Icon';
-import { Balance } from 'views/atoms/WalletBalance';
-import { BasicColor } from 'views/Color';
-import coins from 'views/assets/coins.svg';
-import styled from 'styled-components';
-import { IconSize } from 'views/atoms/Icon/Size';
-import { ScreenSize } from 'constants/screenSize';
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
+import { FC, useState }    from 'react';
+import { Icon }            from 'views/atoms/Icon/Icon';
+import { Balance }         from 'views/atoms/WalletBalance';
+import { BasicColor }      from 'views/Color';
+import coins               from 'views/assets/coins.svg';
+import styled              from 'styled-components';
+import { IconSize }        from 'views/atoms/Icon/Size';
+import { ScreenSize }      from 'constants/screenSize';
+import { LSDialog }        from 'views/molecules/Setting/LSDialog';
 import { WalletTxHistory } from './WalletTxs'
 
 type WalletProps = {

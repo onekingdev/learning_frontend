@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import styled from 'styled-components';
-import { Divider } from 'views/atoms/Divider';
+import { FC }          from 'react';
+import styled          from 'styled-components';
+import { Divider }     from 'views/atoms/Divider';
 import { ButtonColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
-import Button from 'views/molecules/MuiButton';
-import { BasicColor } from 'views/Color';
+import { ScreenSize }  from 'constants/screenSize';
+import Button          from 'views/molecules/MuiButton';
+import { BasicColor }  from 'views/Color';
 
 type LoginActionsProps = {
   googleText: string;

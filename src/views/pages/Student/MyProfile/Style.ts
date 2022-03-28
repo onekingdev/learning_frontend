@@ -3,30 +3,30 @@ import styled from 'styled-components';
 import background from 'views/assets/colored-shapes-bg.svg';
 
 export const Wrapper = styled.div`
-  background-image: url(${background});
+  background-image:  url(${background});
   background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
+  background-size:   cover;
+  height:            100vh;
 `;
 
 export const Container = styled.div`
-  margin-left: auto;
+  margin-left:  auto;
   margin-right: auto;
-  align-items: center;
+  align-items:  center;
   @media (min-width: ${ScreenSize.desktop}) {
-    display: grid;
+    display:               grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 60px;
-    max-width: 1025px;
-    padding-top: 10px;
+    grid-gap:              60px;
+    max-width:             1025px;
+    padding-top:           10px;
   }
 `;
 
 export const Head = styled.div`
-  margin-top: 14px;
+  margin-top:    14px;
   margin-bottom: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left:   auto;
+  margin-right:  auto;
 `;
 
 export const Badges = styled.div``;

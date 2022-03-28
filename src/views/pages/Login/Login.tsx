@@ -1,30 +1,29 @@
-import { FC, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
-import { useDispatch } from 'react-redux'
-import { login, resetReducer } from 'app/actions/userActions'
-import { Header } from 'views/atoms/Text/Header';
-import { Subheader } from 'views/atoms/Text/Subheader';
-import { Button as ButtonText } from 'views/atoms/Text/Button';
-import { ButtonColor } from 'views/Color';
-import logo from 'views/assets/socrates-logo.svg';
-import classroom from 'views/assets/teacher-and-children.svg';
-import greeting from 'views/assets/greeting.svg';
-import { Actions } from 'views/molecules/Login/Actions';
-import { Form } from 'views/molecules/Login/Form';
-import { Greet } from 'views/molecules/Login/Greet';
-
-import { Login, Card, Legal, LoginWrapper, DesktopWelcome } from './Style';
-import { dictionary } from './dictionary';
+import { FC, useEffect, useState }                           from 'react';
+import { useHistory }                                        from 'react-router-dom';
+import { useSnackbar }                                       from 'notistack';
+import { useDispatch }                                       from 'react-redux'
+import { login, resetReducer }                               from 'app/actions/userActions'
+import { Header }                                            from 'views/atoms/Text/Header';
+import { Subheader }                                         from 'views/atoms/Text/Subheader';
+import { Button as ButtonText }                              from 'views/atoms/Text/Button';
+import { ButtonColor }                                       from 'views/Color';
+import logo                                                  from 'views/assets/socrates-logo.svg';
+import classroom                                             from 'views/assets/teacher-and-children.svg';
+import greeting                                              from 'views/assets/greeting.svg';
+import { Actions }                                           from 'views/molecules/Login/Actions';
+import { Form }                                              from 'views/molecules/Login/Form';
+import { Greet }                                             from 'views/molecules/Login/Greet';
+import { Login, Card, Legal, LoginWrapper, DesktopWelcome }  from './Style';
+import { dictionary }                                        from './dictionary';
 
 export const LogIn: FC = () => {
-  const history = useHistory();
-  const dispatch = useDispatch()
+  const history   = useHistory();
+  const dispatch  = useDispatch()
   const { enqueueSnackbar } = useSnackbar();
 
   const language = 'en';
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading]   = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -64,11 +63,11 @@ export const LogIn: FC = () => {
   return (
     <Login>
       <Greet
-        header={dictionary[language].welcome}
-        subheader={dictionary[language].instructions}
-        logo={logo}
-        classroomIllustration={classroom}
-        greetingIllustration={greeting}
+        header    ={dictionary[language].welcome}
+        subheader ={dictionary[language].instructions}
+        logo      ={logo}
+        classroomIllustration ={classroom}
+        greetingIllustration  ={greeting}
       />
       <Card>
         <LoginWrapper>
@@ -77,25 +76,25 @@ export const LogIn: FC = () => {
             <Subheader>{dictionary[language].instructions}</Subheader>
           </DesktopWelcome>
           <Form
-            login={dictionary[language].login}
-            email={dictionary[language].userName}
-            password={dictionary[language].password}
-            forgot={dictionary[language].forgot}
-            wrongPasswordMessage={dictionary[language].error}
-            passwordValidator={validatePassword}
-            setUsername={setUsername}
-            setPassword={setPassword}
+            login     ={dictionary[language].login}
+            email     ={dictionary[language].userName}
+            password  ={dictionary[language].password}
+            forgot    ={dictionary[language].forgot}
+            wrongPasswordMessage  ={dictionary[language].error}
+            passwordValidator     ={validatePassword}
+            setUsername ={setUsername}
+            setPassword ={setPassword}
           />
           <Actions
-            googleText={dictionary[language].with_google}
-            googleColor={ButtonColor.google}
-            googleAction={() => console.log('google auth')} // !! remove console.logs!!!
-            or={dictionary[language].or}
-            loginText={dictionary[language].login}
+            googleText    ={dictionary[language].with_google}
+            googleColor   ={ButtonColor.google}
+            googleAction  ={() => console.log('google auth')} // !! remove console.logs!!!
+            or        ={dictionary[language].or}
+            loginText ={dictionary[language].login}
             loginColor={ButtonColor.login}
-            loginAction={loginAction}
-            loading={loading}
-            disabled={true}
+            loginAction ={loginAction}
+            loading     ={loading}
+            disabled    ={true}
           />
         </LoginWrapper>
         <Legal>

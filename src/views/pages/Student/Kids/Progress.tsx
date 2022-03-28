@@ -1,22 +1,19 @@
 import { useState, useEffect, useContext, FC, useRef } from 'react';
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
-import styled from 'styled-components';
-import { Title } from 'views/atoms/Text';
-
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
+import { StudentMenu }         from 'views/pages/Student/Menus/StudentMenu';
+import styled                  from 'styled-components';
+import { Title }               from 'views/atoms/Text';
+import Box                     from '@mui/material/Box';
+import InputLabel              from '@mui/material/InputLabel';
+import MenuItem                from '@mui/material/MenuItem';
+import FormControl             from '@mui/material/FormControl';
+import Select                  from '@mui/material/Select';
 import TitleProgressBackground from 'views/assets/title-games-background.png';
-import ProgressMap from 'views/assets/student/process/map.svg';
-import ProgressMapMobile from 'views/assets/student/process/progress-map-mobile.svg';
-import MarkTableSubject from 'views/molecules/Table/MarkTableSubject';
-import { LoadingContext } from 'react-router-loading';
-import { ScreenSize } from 'constants/screenSize';
-
-import { MobileCom, PcCom } from './TreasureTrack';
+import ProgressMap             from 'views/assets/student/process/map.svg';
+import ProgressMapMobile       from 'views/assets/student/process/progress-map-mobile.svg';
+import MarkTableSubject        from 'views/molecules/Table/MarkTableSubject';
+import { LoadingContext }      from 'react-router-loading';
+import { ScreenSize }          from 'constants/screenSize';
+import { MobileCom, PcCom }    from './TreasureTrack';
 
 type IProcessPathSvg = {
     bgColor?: string;

@@ -1,7 +1,7 @@
-import { Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import { Stack, TextField }                       from '@mui/material';
+import React, { useState }                        from 'react';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
-import images from 'react-payment-inputs/images';
+import images  from 'react-payment-inputs/images';
 import { css } from 'styled-components';
 export default function PaymentInputs() {
     const {

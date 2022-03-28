@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import styled from 'styled-components';
-import { ScoreBoard } from 'views/organisms/ScoreBoard';
-import { ScreenSize } from 'constants/screenSize';
+import { FC } from          'react';
+import styled from          'styled-components';
+import { ScoreBoard } from  'views/organisms/ScoreBoard';
+import { ScreenSize } from  'constants/screenSize';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 
 export const Leaderboard: FC = () => {

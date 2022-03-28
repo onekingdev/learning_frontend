@@ -1,45 +1,42 @@
 import { FC, useEffect, useState, useContext } from 'react';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { useStyles, Subjects, Subject, SubjectIcon, SubjectTitle } from './Style';
+import { ParentPgContainer }                   from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { useHistory }                          from 'react-router-dom';
+import { useDispatch, useSelector }            from 'react-redux';
+import Grid                                    from '@mui/material/Grid';
+import Paper                                   from '@mui/material/Paper';
+import { useStyles, Subjects,
+  Subject, SubjectIcon, SubjectTitle }         from './Style';
 import {
-  Title,
-  Tip,
-  Container,
-  Welcome,
-  PaperContainer,
+  Title, Tip, Container, Welcome, PaperContainer,
 } from './Style';
-import welcome from 'views/assets/welcome-kid-new.svg';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
-import Radio from '@mui/material/Radio';
-import Button from 'views/molecules/MuiButton';
-import TextField from 'views/molecules/MuiTextField';
+import welcome                   from 'views/assets/welcome-kid-new.svg';
+import InputLabel                from '@mui/material/InputLabel';
+import MenuItem                  from '@mui/material/MenuItem';
+import FormControl               from '@mui/material/FormControl';
+import Select                    from '@mui/material/Select';
+import Checkbox                  from '@mui/material/Checkbox';
+import Radio                     from '@mui/material/Radio';
+import Button                    from 'views/molecules/MuiButton';
+import TextField                 from 'views/molecules/MuiTextField';
 import {ButtonColor, BasicColor} from 'views/Color';
-import math_gold from 'views/assets/packageIcons/math_gold.svg';
-import ela_gold from 'views/assets/packageIcons/ela_gold.svg';
-import science_gold from 'views/assets/packageIcons/science_gold.svg';
-import financial_gold from 'views/assets/packageIcons/financial_gold.svg';
-import health_gold from 'views/assets/packageIcons/health_gold.svg';
-import math_combo from 'views/assets/packageIcons/math_combo.svg';
-import ela_combo from 'views/assets/packageIcons/ela_combo.svg';
-import science_combo from 'views/assets/packageIcons/science_combo.svg';
-import financial_combo from 'views/assets/packageIcons/financial_combo.svg';
-import health_combo from 'views/assets/packageIcons/health_combo.svg';
-import math_sole from 'views/assets/packageIcons/math_sole.svg';
-import ela_sole from 'views/assets/packageIcons/ela_sole.svg';
-import science_sole from 'views/assets/packageIcons/science_sole.svg';
-import financial_sole from 'views/assets/packageIcons/financial_sole.svg';
-import health_sole from 'views/assets/packageIcons/health_sole.svg';
-import {LoadingContext} from 'react-router-loading';
-import { createStudent } from 'views/../app/actions/studentActions'
-import { getGrades } from 'views/../app/actions/gradeActions'
+import math_gold                 from 'views/assets/packageIcons/math_gold.svg';
+import ela_gold                  from 'views/assets/packageIcons/ela_gold.svg';
+import science_gold              from 'views/assets/packageIcons/science_gold.svg';
+import financial_gold            from 'views/assets/packageIcons/financial_gold.svg';
+import health_gold               from 'views/assets/packageIcons/health_gold.svg';
+import math_combo                from 'views/assets/packageIcons/math_combo.svg';
+import ela_combo                 from 'views/assets/packageIcons/ela_combo.svg';
+import science_combo             from 'views/assets/packageIcons/science_combo.svg';
+import financial_combo           from 'views/assets/packageIcons/financial_combo.svg';
+import health_combo              from 'views/assets/packageIcons/health_combo.svg';
+import math_sole                 from 'views/assets/packageIcons/math_sole.svg';
+import ela_sole                  from 'views/assets/packageIcons/ela_sole.svg';
+import science_sole              from 'views/assets/packageIcons/science_sole.svg';
+import financial_sole            from 'views/assets/packageIcons/financial_sole.svg';
+import health_sole               from 'views/assets/packageIcons/health_sole.svg';
+import {LoadingContext}          from 'react-router-loading';
+import { createStudent }         from 'views/../app/actions/studentActions'
+import { getGrades }             from 'views/../app/actions/gradeActions'
 import { getAudiencesWithGrades} from 'app/actions/audienceActions'
 
 import { useSnackbar } from 'notistack';
@@ -47,52 +44,52 @@ import { useSnackbar } from 'notistack';
 const NewKids: FC = () => {
   const loadingContext = useContext(LoadingContext);
 
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const classes = useStyles();
-  const guardian = useSelector((state:any) => state.guardian)
-  const user = useSelector((state: any) => state.user)
+  const history =              useHistory();
+  const dispatch =             useDispatch();
+  const classes =              useStyles();
+  const guardian =             useSelector((state:any) => state.guardian)
+  const user =                 useSelector((state: any) => state.user)
   // const grades = useSelector((state: any) => state.grade)
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } =  useSnackbar();
 
   const [availablePackages, setAvailablePackages] = useState<any[]>([]);
-  const [audiences, setAudiences] = useState([]);
-  const [grades, setGrades] = useState([]);
+  const [audiences, setAudiences]           = useState([]);
+  const [grades, setGrades]                 = useState([]);
   const [currentPackage, setCurrentPackage] = useState<any>();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
+  const [firstName, setFirstName]           = useState('');
+  const [lastName, setLastName]         = useState('');
+  const [userId, setUserId]             = useState('');
+  const [password, setPassword]         = useState('');
   const [confPassword, setConfPassword] = useState('');
-  const [audience, setAudience] = useState<any>();
-  const [grade, setGrade] = useState<any>();
-  const [childNum, setChildNum] = useState(0);
-  const [childIdx, setChildIdx] = useState(1);
-  const [childs, setChilds] = useState([{}]);
-  const [paths, setPaths] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
+  const [audience, setAudience]         = useState<any>();
+  const [grade, setGrade]               = useState<any>();
+  const [childNum, setChildNum]         = useState(0);
+  const [childIdx, setChildIdx]         = useState(1);
+  const [childs, setChilds]             = useState([{}]);
+  const [paths, setPaths]               = useState<any>([]);
+  const [loading, setLoading]           = useState(false);
 
   const subjectIcons:any = {
     Gold: {
-      MATH: math_gold,
-      ELA: ela_gold,
-      SCIENCE: science_gold,
+      MATH:      math_gold,
+      ELA:       ela_gold,
+      SCIENCE:   science_gold,
       FINANCIAL: financial_gold,
-      HEALTH: health_gold
+      HEALTH:    health_gold
     },
     Combo: {
-      MATH: math_combo,
-      ELA: ela_combo,
-      SCIENCE: science_combo,
+      MATH:      math_combo,
+      ELA:       ela_combo,
+      SCIENCE:   science_combo,
       FINANCIAL: financial_combo,
-      HEALTH: health_combo
+      HEALTH:    health_combo
     },
     Sole: {
-      MATH: math_sole,
-      ELA: ela_sole,
-      SCIENCE: science_sole,
+      MATH:      math_sole,
+      ELA:       ela_sole,
+      SCIENCE:   science_sole,
       FINANCIAL: financial_sole,
-      HEALTH: health_sole
+      HEALTH:    health_sole
     }
   }
 
@@ -108,14 +105,14 @@ const NewKids: FC = () => {
   };
 
   const [validateMsg, setValidateMsg] = useState<{[key: string]: any}>({
-    packageName: null,
-    firstName: null,
-    lastName: null,
-    userId: null,
-    password: null,
+    packageName:  null,
+    firstName:    null,
+    lastName:     null,
+    userId:       null,
+    password:     null,
     confPassword: null,
-    audience: null,
-    grade: null,
+    audience:     null,
+    grade:        null,
   });
 
   const handleFormChange = (field: string, errMsg: string) => {
@@ -147,12 +144,12 @@ const NewKids: FC = () => {
 
     setChildIdx(childIdx + 1);
     setValidateMsg({
-      firstName: null,
-      lastName: null,
-      userId: null,
-      password: null,
+      firstName:    null,
+      lastName:     null,
+      userId:       null,
+      password:     null,
       confPassword: null,
-      grade: null,
+      grade:        null,
     });
     setCurrentPackage(temp[0]);
     setFirstName('');
@@ -192,15 +189,15 @@ const NewKids: FC = () => {
     setChilds([
       ...childs,
       {
-        package: currentPackage,
-        firstName: firstName,
-        lastName: lastName,
-        userId: userId,
-        password: password,
-        grade: grade,
+        package:           currentPackage,
+        firstName:         firstName,
+        lastName:          lastName,
+        userId:            userId,
+        password:          password,
+        grade:             grade,
         currentPackage_id: currentPackage.id,
-        listSubjectId: listSubjectId,
-        studentPlan: studentPlan,
+        listSubjectId:     listSubjectId,
+        studentPlan:       studentPlan,
       },
     ]);
     return true;
@@ -208,7 +205,7 @@ const NewKids: FC = () => {
 
   const formValidation = () => {
     const validateMsgTemp = {...validateMsg};
-    let valiResult = true;
+    let valiResult        = true;
     for (const key in validateMsg) {
       console.log('key is ', key, validateMsgTemp[key])
       if (validateMsg[key] === null) {
@@ -387,62 +384,62 @@ const NewKids: FC = () => {
               <Grid item xs={12}>
                 <TextField
                   label='Child First NAME'
-                  onChange={e => {
+                  onChange=   {e => {
                     setFirstName(e.target.value);
                     handleFormChange(
                       'firstName',
                       e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
-                  error={!!validateMsg.firstName}
-                  helperText={validateMsg.firstName}
-                  value={firstName}
+                  error=      {!!validateMsg.firstName}
+                  helperText= {validateMsg.firstName}
+                  value=      {firstName}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label='Child LAST NAME'
-                  onChange={e => {
+                  label      ='Child LAST NAME'
+                  onChange   ={e => {
                     setLastName(e.target.value);
                     handleFormChange(
                       'lastName',
                       e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
-                  error={!!validateMsg.lastName}
-                  helperText={validateMsg.lastName}
-                  value={lastName}
+                  error      ={!!validateMsg.lastName}
+                  helperText ={validateMsg.lastName}
+                  value      ={lastName}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label='USER ID OR CHOOSE A NICK NAME'
-                  onChange={e => {
+                  label      ='USER ID OR CHOOSE A NICK NAME'
+                  onChange   ={e => {
                     setUserId(e.target.value);
                     handleFormChange(
                       'userId',
                       e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
-                  error={!!validateMsg.userId}
-                  helperText={validateMsg.userId}
-                  value={userId}
+                  error      ={!!validateMsg.userId}
+                  helperText ={validateMsg.userId}
+                  value      ={userId}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label='PASSWORD'
-                  onChange={e => {
+                  label      ='PASSWORD'
+                  onChange   ={e => {
                     setPassword(e.target.value);
                     handleFormChange(
                       'password',
                       e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
-                  error={!!validateMsg.password}
-                  helperText={validateMsg.password}
-                  value={password}
-                  type='password'
+                  error      ={!!validateMsg.password}
+                  helperText ={validateMsg.password}
+                  value      ={password}
+                  type       ='password'
                 />
               </Grid>
               <Grid item xs={12}>
@@ -471,12 +468,12 @@ const NewKids: FC = () => {
                     Select Your Audience
                   </InputLabel>
                   <Select
-                    labelId='select-audience-label'
-                    id='select-audience'
-                    value={audience ? audience : {}}
-                    label='Select Your Audience'
-                    className={`${classes.select} err-border`}
-                    onChange={(e: any) => {
+                    labelId   ='select-audience-label'
+                    id        ='select-audience'
+                    value     ={audience ? audience : {}}
+                    label     ='Select Your Audience'
+                    className ={`${classes.select} err-border`}
+                    onChange  ={(e: any) => {
                       setAudience(e.target.value);
                       setGrades(e.target.value.gradeSet)
                       setGrade({})
@@ -510,12 +507,12 @@ const NewKids: FC = () => {
                     Select Your Grade
                   </InputLabel>
                   <Select
-                    labelId='select-grade-label'
-                    id='select-grade'
-                    value={grade ? grade : ''}
-                    label='Select Your Grade'
-                    className={`${classes.select} err-border`}
-                    onChange={e => {
+                    labelId   ='select-grade-label'
+                    id        ='select-grade'
+                    value     ={grade ? grade : ''}
+                    label     ='Select Your Grade'
+                    className ={`${classes.select} err-border`}
+                    onChange  ={e => {
                       setGrade(e.target.value);
                       console.log(e.target.value === undefined ? 'Field is required' : '')
                       handleFormChange(
@@ -546,25 +543,25 @@ const NewKids: FC = () => {
               <Grid item xs={12} md={12} lg={6}>
                 {childIdx > 0 && (
                   <Button
-                    value='Previous Kid'
-                    bgColor={ButtonColor.create}
-                    onClick={handlePrev}
+                    value   ='Previous Kid'
+                    bgColor ={ButtonColor.create}
+                    onClick ={handlePrev}
                     disabled={true}
                   />
                 )}
               </Grid>
               <Grid item xs={12} md={12} lg={6}>
                 <Button
-                  value={childNum !== childIdx ? 'Next Kid' : 'Finish'}
-                  bgColor={
+                  value    ={childNum !== childIdx ? 'Next Kid' : 'Finish'}
+                  bgColor  ={
                     childNum !== childIdx
                       ? ButtonColor.nextKid
                       : ButtonColor.create
                   }
-                  onClick={handleNext}
-                  disabled={availablePackages.length < 1 ? true : false}
-                  align='right'
-                  loading={loading}
+                  onClick  ={handleNext}
+                  disabled ={availablePackages.length < 1 ? true : false}
+                  align    ='right'
+                  loading  ={loading}
                 />
               </Grid>
             </Grid>

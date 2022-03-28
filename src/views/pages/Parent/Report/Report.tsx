@@ -1,15 +1,15 @@
-import { FC, useEffect, useContext } from 'react';
-import { Box, Grid } from '@mui/material';
+import { FC, useEffect, useContext }  from 'react';
+import { Box, Grid }                  from '@mui/material';
 
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { LSCheckboxList } from 'views/molecules/Report/CheckList';
-import { IconTitle } from 'views/molecules/Report/IconTitle';
-import { SocratesLine } from 'views/molecules/Report/Line';
-import { SocratesPie } from 'views/molecules/Report/Pie';
+import { ParentPgContainer }          from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { LSCheckboxList }             from 'views/molecules/Report/CheckList';
+import { IconTitle }                  from 'views/molecules/Report/IconTitle';
+import { SocratesLine }               from 'views/molecules/Report/Line';
+import { SocratesPie }                from 'views/molecules/Report/Pie';
 import { LSLabel, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
-import { LSCalendarComponent } from 'views/molecules/Report/Calendar';
-import { ReportProgress } from 'views/molecules/Report/Progress';
-import { LoadingContext } from 'react-router-loading';
+import { LSCalendarComponent }        from 'views/molecules/Report/Calendar';
+import { ReportProgress }             from 'views/molecules/Report/Progress';
+import { LoadingContext }             from 'react-router-loading';
 
 export const Report: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -28,9 +28,9 @@ export const Report: FC = () => {
                 <Box sx={{display: 'flex', flexDirection: 'row'}}>
                   <Box
                     sx={{
-                      display: 'flex',
-                      paddingLeft: '30px',
-                      flexDirection: 'column',
+                      display:        'flex',
+                      paddingLeft:    '30px',
+                      flexDirection:  'column',
                       justifyContent: 'center',
                     }}
                   >

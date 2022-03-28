@@ -1,14 +1,14 @@
 import { FC, useEffect, ReactChildren, ReactChild } from 'react';
-import { ParentPgNav } from 'views/molecules/ParentPgNav/ParentPgNav'
-import colorpanel from 'views/assets/colorPannel.svg';
-import mess from 'views/assets/mess.svg';
-import planet from 'views/assets/planet.svg';
-import noteBook from 'views/assets/note-book.svg';
-import islandGreen from 'views/assets/island-green.svg';
-import islandYellow from 'views/assets/island-yellow.svg';
-import gateway from 'views/assets/gateway.svg';
-import triangle from 'views/assets/triangle.svg';
-import pencil from 'views/assets/pencil.svg'
+import { ParentPgNav }                              from 'views/molecules/ParentPgNav/ParentPgNav'
+import colorpanel                                   from 'views/assets/colorPannel.svg';
+import mess                                         from 'views/assets/mess.svg';
+import planet                                       from 'views/assets/planet.svg';
+import noteBook                                     from 'views/assets/note-book.svg';
+import islandGreen                                  from 'views/assets/island-green.svg';
+import islandYellow                                 from 'views/assets/island-yellow.svg';
+import gateway                                      from 'views/assets/gateway.svg';
+import triangle                                     from 'views/assets/triangle.svg';
+import pencil                                       from 'views/assets/pencil.svg'
 import {
   Container,
   IslandGreen,

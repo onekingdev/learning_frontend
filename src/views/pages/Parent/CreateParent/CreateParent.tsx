@@ -1,17 +1,17 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
-import { useSnackbar } from 'notistack';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import Grid from '@mui/material/Grid';
-import Button from 'views/molecules/MuiButton';
-import TextField from 'views/molecules/MuiTextField';
-import { BasicColor } from 'views/Color';
-import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
-import SocratesImg from 'views/assets/socrates.svg';
-import { createGuardian } from 'app/actions/guardianActions'
-import { Button as ButtonText } from 'views/atoms/Text/Button';
+import { useSnackbar }    from 'notistack';
+import { useHistory }     from 'react-router-dom';
+import { useDispatch }    from 'react-redux';
+import Grid               from '@mui/material/Grid';
+import Button             from 'views/molecules/MuiButton';
+import TextField                      from 'views/molecules/MuiTextField';
+import { BasicColor }                 from 'views/Color';
+import { ParentPgContainer }          from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { ParentPgStepper }            from 'views/molecules/ParentPgStepper/ParentPgStepper';
+import SocratesImg                    from 'views/assets/socrates.svg';
+import { createGuardian }             from 'app/actions/guardianActions'
+import { Button as ButtonText }       from 'views/atoms/Text/Button';
 import {
   Container,
   FormContainer,
@@ -22,15 +22,15 @@ import {
 } from './Style';
 
 const CreateParent: FC = () => {
-  const loadingContext = useContext(LoadingContext);
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const {enqueueSnackbar} = useSnackbar();
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const loadingContext                = useContext(LoadingContext);
+  const history                       = useHistory();
+  const dispatch                      = useDispatch();
+  const {enqueueSnackbar}             = useSnackbar();
+  const [userName, setUserName]       = useState('');
+  const [password, setPassword]       = useState('');
+  const [email, setEmail]             = useState('');
+  const [firstName, setFirstName]     = useState('');
+  const [lastName, setLastName]       = useState('');
   // const [confPassword, setConfPassword] = useState('');
   const [validateMsg, setValidateMsg] = useState<{[key: string]: any}>({
     email: null,

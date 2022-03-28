@@ -1,9 +1,9 @@
-import CrogoGirlsFace from 'views/assets/croco-girl.svg';
-import TitleKidBackground from 'views/assets/title-kids-background.png';
-import ReportCheckIcon from 'views/assets/parent/report-check.png';
-import ReportCoinIcon from 'views/assets/parent/report-coin.png';
-import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
+import CrogoGirlsFace                  from 'views/assets/croco-girl.svg';
+import TitleKidBackground              from 'views/assets/title-kids-background.png';
+import ReportCheckIcon                 from 'views/assets/parent/report-check.png';
+import ReportCoinIcon                  from 'views/assets/parent/report-coin.png';
+import styled                          from 'styled-components';
+import { ScreenSize }                  from 'constants/screenSize';
 import { useEffect, useRef, useState } from 'react';
 import 'react-vis/dist/style.css';
 import {
@@ -15,8 +15,8 @@ import {
     YAxis,
     VerticalGridLines,
     HorizontalGridLines,
-} from 'react-vis';
-import TitleGameBackground from 'views/assets/title-games-background.png';
+}                                      from 'react-vis';
+import TitleGameBackground             from 'views/assets/title-games-background.png';
 
 const ChartHeaderContrainer = styled.div`
     display: flex;
@@ -85,16 +85,6 @@ const MONTHS = [
     'Dec',
 ]
 
-const WEEKS = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun'
-]
-
 interface iChartData {
     x: number,
     y: number
@@ -102,7 +92,6 @@ interface iChartData {
 
 export const BarChart = () => {
     const [barChartData, setBarChartData] = useState<iChartData[]>([]);
-    const [barChartData2, setBarChartData2] = useState<iChartData[]>([]);
     const [areaChartData, setAreaChartData] = useState<iChartData[]>([]);
     useEffect(() => {
         setBarChartData([
@@ -113,25 +102,11 @@ export const BarChart = () => {
             {x: 4, y: 100},
             {x: 5, y: 800},
             {x: 6, y: 100},
-            // {x: 7, y: 2900},
-            // {x: 8, y: 1600},
-            // {x: 9, y: 800},
-            // {x: 10, y: 600},
-            // {x: 11, y: 1500},
-        ]);
-        setBarChartData2([
-            {x: 0, y: 250},
-            {x: 1, y: 100},
-            {x: 2, y: 1400},
-            {x: 3, y: 800},
-            {x: 4, y: 900},
-            {x: 5, y: 300},
-            {x: 6, y: 500},
-            // {x: 7, y: 2900},
-            // {x: 8, y: 1600},
-            // {x: 9, y: 800},
-            // {x: 10, y: 600},
-            // {x: 11, y: 1500},
+            {x: 7, y: 2900},
+            {x: 8, y: 1600},
+            {x: 9, y: 800},
+            {x: 10, y: 600},
+            {x: 11, y: 1500},
         ]);
         setAreaChartData([
             {x: 0, y: 375},
@@ -141,11 +116,11 @@ export const BarChart = () => {
             {x: 4, y: 50},
             {x: 5, y: 400},
             {x: 6, y: 50},
-            // {x: 7, y: 1450},
-            // {x: 8, y: 800},
-            // {x: 9, y: 400},
-            // {x: 10, y: 300},
-            // {x: 11, y: 750},
+            {x: 7, y: 1450},
+            {x: 8, y: 800},
+            {x: 9, y: 400},
+            {x: 10, y: 300},
+            {x: 11, y: 750},
         ]);
     }, []);
 
@@ -213,16 +188,15 @@ export const BarChart = () => {
                         text: {
                             fontSize: chartWidth < 576 ? '0.8rem' : '1.2rem'
                         }
-                    }} tickLabelAngle={0} tickFormat={v => WEEKS[v]} />
+                    }} tickLabelAngle={0} tickFormat={v => MONTHS[v]} />
                     <YAxis style={{
                         text: {
                             fontSize: '1rem'
                         }
                     }} width={52}/>
-                    {/* <AreaSeries fill={'#F4C222'} opacity={0.54} data={areaChartData} curve={'curveMonotoneX'} />
-                    <LineSeries fill={'#F4C222'} opacity={0.54} data={areaChartData} curve={'curveMonotoneX'} /> */}
+                    <AreaSeries fill={'#F4C222'} opacity={0.54} data={areaChartData} curve={'curveMonotoneX'} />
+                    <LineSeries fill={'#F4C222'} opacity={0.54} data={areaChartData} curve={'curveMonotoneX'} />
                     <VerticalBarSeries color='#28D764' barWidth={0.7} data={barChartData} opacity={0.6} />
-                    <VerticalBarSeries color='#CC5B1D' barWidth={0.7} data={barChartData2} opacity={0.6} />
                 </XYPlot>
             </div>
             <div style={{

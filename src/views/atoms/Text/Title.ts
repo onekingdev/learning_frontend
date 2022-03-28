@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled         from 'styled-components';
 import { BasicColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';
 import { Typography } from './typography';

@@ -22,15 +22,15 @@ export const StudentMenu: FC = ({children}) => {
       {/* {console.log(earning)} */}
       <TopMenuContainer>
         <TopMenu
-          rank={earning.rank}
-          level={earning.level || 0}
-          exp={earning.exp || 0}
+          rank  ={earning.rank}
+          level ={earning.level || 0}
+          exp   ={earning.exp || 0}
           expMax={earning.expMax || 0}
-          icon={user?.avatar || avatarPlaceHolder}
-          userName={user?.username || 'None'}
-          progress={earning.exp / earning.expMax * 100}
+          icon  ={user?.avatar || avatarPlaceHolder}
+          userName  ={user?.username || 'None'}
+          progress  ={earning.exp / earning.expMax * 100}
           energyCharge={earning.energyCharge}
-          balance={earning.balance || 0}
+          balance   ={earning.balance || 0}
         />
       </TopMenuContainer>
       <div>{children}</div>
@@ -40,17 +40,17 @@ export const StudentMenu: FC = ({children}) => {
 };
 
 const Template = styled.div`
-  display: grid;
+  display:            grid;
   grid-template-rows: 68px calc(100vh - 68px);
-  @media (max-width: ${ScreenSize.tablet}) {
+  @media (max-width:  ${ScreenSize.tablet}) {
     grid-template-rows: calc(100vh - 60px) 60px;
   }
 `;
 const TopMenuContainer = styled.div`
-  width: 100%;
-  display: flex;
+  width:           100%;
+  display:         flex;
   justify-content: center;
-  margin-bottom: 100px;
+  margin-bottom:   100px;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     display: none;
   }

@@ -1,11 +1,11 @@
-import { FC, useState } from 'react';
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { useHistory } from 'react-router-dom';
-import { ImageAvatar } from 'views/molecules/Avatar/DefaultAvatar';
-import { useSelector } from 'react-redux'
+import { FC, useState }  from 'react';
+import * as React        from 'react';
+import Button            from '@mui/material/Button';
+import Menu              from '@mui/material/Menu';
+import MenuItem          from '@mui/material/MenuItem';
+import { useHistory }    from 'react-router-dom';
+import { ImageAvatar }   from 'views/molecules/Avatar/DefaultAvatar';
+import { useSelector }   from 'react-redux'
 
 export const ProfileDropDownMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

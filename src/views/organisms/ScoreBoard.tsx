@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import { Header } from 'views/atoms/Text/Header';
-import { Title } from 'views/atoms/Text/Title';
+import { useEffect }   from 'react';
+import styled          from 'styled-components';
+import { ScreenSize }  from 'constants/screenSize';
+import { Header }      from 'views/atoms/Text/Header';
+import { Title }       from 'views/atoms/Text/Title';
 import titleBackground from 'views/assets/title-games-background.png';
 
 export const ScoreBoard = () => {

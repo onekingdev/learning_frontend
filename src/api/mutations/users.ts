@@ -1,11 +1,6 @@
-import {
-    GUARDIAN,
-} from '../fragments/guardianFragments';
-import  {
-    USER,
-    USER_PROFILE
-} from '../fragments/userFragments'
-import { token } from '../fragments/tokenFragments'
+import { GUARDIAN, }          from '../fragments/guardianFragments';
+import { USER, USER_PROFILE } from '../fragments/userFragments'
+import { token }              from '../fragments/tokenFragments'
 
 export const CREATE_GUARDIAN = (email: string, username: string, password: string) => `
 	createGuardian(email: "${email}", username: "${username}", password: "${password}") {

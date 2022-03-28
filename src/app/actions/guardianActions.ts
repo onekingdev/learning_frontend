@@ -1,4 +1,4 @@
-import mutationFetch from 'api/mutations/get';
+import mutationFetch    from 'api/mutations/get';
 import { CREATE_GUARDIAN,
     UPDATE_EMAIL_PASSWORD,
     FETCH_GUARDIAN_AVAILABLE_BOUGHT_PLANS,
@@ -7,9 +7,9 @@ import { CREATE_GUARDIAN,
     FETCH_PLANS,
     ADD_STUDENT_PLAN_PACKAGE,
     CANCEL_MEMBERSHIP
- } from 'api/mutations/guardians';
+ }                      from 'api/mutations/guardians';
 import { sendRawQuery } from 'api/queries/get';
-import * as TYPES from 'app/types'
+import * as TYPES       from 'app/types'
 
 export const createGuardian = async (email: string, firstName: string, lastName: string, userName: string, password: string, couponCode: string, dispatch: any) => {
     const res: any = await mutationFetch(

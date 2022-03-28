@@ -6,7 +6,7 @@ import { BasicColor } from 'views/Color';
 
 export const Avatar         = styled.img`
   cursor: pointer;
-  width:  85px;
+  width :  85px;
   height: 95px;
 `;
 
@@ -19,7 +19,7 @@ export const LicenseButton  = styled.img`
 `;
 
 export const Title          = styled.div`
-  font-Size:    40px;
+  font-Size  :    40px;
   line-height:  50px;
   font-family:  Montserrat;
   font-weight:  700;

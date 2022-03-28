@@ -1,15 +1,15 @@
 import { FC, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { LoadingContext } from 'react-router-loading';
-import backpackHook from 'views/assets/backpack-hook.svg';
-import { BackpackButton } from 'views/atoms/BackpackButton';
-import avatarButton from 'views/assets/avatar-button.svg';
-import cardsButton from 'views/assets/cards-button.svg';
-import controlButton from 'views/assets/control-button.svg';
-import backpackFace from 'views/assets/backpack-face.svg';
-import backpackLeft from 'views/assets/backpack-left.svg';
-import backpackRight from 'views/assets/backpack-right.svg';
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
+import { useHistory }                from 'react-router-dom';
+import { LoadingContext }            from 'react-router-loading';
+import backpackHook                  from 'views/assets/backpack-hook.svg';
+import { BackpackButton }            from 'views/atoms/BackpackButton';
+import avatarButton                  from 'views/assets/avatar-button.svg';
+import cardsButton                   from 'views/assets/cards-button.svg';
+import controlButton                 from 'views/assets/control-button.svg';
+import backpackFace                  from 'views/assets/backpack-face.svg';
+import backpackLeft                  from 'views/assets/backpack-left.svg';
+import backpackRight                 from 'views/assets/backpack-right.svg';
+import { StudentMenu }               from 'views/pages/Student/Menus/StudentMenu';
 import {
   Wrapper,
   AvatarButtonContainer,
@@ -26,8 +26,8 @@ import {
 } from './Styles';
 
 export const Backpack: FC = () => {
-  const loadingContext = useContext(LoadingContext);
-  const history = useHistory();
+  const loadingContext  = useContext(LoadingContext);
+  const history         = useHistory();
   useEffect(() => {
     loadingContext.done();
   }, []);
@@ -46,25 +46,25 @@ export const Backpack: FC = () => {
                 <BackpackButtonsContainer>
                   <AvatarButtonContainer>
                     <BackpackButton
-                      onClick={() => history.push('/avatar')}
-                      image={avatarButton}
-                      width={60}
-                      height={130}
+                      onClick ={() => history.push('/avatar')}
+                      image   ={avatarButton}
+                      width   ={60}
+                      height  ={130}
                     />
                   </AvatarButtonContainer>
                   <BackpackButton
                     // onClick={() => history.push('/collectibles/category_1')}
-                    onClick={() => history.push('/collectibles/cards')}
-                    image={cardsButton}
-                    width={100}
-                    height={70}
+                    onClick ={() => history.push('/collectibles/cards')}
+                    image   ={cardsButton}
+                    width   ={100}
+                    height  ={70}
                   />
                   <ControlButtonContainer>
                     <BackpackButton
-                      onClick={() => history.push('/games/categories')}
-                      image={controlButton}
-                      width={100}
-                      height={70}
+                      onClick ={() => history.push('/games/categories')}
+                      image   ={controlButton}
+                      width   ={100}
+                      height  ={70}
                     />
                   </ControlButtonContainer>
                 </BackpackButtonsContainer>
