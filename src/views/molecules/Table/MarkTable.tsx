@@ -12,6 +12,12 @@ const colors = [
     '#FF8D8D',
     '#C6CACC'
 ];
+const masteryColors = {
+    "NP": "#919699",
+    "N": "#EC5858",
+    "C": "#F4C222",
+    "M": "#26B824"
+}
 
 const Subject = styled.div`
     flex-grow: 1;
@@ -74,6 +80,16 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {
         return <SingleGroup key={id} main={item.main} extra={item.extra} deep={deep+1} />
     }) : '';
+    let bgColor = masteryColors.NP;
+    if (main.mastery === "NP") {
+        bgColor = masteryColors.NP;
+    } else if (main.mastery === "N") {
+        bgColor = masteryColors.N;
+    } else if (main.mastery === "C") {
+        bgColor = masteryColors.C;
+    } else if (main.mastery === "M") {
+        bgColor = masteryColors.M;
+    }
     if (main === {}) {
         return <></>;
     } else {
@@ -82,7 +98,8 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
             flexDirection: 'column',
         }}>
             <PcCom style={{
-                backgroundColor: colors[deep],
+                // backgroundColor: colors[deep],
+                backgroundColor: bgColor,
                 cursor: 'pointer',
                 border: '1px solid black'
             }} onClick={toggle}>
@@ -100,7 +117,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                 <Mark>{main.item4}</Mark>
             </PcCom>
             <MobileCom style={{
-                backgroundColor: colors[deep],
+                backgroundColor: bgColor,
                 cursor: 'pointer',
             }}>
                 <Subject style={{
@@ -202,44 +219,38 @@ const MarkTable = ({
         { data && data.rootTopicsByAok && data.rootTopicsByAok.length > 0 ? data?.rootTopicsByAok?.map((aok: any, id: number) => (
             <SingleGroup key={id} main={{
                 item1: aok?.name,
-                item2: aok?.report ? '' : '',
-                item3: aok?.report ? '' : '',
-                item4: aok?.report ? '' : '',
+                item2: aok?.report?.accuracy ? aok?.report?.accuracy : '',
+                item3: aok?.report?.correctQuestion ? aok?.report?.correctQuestion : '',
+                item4: aok?.report?.questionsAnswered ? aok?.report?.questionsAnswered : '',
                 mastery: aok?.mastery
             }} extra={aok?.subTopics.map((subTopic1: any) => ({
                 main: {
                     item1: subTopic1?.name,
-                    item2: subTopic1?.report ? '' : '',
-                    item3: subTopic1?.report ? '' : '',
-                    item4: subTopic1?.report ? '' : '',
+                    item2: subTopic1?.report?.accuracy ? subTopic1?.report?.accuracy : '',
+                    item3: subTopic1?.report?.correctQuestion ? subTopic1?.report?.correctQuestion : '',
+                    item4: subTopic1?.report?.questionsAnswered ? subTopic1?.report?.questionsAnswered : '',
                     mastery: subTopic1?.mastery
                 },
                 extra: subTopic1?.subTopics.map((subTopic2: any) => ({
                     main: {
                         item1: subTopic2?.name,
-                        item2: subTopic2?.report ? '' : '',
-                        item3: subTopic2?.report ? '' : '',
-                        item4: subTopic2?.report ? '' : '',
+                        item2: subTopic2?.report?.accuracy ? subTopic2?.report?.accuracy : '',
+                        item3: subTopic2?.report?.correctQuestion ? subTopic2?.report?.correctQuestion : '',
+                        item4: subTopic2?.report?.questionsAnswered ? subTopic2?.report?.questionsAnswered : '',
                         mastery: subTopic2?.mastery
                     },
                     extra: subTopic1?.subTopics.map((subTopic3: any) => ({
                         main: {
                             item1: subTopic3?.name,
-                            item2: subTopic3?.report ? '' : '',
-                            item3: subTopic3?.report ? '' : '',
-                            item4: subTopic3?.report ? '' : '',
+                            item2: subTopic3?.report?.accuracy ? subTopic3?.report?.accuracy : '',
+                            item3: subTopic3?.report?.correctQuestion ? subTopic3?.report?.correctQuestion : '',
+                            item4: subTopic3?.report?.questionsAnswered ? subTopic3?.report?.questionsAnswered : '',
                             mastery: subTopic3?.mastery
                         },
                     }))
                 }))
             }))} deep={1} />
         )) : '' }
-        <SingleGroup main={{
-            item1: 'Resta de números enteros',
-            item2: '-%',
-            item3: '-%',
-            item4: '-%',
-        }} deep={0} />
     </MarkTableDiv>);
 };
 
