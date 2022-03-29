@@ -46,9 +46,6 @@ import {
 // import countryList from 'react-select-country-list';
 import { Country, State } from 'country-state-city';
 
-console.log(Country.getAllCountries())
-console.log(State.getAllStates())
-
 // type PaymentFormProps = {
 //   isUpdate: boolean
 // };
@@ -190,7 +187,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
         plansDetail = plansDetail !== null ? plansDetail : plans;
         for (const type in plansDetail) {
             const plan = plansDetail[type]
-            console.log(plan.childCount)
             if (plan.childCount < 1 || !plan.childCount) continue;
             const orderDetailInput: any = {};
             orderDetailInput.planId = plan.id
@@ -217,8 +213,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 user.token,
                 dispatch
             )
-            console.log('this is result, ', result)
-            console.log(user)
             result.data.email = user.email;
         }
         else {

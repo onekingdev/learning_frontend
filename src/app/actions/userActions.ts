@@ -29,7 +29,6 @@ export const login = async (username: string, password: string, dispatch: any) =
 
   const result_who:any = await res_who.json();
 
-  console.log(result_who);
   if(result_who.errors && !result_who.data) {
     return {success: false, msg: result_who.errors[0].message};
   }
@@ -45,7 +44,6 @@ export const login = async (username: string, password: string, dispatch: any) =
     return {success: false, msg: result_interests.errors[0].message};
   }
   const interests = result_interests.data.interests
-  console.log(interests)
   const user = result_who.data.whoami;
   const user_redux:any = (({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language,profile }) => ({lastLogin, isSuperuser, username, firstName, lastName, email , isStaff, isActive, dateJoined, language, profile}))(user)
   const {guardian, student} = result_who.data.whoami;
@@ -54,44 +52,37 @@ export const login = async (username: string, password: string, dispatch: any) =
 
   if(student) {
     dispatch({ type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token} })
-      dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
-      console.log(student)
-      dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
-        rank: 1,
-        level_name: student.level.name,
-        level: student.level.amount,
-        exp: parseInt(student.points),
-        expMax: student.level.pointsRequired,
-        progress: 0,
-        energyCharge: 0,
-        balance: student.coinWallet.balance,
-      }})
-      dispatch({type: TYPES.AVATAR_SET_DATA, payload: {
-        accessories: student.avatarAccessories,
-        head: student.avatarHead,
-        clothes: student.avatarClothes,
-        pants: student.avatarPants
-      }})
-      dispatch({type: TYPES.INTEREST_SET_DATA, payload: interests})
-      return {success: true, msg: 'Successfully Logined!', userType: 'student'}
-    }
-    else if(guardian) {
-      console.log('this is a guardian')
-      dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian })
-      // const result:any = await getGrades(
-      //   user.token,
-      //   dispatch
-      // );
-      // if(!result.success) {
-      //   return false;
-      // }
-      // return true;
-      return {success: true, msg: 'Successfully Logined!', userType: 'guardian'}
-    }
-    else {
-      // dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
-      return {success: true, msg: 'Successfully Logined!', userType: 'teacher'}
-    }
+    dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
+    dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
+      rank: 1,
+      level_name: student.level.name,
+      level: student.level.amount,
+      exp: parseInt(student.points),
+      expMax: student.level.pointsRequired,
+      progress: 0,
+      energyCharge: 0,
+      balance: student.coinWallet.balance,
+    }})
+    dispatch({type: TYPES.AVATAR_SET_DEFAULT, payload: student})
+    dispatch({type: TYPES.INTEREST_SET_DATA, payload: interests})
+    return {success: true, msg: 'Successfully Logined!', userType: 'student'}
+  }
+  else if(guardian) {
+    dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian })
+    // const result:any = await getGrades(
+    //   user.token,
+    //   dispatch
+    // );
+    // if(!result.success) {
+    //   return false;
+    // }
+    // return true;
+    return {success: true, msg: 'Successfully Logined!', userType: 'guardian'}
+  }
+  else {
+    // dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
+    return {success: true, msg: 'Successfully Logined!', userType: 'teacher'}
+  }
 }
 
 export const getNextLevel = async (currentLevelAmount: number,token: string, dispatch: any ) => {

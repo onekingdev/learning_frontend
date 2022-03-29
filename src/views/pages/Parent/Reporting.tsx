@@ -29,7 +29,6 @@ export const ParentReporting: FC = () => {
         return
       }
       const result:any = await res.json();
-      console.log(result)
       if(result.errors && !result.data) {
         alert(result.errors[0].message);
       } else {
@@ -42,13 +41,11 @@ export const ParentReporting: FC = () => {
     if (activeSubjectId !== -1 && parseInt(studentId) > 0) {
       (async () => {
         // Get Topic Report
-        console.log("Request for Topic Report BY following infos\nStudentId: ", studentId, " activeSubjectId: ", activeSubjectId)
         const res:any = await query(``, TopicReport(parseInt(studentId), activeSubjectId), user.token).catch(e => ({success: false}));
         if(res.success === false) {
           return
         }
         const result:any = await res.json();
-        console.log(result.data)
         if(result.errors && !result.data) {
           alert(result.errors[0].message);
         } else {
@@ -59,7 +56,6 @@ export const ParentReporting: FC = () => {
     }
   }, [activeSubjectId, studentId]);
   useEffect(() => {
-    console.log(guardian)
     for (const guardianStudent of guardian.guardianstudentSet) {
       if (guardianStudent?.student.id === studentId) {
         setStudent(guardianStudent?.student)

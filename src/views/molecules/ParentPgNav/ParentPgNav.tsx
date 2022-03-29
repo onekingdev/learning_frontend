@@ -34,7 +34,6 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   // const dispatch = useDispatch()
   const classes = useStyles();
   const handleChange = (event:any) => {
-    console.log(event.target.value)
     switch(event.target.value) {
       case 'Settings' :
         history.push('/parent/setting')

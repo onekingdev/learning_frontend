@@ -47,7 +47,6 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   }, [question.answeroptionSet]);
 
   const handleAnswer = (result: BlockQuestionInput) => {
-    console.log('answered, result is ', result)
     setIsAnswered(true);
     result.question = parseInt(question.id);
     onAnswer(result);

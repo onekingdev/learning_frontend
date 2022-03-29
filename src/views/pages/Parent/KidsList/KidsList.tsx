@@ -120,7 +120,6 @@ const KidsList: FC = () => {
     useEffect(() => {
 
       loadingContext.done();
-      console.log(props)
 
     }, []);
 

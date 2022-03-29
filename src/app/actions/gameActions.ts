@@ -13,7 +13,6 @@ export const getGameCategories = async (token: string, dispatch: any) => {
 
   const result: any = await res.json();
 
-  console.log(result);
   if (result.errors && !result.data) {
     return { success: false, msg: result.errors[0].message };
   }
@@ -29,7 +28,6 @@ export const getGameByCategory = async (categoryName: string, token: string, dis
 
   const result: any = await res.json();
 
-  console.log(result);
   if (result.errors && !result.data) {
     return { success: false, msg: result.errors[0].message };
   }

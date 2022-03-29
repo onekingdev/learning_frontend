@@ -31,7 +31,6 @@ export const TextOption: FC<TextOptionProps> = ({ answer, onClick }) => {
     console.log('initialized text option, isAnswered: ', isAnswered, 'answer is ', answer)
   }, [answer])
   const handleAnswer = () => {
-    console.log('handle answer')
     setIsCorrect(answer.isCorrect)
     setIsAnswered(true);
     const inputAnswer: BlockQuestionInput = {

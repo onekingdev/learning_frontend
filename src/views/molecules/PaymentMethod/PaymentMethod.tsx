@@ -53,7 +53,6 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     setLoading(true)
     // const result = await paymentFormRef?.current?.handleOrder(plans, couponCode);
     const result = await paymentFormRef?.current?.handleOrder(plans, '');
-    console.log('result is ', result)
     // test
     // dispatch({
     //     type: TYPES.GUARDIAN_SET_AVAILABLE_PLANS,
@@ -203,7 +202,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                 <OrderTip>
                 Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy </b></a>by clicking the link below.
                 </OrderTip>
-                <OrderTip>
+                <OrderTip style={{display: 'flex'}}>
                     <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)}/>
                     <div style={{paddingLeft: '20px'}}>I have read and agree to the website terms and conditions*</div>
                 </OrderTip>

@@ -119,17 +119,14 @@ const NewKids: FC = () => {
   };
 
   const handlePrev = () => {};
-  console.log('child num is ', childNum )
 
   const handleNext = async () => {
     if (!formValidation()) return;
-    console.log(childIdx)
     // return;
     // if (childIdx === childNum) {
     //   saveChild(childs[childIdx]);
     //   return;
     // }
-    console.log('paths is ', paths)
     setLoading(true)
     if(!await saveChild()) {
       setLoading(false)
@@ -161,7 +158,6 @@ const NewKids: FC = () => {
   };
 
   const saveChild = async () => {
-    console.log(currentPackage, paths)
     const listSubjectId: number[] = [];
     const studentPlan = 1;
     for(const path of paths)
@@ -204,7 +200,6 @@ const NewKids: FC = () => {
     const validateMsgTemp = {...validateMsg};
     let valiResult        = true;
     for (const key in validateMsg) {
-      console.log('key is ', key, validateMsgTemp[key])
       if (validateMsg[key] === null) {
         validateMsgTemp[key] = 'Field is required';
       }
@@ -291,11 +286,7 @@ const NewKids: FC = () => {
                         : classes.soleInput
                     } err-border`}
                     onChange={e => {
-                      console.log('target', e.target.value, e.target.value.length)
                       setCurrentPackage(e.target.value);
-                      console.log('target is ', e.target.value);
-                      console.log('set path like that', e.target.value?.plan?.subjects)
-                      console.log('set path like name is ',e.target.value?.plan?.name)
 
                       if(e.target.value?.plan?.name === 'Gold') setPaths(e.target.value?.plan?.subjects)
                       else setPaths([]);

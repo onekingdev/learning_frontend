@@ -23,7 +23,6 @@ export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics,id}) => {
     setBlockPresentationId(data.data.createPathBlockPresentation.blockPresentation.id)
   }
   const handleError = (error: any) => {
-    console.log(error)
   }
   const handleClick = (topicId:string) => {
     mutation(
@@ -34,17 +33,14 @@ export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics,id}) => {
       handleError
     )
     if(blockPresentationId){
-      console.log(topicId,'topicId')
-      console.log(blockPresentationId)
       history.push(`/question/presentation_${blockPresentationId}`)
     }
     else {
-      console.log('Los Ids no coinciden')
+      console.log("else")
     }
   }
 
   const handleMoveRight = () => {
-    console.log(id)
     const carousel = document.getElementById(`${id}`);
     if (carousel) {
       return (carousel.scrollLeft += carousel.offsetWidth);
