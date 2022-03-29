@@ -62,7 +62,7 @@ export const login = async (username: string, password: string, dispatch: any) =
       exp: parseInt(student.points),
       expMax: student.level.pointsRequired,
       progress: 0,
-      energyCharge: 0,
+      energyCharge: student.battery.level,
       balance: student.coinWallet.balance,
     }})
     dispatch({type: TYPES.AVATAR_SET_DEFAULT, payload: student})
