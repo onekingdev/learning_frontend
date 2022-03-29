@@ -23,7 +23,6 @@ import { ImageAvatar }              from 'views/molecules/Avatar/DefaultAvatar';
 
 import {
   Title,
-  Avatar,
   LicenseButton,
   useStyles,
   Container,

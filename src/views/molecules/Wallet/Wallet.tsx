@@ -1,6 +1,6 @@
 import { FC, useState }    from 'react';
 import { Icon }            from 'views/atoms/Icon/Icon';
-import { Balance }         from 'views/atoms/WalletBalance';
+import { TypoGeneralText } from 'views/atoms/Text'
 import { BasicColor }      from 'views/Color';
 import coins               from 'views/assets/coins.svg';
 import styled              from 'styled-components';
@@ -26,7 +26,7 @@ export const Wallet: FC<WalletProps> = ({ balance }) => {
           <IconContainer>
             <Icon image={coins} size={IconSize.medium} onClick={deployDropdown} />
           </IconContainer>
-          <Balance>{balance}</Balance>
+          <TypoGeneralText>{balance}</TypoGeneralText>
         </WalletStyle>
         {isDeploy ? (
           <LSDialog isOpen={isDeploy} open={deployDropdown} dialogContent={<WalletTxHistory />} fullWidth='true' title='Recent Transactions' />

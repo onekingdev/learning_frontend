@@ -17,15 +17,6 @@ position: relative;
 left: -120px;
 margin: 0;
 `
-// const Title = styled.p`
-// font-family: Montserrat;
-// font-size: 35px;
-// font-style: normal;
-// font-weight: 700;
-// line-height: 50px;
-// letter-spacing: 0.25px;
-// text-align: center;
-// `
 
 const Background = styled.div`
   font-weight: 700;

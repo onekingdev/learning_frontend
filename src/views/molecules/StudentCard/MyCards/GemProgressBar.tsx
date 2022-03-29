@@ -9,19 +9,21 @@ interface ProgressBarProps {
   totalCount: number;
   gainedCount: number;
   category: string;
+  firebaseName: string | undefined
 }
 
 export const GemProgressBar: FC<ProgressBarProps> = ({
   totalCount,
   gainedCount,
   category,
+  firebaseName,
 }) => {
   const [imgurl, setImgurl] = useState('');
 
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(
       'CategoriesBack',
-      category ? 'back' + category + '.png' : ''
+      firebaseName ? 'back' + firebaseName + '.png' : ''
     );
     if (link === 'NO_IMAGE') setImgurl('');
     else setImgurl(link);
@@ -80,7 +82,6 @@ const ProgressBarContainer = styled.div`
 `;
 
 const StyledProgressLabel = styled.p`
-  font-family: Montserrat;
   text-align: end;
   margin: 0;
   font-weight: 700;

@@ -18,7 +18,6 @@ import avatar            from 'views/assets/socrates-icon.svg'
 import {
   LogoContainer,
   LogoImg,
-  LogoTitle,
   Home,
   NameAvatarGroup,
   SupportBtnContainer,
