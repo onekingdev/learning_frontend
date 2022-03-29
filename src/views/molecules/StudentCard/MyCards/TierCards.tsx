@@ -17,7 +17,6 @@ interface TierCardProp {
     }>;
     category: {
       name: string;
-      firebaseName: string
     };
   }[];
 }
@@ -48,7 +47,6 @@ export const TierCards: FC<TierCardProp> = ({cards}) => {
               purchased={card.owned}
               amount={card.amount}
               name={card.name}
-              firebaseName={card.category.firebaseName}
               description={card.description}
             />
           );
@@ -64,6 +62,7 @@ const Container = styled.div`
   align-items: center;
   p {
     text-align: center;
+    font-family: Montserrat;
     font-weight: 700;
     font-size: 20px;
   }

@@ -6,8 +6,8 @@ import {
 import mutation    from 'api/mutations/get'
 import * as TYPES  from '../types'
 
-export const finishBlock = async (block_presentation_id: string, hits: number, errors: number, bonusCoins: number, earning: object, questionResults: any, token: string, dispatch: any) => {
-    const res: any = await mutation(FINISH_BLOCK_PRESENTATION(block_presentation_id, hits, errors, bonusCoins, questionResults), token).catch(() => ({ success: false }));
+export const finishBlock = async (block_presentation_id: string, batteryLevel: number, hits: number, errors: number, bonusCoins: number, earning: object, questionResults: any, token: string, dispatch: any) => {
+    const res: any = await mutation(FINISH_BLOCK_PRESENTATION(block_presentation_id, batteryLevel, hits, errors, bonusCoins, questionResults), token).catch(() => ({ success: false }));
     if (res.success === false) {
         return { success: false, msg: 'Network Error' };
     }

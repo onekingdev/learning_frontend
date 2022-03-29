@@ -120,7 +120,7 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
                 <TableCell
                   key={column.id}
                   align='center'
-                  style={{ minWidth: column.minWidth, backgroundColor: BasicColor.blue, color: 'white' }}
+                  style={{ minWidth: column.minWidth, backgroundColor: BasicColor.blue, color: 'white', fontFamily: 'Montserrat' }}
                 >
                   {column.label}
                 </TableCell>
@@ -155,7 +155,7 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
                         value = temp.toLocaleDateString('en-US')
                       }
                       return (
-                        <TableCell key={column.id} align='center' sx={{ color: 'white' }}>
+                        <TableCell key={column.id} align='center' sx={{ color: 'white', fontFamily: 'Montserrat' }}>
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

@@ -265,6 +265,7 @@ export const Question: FC = () => {
         }
         const finishBlockResult = await finishBlock(
           blockPresentation.id,
+          earning.energyCharge,
           correctCount,
           wrongCount,
           (state.earning.energyCharge * pointUnit * 10) / 100,
@@ -305,6 +306,7 @@ export const Question: FC = () => {
               combocount     ={state.earning.energyCharge}
             />
           </ProgressWrapper>
+          <button onClick={congratulations}>CONGRATULATIONS</button>
           <CardDialog
             isOpen={openDg}
             open={congratulations}

@@ -101,6 +101,7 @@ const CardContainer = styled.div`
     justify-content: center;
     text-align: center;
     margin: 0px;
+    font-family: Montserrat;
     color: white;
     background-color: ${BasicColor.green};
   }
@@ -145,6 +146,7 @@ const StyledBg = styled.div`
   p {
     text-align: center;
     font-weight: 700;
+    font-family: Montserrat;
     margin: 0;
     font-size: 15px;
     @media screen and (max-width: ${ScreenSize.tablet}) {
@@ -161,6 +163,7 @@ const StyledBg = styled.div`
     border-radius: 20px;
     display: flex;
     align-items: center;
+    font-family: Montserrat;
     justify-content: center;
     &:hover {
       box-shadow: 0 1px 1rem -3px orange;
@@ -178,6 +181,7 @@ const StyledBg = styled.div`
 `;
 
 const StyledPrice = styled.div`
+  font-family: Montserrat;
   background-color: ${BasicColor.blue};
   height: 40px;
   width: 100px;

@@ -73,6 +73,7 @@ const CardContainer = styled.div`
     justify-content: center;
     text-align: center;
     margin: 0px;
+    font-family: Montserrat;
     color: white;
     background-color: ${BasicColor.green};
   }

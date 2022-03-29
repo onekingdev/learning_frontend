@@ -55,6 +55,12 @@ export const SupportBtnContainer = styled.div`
   }
 `;
 
+export const LogoTitle = styled.div`
+  align-self: center;
+  font-size: 20px;
+  paddint-top: 9px;
+`;
+
 export const NameAvatarGroup = styled.div`
   display: flex;
   justify-content: center;

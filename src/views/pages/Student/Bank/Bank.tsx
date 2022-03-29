@@ -12,10 +12,10 @@ import { PageTitle }                 from 'views/molecules/PageTitle';
 import { Wrapper, GridItem, Img }    from './Styles';
 export const Bank: FC = () => {
 
-  const student        = useSelector((state: any) => state.student)
-  const interests      = useSelector((state: any) => state.interests.interests)
+  const student = useSelector((state: any) => state.student)
+  const interests = useSelector((state: any) => state.interests.interests)
   const loadingContext = useContext(LoadingContext);
-  const bankMovement   = student.bankWallet.bankmovementSet
+  const bankMovement = student.bankWallet.bankmovementSet
 
   useEffect(() => {
     loadingContext.done();

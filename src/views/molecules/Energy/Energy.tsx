@@ -1,11 +1,10 @@
-import { FC } from 'react';
-import { Icon } from 'views/atoms/Icon/Icon';
-import lightning from 'views/assets/lightning.svg';
-import { Battery } from 'views/molecules/Battery/Battery';
-import { IconSize } from 'views/atoms/Icon/Size';
-import styled from 'styled-components';
+import { FC }            from 'react';
+import { Icon }          from 'views/atoms/Icon/Icon';
+import lightning         from 'views/assets/lightning.svg';
+import { Battery }       from 'views/molecules/Battery/Battery';
+import { IconSize }      from 'views/atoms/Icon/Size';
+import styled            from 'styled-components';
 import { BatteryButton } from 'views/molecules/Battery/BatteryButton';
-import { ScreenSize } from 'constants/screenSize';
 
 type EnergyProps = {
   charge: number;
@@ -19,24 +18,14 @@ const EnergyStyle = styled.div`
   justify-content: space-between;
 `;
 
-export const Energy: FC<EnergyProps> = ({ charge }) => {
+export const Energy: FC<EnergyProps> = ({charge}) => {
   return (
     <>
       <EnergyStyle>
-        <IconContainer>
-
-          <Icon image={lightning} size={IconSize.small} />
-        </IconContainer>
+        <Icon image={lightning} size={IconSize.small} />
         <Battery charge={charge} />
-        <BatteryButton value={charge * 10 + ' % '} onClick={() => console.log('Hella yes')} />
+        <BatteryButton value={charge*10 + ' % '} onClick={() => console.log('Hella yes')} />
       </EnergyStyle>
     </>
   );
 };
-
-const IconContainer = styled.div`
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    display: none;
-  }
-`;
-

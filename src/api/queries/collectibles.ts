@@ -21,7 +21,6 @@ export const OWNED_CARDS_QUERY = `{
     }
     category {
       name
-      firebaseName
     }
     owned
     amount
