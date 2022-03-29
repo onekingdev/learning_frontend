@@ -13,6 +13,7 @@ type CardProps = {
   imgUrl: string;
   purchased?: boolean;
   amount: number;
+  firebaseName: string
   description?: Array <{
     key: string
     value: string
@@ -31,7 +32,8 @@ export const Gemcard: FC<CardProps> = ({
   amount,
   description,
   name,
-  category,
+  // category,
+  firebaseName
 }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
@@ -56,7 +58,7 @@ export const Gemcard: FC<CardProps> = ({
   };
 
   const fetchFirebaseUrls = async () => {
-    const link = await getDownUrlByFilename(category, imgUrl);
+    const link = await getDownUrlByFilename(firebaseName, imgUrl);
     setImg(link);
   };
 
@@ -162,7 +164,6 @@ export const Gemcard: FC<CardProps> = ({
 
 const Container = styled.div`
   p {
-    font-family: Montserrat;
     font-size: 18px;
     font-weight: 700;
     padding: 0;
@@ -194,7 +195,6 @@ const Button = styled.button`
 
 const StyledGrid = styled(Grid)`
   &.MuiGrid-root {
-    font-family: Montserrat;
     padding-left: 20px;
 
     img {

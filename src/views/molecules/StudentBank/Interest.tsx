@@ -51,7 +51,7 @@ export const Interest: FC<InterestProp> = ({interests}) => {
                 <TableCell
                   key={column.id}
                   align='center'
-                  style={{ minWidth: column.minWidth,maxWidth: 90, backgroundColor: BasicColor.white, color: 'black', fontFamily: 'Montserrat' }}
+                  style={{ minWidth: column.minWidth,maxWidth: 90, backgroundColor: BasicColor.white, color: 'black' }}
                 >
                   {column.label}
                 </TableCell>
@@ -66,7 +66,7 @@ export const Interest: FC<InterestProp> = ({interests}) => {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align='center' sx={{ color: 'black', fontFamily: 'Montserrat' }}>
+                        <TableCell key={column.id} align='center' sx={{ color: 'black' }}>
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

@@ -66,7 +66,7 @@ const MuiButton: FC<MuiButtonProps> = ({
                 height: height || '49px',
                 width: fullWidth ? '100%' : width || '215px',
                 textTransform: 'unset',
-                fontSize: fontSize || '16px',
+                fontSize: fontSize || '14px',
                 fontWeight: weight || 500,
                 color: color || BasicColor.white,
                 float: align,

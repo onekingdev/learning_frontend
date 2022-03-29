@@ -8,42 +8,16 @@ import { doCancelMembership }                         from 'app/actions/guardian
 import { useSelector }                                from 'react-redux'
 import { useSnackbar }                                from 'notistack';
 import { LoadingSpinner }                             from 'views/atoms/Spinner';
+import { CANCEL_REASONS }                             from 'constants/parent'
 
 interface ICancelFormProps {
   open: () => void
   refresh: () => void
 }
 
-const data = [
-  {
-    id: 0,
-    value: 'reason0',
-    label: 'How can we raise a good child, one who will do the right thing, even when no one may see them do it',
-  },
-  {
-    id: 1,
-    value: 'reason1',
-    label: 'To encourage empathy in your child, encourage your child to talk about her feelings and make sure she knows that you care about them.',
-  },
-  {
-    id: 2,
-    value: 'reason2',
-    label: 'No two children learn the same way or at the same pace.',
-  },
-  {
-    id: 3,
-    value: 'reason3',
-    label: 'Babies and young children learn best when they have warm, engaged and responsive relationships with their main carers.',
-  },
-  {
-    id: 4,
-    value: 'reason4',
-    label: 'Letting your child make mistakes and find out for himself how the world works is a big part of learning.',
-  },
-]
 
 export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) => {
-  const [value, setValue] = useState(data[0].value);
+  const [value, setValue] = useState(CANCEL_REASONS[0].value);
   const [loading, setLoading] = useState(false)
   const guardian = useSelector((state: any) => state.guardian);
   const user = useSelector((state: any) => state.user);
@@ -51,7 +25,7 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
 
   const onSubmit = () => {
     setLoading(true)
-    const reason = data.find(element => element.value === value)?.label
+    const reason = CANCEL_REASONS.find(element => element.value === value)?.label
     // TODO: send cancel membership mutation
     const res: any = doCancelMembership(guardian.id, reason ? reason : '', user.token)
     if (res.status) {
@@ -62,7 +36,6 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
     setLoading(false)
     open()
     refresh()
-    // window.location.reload();
   }
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +58,7 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
           onChange={handleRadioChange}
         >
           {
-            data.map((row) => {
+            CANCEL_REASONS.map((row) => {
               return <LSFormControlLabel key={row.id} value={row.value} control={<LSRadio />} label={row.label} />
             })
           }

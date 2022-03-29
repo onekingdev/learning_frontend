@@ -2,7 +2,7 @@ export const dictionary = Object.freeze({
   en: {
     practice:'Practice, play, grow',
     description:
-      `Socrates makes learning fun while adjusting to your child's needs.  Join now to begin their learning journey.`,
+      'Socrates makes learning fun while adjusting to your child\'s needs.  Join now to begin their learning journey.',
     login:   'Log In',
     join:    'Join',
     about:   'About Us',

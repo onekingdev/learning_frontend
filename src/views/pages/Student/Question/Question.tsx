@@ -118,7 +118,7 @@ export const Question: FC = () => {
   }
 
   const onAnswer = (result: BlockQuestionInput) => {
-    increaseExp(result.isCorrect);
+    increaseExp();
     //for test
     // result.isCorrect = true;
 
@@ -128,8 +128,8 @@ export const Question: FC = () => {
     }
   };
 
-  const increaseExp = async (isCorrect:boolean) => {
-    const currentExp  = earning.exp + (isCorrect ? EXP_UNIT : 1);
+  const increaseExp = async () => {
+    const currentExp  = earning.exp + EXP_UNIT;
     const expMax      = earning.expMax
 
     if (currentExp > expMax) {
