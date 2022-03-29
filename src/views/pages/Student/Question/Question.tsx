@@ -19,13 +19,15 @@ import { finishBlock }                 from 'app/actions/blockActions';
 import {IBlockPresentation, IQuestion} from 'app/entities/block';
 import {Store}                         from 'app/configureStore';
 import * as TYPE                       from 'app/types';
-import { createAiBlockPresentation,
-  createPathBlockPresentation}         from 'app/actions/blockActions';
+import {
+  createAiBlockPresentation,
+  createPathBlockPresentation,
+  getBlockPresentationById}            from 'app/actions/blockActions';
 import { getNextLevel }                from 'app/actions/userActions';
 
 interface RoutePresentationParams {
   mode  : string;
-  aokId : string;
+  aokId : string;       //Area of Knowledge Id on AI or Path mode, BlockPresentationId on BlockID mode
 }
 
 interface BlockQuestionInput {
@@ -101,8 +103,12 @@ export const Question: FC = () => {
     setNextMaxExp(student.nextLevel.pointsRequired)
     if(mode === 'AI') setQuestionsInAI()
     if(mode ==='PATH') setQuestionsInPath();
+    if(mode === 'BlockID') setQuestionBySpecificBlockPresentation();
   }, [])
 
+  useEffect(() => {
+    console.log("Block Presentation Id is : ", blockPresentation?.id)
+  }, [blockPresentation])
   useEffect(() => {
     setQuestion(blockPresentation?.block.questions[questionCounter]);
   }, [blockPresentation, questionCounter]);
@@ -216,6 +222,22 @@ export const Question: FC = () => {
     return true;
   }
 
+  const setQuestionBySpecificBlockPresentation = async() => {
+    const result:any = await getBlockPresentationById(
+      parseInt(aokId),
+      user.token,
+      dispatch
+    );
+    if(!result.success) {
+      enqueueSnackbar(result.msg, { variant: 'error' });
+      return false;
+    }
+    setBlockPresentation(result.data);
+    setPointUnit(10);
+    loadingContext.done()
+    return true;
+  }
+
   const onNextLesson = () => {
     setQuestionCounter(0);
     setIsLessonFinished(false)
@@ -252,8 +274,13 @@ export const Question: FC = () => {
   // }, [presentationId]);
 
   const handleNextQuestion = async () => {
+
     if (blockPresentation) {
       if (blockPresentation.block.questions.length < questionCounter + 2) {
+        if(mode === 'BlockID') {
+          setIsLessonFinished(true);
+          return;
+        }
         setLoading(true)
         setIsLessonFinished(true);
         setLoading(true);
@@ -275,7 +302,9 @@ export const Question: FC = () => {
           dispatch
         );
         if(mode === 'AI') await setQuestionsInAI();
-        else await setQuestionsInPath();
+        if(mode ==='PATH')  await setQuestionsInPath();
+        if(mode === 'BlockID') await setQuestionBySpecificBlockPresentation();
+
         setLoading(false);
       }
     }
