@@ -1,5 +1,6 @@
 body {
     color: #3F3F3F;
+    font-family: 'Roboto';
 }
 .flex{
     display: flex;
@@ -356,12 +357,12 @@ body {
     background: #9975F6;
     border-radius: 10px;
   }
-  
+
   *::-webkit-scrollbar-track {
     box-shadow: rgb(20, 17, 24) 0px 0px 5px inset;
     border-radius: 10px;
   }
-  
+
   *::-webkit-scrollbar {
     width: 5px;
     height: 5px;

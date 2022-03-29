@@ -24,7 +24,6 @@ import { getAudiencesWithGrades}    from 'app/actions/audienceActions'
 
 import {
   Title,
-  Avatar,
   LicenseButton,
   useStyles,
   Container,

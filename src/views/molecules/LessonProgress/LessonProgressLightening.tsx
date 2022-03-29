@@ -38,7 +38,6 @@ const Energy = styled.div`
     align-self: center;
     p {
       color: white;
-      font-family: Montserrat;
       font-size: 30px;
       margin: auto;
     }

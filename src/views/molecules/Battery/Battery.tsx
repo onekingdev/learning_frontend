@@ -1,6 +1,7 @@
 import { FC }         from 'react';
 import styled         from 'styled-components';
 import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
 
 type BatteryProps = {
   charge: number;
@@ -42,6 +43,11 @@ const ChargeItem = styled.div<ChargeItemProps>`
   height: 34px;
   background-color: ${p => p.color};
   border-bottom: 10px solid ${p => p.borderColor};
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    border-bottom: 2px solid ${p => p.borderColor};
+    width: 34px;
+    height: 15px;
+  }
 `;
 
 const BatteryStyles = styled.div`
@@ -56,6 +62,12 @@ const BatteryStyles = styled.div`
   background: linear-gradient(to bottom, #f0f0f0, #d2d2d2);
   padding: 0 5px;
   border-radius: 5px;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    flex-direction: column-reverse;
+    justify-content: center;
+    width: auto;
+    height: auto;
+  }
 `;
 const BatteryContainer = styled.div`
   width: 195px;
@@ -63,6 +75,12 @@ const BatteryContainer = styled.div`
   display: flex;
   justify-items: left;
   align-items: center;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    flex-direction: column-reverse;
+    width: 50px;
+    justify-content: center;
+    height: auto;
+  }
 `;
 
 const BatteryPole = styled.div`
@@ -70,4 +88,9 @@ const BatteryPole = styled.div`
   height: 20px;
   background-color: #505050;
   border-bottom: 7px solid #3c3c3c;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    border-bottom: 2px solid #3c3c3c;
+    width: 20px;
+    height: 10px;
+  }
 `;

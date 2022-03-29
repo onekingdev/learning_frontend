@@ -4,12 +4,6 @@ import Grid           from '@mui/material/Grid';
 import titleBg        from 'views/assets/title-kids-background.png'
 import { BasicColor } from 'views/Color';
 
-export const Avatar         = styled.img`
-  cursor  : pointer;
-  width   : 85px;
-  height  : 95px;
-`;
-
 export const LicenseButton  = styled.img`
   cursor: pointer;
   &:hover {
@@ -21,7 +15,6 @@ export const LicenseButton  = styled.img`
 export const Title          = styled.div`
   font-Size   :    40px;
   line-height :  50px;
-  font-family :  Montserrat;
   font-weight :  700;
   color           : white;
   width           : 385px;

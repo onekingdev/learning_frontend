@@ -219,32 +219,32 @@ const MarkTable = ({
         { data && data.rootTopicsByAok && data.rootTopicsByAok.length > 0 ? data?.rootTopicsByAok?.map((aok: any, id: number) => (
             <SingleGroup key={id} main={{
                 item1: aok?.name,
-                item2: aok?.report?.accuracy ? aok?.report?.accuracy : '',
-                item3: aok?.report?.correctQuestion ? aok?.report?.correctQuestion : '',
-                item4: aok?.report?.questionsAnswered ? aok?.report?.questionsAnswered : '',
+                item2: aok?.report?.accuracy ? aok?.report?.accuracy + "%" : '0%',
+                item3: aok?.report?.correctQuestion ? aok?.report?.correctQuestion : '0',
+                item4: aok?.report?.questionsAnswered ? aok?.report?.questionsAnswered : '0',
                 mastery: aok?.mastery
             }} extra={aok?.subTopics.map((subTopic1: any) => ({
                 main: {
                     item1: subTopic1?.name,
-                    item2: subTopic1?.report?.accuracy ? subTopic1?.report?.accuracy : '',
-                    item3: subTopic1?.report?.correctQuestion ? subTopic1?.report?.correctQuestion : '',
-                    item4: subTopic1?.report?.questionsAnswered ? subTopic1?.report?.questionsAnswered : '',
+                    item2: subTopic1?.report?.accuracy ? subTopic1?.report?.accuracy + "%" : '0%',
+                    item3: subTopic1?.report?.correctQuestion ? subTopic1?.report?.correctQuestion : '0',
+                    item4: subTopic1?.report?.questionsAnswered ? subTopic1?.report?.questionsAnswered : '0',
                     mastery: subTopic1?.mastery
                 },
                 extra: subTopic1?.subTopics.map((subTopic2: any) => ({
                     main: {
                         item1: subTopic2?.name,
-                        item2: subTopic2?.report?.accuracy ? subTopic2?.report?.accuracy : '',
-                        item3: subTopic2?.report?.correctQuestion ? subTopic2?.report?.correctQuestion : '',
-                        item4: subTopic2?.report?.questionsAnswered ? subTopic2?.report?.questionsAnswered : '',
+                        item2: subTopic2?.report?.accuracy ? subTopic2?.report?.accuracy + "%" : '0%',
+                        item3: subTopic2?.report?.correctQuestion ? subTopic2?.report?.correctQuestion : '0',
+                        item4: subTopic2?.report?.questionsAnswered ? subTopic2?.report?.questionsAnswered : '0',
                         mastery: subTopic2?.mastery
                     },
                     extra: subTopic1?.subTopics.map((subTopic3: any) => ({
                         main: {
                             item1: subTopic3?.name,
-                            item2: subTopic3?.report?.accuracy ? subTopic3?.report?.accuracy : '',
-                            item3: subTopic3?.report?.correctQuestion ? subTopic3?.report?.correctQuestion : '',
-                            item4: subTopic3?.report?.questionsAnswered ? subTopic3?.report?.questionsAnswered : '',
+                            item2: subTopic3?.report?.accuracy ? subTopic3?.report?.accuracy + "%" : '0%',
+                            item3: subTopic3?.report?.correctQuestion ? subTopic3?.report?.correctQuestion : '0',
+                            item4: subTopic3?.report?.questionsAnswered ? subTopic3?.report?.questionsAnswered : '0',
                             mastery: subTopic3?.mastery
                         },
                     }))
