@@ -106,8 +106,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
           <ImageAssetContainer
             imageLength={question.questionImageAssets.length}
           >
-            {question.questionImageAssets.map(item => (
-              <ImageAsset src={item.image} alt='' />
+            {question.questionImageAssets.map((item,i) => (
+              <ImageAsset key={i} src={item.image} alt='' />
             ))}
           </ImageAssetContainer>
         </AnswersContainer>
