@@ -195,6 +195,9 @@ export const STUDENT = `
             areaofknowledgeSet {
                 ${AREA_OF_KNOWLEDGE}
             }
+            gradeSet {
+                ${GRADES}
+            }
         }
         grade {
             ${STUDENT_GRADE}

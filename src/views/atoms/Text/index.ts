@@ -15,18 +15,8 @@ export const TypoHeader = styled.h1<TextProps>`
   font-weight: 700;
   font-size: 40px;
   @media (max-width: ${ScreenSize.phone}) {
-    font-size: 22px;
     letter-spacing: 0.1px;
-  }
-`;
-
-export const TypoGeneralText = styled.p<TextProps>`
-  font-family: ${Typography.primary};
-  color: black;
-  font-weight: 400;
-  font-size: 24px;
-  @media (max-width: ${ScreenSize.phone}) {
-    font-size: 16px;
+    font-size: 22px;
     letter-spacing: 0.1px;
   }
 `;
@@ -39,6 +29,7 @@ export const Subheader = styled.h3<TextProps>`
   margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 12px;
+    line-height: 15px;
     letter-spacing: 0.75px;
     text-transform: capitalize;
   }
@@ -55,6 +46,7 @@ export const Title = styled.h2<TextProps>`
 
   @media (min-width: ${ScreenSize.desktop}) {
     font-size: 34px;
+    line-height: 50px;
   }
 `;
 
@@ -65,9 +57,11 @@ export const TypoTitle = styled.h2`
   margin: 0;
   font-size: 40px;
   font-weight: 700;
+  line-height: 50px;
 
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 24px;
+    line-height: 28px;
   }
 `;
 

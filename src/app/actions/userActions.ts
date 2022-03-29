@@ -71,14 +71,6 @@ export const login = async (username: string, password: string, dispatch: any) =
   }
   else if(guardian) {
     dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian })
-    const result:any = await getGrades(
-      user.token,
-      dispatch
-    );
-    if(!result.success) {
-      return {success: false, msg: 'Can not get grades.'}
-    }
-
     return {success: true, msg: 'Successfully Logined!', userType: 'guardian'}
   }
   else {

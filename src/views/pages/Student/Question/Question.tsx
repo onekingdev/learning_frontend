@@ -335,6 +335,7 @@ export const Question: FC = () => {
               combocount     ={state.earning.energyCharge}
             />
           </ProgressWrapper>
+          <button onClick={congratulations}>CONGRATULATIONS</button>
           <CardDialog
             isOpen={openDg}
             open={congratulations}

@@ -20,9 +20,11 @@ import { Store }                    from 'app/configureStore';
 import { changeStudentGrade }       from 'app/actions/studentActions';
 import { changeStudentPassword }    from 'app/actions/studentActions';
 import { ImageAvatar }              from 'views/molecules/Avatar/DefaultAvatar';
+import { getAudiencesWithGrades}    from 'app/actions/audienceActions'
 
 import {
   Title,
+  Avatar,
   LicenseButton,
   useStyles,
   Container,
@@ -45,12 +47,12 @@ const KidsList: FC = () => {
   const user      = useSelector((state: Store) => state.user);
   const guardian  = useSelector((state: any) => state.guardian)
   const student   = useSelector((state: any) => state.student)
-  const grades    = useSelector((state: any) => state.grade)
 
   const history  = useHistory();
   const dispatch = useDispatch()
 
-  const [children, setChildren] = useState<kid[]>([]);
+  const [children,  setChildren] = useState<kid[]>([]);
+  const [audiences, setAudiences] = useState<any>();
 
   const langs = [{
     name: 'English',
@@ -64,11 +66,11 @@ const KidsList: FC = () => {
     // const parentName  = user.username;
     // const fullName    = props.fullName;
     const studentId = props.id;
-
-    const [grade, setGrade]     = useState(props.grade.grade);
-    const [newPwd, setNewPwd]   = useState('');
-    const [loading, setLoading] = useState(false);
-    const [openLicense, setOpenLicense]     = useState(false);
+    const grades = props.audience?.gradeSet;
+    const [grade,   setGrade]     = useState(props.grade?.grade);
+    const [newPwd,  setNewPwd]    = useState('');
+    const [loading, setLoading]   = useState(false);
+    const [openLicense,   setOpenLicense]   = useState(false);
     const [openChangePwd, setOpenChangePwd] = useState(false);
 
     const openLicenseDlg = () => {
@@ -292,6 +294,10 @@ const KidsList: FC = () => {
   };
 
   useEffect(() => {
+    onInit();
+  }, []);
+
+  const onInit = async () => {
     const guardianStudents  = guardian.guardianstudentSet
     const students          = [];
 
@@ -299,9 +305,9 @@ const KidsList: FC = () => {
       students.push(guardianStudent?.student)
     }
     setChildren(students)
-
     loadingContext.done();
-  }, []);
+  }
+
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>

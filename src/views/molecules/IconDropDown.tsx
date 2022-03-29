@@ -1,18 +1,24 @@
-import { FC } from 'react';
-import styled from 'styled-components';
+import { FC }         from 'react';
+import styled         from 'styled-components';
+import { UserInfo }   from 'views/atoms/Text/UserInfo';
 import { BasicColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';
 
+type Option = {
+  name: string;
+  url?: string;
+  action?: () => void;
+};
 
 type IconDropDownProps = {
   icon: string;
   onIconClick?: () => void;
-  content?: React.ReactNode | FC
+  options: Array<Option>;
 };
 
 export const IconDropDown: FC<IconDropDownProps> = ({
   icon,
-  content,
+  options,
   onIconClick,
 }) => {
   return (
@@ -27,7 +33,11 @@ export const IconDropDown: FC<IconDropDownProps> = ({
         <DropdownImage src={icon} />
       </label>
       <DropdownContent>
-        {content}
+        {options.map((o, i) => (
+          <DropDownText key={i} isDark={true} onClick={o.action}>
+            {o.name}
+          </DropDownText>
+        ))}
       </DropdownContent>
     </Dropdown>
   );
@@ -49,11 +59,13 @@ const DropdownImage = styled.img`
   }
 `;
 const DropdownContent = styled.div`
+  width: 50px;
   display: none;
   position: absolute;
   background-color: ${BasicColor.white};
   padding: 3px;
   z-index: 1;
+  left: 0;
   right: 0;
   margin: 0 auto;
   bottom: 55px;
@@ -62,6 +74,8 @@ const DropdownContent = styled.div`
   border-radius: 10px 10px 0 0;
 
   @media screen and (min-width: ${ScreenSize.tablet}) {
+    bottom: -100px;
+    padding-top: 25px;
     border-radius: 10px;
     ${Dropdown}:hover & {
       display: flex;
@@ -82,5 +96,17 @@ const DropdownButton = styled.input`
   &:checked ~ ${DropdownContent} {
     display: flex;
     flex-direction: column;
+  }
+`;
+const DropDownText = styled(UserInfo)`
+  font-size: 10px;
+  font-weight: bold;
+  margin: 3px 0;
+
+  @media screen and (min-width: ${ScreenSize.tablet}) {
+    cursor: pointer;
+    &:hover {
+      color: ${BasicColor.green};
+    }
   }
 `;

@@ -27,7 +27,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
 
   // state to store all links for current category cards
   const [allCards, setAllCards] = useState<
-    Array<{tier: string; category: {name: string, firebaseName: string}; owned: boolean}>
+    Array<{tier: string; category: {name: string}; owned: boolean}>
   >([]);
 
   // get all cards from server on page loading
@@ -55,7 +55,6 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
 
   // state to store all cards of given gem
   const [gemcards, setGemcards] = useState<Array<any>>([]);
-  const [cateCards, setCateCards] = useState<Array<any>>([])
 
   // set gem state when user clicks one of 4 gems
   const callbackGem = (gem: string) => {
@@ -74,9 +73,6 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
       card_id ? card_id : 0,
       user.token
     );
-
-    const cates = allCards.filter(acard => acard.category.name === category)
-    setCateCards(cates)
     const purchased = await getProgressPurchasedCount(
       card_id ? card_id : 0,
       user.token
@@ -90,22 +86,10 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
     const gemTitles = ['LEGENDARY', 'EPIC', 'RARE', 'COMMON'];
     const tempActives = [];
     for (const gemtitle of gemTitles) {
-      const res = cateCards.filter((acard) => acard.tier === gemtitle)
-      res.length ? tempActives.push(true) : tempActives.push(false)
-      // let active = false;
-      // for(let i = 0 ; i < allCards.length; i ++){
-      //   const item:any = allCards[i]
-      //   if(item.tire === gemtitle && item.owned === true){
-
-      //     active = true
-      //     break
-      //   }
-      // }
-      // console.log(active)
-      // // const active: boolean = allCards.some(
-      // //   allcard => allcard.tier === gemtitle && allcard.owned === true
-      // // );
-      // tempActives.push(active);
+      const active: boolean = allCards.some(
+        allcard => allcard.tier === gemtitle && allcard.owned === true
+      );
+      tempActives.push(active);
     }
     setGemActives(tempActives);
   };
@@ -148,7 +132,6 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
         totalCount={totalCount}
         gainedCount={gainedCount}
         category={card}
-        firebaseName={cards.find((tcard) => tcard.name === card)?.firebaseName}
       />
       <Gems select={callbackGem} actives={gemActives} />
       <TierCards cards={gemcards} />

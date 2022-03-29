@@ -55,6 +55,7 @@ const StyledInput = styled.input`
 `;
 
 const Wrapper = styled.div<{isValid: boolean}>`
+  font-family: Montserrat;
   background-color: ${BasicColor.white};
   font-weight: 500;
   height: 47px;
@@ -76,3 +77,11 @@ const Label = styled.label`
   padding: 3px 8px;
 `;
 
+// const Warning = styled.label`
+//   font-family: Montserrat;
+//   font-weight: 700;
+//   font-size: 11px;
+//   line-height: 13px;
+//   color: ${BasicColor.yellow};
+//   padding: 0 8px;
+// `;
