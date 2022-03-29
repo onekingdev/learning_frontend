@@ -27,11 +27,7 @@ export const TextOption: FC<TextOptionProps> = ({ answer, onClick }) => {
     setIsAnswered(false);
   }, [answer])
 
-  useEffect(() => {
-    console.log('initialized text option, isAnswered: ', isAnswered, 'answer is ', answer)
-  }, [answer])
   const handleAnswer = () => {
-    console.log('handle answer')
     setIsCorrect(answer.isCorrect)
     setIsAnswered(true);
     const inputAnswer: BlockQuestionInput = {

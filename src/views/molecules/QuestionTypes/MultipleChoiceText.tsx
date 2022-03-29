@@ -47,7 +47,6 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   }, [question.answeroptionSet]);
 
   const handleAnswer = (result: BlockQuestionInput) => {
-    console.log('answered, result is ', result)
     setIsAnswered(true);
     result.question = parseInt(question.id);
     onAnswer(result);
@@ -107,8 +106,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
           <ImageAssetContainer
             imageLength={question.questionImageAssets.length}
           >
-            {question.questionImageAssets.map(item => (
-              <ImageAsset src={item.image} alt='' />
+            {question.questionImageAssets.map((item,i) => (
+              <ImageAsset key={i} src={item.image} alt='' />
             ))}
           </ImageAssetContainer>
         </AnswersContainer>

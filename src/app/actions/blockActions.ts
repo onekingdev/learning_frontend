@@ -4,10 +4,13 @@ import {
     CREATE_PATH_BLOCK_PRESENTATION
 }                  from 'api/mutations/block'
 import mutation    from 'api/mutations/get'
+import query       from 'api/queries/get'
+import {BLOCK_PRESENTATION_QUERY} from 'api/queries/questions'
+
 import * as TYPES  from '../types'
 
-export const finishBlock = async (block_presentation_id: string, hits: number, errors: number, bonusCoins: number, earning: object, questionResults: any, token: string, dispatch: any) => {
-    const res: any = await mutation(FINISH_BLOCK_PRESENTATION(block_presentation_id, hits, errors, bonusCoins, questionResults), token).catch(() => ({ success: false }));
+export const finishBlock = async (block_presentation_id: string, batteryLevel: number, hits: number, errors: number, bonusCoins: number, earning: object, questionResults: any, token: string, dispatch: any) => {
+    const res: any = await mutation(FINISH_BLOCK_PRESENTATION(block_presentation_id, batteryLevel, hits, errors, bonusCoins, questionResults), token).catch(() => ({ success: false }));
     if (res.success === false) {
         return { success: false, msg: 'Network Error' };
     }
@@ -83,4 +86,30 @@ export const createPathBlockPresentation = async (studentId: number, topicId: nu
     //     balance: student.coinWallet.balance,
     // }})
     return { success: true, msg: 'Success!', data: blockPresentation }
+}
+
+export const getBlockPresentationById = async(blockPresentationId: number, token: string, dispatch: any) => {
+    // export const createAiBlockPresentation = async (aokId: number, token: string) => {
+    const res: any = await query(`blockPresentationById(id:${blockPresentationId})`,BLOCK_PRESENTATION_QUERY, token).catch(() => ({ success: false }));
+    if (res.success === false) {
+        return { success: false, msg: 'Network Error' };
+    }
+
+    const result: any = await res.json();
+
+    if (result.errors) {
+        return { success: false, msg: result.errors[0].message };
+    }
+
+    const { blockPresentationById } = result.data
+    // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
+    // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
+    //     ...earning,
+    //     level_name: student.level.name,
+    //     level: student.level.amount,
+    //     exp: parseInt(student.points),
+    //     expMax: student.level.pointsRequired,
+    //     balance: student.coinWallet.balance,
+    // }})
+    return { success: true, msg: 'Success!', data: blockPresentationById }
 }

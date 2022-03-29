@@ -17,8 +17,6 @@ export const ParentReporting: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const user           = useSelector((state: any) => state.user);
   const guardian       = useSelector((state: any) => state.guardian);
-  const currentStudent  = guardian.guardianstudentSet.find((element: any) => element.student.id === studentId)
-
   const [student, setStudent] = useState<any>();
   const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
   const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
@@ -31,7 +29,6 @@ export const ParentReporting: FC = () => {
         return
       }
       const result:any = await res.json();
-      console.log(result)
       if(result.errors && !result.data) {
         alert(result.errors[0].message);
       } else {
@@ -44,13 +41,11 @@ export const ParentReporting: FC = () => {
     if (activeSubjectId !== -1 && parseInt(studentId) > 0) {
       (async () => {
         // Get Topic Report
-        console.log("Request for Topic Report BY following infos\nStudentId: ", studentId, " activeSubjectId: ", activeSubjectId)
         const res:any = await query(``, TopicReport(parseInt(studentId), activeSubjectId), user.token).catch(e => ({success: false}));
         if(res.success === false) {
           return
         }
         const result:any = await res.json();
-        console.log(result.data)
         if(result.errors && !result.data) {
           alert(result.errors[0].message);
         } else {
@@ -59,11 +54,8 @@ export const ParentReporting: FC = () => {
         loadingContext.done();
       })();
     }
-  }, [activeSubjectId,
-  ]);
+  }, [activeSubjectId, studentId]);
   useEffect(() => {
-    // console.log(guardian)
-    console.log(studentId)
     for (const guardianStudent of guardian.guardianstudentSet) {
       if (guardianStudent?.student.id === studentId) {
         setStudent(guardianStudent?.student)
@@ -75,8 +67,7 @@ export const ParentReporting: FC = () => {
       <div style={{
         width: '100%'
       }}>
-        <BarChart student={student} studentId={studentId} />
-        {/* <BarChart student={student}  /> */}
+        <BarChart student={student} />
         <MarkTable
           areasOfKnowledge={areasOfKnowledge}
           data={data}

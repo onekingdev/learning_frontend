@@ -1,35 +1,35 @@
-import { FC } from 'react';
-import Avatar from '@mui/material/Avatar';
+import { FC }                     from 'react';
+import Avatar                     from '@mui/material/Avatar';
 import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
-import styled from 'styled-components';
-import { deepPurple } from '@mui/material/colors';
-import { ScreenSize } from 'constants/screenSize';
+import styled                     from 'styled-components';
+import { deepPurple }             from '@mui/material/colors';
+import { ScreenSize }             from 'constants/screenSize';
 
 interface AvatarProps {
     accessory?: any,
     head?: any,
     skinTone?: string,
     firstName: string,
-    lastName: string,
-    size: number
+    lastName:string
 }
 
-export const ImageAvatar: FC<AvatarProps> = ({ accessory, head, skinTone, firstName, lastName, size }) => {
+export const ImageAvatar: FC<AvatarProps> = ({ accessory, head, skinTone, firstName,lastName  }) => {
     return (
         head ?
-            <div style={{width: size, height: size, zIndex: 30, position: 'relative'}}>
-                {/* {accessory && <CurrentAccessory src={accessory.image} style={{width: size, height: size}}/>} */}
-                <div style={{width: size, height: size, position: 'absolute'}}>
-                    <AvatarItemWithSkinTone url={head.image} skinTone={skinTone ? skinTone : ''} />
-                </div>
+        <Avatar sx={{width: 60, height: 60}}>
+            {accessory && <CurrentAccessory src={accessory.image} />}
+            <div className='head'>
+                <AvatarItemWithSkinTone url={head.image} skinTone={skinTone ? skinTone : ''} />
             </div>
-            :
-            <Avatar sx={{ bgcolor: deepPurple[500], width: size, height: size , zIndex:30}}>{firstName.charAt(0).toUpperCase()}{lastName.charAt(0).toUpperCase()}</Avatar>
+        </Avatar>:
+        <Avatar sx={{ bgcolor: deepPurple[500] }}>{firstName.charAt(0).toUpperCase()}{lastName.charAt(0).toUpperCase()}</Avatar>
     )
 }
 
 const CurrentAccessory = styled.img`
   position: absolute;
+  top: -17px;
+  width: 100%;
   z-index: 3;
   @media screen and (max-width: ${ScreenSize.phone}) {
   }

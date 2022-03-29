@@ -109,9 +109,7 @@ export const createOrderWithOutPay = async (
     if (result.errors) {
         return { success: false, msg: result.errors[0].message };
     }
-    console.log(result.data);
     const { guardian, status } = result.data.createOrderWithOutPay;
-    console.log(guardian);
     dispatch({
         type: TYPES.GUARDIAN_SET_DATA,
         payload: guardian,
@@ -206,7 +204,6 @@ export const doFetchPaymentMethod = async (guradianId: number, token: string) =>
 
 export const doChangePaymentMethod = async (guradianId: number, paymentInfo: any, token: string) => {
     try {
-        console.log(paymentInfo)
         const res: any = await sendRawQuery(
             CHANGE_PAYMENT_METHOD_INFO(guradianId, paymentInfo),
             token

@@ -43,14 +43,12 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
 
   const onUpgradeBtnClick = (id: number) => {
     seTag(id)
-    console.log('plan id:',id)
     openUpdate()
   }
 
   const onCancelUpgrade = () => openUpdate()
 
   const fetchAvailableBrougthPlans = async (mounted: boolean) => {
-    console.log('refreshing....')
     setPlans([])
     const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
     if (res !== null) {
@@ -64,7 +62,6 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
 
   useEffect(() => {
     let mounted = true
-    console.log(refresh)
     fetchAvailableBrougthPlans(mounted)
     return () => {
       mounted = false
@@ -79,7 +76,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
             <TableRow>
               <TableCell align="center">
                 <LSLabel fontSize={17} textAlign='center'>{'Plan'}</LSLabel>
-                <LSText textAlign='center' fontSize={13}>{'(Get 3 months FREE for annual plan)'}</LSText>
+                <LSText textAlign='center' fontSize={13}>{'(save 3 months if you change to annual plan)'}</LSText>
               </TableCell>
             </TableRow>
           </StyledTableHead>

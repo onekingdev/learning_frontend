@@ -20,9 +20,6 @@ export const doPurchaseAvatarItem = async (avatarId: number, studentId: number, 
         PURCHASE_AN_AVATAR_ITEM(avatarId, studentId),
         token
     );
-    // if(res.msg){
-    //     console.log(res.msg)
-    // }
     return res.msg ? console.log(res.msg) : true;
 }
 

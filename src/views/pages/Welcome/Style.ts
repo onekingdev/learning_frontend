@@ -72,7 +72,7 @@ export const Actions = styled.div`
 
 export const Legal = styled.div`
   display               : grid;
-  grid-template-columns : repeat(4, 1fr);
+  grid-template-columns : 1fr 1fr 1fr;
   width                 : 85vw;
   margin-left           : 7.5vw;
   margin-top            : 0.5rem;
