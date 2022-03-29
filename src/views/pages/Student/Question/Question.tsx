@@ -118,7 +118,7 @@ export const Question: FC = () => {
   }
 
   const onAnswer = (result: BlockQuestionInput) => {
-    increaseExp();
+    increaseExp(result.isCorrect);
     //for test
     // result.isCorrect = true;
 
@@ -128,8 +128,8 @@ export const Question: FC = () => {
     }
   };
 
-  const increaseExp = async () => {
-    const currentExp  = earning.exp + EXP_UNIT;
+  const increaseExp = async (isCorrect:boolean) => {
+    const currentExp  = earning.exp + (isCorrect ? EXP_UNIT : 1);
     const expMax      = earning.expMax
 
     if (currentExp > expMax) {
@@ -305,7 +305,6 @@ export const Question: FC = () => {
               combocount     ={state.earning.energyCharge}
             />
           </ProgressWrapper>
-          <button onClick={congratulations}>CONGRATULATIONS</button>
           <CardDialog
             isOpen={openDg}
             open={congratulations}
