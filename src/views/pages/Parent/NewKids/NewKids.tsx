@@ -502,7 +502,6 @@ const NewKids: FC = () => {
                     className ={`${classes.select} err-border`}
                     onChange  ={e => {
                       setGrade(e.target.value);
-                      console.log(e.target.value === undefined ? 'Field is required' : '')
                       handleFormChange(
                         'grade',
                         ''
