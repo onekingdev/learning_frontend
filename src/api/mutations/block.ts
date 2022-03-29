@@ -36,4 +36,3 @@ createPathBlockPresentation( studentId: ${studentId}, topicId: ${topicId}) {
     blockPresentation ${BLOCK_PRESENTATION_QUERY}
 }
 `;
-
