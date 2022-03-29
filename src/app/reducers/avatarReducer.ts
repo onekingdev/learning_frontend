@@ -18,11 +18,11 @@ const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: an
     case TYPE.AVATAR_SET_DEFAULT:
       return {
         ...state,
-        accessory: action.payload.currentAvatarAccessories?.image,
-        head: action.payload.currentAvatarHead?.image,
-        clothes: action.payload.currentAvatarClothes?.image,
-        pants: action.payload.currentAvatarPants?.image,
-        skin: null
+        accessory: action.payload.avatarAccessorie,
+        head: action.payload.avatarHead,
+        clothes: action.payload.avatarClothes,
+        pants: action.payload.avatarPants,
+        skin: action.payload.skinTone
       };
     case TYPE.AVATAR_RESET:
       return INITIAL_STATE;

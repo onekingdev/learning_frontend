@@ -54,6 +54,7 @@ export const AddPlanForm: FC<IAddPlanProps> = ({ onConfirm, onCancel }) => {
   const onSubmit = () => {
     if (parentState === 'solo') {
 
+      console.log(soloState)
     }
     else if (parentState === 'combo') {
       if (checked.indexOf(true) === -1)
@@ -63,6 +64,7 @@ export const AddPlanForm: FC<IAddPlanProps> = ({ onConfirm, onCancel }) => {
         for (let i = 0; i < checked.length; i++) {
           if (checked[i] === true) combo += i + ','
         }
+        console.log(combo)
       }
     }
     else console.log(parentState)

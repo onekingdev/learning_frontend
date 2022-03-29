@@ -19,6 +19,7 @@ export const TopicCard: FC<TopicCardProps> = ({
   isActive,
   isButton,
 }) => {
+  console.log(isActive)
   return (
     <>
       <TopicCardStyles

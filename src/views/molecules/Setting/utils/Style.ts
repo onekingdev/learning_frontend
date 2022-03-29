@@ -19,19 +19,6 @@ import titleBg from 'views/assets/title-kids-background.png';
 /*--------------------------------------------------------------------------------------------*/
 /*                                         Dialog                                             */
 /*--------------------------------------------------------------------------------------------*/
-
-export const LSDialogTitle = styled(DialogTitle)`
-  &.MuiDialogTitle-root {
-    color: ${BasicColor.blue};
-    font-family: ${Typography.primary};
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 0.25px;
-    text-align: center;
-    margin-top: 20px;
-  }
-`;
 export const LSDialogContent = styled(DialogContent)`
   &.MuiDialogContent-root {
     padding: 40px;

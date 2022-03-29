@@ -37,6 +37,7 @@ const MyCardsCategory: FC<CardPropArray> = ({cards}) => {
       const collectibles = await getCollectibleCards(user.token);
       if (!ignore) {
         if (collectibles.msg) {
+          console.log('message from all cards:', collectibles.msg);
           setAllCards([]);
         } else {
           setAllCards(collectibles);
@@ -167,6 +168,7 @@ export const MyCards: FC = () => {
       if (!ignore) {
         if (names.msg) {
           setCategories([]);
+          console.log('message:', names.msg);
         } else {
           setCategories(names);
         }

@@ -5,7 +5,6 @@ import { AUDIENCES }         from './peopleFragments'
 import { AREA_OF_KNOWLEDGE } from './areaOfKnowledgeFragments'
 import { GRADES }            from './peopleFragments'
 import {AVATAR}              from './avatarFragments'
-import {BATTERY_RAW}         from './batteryFragments'
 
 export const GUARIDAN_STUDENT_PLAN_RAW = `
     id
@@ -181,9 +180,6 @@ export const STUDENT = `
         bankWallet {
             ${BANK_WALLET}
         }
-        battery {
-            ${BATTERY_RAW}
-        }
         studentcollectibleSet {
             id
         }
@@ -194,9 +190,6 @@ export const STUDENT = `
             ${AUDIENCES}
             areaofknowledgeSet {
                 ${AREA_OF_KNOWLEDGE}
-            }
-            gradeSet {
-                ${GRADES}
             }
         }
         grade {

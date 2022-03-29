@@ -147,6 +147,7 @@ export const OrderTip = styled.div`
     padding: 10px;
     padding-left: 55px;
     padding-right: 55px;
+    display: flex;
     @media screen and (max-width: ${ScreenSize.tablet}) {
         padding-left: 10px;
         padding-right: 10px;

@@ -131,7 +131,9 @@ export const setCoinWallet = async (studentId: number, token: string, dispatch: 
   if (result.errors) {
     return { success: false, msg: result.errors[0].message };
   }
+  console.log('coin result is ', result)
   const coinWallet = result.data.studentById.coinWallet
+  console.log(coinWallet)
   dispatch({ type: TYPES.EARNING_COIN_SET, payload: coinWallet.balance })
   return { success: true, msg: 'Success!' }
 }

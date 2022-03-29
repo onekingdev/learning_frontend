@@ -33,6 +33,7 @@ export const TopicsMenu: FC = () => {
       handleData,
       handleError
     );
+    console.log(topicId);
   }, []);
   return (
     <>

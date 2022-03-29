@@ -60,6 +60,7 @@ const CardContainer: FC<CardPropArray> = ({cards}) => {
       const names = await purchaseCardPack(cardId, student.id, user.token, dispatch, cardPrice ? cardPrice: 0);
       if (names.msg) {
         setPurchasedItems([]);
+        console.log(names.msg);
       } else {
         await buyCardsWithFilenames(names, card, setPurchasedItems);
       }
@@ -145,6 +146,7 @@ export const CardCategory: FC = () => {
       if(!ignore){
         if (names.msg) {
           setCategories([]);
+          console.log('message:', names.msg);
         } else {
           setCategories(names);
           setLoading(false)

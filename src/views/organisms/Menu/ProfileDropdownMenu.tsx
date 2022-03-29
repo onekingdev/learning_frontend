@@ -6,6 +6,8 @@ import MenuItem          from '@mui/material/MenuItem';
 import { useHistory }    from 'react-router-dom';
 import { ImageAvatar }   from 'views/molecules/Avatar/DefaultAvatar';
 import { useSelector }   from 'react-redux'
+import styled            from 'styled-components';
+import { ScreenSize }    from 'constants/screenSize';
 
 export const ProfileDropDownMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -30,13 +32,16 @@ export const ProfileDropDownMenu: FC = () => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <ImageAvatar
-         firstName={student.firstName}
-         lastName={student.lastName}
-         accessory={avatar.accessory?avatar.accessory:null}
-         head={avatar.head?avatar.head:null}
-         skinTone={avatar.skin?avatar.skin:null}
-         />
+        <ChartHeaderContrainer>
+          <ImageAvatar
+          firstName={student.firstName}
+          lastName={student.lastName}
+          accessory={avatar.accessory?avatar.accessory:null}
+          head={avatar.head?avatar.head:null}
+          skinTone={avatar.skin?avatar.skin:null}
+          size={60}
+          />
+        </ChartHeaderContrainer>
         {/* <img style={{width: ICON_SIZE.medium}} src={icon} /> */}
       </Button>
       <Menu
@@ -54,6 +59,18 @@ export const ProfileDropDownMenu: FC = () => {
     </div>
   );
 }
+
+const ChartHeaderContrainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+    @media (min-width: ${ScreenSize.phone}) {
+        flex-direction: row;
+        background: transparent;
+    }
+`;
 
 
 

@@ -38,8 +38,10 @@ import {LoadingContext}          from 'react-router-loading';
 import { createStudent }         from 'views/../app/actions/studentActions'
 import { getGrades }             from 'views/../app/actions/gradeActions'
 import { getAudiencesWithGrades} from 'app/actions/audienceActions'
-
-import { useSnackbar } from 'notistack';
+import InfoIcon                  from '@mui/icons-material/Info';
+import { useSnackbar }           from 'notistack';
+import Tooltip                   from '@mui/material/Tooltip';
+import { CURRICULUM_TOOLTIP, GRADE_TOOLTIP }    from 'constants/parent';
 
 const NewKids: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -119,14 +121,17 @@ const NewKids: FC = () => {
   };
 
   const handlePrev = () => {};
+  console.log('child num is ', childNum )
 
   const handleNext = async () => {
     if (!formValidation()) return;
+    console.log(childIdx)
     // return;
     // if (childIdx === childNum) {
     //   saveChild(childs[childIdx]);
     //   return;
     // }
+    console.log('paths is ', paths)
     setLoading(true)
     if(!await saveChild()) {
       setLoading(false)
@@ -158,6 +163,7 @@ const NewKids: FC = () => {
   };
 
   const saveChild = async () => {
+    console.log(currentPackage, paths)
     const listSubjectId: number[] = [];
     const studentPlan = 1;
     for(const path of paths)
@@ -200,6 +206,7 @@ const NewKids: FC = () => {
     const validateMsgTemp = {...validateMsg};
     let valiResult        = true;
     for (const key in validateMsg) {
+      console.log('key is ', key, validateMsgTemp[key])
       if (validateMsg[key] === null) {
         validateMsgTemp[key] = 'Field is required';
       }
@@ -286,7 +293,11 @@ const NewKids: FC = () => {
                         : classes.soleInput
                     } err-border`}
                     onChange={e => {
+                      console.log('target', e.target.value, e.target.value.length)
                       setCurrentPackage(e.target.value);
+                      console.log('target is ', e.target.value);
+                      console.log('set path like that', e.target.value?.plan?.subjects)
+                      console.log('set path like name is ',e.target.value?.plan?.name)
 
                       if(e.target.value?.plan?.name === 'Gold') setPaths(e.target.value?.plan?.subjects)
                       else setPaths([]);
@@ -456,26 +467,26 @@ const NewKids: FC = () => {
                     Select Your curriculum
                   </InputLabel>
                   <Select
-                    labelId   ='select-audience-label'
-                    id        ='select-audience'
-                    value     ={audience ? audience : {}}
-                    label     ='Select Your Audience'
-                    className ={`${classes.select} err-border`}
-                    onChange  ={(e: any) => {
+                    labelId='select-audience-label'
+                    id='select-audience'
+                    value={audience ? audience : {}}
+                    label='Select Your Audience'
+                    className={`${classes.select} err-border`}
+                    onChange={(e: any) => {
                       setAudience(e.target.value);
                       setGrades(e.target.value.gradeSet)
                       setGrade({})
                       validateMsg.grade = null
                       validateMsg.audience = '';
-                      setValidateMsg({...validateMsg});
+                      setValidateMsg({ ...validateMsg });
                     }}
                     sx={
                       validateMsg.audience
                         ? {
-                            '& fieldset': {
-                              borderColor: `${BasicColor.red} !important`,
-                            },
-                          }
+                          '& fieldset': {
+                            borderColor: `${BasicColor.red} !important`,
+                          },
+                        }
                         : {}
                     }
                     displayEmpty={true}
@@ -486,6 +497,14 @@ const NewKids: FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
+                  <Tooltip title={CURRICULUM_TOOLTIP} arrow placement='left-start'
+                    sx={{
+                      '& .MuiTooltip-tooltip' : {
+                        fontSize: 12,
+                      }
+                    }} >
+                    <InfoIcon fontSize='small' sx={{ zIndex: 1, position: 'absolute', right: -15, top: 0, color: BasicColor.green }} />
+                  </Tooltip>
                   <div className='err-text'>{validateMsg.audience}</div>
                 </FormControl>
               </Grid>
@@ -502,6 +521,7 @@ const NewKids: FC = () => {
                     className ={`${classes.select} err-border`}
                     onChange  ={e => {
                       setGrade(e.target.value);
+                      console.log(e.target.value === undefined ? 'Field is required' : '')
                       handleFormChange(
                         'grade',
                         ''
@@ -524,6 +544,15 @@ const NewKids: FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
+                  <Tooltip title={GRADE_TOOLTIP} arrow placement='left-start'
+                    sx={{
+                      fontSize: 20,
+                      '& .MuiTooltip-tooltip' : {
+                        fontSize: 12,
+                      }
+                    }} >
+                    <InfoIcon fontSize='small' sx={{ zIndex: 1, position: 'absolute', right: -15, top: 0, color: BasicColor.green }} />
+                  </Tooltip>
                   <div className='err-text'>{validateMsg.grade}</div>
                 </FormControl>
               </Grid>

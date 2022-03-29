@@ -20,7 +20,6 @@ import { Store }                    from 'app/configureStore';
 import { changeStudentGrade }       from 'app/actions/studentActions';
 import { changeStudentPassword }    from 'app/actions/studentActions';
 import { ImageAvatar }              from 'views/molecules/Avatar/DefaultAvatar';
-import { getAudiencesWithGrades}    from 'app/actions/audienceActions'
 
 import {
   Title,
@@ -46,12 +45,12 @@ const KidsList: FC = () => {
   const user      = useSelector((state: Store) => state.user);
   const guardian  = useSelector((state: any) => state.guardian)
   const student   = useSelector((state: any) => state.student)
+  const grades    = useSelector((state: any) => state.grade)
 
   const history  = useHistory();
   const dispatch = useDispatch()
 
-  const [children,  setChildren] = useState<kid[]>([]);
-  const [audiences, setAudiences] = useState<any>();
+  const [children, setChildren] = useState<kid[]>([]);
 
   const langs = [{
     name: 'English',
@@ -65,11 +64,11 @@ const KidsList: FC = () => {
     // const parentName  = user.username;
     // const fullName    = props.fullName;
     const studentId = props.id;
-    const grades = props.audience?.gradeSet;
-    const [grade,   setGrade]     = useState(props.grade?.grade);
-    const [newPwd,  setNewPwd]    = useState('');
-    const [loading, setLoading]   = useState(false);
-    const [openLicense,   setOpenLicense]   = useState(false);
+
+    const [grade, setGrade]     = useState(props.grade.grade);
+    const [newPwd, setNewPwd]   = useState('');
+    const [loading, setLoading] = useState(false);
+    const [openLicense, setOpenLicense]     = useState(false);
     const [openChangePwd, setOpenChangePwd] = useState(false);
 
     const openLicenseDlg = () => {
@@ -120,6 +119,7 @@ const KidsList: FC = () => {
     useEffect(() => {
 
       loadingContext.done();
+      console.log(props)
 
     }, []);
 
@@ -206,11 +206,12 @@ const KidsList: FC = () => {
               }}
               >
             <ImageAvatar
-              firstName ={student.firstName? student.firstName:'F'}
-              lastName  ={student.lastName? student.lastName:'L'}
-              accessory ={props.currentAvatarAccessories ? props.currentAvatarAccessories : null}
-              head      ={props.currentAvatarHead ? props.currentAvatarHead : null}
+              firstName = {student.firstName? student.firstName:'F'}
+              lastName  = {student.lastName? student.lastName:'L'}
+              accessory = {props.currentAvatarAccessories ? props.currentAvatarAccessories : null}
+              head      = {props.currentAvatarHead ? props.currentAvatarHead : null}
             // skinTone={null}
+              size      = {60}
             />
             {/* <Avatar src={props.avatar} onClick={() => history.push('/parent/reporting')} /> */}
           </GridItem>
@@ -293,10 +294,6 @@ const KidsList: FC = () => {
   };
 
   useEffect(() => {
-    onInit();
-  }, []);
-
-  const onInit = async () => {
     const guardianStudents  = guardian.guardianstudentSet
     const students          = [];
 
@@ -304,9 +301,9 @@ const KidsList: FC = () => {
       students.push(guardianStudent?.student)
     }
     setChildren(students)
-    loadingContext.done();
-  }
 
+    loadingContext.done();
+  }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
