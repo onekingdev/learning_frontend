@@ -237,7 +237,7 @@ const NewKids: FC = () => {
 
   const onPageInit = async () => {
 
-    window.Tawk_API?.showWidget();
+    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
     const guardianStudentPlans  = guardian.guardianstudentplanSet;
     const temp_availblePlans    = [];

@@ -25,7 +25,7 @@ export const ParentReporting: FC = () => {
   const [data, setData]                         = useState<any[]>([]);
   useEffect(() => {
 
-    window.Tawk_API?.showWidget();
+    if(window.Tawk_API?.onLoaded) if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
     (async () => {
       // Get All Subject

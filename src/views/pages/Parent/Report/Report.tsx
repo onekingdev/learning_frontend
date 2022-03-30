@@ -15,7 +15,7 @@ export const Report: FC = () => {
 
   useEffect(() => {
 
-    window.Tawk_API?.showWidget();
+    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
     loadingContext.done();
   }, []);

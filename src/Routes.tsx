@@ -74,7 +74,7 @@ export function Routes() {
   animation: 1.5s ${keyframes`${fadeIn}`} ;
   `;
   useEffect(() => {
-    window.Tawk_API?.hideWidget();
+    if(window.Tawk_API?.onLoaded) window.Tawk_API?.hideWidget();
   }, [location])
   return (
     <FadeIn>
