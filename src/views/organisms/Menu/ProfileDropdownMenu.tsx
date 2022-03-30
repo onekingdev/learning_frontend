@@ -6,6 +6,8 @@ import MenuItem          from '@mui/material/MenuItem';
 import { useHistory }    from 'react-router-dom';
 import { ImageAvatar }   from 'views/molecules/Avatar/DefaultAvatar';
 import { useSelector }   from 'react-redux'
+import styled            from 'styled-components';
+import { ScreenSize }    from 'constants/screenSize';
 
 export const ProfileDropDownMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -21,8 +23,11 @@ export const ProfileDropDownMenu: FC = () => {
     setAnchorEl(null);
   };
 
+
+
   return (
     <div>
+      {console.log(avatar)}
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -30,13 +35,16 @@ export const ProfileDropDownMenu: FC = () => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <ImageAvatar
-         firstName={student.firstName}
-         lastName={student.lastName}
-         accessory={avatar.accessory?avatar.accessory:null}
-         head={avatar.head?avatar.head:null}
-         skinTone={avatar.skin?avatar.skin:null}
-         />
+          {avatar &&
+          <ImageAvatar
+          firstName={student.firstName}
+          lastName={student.lastName}
+          accessory={avatar.accessory?avatar.accessory:null}
+          head={avatar.head?avatar.head:null}
+          skinTone={avatar.skin?avatar.skin:null}
+          size={70}
+          />
+          }
         {/* <img style={{width: ICON_SIZE.medium}} src={icon} /> */}
       </Button>
       <Menu
@@ -48,7 +56,7 @@ export const ProfileDropDownMenu: FC = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => history.push('/avatar')}>Profile</MenuItem>
+        <MenuItem onClick={() => history.push('/avatar')}>My Avatar</MenuItem>
         <MenuItem onClick={() => history.push('/')}>Logout</MenuItem>
       </Menu>
     </div>

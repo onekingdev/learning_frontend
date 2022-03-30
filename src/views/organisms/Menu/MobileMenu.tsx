@@ -34,11 +34,11 @@ export const MobileMenu: FC = () => {
         />
         <MobileMenuStyles>
           <Sidebar />
-          <Icon
+          {/* <Icon
             image={home}
             size={IconSize.medium}
             onClick={() => history.push('/home')}
-          />
+          /> */}
           <Icon image={modality} onClick={() => history.push('/map')} size={IconSize.medium} />
           {/* <Icon image={energyButton} size={IconSize.medium} /> */}
           <IconDropdownContainer>

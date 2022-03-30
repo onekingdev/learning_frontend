@@ -227,9 +227,6 @@ const CreateParent: FC = () => {
               <div className="font-w-8 font-s-30 line-h-35 p-b-25">
                 Contact Us
               </div>
-              <div className="font-w-5 font-s-20 line-h-25 p-b-50">
-                You have any question about your plan?
-              </div>
               <div className="flex-col">
                 <div className="font-w-7 font-s-35 p-b-20">
                   We're happy to help you

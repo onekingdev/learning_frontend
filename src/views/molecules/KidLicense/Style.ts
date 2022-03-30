@@ -31,21 +31,11 @@ export const LicenseBody = styled.div`
 `;
 
 export const LicenseUsername = styled.div`
-  font-size: 25px;
-  weight: 600;
   line-height: 31px;
   background-color: ${BasicColor.green};
-  color: ${BasicColor.white};
-  padding: 5px 11px 5px 11px;
-  margin-right: 45px;
-  margin-top: 10px;
-  border-radius: 5px;
-  width: 110px;
-  min-height: 35px;
-  text-align: center;
-  overflow-wrap: anywhere;
   @media screen and (max-width: 540px) {
     font-size: 1em;
+    width: 100%;
     padding: 0;
     margin-right: 20px;
   }

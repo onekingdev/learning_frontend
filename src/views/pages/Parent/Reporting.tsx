@@ -17,6 +17,8 @@ export const ParentReporting: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const user           = useSelector((state: any) => state.user);
   const guardian       = useSelector((state: any) => state.guardian);
+  const currentStudent  = guardian.guardianstudentSet.find((element: any) => element.student.id === studentId)
+
   const [student, setStudent] = useState<any>();
   const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
   const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
@@ -57,7 +59,8 @@ export const ParentReporting: FC = () => {
         loadingContext.done();
       })();
     }
-  }, [activeSubjectId, studentId]);
+  }, [activeSubjectId,
+  ]);
   useEffect(() => {
     for (const guardianStudent of guardian.guardianstudentSet) {
       if (guardianStudent?.student.id === studentId) {
@@ -70,7 +73,8 @@ export const ParentReporting: FC = () => {
       <div style={{
         width: '100%'
       }}>
-        <BarChart student={student} />
+        <BarChart student={student} studentId={studentId} />
+        {/* <BarChart student={student}  /> */}
         <MarkTable
           areasOfKnowledge={areasOfKnowledge}
           data={data}
