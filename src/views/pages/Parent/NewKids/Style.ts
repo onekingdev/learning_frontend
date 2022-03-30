@@ -2,6 +2,7 @@ import styled         from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
 import { makeStyles } from '@mui/styles'
 import { BasicColor } from 'views/Color';
+import Tooltip        from '@mui/material/Tooltip';
 
 export const Title = styled.div`
   font-weight      : 700;

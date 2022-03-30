@@ -38,8 +38,10 @@ import {LoadingContext}          from 'react-router-loading';
 import { createStudent }         from 'views/../app/actions/studentActions'
 import { getGrades }             from 'views/../app/actions/gradeActions'
 import { getAudiencesWithGrades} from 'app/actions/audienceActions'
-
-import { useSnackbar } from 'notistack';
+import InfoIcon                  from '@mui/icons-material/Info';
+import { useSnackbar }           from 'notistack';
+import Tooltip                   from '@mui/material/Tooltip';
+import { CURRICULUM_TOOLTIP, GRADE_TOOLTIP }    from 'constants/parent';
 
 const NewKids: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -456,26 +458,26 @@ const NewKids: FC = () => {
                     Select Your curriculum
                   </InputLabel>
                   <Select
-                    labelId   ='select-audience-label'
-                    id        ='select-audience'
-                    value     ={audience ? audience : {}}
-                    label     ='Select Your Audience'
-                    className ={`${classes.select} err-border`}
-                    onChange  ={(e: any) => {
+                    labelId='select-audience-label'
+                    id='select-audience'
+                    value={audience ? audience : {}}
+                    label='Select Your Audience'
+                    className={`${classes.select} err-border`}
+                    onChange={(e: any) => {
                       setAudience(e.target.value);
                       setGrades(e.target.value.gradeSet)
                       setGrade({})
                       validateMsg.grade = null
                       validateMsg.audience = '';
-                      setValidateMsg({...validateMsg});
+                      setValidateMsg({ ...validateMsg });
                     }}
                     sx={
                       validateMsg.audience
                         ? {
-                            '& fieldset': {
-                              borderColor: `${BasicColor.red} !important`,
-                            },
-                          }
+                          '& fieldset': {
+                            borderColor: `${BasicColor.red} !important`,
+                          },
+                        }
                         : {}
                     }
                     displayEmpty={true}
@@ -486,6 +488,14 @@ const NewKids: FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
+                  <Tooltip title={CURRICULUM_TOOLTIP} arrow placement='left-start'
+                    sx={{
+                      '& .MuiTooltip-tooltip' : {
+                        fontSize: 12,
+                      }
+                    }} >
+                    <InfoIcon fontSize='small' sx={{ zIndex: 1, position: 'absolute', right: -15, top: 0, color: BasicColor.green }} />
+                  </Tooltip>
                   <div className='err-text'>{validateMsg.audience}</div>
                 </FormControl>
               </Grid>
@@ -524,6 +534,15 @@ const NewKids: FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
+                  <Tooltip title={GRADE_TOOLTIP} arrow placement='left-start'
+                    sx={{
+                      fontSize: 20,
+                      '& .MuiTooltip-tooltip' : {
+                        fontSize: 12,
+                      }
+                    }} >
+                    <InfoIcon fontSize='small' sx={{ zIndex: 1, position: 'absolute', right: -15, top: 0, color: BasicColor.green }} />
+                  </Tooltip>
                   <div className='err-text'>{validateMsg.grade}</div>
                 </FormControl>
               </Grid>
