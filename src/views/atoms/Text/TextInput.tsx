@@ -1,5 +1,6 @@
-import { FC }         from 'react';
-import styled         from 'styled-components';
+import { TextField } from '@mui/material';
+import { FC } from 'react';
+import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
 
 type TextInputProps = {
@@ -7,7 +8,7 @@ type TextInputProps = {
   validate?: (text: string) => boolean;
   errMsg?: string;
   isSecret?: boolean;
-  onChange?: (e:any) => void;
+  onChange?: (e: any) => void;
 };
 
 export const TextInput: FC<TextInputProps> = ({
@@ -19,24 +20,30 @@ export const TextInput: FC<TextInputProps> = ({
 }) => {
   //const [value, setValue] = useState('');
   // const [isValid, setIsValid] = useState<boolean>(true);
- /* useEffect(() => {
-    if (validate(value) && isValid === false) {
-      setIsValid(true);
-    }
-    if (!validate(value) && isValid === true) {
-      setIsValid(false);
-    }
-  }, [value]);*/
+  /* useEffect(() => {
+     if (validate(value) && isValid === false) {
+       setIsValid(true);
+     }
+     if (!validate(value) && isValid === true) {
+       setIsValid(false);
+     }
+   }, [value]);*/
 
   return (
     <>
-      <Wrapper isValid={true}>
-        <Label>{label}</Label>
-        <StyledInput
+      {/* <Wrapper isValid={true}> */}
+      {/* <Label>{label}</Label> */}
+      <TextField
+        onChange={onChange}
+        fullWidth
+        label={label}
+        type={isSecret ? 'password' : 'text'}
+      />
+      {/* <StyledInput
           onChange={onChange}
           type={isSecret ? 'password' : 'text'}
-        />
-      </Wrapper>
+        /> */}
+      {/* </Wrapper> */}
       {/* <Warning>{!isValid ? errMsg : ''}</Warning> */}
     </>
   );
@@ -46,7 +53,7 @@ const StyledInput = styled.input`
   border: none;
   outline: 0;
   padding: 20px 8px 10px;
-  width: 90%;
+  width: 100%;
   font-style: normal;
   font-weight: 600;
   font-size: 13px;
@@ -54,7 +61,7 @@ const StyledInput = styled.input`
   border-radius: 8px;
 `;
 
-const Wrapper = styled.div<{isValid: boolean}>`
+const Wrapper = styled.div<{ isValid: boolean }>`
   background-color: ${BasicColor.white};
   font-weight: 500;
   height: 47px;

@@ -64,7 +64,8 @@ const MuiButton: FC<MuiButtonProps> = ({
                 borderStyle: 'solid',
                 borderWidth: 1,
                 height: height || '49px',
-                width: fullWidth ? '100%' : width || '215px',
+                width: fullWidth ? '100%' : width || 150,
+                maxWidth: 200,
                 textTransform: 'unset',
                 fontSize: fontSize || '14px',
                 fontWeight: weight || 500,
@@ -78,7 +79,6 @@ const MuiButton: FC<MuiButtonProps> = ({
                     center/15000% !important`
             },
             '&:disabled': {
-              color: 'transparent !important',
               boxShadow: 'none !important',
               backgroundColor: 'rgba(0, 0, 0, 0.12) !important'
             }
