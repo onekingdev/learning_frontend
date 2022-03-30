@@ -4,6 +4,7 @@ import ReportCheckIcon                 from 'views/assets/parent/report-check.pn
 import ReportCoinIcon                  from 'views/assets/parent/report-coin.png';
 import styled                          from 'styled-components';
 import { ScreenSize }                  from 'constants/screenSize';
+import { useSelector }                 from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import 'react-vis/dist/style.css';
 import {
@@ -17,6 +18,9 @@ import {
     HorizontalGridLines,
 }                                      from 'react-vis';
 import TitleGameBackground             from 'views/assets/title-games-background.png';
+import { Typography }              from 'views/atoms/Text/typography';
+import { ImageAvatar } from '../Avatar/DefaultAvatar';
+
 
 const ChartHeaderContrainer = styled.div`
     display: flex;
@@ -56,6 +60,7 @@ const ChartTitle = styled.span`
     color: #3F3F3F;
     position: relative;
     font-weight: 700;
+    font-family: ${Typography.secondary};
     font-style: normal;
     font-size: 40px;
     line-height: 50px;
@@ -100,11 +105,21 @@ interface iChartData {
     y: number
 }
 
-export const BarChart = ({ student }: { student: any }) => {
+interface BarChartProps {
+    student: any,
+    studentId: string
+}
+
+// export const BarChart = ({ student }: { student: any }) => {
+export const BarChart = ({ student, studentId }: BarChartProps) => {
+    const guardian       = useSelector((state: any) => state.guardian);
+    const currentStudent  = guardian.guardianstudentSet.find((element: any) => element.student.id === studentId).student
+
     const [barChartData, setBarChartData] = useState<iChartData[]>([]);
     const [barChartData2, setBarChartData2] = useState<iChartData[]>([]);
     const [areaChartData, setAreaChartData] = useState<iChartData[]>([]);
     useEffect(() => {
+        console.log('studentid:', student)
         setBarChartData([
             {x: 0, y: 750},
             {x: 1, y: 200},
@@ -191,12 +206,22 @@ export const BarChart = ({ student }: { student: any }) => {
                 }}>Your Childs</h3>
             </MobileCom>
             <ChartHeaderContrainer>
-                <CrocoGirlImg style={{
+                {
+                    student && <ImageAvatar
+                        firstName={student.firstName ? student.firstName : 'F'}
+                        lastName={student.lastName ? student.lastName : 'L'}
+                        accessory={student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
+                        head={student.currentAvatarHead ? student.currentAvatarHead : null}
+                        // skinTone={null}
+                        size={200}
+                    />
+                }
+                {/* <CrocoGirlImg style={{
                     zIndex: 20
-                }} src={CrogoGirlsFace} alt='CrogoGirls' />
+                }} src={CrogoGirlsFace} alt='CrogoGirls' /> */}
                 <ChartTitleGroup>
                     <ChartTitleBG src={TitleKidBackground} alt='Kid Title Bg' />
-                    <ChartTitle>{ student?.fullName } Turner Report</ChartTitle>
+                    <ChartTitle>{student?.fullName} <span><br/></span> Progress Report</ChartTitle>
                 </ChartTitleGroup>
             </ChartHeaderContrainer>
             <div ref={chartContainerRef} style={{

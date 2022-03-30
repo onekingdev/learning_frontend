@@ -135,10 +135,19 @@ export const WardrobeSelector: FC = () => {
         <div className='star'>
           {
             headerIndex && bodyIndex && footerIndex ?
-              <IconButton color='secondary' aria-label='set favorite' component='span' onClick={setFavorite}>
+
+              <IconButton sx={{
+                '&.MuiIconButton-root': {
+                  color: 'gold',
+                }
+              }} aria-label='set favorite' component='span' onClick={setFavorite}>
                 <Star />
               </IconButton> :
-              <IconButton color='primary' disabled aria-label='set favorite' component='span' onClick={setFavorite}>
+              <IconButton sx={{
+                '&.MuiIconButton-root': {
+                  color: 'gray',
+                }
+              }} disabled aria-label='set favorite' component='span' onClick={setFavorite}>
                 <Star />
               </IconButton>
           }

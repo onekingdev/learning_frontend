@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles'
 import Grid           from '@mui/material/Grid';
 import titleBg        from 'views/assets/title-kids-background.png'
 import { BasicColor } from 'views/Color';
+import { Typography } from 'views/atoms/Text/typography';
 
 export const LicenseButton  = styled.img`
   cursor: pointer;
@@ -16,6 +17,7 @@ export const Title          = styled.div`
   font-Size   :    40px;
   line-height :  50px;
   font-weight :  700;
+  font-family :  ${Typography.secondary};
   color           : white;
   width           : 385px;
   height          : 81px;
