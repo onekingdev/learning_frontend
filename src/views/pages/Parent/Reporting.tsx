@@ -24,6 +24,9 @@ export const ParentReporting: FC = () => {
   const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
   const [data, setData]                         = useState<any[]>([]);
   useEffect(() => {
+
+    if(window.Tawk_API?.onLoaded) if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+
     (async () => {
       // Get All Subject
       const res:any = await query(``, AreasOfKnowledge(), user.token).catch(e => ({success: false}));

@@ -298,6 +298,9 @@ const KidsList: FC = () => {
   }, []);
 
   const onInit = async () => {
+
+    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+
     const guardianStudents  = guardian.guardianstudentSet
     const students          = [];
 
@@ -311,7 +314,7 @@ const KidsList: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
-        <Title>Your Children</Title>
+        <Title>Your Childs</Title>
         {children.map((child, index) => (
           <Kid {...child} index={index} key={index}></Kid>
         ))}

@@ -49,6 +49,7 @@ const CreateParent: FC = () => {
   }
 
   useEffect(() => {
+    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     loadingContext.done()
   }, [])
 

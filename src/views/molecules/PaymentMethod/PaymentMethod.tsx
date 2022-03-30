@@ -163,7 +163,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     </OrderItemContent>
                 </OrderItem>
                 <OrderTip>
-                Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy</b></a>.
+                Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy </b></a>by clicking the link below.
                 </OrderTip>
                 <OrderTip>
                     <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)}/>
@@ -200,7 +200,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     </OrderItem>
                 }
                 <OrderTip>
-                Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy</b></a>.
+                Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy </b></a>by clicking the link below.
                 </OrderTip>
                 <OrderTip style={{display: 'flex'}}>
                     <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)}/>
