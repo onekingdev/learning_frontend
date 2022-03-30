@@ -125,6 +125,9 @@ export const Payment: FC = () => {
 }
 
   useEffect(() => {
+
+    window.Tawk_API.showWidget();
+
     if(parseInt(guardian?.couponCode?.percentage) === 100) setIsSpecialCode(true)
     setOffRate(50);
     setPlanData();

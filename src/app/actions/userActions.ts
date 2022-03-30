@@ -65,7 +65,7 @@ export const login = async (username: string, password: string, dispatch: any) =
       energyCharge: student.battery.level,
       balance: student.coinWallet.balance,
     }})
-    dispatch({type: TYPES.AVATAR_SET_DEFAULT_LOGIN, payload: student})
+    dispatch({type: TYPES.AVATAR_SET_DEFAULT, payload: student})
     dispatch({type: TYPES.INTEREST_SET_DATA, payload: interests})
     return {success: true, msg: 'Successfully Logined!', userType: 'student'}
   }

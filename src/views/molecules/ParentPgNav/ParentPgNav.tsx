@@ -58,7 +58,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   )
   else return (
     <Container>
-      {/* <Home src={home} /> */}
+      <Home src={home} />
       <SupportBtnContainer>
         <Button
           variant='contained'
@@ -73,8 +73,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
         >
           Support
         </Button>
-        <Avatar className={classes.questionMarkButton} id='questionMarkButton' onClick={() => location.href='https://www.withsocrates.com/contact/'}>
-        {/* https://www.withsocrates.com/contact/ */}
+        <Avatar className={classes.questionMarkButton} id='questionMarkButton'>
           <QuestionMarkIcon />
         </Avatar>
       </SupportBtnContainer>

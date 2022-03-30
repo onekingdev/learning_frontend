@@ -206,12 +206,11 @@ const KidsList: FC = () => {
               }}
               >
             <ImageAvatar
-              firstName = {student.firstName? student.firstName:'F'}
-              lastName  = {student.lastName? student.lastName:'L'}
-              accessory = {props.currentAvatarAccessories ? props.currentAvatarAccessories : null}
-              head      = {props.currentAvatarHead ? props.currentAvatarHead : null}
+              firstName ={student.firstName? student.firstName:'F'}
+              lastName  ={student.lastName? student.lastName:'L'}
+              accessory ={props.currentAvatarAccessories ? props.currentAvatarAccessories : null}
+              head      ={props.currentAvatarHead ? props.currentAvatarHead : null}
             // skinTone={null}
-              size      = {60}
             />
             {/* <Avatar src={props.avatar} onClick={() => history.push('/parent/reporting')} /> */}
           </GridItem>
@@ -298,6 +297,9 @@ const KidsList: FC = () => {
   }, []);
 
   const onInit = async () => {
+
+    window.Tawk_API.showWidget();
+
     const guardianStudents  = guardian.guardianstudentSet
     const students          = [];
 

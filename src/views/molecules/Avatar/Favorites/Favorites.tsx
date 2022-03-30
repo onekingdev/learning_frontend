@@ -59,7 +59,6 @@ export const AvatarSelector: FC = () => {
 
       const res: any = await doSetUserAvatar(student.id, favorites[currentAvatarId].id, user.token)
       if (res.status) {
-        console.log(res)
         dispatch({ type: AVATAR_SET_DEFAULT, payload: res })
         enqueueSnackbar('Set user avatar successfully!', { variant: 'success' })
       } else {

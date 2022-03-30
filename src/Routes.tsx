@@ -1,8 +1,10 @@
+import { useEffect }             from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import { Route, Switch }         from 'react-router-loading';
 import { fadeIn }                from 'react-animations';
+import { useSelector }           from 'react-redux';
+
 import styled, { keyframes }     from 'styled-components';
-import 'animate.css';
 import { LogIn }                 from 'views/pages/Login/Login';
 import { Welcome }               from 'views/pages/Welcome/Welcome';
 import { Question }              from 'views/pages/Student/Question/Question';
@@ -20,7 +22,6 @@ import { Wardrobe }              from 'views/pages/Student/Avatar/Wardrobe';
 import { Payment }               from 'views/pages/Parent/Payment/Payment';
 import CreateParent              from 'views/pages/Parent/CreateParent/CreateParent';
 import KidsList                  from 'views/pages/Parent/KidsList/KidsList';
-import { useSelector }           from 'react-redux';
 import { Store }                 from 'app/configureStore';
 import { Settings }              from 'views/pages/Parent/Settings/Settings';
 import { Report }                from 'views/pages/Parent/Report/Report';
@@ -32,6 +33,7 @@ import { Spinner }               from 'views/atoms/Spinner';
 import { ParentReporting }       from 'views/pages/Parent/Reporting';
 import { KidsTreasureTrack }     from 'views/pages/Student/TreasureTrack/TreasureTrack';
 import { KidsProgress }          from 'views/pages/Student/Progress/Progress';
+import 'animate.css';
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
@@ -71,7 +73,9 @@ export function Routes() {
   const FadeIn = styled.div`
   animation: 1.5s ${keyframes`${fadeIn}`} ;
   `;
-
+  useEffect(() => {
+    window.Tawk_API.hideWidget();
+  }, [location])
   return (
     <FadeIn>
     {/* <TransitionGroup component={null}> */}

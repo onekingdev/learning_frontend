@@ -75,7 +75,7 @@ export const Sidebar: FC = () => {
                                 <TypoIcon >HOMEWORKS</TypoIcon>
                             </IconContainer>
                         </ListItem> */}
-                        <StyledListItem>
+                        <ListItem >
                             <IconContainer>
                                 <Icon
                                     image={question_icon}
@@ -84,8 +84,8 @@ export const Sidebar: FC = () => {
                                 />
                                 <TypoIcon >QUESTIONS</TypoIcon >
                             </IconContainer>
-                        </StyledListItem>
-                        <StyledListItem >
+                        </ListItem>
+                        <ListItem >
                             <IconContainer>
                                 <Icon
                                     image={game_icon}
@@ -94,8 +94,8 @@ export const Sidebar: FC = () => {
                                 />
                                 <TypoIcon >GAMES</TypoIcon >
                             </IconContainer>
-                        </StyledListItem>
-                        <StyledListItem >
+                        </ListItem>
+                        <ListItem >
                             <IconContainer>
                                 <Icon
                                     image={progress_icon}
@@ -104,8 +104,8 @@ export const Sidebar: FC = () => {
                                 />
                                 <TypoIcon >PROGRESS</TypoIcon >
                             </IconContainer>
-                        </StyledListItem>
-                        <StyledListItem >
+                        </ListItem>
+                        <ListItem >
                             <IconContainer>
                                 <Icon
                                     image={collectible_icon}
@@ -114,8 +114,8 @@ export const Sidebar: FC = () => {
                                 />
                                 <TypoIcon >MY STUFF</TypoIcon >
                             </IconContainer>
-                        </StyledListItem>
-                        <StyledListItem >
+                        </ListItem>
+                        <ListItem >
                             <IconContainer>
                                 <Icon
                                     size={ICON_SIZE.medium}
@@ -124,8 +124,8 @@ export const Sidebar: FC = () => {
                                 />
                                 <TypoIcon >BANK</TypoIcon >
                             </IconContainer>
-                        </StyledListItem>
-                        <StyledListItem sx={{display: isMobile ? 'block' : 'none'}}>
+                        </ListItem>
+                        <ListItem sx={{display: isMobile ? 'block' : 'none'}}>
                             <IconContainer>
                                 <Icon
                                     image={profile_icon}
@@ -134,7 +134,7 @@ export const Sidebar: FC = () => {
                                 />
                                 <TypoIcon >PROFILE</TypoIcon >
                             </IconContainer>
-                        </StyledListItem>
+                        </ListItem>
                     </List>
                 </Box>
             </Drawer>
@@ -144,18 +144,12 @@ export const Sidebar: FC = () => {
 
 
 export const IconContainer = styled.div`
-  width: 50%;
+  width: 90%;
   height: 70px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   cursor: pointer;
 `;
-
-export const StyledListItem = styled(ListItem)`
-&.MuiListItem-root {
-    justify-content: flex-end;
-}
-`

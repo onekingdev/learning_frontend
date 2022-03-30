@@ -8,10 +8,17 @@ import { SnackbarProvider }        from 'notistack';
 import { BrowserRouter as Router } from 'react-router-dom';
 import TawkMessengerReact          from '@tawk.to/tawk-messenger-react';
 import './style.css'
+declare global {
+  interface Window {
+    Tawk_API?: any;
+  }
+}
 export default () => {
   const [persist] = useState(store());
   const tawkMessengerRef = useRef();
-
+  const onLoad = () => {
+    window.Tawk_API.hideWidget();
+  };
   // const handleMinimize =  () => {
   //     tawkMessengerRef?.current?.minimize();
   // };
@@ -22,6 +29,7 @@ export default () => {
           <TawkMessengerReact
             propertyId="58cecc295b89e2149e1b042f"
             widgetId="default"
+            onLoad={onLoad}
             useRef={tawkMessengerRef}/>
           <Router>
             <Routes />

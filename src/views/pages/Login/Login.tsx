@@ -13,9 +13,8 @@ import greeting                                              from 'views/assets/
 import { Actions }                                           from 'views/molecules/Login/Actions';
 import { Form }                                              from 'views/molecules/Login/Form';
 import { Greet }                                             from 'views/molecules/Login/Greet';
-import { Login, Card, LoginWrapper, DesktopWelcome }  from './Style';
+import { Login, Card, Legal, LoginWrapper, DesktopWelcome }  from './Style';
 import { dictionary }                                        from './dictionary';
-import { Grid } from '@mui/material';
 
 export const LogIn: FC = () => {
   const history   = useHistory();
@@ -98,20 +97,11 @@ export const LogIn: FC = () => {
             disabled    ={true}
           />
         </LoginWrapper>
-        <Grid container>
-          <Grid item xs={12} md={3}>
-            <ButtonText onClick={() => location.href='https://www.WithSocrates.com'}>{dictionary[language].about}</ButtonText>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <ButtonText onClick={() => location.href='https://www.withsocrates.com/privacy-policy/'}>{dictionary[language].privacy}</ButtonText>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <ButtonText onClick={() => location.href='https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'}>{dictionary[language].children_privacy}</ButtonText>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <ButtonText onClick={() => location.href='https://www.withsocrates.com/terms-conditions/'}>{dictionary[language].termCondition}</ButtonText>
-          </Grid>
-        </Grid>
+        <Legal>
+          <ButtonText onClick={() => location.href='https://www.WithSocrates.com'}>{dictionary[language].about}</ButtonText>
+          <ButtonText onClick={() => location.href='https://www.withsocrates.com/privacy-policy/'}>{dictionary[language].privacy}</ButtonText>
+          <ButtonText onClick={() => location.href='https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'}>{dictionary[language].children_privacy}</ButtonText>
+        </Legal>
       </Card>
     </Login>
   );

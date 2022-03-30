@@ -45,6 +45,16 @@ export const Card = styled.div`
   }
 `;
 
+export const Legal = styled.div`
+  display: none;
+  @media (min-width: ${ScreenSize.desktop}) {
+    display               : grid;
+    grid-template-columns : 1fr 1fr 1fr;
+    position              : absolute;
+    bottom                : 1rem;
+    left                  : calc(50vw + 3rem);
+  }
+`;
 
 export const LoginWrapper = styled.div`
   @media (min-width: ${ScreenSize.desktop}) {
