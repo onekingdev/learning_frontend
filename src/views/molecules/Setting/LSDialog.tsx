@@ -4,11 +4,10 @@ import Dialog                                                  from '@mui/materi
 import IconButton                                              from '@mui/material/IconButton';
 import CloseIcon                                               from '@mui/icons-material/Close';
 import styled                                                  from 'styled-components';
-import { DialogTitle, ThemeProvider }                          from '@mui/material';
+import { ThemeProvider }                                       from '@mui/material';
 import { BasicColor }                                          from 'views/Color';
 import { settingPage }                                         from './utils/Theme';
-import { LSDialogContent, LSDialogContentText } from './utils/Style';
-import { Subheader } from 'views/atoms/Text';
+import { LSDialogTitle, LSDialogContent, LSDialogContentText } from './utils/Style';
 
 type LSDialogProps = {
   title?: string
@@ -41,9 +40,7 @@ export const LSDialog: FC<LSDialogProps> = ({
         <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} >
           <CloseIcon />
         </StyledIconBtn>
-        <DialogTitle>
-          <Subheader style={{color: BasicColor.blue, textAlign: 'center'}}>{title ? title : ''}</Subheader>
-        </DialogTitle>
+        {title ? <LSDialogTitle>{title}</LSDialogTitle> : null}
         <LSDialogContent>
           {
             contentText ?

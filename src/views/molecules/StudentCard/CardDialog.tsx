@@ -6,9 +6,7 @@ import CloseIcon      from '@mui/icons-material/Close';
 import styled         from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
 import { BasicColor } from 'views/Color';
-import { LSDialogContent, LSDialogContentText } from 'views/molecules/Setting/utils/Style';
-import { Subheader }  from 'views/atoms/Text';
-import { DialogTitle } from '@mui/material';
+import { LSDialogTitle, LSDialogContent, LSDialogContentText } from 'views/molecules/Setting/utils/Style';
 
 type LSDialogProps = {
   title?: string
@@ -40,9 +38,7 @@ export const CardDialog: FC<LSDialogProps> = ({
         <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} sx={{zIndex: 2}}>
           <CloseIcon />
         </StyledIconBtn>
-        <DialogTitle>
-          <Subheader>{title ? title: ''}</Subheader>
-        </DialogTitle>
+        {title ? <LSDialogTitle>{title}</LSDialogTitle> : null}
         <LSDialogContent>
           {
             contentText ?

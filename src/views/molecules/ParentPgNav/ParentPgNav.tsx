@@ -58,7 +58,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   )
   else return (
     <Container>
-      {/* <Home src={home} /> */}
+      <Home src={home} />
       <SupportBtnContainer>
         <Button
           variant='contained'
