@@ -73,7 +73,10 @@ export const Welcome: FC = () => {
         <Header isDark={true}>{dictionary[language].practice}</Header>
         <Description>
           <Subheader isDark={true}>
-            {dictionary[language].description}
+            {dictionary[language].description1}
+          </Subheader>
+          <Subheader isDark={true}>
+            {dictionary[language].description2}
           </Subheader>
         </Description>
       </Body>
@@ -102,6 +105,9 @@ export const Welcome: FC = () => {
         </TypoIcon >
         <TypoIcon onClick={() => location.href='https://www.withsocrates.com/privacy-policy/'} >
           {dictionary[language].privacy}
+        </TypoIcon >
+        <TypoIcon onClick={() => location.href='https://www.withsocrates.com/terms-conditions/'} >
+          {'Terms & Conditions'}
         </TypoIcon >
         <TypoIcon onClick={() => location.href='https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'} >
           {dictionary[language].children_privacy}

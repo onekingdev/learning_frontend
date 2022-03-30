@@ -32,10 +32,10 @@ export const TypoGeneralText = styled.p<TextProps>`
 `;
 
 export const Subheader = styled.h3<TextProps>`
-  font-family: ${Typography.primary};
+  font-family: ${Typography.secondary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 700;
   margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 12px;
