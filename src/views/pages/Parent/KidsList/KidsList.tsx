@@ -298,9 +298,6 @@ const KidsList: FC = () => {
   }, []);
 
   const onInit = async () => {
-
-    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
-
     const guardianStudents  = guardian.guardianstudentSet
     const students          = [];
 
