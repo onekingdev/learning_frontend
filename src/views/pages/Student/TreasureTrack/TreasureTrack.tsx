@@ -2720,16 +2720,17 @@ export const KidsTreasureTrack: FC = () => {
 const Container = styled.div`
     display: flex;
     flex-direction: row;
+    margin: auto;
+    margin-top: 10rem;
     max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px;
     width: 100%;
-    margin: auto;
     align-items: flex-end;
-    margin-top: 2rem;
     box-sizing: border-box;
     @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
         flex-direction: column;
         max-width: 100vw;
         padding: 0.5rem;
+        margin-top: 0.5rem;
     }
 `;
 

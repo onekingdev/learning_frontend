@@ -56,15 +56,14 @@ export const ParentReporting: FC = () => {
         loadingContext.done();
       })();
     }
-  }, [activeSubjectId,
-  ]);
+  }, [activeSubjectId, studentId]);
   useEffect(() => {
     for (const guardianStudent of guardian.guardianstudentSet) {
       if (guardianStudent?.student.id === studentId) {
         setStudent(guardianStudent?.student)
       }
     }
-  }, [])
+  }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <div style={{

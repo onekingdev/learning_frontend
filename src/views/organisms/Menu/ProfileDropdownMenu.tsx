@@ -56,7 +56,7 @@ export const ProfileDropDownMenu: FC = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => history.push('/avatar')}>My Avatar</MenuItem>
+        <MenuItem onClick={() => history.push('/avatar')}>Profile</MenuItem>
         <MenuItem onClick={() => history.push('/')}>Logout</MenuItem>
       </Menu>
     </div>

@@ -207,21 +207,22 @@ export const BarChart = ({ student, studentId }: BarChartProps) => {
             </MobileCom>
             <ChartHeaderContrainer>
                 {
-                    student && <ImageAvatar
-                        firstName={student.firstName ? student.firstName : 'F'}
-                        lastName={student.lastName ? student.lastName : 'L'}
-                        accessory={student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
-                        head={student.currentAvatarHead ? student.currentAvatarHead : null}
-                        // skinTone={null}
-                        size={200}
-                    />
+
+                student && <ImageAvatar
+                firstName = {student.firstName?student.firstName:'F'}
+                lastName  = {student.lastName?student.lastName:'L'}
+                accessory = {student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
+                head      = {student.currentAvatarHead ? student.currentAvatarHead : null}
+                // skinTone={null}
+                size      = {200}
+                />
                 }
                 {/* <CrocoGirlImg style={{
                     zIndex: 20
                 }} src={CrogoGirlsFace} alt='CrogoGirls' /> */}
                 <ChartTitleGroup>
                     <ChartTitleBG src={TitleKidBackground} alt='Kid Title Bg' />
-                    <ChartTitle>{student?.fullName} <span><br/></span> Progress Report</ChartTitle>
+                    <ChartTitle>{ student?.fullName } Progress Report</ChartTitle>
                 </ChartTitleGroup>
             </ChartHeaderContrainer>
             <div ref={chartContainerRef} style={{

@@ -4,8 +4,8 @@ import styled                      from 'styled-components';
 import { Answer }                  from 'views/atoms/Text/Answer';
 import { BasicColor }              from 'views/Color';
 import { ScreenSize }              from 'constants/screenSize';
-import audioCheck                  from 'views/assets/audios/correct-winning-sound.wav';
-import audioError                  from 'views/assets/audios/wrong-answer-sound.wav';
+import audioCheck                  from 'views/assets/audios/check.mp3';
+import audioError                  from 'views/assets/audios/error.wav';
 
 interface BlockQuestionInput {
   question: number;
@@ -64,7 +64,7 @@ const TextOptionStyles = styled.div<{
     width: 90%;
     margin: 20px auto;
     font-family: ${Typography.secondary};
-    font-weight:300;
+    font-weight:500;
     padding:2px;
 
     background-color: ${props => props.isAnswered ?
