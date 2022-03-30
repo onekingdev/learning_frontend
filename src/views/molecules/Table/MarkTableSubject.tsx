@@ -3,7 +3,6 @@ import styled           from 'styled-components';
 import ArrowRightIcon   from '@mui/icons-material/ArrowRight';
 import { ScreenSize }   from 'constants/screenSize';
 import { TypoBtn }      from 'views/atoms/Text';
-import { useHistory } from 'react-router-dom';
 
 const colors = [
     '#CC5B1D',
@@ -13,12 +12,6 @@ const colors = [
     '#FF8D8D',
     '#C6CACC'
 ];
-const masteryColors = {
-    "NP": "#919699",
-    "N": "#EC5858",
-    "C": "#F4C222",
-    "M": "#26B824"
-}
 
 const Subject = styled.div`
     flex-grow: 1;
@@ -46,31 +39,18 @@ const MarkTableDiv = styled.div`
 interface ISingleGroup {
     main?: {
         item?: string,
-        button?: boolean,
-        mastery?: string,
+        type?: string,
     },
     extra?: ISingleGroup[],
     deep?: number,
-    aokId?: number,
 }
 
-const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, aokId = -1 }) => {
-    const history = useHistory();
-    const [opened, setOpened] = useState<boolean>(false);
+const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
+    const [opened, setOpened] = useState<boolean>(true);
     const toggle = () => setOpened(val => !val);
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {
-        return <SingleGroup aokId={aokId} key={id} main={item.main} extra={item.extra} deep={deep+1} />
+        return <SingleGroup key={id} main={item.main} extra={item.extra} deep={deep+1} />
     }) : '';
-    let bgColor = masteryColors.NP;
-    if (main.mastery === "NP") {
-        bgColor = masteryColors.NP;
-    } else if (main.mastery === "N") {
-        bgColor = masteryColors.N;
-    } else if (main.mastery === "C") {
-        bgColor = masteryColors.C;
-    } else if (main.mastery === "M") {
-        bgColor = masteryColors.M;
-    }
     if (main === {}) {
         return <></>;
     } else {
@@ -81,92 +61,107 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, aokId = -1
         }}>
             <div style={{
                 display: 'flex',
-                // backgroundColor: colors[deep],
-                backgroundColor: bgColor,
+                backgroundColor: colors[deep],
                 cursor: 'pointer',
                 border: '1px solid black'
             }} onClick={toggle}>
                 <Subject style={{
                     paddingLeft: `${deep}rem`,
                 }}>
-                    <ArrowRightIcon style={{
-                        transform: opened ? 'rotate(90deg)' : 'rotate(0deg)',
-                        opacity: extra.length > 0 ? '100' : '0'
-                    }} />
-                    <span style={{
-                        paddingLeft: '5px',
-                        paddingRight: '5px',
-                    }}>{main.item}</span>
+                    { main.type === 'text' ? <>
+                        <ArrowRightIcon style={{
+                            transform: opened ? 'rotate(90deg)' : 'rotate(0deg)',
+                            opacity: extra.length > 0 ? '100' : '0'
+                        }} />
+                        <span style={{
+                            paddingLeft: '5px',
+                            paddingRight: '5px',
+                        }}>{main.item}</span>
+                    </> : <>
+                        <TypoBtn style={{
+                            background: '#26B824',
+                            color: 'black',
+                            minWidth: '200px',
+                            height: '36px',
+                            marginTop: '10px',
+                            marginBottom: '10px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: '1000px',
+                            outline: 'none',
+                            cursor: 'pointer'
+                        }}>{main.item}</TypoBtn>
+                    </> }
                 </Subject>
             </div>
-            { main.button ? <div style={{
-                    display: 'flex',
-                    // backgroundColor: colors[deep],
-                    backgroundColor: bgColor,
-                    cursor: 'pointer',
-                    border: '1px solid black'
-                }} onClick={toggle}>
-                    <TypoBtn style={{
-                        background: '#26B824',
-                        color: 'black',
-                        minWidth: '200px',
-                        height: '36px',
-                        marginTop: '10px',
-                        marginBottom: '10px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: '1000px',
-                        outline: 'none',
-                        cursor: 'pointer',
-                        marginLeft: `calc(${deep}rem + 2rem)`,
-                    }} onClick={() => {
-                        if (aokId !== -1) {
-                            history.push('/question/PATH/' + aokId)
-                        }
-                    }}>Practice</TypoBtn>
-                </div>
-            : "" }
             { children }
         </div>
     }
 }
 
-const MarkTableSubject = ({
-    data=[],
-    activeSubjectId=-1,
-}: {
-    data: any[];
-    activeSubjectId: number,
-}) => {
+const MarkTableSubject = () => {
     return (<MarkTableDiv>
-        { data && data.length > 0 ? data?.map((aok: any, id: number) => (
-            <SingleGroup aokId={activeSubjectId} key={id} main={{
-                item: aok?.name,
-                mastery: aok?.mastery,
-                button: aok?.subTopics.length ? false : true,
-            }} extra={aok?.subTopics.map((subTopic1: any) => ({
+        <SingleGroup main={{
+            item: 'Math',
+            type: 'text'
+        }} extra={[{
+            main: {
+                item: 'Conteo',
+                type: 'text'
+            }
+        }, {
+            main: {
+                item: 'Geometría',
+                type: 'text'
+            }
+        }, {
+            main: {
+                item: 'Sentido numérico',
+                type: 'text'
+            }
+        }, {
+            main: {
+                item: 'Medición',
+                type: 'text'
+            }
+        }, {
+            main: {
+                item: 'Suma de números enteros',
+                type: 'text'
+            },
+            extra: [{
                 main: {
-                    item: subTopic1?.name,
-                    mastery: subTopic1?.mastery,
-                    button: subTopic1?.subTopics.length ? false : true,
+                    item: 'Dinero:',
+                    type: 'text'
                 },
-                extra: subTopic1?.subTopics.map((subTopic2: any) => ({
+            }, {
+                main: {
+                    item: 'Conceptos de la moneda-2 Comparar valores de monedas',
+                    type: 'text'
+                },
+                extra: [{
                     main: {
-                        item: subTopic2?.name,
-                        mastery: subTopic2?.mastery,
-                        button: subTopic2?.subTopics.length ? false : true,
-                    },
-                    extra: subTopic1?.subTopics.map((subTopic3: any) => ({
-                        main: {
-                            item: subTopic3?.name,
-                            mastery: subTopic3?.mastery,
-                            button: true,
-                        },
-                    }))
-                }))
-            }))} deep={1} />
-        )) : '' }
+                        item: 'Representar el valor de una moneda con una cantidad de una moneda diferente',
+                        type: 'text'
+                    }
+                }, {
+                    main: {
+                        item: 'Practice',
+                        type: 'button'
+                    }
+                }, ]
+            }, ]
+        }, {
+            main: {
+                item: 'Conceptos de la moneda-2 Comparar valores de monedas',
+                type: 'text'
+            }
+        }, ]} deep={0}/>
+        <SingleGroup main={{
+            item: 'Resta de números enteros',
+            type: 'text'
+        }} deep={0} />
     </MarkTableDiv>);
 };
 

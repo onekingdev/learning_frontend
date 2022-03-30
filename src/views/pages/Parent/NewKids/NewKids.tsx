@@ -41,7 +41,9 @@ import { getAudiencesWithGrades} from 'app/actions/audienceActions'
 import InfoIcon                  from '@mui/icons-material/Info';
 import { useSnackbar }           from 'notistack';
 import Tooltip                   from '@mui/material/Tooltip';
-import { CURRICULUM_TOOLTIP, GRADE_TOOLTIP }    from 'constants/parent';
+import { CURRICULUM_TOOLTIP,
+  GRADE_TOOLTIP }                from 'constants/parent';
+import { LSGridRow }             from 'views/molecules/Setting/utils/Style';
 
 const NewKids: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -70,6 +72,8 @@ const NewKids: FC = () => {
   const [childs, setChilds]             = useState([{}]);
   const [paths, setPaths]               = useState<any>([]);
   const [loading, setLoading]           = useState(false);
+  const [showTooltip, setShowTooltip]   = useState(false);
+  const [showTooltipGrade, setShowTooltipGrade]   = useState(false);
 
   const subjectIcons:any = {
     Gold: {
@@ -489,12 +493,18 @@ const NewKids: FC = () => {
                     ))}
                   </Select>
                   <Tooltip title={CURRICULUM_TOOLTIP} arrow placement='left-start'
+                    open={showTooltip}
+                    onOpen={() => setShowTooltip(true)}
+                    onClose={() => setShowTooltip(false)}
                     sx={{
-                      '& .MuiTooltip-tooltip' : {
+                      '&.MuiTooltip-tooltip' : {
                         fontSize: 12,
                       }
                     }} >
-                    <InfoIcon fontSize='small' sx={{ zIndex: 1, position: 'absolute', right: -15, top: 0, color: BasicColor.green }} />
+                    <InfoIcon
+                      onClick ={() => setShowTooltip(!showTooltip)}
+                      fontSize='small' sx={{ zIndex: 1, position: 'absolute', right: -15, top: 0, color: BasicColor.green }}
+                    />
                   </Tooltip>
                   <div className='err-text'>{validateMsg.audience}</div>
                 </FormControl>
@@ -535,13 +545,18 @@ const NewKids: FC = () => {
                     ))}
                   </Select>
                   <Tooltip title={GRADE_TOOLTIP} arrow placement='left-start'
+                    open={showTooltipGrade}
+                    onOpen={() => setShowTooltipGrade(true)}
+                    onClose={() => setShowTooltipGrade(false)}
                     sx={{
                       fontSize: 20,
                       '& .MuiTooltip-tooltip' : {
                         fontSize: 12,
                       }
                     }} >
-                    <InfoIcon fontSize='small' sx={{ zIndex: 1, position: 'absolute', right: -15, top: 0, color: BasicColor.green }} />
+                    <InfoIcon
+                      onClick ={() => setShowTooltipGrade(!showTooltipGrade)}
+                      fontSize='small' sx={{ zIndex: 1, position: 'absolute', right: -15, top: 0, color: BasicColor.green }} />
                   </Tooltip>
                   <div className='err-text'>{validateMsg.grade}</div>
                 </FormControl>
@@ -556,7 +571,7 @@ const NewKids: FC = () => {
                   />
                 )}
               </Grid>
-              <Grid item xs={12} md={12} lg={6}>
+              <LSGridRow item xs={12} md={12} lg={6}>
                 <Button
                   value    ={childNum !== childIdx ? 'Next Kid' : 'Finish'}
                   bgColor  ={
@@ -569,7 +584,7 @@ const NewKids: FC = () => {
                   align    ='right'
                   loading  ={loading}
                 />
-              </Grid>
+              </LSGridRow>
             </Grid>
           </Paper>
         </PaperContainer>

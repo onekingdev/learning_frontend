@@ -15,6 +15,7 @@ import Boy7               from 'views/assets/avatars/boy-7.png';
 import Girl5              from 'views/assets/avatars/girl-5.png';
 import Girl9              from 'views/assets/avatars/girl-9.png';
 import Girl11             from 'views/assets/avatars/girl-11.png';
+import { useSelector }    from 'react-redux';
 
 import FaceGirl11 from 'views/assets/avatars/pieces/faces/girl-11.png';
 import Hair       from 'views/assets/avatars/pieces/hairs/hair.png';
@@ -25,9 +26,7 @@ import MenuItem   from '@mui/material/MenuItem';
 import { UserRankTreasureTrack } from 'views/molecules/UserRank';
 import { getRanking }            from 'app/firebase';
 import { ScreenSize }            from 'constants/screenSize';
-import { useSelector }       from 'react-redux';
-import { HonorRoll } from 'api/fragments/honorRollFragments';
-import query                 from 'api/queries/get';
+import { AvatarSet } from 'views/molecules/Avatar/AvatarSet';
 
 const avatars = [Boy1, Boy7, Girl5, Girl9, Girl11];
 
@@ -291,7 +290,7 @@ strokeWidth={strokeWidth}
 
 const TreasureIsland01Svg = () => {
     return (
-        <svg width={143} height={104} viewBox='0 0 143 104' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <svg width={143} height={104} viewBox='0 0 143 104' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <path d='M65.523 22.471C49.132 24.0286 32.9122 29.2151 18.9183 39.853C13.657 43.8558 7.60181 50.4442 6.46549 59.0417C5.62492 65.6924 6.46548 74.4301 9.81218 80.1929C11.8306 83.9298 15.0187 86.9009 18.8872 88.6503C34.7334 94.6779 50.2683 80.0528 64.2933 74.2588C75.9678 69.4304 88.4207 71.9225 100.547 70.2403C110.945 68.7918 128.565 63.4962 129.935 46.379C130.387 40.9744 129.842 34.4795 126.137 30.8038C122.775 27.4863 118.027 27.0502 114.182 26.3648C102.16 24.1002 89.994 22.6794 77.7735 22.1128C73.6866 21.9569 69.5939 22.0766 65.523 22.471Z' fill='#00D8E7'/>
             <g opacity='0.3'>
             <path opacity='0.3' d='M67.5777 17.8763C48.7584 19.6363 30.2193 25.9131 14.2796 39.2456C8.31785 44.2452 1.45323 52.5468 0.270207 63.4963C-0.585925 71.9692 0.565961 83.1367 4.4886 90.5349C7.15039 95.5501 11.0575 99.7399 15.0579 101.438C33.3792 109.381 50.9843 91.0022 67.0174 83.8531C80.3575 77.8878 94.7094 81.2676 108.625 79.3363C120.565 77.6697 140.723 71.2216 142.03 49.4162C142.435 42.5319 141.703 34.2459 137.36 29.511C133.438 25.2434 128.021 24.5893 123.538 23.6392C109.702 20.5508 95.6525 18.5201 81.5093 17.5648C76.8642 17.3222 72.2074 17.4264 67.5777 17.8763Z' fill='#2A81BC'/>
@@ -1348,6 +1347,7 @@ const TreasureIsland04Svg = () => {
         </svg>
     )
 }
+
 const TreasureIsland01SvgMobile = () => {
     return (
         <svg width='143' height='104' viewBox='0 0 143 104' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -2407,10 +2407,12 @@ const TreasureIsland04SvgMobile = () => {
 
 export const KidsTreasureTrack: FC = () => {
     const loadingContext = useContext(LoadingContext);
+    const avatar = useSelector((state: any) => state.avatar)
+
     useEffect(() => {
         loadingContext.done();
     }, []);
-    const [earnedCoin, setEarnedCoin] = useState<number>(0); //Math.ceil(Math.random() * 1000)
+    const [earnedCoin, setEarnedCoin] = useState<number>(Math.ceil(Math.random() * 1000)); //Math.ceil(Math.random() * 1000)
 
     const [menuTitle, setMenuTitle] = useState<string>('Socrates');
     const [anchorEl, setAnchorEl] = useState<Element | null>(null);
@@ -2424,12 +2426,12 @@ export const KidsTreasureTrack: FC = () => {
         setEarnedCoin(Math.ceil(Math.random() * 1000));
     };
 
-    // const mock_ranking = ['Candy', 'Tony', 'Emily', 'Albert', 'Viri'];
+    const mock_ranking = ['Candy', 'Tony', 'Emily', 'Albert', 'Viri'];
 
-    // const [ranking, setRanking] = useState(mock_ranking);
-    // useEffect(() => {
-    //     getRanking(setRanking);
-    // }, []);
+    const [ranking, setRanking] = useState(mock_ranking);
+    useEffect(() => {
+        getRanking(setRanking);
+    }, []);
 
     const initialNumber = Math.ceil(earnedCoin / 40);
 
@@ -2585,45 +2587,6 @@ export const KidsTreasureTrack: FC = () => {
         }
     ]
 
-    const user           = useSelector((state: any) => state.user);
-    const [rankKids, setRankKids] = useState<any[]>([]);
-    const [initRank, setInitRank] = useState<number>(1);
-    useEffect(() => {
-        (async () => {
-            // Get Topic Report
-            const res:any = await query(``, HonorRoll, user.token).catch(e => ({success: false}));
-            if (res.success === false) {
-              return
-            }
-            const result:any = await res.json();
-            if (result.errors && !result.data) {
-                alert(result.errors[0].message);
-            } else {
-                if (result.data.coinWallets.length > 0) {
-                    let index = 0;
-                    for (let i = 0; i < result.data.coinWallets.length; i ++) {
-                        if (user.username === result.data.coinWallets[i].student.user.username) {
-                            index = i;
-                            setEarnedCoin(result.data.coinWallets[i].blockTransactionCoins);
-                            break;
-                        }
-                    }
-                    if (2 <= index && index <= result.data.coinWallets.length - 3) {
-                        setInitRank(index - 2);
-                        setRankKids(result.data.coinWallets.slice(index - 2, index + 3));
-                    } else if (index < 2) {
-                        setInitRank(0);
-                        setRankKids(result.data.coinWallets.slice(0, Math.min(5, result.data.coinWallets.length)));
-                    } else if (index > result.data.coinWallets.length - 3) {
-                        setInitRank(Math.max(0, result.data.coinWallets.length.length - 5));
-                        setRankKids(result.data.coinWallets.slice(Math.max(0, result.data.coinWallets.length.length - 5)));
-                    }
-                }
-            }
-            loadingContext.done();
-        })();
-    }, []);
-
     return (<StudentMenu>
         <Container>
             <MapWrapper>
@@ -2689,7 +2652,14 @@ export const KidsTreasureTrack: FC = () => {
                             </MobileCom>
                         </div>
                         <CharactorViewer>
-                            <img src={Hair} alt='hair' />
+                            <AvatarSet
+                                accessory={avatar.accessory ? avatar.accessory.image : ''}
+                                head={avatar.head ? avatar.head.image : ''}
+                                pants={avatar.pants ? avatar.pants.image : ''}
+                                body={avatar.clothes ? avatar.clothes.image : ''}
+                                skin={avatar.skin}
+                            />
+                            {/* <img src={Hair} alt='hair' />
                             <img style={{
                                 marginTop: '-2rem'
                             }} src={TShirt} alt='tshirt' />
@@ -2697,7 +2667,7 @@ export const KidsTreasureTrack: FC = () => {
                             <img style={{
                                 position: 'absolute',
                                 top: '2rem'
-                            }} src={FaceGirl11} alt='pant' />
+                            }} src={FaceGirl11} alt='pant' /> */}
                         </CharactorViewer>
                     </MapViewer>
                 </div>
@@ -2744,11 +2714,11 @@ export const KidsTreasureTrack: FC = () => {
                                     </Menu>
                                 </div>
                             </Typography>
-                            { rankKids.map((kid, i) => {
+                            {ranking.map((name, i) => {
                                 return (
-                                <UserRankTreasureTrack additionalPl={i%2 === 1 ? '0px' : '10px'} active={i === Math.floor(rankKids.length / 2)} coinsEarned={kid.blockTransactionCoins} userRank={i + initRank} userName={kid.student.user.username} key={i} userIcon={avatars[i]} />
+                                <UserRankTreasureTrack additionalPl={i%2 === 1 ? '0px' : '10px'} active={i === Math.floor(ranking.length / 2)} coinsEarned={i === Math.floor(ranking.length / 2) ? earnedCoin : Math.floor(Math.random() * 1000)} userRank={i + initialNumber} userName={name} key={name+i} userIcon={avatars[i]} />
                                 );
-                            }) }
+                            })}
                         </div>
                     </CardContent>
                 </Card>
@@ -2760,17 +2730,16 @@ export const KidsTreasureTrack: FC = () => {
 const Container = styled.div`
     display: flex;
     flex-direction: row;
-    margin: auto;
-    margin-top: 10rem;
     max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px;
     width: 100%;
+    margin: auto;
     align-items: flex-end;
+    margin-top: 2rem;
     box-sizing: border-box;
     @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
         flex-direction: column;
         max-width: 100vw;
         padding: 0.5rem;
-        margin-top: 0.5rem;
     }
 `;
 
@@ -2797,7 +2766,7 @@ const PanelWrapper = styled.div`
     flex-shrink: 0;
     box-shadow: 0 0 10px #0000003f;
     min-width: ${panelWidth}px;
-    max-width: calc(${panelWidth}px + 3rem);
+    max-width: calc(100vw - 1.5rem);
     @media (max-width: ${ parseInt(ScreenSize.desktop.slice(0, -2)) + 100 }px) {
         margin: auto;
         margin-bottom: 1rem;

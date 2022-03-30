@@ -46,7 +46,7 @@ export const Actions: FC<LoginActionsProps> = ({
       <Divider value={or} />
       <Action>
         <Button
-          value={loginText}
+          value={loading?'...Loading':loginText}
           bgColor={loginColor}
           color={BasicColor.white}
           onClick={loginAction}

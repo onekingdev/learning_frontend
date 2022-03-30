@@ -26,7 +26,7 @@ import { Settings }              from 'views/pages/Parent/Settings/Settings';
 import { Report }                from 'views/pages/Parent/Report/Report';
 import { Bank }                  from 'views/pages/Student/Bank/Bank';
 import { Cards }                 from 'views/pages/Student/Collectibles/Cards';
-import { MyCardCollection }    from 'views/pages/Student/Collectibles/MyCards';
+import {  MyCardCollection  }    from 'views/pages/Student/Collectibles/MyCards';
 import NewKids                   from 'views/pages/Parent/NewKids/NewKids';
 import { Spinner }               from 'views/atoms/Spinner';
 import { ParentReporting }       from 'views/pages/Parent/Reporting';
@@ -62,6 +62,8 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
     </Route>
   );
 };
+
+
 
 export function Routes() {
   const location = useLocation();
@@ -172,6 +174,18 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute loading={true} path="/kids/new">
             <NewKids />
+          </PrivateRoute>
+          <PrivateRoute
+            loading={true}
+            path="/kids/treasure-track"
+          >
+            <KidsTreasureTrack />
+          </PrivateRoute>
+          <PrivateRoute
+            loading={true}
+            path="/kids/progress"
+          >
+            <KidsProgress />
           </PrivateRoute>
           {/* <Route path="/testing-student-treasure-track">
             <StudentTreasureTrack />
