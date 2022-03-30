@@ -12,7 +12,6 @@ import { Backpack }              from 'views/pages/Student/Backpack/Backpack';
 import { Games }                 from 'views/pages/Student/Games/Games';
 import { GamesMenu }             from 'views/pages/Student/Games/GamesMenu/GamesMenu';
 import { StudentHome }           from 'views/pages/Student/StudentHome/StudentHome';
-import { Progress }              from 'views/pages/Student/Progress/Progress';
 import { ConfirmAccount }        from 'views/pages/ConfirmAccount/ConfirmAccount';
 import { KnowledgeMap }          from 'views/pages/Student/KnowledgeMap/KnowledgeMap';
 import { SubjectsMenu }          from 'views/pages/Student/Menus/SubjectMenu/SubjectsMenu';
@@ -31,8 +30,8 @@ import {  MyCardCollection  }    from 'views/pages/Student/Collectibles/MyCards'
 import NewKids                   from 'views/pages/Parent/NewKids/NewKids';
 import { Spinner }               from 'views/atoms/Spinner';
 import { ParentReporting }       from 'views/pages/Parent/Reporting';
-import { KidsTreasureTrack }     from 'views/pages/Student/Kids/TreasureTrack';
-import { KidsProgress }          from 'views/pages/Student/Kids/Progress';
+import { KidsTreasureTrack }     from 'views/pages/Student/TreasureTrack/TreasureTrack';
+import { KidsProgress }          from 'views/pages/Student/Progress/Progress';
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
@@ -126,10 +125,10 @@ export function Routes() {
             <MyProfile />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/home">
-            <StudentHome />
+            <KidsTreasureTrack />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/progress">
-            <Progress />
+            <KidsProgress />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/backpack">
             <Backpack />
