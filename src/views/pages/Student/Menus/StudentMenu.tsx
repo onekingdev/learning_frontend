@@ -25,10 +25,7 @@ export const StudentMenu: FC = ({children}) => {
         />
       </TopMenuContainer>
       <div>{children}</div>
-      {/*
-        // deprecated on Mar 30th
-        <MobileMenu />
-      */}
+      <MobileMenu />
     </Template>
   );
 };

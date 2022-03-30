@@ -76,7 +76,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
             <TableRow>
               <TableCell align="center">
                 <LSLabel fontSize={17} textAlign='center'>{'Plan'}</LSLabel>
-                <LSText textAlign='center' fontSize={13}>{'(Get 3 months FREE for annual plan)'}</LSText>
+                <LSText textAlign='center' fontSize={13}>{'(save 3 months if you change to annual plan)'}</LSText>
               </TableCell>
             </TableRow>
           </StyledTableHead>

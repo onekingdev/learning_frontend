@@ -4,16 +4,14 @@ import socrates                                        from 'views/assets/socrat
 import TextField                                       from 'views/molecules/MuiTextField'
 import { LicenseHeader, LicenseBody, LicenseUsername } from './Style'
 import QRCode                                          from 'react-qr-code';
-import { LSGridRow, LSText }                                      from 'views/molecules/Setting/utils/Style';
-import { Grid } from '@mui/material';
-import { TypoGeneralText } from 'views/atoms/Text';
+import { LSText }                                      from 'views/molecules/Setting/utils/Style';
 
 const License = (props: any) => {
     return (
       <ResponsiveLicense id="license">
         <LicenseHeader>
           <Img src={ logo } />
-          <LSText fontSize={25} >
+          <LSText fontSize={13}>
           LEARNING LICENSE
           </LSText>
         </LicenseHeader>
@@ -37,20 +35,10 @@ const License = (props: any) => {
             </div>
           </div>
           <div className="flex align-center">
-            <Grid container>
-              <LSGridRow item md={4} xs={12}>
-                <LicenseUsername>
-                  <TypoGeneralText style={{color: 'white', textAlign:'center'}}>
-                    {props?.parentName}
-                  </TypoGeneralText>
-                </LicenseUsername>
-              </LSGridRow>
-              <LSGridRow item md={8} xs={12} justifyContent='center'>
-                <TypoGeneralText style={{ textAlign:'center'}}>
-                  www.learnwithsocrates.com
-                </TypoGeneralText>
-              </LSGridRow>
-            </Grid>
+            <LicenseUsername>{props?.parentName}</LicenseUsername>
+            <div>
+              www.learnwithsocrates.com
+            </div>
           </div>
         </LicenseBody>
       </ResponsiveLicense>

@@ -17,8 +17,6 @@ export const ParentReporting: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const user           = useSelector((state: any) => state.user);
   const guardian       = useSelector((state: any) => state.guardian);
-  const currentStudent  = guardian.guardianstudentSet.find((element: any) => element.student.id === studentId)
-
   const [student, setStudent] = useState<any>();
   const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
   const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
@@ -63,14 +61,13 @@ export const ParentReporting: FC = () => {
         setStudent(guardianStudent?.student)
       }
     }
-  }, []);
+  }, [])
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <div style={{
         width: '100%'
       }}>
-        <BarChart student={student} studentId={studentId} />
-        {/* <BarChart student={student}  /> */}
+        <BarChart student={student} />
         <MarkTable
           areasOfKnowledge={areasOfKnowledge}
           data={data}
