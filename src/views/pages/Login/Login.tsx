@@ -98,7 +98,7 @@ export const LogIn: FC = () => {
             disabled    ={true}
           />
         </LoginWrapper>
-        <Grid container>
+        <Grid container >
           <Grid item xs={12} md={3}>
             <ButtonText onClick={() => location.href='https://www.WithSocrates.com'}>{dictionary[language].about}</ButtonText>
           </Grid>

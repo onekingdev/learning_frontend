@@ -203,7 +203,7 @@ export const BarChart = ({ student, studentId }: BarChartProps) => {
                     paddingTop: '1rem',
                     paddingBottom: '1rem',
                     zIndex: 20,
-                }}>Your Childs</h3>
+                }}>Your Children</h3>
             </MobileCom>
             <ChartHeaderContrainer>
                 {
