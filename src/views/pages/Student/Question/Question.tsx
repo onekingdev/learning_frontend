@@ -156,7 +156,7 @@ export const Question: FC = () => {
 
   const upgradeEnergy = () => {
     if (!answerResult[answerResult.length - 1]) {
-      // dispatch({type: TYPE.EARNING_ENERGY_RESET});
+      dispatch({type: TYPE.EARNING_ENERGY_RESET});
       return;
     }
     let corrCount = 0;

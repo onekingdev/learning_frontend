@@ -73,7 +73,8 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
         >
           Support
         </Button>
-        <Avatar className={classes.questionMarkButton} id='questionMarkButton'>
+        <Avatar className={classes.questionMarkButton} id='questionMarkButton' onClick={() => location.href='https://www.withsocrates.com/contact/'}>
+        {/* https://www.withsocrates.com/contact/ */}
           <QuestionMarkIcon />
         </Avatar>
       </SupportBtnContainer>

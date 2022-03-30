@@ -1,6 +1,7 @@
 export const dictionary = Object.freeze({
   en: {
     welcome: 'Welcome back!',
+    termCondition: 'Terms & Conditions',
     instructions: 'To log in please enter your email and password',
     email: 'Email',
     userName: 'User name',
