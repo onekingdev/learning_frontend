@@ -1,10 +1,9 @@
-import { FC } from 'react';
-import styled from 'styled-components';
+import { FC }          from 'react';
+import styled          from 'styled-components';
 import { GeneralText } from 'views/atoms/Text/GeneralText';
-import { Link } from 'views/atoms/Text/Link';
-// import { TextInput }   from 'views/atoms/Text/TextInput';
-import { ScreenSize } from 'constants/screenSize';
-import { TextField } from '@mui/material';
+import { Link }        from 'views/atoms/Text/Link';
+import { TextInput }   from 'views/atoms/Text/TextInput';
+import { ScreenSize }  from 'constants/screenSize';
 
 type FormProps = {
   login: string;
@@ -33,23 +32,13 @@ export const Form: FC<FormProps> = ({
         <Field>
           <GeneralText>{login}</GeneralText>
         </Field>
-        <StyledTextField
-          onChange={(e) => setUsername(e.target.value)}
-          label={email}
-          type='email'
-        />
-        <StyledTextField
-          onChange={(e) => setPassword(e.target.value)}
-          label={password}
-          type='password'
-        />
 
-        {/* <Field>
+        <Field>
           <TextInput label={email}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </Field> */}
-        {/*
+        </Field>
+
         <Field>
           <TextInput
             label={password}
@@ -58,7 +47,7 @@ export const Form: FC<FormProps> = ({
             isSecret={true}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </Field> */}
+        </Field>
         <Link>{forgot}</Link>
       </StyledForm>
     </>
@@ -66,30 +55,9 @@ export const Form: FC<FormProps> = ({
 };
 
 const StyledForm = styled.div`
-  display       : flex;
-  flex-direction: column;
-  gap           : 10px;
+  padding: 2rem;
   @media (min-width: ${ScreenSize.desktop}) {
-    // all: unset;
-  }
-`;
-
-const StyledTextField = styled(TextField)`
-  width: 100%;
-  border: none;
-
-  & .MuiOutlinedInput-notchedOutline {
-    border: none;
-  }
-  & .MuiOutlinedInput-root  {
-    border-radius: 10px;
-  }
-  & .MuiOutlinedInput-input  {
-    border-radius: 10px;
-    background: white;
-  }
-  & .MuiFormLabel-root {
-    top: 5px;
+    all: unset;
   }
 `;
 

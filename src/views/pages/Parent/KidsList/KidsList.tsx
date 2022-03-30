@@ -314,7 +314,7 @@ const KidsList: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
-        <Title>Your Children</Title>
+        <Title>Your Childs</Title>
         {children.map((child, index) => (
           <Kid {...child} index={index} key={index}></Kid>
         ))}

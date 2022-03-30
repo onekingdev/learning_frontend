@@ -150,7 +150,6 @@ export const LSWhiteTextButton = styled(Button)`
 /*                                           GRID                                             */
 /*--------------------------------------------------------------------------------------------*/
 export const LSGridRow = styled(Grid)`
-  display: flex;
   justify-content: center;
   padding: 5px 7px 0px 15px;
   align-items: center;

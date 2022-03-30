@@ -13,82 +13,37 @@ import MarkTableSubject        from 'views/molecules/Table/MarkTableSubject';
 import { LoadingContext }      from 'react-router-loading';
 import { ScreenSize }          from 'constants/screenSize';
 import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
-import { Container }            from './Style';
-import { useSelector }       from 'react-redux';
-import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
-import query                 from 'api/queries/get';
+import {Container }            from './Style'
 
 type IProcessPathSvg = {
     bgColor?: string;
     active?: boolean;
 }
 
-const masteryColors = {
-    "NP": "#919699",
-    "N": "#EC5858",
-    "C": "#F4C222",
-    "M": "#26B824"
-}
-
 export const KidsProgress = () => {
-    const user           = useSelector((state: any) => state.user);
-    const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
-    const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
-    const [data, setData]                         = useState<any[]>([]);
-    useEffect(() => {
-        (async () => {
-            // Get All Subject
-            const res:any = await query(``, AreasOfKnowledge(), user.token).catch(e => ({success: false}));
-            if(res.success === false) {
-                return
-            }
-            const result:any = await res.json();
-            if(result.errors && !result.data) {
-                alert(result.errors[0].message);
-            } else {
-                setAreasOfKnowledge(result.data.areasOfKnowledge)
-                setActiveSubjectId(result.data.areasOfKnowledge[4].id)
-                // setSubject(result.data.areasOfKnowledge[0].id);
-            }
-        })();
-    }, [user]);
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
-        if (activeSubjectId !== -1) {
-          (async () => {
-            // Get Topic Report
-            const res:any = await query(``, TopicReport(parseInt(user.profile.id), activeSubjectId), user.token).catch(e => ({success: false}));
-            if(res.success === false) {
-              return
-            }
-            const result:any = await res.json();
-            if(result.errors && !result.data) {
-                alert(result.errors[0].message);
-            } else {
-                setData(result.data.rootTopicsByAok);
-            }
-            loadingContext.done();
-          })();
-        }
-      }, [activeSubjectId]);
+      loadingContext.done();
+    }, []);
     const grades = [
-        'KinderGarten',
         '1st Grade',
-        '2nd Grade',
-        '3rd Grade',
-        '4th Grade',
-        '5th Grade',
-        '6th Grade',
-        '7th Grade',
-        '8th Grade',
+        '2st Grade',
+        '3st Grade',
+        '4st Grade',
     ]
-    const [grade, setGrade] = useState<string>(grades[0]);
+    const subjects = [
+        'Math',
+        'Computer',
+        'Psychology',
+    ]
+    const [grade, setGrade] = useState<string>('');
+    const [subject, setSubject] = useState<string>('');
 
     const handleGradeChange = (event: any) => {
         setGrade(event.target.value);
     };
     const handleSubjectChange = (event: any) => {
-        setActiveSubjectId(event.target.value);
+        setSubject(event.target.value);
     };
 
     const paths = [{
@@ -341,326 +296,6 @@ export const KidsProgress = () => {
             text: 'Multiplicación de números enteros',
             active: true
         },
-        {
-            left: 59.46,
-            top: 14,
-            width: 97.44,
-            angle: 52,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 61.46,
-            top: 23,
-            width: 97.44,
-            angle: 93,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 57.46,
-            top: 31,
-            width: 97.44,
-            angle: 316,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 51.46,
-            top: 35,
-            width: 97.44,
-            angle: 354,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 42.46,
-            top: 34,
-            width: 97.44,
-            angle: 5,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 34.46,
-            top: 32,
-            width: 97.44,
-            angle: 5,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 26.46,
-            top: 31,
-            width: 97.44,
-            angle: 357,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 18.46,
-            top: 35,
-            width: 97.44,
-            angle: 317,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 14.46,
-            top: 44,
-            width: 97.44,
-            angle: 275,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 17.46,
-            top: 54,
-            width: 97.44,
-            angle: 59,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 23.46,
-            top: 60,
-            width: 97.44,
-            angle: 22,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 32.46,
-            top: 61,
-            width: 97.44,
-            angle: 354,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 40.46,
-            top: 58,
-            width: 97.44,
-            angle: 333,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 48.46,
-            top: 51,
-            width: 97.44,
-            angle: 321,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 55.46,
-            top: 43,
-            width: 97.44,
-            angle: 321,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 62.46,
-            top: 38,
-            width: 97.44,
-            angle: 337,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 70.46,
-            top: 36,
-            width: 97.44,
-            angle: 357,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 81.46,
-            top: 50,
-            width: 97.44,
-            angle: 90,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 76.46,
-            top: 59,
-            width: 97.44,
-            angle: 331,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 68.46,
-            top: 62,
-            width: 97.44,
-            angle: 356,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 60.46,
-            top: 61,
-            width: 97.44,
-            angle: 11,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 52.46,
-            top: 60,
-            width: 97.44,
-            angle: 0,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 40,
-            width: 97.44,
-            angle: 47,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
     ];
     const subSubjectsMobile = [
         {
@@ -744,26 +379,6 @@ export const KidsProgress = () => {
             active: true
         },
     ];
-    const subSubjects1 = subSubjects.map((subSubject, id) => {
-        let bgColor = masteryColors.NP;
-        if (data && data[id] && data[id].mastery) {
-            if (data[id].mastery === "NP") {
-                bgColor = masteryColors.NP;
-            } else if (data[id].mastery === "N") {
-                bgColor = masteryColors.N;
-            } else if (data[id].mastery === "C") {
-                bgColor = masteryColors.C;
-            } else if (data[id].mastery === "M") {
-                bgColor = masteryColors.M;
-            }
-        }
-        return ({
-            ...subSubject,
-            text: data && data[id] && data[id].name ? data[id].name : "",
-            bgColor: bgColor,
-            active: false,
-        })
-    })
 
     const mapBgRef = useRef<HTMLDivElement>(null);
     const [mapWidth, setMapWidth] = useState<number>(1366);
@@ -2222,12 +1837,12 @@ export const KidsProgress = () => {
                         <Select
                             labelId='demo-simple-select-label'
                             id='demo-simple-select'
-                            value={activeSubjectId}
+                            value={subject}
                             label='Subject'
                             onChange={handleSubjectChange}
                         >
-                            { areasOfKnowledge.map((subject, id) => (
-                                <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
+                            { subjects.map((subject, id) => (
+                                <MenuItem key={id} value={subject}>{subject}</MenuItem>
                             )) }
                         </Select>
                     </FormControl>
@@ -2261,8 +1876,8 @@ export const KidsProgress = () => {
                         top: `${path.top}%`,
                     }}>
                         {path.imgSrc({
-                            bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
-                            active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                            bgColor: subSubjects.length > id ? subSubjects[id].bgColor : '#C6CACC',
+                            active: subSubjects.length > id ? subSubjects[id].active : false,
                         })}
                     </PcCom>) }
                     { pathsMobile.map((path, id) => <MobileCom key={id} style={{
@@ -2271,11 +1886,11 @@ export const KidsProgress = () => {
                         top: `${path.top}%`,
                     }}>
                         {path.imgSrc({
-                            bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
-                            active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                            bgColor: subSubjects.length > id ? subSubjects[id].bgColor : '#C6CACC',
+                            active: subSubjects.length > id ? subSubjects[id].active : false,
                         })}
                     </MobileCom>) }
-                    { subSubjects1.map((subSubject, id) => <PcCom key={id} style={{
+                    { subSubjects.map((subSubject, id) => <><PcCom key={id} style={{
                         position: 'absolute',
                         transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
                         left: `${subSubject.left}%`,
@@ -2283,8 +1898,8 @@ export const KidsProgress = () => {
                         fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
                         fontWeight: subSubject.active ? '600' : '400',
                         width: `${subSubject.width * mapWidth / 1366}px`,
-                    }}>{subSubject.text}</PcCom>)}
-                    { subSubjectsMobile.map((subSubject, id) => <MobileCom key={id} style={{
+                    }}>{subSubject.text}</PcCom></>)}
+                    { subSubjectsMobile.map((subSubject, id) => <><MobileCom key={id} style={{
                         position: 'absolute',
                         transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
                         left: `${subSubject.left}%`,
@@ -2293,15 +1908,12 @@ export const KidsProgress = () => {
                         fontWeight: subSubject.active ? '600' : '400',
                         width: `${subSubject.width * mapWidth / 1366}px`,
                         zIndex: 20,
-                    }}>{subSubject.text}</MobileCom>)}
+                    }}>{subSubject.text}</MobileCom></>)}
                 {/* </div> */}
             </div>
         </Container>
         <Container>
-            <MarkTableSubject
-                data={data}
-                activeSubjectId={activeSubjectId}
-            />
+            <MarkTableSubject />
         </Container>
     </StudentMenu>
 }
