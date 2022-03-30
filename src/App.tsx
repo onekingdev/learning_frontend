@@ -17,7 +17,7 @@ export default () => {
   const [persist] = useState(store());
   const tawkMessengerRef = useRef();
   const onLoad = () => {
-    window.Tawk_API.hideWidget();
+    window.Tawk_API?.hideWidget();
   };
   // const handleMinimize =  () => {
   //     tawkMessengerRef?.current?.minimize();

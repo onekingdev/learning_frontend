@@ -22,7 +22,7 @@ export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);
 
   useEffect(() => {
-    window.Tawk_API.showWidget();
+    window.Tawk_API?.showWidget();
 
     loadingContext.done();
   }, []);
