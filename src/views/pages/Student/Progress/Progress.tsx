@@ -572,7 +572,7 @@ export const KidsProgress = () => {
             active: true
         },
         {
-            left: 78.46,
+            left: 43.46,
             top: 40,
             width: 97.44,
             angle: 47,

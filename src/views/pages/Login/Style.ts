@@ -32,6 +32,9 @@ export const Card = styled.div`
   @media (min-width: ${ScreenSize.tablet}) {
     width             : 512px;
     border-radius     : 32px;
+    display           : flex;
+    flex-direction    : column;
+    justify-content   : space-between;
     padding           : 1rem;
     position          : absolute;
     left              : 50%;
