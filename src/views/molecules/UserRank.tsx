@@ -3,6 +3,7 @@ import styled           from 'styled-components';
 import { Button }       from 'views/atoms/Text/Button';
 import { UserIcon }     from 'views/atoms/UserIcon';
 import { ScreenSize }   from 'constants/screenSize';
+import { ImageAvatar }   from 'views/molecules/Avatar/DefaultAvatar';
 
 type UserRankProps = {
   userRank: number;
@@ -33,7 +34,14 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
     <>
       <UserRankTreasureTrackStylesActive >
         <Button isDark={true}>#{userRank}</Button>
-        <UserIcon src={userIcon} />
+        <ImageAvatar
+          firstName={""}
+          lastName={userName}
+          head={{
+            image: userIcon || ""
+          }}
+          size={70}
+        />
         <Button fontSize='24px' isDark={true}>YOU</Button>
         <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStylesActive>
@@ -42,7 +50,14 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
     <>
       <UserRankTreasureTrackStyles pl={additionalPl} >
         <Button isDark={true}>#{userRank}</Button>
-        <UserIcon src={userIcon} />
+        <ImageAvatar
+          firstName={""}
+          lastName={userName}
+          head={{
+            image: userIcon || ""
+          }}
+          size={70}
+        />
         <Button isDark={true}>{userName}</Button>
         <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStyles>
