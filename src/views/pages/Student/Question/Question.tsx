@@ -110,7 +110,6 @@ export const Question: FC = () => {
   useEffect(() => {
     console.log("Block Presentation Id is : ", blockPresentation?.id)
     console.log("Block Presentation is,", blockPresentation)
-    setBonusCoins(0)
   }, [blockPresentation])
   useEffect(() => {
     setQuestion(blockPresentation?.block.questions[questionCounter]);
@@ -127,6 +126,8 @@ export const Question: FC = () => {
   }
 
   const onAnswer = (result: BlockQuestionInput) => {
+    //test
+    // result.isCorrect = true;
     increaseExp(result.isCorrect);
     //for test
     // result.isCorrect = true;
@@ -159,9 +160,10 @@ export const Question: FC = () => {
 
   const upgradeEnergy = () => {
     const currentResult = answerResult[answerResult.length - 1]?.isCorrect;
-    if(!currentResult) dispatch({type: TYPE.EARNING_ENERGY_RESET});
+    console.log("current Result is", currentResult);
+    if(currentResult === false) dispatch({type: TYPE.EARNING_ENERGY_RESET});
     if(answerResult.length < 2) {
-      if(earning.energyCharge > 0) {
+      if(earning.energyCharge > 0 && currentResult) {
         dispatch({type: TYPE.EARNING_ENERGY_UP});
         setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * pointUnit / 10)))
         console.log("bonus coins is ",bonusCoins)
@@ -252,6 +254,7 @@ export const Question: FC = () => {
     setIsLessonFinished(false)
     setAnswerResult([]);
     setPoints(0)
+    setBonusCoins(0)
   }
 
   const arrObjToString  = (arrObj: any) => {

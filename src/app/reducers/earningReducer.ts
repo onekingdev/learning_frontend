@@ -18,7 +18,7 @@ const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: I
         ...action.payload
       };
     case TYPE.EARNING_ENERGY_UP:
-      if(state.energyCharge > 10) return {...state}
+      if(state.energyCharge >= 10) return {...state}
       else return {
         ...state,
         energyCharge: state.energyCharge + 1
