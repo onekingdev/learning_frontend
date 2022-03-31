@@ -109,6 +109,7 @@ export const Question: FC = () => {
 
   useEffect(() => {
     console.log("Block Presentation Id is : ", blockPresentation?.id)
+    console.log("Block Presentation is,", blockPresentation)
     setBonusCoins(0)
   }, [blockPresentation])
   useEffect(() => {
