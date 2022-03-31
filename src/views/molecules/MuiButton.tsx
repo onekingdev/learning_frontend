@@ -59,7 +59,10 @@ const MuiButton: FC<MuiButtonProps> = ({
                 // backgroundColor: '#21B95C',
                 zIndex:zIndex,
                 backgroundColor: variant !== 'outlined' ? bgColor || BasicColor.greenSoft : 'white',
+                borderColor: borderColor || bgColor || BasicColor.greenSoft,
                 borderRadius: radius,
+                borderStyle: 'solid',
+                borderWidth: 1,
                 height: height || '49px',
                 width: fullWidth ? '100%' : width || 150,
                 maxWidth: 200,
@@ -76,8 +79,8 @@ const MuiButton: FC<MuiButtonProps> = ({
                     center/15000% !important`
             },
             '&:disabled': {
-              color: 'white',
-              backgroundColor: '#919699 !important'
+              boxShadow: 'none !important',
+              backgroundColor: 'rgba(0, 0, 0, 0.12) !important'
             }
         },
     })

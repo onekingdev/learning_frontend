@@ -4,6 +4,12 @@ export const HonorRoll = `
             user {
                 id
                 username
+                student {
+                    currentAvatarHead {
+                        id
+                        image
+                    }
+                }
             }
         }
         blockTransactionCoins

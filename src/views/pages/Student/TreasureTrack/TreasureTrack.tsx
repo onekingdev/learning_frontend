@@ -29,7 +29,14 @@ import { ScreenSize }            from 'constants/screenSize';
 import { HonorRoll } from 'api/fragments/honorRollFragments';
 import query                 from 'api/queries/get';
 import { AvatarSet } from 'views/molecules/Avatar/AvatarSet';
+import background     from 'views/assets/colored-shapes-bg.svg';
 
+const Wrapper = styled.div`
+    background-image  : url(${background});
+    background-repeat : no-repeat;
+    background-size   : cover;
+    height            : 100vh;
+`;
 const avatars = [Boy1, Boy7, Girl5, Girl9, Girl11];
 
 type IPathComp = {
@@ -2410,9 +2417,6 @@ export const KidsTreasureTrack: FC = () => {
     const loadingContext = useContext(LoadingContext);
     const avatar = useSelector((state: any) => state.avatar)
 
-    useEffect(() => {
-        loadingContext.done();
-    }, []);
     const [earnedCoin, setEarnedCoin] = useState<number>(0); //Math.ceil(Math.random() * 1000)
 
     const [menuTitle, setMenuTitle] = useState<string>('Socrates');
@@ -2426,13 +2430,6 @@ export const KidsTreasureTrack: FC = () => {
         setMenuTitle(str);
         setEarnedCoin(Math.ceil(Math.random() * 1000));
     };
-
-    // const mock_ranking = ['Candy', 'Tony', 'Emily', 'Albert', 'Viri'];
-
-    // const [ranking, setRanking] = useState(mock_ranking);
-    // useEffect(() => {
-    //     getRanking(setRanking);
-    // }, []);
 
     const initialNumber = Math.ceil(earnedCoin / 40);
 
@@ -2590,181 +2587,205 @@ export const KidsTreasureTrack: FC = () => {
 
     const user           = useSelector((state: any) => state.user);
     const [rankKids, setRankKids] = useState<any[]>([]);
-    const [initRank, setInitRank] = useState<number>(1);
+    const [initRanks, setInitRanks] = useState<number[]>([]);
+    const [addPls, setAddPls] = useState<number[]>([]);
     useEffect(() => {
         (async () => {
-            // Get Topic Report
-            const res:any = await query(``, HonorRoll, user.token).catch(e => ({success: false}));
-            if (res.success === false) {
-              return
-            }
-            const result:any = await res.json();
-            if (result.errors && !result.data) {
-                alert(result.errors[0].message);
-            } else {
-                if (result.data.coinWallets.length > 0) {
-                    let index = 0;
-                    for (let i = 0; i < result.data.coinWallets.length; i ++) {
-                        if (user.username === result.data.coinWallets[i].student.user.username) {
-                            index = i;
-                            setEarnedCoin(result.data.coinWallets[i].blockTransactionCoins);
-                            break;
+            if (user) {
+                // Get Topic Report
+                const res:any = await query(``, HonorRoll, user.token).catch(e => ({success: false}));
+                if (res.success === false) {
+                  return
+                }
+                const result:any = await res.json();
+                if (result.errors && !result.data) {
+                    alert(result.errors[0].message);
+                } else {
+                    if (result.data.coinWallets.length > 0) {
+                        let index = -1;
+                        const temp = result.data.coinWallets
+                        temp.sort((a: any, b: any) => {
+                            if (b.blockTransactionCoins === a.blockTransactionCoins) {
+                                return b.student.user.username === user.username ? 1 : -1;
+                            } else {
+                                return b.blockTransactionCoins - a.blockTransactionCoins;
+                            }
+                        });
+                        for (let i = 0; i < temp.length; i ++) {
+                            if (user.username === temp[i].student.user.username) {
+                                index = i;
+                                setEarnedCoin(temp[i].blockTransactionCoins);
+                                break;
+                            }
                         }
-                    }
-                    if (2 <= index && index <= result.data.coinWallets.length - 3) {
-                        setInitRank(index - 2);
-                        setRankKids(result.data.coinWallets.slice(index - 2, index + 3));
-                    } else if (index < 2) {
-                        setInitRank(0);
-                        setRankKids(result.data.coinWallets.slice(0, Math.min(5, result.data.coinWallets.length)));
-                    } else if (index > result.data.coinWallets.length - 3) {
-                        setInitRank(Math.max(0, result.data.coinWallets.length.length - 5));
-                        setRankKids(result.data.coinWallets.slice(Math.max(0, result.data.coinWallets.length.length - 5)));
+                        if (index < 5) {
+                            setRankKids(temp.slice(0, 5));
+                            setInitRanks([1,2,3,4,5]);
+                            setAddPls((new Array(5)).fill(true).map((val, id) => Math.abs(index - id) * 5));
+                        } else {
+                            setRankKids([...temp.slice(0,4), temp[index]])
+                            setInitRanks([1,2,3,4,index + 1]);
+                            setAddPls([20,15,10,5,0]);
+                        }
+                        // if (2 <= index && index <= temp.length - 3) {
+                        //     setInitRank(index - 2);
+                        //     setRankKids(temp.slice(index - 2, index + 3));
+                        // } else if (index < 2) {
+                        //     setInitRank(0);
+                        //     setRankKids(temp.slice(0, Math.min(5, temp.length)));
+                        // } else if (index > temp.length - 3) {
+                        //     setInitRank(Math.max(0, temp.length - 5));
+                        //     setRankKids(temp.slice(Math.max(0, temp.length - 5)));
+                        // }
                     }
                 }
+                loadingContext.done();
             }
-            loadingContext.done();
         })();
-    }, []);
+    }, [user]);
 
-    return (<StudentMenu>
-        <Container>
-            <MapWrapper>
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '100%',
-                }}>
-                    <MapTitleViewer>
-                        <img style={{
-                            position: 'absolute',
-                            zIndex: 10,
-                            width: '100%',
-                            height: '80px'
-                        }} src={welcome} alt='Welcome' />
-                        <Title style={{
-                            zIndex: 20,
-                        }}>Treasure Track</Title>
-                    </MapTitleViewer>
-                    <MapViewer>
-                        <div ref={mapBgRef} style={{
-                            position: 'relative',
-                            width: '100%',
-                            overflow: 'auto',
-                        }}>
-                            <ImgPc src={treasureMapPc} alt='treasureMap' />
-                            <ImgMobile src={treasureMapMobile} alt='treasureMap' />
-                            { TreasureIslands.map(({Comp, left, top}, id) => <PcCom
-                                key={id}
-                                style={{
-                                    position: 'absolute',
-                                    left: `${left}%`,
-                                    top: `${top}%`,
-                                    zIndex: 10,
-                                    opacity: earnedCoin / 250 < id ? '0.6' : '1',
-                                }}
-                            ><Comp /></PcCom>) }
-                            { TreasureIslandsMobile.map(({Comp, left, top}, id) => <MobileCom
-                                key={id}
-                                style={{
-                                    position: 'absolute',
-                                    left: `${left}%`,
-                                    top: `${top}%`,
-                                    zIndex: 10,
-                                    opacity: earnedCoin / 250 < id ? '0.6' : '1',
-                                }}
-                            ><Comp /></MobileCom>) }
-                            <PcCom style={{
+    return (
+    <Wrapper>
+        <StudentMenu>
+            <Container>
+                <MapWrapper>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%',
+                    }}>
+                        <MapTitleViewer>
+                            <img style={{
                                 position: 'absolute',
-                                left: '30%',
-                                top: '16.93%',
+                                zIndex: 10,
+                                width: '100%',
+                                height: '80px'
+                            }} src={welcome} alt='Welcome' />
+                            <Title style={{
                                 zIndex: 20,
+                            }}>Treasure Track</Title>
+                        </MapTitleViewer>
+                        <MapViewer>
+                            <div ref={mapBgRef} style={{
+                                position: 'relative',
+                                width: '100%',
+                                overflow: 'auto',
                             }}>
-                            { pathComPc }
-                            </PcCom>
-                            <MobileCom style={{
-                                position: 'absolute',
-                                left: '24.72%',
-                                top: '19.59%',
-                                zIndex: 20
-                            }}>
-                            { pathComMobile }
-                            </MobileCom>
-                        </div>
-                        <CharactorViewer>
-                            <AvatarSet
-                                accessory={avatar.accessory ? avatar.accessory.image : ''}
-                                head={avatar.head ? avatar.head.image : ''}
-                                pants={avatar.pants ? avatar.pants.image : ''}
-                                body={avatar.clothes ? avatar.clothes.image : ''}
-                                skin={avatar.skin}
-                            />
-                            {/* <img src={Hair} alt='hair' />
-                            <img style={{
-                                marginTop: '-2rem'
-                            }} src={TShirt} alt='tshirt' />
-                            <img src={Pant} alt='pant' />
-                            <img style={{
-                                position: 'absolute',
-                                top: '2rem'
-                            }} src={FaceGirl11} alt='pant' /> */}
-                        </CharactorViewer>
-                    </MapViewer>
-                </div>
-            </MapWrapper>
-            <PanelWrapper>
-                <Card>
-                    <CardContent>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            marginLeft: '-1rem',
-                            marginRight: '-1rem',
-                        }}>
-                            <Typography variant='h4' color='text.primary' gutterBottom>
-                            Honor Roll
-                            </Typography>
-                            <Typography variant='h5' color='text.primary' gutterBottom>
-                                <div>
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center'
+                                <ImgPc src={treasureMapPc} alt='treasureMap' />
+                                <ImgMobile src={treasureMapMobile} alt='treasureMap' />
+                                { TreasureIslands.map(({Comp, left, top}, id) => <PcCom
+                                    key={id}
+                                    style={{
+                                        position: 'absolute',
+                                        left: `${left}%`,
+                                        top: `${top}%`,
+                                        zIndex: 10,
+                                        opacity: earnedCoin / 250 < id ? '0.6' : '1',
                                     }}
-                                        aria-controls={open ? 'basic-menu' : undefined}
-                                        aria-haspopup='true'
-                                        aria-expanded={open ? 'true' : undefined}
-                                        onClick={handleClick}
-                                    >
-                                        {menuTitle}
-                                        <ArrowDropDownIcon />
-                                    </div>
-                                    <Menu
-                                        id='basic-menu'
-                                        anchorEl={anchorEl}
-                                        open={open}
-                                        onClose={() => handleClose(menuTitle)}
-                                        MenuListProps={{
-                                        'aria-labelledby': 'basic-button',
+                                ><Comp /></PcCom>) }
+                                { TreasureIslandsMobile.map(({Comp, left, top}, id) => <MobileCom
+                                    key={id}
+                                    style={{
+                                        position: 'absolute',
+                                        left: `${left}%`,
+                                        top: `${top}%`,
+                                        zIndex: 10,
+                                        opacity: earnedCoin / 250 < id ? '0.6' : '1',
+                                    }}
+                                ><Comp /></MobileCom>) }
+                                <PcCom style={{
+                                    position: 'absolute',
+                                    left: '30%',
+                                    top: '16.93%',
+                                    zIndex: 20,
+                                }}>
+                                { pathComPc }
+                                </PcCom>
+                                <MobileCom style={{
+                                    position: 'absolute',
+                                    left: '24.72%',
+                                    top: '19.59%',
+                                    zIndex: 20
+                                }}>
+                                { pathComMobile }
+                                </MobileCom>
+                            </div>
+                            <CharactorViewer>
+                                <AvatarSet
+                                    accessory={avatar.accessory ? avatar.accessory.image : ''}
+                                    head={avatar.head ? avatar.head.image : ''}
+                                    pants={avatar.pants ? avatar.pants.image : ''}
+                                    body={avatar.clothes ? avatar.clothes.image : ''}
+                                    skin={avatar.skin}
+                                />
+                                {/* <img src={Hair} alt='hair' />
+                                <img style={{
+                                    marginTop: '-2rem'
+                                }} src={TShirt} alt='tshirt' />
+                                <img src={Pant} alt='pant' />
+                                <img style={{
+                                    position: 'absolute',
+                                    top: '2rem'
+                                }} src={FaceGirl11} alt='pant' /> */}
+                            </CharactorViewer>
+                        </MapViewer>
+                    </div>
+                </MapWrapper>
+                <PanelWrapper>
+                    <Card>
+                        <CardContent>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                marginLeft: '-1rem',
+                                marginRight: '-1rem',
+                            }}>
+                                <Typography variant='h4' color='text.primary' gutterBottom>
+                                Honor Roll
+                                </Typography>
+                                <Typography variant='h5' color='text.primary' gutterBottom>
+                                    <div>
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center'
                                         }}
-                                    >
-                                        <MenuItem onClick={() => handleClose('Socrates')}>Socrates</MenuItem>
-                                        <MenuItem onClick={() => handleClose('Classroom')}>Classroom</MenuItem>
-                                        <MenuItem onClick={() => handleClose('School')}>School</MenuItem>
-                                    </Menu>
-                                </div>
-                            </Typography>
-                            { rankKids.map((kid, i) => {
-                                return (
-                                <UserRankTreasureTrack additionalPl={i%2 === 1 ? '0px' : '10px'} active={i === Math.floor(rankKids.length / 2)} coinsEarned={kid.blockTransactionCoins} userRank={i + initRank} userName={kid.student.user.username} key={i} userIcon={avatars[i]} />
-                                );
-                            }) }
-                        </div>
-                    </CardContent>
-                </Card>
-            </PanelWrapper>
-        </Container>
-    </StudentMenu>)
+                                            aria-controls={open ? 'basic-menu' : undefined}
+                                            aria-haspopup='true'
+                                            aria-expanded={open ? 'true' : undefined}
+                                            onClick={handleClick}
+                                        >
+                                            {menuTitle}
+                                            <ArrowDropDownIcon />
+                                        </div>
+                                        <Menu
+                                            id='basic-menu'
+                                            anchorEl={anchorEl}
+                                            open={open}
+                                            onClose={() => handleClose(menuTitle)}
+                                            MenuListProps={{
+                                            'aria-labelledby': 'basic-button',
+                                            }}
+                                        >
+                                            <MenuItem onClick={() => handleClose('Socrates')}>Socrates</MenuItem>
+                                            <MenuItem onClick={() => handleClose('Classroom')}>Classroom</MenuItem>
+                                            <MenuItem onClick={() => handleClose('School')}>School</MenuItem>
+                                        </Menu>
+                                    </div>
+                                </Typography>
+                                { (rankKids.length === 5 && addPls.length === 5 && initRanks.length === 5) ? rankKids.map((kid, i) => {
+                                    return (
+                                    <UserRankTreasureTrack additionalPl={addPls[i].toString() + "px"} active={addPls[i] === 0} coinsEarned={kid.blockTransactionCoins} userRank={initRanks[i]} userName={kid.student.user.username} key={i} userIcon={kid.student?.user?.student?.currentAvatarHead?.image} />
+                                    );
+                                }) : "" }
+                            </div>
+                        </CardContent>
+                    </Card>
+                </PanelWrapper>
+            </Container>
+        </StudentMenu>
+    </Wrapper>
+    )
 }
 
 const Container = styled.div`

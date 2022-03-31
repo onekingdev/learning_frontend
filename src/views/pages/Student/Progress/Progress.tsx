@@ -47,7 +47,7 @@ export const KidsProgress = () => {
                 alert(result.errors[0].message);
             } else {
                 setAreasOfKnowledge(result.data.areasOfKnowledge)
-                setActiveSubjectId(result.data.areasOfKnowledge[0].id)
+                setActiveSubjectId(result.data.areasOfKnowledge[4].id)
                 // setSubject(result.data.areasOfKnowledge[0].id);
             }
         })();
@@ -336,6 +336,326 @@ export const KidsProgress = () => {
             top: 9,
             width: 97.44,
             angle: 5,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 59.46,
+            top: 14,
+            width: 97.44,
+            angle: 52,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 61.46,
+            top: 23,
+            width: 97.44,
+            angle: 93,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 57.46,
+            top: 31,
+            width: 97.44,
+            angle: 316,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 51.46,
+            top: 35,
+            width: 97.44,
+            angle: 354,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 42.46,
+            top: 34,
+            width: 97.44,
+            angle: 5,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 34.46,
+            top: 32,
+            width: 97.44,
+            angle: 5,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 26.46,
+            top: 31,
+            width: 97.44,
+            angle: 357,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 18.46,
+            top: 35,
+            width: 97.44,
+            angle: 317,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 14.46,
+            top: 44,
+            width: 97.44,
+            angle: 275,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 17.46,
+            top: 54,
+            width: 97.44,
+            angle: 59,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 23.46,
+            top: 60,
+            width: 97.44,
+            angle: 22,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 32.46,
+            top: 61,
+            width: 97.44,
+            angle: 354,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 40.46,
+            top: 58,
+            width: 97.44,
+            angle: 333,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 48.46,
+            top: 51,
+            width: 97.44,
+            angle: 321,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 55.46,
+            top: 43,
+            width: 97.44,
+            angle: 321,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 62.46,
+            top: 38,
+            width: 97.44,
+            angle: 337,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 70.46,
+            top: 36,
+            width: 97.44,
+            angle: 357,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 81.46,
+            top: 50,
+            width: 97.44,
+            angle: 90,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 76.46,
+            top: 59,
+            width: 97.44,
+            angle: 331,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 68.46,
+            top: 62,
+            width: 97.44,
+            angle: 356,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 60.46,
+            top: 61,
+            width: 97.44,
+            angle: 11,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 52.46,
+            top: 60,
+            width: 97.44,
+            angle: 0,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 43.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
+            tX: 10,
+            tY: 5,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 40,
+            width: 97.44,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',

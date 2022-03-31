@@ -1,14 +1,12 @@
-import logo                           from 'views/assets/logo-learn-white.svg'
-import styled                         from 'styled-components';
-import socrates                       from 'views/assets/socrates.svg'
-import TextField                      from 'views/molecules/MuiTextField'
-import { LicenseHeader, LicenseBody } from './Style'
-import QRCode                         from 'react-qr-code';
-import { LSGridRow, LSText }          from 'views/molecules/Setting/utils/Style';
-import { Grid }             from '@mui/material';
-import { TypoGeneralText }  from 'views/atoms/Text';
-import { BasicColor}        from 'views/Color';
-import { ScreenSize }       from 'constants/screenSize';
+import logo                                            from 'views/assets/logo-learn-white.svg'
+import styled                                          from 'styled-components';
+import socrates                                        from 'views/assets/socrates.svg'
+import TextField                                       from 'views/molecules/MuiTextField'
+import { LicenseHeader, LicenseBody, LicenseUsername } from './Style'
+import QRCode                                          from 'react-qr-code';
+import { LSGridRow, LSText }                                      from 'views/molecules/Setting/utils/Style';
+import { Grid } from '@mui/material';
+import { TypoGeneralText } from 'views/atoms/Text';
 
 const License = (props: any) => {
     return (
@@ -16,7 +14,7 @@ const License = (props: any) => {
         <LicenseHeader>
           <Img src={ logo } />
           <LSText fontSize={25} >
-            LEARNING LICENSE
+          LEARNING LICENSE
           </LSText>
         </LicenseHeader>
         <LicenseBody>
@@ -41,11 +39,11 @@ const License = (props: any) => {
           <div className="flex align-center">
             <Grid container>
               <LSGridRow item md={4} xs={12}>
-                {/* <LicenseUsername> */}
-                <Username >
-                  {props?.parentName}
-                </Username>
-                {/* </LicenseUsername> */}
+                <LicenseUsername>
+                  <TypoGeneralText style={{color: 'white', textAlign:'center'}}>
+                    {props?.parentName}
+                  </TypoGeneralText>
+                </LicenseUsername>
               </LSGridRow>
               <LSGridRow item md={8} xs={12} justifyContent='center'>
                 <TypoGeneralText style={{ textAlign:'center'}}>
@@ -77,16 +75,6 @@ const Img = styled.img`
 @media screen and (max-width: 540px) {
   width: 40%;
 }
-`
-const Username = styled(TypoGeneralText)`
-  color: white;
-  text-align: center;
-  background: ${BasicColor.green};
-  padding: 3px 6px;
-  border-radius: 5px;
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    width: 60vw;
-  }
 `
 const DialogTextField = styled(TextField)`
 &.MuiTextField-root {
