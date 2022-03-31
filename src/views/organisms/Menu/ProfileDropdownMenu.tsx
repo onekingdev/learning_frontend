@@ -8,6 +8,7 @@ import { ImageAvatar }   from 'views/molecules/Avatar/DefaultAvatar';
 import { useSelector }   from 'react-redux'
 import styled            from 'styled-components';
 import { ScreenSize }    from 'constants/screenSize';
+import { USER_AVATAR_SIZE } from 'constants/common';
 
 export const ProfileDropDownMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -42,7 +43,7 @@ export const ProfileDropDownMenu: FC = () => {
           accessory={avatar.accessory?avatar.accessory:null}
           head={avatar.head?avatar.head:null}
           skinTone={avatar.skin?avatar.skin:null}
-          size={70}
+          size={USER_AVATAR_SIZE}
           />
           }
         {/* <img style={{width: ICON_SIZE.medium}} src={icon} /> */}

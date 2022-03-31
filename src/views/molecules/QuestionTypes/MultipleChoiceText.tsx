@@ -7,7 +7,7 @@ import { BasicColor, ButtonColor } from 'views/Color';
 import { ScreenSize }              from 'constants/screenSize';
 import { Question }                from 'views/atoms/Text/Question';
 import { Icon }                    from 'views/atoms/Icon/Icon';
-import videoIcon                   from 'views/assets/videoIcon.svg';
+import videoIcon                   from 'views/assets/others/video-assistor.png';
 import assistor                    from 'views/assets/text-to-speech.svg';
 import { TextOption }              from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor }      from 'views/organisms/VideoModalAssistor';
@@ -81,9 +81,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
       ) : null}
       <BlackBoard>
         <QuestionContainer>
-          <Icon image={videoIcon} onClick={closeVideoModal}/>
           <Question>{question.questionText}</Question>
-          <Icon image={assistor} onClick={readQuestion} />
         </QuestionContainer>
         <AnswersContainer>
           <TextOptionsList>
@@ -120,6 +118,8 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
             color={BasicColor.black}
             value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'}
           />
+          <Icon image={assistor} onClick={readQuestion} />
+          <Icon image={videoIcon} onClick={closeVideoModal}/>
         </AssistorContainer>
       </BlackBoard>
     </>
@@ -204,9 +204,9 @@ const AssistorContainer = styled.div`
   max-width: 400px;
   height: 40px;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  grid-gap: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
   margin: 30px auto;
 `;
 const AnswerContainer = styled.div`

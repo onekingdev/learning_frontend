@@ -10,7 +10,7 @@ export const Avatar: FC = () => {
     <Wrapper>
       <StudentMenu>
         <AvatarContainer>
-          <PageTitle title="YOUR FAVORITES" />
+          <PageTitle title="My Avatar" />
           <AvatarSelector />
         </AvatarContainer>
       </StudentMenu>

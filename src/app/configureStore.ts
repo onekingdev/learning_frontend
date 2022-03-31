@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore, compose } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { createLogger } from 'redux-logger';
@@ -70,20 +70,10 @@ const promise = () => (next: any) => (action: any) => (
         : next(action)
 )
 
-console.log("REACT_APP_ENABLE_REDUX_DEVTOOL_EXTENSION:", process.env.REACT_APP_ENABLE_REDUX_DEVTOOL_EXTENSION)
-console.log("REACT_APP_ENABLE_REDUX_LOGGER:", process.env.REACT_APP_ENABLE_REDUX_LOGGER)
-
-const enhancer = process.env.REACT_APP_ENABLE_REDUX_DEVTOOL_EXTENSION === 'True' ?
-    composeWithDevTools(
-        process.env.REACT_APP_ENABLE_REDUX_LOGGER === 'True' ?
-            applyMiddleware(thunk, promise, logger) :
-            applyMiddleware(thunk, promise)
-    ) :
-    compose(
-        process.env.REACT_APP_ENABLE_REDUX_LOGGER === 'True' ?
-            applyMiddleware(thunk, promise, logger) :
-            applyMiddleware(thunk, promise)
-    );
+const enhancer = composeWithDevTools(
+    applyMiddleware(thunk, promise, logger),
+    // applyMiddleware(thunk, promise),
+);
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 // export default function configureStore(onCompletion: any) {

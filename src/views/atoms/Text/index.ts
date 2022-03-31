@@ -73,17 +73,15 @@ export const TypoTitle = styled.h2`
 
 export const TypoBtn = styled.p`
   font-family: ${Typography.primary};
-  font-weight: bold;
   letter-spacing: 0.25px;
   margin: 0;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 35px;
+  cursor: pointer;
 
   @media (max-width: ${ScreenSize.phone}) {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 500;
-    line-height: 18px;
   }
 `;
 

@@ -25,7 +25,7 @@ export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy, loading, on
         <FinishLessonTextContainer>
           <GeneralText isDark={true}>Lesson Complete</GeneralText>
           <GeneralText>
-            <GreenText>+{tokens} token</GreenText>
+            <GreenText>+{tokens} Coins</GreenText>
           </GeneralText>
         </FinishLessonTextContainer>
         <FinishLessonTextContainer>
@@ -81,6 +81,7 @@ const FinishLessonTextContainer = styled.div`
   margin: 10px 0;
 `;
 const FinishLessonButtonContainer = styled.div`
-  width: 50%;
-  margin: 10px auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 `;

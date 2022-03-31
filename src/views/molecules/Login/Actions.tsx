@@ -31,6 +31,18 @@ export const Actions: FC<LoginActionsProps> = ({
 }) => {
   return (
     <StyledActions>
+
+      <Action>
+        <Button
+          value={loading?'Loading...':loginText}
+          bgColor={loginColor}
+          color={BasicColor.white}
+          onClick={loginAction}
+          fullWidth={true}
+          loading={loading}
+        />
+      </Action>
+      <Divider value={or} />
       <Action>
         <Button
           value={googleText}
@@ -43,17 +55,6 @@ export const Actions: FC<LoginActionsProps> = ({
         />
       </Action>
 
-      <Divider value={or} />
-      <Action>
-        <Button
-          value={loading?'...Loading':loginText}
-          bgColor={loginColor}
-          color={BasicColor.white}
-          onClick={loginAction}
-          fullWidth={true}
-          loading={loading}
-        />
-      </Action>
     </StyledActions>
   );
 };
@@ -66,7 +67,7 @@ const StyledActions = styled.div`
   @media (min-width: ${ScreenSize.desktop}) {
     grid-template-columns: 1fr 0 1fr;
     grid-gap: 20px;
-    direction: rtl;
+    // direction: rtl;
     margin-top: 1rem;
     margin-left: 0;
   }
@@ -75,6 +76,8 @@ const StyledActions = styled.div`
 export const Action = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
   @media (min-width: ${ScreenSize.phone}) {
     margin-top: 15px;
     margin-bottom: 15px;

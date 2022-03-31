@@ -59,7 +59,6 @@ export const Question: FC = () => {
   const [loading, setLoading]                     = useState(false)
   const [nextMaxExp, setNextMaxExp]               = useState(0)
   const [openDg, setOpenDg]                       = useState(false);
-  const [bonusCoins, setBonusCoins]               = useState(0)
 
   const renderTypes = (
     question           : IQuestion,
@@ -109,7 +108,6 @@ export const Question: FC = () => {
 
   useEffect(() => {
     console.log("Block Presentation Id is : ", blockPresentation?.id)
-    console.log("Block Presentation is,", blockPresentation)
   }, [blockPresentation])
   useEffect(() => {
     setQuestion(blockPresentation?.block.questions[questionCounter]);
@@ -126,8 +124,6 @@ export const Question: FC = () => {
   }
 
   const onAnswer = (result: BlockQuestionInput) => {
-    //test
-    // result.isCorrect = true;
     increaseExp(result.isCorrect);
     //for test
     // result.isCorrect = true;
@@ -159,26 +155,19 @@ export const Question: FC = () => {
   };
 
   const upgradeEnergy = () => {
-    const currentResult = answerResult[answerResult.length - 1]?.isCorrect;
-    console.log("current Result is", currentResult);
-    if(currentResult === false) dispatch({type: TYPE.EARNING_ENERGY_RESET});
-    if(answerResult.length < 2) {
-      if(earning.energyCharge > 0 && currentResult) {
-        dispatch({type: TYPE.EARNING_ENERGY_UP});
-        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * pointUnit / 10)))
-        console.log("bonus coins is ",bonusCoins)
-      }
-      return
+    if (!answerResult[answerResult.length - 1]) {
+      // dispatch({type: TYPE.EARNING_ENERGY_RESET});
+      return;
     }
-    const lastResult = answerResult[answerResult.length - 2]?.isCorrect;
-    if(currentResult) {
-      if(!lastResult) return;
-      else {
-        dispatch({type: TYPE.EARNING_ENERGY_UP});
-        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * pointUnit / 10)))
-      }
+    let corrCount = 0;
+    for (let i = answerResult.length - 1; i >= 0; i--) {
+      if (answerResult[i].isCorrect) {
+        corrCount = answerResult.length - i;
+      } else break;
     }
-    console.log("bonus coins is ",bonusCoins)
+    if (corrCount < 1) corrCount = 1;
+    if (corrCount > 11) return;
+    dispatch({type: TYPE.EARNING_ENERGY_SET, payload: corrCount - 1});
   };
 
   // const handleData = (data: any) => {
@@ -254,7 +243,6 @@ export const Question: FC = () => {
     setIsLessonFinished(false)
     setAnswerResult([]);
     setPoints(0)
-    setBonusCoins(0)
   }
 
   const arrObjToString  = (arrObj: any) => {
@@ -307,7 +295,7 @@ export const Question: FC = () => {
           earning.energyCharge,
           correctCount,
           wrongCount,
-          bonusCoins,
+          (state.earning.energyCharge * pointUnit * 10) / 100,
           state.earning,
           arrObjToString(answerResult),
           state.user.token,
@@ -331,7 +319,7 @@ export const Question: FC = () => {
           <FinishLesson
             loading      ={loading}
             tokens       ={points}
-            energy       ={bonusCoins}
+            energy       ={(state.earning.energyCharge * pointUnit * 10) / 100}
             onNextLesson = {onNextLesson}
           />
         </StudentMenu>

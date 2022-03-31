@@ -1,6 +1,7 @@
 import styled         from 'styled-components';
 import { BasicColor } from 'views/Color';
 import { Typography } from './typography';
+import { ScreenSize } from 'constants/screenSize';
 
 type ButtonProps = {
   isDark?: boolean;
@@ -16,4 +17,7 @@ export const Button = styled.span<ButtonProps>`
   letter-spacing: 0.75px;
   text-transform: capitalize;
   cursor: pointer;
+  @media (max-width: ${ScreenSize.phone}) {
+    font-size:
+  }
 `;
