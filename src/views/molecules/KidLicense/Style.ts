@@ -30,17 +30,3 @@ export const LicenseBody = styled.div`
   }
 `;
 
-export const LicenseUsername = styled.div`
-  line-height: 31px;
-  background-color: ${BasicColor.green};
-  @media screen and (max-width: 540px) {
-    font-size: 1em;
-    width: 100%;
-    padding: 0;
-    margin-right: 20px;
-  }
-`
-
-export const useStyles = makeStyles({
-
-});

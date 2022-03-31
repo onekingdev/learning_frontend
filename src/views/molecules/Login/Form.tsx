@@ -4,7 +4,7 @@ import { GeneralText } from 'views/atoms/Text/GeneralText';
 import { Link } from 'views/atoms/Text/Link';
 // import { TextInput }   from 'views/atoms/Text/TextInput';
 import { ScreenSize } from 'constants/screenSize';
-import { TextField } from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 
 type FormProps = {
   login: string;
@@ -44,6 +44,7 @@ export const Form: FC<FormProps> = ({
           type='password'
         />
 
+
         {/* <Field>
           <TextInput label={email}
             onChange={(e) => setUsername(e.target.value)}
@@ -59,7 +60,11 @@ export const Form: FC<FormProps> = ({
             onChange={(e) => setPassword(e.target.value)}
           />
         </Field> */}
-        <Link>{forgot}</Link>
+        <Stack direction={'row'}>
+          <Link>{forgot}</Link>
+          <span>{'_'}</span>
+          <Link>{' Or username?'}</Link>
+        </Stack>
       </StyledForm>
     </>
   );

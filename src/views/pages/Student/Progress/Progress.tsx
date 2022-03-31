@@ -55,25 +55,24 @@ export const KidsProgress = () => {
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
         if (activeSubjectId !== -1) {
-            loadingContext.restart();
-            (async () => {
-                // Get Topic Report
-                const res:any = await query(``, TopicReport(parseInt(user.profile.id), activeSubjectId), user.token).catch(e => ({success: false}));
-                if(res.success === false) {
-                return
-                }
-                const result:any = await res.json();
-                if(result.errors && !result.data) {
-                    alert(result.errors[0].message);
-                } else {
-                    setData(result.data.rootTopicsByAok);
-                }
-                loadingContext.done();
+          (async () => {
+            // Get Topic Report
+            const res:any = await query(``, TopicReport(parseInt(user.profile.id), activeSubjectId), user.token).catch(e => ({success: false}));
+            if(res.success === false) {
+              return
+            }
+            const result:any = await res.json();
+            if(result.errors && !result.data) {
+                alert(result.errors[0].message);
+            } else {
+                setData(result.data.rootTopicsByAok);
+            }
+            loadingContext.done();
           })();
         }
       }, [activeSubjectId]);
     const grades = [
-        'Kindergarten',
+        'KinderGarten',
         '1st Grade',
         '2nd Grade',
         '3rd Grade',
@@ -264,7 +263,7 @@ export const KidsProgress = () => {
     const subSubjects = [
         {
             left: 15.39,
-            top: -2.99,
+            top: 0.01,
             width: 63.03,
             angle: 103,
             tX: 45,
@@ -274,7 +273,7 @@ export const KidsProgress = () => {
         },
         {
             left: 14.19,
-            top: 5.66,
+            top: 7.66,
             width: 78.38,
             angle: 72,
             tX: 30,
@@ -573,100 +572,90 @@ export const KidsProgress = () => {
             active: true
         },
         {
-            left: 43.46,
-            top: 63,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 317,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
             active: true
         },
         {
-            left: 39.06,
-            top: 70,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 285,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
             active: true
         },
         {
-            left: 40.46,
-            top: 79,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 59,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
             active: true
         },
         {
-            left: 46.46,
-            top: 84,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 20,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
             active: true
         },
         {
-            left: 53.46,
-            top: 84,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 331,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
             active: true
         },
         {
-            left: 59.46,
-            top: 78,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 312,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
             active: true
         },
         {
-            left: 66.46,
-            top: 72,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 335,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
             active: true
         },
         {
-            left: 74.46,
-            top: 72.5,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 29,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
             active: true
         },
         {
-            left: 79.46,
-            top: 78,
+            left: 78.46,
+            top: 40,
             width: 97.44,
-            angle: 0,
-            tX: 10,
-            tY: 5,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 82.46,
-            top: 84,
-            width: 55,
-            angle: 0,
+            angle: 47,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
@@ -2294,11 +2283,6 @@ export const KidsProgress = () => {
                         fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
                         fontWeight: subSubject.active ? '600' : '400',
                         width: `${subSubject.width * mapWidth / 1366}px`,
-                        overflow: "hidden",
-                        height: "50px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
                     }}>{subSubject.text}</PcCom>)}
                     { subSubjectsMobile.map((subSubject, id) => <MobileCom key={id} style={{
                         position: 'absolute',
