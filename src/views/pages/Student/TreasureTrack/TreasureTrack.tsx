@@ -2410,9 +2410,6 @@ export const KidsTreasureTrack: FC = () => {
     const loadingContext = useContext(LoadingContext);
     const avatar = useSelector((state: any) => state.avatar)
 
-    useEffect(() => {
-        loadingContext.done();
-    }, []);
     const [earnedCoin, setEarnedCoin] = useState<number>(0); //Math.ceil(Math.random() * 1000)
 
     const [menuTitle, setMenuTitle] = useState<string>('Socrates');
@@ -2426,13 +2423,6 @@ export const KidsTreasureTrack: FC = () => {
         setMenuTitle(str);
         setEarnedCoin(Math.ceil(Math.random() * 1000));
     };
-
-    // const mock_ranking = ['Candy', 'Tony', 'Emily', 'Albert', 'Viri'];
-
-    // const [ranking, setRanking] = useState(mock_ranking);
-    // useEffect(() => {
-    //     getRanking(setRanking);
-    // }, []);
 
     const initialNumber = Math.ceil(earnedCoin / 40);
 
@@ -2593,39 +2583,53 @@ export const KidsTreasureTrack: FC = () => {
     const [initRank, setInitRank] = useState<number>(1);
     useEffect(() => {
         (async () => {
-            // Get Topic Report
-            const res:any = await query(``, HonorRoll, user.token).catch(e => ({success: false}));
-            if (res.success === false) {
-              return
-            }
-            const result:any = await res.json();
-            if (result.errors && !result.data) {
-                alert(result.errors[0].message);
-            } else {
-                if (result.data.coinWallets.length > 0) {
-                    let index = 0;
-                    for (let i = 0; i < result.data.coinWallets.length; i ++) {
-                        if (user.username === result.data.coinWallets[i].student.user.username) {
-                            index = i;
-                            setEarnedCoin(result.data.coinWallets[i].blockTransactionCoins);
-                            break;
+            if (user) {
+                // Get Topic Report
+                const res:any = await query(``, HonorRoll, user.token).catch(e => ({success: false}));
+                if (res.success === false) {
+                  return
+                }
+                const result:any = await res.json();
+                if (result.errors && !result.data) {
+                    alert(result.errors[0].message);
+                } else {
+                    if (result.data.coinWallets.length > 0) {
+                        let index = -1;
+                        const temp = result.data.coinWallets
+                        temp.sort((a: any, b: any) => {
+                            if (b.blockTransactionCoins === a.blockTransactionCoins) {
+                                return b.student.user.username === user.username ? 1 : -1;
+                            } else {
+                                return b.blockTransactionCoins - a.blockTransactionCoins;
+                            }
+                        });
+                        console.log(temp)
+                        // console.log(result.data.coinWallets)
+                        // console.log(user.username)
+                        for (let i = 0; i < temp.length; i ++) {
+                            if (user.username === temp[i].student.user.username) {
+                                index = i;
+                                setEarnedCoin(temp[i].blockTransactionCoins);
+                                break;
+                            }
+                        }
+                        console.log(index)
+                        if (2 <= index && index <= temp.length - 3) {
+                            setInitRank(index - 2);
+                            setRankKids(temp.slice(index - 2, index + 3));
+                        } else if (index < 2) {
+                            setInitRank(0);
+                            setRankKids(temp.slice(0, Math.min(5, temp.length)));
+                        } else if (index > temp.length - 3) {
+                            setInitRank(Math.max(0, temp.length - 5));
+                            setRankKids(temp.slice(Math.max(0, temp.length - 5)));
                         }
                     }
-                    if (2 <= index && index <= result.data.coinWallets.length - 3) {
-                        setInitRank(index - 2);
-                        setRankKids(result.data.coinWallets.slice(index - 2, index + 3));
-                    } else if (index < 2) {
-                        setInitRank(0);
-                        setRankKids(result.data.coinWallets.slice(0, Math.min(5, result.data.coinWallets.length)));
-                    } else if (index > result.data.coinWallets.length - 3) {
-                        setInitRank(Math.max(0, result.data.coinWallets.length.length - 5));
-                        setRankKids(result.data.coinWallets.slice(Math.max(0, result.data.coinWallets.length.length - 5)));
-                    }
                 }
+                loadingContext.done();
             }
-            loadingContext.done();
         })();
-    }, []);
+    }, [user]);
 
     return (<StudentMenu>
         <Container>
