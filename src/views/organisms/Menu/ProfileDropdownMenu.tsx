@@ -6,8 +6,6 @@ import MenuItem          from '@mui/material/MenuItem';
 import { useHistory }    from 'react-router-dom';
 import { ImageAvatar }   from 'views/molecules/Avatar/DefaultAvatar';
 import { useSelector }   from 'react-redux'
-import styled            from 'styled-components';
-import { ScreenSize }    from 'constants/screenSize';
 import { USER_AVATAR_SIZE } from 'constants/common';
 
 export const ProfileDropDownMenu: FC = () => {

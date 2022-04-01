@@ -41,7 +41,7 @@ export const CardDialog: FC<LSDialogProps> = ({
           <CloseIcon />
         </StyledIconBtn>
         <DialogTitle>
-          <Subheader>{title ? title: ''}</Subheader>
+          <Subheader style={{color: BasicColor.blue, textAlign:'center'}}>{title ? title: ''}</Subheader>
         </DialogTitle>
         <LSDialogContent>
           {

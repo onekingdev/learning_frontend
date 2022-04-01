@@ -8,7 +8,7 @@ import { Stack, TextField } from '@mui/material';
 
 type FormProps = {
   login: string;
-  email: string;
+  emailLabel: string;
   password: string;
   passwordValidator?: (str: string) => boolean;
   wrongPasswordMessage?: string;
@@ -19,7 +19,7 @@ type FormProps = {
 
 export const Form: FC<FormProps> = ({
   login,
-  email,
+  emailLabel,
   password,
   passwordValidator,
   wrongPasswordMessage,
@@ -35,7 +35,7 @@ export const Form: FC<FormProps> = ({
         </Field>
         <StyledTextField
           onChange={(e) => setUsername(e.target.value)}
-          label={email}
+          // label={emailLabel}
           type='email'
         />
         <StyledTextField
@@ -62,8 +62,6 @@ export const Form: FC<FormProps> = ({
         </Field> */}
         <Stack direction={'row'}>
           <Link>{forgot}</Link>
-          <span>{'_'}</span>
-          <Link>{' Or username?'}</Link>
         </Stack>
       </StyledForm>
     </>

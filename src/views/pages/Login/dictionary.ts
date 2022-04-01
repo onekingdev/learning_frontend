@@ -4,7 +4,7 @@ export const dictionary = Object.freeze({
     termCondition: 'Terms & Conditions',
     instructions: 'To log in please enter your name and password',
     email: 'Email',
-    userName: 'User name',
+    userName: 'Username',
     password: 'Password',
     error: 'Incorrect password. Try again later or reset it.',
     forgot: 'Forgot your password?',

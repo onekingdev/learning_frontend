@@ -11,9 +11,7 @@ export const Answer = styled.h3<AnswerProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-size: 28px;
-  line-height: 36px;
-  font-style: normal;
-  font-weight: 600;
+  font-weight: normal;
   margin: 0;
   @media (max-width: ${ScreenSize.phone}) {
     font-size: 16px;

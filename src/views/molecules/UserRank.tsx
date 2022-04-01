@@ -32,7 +32,9 @@ export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
 export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userIcon, active=false, coinsEarned='0', additionalPl='' }) => {
   return active ? (
     <>
-      <UserRankTreasureTrackStylesActive >
+      <UserRankTreasureTrackStylesActive
+        pl="10px"
+      >
         <Button isDark={true}>#{userRank}</Button>
         { userIcon ? <ImageAvatar
           firstName={""}
@@ -60,7 +62,7 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
   ) : (
     <>
       <UserRankTreasureTrackStyles
-        pl={10}
+        pl="10px"
       >
         <Button isDark={true}>#{userRank}</Button>
         { userIcon ?
@@ -123,7 +125,8 @@ const UserRankTreasureTrackStyles = styled(UserRankStyles)<IUserRankTreasureTrac
 
 const UserRankTreasureTrackStylesActive = styled(UserRankStyles)`
   grid-template-columns: 40px 1fr 1fr 4fr;
-  padding-left: 6px;
+  margin-left: 16px;
+  padding-left: ${ props => props.pl ? props.pl : '0px'};
   background: #21B95C33;
   width: calc(100% - 6px);
   @media (max-width: ${ScreenSize.desktop}) {

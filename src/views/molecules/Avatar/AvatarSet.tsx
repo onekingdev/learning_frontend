@@ -51,7 +51,7 @@ const CurrentAvatar = styled.div`
     width: 160px;
     margin: auto;
     z-index: 2;
-    top: -75px;
+    top: -65px;
     @media screen and (min-width: ${ScreenSize.phone}) {
     }
   }

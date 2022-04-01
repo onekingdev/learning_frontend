@@ -57,7 +57,6 @@ const DropDownContainer = styled.div`
     flex-direction: column
   }
   @media screen and (max-width: ${ScreenSize.phone}) {
-    left: 5vw;
     right: auto;
     top: 0;
   }
