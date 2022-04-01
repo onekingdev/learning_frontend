@@ -32,12 +32,8 @@ export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
 export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userIcon, active=false, coinsEarned='0', additionalPl='' }) => {
   return active ? (
     <>
-      <UserRankTreasureTrackStyles1
-        pl={"10px"}
-      >
-        <Button style={{
-          width: "20px"
-        }} isDark={true}>#{userRank}</Button>
+      <UserRankTreasureTrackStylesActive >
+        <Button isDark={true}>#{userRank}</Button>
         { userIcon ? <ImageAvatar
           firstName={""}
           lastName={userName}
@@ -57,21 +53,14 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         }}>
           { userName[0].toUpperCase() }
         </div> }
-        <Button style={{
-          width: "120px",
-          textAlign: "center",
-        }} fontSize='24px' isDark={true}>YOU</Button>
-        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS <br />EARNED</Button>
-      </UserRankTreasureTrackStyles1>
+        <Button fontSize='24px' isDark={true}>YOU</Button>
+        <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
+      </UserRankTreasureTrackStylesActive>
     </>
   ) : (
     <>
-      <UserRankTreasureTrackStyles1
-        pl={"10px"}
-      >
-        <Button style={{
-          width: "20px"
-        }} isDark={true}>#{userRank}</Button>
+      <UserRankTreasureTrackStyles pl={additionalPl} >
+        <Button isDark={true}>#{userRank}</Button>
         { userIcon ?
         <ImageAvatar
           firstName={""}
@@ -92,12 +81,9 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         }}>
           { userName[0].toUpperCase() }
         </div> }
-        <Button style={{
-          width: "120px",
-          textAlign: "center",
-        }} isDark={true}>{userName}</Button>
-        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS <br />EARNED</Button>
-      </UserRankTreasureTrackStyles1>
+        <Button isDark={true}>{userName}</Button>
+        <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
+      </UserRankTreasureTrackStyles>
     </>
   );
 };
@@ -117,19 +103,6 @@ const UserRankStyles = styled.div`
 type IUserRankTreasureTrackStyles = {
   pl?: string;
 }
-
-const UserRankTreasureTrackStyles1 = styled(UserRankStyles)<IUserRankTreasureTrackStyles>`
-  display: flex;
-  justify-content: center;
-  margin-left: 0px;
-  width: 100%;
-  @media (max-width: ${ScreenSize.desktop}) {
-    padding-left: 0px;
-    width: 100%;
-  }
-  @media (max-width: ${ScreenSize.phone}) {
-  }
-`;
 
 const UserRankTreasureTrackStyles = styled(UserRankStyles)<IUserRankTreasureTrackStyles>`
   grid-template-columns: 40px 1fr 1fr 4fr;

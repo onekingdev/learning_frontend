@@ -2,6 +2,7 @@ import { useEffect, useRef, FC } from 'react';
 import 'plyr-react/dist/plyr.css';
 import Hls from 'hls.js';
 import Plyr from 'plyr-react';
+import { TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH } from 'constants/common';
 
 interface VideoPlayerProps {
     src: string
@@ -31,14 +32,15 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 
     return (
         <Plyr
+            style={{width: TUTORIAL_VDO_DG_WIDTH, height: TUTORIAL_VDO_DG_HEIGHT}}
             id='plyr'
             options={{
-                ads: {
-                    enabled: true,
-                    publisherId: 'sd',
-                    tagUrl:
-                        'https://napi.arvancloud.com/vod/channels/c49885f0-11e3-4f15-b0a4-68392958643b/ads'
-                },
+                // ads: {
+                //     enabled: true,
+                //     publisherId: 'sd',
+                //     tagUrl:
+                //         'https://napi.arvancloud.com/vod/channels/c49885f0-11e3-4f15-b0a4-68392958643b/ads'
+                // },
                 quality: {
                     default: 576,
                     options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]

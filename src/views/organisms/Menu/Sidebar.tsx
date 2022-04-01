@@ -20,7 +20,9 @@ import styled                       from 'styled-components';
 import { TypoIcon }                 from 'views/atoms/Text';
 import { CardDialog }               from 'views/molecules/StudentCard/CardDialog';
 import { VideoPlayer } from 'views/molecules/VideoPlayer';
-import { TUTORIAL_VDO_URL } from 'constants/common';
+import { TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH, TUTORIAL_VDO_URL } from 'constants/common';
+import { VIDEO_TUTORIAL_EXPLAIN }   from 'constants/parent';
+import {ScreenSize}                 from 'constants/screenSize';
 
 export const Sidebar: FC = () => {
 
@@ -59,10 +61,11 @@ export const Sidebar: FC = () => {
             <CardDialog
                 isOpen = {open}
                 open = {openTutorial}
-                title = 'Chanllege 1 of 10'
-                fullWidth='true'
+                // title = {VIDEO_TUTORIAL_EXPLAIN}
+                // fullWidth='true'
                 dialogContent = {
-                    <div style={{minWidth: 800, minHeight: 450, maxWidth: 1366, maxHeight: 768}}>
+                    <div >
+                        <ExplainText>{VIDEO_TUTORIAL_EXPLAIN}</ExplainText>
                         <VideoPlayer src= {TUTORIAL_VDO_URL}/>
                     </div>
                 }
@@ -188,4 +191,12 @@ export const StyledListItem = styled(ListItem)`
 &.MuiListItem-root {
     justify-content: flex-end;
 }
+`
+const ExplainText = styled.p`
+    font-size: 22px;
+    text-align: center;
+    color: ${BasicColor.blue};
+    @media screen and (max-width: ${ScreenSize.phone}) {
+        font-size: 16px;
+    }
 `
