@@ -122,8 +122,9 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, aokId = -1
                         marginLeft: `calc(${deep}rem + 2rem)`,
                     }} onClick={() => {
                         if (aokId !== -1) {
-                            // history.push('/question/PATH/' + aokId)
-                            alert("Developing now, will be released soon 🎓")
+                            history.push('/question/PATH/' + aokId)
+                            history.push('/question/AI/' + aokId)
+                            // alert("Developing now, will be released soon 🎓")
                         }
                     }}>Practice</TypoBtn>
                 </div>
