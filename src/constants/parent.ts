@@ -28,4 +28,3 @@ export const CANCEL_REASONS = [
 
 export const CURRICULUM_TOOLTIP = 'Note: Socrates offers curriculum based on different country standards.  The curriculum you choose may impact specific content they receive.  If your country is not listed, choose one of the available and let us know you are interested in adding your country in future releases'
 export const GRADE_TOOLTIP = 'The grade you select determines where your child starts their learning journey.  It is just a place to start - Socrates will adjust to their individual abilities and allow them to progress at their own speed'
-export const VIDEO_TUTORIAL_EXPLAIN = 'Welcome to Socrates! Here you will find the video explaining how to use the platform!'

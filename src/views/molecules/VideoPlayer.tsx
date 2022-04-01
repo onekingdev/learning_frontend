@@ -33,12 +33,12 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         <Plyr
             id='plyr'
             options={{
-                // ads: {
-                //     enabled: true,
-                //     publisherId: 'sd',
-                //     tagUrl:
-                //         'https://napi.arvancloud.com/vod/channels/c49885f0-11e3-4f15-b0a4-68392958643b/ads'
-                // },
+                ads: {
+                    enabled: true,
+                    publisherId: 'sd',
+                    tagUrl:
+                        'https://napi.arvancloud.com/vod/channels/c49885f0-11e3-4f15-b0a4-68392958643b/ads'
+                },
                 quality: {
                     default: 576,
                     options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]

@@ -21,7 +21,6 @@ import { TypoIcon }                 from 'views/atoms/Text';
 import { CardDialog }               from 'views/molecules/StudentCard/CardDialog';
 import { VideoPlayer } from 'views/molecules/VideoPlayer';
 import { TUTORIAL_VDO_URL } from 'constants/common';
-import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
 
 export const Sidebar: FC = () => {
 
@@ -60,7 +59,7 @@ export const Sidebar: FC = () => {
             <CardDialog
                 isOpen = {open}
                 open = {openTutorial}
-                title = {VIDEO_TUTORIAL_EXPLAIN}
+                title = 'Chanllege 1 of 10'
                 fullWidth='true'
                 dialogContent = {
                     <div style={{minWidth: 800, minHeight: 450, maxWidth: 1366, maxHeight: 768}}>

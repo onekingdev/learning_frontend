@@ -20,7 +20,7 @@ export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy, loading, on
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
       <FinishLessonStyle>
-        <GeneralText isDark={true}>You finished your lesson!</GeneralText>
+        <GeneralText isDark={true}>You finish your lessons!</GeneralText>
         <FinishLessonImage src={finishLesson} />
         <FinishLessonTextContainer>
           <GeneralText isDark={true}>Lesson Complete</GeneralText>
