@@ -32,7 +32,9 @@ export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
 export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userIcon, active=false, coinsEarned='0', additionalPl='' }) => {
   return active ? (
     <>
-      <UserRankTreasureTrackStylesActive >
+      <UserRankTreasureTrackStyles1
+        pl={"10px"}
+      >
         <Button isDark={true}>#{userRank}</Button>
         { userIcon ? <ImageAvatar
           firstName={""}
@@ -54,12 +56,14 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
           { userName[0].toUpperCase() }
         </div> }
         <Button fontSize='24px' isDark={true}>YOU</Button>
-        <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
-      </UserRankTreasureTrackStylesActive>
+        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS EARNED</Button>
+      </UserRankTreasureTrackStyles1>
     </>
   ) : (
     <>
-      <UserRankTreasureTrackStyles pl={additionalPl} >
+      <UserRankTreasureTrackStyles1
+        pl={"10px"}
+      >
         <Button isDark={true}>#{userRank}</Button>
         { userIcon ?
         <ImageAvatar
@@ -82,8 +86,8 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
           { userName[0].toUpperCase() }
         </div> }
         <Button isDark={true}>{userName}</Button>
-        <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
-      </UserRankTreasureTrackStyles>
+        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS EARNED</Button>
+      </UserRankTreasureTrackStyles1>
     </>
   );
 };
@@ -103,6 +107,19 @@ const UserRankStyles = styled.div`
 type IUserRankTreasureTrackStyles = {
   pl?: string;
 }
+
+const UserRankTreasureTrackStyles1 = styled(UserRankStyles)<IUserRankTreasureTrackStyles>`
+  grid-template-columns: 40px 70px calc(50% - 68px) calc(50% - 68px);
+  margin-left: 0px;
+  width: 100%;
+  @media (max-width: ${ScreenSize.desktop}) {
+    padding-left: 0px;
+    width: 100%;
+  }
+  @media (max-width: ${ScreenSize.phone}) {
+    grid-template-columns: 35px 70px calc(50% - 50px) calc(50% - 50px);
+  }
+`;
 
 const UserRankTreasureTrackStyles = styled(UserRankStyles)<IUserRankTreasureTrackStyles>`
   grid-template-columns: 40px 1fr 1fr 4fr;

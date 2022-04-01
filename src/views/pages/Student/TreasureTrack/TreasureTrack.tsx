@@ -2428,7 +2428,7 @@ export const KidsTreasureTrack: FC = () => {
     const handleClose = (str: string) => {
         setAnchorEl(null);
         setMenuTitle(str);
-        setEarnedCoin(Math.ceil(Math.random() * 1000));
+        // setEarnedCoin(Math.ceil(Math.random() * 1000));
     };
 
     const initialNumber = Math.ceil(earnedCoin / 40);
