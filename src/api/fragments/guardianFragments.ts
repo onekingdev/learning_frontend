@@ -1,14 +1,10 @@
-import { STUDENT_RAW }                                      from './studentFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN_RAW, PLAN }  from '../fragments/paymentFragments'
-import { COUPON_COODE, }                                    from '../fragments/paymentFragments';
-import { GRADES }                                           from '../fragments/peopleFragments'
 export const GUARDIAN_STUDENT = `
     id
     identifier
     randomSlug
 `;
 
-export const GUARDIAN_RAW = `
+export const GUARDIAN = `
     id
     identifier
     isActive
@@ -20,40 +16,3 @@ export const GUARDIAN_RAW = `
     lastName
     gender
 `;
-
-export const GUARDIAN = `
-    ${GUARDIAN_RAW}
-    couponCode {
-        ${COUPON_COODE}
-    }
-    guardianstudentSet {
-        ${GUARDIAN_STUDENT}
-        student {
-            ${STUDENT_RAW}
-            audience {
-                gradeSet {
-                    ${GRADES}
-                }
-            }
-            grade {
-                grade{
-                    ${GRADES}
-                }
-            }
-            user{
-                id
-                username
-                language
-            }
-        }
-    }
-    guardianstudentplanSet {
-        ${GUARDIAN_STUDENT_PLAN_RAW}
-        plan {
-            ${PLAN}
-        }
-    }
-    paymentMethod {
-        ${PAYMENT_METHOD}
-    }
-`

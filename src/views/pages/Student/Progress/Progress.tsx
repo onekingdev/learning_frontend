@@ -656,7 +656,7 @@ export const KidsProgress = () => {
             left: 79.46,
             top: 78,
             width: 97.44,
-            angle: 0,
+            angle: 328,
             tX: 10,
             tY: 5,
             text: 'Multiplicación de números enteros',
@@ -664,7 +664,7 @@ export const KidsProgress = () => {
         },
         {
             left: 82.46,
-            top: 84,
+            top: 86,
             width: 55,
             angle: 0,
             tX: 10,
@@ -676,9 +676,9 @@ export const KidsProgress = () => {
     const subSubjectsMobile = [
         {
             left: 10.39,
-            top: 2.01,
+            top: 0.01,
             width: 63.03,
-            angle: 121,
+            angle: 123,
             tX: 0,
             tY: 0,
             text: 'Conteo',
@@ -756,6 +756,26 @@ export const KidsProgress = () => {
         },
     ];
     const subSubjects1 = subSubjects.map((subSubject, id) => {
+        let bgColor = masteryColors.NP;
+        if (data && data[id] && data[id].mastery) {
+            if (data[id].mastery === "NP") {
+                bgColor = masteryColors.NP;
+            } else if (data[id].mastery === "N") {
+                bgColor = masteryColors.N;
+            } else if (data[id].mastery === "C") {
+                bgColor = masteryColors.C;
+            } else if (data[id].mastery === "M") {
+                bgColor = masteryColors.M;
+            }
+        }
+        return ({
+            ...subSubject,
+            text: data && data[id] && data[id].name ? data[id].name : "",
+            bgColor: bgColor,
+            active: false,
+        })
+    })
+    const subSubjectsMobile1 = subSubjectsMobile.map((subSubject, id) => {
         let bgColor = masteryColors.NP;
         if (data && data[id] && data[id].mastery) {
             if (data[id].mastery === "NP") {
@@ -2219,7 +2239,8 @@ export const KidsProgress = () => {
                             id='demo-simple-select'
                             value={grade}
                             label='Grade'
-                            onChange={handleGradeChange}
+                            disabled
+                            // onChange={handleGradeChange}
                         >
                             { grades.map((grade, id) => (
                                 <MenuItem key={id} value={grade}>{grade}</MenuItem>
@@ -2294,13 +2315,13 @@ export const KidsProgress = () => {
                         fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
                         fontWeight: subSubject.active ? '600' : '400',
                         width: `${subSubject.width * mapWidth / 1366}px`,
-                        overflow: "hidden",
+                        // overflow: "hidden",
                         height: "50px",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                     }}>{subSubject.text}</PcCom>)}
-                    { subSubjectsMobile.map((subSubject, id) => <MobileCom key={id} style={{
+                    { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
                         position: 'absolute',
                         transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
                         left: `${subSubject.left}%`,

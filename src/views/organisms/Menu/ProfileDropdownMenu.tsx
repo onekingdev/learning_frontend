@@ -28,7 +28,7 @@ export const ProfileDropDownMenu: FC = () => {
 
   return (
     <div>
-      {console.log(avatar)}
+      {/* {console.log(avatar)} */}
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}

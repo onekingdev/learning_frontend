@@ -1,10 +1,7 @@
 import { USER, USER_PROFILE, }                          from '../fragments/userFragments';
-import { STUDENT, STUDENT_RAW }                                      from '../fragments/studentFragments'
+import { STUDENT }                                      from '../fragments/studentFragments'
 import { COIN_WALLET }                                  from '../fragments/coinWalletFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER, GUARDIAN_STUDENT_PLAN_RAW, PLAN } from '../fragments/paymentFragments'
-import { COUPON_COODE, }                                from '../fragments/paymentFragments';
-import { GRADES }                                       from '../fragments/peopleFragments'
-
+import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
 import {
     GUARDIAN_STUDENT,
     GUARDIAN,
@@ -27,6 +24,29 @@ export const WHOAMI_QUERY = `
         }
         guardian {
             ${GUARDIAN}
+            guardianstudentSet {
+                ${GUARDIAN_STUDENT}
+                student {
+                    ${STUDENT}
+                    user{
+                        id
+                        username
+                        language
+                    }
+                }
+            }
+            guardianstudentplanSet {
+                ${GUARDIAN_STUDENT_PLAN}
+            }
+            orderSet {
+                ${ORDER}
+            }
+            paymentmethodSet {
+                ${PAYMENT_METHOD}
+            }
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
         }
         profile {
             ${USER_PROFILE}
