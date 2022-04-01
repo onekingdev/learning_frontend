@@ -38,7 +38,14 @@ export const ParentReporting: FC = () => {
         alert(result.errors[0].message);
       } else {
         setAreasOfKnowledge(result.data.areasOfKnowledge)
-        setActiveSubjectId(result.data.areasOfKnowledge[0].id)
+        let iii = 4;
+        for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
+            if (result.data.areasOfKnowledge[i].name === "Sight Words") {
+                iii = i;
+                break;
+            }
+        }
+        setActiveSubjectId(result.data.areasOfKnowledge[iii].id)
       }
     })();
   }, [user]);

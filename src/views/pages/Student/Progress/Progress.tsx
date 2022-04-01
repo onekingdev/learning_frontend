@@ -56,7 +56,14 @@ export const KidsProgress = () => {
                 alert(result.errors[0].message);
             } else {
                 setAreasOfKnowledge(result.data.areasOfKnowledge)
-                setActiveSubjectId(result.data.areasOfKnowledge[4].id)
+                let iii = 4;
+                for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
+                    if (result.data.areasOfKnowledge[i].name === "Sight Words") {
+                        iii = i;
+                        break;
+                    }
+                }
+                setActiveSubjectId(result.data.areasOfKnowledge[iii].id)
                 // setSubject(result.data.areasOfKnowledge[0].id);
             }
         })();
@@ -67,6 +74,7 @@ export const KidsProgress = () => {
             loadingContext.restart();
             (async () => {
                 // Get Topic Report
+                console.log(user)
                 const res:any = await query(``, TopicReport(parseInt(user.profile.id), activeSubjectId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
                 return
@@ -75,6 +83,7 @@ export const KidsProgress = () => {
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
+                    // console.log(result.data.rootTopicsByAok)
                     setData(result.data.rootTopicsByAok);
                 }
                 loadingContext.done();
