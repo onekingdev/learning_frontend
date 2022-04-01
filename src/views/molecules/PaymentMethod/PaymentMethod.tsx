@@ -51,8 +51,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
 
   const handleOrder = async () => {
     /*----------------------- if not selected any package, show error and break -S----------------------*/
-    console.log(plans.Gold?.childCount ? plans.Gold?.childCount : 0 + plans.Combo?.childCount ? plans.Combo?.childCount : 0 + plans.Sole?.childCount ? plans.Sole?.childCount : 0 );
-    if((plans.Gold?.childCount ? plans.Gold?.childCount : 0 + plans.Combo?.childCount ? plans.Combo?.childCount : 0 + plans.Sole?.childCount ? plans.Sole?.childCount : 0 ) < 1) {
+    if(plans.Gold.childCount + plans.Combo.childCount + plans.Sole.childCount < 1) {
         enqueueSnackbar(`Failed! You didn't select any children number`, { variant: 'error' });
         return
     }

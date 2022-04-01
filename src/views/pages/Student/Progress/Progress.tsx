@@ -675,9 +675,9 @@ export const KidsProgress = () => {
     ];
     const subSubjectsMobile = [
         {
-            left: 10.39,
-            top: 0.01,
-            width: 63.03,
+            left: 3.39,
+            top: 1.01,
+            width: 65.15,
             angle: 123,
             tX: 0,
             tY: 0,
@@ -685,9 +685,9 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: 3.5,
-            top: 6.4,
-            width: 78.38,
+            left: -5.5,
+            top: 5.4,
+            width: 78.98,
             angle: 107,
             tX: 0,
             tY: 0,
@@ -695,9 +695,9 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: 2.41,
+            left: -3.59,
             top: 11.21,
-            width: 72.24,
+            width: 59.8,
             angle: 79,
             tX: 0,
             tY: 0,
@@ -705,9 +705,9 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: 6.97,
+            left: 5.97,
             top: 16.37,
-            width: 78.8,
+            width: 60.04,
             angle: 45,
             tX: 0,
             tY: 0,
@@ -715,8 +715,8 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: 23.98,
-            top: 18.28,
+            left: 21.98,
+            top: 19.28,
             width: 74.84,
             angle: 16,
             tX: 0,
@@ -725,9 +725,9 @@ export const KidsProgress = () => {
             bgColor: '#FFD814'
         },
         {
-            left: 44,
-            top: 19.24,
-            width: 78.63,
+            left: 40,
+            top: 18.24,
+            width: 79.23,
             angle: 340,
             tX: 0,
             tY: 0,
@@ -735,9 +735,9 @@ export const KidsProgress = () => {
             bgColor: '#FF1940'
         },
         {
-            left: 59.45,
+            left: 57.45,
             top: 16.24,
-            width: 72.37,
+            width: 59.97,
             angle:350,
             tX: 0,
             tY: 0,
@@ -745,10 +745,350 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: 76.46,
-            top: 16.5,
-            width: 97.44,
+            left: 74.46,
+            top: 17.5,
+            width: 62.19,
             angle: 31,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 82.46,
+            top: 22.5,
+            width: 62.19,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 76.46,
+            top: 27.5,
+            width: 57.69,
+            angle: 307,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 60.46,
+            top: 31.5,
+            width: 62.6684,
+            angle: 351,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 41.46,
+            top: 30.5,
+            width: 62.69,
+            angle: 31,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 29.46,
+            top: 26.5,
+            width: 62.66,
+            angle: 31,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 13.46,
+            top: 24.5,
+            width: 62.19,
+            angle: 347,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 2.46,
+            top: 25.5,
+            width: 41.69,
+            angle: 31,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: -0.56,
+            top: 32.5,
+            width: 62.19,
+            angle: 0,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 3.46,
+            top: 38.5,
+            width: 57.69,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 16.46,
+            top: 42,
+            width: 60.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 37.46,
+            top: 42.5,
+            width: 61.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 58.46,
+            top: 41.5,
+            width: 70.3,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 79.46,
+            top: 41.5,
+            width: 58.69,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 84.46,
+            top: 47,
+            width: 58.69,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 78.46,
+            top: 52.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 61.46,
+            top: 55.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 43.46,
+            top: 55,
+            width: 60.19,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 23.46,
+            top: 54.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 11.46,
+            top: 57.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 7.46,
+            top: 63.5,
+            width: 58.5,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 16.46,
+            top: 67.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 32.46,
+            top: 69.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 49.46,
+            top: 66.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 64.46,
+            top: 64.5,
+            width: 61.58,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 82.46,
+            top: 65.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 87.46,
+            top: 71.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 84.46,
+            top: 76.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 72.46,
+            top: 81.5,
+            width: 58.14,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 53.46,
+            top: 82.5,
+            width: 60.64,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 36.46,
+            top: 79.5,
+            width: 61.24,
+            angle: 38,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 20.46,
+            top: 78.5,
+            width: 61.1,
+            angle: 337,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 9.46,
+            top: 82.5,
+            width: 60.64,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 11.46,
+            top: 87.5,
+            width: 60.64,
+            angle: 1,
+            tX: 0,
+            tY: 0,
+            text: 'Multiplicación de números enteros',
+            active: true
+        },
+        {
+            left: 24.46,
+            top: 90.5,
+            width: 61.14,
+            angle: 1,
             tX: 0,
             tY: 0,
             text: 'Multiplicación de números enteros',
@@ -2317,9 +2657,7 @@ export const KidsProgress = () => {
                         width: `${subSubject.width * mapWidth / 1366}px`,
                         // overflow: "hidden",
                         height: "50px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        textAlign: "center"
                     }}>{subSubject.text}</PcCom>)}
                     { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
                         position: 'absolute',
@@ -2328,8 +2666,10 @@ export const KidsProgress = () => {
                         top: `${subSubject.top}%`,
                         fontSize: '11px',
                         fontWeight: subSubject.active ? '600' : '400',
-                        width: `${subSubject.width * mapWidth / 1366}px`,
+                        width: `${subSubject.width * mapWidth / 390}px`,
                         zIndex: 20,
+                        height: "50px",
+                        textAlign: "center"
                     }}>{subSubject.text}</MobileCom>)}
                 {/* </div> */}
             </div>

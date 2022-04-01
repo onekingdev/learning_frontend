@@ -410,7 +410,7 @@ const NewKids: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label      ='Child Username (DO NOT USE YOUR REAL NAME)'
+                  label      ='Child User Name (DO NOT USE YOUR REAL NAME)'
                   onChange   ={e => {
                     setUserId(e.target.value);
                     handleFormChange(
