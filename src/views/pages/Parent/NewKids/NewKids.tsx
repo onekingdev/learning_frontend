@@ -252,7 +252,7 @@ const NewKids: FC = () => {
 
     setAvailablePackages(guardianStudentPlans);
     setChildNum(guardianStudentPlans.length);
-    await setGradeData();
+    // await setGradeData();
     await setAudienceData();
     loadingContext.done();
 
@@ -380,7 +380,7 @@ const NewKids: FC = () => {
               )}
               <Grid item xs={12}>
                 <TextField
-                  label='Child First NAME'
+                  label='Child First Name'
                   onChange=   {e => {
                     setFirstName(e.target.value);
                     handleFormChange(
@@ -395,7 +395,7 @@ const NewKids: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label      ='Child LAST NAME'
+                  label      ='First Letter of Child Last Name'
                   onChange   ={e => {
                     setLastName(e.target.value);
                     handleFormChange(
@@ -410,7 +410,7 @@ const NewKids: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label      ='USER ID OR CHOOSE A NICK NAME'
+                  label      ='Child Username (DO NOT USE YOUR REAL NAME)'
                   onChange   ={e => {
                     setUserId(e.target.value);
                     handleFormChange(

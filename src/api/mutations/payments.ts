@@ -25,24 +25,6 @@ export const CREATE_ORDER = (
     createOrder(address1: "${address1}", address2: "${address2}", cardCvc: "${cardCvc}", cardExpMonth: "${cardExpMonth}", cardExpYear: "${cardExpYear}", cardFirstName: "${cardFirstName}", cardLastName: "${cardLastName}", cardNumber: "${cardNumber}", city: "${city}", country: "${country}", guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}, paymentMethod: "${paymentMethod}", phone: "${phone}", postCode: "${postCode}", returnUrl: "${returnUrl}", state: "${state}"){
         guardian {
             ${GUARDIAN}
-            guardianstudentSet {
-                ${GUARDIAN_STUDENT}
-                student {
-                    ${STUDENT}
-                }
-            }
-            guardianstudentplanSet {
-                ${GUARDIAN_STUDENT_PLAN}
-            }
-            orderSet {
-                ${ORDER}
-            }
-            paymentmethodSet {
-                ${PAYMENT_METHOD}
-            }
-            paymentMethod {
-                ${PAYMENT_METHOD}
-            }
         }
         order{
             ${ORDER}
@@ -67,24 +49,6 @@ export const CREATE_ORDER_WITH_OUT_PAY = (
     createOrderWithOutPay(guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}){
         guardian {
             ${GUARDIAN}
-            guardianstudentSet {
-                ${GUARDIAN_STUDENT}
-                student {
-                    ${STUDENT}
-                }
-            }
-            guardianstudentplanSet {
-                ${GUARDIAN_STUDENT_PLAN}
-            }
-            orderSet {
-                ${ORDER}
-            }
-            paymentmethodSet {
-                ${PAYMENT_METHOD}
-            }
-            paymentMethod {
-                ${PAYMENT_METHOD}
-            }
         }
         order{
             ${ORDER}
@@ -99,24 +63,6 @@ export const CONFIRM_PAYMENT_ORDER = (
     confirmPaymentOrder(orderId: ${orderId}){
         guardian {
             ${GUARDIAN}
-            guardianstudentSet {
-                ${GUARDIAN_STUDENT}
-                student {
-                    ${STUDENT}
-                }
-            }
-            guardianstudentplanSet {
-                ${GUARDIAN_STUDENT_PLAN}
-            }
-            orderSet {
-                ${ORDER}
-            }
-            paymentmethodSet {
-                ${PAYMENT_METHOD}
-            }
-            paymentMethod {
-                ${PAYMENT_METHOD}
-            }
         }
         order{
             ${ORDER}
