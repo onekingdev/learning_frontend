@@ -148,7 +148,7 @@ export const Sidebar: FC = () => {
                                 <TypoIcon >BANK</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
-                        <StyledListItem sx={{display: isMobile ? 'block' : 'none'}}>
+                        <StyledListItem sx={{display: isMobile ? 'flex' : 'none'}}>
                             <IconContainer>
                                 <Icon
                                     image={profile_icon}
