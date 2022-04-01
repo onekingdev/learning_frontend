@@ -81,24 +81,21 @@ const NewKids: FC = () => {
       ELA       : ela_gold,
       SCIENCE   : science_gold,
       FINANCIAL : financial_gold,
-      HEALTH    : health_gold,
-      SIGHT     : ela_gold
+      HEALTH    : health_gold
     },
     Combo: {
       MATH      : math_combo,
       ELA       : ela_combo,
       SCIENCE   : science_combo,
       FINANCIAL : financial_combo,
-      HEALTH    : health_combo,
-      SIGHT     : ela_combo
+      HEALTH    : health_combo
     },
     Sole: {
       MATH      : math_sole,
       ELA       : ela_sole,
       SCIENCE   : science_sole,
       FINANCIAL : financial_sole,
-      HEALTH    : health_sole,
-      SIGHT     : ela_sole
+      HEALTH    : health_sole
     }
   }
 

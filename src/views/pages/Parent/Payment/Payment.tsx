@@ -129,8 +129,6 @@ export const Payment: FC = () => {
     if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
     if(parseInt(guardian?.couponCode?.percentage) === 100) setIsSpecialCode(true)
-    else setIsSpecialCode(true) //For always enable special code for first release
-
     setOffRate(50);
     setPlanData();
   }, []);
