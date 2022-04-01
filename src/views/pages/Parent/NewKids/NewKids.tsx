@@ -82,7 +82,7 @@ const NewKids: FC = () => {
       SCIENCE   : science_gold,
       FINANCIAL : financial_gold,
       HEALTH    : health_gold,
-      SIGHT     : ela_sole
+      SIGHT     : ela_gold
     },
     Combo: {
       MATH      : math_combo,
@@ -90,7 +90,7 @@ const NewKids: FC = () => {
       SCIENCE   : science_combo,
       FINANCIAL : financial_combo,
       HEALTH    : health_combo,
-      SIGHT     : ela_sole
+      SIGHT     : ela_combo
     },
     Sole: {
       MATH      : math_sole,
