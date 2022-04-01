@@ -27,6 +27,9 @@ export const Form: FC<FormProps> = ({
   setUsername,
   setPassword
 }) => {
+  const handleForgot = () => {
+    location.href = `${process.env.REACT_APP_SERVER_URL}accounts/password_reset/`
+  }
   return (
     <>
       <StyledForm>
@@ -61,7 +64,7 @@ export const Form: FC<FormProps> = ({
           />
         </Field> */}
         <Stack direction={'row'}>
-          <Link>{forgot}</Link>
+          <Link onClick={handleForgot}>{forgot}</Link>
         </Stack>
       </StyledForm>
     </>
