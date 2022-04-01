@@ -41,6 +41,7 @@ const masteryColors = {
 
 export const KidsProgress = () => {
     const user           = useSelector((state: any) => state.user);
+    const student           = useSelector((state: any) => state.student);
     const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
     const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
     const [data, setData]                         = useState<any[]>([]);
@@ -74,8 +75,7 @@ export const KidsProgress = () => {
             loadingContext.restart();
             (async () => {
                 // Get Topic Report
-                console.log(user)
-                const res:any = await query(``, TopicReport(parseInt(user.profile.id), activeSubjectId), user.token).catch(e => ({success: false}));
+                const res:any = await query(``, TopicReport(parseInt(student.id), activeSubjectId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
                 return
                 }
