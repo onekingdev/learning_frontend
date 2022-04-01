@@ -17,6 +17,15 @@ import { Container }            from './Style';
 import { useSelector }       from 'react-redux';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
+import styled             from 'styled-components';
+import background     from 'views/assets/colored-shapes-bg.svg';
+
+const Wrapper = styled.div`
+    background-image  : url(${background});
+    background-repeat : no-repeat;
+    background-size   : cover;
+    height            : 100vh;
+`;
 
 type IProcessPathSvg = {
     bgColor?: string;
@@ -2541,144 +2550,146 @@ export const KidsProgress = () => {
             </svg>
         )
     }
-    return <StudentMenu>
-        <Container>
-            <div style={{
-                width: '500px',
-                maxWidth: 'calc(100vw - 100px)',
-                height: '80px',
-                position: 'relative',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <img style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    zIndex: 10,
-                }} src={TitleProgressBackground} alt='TitleProgressBackground' />
-                <Title style={{
-                    zIndex: 20,
-                    color: 'black',
-                    paddingLeft: '1rem',
-                    paddingRight: '1rem',
-                }}>Progress</Title>
-            </div>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-                paddingTop: '1rem'
-            }}>
-                <Box sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
-                        <InputLabel id='demo-simple-select-label'>Grade</InputLabel>
-                        <Select
-                            labelId='demo-simple-select-label'
-                            id='demo-simple-select'
-                            value={grade}
-                            label='Grade'
-                            disabled
-                            // onChange={handleGradeChange}
-                        >
-                            { grades.map((grade, id) => (
-                                <MenuItem key={id} value={grade}>{grade}</MenuItem>
-                            )) }
-                        </Select>
-                    </FormControl>
-                </Box>
-                <Box sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
-                        <InputLabel id='demo-simple-select-label'>Subject</InputLabel>
-                        <Select
-                            labelId='demo-simple-select-label'
-                            id='demo-simple-select'
-                            value={activeSubjectId}
-                            label='Subject'
-                            onChange={handleSubjectChange}
-                        >
-                            { areasOfKnowledge.map((subject, id) => (
-                                <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
-                            )) }
-                        </Select>
-                    </FormControl>
-                </Box>
-            </div>
-            <div ref={mapBgRef} style={{
-                position: 'relative',
-                width: '100%',
-                paddingLeft: '0px',
-                paddingRight: '0px',
-                overflow: 'hidden',
-                background: '#EB7738'
-            }}>
-                {/* <div style={{
+    return (<Wrapper>
+        <StudentMenu>
+            <Container>
+                <div style={{
+                    width: '500px',
+                    maxWidth: 'calc(100vw - 100px)',
+                    height: '80px',
                     position: 'relative',
-                    width: ScreenSize.widescreen
-                }}> */}
-                    <PcCom>
-                        <img style={{
-                            width: '100%'
-                        }} src={ProgressMap} alt='ProgressMap' />
-                    </PcCom>
-                    <MobileCom>
-                        <img style={{
-                            width: '100%'
-                        }} src={ProgressMapMobile} alt='ProgressMapMobile' />
-                    </MobileCom>
-                    { paths.map((path, id) => <PcCom key={id} style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <img style={{
                         position: 'absolute',
-                        left: `${path.left}%`,
-                        top: `${path.top}%`,
-                    }}>
-                        {path.imgSrc({
-                            bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
-                            active: subSubjects1.length > id ? subSubjects1[id].active : false,
-                        })}
-                    </PcCom>) }
-                    { pathsMobile.map((path, id) => <MobileCom key={id} style={{
-                        position: 'absolute',
-                        left: `${path.left}%`,
-                        top: `${path.top}%`,
-                    }}>
-                        {path.imgSrc({
-                            bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
-                            active: subSubjects1.length > id ? subSubjects1[id].active : false,
-                        })}
-                    </MobileCom>) }
-                    { subSubjects1.map((subSubject, id) => <PcCom key={id} style={{
-                        position: 'absolute',
-                        transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
-                        left: `${subSubject.left}%`,
-                        top: `${subSubject.top}%`,
-                        fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
-                        fontWeight: subSubject.active ? '600' : '400',
-                        width: `${subSubject.width * mapWidth / 1366}px`,
-                        // overflow: "hidden",
-                        height: "50px",
-                        textAlign: "center"
-                    }}>{subSubject.text}</PcCom>)}
-                    { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
-                        position: 'absolute',
-                        transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
-                        left: `${subSubject.left}%`,
-                        top: `${subSubject.top}%`,
-                        fontSize: '11px',
-                        fontWeight: subSubject.active ? '600' : '400',
-                        width: `${subSubject.width * mapWidth / 390}px`,
+                        width: '100%',
+                        height: '100%',
+                        zIndex: 10,
+                    }} src={TitleProgressBackground} alt='TitleProgressBackground' />
+                    <Title style={{
                         zIndex: 20,
-                        height: "50px",
-                        textAlign: "center"
-                    }}>{subSubject.text}</MobileCom>)}
-                {/* </div> */}
-            </div>
-        </Container>
-        <Container>
-            <MarkTableSubject
-                data={data}
-                activeSubjectId={activeSubjectId}
-            />
-        </Container>
-    </StudentMenu>
+                        color: 'black',
+                        paddingLeft: '1rem',
+                        paddingRight: '1rem',
+                    }}>Progress</Title>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    paddingTop: '1rem'
+                }}>
+                    <Box sx={{ minWidth: 120 }}>
+                        <FormControl fullWidth>
+                            <InputLabel id='demo-simple-select-label'>Grade</InputLabel>
+                            <Select
+                                labelId='demo-simple-select-label'
+                                id='demo-simple-select'
+                                value={grade}
+                                label='Grade'
+                                disabled
+                                // onChange={handleGradeChange}
+                            >
+                                { grades.map((grade, id) => (
+                                    <MenuItem key={id} value={grade}>{grade}</MenuItem>
+                                )) }
+                            </Select>
+                        </FormControl>
+                    </Box>
+                    <Box sx={{ minWidth: 120 }}>
+                        <FormControl fullWidth>
+                            <InputLabel id='demo-simple-select-label'>Subject</InputLabel>
+                            <Select
+                                labelId='demo-simple-select-label'
+                                id='demo-simple-select'
+                                value={activeSubjectId}
+                                label='Subject'
+                                onChange={handleSubjectChange}
+                            >
+                                { areasOfKnowledge.map((subject, id) => (
+                                    <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
+                                )) }
+                            </Select>
+                        </FormControl>
+                    </Box>
+                </div>
+                <div ref={mapBgRef} style={{
+                    position: 'relative',
+                    width: '100%',
+                    paddingLeft: '0px',
+                    paddingRight: '0px',
+                    overflow: 'hidden',
+                    background: '#EB7738'
+                }}>
+                    {/* <div style={{
+                        position: 'relative',
+                        width: ScreenSize.widescreen
+                    }}> */}
+                        <PcCom>
+                            <img style={{
+                                width: '100%'
+                            }} src={ProgressMap} alt='ProgressMap' />
+                        </PcCom>
+                        <MobileCom>
+                            <img style={{
+                                width: '100%'
+                            }} src={ProgressMapMobile} alt='ProgressMapMobile' />
+                        </MobileCom>
+                        { paths.map((path, id) => <PcCom key={id} style={{
+                            position: 'absolute',
+                            left: `${path.left}%`,
+                            top: `${path.top}%`,
+                        }}>
+                            {path.imgSrc({
+                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
+                                active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                            })}
+                        </PcCom>) }
+                        { pathsMobile.map((path, id) => <MobileCom key={id} style={{
+                            position: 'absolute',
+                            left: `${path.left}%`,
+                            top: `${path.top}%`,
+                        }}>
+                            {path.imgSrc({
+                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
+                                active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                            })}
+                        </MobileCom>) }
+                        { subSubjects1.map((subSubject, id) => <PcCom key={id} style={{
+                            position: 'absolute',
+                            transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
+                            left: `${subSubject.left}%`,
+                            top: `${subSubject.top}%`,
+                            fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
+                            fontWeight: subSubject.active ? '600' : '400',
+                            width: `${subSubject.width * mapWidth / 1366}px`,
+                            // overflow: "hidden",
+                            height: "50px",
+                            textAlign: "center"
+                        }}>{subSubject.text}</PcCom>)}
+                        { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
+                            position: 'absolute',
+                            transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
+                            left: `${subSubject.left}%`,
+                            top: `${subSubject.top}%`,
+                            fontSize: '11px',
+                            fontWeight: subSubject.active ? '600' : '400',
+                            width: `${subSubject.width * mapWidth / 390}px`,
+                            zIndex: 20,
+                            height: "50px",
+                            textAlign: "center"
+                        }}>{subSubject.text}</MobileCom>)}
+                    {/* </div> */}
+                </div>
+            </Container>
+            <Container>
+                <MarkTableSubject
+                    data={data}
+                    activeSubjectId={activeSubjectId}
+                />
+            </Container>
+        </StudentMenu>
+    </Wrapper>)
 }

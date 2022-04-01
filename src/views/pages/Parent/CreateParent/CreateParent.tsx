@@ -141,7 +141,7 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="Parent User Name"
+                  label="Parent Username"
                   onChange={e => {
                     setUserName(e.target.value);
                     handleFormChange(
