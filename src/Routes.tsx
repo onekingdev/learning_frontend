@@ -68,7 +68,7 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
 
 export function Routes() {
   const location = useLocation();
-  
+
   const FadeIn = styled.div`
   animation: 1.5s ${keyframes`${fadeIn}`} ;
   `;
