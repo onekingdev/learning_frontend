@@ -35,7 +35,9 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
       <UserRankTreasureTrackStyles1
         pl={"10px"}
       >
-        <Button isDark={true}>#{userRank}</Button>
+        <Button style={{
+          width: "20px"
+        }} isDark={true}>#{userRank}</Button>
         { userIcon ? <ImageAvatar
           firstName={""}
           lastName={userName}
@@ -55,8 +57,11 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         }}>
           { userName[0].toUpperCase() }
         </div> }
-        <Button fontSize='24px' isDark={true}>YOU</Button>
-        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS EARNED</Button>
+        <Button style={{
+          width: "120px",
+          textAlign: "center",
+        }} fontSize='24px' isDark={true}>YOU</Button>
+        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS <br />EARNED</Button>
       </UserRankTreasureTrackStyles1>
     </>
   ) : (
@@ -64,7 +69,9 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
       <UserRankTreasureTrackStyles1
         pl={"10px"}
       >
-        <Button isDark={true}>#{userRank}</Button>
+        <Button style={{
+          width: "20px"
+        }} isDark={true}>#{userRank}</Button>
         { userIcon ?
         <ImageAvatar
           firstName={""}
@@ -85,8 +92,11 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         }}>
           { userName[0].toUpperCase() }
         </div> }
-        <Button isDark={true}>{userName}</Button>
-        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS EARNED</Button>
+        <Button style={{
+          width: "120px",
+          textAlign: "center",
+        }} isDark={true}>{userName}</Button>
+        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS <br />EARNED</Button>
       </UserRankTreasureTrackStyles1>
     </>
   );
@@ -109,7 +119,8 @@ type IUserRankTreasureTrackStyles = {
 }
 
 const UserRankTreasureTrackStyles1 = styled(UserRankStyles)<IUserRankTreasureTrackStyles>`
-  grid-template-columns: 40px 70px calc(50% - 68px) calc(50% - 68px);
+  display: flex;
+  justify-content: center;
   margin-left: 0px;
   width: 100%;
   @media (max-width: ${ScreenSize.desktop}) {
@@ -117,7 +128,6 @@ const UserRankTreasureTrackStyles1 = styled(UserRankStyles)<IUserRankTreasureTra
     width: 100%;
   }
   @media (max-width: ${ScreenSize.phone}) {
-    grid-template-columns: 35px 70px calc(50% - 50px) calc(50% - 50px);
   }
 `;
 
