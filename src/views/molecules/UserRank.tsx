@@ -59,7 +59,9 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
     </>
   ) : (
     <>
-      <UserRankTreasureTrackStyles pl={additionalPl} >
+      <UserRankTreasureTrackStyles
+        pl={10}
+      >
         <Button isDark={true}>#{userRank}</Button>
         { userIcon ?
         <ImageAvatar
