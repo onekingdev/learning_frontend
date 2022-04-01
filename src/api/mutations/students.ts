@@ -21,6 +21,29 @@ export const CREATE_STUDENT = (
 	createStudent(audience: ${audience}, firstName: "${firstName}",  guardianStudentPlanId: ${guardianStudentPlanId}, lastName: "${lastName}", listSubjectId: [${listSubjectId}], password: "${password}", studentPlan: ${studentPlan}, username: "${username}", grade: ${gradeId}) {
         guardian {
             ${GUARDIAN}
+            guardianstudentSet {
+                ${GUARDIAN_STUDENT}
+                student {
+                    ${STUDENT}
+                    user{
+                        id
+                        username
+                        language
+                    }
+                }
+            }
+            guardianstudentplanSet {
+                ${GUARDIAN_STUDENT_PLAN}
+            }
+            orderSet {
+                ${ORDER}
+            }
+            paymentmethodSet {
+                ${PAYMENT_METHOD}
+            }
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
         }
         student {
             ${STUDENT}
@@ -43,6 +66,28 @@ export const CHANGE_STUDENT_GRADE = (
 	createChangeStudentGrade(gradeId: ${gradeId},  studentId: ${studentId}) {
         guardian {
             ${GUARDIAN}
+            guardianstudentSet {
+                ${GUARDIAN_STUDENT}
+                student {
+                    ${STUDENT}
+                    user{
+                        id
+                        username
+                    }
+                }
+            }
+            guardianstudentplanSet {
+                ${GUARDIAN_STUDENT_PLAN}
+            }
+            orderSet {
+                ${ORDER}
+            }
+            paymentmethodSet {
+                ${PAYMENT_METHOD}
+            }
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
         }
         student {
             ${STUDENT}
@@ -58,6 +103,28 @@ export const CHANGE_STUDENT_PASSWORD = (
 	changeStudentPassword(password: "${password}",  studentId: ${studentId}) {
         guardian {
             ${GUARDIAN}
+            guardianstudentSet {
+                ${GUARDIAN_STUDENT}
+                student {
+                    ${STUDENT}
+                    user{
+                        id
+                        username
+                    }
+                }
+            }
+            guardianstudentplanSet {
+                ${GUARDIAN_STUDENT_PLAN}
+            }
+            orderSet {
+                ${ORDER}
+            }
+            paymentmethodSet {
+                ${PAYMENT_METHOD}
+            }
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
         }
         student {
             ${STUDENT}

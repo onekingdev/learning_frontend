@@ -1,4 +1,4 @@
-import {AREA_OF_KNOWLEDGE, AREA_OF_KNOWLEDGE_RAW} from './areaOfKnowledgeFragments'
+import {AREA_OF_KNOWLEDGE} from './areaOfKnowledgeFragments'
 import {STUDENT}           from './studentFragments'
 export const PAYMENT_METHOD = `
   id
@@ -36,23 +36,8 @@ export const PLAN = `
     currency
     isCancel
     subjects {
-        ${AREA_OF_KNOWLEDGE_RAW}
+        ${AREA_OF_KNOWLEDGE}
     }
-`
-
-export const PLAN_RAW = `
-  id
-  identifier
-  createTimestamp
-  updateTimestamp
-  name
-  description
-  areaOfKnowledge
-  slug
-  priceMonth
-  priceYear
-  currency
-  isCancel
 `
 export const GUARDIAN_STUDENT_PLAN = `
     id
@@ -68,19 +53,6 @@ export const GUARDIAN_STUDENT_PLAN = `
     subject {
         ${AREA_OF_KNOWLEDGE}
     }
-    cancelReason
-    isCancel
-    isPaid
-    expiredAt
-    period
-    price
-
-`
-export const GUARDIAN_STUDENT_PLAN_RAW = `
-    id
-    identifier
-    randomSlug
-    slug
     cancelReason
     isCancel
     isPaid

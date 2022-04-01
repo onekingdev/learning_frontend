@@ -15,9 +15,9 @@ interface AvatarProps {
 }
 
 export const ImageAvatar: FC<AvatarProps> = ({ accessory, head, skinTone, firstName, lastName, size }) => {
-    // useEffect(() => {
-    //     console.log(head)
-    // })
+    useEffect(() => {
+        console.log(head)
+    })
     return (
         head ?
             <div style={{width: size, height: size, zIndex: 30, position: 'relative', display:'flex'}}>

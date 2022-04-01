@@ -69,12 +69,12 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
 
   return (
     <>
-      {(showAssistor && blockPresentation?.block?.topicGrade?.topic?.videoAssistor) ? (
+      {showAssistor ? (
         <VideoModalAssistor
           onClick={closeVideoModal}
           source={
             blockPresentation
-              ? blockPresentation?.block?.topicGrade?.topic?.videoAssistor
+              ? blockPresentation?.block.topicGrade.topic.videoAssistor
               : ''
           }
         />

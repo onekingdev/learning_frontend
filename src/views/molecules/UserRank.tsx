@@ -34,25 +34,14 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
     <>
       <UserRankTreasureTrackStylesActive >
         <Button isDark={true}>#{userRank}</Button>
-        { userIcon ? <ImageAvatar
+        <ImageAvatar
           firstName={""}
           lastName={userName}
           head={{
             image: userIcon || ""
           }}
           size={70}
-        /> : <div style={{
-          width: 70,
-          height: 70,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: "1000px",
-          border: "1px solid gray",
-          fontSize: "1.5rem"
-        }}>
-          { userName[0].toUpperCase() }
-        </div> }
+        />
         <Button fontSize='24px' isDark={true}>YOU</Button>
         <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStylesActive>
@@ -61,7 +50,6 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
     <>
       <UserRankTreasureTrackStyles pl={additionalPl} >
         <Button isDark={true}>#{userRank}</Button>
-        { userIcon ?
         <ImageAvatar
           firstName={""}
           lastName={userName}
@@ -69,18 +57,7 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
             image: userIcon || ""
           }}
           size={70}
-        /> : <div style={{
-          width: 70,
-          height: 70,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: "1000px",
-          border: "1px solid gray",
-          fontSize: "1.5rem"
-        }}>
-          { userName[0].toUpperCase() }
-        </div> }
+        />
         <Button isDark={true}>{userName}</Button>
         <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
       </UserRankTreasureTrackStyles>

@@ -6,7 +6,7 @@ import {Icon}                   from 'views/atoms/Icon/Icon';
 import finishLesson             from 'views/assets/finish-lesson.svg';
 import energyIcon               from 'views/assets/lightning.svg';
 import Button                   from 'views/molecules/MuiButton';
-import {ScreenSize}             from '../../constants/screenSize';
+import {ScreenSize}             from 'constants/screenSize';
 import {BasicColor, ButtonColor}from '../Color';
 
 type FinishLessonProps = {
@@ -18,7 +18,7 @@ type FinishLessonProps = {
 
 export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy, loading, onNextLesson}) => {
   return (
-    <>
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
       <FinishLessonStyle>
         <GeneralText isDark={true}>You finish your lessons!</GeneralText>
         <FinishLessonImage src={finishLesson} />
@@ -48,23 +48,24 @@ export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy, loading, on
           />
         </FinishLessonButtonContainer>
       </FinishLessonStyle>
-    </>
+    </div>
   );
 };
 
 const FinishLessonStyle = styled.div`
-  width: 100%;
+
+  border-radius: 75px;
+  box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
+  padding: 50px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px auto;
-
+  width: 40vw;
   background-color: ${BasicColor.white};
-  @media screen and (min-width: ${ScreenSize.tablet}) {
-    border-radius: 75px;
-    box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
-    width: 530px;
-    padding: 10px;
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    width: 100%;
+    border-radius: 0;
+
   }
 `;
 const FinishLessonImage = styled.img`

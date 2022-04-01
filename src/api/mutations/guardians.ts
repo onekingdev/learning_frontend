@@ -1,16 +1,34 @@
 import { GUARDIAN_STUDENT, GUARDIAN, }                  from '../fragments/guardianFragments';
 import { COUPON_COODE, }                                from '../fragments/paymentFragments';
 import { USER, USER_PROFILE }                           from '../fragments/userFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, GUARDIAN_STUDENT_PLAN_RAW,  ORDER, PLAN, PLAN_RAW } from '../fragments/paymentFragments'
-import { STUDENT, STUDENT_RAW, STUDENT_GRADE }                                      from '../fragments/studentFragments'
-import { AUDIENCES }                                    from '../fragments/peopleFragments'
-import { AREA_OF_KNOWLEDGE }                            from '../fragments/areaOfKnowledgeFragments'
-import { GRADES }                                       from '../fragments/peopleFragments'
+import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
+import { STUDENT }                                      from '../fragments/studentFragments'
 
 export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string) => `
 	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}") {
         guardian {
             ${GUARDIAN}
+            couponCode {
+                ${COUPON_COODE}
+            }
+            guardianstudentSet {
+                ${GUARDIAN_STUDENT}
+                student {
+                    ${STUDENT}
+                }
+            }
+            guardianstudentplanSet {
+                ${GUARDIAN_STUDENT_PLAN}
+            }
+            orderSet {
+                ${ORDER}
+            }
+            paymentmethodSet {
+                ${PAYMENT_METHOD}
+            }
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
         }
         user {
             ${USER}

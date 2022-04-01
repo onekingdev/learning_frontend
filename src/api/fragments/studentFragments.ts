@@ -133,11 +133,29 @@ export const STUDENT = `
         activeStudentPlan {
             ${STUDENT_PLAN}
         }
+        group {
+            id
+        }
+        activeGroup {
+            id
+        }
         level {
             ${LEVEL}
         }
         nextLevel {
             ${LEVEL}
+        }
+        studenttopicmasterySet {
+            id
+        }
+        studentgradeSet {
+            id
+        }
+        studentachievementSet {
+            id
+        }
+        guardianstudentSet {
+            id
         }
         guardianstudentplan{
             subject {
@@ -148,6 +166,15 @@ export const STUDENT = `
                 ${ORDER_DETAIL_RAW}
             }
         }
+        blockSet {
+            id
+        }
+        blockpresentationSet {
+            id
+        }
+        blockassignmentSet {
+            id
+        }
         coinWallet {
             ${COIN_WALLET}
         }
@@ -156,6 +183,12 @@ export const STUDENT = `
         }
         battery {
             ${BATTERY_RAW}
+        }
+        studentcollectibleSet {
+            id
+        }
+        schoolSet {
+            id
         }
         audience {
             ${AUDIENCES}
@@ -184,20 +217,4 @@ export const STUDENT = `
         currentAvatarPants {
             ${AVATAR}
         }
-`;
-export const STUDENT_RAW = `
-        id
-        identifier
-        isActive
-        deletedTimestamp
-        randomSlug
-        createTimestamp
-        updateTimestamp
-        firstName
-        lastName
-        fullName
-        dob
-        gender
-        points
-        intPeriodStartAt
 `;

@@ -66,7 +66,7 @@ export const LogIn: FC = () => {
     <Login>
       <Greet
         header    ={dictionary[language].welcome}
-        subheader ={dictionary[language].instructions}
+        // subheader ={dictionary[language].instructions}
         logo      ={logo}
         classroomIllustration ={classroom}
         greetingIllustration  ={greeting}
@@ -76,11 +76,11 @@ export const LogIn: FC = () => {
           <LoginWrapper>
             <DesktopWelcome>
               <Header>{dictionary[language].welcome}</Header>
-              <Subheader>{dictionary[language].instructions}</Subheader>
+              {/* <Subheader>{dictionary[language].instructions}</Subheader> */}
             </DesktopWelcome>
             <Form
               login={dictionary[language].login}
-              email={dictionary[language].userName}
+              emailLabel={dictionary[language].userName}
               password={dictionary[language].password}
               forgot={dictionary[language].forgot}
               wrongPasswordMessage={dictionary[language].error}

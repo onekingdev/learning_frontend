@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useContext } from 'react';
 import {
   CardCollectibleContainer,
   Wrapper,
@@ -9,8 +9,14 @@ import { StudentMenu }  from 'views/pages/Student/Menus/StudentMenu';
 import { MyCards }      from 'views/molecules/StudentCard/MyCards';
 import { BtnContainer } from './Style';
 import { Button }       from './Style';
+import { LoadingContext } from 'react-router-loading';
 export const MyCardCollection: FC = () => {
   const history = useHistory();
+  const loadingContext = useContext(LoadingContext);
+
+  useEffect(() => {
+    loadingContext.done()
+  },[])
 
   return (
     <Wrapper>

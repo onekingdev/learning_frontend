@@ -6,7 +6,6 @@ import { ScreenSize } from 'constants/screenSize';
 
 type GreetProps = {
   header: string;
-  subheader: string;
   logo: string;
   classroomIllustration: string;
   greetingIllustration: string;
@@ -14,7 +13,6 @@ type GreetProps = {
 
 export const Greet: FC<GreetProps> = ({
   header,
-  subheader,
   logo,
   classroomIllustration,
   greetingIllustration,
@@ -23,7 +21,6 @@ export const Greet: FC<GreetProps> = ({
     <div>
       <MobileWelcome>
         <Header isDark={true}>{header}</Header>
-        <Subheader isDark={true}>{subheader}</Subheader>
       </MobileWelcome>
 
       <Illustrations>
