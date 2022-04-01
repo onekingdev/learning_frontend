@@ -61,7 +61,7 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
           width: "120px",
           textAlign: "center",
         }} fontSize='24px' isDark={true}>YOU</Button>
-        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS EARNED</Button>
+        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS <br />EARNED</Button>
       </UserRankTreasureTrackStyles1>
     </>
   ) : (
@@ -96,7 +96,7 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
           width: "120px",
           textAlign: "center",
         }} isDark={true}>{userName}</Button>
-        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS EARNED</Button>
+        <Button fontSize='12px' isDark={true}>{coinsEarned} COINS <br />EARNED</Button>
       </UserRankTreasureTrackStyles1>
     </>
   );
