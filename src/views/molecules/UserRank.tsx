@@ -32,8 +32,8 @@ export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
 export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userIcon, active=false, coinsEarned='0', additionalPl='' }) => {
   return active ? (
     <>
-      <UserRankTreasureTrackStylesActive
-        pl="10px"
+      <UserRankTreasureTrackStyles
+        pl={"10px"}
       >
         <Button isDark={true}>#{userRank}</Button>
         { userIcon ? <ImageAvatar
@@ -57,12 +57,12 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         </div> }
         <Button fontSize='24px' isDark={true}>YOU</Button>
         <Button fontSize='14px' isDark={true}>{coinsEarned} COINS EARNED</Button>
-      </UserRankTreasureTrackStylesActive>
+      </UserRankTreasureTrackStyles>
     </>
   ) : (
     <>
       <UserRankTreasureTrackStyles
-        pl="10px"
+        pl={"10px"}
       >
         <Button isDark={true}>#{userRank}</Button>
         { userIcon ?
@@ -125,8 +125,7 @@ const UserRankTreasureTrackStyles = styled(UserRankStyles)<IUserRankTreasureTrac
 
 const UserRankTreasureTrackStylesActive = styled(UserRankStyles)`
   grid-template-columns: 40px 1fr 1fr 4fr;
-  margin-left: 16px;
-  padding-left: ${ props => props.pl ? props.pl : '0px'};
+  padding-left: 6px;
   background: #21B95C33;
   width: calc(100% - 6px);
   @media (max-width: ${ScreenSize.desktop}) {
