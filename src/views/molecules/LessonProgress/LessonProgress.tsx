@@ -5,8 +5,6 @@ import { LessonProgressBar }        from './LessonProgressBar';
 import { ScreenSize }               from 'constants/screenSize';
 import { BasicColor }               from 'views/Color';
 import { LessonProgressLightening } from './LessonProgressLightening';
-import { LESSON_PROGRESS_BAR_HEIGHT,
-LESSON_PROGRESS_BAR_MOBILE_HEIGHT } from 'constants/common';
 
 type LessonProgressProps = {
   topic: string;
@@ -88,10 +86,9 @@ const StyledLessonProgressWrapper = styled.div`
 
 const StyledLessonProgressBarWrapper = styled.div`
   width: 100%;
-  height: ${LESSON_PROGRESS_BAR_MOBILE_HEIGHT}px;
+  height: 30px;
   display: flex;
-  background: white;
-  grid-gap: 2px;
+  grid-gap: 1px;
   position: relative;
 
   .lightening {
@@ -99,10 +96,8 @@ const StyledLessonProgressBarWrapper = styled.div`
     justify-content: space-between;
     position: absolute;
     right: 0;
-    top: 0;
-    bottom: 0;
   }
   @media screen and (min-width: ${ScreenSize.phone}) {
-    height: ${LESSON_PROGRESS_BAR_HEIGHT}px;
+    height: 57px;
   }
 `;

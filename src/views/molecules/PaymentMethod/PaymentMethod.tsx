@@ -50,6 +50,13 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
 
 
   const handleOrder = async () => {
+    /*----------------------- if not selected any package, show error and break -S----------------------*/
+    console.log(plans.Gold?.childCount ? plans.Gold?.childCount : 0 + plans.Combo?.childCount ? plans.Combo?.childCount : 0 + plans.Sole?.childCount ? plans.Sole?.childCount : 0 );
+    if((plans.Gold?.childCount ? plans.Gold?.childCount : 0 + plans.Combo?.childCount ? plans.Combo?.childCount : 0 + plans.Sole?.childCount ? plans.Sole?.childCount : 0 ) < 1) {
+        enqueueSnackbar(`Failed! You didn't select any children number`, { variant: 'error' });
+        return
+    }
+    /*----------------------- if not selected any package, show error and break -E----------------------*/
     setLoading(true)
     // const result = await paymentFormRef?.current?.handleOrder(plans, couponCode);
     const result = await paymentFormRef?.current?.handleOrder(plans, '');

@@ -3,10 +3,7 @@ import styled, {keyframes, css }   from 'styled-components';
 import lightening                  from 'views/assets/lightning.svg';
 import { bounceInLeft }            from 'react-animations';
 import { zoomIn }                  from 'react-animations';
-import { ScreenSize }              from 'constants/screenSize';
-import { TypoGeneralText }         from 'views/atoms/Text';
-import { LESSON_PROGRESS_BAR_HEIGHT,
-LESSON_PROGRESS_BAR_MOBILE_HEIGHT } from 'constants/common';
+
 interface LighteningProps {
   combocount: number;
 }
@@ -23,12 +20,12 @@ export const LessonProgressLightening: FC<LighteningProps> = ({combocount}) => {
     <Energy>
       <Combocount animate={animate} className="count">
         <Combocount animate={!animate} >
-          <TypoGeneralText style={{color: 'white'}}>+{combocount}</TypoGeneralText>
+          <p>+{combocount}</p>
         </Combocount>
       </Combocount>
       <Wobble animate={animate}>
         <Wobble animate={!animate}>
-          <Img src={lightening} alt={'lightening'} />
+          <img src={lightening} alt={'lightening'} />
         </Wobble>
       </Wobble>
     </Energy>
@@ -39,17 +36,13 @@ const Energy = styled.div`
   display: flex;
   .count {
     align-self: center;
-  }
-  @media screen and (max-width: ${ScreenSize.phone}) {
+    p {
+      color: white;
+      font-size: 30px;
+      margin: auto;
+    }
   }
 `;
-
-const Img = styled.img`
-  height: ${LESSON_PROGRESS_BAR_HEIGHT}px;
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    height: ${LESSON_PROGRESS_BAR_MOBILE_HEIGHT}px;
-  }
-`
 
 const Wobble = styled.div<{
   animate: boolean;

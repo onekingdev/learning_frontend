@@ -24,9 +24,7 @@ export const Gems: FC<GemsProps> = ({select, actives}) => {
     select(gemTitles[id])
   }
 
-  useEffect(() => {
-    console.log('adc',actives)
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <StyledGems>

@@ -95,7 +95,7 @@ const CreateParent: FC = () => {
         <ParentPgStepper step={1} />
         <Container>
           <FormContainer>
-            <Title>Choose your name and password</Title>
+            <Title>Parent Signup</Title>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <TextField
@@ -113,7 +113,7 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="First Name"
+                  label="Parent First Name"
                   onChange={e => {
                     setFirstName(e.target.value);
                     handleFormChange(
@@ -127,7 +127,7 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="Last Name"
+                  label="Parent Last Name"
                   onChange={e => {
                     setLastName(e.target.value);
                     handleFormChange(
@@ -141,7 +141,7 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="User Name"
+                  label="Parent Username"
                   onChange={e => {
                     setUserName(e.target.value);
                     handleFormChange(

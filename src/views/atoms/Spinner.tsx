@@ -1,7 +1,6 @@
 import { FC }                from 'react';
 import styled, { keyframes } from 'styled-components';
 import socrates              from 'views/assets/socrates.svg';
-import boat                  from 'views/assets/islands/fillers/boat.svg';
 import shapes                from 'views/assets/colored-shapes-bg.svg';
 import ReactLoading          from 'react-loading';
 import { LoadingContainer }  from 'views/atoms/Loading'
@@ -16,7 +15,7 @@ export const LoadingSpinner: FC = () => (
 export const Spinner: any = () => {
   return (
     <Shapes>
-      <Icon src={boat} />
+      <Icon src={socrates} />
     </Shapes>
   );
 };
@@ -36,29 +35,15 @@ const rotate = keyframes`
     transform: rotate(360deg);
   }
 `;
-const move = keyframes`
-  0% {
-    left: 20vw;
-    transform: rotate(0deg);
-  }
-  50% {
-    left: 55vw;
-    transform: rotate(-30deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-    left: 90vw;
-  }
-`;
 
 const Icon = styled.img`
   position: absolute;
-  top: 30%;
-  height: 300px;
-  // margin-top: -250px;
-  // margin-left: -250px;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  margin-top: -250px;
+  margin-left: -250px;
   z-index: 1;
-  // animation: ${move} 6s linear infinite;
-  animation: ${move} 3s linear;
+  animation: ${rotate} 6s linear infinite;
 `;

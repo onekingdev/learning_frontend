@@ -31,8 +31,8 @@ export const KnowledgeMap: FC = () => {
 
   const [areasOfKnowledge,  setAreasOfKnowledge]  = useState([]);
   const [loadedImgNum,      setLoadedImgNum]      = useState(0)
-  const [boatX,             setBoatX]             = useState(window.innerWidth / 2)
-  const [boatY,             setBoatY]             = useState(window.innerHeight / 2)
+  const [boatX,             setBoatX]             = useState(200)
+  const [boatY,             setBoatY]             = useState(300)
 
   const onImgLoad       = () => {
 
@@ -74,7 +74,6 @@ export const KnowledgeMap: FC = () => {
   const dragonNum       = randRange(0, areasOfKnowledge.length);
 
   useEffect(() => {
-    // setBoatX(window.innerWi / )
     setAreasOfKnowledge(student?.guardianstudentplan?.subject);
   }, []);
 

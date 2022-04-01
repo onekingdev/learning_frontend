@@ -103,7 +103,7 @@ export const AvatarSelector: FC = () => {
             <LoadingSpinner />}
 
           <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} />
-          <div style={{ display: 'flex', alignItems: 'start', height: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'start' }}>
             <IconButton color='warning'
               aria-label='set favorite'
               component='span'
@@ -185,7 +185,6 @@ const RightDrawer = styled.div`
 const AvatarGrid = styled.div`
   display: grid;
   min-width: 25vw;
-  place-items: center;
   grid-template-columns: 2vw 1fr 2vw;
   @media screen and (max-width: ${ScreenSize.phone}) {
   }

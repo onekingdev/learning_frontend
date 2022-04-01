@@ -14,18 +14,13 @@ import game_icon                    from 'views/assets/nav-icons/game.png';
 import bank_icon                    from 'views/assets/nav-icons/bank.png';
 import collectible_icon             from 'views/assets/nav-icons/collectibles.png';
 import profile_icon                 from 'views/assets/nav-icons/profile.png';
-import tutorial_icon                from 'views/assets/nav-icons/tutorial.png';
 import menu_toggle                  from 'views/assets/Menu Toggle.svg';
 import styled                       from 'styled-components';
 import { TypoIcon }                 from 'views/atoms/Text';
-import { CardDialog }               from 'views/molecules/StudentCard/CardDialog';
-import { VideoPlayer } from 'views/molecules/VideoPlayer';
-import { TUTORIAL_VDO_URL } from 'constants/common';
 
 export const Sidebar: FC = () => {
 
-    const [state, setState] = useState(false)
-    const [open, setOpen]   = useState(false)
+    const [state, setState] = useState(false);
     const [isMobile, setMobile] = useState(false)
     const history = useHistory();
 
@@ -40,10 +35,6 @@ export const Sidebar: FC = () => {
         setState(open);
     };
 
-    const openTutorial = () => {
-        setOpen(!open)
-    }
-
     useEffect(() => {
             // check device is mobile, do mobile view
     const handleResize = () => {
@@ -56,17 +47,6 @@ export const Sidebar: FC = () => {
 
     return (
         <div>
-            <CardDialog
-                isOpen = {open}
-                open = {openTutorial}
-                title = 'Chanllege 1 of 10'
-                fullWidth='true'
-                dialogContent = {
-                    <div style={{minWidth: 800, minHeight: 450, maxWidth: 1366, maxHeight: 768}}>
-                        <VideoPlayer src= {TUTORIAL_VDO_URL}/>
-                    </div>
-                }
-            />
             <Button onClick={toggleDrawer(true)}>
                 <Icon
                     image={menu_toggle}
@@ -153,16 +133,6 @@ export const Sidebar: FC = () => {
                                     onClick={() => history.push('/avatar')}
                                 />
                                 <TypoIcon >PROFILE</TypoIcon >
-                            </IconContainer>
-                        </StyledListItem>
-                        <StyledListItem >
-                            <IconContainer>
-                                <Icon
-                                    image={tutorial_icon}
-                                    size={ICON_SIZE.medium}
-                                    onClick={() => setOpen(true)}
-                                />
-                                <TypoIcon >TUTORIAL</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                     </List>
