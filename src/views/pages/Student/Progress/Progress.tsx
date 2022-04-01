@@ -17,15 +17,6 @@ import { Container }            from './Style';
 import { useSelector }       from 'react-redux';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
-import styled             from 'styled-components';
-import background     from 'views/assets/colored-shapes-bg.svg';
-
-const Wrapper = styled.div`
-    background-image  : url(${background});
-    background-repeat : no-repeat;
-    background-size   : cover;
-    height            : 100vh;
-`;
 
 type IProcessPathSvg = {
     bgColor?: string;
@@ -56,14 +47,7 @@ export const KidsProgress = () => {
                 alert(result.errors[0].message);
             } else {
                 setAreasOfKnowledge(result.data.areasOfKnowledge)
-                let iii = 4;
-                for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
-                    if (result.data.areasOfKnowledge[i].name === "Sight Words") {
-                        iii = i;
-                        break;
-                    }
-                }
-                setActiveSubjectId(result.data.areasOfKnowledge[iii].id)
+                setActiveSubjectId(result.data.areasOfKnowledge[4].id)
                 // setSubject(result.data.areasOfKnowledge[0].id);
             }
         })();
@@ -74,7 +58,6 @@ export const KidsProgress = () => {
             loadingContext.restart();
             (async () => {
                 // Get Topic Report
-                console.log(user)
                 const res:any = await query(``, TopicReport(parseInt(user.profile.id), activeSubjectId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
                 return
@@ -83,7 +66,6 @@ export const KidsProgress = () => {
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
-                    // console.log(result.data.rootTopicsByAok)
                     setData(result.data.rootTopicsByAok);
                 }
                 loadingContext.done();
@@ -693,9 +675,9 @@ export const KidsProgress = () => {
     ];
     const subSubjectsMobile = [
         {
-            left: 3.39,
-            top: 1.01,
-            width: 65.15,
+            left: 10.39,
+            top: 0.01,
+            width: 63.03,
             angle: 123,
             tX: 0,
             tY: 0,
@@ -703,9 +685,9 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: -5.5,
-            top: 5.4,
-            width: 78.98,
+            left: 3.5,
+            top: 6.4,
+            width: 78.38,
             angle: 107,
             tX: 0,
             tY: 0,
@@ -713,9 +695,9 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: -3.59,
+            left: 2.41,
             top: 11.21,
-            width: 59.8,
+            width: 72.24,
             angle: 79,
             tX: 0,
             tY: 0,
@@ -723,9 +705,9 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: 5.97,
+            left: 6.97,
             top: 16.37,
-            width: 60.04,
+            width: 78.8,
             angle: 45,
             tX: 0,
             tY: 0,
@@ -733,8 +715,8 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: 21.98,
-            top: 19.28,
+            left: 23.98,
+            top: 18.28,
             width: 74.84,
             angle: 16,
             tX: 0,
@@ -743,9 +725,9 @@ export const KidsProgress = () => {
             bgColor: '#FFD814'
         },
         {
-            left: 40,
-            top: 18.24,
-            width: 79.23,
+            left: 44,
+            top: 19.24,
+            width: 78.63,
             angle: 340,
             tX: 0,
             tY: 0,
@@ -753,9 +735,9 @@ export const KidsProgress = () => {
             bgColor: '#FF1940'
         },
         {
-            left: 57.45,
+            left: 59.45,
             top: 16.24,
-            width: 59.97,
+            width: 72.37,
             angle:350,
             tX: 0,
             tY: 0,
@@ -763,350 +745,10 @@ export const KidsProgress = () => {
             bgColor: '#28D764'
         },
         {
-            left: 74.46,
-            top: 17.5,
-            width: 62.19,
-            angle: 31,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 82.46,
-            top: 22.5,
-            width: 62.19,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
             left: 76.46,
-            top: 27.5,
-            width: 57.69,
-            angle: 307,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 60.46,
-            top: 31.5,
-            width: 62.6684,
-            angle: 351,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 41.46,
-            top: 30.5,
-            width: 62.69,
+            top: 16.5,
+            width: 97.44,
             angle: 31,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 29.46,
-            top: 26.5,
-            width: 62.66,
-            angle: 31,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 13.46,
-            top: 24.5,
-            width: 62.19,
-            angle: 347,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 2.46,
-            top: 25.5,
-            width: 41.69,
-            angle: 31,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: -0.56,
-            top: 32.5,
-            width: 62.19,
-            angle: 0,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 3.46,
-            top: 38.5,
-            width: 57.69,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 16.46,
-            top: 42,
-            width: 60.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 37.46,
-            top: 42.5,
-            width: 61.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 58.46,
-            top: 41.5,
-            width: 70.3,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 79.46,
-            top: 41.5,
-            width: 58.69,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 84.46,
-            top: 47,
-            width: 58.69,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 78.46,
-            top: 52.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 61.46,
-            top: 55.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 43.46,
-            top: 55,
-            width: 60.19,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 23.46,
-            top: 54.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 11.46,
-            top: 57.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 7.46,
-            top: 63.5,
-            width: 58.5,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 16.46,
-            top: 67.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 32.46,
-            top: 69.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 49.46,
-            top: 66.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 64.46,
-            top: 64.5,
-            width: 61.58,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 82.46,
-            top: 65.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 87.46,
-            top: 71.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 84.46,
-            top: 76.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 72.46,
-            top: 81.5,
-            width: 58.14,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 53.46,
-            top: 82.5,
-            width: 60.64,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 36.46,
-            top: 79.5,
-            width: 61.24,
-            angle: 38,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 20.46,
-            top: 78.5,
-            width: 61.1,
-            angle: 337,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 9.46,
-            top: 82.5,
-            width: 60.64,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 11.46,
-            top: 87.5,
-            width: 60.64,
-            angle: 1,
-            tX: 0,
-            tY: 0,
-            text: 'Multiplicación de números enteros',
-            active: true
-        },
-        {
-            left: 24.46,
-            top: 90.5,
-            width: 61.14,
-            angle: 1,
             tX: 0,
             tY: 0,
             text: 'Multiplicación de números enteros',
@@ -2559,146 +2201,144 @@ export const KidsProgress = () => {
             </svg>
         )
     }
-    return (<Wrapper>
-        <StudentMenu>
-            <Container>
-                <div style={{
-                    width: '500px',
-                    maxWidth: 'calc(100vw - 100px)',
-                    height: '80px',
+    return <StudentMenu>
+        <Container>
+            <div style={{
+                width: '500px',
+                maxWidth: 'calc(100vw - 100px)',
+                height: '80px',
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <img style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 10,
+                }} src={TitleProgressBackground} alt='TitleProgressBackground' />
+                <Title style={{
+                    zIndex: 20,
+                    color: 'black',
+                    paddingLeft: '1rem',
+                    paddingRight: '1rem',
+                }}>Progress</Title>
+            </div>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                paddingTop: '1rem'
+            }}>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id='demo-simple-select-label'>Grade</InputLabel>
+                        <Select
+                            labelId='demo-simple-select-label'
+                            id='demo-simple-select'
+                            value={grade}
+                            label='Grade'
+                            disabled
+                            // onChange={handleGradeChange}
+                        >
+                            { grades.map((grade, id) => (
+                                <MenuItem key={id} value={grade}>{grade}</MenuItem>
+                            )) }
+                        </Select>
+                    </FormControl>
+                </Box>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id='demo-simple-select-label'>Subject</InputLabel>
+                        <Select
+                            labelId='demo-simple-select-label'
+                            id='demo-simple-select'
+                            value={activeSubjectId}
+                            label='Subject'
+                            onChange={handleSubjectChange}
+                        >
+                            { areasOfKnowledge.map((subject, id) => (
+                                <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
+                            )) }
+                        </Select>
+                    </FormControl>
+                </Box>
+            </div>
+            <div ref={mapBgRef} style={{
+                position: 'relative',
+                width: '100%',
+                paddingLeft: '0px',
+                paddingRight: '0px',
+                overflow: 'hidden',
+                background: '#EB7738'
+            }}>
+                {/* <div style={{
                     position: 'relative',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <img style={{
+                    width: ScreenSize.widescreen
+                }}> */}
+                    <PcCom>
+                        <img style={{
+                            width: '100%'
+                        }} src={ProgressMap} alt='ProgressMap' />
+                    </PcCom>
+                    <MobileCom>
+                        <img style={{
+                            width: '100%'
+                        }} src={ProgressMapMobile} alt='ProgressMapMobile' />
+                    </MobileCom>
+                    { paths.map((path, id) => <PcCom key={id} style={{
                         position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        zIndex: 10,
-                    }} src={TitleProgressBackground} alt='TitleProgressBackground' />
-                    <Title style={{
+                        left: `${path.left}%`,
+                        top: `${path.top}%`,
+                    }}>
+                        {path.imgSrc({
+                            bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
+                            active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                        })}
+                    </PcCom>) }
+                    { pathsMobile.map((path, id) => <MobileCom key={id} style={{
+                        position: 'absolute',
+                        left: `${path.left}%`,
+                        top: `${path.top}%`,
+                    }}>
+                        {path.imgSrc({
+                            bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
+                            active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                        })}
+                    </MobileCom>) }
+                    { subSubjects1.map((subSubject, id) => <PcCom key={id} style={{
+                        position: 'absolute',
+                        transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
+                        left: `${subSubject.left}%`,
+                        top: `${subSubject.top}%`,
+                        fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
+                        fontWeight: subSubject.active ? '600' : '400',
+                        width: `${subSubject.width * mapWidth / 1366}px`,
+                        // overflow: "hidden",
+                        height: "50px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}>{subSubject.text}</PcCom>)}
+                    { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
+                        position: 'absolute',
+                        transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
+                        left: `${subSubject.left}%`,
+                        top: `${subSubject.top}%`,
+                        fontSize: '11px',
+                        fontWeight: subSubject.active ? '600' : '400',
+                        width: `${subSubject.width * mapWidth / 1366}px`,
                         zIndex: 20,
-                        color: 'black',
-                        paddingLeft: '1rem',
-                        paddingRight: '1rem',
-                    }}>Progress</Title>
-                </div>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                    paddingTop: '1rem'
-                }}>
-                    <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label'>Grade</InputLabel>
-                            <Select
-                                labelId='demo-simple-select-label'
-                                id='demo-simple-select'
-                                value={grade}
-                                label='Grade'
-                                disabled
-                                // onChange={handleGradeChange}
-                            >
-                                { grades.map((grade, id) => (
-                                    <MenuItem key={id} value={grade}>{grade}</MenuItem>
-                                )) }
-                            </Select>
-                        </FormControl>
-                    </Box>
-                    <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label'>Subject</InputLabel>
-                            <Select
-                                labelId='demo-simple-select-label'
-                                id='demo-simple-select'
-                                value={activeSubjectId}
-                                label='Subject'
-                                onChange={handleSubjectChange}
-                            >
-                                { areasOfKnowledge.map((subject, id) => (
-                                    <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
-                                )) }
-                            </Select>
-                        </FormControl>
-                    </Box>
-                </div>
-                <div ref={mapBgRef} style={{
-                    position: 'relative',
-                    width: '100%',
-                    paddingLeft: '0px',
-                    paddingRight: '0px',
-                    overflow: 'hidden',
-                    background: '#EB7738'
-                }}>
-                    {/* <div style={{
-                        position: 'relative',
-                        width: ScreenSize.widescreen
-                    }}> */}
-                        <PcCom>
-                            <img style={{
-                                width: '100%'
-                            }} src={ProgressMap} alt='ProgressMap' />
-                        </PcCom>
-                        <MobileCom>
-                            <img style={{
-                                width: '100%'
-                            }} src={ProgressMapMobile} alt='ProgressMapMobile' />
-                        </MobileCom>
-                        { paths.map((path, id) => <PcCom key={id} style={{
-                            position: 'absolute',
-                            left: `${path.left}%`,
-                            top: `${path.top}%`,
-                        }}>
-                            {path.imgSrc({
-                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
-                                active: subSubjects1.length > id ? subSubjects1[id].active : false,
-                            })}
-                        </PcCom>) }
-                        { pathsMobile.map((path, id) => <MobileCom key={id} style={{
-                            position: 'absolute',
-                            left: `${path.left}%`,
-                            top: `${path.top}%`,
-                        }}>
-                            {path.imgSrc({
-                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
-                                active: subSubjects1.length > id ? subSubjects1[id].active : false,
-                            })}
-                        </MobileCom>) }
-                        { subSubjects1.map((subSubject, id) => <PcCom key={id} style={{
-                            position: 'absolute',
-                            transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
-                            left: `${subSubject.left}%`,
-                            top: `${subSubject.top}%`,
-                            fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
-                            fontWeight: subSubject.active ? '600' : '400',
-                            width: `${subSubject.width * mapWidth / 1366}px`,
-                            // overflow: "hidden",
-                            height: "50px",
-                            textAlign: "center"
-                        }}>{subSubject.text}</PcCom>)}
-                        { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
-                            position: 'absolute',
-                            transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
-                            left: `${subSubject.left}%`,
-                            top: `${subSubject.top}%`,
-                            fontSize: '11px',
-                            fontWeight: subSubject.active ? '600' : '400',
-                            width: `${subSubject.width * mapWidth / 390}px`,
-                            zIndex: 20,
-                            height: "50px",
-                            textAlign: "center"
-                        }}>{subSubject.text}</MobileCom>)}
-                    {/* </div> */}
-                </div>
-            </Container>
-            <Container>
-                <MarkTableSubject
-                    data={data}
-                    activeSubjectId={activeSubjectId}
-                />
-            </Container>
-        </StudentMenu>
-    </Wrapper>)
+                    }}>{subSubject.text}</MobileCom>)}
+                {/* </div> */}
+            </div>
+        </Container>
+        <Container>
+            <MarkTableSubject
+                data={data}
+                activeSubjectId={activeSubjectId}
+            />
+        </Container>
+    </StudentMenu>
 }

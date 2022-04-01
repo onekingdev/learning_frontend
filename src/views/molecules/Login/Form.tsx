@@ -35,7 +35,7 @@ export const Form: FC<FormProps> = ({
         </Field>
         <StyledTextField
           onChange={(e) => setUsername(e.target.value)}
-          // label={emailLabel}
+          label={emailLabel}
           type='email'
         />
         <StyledTextField
