@@ -129,6 +129,7 @@ export const STUDENT = `
         dob
         gender
         points
+        isNew
         intPeriodStartAt
         activeStudentPlan {
             ${STUDENT_PLAN}

@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   levelId: null,
   guardianId: null,
   schoolId: null,
+  isNew: null,
 };
 const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: IStudent}) => {
@@ -115,6 +116,11 @@ const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: a
       return {
         ...state,
         nextLevel: action.payload
+      }
+    case TYPE.SET_OLD_USER:
+      return {
+        ...state,
+        isNew: false
       }
     default:
       return state;

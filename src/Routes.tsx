@@ -65,13 +65,13 @@ const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   );
 };
 
+const FadeIn = styled.div`
+animation: 1.5s ${keyframes`${fadeIn}`} ;
+`;
 
 export function Routes() {
   const location = useLocation();
 
-  const FadeIn = styled.div`
-  animation: 1.5s ${keyframes`${fadeIn}`} ;
-  `;
 
   useEffect(() => {
     if(window.Tawk_API?.onLoaded) window.Tawk_API?.hideWidget();

@@ -8,6 +8,8 @@ import {
   CHANGE_STUDENT_PASSWORD
 }                               from 'api/mutations/students'
 import mutation                 from 'api/mutations/get'
+import { sendRawQuery }         from 'api/queries/get';
+
 
 export const studentSetData = (payload: any) => {
   return {
@@ -260,4 +262,26 @@ export const changeStudentPassword = async (
   //     payload: student || []
   // });
   return { success: true, msg: 'Success', data: result.data.createOrder }
+}
+
+export const doSetOldUser = async (token: string) => {
+
+  try {
+      const res: any = await sendRawQuery(
+          `mutation IsNew {
+            updateIsNew {
+              student{
+                isNew
+              }
+            }
+          }`,
+          token
+      );
+      return res.msg ?
+          { msg: res.msg, status: false } :
+          { ...res.data.IsNew, status: true }
+  } catch(e) {
+      console.log(e)
+      return { msg: 'Set old user error!', status: false }
+  }
 }

@@ -28,10 +28,10 @@ export const MobileMenu: FC = () => {
   return (
     <>
       <MobileMenuContainer>
-        {/* <StartLesson
+        <StartLesson
           onClick={() => history.push('/question')}
           isClose={closeStartButton ? true : false}
-        /> */}
+        />
         <MobileMenuStyles>
           <Sidebar />
           {/* <Icon

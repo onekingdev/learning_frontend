@@ -1,6 +1,7 @@
 import { FC, useState, useEffect }  from 'react';
 import { useHistory }               from 'react-router-dom';
 import { ICON_SIZE }                from 'constants/icon';
+import { useDispatch, useSelector }              from 'react-redux'
 import Box                          from '@mui/material/Box';
 import Drawer                       from '@mui/material/Drawer';
 import Button                       from '@mui/material/Button';
@@ -20,14 +21,19 @@ import styled                       from 'styled-components';
 import { TypoIcon }                 from 'views/atoms/Text';
 import { CardDialog }               from 'views/molecules/StudentCard/CardDialog';
 import { VideoPlayer } from 'views/molecules/VideoPlayer';
-import { TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH, TUTORIAL_VDO_URL } from 'constants/common';
+import { SCREEN_MOBILE, TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH, TUTORIAL_VDO_URL } from 'constants/common';
 import { VIDEO_TUTORIAL_EXPLAIN }   from 'constants/parent';
 import {ScreenSize}                 from 'constants/screenSize';
+import { doSetOldUser } from 'app/actions';
+import { SET_OLD_USER } from 'app/types';
 
 export const Sidebar: FC = () => {
 
     const [state, setState] = useState(false)
     const [open, setOpen]   = useState(false)
+    const dispatch = useDispatch()
+    const isNew = useSelector((state: any) => state.student.isNew);
+    const token = useSelector((state: any) => state.user.token);
     const [isMobile, setMobile] = useState(false)
     const history = useHistory();
 
@@ -46,15 +52,25 @@ export const Sidebar: FC = () => {
         setOpen(!open)
     }
 
+    const setOldUser = async () => {
+        await doSetOldUser(token)
+        dispatch({ type: SET_OLD_USER })
+    }
+
     useEffect(() => {
-            // check device is mobile, do mobile view
-    const handleResize = () => {
-        if (window.innerWidth > 425) {
-          setMobile(false);
+        let mounted = true
+        if (isNew) {
+            setOldUser()
+            if (mounted)
+                setOpen(true)
+        }
+        // check device is mobile, do mobile view
+        if (window.innerWidth > SCREEN_MOBILE) {
+            setMobile(false);
         } else setMobile(true);
-      };
-      handleResize();
-    })
+
+        return () => { mounted = false }
+    }, [])
 
     return (
         <div>
