@@ -34,3 +34,16 @@ export const AREA_OF_KNOWLEDGE = `
     }
     name
 `
+
+export const AREA_OF_KNOWLEDGE_RAW = `
+    id
+    identifier
+    name
+    createTimestamp
+    updateTimestamp
+    hexColor
+    slug
+    image
+    islandImage
+    isActive
+`
