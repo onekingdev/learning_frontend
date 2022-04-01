@@ -2,7 +2,6 @@ import { STUDENT_RAW }                                      from './studentFragm
 import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN_RAW, PLAN }  from '../fragments/paymentFragments'
 import { COUPON_COODE, }                                    from '../fragments/paymentFragments';
 import { GRADES }                                           from '../fragments/peopleFragments'
-import {AVATAR, AVATAR_RAW}                                             from './avatarFragments'
 export const GUARDIAN_STUDENT = `
     id
     identifier
@@ -31,18 +30,6 @@ export const GUARDIAN = `
         ${GUARDIAN_STUDENT}
         student {
             ${STUDENT_RAW}
-            currentAvatarHead{
-                ${AVATAR_RAW}
-            }
-            currentAvatarAccessories{
-                ${AVATAR_RAW}
-            }
-            currentAvatarClothes{
-                ${AVATAR_RAW}
-            }
-            currentAvatarPants{
-                ${AVATAR_RAW}
-            }
             audience {
                 gradeSet {
                     ${GRADES}
