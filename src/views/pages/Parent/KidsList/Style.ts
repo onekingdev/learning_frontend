@@ -29,7 +29,7 @@ export const Title          = styled.div`
   justify-content : center;
   align-items     : center;
   @media screen and (max-width: 540px) {
-    width:      60%;
+    width:      95%;
     font-size:  32px;
   }
 `

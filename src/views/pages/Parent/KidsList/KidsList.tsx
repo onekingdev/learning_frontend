@@ -288,6 +288,13 @@ const KidsList: FC = () => {
               value='Change Password'
             />
           </GridItem>
+          <GridItem item xs={12} md={1.5}>
+            <Button
+              bgColor={BasicColor.red}
+              onClick={() => history.push("/login")}
+              value='Student Login'
+            />
+          </GridItem>
         </GridContainer>
       </KidContainer>
     );
