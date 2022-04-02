@@ -1,36 +1,48 @@
-import { FC, useState} from 'react';
-import styled          from 'styled-components';
-import { BasicColor }  from 'views/Color';
-import ReactLoading    from 'react-loading';
-import useSound        from 'use-sound';
-import purchaseSound   from 'views/assets/audios/mixkit-coin-win-notification.wav';
-import { ScreenSize }  from 'views/../constants/screenSize';
-
-type CardProps = {
-  imgUrl: string;
-};
+import { FC, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { BasicColor } from 'views/Color';
+import ReactLoading from 'react-loading';
+import useSound from 'use-sound';
+import purchaseSound from 'views/assets/audios/mixkit-coin-win-notification.wav';
+import { ScreenSize } from 'constants/screenSize';
+import { getDownUrlByFilename } from 'app/firebase';
 
 /**
  * @author BruceLee
  * Displaying a bought package of 3 cards when a user pressed bought button
  * Turn around image effect and sound effect added
  */
-export const BoughtCard: FC<CardProps> = ({imgUrl}) => {
+export const BoughtCard: FC<{ imgName: string, firebaseName: string }> = ({ imgName, firebaseName }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
+  const [url, setUrl] = useState('')
 
   const [play] = useSound(purchaseSound);
 
   // state to know that image is loaded, rotating effect only works when image is fully loaded
   const [loaded, setLoaded] = useState(false);
+
+  const fetchFirebaseUrl = async (mounted: boolean, _imgName: string, _dir: string) => {
+    const res = await getDownUrlByFilename(_dir, _imgName)
+    if (res) {
+      if (mounted)
+        setUrl(res)
+    }
+  }
+
+  useEffect(() => {
+    let mounted = true
+    fetchFirebaseUrl(mounted, imgName, firebaseName)
+    return () => { mounted = false }
+  }, [])
   return (
     <StyledCard onClick={() => setOpen(!open)}>
-      {imgUrl ? (
-        open ? (
+      {url ?
+        open ?
           <>
             <img
-              style={loaded ? {} : {display: 'none'}}
-              src={imgUrl}
+              style={loaded ? {} : { display: 'none' }}
+              src={url}
               loading="eager"
               onLoad={() => {
                 setLoaded(true), play();
@@ -39,19 +51,22 @@ export const BoughtCard: FC<CardProps> = ({imgUrl}) => {
             <div
               style={
                 loaded
-                  ? {display: 'none'}
-                  : {display: 'flex', alignItems: 'center'}
+                  ? { display: 'none' }
+                  : { display: 'flex', alignItems: 'center' }
               }
             >
-              <ReactLoading type="spokes" color={BasicColor.green} />
+              {/* <p>loading...</p> */}
+              {/* <ReactLoading /> */}
+              <ReactLoading type="spinningBubbles" color={BasicColor.green} />
             </div>
           </>
-        ) : (
+          :
           <p>?</p>
-        )
-      ) : (
-        <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-      )}
+        :
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <ReactLoading type="spinningBubbles" color={BasicColor.green} />
+        </div>
+      }
     </StyledCard>
   );
 };

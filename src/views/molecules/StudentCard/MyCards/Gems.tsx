@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import styled                      from 'styled-components';
 import { ScreenSize }              from 'constants/screenSize';
 import gem_legendary               from 'views/assets/gems_card_collectible/gem_legendary.png';
@@ -23,10 +23,6 @@ export const Gems: FC<GemsProps> = ({select, actives}) => {
     setSelected(gemTitles[id])
     select(gemTitles[id])
   }
-
-  useEffect(() => {
-    console.log('adc',actives)
-  }, []);
 
   return (
     <StyledGems>

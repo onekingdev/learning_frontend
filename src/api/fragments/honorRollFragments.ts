@@ -9,14 +9,6 @@ export const HonorRoll = `
                         id
                         image
                     }
-                    currentAvatarAccessories {
-                        id
-                        image
-                    }
-                    currentAvatarClothes {
-                        id
-                        image
-                    }
                 }
             }
         }

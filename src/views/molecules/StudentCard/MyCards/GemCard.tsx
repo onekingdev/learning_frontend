@@ -4,7 +4,7 @@ import { BasicColor }              from 'views/Color';
 import ReactLoading                from 'react-loading';
 import { Grid }                    from '@mui/material';
 import { ScreenSize }              from 'constants/screenSize';
-import { CardDialog }              from '../CardDialog';
+import { CardDialog }              from './CardDialog';
 import { getDownUrlByFilename }    from 'app/firebase';
 import { useHistory }              from 'react-router-dom';
 
@@ -59,7 +59,7 @@ export const Gemcard: FC<CardProps> = ({
 
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(firebaseName, imgUrl);
-    setImg(link);
+    setImg(link?link:'');
   };
 
   useEffect(() => {
@@ -70,9 +70,10 @@ export const Gemcard: FC<CardProps> = ({
       <StyledCard >
         <img
           style={loaded ? {objectFit: 'fill'} : {display: 'none'}}
-          className="loaded"
+          className='loaded'
           src={img}
-          loading="eager"
+          loading='eager'
+          // loading='eager'
           onLoad={() => {
             setLoaded(true);
           }}
@@ -95,7 +96,7 @@ export const Gemcard: FC<CardProps> = ({
                 }
           }
         >
-          <ReactLoading type="spinningBubbles" color={BasicColor.green} />
+          <ReactLoading type='spinningBubbles' color={BasicColor.green} />
         </div>
         <CardDialog
           dialogContent={
@@ -128,7 +129,7 @@ export const Gemcard: FC<CardProps> = ({
                   }
                 >
                   <ReactLoading
-                    type="spinningBubbles"
+                    type='spinningBubbles'
                     color={BasicColor.green}
                   />
                 </div>
@@ -145,7 +146,7 @@ export const Gemcard: FC<CardProps> = ({
           isOpen={open}
         />
         <CardDialog
-          contentText="Not collected yet!"
+          title='Not collected yet!'
           dialogContent={
             <div style={{display: 'flex', justifyContent: 'center'}}>
               <Button onClick={() => history.push('/collectibles/cards')}>

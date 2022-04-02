@@ -1,3 +1,5 @@
+import { CARD } from "api/fragments/collectibleFragments";
+
 export const PURCHASE_CARD_PACK = (
   collectibleCategory: number,
   packSize: number,
@@ -9,7 +11,7 @@ mutation {
   ) {
     collectiblePackPurchaseTransaction{
       collectibles {
-          image
+          ${CARD}
       }
     }
   }

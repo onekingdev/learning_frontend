@@ -61,10 +61,7 @@ const CreateParent: FC = () => {
     if (!formValidation()) return;
 
     setLoading(true);
-    // const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
-    // free account for first releae
-    const result: any = await createGuardian(email, firstName, lastName, userName, password,"FREE", dispatch)
-
+    const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
     setLoading(false);
 
     if(!result.success) {

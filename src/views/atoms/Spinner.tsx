@@ -1,6 +1,6 @@
 import { FC }                from 'react';
 import styled, { keyframes } from 'styled-components';
-import socrates              from 'views/assets/socrates.svg';
+// import socrates              from 'views/assets/socrates.svg';
 import boat                  from 'views/assets/islands/fillers/boat.svg';
 import shapes                from 'views/assets/colored-shapes-bg.svg';
 import ReactLoading          from 'react-loading';
@@ -27,17 +27,17 @@ const Shapes = styled.div`
   height: 100vh;
 `;
 
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
+// const rotate = keyframes`
+//   from {
+//     transform: rotate(0deg);
+//   }
 
-  to {
-    transform: rotate(360deg);
-  }
-`;
+//   to {
+//     transform: rotate(360deg);
+//   }
+// `;
 const move = keyframes`
-  0% {
+  from {
     left: 20vw;
     transform: rotate(0deg);
   }
@@ -46,7 +46,7 @@ const move = keyframes`
     transform: rotate(-30deg);
   }
 
-  100% {
+  to {
     transform: rotate(0deg);
     left: 90vw;
   }
@@ -60,5 +60,5 @@ const Icon = styled.img`
   // margin-left: -250px;
   z-index: 1;
   // animation: ${move} 6s linear infinite;
-  animation: ${move} 3s linear;
+  animation: ${move} 10s linear infinite;
 `;

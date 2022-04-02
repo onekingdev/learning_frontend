@@ -2604,7 +2604,6 @@ export const KidsTreasureTrack: FC = () => {
                     if (result.data.coinWallets.length > 0) {
                         let index = -1;
                         const temp = result.data.coinWallets
-                        console.log(temp)
                         temp.sort((a: any, b: any) => {
                             if (b.blockTransactionCoins === a.blockTransactionCoins) {
                                 return b.student.user.username === user.username ? 1 : -1;
@@ -2774,28 +2773,11 @@ export const KidsTreasureTrack: FC = () => {
                                         </Menu>
                                     </div>
                                 </Typography>
-                                <table style={{
-                                    width: "100%",
-                                    padding: "0 1rem"
-                                }}>
-                                    <tbody>
-                                    { (rankKids.length === 5 && addPls.length === 5 && initRanks.length === 5) ? rankKids.map((kid, i) => {
-                                        return (
-                                        <UserRankTreasureTrack
-                                            additionalPl={addPls[i].toString() + "px"}
-                                            active={addPls[i] === 0}
-                                            coinsEarned={kid.blockTransactionCoins}
-                                            userRank={initRanks[i]}
-                                            userName={kid.student.user.username}
-                                            key={i}
-                                            userHead={kid.student?.user?.student?.currentAvatarHead?.image}
-                                            userAccessory={kid.student?.user?.student?.currentAvatarAccessories?.image}
-                                            userClothes={kid.student?.user?.student?.currentAvatarClothes?.image}
-                                        />
-                                        );
-                                    }) : "" }
-                                    </tbody>
-                                </table>
+                                { (rankKids.length === 5 && addPls.length === 5 && initRanks.length === 5) ? rankKids.map((kid, i) => {
+                                    return (
+                                    <UserRankTreasureTrack additionalPl={addPls[i].toString() + "px"} active={addPls[i] === 0} coinsEarned={kid.blockTransactionCoins} userRank={initRanks[i]} userName={kid.student.user.username} key={i} userIcon={kid.student?.user?.student?.currentAvatarHead?.image} />
+                                    );
+                                }) : "" }
                             </div>
                         </CardContent>
                     </Card>

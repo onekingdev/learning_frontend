@@ -19,7 +19,7 @@ import tutorial_icon                from 'views/assets/nav-icons/tutorial.png';
 import menu_toggle                  from 'views/assets/Menu Toggle.svg';
 import styled                       from 'styled-components';
 import { TypoIcon }                 from 'views/atoms/Text';
-import { CardDialog }               from 'views/molecules/StudentCard/CardDialog';
+import { CardDialog }               from 'views/molecules/StudentCard/MyCards/CardDialog';
 import { VideoPlayer } from 'views/molecules/VideoPlayer';
 import { SCREEN_MOBILE, TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH, TUTORIAL_VDO_URL } from 'constants/common';
 import { VIDEO_TUTORIAL_EXPLAIN }   from 'constants/parent';

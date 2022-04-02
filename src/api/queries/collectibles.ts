@@ -20,6 +20,7 @@ export const OWNED_CARDS_QUERY = `{
       value
     }
     category {
+      id
       name
       firebaseName
     }

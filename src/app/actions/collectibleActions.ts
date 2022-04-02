@@ -36,6 +36,7 @@ export const purchaseCardPack = async (pack_id: number, student_id: number, toke
       dispatch({ type: PURCHASE_CARDS, payload: { price: price } })
       return res.data.purchaseCollectiblePack.collectiblePackPurchaseTransaction.collectibles;
     }
+    else return {msg: res.msg}
   } catch (e) {
     return { msg: e };
   }

@@ -7,14 +7,15 @@
 
 type CardProps = {
   category: string
-  select: (name: string) => (void)
+  select: (id: number) => (void)
   isSelected?: boolean
   purchased: boolean
   firebaseName: string
+  id: number
 }
 
-export const MyCard: FC<CardProps> = ({
-  select, category, isSelected, purchased, firebaseName
+export const MyCardPack: FC<CardProps> = ({
+  select, category, isSelected, purchased, firebaseName, id
 }) => {
 
   const [imgurl, setImgurl] = useState('')
@@ -24,8 +25,7 @@ export const MyCard: FC<CardProps> = ({
       'Categories',
       firebaseName ? firebaseName + '.png' : ''
     );
-    if (link === 'NO_IMAGE') setImgurl('');
-    else setImgurl(link);
+    setImgurl(link?link:'');
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const MyCard: FC<CardProps> = ({
   const onCardSelect = () => {
 
     // This is prop from parent component, when card is clicked, this calls function of parent.
-    select(category)
+    select(id)
   }
   return (
     <CardContainer style={ isSelected ? {boxShadow: '0px 1px 20px 0px #FB8500'} : {} }>

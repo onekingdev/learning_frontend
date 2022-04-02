@@ -218,12 +218,12 @@ export const getAllCards = async (
 /**
  * @author Bruce Lee
  * @description Get firebase storage file download url with file name
- * @param setCateItems set states with image urls
  */
 export const getDownUrlByFilename = async (dir: string, filename: string) => {
-  const storage = getStorage();
+
 
   try {
+    const storage = getStorage();
     if ((filename && dir) !== '') {
 
       const fileRef = assetRef(
@@ -233,9 +233,9 @@ export const getDownUrlByFilename = async (dir: string, filename: string) => {
       const url = await getDownloadURL(fileRef);
       return url
     }
-    else return 'NO_IMAGE'
+    else return null
   } catch (e) {
     console.log('error from firebase:', e)
-    return 'NO_IMAGE'
+    return null
   }
 };

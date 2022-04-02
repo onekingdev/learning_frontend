@@ -10,3 +10,14 @@ export const COLLECTIBLE_OWNED_CARD = `
   image
   tire
 `
+
+export const CARD = `
+  id
+  name
+  image
+  category {
+    id
+    name
+    firebaseName
+  }
+`

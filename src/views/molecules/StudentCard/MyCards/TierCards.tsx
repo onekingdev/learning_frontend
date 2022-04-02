@@ -1,7 +1,7 @@
-import { FC, useRef, useEffect } from 'react';
-import styled                    from 'styled-components';
-import { ScreenSize }            from 'constants/screenSize';
-import { Gemcard }               from './GemCard';
+import { FC } from 'react';
+import { Gemcard } from './GemCard';
+import { Container, Grid } from '@mui/material';
+import { TypoTitle } from 'views/atoms/Text';
 
 interface TierCardProp {
   cards: {
@@ -11,7 +11,7 @@ interface TierCardProp {
     image: string;
     owned: boolean;
     tier: string;
-    description?: Array <{
+    description?: Array<{
       key: string
       value: string
     }>;
@@ -23,59 +23,29 @@ interface TierCardProp {
 }
 
 
-export const TierCards: FC<TierCardProp> = ({cards}) => {
-    // using ref to auto scroll to current component
-    const loadingRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+export const TierCards: FC<TierCardProp> = ({ cards }) => {
 
-    useEffect(() => {
-      if (loadingRef.current) {
-        window.scrollTo({
-          behavior: 'smooth',
-          top: loadingRef.current.offsetTop + 500,
-        });
-      }
-    }, [cards]);
   return (
-    <Container>
-      <p>{cards[0] ? cards[0].tier : null}</p>
-      <GemCardsContainer ref={loadingRef}>
+    <Container sx={{ minHeight: 300 }}>
+      <TypoTitle style={{ textAlign: 'center' }}>{cards[0] ? cards[0].tier : null}</TypoTitle>
+      <Grid container justifyContent='center' spacing={2}>
         {cards.map(card => {
           return (
-            <Gemcard
-              key={card.id}
-              category={card.category.name}
-              imgUrl={card.image}
-              purchased={card.owned}
-              amount={card.amount}
-              name={card.name}
-              firebaseName={card.category.firebaseName}
-              description={card.description}
-            />
+            <Grid item>
+              <Gemcard
+                key={card.id}
+                category={card.category.name}
+                imgUrl={card.image}
+                purchased={card.owned}
+                amount={card.amount}
+                name={card.name}
+                firebaseName={card.category.firebaseName}
+                description={card.description}
+              />
+            </Grid>
           );
         })}
-      </GemCardsContainer>
+      </Grid>
     </Container>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  p {
-    text-align: center;
-    font-weight: 700;
-    font-size: 20px;
-  }
-`;
-const GemCardsContainer = styled.div`
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(6, 1fr);
-
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    margin-bottom: 10vh;
-    grid-template-columns: repeat(2, 1fr);
-    min-height: 20vh;
-  }
-`;

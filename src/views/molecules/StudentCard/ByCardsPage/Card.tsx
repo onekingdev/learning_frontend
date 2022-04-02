@@ -11,13 +11,13 @@ type CardProps = {
   id: number;
   price: number;
   firebaseName: string;
-  buy: (imgUrl: string, id: number) => void;
+  buy: (id: number, price: number) => void;
 };
 
 export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) => {
   const onCardClick = () => {
     // This is prop from parent component, when card is clicked, this calls function of parent.
-    buy(category, id);
+    buy(id, price);
   };
 
   const [imgurl, setImgurl] = useState('');
@@ -27,8 +27,7 @@ export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) =>
       'Categories',
       firebaseName ? firebaseName + '.png' : ''
     );
-    if (link === 'NO_IMAGE') setImgurl('');
-    else setImgurl(link);
+    setImgurl(link?link:'')
   };
 
   useEffect(() => {

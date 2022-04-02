@@ -8,14 +8,12 @@ import { BasicColor }              from 'views/Color';
 interface ProgressBarProps {
   totalCount: number;
   gainedCount: number;
-  category: string;
   firebaseName: string | undefined
 }
 
 export const GemProgressBar: FC<ProgressBarProps> = ({
   totalCount,
   gainedCount,
-  category,
   firebaseName,
 }) => {
   const [imgurl, setImgurl] = useState('');
@@ -25,13 +23,12 @@ export const GemProgressBar: FC<ProgressBarProps> = ({
       'CategoriesBack',
       firebaseName ? 'back' + firebaseName + '.png' : ''
     );
-    if (link === 'NO_IMAGE') setImgurl('');
-    else setImgurl(link);
+    setImgurl(link?link:'');
   };
 
   useEffect(() => {
     fetchFirebaseUrls();
-  }, [category]);
+  }, [firebaseName]);
   return (
     <ProgressBarContainer>
       <div style={{width: '80%'}}>
