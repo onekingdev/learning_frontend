@@ -53,7 +53,7 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   useEffect(() => {}, [currentQuestion]);
 
   return (
-    <StyledLessonProgressWrapper>
+    <StyledLessonProgressWrapper id='lesson-progress-wrapper'>
       <LessonProgressTitle
         topic={topic}
         currentQuestion={currentQuestion}

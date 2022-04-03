@@ -54,61 +54,59 @@ interface PaymentFormFunc {
     handleUpdate(): void;
 }
 export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
-    const dispatch  = useDispatch()
-    const classes   = useStyles();
-    const stripe    = useStripe();
-    const elements  = useElements();
-    const user      = useSelector((state: Store) => state.user)
-    const guardian  = useSelector((state: any) => state.guardian)
+    const dispatch = useDispatch()
+    const classes = useStyles();
+    const stripe = useStripe();
+    const elements = useElements();
+    const user = useSelector((state: Store) => state.user)
+    const guardian = useSelector((state: any) => state.guardian)
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
 
-    console.log(countries)
     // const [paymentMethod, setPaymentMethod] = useState('card')
     const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(
         isSpecialCode ? {
-            firstName   : '',
-            lastName    : '',
-            addressOne  : null,
+            firstName: null,
+            lastName: null,
+            addressOne: null,
             // addressTwo: null,
-            state       : null,
-            city        : null,
-            zip         : null,
-            country     : '',
-            phone       : null,
+            state: null,
+            city: null,
+            zip: null,
+            country: null,
+            phone: null,
         } : {
-            firstName   : null,
-            lastName    : null,
-            cardNumber  : null,
-            expiryDate  : null,
-            cvc         : null,
-            addressOne  : null,
+            firstName: null,
+            lastName: null,
+            cardNumber: null,
+            expiryDate: null,
+            cvc: null,
+            addressOne: null,
             // addressTwo: null,
-            state       : null,
-            city        : null,
-            zip         : null,
-            country     : '',
-            phone       : null,
+            state: null,
+            city: null,
+            zip: null,
+            country: null,
+            phone: null,
         });
 
     const [data, setData] = useState({
-        paymentMethod   : 'card',
-        firstName       : guardian.firstName,
-        lastName        : guardian.lastName,
-        cardNumber      : '',
-        cardExpMonth    : '',
-        cardExpYear     : '',
-        cvc             : '',
-        addressOne      : '',
-        addressTwo      : '',
-        state           : '',
-        city            : '',
-        zip             : '',
-        // country: { name: '', isoCode: '' },
-        country         : countries[232],
-        phone           : '',
-        couponCode      : '',
-        price           : 0
+        paymentMethod: 'card',
+        firstName: '',
+        lastName: '',
+        cardNumber: '',
+        cardExpMonth: '',
+        cardExpYear: '',
+        cvc: '',
+        addressOne: '',
+        addressTwo: '',
+        state: '',
+        city: '',
+        zip: '',
+        country: { name: '', isoCode: '' },
+        phone: '',
+        couponCode: '',
+        price: 0
     })
     const arrObjToString = (arrObj: any) => {
         let str = '[';

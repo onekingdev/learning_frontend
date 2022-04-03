@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-import styled                      from 'styled-components';
-import { ScreenSize }              from 'constants/screenSize';
-import { AvatarItemWithSkinTone }  from 'views/molecules/Avatar/AvatarItemWithSkinTone';
+import styled          from 'styled-components';
+import { ScreenSize }  from 'constants/screenSize';
+import { ImageAvatar } from '../DefaultAvatar';
+import { SCREEN_MOBILE } from 'constants/common';
 
 interface FavoritProps {
   select: (id: number) => (void)
@@ -15,6 +16,8 @@ export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
     select(i)
     setCurrent(i)
   }
+
+  // const isMobile = window.innerWidth > SCREEN_MOBILE ? false : true
   const [placeholders, setPlaceHolders] = useState<Array<string>>([])
   useEffect(() => {
     // in case there are less than 4 favorite avatars for current user.
@@ -25,10 +28,14 @@ export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
       {favorites.map((favorite, i) => (
         <Drawer key={favorite.id}>
           <CenteredRoundIcon onClick={() => handleAvatarClick(i)} key={favorite.id} style={i === current ? { background: '#ffff00c2' } : {}}>
-            {favorite.avatarAccessorie &&<CurrentAccessory src={favorite.avatarAccessorie?.image} />}
-            <div className='head'>
-              <AvatarItemWithSkinTone url={favorite.avatarHead.image} skinTone={favorite.skinTone ? favorite.skinTone : ''} />
-            </div>
+            <ImageAvatar
+              firstName='A'
+              lastName='B'
+              accessory={favorite.avatarAccessorie}
+              head={favorite.avatarHead}
+              clothes={favorite.avatarClothes}
+              size={80}
+            />
           </CenteredRoundIcon>
         </Drawer>
       ))}
@@ -52,18 +59,6 @@ const Drawer = styled.div`
 `
 const CenteredRoundIcon = styled.div`
   overflow: hidden;
-  .head {
-    position: absolute;
-    width: 80px;
-    margin: auto;
-    z-index: 2;
-    inset: 0;
-    top: -20px;
-
-    @media screen and (max-width: ${ScreenSize.phone}) {
-      width: auto;
-    }
-  }
   @media screen and (max-width: ${ScreenSize.phone}) {
     width: 100%;
     height: 100%;
@@ -80,12 +75,3 @@ const CenteredRoundIcon = styled.div`
   height: 100px;
 `;
 
-const CurrentAccessory = styled.img`
-  width: 80px;
-  position: absolute;
-  top: -20px;
-  z-index: 3;
-  @media screen and (max-width: ${ScreenSize.phone}) {
-    width: 70px;
-  }
-`;

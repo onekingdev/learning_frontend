@@ -35,7 +35,7 @@ const License = (props: any) => {
               />
             </div>
             <div >
-              <QRCode value={props?.username} size={window.innerWidth > 600 ? 100 : 65} />
+              <QRCode value={props?.username} size={100} />
             </div>
           </div>
           <div className="flex align-center">
@@ -75,7 +75,7 @@ flex-direction: column;
 
 const Img = styled.img`
 @media screen and (max-width: 540px) {
-  width: 30%;
+  width: 40%;
 }
 `
 const Username = styled(TypoGeneralText)`

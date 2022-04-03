@@ -35,9 +35,7 @@ export const PaymentContainer = styled.div`
         max-width: 540px;
     }
     @media screen and (max-width: ${ScreenSize.phone}) {
-        width: 95vw;
-        padding-left: 10px;
-        padding-right: 10px;
+        width: calc(100vw - 180px)
     }
 `
 

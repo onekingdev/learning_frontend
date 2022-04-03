@@ -35,7 +35,7 @@ export const ImageAvatar: FC<AvatarProps> = ({ clothes, accessory, head, skinTon
 
 const CurrentAccessory = styled.img`
   position: absolute;
-  z-index: 4;
+  z-index: 30;
   @media screen and (max-width: ${ScreenSize.phone}) {
   }
 `;

@@ -8,7 +8,6 @@ import Button                              from 'views/molecules/MuiButton';
 // import TextField from 'views/molecules/MuiTextField';
 import { BasicColor }                      from 'views/Color';
 import { PaymentForm }                     from './PaymentForm';
-import { useSelector }                     from 'react-redux';
 import {
   Container,
   PaymentContainer,
@@ -39,15 +38,16 @@ interface PaymentFormFunc {
 // export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCounts, offRate}) => {
 export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode}) => {
 
-  const history             = useHistory();
-  const paymentFormRef      = useRef<PaymentFormFunc>(null)
+  const history = useHistory();
+  const paymentFormRef = useRef<PaymentFormFunc>(null)
   const { enqueueSnackbar } = useSnackbar();
 
 //   const [couponCode, setCouponCode] = useState('');
-  const [subtotal,      setSubtotal]     = useState(0);
-  const [agreeLicense,  setAgreeLicense] = useState(false)
-  const [loading,       setLoading]      = useState(false)
-  //   const [couponPrice, setCouponPrice] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+//   const [couponPrice, setCouponPrice] = useState(0);
+  const [agreeLicense, setAgreeLicense] = useState(false)
+  const [loading, setLoading] = useState(false)
+
 
   const handleOrder = async () => {
     /*----------------------- if not selected any package, show error and break -S----------------------*/

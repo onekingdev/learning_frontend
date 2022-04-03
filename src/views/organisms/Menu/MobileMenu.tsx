@@ -8,7 +8,7 @@ import walletIcon from 'views/assets/coins-mobile.svg';
 import { IconSize } from 'views/atoms/Icon/Size';
 import { useState } from 'react';
 import { ScreenSize } from 'constants/screenSize';
-import { StartLesson } from 'views/molecules/StartLesson';
+// import { StartLesson } from 'views/molecules/StartLesson';
 import { IconDropDown } from 'views/molecules/IconDropDown';
 import { Sidebar } from 'views/organisms/Menu/Sidebar';
 import { useHistory } from 'react-router-dom';
@@ -16,6 +16,7 @@ import modality from 'views/assets/modality.svg';
 import { useSelector } from 'react-redux';
 import { TypoGeneralText } from 'views/atoms/Text';
 import { Battery } from 'views/molecules/Battery/Battery';
+import { Container } from '@mui/material';
 
 export const MobileMenu: FC = () => {
   const [closeStartButton, setCloseStartButton] = useState(Boolean);
@@ -27,25 +28,26 @@ export const MobileMenu: FC = () => {
 
   return (
     <>
-      <MobileMenuContainer>
-        {/* <StartLesson
+      {/* <MobileMenuContainer> */}
+      {/* <StartLesson
           onClick={() => history.push('/question')}
           isClose={closeStartButton ? true : false}
         /> */}
+      <Container>
         <MobileMenuStyles>
           <Sidebar />
-          {/* <Icon
+          <Icon
             image={home}
             size={IconSize.medium}
             onClick={() => history.push('/home')}
-          /> */}
+          />
           <Icon image={modality} onClick={() => history.push('/map')} size={IconSize.medium} />
           {/* <Icon image={energyButton} size={IconSize.medium} /> */}
           <IconDropdownContainer>
             <IconDropDown
               icon={energyButton}
               content={
-                <div style={{display: 'flex', alignItems:'center', flexDirection:'column'}}>
+                <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                   <TypoGeneralText style={{ color: BasicColor.green, margin: 0 }}>{+earning.energyCharge * 10 + '%'}</TypoGeneralText>
                   <Battery charge={earning.energyCharge} />
                 </div>
@@ -65,7 +67,8 @@ export const MobileMenu: FC = () => {
             />
           </IconDropdownContainer>
         </MobileMenuStyles>
-      </MobileMenuContainer>
+      </Container>
+      {/* </MobileMenuContainer> */}
     </>
   );
 };
@@ -83,15 +86,10 @@ const MobileMenuStyles = styled.div`
     bottom: 0;
     justify-content: space-around;
     align-items: center;
-    z-index: 2;
+    z-index: 1000;
     }
 `;
 
-const MobileMenuContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-`;
 
 const IconDropdownContainer = styled.div`
   width: 50px;

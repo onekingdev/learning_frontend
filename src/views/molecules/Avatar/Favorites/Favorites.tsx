@@ -104,7 +104,7 @@ export const AvatarSelector: FC = () => {
 
           <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} />
           <div style={{ display: 'flex', alignItems: 'start', height: '100%' }}>
-            <IconButton color='warning'
+            <IconButton
               aria-label='set favorite'
               component='span'
               onClick={setUserAvatar}
