@@ -88,7 +88,6 @@ export const Welcome: FC = () => {
           <Button
             value={dictionary[language].login}
             color={ButtonColor.login}
-            onClick={() => {}}
           />
         </Link>
         <Button

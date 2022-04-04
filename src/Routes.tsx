@@ -77,6 +77,18 @@ export function Routes() {
   }, [location])
   return (
     <FadeIn>
+    {/* <TransitionGroup component={null}> */}
+      {/* <CSSTransition
+        key={location.key}
+        appear={true}
+        timeout={{enter: 1000, exit: 1000}}
+        classNames={{
+          enter: 'my-node-enter',
+          enterActive: 'my-node-enter-active',
+          exit: 'my-node-exit',
+          exitActive: 'my-node-exit-active',
+         }}
+      > */}
         <Switch loadingScreen={Spinner} location={location}>
           <PrivateRoute exact path="/" requireAuth={false}>
             <Welcome />
@@ -166,12 +178,18 @@ export function Routes() {
           <PrivateRoute loading={true} path="/kids/new">
             <NewKids />
           </PrivateRoute>
+          {/* <Route path="/testing-student-treasure-track">
+            <StudentTreasureTrack />
+          </Route> */}
           {process.env.NODE_ENV === 'development' ? (
             <Route path="/testing-student-progress">
+              {/* <StudentProgress /> */}
             </Route>
           ) : null}
           <Redirect from="/" to="/login" />
         </Switch>
+       {/* </CSSTransition > */}
+    {/* </TransitionGroup> */}
     </FadeIn>
   );
 }
