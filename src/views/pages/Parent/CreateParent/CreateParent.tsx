@@ -105,10 +105,18 @@ const CreateParent: FC = () => {
                   label="Email"
                   onChange={e => {
                     setEmail(e.target.value);
-                    handleFormChange(
-                      'email',
-                      e.target.value.length === 0 ? 'Field is required' : !validateEmail(e.target.value) ? 'This is not email address' : ''
-                    );
+                    // handleFormChange(
+                    //   'email',
+                    //   e.target.value.length === 0 ? 'Field is required' : !validateEmail(e.target.value) ? 'This is not email address' : ''
+                    // );
+                    /*------------- set username to email -S--------------------------*/
+                    setUserName(e.target.value);
+                    setValidateMsg({...validateMsg,
+                      email: e.target.value.length === 0 ? 'Field is required' : !validateEmail(e.target.value) ? 'This is not email address' : '',
+                      userName: ''
+                    });
+                    /*------------- set username to email -E--------------------------*/
+
                   }}
                   error={!!validateMsg.email}
                   helperText={validateMsg.email}
@@ -142,7 +150,7 @@ const CreateParent: FC = () => {
                   helperText={validateMsg.lastName}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   label="Parent Username"
                   onChange={e => {
@@ -155,7 +163,7 @@ const CreateParent: FC = () => {
                   error={!!validateMsg.userName}
                   helperText={validateMsg.userName}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   label="Password"

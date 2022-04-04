@@ -20,7 +20,7 @@ export const AvatarSet: FC<AvatarProps> = ({
     <CurrentAvatar style={{ height: AVATAR_SET_SIZE * 2.6, width: AVATAR_SET_SIZE*1.5 }}>
       <img src={accessory} style={{
         width: AVATAR_SET_SIZE,
-        top: -AVATAR_SET_SIZE / 3,
+        top: -AVATAR_SET_SIZE / 4,
         position: 'absolute',
         zIndex: 30
       }} />

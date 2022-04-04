@@ -43,9 +43,9 @@ const KidsList: FC = () => {
   const loadingContext      = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
   const classes             = useStyles();
-  const user      = useSelector((state: Store) => state.user);
-  const guardian  = useSelector((state: any) => state.guardian)
-  const student   = useSelector((state: any) => state.student)
+  const user      = useSelector((state: Store) => state?.user);
+  const guardian  = useSelector((state: any) => state?.guardian)
+  const student   = useSelector((state: any) => state?.student)
 
   const history  = useHistory();
   const dispatch = useDispatch()
@@ -60,13 +60,13 @@ const KidsList: FC = () => {
 
   const Kid = (props: any) => {
 
-    const userName  = props.user.username;
-    const language  = props.user.language;
-    // const parentName  = user.username;
-    // const fullName    = props.fullName;
-    const studentId = props.id;
-    const grades = props.audience?.gradeSet;
-    const [grade,   setGrade]     = useState(props.grade?.grade);
+    const userName  = props?.user?.username;
+    const language  = props?.user?.language;
+    // const parentName  = user?.username;
+    // const fullName    = props?.fullName;
+    const studentId = props?.id;
+    const grades = props?.audience?.gradeSet;
+    const [grade,   setGrade]     = useState(props?.grade?.grade);
     const [newPwd,  setNewPwd]    = useState('');
     const [loading, setLoading]   = useState(false);
     const [openLicense,   setOpenLicense]   = useState(false);
@@ -97,14 +97,14 @@ const KidsList: FC = () => {
 
     const handleChangePwdBtnClicked = async () => {
 
-      if (newPwd.length < 1) return;
+      if (newPwd?.length < 1) return;
 
       setLoading(true);
-      const result: any = await changeStudentPassword(newPwd, studentId, user.token, dispatch)
+      const result: any = await changeStudentPassword(newPwd, studentId, user?.token, dispatch)
       setLoading(false);
 
-      if (!result.success) {
-        enqueueSnackbar(result.msg, { variant: 'error' });
+      if (!result?.success) {
+        enqueueSnackbar(result?.msg, { variant: 'error' });
         return;
       }
 
@@ -119,7 +119,7 @@ const KidsList: FC = () => {
 
     useEffect(() => {
 
-      loadingContext.done();
+      loadingContext?.done();
 
     }, []);
 
@@ -133,7 +133,7 @@ const KidsList: FC = () => {
           dialogContent ={
             <>
               <License
-                parentName ={user.username}
+                parentName ={user?.username}
                 username   ={userName}
                 membership ={props?.guardianstudentplanSet?.legnth > 0 ? new Date(props?.guardianstudentplanSet[0]?.expiredAt) : ''}
               />
@@ -169,9 +169,9 @@ const KidsList: FC = () => {
                   <TextField
                     label='Password'
                     onChange={e => {
-                      setNewPwd(e.target.value);
+                      setNewPwd(e?.target?.value);
                     }}
-                    error={newPwd.length > 0 ? false : true}
+                    error={newPwd?.length > 0 ? false : true}
                     helperText={'Password field is required'}
                   />
                 </GridItem>
@@ -206,14 +206,14 @@ const KidsList: FC = () => {
               }}
               >
             <ImageAvatar
-              firstName = {student.firstName? student.firstName:'F'}
-              lastName  = {student.lastName? student.lastName:'L'}
-              accessory = {props.currentAvatarAccessories ? props.currentAvatarAccessories : null}
-              head      = {props.currentAvatarHead ? props.currentAvatarHead : null}
+              firstName = {student?.firstName? student?.firstName:'F'}
+              lastName  = {student?.lastName? student?.lastName:'L'}
+              accessory = {props?.currentAvatarAccessories ? props?.currentAvatarAccessories : null}
+              head      = {props?.currentAvatarHead ? props?.currentAvatarHead : null}
             // skinTone={null}
               size      = {60}
             />
-            {/* <Avatar src={props.avatar} onClick={() => history.push('/parent/reporting')} /> */}
+            {/* <Avatar src={props?.avatar} onClick={() => history?.push('/parent/reporting')} /> */}
           </GridItem>
           <GridItem item xs={6} md={1.3}>
             <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
@@ -232,19 +232,19 @@ const KidsList: FC = () => {
               <Select
                 labelId   ='select-grade-label'
                 id        ='select-grade'
-                value     ={grades?.length > 0 ? grades[grades.findIndex((item: any) => item.id === grade.id)] : ''}
+                value     ={grades?.length > 0 ? grades[grades?.findIndex((item: any) => item?.id === grade?.id)] : ''}
                 label     ='Select Your Grade'
-                className ={`${classes.select} err-border`}
+                className ={`${classes?.select} err-border`}
                 onChange  ={async (e) => {
-                  setGrade(e.target.value);
-                  const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
-                  if (!res.success) {
-                    enqueueSnackbar(res.msg, { variant: 'error' });
+                  setGrade(e?.target?.value);
+                  const res = await changeStudentGrade(e?.target?.value?.id, props?.id, user?.token, dispatch)
+                  if (!res?.success) {
+                    enqueueSnackbar(res?.msg, { variant: 'error' });
                   }
                 }}
                 displayEmpty={true}
               >
-                {grades?.length > 0 && grades.map((value: any, index: number) => (
+                {grades?.length > 0 && grades?.map((value: any, index: number) => (
                   <MenuItem value={value} key={index}>
                     {value?.name}
                   </MenuItem>
@@ -260,7 +260,7 @@ const KidsList: FC = () => {
               <Select
                 labelId   ='select-lang-label'
                 id        ='select-lang'
-                value     ={langs[langs.findIndex((item: any) => item.value === language)]}
+                value     ={langs[langs?.findIndex((item: any) => item?.value === language)]}
                 label     ='Select Your Language'
                 className ={`${classes.select} err-border`}
                 onChange  ={async () => {
@@ -273,9 +273,9 @@ const KidsList: FC = () => {
                 }}
                 displayEmpty={true}
               >
-                {langs?.length && langs.length > 0 && langs.map((value: any, index: number) => (
+                {langs?.length && langs?.length > 0 && langs?.map((value: any, index: number) => (
                   <MenuItem value={value} key={index}>
-                    {value.name}
+                    {value?.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -286,6 +286,13 @@ const KidsList: FC = () => {
               bgColor={BasicColor.shadeBrown}
               onClick={() => setOpenChangePwd(true)}
               value='Change Password'
+            />
+          </GridItem>
+          <GridItem item xs={12} md={1.5}>
+            <Button
+              bgColor={BasicColor.red}
+              onClick={() => history.push("/login")}
+              value='Student Login'
             />
           </GridItem>
         </GridContainer>
@@ -301,7 +308,7 @@ const KidsList: FC = () => {
 
     if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
-    const guardianStudents  = guardian.guardianstudentSet
+    const guardianStudents  = guardian?.guardianstudentSet
     const students          = [];
 
     for (const guardianStudent of guardianStudents) {
@@ -315,7 +322,7 @@ const KidsList: FC = () => {
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
         <Title>Your Children</Title>
-        {children.map((child, index) => (
+        {children?.map((child, index) => (
           <Kid {...child} index={index} key={index}></Kid>
         ))}
       </Container>
