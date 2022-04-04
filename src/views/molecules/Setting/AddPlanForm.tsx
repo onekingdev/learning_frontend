@@ -44,8 +44,8 @@ const combo = [
 
 export const AddPlanForm: FC<IAddPlanProps> = ({ onConfirm, onCancel }) => {
 
-  const comboChildren = dictionary.en.combo
-  const parents = dictionary.en.planRadios
+  const comboChildren = dictionary['en-us']?.combo
+  const parents = dictionary['en-us']?.planRadios
 
   const [parentState, setParentState] = useState(parents[0].value)
   const [soloState, setSoloState] = useState('')
