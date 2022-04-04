@@ -42,25 +42,24 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         <div style={{
           width: 70,
           height: 70,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: "1000px",
-          border: "1px solid gray",
-          fontSize: "1.5rem",
-          overflow: "hidden"
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '1000px',
+          border: '1px solid gray',
+          fontSize: '1.5rem',
+          overflow: 'hidden'
         }}>
         { userHead ? <ImageAvatar
-          firstName={""}
-          lastName={userName}
+          name={''}
           head={{
-            image: userHead || ""
+            image: userHead || ''
           }}
           accessory={{
-            image: userAccessory || ""
+            image: userAccessory || ''
           }}
           clothes={{
-            image: userClothes || ""
+            image: userClothes || ''
           }}
           size={70}
         /> : userName[0].toUpperCase()
@@ -71,7 +70,7 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
       { active ? <div>You</div> : <div>{ userName }</div> }
       </td>
       <td style={{
-        fontSize: "0.8rem"
+        fontSize: '0.8rem'
       }}>
       { coinsEarned } COINS <br />EARNED
       </td>
@@ -80,36 +79,36 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
   // return active ? (
   //   <>
   //     <UserRankTreasureTrackStyles1
-  //       pl={"10px"}
+  //       pl={'10px'}
   //     >
   //       <Button style={{
-  //         width: "20px"
+  //         width: '20px'
   //       }} isDark={true}>#{userRank}</Button>
   //       { userHead ? <ImageAvatar
-  //         firstName={""}
+  //         firstName={''}
   //         lastName={userName}
   //         head={{
-  //           image: userHead || ""
+  //           image: userHead || ''
   //         }}
   //         accessory={{
-  //           image: userAccessory || ""
+  //           image: userAccessory || ''
   //         }}
   //         size={70}
   //       /> : <div style={{
   //         width: 70,
   //         height: 70,
-  //         display: "flex",
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //         borderRadius: "1000px",
-  //         border: "1px solid gray",
-  //         fontSize: "1.5rem"
+  //         display: 'flex',
+  //         justifyContent: 'center',
+  //         alignItems: 'center',
+  //         borderRadius: '1000px',
+  //         border: '1px solid gray',
+  //         fontSize: '1.5rem'
   //       }}>
   //         { userName[0].toUpperCase() }
   //       </div> }
   //       <Button style={{
-  //         width: "120px",
-  //         textAlign: "center",
+  //         width: '120px',
+  //         textAlign: 'center',
   //       }} fontSize='24px' isDark={true}>YOU</Button>
   //       <Button fontSize='12px' isDark={true}>{coinsEarned} COINS <br />EARNED</Button>
   //     </UserRankTreasureTrackStyles1>
@@ -117,37 +116,37 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
   // ) : (
   //   <>
   //     <UserRankTreasureTrackStyles1
-  //       pl={"10px"}
+  //       pl={'10px'}
   //     >
   //       <Button style={{
-  //         width: "20px"
+  //         width: '20px'
   //       }} isDark={true}>#{userRank}</Button>
   //       { userHead ?
   //       <ImageAvatar
-  //         firstName={""}
+  //         firstName={''}
   //         lastName={userName}
   //         head={{
-  //           image: userHead || ""
+  //           image: userHead || ''
   //         }}
   //         accessory={{
-  //           image: userAccessory || ""
+  //           image: userAccessory || ''
   //         }}
   //         size={70}
   //       /> : <div style={{
   //         width: 70,
   //         height: 70,
-  //         display: "flex",
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //         borderRadius: "1000px",
-  //         border: "1px solid gray",
-  //         fontSize: "1.5rem"
+  //         display: 'flex',
+  //         justifyContent: 'center',
+  //         alignItems: 'center',
+  //         borderRadius: '1000px',
+  //         border: '1px solid gray',
+  //         fontSize: '1.5rem'
   //       }}>
   //         { userName[0].toUpperCase() }
   //       </div> }
   //       <Button style={{
-  //         width: "120px",
-  //         textAlign: "center",
+  //         width: '120px',
+  //         textAlign: 'center',
   //       }} isDark={true}>{userName}</Button>
   //       <Button fontSize='12px' isDark={true}>{coinsEarned} COINS <br />EARNED</Button>
   //     </UserRankTreasureTrackStyles1>

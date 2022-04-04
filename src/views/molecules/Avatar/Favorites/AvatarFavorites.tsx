@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import styled          from 'styled-components';
 import { ScreenSize }  from 'constants/screenSize';
 import { ImageAvatar } from '../DefaultAvatar';
-import { SCREEN_MOBILE } from 'constants/common';
 
 interface FavoritProps {
   select: (id: number) => (void)
@@ -29,8 +28,7 @@ export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
         <Drawer key={favorite.id}>
           <CenteredRoundIcon onClick={() => handleAvatarClick(i)} key={favorite.id} style={i === current ? { background: '#ffff00c2' } : {}}>
             <ImageAvatar
-              firstName='A'
-              lastName='B'
+              name='S'
               accessory={favorite.avatarAccessorie}
               head={favorite.avatarHead}
               clothes={favorite.avatarClothes}

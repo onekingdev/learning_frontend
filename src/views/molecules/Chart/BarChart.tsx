@@ -1,4 +1,3 @@
-import CrogoGirlsFace                  from 'views/assets/croco-girl.svg';
 import TitleKidBackground              from 'views/assets/title-kids-background.png';
 import ReportCheckIcon                 from 'views/assets/parent/report-check.png';
 import ReportCoinIcon                  from 'views/assets/parent/report-coin.png';
@@ -9,9 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import 'react-vis/dist/style.css';
 import {
     XYPlot,
-    LineSeries,
     VerticalBarSeries,
-    AreaSeries,
     XAxis,
     YAxis,
     VerticalGridLines,
@@ -37,7 +34,6 @@ const ChartHeaderContrainer = styled.div`
         margin-top: 5rem;
     }
 `;
-const CrocoGirlImg = styled.img``;
 const ChartTitleGroup = styled.div`
     position: relative;
     display: flex;
@@ -75,20 +71,20 @@ const ChartTitle = styled.span`
     }
 `;
 
-const MONTHS = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-]
+// const MONTHS = [
+//     'Jan',
+//     'Feb',
+//     'Mar',
+//     'Apr',
+//     'May',
+//     'Jun',
+//     'Jul',
+//     'Aug',
+//     'Sep',
+//     'Oct',
+//     'Nov',
+//     'Dec',
+// ]
 
 const WEEKS = [
     'Mon',
@@ -111,15 +107,12 @@ interface BarChartProps {
 }
 
 // export const BarChart = ({ student }: { student: any }) => {
-export const BarChart = ({ student, studentId }: BarChartProps) => {
-    const guardian       = useSelector((state: any) => state.guardian);
-    const currentStudent  = guardian.guardianstudentSet.find((element: any) => element.student.id === studentId).student
+export const BarChart = ({ student }: BarChartProps) => {
 
     const [barChartData, setBarChartData] = useState<iChartData[]>([]);
     const [barChartData2, setBarChartData2] = useState<iChartData[]>([]);
     const [areaChartData, setAreaChartData] = useState<iChartData[]>([]);
     useEffect(() => {
-        console.log('studentid:', student)
         setBarChartData([
             {x: 0, y: 750},
             {x: 1, y: 200},
@@ -208,17 +201,14 @@ export const BarChart = ({ student, studentId }: BarChartProps) => {
             <ChartHeaderContrainer>
                 {
                     student && <ImageAvatar
-                        firstName={student.firstName ? student.firstName : 'F'}
-                        lastName={student.lastName ? student.lastName : 'L'}
-                        accessory={student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
-                        head={student.currentAvatarHead ? student.currentAvatarHead : null}
+                        name      = {student.fullName ? student.fullName : 'F'}
+                        accessory = {student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
+                        head      = {student.currentAvatarHead ? student.currentAvatarHead : null}
+                        clothes   = {student.currentAvatarClothes ? student.currentAvatarClothes : null}
                         // skinTone={null}
-                        size={200}
+                        size      = {150}
                     />
                 }
-                {/* <CrocoGirlImg style={{
-                    zIndex: 20
-                }} src={CrogoGirlsFace} alt='CrogoGirls' /> */}
                 <ChartTitleGroup>
                     <ChartTitleBG src={TitleKidBackground} alt='Kid Title Bg' />
                     <ChartTitle>{student?.fullName} <span><br/></span> Progress Report</ChartTitle>

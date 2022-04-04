@@ -206,12 +206,12 @@ const KidsList: FC = () => {
               }}
               >
             <ImageAvatar
-              firstName = {student?.firstName? student?.firstName:'F'}
-              lastName  = {student?.lastName? student?.lastName:'L'}
+              name = {student?.fullName? student?.fullName:'F'}
               accessory = {props?.currentAvatarAccessories ? props?.currentAvatarAccessories : null}
               head      = {props?.currentAvatarHead ? props?.currentAvatarHead : null}
+              clothes   = {props?.currentAvatarClothes ? props?.currentAvatarClothes : null}
             // skinTone={null}
-              size      = {60}
+              size      = {70}
             />
             {/* <Avatar src={props?.avatar} onClick={() => history?.push('/parent/reporting')} /> */}
           </GridItem>
