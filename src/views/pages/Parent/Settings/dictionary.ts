@@ -1,5 +1,5 @@
 export const dictionary = Object.freeze({
-  "en-us": {
+  en: {
     form:{
       title: 'Profile and settings',
       currentEmail: 'name@learnwithsocrates.com',
