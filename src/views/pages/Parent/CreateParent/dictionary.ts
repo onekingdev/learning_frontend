@@ -1,4 +1,53 @@
 export const dictionary = Object.freeze({
     "en-us": {
+        parentSignup: "Parent Signup",
+        email: "Email",
+        fieldIsRequired: 'Field is required',
+        thisIsNotEmailAddress: 'This is not email address',
+        parentFirstName: 'Parent First Name',
+        parentLastName: 'Parent Last Name',
+        password: 'Password',
+        confirmPassword: 'Confirm Password',
+        passwordIsNotMatchedWithConfirmPassword: 'Password is not matched with confirm password',
+        couponCode: "Coupon Code",
+        createAccount: "Create Account",
+        byClickingCreateAccountYouAgreeToLearnWithSocrates: "By clicking Create Account, you agree to Learn With Socrates’s",
+        privacyPolicy: "Privacy Policy",
+        termsAndConditions: "Terms & Conditions",
+        and: "and",
+        childrenPrivacyPolicy: "Children’s Privacy Policy",
+        welcome: "Welcome",
+        toSocrates: "to Socrates",
+        contactUs: "Contact Us",
+        weAreHappyToHelpYou: "We're happy to help you",
+        FAQ: "FAQ",
+        plans: "Plans"
     },
+    "th": {
+        parentSignup: "สมัครผู้ปกครอง",
+        email: "อีเมล",
+        fieldIsRequired: 'ต้องระบุข้อมูล',
+        thisIsNotEmailAddress: 'นี้ไม่ใช่ที่อยู่อีเมล',
+        parentFirstName: 'Parent First Name',
+        parentLastName: 'Parent Last Name',
+        password: 'Password',
+        confirmPassword: 'Confirm Password',
+        passwordIsNotMatchedWithConfirmPassword: 'Password is not matched with confirm password',
+        couponCode: "Coupon Code",
+        createAccount: "Create Account",
+        byClickingCreateAccountYouAgreeToLearnWithSocrates: "By clicking Create Account, you agree to Learn With Socrates’s",
+        privacyPolicy: "Privacy Policy",
+        termsAndConditions: "Terms & Conditions",
+        and: "and",
+        childrenPrivacyPolicy: "Children’s Privacy Policy",
+        welcome: "Welcome",
+        toSocrates: "to Socrates",
+        contactUs: "Contact Us",
+        weAreHappyToHelpYou: "We're happy to help you",
+        FAQ: "FAQ",
+        plans: "Plans"
+    },
+    "es-mx": {
+
+    }
 });
