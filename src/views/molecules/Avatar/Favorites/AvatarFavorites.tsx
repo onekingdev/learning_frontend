@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import styled          from 'styled-components';
 import { ScreenSize }  from 'constants/screenSize';
 import { ImageAvatar } from '../DefaultAvatar';
+import useMediaQuery   from '@mui/material/useMediaQuery'
 
 interface FavoritProps {
   select: (id: number) => (void)
@@ -10,6 +11,7 @@ interface FavoritProps {
 
 export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
 
+  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
   const [current, setCurrent] = useState(0)
   const handleAvatarClick = (i: number) => {
     select(i)
@@ -32,7 +34,7 @@ export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
               accessory={favorite.avatarAccessorie}
               head={favorite.avatarHead}
               clothes={favorite.avatarClothes}
-              size={80}
+              size={isMobile ? 60 : 85}
             />
           </CenteredRoundIcon>
         </Drawer>
@@ -61,7 +63,9 @@ const CenteredRoundIcon = styled.div`
     width: 100%;
     height: 100%;
   }
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: auto;
   margin-right: auto;
   border-radius: 100%;
