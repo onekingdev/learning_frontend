@@ -1,18 +1,18 @@
-import { FC, useEffect }    from 'react';
-import Avatar               from '@mui/material/Avatar';
-import styled               from 'styled-components';
-import { deepPurple }       from '@mui/material/colors';
-import { ScreenSize }       from 'constants/screenSize';
+import { FC, useEffect } from 'react';
+import Avatar from '@mui/material/Avatar';
 import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
+import styled from 'styled-components';
+import { deepPurple } from '@mui/material/colors';
+import { ScreenSize } from 'constants/screenSize';
 
 interface AvatarProps {
-    clothes?    : any,
-    accessory?  : any,
-    head?       : any,
-    skinTone?   : string,
-    firstName   : string,
-    lastName    : string,
-    size        : number
+    clothes?: any,
+    accessory?: any,
+    head?: any,
+    skinTone?: string,
+    firstName: string,
+    lastName: string,
+    size: number
 }
 
 export const ImageAvatar: FC<AvatarProps> = ({ clothes, accessory, head, skinTone, firstName, lastName, size }) => {
@@ -34,15 +34,15 @@ export const ImageAvatar: FC<AvatarProps> = ({ clothes, accessory, head, skinTon
 }
 
 const CurrentAccessory = styled.img`
-  position  : absolute;
-  z-index   : 4;
+  position: absolute;
+  z-index: 30;
   @media screen and (max-width: ${ScreenSize.phone}) {
   }
 `;
 
 const CurrentClothes = styled.img`
-  position  : absolute;
-  z-index   : 1;
+  position: absolute;
+  z-index: 1;
   @media screen and (max-width: ${ScreenSize.phone}) {
   }
 `;

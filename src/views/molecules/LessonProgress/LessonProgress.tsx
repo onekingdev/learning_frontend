@@ -9,23 +9,23 @@ import { LESSON_PROGRESS_BAR_HEIGHT,
 LESSON_PROGRESS_BAR_MOBILE_HEIGHT } from 'constants/common';
 
 type LessonProgressProps = {
-  topic           : string;
-  currentQuestion : number;
-  totalQuestions  : number;
-  finished?       : boolean;
-  questions?      : any
-  answerResult?   : BlockQuestionInput[];
-  combocount      : number;
+  topic: string;
+  currentQuestion: number;
+  totalQuestions: number;
+  finished?: boolean;
+  questions?: any
+  answerResult?: BlockQuestionInput[];
+  combocount: number;
 };
 
 interface BlockQuestionInput {
-  question      : number;
-  answerOption  : number;
-  isCorrect     : boolean;
+  question: number;
+  answerOption: number;
+  isCorrect: boolean;
 }
 
 type ProgressBar = {
-  color         : BasicColor | null;
+  color: BasicColor | null;
 };
 
 export const LessonProgress: FC<LessonProgressProps> = ({
@@ -53,13 +53,13 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   useEffect(() => {}, [currentQuestion]);
 
   return (
-    <StyledLessonProgressWrapper>
+    <StyledLessonProgressWrapper id='lesson-progress-wrapper'>
       <LessonProgressTitle
-        topic           = {topic}
-        currentQuestion = {currentQuestion}
-        totalQuestions  = {totalQuestions}
-        finished        = {finished}
-        questions       = {questions}
+        topic={topic}
+        currentQuestion={currentQuestion}
+        totalQuestions={totalQuestions}
+        finished={finished}
+        questions={questions}
       ></LessonProgressTitle>
       <StyledLessonProgressBarWrapper>
         {buildBars(totalQuestions, answerResult).map(
@@ -76,33 +76,33 @@ export const LessonProgress: FC<LessonProgressProps> = ({
 };
 
 const StyledLessonProgressWrapper = styled.div`
-  position  : fixed;
-  z-index   : 100;
-  width     : 100%;
-  margin-left   : auto;
-  margin-right  : auto;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   @media screen and (min-width: ${ScreenSize.phone}) {
-    max-width   : 1366px;
+    max-width: 1366px;
   }
 `;
 
 const StyledLessonProgressBarWrapper = styled.div`
-  width   : 100%;
-  height  : ${LESSON_PROGRESS_BAR_MOBILE_HEIGHT}px;
-  display : flex;
+  width: 100%;
+  height: ${LESSON_PROGRESS_BAR_MOBILE_HEIGHT}px;
+  display: flex;
   background: white;
-  grid-gap  : 2px;
-  position  : relative;
+  grid-gap: 2px;
+  position: relative;
 
   .lightening {
-    display         : flex;
-    justify-content : space-between;
-    position        : absolute;
-    right           : 0;
-    top             : 0;
-    bottom          : 0;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
   }
   @media screen and (min-width: ${ScreenSize.phone}) {
-    height          : ${LESSON_PROGRESS_BAR_HEIGHT}px;
+    height: ${LESSON_PROGRESS_BAR_HEIGHT}px;
   }
 `;

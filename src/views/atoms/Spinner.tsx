@@ -22,9 +22,9 @@ export const Spinner: any = () => {
 };
 
 const Shapes = styled.div`
-  background-image : url(${shapes});
-  width            : 100vw;
-  height           : 100vh;
+  background-image: url(${shapes});
+  width: 100vw;
+  height: 100vh;
 `;
 
 // const rotate = keyframes`
@@ -38,24 +38,27 @@ const Shapes = styled.div`
 // `;
 const move = keyframes`
   from {
-    left      : 20vw;
-    transform : rotate(0deg);
+    left: 20vw;
+    transform: rotate(0deg);
   }
   50% {
-    left      : 55vw;
-    transform : rotate(-30deg);
+    left: 55vw;
+    transform: rotate(-30deg);
   }
 
   to {
-    transform : rotate(0deg);
-    left      : 90vw;
+    transform: rotate(0deg);
+    left: 90vw;
   }
 `;
 
 const Icon = styled.img`
-  position  : absolute;
-  top       : 30%;
-  height    : 300px;
-  z-index   : 1;
-  animation : ${move} 10s linear infinite;
+  position: absolute;
+  top: 30%;
+  height: 300px;
+  // margin-top: -250px;
+  // margin-left: -250px;
+  z-index: 1;
+  // animation: ${move} 6s linear infinite;
+  animation: ${move} 10s linear infinite;
 `;

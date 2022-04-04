@@ -29,14 +29,14 @@ const StyledLessonProgressBar = styled.div<{
   bgColor: string | null;
   width: string;
 }>`
-  width           : ${props => props.width};
-  height          : 100%;
+  width: ${props => props.width};
+  height: 100%;
   background-color: ${props => props.bgColor};
-  transition      : width 1000ms;
+  transition: width 1000ms;
 `;
 
 const Container = styled.div`
-  width           : 100%;
-  height          : 100%;
+  width: 100%;
+  height: 100%;
   background-color: ${BasicColor.gray80};
 `;

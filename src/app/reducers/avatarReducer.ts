@@ -27,8 +27,8 @@ const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: an
     case TYPE.AVATAR_SET_DEFAULT_LOGIN:
       return {
         ...state,
-        accessory: action.payload.currentAvatarHead,
-        head: action.payload.currentAvatarAccessories,
+        head: action.payload.currentAvatarHead,
+        accessory: action.payload.currentAvatarAccessories,
         clothes: action.payload.currentAvatarClothes,
         pants: action.payload.currentAvatarPants,
         skin: null

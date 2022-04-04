@@ -14,8 +14,8 @@ declare global {
   }
 }
 export default () => {
-  const [persist]         = useState(store());
-  const tawkMessengerRef  = useRef();
+  const [persist] = useState(store());
+  const tawkMessengerRef = useRef();
   const onLoad = () => {
     window.Tawk_API?.hideWidget();
   };
@@ -27,10 +27,10 @@ export default () => {
       <PersistGate loading={true} persistor={persist.persistor}>
         <SnackbarProvider maxSnack={3}>
           <TawkMessengerReact
-            propertyId  = "58cecc295b89e2149e1b042f"
-            widgetId    = "default"
-            onLoad      = {onLoad}
-            useRef      = {tawkMessengerRef}/>
+            propertyId="58cecc295b89e2149e1b042f"
+            widgetId="default"
+            onLoad={onLoad}
+            useRef={tawkMessengerRef}/>
           <Router>
             <Routes />
           </Router>

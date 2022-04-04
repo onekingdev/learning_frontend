@@ -38,10 +38,10 @@ export const LoginWrapper = styled.div`
   }
 `;
 export const TermsContainer = styled.div`
-  position  : fixed;
-  bottom    : 2vh;
-  right     : 0;
-  left      : 50%;
+  position: fixed;
+  bottom: 2vh;
+  right: 0;
+  left: 50%;
   @media (max-width: ${ScreenSize.phone}) {
     left: 0;
   }

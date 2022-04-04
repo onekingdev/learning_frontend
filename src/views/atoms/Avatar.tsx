@@ -3,14 +3,14 @@ import { ReactComponent as AvatarSvg } from 'views/assets/avatars/girl-11.svg';
 import { shadeColor }                  from 'views/Color';
 
 type AvatarProps = {
-  skin    : string;
-  shadow? : string;
+  skin: string;
+  shadow?: string;
 };
 
 export const Avatar: FC<AvatarProps> = ({skin, shadow}) => {
   useEffect(() => {
-    const main      = ['head', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg', 'legs'];
-    const shadowed  = ['neck', 'rightEar', 'blush1', 'blush2', 'lefttEar'];
+    const main = ['head', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg', 'legs'];
+    const shadowed = ['neck', 'rightEar', 'blush1', 'blush2', 'lefttEar'];
 
     main.map(s => {
       const currentSkin = document.getElementById(s);

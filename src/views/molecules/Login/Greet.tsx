@@ -26,12 +26,12 @@ export const Greet: FC<GreetProps> = ({
       <Illustrations>
         <Logo src={logo} alt="Learn with Socrates logo" />
         <ClassroomIlustration
-          src = {classroomIllustration}
-          alt = "Classroom Illustratoin"
+          src={classroomIllustration}
+          alt="Classroom Illustratoin"
         />
         <GreetingIlustration
-          src = {greetingIllustration}
-          alt = "Teach with student's illustration"
+          src={greetingIllustration}
+          alt="Teach with student's illustration"
         />
       </Illustrations>
     </div>
@@ -39,54 +39,54 @@ export const Greet: FC<GreetProps> = ({
 };
 
 const MobileWelcome = styled.div`
-  padding     : 4rem 1rem 2rem 1rem;
-  text-align  : center;
+  padding: 4rem 1rem 2rem 1rem;
+  text-align: center;
   @media (min-width: ${ScreenSize.tablet}) {
-    display   : none;
+    display: none;
   }
 `;
 
 const Illustrations = styled.div`
-  display     : none;
+  display: none;
   @media (min-width: ${ScreenSize.tablet}) {
-    display   : unset;
+    display: unset;
   }
 `;
 
 const Logo = styled.img`
   @media (min-width: ${ScreenSize.tablet}) {
-    width     : 12rem;
-    position  : absolute;
-    top       : 2rem;
-    left      : 3rem;
+    width: 12rem;
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
   }
   @media (min-width: ${ScreenSize.desktop}) {
-    width     : 15rem;
-    position  : absolute;
-    top       : 3rem;
-    left      : 8rem;
+    width: 15rem;
+    position: absolute;
+    top: 3rem;
+    left: 8rem;
   }
 `;
 
 const ClassroomIlustration = styled.img`
   @media (min-width: ${ScreenSize.tablet}) {
-    width     : 55%;
-    position  : absolute;
-    bottom    : 2rem;
-    left      : 3rem;
+    width: 55%;
+    position: absolute;
+    bottom: 2rem;
+    left: 3rem;
   }
   @media (min-width: ${ScreenSize.desktop}) {
-    display   : none;
+    display: none;
   }
 `;
 
 const GreetingIlustration = styled.img`
-  display     : none;
+  display: none;
   @media (min-width: ${ScreenSize.desktop}) {
-    display   : unset;
-    width     : 35%;
-    position  : absolute;
-    bottom    : 2rem;
-    left      : 8rem;
+    display: unset;
+    width: 35%;
+    position: absolute;
+    bottom: 2rem;
+    left: 8rem;
   }
 `;

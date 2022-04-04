@@ -73,7 +73,7 @@ const ProgressBarContainer = styled.div`
   width: 40vw;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     flex-direction: column-reverse;
-    width: 100%;
+    width: 80%;
     align-items: center;
   }
 `;

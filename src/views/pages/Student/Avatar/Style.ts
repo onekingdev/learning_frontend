@@ -9,8 +9,8 @@ export const Wrapper = styled.div`
   height            : 100vh;
 `;
 export const AvatarContainer = styled.div`
-  width   : 100%;
-  margin  : 40px 0;
+  width : 100%;
+  margin: 40px 0;
   @media screen and (max-width: ${ScreenSize.phone}) {
     margin    :0;
     display   :flex;

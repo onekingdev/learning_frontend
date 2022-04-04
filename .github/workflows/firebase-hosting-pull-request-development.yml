@@ -12,10 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: - run: sudo mv .env.dev.site .env.production && yarn && yarn build-github
+      - run: sudo mv .env.dev.site .env.production && yarn && yarn build-github
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          expires: 1d
           firebaseServiceAccount: >-
             ${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEARNINGWITHSOCRATES_FRONTEND
             }}

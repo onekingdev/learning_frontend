@@ -18,60 +18,60 @@ import {
     HorizontalGridLines,
 }                                      from 'react-vis';
 import TitleGameBackground             from 'views/assets/title-games-background.png';
-import { Typography }                  from 'views/atoms/Text/typography';
-import { ImageAvatar }                 from '../Avatar/DefaultAvatar';
+import { Typography }              from 'views/atoms/Text/typography';
+import { ImageAvatar } from '../Avatar/DefaultAvatar';
 
 
 const ChartHeaderContrainer = styled.div`
-    display         : flex;
-    flex-direction  : column;
-    justify-content : center;
-    align-items     : center;
-    margin-top      : 1rem;
-    background      : #D1E3F1;
-    padding-top     : 1rem;
-    padding-bottom  : 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    background: #D1E3F1;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     @media (min-width: ${ScreenSize.phone}) {
-        flex-direction  : row;
-        background      : transparent;
-        margin-top      : 5rem;
+        flex-direction: row;
+        background: transparent;
+        margin-top: 5rem;
     }
 `;
 const CrocoGirlImg = styled.img``;
 const ChartTitleGroup = styled.div`
-    position        : relative;
-    display         : flex;
-    justify-content : center;
+    position: relative;
+    display: flex;
+    justify-content: center;
 `;
 const ChartTitleBG = styled.img`
-    position    : absolute;
-    height      : 100%;
-    margin-left : 0;
-    width       : 100%;
-    z-index     : 10;
-    display     : none;
+    position: absolute;
+    height: 100%;
+    margin-left: 0;
+    width: 100%;
+    z-index: 10;
+    display: none;
     @media (min-width: ${ScreenSize.phone}) {
-        margin-left : -10rem;
-        display     : block
+        margin-left: -10rem;
+        display: block
     }
 `;
 const ChartTitle = styled.span`
-    z-index     : 20;
-    color       : #3F3F3F;
-    position    : relative;
-    font-weight : 700;
-    font-family : ${Typography.secondary};
-    font-style  : normal;
-    font-size   : 40px;
-    line-height : 50px;
-    width       : 100%;
-    padding-right   : 3rem;
-    padding-left    : 3rem;
-    text-align      : center;
+    z-index: 20;
+    color: #3F3F3F;
+    position: relative;
+    font-weight: 700;
+    font-family: ${Typography.secondary};
+    font-style: normal;
+    font-size: 40px;
+    line-height: 50px;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    text-align: center;
+    width: 100%;
     @media (min-width: ${ScreenSize.phone}) {
-        padding-right   : 10rem;
-        padding-left    : 0;
-        color           : white;
+        padding-right: 10rem;
+        padding-left: 0;
+        color: white;
     }
 `;
 
@@ -112,13 +112,12 @@ interface BarChartProps {
 
 // export const BarChart = ({ student }: { student: any }) => {
 export const BarChart = ({ student, studentId }: BarChartProps) => {
-    const guardian          = useSelector((state: any) => state.guardian);
-    const currentStudent    = guardian.guardianstudentSet.find((element: any) => element.student.id === studentId).student
+    const guardian       = useSelector((state: any) => state.guardian);
+    const currentStudent  = guardian.guardianstudentSet.find((element: any) => element.student.id === studentId).student
 
-    const [barChartData,    setBarChartData]    = useState<iChartData[]>([]);
-    const [barChartData2,   setBarChartData2]   = useState<iChartData[]>([]);
-    const [areaChartData,   setAreaChartData]   = useState<iChartData[]>([]);
-
+    const [barChartData, setBarChartData] = useState<iChartData[]>([]);
+    const [barChartData2, setBarChartData2] = useState<iChartData[]>([]);
+    const [areaChartData, setAreaChartData] = useState<iChartData[]>([]);
     useEffect(() => {
         console.log('studentid:', student)
         setBarChartData([
@@ -185,36 +184,36 @@ export const BarChart = ({ student, studentId }: BarChartProps) => {
         <div style={{ position: 'relative', maxWidth: '768px', margin: 'auto'}}>
             <MobileCom>
                 <img style={{
-                    position    : 'absolute',
-                    height      : '100%',
-                    left        : '50%',
-                    transform   : 'translateX(-50%)',
-                    zIndex      : 10,
+                    position: 'absolute',
+                    height: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    zIndex: 10,
                 }} src={TitleGameBackground} alt='TitleGameBackground'></img>
                 <h3 style={{
-                    position    : 'relative',
-                    width       : '100%',
-                    fontWeight  : 700,
-                    fontSize    : '24px',
-                    lineHeight  : '28px',
-                    color       : '#3F3F3F',
-                    display     : 'flex',
-                    textAlign   : 'center',
-                    paddingTop  : '1rem',
-                    zIndex      : 20,
-                    paddingBottom   : '1rem',
-                    justifyContent  : 'center',
+                    position: 'relative',
+                    width: '100%',
+                    fontWeight: 700,
+                    fontSize: '24px',
+                    lineHeight: '28px',
+                    color: '#3F3F3F',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    paddingTop: '1rem',
+                    paddingBottom: '1rem',
+                    zIndex: 20,
                 }}>Your Children</h3>
             </MobileCom>
             <ChartHeaderContrainer>
                 {
                     student && <ImageAvatar
-                        firstName   = {student.firstName ? student.firstName : 'F'}
-                        lastName    = {student.lastName ? student.lastName : 'L'}
-                        accessory   = {student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
-                        head        = {student.currentAvatarHead ? student.currentAvatarHead : null}
+                        firstName={student.firstName ? student.firstName : 'F'}
+                        lastName={student.lastName ? student.lastName : 'L'}
+                        accessory={student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
+                        head={student.currentAvatarHead ? student.currentAvatarHead : null}
                         // skinTone={null}
-                        size        = {200}
+                        size={200}
                     />
                 }
                 {/* <CrocoGirlImg style={{
@@ -226,11 +225,11 @@ export const BarChart = ({ student, studentId }: BarChartProps) => {
                 </ChartTitleGroup>
             </ChartHeaderContrainer>
             <div ref={chartContainerRef} style={{
-                position : 'relative',
-                width    : 'calc(100% - 2rem)',
-                marginLeft  : '1rem',
-                marginRight : '1rem',
-                overflowX   : 'auto'
+                position: 'relative',
+                width: 'calc(100% - 2rem)',
+                marginLeft: '1rem',
+                marginRight: '1rem',
+                overflowX: 'auto'
             }}>
                 <XYPlot height={450} width={chartWidth}>
                     <VerticalGridLines />
@@ -252,22 +251,22 @@ export const BarChart = ({ student, studentId }: BarChartProps) => {
                 </XYPlot>
             </div>
             <div style={{
-                display         : 'flex',
-                justifyContent  : 'center',
-                marginTop       : '1rem',
-                marginBottom    : '1rem',
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '1rem',
+                marginBottom: '1rem',
             }}>
                 <div style={{
-                    display     : 'flex',
-                    alignItems  : 'center'
+                    display: 'flex',
+                    alignItems: 'center'
                 }}>
                     <img src={ReportCheckIcon} alt='ReportCheckIcon' />
                     <span style={{marginLeft: '0.5rem'}}>correct answers</span>
                 </div>
                 <div style={{
-                    display     : 'flex',
-                    marginLeft  : '3rem',
-                    alignItems  : 'center'
+                    display: 'flex',
+                    marginLeft: '3rem',
+                    alignItems: 'center'
                 }}>
                     <img src={ReportCoinIcon} alt='ReportCoinIcon' />
                     <span style={{marginLeft: '0.5rem'}}>coins earned</span>
@@ -278,17 +277,17 @@ export const BarChart = ({ student, studentId }: BarChartProps) => {
 }
 
 export const MobileCom = styled.div`
-    display     : none;
-    position    : relative;
+    display: none;
+    position: relative;
     @media (max-width: ${ScreenSize.phone}) {
-        display : block;
+        display: block;
     }
 `;
 
 export const PcCom = styled.div`
-    display     : block;
-    position    : relative;
+    display: block;
+    position: relative;
     @media (max-width: ${ScreenSize.phone}) {
-        display : none;
+        display: none;
     }
 `;
