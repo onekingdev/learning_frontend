@@ -12,11 +12,11 @@ import greeting                                              from 'views/assets/
 import { Actions }                                           from 'views/molecules/Login/Actions';
 import { Form }                                              from 'views/molecules/Login/Form';
 import { Greet }                                             from 'views/molecules/Login/Greet';
-import { Login, StyledContainer, LoginWrapper, DesktopWelcome, TermsContainer }  from './Style';
 import { dictionary }                                        from './dictionary';
-import { ScreenSize } from 'constants/screenSize';
-import { Container, Grid } from '@mui/material';
-import { TypoBtn } from 'views/atoms/Text';
+import { ScreenSize }       from 'constants/screenSize';
+import { Container, Grid }  from '@mui/material';
+import { TypoBtn }          from 'views/atoms/Text';
+import { Login, StyledContainer, LoginWrapper, DesktopWelcome, TermsContainer }  from './Style';
 
 export const LogIn: FC = () => {
   const history   = useHistory();
@@ -65,11 +65,11 @@ export const LogIn: FC = () => {
   return (
     <Login>
       <Greet
-        header    ={dictionary[language].welcome}
+        header    = {dictionary[language].welcome}
         // subheader ={dictionary[language].instructions}
-        logo      ={logo}
-        classroomIllustration ={classroom}
-        greetingIllustration  ={greeting}
+        logo      = {logo}
+        classroomIllustration = {classroom}
+        greetingIllustration  = {greeting}
       />
       {/* <Card> */}
         <StyledContainer >
@@ -79,25 +79,25 @@ export const LogIn: FC = () => {
               {/* <Subheader>{dictionary[language].instructions}</Subheader> */}
             </DesktopWelcome>
             <Form
-              login={dictionary[language].login}
-              emailLabel={dictionary[language].userName}
-              password={dictionary[language].password}
-              forgot={dictionary[language].forgot}
-              wrongPasswordMessage={dictionary[language].error}
-              passwordValidator={validatePassword}
-              setUsername={setUsername}
-              setPassword={setPassword}
+              login       = {dictionary[language].login}
+              emailLabel  = {dictionary[language].userName}
+              password    = {dictionary[language].password}
+              forgot      = {dictionary[language].forgot}
+              wrongPasswordMessage  = {dictionary[language].error}
+              passwordValidator     ={validatePassword}
+              setUsername ={setUsername}
+              setPassword ={setPassword}
             />
             <Actions
-              googleText={dictionary[language].with_google}
-              googleColor={ButtonColor.google}
-              googleAction={() => console.log('google auth')} // !! remove console.logs!!!
+              googleText  = {dictionary[language].with_google}
+              googleColor = {ButtonColor.google}
+              googleAction= {() => console.log('google auth')} // !! remove console.logs!!!
+              loginText   = {dictionary[language].login}
+              loginColor  = {ButtonColor.login}
+              loginAction = {loginAction}
+              loading     = {loading}
+              disabled    = {true}
               or={dictionary[language].or}
-              loginText={dictionary[language].login}
-              loginColor={ButtonColor.login}
-              loginAction={loginAction}
-              loading={loading}
-              disabled={true}
             />
           </LoginWrapper>
           <TermsContainer>

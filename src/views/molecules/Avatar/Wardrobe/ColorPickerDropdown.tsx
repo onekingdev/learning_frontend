@@ -43,6 +43,9 @@ export const ColorPickerDropdown: FC<ColorPickerProp> = ({ select }) => {
 
 
 const DropDownContainer = styled.div`
+  position: absolute;
+  top: -20px;
+  right: 0;
   display: flex;
   padding: 5px;
   align-items: center;

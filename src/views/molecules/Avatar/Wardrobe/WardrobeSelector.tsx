@@ -1,23 +1,21 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import { ScreenSize } from 'constants/screenSize';
-import styled from 'styled-components';
-import wardrobe_icon from 'views/assets/wardrobe.png';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { LoadingContext } from 'react-router-loading';
-import { get } from 'api/queries/get';
-import { AVATAR } from 'api/fragments/avatarFragments';
-import { IAvatar } from 'app/entities/avatar';
-import { AvatarSet } from '../AvatarSet';
-import IconButton from '@mui/material/IconButton';
-import StarIcon from '@mui/icons-material/Star';
-import { ColorPickerDropdown } from 'views/molecules/Avatar/Wardrobe/ColorPickerDropdown';
-import { AtomsDrawer } from './AtomsDrawer';
-import { AtomsSelector } from './AtomsSelector';
+import { FC, useContext, useEffect, useState }      from 'react';
+import { ScreenSize }                               from 'constants/screenSize';
+import styled                                       from 'styled-components';
+import wardrobe_icon                                from 'views/assets/wardrobe.png';
+import { Link }                                     from 'react-router-dom';
+import { useSelector }                              from 'react-redux';
+import { LoadingContext }                           from 'react-router-loading';
+import { get }                                      from 'api/queries/get';
+import { AVATAR }                                   from 'api/fragments/avatarFragments';
+import { IAvatar }                                  from 'app/entities/avatar';
+import { AvatarSet }                                from '../AvatarSet';
+import IconButton                                   from '@mui/material/IconButton';
+import StarIcon                                     from '@mui/icons-material/Star';
+import { ColorPickerDropdown }                      from 'views/molecules/Avatar/Wardrobe/ColorPickerDropdown';
+import { AtomsDrawer }                              from './AtomsDrawer';
+import { AtomsSelector }                            from './AtomsSelector';
 import { doFetchOwnedAvatars, doSetFavoriteAvatar } from 'app/actions/avatarActions';
-import { useSnackbar } from 'notistack';
-import { Grid } from '@mui/material';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import { useSnackbar }                              from 'notistack';
 
 export const WardrobeSelector: FC = () => {
 
@@ -122,39 +120,44 @@ export const WardrobeSelector: FC = () => {
           <AtomsSelector items={atoms[atomIndex]} onItemClick={handleOnAtomSelect} owned={ownedIds} reload={reloadData} />
         }
       </WardrobeDrawer>
-      <Grid container justifyContent='center' sx={{ width: 'auto' }}>
-        <Grid item sx={{display:'flex'}} alignItems='center'>
+      <AvatarContainer >
+        {
+          avatarItems &&
+          <AvatarSet
+            accessory={avatarItems ? avatarItems.find(x => x.id === accessoryIndex)?.image : ''}
+            head={avatarItems ? avatarItems.find(x => x.id === headerIndex)?.image : ''}
+            pants={avatarItems ? avatarItems.find(x => x.id === footerIndex)?.image : ''}
+            body={avatarItems ? avatarItems.find(x => x.id === bodyIndex)?.image : ''}
+            skin={skin}
+          />
+        }
+        <ColorPickerDropdown select={setSkin} />
+        <div className='star'>
           {
-            avatarItems &&
-            <AvatarSet
-              accessory={avatarItems ? avatarItems.find(x => x.id === accessoryIndex)?.image : ''}
-              head={avatarItems ? avatarItems.find(x => x.id === headerIndex)?.image : ''}
-              pants={avatarItems ? avatarItems.find(x => x.id === footerIndex)?.image : ''}
-              body={avatarItems ? avatarItems.find(x => x.id === bodyIndex)?.image : ''}
-              skin={skin}
-            />
+            headerIndex && bodyIndex && footerIndex ?
+
+              <IconButton sx={{
+                '&.MuiIconButton-root': {
+                  color: 'gold',
+                }
+              }} aria-label='set favorite' component='span' onClick={setFavorite}>
+                <Star />
+              </IconButton> :
+              <IconButton sx={{
+                '&.MuiIconButton-root': {
+                  color: 'gray',
+                }
+              }} disabled aria-label='set favorite' component='span' onClick={setFavorite}>
+                <Star />
+              </IconButton>
           }
-        </Grid>
-        <Grid item sx={{display: 'flex', flexDirection:'column', alignItems:'center', width: 30}}>
-          <IconButton
-            aria-label='set favorite'
-            component='span'
-            onClick={setFavorite}
-            disabled={headerIndex && bodyIndex && footerIndex ? false : true}
-            sx={{
-              '&.MuiIconButton-root': {
-                color: headerIndex && bodyIndex && footerIndex ? 'gold' : 'gray',
-              }
-            }}
-          >
-            <StarRoundedIcon fontSize='large' />
-          </IconButton>
-          <Link id='go-to-favorites' to={'/avatar'}>
+        </div>
+        <div className='hanger'>
+          <Link to={'/avatar'}>
             <ToggleWardrobe src={wardrobe_icon} />
           </Link>
-          <ColorPickerDropdown select={setSkin} />
-        </Grid>
-      </Grid>
+        </div>
+      </AvatarContainer>
     </WardrobeModule>
   );
 };
@@ -166,11 +169,57 @@ const WardrobeModule = styled.div`
   @media screen and (max-width: ${ScreenSize.phone}) {
     flex-direction: column;
     align-items: center;
-    margin-top: 0;
-    margin-bottom: 10vh;
+    margin: 0;
   }
 `;
 
+const Star = styled(StarIcon)`
+  &.MuiSvgIcon-root  {
+    transform: scale(1.5);
+    &:hover {
+      transform: scale(1.6);
+    }
+  }
+`
+
+const AvatarContainer = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  .hanger {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    flex-direction: column;
+    .hanger {
+      position: absolute;
+      top: 0;
+      left: auto;
+      bottom: auto;
+      right: 20px;
+    }
+    margin-bottom: 10vh;
+  }
+  .register {
+    display: flex;
+    align-items: flex-end;
+    img {
+      z-index: 20;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .star {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+  }
+`;
 
 const WardrobeDrawer = styled.div`
   height: 100%;

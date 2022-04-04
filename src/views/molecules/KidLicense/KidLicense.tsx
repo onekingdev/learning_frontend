@@ -24,13 +24,13 @@ const License = (props: any) => {
             <Img src={socrates} />
             <div className="flex flex-col h-full justify-space-between">
               <DialogTextField
-                label="Member Since"
-                value={typeof(props?.membership) === 'object' ? `${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}` : ''}
+                label = "Member Since"
+                value = {typeof(props?.membership) === 'object' ? `${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}` : ''}
                 // onChange={(e) => updateUsername(e.target.value)}
               />
               <DialogTextField
-                label="User Name"
-                value={props?.username}
+                label = "User Name"
+                value = {props?.username}
                 // onChange={(e) => updateUsername(e.target.value)}
               />
             </div>
@@ -62,14 +62,14 @@ const License = (props: any) => {
 export default License
 
 const ResponsiveLicense = styled.div`
-width: 100%;
-heigth: 100%;
+width  : 100%;
+heigth : 100%;
 display: flex;
 flex-direction: column;
 @media screen and (max-width: 540px) {
-  font-size: 1em;
-  padding: 0;
-  margin: 0;
+  font-size : 1em;
+  padding   : 0;
+  margin    : 0;
 }
 `
 
@@ -79,20 +79,20 @@ const Img = styled.img`
 }
 `
 const Username = styled(TypoGeneralText)`
-  color: white;
-  text-align: center;
-  background: ${BasicColor.green};
-  padding: 3px 6px;
-  border-radius: 5px;
+  color       : white;
+  text-align  : center;
+  background  : ${BasicColor.green};
+  padding     : 3px 6px;
+  border-radius : 5px;
   @media screen and (max-width: ${ScreenSize.phone}) {
-    width: 60vw;
+    width     : 60vw;
   }
 `
 const DialogTextField = styled(TextField)`
 &.MuiTextField-root {
-  margin-top: 10px;
+  margin-top  : 10px;
 }
 @media screen and (max-width: 540px) {
-  width: 30%;
+  width       : 30%;
 }
 `

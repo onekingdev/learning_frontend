@@ -337,7 +337,7 @@ export const Question: FC = () => {
         </StudentMenu>
       ) : blockPresentation && question ? (
         <StudentMenu>
-          <ProgressWrapper id='lesson-progress'>
+          <ProgressWrapper>
             <LessonProgress
               currentQuestion={questionCounter + 1}
               topic          ={blockPresentation?.block?.topicGrade?.topic?.name}

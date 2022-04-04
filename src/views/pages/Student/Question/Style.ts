@@ -17,12 +17,12 @@ export const Wrapper = styled.div`
 `;
 
 export const ProgressWrapper = styled.div`
-  // position        : relative;
+  position        : relative;
   display         : flex;
   justify-content : center;
-  margin-bottom   : 100px;
-  @media (max-width: ${ScreenSize.phone}) {
-    margin-bottom   : 60px;
+  margin-bottom   : 120px;
+  @media (min-width: ${ScreenSize.desktop}) {
+    // margin-top: 1rem;
   }
 `;
 

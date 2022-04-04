@@ -36,18 +36,18 @@ export const LessonProgressLightening: FC<LighteningProps> = ({combocount}) => {
 };
 
 const Energy = styled.div`
-  display: flex;
+  display       : flex;
   .count {
-    align-self: center;
+    align-self  : center;
   }
   @media screen and (max-width: ${ScreenSize.phone}) {
   }
 `;
 
 const Img = styled.img`
-  height: ${LESSON_PROGRESS_BAR_HEIGHT}px;
+  height        : ${LESSON_PROGRESS_BAR_HEIGHT}px;
   @media screen and (max-width: ${ScreenSize.phone}) {
-    height: ${LESSON_PROGRESS_BAR_MOBILE_HEIGHT}px;
+    height      : ${LESSON_PROGRESS_BAR_MOBILE_HEIGHT}px;
   }
 `
 

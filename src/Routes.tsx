@@ -36,7 +36,7 @@ import { KidsProgress }          from 'views/pages/Student/Progress/Progress';
 import 'animate.css';
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
-  const user = useSelector((state: Store) => state.user);
+  const user            = useSelector((state: Store) => state.user);
   const isAuthenticated = !!user?.token;
   return loading ? (
     <Route loading {...rest}>

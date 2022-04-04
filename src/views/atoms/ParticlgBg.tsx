@@ -14,25 +14,25 @@ interface Props {
   close: () => (void)
 }
 export const LevelUpDgContent: FC<Props> = ({ close }) => {
-  const [play] = useSound(fireworkSfx);
+  const [play]  = useSound(fireworkSfx);
 
   const earning = useSelector((state: any) => state.earning);
 
 
   const config = {
-    num: [1, 10],
-    rps: 0.1,
-    radius: [2, 10],
-    life: [-2, 3],
-    v: [2, 3],
-    tha: [-40, 40],
-    alpha: [0.9, 0],
-    scale: [0.1, 0.4],
+    num     : [1, 10],
+    rps     : 0.1,
+    radius  : [2, 10],
+    life    : [-2, 3],
+    v       : [2, 3],
+    tha     : [-40, 40],
+    alpha   : [0.9, 0],
+    scale   : [0.1, 0.4],
     position: 'all',
-    color: ['random', '#ff0000'],
-    cross: 'dead',
-    random: 15,
-    g: 1,
+    color   : ['random', '#ff0000'],
+    cross   : 'dead',
+    random  : 15,
+    g       : 1,
   };
   return (
     <div onLoad={() => play} style={{ display: 'flex', justifyContent: 'center' }}>
@@ -56,7 +56,7 @@ export const LevelUpDgContent: FC<Props> = ({ close }) => {
   );
 };
 
-const Flip = styled.div`
+const Flip    = styled.div`
   animation: 2s ${keyframes`${flip}`} ;
 `;
 

@@ -21,9 +21,9 @@ export const Battery: FC<BatteryProps> = ({charge}) => {
         <BatteryStyles>
           {chargeArray.map((item, i) => (
             <ChargeItem
-              color={item ? BasicColor.greenSoft : BasicColor.gray80}
-              borderColor={item ? BasicColor.greenShadow : BasicColor.gray90}
-              key={i}
+              color       = {item ? BasicColor.greenSoft : BasicColor.gray80}
+              borderColor = {item ? BasicColor.greenShadow : BasicColor.gray90}
+              key         = {i}
             />
           ))}
         </BatteryStyles>
@@ -34,19 +34,19 @@ export const Battery: FC<BatteryProps> = ({charge}) => {
 };
 
 type ChargeItemProps = {
-  color: BasicColor.greenSoft | BasicColor.gray80;
-  borderColor: BasicColor.greenShadow | BasicColor.gray90;
+  color       : BasicColor.greenSoft    | BasicColor.gray80;
+  borderColor : BasicColor.greenShadow  | BasicColor.gray90;
 };
 
 const ChargeItem = styled.div<ChargeItemProps>`
-  width: 15px;
-  height: 34px;
-  background-color: ${p => p.color};
-  border-bottom: 10px solid ${p => p.borderColor};
+  width   : 15px;
+  height  : 34px;
+  background-color  : ${p => p.color};
+  border-bottom     : 10px solid ${p => p.borderColor};
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    border-bottom: 2px solid ${p => p.borderColor};
-    width: 34px;
-    height: 15px;
+    border-bottom   : 2px solid ${p => p.borderColor};
+    width           : 34px;
+    height          : 15px;
   }
 `;
 

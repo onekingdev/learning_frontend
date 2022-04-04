@@ -1,56 +1,29 @@
-import { FC } from 'react';
-import { ScreenSize } from 'constants/screenSize';
-import styled from 'styled-components';
+import { FC }                     from 'react';
+import { ScreenSize }             from 'constants/screenSize';
+import styled                     from 'styled-components';
 import { AvatarItemWithSkinTone } from 'views/molecules/Avatar/AvatarItemWithSkinTone';
 
 interface AvatarProps {
-  head: string
-  body: string
+  head  : string
+  body  : string
+  pants : string
+  skin? : string
   accessory: string
-  pants: string
-  skin?: string
 }
-
-const AVATAR_SET_SIZE = 150
 export const AvatarSet: FC<AvatarProps> = ({
   head, body, accessory, pants, skin
 }) => {
 
   return (
-    <CurrentAvatar style={{ height: AVATAR_SET_SIZE * 2.6, width: AVATAR_SET_SIZE*1.5 }}>
-      <img src={accessory} style={{
-        width: AVATAR_SET_SIZE,
-        top: -AVATAR_SET_SIZE / 4,
-        position: 'absolute',
-        zIndex: 30
-      }} />
-      <div style={{
-        width: AVATAR_SET_SIZE,
-        top: -AVATAR_SET_SIZE / 4,
-        position: 'absolute',
-        zIndex: 25
-      }}>
+    <CurrentAvatar>
+      <CurrentAccessory src={accessory} />
+      <div className='header' >
         <AvatarItemWithSkinTone url={head} skinTone={skin} />
       </div>
-      <div style={
-        body ? {
-          width: AVATAR_SET_SIZE * 1.5,
-          position: 'absolute',
-          zIndex: 20
-        }
-          :
-          { display: 'none' }}>
+      <div className='body' style={body ? {} : { display: 'none' }}>
         <AvatarItemWithSkinTone url={body} skinTone={skin} />
       </div>
-      <div style={
-        pants ? {
-          width: AVATAR_SET_SIZE,
-          bottom: 0,
-          position: 'absolute',
-          zIndex: 15
-        }
-          :
-          { display: 'none' }}>
+      <div className='pants' style={pants ? {} : { display: 'none' }}>
         <AvatarItemWithSkinTone url={pants} skinTone={skin} />
       </div>
     </CurrentAvatar>
@@ -58,18 +31,55 @@ export const AvatarSet: FC<AvatarProps> = ({
 };
 
 const CurrentAvatar = styled.div`
-  display: flex;
+  height        : 400px;
+  display       : flex;
   flex-direction: column;
-  overflow: hidden;
-  align-items: center;
+  overflow      : hidden;
+  align-items   : center;
   justify-content: center;
-  width: 300px;
+  width         : 300px;
   @media (min-width:${ScreenSize.tablet}) and (max-width:${ScreenSize.desktop}) {
-    width: 250px;
+    width       : 250px;
   }
-  position: relative;
+  position      : relative;
   @media screen and (max-width: ${ScreenSize.phone}) {
-    width: 65vw;
+    width       : 65vw;
   }
 
+  .header {
+    position    : absolute;
+    width       : 160px;
+    margin      : auto;
+    z-index     : 2;
+    top         : -65px;
+    @media screen and (min-width: ${ScreenSize.phone}) {
+    }
+  }
+
+  .body {
+    width   : 235px;
+    z-index : 1;
+    top     : 119px;
+    position: absolute;
+    @media screen and (min-width: ${ScreenSize.phone}) {
+    }
+  }
+
+  .pants {
+    position  : absolute;
+    bottom    : 0;
+    width     : 160px;
+    @media screen and (min-width: ${ScreenSize.phone}) {
+    }
+  }
+`;
+
+const CurrentAccessory = styled.img`
+  width   : 160px;
+  margin  : auto;
+  position: absolute;
+  top     : -75px;
+  z-index : 3;
+  @media screen and (min-width: ${ScreenSize.phone}) {
+  }
 `;
