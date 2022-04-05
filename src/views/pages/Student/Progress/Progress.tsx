@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, FC, useRef } from 'react';
+import { useHistory }           from 'react-router-dom';
 import { StudentMenu }         from 'views/pages/Student/Menus/StudentMenu';
 import { Title }               from 'views/atoms/Text';
 import Box                     from '@mui/material/Box';
@@ -2559,6 +2560,7 @@ export const KidsProgress = () => {
             </svg>
         )
     }
+    const history = useHistory();
     return (<Wrapper>
         <StudentMenu>
             <Container>
@@ -2666,12 +2668,18 @@ export const KidsProgress = () => {
                                 active: subSubjects1.length > id ? subSubjects1[id].active : false,
                             })}
                         </MobileCom>) }
-                        { subSubjects1.map((subSubject, id) => <PcCom key={id} style={{
+                        { subSubjects1.map((subSubject, id) => <PcCom onClick={() => {
+                            // history.push('/question/PATH/' + aokId)
+                            history.push('/question/AI/' + data[id].id)
+                            // console.log(data[id].id)
+                            // alert("Developing now, will be released soon 🎓")
+                        }} key={id} style={{
                             position: 'absolute',
                             transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
+                            // transform: `translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
                             left: `${subSubject.left}%`,
                             top: `${subSubject.top}%`,
-                            fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
+                            // fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
                             fontWeight: subSubject.active ? '600' : '400',
                             width: `${subSubject.width * mapWidth / 1366}px`,
                             // overflow: "hidden",

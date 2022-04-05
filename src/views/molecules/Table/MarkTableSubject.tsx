@@ -141,6 +141,7 @@ const MarkTableSubject = ({
     data: any[];
     activeSubjectId: number,
 }) => {
+    console.log(data)
     return (<MarkTableDiv>
         { data && data.length > 0 ? data?.map((aok: any, id: number) => (
             <SingleGroup aokId={activeSubjectId} key={id} main={{

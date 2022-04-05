@@ -41,9 +41,9 @@ export const ConfirmAccount: FC = () => {
         </div>
         <StudentRegister>
           <StudentSelector>
-            <Button value={'test'} />
-            <Button value={'test'} />
-            <Button value={'test'} />
+            <Button value={'test'} onClick={() => {}}/>
+            <Button value={'test'} onClick={() => {}}/>
+            <Button value={'test'} onClick={() => {}}/>
           </StudentSelector>
           <Centered>
             <StudentsForm>
@@ -57,7 +57,7 @@ export const ConfirmAccount: FC = () => {
               />
             </StudentsForm>
             <ValidationButton>
-              <Button value={'Validate'} />
+              <Button value={'Validate'} onClick={() => {}} />
             </ValidationButton>
           </Centered>
         </StudentRegister>
