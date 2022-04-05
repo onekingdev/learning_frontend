@@ -2561,7 +2561,7 @@ export const KidsProgress = () => {
         )
     }
     const history = useHistory();
-    const [type, setType] = useState<string>("Today's Answers");
+    const [type, setType] = useState<string>();
     const handleTypeChange = (e: any) => setType(e.target.value);
     return (<Wrapper>
         <StudentMenu>
@@ -2591,6 +2591,7 @@ export const KidsProgress = () => {
                 <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
+                    flexWrap: "wrap",
                     width: '100%',
                     paddingTop: '1rem'
                 }}>
@@ -2625,14 +2626,27 @@ export const KidsProgress = () => {
                     <Box sx={{ minWidth: 120 }} style={{
                         marginRight: "1rem"
                     }}>
-                        <FormControl fullWidth>
-                            {/* <InputLabel id='demo-simple-select-label' style={{
-                                background: '#26B824',
-                                color: 'white'
-                            }}>Review Questions Answered</InputLabel> */}
+                        <FormControl fullWidth style={{
+                            width: "17rem",
+                        }}>
+                            <PcCom style={{
+                                paddingLeft: "1rem"
+                            }}>
+                                <InputLabel id='demo-simple-select-label' style={{
+                                    background: '#26B824',
+                                    color: 'white',
+                                }}>Review Questions Answered</InputLabel>
+                            </PcCom>
+                            <MobileCom>
+                                <InputLabel id='demo-simple-select-label' style={{
+                                    background: '#26B824',
+                                    color: 'white',
+                                }}>Review Questions</InputLabel>
+                            </MobileCom>
                             <Select
                                 id='demo-simple-select'
                                 value={type}
+                                disabled
                                 onChange={handleTypeChange}
                                 SelectDisplayProps={{
                                     style: {
