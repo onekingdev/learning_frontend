@@ -1183,6 +1183,9 @@ export const KidsProgress = () => {
                     stroke='#5E6366'
                     strokeWidth={active ? '8' : '0'}
                 />
+                <g>
+                    <text x="0" y="0" width="84" height="70" font-family="Verdana" font-size="35" fill="blue">Hello</text>
+                </g>
             </svg>
         )
     }
@@ -1198,6 +1201,9 @@ export const KidsProgress = () => {
                     stroke='#5E6366'
                     strokeWidth={active ? '8' : '0'}
                 />
+                <g>
+                    <text x="0" y="0" width="84" height="70">Hello</text>
+                </g>
             </svg>
         )
     }
