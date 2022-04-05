@@ -2561,7 +2561,7 @@ export const KidsProgress = () => {
         )
     }
     const history = useHistory();
-    const [type, setType] = useState<string>("Review");
+    const [type, setType] = useState<string>("Today's Answers");
     const handleTypeChange = (e: any) => setType(e.target.value);
     return (<Wrapper>
         <StudentMenu>
@@ -2596,15 +2596,13 @@ export const KidsProgress = () => {
                 }}>
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label' style={{
+                            {/* <InputLabel id='demo-simple-select-label' style={{
                                 background: '#1771B9',
                                 color: 'white'
-                            }}>Grade</InputLabel>
+                            }}>Grade</InputLabel> */}
                             <Select
-                                labelId='demo-simple-select-label'
                                 id='demo-simple-select'
                                 value={grade}
-                                label="Grade"
                                 disabled
                                 // onChange={handleGradeChange}
                                 SelectDisplayProps={{
@@ -2628,15 +2626,13 @@ export const KidsProgress = () => {
                         marginRight: "1rem"
                     }}>
                         <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label' style={{
+                            {/* <InputLabel id='demo-simple-select-label' style={{
                                 background: '#26B824',
                                 color: 'white'
-                            }}>Type</InputLabel>
+                            }}>Review Questions Answered</InputLabel> */}
                             <Select
-                                labelId='demo-simple-select-label'
                                 id='demo-simple-select'
                                 value={type}
-                                label='Subject'
                                 onChange={handleTypeChange}
                                 SelectDisplayProps={{
                                     style: {
@@ -2645,7 +2641,7 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                { ["Review", "Questions", "Answered"].map((type, id) => (
+                                { ["Today's Answers", "Recent Answers", "Recent Incorrect Answers"].map((type, id) => (
                                     <MenuItem key={id} value={type}>{type}</MenuItem>
                                 )) }
                             </Select>
@@ -2653,15 +2649,13 @@ export const KidsProgress = () => {
                     </Box>
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label' style={{
+                            {/* <InputLabel id='demo-simple-select-label' style={{
                                 background: '#CE2489',
                                 color: 'white'
-                            }}>Subject</InputLabel>
+                            }}>Subject</InputLabel> */}
                             <Select
-                                labelId='demo-simple-select-label'
                                 id='demo-simple-select'
                                 value={activeSubjectId}
-                                label='Subject'
                                 onChange={handleSubjectChange}
                                 SelectDisplayProps={{
                                     style: {
