@@ -3,13 +3,12 @@ import { Redirect, useLocation } from 'react-router-dom';
 import { Route, Switch }         from 'react-router-loading';
 import { fadeIn }                from 'react-animations';
 import { useSelector }           from 'react-redux';
-
 import styled, { keyframes }     from 'styled-components';
 import { LogIn }                 from 'views/pages/Login/Login';
 import { Welcome }               from 'views/pages/Welcome/Welcome';
 import { Question }              from 'views/pages/Student/Question/Question';
 import { Avatar }                from 'views/pages/Student/Avatar/Avatar';
-import { MyProfile }             from 'views/pages/Student/MyProfile/MyProfile';
+import { MyProfile }             from 'views/pages/Student/Settings/MyProfile';
 import { Backpack }              from 'views/pages/Student/Backpack/Backpack';
 import { Games }                 from 'views/pages/Student/Games/Games';
 import { GamesMenu }             from 'views/pages/Student/Games/GamesMenu/GamesMenu';
@@ -77,6 +76,18 @@ export function Routes() {
   }, [location])
   return (
     <FadeIn>
+    {/* <TransitionGroup component={null}> */}
+      {/* <CSSTransition
+        key={location.key}
+        appear={true}
+        timeout={{enter: 1000, exit: 1000}}
+        classNames={{
+          enter: 'my-node-enter',
+          enterActive: 'my-node-enter-active',
+          exit: 'my-node-exit',
+          exitActive: 'my-node-exit-active',
+         }}
+      > */}
         <Switch loadingScreen={Spinner} location={location}>
           <PrivateRoute exact path="/" requireAuth={false}>
             <Welcome />
@@ -145,6 +156,9 @@ export function Routes() {
           <PrivateRoute loading={true} path="/parent/setting">
             <Settings />
           </PrivateRoute>
+          <PrivateRoute loading={true} path="/student/settings">
+            <Settings />
+          </PrivateRoute>
           <PrivateRoute loading={true} path="/parent/report">
             <Report />
           </PrivateRoute>
@@ -166,12 +180,18 @@ export function Routes() {
           <PrivateRoute loading={true} path="/kids/new">
             <NewKids />
           </PrivateRoute>
+          {/* <Route path="/testing-student-treasure-track">
+            <StudentTreasureTrack />
+          </Route> */}
           {process.env.NODE_ENV === 'development' ? (
             <Route path="/testing-student-progress">
+              {/* <StudentProgress /> */}
             </Route>
           ) : null}
           <Redirect from="/" to="/login" />
         </Switch>
+       {/* </CSSTransition > */}
+    {/* </TransitionGroup> */}
     </FadeIn>
   );
 }

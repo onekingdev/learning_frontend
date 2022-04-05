@@ -16,12 +16,13 @@ import bank_icon                    from 'views/assets/nav-icons/bank.png';
 import collectible_icon             from 'views/assets/nav-icons/collectibles.png';
 import profile_icon                 from 'views/assets/nav-icons/profile.png';
 import tutorial_icon                from 'views/assets/nav-icons/tutorial.png';
+import settings_icon                from 'views/assets/nav-icons/settings.png';
 import menu_toggle                  from 'views/assets/Menu Toggle.svg';
 import styled                       from 'styled-components';
 import { TypoIcon }                 from 'views/atoms/Text';
 import { CardDialog }               from 'views/molecules/StudentCard/MyCards/CardDialog';
 import { VideoPlayer } from 'views/molecules/VideoPlayer';
-import { SCREEN_MOBILE, TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH, TUTORIAL_VDO_URL } from 'constants/common';
+import { SCREEN_MOBILE, TUTORIAL_VDO_URL } from 'constants/common';
 import { VIDEO_TUTORIAL_EXPLAIN }   from 'constants/parent';
 import {ScreenSize}                 from 'constants/screenSize';
 import { doSetOldUser } from 'app/actions';
@@ -182,6 +183,16 @@ export const Sidebar: FC = () => {
                                     onClick={() => setOpen(true)}
                                 />
                                 <TypoIcon >TUTORIAL</TypoIcon >
+                            </IconContainer>
+                        </StyledListItem>
+                        <StyledListItem >
+                            <IconContainer>
+                                <Icon
+                                    image={settings_icon}
+                                    size={ICON_SIZE.medium}
+                                    onClick={() => history.push('/profile')}
+                                />
+                                <TypoIcon >SETTINGS</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                     </List>
