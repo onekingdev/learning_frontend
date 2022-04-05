@@ -2561,6 +2561,8 @@ export const KidsProgress = () => {
         )
     }
     const history = useHistory();
+    const [type, setType] = useState<string>("Review");
+    const handleTypeChange = (e: any) => setType(e.target.value);
     return (<Wrapper>
         <StudentMenu>
             <Container>
@@ -2594,14 +2596,23 @@ export const KidsProgress = () => {
                 }}>
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label'>Grade</InputLabel>
+                            <InputLabel id='demo-simple-select-label' style={{
+                                background: '#1771B9',
+                                color: 'white'
+                            }}>Grade</InputLabel>
                             <Select
                                 labelId='demo-simple-select-label'
                                 id='demo-simple-select'
                                 value={grade}
-                                label='Grade'
+                                label="Grade"
                                 disabled
                                 // onChange={handleGradeChange}
+                                SelectDisplayProps={{
+                                    style: {
+                                        background: '#1771B9',
+                                        color: 'white'
+                                    }
+                                }}
                             >
                                 { grades.map((grade, id) => (
                                     <MenuItem key={id} value={grade}>{grade}</MenuItem>
@@ -2609,15 +2620,55 @@ export const KidsProgress = () => {
                             </Select>
                         </FormControl>
                     </Box>
+                    <div style={{
+                        flexGrow: 1,
+                        flexShrink: 1,
+                    }}></div>
+                    <Box sx={{ minWidth: 120 }} style={{
+                        marginRight: "1rem"
+                    }}>
+                        <FormControl fullWidth>
+                            <InputLabel id='demo-simple-select-label' style={{
+                                background: '#26B824',
+                                color: 'white'
+                            }}>Type</InputLabel>
+                            <Select
+                                labelId='demo-simple-select-label'
+                                id='demo-simple-select'
+                                value={type}
+                                label='Subject'
+                                onChange={handleTypeChange}
+                                SelectDisplayProps={{
+                                    style: {
+                                        background: '#26B824',
+                                        color: 'white'
+                                    }
+                                }}
+                            >
+                                { ["Review", "Questions", "Answered"].map((type, id) => (
+                                    <MenuItem key={id} value={type}>{type}</MenuItem>
+                                )) }
+                            </Select>
+                        </FormControl>
+                    </Box>
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label'>Subject</InputLabel>
+                            <InputLabel id='demo-simple-select-label' style={{
+                                background: '#CE2489',
+                                color: 'white'
+                            }}>Subject</InputLabel>
                             <Select
                                 labelId='demo-simple-select-label'
                                 id='demo-simple-select'
                                 value={activeSubjectId}
                                 label='Subject'
                                 onChange={handleSubjectChange}
+                                SelectDisplayProps={{
+                                    style: {
+                                        background: '#CE2489',
+                                        color: 'white'
+                                    }
+                                }}
                             >
                                 { areasOfKnowledge.map((subject, id) => (
                                     <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
