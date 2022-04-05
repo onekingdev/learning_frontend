@@ -21,6 +21,7 @@ import { changeStudentGrade }       from 'app/actions/studentActions';
 import { changeStudentPassword }    from 'app/actions/studentActions';
 import { ImageAvatar }              from 'views/molecules/Avatar/DefaultAvatar';
 import { getAudiencesWithGrades}    from 'app/actions/audienceActions'
+import { dictionary }               from './dictionary';
 
 import {
   Title,
@@ -52,6 +53,7 @@ const KidsList: FC = () => {
 
   const [children,  setChildren] = useState<kid[]>([]);
   const [audiences, setAudiences] = useState<any>();
+  const language = 'en-us';
 
   const langs = [{
     name: 'English',
@@ -61,7 +63,7 @@ const KidsList: FC = () => {
   const Kid = (props: any) => {
 
     const userName  = props?.user?.username;
-    const language  = props?.user?.language;
+    const kidLanguage  = props?.user?.language;
     // const parentName  = user?.username;
     // const fullName    = props?.fullName;
     const studentId = props?.id;
@@ -128,7 +130,7 @@ const KidsList: FC = () => {
         <LSDialog
           isOpen        ={openLicense}
           open          ={openLicenseDlg}
-          title         ='Your Child License'
+          title         ={dictionary[language]?.yourChildLicense}
           fullWidth     ='true'
           dialogContent ={
             <>
@@ -143,14 +145,14 @@ const KidsList: FC = () => {
                     bgColor={BasicColor.green}
                     onClick={handleDownloadBtnClicked}
                     loading={loading}
-                    value='Download'
+                    value={dictionary[language]?.download}
                   />
                 </GridItem>
                 <GridItem item md={6} xs={12}>
                   <Button
                     bgColor={BasicColor.gray60}
                     onClick={() => handleCancelBtnClicked()}
-                    value='Return'
+                    value={dictionary[language]?.return}
                   />
                 </GridItem>
               </GridContainer>
@@ -160,19 +162,19 @@ const KidsList: FC = () => {
         <LSDialog
           isOpen        ={openChangePwd}
           open          ={openChangePwdDlg}
-          title         ='Change Your Password'
+          title         ={dictionary[language]?.changeYourPassword}
           fullWidth     ='true'
           dialogContent ={
             <>
               <GridContainer container>
                 <GridItem item md={12} xs={12}>
                   <TextField
-                    label='Password'
+                    label={dictionary[language]?.password}
                     onChange={e => {
                       setNewPwd(e?.target?.value);
                     }}
                     error={newPwd?.length > 0 ? false : true}
-                    helperText={'Password field is required'}
+                    helperText={dictionary[language]?.passwordFieldIsRequired}
                   />
                 </GridItem>
                 <GridItem item md={6} xs={12}>
@@ -180,14 +182,14 @@ const KidsList: FC = () => {
                     bgColor={BasicColor.green}
                     onClick={handleChangePwdBtnClicked}
                     loading={loading}
-                    value='Change'
+                    value={dictionary[language]?.change}
                   />
                 </GridItem>
                 <GridItem item md={6} xs={12}>
                   <Button
                     bgColor={BasicColor.gray60}
                     onClick={() => handleCancelBtnClicked()}
-                    value='Return'
+                    value={dictionary[language]?.return}
                   />
                 </GridItem>
               </GridContainer>
@@ -220,20 +222,20 @@ const KidsList: FC = () => {
           </GridItem>
           <GridItem item xs={12} md={2}>
             <TextField
-              label='User Name'
+              label={dictionary[language]?.userName}
               value={userName}
             />
           </GridItem>
           <GridItem item xs={12} md={2}>
             <FormControl fullWidth>
               <InputLabel id='select-grade-label'>
-                Select Your Grade
+                {dictionary[language]?.selectYourGrade}
               </InputLabel>
               <Select
                 labelId   ='select-grade-label'
                 id        ='select-grade'
                 value     ={grades?.length > 0 ? grades[grades?.findIndex((item: any) => item?.id === grade?.id)] : ''}
-                label     ='Select Your Grade'
+                label     ={dictionary[language]?.selectYourGrade}
                 className ={`${classes?.select} err-border`}
                 onChange  ={async (e) => {
                   setGrade(e?.target?.value);
@@ -255,13 +257,13 @@ const KidsList: FC = () => {
           <GridItem item xs={12} md={2}>
             <FormControl fullWidth>
               <InputLabel id='select-lang-label'>
-                Select Your Language
+                {dictionary[language]?.selectYourLanguage}
               </InputLabel>
               <Select
                 labelId   ='select-lang-label'
                 id        ='select-lang'
-                value     ={langs[langs?.findIndex((item: any) => item?.value === language)]}
-                label     ='Select Your Language'
+                value     ={langs[langs?.findIndex((item: any) => item?.value === kidLanguage)]}
+                label     ={dictionary[language]?.selectYourLanguage}
                 className ={`${classes.select} err-border`}
                 onChange  ={async () => {
                   // setGrade(e.target.value);
@@ -285,14 +287,14 @@ const KidsList: FC = () => {
             <Button
               bgColor={BasicColor.shadeBrown}
               onClick={() => setOpenChangePwd(true)}
-              value='Change Password'
+              value={dictionary[language]?.changePassword}
             />
           </GridItem>
           <GridItem item xs={12} md={1.5}>
             <Button
               bgColor={BasicColor.red}
               onClick={() => history.push("/login")}
-              value='Student Login'
+              value={dictionary[language]?.studentLogin}
             />
           </GridItem>
         </GridContainer>
@@ -321,7 +323,7 @@ const KidsList: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
-        <Title>Your Children</Title>
+        <Title>{dictionary[language]?.yourChildren}</Title>
         {children?.map((child, index) => (
           <Kid {...child} index={index} key={index}></Kid>
         ))}

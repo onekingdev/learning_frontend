@@ -14,16 +14,18 @@ import { Form }                                              from 'views/molecul
 import { Greet }                                             from 'views/molecules/Login/Greet';
 import { Login, StyledContainer, LoginWrapper, DesktopWelcome, TermsContainer }  from './Style';
 import { dictionary }                                        from './dictionary';
-import { ScreenSize } from 'constants/screenSize';
-import { Container, Grid } from '@mui/material';
-import { TypoBtn } from 'views/atoms/Text';
+import { useSelector }        from 'react-redux';
+import { ScreenSize }         from 'constants/screenSize';
+import { Container, Grid }    from '@mui/material';
+import { TypoBtn }            from 'views/atoms/Text';
 
 export const LogIn: FC = () => {
   const history   = useHistory();
   const dispatch  = useDispatch()
   const { enqueueSnackbar } = useSnackbar();
 
-  const language = 'en';
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
 
   const [loading, setLoading]   = useState(false);
   const [username, setUsername] = useState('');

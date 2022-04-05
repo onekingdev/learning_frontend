@@ -2591,8 +2591,7 @@ export const KidsTreasureTrack: FC = () => {
     const [addPls, setAddPls] = useState<number[]>([]);
     useEffect(() => {
         (async () => {
-            // console.log(user)
-            if (user && user.token) {
+            if (user) {
                 // Get Topic Report
                 const res:any = await query(``, HonorRoll, user.token).catch(e => ({success: false}));
                 if (res.success === false) {
@@ -2644,166 +2643,166 @@ export const KidsTreasureTrack: FC = () => {
                 loadingContext.done();
             }
         })();
-    }, []);
+    }, [user]);
+
     return (
-        <Wrapper>
-            <StudentMenu>
-                <Container>
-                    <MapWrapper>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            width: '100%',
-                        }}>
-                            <MapTitleViewer>
+    <Wrapper>
+        <StudentMenu>
+            <Container>
+                <MapWrapper>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%',
+                    }}>
+                        <MapTitleViewer>
+                            <img style={{
+                                position: 'absolute',
+                                zIndex: 10,
+                                width: '100%',
+                                height: '80px'
+                            }} src={welcome} alt='Welcome' />
+                            <Title style={{
+                                zIndex: 20,
+                            }}>Treasure Track</Title>
+                        </MapTitleViewer>
+                        <MapViewer>
+                            <div ref={mapBgRef} style={{
+                                position: 'relative',
+                                width: '100%',
+                                overflow: 'auto',
+                            }}>
+                                <ImgPc src={treasureMapPc} alt='treasureMap' />
+                                <ImgMobile src={treasureMapMobile} alt='treasureMap' />
+                                { TreasureIslands.map(({Comp, left, top}, id) => <PcCom
+                                    key={id}
+                                    style={{
+                                        position: 'absolute',
+                                        left: `${left}%`,
+                                        top: `${top}%`,
+                                        zIndex: 10,
+                                        opacity: earnedCoin / 250 < id ? '0.6' : '1',
+                                    }}
+                                ><Comp /></PcCom>) }
+                                { TreasureIslandsMobile.map(({Comp, left, top}, id) => <MobileCom
+                                    key={id}
+                                    style={{
+                                        position: 'absolute',
+                                        left: `${left}%`,
+                                        top: `${top}%`,
+                                        zIndex: 10,
+                                        opacity: earnedCoin / 250 < id ? '0.6' : '1',
+                                    }}
+                                ><Comp /></MobileCom>) }
+                                <PcCom style={{
+                                    position: 'absolute',
+                                    left: '30%',
+                                    top: '16.93%',
+                                    zIndex: 20,
+                                }}>
+                                { pathComPc }
+                                </PcCom>
+                                <MobileCom style={{
+                                    position: 'absolute',
+                                    left: '24.72%',
+                                    top: '19.59%',
+                                    zIndex: 20
+                                }}>
+                                { pathComMobile }
+                                </MobileCom>
+                            </div>
+                            <CharactorViewer>
+                                <AvatarSet
+                                    accessory={avatar.accessory ? avatar.accessory.image : ''}
+                                    head={avatar.head ? avatar.head.image : ''}
+                                    pants={avatar.pants ? avatar.pants.image : ''}
+                                    body={avatar.clothes ? avatar.clothes.image : ''}
+                                    skin={avatar.skin}
+                                />
+                                {/* <img src={Hair} alt='hair' />
+                                <img style={{
+                                    marginTop: '-2rem'
+                                }} src={TShirt} alt='tshirt' />
+                                <img src={Pant} alt='pant' />
                                 <img style={{
                                     position: 'absolute',
-                                    zIndex: 10,
-                                    width: '100%',
-                                    height: '80px'
-                                }} src={welcome} alt='Welcome' />
-                                <Title style={{
-                                    zIndex: 20,
-                                }}>Treasure Track</Title>
-                            </MapTitleViewer>
-                            <MapViewer>
-                                <div ref={mapBgRef} style={{
-                                    position: 'relative',
-                                    width: '100%',
-                                    overflow: 'auto',
-                                }}>
-                                    <ImgPc src={treasureMapPc} alt='treasureMap' />
-                                    <ImgMobile src={treasureMapMobile} alt='treasureMap' />
-                                    { TreasureIslands.map(({Comp, left, top}, id) => <PcCom
-                                        key={id}
-                                        style={{
-                                            position: 'absolute',
-                                            left: `${left}%`,
-                                            top: `${top}%`,
-                                            zIndex: 10,
-                                            opacity: earnedCoin / 250 < id ? '0.6' : '1',
+                                    top: '2rem'
+                                }} src={FaceGirl11} alt='pant' /> */}
+                            </CharactorViewer>
+                        </MapViewer>
+                    </div>
+                </MapWrapper>
+                <PanelWrapper>
+                    <Card>
+                        <CardContent>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                marginLeft: '-1rem',
+                                marginRight: '-1rem',
+                            }}>
+                                <Typography variant='h4' color='text.primary' gutterBottom>
+                                Honor Roll
+                                </Typography>
+                                <Typography variant='h5' color='text.primary' gutterBottom>
+                                    <div>
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center'
                                         }}
-                                    ><Comp /></PcCom>) }
-                                    { TreasureIslandsMobile.map(({Comp, left, top}, id) => <MobileCom
-                                        key={id}
-                                        style={{
-                                            position: 'absolute',
-                                            left: `${left}%`,
-                                            top: `${top}%`,
-                                            zIndex: 10,
-                                            opacity: earnedCoin / 250 < id ? '0.6' : '1',
-                                        }}
-                                    ><Comp /></MobileCom>) }
-                                    <PcCom style={{
-                                        position: 'absolute',
-                                        left: '30%',
-                                        top: '16.93%',
-                                        zIndex: 20,
-                                    }}>
-                                    { pathComPc }
-                                    </PcCom>
-                                    <MobileCom style={{
-                                        position: 'absolute',
-                                        left: '24.72%',
-                                        top: '19.59%',
-                                        zIndex: 20
-                                    }}>
-                                    { pathComMobile }
-                                    </MobileCom>
-                                </div>
-                                <CharactorViewer>
-                                    <AvatarSet
-                                        accessory={avatar.accessory ? avatar.accessory.image : ''}
-                                        head={avatar.head ? avatar.head.image : ''}
-                                        pants={avatar.pants ? avatar.pants.image : ''}
-                                        body={avatar.clothes ? avatar.clothes.image : ''}
-                                        skin={avatar.skin}
-                                    />
-                                    {/* <img src={Hair} alt='hair' />
-                                    <img style={{
-                                        marginTop: '-2rem'
-                                    }} src={TShirt} alt='tshirt' />
-                                    <img src={Pant} alt='pant' />
-                                    <img style={{
-                                        position: 'absolute',
-                                        top: '2rem'
-                                    }} src={FaceGirl11} alt='pant' /> */}
-                                </CharactorViewer>
-                            </MapViewer>
-                        </div>
-                    </MapWrapper>
-                    <PanelWrapper>
-                        <Card>
-                            <CardContent>
-                                <div style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    marginLeft: '-1rem',
-                                    marginRight: '-1rem',
-                                }}>
-                                    <Typography variant='h4' color='text.primary' gutterBottom>
-                                    Honor Roll
-                                    </Typography>
-                                    <Typography variant='h5' color='text.primary' gutterBottom>
-                                        <div>
-                                            <div style={{
-                                                display: 'flex',
-                                                alignItems: 'center'
-                                            }}
-                                                aria-controls={open ? 'basic-menu' : undefined}
-                                                aria-haspopup='true'
-                                                aria-expanded={open ? 'true' : undefined}
-                                                onClick={handleClick}
-                                            >
-                                                {menuTitle}
-                                                <ArrowDropDownIcon />
-                                            </div>
-                                            <Menu
-                                                id='basic-menu'
-                                                anchorEl={anchorEl}
-                                                open={open}
-                                                onClose={() => handleClose(menuTitle)}
-                                                MenuListProps={{
-                                                'aria-labelledby': 'basic-button',
-                                                }}
-                                            >
-                                                <MenuItem onClick={() => handleClose('Socrates')}>Socrates</MenuItem>
-                                                <MenuItem onClick={() => handleClose('Classroom')}>Classroom</MenuItem>
-                                                <MenuItem onClick={() => handleClose('School')}>School</MenuItem>
-                                            </Menu>
+                                            aria-controls={open ? 'basic-menu' : undefined}
+                                            aria-haspopup='true'
+                                            aria-expanded={open ? 'true' : undefined}
+                                            onClick={handleClick}
+                                        >
+                                            {menuTitle}
+                                            <ArrowDropDownIcon />
                                         </div>
-                                    </Typography>
-                                    { (rankKids.length === 5 && addPls.length === 5 && initRanks.length === 5) ?
-                                    <table style={{
-                                        width: "100%",
-                                        padding: "0 1rem"
-                                    }}>
-                                        <tbody>
-                                            { rankKids.map((kid, i) => {
-                                                return (
-                                                <UserRankTreasureTrack
-                                                    additionalPl={addPls[i].toString() + "px"}
-                                                    active={addPls[i] === 0}
-                                                    coinsEarned={kid.blockTransactionCoins}
-                                                    userRank={initRanks[i]}
-                                                    userName={kid.student.user.username}
-                                                    key={i}
-                                                    userHead={kid.student?.user?.student?.currentAvatarHead?.image}
-                                                    userAccessory={kid.student?.user?.student?.currentAvatarAccessories?.image}
-                                                    userClothes={kid.student?.user?.student?.currentAvatarClothes?.image}
-                                                />
-                                                );
-                                            }) }
-                                        </tbody>
-                                    </table> : "" }
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </PanelWrapper>
-                </Container>
-            </StudentMenu>
-        </Wrapper>
+                                        <Menu
+                                            id='basic-menu'
+                                            anchorEl={anchorEl}
+                                            open={open}
+                                            onClose={() => handleClose(menuTitle)}
+                                            MenuListProps={{
+                                            'aria-labelledby': 'basic-button',
+                                            }}
+                                        >
+                                            <MenuItem onClick={() => handleClose('Socrates')}>Socrates</MenuItem>
+                                            <MenuItem onClick={() => handleClose('Classroom')}>Classroom</MenuItem>
+                                            <MenuItem onClick={() => handleClose('School')}>School</MenuItem>
+                                        </Menu>
+                                    </div>
+                                </Typography>
+                                <table style={{
+                                    width: "100%",
+                                    padding: "0 1rem"
+                                }}>
+                                    <tbody>
+                                    { (rankKids.length === 5 && addPls.length === 5 && initRanks.length === 5) ? rankKids.map((kid, i) => {
+                                        return (
+                                        <UserRankTreasureTrack
+                                            additionalPl={addPls[i].toString() + "px"}
+                                            active={addPls[i] === 0}
+                                            coinsEarned={kid.blockTransactionCoins}
+                                            userRank={initRanks[i]}
+                                            userName={kid.student.user.username}
+                                            key={i}
+                                            userHead={kid.student?.user?.student?.currentAvatarHead?.image}
+                                            userAccessory={kid.student?.user?.student?.currentAvatarAccessories?.image}
+                                            userClothes={kid.student?.user?.student?.currentAvatarClothes?.image}
+                                        />
+                                        );
+                                    }) : "" }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </PanelWrapper>
+            </Container>
+        </StudentMenu>
+    </Wrapper>
     )
 }
 

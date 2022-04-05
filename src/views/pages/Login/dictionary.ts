@@ -1,5 +1,5 @@
-export const dictionary = Object.freeze({
-  en: {
+export const dictionary: any = Object.freeze({
+  "EN_US": {
     welcome: 'Welcome back!',
     termCondition: 'Terms & Conditions',
     instructions: 'To log in please enter your name and password',
@@ -15,5 +15,39 @@ export const dictionary = Object.freeze({
     privacy: 'Privacy Policy',
     children_privacy: "Children's Privacy Policy",
     or: 'or',
+  },
+  "th": {
+    welcome: 'ยินดีต้อนรับกลับ!',
+    termCondition: 'ข้อตกลงและเงื่อนไข',
+    instructions: 'เข้าสู่ระบบ กรุณาใส่ชื่อและรหัสผ่านของคุณ',
+    email: 'อีเมล',
+    userName: 'ชื่อผู้ใช้หรืออีเมล',
+    password: 'รหัสผ่าน',
+    error: 'รหัสผ่านผิดพลาด. ลองอีกครั้งในภายหลังหรือรีเซ็ต',
+    forgot: 'ลืมรหัสผ่านหรือไม่?',
+    login: 'เข้าสู่ระบบ',
+    create: 'สร้างบัญชี',
+    with_google: 'เข้าสู่ระบบด้วย Google',
+    about: 'เกี่ยวกับเรา',
+    privacy: 'นโยบายความเป็นส่วนตัว',
+    children_privacy: "นโยบายความเป็นส่วนตัวของเด็ก",
+    or: 'หรือ',
+  },
+  "es-mx": {
+    welcome: '¡Bienvenido de nuevo!',
+    termCondition: 'Términos y condiciones',
+    instructions: 'Para iniciar sesión por favor ingrese su nombre y contraseña',
+    email: 'Correo electrónico',
+    userName: 'Nombre de usuario o correo electrónico',
+    password: 'Clave',
+    error: 'Contraseña incorrecta. Vuelva a intentarlo más tarde o reinícielo.',
+    forgot: '¿Olvidaste tu contraseña?',
+    login: 'Iniciar sesión',
+    create: 'Crear una cuenta',
+    with_google: 'Iniciar sesión con Google',
+    about: 'Sobre nosotros',
+    privacy: 'Política de privacidad',
+    children_privacy: "Política de privacidad para niños",
+    or: 'o',
   },
 });
