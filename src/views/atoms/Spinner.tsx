@@ -41,9 +41,14 @@ const move = keyframes`
     left: 20vw;
     transform: rotate(0deg);
   }
+  25% {
+    transform: rotate(-15deg);
+  }
   50% {
-    left: 55vw;
-    transform: rotate(-30deg);
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-15deg);
   }
 
   to {

@@ -82,7 +82,7 @@ export const KnowledgeMap: FC = () => {
     <Wrapper>
       <StudentMenu>
         <Boat src={boat} style={{position: 'absolute', left: boatX - 100, top: boatY - 100}}/>
-        <Ocean>
+        <Ocean >
           {areasOfKnowledge.map(
             (
               areaOfKnowledge: {

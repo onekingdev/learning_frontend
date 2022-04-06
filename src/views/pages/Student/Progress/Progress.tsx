@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, FC, useRef } from 'react';
+import { useHistory }           from 'react-router-dom';
 import { StudentMenu }         from 'views/pages/Student/Menus/StudentMenu';
 import { Title }               from 'views/atoms/Text';
 import Box                     from '@mui/material/Box';
@@ -2559,6 +2560,9 @@ export const KidsProgress = () => {
             </svg>
         )
     }
+    const history = useHistory();
+    const [type, setType] = useState<string>("Review");
+    const handleTypeChange = (e: any) => setType(e.target.value);
     return (<Wrapper>
         <StudentMenu>
             <Container>
@@ -2592,14 +2596,23 @@ export const KidsProgress = () => {
                 }}>
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label'>Grade</InputLabel>
+                            <InputLabel id='demo-simple-select-label' style={{
+                                background: '#1771B9',
+                                color: 'white'
+                            }}>Grade</InputLabel>
                             <Select
                                 labelId='demo-simple-select-label'
                                 id='demo-simple-select'
                                 value={grade}
-                                label='Grade'
+                                label="Grade"
                                 disabled
                                 // onChange={handleGradeChange}
+                                SelectDisplayProps={{
+                                    style: {
+                                        background: '#1771B9',
+                                        color: 'white'
+                                    }
+                                }}
                             >
                                 { grades.map((grade, id) => (
                                     <MenuItem key={id} value={grade}>{grade}</MenuItem>
@@ -2607,15 +2620,55 @@ export const KidsProgress = () => {
                             </Select>
                         </FormControl>
                     </Box>
+                    <div style={{
+                        flexGrow: 1,
+                        flexShrink: 1,
+                    }}></div>
+                    <Box sx={{ minWidth: 120 }} style={{
+                        marginRight: "1rem"
+                    }}>
+                        <FormControl fullWidth>
+                            <InputLabel id='demo-simple-select-label' style={{
+                                background: '#26B824',
+                                color: 'white'
+                            }}>Type</InputLabel>
+                            <Select
+                                labelId='demo-simple-select-label'
+                                id='demo-simple-select'
+                                value={type}
+                                label='Subject'
+                                onChange={handleTypeChange}
+                                SelectDisplayProps={{
+                                    style: {
+                                        background: '#26B824',
+                                        color: 'white'
+                                    }
+                                }}
+                            >
+                                { ["Review", "Questions", "Answered"].map((type, id) => (
+                                    <MenuItem key={id} value={type}>{type}</MenuItem>
+                                )) }
+                            </Select>
+                        </FormControl>
+                    </Box>
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
-                            <InputLabel id='demo-simple-select-label'>Subject</InputLabel>
+                            <InputLabel id='demo-simple-select-label' style={{
+                                background: '#CE2489',
+                                color: 'white'
+                            }}>Subject</InputLabel>
                             <Select
                                 labelId='demo-simple-select-label'
                                 id='demo-simple-select'
                                 value={activeSubjectId}
                                 label='Subject'
                                 onChange={handleSubjectChange}
+                                SelectDisplayProps={{
+                                    style: {
+                                        background: '#CE2489',
+                                        color: 'white'
+                                    }
+                                }}
                             >
                                 { areasOfKnowledge.map((subject, id) => (
                                     <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
@@ -2666,12 +2719,18 @@ export const KidsProgress = () => {
                                 active: subSubjects1.length > id ? subSubjects1[id].active : false,
                             })}
                         </MobileCom>) }
-                        { subSubjects1.map((subSubject, id) => <PcCom key={id} style={{
+                        { subSubjects1.map((subSubject, id) => <PcCom onClick={() => {
+                            // history.push('/question/PATH/' + aokId)
+                            history.push('/question/AI/' + data[id].id)
+                            // console.log(data[id].id)
+                            // alert("Developing now, will be released soon 🎓")
+                        }} key={id} style={{
                             position: 'absolute',
                             transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
+                            // transform: `translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
                             left: `${subSubject.left}%`,
                             top: `${subSubject.top}%`,
-                            fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
+                            // fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
                             fontWeight: subSubject.active ? '600' : '400',
                             width: `${subSubject.width * mapWidth / 1366}px`,
                             // overflow: "hidden",

@@ -1,8 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import isSvg                       from 'is-svg'
 import { parseSVG, fetchFile }     from './ColorUtil'
-import { useSelector }            from 'react-redux';
-import { dictionary }              from 'views/pages/Student/Avatar/dictionary'
 
 interface SvgProps {
   url: string
@@ -11,9 +9,6 @@ interface SvgProps {
 
 export const AvatarItemWithSkinTone: FC<SvgProps> = ({ url, skinTone }) => {
   const [img, setImg] = useState('')
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
 
   const updateAvatar = async () => {
     // fetch if skinTone is not zero

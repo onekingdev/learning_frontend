@@ -38,6 +38,8 @@ export const Ocean = styled.div`
     padding-top           : 3em;
     padding-bottom        : 3em;
     display               : grid;
+    margin-left           : -90px;
+    margin-right          : -90px;
     grid-template-columns : 60% 40%;
   }
 `;

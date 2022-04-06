@@ -14,7 +14,8 @@ const INITIAL_STATE = {
   profile: {
     role: null,
   },
-  token: null
+  token: null,
+  sound: true
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUser}) => {
@@ -23,6 +24,16 @@ const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUse
       return {
         ...state,
         ...action.payload
+      };
+    case TYPE.USER_SET_TOGGLE_SOUND:
+      return {
+        ...state,
+        sound: !state.sound
+      };
+    case TYPE.USER_SET_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload
       };
     case TYPE.GUARDIAN_UPDATE_EMAIL_PWD:
       return {

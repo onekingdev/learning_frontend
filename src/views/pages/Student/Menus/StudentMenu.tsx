@@ -11,7 +11,7 @@ export const StudentMenu: FC = ({ children }) => {
   const earning = useSelector((state: any) => state.earning);
 
   return (
-    <Container sx={{ padding: 0 }}>
+    <Container sx={{ padding: 0, maxWidth: 2000 }} id='main-page-container'>
       <TopMenuContainer>
         <TopMenu
           rank={earning.rank}

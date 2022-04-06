@@ -7,7 +7,7 @@ import { TypoHeader } from 'views/atoms/Text';
 export const PageTitle: FC<{title: string}> = ({title}) => {
   return (
     <CardTitle>
-      <TypoHeader>{title}</TypoHeader>
+      <TypoHeader style={{margin: 0}}>{title}</TypoHeader>
     </CardTitle>
   );
 };
@@ -20,23 +20,10 @@ const CardTitle = styled.div`
   background-position: center;
   background-size: contain;
   padding: 15px;
-  margin-top: 3vh;
-  h1 {
-    font-family: 'Quicksand', sans-serif;
-    margin: 0;
-    // font-size: 40px;
-    font-style: normal;
-    letter-spacing: 0.25px;
-    text-align: center;
-    // padding:inherit;
-  }
+  margin-top: 15vh;
 
   @media screen and (max-width: ${ScreenSize.phone}) {
-    h1 {
-      font-size: 30px;
-    }
     width: 100%;
-    // padding: 10px;
     margin: 0;
     padding: 10px 0 10px 0;
     background-image: none;
