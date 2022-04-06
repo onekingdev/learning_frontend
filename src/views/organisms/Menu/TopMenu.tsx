@@ -13,15 +13,15 @@ import { Sidebar }                 from 'views/organisms/Menu/Sidebar';
 import { ProfileDropDownMenu }     from 'views/organisms/Menu/ProfileDropdownMenu';
 
 type TopMenuProps = {
-  rank         : number;
-  level        : number;
-  exp          : number;
-  expMax       : number;
-  icon         : string;
-  userName     : string;
-  progress     : number;
-  energyCharge : number;
-  balance      : number;
+  rank: number;
+  level: number;
+  exp: number;
+  expMax: number;
+  icon: string;
+  userName: string;
+  progress: number;
+  energyCharge: number;
+  balance: number;
 };
 
 export const TopMenu: FC<TopMenuProps> = ({
@@ -39,7 +39,7 @@ export const TopMenu: FC<TopMenuProps> = ({
   const [navOp, setNavOp] = useState(true)
   const changeNavBarOpacity = () => {
     const posY = window.scrollY
-    if(posY < 40) {
+    if(posY < 60) {
       setNavOp(true)
     } else setNavOp(false)
   }

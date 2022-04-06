@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import {Typography, Container} from '@mui/material';
+import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { SettingBarColor } from 'views/Color';
 import { SoundSwitch } from './SoundSwitch';
@@ -11,8 +11,9 @@ import { LanguageSelect } from './StudentSettingsLanguageSelect';
 export const StudentSettingsAccordian: FC = () => {
 
   return (
-    <Container sx={{marginTop: 2, marginBottom: 2, borderRadius: 10}}>
-      <Accordion sx={{ marginBottom: 2 }}>
+    <div>
+
+      <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -25,31 +26,29 @@ export const StudentSettingsAccordian: FC = () => {
           <LanguageSelect />
         </AccordionDetails>
       </Accordion>
-      <Accordion sx={{ marginBottom: 2 }}>
+      <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
-          sx={{ background: SettingBarColor.notifications }}
         >
-          <Typography style={{ color: 'white' }}>Account</Typography>
+          <Typography>Account</Typography>
         </AccordionSummary>
         <AccordionDetails>
         </AccordionDetails>
       </Accordion>
       <Accordion>
         <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
-          sx={{ background: SettingBarColor.audio }}
-          expandIcon={<ExpandMoreIcon />}
         >
-          <Typography style={{ color: 'white', textAlign:'center' }}>Sound</Typography>
+          <Typography>Sound</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{ display: 'flex', justifyContent: 'center'}}>
+        <AccordionDetails>
           <SoundSwitch />
         </AccordionDetails>
       </Accordion>
-    </Container>
+    </div>
   );
 }

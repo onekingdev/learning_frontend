@@ -27,7 +27,7 @@ export const Img = styled.img`
 `;
 export const Wrapper = styled.div`
   background-image  : url(${background});
-  background-repeat : repeat-y;
+  background-repeat : no-repeat;
   background-size   : cover;
   height            : 100vh;
 `;

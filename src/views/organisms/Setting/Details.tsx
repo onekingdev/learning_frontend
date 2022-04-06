@@ -1,15 +1,15 @@
-import { FC, useState } from 'react';
-import styled from 'styled-components';
-import Box from '@mui/material/Box';
+import { FC, useState }               from 'react';
+import styled                         from 'styled-components';
+import Box                            from '@mui/material/Box';
 import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
-import { LSBlueTextButton } from 'views/molecules/Setting/utils/Style'
-import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanForm';
-import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
-import { PlanList } from 'views/molecules/Setting/PlanList';
-import { CancelMembershipForm } from 'views/molecules/Setting/CancelMembershipForm';
+import { LSBlueTextButton }           from 'views/molecules/Setting/utils/Style'
+import { LSDialog }                   from 'views/molecules/Setting/LSDialog';
+import { AddSimplePlanForm }          from 'views/molecules/Setting/AddSimplePlanForm';
+import { useDialog, useAddDialog }    from 'views/molecules/Setting/utils/useDialog';
+import { PlanList }                   from 'views/molecules/Setting/PlanList';
+import { CancelMembershipForm }       from 'views/molecules/Setting/CancelMembershipForm';
 
-export const MembershipDetail: FC = () => {
+export const MembershipDetail:FC = () => {
 
   const { isOpen, open } = useDialog()
   const { isAddOpen, openAdd } = useAddDialog()
@@ -23,51 +23,50 @@ export const MembershipDetail: FC = () => {
   }
 
   return (
-    <Box>
-      <LSShadowContainer >
-        <LSTitle>
-          Membership Details
-        </LSTitle>
-        <Box >
-          <Box sx={{ display: 'flex', justifyContent: 'center', margin: 2 }}>
-            <LSDialog
-              isOpen={isAddOpen}
-              open={openAdd}
-              title='Add Plan/or Package'
-              // fullWidth='true'
-              contentText='Choose the new plan'
-              dialogContent={
-                <AddSimplePlanForm
-                  open={openAdd}
-                  refresh={refresh}
-                />
-              }
-            />
-          </Box>
-          <PlanList refresh={value} />
-          <BtnContainer >
-            <LSBlueTextButton onClick={openAdd}>
-              {'Add a Plan'}
-            </LSBlueTextButton>
-            <LSBlueTextButton onClick={open}>
-              {'Cancel Membership'}
-            </LSBlueTextButton>
-          </BtnContainer>
+  <Box>
+    <LSShadowContainer >
+      <LSTitle>
+        Membership Details
+      </LSTitle>
+      <Box >
+        <Box sx={{display:'flex', justifyContent:'center', margin:2}}>
           <LSDialog
-            isOpen={isOpen}
-            open={open}
-            title='Cancel Membership'
-            contentText='Thank you for your plan. We are sorry to see you go'
-            dialogContent={
-              <CancelMembershipForm
-                open={open}
-                refresh={refresh}
-              />
-            }
+          isOpen={isAddOpen}
+          open={openAdd}
+          title = 'Add Plan/or Package'
+          contentText = 'Choose the new plan'
+          dialogContent = {
+            <AddSimplePlanForm
+              open={openAdd}
+              refresh={refresh}
+            />
+          }
           />
         </Box>
-      </LSShadowContainer>
-    </Box>
+        <PlanList refresh={value}/>
+        <BtnContainer >
+          <LSBlueTextButton onClick={openAdd}>
+              {'Add a Plan'}
+            </LSBlueTextButton>
+          <LSBlueTextButton onClick={open}>
+            {'Cancel Membership'}
+          </LSBlueTextButton>
+        </BtnContainer>
+        <LSDialog
+          isOpen={isOpen}
+          open={open}
+          title = 'Cancel Membership'
+          contentText = 'Thank you for your plan. We are sorry to see you go'
+          dialogContent = {
+            <CancelMembershipForm
+              open={open}
+              refresh={refresh}
+            />
+          }
+          />
+      </Box>
+    </LSShadowContainer>
+  </Box>
   );
 }
 const BtnContainer = styled.div`

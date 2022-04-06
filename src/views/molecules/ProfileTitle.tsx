@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import ribbon from 'views/assets/ribbon.svg';
-import { TypoTitle } from 'views/atoms/Text';
+import { TypoHeader } from 'views/atoms/Text';
 
 export const ProfileTitle: FC<{ title: string }> = ({ title }) => {
   return (
     <CardTitle>
-      <TypoTitle style={{ padding: 20, margin: 0 }}>{title}</TypoTitle>
+      <TypoHeader style={{ padding: 30, margin: 0 }}>{title}</TypoHeader>
     </CardTitle>
   );
 };

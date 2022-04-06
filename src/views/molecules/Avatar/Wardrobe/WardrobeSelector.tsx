@@ -10,6 +10,7 @@ import { AVATAR } from 'api/fragments/avatarFragments';
 import { IAvatar } from 'app/entities/avatar';
 import { AvatarSet } from '../AvatarSet';
 import IconButton from '@mui/material/IconButton';
+import StarIcon from '@mui/icons-material/Star';
 import { ColorPickerDropdown } from 'views/molecules/Avatar/Wardrobe/ColorPickerDropdown';
 import { AtomsDrawer } from './AtomsDrawer';
 import { AtomsSelector } from './AtomsSelector';
@@ -17,11 +18,9 @@ import { doFetchOwnedAvatars, doSetFavoriteAvatar } from 'app/actions/avatarActi
 import { useSnackbar } from 'notistack';
 import { Grid } from '@mui/material';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const WardrobeSelector: FC = () => {
 
-  const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
   const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) => state.student)
   const loadingContext = useContext(LoadingContext);
@@ -123,11 +122,8 @@ export const WardrobeSelector: FC = () => {
           <AtomsSelector items={atoms[atomIndex]} onItemClick={handleOnAtomSelect} owned={ownedIds} reload={reloadData} />
         }
       </WardrobeDrawer>
-      <Grid container justifyContent='center' sx={{ width: 'auto', margin: 3 }}>
-        <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 30}}>
-          <ColorPickerDropdown select={setSkin} />
-        </Grid>
-        <Grid item sx={{ display: 'flex', overflow: 'hidden' }} alignItems='center'>
+      <Grid container justifyContent='center' sx={{ width: 'auto' }}>
+        <Grid item sx={{display:'flex'}} alignItems='center'>
           {
             avatarItems &&
             <AvatarSet
@@ -136,11 +132,10 @@ export const WardrobeSelector: FC = () => {
               pants={avatarItems ? avatarItems.find(x => x.id === footerIndex)?.image : ''}
               body={avatarItems ? avatarItems.find(x => x.id === bodyIndex)?.image : ''}
               skin={skin}
-              size={isMobile ? 120 : 150}
             />
           }
         </Grid>
-        <Grid item sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+        <Grid item sx={{display: 'flex', flexDirection:'column', alignItems:'center', width: 30}}>
           <IconButton
             aria-label='set favorite'
             component='span'
@@ -157,6 +152,7 @@ export const WardrobeSelector: FC = () => {
           <Link id='go-to-favorites' to={'/avatar'}>
             <ToggleWardrobe src={wardrobe_icon} />
           </Link>
+          <ColorPickerDropdown select={setSkin} />
         </Grid>
       </Grid>
     </WardrobeModule>

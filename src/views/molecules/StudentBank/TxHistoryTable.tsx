@@ -141,7 +141,7 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
                             value = 'Deposit';
                             break;
                           case 'L' :
-                            value = 'Withdrawal';
+                            value = 'Withdraw';
                             break;
                           case 'I' :
                             value = 'Interest'

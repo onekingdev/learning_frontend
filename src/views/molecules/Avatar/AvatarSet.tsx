@@ -8,25 +8,25 @@ interface AvatarProps {
   body: string
   accessory: string
   pants: string
-  skin?: string,
-  size: number
+  skin?: string
 }
 
+const AVATAR_SET_SIZE = 150
 export const AvatarSet: FC<AvatarProps> = ({
-  head, body, accessory, pants, skin, size
+  head, body, accessory, pants, skin
 }) => {
 
   return (
-    <CurrentAvatar style={{ height: size * 2.6, width: size*1.5 }}>
+    <CurrentAvatar style={{ height: AVATAR_SET_SIZE * 2.6, width: AVATAR_SET_SIZE*1.5 }}>
       <img src={accessory} style={{
-        width: size,
-        top: -size / 4,
+        width: AVATAR_SET_SIZE,
+        top: -AVATAR_SET_SIZE / 4,
         position: 'absolute',
         zIndex: 30
       }} />
       <div style={{
-        width: size,
-        top: -size / 4,
+        width: AVATAR_SET_SIZE,
+        top: -AVATAR_SET_SIZE / 4,
         position: 'absolute',
         zIndex: 25
       }}>
@@ -34,7 +34,7 @@ export const AvatarSet: FC<AvatarProps> = ({
       </div>
       <div style={
         body ? {
-          width: size * 1.5,
+          width: AVATAR_SET_SIZE * 1.5,
           position: 'absolute',
           zIndex: 20
         }
@@ -44,7 +44,7 @@ export const AvatarSet: FC<AvatarProps> = ({
       </div>
       <div style={
         pants ? {
-          width: size,
+          width: AVATAR_SET_SIZE,
           bottom: 0,
           position: 'absolute',
           zIndex: 15
