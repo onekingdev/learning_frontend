@@ -12,7 +12,6 @@ import { MyProfile }             from 'views/pages/Student/Settings/MyProfile';
 import { Backpack }              from 'views/pages/Student/Backpack/Backpack';
 import { Games }                 from 'views/pages/Student/Games/Games';
 import { GamesMenu }             from 'views/pages/Student/Games/GamesMenu/GamesMenu';
-import { StudentHome }           from 'views/pages/Student/StudentHome/StudentHome';
 import { ConfirmAccount }        from 'views/pages/ConfirmAccount/ConfirmAccount';
 import { KnowledgeMap }          from 'views/pages/Student/KnowledgeMap/KnowledgeMap';
 import { SubjectsMenu }          from 'views/pages/Student/Menus/SubjectMenu/SubjectsMenu';

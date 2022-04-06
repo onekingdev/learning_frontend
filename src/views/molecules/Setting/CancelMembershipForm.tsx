@@ -70,14 +70,6 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
           >
             {'Submit'}
           </LSButton>
-          <LSButton
-            variant='contained'
-            color="secondary"
-            bgcolor={BasicColor.gray60}
-            onClick={open}
-          >
-            {'Cancel'}
-          </LSButton>
         </LSButtonContainer>
       </LSFormControl>
   );

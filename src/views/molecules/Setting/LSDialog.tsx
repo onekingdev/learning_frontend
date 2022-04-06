@@ -16,7 +16,7 @@ type LSDialogProps = {
   contentText?: string
   open: () => void
   dialogContent?: React.ReactNode | FC
-  fullWidth?: string
+  fullWidth?: 'true'
 }
 
 export const LSDialog: FC<LSDialogProps> = ({

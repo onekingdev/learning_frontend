@@ -1,12 +1,19 @@
-export const dictionary = Object.freeze({
-  en: {
+
+export const dictionary:any = Object.freeze({
+  'EN_US': {
     title    : 'Progress',
-    rank     : 'Rank',
-    progress : 'My Progress',
-    ela      : 'ELA',
-    math     : 'MATH',
-    sight    : 'SIGHT',
-    science  : 'SCIENCE',
-    health   : 'HEALTH',
+    reviewQuestionsAnswered: 'Review Questions Answered',
+    reviewQuestions: 'Review Questions'
   },
+  'TH' :{
+    title    : 'ความคืบหน้า',
+    reviewQuestionsAnswered: 'ทบทวนคำถามที่ได้รับคำตอบ',
+    reviewQuestions: 'คำถามทบทวน'
+  },
+  'es-mx': {
+    title    : 'Progreso',
+    reviewQuestionsAnswered: 'Preguntas de revisión respondidas',
+    reviewQuestions: 'Preguntas de revisión'
+  }
 });
+

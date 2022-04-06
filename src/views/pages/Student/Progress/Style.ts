@@ -18,13 +18,3 @@ export const Container = styled.div`
         padding-right: 0rem;
     }
 `;
-
-export const SvgContainer = styled.div`
-    &:hover {
-        svg {
-            transform: scale(1.2);
-            path {                
-            }
-        }
-    }
-`

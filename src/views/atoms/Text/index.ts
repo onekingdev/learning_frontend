@@ -13,9 +13,9 @@ export const TypoHeader = styled.h1<TextProps>`
   font-family: ${Typography.secondary};
   color: black;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 36px;
   @media (max-width: ${ScreenSize.phone}) {
-    font-size: 22px;
+    font-size: 20px;
     letter-spacing: 0.1px;
   }
 `;

@@ -125,7 +125,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
       <LSDialog
         isOpen={isOpen}
         open={open}
-        title='Cancel Childrens plan'
+        title='Cancel Children plan'
         contentText='You are cancelling 1 child solo area'
         dialogContent={
           <CancelPlanForm

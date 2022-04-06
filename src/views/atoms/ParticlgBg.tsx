@@ -9,6 +9,7 @@ import fireworkSfx                        from 'views/assets/audios/mixkit-firew
 import { bounceInUp }                     from 'react-animations';
 import { flip }                           from 'react-animations'
 import { TypoHeader, TypoTitle, TypoBtn } from 'views/atoms/Text';
+import { dictionary } from 'views/pages/Student/Question/dictionary'
 
 interface Props {
   close: () => (void)
@@ -16,8 +17,9 @@ interface Props {
 export const LevelUpDgContent: FC<Props> = ({ close }) => {
   const [play] = useSound(fireworkSfx);
 
-  const earning = useSelector((state: any) => state.earning);
-
+  const earning           = useSelector((state: any) => state.earning);
+  let language:string     = useSelector((state: any) => state.user.language);
+  language                = language? language : "EN_US"
 
   const config = {
     num: [1, 10],
@@ -47,10 +49,10 @@ export const LevelUpDgContent: FC<Props> = ({ close }) => {
           <img src={img_congats} />
         </Flip>
         <BounceIn>
-          <TypoHeader style={{ textAlign: 'center' }}>LEVEL UP!</TypoHeader>
-          <TypoTitle style={{ textAlign: 'center' }}> Your level is now: {earning.level}</TypoTitle>
+          <TypoHeader style={{ textAlign: 'center' }}>{dictionary[language]?.levelUp}</TypoHeader>
+          <TypoTitle style={{ textAlign: 'center' }}>{dictionary[language]?.yourLevelIsNow}: {earning.level}</TypoTitle>
         </BounceIn>
-        <button onClick={close}><TypoBtn>Continue</TypoBtn></button>
+        <button onClick={close}><TypoBtn>{dictionary[language]?.continue}</TypoBtn></button>
       </CongratsDgContainer>
     </div>
   );

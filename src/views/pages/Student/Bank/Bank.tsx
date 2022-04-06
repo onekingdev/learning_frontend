@@ -9,11 +9,14 @@ import { TxBox }                     from 'views/molecules/StudentBank/TxBox';
 import { TxHistoryTable }            from 'views/molecules/StudentBank/TxHistoryTable';
 import { Interest }                  from 'views/molecules/StudentBank/Interest';
 import { PageTitle }                 from 'views/molecules/PageTitle';
+import { dictionary }                from './dictionary'
 import { Wrapper, GridItem, Img }    from './Styles';
 export const Bank: FC = () => {
 
   const student        = useSelector((state: any) => state.student)
   const interests      = useSelector((state: any) => state.interests.interests)
+  let language:string  = useSelector((state: any) => state.user.language);
+  language             = language? language : "EN_US"
   const loadingContext = useContext(LoadingContext);
   const bankMovement   = student.bankWallet.bankmovementSet
 
@@ -24,7 +27,7 @@ export const Bank: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        <PageTitle title='BANK' />
+        <PageTitle title={dictionary[language]?.bank} />
         <div >
           <Grid container >
             <Grid container item xs={12} md={6}
@@ -39,7 +42,7 @@ export const Bank: FC = () => {
               <GridItem item md={12} xs={4} align='center'>
                 <Img src={Cartera} />
               </GridItem>
-              <GridItem item md={8} xs={8} align='center'>
+              <GridItem item md={12} xs={8} align='center'>
                 <AccountBalance balance={student.bankWallet.balance} />
               </GridItem>
               <GridItem item md={12} xs={12} align='center'>

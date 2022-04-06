@@ -15,13 +15,16 @@ import IconButton                                  from '@mui/material/IconButto
 import { useSnackbar }                             from 'notistack';
 import { LoadingSpinner }                          from 'views/atoms/Spinner';
 import { AVATAR_SET_DEFAULT }                      from 'app/types'
+import { dictionary }   from 'views/pages/Student/Avatar/dictionary'
 
 export const AvatarSelector: FC = () => {
 
-  const history = useHistory();
-  const dispatch = useDispatch()
-  const user = useSelector((state: any) => state.user);
-  const student = useSelector((state: any) => state.student)
+  const history       = useHistory();
+  const dispatch      = useDispatch()
+  const user          = useSelector((state: any) => state.user);
+  const student       = useSelector((state: any) => state.student)
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
   const loadingContext = useContext(LoadingContext);
   const [loading, setLoading] = useState(false)
 
@@ -61,7 +64,7 @@ export const AvatarSelector: FC = () => {
       if (res.status) {
         console.log(res)
         dispatch({ type: AVATAR_SET_DEFAULT, payload: res })
-        enqueueSnackbar('Set user avatar successfully!', { variant: 'success' })
+        enqueueSnackbar(dictionary[language]?.setUserAvatarSuccessfully, { variant: 'success' })
       } else {
         enqueueSnackbar(res.msg, { variant: 'error' })
       }
@@ -102,10 +105,10 @@ export const AvatarSelector: FC = () => {
             loading &&
             <LoadingSpinner />}
 
-          <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} />
+          <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} size={150}/>
           <div style={{ display: 'flex', alignItems: 'start', height: '100%' }}>
             <IconButton
-              aria-label='set favorite'
+              aria-label={dictionary[language]?.setFavorite}
               component='span'
               onClick={setUserAvatar}
               sx={{

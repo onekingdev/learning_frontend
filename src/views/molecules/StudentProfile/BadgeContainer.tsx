@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import styled from 'styled-components';
 import question from 'views/assets/question-mark.svg';
 import { ProfileTitle } from 'views/molecules/ProfileTitle';
 import creon_img from 'views/assets/badges/creon.svg';
@@ -8,6 +7,8 @@ import notebook_img from 'views/assets/badges/notebook.svg';
 import picture_img from 'views/assets/badges/picture.svg';
 import sharpener_img from 'views/assets/badges/sharpener.svg';
 import { Avatar, Grid } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { ScreenSize } from 'constants/screenSize';
 
 export const BadgeContainer: FC = () => {
   const badges = [
@@ -20,16 +21,17 @@ export const BadgeContainer: FC = () => {
     question,
     question,
   ];
-
+  const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
+  const size = isMobile ? 40: 120
   return (
     <>
       <ProfileTitle title='Badges' />
-      <Grid container spacing={2} sx={{marginBottom: 5, width: '90%'}} >
+      <Grid container spacing={2} justifyContent={'center'} sx={{marginBottom: 5, width: '90%'}} >
         {
           badges.map(badge => (
-            <Grid item >
-              <Avatar sx={{ width: 120, height: 120, background: 'white', border: 'gray dashed' }}>
-                <img style={{ height: 90 }} src={badge} />
+            <Grid item sm={3} sx={{display: 'flex', justifyContent: 'center'}}>
+              <Avatar sx={{ width: size, height: size, background: 'white', border: 'gray dashed' }}>
+                <img style={{ height: size / 5 * 4 }} src={badge} />
               </Avatar>
             </Grid>)
           )
@@ -39,11 +41,3 @@ export const BadgeContainer: FC = () => {
   );
 };
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 19px;
-  padding: 8px;
-  margin-bottom: 39px;
-  justify-content: center;
-`;
