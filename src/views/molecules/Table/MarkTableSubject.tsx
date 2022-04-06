@@ -48,19 +48,18 @@ interface ISingleGroup {
         item?: string,
         button?: boolean,
         mastery?: string,
-        aokId?: string,
     },
     extra?: ISingleGroup[],
     deep?: number,
-    activeAokId?: string,
+    aokId?: number,
 }
 
-const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokId="" }) => {
+const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, aokId = -1 }) => {
     const history = useHistory();
     const [opened, setOpened] = useState<boolean>(false);
     const toggle = () => setOpened(val => !val);
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {
-        return <SingleGroup activeAokId={activeAokId} key={id} main={item.main} extra={item.extra} deep={deep+1} />
+        return <SingleGroup aokId={aokId} key={id} main={item.main} extra={item.extra} deep={deep+1} />
     }) : '';
     let bgColor = masteryColors.NP;
     if (main.mastery === "NP") {
@@ -80,7 +79,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
             flexDirection: 'column',
             width: '100%',
         }}>
-            <div id={"aok-id-" + main.aokId} style={{
+            <div style={{
                 display: 'flex',
                 // backgroundColor: colors[deep],
                 backgroundColor: bgColor,
@@ -105,11 +104,11 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
                     // backgroundColor: colors[deep],
                     backgroundColor: bgColor,
                     cursor: 'pointer',
-                    border: '1px solid black',
+                    border: '1px solid black'
                 }} onClick={toggle}>
                     <TypoBtn style={{
-                        background: activeAokId === main.aokId ? '#CE2489' : '#26B824',
-                        color: activeAokId === main.aokId ? 'white' : 'black',
+                        background: '#26B824',
+                        color: 'black',
                         minWidth: '200px',
                         height: '36px',
                         marginTop: '10px',
@@ -122,9 +121,9 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
                         cursor: 'pointer',
                         marginLeft: `calc(${deep}rem + 2rem)`,
                     }} onClick={() => {
-                        if (main.aokId !== "") {
+                        if (aokId !== -1) {
                             // history.push('/question/PATH/' + aokId)
-                            history.push('/question/AI/' + main.aokId)
+                            history.push('/question/AI/' + aokId)
                             // alert("Developing now, will be released soon 🎓")
                         }
                     }}>Practice</TypoBtn>
@@ -137,35 +136,31 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
 
 const MarkTableSubject = ({
     data=[],
-    activeSubjectId="",
+    activeSubjectId=-1,
 }: {
     data: any[];
-    activeSubjectId: string,
+    activeSubjectId: number,
 }) => {
     return (<MarkTableDiv>
         { data && data.length > 0 ? data?.map((aok: any, id: number) => (
-            <SingleGroup activeAokId={activeSubjectId} key={id} main={{
-                aokId: aok?.id,
+            <SingleGroup aokId={activeSubjectId} key={id} main={{
                 item: aok?.name,
                 mastery: aok?.mastery,
                 button: aok?.subTopics.length ? false : true,
             }} extra={aok?.subTopics.map((subTopic1: any) => ({
                 main: {
-                    aokId: subTopic1?.id,
                     item: subTopic1?.name,
                     mastery: subTopic1?.mastery,
                     button: subTopic1?.subTopics.length ? false : true,
                 },
                 extra: subTopic1?.subTopics.map((subTopic2: any) => ({
                     main: {
-                        aokId: subTopic2?.id,
                         item: subTopic2?.name,
                         mastery: subTopic2?.mastery,
                         button: subTopic2?.subTopics.length ? false : true,
                     },
                     extra: subTopic1?.subTopics.map((subTopic3: any) => ({
                         main: {
-                            aokId: subTopic3?.id,
                             item: subTopic3?.name,
                             mastery: subTopic3?.mastery,
                             button: true,

@@ -10,6 +10,8 @@ import backpackFace       from 'views/assets/backpack-face.svg';
 import backpackLeft       from 'views/assets/backpack-left.svg';
 import backpackRight      from 'views/assets/backpack-right.svg';
 import { StudentMenu }    from 'views/pages/Student/Menus/StudentMenu';
+import { useSelector }    from 'react-redux';
+
 import {
   Wrapper,
   AvatarButtonContainer,
@@ -26,8 +28,13 @@ import {
 } from './Styles';
 
 export const Backpack: FC = () => {
+
   const loadingContext  = useContext(LoadingContext);
   const history         = useHistory();
+
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
+
   useEffect(() => {
     loadingContext.done();
   }, []);

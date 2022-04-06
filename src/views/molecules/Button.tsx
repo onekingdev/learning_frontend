@@ -7,7 +7,7 @@ type ButtonProps = {
   value: string;
   color?: ButtonColor;
   darkText?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const Button: FC<ButtonProps> = ({
@@ -17,7 +17,7 @@ export const Button: FC<ButtonProps> = ({
   onClick,
 }) => {
   return (
-    <ButtonWrapper bgcolor={color} onClick={onClick}>
+    <ButtonWrapper bgColor={color} onClick={onClick}>
       <ButtonText isDark={darkText}>{value}</ButtonText>
     </ButtonWrapper>
   );

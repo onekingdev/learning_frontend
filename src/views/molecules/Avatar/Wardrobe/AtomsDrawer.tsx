@@ -6,6 +6,8 @@ import drawer_head        from 'views/assets/drawers/drawer-head.png';
 import drawer_clothes     from 'views/assets/drawers/drawer_clothes.png';
 import drawer_pants       from 'views/assets/drawers/drawer_pants.png';
 import floor              from 'views/assets/avatars/floor.png';
+import { useSelector }        from 'react-redux';
+import { dictionary }   from 'views/pages/Student/Avatar/dictionary'
 
 interface AtomDrawerProps {
   onAtomClick?: (atomId: number) => (void)
@@ -13,6 +15,9 @@ interface AtomDrawerProps {
 export const AtomsDrawer: FC<AtomDrawerProps> = ({ onAtomClick }) => {
 
   const [current, setCurrent] = useState(0)
+
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
 
   const setCurrentAtomId = (val: any) => {
     if (val < 4) {

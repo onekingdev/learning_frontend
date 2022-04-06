@@ -25,9 +25,7 @@ export const StudentMenu: FC = ({ children }) => {
           balance={earning.balance || 0}
         />
       </TopMenuContainer>
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
       <MobileMenu />
     </Container>
   );
