@@ -10,7 +10,7 @@ type TextProps = {
 };
 
 export const TypoHeader = styled.h1<TextProps>`
-  font-family: ${Typography.secondary};
+  font-family: ${Typography.primary};
   color: black;
   font-weight: 700;
   font-size: 40px;
