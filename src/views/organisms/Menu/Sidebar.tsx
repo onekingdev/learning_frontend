@@ -1,37 +1,37 @@
-import { FC, useState, useEffect }  from 'react';
-import { useHistory }               from 'react-router-dom';
-import { ICON_SIZE }                from 'constants/icon';
-import { useDispatch, useSelector }              from 'react-redux'
-import Box                          from '@mui/material/Box';
-import Drawer                       from '@mui/material/Drawer';
-import Button                       from '@mui/material/Button';
-import List                         from '@mui/material/List';
-import { BasicColor }               from 'views/Color';
-import ListItem                     from '@mui/material/ListItem';
-import { Icon }                     from 'views/atoms/Icon/Icon';
-import progress_icon                from 'views/assets/nav-icons/Progress.png';
-import question_icon                from 'views/assets/nav-icons/question.png';
-import game_icon                    from 'views/assets/nav-icons/game.png';
-import bank_icon                    from 'views/assets/nav-icons/bank.png';
-import collectible_icon             from 'views/assets/nav-icons/collectibles.png';
-import profile_icon                 from 'views/assets/nav-icons/profile.png';
-import tutorial_icon                from 'views/assets/nav-icons/tutorial.png';
-import settings_icon                from 'views/assets/nav-icons/settings.png';
-import menu_toggle                  from 'views/assets/Menu Toggle.svg';
-import styled                       from 'styled-components';
-import { TypoIcon }                 from 'views/atoms/Text';
-import { CardDialog }               from 'views/molecules/StudentCard/MyCards/CardDialog';
+import { FC, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { ICON_SIZE } from 'constants/icon';
+import { useDispatch, useSelector } from 'react-redux'
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import { BasicColor } from 'views/Color';
+import ListItem from '@mui/material/ListItem';
+import { Icon } from 'views/atoms/Icon/Icon';
+import progress_icon from 'views/assets/nav-icons/Progress.png';
+import question_icon from 'views/assets/nav-icons/question.png';
+import game_icon from 'views/assets/nav-icons/game.png';
+import bank_icon from 'views/assets/nav-icons/bank.png';
+import collectible_icon from 'views/assets/nav-icons/collectibles.png';
+import profile_icon from 'views/assets/nav-icons/profile.png';
+import tutorial_icon from 'views/assets/nav-icons/tutorial.png';
+import settings_icon from 'views/assets/nav-icons/settings.png';
+import menu_toggle from 'views/assets/Menu Toggle.svg';
+import styled from 'styled-components';
+import { TypoIcon } from 'views/atoms/Text';
+import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import { VideoPlayer } from 'views/molecules/VideoPlayer';
 import { SCREEN_MOBILE, TUTORIAL_VDO_URL } from 'constants/common';
-import { VIDEO_TUTORIAL_EXPLAIN }   from 'constants/parent';
-import {ScreenSize}                 from 'constants/screenSize';
+import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
+import { ScreenSize } from 'constants/screenSize';
 import { doSetOldUser } from 'app/actions';
 import { SET_OLD_USER } from 'app/types';
 
 export const Sidebar: FC = () => {
 
     const [state, setState] = useState(false)
-    const [open, setOpen]   = useState(false)
+    const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
     const isNew = useSelector((state: any) => state.student.isNew);
     const token = useSelector((state: any) => state.user.token);
@@ -76,14 +76,14 @@ export const Sidebar: FC = () => {
     return (
         <div>
             <CardDialog
-                isOpen = {open}
-                open = {openTutorial}
+                isOpen={open}
+                open={openTutorial}
                 // title = {VIDEO_TUTORIAL_EXPLAIN}
                 // fullWidth='true'
-                dialogContent = {
+                dialogContent={
                     <div >
                         <ExplainText>{VIDEO_TUTORIAL_EXPLAIN}</ExplainText>
-                        <VideoPlayer src= {TUTORIAL_VDO_URL}/>
+                        <VideoPlayer src={TUTORIAL_VDO_URL} />
                     </div>
                 }
             />
@@ -105,96 +105,83 @@ export const Sidebar: FC = () => {
                     onKeyDown={toggleDrawer(false)}
                 >
                     <List>
-                        {/* <ListItem >
-                            <IconContainer>
-                                <Icon
-                                    image={homework_icon}
-                                    size={ICON_SIZE.medium}
-                                    onClick={() => history.push('/testing-student-treasure-track')}
-                                />
-                                <TypoIcon >HOMEWORKS</TypoIcon>
-                            </IconContainer>
-                        </ListItem> */}
-                        <StyledListItem>
+                        <StyledListItem
+                            onClick={() => history.push('/map')}
+                        >
                             <IconContainer>
                                 <Icon
                                     image={question_icon}
                                     size={ICON_SIZE.medium}
-                                    onClick={() => history.push('/map')}
                                 />
                                 <TypoIcon >QUESTIONS</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
-                        <StyledListItem >
+                        <StyledListItem
+                            onClick={() => history.push('/games/categories')}
+                        >
                             <IconContainer>
                                 <Icon
                                     image={game_icon}
                                     size={ICON_SIZE.medium}
-                                    onClick={() => history.push('/games/categories')}
                                 />
                                 <TypoIcon >GAMES</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
-                        <StyledListItem >
+                        <StyledListItem
+                            onClick={() => history.push('/progress')}
+                        >
                             <IconContainer>
                                 <Icon
                                     image={progress_icon}
                                     size={ICON_SIZE.medium}
-                                    onClick={() => history.push('/progress')}
                                 />
                                 <TypoIcon >PROGRESS</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
-                        <StyledListItem >
+                        <StyledListItem
+                            onClick={() => history.push('/backpack')}
+                        >
                             <IconContainer>
                                 <Icon
                                     image={collectible_icon}
                                     size={ICON_SIZE.medium}
-                                    onClick={() => history.push('/backpack')}
                                 />
                                 <TypoIcon >MY STUFF</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
-                        <StyledListItem >
+                        <StyledListItem
+                            onClick={() => history.push('/bank')}
+                        >
                             <IconContainer>
                                 <Icon
                                     size={ICON_SIZE.medium}
                                     image={bank_icon}
-                                    onClick={() => history.push('/bank')}
                                 />
                                 <TypoIcon >BANK</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
-                        <StyledListItem sx={{display: isMobile ? 'flex' : 'none'}}>
+                        <StyledListItem sx={{ display: isMobile ? 'flex' : 'none' }}
+                            onClick={() => history.push('/profile')}
+                        >
                             <IconContainer>
                                 <Icon
-                                    image={profile_icon}
                                     size={ICON_SIZE.medium}
-                                    onClick={() => history.push('/profile')}
+                                    image={profile_icon}
                                 />
                                 <TypoIcon >PROFILE</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
-                        <StyledListItem >
+                        <StyledListItem
+                            onClick={() => setOpen(true)}
+                        >
                             <IconContainer>
                                 <Icon
                                     image={tutorial_icon}
                                     size={ICON_SIZE.medium}
-                                    onClick={() => setOpen(true)}
                                 />
                                 <TypoIcon >TUTORIAL</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
-                        {/* <StyledListItem >
-                            <IconContainer>
-                                <Icon
-                                    image={settings_icon}
-                                    size={ICON_SIZE.medium}
-                                    onClick={() => history.push('/profile')}
-                                />
-                                <TypoIcon >SETTINGS</TypoIcon >
-                            </IconContainer>
-                        </StyledListItem> */}
                     </List>
                 </Box>
             </Drawer>

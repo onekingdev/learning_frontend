@@ -2718,6 +2718,7 @@ export const KidsTreasureTrack: FC = () => {
                                         pants={avatar.pants ? avatar.pants.image : ''}
                                         body={avatar.clothes ? avatar.clothes.image : ''}
                                         skin={avatar.skin}
+                                        size={150}
                                     />
                                     {/* <img src={Hair} alt='hair' />
                                     <img style={{

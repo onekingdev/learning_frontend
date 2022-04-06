@@ -102,7 +102,7 @@ export const AvatarSelector: FC = () => {
             loading &&
             <LoadingSpinner />}
 
-          <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} />
+          <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} size={150}/>
           <div style={{ display: 'flex', alignItems: 'start', height: '100%' }}>
             <IconButton
               aria-label='set favorite'
