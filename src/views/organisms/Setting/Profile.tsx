@@ -134,12 +134,6 @@ export const SettingForm: FC = () => {
               >
                 {'Submit'}
               </LSButton>
-              <LSButton
-                color="secondary"
-                variant='contained'
-              >
-                {'Cancel'}
-              </LSButton>
             </LSButtonContainer>
           </Box>
         </LSShadowContainer>

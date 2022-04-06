@@ -13,6 +13,8 @@ import { doAddStudentPlan, doFetchPlans }                          from 'app/act
 import { useSelector }                                             from 'react-redux'
 import { useSnackbar }                                             from 'notistack';
 import { LoadingSpinner }                                          from 'views/atoms/Spinner';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { ScreenSize } from 'constants/screenSize';
 
 interface IAddPlanProps {
   open: () => void
@@ -44,6 +46,9 @@ const combo = [
 
 export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
 
+  const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
+  const width = isMobile ? 300: 400
+  const padding = isMobile ? 10 : 20
   const user = useSelector((state: any) => state.user);
   const guardian = useSelector((state: any) => state.guardian);
   const { enqueueSnackbar } = useSnackbar();
@@ -168,7 +173,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
 
   return (
     !loading && plans.length ?
-      <div >
+      <div style={{width: width, padding: padding}}>
         <RadioGroup
           aria-labelledby="canceling-reason-label"
           name="radio-buttons-group"
@@ -178,16 +183,16 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <LSFormControlLabel value={plans[0]?.name} control={<LSRadio />} label={plans[0]?.name} />
-            <LSLabel>{plans[0]?.priceMonth}</LSLabel>
+            <LSLabel>${plans[0]?.priceMonth}</LSLabel>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <LSFormControlLabel value={plans[1]?.name} control={<LSRadio checked={checked[0] || checked[1] || checked[2] || checked[3] || checked[4]} />} label={plans[1]?.name} />
-            <LSLabel>{plans[1]?.priceMonth}</LSLabel>
+            <LSLabel>${plans[1]?.priceMonth}</LSLabel>
           </Box>
           {renderComboChildren(comboChildren)}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <LSFormControlLabel value={plans[2]?.name} control={<LSRadio />} label={plans[2]?.name} />
-            <LSLabel>{plans[2]?.priceMonth}</LSLabel>
+            <LSLabel>${plans[2]?.priceMonth}</LSLabel>
           </Box>
           {renderSoloChildren(comboChildren)}
         </RadioGroup>
@@ -196,11 +201,6 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
             bgColor={BasicColor.green}
             onClick={onSubmit}
             value={'Submit'}
-          />
-          <Button
-            bgColor={BasicColor.gray60}
-            onClick={open}
-            value={'Cancel'}
           />
         </LSButtonContainer>
       </div> :

@@ -20,11 +20,11 @@ interface IUpgradeProps {
 
 const text = [
   'You are going to upgrade your current subscription to an ',
-  'Have in mind you that the first payment will be prorated according your billing cycle',
-  'You are already have an active agreement, you only need to confirm your payment',
+  'The first payment will be prorated according to your billing cycle.',
+  'Your credit card on file will be charged for this upgrade.',
 ]
 
-export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan, refresh }) => {
+export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, plan, refresh }) => {
   const guardian = useSelector((state: any) => state.guardian);
   const user = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
@@ -44,10 +44,6 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan, refresh 
     setLoading(false)
   }
 
-  const onCancelBtnClicked = () => {
-    onCancel()
-  }
-
   useEffect(() => {
   }, [])
 
@@ -61,7 +57,6 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan, refresh 
         <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
           <LSText >{text[0]}</LSText>
           <LSLabel mt={0}>{'Annual Plan'}</LSLabel>
-          <LSLabel >{'Do you have any coupon?'}</LSLabel >
           <LSPaperMoney elevation={6}>
             <LSLabel fontSize={24} color='darkblue' >{plan?.plan.priceYear}{plan?.plan.currency}<span style={{ fontSize: '14px', color: 'black' }}>{'/year'}</span></LSLabel>
           </LSPaperMoney>
@@ -84,13 +79,6 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, onCancel, plan, refresh 
             onClick={onSubmitBtnClicked}
           >
             {'Upgrade'}
-          </LSButton>
-          <LSButton
-            variant='contained'
-            color="secondary"
-            onClick={onCancelBtnClicked}
-          >
-            {'Cancel'}
           </LSButton>
         </LSButtonContainer>
       </div>

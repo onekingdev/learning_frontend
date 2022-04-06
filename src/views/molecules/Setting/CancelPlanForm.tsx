@@ -71,14 +71,6 @@ export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan, refresh }) =>
         >
           {'Submit'}
         </LSButton>
-        <LSButton
-          variant='contained'
-          color="secondary"
-          bgcolor={BasicColor.gray60}
-          onClick={open}
-        >
-          {'Cancel'}
-        </LSButton>
       </LSButtonContainer>
     </LSFormControl>
   );
