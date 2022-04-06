@@ -23,7 +23,7 @@ export const dictionary:any = Object.freeze({
     children_privacy: "นโยบายความเป็นส่วนตัวของเด็ก",
     termAndConditions: "ข้อตกลงและเงื่อนไข"
   },
-  "es-mx": {
+  'ES_MX': {
     practice: 'Practica, Juega, Crece',
     description1:
       'Sócrates hace que el aprendizaje sea divertido mientras se adapta a las necesidades de su hijo.',

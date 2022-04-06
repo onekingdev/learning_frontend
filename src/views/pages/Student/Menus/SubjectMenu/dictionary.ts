@@ -14,7 +14,7 @@ export const dictionary:any = Object.freeze({
     science: 'SCIENCE',
     sight: 'ศาสตร์',
   },
-  'es-mx': {
+  'ES_MX': {
     title: 'Práctica',
     math: 'MATEMÁTICAS',
     ela: '¿ESTÁ POR ALLÁ?',

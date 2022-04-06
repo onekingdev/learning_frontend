@@ -29,7 +29,7 @@ export const dictionary = Object.freeze({
         studentLogin: 'เข้าสู่ระบบนักศึกษา',
         yourChildren: 'ลูก ๆ ของคุณ',
     },
-    "es-mx": {
+    'ES_MX': {
         yourChildLicense: 'Su licencia de niño',
         download: 'descargar',
         change: 'cambiar',

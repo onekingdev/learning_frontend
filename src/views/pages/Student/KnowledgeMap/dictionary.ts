@@ -3,7 +3,7 @@ export const dictionary:any = Object.freeze({
     },
     'TH' :{
     },
-    'es-mx': {
+    'ES_MX': {
     }
   });
   

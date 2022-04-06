@@ -23,7 +23,7 @@ export const dictionary: any = Object.freeze({
         buy: 'ซื้อ',
         failed: 'ล้มเหลว!'
     },
-    'es-mx': {
+    'ES_MX': {
         myAvatar: 'Mi avatar',
         wardrobe: 'Armario',
         setUserAvatarSuccessfully: '¡Establecer avatar de usuario con éxito!',

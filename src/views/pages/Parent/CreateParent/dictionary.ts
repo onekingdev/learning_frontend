@@ -47,7 +47,7 @@ export const dictionary = Object.freeze({
         FAQ: "คำถามที่พบบ่อย",
         plans: "แผน"
     },
-    "es-mx": {
+    'ES_MX': {
         parentSignup: "Registro de padres",
         email: "Correo electrónico",
         fieldIsRequired: 'Se requiere campo',

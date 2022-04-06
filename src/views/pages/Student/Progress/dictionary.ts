@@ -10,7 +10,7 @@ export const dictionary:any = Object.freeze({
     reviewQuestionsAnswered: 'ทบทวนคำถามที่ได้รับคำตอบ',
     reviewQuestions: 'คำถามทบทวน'
   },
-  'es-mx': {
+  'ES_MX': {
     title    : 'Progreso',
     reviewQuestionsAnswered: 'Preguntas de revisión respondidas',
     reviewQuestions: 'Preguntas de revisión'

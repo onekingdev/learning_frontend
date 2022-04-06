@@ -5,7 +5,7 @@ export const dictionary: any = Object.freeze({
     'TH' :{
         bank: "ธนาคาร"
     },
-    'es-mx': {
+    'ES_MX': {
         bank: "BANCO"
     }
 });

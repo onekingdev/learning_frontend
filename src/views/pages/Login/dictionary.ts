@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-  "EN_US": {
+  'EN_US': {
     welcome: 'Welcome back!',
     termCondition: 'Terms & Conditions',
     instructions: 'To log in please enter your name and password',
@@ -33,7 +33,7 @@ export const dictionary: any = Object.freeze({
     children_privacy: "นโยบายความเป็นส่วนตัวของเด็ก",
     or: 'หรือ',
   },
-  "es-mx": {
+  'ES_MX': {
     welcome: '¡Bienvenido de nuevo!',
     termCondition: 'Términos y condiciones',
     instructions: 'Para iniciar sesión por favor ingrese su nombre y contraseña',

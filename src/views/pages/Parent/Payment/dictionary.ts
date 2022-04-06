@@ -25,7 +25,7 @@ export const dictionary = Object.freeze({
         finish: "เสร็จสิ้น",
         fieldIsRequired: 'ต้องระบุข้อมูล',
     },
-    "es-mx": {
+    'ES_MX': {
         addingANewChild : "Agregar un nuevo niño",
         pleaseCompleteTheFollowingToGetYourChildStarted : "Complete lo siguiente para que su hijo comience",
         selectYourPackage: "Seleccione su paquete",

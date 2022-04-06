@@ -5,7 +5,7 @@ export const dictionary:any = Object.freeze({
     'TH' :{
         profile: `ประวัติโดยย่อ`,
     },
-    'es-mx': {
+    'ES_MX': {
         profile: `Perfil`,
     }
   });

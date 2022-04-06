@@ -26,7 +26,7 @@ export const dictionary:any = Object.freeze({
     finish: 'เสร็จสิ้น',
     next: 'ต่อไป',
   },
-  'es-mx': {
+  'ES_MX': {
     youFinishedYourLessons: '¡Terminaste tus lecciones!',
     lessonComplete: 'Lección completa',
     coins: 'monedas',

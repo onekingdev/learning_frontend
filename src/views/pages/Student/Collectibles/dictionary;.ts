@@ -7,7 +7,7 @@ export const dictionary: any = Object.freeze({
         myCollection: "คอลเลกชันของฉัน",
         buyCards: "ซื้อบัตร"
     },
-    'es-mx': {
+    'ES_MX': {
         myCollection: "MI COLECCIÓN",
         buyCards: "COMPRAR TARJETAS"
     }
