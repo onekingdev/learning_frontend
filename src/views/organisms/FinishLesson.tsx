@@ -7,9 +7,8 @@ import finishLesson             from 'views/assets/finish-lesson.svg';
 import energyIcon               from 'views/assets/lightning.svg';
 import Button                   from 'views/molecules/MuiButton';
 import {ScreenSize}             from 'constants/screenSize';
-import {BasicColor, ButtonColor}    from '../Color';
-import { useDispatch, useSelector } from 'react-redux';
-import { dictionary } from 'views/pages/Student/Question/dictionary'
+import {BasicColor, ButtonColor}from '../Color';
+
 type FinishLessonProps = {
   tokens: number;
   energy: number;
@@ -18,35 +17,31 @@ type FinishLessonProps = {
 };
 
 export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy, loading, onNextLesson}) => {
-
-  let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : "EN_US"
-
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
       <FinishLessonStyle>
-        <GeneralText isDark={true}>{dictionary[language]?.youFinishedYourLessons}</GeneralText>
+        <GeneralText isDark={true}>You finished your lessons!</GeneralText>
         <FinishLessonImage src={finishLesson} />
         <FinishLessonTextContainer>
-          <GeneralText isDark={true}>{dictionary[language]?.lessonComplete}</GeneralText>
+          <GeneralText isDark={true}>Lesson Complete</GeneralText>
           <GeneralText>
-            <GreenText>+{tokens} {dictionary[language]?.coins}</GreenText>
+            <GreenText>+{tokens} Coins</GreenText>
           </GeneralText>
         </FinishLessonTextContainer>
         <FinishLessonTextContainer>
-          <GeneralText isDark={true}>{dictionary[language]?.bonus}</GeneralText>
+          <GeneralText isDark={true}>Bonus</GeneralText>
           <GeneralText>
             <GreenText>+{energy}</GreenText>
           </GeneralText>
           <Icon image={energyIcon} size={IconSize.small} />
           <GeneralText>
-            <GreenText>{dictionary[language]?.ofEnergy}</GreenText>
+            <GreenText>of energy</GreenText>
           </GeneralText>
         </FinishLessonTextContainer>
         <FinishLessonButtonContainer>
           <Button
             onClick={onNextLesson}
-            value={dictionary[language]?.nextLesson}
+            value="Next Lesson"
             loading={loading}
             bgColor={ButtonColor.next}
             fullWidth={true}

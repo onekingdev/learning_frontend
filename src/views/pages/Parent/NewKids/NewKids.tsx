@@ -44,7 +44,6 @@ import Tooltip                   from '@mui/material/Tooltip';
 import { CURRICULUM_TOOLTIP,
   GRADE_TOOLTIP }                from 'constants/parent';
 import { LSGridRow }             from 'views/molecules/Setting/utils/Style';
-import { dictionary }            from './dictionary';
 
 const NewKids: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -75,9 +74,6 @@ const NewKids: FC = () => {
   const [loading, setLoading]           = useState(false);
   const [showTooltip, setShowTooltip]   = useState(false);
   const [showTooltipGrade, setShowTooltipGrade]   = useState(false);
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
 
   const subjectIcons:any = {
     Gold: {
@@ -273,8 +269,8 @@ const NewKids: FC = () => {
       <Container>
         <PaperContainer>
           <Paper elevation={3} className={classes.paper}>
-            <Title>{dictionary[language]?.addingANewChild}</Title>
-            <Tip>{dictionary[language]?.pleaseCompleteTheFollowingToGetYourChildStarted}</Tip>
+            <Title>Adding a New Child</Title>
+            <Tip>Please complete the following to get your child started</Tip>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 {/* <TextField label='Select Your Package' variant='outlined' fullWidth sx={{backgroundColor: 'white'}} value={packageName}
@@ -287,13 +283,13 @@ const NewKids: FC = () => {
                             /> */}
                 <FormControl fullWidth>
                   <InputLabel id='select-package-label'>
-                    {dictionary[language]?.selectYourPackage}
+                    Select Your Package
                   </InputLabel>
                   <Select
                     labelId='select-package-label'
                     id='select-package'
                     value={currentPackage ? currentPackage : ''}
-                    label={dictionary[language]?.selectYourPackage}
+                    label='Select Your Package'
                     className={`${classes.select} ${
                       currentPackage?.plan?.name === 'Gold'
                         ? classes.goldInput
@@ -308,7 +304,7 @@ const NewKids: FC = () => {
                       else setPaths([]);
                       handleFormChange(
                         'packageName',
-                        e.target.value.length === 0 ? `${dictionary[language]?.fieldIsRequired}` : ''
+                        e.target.value.length === 0 ? 'Field is required' : ''
                       );
                     }}
                     sx={
@@ -387,8 +383,8 @@ const NewKids: FC = () => {
               )}
               <Grid item xs={12}>
                 <TextField
-                  label={dictionary[language]?.childFirstName}
-                  onChange={e => {
+                  label='Child First Name'
+                  onChange=   {e => {
                     setFirstName(e.target.value);
                     handleFormChange(
                       'firstName',
@@ -402,53 +398,53 @@ const NewKids: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label      = {dictionary[language]?.firstLetterofChildLastName}
-                  onChange   = {e => {
+                  label      ='First Letter of Child Last Name'
+                  onChange   ={e => {
                     setLastName(e.target.value);
                     handleFormChange(
                       'lastName',
                       e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
-                  error      = {!!validateMsg.lastName}
-                  helperText = {validateMsg.lastName}
-                  value      = {lastName}
+                  error      ={!!validateMsg.lastName}
+                  helperText ={validateMsg.lastName}
+                  value      ={lastName}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label      = {dictionary[language]?.childUsernameDoNotUseYourRealName}
-                  onChange   = {e => {
+                  label      ='Child Username (DO NOT USE YOUR REAL NAME)'
+                  onChange   ={e => {
                     setUserId(e.target.value);
                     handleFormChange(
                       'userId',
                       e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
-                  error      = {!!validateMsg.userId}
-                  helperText = {validateMsg.userId}
-                  value      = {userId}
+                  error      ={!!validateMsg.userId}
+                  helperText ={validateMsg.userId}
+                  value      ={userId}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label      = {dictionary[language]?.password}
-                  onChange   = {e => {
+                  label      ='PASSWORD'
+                  onChange   ={e => {
                     setPassword(e.target.value);
                     handleFormChange(
                       'password',
                       e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
-                  error      = {!!validateMsg.password}
-                  helperText = {validateMsg.password}
-                  value      = {password}
-                  type       = 'password'
+                  error      ={!!validateMsg.password}
+                  helperText ={validateMsg.password}
+                  value      ={password}
+                  type       ='password'
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label={dictionary[language]?.confirmPassword}
+                  label='CONFIRM PASSWORD'
                   onChange={e => {
                     setConfPassword(e.target.value);
                     handleFormChange(
@@ -469,13 +465,13 @@ const NewKids: FC = () => {
               <Grid item xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id='select-audience-label'>
-                    {dictionary[language]?.selectYourCurriculum}
+                    Select Your curriculum
                   </InputLabel>
                   <Select
                     labelId='select-audience-label'
                     id='select-audience'
                     value={audience ? audience : {}}
-                    label={dictionary[language]?.selectYourCurriculum}
+                    label='Select Your Audience'
                     className={`${classes.select} err-border`}
                     onChange={(e: any) => {
                       setAudience(e.target.value);
@@ -522,15 +518,15 @@ const NewKids: FC = () => {
               <Grid item xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id='select-grade-label'>
-                    {dictionary[language]?.selectYourGrade}
+                    Select Your Grade
                   </InputLabel>
                   <Select
-                    labelId   = 'select-grade-label'
-                    id        = 'select-grade'
-                    value     = {grade ? grade : ''}
-                    label     = {dictionary[language]?.selectYourGrade}
-                    className = {`${classes.select} err-border`}
-                    onChange  = {e => {
+                    labelId   ='select-grade-label'
+                    id        ='select-grade'
+                    value     ={grade ? grade : ''}
+                    label     ='Select Your Grade'
+                    className ={`${classes.select} err-border`}
+                    onChange  ={e => {
                       setGrade(e.target.value);
                       handleFormChange(
                         'grade',
@@ -574,16 +570,16 @@ const NewKids: FC = () => {
               <Grid item xs={12} md={12} lg={6}>
                 {childIdx > 0 && (
                   <Button
-                    value   = {dictionary[language]?.previousKid}
-                    bgColor = {ButtonColor.create}
-                    onClick = {handlePrev}
-                    disabled= {true}
+                    value   ='Previous Kid'
+                    bgColor ={ButtonColor.create}
+                    onClick ={handlePrev}
+                    disabled={true}
                   />
                 )}
               </Grid>
               <LSGridRow item xs={12} md={12} lg={6}>
                 <Button
-                  value    ={childNum !== childIdx ? dictionary[language]?.nextKid : dictionary[language]?.finish }
+                  value    ={childNum !== childIdx ? 'Next Kid' : 'Finish'}
                   bgColor  ={
                     childNum !== childIdx
                       ? ButtonColor.nextKid

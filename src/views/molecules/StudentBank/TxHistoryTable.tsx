@@ -12,8 +12,6 @@ import TableRow         from '@mui/material/TableRow';
 import PaidIcon         from '@mui/icons-material/Paid';
 import { BasicColor }   from 'views/Color';
 import { LSLabel }      from 'views/molecules/Setting/utils/Style';
-import { dictionary }   from 'views/pages/Student/Bank/dictionary'
-import { useDispatch, useSelector } from 'react-redux'
 
 interface Column {
   id: 'updateTimestamp' | 'side' | 'amount';
@@ -90,10 +88,6 @@ interface MovementProp {
   movement: []
 }
 export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
-
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -111,7 +105,7 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
     <StyledTxContainer >
       <div style={{display: 'flex', alignItems:'center'}}>
       <PaidIcon />
-      <LSLabel fontSize={20}>{dictionary[language]?.latestTransactions}</LSLabel>
+      <LSLabel fontSize={20}>Latest Transactions</LSLabel>
       </div>
       <StyledTableContainer >
         <Table >
@@ -144,13 +138,13 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
                       if(column.id === 'side'){
                         switch(value){
                           case 'R' :
-                            value = dictionary[language]?.deposit;
+                            value = 'Deposit';
                             break;
                           case 'L' :
-                            value = dictionary[language]?.withdrawal;
+                            value = 'Withdrawal';
                             break;
                           case 'I' :
-                            value = dictionary[language]?.interest;
+                            value = 'Interest'
                           // default :
                           //   row[column.id] = "Interest";
                         }

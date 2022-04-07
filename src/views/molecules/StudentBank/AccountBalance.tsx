@@ -5,23 +5,17 @@ import { BasicColor }       from 'views/Color';
 import SavingsIcon          from '@mui/icons-material/Savings';
 import { LSText, LSLabel }  from 'views/molecules/Setting/utils/Style';
 import { numberWithCommas } from 'views/utils'
-import { dictionary }       from 'views/pages/Student/Bank/dictionary'
-import { useSelector }      from 'react-redux'
 
 interface BalanceProp {
   balance: number
 }
-
 export const AccountBalance: FC<BalanceProp> = ({ balance }) => {
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
 
   return (
     <BankPaper flex_direction='row' bg_color={BasicColor.blue} >
       <SavingsIcon />
       <LSText fontSize={24}>
-        {dictionary[language]?.accountBalance}
+        Account Balance:
       </LSText>
       <LSLabel ml={10} fontSize={24}>${numberWithCommas(balance)}</LSLabel>
     </BankPaper>

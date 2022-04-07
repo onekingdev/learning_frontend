@@ -12,7 +12,7 @@ import { CardPacks } from 'views/molecules/StudentCard/ByCardsPage/CardPacks';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { LoadingContext } from 'react-router-loading';
 import { useSnackbar } from 'notistack';
-import { dictionary } from './dictionary;'
+
 
 export const Cards: FC = () => {
   const history = useHistory();
@@ -21,9 +21,6 @@ export const Cards: FC = () => {
   const [loading, setLoading] = useState(true)
   const loadingContext = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
 
   const fetchCategories = async (mounted: boolean) => {
     try {
@@ -59,10 +56,10 @@ export const Cards: FC = () => {
     <Wrapper>
       <StudentMenu>
         {/* <div> */}
-          <PageTitle title={dictionary[language]?.collectibleCards} />
+          <PageTitle title='Collectible Cards' />
           <BtnContainer>
             <Button onClick={() => history.push('/collectibles/mycards')}>
-              {dictionary[language]?.myCollection}
+              MY COLLECTION
             </Button>
           </BtnContainer>
           {
