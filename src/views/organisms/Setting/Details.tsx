@@ -33,7 +33,7 @@ export const MembershipDetail: FC = () => {
             <LSDialog
               isOpen={isAddOpen}
               open={openAdd}
-              title='Add Plan/or Package'
+              title='Add Plan or Package'
               // fullWidth='true'
               // contentText='Choose the new plan'
               dialogContent={
