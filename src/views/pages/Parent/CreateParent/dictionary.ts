@@ -1,5 +1,5 @@
-export const dictionary = Object.freeze({
-    "en-us": {
+export const dictionary: any = Object.freeze({
+    'EN_US': {
         parentSignup: "Parent Signup",
         email: "Email",
         fieldIsRequired: 'Field is required',

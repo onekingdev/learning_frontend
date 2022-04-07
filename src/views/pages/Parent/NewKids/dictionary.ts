@@ -1,5 +1,5 @@
-export const dictionary = Object.freeze({
-    "en-us": {
+export const dictionary: any = Object.freeze({
+    'EN_US': {
         addingANewChild : "Adding a New Child",
         pleaseCompleteTheFollowingToGetYourChildStarted : "Please complete the following to get your child started",
         selectYourPackage: " Select Your Package",
@@ -15,7 +15,7 @@ export const dictionary = Object.freeze({
         finish: "Finish",
         fieldIsRequired: 'Field is required',
     },
-    'TH' :{
+    'TH': {
         addingANewChild : "การเพิ่มเด็กใหม่",
         pleaseCompleteTheFollowingToGetYourChildStarted : "โปรดกรอกข้อมูลต่อไปนี้เพื่อให้บุตรหลานของคุณเริ่มต้น",
         selectYourPackage: "เลือกแพ็คเกจของคุณ",

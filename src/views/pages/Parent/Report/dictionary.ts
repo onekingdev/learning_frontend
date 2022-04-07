@@ -1,4 +1,4 @@
 export const dictionary = Object.freeze({
-    "en-us": {
+    'EN_US': {
     },
 });

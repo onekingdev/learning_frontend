@@ -1,5 +1,5 @@
-export const dictionary = Object.freeze({
-    "en-us": {
+export const dictionary: any = Object.freeze({
+    'EN_US': {
         choosePackageInfo: `When signing up for Socrates, children can get one or more areas of knowledge to learn from our growing selection.Choose the Solo package for one area, Combo package for any two, or Gold Package to get it all!`,
         math: 'Math',
         elaSgithWords: "ELA + SIGHT WORDS",

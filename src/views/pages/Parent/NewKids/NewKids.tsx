@@ -76,7 +76,9 @@ const NewKids: FC = () => {
   const [showTooltip, setShowTooltip]   = useState(false);
   const [showTooltipGrade, setShowTooltipGrade]   = useState(false);
 
-  const language = 'en-us';
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
+
   const subjectIcons:any = {
     Gold: {
       MATH      : math_gold,

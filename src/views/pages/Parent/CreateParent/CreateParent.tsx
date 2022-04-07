@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
 import { useSnackbar }    from 'notistack';
 import { useHistory }     from 'react-router-dom';
-import { useDispatch }    from 'react-redux';
+import { useDispatch, useSelector }    from 'react-redux';
 import Grid               from '@mui/material/Grid';
 import Button             from 'views/molecules/MuiButton';
 import TextField                from 'views/molecules/MuiTextField';
@@ -45,7 +45,8 @@ const CreateParent: FC = () => {
   const [loading, setLoading]       = useState(false);
   const [couponCode, setCouponCode] = useState('');
 
-  const language = 'en-us';
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
 
   function validateEmail (email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)

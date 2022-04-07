@@ -1,5 +1,5 @@
-export const dictionary = Object.freeze({
-    "en-us": {
+export const dictionary: any = Object.freeze({
+    'EN_US': {
         yourChildLicense: 'Your Child License',
         download: 'download',
         change: 'change',
