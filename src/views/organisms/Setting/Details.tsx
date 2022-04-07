@@ -35,7 +35,7 @@ export const MembershipDetail: FC = () => {
               open={openAdd}
               title='Add Plan/or Package'
               // fullWidth='true'
-              contentText='Choose the new plan'
+              // contentText='Choose the new plan'
               dialogContent={
                 <AddSimplePlanForm
                   open={openAdd}
