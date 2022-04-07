@@ -16,7 +16,6 @@ import skill                    from 'views/assets/skills.svg';
 import strategy                 from 'views/assets/strategy.svg'
 import { getGameByCategory }    from 'app/actions/gameActions'
 import { setCoinWallet }        from 'app/actions/studentActions'
-
 import { dictionary }           from './dictionary';
 import { GamesMenuContainer, GamesMenuTitleContainer, Wrapper } from './Styles';
 
@@ -35,11 +34,13 @@ interface GameCardParam {
 }
 export const GamesMenu: FC = () => {
 
-  const loadingContext = useContext(LoadingContext);
-  const {category} = useParams<GameCategoryParams>();
-  const user       = useSelector((state: any) => state.user)
-  const student    = useSelector((state: any) => state.student)
-  const dispatch   = useDispatch()
+  const loadingContext  = useContext(LoadingContext);
+  const {category}      = useParams<GameCategoryParams>();
+  const user            = useSelector((state: any) => state.user)
+  const student         = useSelector((state: any) => state.student)
+  let language:string   = useSelector((state: any) => state.user.language);
+  language              = language? language : "EN_US"
+  const dispatch        = useDispatch()
 
   const [loading,   setLoading]   = useState(false)
   const [gameCards, setGameCards] = useState<GameCardParam[]>([])
@@ -62,8 +63,6 @@ export const GamesMenu: FC = () => {
     strategy   : BasicColor.yellow,
   }
 
-  const lenguage = 'en';
-
   useEffect(() => {
 
     onComponentLoad();
@@ -80,7 +79,7 @@ export const GamesMenu: FC = () => {
 
   const getGamesList = async () => {
 
-    const result = await getGameByCategory(dictionary[lenguage][category], user.token, null)
+    const result = await getGameByCategory(dictionary[language][category], user.token, null)
     setGameCards(result.data)
 
   }
@@ -92,7 +91,7 @@ export const GamesMenu: FC = () => {
         <StudentMenu>
           <GamesMenuTitleContainer>
             <GameMenuButton
-              gameMode      = {dictionary[lenguage][category]}
+              gameMode      = {dictionary[language][category]}
               gameModeImage = {gameMenuImgs[category]}
               color         = {gameMenuColor[category]}
               isButton      = {false}

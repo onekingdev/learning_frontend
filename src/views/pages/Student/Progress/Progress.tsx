@@ -15,6 +15,7 @@ import { LoadingContext }      from 'react-router-loading';
 import { ScreenSize }          from 'constants/screenSize';
 import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
 import { Container }            from './Style';
+import { dictionary }           from './dictionary'
 import { useSelector }       from 'react-redux';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
@@ -38,8 +39,11 @@ const masteryColors = {
 }
 
 export const KidsProgress = () => {
-    const user           = useSelector((state: any) => state.user);
+    const user              = useSelector((state: any) => state.user);
     const student           = useSelector((state: any) => state.student);
+    let language:string     = useSelector((state: any) => state.user.language);
+    language                = language? language : "EN_US"
+
     const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
     const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>("");
     const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
@@ -194,7 +198,7 @@ export const KidsProgress = () => {
                         color: 'black',
                         paddingLeft: '1rem',
                         paddingRight: '1rem',
-                    }}>Progress</Title>
+                    }}>{dictionary[language]?.title}</Title>
                 </div>
                 <div style={{
                     display: 'flex',
@@ -243,13 +247,13 @@ export const KidsProgress = () => {
                                 <InputLabel id='demo-simple-select-label' style={{
                                     background: '#26B824',
                                     color: 'white',
-                                }}>Review Questions Answered</InputLabel>
+                                }}>{dictionary[language]?.reviewQuestionsAnswered}</InputLabel>
                             </PcCom>
                             <MobileCom>
                                 <InputLabel id='demo-simple-select-label' style={{
                                     background: '#26B824',
                                     color: 'white',
-                                }}>Review Questions</InputLabel>
+                                }}>{dictionary[language]?.reviewQuestions}</InputLabel>
                             </MobileCom>
                             <Select
                                 id='demo-simple-select'

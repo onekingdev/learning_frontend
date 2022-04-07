@@ -27,6 +27,7 @@ import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
 import { ScreenSize } from 'constants/screenSize';
 import { doSetOldUser } from 'app/actions';
 import { SET_OLD_USER } from 'app/types';
+import { dictionary } from 'views/pages/Student/Menus/dictionary'
 
 export const Sidebar: FC = () => {
 
@@ -37,6 +38,9 @@ export const Sidebar: FC = () => {
     const token = useSelector((state: any) => state.user.token);
     const [isMobile, setMobile] = useState(false)
     const history = useHistory();
+
+    let language:string = useSelector((state: any) => state.user.language);
+    language            = language? language : "EN_US"
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (
@@ -113,7 +117,7 @@ export const Sidebar: FC = () => {
                                     image={question_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >QUESTIONS</TypoIcon >
+                                <TypoIcon >{dictionary[language]?.questions}</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -124,7 +128,7 @@ export const Sidebar: FC = () => {
                                     image={game_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >GAMES</TypoIcon >
+                                <TypoIcon >{dictionary[language]?.games}</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -135,7 +139,7 @@ export const Sidebar: FC = () => {
                                     image={progress_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >PROGRESS</TypoIcon >
+                                <TypoIcon >{dictionary[language]?.progress}</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -146,7 +150,7 @@ export const Sidebar: FC = () => {
                                     image={collectible_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >MY STUFF</TypoIcon >
+                                <TypoIcon >{dictionary[language]?.myStuff}</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -157,7 +161,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     image={bank_icon}
                                 />
-                                <TypoIcon >BANK</TypoIcon >
+                                <TypoIcon >{dictionary[language]?.bank}</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem sx={{ display: isMobile ? 'flex' : 'none' }}
@@ -168,7 +172,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     image={profile_icon}
                                 />
-                                <TypoIcon >PROFILE</TypoIcon >
+                                <TypoIcon >{dictionary[language]?.profile}</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -179,7 +183,7 @@ export const Sidebar: FC = () => {
                                     image={tutorial_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >TUTORIAL</TypoIcon >
+                                <TypoIcon >{dictionary[language]?.tutorial}</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                     </List>

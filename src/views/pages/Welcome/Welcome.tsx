@@ -11,6 +11,8 @@ import { Modal }            from 'views/atoms/Modal';
 import { Link, useHistory } from 'react-router-dom';
 import { resetReducer }     from 'app/actions/userActions';
 import { useDispatch }      from 'react-redux';
+import { useSelector }      from 'react-redux';
+
 import {
   Wrapper,
   Logo,
@@ -27,16 +29,20 @@ import { TextInput } from '../../atoms/Text/TextInput';
 
 export const Welcome: FC = () => {
   const [joinModal, setJoinModal] = useState(false);
-  const language      = 'en';
   const [deployModal] = useState(false);
   const history       = useHistory();
   const dispatch      = useDispatch();
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
+
   const sendEmail     = () => {
     setJoinModal(!joinModal);
   };
+
   useEffect(() => {
     resetReducer(dispatch);
   }, []);
+
   return (
     <Wrapper>
       <Logo src={logo} alt='Learn with Socrates logo' />
@@ -108,7 +114,7 @@ export const Welcome: FC = () => {
           {dictionary[language].privacy}
         </TypoIcon >
         <TypoIcon onClick={() => location.href='https://www.withsocrates.com/terms-conditions/'} >
-          {'Terms & Conditions'}
+          {dictionary[language].termAndConditions}
         </TypoIcon >
         <TypoIcon onClick={() => location.href='https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'} >
           {dictionary[language].children_privacy}

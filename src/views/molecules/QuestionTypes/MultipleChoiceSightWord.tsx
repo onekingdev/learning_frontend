@@ -15,6 +15,7 @@ import { useSelector }             from 'react-redux';
 import { Store }                   from 'app/configureStore';
 import videoIcon                   from 'views/assets/videoIcon.svg';
 import assistor                    from 'views/assets/text-to-speech.svg';
+import { dictionary }              from 'views/pages/Student/Question/dictionary'
 
 type ChoiceTextProps = {
   question: IQuestion;
@@ -42,6 +43,8 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
   const state = useSelector((state: Store) => state.blockPresentation);
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
+  let language:string     = useSelector((state: any) => state.user.language);
+  language                = language? language : "EN_US"
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
 
   useEffect(() => {
@@ -119,7 +122,7 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
             disabled={!isAnswered}
             fullWidth={true}
             color={BasicColor.black}
-            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'}
+            value={totalQuestions === questionCounter + 1 ? dictionary[language]?.finish : dictionary[language]?.next}
           />
           {/* <IconVideoContainer onClick={closeVideoModal}>
           <Icon image={videoIcon} />
