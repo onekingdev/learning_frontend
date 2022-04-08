@@ -5,15 +5,7 @@ export const dictionary: any = Object.freeze({
         deposit: "Deposit",
         withdrawal: "Withdrawal",
         interest: "Interest",
-        accountBalance: "Account Balance",
-        levels: 'Levels',
-        savingsTitle: 'Savings Title',
-        value: 'Value',
-        perWeek: 'Per Week',
-        date: 'Date',
-        type: 'Type',
-        amount: 'Amount',
-        amountIsEmpty: 'Amount is empty'
+        accountBalance: "Account Balance"
     },
     'TH' :{
         bank: "ธนาคาร",
@@ -21,15 +13,7 @@ export const dictionary: any = Object.freeze({
         deposit: "เงินฝาก",
         withdrawal: "การถอนเงิน",
         interest: "ความสนใจ",
-        accountBalance: "ยอดเงินในบัญชี",
-        levels: 'ระดับ',
-        savingsTitle: 'ชื่อออมทรัพย์',
-        value: 'ค่า',
-        perWeek: 'ต่อสัปดาห์',
-        date: 'วันที่',
-        type: 'พิมพ์',
-        amount: 'จำนวน',
-        amountIsEmpty: 'จำนวนเงินว่างเปล่า'
+        accountBalance: "ยอดเงินในบัญชี"
     },
     'ES_MX': {
         bank: "BANCO",
@@ -37,14 +21,6 @@ export const dictionary: any = Object.freeze({
         deposit: "Depósito",
         withdrawal: "Retiro",
         interest: "Interesar",
-        accountBalance: "Saldo de la cuenta",
-        levels: 'Niveles',
-        savingsTitle: 'Título de ahorro',
-        value: 'Valor',
-        perWeek: 'Por semana',
-        date: 'Fecha',
-        type: 'Tipo',
-        amount: 'Monto',
-        amountIsEmpty: 'La cantidad está vacía'
+        accountBalance: "Saldo de la cuenta"
     }
 });

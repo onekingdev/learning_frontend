@@ -502,7 +502,7 @@ const NewKids: FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  <Tooltip title={CURRICULUM_TOOLTIP[language]} arrow placement='left-start'
+                  <Tooltip title={CURRICULUM_TOOLTIP} arrow placement='left-start'
                     open={showTooltip}
                     onOpen={() => setShowTooltip(true)}
                     onClose={() => setShowTooltip(false)}
@@ -554,7 +554,7 @@ const NewKids: FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  <Tooltip title={GRADE_TOOLTIP[language]} arrow placement='left-start'
+                  <Tooltip title={GRADE_TOOLTIP} arrow placement='left-start'
                     open={showTooltipGrade}
                     onOpen={() => setShowTooltipGrade(true)}
                     onClose={() => setShowTooltipGrade(false)}

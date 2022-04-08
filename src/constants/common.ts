@@ -8,14 +8,17 @@ export const SCREEN_MOBILE = 425
 export const LANGUAGES = [
     {
         id: 1,
-        lang: 'English'
+        label: 'English',
+        value: 'EN_US'
     },
     {
         id: 2,
-        lang: 'Spanish'
+        label: 'Spanish',
+        value: 'ES_MX'
     },
     {
         id: 3,
-        lang: 'Thai'
+        label: 'Thai',
+        value: 'TH'
     },
 ]
