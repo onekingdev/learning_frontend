@@ -45,7 +45,7 @@ import {
 // import StripeInput from './StripeInput';
 // import countryList from 'react-select-country-list';
 import { Country, State } from 'country-state-city';
-
+// import commonDictionary from 'constants/commonDictionary'
 // type PaymentFormProps = {
 //   isUpdate: boolean
 // };
@@ -60,9 +60,10 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     const elements  = useElements();
     const user      = useSelector((state: Store) => state.user)
     const guardian  = useSelector((state: any) => state.guardian)
+    let language:string  = useSelector((state: any) => state.user.language);
+    language             = language? language : "EN_US"
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
-
     console.log(countries)
     // const [paymentMethod, setPaymentMethod] = useState('card')
     const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(

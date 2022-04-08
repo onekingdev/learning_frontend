@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   isStaff: null,
   isActive: null,
   dateJoined: null,
-  language: null,
+  language: "TH",
   profile: {
     role: null,
   },
