@@ -10,17 +10,23 @@ import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
 import { useSnackbar }                            from 'notistack';
 import { GUARDIAN_PAYMENT_METHOD_INFO }           from 'app/types'
 import { LoadingSpinner }                         from 'views/atoms/Spinner';
+import commonDictionary                           from 'constants/commonDictionary'
 
 interface DialogProps {
     open: () => (void)
 }
 
 export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
-    const { enqueueSnackbar } = useSnackbar();
-    const dispatch = useDispatch()
+    const dispatch       = useDispatch()
+    let language:string  = useSelector((state: any) => state.user.language);
+    language             = language? language : "EN_US"
+    const user           = useSelector((state: any) => state.user);
+    const guardian       = useSelector((state: any) => state.guardian);
+
+    const { enqueueSnackbar }   = useSnackbar();
+
     const [loading, setLoading] = useState(false)
-    const user = useSelector((state: any) => state.user);
-    const guardian = useSelector((state: any) => state.guardian);
+
     const {
         wrapperProps,
         getCardNumberProps,
@@ -184,7 +190,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                         <TextField
                             label='Address 1'
                             onChange={(e: any) => {
-                                handleFormChange('address1', e.target.value.length === 0 ? 'Field is required' : '')
+                                handleFormChange('address1', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                 setPaymentMethodInfo({ ...paymentMethodInfo, address1: e.target.value })
                             }}
                             error={!!validateRst.address1}
@@ -196,7 +202,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                         <TextField
                             label='Address 2'
                             onChange={(e: any) => {
-                                handleFormChange('address2', e.target.value.length === 0 ? 'Field is required' : '')
+                                handleFormChange('address2', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                 setPaymentMethodInfo({ ...paymentMethodInfo, address2: e.target.value })
                             }}
                             error={!!validateRst.address2}
@@ -208,7 +214,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                         <TextField
                             label='City'
                             onChange={(e: any) => {
-                                handleFormChange('city', e.target.value.length === 0 ? 'Field is required' : '')
+                                handleFormChange('city', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                 setPaymentMethodInfo({ ...paymentMethodInfo, city: e.target.value })
                             }}
                             error={!!validateRst.city}
@@ -220,7 +226,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                         <TextField
                             label='State/ Province'
                             onChange={(e: any) => {
-                                handleFormChange('state', e.target.value.length === 0 ? 'Field is required' : '')
+                                handleFormChange('state', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                 setPaymentMethodInfo({ ...paymentMethodInfo, state: e.target.value })
                             }}
                             error={!!validateRst.state}
@@ -232,7 +238,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                         <TextField
                             label='Zip /Postal Code'
                             onChange={(e: any) => {
-                                handleFormChange('postCode', e.target.value.length === 0 ? 'Field is required' : '')
+                                handleFormChange('postCode', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                 setPaymentMethodInfo({ ...paymentMethodInfo, postCode: e.target.value })
                             }}
                             error={!!validateRst.postCode}
@@ -244,7 +250,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                         <TextField
                             label='Country'
                             onChange={(e: any) => {
-                                handleFormChange('postCode', e.target.value.length === 0 ? 'Field is required' : '')
+                                handleFormChange('postCode', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                 setPaymentMethodInfo({ ...paymentMethodInfo, country: e.target.value })
                             }}
                             error={!!validateRst.country}
@@ -256,7 +262,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                         <TextField
                             label='Phone Number'
                             onChange={(e: any) => {
-                                handleFormChange('phone', e.target.value.length === 0 ? 'Field is required' : '')
+                                handleFormChange('phone', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                 setPaymentMethodInfo({ ...paymentMethodInfo, phone: e.target.value })
                             }}
                             error={!!validateRst.phone}
@@ -267,7 +273,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                     {/* <Grid item xs={6} md={6}>
                     <TextField
                         label='Country'
-                        onChange={(e: any) => handleFormChange('country', e.target.value.length === 0 ? 'Field is required' : '')}
+                        onChange={(e: any) => handleFormChange('country', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')}
                         error={!!validateRst.country}
                         helperText={validateRst.country}
                     />
@@ -275,7 +281,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                     {/* <Grid item xs={12} md={12}>
                     <TextField
                         label='Phone'
-                        onChange={(e: any) => handleFormChange('phone', e.target.value.length === 0 ? 'Field is required' : '')}
+                        onChange={(e: any) => handleFormChange('phone', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')}
                         error={!!validateRst.phone}
                         helperText={validateRst.phone}
                     />

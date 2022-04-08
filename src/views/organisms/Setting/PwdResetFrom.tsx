@@ -107,6 +107,13 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                     >
                         {'Submit'}
                     </LSButton>
+                    <LSButton
+                        color="secondary"
+                        variant='contained'
+                        onClick={open}
+                    >
+                        {'Cancel'}
+                    </LSButton>
                 </LSButtonContainer>
             </ThemeProvider>
     );

@@ -31,7 +31,7 @@ export const LanguageSelect: FC = () => {
                 >
                     {
                         LANGUAGES.map((lang) => (
-                            <FormControlLabel value={lang.value} control={<Radio />} label={lang.label} />
+                            <FormControlLabel value={lang.lang} control={<Radio />} label={lang.lang} />
                         ))
                     }
                 </RadioGroup>

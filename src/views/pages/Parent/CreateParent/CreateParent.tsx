@@ -21,6 +21,7 @@ import {
   ContactHeader,
   ContactBody,
 } from './Style';
+import commonDictionary                           from 'constants/commonDictionary'
 
 const CreateParent: FC = () => {
   const loadingContext                = useContext(LoadingContext);
@@ -65,10 +66,9 @@ const CreateParent: FC = () => {
     if (!formValidation()) return;
 
     setLoading(true);
-    const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
-    /*------------------------ free account for first releae -S-------------------------*
+    // const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
+    // free account for first releae
     const result: any = await createGuardian(email, firstName, lastName, userName, password,"FREE", dispatch)
-    /*------------------------ free account for first releae -E-------------------------*/
 
     setLoading(false);
 
@@ -85,7 +85,7 @@ const CreateParent: FC = () => {
     let valiResult = true;
     for (const key in validateMsg) {
       if (validateMsg[key] === null) {
-        validateMsgTemp[key] = 'Field is required';
+        validateMsgTemp[key] = commonDictionary[language]?.fieldIsRequired;
       }
       if (validateMsgTemp[key]) valiResult = false;
     }
@@ -112,7 +112,7 @@ const CreateParent: FC = () => {
                     setEmail(e.target.value);
                     // handleFormChange(
                     //   'email',
-                    //   e.target.value.length === 0 ? 'Field is required' : !validateEmail(e.target.value) ? 'This is not email address' : ''
+                    //   e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? 'This is not email address' : ''
                     // );
                     /*------------- set username to email -S--------------------------*/
                     setUserName(e.target.value);
@@ -162,7 +162,7 @@ const CreateParent: FC = () => {
                     setUserName(e.target.value);
                     handleFormChange(
                       'userName',
-                      e.target.value.length === 0 ? 'Field is required' : ''
+                      e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
                     );
                   }}
                   error={!!validateMsg.userName}

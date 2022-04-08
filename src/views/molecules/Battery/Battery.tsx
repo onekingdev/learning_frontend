@@ -8,13 +8,11 @@ type BatteryProps = {
 };
 
 export const Battery: FC<BatteryProps> = ({charge}) => {
-  // const chargeArray = [false, false, false, false, false, false, false, false, false, false];
-  const chargeArray = new Array(10).fill(false);
+  const chargeArray = [false, false, false, false, false, false, false, false, false, false];
   const IncreaseCharge = () => {
-    // for (let i = 0; i < charge; i++) {
-    //   chargeArray[i] = true;
-    // }
-    chargeArray.fill(true, 0, charge)
+    for (let i = 0; i < charge; i++) {
+      chargeArray[i] = true;
+    }
   };
   IncreaseCharge();
   return (
