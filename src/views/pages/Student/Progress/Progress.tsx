@@ -72,11 +72,12 @@ export const KidsProgress = () => {
             }
         })();
     }, [user]);
+    const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
         if (activeSubjectId !== -1) {
-            loadingContext.restart();
             (async () => {
+                loadingContext.start();
                 // Get Topic Report
                 const res:any = await query(``, TopicReport(parseInt(student.id), activeSubjectId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
@@ -89,7 +90,10 @@ export const KidsProgress = () => {
                     // console.log(result.data.rootTopicsByAok)
                     setData(result.data.rootTopicsByAok);
                 }
-                loadingContext.done();
+                // if (firstLoad) {
+                //     setFirstLoad(false);
+                    loadingContext.done();
+                // }
           })();
         }
       }, [activeSubjectId]);
@@ -360,7 +364,13 @@ export const KidsProgress = () => {
                             width: `${subSubject.width * mapWidth / 1366}px`,
                             // overflow: "hidden",
                             height: "50px",
-                            textAlign: "center"
+                            textAlign: "center",
+                            display: "-webkit-box",
+                            WebkitBoxOrient: "vertical",
+                            // "-webkit-box-orient": "vertical",
+                            WebkitLineClamp: 3,
+                            // "-webkit-line-clamp": 3,
+                            overflow: "hidden",
                         }}>{subSubject.text}</PcCom>)}
                         { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
                             position: 'absolute',
