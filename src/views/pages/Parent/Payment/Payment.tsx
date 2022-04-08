@@ -17,10 +17,7 @@ import health             from 'views/assets/health-elements.svg';
 import { LoadingContext } from 'react-router-loading';
 import { getPlans }       from 'app/actions/paymentActions'
 import { useSnackbar }    from 'notistack';
-import { dictionary }     from './dictionary';
-
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
-
 export const Payment: FC = () => {
   const loadingContext    = useContext(LoadingContext);
   const {enqueueSnackbar} = useSnackbar();
@@ -97,9 +94,6 @@ export const Payment: FC = () => {
   //   // });
   // };
 
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
-
   const onChangePackage = (type: string, count: number, period: string) => {
     plans[type].childCount    = count;
     plans[type].period        = period;
@@ -135,7 +129,7 @@ export const Payment: FC = () => {
     if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
     if(parseInt(guardian?.couponCode?.percentage) === 100) setIsSpecialCode(true)
-    else setIsSpecialCode(true) //For always enable special code for first release
+    // else setIsSpecialCode(true) //For always enable special code for first release
 
     setOffRate(50);
     setPlanData();
@@ -146,30 +140,31 @@ export const Payment: FC = () => {
         <ParentPgStepper step={2} />
         <TipContainer>
           <Alert severity='info'>
-            {dictionary[language]?.choosePackageInfo}
+            When signing up for Socrates, children can get one or more areas of knowledge to learn from our growing selection.
+            Choose the Solo package for one area, Combo package for any two, or Gold Package to get it all!
             <br />
             <SubjectContainer>
               <div className='flex align-center'>
                 <Subject src={math} />
-                &nbsp;{dictionary[language]?.math}
+                &nbsp;Math
               </div>
               <div className='flex align-center'>
                 <Subject src={ela} />
-                &nbsp;{dictionary[language]?.elaSgithWords}
+                &nbsp;ELA + SIGHT WORDS
               </div>
               <div className='flex align-center'>
                 <Subject src={science} />
-                &nbsp;{dictionary[language]?.science}
+                &nbsp;SCIENCE
               </div>
             </SubjectContainer>
             <SubjectContainer>
               <div className='flex align-center'>
                 <Subject src={financial} />
-                &nbsp;{dictionary[language]?.financialLiteracy}
+                &nbsp;FINANCIAL LITERACY
               </div>
               <div className='flex align-center'>
                 <Subject src={health} />
-                &nbsp;{dictionary[language]?.healthAndSafety}
+                &nbsp;HEALTH & SAFETY
               </div>
             </SubjectContainer>
           </Alert>
@@ -204,7 +199,7 @@ export const Payment: FC = () => {
         </PackageContainer>
         {!isSpecialCode &&
           <Alert severity='info' className='m-b-35' style={{width: '72%', fontSize: '40px', justifyContent: 'center', alignItems: 'center', maxWidth: '1414px'}}>
-            {dictionary[language]?.receive} {offRate}% {dictionary[language]?.offThesePricesForEachAdditionalChildOnYourAccount}
+            Receive {offRate}% off these prices for each additional child on your account
           </Alert>
         }
         <Elements stripe={stripePromise}>

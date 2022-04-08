@@ -27,7 +27,6 @@ import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
 import { ScreenSize } from 'constants/screenSize';
 import { doSetOldUser } from 'app/actions';
 import { SET_OLD_USER } from 'app/types';
-import { dictionary } from 'views/pages/Student/Menus/dictionary'
 
 export const Sidebar: FC = () => {
 
@@ -38,9 +37,6 @@ export const Sidebar: FC = () => {
     const token = useSelector((state: any) => state.user.token);
     const [isMobile, setMobile] = useState(false)
     const history = useHistory();
-
-    let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : "EN_US"
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (
@@ -86,7 +82,7 @@ export const Sidebar: FC = () => {
                 // fullWidth='true'
                 dialogContent={
                     <div >
-                        <ExplainText>{VIDEO_TUTORIAL_EXPLAIN[language]}</ExplainText>
+                        <ExplainText>{VIDEO_TUTORIAL_EXPLAIN}</ExplainText>
                         <VideoPlayer src={TUTORIAL_VDO_URL} />
                     </div>
                 }
@@ -117,7 +113,7 @@ export const Sidebar: FC = () => {
                                     image={question_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >{dictionary[language]?.questions}</TypoIcon >
+                                <TypoIcon >QUESTIONS</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -128,7 +124,7 @@ export const Sidebar: FC = () => {
                                     image={game_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >{dictionary[language]?.games}</TypoIcon >
+                                <TypoIcon >GAMES</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -139,7 +135,7 @@ export const Sidebar: FC = () => {
                                     image={progress_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >{dictionary[language]?.progress}</TypoIcon >
+                                <TypoIcon >PROGRESS</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -150,7 +146,7 @@ export const Sidebar: FC = () => {
                                     image={collectible_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >{dictionary[language]?.myStuff}</TypoIcon >
+                                <TypoIcon >MY STUFF</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -161,7 +157,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     image={bank_icon}
                                 />
-                                <TypoIcon >{dictionary[language]?.bank}</TypoIcon >
+                                <TypoIcon >BANK</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem sx={{ display: isMobile ? 'flex' : 'none' }}
@@ -172,7 +168,7 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                     image={profile_icon}
                                 />
-                                <TypoIcon >{dictionary[language]?.profile}</TypoIcon >
+                                <TypoIcon >PROFILE</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem
@@ -183,7 +179,7 @@ export const Sidebar: FC = () => {
                                     image={tutorial_icon}
                                     size={ICON_SIZE.medium}
                                 />
-                                <TypoIcon >{dictionary[language]?.tutorial}</TypoIcon >
+                                <TypoIcon >TUTORIAL</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                     </List>

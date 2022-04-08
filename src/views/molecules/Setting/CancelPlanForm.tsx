@@ -1,4 +1,4 @@
-import { FC, JSXElementConstructor, Key, ReactElement, useState }                               from 'react';
+import { FC, useState }                               from 'react';
 import FormLabel                                      from '@mui/material/FormLabel';
 import RadioGroup                                     from '@mui/material/RadioGroup';
 import { BasicColor }                                 from 'views/Color';
@@ -20,17 +20,13 @@ interface ICancelFormProps {
 
 
 export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan, refresh }) => {
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
-
-  const [value, setValue] = useState(CANCEL_REASONS[language][0].value);
+  const [value, setValue] = useState(CANCEL_REASONS[0].value);
   const user = useSelector((state: any) => state.user);
   const [loading, setLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = async () => {
-    const reason = CANCEL_REASONS[language].find((element: { value: any; }) => element.value === value)?.label
+    const reason = CANCEL_REASONS.find(element => element.value === value)?.label
     setLoading(true)
     const res:any = await doCancelBroughtPlan(plan.id, reason?reason:'', user.token)
     if(res.status){
@@ -63,7 +59,7 @@ export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan, refresh }) =>
         onChange={handleRadioChange}
       >
         {
-          CANCEL_REASONS[language].map((row: { id: Key | null | undefined; value: unknown; label: string | number | ReactElement<any, string | JSXElementConstructor<any>>; }) => {
+          CANCEL_REASONS.map((row) => {
             return <LSFormControlLabel key={row.id} value={row.value} control={<LSRadio />} label={row.label} />
           })
         }

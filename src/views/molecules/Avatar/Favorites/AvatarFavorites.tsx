@@ -1,11 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-
-import styled           from 'styled-components';
-import { ScreenSize }   from 'constants/screenSize';
-import { ImageAvatar }  from '../DefaultAvatar';
-import useMediaQuery    from '@mui/material/useMediaQuery'
-import { useSelector }  from 'react-redux';
-import { dictionary }   from 'views/pages/Student/Avatar/dictionary'
+import styled          from 'styled-components';
+import { ScreenSize }  from 'constants/screenSize';
+import { ImageAvatar } from '../DefaultAvatar';
+import useMediaQuery   from '@mui/material/useMediaQuery'
 
 interface FavoritProps {
   select: (id: number) => (void)
@@ -14,9 +11,7 @@ interface FavoritProps {
 
 export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
 
-  const isMobile      = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
   const [current, setCurrent] = useState(0)
   const handleAvatarClick = (i: number) => {
     select(i)

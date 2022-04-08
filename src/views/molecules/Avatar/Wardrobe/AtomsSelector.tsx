@@ -9,7 +9,6 @@ import { doPurchaseAvatarItem }     from 'app/actions/avatarActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSnackbar }              from 'notistack';
 import * as TYPES                   from 'app/types'
-import { dictionary }               from 'views/pages/Student/Avatar/dictionary'
 
 interface AtomsProps {
   items: Array<IAvatar>
@@ -24,12 +23,10 @@ export const AtomsSelector: FC<AtomsProps> = ({
   const [id, setId] = useState(0)
   const [isloading, setLoading] = useState(false)
 
-  const dispatch      = useDispatch();
-  const user          = useSelector((state: any) => state.user);
-  const student       = useSelector((state: any) => state.student)
-  const earning       = useSelector((state: any) => state.earning);
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.user);
+  const student = useSelector((state: any) => state.student)
+  const earning = useSelector((state: any) => state.earning);
 
   const { enqueueSnackbar } = useSnackbar();
   const purchaseAvatarItem = async (id: number, price: number) => {
@@ -38,10 +35,10 @@ export const AtomsSelector: FC<AtomsProps> = ({
     if (res) {
       reload()
       dispatch({ type: TYPES.PURCHASE_CARDS, payload: { price: price } });
-      enqueueSnackbar(dictionary[language]?.youBoughtAnAvatarItemFor$ + price, { variant: 'success' });
+      enqueueSnackbar('You bought an avatar item for $ ' + price, { variant: 'success' });
     }
     else
-      enqueueSnackbar(dictionary[language]?.failedPurchasing, { variant: 'error' });
+      enqueueSnackbar('Failed purchasing', { variant: 'error' });
     setLoading(false)
   }
 
@@ -61,9 +58,9 @@ export const AtomsSelector: FC<AtomsProps> = ({
                 !owned.some(owneditem => owneditem.avatar.id === item.id) &&
                 <>
                   <OverLay >
-                    <p>{dictionary[language]?.buyFor}</p>
+                    <p>BUY FOR</p>
                     <p className="dollars">${parseInt(item.price)}</p>
-                    <button onClick={() => { purchaseAvatarItem(item.id, item.price) }}>{dictionary[language]?.buy}</button>
+                    <button onClick={() => { purchaseAvatarItem(item.id, item.price) }}>BUY</button>
                   </OverLay>
                   <Disabled style={+earning.balance > +item.price ? {display:'none'}:{}}/>
                   <PriceContainer>

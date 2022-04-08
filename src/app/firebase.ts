@@ -24,7 +24,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 
-const language = 'EN_US';
+const language = 'en';
 const userProgress = [
   {
     title: dictionary[language].ela,

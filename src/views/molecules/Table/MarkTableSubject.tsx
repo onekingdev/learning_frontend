@@ -3,9 +3,8 @@ import styled           from 'styled-components';
 import ArrowRightIcon   from '@mui/icons-material/ArrowRight';
 import { ScreenSize }   from 'constants/screenSize';
 import { TypoBtn }      from 'views/atoms/Text';
-import { useHistory }   from 'react-router-dom';
-import { useSelector }  from 'react-redux';
-import { dictionary }   from 'views/pages/Student/Progress/dictionary'
+import { useHistory } from 'react-router-dom';
+
 const colors = [
     '#CC5B1D',
     '#28D764',
@@ -58,8 +57,6 @@ interface ISingleGroup {
 
 const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokId="" }) => {
     const history = useHistory();
-    let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : "EN_US"
     const [opened, setOpened] = useState<boolean>(false);
     const toggle = () => setOpened(val => !val);
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {
@@ -130,7 +127,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
                             history.push('/question/AI/' + main.aokId)
                             // alert("Developing now, will be released soon 🎓")
                         }
-                    }}>{dictionary[language]?.practice}</TypoBtn>
+                    }}>Practice</TypoBtn>
                 </div>
             : "" }
             { children }

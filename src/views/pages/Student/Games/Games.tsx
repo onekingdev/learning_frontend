@@ -5,12 +5,10 @@ import { GameMainMenu }   from 'views/organisms/GameMainMenu';
 import { StudentMenu }    from 'views/pages/Student/Menus/StudentMenu';
 import { dictionary }     from './dictionary';
 import { GamesContainer, GamesTitle, Wrapper } from './Style';
-import { useSelector, useDispatch }             from 'react-redux'
 
 export const Games: FC = () => {
   const loadingContext  = useContext(LoadingContext);
-  let language:string   = useSelector((state: any) => state.user.language);
-  language              = language? language : "EN_US"
+  const language        = 'en';
   useEffect(() => {
     loadingContext.done();
   }, []);

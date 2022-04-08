@@ -11,15 +11,12 @@ import { ProfileMobileTitle }        from 'views/molecules/StudentProfile/Profil
 import useMediaQuery                 from '@mui/material/useMediaQuery';
 import { ScreenSize }                from 'constants/screenSize';
 import { Wrapper }                   from '../Bank/Styles';
-import { dictionary }                from './dictionary'
 
 export const MyProfile: FC = () => {
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
   const loadingContext = useContext(LoadingContext);
   const avatar = useSelector((state: any) => state.avatar)
   const student = useSelector((state: any) => state.student);
-  let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : "EN_US"
 
   useEffect(() => {
     loadingContext.done();
@@ -29,7 +26,7 @@ export const MyProfile: FC = () => {
       <StudentMenu>
         <Container >
           <div style={{ display: isMobile ? 'none' : 'block' }}>
-            <PageTitle title={student.firstName + dictionary[language]?.profile} />
+            <PageTitle title={student.firstName + '\'s profile'} />
           </div>
           <ProfileMobileTitle title={student.firstName + '\'s profile'} />
           <Grid container justifyContent={'center'}>

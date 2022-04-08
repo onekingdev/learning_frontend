@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
 import { useSnackbar }    from 'notistack';
 import { useHistory }     from 'react-router-dom';
-import { useDispatch, useSelector }    from 'react-redux';
+import { useDispatch }    from 'react-redux';
 import Grid               from '@mui/material/Grid';
 import Button             from 'views/molecules/MuiButton';
 import TextField                from 'views/molecules/MuiTextField';
@@ -12,7 +12,6 @@ import { ParentPgStepper }      from 'views/molecules/ParentPgStepper/ParentPgSt
 import SocratesImg              from 'views/assets/socrates.svg';
 import { createGuardian }       from 'app/actions/guardianActions'
 import { Button as ButtonText } from 'views/atoms/Text/Button';
-import { dictionary }           from './dictionary';
 import {
   Container,
   FormContainer,
@@ -42,11 +41,8 @@ const CreateParent: FC = () => {
     confPassword: null,
   });
   // const [errMsg, setErrMsg] = useState('');
-  const [loading, setLoading]       = useState(false);
+  const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState('');
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
 
   function validateEmail (email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -65,9 +61,10 @@ const CreateParent: FC = () => {
     if (!formValidation()) return;
 
     setLoading(true);
-    // const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
-    // free account for first releae
+    const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
+    /*------------------------ free account for first releae -S-------------------------*
     const result: any = await createGuardian(email, firstName, lastName, userName, password,"FREE", dispatch)
+    /*------------------------ free account for first releae -E-------------------------*/
 
     setLoading(false);
 
@@ -102,11 +99,11 @@ const CreateParent: FC = () => {
         <ParentPgStepper step={1} />
         <Container>
           <FormContainer>
-            <Title>{dictionary[language]?.parentSignup}</Title>
+            <Title>Parent Signup</Title>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <TextField
-                  label={dictionary[language]?.email}
+                  label="Email"
                   onChange={e => {
                     setEmail(e.target.value);
                     // handleFormChange(
@@ -116,7 +113,7 @@ const CreateParent: FC = () => {
                     /*------------- set username to email -S--------------------------*/
                     setUserName(e.target.value);
                     setValidateMsg({...validateMsg,
-                      email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
+                      email: e.target.value.length === 0 ? 'Field is required' : !validateEmail(e.target.value) ? 'This is not email address' : '',
                       userName: ''
                     });
                     /*------------- set username to email -E--------------------------*/
@@ -128,12 +125,12 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label={dictionary[language]?.parentFirstName}
+                  label="Parent First Name"
                   onChange={e => {
                     setFirstName(e.target.value);
                     handleFormChange(
                       'firstName',
-                      e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : ''
+                      e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
                   error={!!validateMsg.firstName}
@@ -142,12 +139,12 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label={dictionary[language]?.parentLastName}
+                  label="Parent Last Name"
                   onChange={e => {
                     setLastName(e.target.value);
                     handleFormChange(
                       'lastName',
-                      e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : ''
+                      e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
                   error={!!validateMsg.lastName}
@@ -170,13 +167,13 @@ const CreateParent: FC = () => {
               </Grid> */}
               <Grid item xs={12}>
                 <TextField
-                  label={dictionary[language]?.password}
+                  label="Password"
                   type="password"
                   onChange={e => {
                     setPassword(e.target.value);
                     handleFormChange(
                       'password',
-                      e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : ''
+                      e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
                   error={!!validateMsg.password}
@@ -185,16 +182,16 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12} md={12}>
                 <TextField
-                  label={dictionary[language]?.confirmPassword}
+                  label="Confirm Password"
                   type="password"
                   onChange={e => {
                     // setConfPassword(e.target.value);
                     handleFormChange(
                       'confPassword',
                       e.target.value.length === 0
-                        ? dictionary[language]?.fieldIsRequired
+                        ? 'Field is required'
                         : password !== e.target.value
-                        ? dictionary[language]?.passwordIsNotMatchedWithConfirmPassword
+                        ? 'Password is not matched with confirm password'
                         : ''
                     );
                   }}
@@ -204,7 +201,7 @@ const CreateParent: FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label={dictionary[language]?.couponCode}
+                  label="COUPON CODE"
                   onChange={e => {
                     setCouponCode(e.target.value);
                   }}
@@ -217,39 +214,39 @@ const CreateParent: FC = () => {
               <Button
                 bgColor={BasicColor.green}
                 onClick={handleCreate}
-                value={dictionary[language]?.createAccount}
+                value="Create Account"
                 margin="45px 0 0 0"
                 loading={loading}
               />
             </div>
             <div className="p-b-95 p-t-30 font-s-15 inline">
-              {dictionary[language]?.byClickingCreateAccountYouAgreeToLearnWithSocrates}{' '}
+              By clicking Create Account, you agree to Learn With Socrates’s{' '}
               <div className="font-w-9 inline">
-                {dictionary[language]?.privacyPolicy}, {dictionary[language]?.termsAndConditions}
+                Privacy Policy, Terms & Conditions
               </div>{' '}
-              {dictionary[language]?.and} <div className="font-w-9 inline">{dictionary[language]?.childrenPrivacyPolicy}</div>
+              and <div className="font-w-9 inline">Children’s Privacy Policy</div>
             </div>
           </FormContainer>
           <ContactContainer>
             <ContactHeader>
               <img src={SocratesImg} className="p-l-20 p-r-10" />
               <div className="font-s-60 line-h-75 font-w-6 text-center p-r-25">
-              {dictionary[language]?.welcome} <br />
-              {dictionary[language]?.toSocrates}
+                Welcome <br />
+                to Socrates
               </div>
             </ContactHeader>
             <ContactBody>
               <div className="font-w-8 font-s-30 line-h-35 p-b-25">
-                {dictionary[language]?.contactUs}
+                Contact Us
               </div>
               <div className="flex-col">
                 <div className="font-w-7 font-s-35 p-b-20">
-                  {dictionary[language]?.weAreHappyToHelpYou}
+                  We're happy to help you
                 </div>
                 <div className="flex justify-space-between">
-                  <ButtonText className="p-1-10" onClick={() => location.href='https://www.withsocrates.com/contact/'}>{dictionary[language]?.contactUs}</ButtonText>
-                  <ButtonText onClick={() => location.href='https://www.withsocrates.com/faq/'}>{dictionary[language]?.FAQ}</ButtonText>
-                  <ButtonText className="p-r-10" onClick={() => location.href='https://www.withsocrates.com/membership/'}>{dictionary[language]?.plans}</ButtonText>
+                  <ButtonText className="p-1-10" onClick={() => location.href='https://www.withsocrates.com/contact/'}>Contact Us</ButtonText>
+                  <ButtonText onClick={() => location.href='https://www.withsocrates.com/faq/'}>FAQ</ButtonText>
+                  <ButtonText className="p-r-10" onClick={() => location.href='https://www.withsocrates.com/membership/'}>Plans</ButtonText>
                 </div>
               </div>
             </ContactBody>

@@ -5,17 +5,12 @@ import { TopicProgress }           from 'views/molecules/TopicProgress';
 import { ScreenSize }              from 'constants/screenSize';
 import { dictionary }              from 'views/pages/Student/Progress/dictionary';
 import { getProgress }             from 'app/firebase';
-import { useSelector }             from 'react-redux';
 
 export const ReportProgress: FC = () => {
-
   useEffect(() => {
     getProgress(setProgress);
   }, []);
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
-
+  const language = 'en';
   const lessonProps = [
     {
       title: dictionary[language].ela,
