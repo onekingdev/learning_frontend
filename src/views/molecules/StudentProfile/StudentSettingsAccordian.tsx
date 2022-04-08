@@ -7,12 +7,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { SettingBarColor } from 'views/Color';
 import { SoundSwitch } from './SoundSwitch';
 import { LanguageSelect } from './StudentSettingsLanguageSelect';
-import { dictionary }       from 'views/pages/Student/Settings/dictionary'
-import { useSelector, useDispatch } from 'react-redux';
 
 export const StudentSettingsAccordian: FC = () => {
-  let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : "EN_US"
+
   return (
     <Container sx={{marginTop: 2, marginBottom: 2, borderRadius: 10}}>
       <Accordion sx={{ marginBottom: 2 }}>
@@ -22,7 +19,7 @@ export const StudentSettingsAccordian: FC = () => {
           id="panel1a-header"
           sx={{ background: SettingBarColor.accessibility }}
         >
-          <Typography style={{ color: 'white' }}>{dictionary[language]?.language}</Typography>
+          <Typography style={{ color: 'white' }}>Language</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <LanguageSelect />
@@ -35,7 +32,7 @@ export const StudentSettingsAccordian: FC = () => {
           id="panel2a-header"
           sx={{ background: SettingBarColor.notifications }}
         >
-          <Typography style={{ color: 'white' }}>{dictionary[language]?.account}</Typography>
+          <Typography style={{ color: 'white' }}>Account</Typography>
         </AccordionSummary>
         <AccordionDetails>
         </AccordionDetails>
@@ -47,7 +44,7 @@ export const StudentSettingsAccordian: FC = () => {
           sx={{ background: SettingBarColor.audio }}
           expandIcon={<ExpandMoreIcon />}
         >
-          <Typography style={{ color: 'white', textAlign:'center' }}>{dictionary[language]?.sound}</Typography>
+          <Typography style={{ color: 'white', textAlign:'center' }}>Sound</Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ display: 'flex', justifyContent: 'center'}}>
           <SoundSwitch />

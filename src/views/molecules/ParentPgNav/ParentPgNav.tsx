@@ -1,7 +1,6 @@
 import { FC, useEffect } from 'react';
 import styled            from 'styled-components';
 import { useHistory}     from 'react-router-dom';
-import { useSelector }   from 'react-redux'
 // import { useDispatch } from 'react-redux';
 import InputLabel        from '@mui/material/InputLabel';
 import MenuItem          from '@mui/material/MenuItem';
@@ -16,7 +15,6 @@ import { useStyles }     from './Style';
 import logoTitle         from 'views/assets/logo-learn.svg'
 import home              from 'views/assets/home_pc.svg'
 import avatar            from 'views/assets/socrates-icon.svg'
-import { dictionary }    from './dictionary'
 import {
   LogoContainer,
   LogoImg,
@@ -34,8 +32,6 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   const history = useHistory();
   // const dispatch = useDispatch()
   const classes = useStyles();
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
   const handleChange = (event:any) => {
     switch(event.target.value) {
       case 'Settings' :
@@ -75,7 +71,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
           color='success'
           onClick={onSupport}
         >
-          {dictionary[language]?.support}
+          Support
         </Button>
         <Avatar className={classes.questionMarkButton} id='questionMarkButton' onClick={() => location.href='https://www.withsocrates.com/contact/'}>
         {/* https://www.withsocrates.com/contact/ */}
@@ -87,7 +83,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
       </LogoContainer>
       <NameAvatarGroup>
         <FormControl className={classes.formControl}>
-          <InputLabel id='menu'>{dictionary[language]?.menu}</InputLabel>
+          <InputLabel id='menu'>Menu</InputLabel>
           <Select
             labelId='menu'
             id='menu-select'
@@ -95,9 +91,9 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
             onChange={handleChange}
             sx={{backgroundColor: 'white'}}
           >
-            <MenuItem value={'Settings'}>{dictionary[language]?.settings}</MenuItem>
-            <MenuItem value={'ManageKids'}>{dictionary[language]?.manageKids}</MenuItem>
-            <MenuItem value={'SignOut'}>{dictionary[language]?.signOut}</MenuItem>
+            <MenuItem value={'Settings'}>Settings</MenuItem>
+            <MenuItem value={'ManageKids'}>Manage Kids</MenuItem>
+            <MenuItem value={'SignOut'}>Sign Out</MenuItem>
           </Select>
         </FormControl>
         <AvatarContainer>

@@ -8,20 +8,20 @@ import {Typography}              from 'views/atoms/Text/typography';
 import FormControl               from '@mui/material/FormControl';
 import {
   DialogContent,
-  DialogTitle,
   DialogContentText,
   Radio,
   FormControlLabel,
 } from '@mui/material';
 
 import titleBg from 'views/assets/title-kids-background.png';
+import { ScreenSize } from 'constants/screenSize';
 
 /*--------------------------------------------------------------------------------------------*/
 /*                                         Dialog                                             */
 /*--------------------------------------------------------------------------------------------*/
 export const LSDialogContent = styled(DialogContent)`
   &.MuiDialogContent-root {
-    padding: 40px;
+    padding: 0 40px 0 40px;
     @media screen and (max-width: 540px) {
       padding: 5px;
     }
@@ -65,7 +65,7 @@ export const LSInputBase = styled(InputBase)<InputBaseProps>`
 `;
 export const LSRadio = styled(Radio)`
   & .MuiSvgIcon-root {
-    font-size: 40px;
+    font-size: 30px;
   }
   &.MuiRadio-root {
     color: ${BasicColor.green};
@@ -80,6 +80,9 @@ export const LSFormControlLabel = styled(FormControlLabel)`
     line-height: 18px;
     letter-spacing: 0px;
     text-align: left;
+    @media screen and (max-width: ${ScreenSize.phone}) {
+      font-size: 12px;
+    }
   }
 `;
 

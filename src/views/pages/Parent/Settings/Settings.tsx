@@ -14,16 +14,13 @@ import { MembershipDetail } from 'views/organisms/Setting/Details';
 import { CssBaseline }      from '@mui/material';
 import { LoadingContext }   from 'react-router-loading';
 import { TypoTitle }        from 'views/atoms/Text';
-import { useSelector }      from 'react-redux'
-import { dictionary }       from './dictionary'
 import {
   SettingContainer,
   TitleContainer,
  } from './Styles';
 export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+
   useEffect(() => {
     if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     loadingContext.done();
@@ -32,7 +29,7 @@ export const Settings: FC = () => {
     <ParentPgContainer onlyLogoImgNav={false}>
       <SettingContainer>
         <TitleContainer>
-          <Title><TypoTitle>{dictionary[language]?.settings}</TypoTitle></Title>
+          <Title><TypoTitle>Settings</TypoTitle></Title>
         </TitleContainer>
         <CssBaseline />
         <Grid container>
@@ -40,9 +37,9 @@ export const Settings: FC = () => {
             <SettingForm />
             <Payment />
             <TextGroup>
-              <LSLabel>{dictionary[language]?.questions}</LSLabel>
-              <LSText>{dictionary[language]?.reachUsAndWeWillHelpYou}</LSText>
-              <LSBlueTextButton href="#">{dictionary[language]?.contact}</LSBlueTextButton>
+              <LSLabel>{'Questions? '}</LSLabel>
+              <LSText>{' Reach us and we will help you'}</LSText>
+              <LSBlueTextButton href="#">{' Contact'}</LSBlueTextButton>
             </TextGroup>
           </Grid>
           <Grid item xs={12} md={6}>

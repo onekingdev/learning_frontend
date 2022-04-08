@@ -1,9 +1,5 @@
-export const dictionary:any = Object.freeze({
-  "EN_US": {
-    settings: 'Settings',
-    questions: 'questions',
-    reachUsAndWeWillHelpYou: 'Reach us and we will help you',
-    contact: ' Contact',
+export const dictionary = Object.freeze({
+  "en-us": {
     form:{
       title: 'Profile and settings',
       currentEmail: 'name@learnwithsocrates.com',
@@ -61,16 +57,4 @@ export const dictionary:any = Object.freeze({
       },
     ],
   },
-  "TH": {
-    settings: 'การตั้งค่า',
-    questions: 'คำถาม',
-    reachUsAndWeWillHelpYou: 'ติดต่อเราและเราจะช่วยคุณ',
-    contact: ' ติดต่อ',
-  },
-  'ES_MX': {
-    settings: 'Ajustes',
-    questions: 'preguntas',
-    reachUsAndWeWillHelpYou: 'Contáctanos y te ayudaremos',
-    contact: ' Contacto',
-  }
 });
