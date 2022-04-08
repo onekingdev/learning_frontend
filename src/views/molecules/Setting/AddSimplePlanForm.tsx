@@ -2,12 +2,12 @@ import * as React                                                  from 'react';
 import { FC, useEffect, useState }                                 from 'react';
 import Box                                                         from '@mui/material/Box';
 import FormControlLabel                                            from '@mui/material/FormControlLabel';
-import { Checkbox, Radio, Grid }                                   from '@mui/material';
+import { Checkbox, Radio }                                         from '@mui/material';
 import RadioGroup                                                  from '@mui/material/RadioGroup';
 import { FormGroup }                                               from '@mui/material';
 import { BasicColor }                                              from 'views/Color';
 import Button                                                      from 'views/molecules/MuiButton';
-import { LSButtonContainer, LSRadio, LSFormControlLabel, LSInputBase } from './utils/Style';
+import { LSButtonContainer, LSRadio, LSFormControlLabel, LSLabel } from './utils/Style';
 import { dictionary }                                              from 'views/pages/Parent/Settings/dictionary';
 import { doAddStudentPlan, doFetchPlans }                          from 'app/actions/guardianActions';
 import { useSelector }                                             from 'react-redux'
@@ -15,7 +15,6 @@ import { useSnackbar }                                             from 'notista
 import { LoadingSpinner }                                          from 'views/atoms/Spinner';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ScreenSize } from 'constants/screenSize';
-import { TypoBtn, TypoDescription } from 'views/atoms/Text';
 
 interface IAddPlanProps {
   open: () => void
@@ -48,7 +47,8 @@ const combo = [
 export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
 
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
-  const width = isMobile ? 300: 500
+  const width = isMobile ? 300: 400
+  const padding = isMobile ? 10 : 20
   const user = useSelector((state: any) => state.user);
   const guardian = useSelector((state: any) => state.guardian);
   const { enqueueSnackbar } = useSnackbar();
@@ -143,43 +143,37 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
       onChange={handleSoloChange}
       sx={{ marginLeft: 3 }}
     >
-      <Grid container alignItems={'center'}>
       {
         comboChildren.map((comboChild, index) => (
-          <Grid item md={6} xs={12}>
-            <FormControlLabel
-              key={index}
-              label={comboChild.label}
-              value={comboChild.value}
-              control={<Radio />}
-            />
-          </Grid>
+          <FormControlLabel
+            key={index}
+            label={comboChild.label}
+            value={comboChild.value}
+            control={<Radio />}
+          />
         ))
       }
-      </Grid>
     </RadioGroup>
   }
 
   const renderComboChildren = (comboChildren: Array<ChildrenProps>) => {
     return <FormGroup sx={{ marginLeft: 3 }}>
-        <Grid container alignItems={'center'}>
-          {comboChildren.map((comboChild, index) => (
-            <Grid item md={6} xs={12}>
-              <FormControlLabel
-                key={index}
-                label={comboChild.label}
-                value={comboChild.value}
-                control={<Checkbox checked={checked[index]} onChange={handleCheckChange} />}
-              />
-            </Grid>
-          ))}
-        </Grid>
+      {
+        comboChildren.map((comboChild, index) => (
+          <FormControlLabel
+            key={index}
+            label={comboChild.label}
+            value={comboChild.value}
+            control={<Checkbox checked={checked[index]} onChange={handleCheckChange} />}
+          />
+        ))
+      }
     </FormGroup>
   }
 
   return (
     !loading && plans.length ?
-      <div style={{width: width}}>
+      <div style={{width: width, padding: padding}}>
         <RadioGroup
           aria-labelledby="canceling-reason-label"
           name="radio-buttons-group"
@@ -187,43 +181,21 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
           value={parentState}
           onChange={handleRadioChange}
         >
-          <Grid container alignItems='center'>
-            <Grid item xs={6}>
-              <LSFormControlLabel value={plans[0]?.name} control={<LSRadio />} label={'Gold Package'} />
-            </Grid>
-            <Grid item xs={6}>
-              <TypoBtn>${plans[0]?.priceMonth}</TypoBtn>
-            </Grid>
-            <Grid item xs={6}>
-              <LSFormControlLabel value={plans[1]?.name} control={<LSRadio checked={checked[0] || checked[1] || checked[2] || checked[3] || checked[4]} />} label={'Combo Package(Pick 2)'} />
-            </Grid>
-            <Grid item xs={6}>
-              <TypoBtn>${plans[1]?.priceMonth}</TypoBtn>
-            </Grid>
-            <Grid item xs={12}>
-              {renderComboChildren(comboChildren)}
-            </Grid>
-            <Grid item xs={6}>
-              <LSFormControlLabel value={plans[2]?.name} control={<LSRadio />} label={'Solo Package'} />
-            </Grid>
-            <Grid item xs={6}>
-              <TypoBtn>${plans[2]?.priceMonth}</TypoBtn>
-            </Grid>
-            <Grid item xs={12}>
-              {renderSoloChildren(comboChildren)}
-            </Grid>
-          </Grid>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <LSFormControlLabel value={plans[0]?.name} control={<LSRadio />} label={plans[0]?.name} />
+            <LSLabel>${plans[0]?.priceMonth}</LSLabel>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <LSFormControlLabel value={plans[1]?.name} control={<LSRadio checked={checked[0] || checked[1] || checked[2] || checked[3] || checked[4]} />} label={plans[1]?.name} />
+            <LSLabel>${plans[1]?.priceMonth}</LSLabel>
+          </Box>
+          {renderComboChildren(comboChildren)}
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <LSFormControlLabel value={plans[2]?.name} control={<LSRadio />} label={plans[2]?.name} />
+            <LSLabel>${plans[2]?.priceMonth}</LSLabel>
+          </Box>
+          {renderSoloChildren(comboChildren)}
         </RadioGroup>
-        <TypoDescription >{'Your credit card on file will be charged for this plan'}</TypoDescription>
-        <LSInputBase
-          fullWidth
-          disabled
-          border='solid 2px darkblue'
-          border_radius={10}
-          pl={10}
-          value={guardian.paymentMethod?.cardNumber}
-        // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
-        />
         <LSButtonContainer>
           <Button
             bgColor={BasicColor.green}

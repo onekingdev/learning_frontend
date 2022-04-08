@@ -85,18 +85,6 @@ export const TypoBtn = styled.p`
   }
 `;
 
-export const TypoDescription = styled.p`
-  font-family: ${Typography.primary};
-  letter-spacing: 0.25px;
-  margin: 0;
-  font-size: 16px;
-  cursor: pointer;
-
-  @media (max-width: ${ScreenSize.phone}) {
-    font-size: 12px;
-  }
-`;
-
 export const TypoIcon = styled.p`
   font-family: ${Typography.primary};
   font-size: 12px;
