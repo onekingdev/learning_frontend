@@ -52,7 +52,9 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
   const user = useSelector((state: any) => state.user);
   const guardian = useSelector((state: any) => state.guardian);
   const { enqueueSnackbar } = useSnackbar();
-  const comboChildren = dictionary['en-us']?.combo
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
+  const comboChildren = dictionary[language]?.combo
   const [plans, setPlans] = useState<Array<any>>([])
 
   const [parentState, setParentState] = useState('')
@@ -113,7 +115,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
     const counts = countOccurrences(checked, true)
     if (!(event.target.checked === true && counts === 2)) {
 
-      const idx = comboChildren.findIndex(x => x.value === event.target.value)
+      const idx = comboChildren.findIndex((x: { value: string; }) => x.value === event.target.value)
       tempArray[idx] = event.target.checked
       setChecked(tempArray)
       setParentState(plans[1].name)

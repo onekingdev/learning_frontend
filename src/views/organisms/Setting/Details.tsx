@@ -8,12 +8,14 @@ import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanForm';
 import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
 import { PlanList } from 'views/molecules/Setting/PlanList';
 import { CancelMembershipForm } from 'views/molecules/Setting/CancelMembershipForm';
-
+import { useSelector } from 'react-redux';
+import { dictionary } from './dictionary'
 export const MembershipDetail: FC = () => {
 
   const { isOpen, open } = useDialog()
   const { isAddOpen, openAdd } = useAddDialog()
-
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
 
   // State to refresh component
   const [value, setValue] = useState(false);
@@ -26,16 +28,16 @@ export const MembershipDetail: FC = () => {
     <Box>
       <LSShadowContainer >
         <LSTitle>
-          Membership Details
+          {dictionary[language]?.membershipDetails}
         </LSTitle>
         <Box >
           <Box sx={{ display: 'flex', justifyContent: 'center', margin: 2 }}>
             <LSDialog
               isOpen={isAddOpen}
               open={openAdd}
-              title='Add Plan/or Package'
+              title={dictionary[language]?.addPlanPackage}
               // fullWidth='true'
-              contentText='Choose the new plan'
+              contentText={dictionary[language]?.chooseTheNewPlan}
               dialogContent={
                 <AddSimplePlanForm
                   open={openAdd}

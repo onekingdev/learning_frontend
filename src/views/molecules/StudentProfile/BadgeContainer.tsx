@@ -7,8 +7,10 @@ import notebook_img from 'views/assets/badges/notebook.svg';
 import picture_img from 'views/assets/badges/picture.svg';
 import sharpener_img from 'views/assets/badges/sharpener.svg';
 import { Avatar, Grid } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { ScreenSize } from 'constants/screenSize';
+import useMediaQuery    from '@mui/material/useMediaQuery';
+import { ScreenSize }   from 'constants/screenSize';
+import {useSelector}    from 'react-redux'
+import { dictionary }   from 'views/pages/Student/Settings/dictionary'
 
 export const BadgeContainer: FC = () => {
   const badges = [
@@ -22,10 +24,12 @@ export const BadgeContainer: FC = () => {
     question,
   ];
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
+  let language:string     = useSelector((state: any) => state.user.language);
+  language                = language? language : "EN_US"
   const size = isMobile ? 40: 120
   return (
     <>
-      <ProfileTitle title='Badges' />
+      <ProfileTitle title={dictionary[language]?.badges} />
       <Grid container spacing={2} justifyContent={'center'} sx={{marginBottom: 5, width: '90%'}} >
         {
           badges.map(badge => (
