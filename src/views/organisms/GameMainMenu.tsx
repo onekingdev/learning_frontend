@@ -11,10 +11,14 @@ import skill              from 'views/assets/skills.svg';
 import strategy           from 'views/assets/strategy.svg'
 import { dictionary }     from 'views/pages/Student/Games/dictionary';
 import { useHistory }     from 'react-router-dom';
+import { useSelector }    from 'react-redux';
 
 export const GameMainMenu: FC = () => {
-  const language = 'en';
+
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
   const history = useHistory();
+
   return (
     <>
       <GameMainMenuStyle>

@@ -9,11 +9,14 @@ import { useDispatch }             from 'react-redux'
 import { useSelector }             from 'react-redux';
 import { useSnackbar }             from 'notistack';
 import Button                      from 'views/molecules/MuiButton';
+import { dictionary }              from 'views/pages/Student/Bank/dictionary'
 
 export const TxBox: FC = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
   const user = useSelector((state: any) => state.user);
 
   const [depositAmount, setDepositAmount] = useState(0)
@@ -70,7 +73,7 @@ export const TxBox: FC = () => {
           <Button
             bgColor={BasicColor.green}
             onClick={onDepositBtnClicked}
-            value="Deposit"
+            value={dictionary[language]?.deposit}
             fullWidth={true}
             loading={loading}
           />
@@ -87,7 +90,7 @@ export const TxBox: FC = () => {
           <Button
             bgColor={BasicColor.green}
             onClick={onWithdrawBtnClicked}
-            value="Withdraw"
+            value={dictionary[language]?.withdrawal}
             fullWidth={true}
             loading={loading}
           />

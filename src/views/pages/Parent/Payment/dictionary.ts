@@ -1,4 +1,44 @@
-export const dictionary = Object.freeze({
-    en: {
+export const dictionary: any = Object.freeze({
+    'EN_US': {
+        choosePackageInfo: `When signing up for Socrates, children can get one or more areas of knowledge to learn from our growing selection.Choose the Solo package for one area, Combo package for any two, or Gold Package to get it all!`,
+        math: 'Math',
+        elaSgithWords: "ELA + SIGHT WORDS",
+        science: "SCIENCE",
+        financialLiteracy: "FINANCIAL LITERACY",
+        healthAndSafety: "HEALTH & SAFETY",
+        receive: "Receive",
+        offThesePricesForEachAdditionalChildOnYourAccount: "off these prices for each additional child on your account"
     },
+    'TH' :{
+        addingANewChild : "การเพิ่มเด็กใหม่",
+        pleaseCompleteTheFollowingToGetYourChildStarted : "โปรดกรอกข้อมูลต่อไปนี้เพื่อให้บุตรหลานของคุณเริ่มต้น",
+        selectYourPackage: "เลือกแพ็คเกจของคุณ",
+        childFirstName: "ชื่อลูก",
+        firstLetterofChildLastName: "อักษรตัวแรกของเด็ก นามสกุล",
+        childUsernameDoNotUseYourRealName: "ชื่อผู้ใช้ของเด็ก (อย่าใช้ชื่อจริงของคุณ)",
+        password: "รหัสผ่าน",
+        confirmPassword: "ยืนยันรหัสผ่าน",
+        selectYourCurriculum: "เลือกหลักสูตรของคุณ",
+        selectYourGrade: "เลือกเกรดของคุณ",
+        previousKid: "เด็กก่อนหน้า",
+        nextKid: "เด็กต่อไป",
+        finish: "เสร็จสิ้น",
+        fieldIsRequired: 'ต้องระบุข้อมูล',
+    },
+    'ES_MX': {
+        addingANewChild : "Agregar un nuevo niño",
+        pleaseCompleteTheFollowingToGetYourChildStarted : "Complete lo siguiente para que su hijo comience",
+        selectYourPackage: "Seleccione su paquete",
+        childFirstName: "Nombre del niño",
+        firstLetterofChildLastName: "Primera letra del apellido del niño",
+        childUsernameDoNotUseYourRealName: "Nombre de usuario infantil (NO USE SU NOMBRE REAL)",
+        password: "Clave",
+        confirmPassword: "Confirmar contraseña",
+        selectYourCurriculum: "Seleccione su plan de estudios",
+        selectYourGrade: "Seleccione su grado",
+        previousKid: "Niño anterior",
+        nextKid: "próximo niño",
+        finish: "Finalizar",
+        fieldIsRequired: 'Se requiere campo',
+    }
 });

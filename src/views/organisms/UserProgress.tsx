@@ -3,7 +3,8 @@ import styled              from 'styled-components';
 import { BasicColor }      from 'views/Color';
 import { UserProgressBar } from 'views/molecules/UserProgressBar';
 import { Typography }      from 'views/atoms/Text/typography';
-
+import { useSelector }     from 'react-redux';
+import { dictionary }      from 'views/pages/Student/Menus/dictionary'
 type UserProgressProps = {
   rank: number;
   level: number;
@@ -22,18 +23,22 @@ export const UserProgress: FC<UserProgressProps> = ({
   progress,
   userName,
 }) => {
+
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
+
   return (
     <UserProgressStyle>
       <RangeContainer color={BasicColor.greenSoft}>
-        Rank <Range>#{rank}</Range>
+        {dictionary[language]?.rank} <Range>#{rank}</Range>
       </RangeContainer>
       <RangeContainer color={BasicColor.blue}>
-        Level <Range>{level}</Range>
+        {dictionary[language]?.level} <Range>{level}</Range>
       </RangeContainer>
       <Name color={BasicColor.black}>{userName}</Name>
       <ExpContainer>
         <Name color={BasicColor.greenSoft}>{exp}</Name>
-        <Name color={BasicColor.black}>/{expMax}XP</Name>
+        <Name color={BasicColor.black}>/{expMax}{dictionary[language]?.exp}</Name>
       </ExpContainer>
       <UserProgressBar progress={progress} />
     </UserProgressStyle>

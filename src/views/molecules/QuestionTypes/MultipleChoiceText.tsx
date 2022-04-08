@@ -13,6 +13,7 @@ import { TextOption }              from 'views/atoms/QuestionOptions/Textoption'
 import { VideoModalAssistor }      from 'views/organisms/VideoModalAssistor';
 import Button                      from 'views/molecules/MuiButton';
 import { Store }                   from 'app/configureStore';
+import { dictionary }              from 'views/pages/Student/Question/dictionary'
 
 type ChoiceTextProps = {
   question: IQuestion;
@@ -38,10 +39,11 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   onAnswer,
 }) => {
   const state = useSelector((state: Store) => state.blockPresentation);
+  let language:string     = useSelector((state: any) => state.user.language);
+  language                = language? language : "EN_US"
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
-
   useEffect(() => {
     setIsAnswered(false);
   }, [question.answeroptionSet]);
@@ -116,7 +118,7 @@ export const MultipleChoiceText: FC<ChoiceTextProps> = ({
             disabled={!isAnswered}
             fullWidth={true}
             color={BasicColor.black}
-            value={totalQuestions === questionCounter + 1 ? 'Finish' : 'Next'}
+            value={totalQuestions === questionCounter + 1 ? dictionary[language]?.finish : dictionary[language]?.next}
           />
           <Icon image={assistor} onClick={readQuestion} />
           <Icon image={videoIcon} onClick={closeVideoModal}/>

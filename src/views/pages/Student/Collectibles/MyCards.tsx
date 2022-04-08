@@ -16,13 +16,15 @@ import {
 import { MyCardPacks } from 'views/molecules/StudentCard/MyCards/MyCardPacks'
 import { getCollectibleCards } from 'app/actions/collectibleActions';
 import { LoadingSpinner } from 'views/atoms/Spinner';
-
+import { dictionary } from './dictionary;';
 export const MyCardCollection: FC = () => {
   const history = useHistory();
   const loadingContext = useContext(LoadingContext);
   const user = useSelector((state: any) => state.user);
   const [categories, setCategories] = useState([]);
   const [allCards, setAllCards] = useState<Array<any>>([]);
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
 
   useEffect(() => {
     let ignore = false;
@@ -55,10 +57,10 @@ export const MyCardCollection: FC = () => {
     <Wrapper>
       <StudentMenu>
         <CardCollectibleContainer>
-          <PageTitle title='MY CARDS' />
+          <PageTitle title={dictionary[language]?.myCards} />
           <BtnContainer>
             <Button onClick={() => history.push('/collectibles/cards')}>
-              BUY CARDS
+              {dictionary[language]?.buyCards}
             </Button>
           </BtnContainer>
           {

@@ -12,12 +12,14 @@ import * as TYPE             from 'app/types';
 import { AUDIENCES_QUERY }   from 'api/queries/people';
 import { IAreasOfKnowledge } from 'app/entities/areasOfKnowledge';
 import { LoadingContext }    from 'react-router-loading';
+import { useSelector }       from 'react-redux'
 
 export const SubjectsMenu: FC = () => {
   const loadingContext  = useContext(LoadingContext);
   const dispatch        = useDispatch();
   const history         = useHistory();
-  const language        = 'en';
+  let language:string   = useSelector((state: any) => state.user.language);
+  language              = language? language : "EN_US"
   const [areasOfKnowledge, setTopics] = useState<IAreasOfKnowledge[]>([]);
 
   const handleData = (data: any) => {

@@ -15,6 +15,7 @@ import { LoadingContext }      from 'react-router-loading';
 import { ScreenSize }          from 'constants/screenSize';
 import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
 import { Container }            from './Style';
+import { dictionary }           from './dictionary'
 import { useSelector }       from 'react-redux';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
@@ -38,8 +39,11 @@ const masteryColors = {
 }
 
 export const KidsProgress = () => {
-    const user           = useSelector((state: any) => state.user);
+    const user              = useSelector((state: any) => state.user);
     const student           = useSelector((state: any) => state.student);
+    let language:string     = useSelector((state: any) => state.user.language);
+    language                = language? language : "EN_US"
+
     const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
     const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>("");
     const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
@@ -68,11 +72,12 @@ export const KidsProgress = () => {
             }
         })();
     }, [user]);
+    const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
         if (activeSubjectId !== -1) {
-            loadingContext.restart();
             (async () => {
+                loadingContext.start();
                 // Get Topic Report
                 const res:any = await query(``, TopicReport(parseInt(student.id), activeSubjectId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
@@ -85,7 +90,10 @@ export const KidsProgress = () => {
                     // console.log(result.data.rootTopicsByAok)
                     setData(result.data.rootTopicsByAok);
                 }
-                loadingContext.done();
+                // if (firstLoad) {
+                //     setFirstLoad(false);
+                    loadingContext.done();
+                // }
           })();
         }
       }, [activeSubjectId]);
@@ -194,7 +202,7 @@ export const KidsProgress = () => {
                         color: 'black',
                         paddingLeft: '1rem',
                         paddingRight: '1rem',
-                    }}>Progress</Title>
+                    }}>{dictionary[language]?.title}</Title>
                 </div>
                 <div style={{
                     display: 'flex',
@@ -243,13 +251,13 @@ export const KidsProgress = () => {
                                 <InputLabel id='demo-simple-select-label' style={{
                                     background: '#26B824',
                                     color: 'white',
-                                }}>Review Questions Answered</InputLabel>
+                                }}>{dictionary[language]?.reviewQuestionsAnswered}</InputLabel>
                             </PcCom>
                             <MobileCom>
                                 <InputLabel id='demo-simple-select-label' style={{
                                     background: '#26B824',
                                     color: 'white',
-                                }}>Review Questions</InputLabel>
+                                }}>{dictionary[language]?.reviewQuestions}</InputLabel>
                             </MobileCom>
                             <Select
                                 id='demo-simple-select'
@@ -356,7 +364,13 @@ export const KidsProgress = () => {
                             width: `${subSubject.width * mapWidth / 1366}px`,
                             // overflow: "hidden",
                             height: "50px",
-                            textAlign: "center"
+                            textAlign: "center",
+                            display: "-webkit-box",
+                            WebkitBoxOrient: "vertical",
+                            // "-webkit-box-orient": "vertical",
+                            WebkitLineClamp: 3,
+                            // "-webkit-line-clamp": 3,
+                            overflow: "hidden",
                         }}>{subSubject.text}</PcCom>)}
                         { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
                             position: 'absolute',

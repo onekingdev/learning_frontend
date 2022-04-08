@@ -1,29 +1,33 @@
 import { FC, useContext, useEffect, useState } from 'react';
-import { ScreenSize } from 'constants/screenSize';
-import styled from 'styled-components';
-import wardrobe_icon from 'views/assets/wardrobe.png';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { ScreenSize }     from 'constants/screenSize';
+import styled             from 'styled-components';
+import { useSnackbar }    from 'notistack';
+import { Link }           from 'react-router-dom';
+import { useSelector }    from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
-import { get } from 'api/queries/get';
-import { AVATAR } from 'api/fragments/avatarFragments';
-import { IAvatar } from 'app/entities/avatar';
-import { AvatarSet } from '../AvatarSet';
-import IconButton from '@mui/material/IconButton';
-import { ColorPickerDropdown } from 'views/molecules/Avatar/Wardrobe/ColorPickerDropdown';
-import { AtomsDrawer } from './AtomsDrawer';
-import { AtomsSelector } from './AtomsSelector';
+import { get }            from 'api/queries/get';
+import { AVATAR }         from 'api/fragments/avatarFragments';
+import { IAvatar }        from 'app/entities/avatar';
+import IconButton         from '@mui/material/IconButton';
+import StarIcon           from '@mui/icons-material/Star';
+import StarRoundedIcon    from '@mui/icons-material/StarRounded';
+import { Grid }           from '@mui/material';
+import { AvatarSet }      from '../AvatarSet';
+import { AtomsDrawer }    from './AtomsDrawer';
+import { AtomsSelector }  from './AtomsSelector';
 import { doFetchOwnedAvatars, doSetFavoriteAvatar } from 'app/actions/avatarActions';
-import { useSnackbar } from 'notistack';
-import { Grid } from '@mui/material';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { ColorPickerDropdown }  from 'views/molecules/Avatar/Wardrobe/ColorPickerDropdown';
+import { dictionary }           from 'views/pages/Student/Avatar/dictionary'
+import wardrobe_icon            from 'views/assets/wardrobe.png';
+import useMediaQuery            from '@mui/material/useMediaQuery';
 
 export const WardrobeSelector: FC = () => {
 
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
-  const user = useSelector((state: any) => state.user);
-  const student = useSelector((state: any) => state.student)
+  const user          = useSelector((state: any) => state.user);
+  const student       = useSelector((state: any) => state.student)
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
   const loadingContext = useContext(LoadingContext);
 
   const [reload, setReload] = useState(false)
@@ -53,10 +57,10 @@ export const WardrobeSelector: FC = () => {
   const setFavorite = async () => {
     const res: any = await doSetFavoriteAvatar(student.id, accessoryIndex, headerIndex, bodyIndex, footerIndex, skin, user.token)
     if (res) {
-      enqueueSnackbar('You\'ve set an favorite avatar ', { variant: 'success' });
+      enqueueSnackbar(dictionary[language]?.youVeSetAnFavoriteAvatar, { variant: 'success' });
     }
     else
-      enqueueSnackbar('Failed!', { variant: 'error' });
+      enqueueSnackbar(dictionary[language]?.failed, { variant: 'error' });
   }
 
   const reloadData = () => {
@@ -142,7 +146,7 @@ export const WardrobeSelector: FC = () => {
         </Grid>
         <Grid item sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
           <IconButton
-            aria-label='set favorite'
+            aria-label={dictionary[language]?.setFavorite}
             component='span'
             onClick={setFavorite}
             disabled={headerIndex && bodyIndex && footerIndex ? false : true}
