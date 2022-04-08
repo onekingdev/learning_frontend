@@ -12,7 +12,8 @@ export const dictionary: any = Object.freeze({
         perWeek: 'Per Week',
         date: 'Date',
         type: 'Type',
-        amount: 'Amount'
+        amount: 'Amount',
+        amountIsEmpty: 'Amount is empty'
     },
     'TH' :{
         bank: "ธนาคาร",
@@ -27,7 +28,8 @@ export const dictionary: any = Object.freeze({
         perWeek: 'ต่อสัปดาห์',
         date: 'วันที่',
         type: 'พิมพ์',
-        amount: 'จำนวน'
+        amount: 'จำนวน',
+        amountIsEmpty: 'จำนวนเงินว่างเปล่า'
     },
     'ES_MX': {
         bank: "BANCO",
@@ -42,6 +44,7 @@ export const dictionary: any = Object.freeze({
         perWeek: 'Por semana',
         date: 'Fecha',
         type: 'Tipo',
-        amount: 'Monto'
+        amount: 'Monto',
+        amountIsEmpty: 'La cantidad está vacía'
     }
 });
