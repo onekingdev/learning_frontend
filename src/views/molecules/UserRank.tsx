@@ -3,8 +3,9 @@ import styled           from 'styled-components';
 import { Button }       from 'views/atoms/Text/Button';
 import { UserIcon }     from 'views/atoms/UserIcon';
 import { ScreenSize }   from 'constants/screenSize';
-import { ImageAvatar }   from 'views/molecules/Avatar/DefaultAvatar';
-
+import { ImageAvatar }  from 'views/molecules/Avatar/DefaultAvatar';
+import { dictionary }   from 'views/pages/Student/TreasureTrack/dictionary'
+import { useSelector }  from 'react-redux'
 type UserRankProps = {
   userRank: number;
   userName: string;
@@ -33,6 +34,8 @@ export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
 };
 
 export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userHead, userAccessory, userClothes, active=false, coinsEarned='0', additionalPl='' }) => {
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
   return (
     <tr>
       <td>
@@ -67,12 +70,12 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
         </div>
       </td>
       <td style={{}}>
-      { active ? <div>You</div> : <div>{ userName }</div> }
+      { active ? <div>{dictionary[language]?.you}</div> : <div>{ userName }</div> }
       </td>
       <td style={{
         fontSize: '0.8rem'
       }}>
-      <div>{ coinsEarned } COINS <br />EARNED</div>
+      <div>{ coinsEarned }{dictionary[language]?.coins} <br />{dictionary[language]?.earn}</div>
       </td>
     </tr>
   )

@@ -1,4 +1,4 @@
-import { FC, useState }                               from 'react';
+import { FC, JSXElementConstructor, Key, ReactElement, useState }                               from 'react';
 import FormLabel                                      from '@mui/material/FormLabel';
 import RadioGroup                                     from '@mui/material/RadioGroup';
 import { BasicColor }                                 from 'views/Color';
@@ -9,7 +9,7 @@ import { useSelector }                                from 'react-redux'
 import { useSnackbar }                                from 'notistack';
 import { LoadingSpinner }                             from 'views/atoms/Spinner';
 import { CANCEL_REASONS }                             from 'constants/parent'
-
+import { dictionary }                                 from './dictionary'
 interface ICancelFormProps {
   open: () => void
   refresh: () => void
@@ -17,7 +17,11 @@ interface ICancelFormProps {
 
 
 export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) => {
-  const [value, setValue] = useState(CANCEL_REASONS[0].value);
+
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
+
+  const [value, setValue] = useState(CANCEL_REASONS[language][0].value);
   const [loading, setLoading] = useState(false)
   const guardian = useSelector((state: any) => state.guardian);
   const user = useSelector((state: any) => state.user);
@@ -25,13 +29,13 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
 
   const onSubmit = () => {
     setLoading(true)
-    const reason = CANCEL_REASONS.find(element => element.value === value)?.label
+    const reason = CANCEL_REASONS[language].find((element: { value: any; }) => element.value === value)?.label
     // TODO: send cancel membership mutation
     const res: any = doCancelMembership(guardian.id, reason ? reason : '', user.token)
     if (res.status) {
-      enqueueSnackbar('Membership canceled successfully', { variant: 'success' })
+      enqueueSnackbar(dictionary[language]?.membershipCanceledSuccessfully, { variant: 'success' })
     } else
-    enqueueSnackbar('Membership cancelations failed', { variant: 'error' })
+    enqueueSnackbar(dictionary[language]?.membershipCancelationsFailed, { variant: 'error' })
 
     setLoading(false)
     open()
@@ -48,7 +52,7 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
       :
       <LSFormControl variant='standard'>
         <FormLabel id="canceling-reason-label">
-          <LSLabel>{'Please tell us why are you canceling.'}</LSLabel>
+          <LSLabel>{dictionary[language]?.pleaseTellUsWhyAreYouCanceling}</LSLabel>
         </FormLabel>
         <RadioGroup
           aria-labelledby="canceling-reason-label"
@@ -58,7 +62,7 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
           onChange={handleRadioChange}
         >
           {
-            CANCEL_REASONS.map((row) => {
+            CANCEL_REASONS[language].map((row: { id: Key | null | undefined; value: unknown; label: string | number | ReactElement<any, string | JSXElementConstructor<any>>; }) => {
               return <LSFormControlLabel key={row.id} value={row.value} control={<LSRadio />} label={row.label} />
             })
           }
@@ -68,7 +72,7 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
             variant='contained'
             onClick={onSubmit}
           >
-            {'Submit'}
+            {dictionary[language]?.submit}
           </LSButton>
         </LSButtonContainer>
       </LSFormControl>
