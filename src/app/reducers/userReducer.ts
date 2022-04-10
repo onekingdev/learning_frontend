@@ -10,8 +10,7 @@ const INITIAL_STATE = {
   isStaff: null,
   isActive: null,
   dateJoined: null,
-  // language: null,
-  language: "TH",     // test for language
+  language: null,
   profile: {
     role: null,
   },
@@ -24,9 +23,7 @@ const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUse
     case TYPE.USER_SET_DATA:
       return {
         ...state,
-        ...action.payload,
-        language: "TH",     // test for language
-
+        ...action.payload
       };
     case TYPE.USER_SET_TOGGLE_SOUND:
       return {

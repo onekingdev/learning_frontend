@@ -23,6 +23,24 @@ interface Column {
   format?: (value: number) => string;
 }
 
+const columns: readonly Column[] = [
+  { id: 'updateTimestamp', label: 'Date', minWidth: 60 },
+  { id: 'side', label: 'Type', minWidth: 60 },
+  {
+    id: 'amount',
+    label: 'Amount($)',
+    align: 'right',
+    minWidth: 60,
+    format: (value: number) => value.toLocaleString('en-US'),
+  },
+  // {
+  //   id: 'interest',
+  //   label: 'Interest(%)',
+  //   align: 'right',
+  //   minWidth: 60,
+  //   format: (value: number) => value.toLocaleString('en-US'),
+  // },
+];
 
 // const txData = [
 //   {
@@ -78,25 +96,6 @@ export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const columns: readonly Column[] = [
-    { id: 'updateTimestamp', label: dictionary[language]?.date, minWidth: 60 },
-    { id: 'side', label: dictionary[language]?.type, minWidth: 60 },
-    {
-      id: 'amount',
-      label: `${dictionary[language]?.amount}($)`,
-      align: 'right',
-      minWidth: 60,
-      format: (value: number) => value.toLocaleString('en-US'),
-    },
-    // {
-    //   id: 'interest',
-    //   label: 'Interest(%)',
-    //   align: 'right',
-    //   minWidth: 60,
-    //   format: (value: number) => value.toLocaleString('en-US'),
-    // },
-  ];
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

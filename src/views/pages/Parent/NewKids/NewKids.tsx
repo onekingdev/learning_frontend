@@ -45,7 +45,6 @@ import { CURRICULUM_TOOLTIP,
   GRADE_TOOLTIP }                from 'constants/parent';
 import { LSGridRow }             from 'views/molecules/Setting/utils/Style';
 import { dictionary }            from './dictionary';
-import commonDictionary          from 'constants/commonDictionary'
 
 const NewKids: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -215,7 +214,7 @@ const NewKids: FC = () => {
     let valiResult        = true;
     for (const key in validateMsg) {
       if (validateMsg[key] === null) {
-        validateMsgTemp[key] = commonDictionary[language]?.fieldIsRequired;
+        validateMsgTemp[key] = 'Field is required';
       }
       if (validateMsgTemp[key]) valiResult = false;
     }
@@ -281,7 +280,7 @@ const NewKids: FC = () => {
                 {/* <TextField label='Select Your Package' variant='outlined' fullWidth sx={{backgroundColor: 'white'}} value={packageName}
                                 onChange={(e) => {
                                     setPackageName(e.target.value);
-                                    handleFormChange('packageName',e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
+                                    handleFormChange('packageName',e.target.value.length === 0 ? 'Field is required' : '');
                                 }}
                                 error={!!validateMsg.packageName}
                                 helperText={validateMsg.packageName}
@@ -393,7 +392,7 @@ const NewKids: FC = () => {
                     setFirstName(e.target.value);
                     handleFormChange(
                       'firstName',
-                      e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
+                      e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
                   error=      {!!validateMsg.firstName}
@@ -408,7 +407,7 @@ const NewKids: FC = () => {
                     setLastName(e.target.value);
                     handleFormChange(
                       'lastName',
-                      e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
+                      e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
                   error      = {!!validateMsg.lastName}
@@ -423,7 +422,7 @@ const NewKids: FC = () => {
                     setUserId(e.target.value);
                     handleFormChange(
                       'userId',
-                      e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
+                      e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
                   error      = {!!validateMsg.userId}
@@ -438,7 +437,7 @@ const NewKids: FC = () => {
                     setPassword(e.target.value);
                     handleFormChange(
                       'password',
-                      e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
+                      e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
                   error      = {!!validateMsg.password}
@@ -455,7 +454,7 @@ const NewKids: FC = () => {
                     handleFormChange(
                       'confPassword',
                       e.target.value.length === 0
-                        ? commonDictionary[language]?.fieldIsRequired
+                        ? 'Field is required'
                         : e.target.value !== password
                         ? 'Confirm password in not matched with password'
                         : ''
@@ -503,7 +502,7 @@ const NewKids: FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  <Tooltip title={CURRICULUM_TOOLTIP[language]} arrow placement='left-start'
+                  <Tooltip title={CURRICULUM_TOOLTIP} arrow placement='left-start'
                     open={showTooltip}
                     onOpen={() => setShowTooltip(true)}
                     onClose={() => setShowTooltip(false)}
@@ -555,7 +554,7 @@ const NewKids: FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  <Tooltip title={GRADE_TOOLTIP[language]} arrow placement='left-start'
+                  <Tooltip title={GRADE_TOOLTIP} arrow placement='left-start'
                     open={showTooltipGrade}
                     onOpen={() => setShowTooltipGrade(true)}
                     onClose={() => setShowTooltipGrade(false)}
@@ -599,9 +598,7 @@ const NewKids: FC = () => {
             </Grid>
           </Paper>
         </PaperContainer>
-        <Welcome>
-          <img src={welcome} />
-        </Welcome>
+        <Welcome src={welcome}></Welcome>
       </Container>
     </ParentPgContainer>
   );

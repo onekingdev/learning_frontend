@@ -7,7 +7,6 @@ import { useHistory }       from 'react-router-dom';
 import { ImageAvatar }      from 'views/molecules/Avatar/DefaultAvatar';
 import { useSelector }      from 'react-redux'
 import { USER_AVATAR_SIZE } from 'constants/common';
-import { dictionary }       from 'views/pages/Student/Menus/dictionary'
 
 export const ProfileDropDownMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -15,8 +14,7 @@ export const ProfileDropDownMenu: FC = () => {
   const student = useSelector((state: any) => state.student);
   const avatar  = useSelector((state: any) => state.avatar);
   const open    = Boolean(anchorEl);
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -53,8 +51,8 @@ export const ProfileDropDownMenu: FC = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => history.push('/profile')}>{dictionary[language]?.profile}</MenuItem>
-        <MenuItem onClick={() => history.push('/')}>{dictionary[language]?.logout}</MenuItem>
+        <MenuItem onClick={() => history.push('/profile')}>Profile</MenuItem>
+        <MenuItem onClick={() => history.push('/')}>Logout</MenuItem>
       </Menu>
     </div>
   );

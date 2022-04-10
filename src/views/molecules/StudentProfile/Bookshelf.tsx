@@ -1,26 +1,20 @@
-import { FC, useState }     from 'react'
+import { FC, useState } from 'react'
 import { Container, Stack, Backdrop, Button } from '@mui/material'
-import settings_img         from 'views/assets/student-profile/Vector.svg';
-import badge_img            from 'views/assets/student-profile/badge.png';
-import awards_img           from 'views/assets/student-profile/awards.png';
-import leg_img              from 'views/assets/student-profile/shelf-leg.png';
-import { BadgeContainer }   from 'views/molecules/StudentProfile/BadgeContainer';
-import { Subheader }        from 'views/atoms/Text';
-import styled               from 'styled-components';
-import CloseIcon            from '@mui/icons-material/Close';
-import { Awards }           from './Awards';
-import { BasicColor }       from 'views/Color';
-import useMediaQuery        from '@mui/material/useMediaQuery';
-import { ScreenSize }       from 'constants/screenSize';
-import { dictionary }       from 'views/pages/Student/Settings/dictionary'
-import { StudentSettings }  from 'views/molecules/StudentProfile/StudentSettings';
-import { useSelector }        from 'react-redux'
+import settings_img from 'views/assets/student-profile/Vector.svg';
+import badge_img from 'views/assets/student-profile/badge.png';
+import awards_img from 'views/assets/student-profile/awards.png';
+import leg_img from 'views/assets/student-profile/shelf-leg.png';
+import { BadgeContainer } from 'views/molecules/StudentProfile/BadgeContainer';
+import { Subheader } from 'views/atoms/Text';
+import styled from 'styled-components';
+import { StudentSettings } from 'views/molecules/StudentProfile/StudentSettings';
+import CloseIcon from '@mui/icons-material/Close';
+import { Awards } from './Awards';
+import { BasicColor } from 'views/Color';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { ScreenSize } from 'constants/screenSize';
 
 export const BookShelf: FC = () => {
-
-    let language:string     = useSelector((state: any) => state.user.language);
-    language                = language? language : "EN_US"
-
     const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
     const itemSize = isMobile ? 40 : 120
     const [openSetting, setOpenSetting] = useState(false)
@@ -55,9 +49,9 @@ export const BookShelf: FC = () => {
                 <ProfileImg onClick={() => { setOpenAward(true), setOpen(true) }} src={awards_img} size={itemSize} />
             </Stack>
             <Stack direction='row' justifyContent='space-evenly' width='100%'  sx={{ padding: 2,background: '#85431F', borderRadius: '10px 10px 0 0' }}>
-                <Subheader style={{ color: 'white', textAlign: 'center' }}> {dictionary[language]?.settings} </Subheader>
-                <Subheader style={{ color: 'white', textAlign: 'center' }}> {dictionary[language]?.badges} </Subheader>
-                <Subheader style={{ color: 'white', textAlign: 'center' }}> {dictionary[language]?.settings} </Subheader>
+                <Subheader style={{ color: 'white', textAlign: 'center' }}> Settings </Subheader>
+                <Subheader style={{ color: 'white', textAlign: 'center' }}> Badges </Subheader>
+                <Subheader style={{ color: 'white', textAlign: 'center' }}> Awards </Subheader>
             </Stack>
             <Stack direction='row' justifyContent='space-around' width='100%' >
                 <img src={leg_img} />

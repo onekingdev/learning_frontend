@@ -12,7 +12,7 @@ import { getDownUrlByFilename } from 'app/firebase';
  * Displaying a bought package of 3 cards when a user pressed bought button
  * Turn around image effect and sound effect added
  */
-export const BoughtCard: FC<{ imgName: string, firebaseName: string }> = ({ imgName, firebaseName }) => {
+export const BoughtCard: FC<{ imgName: string, firebaseName: string, description: Array<any> }> = ({ imgName, firebaseName,  description }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState('')
@@ -30,13 +30,17 @@ export const BoughtCard: FC<{ imgName: string, firebaseName: string }> = ({ imgN
     }
   }
 
+  const showCardInfo = () => {
+    console.log('show card info...', description)
+  }
+
   useEffect(() => {
     let mounted = true
     fetchFirebaseUrl(mounted, imgName, firebaseName)
     return () => { mounted = false }
   }, [])
   return (
-    <StyledCard onClick={() => setOpen(!open)}>
+    <StyledCard >
       {url ?
         open ?
           <>
@@ -47,6 +51,7 @@ export const BoughtCard: FC<{ imgName: string, firebaseName: string }> = ({ imgN
               onLoad={() => {
                 setLoaded(true), play();
               }}
+              onClick={() => showCardInfo()}
             />
             <div
               style={
@@ -55,13 +60,13 @@ export const BoughtCard: FC<{ imgName: string, firebaseName: string }> = ({ imgN
                   : { display: 'flex', alignItems: 'center' }
               }
             >
-              {/* <p>loading...</p> */}
-              {/* <ReactLoading /> */}
               <ReactLoading type="spinningBubbles" color={BasicColor.green} />
             </div>
           </>
           :
-          <p>?</p>
+          <p
+          onClick={() => setOpen(true)}
+          >?</p>
         :
         <div style={{display: 'flex', alignItems: 'center'}}>
           <ReactLoading type="spinningBubbles" color={BasicColor.green} />

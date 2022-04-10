@@ -15,7 +15,7 @@ import { loadStripe }           from '@stripe/stripe-js';
 import { useSelector }          from 'react-redux'
 import payment                  from 'views/assets/payment/payment.jpg'
 import creditCardType           from 'credit-card-type'
-import { dictionary }           from './dictionary'
+
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 interface PaymentFormFunc {
   handleOrder(): void;
@@ -27,8 +27,7 @@ export const Payment: FC = () => {
   const [isEdit, edit] = useState(false)
   const guardian = useSelector((state: any) => state.guardian);
   const cardType = creditCardType(guardian.paymentMethod.cardNumber)
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+
 
   const openEdit = () => edit(!isEdit);
 
@@ -48,7 +47,7 @@ export const Payment: FC = () => {
     guardian.paymentMethod.cardNumber > 0 ?
     <LSShadowContainer>
       <LSTitle>
-        {dictionary[language]?.yourPaymentMethod}
+        {'Your payment method'}
       </LSTitle>
       <LSGridRow container>
         <Grid item lg={4} xs={4}>
@@ -59,14 +58,14 @@ export const Payment: FC = () => {
             {cardType[0]?.niceType + ' card ending in ' + guardian.paymentMethod.cardNumber?.slice(-4)}
           </LSText>
           <LSText>
-            {dictionary[language]?.expires + ' ' + guardian.paymentMethod?.cardExpMonth + '/' + guardian.paymentMethod?.cardExpYear}
+            {'Expires ' + guardian.paymentMethod?.cardExpMonth + '/' + guardian.paymentMethod?.cardExpYear}
           </LSText>
         </Grid>
       </LSGridRow>
       <LSGridRow container>
         <Grid item lg={4} xs={4}>
           <LSBlueTextButton onClick={open}>
-            {dictionary[language]?.addNew}
+            {'Add new'}
           </LSBlueTextButton>
           <LSDialog
             isOpen={isOpen}
@@ -83,7 +82,7 @@ export const Payment: FC = () => {
         </Grid>
         <LSDialog
           isOpen={isEdit}
-          title={dictionary[language]?.editPaymentMethod}
+          title={'Edit Payment Method'}
           open={openEdit}
           dialogContent={
             <Elements stripe={stripePromise}>

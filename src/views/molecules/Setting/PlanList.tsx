@@ -15,7 +15,7 @@ import { CancelPlanForm }                    from './CancelPlanForm';
 import { useDialog }                         from './utils/useDialog';
 import { Upgrade }                           from './Upgrade';
 import { doFetchAvailableBroughtPlans }      from 'app/actions/guardianActions'
-import { dictionary }                        from './dictionary'
+
 interface IPlanList {
   refresh: boolean
 }
@@ -31,8 +31,6 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
   const [tag, seTag] = useState(0)
   const [plans, setPlans] = useState<Array<any>>([])
   const [changed, setChanged] = useState(false)
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
 
   const toggleChanged = () => {
     setChanged(!changed)
@@ -77,8 +75,8 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
           <StyledTableHead >
             <TableRow>
               <TableCell align="center">
-                <LSLabel fontSize={17} textAlign='center'>{dictionary[language]?.plan}</LSLabel>
-                <LSText textAlign='center' fontSize={13}>{dictionary[language]?.getThreeMonthsFREEForAnnualPlan}</LSText>
+                <LSLabel fontSize={17} textAlign='center'>{'Plan'}</LSLabel>
+                <LSText textAlign='center' fontSize={13}>{'(Get 3 months FREE for annual plan)'}</LSText>
               </TableCell>
             </TableRow>
           </StyledTableHead>
@@ -111,11 +109,11 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
                       <LSBlueTextButton
                         disabled={row.period === 'MONTHLY' ? false : true}
                         onClick={() => onUpgradeBtnClick(index)}
-                      >{dictionary[language]?.ChangeToYearly}
+                      >{'Change to Yearly'}
                       </LSBlueTextButton>
                     </Grid>
                     <Grid item md={6} xs={12}>
-                      <LSBlueTextButton onClick={() => onBtnClick(index)}>{dictionary[language]?.CancelPlan}</LSBlueTextButton>
+                      <LSBlueTextButton onClick={() => onBtnClick(index)}>Cancel Plan</LSBlueTextButton>
                     </Grid>
                   </Grid>
                 </StyledTableCell>
@@ -127,8 +125,8 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
       <LSDialog
         isOpen={isOpen}
         open={open}
-        title={dictionary[language]?.CancelChildrenPlan}
-        contentText={dictionary[language]?.YouAreCancellingOneChildSoloArea}
+        title='Cancel Children plan'
+        contentText='You are cancelling 1 child solo area'
         dialogContent={
           <CancelPlanForm
             plan={plans[tag]}
@@ -140,7 +138,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
       <LSDialog
         isOpen={isUpdateOpen}
         open={openUpdate}
-        title={dictionary[language]?.Upgrade}
+        title={'Upgrade'}
         dialogContent={
           <Upgrade
             plan={plans[tag]}

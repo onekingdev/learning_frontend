@@ -16,6 +16,10 @@ interface PurchaseCardProps {
       firebaseName: string
       name: string
     }
+    description: {
+      key: string
+      value: string
+    }[]
   }[]
 }
 
@@ -28,7 +32,7 @@ export const PurchasedCards: FC<PurchaseCardProps> = ({ cards }) => {
         {
           cards.map((card: any) => (
             <Grid item key={card.id} >
-              <BoughtCard imgName={card.image} firebaseName={card.category.firebaseName} />
+              <BoughtCard imgName={card.image} firebaseName={card.category.firebaseName} description={card.description} />
             </Grid>
           ))
         }

@@ -1,12 +1,13 @@
-import { sendRawQuery }       from 'api/queries/get';
+import { sendRawQuery } from 'api/queries/get';
 import {
   COLLECTIBLE_CATEGORY_QUERY,
   COLLECTIBLE_PACK_COUNT,
   COLLECTIBLE_PURCHASED_COUNT,
-  OWNED_CARDS_QUERY
-}                             from 'api/queries/collectibles';
+  OWNED_CARDS_QUERY,
+  COLLECTIBLES_BY_CATEGORY_ID
+} from 'api/queries/collectibles';
 import { PURCHASE_CARD_PACK } from 'api/mutations/collectibles';
-import { PURCHASE_CARDS }     from '../types';
+import { PURCHASE_CARDS } from '../types';
 
 /**
  * @author Bruce Lee
@@ -36,7 +37,7 @@ export const purchaseCardPack = async (pack_id: number, student_id: number, toke
       dispatch({ type: PURCHASE_CARDS, payload: { price: price } })
       return res.data.purchaseCollectiblePack.collectiblePackPurchaseTransaction.collectibles;
     }
-    else return {msg: res.msg}
+    else return { msg: res.msg }
   } catch (e) {
     return { msg: e };
   }
@@ -85,4 +86,21 @@ export const getProgressPurchasedCount = async (category: number, token: string)
   );
 
   return res.msg ? { msg: res.msg } : res.data.purchasedCollectibleCountByCategory;
+};
+
+export const doFetchCategoryCollectibles = async (category: number, token: string) => {
+
+  try {
+    const res: any = await sendRawQuery(
+      COLLECTIBLES_BY_CATEGORY_ID(category),
+      token
+    );
+
+    return res.msg ?
+      { msg: res.msg, succeed: false } :
+      { cards: res.data.collectiblesByCategory, succeed: true };
+  } catch (e: any) {
+    return { msg: e.message, succeed: false }
+  }
+
 };

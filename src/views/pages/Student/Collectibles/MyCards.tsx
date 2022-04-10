@@ -23,26 +23,29 @@ export const MyCardCollection: FC = () => {
   const user = useSelector((state: any) => state.user);
   const [categories, setCategories] = useState([]);
   const [allCards, setAllCards] = useState<Array<any>>([]);
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : "EN_US"
 
   useEffect(() => {
     let ignore = false;
     const fetch = async () => {
+      console.log('loading started')
       const packs = await getCardPacksInfo(user.token);
       loadingContext.done()
-      const allcards = await getCollectibleCards(user.token);
+      console.log('loaded card packs', packs)
+      // const allcards = await getCollectibleCards(user.token);
+      // console.log('loaded from backend:', allcards)
       if (!ignore) {
         if (packs.msg) {
           setCategories([]);
         } else {
           setCategories(packs);
         }
-        if (allcards.msg) {
-          setAllCards([]);
-        } else {
-          setAllCards(allcards);
-        }
+        // if (allcards.msg) {
+        //   setAllCards([]);
+        // } else {
+        //   setAllCards(allcards);
+        // }
       }
     };
 
@@ -63,12 +66,7 @@ export const MyCardCollection: FC = () => {
               {dictionary[language]?.buyCards}
             </Button>
           </BtnContainer>
-          {
-            allCards.length > 0 ?
-              <MyCardPacks packs={categories} allcards={allCards} />
-              :
-              <LoadingSpinner />
-          }
+          <MyCardPacks packs={categories} />
         </CardCollectibleContainer>
       </StudentMenu>
     </Wrapper>

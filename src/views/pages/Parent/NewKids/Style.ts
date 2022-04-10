@@ -24,7 +24,7 @@ export const Container = styled.div`
   z-index          : 10;
   align-self       : start;
 `
-export const Welcome = styled.div`
+export const Welcome = styled.img`
   position         : absolute;
   right            : 14.3vw;
   bottom           : 220px;

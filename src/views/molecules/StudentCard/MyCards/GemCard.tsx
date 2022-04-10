@@ -7,6 +7,7 @@ import { ScreenSize }              from 'constants/screenSize';
 import { CardDialog }              from './CardDialog';
 import { getDownUrlByFilename }    from 'app/firebase';
 import { useHistory }              from 'react-router-dom';
+import { CardDescription } from '../CardDescription';
 
 type CardProps = {
   category: string;
@@ -100,52 +101,59 @@ export const Gemcard: FC<CardProps> = ({
         </div>
         <CardDialog
           dialogContent={
-            <Grid container sx={{padding: 0}}>
-              <StyledGrid
-                item
-                md={6}
-                xs={12}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <img
-                  src={img}
-                  onLoad={() => {
-                    setDgImgLoaded(true);
-                  }}
-                />
-                <div
-                  style={
-                    dgImgloaded
-                      ? {display: 'none'}
-                      : {
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }
-                  }
-                >
-                  <ReactLoading
-                    type='spinningBubbles'
-                    color={BasicColor.green}
-                  />
-                </div>
-              </StyledGrid>
-              <StyledGrid item md={6} xs={12}>
-                <h1>{name ? name : 'No name'}</h1>
-                {description?.map(item => (
-                  <p key={item.key}>{item.value}</p>
-                ))}
-              </StyledGrid>
-            </Grid>
+            <CardDescription
+              imgUrl={imgUrl}
+              firebaseName={firebaseName}
+              description={description}
+              purchased={purchased}
+              name={name}
+            />
+            // <Grid container sx={{padding: 0}}>
+            //   <StyledGrid
+            //     item
+            //     md={6}
+            //     xs={12}
+            //     sx={{
+            //       display: 'flex',
+            //       alignItems: 'center',
+            //       justifyContent: 'center',
+            //     }}
+            //   >
+            //     <img
+            //       src={img}
+            //       onLoad={() => {
+            //         setDgImgLoaded(true);
+            //       }}
+            //     />
+            //     <div
+            //       style={
+            //         dgImgloaded
+            //           ? {display: 'none'}
+            //           : {
+            //               display: 'flex',
+            //               alignItems: 'center',
+            //               justifyContent: 'center',
+            //             }
+            //       }
+            //     >
+            //       <ReactLoading
+            //         type='spinningBubbles'
+            //         color={BasicColor.green}
+            //       />
+            //     </div>
+            //   </StyledGrid>
+            //   <StyledGrid item md={6} xs={12}>
+            //     <h1>{name ? name : 'No name'}</h1>
+            //     {description?.map(item => (
+            //       <p key={item.key}>{item.value}</p>
+            //     ))}
+            //   </StyledGrid>
+            // </Grid>
           }
           open={onImgClicked}
           isOpen={open}
         />
-        <CardDialog
+        {/* <CardDialog
           title='Not collected yet!'
           dialogContent={
             <div style={{display: 'flex', justifyContent: 'center'}}>
@@ -156,7 +164,7 @@ export const Gemcard: FC<CardProps> = ({
           }
           open={onDisabledImgClicked}
           isOpen={openBuy}
-        />
+        /> */}
       </StyledCard>
       <p>{amount} / 1</p>
     </Container>

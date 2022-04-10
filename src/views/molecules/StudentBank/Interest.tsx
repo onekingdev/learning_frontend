@@ -9,8 +9,6 @@ import TableHead      from '@mui/material/TableHead';
 import TableRow       from '@mui/material/TableRow';
 import { BasicColor } from 'views/Color';
 import { LSLabel }    from 'views/molecules/Setting/utils/Style';
-import { dictionary } from 'views/pages/Student/Bank/dictionary'
-import { useDispatch, useSelector }    from 'react-redux';
 
 interface Column {
   id: 'name' | 'requireCoin' | 'amount';
@@ -20,29 +18,25 @@ interface Column {
   format?: (value: number) => string;
 }
 
+const columns: readonly Column[] = [
+  { id: 'name', label: 'Savings Title', minWidth: 100 },
+  { id: 'requireCoin', label: 'Value', minWidth: 70, format: (value: number) => value.toLocaleString('en-US'), },
+  {
+    id: 'amount',
+    label: 'Interest% \n (Per Week)',
+    align: 'right',
+    minWidth: 60,
+    format: (value: number) => value.toLocaleString('en-US'),
+  },
+];
+
 interface InterestProp {
   interests: []
 }
 export const Interest: FC<InterestProp> = ({interests}) => {
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
-
-  const columns: readonly Column[] = [
-    { id: 'name', label: dictionary[language]?.savingsTitle, minWidth: 100 },
-    { id: 'requireCoin', label: dictionary[language]?.value, minWidth: 70, format: (value: number) => value.toLocaleString('en-US'), },
-    {
-      id: 'amount',
-      label: `${dictionary[language]?.interest}% \n (${dictionary[language]?.perWeek})`,
-      align: 'right',
-      minWidth: 60,
-      format: (value: number) => value.toLocaleString('en-US'),
-    },
-  ];
-
   return (
     <StyledTxContainer >
-      <LSLabel fontSize={20}>{dictionary[language]?.interest} {' & '} {dictionary[language]?.levels}</LSLabel>
+      <LSLabel fontSize={20}>Interest {' & '} levels</LSLabel>
       <StyledTableContainer >
         <Table >
           <TableHead>

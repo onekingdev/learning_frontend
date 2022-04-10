@@ -21,7 +21,6 @@ import {
   ContactHeader,
   ContactBody,
 } from './Style';
-import commonDictionary                           from 'constants/commonDictionary'
 
 const CreateParent: FC = () => {
   const loadingContext                = useContext(LoadingContext);
@@ -86,7 +85,7 @@ const CreateParent: FC = () => {
     let valiResult = true;
     for (const key in validateMsg) {
       if (validateMsg[key] === null) {
-        validateMsgTemp[key] = commonDictionary[language]?.fieldIsRequired;
+        validateMsgTemp[key] = 'Field is required';
       }
       if (validateMsgTemp[key]) valiResult = false;
     }
@@ -113,7 +112,7 @@ const CreateParent: FC = () => {
                     setEmail(e.target.value);
                     // handleFormChange(
                     //   'email',
-                    //   e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? 'This is not email address' : ''
+                    //   e.target.value.length === 0 ? 'Field is required' : !validateEmail(e.target.value) ? 'This is not email address' : ''
                     // );
                     /*------------- set username to email -S--------------------------*/
                     setUserName(e.target.value);
@@ -163,7 +162,7 @@ const CreateParent: FC = () => {
                     setUserName(e.target.value);
                     handleFormChange(
                       'userName',
-                      e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
+                      e.target.value.length === 0 ? 'Field is required' : ''
                     );
                   }}
                   error={!!validateMsg.userName}

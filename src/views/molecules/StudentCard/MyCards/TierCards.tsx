@@ -31,9 +31,10 @@ export const TierCards: FC<TierCardProp> = ({ cards }) => {
       <Grid container justifyContent='center' spacing={2}>
         {cards.map(card => {
           return (
-            <Grid item>
+            <Grid item
+              key={card.id}
+            >
               <Gemcard
-                key={card.id}
                 category={card.category.name}
                 imgUrl={card.image}
                 purchased={card.owned}

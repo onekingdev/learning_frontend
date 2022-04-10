@@ -9,7 +9,6 @@ import Button                              from 'views/molecules/MuiButton';
 import { BasicColor }                      from 'views/Color';
 import { PaymentForm }                     from './PaymentForm';
 import { useSelector }                     from 'react-redux';
-import { dictionary }                      from './dictionary'
 import {
   Container,
   PaymentContainer,
@@ -43,8 +42,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
   const history             = useHistory();
   const paymentFormRef      = useRef<PaymentFormFunc>(null)
   const { enqueueSnackbar } = useSnackbar();
-  let language:string  = useSelector((state: any) => state.user.language);
-  language             = language? language : "EN_US"
+
 //   const [couponCode, setCouponCode] = useState('');
   const [subtotal,      setSubtotal]     = useState(0);
   const [agreeLicense,  setAgreeLicense] = useState(false)
@@ -55,7 +53,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     /*----------------------- if not selected any package, show error and break -S----------------------*/
     console.log(plans.Gold?.childCount ? plans.Gold?.childCount : 0 + plans.Combo?.childCount ? plans.Combo?.childCount : 0 + plans.Sole?.childCount ? plans.Sole?.childCount : 0 );
     if((plans.Gold?.childCount ? plans.Gold?.childCount : 0 + plans.Combo?.childCount ? plans.Combo?.childCount : 0 + plans.Sole?.childCount ? plans.Sole?.childCount : 0 ) < 1) {
-        enqueueSnackbar(dictionary[language]?.youDidNotSelectAnyChildrenNumber, { variant: 'error' });
+        enqueueSnackbar(`Failed! You didn't select any children number`, { variant: 'error' });
         return
     }
     /*----------------------- if not selected any package, show error and break -E----------------------*/
@@ -70,7 +68,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     // history.push('/kids/new')
     // test end
     if(result.success) {
-        enqueueSnackbar(dictionary[language]?.yourSubscriptionHasBeenSuccessfullyCreated, { variant: 'success' });
+        enqueueSnackbar('Your subscription has been successfully created!', { variant: 'success' });
         setLoading(false)
         // dispatch({
         //     type: TYPES.GUARDIAN_SET_AVAILABLE_PLANS,
@@ -105,28 +103,28 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
         <OrderContainer>
             <OrderTitleContainer>
                 <OrderTitleLog src={payOrderLog} />
-                <OrderTitle>{dictionary[language]?.orderSummary}</OrderTitle>
+                <OrderTitle>Order Summary</OrderTitle>
             </OrderTitleContainer>
             {!isSpecialCode &&
             <OrderBody>
                 {
                     plans.Gold.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{plans.Gold.childCount} Gold {dictionary[language]?.package} </OrderItemTitle>
+                        <OrderItemTitle>{plans.Gold.childCount} Gold Package </OrderItemTitle>
                         <OrderItemContent>${plans.Gold.currentPrice} / {plans.Gold.period}</OrderItemContent>
                     </OrderItem>
                 }
                 {
                 plans.Combo.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{plans.Combo.childCount} Combo {dictionary[language]?.package} </OrderItemTitle>
+                        <OrderItemTitle>{plans.Combo.childCount} Combo Package </OrderItemTitle>
                         <OrderItemContent>${plans.Combo.currentPrice} / {plans.Combo.period}</OrderItemContent>
                     </OrderItem>
                 }
                 {
                     plans.Sole.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{plans.Sole.childCount} Solo {dictionary[language]?.package} </OrderItemTitle>
+                        <OrderItemTitle>{plans.Sole.childCount} Solo Package </OrderItemTitle>
                         <OrderItemContent>${plans.Sole.currentPrice} / {plans.Sole.period}</OrderItemContent>
                     </OrderItem>
                 }
@@ -150,38 +148,38 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                 </Grid> */}
                 <OrderItem>
                     <OrderItemTitleContainer>
-                        <OrderItemTitle>{dictionary[language]?.subtotal}</OrderItemTitle>
+                        <OrderItemTitle>Subtotal</OrderItemTitle>
                     </OrderItemTitleContainer>
                     <OrderItemContent>${subtotal.toFixed(2)}</OrderItemContent>
                 </OrderItem>
                 <OrderItem>
                     <OrderItemTitleContainer>
-                        <OrderItemTitle>{dictionary[language]?.coupon}:<div style={{fontWeight: 400, fontSize: '16px'}}>&nbsp;{dictionary[language]?.year}</div></OrderItemTitle>
+                        <OrderItemTitle>Coupon:<div style={{fontWeight: 400, fontSize: '16px'}}>&nbsp;Year</div></OrderItemTitle>
                     </OrderItemTitleContainer>
                     {/* <OrderItemContent>${couponPrice.toFixed(2)}</OrderItemContent> */}
                     <OrderItemContent>${0.00}</OrderItemContent>
                 </OrderItem>
                 <OrderItem>
                     <OrderItemTitleContainer>
-                        <OrderItemTitle>{dictionary[language]?.total}</OrderItemTitle>
+                        <OrderItemTitle>Total</OrderItemTitle>
                     </OrderItemTitleContainer>
                     <OrderItemContent>
                         {/* <div style={{display: 'flex'}}>${(subtotal - couponPrice).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div> */}
-                        <div style={{display: 'flex'}}>${(subtotal).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;{dictionary[language]?.month}</div></div>
-                        <div style={{fontWeight: 400, lineHeight: '12px', fontSize: '10px'}}>{dictionary[language]?.firstRenewal} : {moment(new Date()).format('YYYY-MM-DD')}</div>
+                        <div style={{display: 'flex'}}>${(subtotal).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div>
+                        <div style={{fontWeight: 400, lineHeight: '12px', fontSize: '10px'}}>First Renewal : {moment(new Date()).format('YYYY-MM-DD')}</div>
                     </OrderItemContent>
                 </OrderItem>
                 <OrderTip>
-                {dictionary[language]?.yourPersonalDataWillOnlyBeUsedToProcessYourOrderAndSupportYourExperience}
+                Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy</b></a>.
                 </OrderTip>
                 <OrderTip>
                     <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)}/>
-                    <div style={{paddingLeft: '20px'}}>{dictionary[language]?.iHaveReadAndAgreeToTheWebsiteTermsAndConditions}</div>
+                    <div style={{paddingLeft: '20px'}}>I have read and agree to the website terms and conditions*</div>
                 </OrderTip>
                 <Button
                     bgColor={BasicColor.green}
                     onClick={handleOrder}
-                    value={dictionary[language]?.planceAnOrder}
+                    value="Place an Order"
                     weight={700}
                     disabled={!agreeLicense}
                     loading={loading}
@@ -193,32 +191,32 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                 {
                     plans.Gold.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{plans.Gold.childCount} Gold {dictionary[language]?.package} </OrderItemTitle>
+                        <OrderItemTitle>{plans.Gold.childCount} Gold Package </OrderItemTitle>
                     </OrderItem>
                 }
                 {
                 plans.Combo.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{plans.Combo.childCount} Combo {dictionary[language]?.package} </OrderItemTitle>
+                        <OrderItemTitle>{plans.Combo.childCount} Combo Package </OrderItemTitle>
                     </OrderItem>
                 }
                 {
                     plans.Sole.childCount > 0 &&
                     <OrderItem>
-                        <OrderItemTitle>{plans.Sole.childCount} Solo {dictionary[language]?.package} </OrderItemTitle>
+                        <OrderItemTitle>{plans.Sole.childCount} Solo Package </OrderItemTitle>
                     </OrderItem>
                 }
                 <OrderTip>
-                {dictionary[language]?.yourPersonalDataWillOnlyBeUsedToProcessYourOrderAndSupportYourExperience}
+                Your personal data will only be used to process your order and support your experience.  We do not provide your data to advertisers!  Learn more in our <a href="https://www.withsocrates.com/privacy-policy/"><b>privacy policy</b></a>.
                 </OrderTip>
                 <OrderTip style={{display: 'flex'}}>
                     <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)}/>
-                    <div style={{paddingLeft: '20px'}}>{dictionary[language]?.iHaveReadAndAgreeToTheWebsiteTermsAndConditions}</div>
+                    <div style={{paddingLeft: '20px'}}>I have read and agree to the website terms and conditions*</div>
                 </OrderTip>
                 <Button
                     bgColor={BasicColor.green}
                     onClick={handleOrder}
-                    value= {dictionary[language]?.planceAnOrder}
+                    value="Place an Order"
                     weight={700}
                     disabled={!agreeLicense}
                     loading={loading}

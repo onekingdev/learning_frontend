@@ -1,14 +1,18 @@
-import { FC, useCallback, useState } from 'react';
-import styled          from 'styled-components';
+import { FC, useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { ScreenSize }  from 'constants/screenSize';
-import { MyCardPack }      from './MyCardPack';
+import { ScreenSize } from 'constants/screenSize';
+import { MyCardPack } from './MyCardPack';
 import {
+  doFetchCategoryCollectibles,
   getProgressPurchasedCount,
   getProgressTotalCount,
 } from 'app/actions/collectibleActions';
 import { GemProgressBar } from './GemProgressBar';
 import { MyPackcards } from './MyCardPackcards';
+import { getCollectibleCards } from 'app/actions/collectibleActions';
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { useSnackbar }    from 'notistack';
 
 interface CardPropArray {
   packs: {
@@ -17,23 +21,27 @@ interface CardPropArray {
     owned: boolean
     firebaseName: string
   }[];
-  allcards: {
-    tier: string;
-    owned: boolean
-    category: {
-      name: string,
-      id: number,
-      firebaseName: string
-    }
-    id: number;
-  }[];
+  // allcards: {
+  //   tier: string;
+  //   owned: boolean
+  //   category: {
+  //     name: string,
+  //     id: number,
+  //     firebaseName: string
+  //   }
+  //   id: number;
+  // }[];
 }
 
-export const MyCardPacks: FC<CardPropArray> = ({packs, allcards}) => {
+export const MyCardPacks: FC<CardPropArray> = ({ packs }) => {
   const user = useSelector((state: any) => state.user);
+  const { enqueueSnackbar } = useSnackbar();
 
   // State to store currently selected card
   const [selected, setSelected] = useState(0)
+  const [loading, setLoading] = useState(false)
+
+  // const [allcards, setAllcards] = useState<Array<any>>([])
 
   const [packcards, setPackcards] = useState<Array<any>>([])
 
@@ -43,7 +51,17 @@ export const MyCardPacks: FC<CardPropArray> = ({packs, allcards}) => {
 
   // get total count and gained count of selected category, this is for progress bar
   const fetchProgressData = async (id: number) => {
-    setPackcards(allcards.filter(card => card.category.id === id))
+    // setPackcards(allcards.filter(card => card.category.id === id))
+    // TODO: fetch category collectibles from backend
+    setLoading(true)
+    const res = await doFetchCategoryCollectibles(id, user.token)
+    if (res.succeed) {
+      setPackcards(res.cards)
+      // enqueueSnackbar(dictionary[language]?.youVeSetAnFavoriteAvatar, { variant: 'success' });
+      enqueueSnackbar('fetch success', { variant: 'success' });
+    } else {
+      enqueueSnackbar(res.msg, { variant: 'error' });
+    }
 
     const total = await getProgressTotalCount(
       id,
@@ -63,7 +81,25 @@ export const MyCardPacks: FC<CardPropArray> = ({packs, allcards}) => {
   const callbackCardSelect = useCallback((packId: number) => {
     setSelected(packId)
     fetchProgressData(packId);
-  },[]);
+  }, []);
+
+  // const fetchAllCards = async (mounted: boolean) => {
+  //   setLoading(true)
+  //   const allcards = await getCollectibleCards(user.token);
+  //   if(mounted){
+  //     // TODO: set
+  //     setAllcards(allcards)
+  //   }
+  //   setLoading(false)
+  // }
+
+  useEffect(() => {
+    let mounted = true
+    // fetchAllCards(mounted)
+    return () => {
+      mounted = false
+    }
+  }, [])
 
   return (
     <div
@@ -92,7 +128,11 @@ export const MyCardPacks: FC<CardPropArray> = ({packs, allcards}) => {
         gainedCount={gainedCount}
         firebaseName={packs.find((pack) => pack.id === selected)?.firebaseName}
       />
-      <MyPackcards packcards={packcards} />
+      {
+        loading ?
+          <LoadingSpinner /> :
+          <MyPackcards packcards={packcards} />
+      }
     </div>
   );
 };
