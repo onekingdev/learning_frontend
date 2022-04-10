@@ -1,13 +1,14 @@
 import { FC, useState, useEffect } from 'react';
-import styled                      from 'styled-components';
-import { BasicColor }              from 'views/Color';
-import ReactLoading                from 'react-loading';
-import { Grid }                    from '@mui/material';
-import { ScreenSize }              from 'constants/screenSize';
-import { CardDialog }              from './CardDialog';
-import { getDownUrlByFilename }    from 'app/firebase';
-import { useHistory }              from 'react-router-dom';
+import styled from 'styled-components';
+import { BasicColor } from 'views/Color';
+import ReactLoading from 'react-loading';
+import { Grid } from '@mui/material';
+import { ScreenSize } from 'constants/screenSize';
+import { CardDialog } from './CardDialog';
+import { getDownUrlByFilename } from 'app/firebase';
+import { useHistory } from 'react-router-dom';
 import { CardDescription } from '../CardDescription';
+import { TypoGeneralText } from 'views/atoms/Text';
 
 type CardProps = {
   category: string;
@@ -15,91 +16,72 @@ type CardProps = {
   purchased?: boolean;
   amount: number;
   firebaseName: string
-  description?: Array <{
+  description?: Array<{
     key: string
     value: string
   }>;
   name?: string;
 };
 
-/**
- * @author BruceLee
- * Displaying a bought package of 3 cards when a user pressed bought button
- * Turn around image effect and sound effect added
- */
 export const Gemcard: FC<CardProps> = ({
   imgUrl,
   purchased,
   amount,
   description,
   name,
-  // category,
   firebaseName
 }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
   const [openBuy, setOpenBuy] = useState(false);
-
   const [img, setImg] = useState('');
-
-  const history = useHistory();
 
   // state to know that image is loaded, rotating effect only works when image is fully loaded
   const [loaded, setLoaded] = useState(false);
-  const [dgImgloaded, setDgImgLoaded] = useState(false);
 
   // action when image is clicked
   const onImgClicked = () => {
     setOpen(!open);
   };
 
-  // open dialog with buy button when disabled image is clicked.
-  const onDisabledImgClicked = () => {
-    setOpenBuy(!openBuy);
-  };
-
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(firebaseName, imgUrl);
-    setImg(link?link:'');
+    setImg(link ? link : '');
   };
 
   useEffect(() => {
     fetchFirebaseUrls();
   }, []);
   return (
-    <Container style={img ? {} : {display: 'none'}}>
-      <StyledCard >
+    <Container style={img ? {} : { display: 'none' }}>
+      <StyledCard onClick={() => onImgClicked()}>
         <img
-          style={loaded ? {objectFit: 'fill'} : {display: 'none'}}
+          style={loaded ? { objectFit: 'fill' } : { display: 'none' }}
           className='loaded'
           src={img}
           loading='eager'
-          // loading='eager'
           onLoad={() => {
             setLoaded(true);
           }}
-          onClick={() => onImgClicked()}
         />
         <StyledOverlay
-          style={purchased ? {display: 'none'} : {}}
-          onClick={() => {
-            onDisabledImgClicked();
-          }}
+          style={purchased ? { display: 'none' } : {}}
         />
         <div
           style={
             loaded
-              ? {display: 'none'}
+              ? { display: 'none' }
               : {
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }
           }
         >
           <ReactLoading type='spinningBubbles' color={BasicColor.green} />
         </div>
         <CardDialog
+          fullWidth='true'
           dialogContent={
             <CardDescription
               imgUrl={imgUrl}
@@ -108,65 +90,12 @@ export const Gemcard: FC<CardProps> = ({
               purchased={purchased}
               name={name}
             />
-            // <Grid container sx={{padding: 0}}>
-            //   <StyledGrid
-            //     item
-            //     md={6}
-            //     xs={12}
-            //     sx={{
-            //       display: 'flex',
-            //       alignItems: 'center',
-            //       justifyContent: 'center',
-            //     }}
-            //   >
-            //     <img
-            //       src={img}
-            //       onLoad={() => {
-            //         setDgImgLoaded(true);
-            //       }}
-            //     />
-            //     <div
-            //       style={
-            //         dgImgloaded
-            //           ? {display: 'none'}
-            //           : {
-            //               display: 'flex',
-            //               alignItems: 'center',
-            //               justifyContent: 'center',
-            //             }
-            //       }
-            //     >
-            //       <ReactLoading
-            //         type='spinningBubbles'
-            //         color={BasicColor.green}
-            //       />
-            //     </div>
-            //   </StyledGrid>
-            //   <StyledGrid item md={6} xs={12}>
-            //     <h1>{name ? name : 'No name'}</h1>
-            //     {description?.map(item => (
-            //       <p key={item.key}>{item.value}</p>
-            //     ))}
-            //   </StyledGrid>
-            // </Grid>
           }
           open={onImgClicked}
           isOpen={open}
         />
-        {/* <CardDialog
-          title='Not collected yet!'
-          dialogContent={
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-              <Button onClick={() => history.push('/collectibles/cards')}>
-                BUY!
-              </Button>
-            </div>
-          }
-          open={onDisabledImgClicked}
-          isOpen={openBuy}
-        /> */}
       </StyledCard>
-      <p>{amount} / 1</p>
+      <TypoGeneralText>{amount} / 1</TypoGeneralText>
     </Container>
   );
 };
@@ -185,47 +114,6 @@ const StyledOverlay = styled.div`
   inset: -2px;
   opacity: 0.7;
   border-radius: inherit;
-`;
-
-const Button = styled.button`
-  background: ${BasicColor.green};
-  border: 0;
-  border-radius: 5px;
-  padding: 10px;
-  color: white;
-  width: 100px;
-
-  &:hover {
-    pointer: cursor;
-    box-shadow: 0 1px 1rem -3px orange;
-    transform: translateY(-5px);
-  }
-`;
-
-const StyledGrid = styled(Grid)`
-  &.MuiGrid-root {
-    padding-left: 20px;
-
-    img {
-      width: 250px;
-    }
-
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-      padding: 10px;
-      img {
-        margin-top: 30px;
-        height: 250px;
-        width: auto;
-      }
-      p {
-        margin: 1px;
-      }
-
-      h1 {
-        margin-top: 0;
-      }
-    }
-  }
 `;
 
 const StyledCard = styled.div`

@@ -1,91 +1,94 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
-import ReactLoading from 'react-loading';
-import { Grid } from '@mui/material';
-import { ScreenSize } from 'constants/screenSize';
+import { Container, Grid } from '@mui/material';
 import { getDownUrlByFilename } from 'app/firebase';
 import { useHistory } from 'react-router-dom';
+import Skeleton from '@mui/material/Skeleton';
+import { TypoGeneralText } from 'views/atoms/Text';
+import useMediaQuery    from '@mui/material/useMediaQuery'
+import { ScreenSize }   from 'constants/screenSize';
 
 type CardProps = {
-    imgUrl: string;
-    purchased?: boolean;
-    firebaseName: string
-    description?: Array<{
-        key: string
-        value: string
-    }>;
-    name?: string;
+  imgUrl: string;
+  purchased?: boolean;
+  firebaseName: string
+  description?: Array<{
+    key: string
+    value: string
+  }>;
+  name?: string;
 };
 
 export const CardDescription: FC<CardProps> = ({
-    imgUrl,
-    purchased,
-    description,
-    name,
-    firebaseName
+  imgUrl,
+  purchased,
+  description,
+  name,
+  firebaseName
 }) => {
-    const [img, setImg] = useState('');
-    const history = useHistory();
-    const [dgImgloaded, setDgImgLoaded] = useState(false);
+  const isMobile      = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+  const [img, setImg] = useState('');
+  const history = useHistory();
+  const [dgImgloaded, setDgImgLoaded] = useState(false);
 
-    const fetchFirebaseUrls = async () => {
-        const link = await getDownUrlByFilename(firebaseName, imgUrl);
-        setImg(link ? link : '');
-    };
+  const fetchFirebaseUrls = async () => {
+    const link = await getDownUrlByFilename(firebaseName, imgUrl);
+    setImg(link ? link : '');
+  };
 
-    useEffect(() => {
-        fetchFirebaseUrls();
-    }, []);
-    return (
-            purchased ?
-            <Grid container sx={{padding: 0}}>
-              <StyledGrid
-                item
-                md={6}
-                xs={12}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <img
-                  src={img}
-                  onLoad={() => {
-                    setDgImgLoaded(true);
-                  }}
-                />
-                <div
-                  style={
-                    dgImgloaded
-                      ? {display: 'none'}
-                      : {
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }
-                  }
+  useEffect(() => {
+    fetchFirebaseUrls();
+  }, []);
+
+  return (
+    <Container sx={{ marginBottom: 2 }}>
+      {
+        purchased ?
+          <Grid container minHeight={300} spacing={2} alignItems='center' justifyContent='center'>
+            <Grid item >
+              {
+                <Container
+                sx={{height: isMobile ? 'auto':300}}
                 >
-                  <ReactLoading
-                    type='spinningBubbles'
-                    color={BasicColor.green}
+                  <img src={img}
+                    onLoad={() => {
+                      setDgImgLoaded(true);
+                    }}
+                    style={{
+                      display: dgImgloaded ? 'block' : 'none',
+                      height: isMobile ? 'auto' : '100%',
+                      width: isMobile ? '100%' : 'auto'
+                    }}
                   />
-                </div>
-              </StyledGrid>
-              <StyledGrid item md={6} xs={12}>
-                <h1>{name ? name : 'No name'}</h1>
-                {description?.map(item => (
-                  <p key={item.key}>{item.value}</p>
-                ))}
-              </StyledGrid>
-            </Grid> :
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-              <Button onClick={() => history.push('/collectibles/cards')}>
-                BUY!
-              </Button>
-            </div>
-    );
+                  <Skeleton variant='rectangular' animation='wave' width={isMobile ? '100vw': 225} height={isMobile ? 50 : 300}
+                    sx={{ display: dgImgloaded ? 'none' : 'flex', marginLeft: -5 }}
+                  />
+                </Container>
+              }
+            </Grid>
+            <Grid item maxWidth={250}>
+
+              <h1>{name ? name : 'No name'}</h1>
+              {description?.map(item => (
+                <p key={item.key}>{item.value}</p>
+              ))}
+            </Grid>
+          </Grid> :
+          <div style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+          }}>
+            <TypoGeneralText>Not collected yet!</TypoGeneralText>
+            <Button onClick={() => history.push('/collectibles/cards')}>
+              BUY!
+            </Button>
+          </div>
+      }
+    </Container>
+  );
 };
 
 
@@ -101,65 +104,5 @@ const Button = styled.button`
     pointer: cursor;
     box-shadow: 0 1px 1rem -3px orange;
     transform: translateY(-5px);
-  }
-`;
-
-const StyledGrid = styled(Grid)`
-  &.MuiGrid-root {
-    padding-left: 20px;
-
-    img {
-      width: 250px;
-    }
-
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-      padding: 10px;
-      img {
-        margin-top: 30px;
-        height: 250px;
-        width: auto;
-      }
-      p {
-        margin: 1px;
-      }
-
-      h1 {
-        margin-top: 0;
-      }
-    }
-  }
-`;
-
-const StyledCard = styled.div`
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-content: center;
-  width: 160px;
-  height: 220px;
-  box-shadow: 0 1px 1rem -4px #000;
-  margin: 1rem;
-  border-radius: 15px;
-  transition: all 250ms ease-in-out;
-  cursor: pointer;
-
-  @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 36vw;
-    height: auto;
-    min-height: 100px;
-    margin: 10px;
-    img {
-      width: 35vw;
-    }
-  }
-
-  img {
-    &:hover {
-      box-shadow: 0px 1px 20px 0px #fb8500;
-      transform: translateY(-5px);
-    }
-    &.loaded {
-      border-radius: inherit;
-    }
   }
 `;

@@ -9,14 +9,6 @@ export const COLLECTIBLE_CATEGORY_QUERY = `{
 }
 `;
 
-export const OWNED_CARDS_QUERY = `{
-  collectibles
-  {
-    ${CARD}
-  }
-}
-`;
-
 export const COLLECTIBLE_PACK_COUNT = (category: number) => `
 query CollectibleCount {
   collectibleCountByCategory(categoryId: ${category})

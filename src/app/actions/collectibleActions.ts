@@ -3,7 +3,6 @@ import {
   COLLECTIBLE_CATEGORY_QUERY,
   COLLECTIBLE_PACK_COUNT,
   COLLECTIBLE_PURCHASED_COUNT,
-  OWNED_CARDS_QUERY,
   COLLECTIBLES_BY_CATEGORY_ID
 } from 'api/queries/collectibles';
 import { PURCHASE_CARD_PACK } from 'api/mutations/collectibles';
@@ -45,23 +44,6 @@ export const purchaseCardPack = async (pack_id: number, student_id: number, toke
 
 /**
  * @author Bruce Lee
- * @description get all of collectible cards from graphql server
- */
-export const getCollectibleCards = async (token: string) => {
-
-  try {
-    const res: any = await sendRawQuery(
-      OWNED_CARDS_QUERY,
-      token
-    );
-    return res.data.collectibles;
-  } catch (e) {
-    return { msg: e };
-  }
-};
-
-/**
- * @author Bruce Lee
  * @description get total collectible count of given category
  */
 export const getProgressTotalCount = async (category: number, token: string) => {
@@ -88,8 +70,13 @@ export const getProgressPurchasedCount = async (category: number, token: string)
   return res.msg ? { msg: res.msg } : res.data.purchasedCollectibleCountByCategory;
 };
 
+/**
+ * Fetch cards of given category id
+ * @param category category id that user selects
+ * @param token
+ * @returns {success: true | false} when succeed, it returns array of cards of that category
+ */
 export const doFetchCategoryCollectibles = async (category: number, token: string) => {
-
   try {
     const res: any = await sendRawQuery(
       COLLECTIBLES_BY_CATEGORY_ID(category),

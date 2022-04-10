@@ -20,7 +20,7 @@ const CardTitle = styled.div`
   background-position: center;
   background-size: contain;
   padding: 15px;
-  margin-top: 20vh;
+  margin-top: 50px;
 
   @media screen and (max-width: ${ScreenSize.phone}) {
     width: 100%;
