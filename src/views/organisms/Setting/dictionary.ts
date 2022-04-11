@@ -26,7 +26,8 @@ export const dictionary:any = Object.freeze({
         passwordShouldBeAtLeast6Letters: 'Password should be at least 6 letters',
         passwordsDontMatch: 'Passwords don\'t match',
         passwordResetError: 'Password reset error!',
-        passwordResetSuccess: 'Password reset success!'
+        passwordResetSuccess: 'Password reset success!',
+        edit: 'Edit',
     },
     "TH": {
         membershipDetails: 'รายละเอียดสมาชิก',
@@ -55,7 +56,8 @@ export const dictionary:any = Object.freeze({
         passwordShouldBeAtLeast6Letters: 'รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร',
         passwordsDontMatch: 'รหัสผ่านไม่ตรงกัน',
         passwordResetError: 'ข้อผิดพลาดในการรีเซ็ตรหัสผ่าน!',
-        passwordResetSuccess: 'รีเซ็ตรหัสผ่านสำเร็จ!'
+        passwordResetSuccess: 'รีเซ็ตรหัสผ่านสำเร็จ!',
+        edit: 'แก้ไข',
     },
     'ES_MX': {
         membershipDetails: 'Detalles de la membresía',
@@ -67,6 +69,7 @@ export const dictionary:any = Object.freeze({
         yourPaymentMethod: 'Tu método de pago',
         expires: 'Caduca',
         addNew: 'Añadir nueva',
+        edit: 'Editar',
         editPaymentMethod: 'Editar método de pago',
         emailIsNotValid: '¡El correo no es válido!',
         emailUpdatedSuccessfully: 'Correo electrónico actualizado con éxito!',

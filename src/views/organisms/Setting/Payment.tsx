@@ -79,7 +79,7 @@ export const Payment: FC = () => {
           />
         </Grid>
         <Grid item lg={8} xs={8}>
-          <LSBlueTextButton onClick={() => edit(true)}>{'Edit'}</LSBlueTextButton>
+          <LSBlueTextButton onClick={() => edit(true)}>{dictionary[language]?.edit}</LSBlueTextButton>
         </Grid>
         <LSDialog
           isOpen={isEdit}
