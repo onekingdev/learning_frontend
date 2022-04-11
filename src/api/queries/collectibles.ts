@@ -1,33 +1,11 @@
 import {
-  COLLECTIBLE_CATEGORY,
+  COLLECTIBLE_CATEGORY, CARD
 } from '../fragments/collectibleFragments';
 
 export const COLLECTIBLE_CATEGORY_QUERY = `{
   collectiblesCategory {
       ${COLLECTIBLE_CATEGORY}
     }
-}
-`;
-
-export const OWNED_CARDS_QUERY = `{
-  collectibles
-  {
-    id
-    name
-    tier
-    description {
-      key
-      value
-    }
-    category {
-      id
-      name
-      firebaseName
-    }
-    owned
-    amount
-    image
-  }
 }
 `;
 
@@ -40,5 +18,13 @@ query CollectibleCount {
 export const COLLECTIBLE_PURCHASED_COUNT = (category: number) => `
 query CollectiblePurchasedCount {
   purchasedCollectibleCountByCategory(categoryId: ${category})
+}
+`;
+
+export const COLLECTIBLES_BY_CATEGORY_ID = (category: number) => `
+query {
+  collectiblesByCategory(categoryId: ${category}) {
+    ${CARD}
+  }
 }
 `;

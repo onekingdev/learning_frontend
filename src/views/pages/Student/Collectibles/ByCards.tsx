@@ -13,6 +13,7 @@ import { LoadingSpinner } from 'views/atoms/Spinner';
 import { LoadingContext } from 'react-router-loading';
 import { useSnackbar } from 'notistack';
 import { dictionary } from './dictionary;'
+import { Container, Grid } from '@mui/material';
 
 export const Cards: FC = () => {
   const history = useHistory();
@@ -22,8 +23,8 @@ export const Cards: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
 
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : "EN_US"
 
   const fetchCategories = async (mounted: boolean) => {
     try {
@@ -38,7 +39,7 @@ export const Cards: FC = () => {
         }
       }
     } catch (e) {
-      enqueueSnackbar('Network Error'+ e, { variant: 'error' })
+      enqueueSnackbar('Network Error' + e, { variant: 'error' })
     }
     loadingContext.done();
 
@@ -59,18 +60,32 @@ export const Cards: FC = () => {
     <Wrapper>
       <StudentMenu>
         {/* <div> */}
-          <PageTitle title={dictionary[language]?.collectibleCards} />
-          <BtnContainer>
-            <Button onClick={() => history.push('/collectibles/mycards')}>
-              {dictionary[language]?.myCollection}
-            </Button>
-          </BtnContainer>
-          {
-            loading ?
-              <LoadingSpinner />
-              :
-              <CardPacks cards={packs} />
-          }
+        <Container sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          padding: 0,
+          marginBottom: 2
+        }}>
+          <Grid container alignItems={'end'}>
+            <Grid item xs={12} md={2} />
+            <Grid item xs={12} md={8}>
+              <PageTitle title={dictionary[language]?.collectibleCards} />
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <BtnContainer>
+                <Button onClick={() => history.push('/collectibles/mycards')}>
+                  {dictionary[language]?.myCollection}
+                </Button>
+              </BtnContainer>
+            </Grid>
+          </Grid>
+        </Container>
+        {
+          loading ?
+            <LoadingSpinner />
+            :
+            <CardPacks cards={packs} />
+        }
         {/* </div> */}
       </StudentMenu>
     </Wrapper>

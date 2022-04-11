@@ -5,6 +5,8 @@ import ReactLoading                from 'react-loading';
 import { getDownUrlByFilename }    from 'app/firebase';
 import { BasicColor }              from 'views/Color';
 import { ScreenSize }              from 'constants/screenSize';
+import { dictionary }              from '../dictionary'
+import { useSelector }             from 'react-redux';
 
 type CardProps = {
   category: string;
@@ -15,6 +17,9 @@ type CardProps = {
 };
 
 export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) => {
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language.toUpperCase() : "EN_US"
+
   const onCardClick = () => {
     // This is prop from parent component, when card is clicked, this calls function of parent.
     buy(id, price);
@@ -44,10 +49,9 @@ export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) =>
         )}
         <PriceBadge price={price} />
         <StyledBg>
-          <p>BUY A PACK OF</p>
-          <p>3 CARDS FOR</p>
+          <p>{dictionary[language].buyCardDescription}</p>
           <p className="dollars">${price}</p>
-          <button onClick={() => onCardClick()}>BUY</button>
+          <button onClick={() => onCardClick()}>{dictionary[language].buy}</button>
         </StyledBg>
       </StyledCard>
     </CardContainer>
