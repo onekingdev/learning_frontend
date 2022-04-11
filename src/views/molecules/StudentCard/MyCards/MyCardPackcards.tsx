@@ -27,7 +27,7 @@ export const MyPackcards: FC<CardPropArray> = ({ packcards }) => {
   const callbackGem = (gem: string) => {
     setLoading(true)
     const tiers = packcards.filter(
-      (gemcard: { tier: string; category: { name: string } }) => {
+      (gemcard: { tier: string }) => {
         // return gemcard.tier === gem && gemcard.category.name === card;
         return gemcard.tier === gem
       }
@@ -64,6 +64,7 @@ export const MyPackcards: FC<CardPropArray> = ({ packcards }) => {
         loading ?
           <div>
             <LoadingSpinner />
+            <p>loading...</p>
           </div>
           :
           <TierCards cards={gemcards} />

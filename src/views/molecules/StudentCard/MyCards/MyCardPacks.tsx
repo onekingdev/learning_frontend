@@ -40,27 +40,32 @@ export const MyCardPacks: FC<CardPropArray> = ({ packs }) => {
   const fetchProgressData = async (id: number) => {
     // TODO: fetch category collectibles from backend
     setLoading(true)
-    const res = await doFetchCategoryCollectibles(id, user.token)
-    if (res.succeed) {
-      setPackcards(res.cards)
-      // enqueueSnackbar(dictionary[language]?.youVeSetAnFavoriteAvatar, { variant: 'success' });
-      enqueueSnackbar('fetch success', { variant: 'success' });
-    } else {
-      enqueueSnackbar(res.msg, { variant: 'error' });
+    try{
+
+      const res = await doFetchCategoryCollectibles(id, user.token)
+      if (res.succeed) {
+        setPackcards(res.cards)
+        // enqueueSnackbar(dictionary[language]?.youVeSetAnFavoriteAvatar, { variant: 'success' });
+        enqueueSnackbar('fetch success', { variant: 'success' });
+      } else {
+        enqueueSnackbar(res.msg, { variant: 'error' });
+      }
+
+      const total = await getProgressTotalCount(
+        id,
+        user.token
+      );
+      total.msg ? setTotalCount(0) : setTotalCount(total);
+
+
+      const purchased = await getProgressPurchasedCount(
+        id,
+        user.token
+      );
+      purchased.msg ? setGainedCount(0) : setGainedCount(purchased);
+    } catch(e:any) {
+      enqueueSnackbar(e.message, { variant: 'error' });
     }
-
-    const total = await getProgressTotalCount(
-      id,
-      user.token
-    );
-    total.msg ? setTotalCount(0) : setTotalCount(total);
-
-
-    const purchased = await getProgressPurchasedCount(
-      id,
-      user.token
-    );
-    purchased.msg ? setGainedCount(0) : setGainedCount(purchased);
     setLoading(false)
   };
 
