@@ -15,7 +15,7 @@ export const CardCollectibleContainer = styled.div`
   justify-content   : center;
   margin            : 0 auto;
   @media screen and (min-width: ${ScreenSize.tablet}) {
-    margin: 0 auto;
+    margin: 0;
   }
 `;
 
@@ -32,10 +32,10 @@ export const Button = styled.button`
   background      : ${BasicColor.aqua};
   color           : white;
   border-radius   : 20px;
-  // position        : absolute;
+  position        : absolute;
   cursor          : pointer;
-  // top             : 16vh;
-  // right           : 15vw;
+  top             : 16vh;
+  right           : 15vw;
   transition      : all 250ms ease-in-out;
 
   &:hover {

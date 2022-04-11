@@ -1,5 +1,6 @@
 import logo                           from 'views/assets/logo-learn-white.svg'
 import styled                         from 'styled-components';
+import { useSelector }                from 'react-redux'
 import socrates                       from 'views/assets/socrates.svg'
 import TextField                      from 'views/molecules/MuiTextField'
 import { LicenseHeader, LicenseBody } from './Style'
@@ -9,8 +10,11 @@ import { Grid }             from '@mui/material';
 import { TypoGeneralText }  from 'views/atoms/Text';
 import { BasicColor}        from 'views/Color';
 import { ScreenSize }       from 'constants/screenSize';
+import { dictionary }       from './dictionary'
 
 const License = (props: any) => {
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
     return (
       <ResponsiveLicense id="license">
         <LicenseHeader>
@@ -24,12 +28,12 @@ const License = (props: any) => {
             <Img src={socrates} />
             <div className="flex flex-col h-full justify-space-between">
               <DialogTextField
-                label="Member Since"
+                label={dictionary[language]?.memberSince}
                 value={typeof(props?.membership) === 'object' ? `${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}` : ''}
                 // onChange={(e) => updateUsername(e.target.value)}
               />
               <DialogTextField
-                label="User Name"
+                label={dictionary[language]?.userName}
                 value={props?.username}
                 // onChange={(e) => updateUsername(e.target.value)}
               />

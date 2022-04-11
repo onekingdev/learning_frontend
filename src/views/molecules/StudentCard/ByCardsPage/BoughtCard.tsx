@@ -6,18 +6,15 @@ import useSound from 'use-sound';
 import purchaseSound from 'views/assets/audios/mixkit-coin-win-notification.wav';
 import { ScreenSize } from 'constants/screenSize';
 import { getDownUrlByFilename } from 'app/firebase';
-import { CardDescription } from '../CardDescription';
-import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 
 /**
  * @author BruceLee
  * Displaying a bought package of 3 cards when a user pressed bought button
  * Turn around image effect and sound effect added
  */
-export const BoughtCard: FC<{ imgName: string, firebaseName: string, description: Array<any>, name: string }> = ({ imgName, firebaseName, description, name }) => {
+export const BoughtCard: FC<{ imgName: string, firebaseName: string }> = ({ imgName, firebaseName }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
-  const [openDg, setOpenDg] = useState(false);
   const [url, setUrl] = useState('')
 
   const [play] = useSound(purchaseSound);
@@ -33,29 +30,23 @@ export const BoughtCard: FC<{ imgName: string, firebaseName: string, description
     }
   }
 
-  const showCardInfo = () => {
-    console.log('show card info...', description)
-    setOpenDg(true)
-  }
-
   useEffect(() => {
     let mounted = true
     fetchFirebaseUrl(mounted, imgName, firebaseName)
     return () => { mounted = false }
   }, [])
   return (
-    <StyledCard >
+    <StyledCard onClick={() => setOpen(!open)}>
       {url ?
         open ?
           <>
             <img
-              style={loaded ? { cursor: 'pointer' } : { display: 'none' }}
+              style={loaded ? {} : { display: 'none' }}
               src={url}
               loading="eager"
               onLoad={() => {
                 setLoaded(true), play();
               }}
-              onClick={() => showCardInfo()}
             />
             <div
               style={
@@ -64,32 +55,18 @@ export const BoughtCard: FC<{ imgName: string, firebaseName: string, description
                   : { display: 'flex', alignItems: 'center' }
               }
             >
+              {/* <p>loading...</p> */}
+              {/* <ReactLoading /> */}
               <ReactLoading type="spinningBubbles" color={BasicColor.green} />
             </div>
           </>
           :
-          <p
-            onClick={() => setOpen(true)}
-          >?</p>
+          <p>?</p>
         :
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{display: 'flex', alignItems: 'center'}}>
           <ReactLoading type="spinningBubbles" color={BasicColor.green} />
         </div>
       }
-      <CardDialog
-        fullWidth='true'
-        dialogContent={
-          <CardDescription
-            imgUrl={imgName}
-            firebaseName={firebaseName}
-            description={description}
-            purchased={true}
-            name={name}
-          />
-        }
-        open={() => setOpenDg(!openDg)}
-        isOpen={openDg}
-      />
     </StyledCard>
   );
 };

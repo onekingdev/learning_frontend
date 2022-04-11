@@ -14,17 +14,10 @@ export const COLLECTIBLE_OWNED_CARD = `
 export const CARD = `
   id
   name
-  tier
-  description {
-    key
-    value
-  }
+  image
   category {
     id
     name
     firebaseName
   }
-  owned
-  amount
-  image
 `
