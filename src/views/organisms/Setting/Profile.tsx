@@ -23,13 +23,15 @@ import { ThemeProvider }           from '@mui/material';
 import { LSDialog }                from 'views/molecules/Setting/LSDialog';
 import { PwdResetForm }            from './PwdResetFrom';
 import { useSnackbar }             from 'notistack';
-
+import { dictionary }              from './dictionary'
 
 export const SettingForm: FC = () => {
   const user = useSelector((state: any) => state.user);
   const [openPwdRstDg, setOpenPwdRstDg] = useState(false)
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
 
   const toggleOpenPwdRstDg = () => {
     setOpenPwdRstDg(!openPwdRstDg)
@@ -43,17 +45,17 @@ export const SettingForm: FC = () => {
     if (validator.isEmail(newEmail)) {
       const res: any = await doUpdateGuardianEmailPassword(newEmail, user.username, 'pwd.password', user.token)
       if (res === null)
-        enqueueSnackbar('Email is not valid! ', { variant: 'error' })
+        enqueueSnackbar(dictionary[language]?.emailIsNotValid, { variant: 'error' })
       else {
         dispatch({
           type: GUARDIAN_UPDATE_EMAIL_PWD,
           payload: { email: newEmail }
         });
-        enqueueSnackbar('Email updated successfully! ', { variant: 'success' })
+        enqueueSnackbar(dictionary[language]?.emailUpdatedSuccessfully, { variant: 'success' })
       }
     }
     else
-      enqueueSnackbar('Email is not valid! ', { variant: 'error' })
+      enqueueSnackbar(dictionary[language]?.emailIsNotValid, { variant: 'error' })
   };
 
   return (
@@ -61,13 +63,13 @@ export const SettingForm: FC = () => {
       <Box>
         <LSShadowContainer >
           <LSTitle>
-            {'Profile and settings'}
+            {dictionary[language]?.profileAndSettings}
           </LSTitle>
           <Box component='form' onSubmit={handleSubmit} noValidate sx={{ flexGrow: 1 }}>
             <LSGridRow container>
               <Grid item lg={4} xs={12}>
                 <LSLabel>
-                  {'Name'}
+                  {dictionary[language]?.name}
                 </LSLabel>
               </Grid>
               <Grid item lg={8} xs={12}>
@@ -79,7 +81,7 @@ export const SettingForm: FC = () => {
             <LSGridRow container>
               <Grid item lg={4} xs={12}>
                 <LSLabel>
-                  {'Current e-mail'}
+                  {dictionary[language]?.currentEmail}
                 </LSLabel>
               </Grid>
               <Grid item lg={8} xs={12}>
@@ -91,7 +93,7 @@ export const SettingForm: FC = () => {
             <LSGridRow container>
               <Grid item lg={4} xs={12}>
                 <LSLabel >
-                  {'Change E-Mail'}
+                  {dictionary[language]?.changeEMail}
                 </LSLabel>
               </Grid>
               <Grid item lg={8} xs={12}>
@@ -109,30 +111,30 @@ export const SettingForm: FC = () => {
             <LSGridRow container>
               <Grid item lg={4} xs={12}>
                 <LSLabel >
-                  {'Password'}
+                  {dictionary[language]?.password}
                 </LSLabel>
               </Grid>
               <Grid item lg={8} xs={12}>
                 <LSDialog
                   isOpen={openPwdRstDg}
                   open={toggleOpenPwdRstDg}
-                  title='Change Password'
+                  title={dictionary[language]?.changePassword}
                   // contentText='Input new password'
                   dialogContent={
                     <PwdResetForm open={toggleOpenPwdRstDg} />
                   }
                 />
                 <LSBlueTextButton onClick={toggleOpenPwdRstDg}>
-                  {'Change Password'}
+                {dictionary[language]?.changePassword}
                 </LSBlueTextButton>
               </Grid>
             </LSGridRow>
             <LSButtonContainer>
               <LSButton
-                type='submit'
+                type={dictionary[language]?.submit}
                 variant='contained'
               >
-                {'Submit'}
+                {dictionary[language]?.submit}
               </LSButton>
             </LSButtonContainer>
           </Box>

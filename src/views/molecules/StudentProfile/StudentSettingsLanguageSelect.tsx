@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Box from '@mui/material/Box';
 import { useSelector, useDispatch } from 'react-redux';
-import { SelectChangeEvent } from '@mui/material/Select';
+import  { SelectChangeEvent } from '@mui/material/Select';
 import { LANGUAGES } from 'constants/common';
 import { USER_SET_LANGUAGE } from 'app/types';
 import Radio from '@mui/material/Radio';
@@ -31,7 +31,7 @@ export const LanguageSelect: FC = () => {
                 >
                     {
                         LANGUAGES.map((lang) => (
-                            <FormControlLabel key={lang.id} value={lang.value} control={<Radio />} label={lang.label} />
+                            <FormControlLabel value={lang.value} control={<Radio />} label={lang.label} />
                         ))
                     }
                 </RadioGroup>

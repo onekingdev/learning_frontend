@@ -8,6 +8,7 @@ import { doUpdateGuardianEmailPassword }   from 'app/actions/guardianActions';
 import { useSelector }                     from 'react-redux';
 import { useSnackbar }                     from 'notistack';
 import { LoadingSpinner }                  from 'views/atoms/Spinner';
+import { dictionary }                      from './dictionary'
 
 interface DialogProps {
     open: () => (void)
@@ -19,6 +20,8 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
     const [errorMsg, setErrorMsg] = useState('')
     const user = useSelector((state: any) => state.user);
     const [loading, setLoading] = useState(false)
+    let language:string = useSelector((state: any) => state.user.language);
+    language            = language? language : "EN_US"
     // Whenever an input changes value, change the corresponding state variable
     const handleInputChange = (event: any) => {
         event.preventDefault();
@@ -31,10 +34,10 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
 
     const validatePwd = () => {
         if (pwd.confirm !== pwd.password) {
-            setErrorMsg('Passwords don\'t match')
+            setErrorMsg(dictionary[language]?.passwordsDontMatch)
             return false
         } else if (pwd.password.length < 6) {
-            setErrorMsg('Password should be at least 6 letters')
+            setErrorMsg(dictionary[language]?.passwordShouldBeAtLeast6Letters)
             return false
         } else {
             setErrorMsg('')
@@ -51,8 +54,8 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
         setLoading(true)
         const res: any = await doUpdateGuardianEmailPassword('', user.username, pwd.password, user.token)
         if (res === null)
-            enqueueSnackbar('Password reset error! ', { variant: 'error' })
-        else enqueueSnackbar('Password reset success! ', { variant: 'success' });
+            enqueueSnackbar(dictionary[language]?.passwordResetError, { variant: 'error' })
+        else enqueueSnackbar(dictionary[language]?.passwordResetSuccess, { variant: 'success' });
         setLoading(false)
         open()
     }
@@ -64,7 +67,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                 <LSGridRow container spacing={3}>
                     <Grid item lg={4} xs={12}>
                         <LSLabel>
-                            {'New Password'}
+                            {dictionary[language]?.newPassword}
                         </LSLabel>
                     </Grid>
                     <Grid item lg={8} xs={12}>
@@ -72,7 +75,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                             error={errorMsg ? true : false}
                             size='small'
                             id='outlined-password-input'
-                            label='New Password'
+                            label={dictionary[language]?.newPassword}
                             type='password'
                             autoComplete='new-password'
                             value={pwd.password}
@@ -84,14 +87,14 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                     </Grid>
                     <Grid item lg={4} xs={12}>
                         <LSLabel>
-                            {'Confirm Password'}
+                        {dictionary[language]?.confirmPassword}
                         </LSLabel>
                     </Grid>
                     <Grid item lg={8} xs={12}>
                         <LSTextField
                             size='small'
                             id='outlined-password-confirm'
-                            label='Confirm'
+                            label={dictionary[language]?.confirm}
                             type='password'
                             value={pwd.confirm}
                             onChange={handleInputChange}
@@ -105,7 +108,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                         variant='contained'
                         onClick={handleSubmit}
                     >
-                        {'Submit'}
+                        {dictionary[language]?.submit}
                     </LSButton>
                 </LSButtonContainer>
             </ThemeProvider>

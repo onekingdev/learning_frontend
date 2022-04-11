@@ -1,24 +1,25 @@
 import { FC, useEffect, useContext, useMemo, useState, useRef }     from 'react';
-import { StudentMenu }    from 'views/pages/Student/Menus/StudentMenu';
-import { LoadingContext } from 'react-router-loading';
-import styled             from 'styled-components';
-import { Title }          from 'views/atoms/Text';
-import welcome            from 'views/assets/welcome.svg';
-import treasureMapPc      from 'views/assets/student/treasure-track-map-pc.png';
-import treasureMapMobile  from 'views/assets/student/treasure-track-map-mobile.png';
-import Card               from '@mui/material/Card';
-import CardContent        from '@mui/material/CardContent';
-import Typography         from '@mui/material/Typography';
-import ArrowDropDownIcon  from '@mui/icons-material/ArrowDropDown';
-import { useSelector }    from 'react-redux';
-import Menu       from '@mui/material/Menu';
-import MenuItem   from '@mui/material/MenuItem';
+import { StudentMenu }      from 'views/pages/Student/Menus/StudentMenu';
+import { LoadingContext }   from 'react-router-loading';
+import styled               from 'styled-components';
+import { Title }            from 'views/atoms/Text';
+import welcome              from 'views/assets/welcome.svg';
+import treasureMapPc        from 'views/assets/student/treasure-track-map-pc.png';
+import treasureMapMobile    from 'views/assets/student/treasure-track-map-mobile.png';
+import Card                 from '@mui/material/Card';
+import CardContent          from '@mui/material/CardContent';
+import Typography           from '@mui/material/Typography';
+import ArrowDropDownIcon    from '@mui/icons-material/ArrowDropDown';
+import { useSelector }      from 'react-redux';
+import Menu                 from '@mui/material/Menu';
+import MenuItem             from '@mui/material/MenuItem';
 import { UserRankTreasureTrack } from 'views/molecules/UserRank';
 import { ScreenSize }            from 'constants/screenSize';
-import { HonorRoll } from 'api/fragments/honorRollFragments';
-import query                 from 'api/queries/get';
-import { AvatarSet } from 'views/molecules/Avatar/AvatarSet';
-import background     from 'views/assets/colored-shapes-bg.svg';
+import { HonorRoll }             from 'api/fragments/honorRollFragments';
+import query                     from 'api/queries/get';
+import { AvatarSet }             from 'views/molecules/Avatar/AvatarSet';
+import background                from 'views/assets/colored-shapes-bg.svg';
+import { dictionary }            from './dictionary'
 import {
     pathMobileCompList,
     pathPcCompList,
@@ -36,6 +37,8 @@ const Wrapper = styled.div`
 export const KidsTreasureTrack: FC = () => {
     const loadingContext = useContext(LoadingContext);
     const avatar = useSelector((state: any) => state.avatar)
+    let language:string = useSelector((state: any) => state.user.language);
+    language            = language? language : "EN_US"
 
     const [earnedCoin, setEarnedCoin] = useState<number>(0); //Math.ceil(Math.random() * 1000)
 
@@ -184,7 +187,7 @@ export const KidsTreasureTrack: FC = () => {
                                 }} src={welcome} alt='Welcome' />
                                 <Title style={{
                                     zIndex: 20,
-                                }}>Treasure Track</Title>
+                                }}>{dictionary[language]?.treasureTrack}</Title>
                             </MapTitleViewer>
                             <MapViewer>
                                 <div ref={mapBgRef} style={{
@@ -255,7 +258,7 @@ export const KidsTreasureTrack: FC = () => {
                                     marginRight: '-1rem',
                                 }}>
                                     <Typography variant='h4' color='text.primary' gutterBottom>
-                                    Honor Roll
+                                    {dictionary[language]?.honorRoll}
                                     </Typography>
                                     <Typography variant='h5' color='text.primary' gutterBottom>
                                         <div>

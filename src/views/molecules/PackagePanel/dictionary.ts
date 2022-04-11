@@ -1,0 +1,38 @@
+export const dictionary: any = Object.freeze({
+    'EN_US': {
+        goldPackage: 'Gold Package',
+        comboPackage: 'Combo Package',
+        solePakcage: 'Sole Package',
+        package: 'Package',
+        includeAllAreasOfKnowledge: 'Include All Areas of Knowledge',
+        numberOfChildren: 'Number of Children',
+        pickTwoAreasOfKnowledge: 'Pick two Areas of Knowledge',
+        pickOneAreaOfKnowledge: 'Pick one Area of Knowledge',
+        monthly:'Monthly',
+        yearly: 'Yearly',
+    },
+    'TH' :{
+        goldPackage: 'Gold บรรจุุภัณฑ์',
+        comboPackage: 'Combo บรรจุุภัณฑ์',
+        solePakcage: 'Sole บรรจุุภัณฑ์',
+        package: 'บรรจุุภัณฑ์',
+        includeAllAreasOfKnowledge: 'รวมความรู้ทุกด้าน',
+        numberOfChildren: 'จำนวนบุตร',
+        pickTwoAreasOfKnowledge: 'เลือกความรู้สองด้าน',
+        pickOneAreaOfKnowledge: 'เลือกความรู้ด้านใดด้านหนึ่ง',
+        monthly:'รายเดือน',
+        yearly: 'รายปี',
+    },
+    'ES_MX': {
+        goldPackage: 'Gold Paquete',
+        comboPackage: 'Combo Paquete',
+        solePakcage: 'Sole Paquete',
+        package: 'Paquete',
+        includeAllAreasOfKnowledge: 'Incluir todas las áreas de conocimiento',
+        numberOfChildren: 'Numero de niñas',
+        pickTwoAreasOfKnowledge: 'Elige dos áreas de conocimiento',
+        pickOneAreaOfKnowledge: 'Elige un área de conocimiento',
+        monthly:'Mensual',
+        yearly: 'Anual',
+    }
+});

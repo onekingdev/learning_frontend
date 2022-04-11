@@ -1,5 +1,5 @@
 import { Routes }                  from 'Routes';
-import { useRef }                  from 'react';
+import { useEffect, useRef }                  from 'react';
 import { Provider }                from 'react-redux';
 import store                       from './app/configureStore';
 import { PersistGate }             from 'redux-persist/integration/react';
@@ -7,21 +7,35 @@ import { useState }                from 'react';
 import { SnackbarProvider }        from 'notistack';
 import { BrowserRouter as Router } from 'react-router-dom';
 import TawkMessengerReact          from '@tawk.to/tawk-messenger-react';
+import * as TYPES from 'app/types'
+
 import './style.css'
 declare global {
   interface Window {
     Tawk_API?: any;
   }
 }
+declare const rewardful: any;
+declare const Rewardful: any;
 export default () => {
   const [persist] = useState(store());
   const tawkMessengerRef = useRef();
   const onLoad = () => {
     window.Tawk_API?.hideWidget();
   };
-  // const handleMinimize =  () => {
-  //     tawkMessengerRef?.current?.minimize();
-  // };
+  useEffect(() => {
+      console.log(Rewardful?.referral)
+  }, [])
+
+  useEffect(() => {
+    if(Rewardful?.referral) {
+      persist.store.dispatch({type: TYPES.USER_SET_REWARDFUL_ID, payload: Rewardful.referral});
+      console.log('Current referral ID: ', Rewardful.referral);
+    } else {
+      console.log('No referral present.');
+    }
+  }, [Rewardful])
+
   return (
     <Provider store={persist.store}>
       <PersistGate loading={true} persistor={persist.persistor}>

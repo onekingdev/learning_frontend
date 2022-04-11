@@ -42,13 +42,9 @@ import {
     Title,
     CardContent
 } from './Style'
-// import StripeInput from './StripeInput';
-// import countryList from 'react-select-country-list';
-import { Country, State } from 'country-state-city';
-
-// type PaymentFormProps = {
-//   isUpdate: boolean
-// };
+import { Country, State }   from 'country-state-city';
+import commonDictionary     from 'constants/commonDictionary'
+import { dictionary }       from './dictionary'
 interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): void;
     handleUpdate(): void;
@@ -60,9 +56,10 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     const elements  = useElements();
     const user      = useSelector((state: Store) => state.user)
     const guardian  = useSelector((state: any) => state.guardian)
+    let language:string  = useSelector((state: any) => state.user.language);
+    language             = language? language : "EN_US"
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
-
     console.log(countries)
     // const [paymentMethod, setPaymentMethod] = useState('card')
     const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(
@@ -138,7 +135,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
         let valiResult = true;
         for (const key in validateRst) {
             if (validateRst[key] === null) {
-                validateMsgTemp[key] = 'Field is required';
+                validateMsgTemp[key] = commonDictionary[language]?.fieldIsRequired;
             }
             if (validateMsgTemp[key]) {
                 valiResult = false;
@@ -285,7 +282,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     return (
         <>
             {!isSpecialCode && <>
-                <Title>Payment Method</Title>
+                <Title>{dictionary[language]?.paymentMethod}</Title>
                 <FormControl>
                     <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
@@ -303,20 +300,20 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                         <FlexRow>
                             <FormControlLabel value="card" control={<Radio className={classes.radio} />} label="" />
                             <CardContent>
-                                <div>Credit or debit card</div>
+                                <div>{dictionary[language]?.creditOrDebitCard}</div>
                                 <CardType src={visacard} />
                             </CardContent>
                         </FlexRow>
                     </RadioGroup>
                 </FormControl>
             </>}
-            <div style={{ fontSize: '24px', fontWeight: '700', paddingTop: '15px', paddingBottom: '15px' }}>Billing Information</div>
+            <div style={{ fontSize: '24px', fontWeight: '700', paddingTop: '15px', paddingBottom: '15px' }}>{dictionary[language]?.billingInformation}</div>
             <Grid container spacing={4}>
                 <Grid item xs={6}>
                     <TextField
-                        label="First Name"
+                        label={dictionary[language]?.firstName}
                         onChange={(e: any) => {
-                            handleFormChange('firstName', e.target.value.length === 0 ? 'Field is required' : '')
+                            handleFormChange('firstName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                             setData({ ...data, firstName: e.target.value })
                         }}
                         error={!!validateRst.firstName}
@@ -326,9 +323,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={6}>
                     <TextField
-                        label="Last Name"
+                        label={dictionary[language]?.lastName}
                         onChange={(e: any) => {
-                            handleFormChange('lastName', e.target.value.length === 0 ? 'Field is required' : '')
+                            handleFormChange('lastName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                             setData({ ...data, lastName: e.target.value })
                         }}
                         error={!!validateRst.lastName}
@@ -354,9 +351,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                         focused
                     /> */}
                         <TextField
-                            label="Card Number ex: (XXXX-XXXX-XXXX-XXXX)"
+                            label={dictionary[language]?.cardNumber}
                             onChange={(e: any) => {
-                                handleFormChange('cardNumber', e.target.value.length < 15 ? 'Field is required' : '')
+                                handleFormChange('cardNumber', e.target.value.length < 15 ? commonDictionary[language]?.fieldIsRequired : '')
                                 // handleFormChange('expiryDate',e.target.value.split("-").length <= 2 ? 'Type is wrong' : '')
                                 setData({ ...data, cardNumber: e.target.value.replaceAll('-', '') })
                             }}
@@ -381,10 +378,10 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                         helperText={validateRst.expiryDate}
                     /> */}
                         <TextField
-                            label="Expiration Date ex: (04/25)"
+                            label={dictionary[language]?.expirationDate}
                             onChange={(e: any) => {
                                 const expiryDate = e.target.value.split('/');
-                                handleFormChange('expiryDate', e.target.value.length < 5 ? 'Field is required' : expiryDate.length <= 1 ? 'Type is wrong' : expiryDate[0] >= 13 ? 'Type is wrong' : '')
+                                handleFormChange('expiryDate', e.target.value.length < 5 ? commonDictionary[language]?.fieldIsRequired : expiryDate.length <= 1 ? 'Type is wrong' : expiryDate[0] >= 13 ? 'Type is wrong' : '')
                                 if (expiryDate.length <= 1 || expiryDate[0] >= 13) return
                                 const cardExpMonth = expiryDate[0]
                                 let cardExpYear = expiryDate[1]
@@ -414,7 +411,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                         <TextField
                             label="CVC/CVV"
                             onChange={(e: any) => {
-                                handleFormChange('cvc', e.target.value.length === 0 ? 'Field is required' : '')
+                                handleFormChange('cvc', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                 setData({ ...data, cvc: e.target.value })
 
                             }}
@@ -425,9 +422,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 }
                 <Grid item xs={12}>
                     <TextField
-                        label="Address Line 1"
+                        label={dictionary[language]?.addressLine + ' 1'}
                         onChange={(e: any) => {
-                            handleFormChange('addressOne', e.target.value.length === 0 ? 'Field is required' : '')
+                            handleFormChange('addressOne', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                             setData({ ...data, addressOne: e.target.value })
                         }}
                         error={!!validateRst.addressOne}
@@ -437,9 +434,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        label="Address Line 2(optional)"
+                        label={dictionary[language]?.addressLine + ' 2(optinoal)'}
                         onChange={(e: any) => {
-                            // handleFormChange('addressTwo',e.target.value.length === 0 ? 'Field is required' : '');
+                            // handleFormChange('addressTwo',e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                             setData({ ...data, addressTwo: e.target.value });
                         }}
                         error={!!validateRst.addressTwo}
@@ -449,9 +446,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={6} md={6}>
                     <TextField
-                        label="City"
+                        label={dictionary[language]?.city}
                         onChange={(e: any) => {
-                            handleFormChange('city', e.target.value.length === 0 ? 'Field is required' : '');
+                            handleFormChange('city', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                             setData({ ...data, city: e.target.value });
                         }}
                         error={!!validateRst.city}
@@ -461,9 +458,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={6} md={6}>
                     <TextField
-                        label="State/ Province"
+                        label={`${dictionary[language]?.state} / ${dictionary[language]?.province}` }
                         onChange={(e: any) => {
-                            handleFormChange('state', e.target.value.length === 0 ? 'Field is required' : '');
+                            handleFormChange('state', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                             setData({ ...data, state: e.target.value })
                         }}
                         error={!!validateRst.state}
@@ -473,9 +470,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={6} md={6}>
                     <TextField
-                        label="Zip /Postal Code"
+                        label={`${dictionary[language]?.zip} / ${dictionary[language]?.postalCode}` }
                         onChange={(e: any) => {
-                            handleFormChange('zip', e.target.value.length === 0 ? 'Field is required' : '')
+                            handleFormChange('zip', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                             setData({ ...data, zip: e.target.value })
                         }}
                         error={!!validateRst.zip}
@@ -486,17 +483,17 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 <Grid item xs={6} md={6}>
                     <FormControl fullWidth>
                         <InputLabel id="select-country-label">
-                            Select Your Country
+                            {dictionary[language]?.selectYourCountry}
                         </InputLabel>
                         <Select
                             labelId="select-country-label"
                             id="select-country"
                             value={countries[countries.findIndex((item: any) => item.name === data.country.name)]}
-                            label="Select Your country"
+                            label={dictionary[language]?.selectYourCountry}
                             className={`${classes.select} err-border`}
                             // className={`${classes.select} err-border`}
                             onChange={async (e: any) => {
-                                handleFormChange('country', e.target.value.length === 0 ? 'Field is required' : '');
+                                handleFormChange('country', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                                 setData({ ...data, country: e.target.value })
                                 // setGrade(e.target.value);
                                 // console.log(props)
@@ -527,7 +524,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                     {/* <TextField
                         label="Country"
                         onChange={(e: any) => {
-                            handleFormChange('country',e.target.value.length === 0 ? 'Field is required' : '');
+                            handleFormChange('country',e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                             setData({...data, country: e.target.value})
 
                         } }
@@ -538,9 +535,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={12} md={12}>
                     <TextField
-                        label="Phone"
+                        label={dictionary[language]?.phone}
                         onChange={(e: any) => {
-                            handleFormChange('phone', e.target.value.length === 0 ? 'Field is required' : !validatePhoneNumber(e.target.value) ? 'Phone number type is wrong' : '')
+                            handleFormChange('phone', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validatePhoneNumber(e.target.value) ? 'Phone number type is wrong' : '')
                             setData({ ...data, phone: e.target.value })
                         }}
                         error={!!validateRst.phone}
@@ -554,7 +551,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                             bgColor={BasicColor.green}
                             onClick={handleOrder}
                             align="left"
-                            value="Update"
+                            value={dictionary[language]?.update}
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -562,12 +559,12 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                             bgColor={BasicColor.gray60}
                             onClick={handleOrder}
                             align="right"
-                            value="Return"
+                            value={dictionary[language]?.return}
                         />
                     </Grid>
                 </>)}
             </Grid>
-            <div style={{ color: BasicColor.lightCyanBlue, fontSize: '14px', paddingTop: '30px', paddingBottom: '30px' }}>Your transaction is secured through SSL Encryption through Stripe</div>
+            <div style={{ color: BasicColor.lightCyanBlue, fontSize: '14px', paddingTop: '30px', paddingBottom: '30px' }}>{dictionary[language]?.yourTransactionIsSecuredThroughSSLEncryptionThroughStripe}</div>
         </>
     );
 });

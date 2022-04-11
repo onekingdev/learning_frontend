@@ -10,11 +10,13 @@ const INITIAL_STATE = {
   isStaff: null,
   isActive: null,
   dateJoined: null,
-  language: null,
+  // language: null,
+  language: "TH",     // test for language
   profile: {
     role: null,
   },
   token: null,
+  rewardfulId: null,
   sound: true
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
@@ -23,8 +25,15 @@ const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUse
     case TYPE.USER_SET_DATA:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        language: "TH",     // test for language
+
       };
+    case TYPE.USER_SET_REWARDFUL_ID:
+      return {
+        ...state,
+        rewardfulId: action.payload
+      }
     case TYPE.USER_SET_TOGGLE_SOUND:
       return {
         ...state,
@@ -41,7 +50,9 @@ const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUse
         email: action.payload.email
       };
     case TYPE.USER_RESET:
-      return INITIAL_STATE;
+      return {
+        ...INITIAL_STATE,
+        rewardfulId: state.rewardfulId};
     default:
       return state;
   }

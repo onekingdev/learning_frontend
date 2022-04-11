@@ -14,6 +14,11 @@ export const dictionary: any = Object.freeze({
         nextKid: "Next Kid",
         finish: "Finish",
         fieldIsRequired: 'Field is required',
+        math: 'Math',
+        elaSgithWords: "ELA + SIGHT WORDS",
+        science: "SCIENCE",
+        financialLiteracy: "FINANCIAL LITERACY",
+        healthAndSafety: "HEALTH & SAFETY",
     },
     'TH': {
         addingANewChild : "การเพิ่มเด็กใหม่",
@@ -30,6 +35,11 @@ export const dictionary: any = Object.freeze({
         nextKid: "เด็กต่อไป",
         finish: "เสร็จสิ้น",
         fieldIsRequired: 'ต้องระบุข้อมูล',
+        math: 'คณิตศาสตร์',
+        elaSgithWords: "ELA + คำมองเห็น",
+        science: "ศาสตร์",
+        financialLiteracy: "ความรู้ทางการเงิน",
+        healthAndSafety: "สุขภาพและความปลอดภัย",
     },
     'ES_MX': {
         addingANewChild : "Agregar un nuevo niño",
@@ -46,5 +56,9 @@ export const dictionary: any = Object.freeze({
         nextKid: "próximo niño",
         finish: "Finalizar",
         fieldIsRequired: 'Se requiere campo',
+        math: 'Matemáticas',
+        elaSgithWords: "ELA + PALABRAS VISIBLES",
+        science: "CIENCIA",
+        financialLiteracy: "EDUCACIÓN FINANCIERA",
     }
 });

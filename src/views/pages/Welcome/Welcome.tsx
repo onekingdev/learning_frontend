@@ -26,14 +26,13 @@ import {
   ModalItemsContainer,
 } from './Style';
 import { TextInput } from '../../atoms/Text/TextInput';
-
 export const Welcome: FC = () => {
   const [joinModal, setJoinModal] = useState(false);
   const [deployModal] = useState(false);
   const history       = useHistory();
   const dispatch      = useDispatch();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language.toUpperCase() : 'EN_US'
+  language            = language? language : "EN_US"
 
   const sendEmail     = () => {
     setJoinModal(!joinModal);
@@ -87,7 +86,7 @@ export const Welcome: FC = () => {
         </Description>
       </Body>
 
-      <Illustration src={welcome} alt=''                           />
+      <Illustration src={welcome} alt=''/>
 
       <Actions>
         <Link to={'/login'}>

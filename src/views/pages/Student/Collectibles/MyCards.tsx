@@ -14,28 +14,34 @@ import {
   getCardPacksInfo,
 } from 'app/actions/collectibleActions';
 import { MyCardPacks } from 'views/molecules/StudentCard/MyCards/MyCardPacks'
+import { getCollectibleCards } from 'app/actions/collectibleActions';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 import { dictionary } from './dictionary;';
-import { Container, Grid } from '@mui/material';
-
 export const MyCardCollection: FC = () => {
   const history = useHistory();
   const loadingContext = useContext(LoadingContext);
   const user = useSelector((state: any) => state.user);
   const [categories, setCategories] = useState([]);
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : "EN_US"
+  const [allCards, setAllCards] = useState<Array<any>>([]);
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : "EN_US"
 
   useEffect(() => {
     let ignore = false;
     const fetch = async () => {
       const packs = await getCardPacksInfo(user.token);
       loadingContext.done()
-
+      const allcards = await getCollectibleCards(user.token);
       if (!ignore) {
         if (packs.msg) {
           setCategories([]);
         } else {
           setCategories(packs);
+        }
+        if (allcards.msg) {
+          setAllCards([]);
+        } else {
+          setAllCards(allcards);
         }
       }
     };
@@ -50,28 +56,19 @@ export const MyCardCollection: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        <Container sx={{
-          display: 'flex',
-          justifyContent:'center',
-          padding: 0,
-          marginBottom: 2
-        }}>
-          <Grid container alignItems={'end'}>
-            <Grid item xs={12} md={2} />
-            <Grid item xs={12} md={8}>
-              <PageTitle title={dictionary[language]?.myCards} />
-            </Grid>
-            <Grid item xs={12} md={2}>
-              <BtnContainer>
-                <Button onClick={() => history.push('/collectibles/cards')}>
-                  {dictionary[language]?.buyCards}
-                </Button>
-              </BtnContainer>
-            </Grid>
-          </Grid>
-        </Container>
         <CardCollectibleContainer>
-          <MyCardPacks packs={categories} />
+          <PageTitle title={dictionary[language]?.myCards} />
+          <BtnContainer>
+            <Button onClick={() => history.push('/collectibles/cards')}>
+              {dictionary[language]?.buyCards}
+            </Button>
+          </BtnContainer>
+          {
+            allCards.length > 0 ?
+              <MyCardPacks packs={categories} allcards={allCards} />
+              :
+              <LoadingSpinner />
+          }
         </CardCollectibleContainer>
       </StudentMenu>
     </Wrapper>

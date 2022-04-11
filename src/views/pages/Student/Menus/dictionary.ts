@@ -8,7 +8,8 @@ export const dictionary:any = Object.freeze({
         progress: 'PROGRESS',
         myStuff: 'MY STUFF',
         bank: 'BANK',
-        profile: 'PROFILE',
+        profile: 'Profile',
+        logout: 'Logout',
         tutorial: 'TUTORIAL'
     },
     'TH' :{
@@ -21,7 +22,8 @@ export const dictionary:any = Object.freeze({
         myStuff: 'สิ่งของของฉัน',
         bank: 'ธนาคาร',
         profile: 'ข้อมูลส่วนตัว',
-        tutorial: 'กวดวิชา'
+        tutorial: 'กวดวิชา',
+        logout: 'ออกจากระบบ',
     },
     'ES_MX': {
         rank: 'Rango',
@@ -33,6 +35,7 @@ export const dictionary:any = Object.freeze({
         myStuff: 'MIS COSAS',
         bank: 'BANCO',
         profile: 'PERFIL',
-        tutorial: 'TUTORIAL'
+        tutorial: 'TUTORIAL',
+        logout: 'Cerrar sesión',
     }
   });
