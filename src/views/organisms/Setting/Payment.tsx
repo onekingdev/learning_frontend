@@ -45,7 +45,7 @@ export const Payment: FC = () => {
   const onCancel = () => open();
 
   return (
-    guardian.paymentMethod.cardNumber > 0 ?
+    guardian.paymentMethod.cardNumber ?
     <LSShadowContainer>
       <LSTitle>
         {dictionary[language]?.yourPaymentMethod}

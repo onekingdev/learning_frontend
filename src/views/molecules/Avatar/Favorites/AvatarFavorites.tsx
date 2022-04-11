@@ -40,6 +40,7 @@ export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
               head={favorite.avatarHead}
               clothes={favorite.avatarClothes}
               size={isMobile ? 60 : 85}
+              skinTone={favorite.skinTone}
             />
           </CenteredRoundIcon>
         </Drawer>

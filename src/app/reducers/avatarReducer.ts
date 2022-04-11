@@ -22,7 +22,7 @@ const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: an
         head: action.payload.avatarHead,
         clothes: action.payload.avatarClothes,
         pants: action.payload.avatarPants,
-        skin: null
+        skin: action.payload.skinTone
       };
     case TYPE.AVATAR_SET_DEFAULT_LOGIN:
       return {
@@ -31,7 +31,7 @@ const avatarReducer = (state = INITIAL_STATE, action: {type: string, payload: an
         accessory: action.payload.currentAvatarAccessories,
         clothes: action.payload.currentAvatarClothes,
         pants: action.payload.currentAvatarPants,
-        skin: null
+        skin: action.payload.skinTone
       };
     case TYPE.AVATAR_RESET:
       return INITIAL_STATE;

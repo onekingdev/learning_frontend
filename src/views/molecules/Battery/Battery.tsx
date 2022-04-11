@@ -1,22 +1,24 @@
-import { FC }         from 'react';
-import styled         from 'styled-components';
+import { FC, useEffect } from 'react';
+import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';
+import useSound from 'use-sound';
+import fullBatterySound from 'views/assets/audios/Battery-payout-award.wav';
 
 type BatteryProps = {
   charge: number;
 };
 
-export const Battery: FC<BatteryProps> = ({charge}) => {
-  // const chargeArray = [false, false, false, false, false, false, false, false, false, false];
+export const Battery: FC<BatteryProps> = ({ charge }) => {
   const chargeArray = new Array(10).fill(false);
+  const [play] = useSound(fullBatterySound);
   const IncreaseCharge = () => {
-    // for (let i = 0; i < charge; i++) {
-    //   chargeArray[i] = true;
-    // }
+    if (charge === 10) play()
     chargeArray.fill(true, 0, charge)
   };
-  IncreaseCharge();
+  useEffect(() => {
+    IncreaseCharge();
+  }, [charge])
   return (
     <>
       <BatteryContainer>

@@ -24,23 +24,43 @@ interface IAddPlanProps {
 
 const combo = [
   {
-    label: 'Math',
+    label: {
+      'EN_US': 'Math',
+      'TH': 'คณิตศาสตร์',
+      'ES_MX': 'Matemáticas'
+    },
     value: 'combo_math'
   },
   {
-    label: 'ELA + Sight Words',
+    label: {
+      'EN_US': 'ELA + Sight Words',
+      'TH': 'ELA + คำสายตา',
+      'ES_MX': 'ELA + Palabras visuales'
+    },
     value: 'combo_esw'
   },
   {
-    label: 'Science',
+    label: {
+      'EN_US': 'Science',
+      'TH': 'ศาสตร์',
+      'ES_MX': 'Ciencia'
+    },
     value: 'combo_science'
   },
   {
-    label: 'Financial Literacy',
+    label: {
+      'EN_US': 'Financial Literacy',
+      'TH': 'ความรู้ทางการเงิน',
+      'ES_MX': 'Educación financiera'
+    },
     value: 'combo_finance'
   },
   {
-    label: 'Health & Safety',
+    label: {
+      'EN_US': 'Health & Safety',
+      'TH': 'สุขภาพ & ความปลอดภัย',
+      'ES_MX': 'Salud & La seguridad'
+    },
     value: 'combo_health'
   },
 ]
@@ -54,7 +74,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
   const { enqueueSnackbar } = useSnackbar();
   let language:string = useSelector((state: any) => state.user.language);
   language            = language? language : "EN_US"
-  const comboChildren = dictionary[language]?.combo
+  // const comboChildren = dictionary['EN_US'].combo
   const [plans, setPlans] = useState<Array<any>>([])
 
   const [parentState, setParentState] = useState('')
@@ -115,7 +135,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
     const counts = countOccurrences(checked, true)
     if (!(event.target.checked === true && counts === 2)) {
 
-      const idx = comboChildren.findIndex((x: { value: string; }) => x.value === event.target.value)
+      const idx = combo.findIndex((x: { value: string; }) => x.value === event.target.value)
       tempArray[idx] = event.target.checked
       setChecked(tempArray)
       setParentState(plans[1].name)
@@ -132,7 +152,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
     }
   }, []);
   interface ChildrenProps {
-    label: string
+    label: any
     value: string
   }
 
@@ -151,7 +171,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
           <Grid item md={6} xs={12}>
             <FormControlLabel
               key={index}
-              label={comboChild.label}
+              label={comboChild.label[language as keyof Object]}
               value={comboChild.value}
               control={<Radio />}
             />
@@ -169,7 +189,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
             <Grid item md={6} xs={12}>
               <FormControlLabel
                 key={index}
-                label={comboChild.label}
+                label={comboChild.label[language as keyof Object]}
                 value={comboChild.value}
                 control={<Checkbox checked={checked[index]} onChange={handleCheckChange} />}
               />
@@ -191,32 +211,32 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
         >
           <Grid container alignItems='center'>
             <Grid item xs={6}>
-              <LSFormControlLabel value={plans[0]?.name} control={<LSRadio />} label={'Gold Package'} />
+              <LSFormControlLabel value={plans[0]?.name} control={<LSRadio />} label={dictionary[language].radioLabelGold} />
             </Grid>
             <Grid item xs={6}>
               <TypoBtn>${plans[0]?.priceMonth}</TypoBtn>
             </Grid>
             <Grid item xs={6}>
-              <LSFormControlLabel value={plans[1]?.name} control={<LSRadio checked={checked[0] || checked[1] || checked[2] || checked[3] || checked[4]} />} label={'Combo Package(Pick 2)'} />
+              <LSFormControlLabel value={plans[1]?.name} control={<LSRadio checked={checked[0] || checked[1] || checked[2] || checked[3] || checked[4]} />} label={dictionary[language].radioLabelCombo} />
             </Grid>
             <Grid item xs={6}>
               <TypoBtn>${plans[1]?.priceMonth}</TypoBtn>
             </Grid>
             <Grid item xs={12}>
-              {renderComboChildren(comboChildren)}
+              {renderComboChildren(combo)}
             </Grid>
             <Grid item xs={6}>
-              <LSFormControlLabel value={plans[2]?.name} control={<LSRadio />} label={'Solo Package'} />
+              <LSFormControlLabel value={plans[2]?.name} control={<LSRadio />} label={dictionary[language].radioLabelSolo} />
             </Grid>
             <Grid item xs={6}>
               <TypoBtn>${plans[2]?.priceMonth}</TypoBtn>
             </Grid>
             <Grid item xs={12}>
-              {renderSoloChildren(comboChildren)}
+              {renderSoloChildren(combo)}
             </Grid>
           </Grid>
         </RadioGroup>
-        <TypoDescription >{'Your credit card on file will be charged for this plan'}</TypoDescription>
+        <TypoDescription >{dictionary[language].paymentCardMessage}</TypoDescription>
         <LSInputBase
           fullWidth
           disabled
@@ -230,7 +250,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
           <Button
             bgColor={BasicColor.green}
             onClick={onSubmit}
-            value={'Submit'}
+            value={dictionary[language].submit}
           />
         </LSButtonContainer>
       </div> :

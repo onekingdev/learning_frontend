@@ -1,29 +1,30 @@
-import { useState, FC }                           from 'react';
-import { useDispatch, useSelector }               from 'react-redux'
-import Button                                     from 'views/molecules/MuiButton'
-import TextField                                  from 'views/molecules/MuiTextField'
-import { css }                                    from 'styled-components';
-import { BasicColor }                             from 'views/Color';
-import Grid                                       from '@mui/material/Grid';
-import { doChangePaymentMethod }                  from 'app/actions/paymentActions';
+import { useState, FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import Button from 'views/molecules/MuiButton'
+import TextField from 'views/molecules/MuiTextField'
+import { css } from 'styled-components';
+import { BasicColor } from 'views/Color';
+import Grid from '@mui/material/Grid';
+import { doChangePaymentMethod } from 'app/actions/paymentActions';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
-import { useSnackbar }                            from 'notistack';
-import { GUARDIAN_PAYMENT_METHOD_INFO }           from 'app/types'
-import { LoadingSpinner }                         from 'views/atoms/Spinner';
-import commonDictionary                           from 'constants/commonDictionary'
+import { useSnackbar } from 'notistack';
+import { GUARDIAN_PAYMENT_METHOD_INFO } from 'app/types'
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import commonDictionary from 'constants/commonDictionary'
+import { Container } from '@mui/material';
 
 interface DialogProps {
     open: () => (void)
 }
 
 export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
-    const dispatch       = useDispatch()
-    let language:string  = useSelector((state: any) => state.user.language);
-    language             = language? language : "EN_US"
-    const user           = useSelector((state: any) => state.user);
-    const guardian       = useSelector((state: any) => state.guardian);
+    const dispatch = useDispatch()
+    let language: string = useSelector((state: any) => state.user.language);
+    language = language ? language : 'EN_US'
+    const user = useSelector((state: any) => state.user);
+    const guardian = useSelector((state: any) => state.guardian);
 
-    const { enqueueSnackbar }   = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar();
 
     const [loading, setLoading] = useState(false)
 
@@ -134,10 +135,6 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
     const handleFormChange = (field: string, errMsg: string) => {
         setValidateRst({ ...validateRst, [field]: errMsg })
     }
-    const handleReturn = (event: any) => {
-        event.preventDefault()
-        open()
-    }
 
     const handleOrder = async (event: any) => {
         event.preventDefault()
@@ -168,7 +165,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                 <LoadingSpinner />
             }
             {!loading &&
-                <Grid container spacing={2} marginTop={1}>
+                <Grid container spacing={2} marginTop={1} justifyContent='center'>
                     <Grid item xs={12} md={12}>
                         <PaymentInputsWrapper {...wrapperProps} styles={style}>
                             <input {...getCardNumberProps({
@@ -286,21 +283,15 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                         helperText={validateRst.phone}
                     />
                 </Grid> */}
-                    <Grid item xs={12} md={6}>
-                        <Button
-                            bgColor={BasicColor.green}
-                            onClick={handleOrder}
-                            align='left'
-                            value='Update'
-                        />
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Button
-                            bgColor={BasicColor.gray60}
-                            onClick={handleReturn}
-                            align='right'
-                            value='Return'
-                        />
+                    <Grid item>
+                        <Container sx={{marginBottom: 2}}>
+                            <Button
+                                bgColor={BasicColor.green}
+                                onClick={handleOrder}
+                                align='left'
+                                value='Update'
+                            />
+                        </Container>
                     </Grid>
                 </Grid>
             }
