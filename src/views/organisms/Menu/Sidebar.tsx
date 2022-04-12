@@ -28,6 +28,8 @@ import { ScreenSize } from 'constants/screenSize';
 import { doSetOldUser } from 'app/actions';
 import { SET_OLD_USER } from 'app/types';
 import { dictionary } from 'views/pages/Student/Menus/dictionary'
+import YouTube from 'react-youtube';
+import { TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH } from 'constants/common';
 
 export const Sidebar: FC = () => {
 
@@ -39,8 +41,8 @@ export const Sidebar: FC = () => {
     const [isMobile, setMobile] = useState(false)
     const history = useHistory();
 
-    let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : "EN_US"
+    let language: string = useSelector((state: any) => state.user.language);
+    language = language ? language : "EN_US"
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (
@@ -87,7 +89,18 @@ export const Sidebar: FC = () => {
                 dialogContent={
                     <div >
                         <ExplainText>{VIDEO_TUTORIAL_EXPLAIN[language]}</ExplainText>
-                        <VideoPlayer src={TUTORIAL_VDO_URL} />
+                        <YouTube
+                            videoId={TUTORIAL_VDO_URL}
+                            opts={{
+                                width: `${TUTORIAL_VDO_DG_WIDTH}`,
+                                height: `${TUTORIAL_VDO_DG_HEIGHT}`,
+                                playerVars: {
+                                    autoplay: 0,
+                                    controls: 0
+                                }
+                            }}
+                        />
+                        {/* <VideoPlayer src={TUTORIAL_VDO_URL} /> */}
                     </div>
                 }
             />

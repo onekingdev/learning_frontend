@@ -67,6 +67,7 @@
     "react-select-country-list": "^2.2.3",
     "react-transition-group": "^4.4.2",
     "react-vis": "^1.11.7",
+    "react-youtube": "^8.0.0",
     "recharts": "^2.1.8",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
