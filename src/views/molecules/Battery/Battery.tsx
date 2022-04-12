@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';
@@ -10,15 +10,18 @@ type BatteryProps = {
 };
 
 export const Battery: FC<BatteryProps> = ({ charge }) => {
+  // const [chargeArray, setChargeArray] = useState(new Array(10).fill(false));
   const chargeArray = new Array(10).fill(false);
   const [play] = useSound(fullBatterySound);
   const IncreaseCharge = () => {
+
     if (charge === 10) play()
     chargeArray.fill(true, 0, charge)
+    console.log(chargeArray)
   };
-  useEffect(() => {
+
     IncreaseCharge();
-  }, [charge])
+
   return (
     <>
       <BatteryContainer>

@@ -19,6 +19,7 @@ type CardProps = {
     value: string
   }>;
   name?: string;
+  id: number
 };
 
 export const Gemcard: FC<CardProps> = ({
@@ -27,7 +28,8 @@ export const Gemcard: FC<CardProps> = ({
   amount,
   description,
   name,
-  firebaseName
+  firebaseName,
+  id
 }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
@@ -87,6 +89,7 @@ export const Gemcard: FC<CardProps> = ({
               description={description}
               purchased={purchased}
               name={name}
+              id={id}
             />
           }
           open={onImgClicked}

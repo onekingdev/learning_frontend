@@ -14,7 +14,7 @@ import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
  * Displaying a bought package of 3 cards when a user pressed bought button
  * Turn around image effect and sound effect added
  */
-export const BoughtCard: FC<{ imgName: string, firebaseName: string, description: Array<any>, name: string }> = ({ imgName, firebaseName, description, name }) => {
+export const BoughtCard: FC<{ imgName: string, id: number, firebaseName: string, description: Array<any>, name: string }> = ({ imgName, firebaseName, description, name, id }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
   const [openDg, setOpenDg] = useState(false);
@@ -34,7 +34,6 @@ export const BoughtCard: FC<{ imgName: string, firebaseName: string, description
   }
 
   const showCardInfo = () => {
-    console.log('show card info...', description)
     setOpenDg(true)
   }
 
@@ -85,6 +84,7 @@ export const BoughtCard: FC<{ imgName: string, firebaseName: string, description
             description={description}
             purchased={true}
             name={name}
+            id={id}
           />
         }
         open={() => setOpenDg(!openDg)}

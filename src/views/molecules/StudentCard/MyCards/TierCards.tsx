@@ -4,7 +4,7 @@ import { Container, Grid } from '@mui/material';
 
 interface TierCardProp {
   cards: {
-    id: string;
+    id: number;
     name: string;
     amount: number;
     image: string;
@@ -39,6 +39,7 @@ export const TierCards: FC<TierCardProp> = ({ cards }) => {
                 purchased={card.owned}
                 amount={card.amount}
                 name={card.name}
+                id={card.id}
                 description={card.description}
               />
             </Grid>

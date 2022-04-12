@@ -18,6 +18,7 @@ type CardProps = {
     value: string
   }>;
   name?: string;
+  id: number
 };
 
 export const CardDescription: FC<CardProps> = ({
@@ -25,7 +26,8 @@ export const CardDescription: FC<CardProps> = ({
   purchased,
   description,
   name,
-  firebaseName
+  firebaseName,
+  id
 }) => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
   const [img, setImg] = useState('');
@@ -36,6 +38,8 @@ export const CardDescription: FC<CardProps> = ({
     const link = await getDownUrlByFilename(firebaseName, imgUrl);
     setImg(link ? link : '');
   };
+
+  const reverseIds = [8, 11, 12]
 
   useEffect(() => {
     fetchFirebaseUrls();
@@ -70,11 +74,15 @@ export const CardDescription: FC<CardProps> = ({
             <Grid item maxWidth={250}>
 
               <h3>{name ? name : 'Unknown'}</h3>
-              {/* <div style={{display: 'flex', flexDirection:'column-reverse'}}> */}
-              <div >
+              <div style={
+                reverseIds.includes(id) ?
+                {}:
+                {display: 'flex', flexDirection:'column-reverse'}
+                }>
+              {/* <div > */}
                 {description?.map(item => (
                   <>
-                    <p key={item.value} style={{ margin: 0 }}><span style={{ color: 'blue' }}>{item.key}</span>{item.value}</p>
+                    <p key={item.value} style={{ margin: 0 }}><span style={{ color: BasicColor.blue }}>{item.key}</span>{item.value}</p>
                     <br />
                   </>
                 ))}
