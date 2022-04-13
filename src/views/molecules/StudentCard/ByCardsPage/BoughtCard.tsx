@@ -8,13 +8,14 @@ import { ScreenSize } from 'constants/screenSize';
 import { getDownUrlByFilename } from 'app/firebase';
 import { CardDescription } from '../CardDescription';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
+import { ICollectibleCardDescription } from 'app/entities/collectibles'
 
 /**
  * @author BruceLee
  * Displaying a bought package of 3 cards when a user pressed bought button
  * Turn around image effect and sound effect added
  */
-export const BoughtCard: FC<{ imgName: string, id: number, firebaseName: string, description: Array<any>, name: string }> = ({ imgName, firebaseName, description, name, id }) => {
+export const BoughtCard: FC<ICollectibleCardDescription> = ({ imgUrl, firebaseName, description, name, id }) => {
   // state updates when user clicks an image
   const [open, setOpen] = useState(false);
   const [openDg, setOpenDg] = useState(false);
@@ -39,7 +40,7 @@ export const BoughtCard: FC<{ imgName: string, id: number, firebaseName: string,
 
   useEffect(() => {
     let mounted = true
-    fetchFirebaseUrl(mounted, imgName, firebaseName)
+    fetchFirebaseUrl(mounted, imgUrl, firebaseName)
     return () => { mounted = false }
   }, [])
   return (
@@ -79,10 +80,9 @@ export const BoughtCard: FC<{ imgName: string, id: number, firebaseName: string,
         fullWidth='true'
         dialogContent={
           <CardDescription
-            imgUrl={imgName}
+            imgUrl={imgUrl}
             firebaseName={firebaseName}
             description={description}
-            purchased={true}
             name={name}
             id={id}
           />

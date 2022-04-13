@@ -129,8 +129,6 @@ export const Question: FC = () => {
     //test
     // result.isCorrect = true;
     increaseExp(result.isCorrect);
-    //for test
-    // result.isCorrect = true;
 
     setAnswerResult([...answerResult, result]);
     if (result.isCorrect) {
@@ -143,42 +141,44 @@ export const Question: FC = () => {
     const expMax      = earning.expMax
 
     if (currentExp > expMax) {
-      dispatch({type: TYPE.EXP_UPDATE, payload: {exp: currentExp - expMax, expMax: nextMaxExp}});
-      dispatch({type: TYPE.EXP_LEVEL_UP});
+      dispatch({ type: TYPE.EXP_UPDATE, payload: { exp: currentExp - expMax, expMax: nextMaxExp } });
+      dispatch({ type: TYPE.EXP_LEVEL_UP });
       congratulations();
 
       const nextLevelMax: any = await updateNextLevel(earning.level)
-      if(nextLevelMax.msg) {
-        console.log('fetch next level max exp failed.')
+      if (nextLevelMax.msg) {
+        console.log(nextLevelMax.msg)
       } else setNextMaxExp(nextLevelMax)
-    } else dispatch({type: TYPE.EXP_UPDATE, payload: {exp: currentExp, expMax: expMax}});
+    } else dispatch({ type: TYPE.EXP_UPDATE, payload: { exp: currentExp, expMax: expMax } });
   };
 
+  // Open Congratulations dialog when user passes the max exp of current level.
   const congratulations = () => {
     setOpenDg(!openDg);
   };
 
   const upgradeEnergy = () => {
     const currentResult = answerResult[answerResult.length - 1]?.isCorrect;
-    console.log("current Result is", currentResult);
-    if(currentResult === false) dispatch({type: TYPE.EARNING_ENERGY_RESET});
-    if(answerResult.length < 2) {
-      if(earning.energyCharge > 0 && currentResult) {
-        dispatch({type: TYPE.EARNING_ENERGY_UP});
+    console.log('Answer Result: ',answerResult)
+    console.log("current Result is: ", currentResult);
+    if (currentResult === false) dispatch({ type: TYPE.EARNING_ENERGY_RESET });
+    if (answerResult.length < 2) {
+      if (earning.energyCharge > 0 && currentResult) {
+        dispatch({ type: TYPE.EARNING_ENERGY_UP });
         setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * pointUnit / 10)))
-        console.log("bonus coins is ",bonusCoins)
+        console.log("bonus coins is ", bonusCoins)
       }
       return
     }
     const lastResult = answerResult[answerResult.length - 2]?.isCorrect;
-    if(currentResult) {
-      if(!lastResult) return;
+    if (currentResult) {
+      if (!lastResult) return;
       else {
-        dispatch({type: TYPE.EARNING_ENERGY_UP});
+        dispatch({ type: TYPE.EARNING_ENERGY_UP });
         setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * pointUnit / 10)))
       }
     }
-    console.log("bonus coins is ",bonusCoins)
+    // console.log("bonus coins is ", bonusCoins)
   };
 
   // const handleData = (data: any) => {

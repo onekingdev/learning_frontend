@@ -16,12 +16,11 @@ import bank_icon from 'views/assets/nav-icons/bank.png';
 import collectible_icon from 'views/assets/nav-icons/collectibles.png';
 import profile_icon from 'views/assets/nav-icons/profile.png';
 import tutorial_icon from 'views/assets/nav-icons/tutorial.png';
-import settings_icon from 'views/assets/nav-icons/settings.png';
 import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
 import { TypoIcon } from 'views/atoms/Text';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import { VideoPlayer } from 'views/molecules/VideoPlayer';
+// import { VideoPlayer } from 'views/molecules/VideoPlayer';
 import { SCREEN_MOBILE, TUTORIAL_VDO_URL } from 'constants/common';
 import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
 import { ScreenSize } from 'constants/screenSize';
@@ -42,7 +41,7 @@ export const Sidebar: FC = () => {
     const history = useHistory();
 
     let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : "EN_US"
+    language = language ? language : 'EN_US'
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (
@@ -117,7 +116,7 @@ export const Sidebar: FC = () => {
             >
                 <Box
                     sx={{ width: isMobile ? 150 : 250 }}
-                    role="presentation"
+                    role='presentation'
                     onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}
                 >

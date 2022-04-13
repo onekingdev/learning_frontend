@@ -1,28 +1,17 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
-import ReactLoading from 'react-loading';
 import { ScreenSize } from 'constants/screenSize';
 import { CardDialog } from './CardDialog';
 import { getDownUrlByFilename } from 'app/firebase';
 import { CardDescription } from '../CardDescription';
 import { TypoGeneralText } from 'views/atoms/Text';
+import { ICollectibleCard } from 'app/entities/collectibles'
+import { Skeleton } from '@mui/material';
+import { Box } from '@mui/material';
+import { BuyCardDgContent } from './BuyCardDgContent';
 
-type CardProps = {
-  category: string;
-  imgUrl: string;
-  purchased?: boolean;
-  amount: number;
-  firebaseName: string
-  description?: Array<{
-    key: string
-    value: string
-  }>;
-  name?: string;
-  id: number
-};
-
-export const Gemcard: FC<CardProps> = ({
+export const Gemcard: FC<ICollectibleCard> = ({
   imgUrl,
   purchased,
   amount,
@@ -31,18 +20,23 @@ export const Gemcard: FC<CardProps> = ({
   firebaseName,
   id
 }) => {
-  // state updates when user clicks an image
+  // open dialog when click card
   const [open, setOpen] = useState(false);
-  const [openBuy, setOpenBuy] = useState(false);
+
+  // get image url from firebase and set
   const [img, setImg] = useState('');
 
-  // state to know that image is loaded, rotating effect only works when image is fully loaded
+  // display skeleton while image is loading
   const [loaded, setLoaded] = useState(false);
 
   // action when image is clicked
-  const onImgClicked = () => {
-    setOpen(!open);
+  const onCardClick = () => {
+    setOpen(true);
   };
+
+  const close = () => {
+    setOpen(false)
+  }
 
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(firebaseName, imgUrl);
@@ -53,63 +47,43 @@ export const Gemcard: FC<CardProps> = ({
     fetchFirebaseUrls();
   }, []);
   return (
-    <Container style={img ? {} : { display: 'none' }}>
-      <StyledCard onClick={() => onImgClicked()}>
+    <Box>
+      <StyledCard onClick={() => onCardClick()}>
         <img
           style={loaded ? { objectFit: 'fill' } : { display: 'none' }}
           className='loaded'
+          alt={imgUrl}
           src={img}
           loading='eager'
           onLoad={() => {
             setLoaded(true);
           }}
         />
-        <StyledOverlay
-          style={purchased ? { display: 'none' } : {}}
-        />
-        <div
-          style={
-            loaded
-              ? { display: 'none' }
-              : {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }
-          }
-        >
-          <ReactLoading type='spinningBubbles' color={BasicColor.green} />
-        </div>
-        <CardDialog
-          fullWidth='true'
-          dialogContent={
+        <Overlay style={purchased ? { display: 'none' } : {}} />
+        <Skeleton variant='rectangular' animation='wave' sx={loaded ? { display: 'none' } : { width: '100%', height: '100%' }} />
+      </StyledCard>
+      <TypoGeneralText style={{ textAlign: 'center' }}>{amount} / 1</TypoGeneralText>
+      <CardDialog
+        fullWidth='true'
+        dialogContent={
+          purchased ?
             <CardDescription
               imgUrl={imgUrl}
               firebaseName={firebaseName}
               description={description}
-              purchased={purchased}
               name={name}
               id={id}
-            />
-          }
-          open={onImgClicked}
-          isOpen={open}
-        />
-      </StyledCard>
-      <TypoGeneralText>{amount} / 1</TypoGeneralText>
-    </Container>
+            /> :
+            <BuyCardDgContent />
+        }
+        open={close}
+        isOpen={open}
+      />
+    </Box>
   );
 };
 
-const Container = styled.div`
-  p {
-    font-size: 18px;
-    font-weight: 700;
-    padding: 0;
-    text-align: center;
-  }
-`;
-const StyledOverlay = styled.div`
+const Overlay = styled.div`
   position: absolute;
   background: ${BasicColor.gray80};
   inset: -2px;
@@ -125,28 +99,18 @@ const StyledCard = styled.div`
   width: 160px;
   height: 220px;
   box-shadow: 0 1px 1rem -4px #000;
-  margin: 1rem;
   border-radius: 15px;
   transition: all 250ms ease-in-out;
   cursor: pointer;
+  overflow: hidden;
 
   @media screen and (max-width: ${ScreenSize.tablet}) {
-    width: 36vw;
-    height: auto;
-    min-height: 100px;
-    margin: 10px;
-    img {
-      width: 35vw;
-    }
+    width: 100px;
+    height: 140px;
   }
 
-  img {
-    &:hover {
-      box-shadow: 0px 1px 20px 0px #fb8500;
-      transform: translateY(-5px);
-    }
-    &.loaded {
-      border-radius: inherit;
-    }
+  &:hover {
+    box-shadow: 0px 1px 20px 0px #fb8500;
+    transform: translateY(-5px);
   }
 `;

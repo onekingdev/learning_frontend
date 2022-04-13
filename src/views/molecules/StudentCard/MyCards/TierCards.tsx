@@ -25,8 +25,8 @@ interface TierCardProp {
 export const TierCards: FC<TierCardProp> = ({ cards }) => {
 
   return (
-    <Container sx={{ minHeight: 100 }}>
-      <Grid container justifyContent='center' spacing={2}>
+    <Container sx={{ minHeight: 100, marginTop: 3 }}>
+      <Grid container justifyContent='center' spacing={3}>
         {cards.map(card => {
           return (
             <Grid item
