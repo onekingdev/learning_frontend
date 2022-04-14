@@ -1,11 +1,11 @@
-import { Typography }              from '../Text/typography';
+import { Typography } from '../Text/typography';
 import { FC, useEffect, useState } from 'react';
-import styled                      from 'styled-components';
-import { Answer }                  from 'views/atoms/Text/Answer';
-import { BasicColor }              from 'views/Color';
-import { ScreenSize }              from 'constants/screenSize';
-import audioCheck                  from 'views/assets/audios/correct-winning-sound.wav';
-import audioError                  from 'views/assets/audios/wrong-answer-sound.wav';
+import styled from 'styled-components';
+import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
+import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
+import audioError from 'views/assets/audios/wrong-answer-sound.wav';
+import { TypoGeneralText } from '../Text';
 
 interface BlockQuestionInput {
   question: number;
@@ -51,7 +51,7 @@ export const TextOption: FC<TextOptionProps> = ({ answer, onClick }) => {
         isCorrect={isAnswered && answer?.isCorrect}
         isAnswered={isAnswered}
       >
-        <Answer isDark >{answer?.answerText}</Answer>
+        <TypoGeneralText style={{ margin: 0 }}>{answer?.answerText}</TypoGeneralText>
       </TextOptionStyles>
     </>
   )
@@ -72,7 +72,7 @@ const TextOptionStyles = styled.div<{
       BasicColor.red
     :
     BasicColor.white20};
-    pointer-events: ${props => props.isAnswered ? 'none' : 'all'};
+    pointer-events: ${props => props.isAnswered ? 'none' : 'auto'};
     cursor: pointer;
     line-height: 30px;
     border-radius: 5px;

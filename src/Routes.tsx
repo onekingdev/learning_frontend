@@ -6,7 +6,7 @@ import { useSelector }           from 'react-redux';
 import styled, { keyframes }     from 'styled-components';
 import { LogIn }                 from 'views/pages/Login/Login';
 import { Welcome }               from 'views/pages/Welcome/Welcome';
-import { Question }              from 'views/pages/Student/Question/Question';
+// import { Question }              from 'views/pages/Student/Question/Question';
 import { Avatar }                from 'views/pages/Student/Avatar/Avatar';
 import { MyProfile }             from 'views/pages/Student/Settings/MyProfile';
 import { Backpack }              from 'views/pages/Student/Backpack/Backpack';
@@ -32,6 +32,7 @@ import { ParentReporting }       from 'views/pages/Parent/Reporting';
 import { KidsTreasureTrack }     from 'views/pages/Student/TreasureTrack/TreasureTrack';
 import { KidsProgress }          from 'views/pages/Student/Progress/Progress';
 import 'animate.css';
+import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
@@ -84,10 +85,11 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute
             loading={true}
-            path="/question/:mode/:aokId"
             requireAuth={false}
+            path="/question/:mode/:aokId"
           >
-            <Question />
+            {/* <Question /> */}
+            <AIQuestion />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/avatar" >
             <Avatar />
@@ -95,12 +97,6 @@ export function Routes() {
           <PrivateRoute loading={true} path="/wardrobe" >
             <Wardrobe />
           </PrivateRoute>
-          {/* <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
-            <CardCollectible />
-          </PrivateRoute>
-          <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
-            <CardCollectible />
-          </PrivateRoute> */}
           <PrivateRoute loading={true} path="/collectibles/cards">
             <Cards />
           </PrivateRoute>

@@ -1,6 +1,7 @@
-import { STUDENT }                      from '../fragments/studentFragments';
-import { BLOCK_PRESENTATON }            from '../fragments/blockFragments'
-import { BLOCK_PRESENTATION_QUERY }     from '../queries/questions'
+import { STUDENT } from '../fragments/studentFragments';
+import { BLOCK_PRESENTATON } from '../fragments/blockFragments'
+import { BLOCK_PRESENTATION_QUERY } from '../queries/questions'
+import { NEW_MC_ANSWER_OPTION, NEW_R_ANSWER_OPTION, TOPIC_GRADE, NEW_O_ANSWER_OPTION } from 'api/fragments/questionFragments';
 // import { QUESTION } from '../fragments/questionFragments'
 export const FINISH_BLOCK_PRESENTATION = (
     block_presentation_id: string,
@@ -37,3 +38,55 @@ createPathBlockPresentation( studentId: ${studentId}, topicId: ${topicId}) {
 }
 `;
 
+
+export const CREATE_NEW_AI_BLOCK = (
+    aokId: number,
+    studentId: number
+) => `
+mutation AIBlock {
+    createAiBlockPresentation(aokId: ${aokId}, studentId: ${studentId}) {
+      blockPresentation {
+        ${BLOCK_PRESENTATON}
+        block {
+          topicGrade{
+              ${TOPIC_GRADE}
+              topic {
+                  videoAssistor
+                  name
+              }
+            }
+          questions {
+            id
+            questionType
+            questionText
+            questionAudioUrl
+            questionImageAssets{
+              id
+              image
+              order
+            }
+            answerOptions {
+              id
+              isCorrect
+              ... on MultipleChoiceAnswerOptionSchema {
+                ${NEW_MC_ANSWER_OPTION}
+              }
+              ... on MultipleSelectAnswerOptionSchema {
+                ${NEW_MC_ANSWER_OPTION}
+              }
+              ... on TypeInAnswerOptionSchema {
+                ${NEW_MC_ANSWER_OPTION}
+              }
+              ... on OrderAnswerOptionSchema {
+                ${NEW_O_ANSWER_OPTION}
+              }
+              ... on RelateAnswerOptionSchema {
+                ${NEW_R_ANSWER_OPTION}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

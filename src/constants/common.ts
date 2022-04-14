@@ -5,6 +5,7 @@ export const TUTORIAL_VDO_URL = 'mGpZkCS_eEg'
 export const TUTORIAL_VDO_DG_HEIGHT = 435
 export const TUTORIAL_VDO_DG_WIDTH = 774
 export const SCREEN_MOBILE = 425
+export const QUESTION_POINT_UNIT = 10
 export const LANGUAGES = [
     {
         id: 1,

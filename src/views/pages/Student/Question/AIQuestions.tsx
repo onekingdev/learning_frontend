@@ -15,16 +15,13 @@ import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
 import { MultipleChoiceText } from 'views/molecules/QuestionTypes/MultipleChoiceText';
 import { MultipleChoiceSightWord } from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import { finishBlock } from 'app/actions/blockActions';
-import { IBlockPresentation, IQuestion } from 'app/entities/block';
+import { createNewAiBlock, finishBlock } from 'app/actions/blockActions';
+import { IAIBlock, IAIQuestion, IQuestion } from 'app/entities/block';
 import { Store } from 'app/configureStore';
 import * as TYPE from 'app/types';
-import {
-  createAiBlockPresentation,
-  createPathBlockPresentation,
-  getBlockPresentationById
-} from 'app/actions/blockActions';
 import { getNextLevel } from 'app/actions/userActions';
+import { QUESTION_POINT_UNIT } from 'constants/common';
+import { NewMultipleChoiceText } from 'views/molecules/QuestionTypes/MultipleChoiceTextNew';
 
 interface RoutePresentationParams {
   mode: string;
@@ -39,7 +36,7 @@ interface BlockQuestionInput {
 
 const EXP_UNIT = 5;
 
-export const Question: FC = () => {
+export const AIQuestion: FC = () => {
 
   const earning = useSelector((state: any) => state.earning);
   const user = useSelector((state: any) => state.user);
@@ -49,57 +46,65 @@ export const Question: FC = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { mode, aokId } = useParams<RoutePresentationParams>();
-  const [blockPresentation, setBlockPresentation] = useState<IBlockPresentation>();
-  const [question, setQuestion] = useState<IQuestion>();
-  const [questionCounter, setQuestionCounter] = useState(Number);
+  const { aokId } = useParams<RoutePresentationParams>();
+  const [aiBlock, setAiBlock] = useState<IAIBlock>();
+  const [question, setQuestion] = useState<IAIQuestion>();
+  const [questions, setQuestions] = useState<Array<IAIQuestion>>();
+  const [questionCounter, setQuestionCounter] = useState(0);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
   const [answerResult, setAnswerResult] = useState<BlockQuestionInput[]>([]);
-  const [pointUnit, setPointUnit] = useState<number>(0);
   const [points, setPoints] = useState<number>(0);
   const [loading, setLoading] = useState(false)
   const [nextMaxExp, setNextMaxExp] = useState(0)
   const [openDg, setOpenDg] = useState(false);
   const [bonusCoins, setBonusCoins] = useState(0)
 
-  const renderTypes = (
-    question: IQuestion,
-    type: string,
-    totalQuestions: number,
-    blockPresentation: IBlockPresentation
+
+  const renderQuestion = (
+    question: IAIQuestion,
+    block: IAIBlock,
+    length: number
   ) => {
-    const types = [
-      {
-        type: 'Text',
-        component: (
-          <MultipleChoiceText
+    let component: any
+    switch (question.questionType) {
+      case 'MC':
+        component = (
+          <NewMultipleChoiceText
             question={question}
             nextQuestion={handleNextQuestion}
-            totalQuestions={totalQuestions}
+            totalQuestions={length}
             questionCounter={questionCounter}
             onAnswer={onAnswer}
-            blockPresentation={blockPresentation}
+            blockPresentation={block}
           />
         )
-      }, {
-        type: 'SightWord',
-        component: (
-          <MultipleChoiceSightWord
-            question={question}
-            nextQuestion={handleNextQuestion}
-            totalQuestions={totalQuestions}
-            questionCounter={questionCounter}
-            onAnswer={onAnswer}
-            blockPresentation={blockPresentation}
-          />
+        break
+      case 'MS':
+        component = (
+          <p>MS</p>
         )
-      },
+        break
+      case 'O':
+        component = (
+          <p>O</p>
+        )
+        break
+      case 'R':
+        component = (
+          <p>R</p>
+        )
+        break
+      case 'T':
+        component = (
+          <p>T</p>
+        )
+        break
+      default:
+        break
 
-    ];
-
-    const filterType = types.find((item: any) => item.type === type);
-    return filterType?.component;
-  };
+    }
+    return component
+  }
 
   const updateNextLevel = async (currentLevelAmount: number) => {
     const res: any = await getNextLevel(currentLevelAmount, user.token, dispatch)
@@ -114,7 +119,7 @@ export const Question: FC = () => {
 
     setAnswerResult([...answerResult, result]);
     if (result.isCorrect) {
-      setPoints(points + pointUnit);
+      setPoints(points + QUESTION_POINT_UNIT);
     }
   };
 
@@ -147,7 +152,7 @@ export const Question: FC = () => {
     if (answerResult.length < 2) {
       if (earning.energyCharge > 0 && currentResult) {
         dispatch({ type: TYPE.EARNING_ENERGY_UP });
-        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * pointUnit / 10)))
+        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * QUESTION_POINT_UNIT / 10)))
         console.log('bonus coins is ', bonusCoins)
       }
       return
@@ -157,77 +162,28 @@ export const Question: FC = () => {
       if (!lastResult) return;
       else {
         dispatch({ type: TYPE.EARNING_ENERGY_UP });
-        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * pointUnit / 10)))
+        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * QUESTION_POINT_UNIT / 10)))
       }
     }
     // console.log('bonus coins is ', bonusCoins)
   };
 
-  // const handleData = (data: any) => {
-  //   setBlockPresentation(data.data.blockPresentationById);
-  //   setPointUnit(10);
-  //   // loadingContext.done()
-  //   try {
-  //     dispatch({
-  //       type: TYPE.SET_BLOCK_PRESENTATION,
-  //       payload: data.data.blockPresentationById,
-  //     });
-  //     loadingContext.done();
-  //   } catch (error) {
-  //     console.log('Error de dispatch', error);
-  //   }
-  // };
-
-  // const handleError = (error: any) => {
-  //   console.error(error);
-  // };
-
-  const setQuestionsInAI = async () => {
-    const result: any = await createAiBlockPresentation(
-      parseInt(aokId),
+  const setQuestionsInAI = async (mounted: boolean) => {
+    const res: any = await createNewAiBlock(
+      11, // parseInt(aokId),
+      15, // student.id,
       user.token,
-      dispatch
     );
-    if (!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
+    if (!res.success) {
+      enqueueSnackbar(res.msg, { variant: 'error' });
       return false;
     }
-    setBlockPresentation(result.data);
-    setPointUnit(10);
-    loadingContext.done()
-    return true;
-  }
-
-  const setQuestionsInPath = async () => {
-    const result: any = await createPathBlockPresentation(
-      student.id,
-      parseInt(aokId),
-      user.token,
-      dispatch
-    );
-    if (!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
+    if (mounted) {
+      console.log(res)
+      setAiBlock(res);
+      setQuestions(res.block.questions)
+      loadingContext.done()
     }
-    setBlockPresentation(result.data);
-    setPointUnit(10);
-    loadingContext.done()
-    return true;
-  }
-
-  const setQuestionBySpecificBlockPresentation = async () => {
-    const result: any = await getBlockPresentationById(
-      parseInt(aokId),
-      user.token,
-      dispatch
-    );
-    if (!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-    setBlockPresentation(result.data);
-    setPointUnit(10);
-    loadingContext.done()
     return true;
   }
 
@@ -256,25 +212,11 @@ export const Question: FC = () => {
     str += ']'
     return str;
   }
-  // useEffect(() => {
-
-  //   setQuestionsInAI();
-  //   // get(
-  //   //   `blockPresentationById(id:${presentationId})`,
-  //   //   BLOCK_PRESENTATION_QUERY,
-  //   //   handleData,
-  //   //   handleError
-  //   // );
-  // }, [presentationId]);
 
   const handleNextQuestion = async () => {
 
-    if (blockPresentation) {
-      if (blockPresentation.block.questions.length < questionCounter + 2) {
-        if (mode === 'BlockID') {
-          setIsLessonFinished(true);
-          return;
-        }
+    if (aiBlock) {
+      if (aiBlock.block.questions.length < questionCounter + 2) {
         setLoading(true)
         setIsLessonFinished(true);
         setLoading(true);
@@ -285,7 +227,7 @@ export const Question: FC = () => {
           else wrongCount++;
         }
         const finishBlockResult = await finishBlock(
-          blockPresentation.id,
+          aiBlock.id,
           earning.energyCharge,
           correctCount,
           wrongCount,
@@ -296,32 +238,34 @@ export const Question: FC = () => {
           dispatch
         );
 
-        if (mode === 'AI') await setQuestionsInAI();
-        if (mode === 'PATH') await setQuestionsInPath();
-        if (mode === 'BlockID') await setQuestionBySpecificBlockPresentation();
+        await setQuestionsInAI(true);
 
         setLoading(false);
       }
     }
-    const counter = questionCounter + 1;
-    setQuestionCounter(counter);
+    // const counter = questionCounter + 1;
+    setQuestionCounter(questionCounter + 1);
   };
 
-
   useEffect(() => {
+
     setNextMaxExp(student.nextLevel.pointsRequired)
-    if (mode === 'AI') setQuestionsInAI()
-    if (mode === 'PATH') setQuestionsInPath();
-    if (mode === 'BlockID') setQuestionBySpecificBlockPresentation();
+    let mounted = true
+    setQuestionsInAI(mounted)
+
+    return () => {
+      mounted = false
+    }
   }, [])
 
+  // useEffect(() => {
+  //   console.log('qustions;',questions)
+  //   console.log('Qustions block',aiBlock)
+  // }, [questions])
+
   useEffect(() => {
-    console.log('Block Presentation Id is : ', blockPresentation?.id)
-    console.log('Block Presentation is,', blockPresentation)
-  }, [blockPresentation])
-  useEffect(() => {
-    setQuestion(blockPresentation?.block.questions[questionCounter]);
-  }, [blockPresentation, questionCounter]);
+    setQuestion(aiBlock?.block.questions[questionCounter]);
+  }, [aiBlock, questionCounter]);
 
   useEffect(() => {
     upgradeEnergy();
@@ -329,44 +273,42 @@ export const Question: FC = () => {
 
   return (
     <Wrapper>
-      {isLessonFinished ? (
-        <StudentMenu>
+      <StudentMenu>
+        {isLessonFinished ? (
           <FinishLesson
             loading={loading}
             tokens={points}
             energy={bonusCoins}
             onNextLesson={onNextLesson}
           />
-        </StudentMenu>
-      ) : blockPresentation && question ? (
-        <StudentMenu>
-          <ProgressWrapper id='lesson-progress'>
-            <LessonProgress
-              currentQuestion={questionCounter + 1}
-              topic={blockPresentation?.block?.topicGrade?.topic?.name}
-              totalQuestions={blockPresentation.block.questions.length}
-              questions={blockPresentation?.block?.questions}
-              answerResult={answerResult}
-              combocount={state.earning.energyCharge}
+        ) : aiBlock && questions ? (
+          <>
+            <ProgressWrapper id='lesson-progress'>
+              <LessonProgress
+                currentQuestion={questionCounter + 1}
+                topic={aiBlock.block.topicGrade.topic.name}
+                totalQuestions={questions.length}
+                questions={questions}
+                answerResult={answerResult}
+                combocount={state.earning.energyCharge}
+              />
+            </ProgressWrapper>
+            <CardDialog
+              isOpen={openDg}
+              open={congratulations}
+              dialogContent={<LevelUpDgContent close={congratulations} />}
+              fullWidth="true"
             />
-          </ProgressWrapper>
-          <CardDialog
-            isOpen={openDg}
-            open={congratulations}
-            dialogContent={<LevelUpDgContent close={congratulations} />}
-            fullWidth="true"
-          />
-          <Container id="container">
-            {renderTypes(
-              question,
-              // blockPresentation.block.typeOf.name,
-              question.questionAudioAssets.length > 0 ? 'SightWord' : 'Text',
-              blockPresentation.block.questions.length,
-              blockPresentation
-            )}
-          </Container>
-        </StudentMenu>
-      ) : null}
+            <Container id="container">
+              {renderQuestion(
+                questions[questionCounter],
+                aiBlock,
+                questions.length
+              )}
+            </Container>
+          </>
+        ) : null}
+      </StudentMenu>
     </Wrapper>
   );
 };

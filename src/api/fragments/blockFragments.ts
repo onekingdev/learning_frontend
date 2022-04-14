@@ -13,15 +13,15 @@ export const BLOCK_TYPE = `
         isActive
         randomSlug
         name
-    
+
 `;
 
 export const BLOCK_TYPE_CONFIGURATION = `
-    
+
         id
         isActive
         value
-    
+
 `;
 
 export const BLOCK = `
@@ -38,7 +38,6 @@ export const BLOCK = `
 `;
 
 export const BLOCK_PRESENTATON = `
-    
         id
         identifier
         isActive
@@ -47,7 +46,8 @@ export const BLOCK_PRESENTATON = `
         errors
         total
         points
-    
+        bonusCoins
+        coins
 `;
 
 export const BLOCK_QUESTION = `
@@ -61,11 +61,11 @@ export const BLOCK_QUESTION = `
 `;
 
 export const BLOCK_QUESTION_PRESENTATION = `
-    
+
         id
         identifier
         randomSlug
-    
+
 `;
 
 export const QUESTION_IMAGE_ASSETS = `

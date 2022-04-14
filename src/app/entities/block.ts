@@ -77,7 +77,7 @@ export interface IBlockType {
   isActive: boolean;
   randomSlug: string;
   name: string;
-  blocktypeconfigurationSet:IBlockConfiguration;
+  blocktypeconfigurationSet: IBlockConfiguration;
 }
 
 export interface IBlock {
@@ -98,4 +98,27 @@ export interface IBlockPresentation {
   identifier: string;
   randomSlug: string;
   block: IBlock;
+}
+
+export interface IAIBlock {
+  id: string;
+  identifier: string;
+  randomSlug: string;
+  block: {
+    topicGrade: any
+    questions: Array<any>
+  };
+}
+
+export interface IAIQuestion {
+  id: string
+  questionText: string
+  questionAudioUrl: string
+  questionImageAssets: {
+    id: number
+    image: string
+    order: number
+  }[]
+  questionType: 'T' | 'MC' | 'O' | 'R' | 'MS'
+  answerOptions: Array<Object>
 }

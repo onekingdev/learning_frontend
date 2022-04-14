@@ -25,6 +25,7 @@ const Shapes = styled.div`
   background-image: url(${shapes});
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 `;
 
 // const rotate = keyframes`
@@ -38,22 +39,22 @@ const Shapes = styled.div`
 // `;
 const move = keyframes`
   from {
-    left: 20vw;
+    left: 0vw;
     transform: rotate(0deg);
   }
   25% {
-    transform: rotate(-15deg);
+    transform: rotate(-8deg);
   }
   50% {
     transform: rotate(0deg);
   }
   75% {
-    transform: rotate(-15deg);
+    transform: rotate(8deg);
   }
 
   to {
     transform: rotate(0deg);
-    left: 90vw;
+    left: 100vw;
   }
 `;
 

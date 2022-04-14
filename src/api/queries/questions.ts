@@ -3,7 +3,7 @@ import { ANSWER_OPTION, AREA_OF_KNOWLEDGE, QUESTION, TOPIC, TOPIC_GRADE } from '
 import { LEVEL } from 'api/fragments/levelFragments';
 
 export const TOPICS_QUERY = `
-   { 
+   {
     ${TOPIC}
     subTopics{
         ${TOPIC}
@@ -24,7 +24,7 @@ export const AREA_OF_KNOWLEDGE_QUERY = `
     {
     ${AREA_OF_KNOWLEDGE}
     topicSet
-    ${TOPICS_QUERY}  
+    ${TOPICS_QUERY}
     }
 `;
 
@@ -54,7 +54,7 @@ export const BLOCK_PRESENTATION_QUERY = `
       block{
         ${BLOCK}
           questions
-            ${QUESTION_QUERY}  
+            ${QUESTION_QUERY}
           topicGrade{
             ${TOPIC_GRADE}
             topic{
@@ -71,6 +71,33 @@ export const BLOCK_PRESENTATION_QUERY = `
               }
           }
       }
-         
+
+    }
+`;
+
+export const NEW_AI_BLOCK = `
+    {
+      ${BLOCK_PRESENTATON}
+      block{
+        ${BLOCK}
+          questions
+            ${QUESTION_QUERY}
+          topicGrade{
+            ${TOPIC_GRADE}
+            topic{
+              videoAssistor
+              name
+            }
+          }
+          typeOf{
+            ${BLOCK_TYPE}
+              blocktypeconfigurationSet{
+                ${BLOCK_TYPE_CONFIGURATION}
+                key
+                ${BLOCK_CONFIGURATION_KEYWORD}
+              }
+          }
+      }
+
     }
 `;
