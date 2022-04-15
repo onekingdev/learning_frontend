@@ -43,11 +43,19 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
+
   useEffect(() => {
     setIsAnswered(false);
     console.log('queston:', question)
   }, []);
 
+  
+  const readAnswer = (answerOption: any) => {
+    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
+    const audio = new Audio(answerSoundURI);
+    audio.play();
+  };
+  
   const handleAnswer = (result: BlockQuestionInput) => {
     setIsAnswered(true);
     result.question = parseInt(question.id);
@@ -57,19 +65,13 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
     // isCorrect: answer.isCorrect
   };
 
-  const closeVideoModal = () => {
-    setShowAssistor(!showAssistor);
-  };
-
   const readQuestion = () => {
     const audio = new Audio(questionSoundURI);
     audio.play();
   };
 
-  const readAnswer = (answerOption: any) => {
-    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
-    const audio = new Audio(answerSoundURI);
-    audio.play();
+  const closeVideoModal = () => {
+    setShowAssistor(!showAssistor);
   };
 
   return (
