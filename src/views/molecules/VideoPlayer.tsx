@@ -1,6 +1,5 @@
 import { useEffect, useRef, FC } from 'react';
 import 'plyr-react/dist/plyr.css';
-import Hls from 'hls.js';
 import Plyr from 'plyr-react';
 import { TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH } from 'constants/common';
 
