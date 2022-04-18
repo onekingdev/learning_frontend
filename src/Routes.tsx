@@ -39,7 +39,6 @@ import TeacherPayment            from 'views/pages/Teacher/Payment/Payment'
 import Classroom                 from 'views/pages/Teacher/Classroom/Classroom'
 import Students                  from 'views/pages/Teacher/Students/Students'
 import Groups                    from 'views/pages/Teacher/Students/Groups'
-import Notes                     from 'views/pages/Teacher/Notes/Notes'
 
 import 'animate.css';
 
@@ -197,9 +196,6 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups">
             <Groups />
-          </PrivateRoute>
-          <PrivateRoute loading={false} requireAuth={false} path="/teacher/notes">
-            <Notes />
           </PrivateRoute>
           {process.env.NODE_ENV === 'development' ? (
             <Route path="/testing-student-progress">
