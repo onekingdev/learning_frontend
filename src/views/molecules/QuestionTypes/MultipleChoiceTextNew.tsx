@@ -49,13 +49,12 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
     console.log('queston:', question)
   }, []);
 
-  
   const readAnswer = (answerOption: any) => {
     const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
     const audio = new Audio(answerSoundURI);
     audio.play();
   };
-  
+
   const handleAnswer = (result: BlockQuestionInput) => {
     setIsAnswered(true);
     result.question = parseInt(question.id);
