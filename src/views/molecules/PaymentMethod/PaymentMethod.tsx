@@ -32,13 +32,14 @@ type PaymentMethodProps = {
     };
     offRate: number;
     isSpecialCode: boolean;
+    sponsorEmail?: string;
 };
 interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): any;
     handleUpdate(): void;
 }
 // export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCounts, offRate}) => {
-export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode}) => {
+export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode, sponsorEmail}) => {
 
   const history             = useHistory();
   const paymentFormRef      = useRef<PaymentFormFunc>(null)

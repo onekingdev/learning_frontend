@@ -24,6 +24,7 @@ type MuiButtonProps = {
   fullWidth?: boolean;
   loadingPosition?: string;
   sx?:any;
+  borderWidth?: number;
   onHover?: (e: any) => void;
   onClick?: (e: any) => void;
 };
@@ -49,6 +50,7 @@ const MuiButton: FC<MuiButtonProps> = ({
   startIcon=<></>,
   fullWidth=false,
   sx=null,
+  borderWidth=0,
   onHover,
   onClick,
 }) => {
@@ -69,6 +71,9 @@ const MuiButton: FC<MuiButtonProps> = ({
                 color: color || BasicColor.white,
                 float: align,
                 margin: margin || 'unset',
+                borderColor: borderColor || BasicColor.white,
+                borderWidth: borderWidth,
+                borderStyle: 'solid',
             },
             '&:hover': {
                 background: `${shadeColor(bgColor || BasicColor.greenSoft, 10)}

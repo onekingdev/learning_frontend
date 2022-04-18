@@ -16,6 +16,9 @@ type MuiTextFieldProps = {
   className?: string;
   borderColor?: ButtonColor | BasicColor | string;
   type?: string;
+  disabled?: boolean;
+  maxRows?: number;
+  height?: number;
   onHover?: (e: any) => void;
   onClick?: (e: any) => void;
   onChange?: (e: any) => void;
@@ -34,6 +37,9 @@ const MuiTextField: FC<MuiTextFieldProps> = ({
   radius=25,
   className='',
   type='text',
+  disabled=false,
+  maxRows=1,
+  height=0,
   onHover,
   onClick,
   onChange
@@ -59,7 +65,12 @@ const MuiTextField: FC<MuiTextFieldProps> = ({
                 backgroundColor: variant !== 'outlined' ? bgColor || BasicColor.greenSoft : 'white',
                 borderRadius: radius,
                 borderWidth: '2px'
-            }
+            },
+            '& .MuiInputBase-root': height > 0 ? {
+              height: height,
+              justifyContent: "start",
+              alignItems: "start",
+            } : {}
         }
     })
 
@@ -80,6 +91,9 @@ const MuiTextField: FC<MuiTextFieldProps> = ({
         fullWidth
         value={value}
         type={type}
+        disabled={disabled}
+        maxRows={maxRows}
+        multiline={maxRows > 1 ? true : false}
     />
   );
 };

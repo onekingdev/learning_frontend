@@ -54,22 +54,31 @@ export const Body = styled.div`
 `;
 
 export const Actions = styled.div`
-  display               : grid;
-  grid-template-columns : 1fr;
-  grid-gap              : 1rem;
-  width                 : 215px;
+  width                 : 100vw;
   margin-top            : 3rem;
   margin-left           : auto;
   margin-right          : auto;
 
   @media (min-width: ${ScreenSize.tablet}) {
-    grid-template-columns : 1fr 1fr;
-    grid-gap              : 114px;
-    width                 : 534px;
+    width                 : 650px;
     margin-top            : 1rem;
   }
 `;
-
+export const SignupActions = styled.div`
+  display               : flex;
+  justify-content       : space-between;
+  align-items           : center;
+  @media (min-width: ${ScreenSize.tablet}) {
+    width                 : 650px;
+    margin-top            : 1rem;
+  }
+`;
+export const SigninActions = styled.div`
+  display               : flex;
+  algin-items           : center;
+  justify-content       : center;
+  margin-top            : 30px;
+`;
 export const Legal = styled.div`
   display               : grid;
   grid-template-columns : repeat(4, 1fr);

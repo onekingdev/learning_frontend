@@ -6,7 +6,7 @@ import { useSelector }           from 'react-redux';
 import styled, { keyframes }     from 'styled-components';
 import { LogIn }                 from 'views/pages/Login/Login';
 import { Welcome }               from 'views/pages/Welcome/Welcome';
-// import { Question }              from 'views/pages/Student/Question/Question';
+import { Question }              from 'views/pages/Student/Question/Question';
 import { Avatar }                from 'views/pages/Student/Avatar/Avatar';
 import { MyProfile }             from 'views/pages/Student/Settings/MyProfile';
 import { Backpack }              from 'views/pages/Student/Backpack/Backpack';
@@ -31,8 +31,17 @@ import { Spinner }               from 'views/atoms/Spinner';
 import { ParentReporting }       from 'views/pages/Parent/Reporting';
 import { KidsTreasureTrack }     from 'views/pages/Student/TreasureTrack/TreasureTrack';
 import { KidsProgress }          from 'views/pages/Student/Progress/Progress';
+//teacher center
+import { SelectCreateType }      from 'views/pages/Teacher/SelectCreateType/SelectCreateType';
+import TeacherSignup             from 'views/pages/Teacher/TeacherSignup/TeacherSignup';
+import SchoolSignup              from 'views/pages/Teacher/SchoolSignup/SchoolSignup'
+import TeacherPayment            from 'views/pages/Teacher/Payment/Payment'
+import Classroom                 from 'views/pages/Teacher/Classroom/Classroom'
+import Students                  from 'views/pages/Teacher/Students/Students'
+import Groups                    from 'views/pages/Teacher/Students/Groups'
+import Notes                     from 'views/pages/Teacher/Notes/Notes'
+
 import 'animate.css';
-import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
@@ -85,11 +94,10 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute
             loading={true}
-            requireAuth={false}
             path="/question/:mode/:aokId"
+            requireAuth={false}
           >
-            {/* <Question /> */}
-            <AIQuestion />
+            <Question />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/avatar" >
             <Avatar />
@@ -97,6 +105,12 @@ export function Routes() {
           <PrivateRoute loading={true} path="/wardrobe" >
             <Wardrobe />
           </PrivateRoute>
+          {/* <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
+            <CardCollectible />
+          </PrivateRoute>
+          <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
+            <CardCollectible />
+          </PrivateRoute> */}
           <PrivateRoute loading={true} path="/collectibles/cards">
             <Cards />
           </PrivateRoute>
@@ -162,6 +176,30 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute loading={true} path="/kids/new">
             <NewKids />
+          </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/selectCreateType">
+            <SelectCreateType />
+          </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/teacherSignup">
+            <TeacherSignup />
+          </PrivateRoute>
+          <PrivateRoute loading={true} requireAuth={false} path="/teacher/schoolSignup">
+            <SchoolSignup />
+          </PrivateRoute>
+          <PrivateRoute loading={true} requireAuth={false} path="/teacher/payment/:productType">
+            <TeacherPayment />
+          </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/classroom">
+            <Classroom />
+          </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/students">
+            <Students />
+          </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups">
+            <Groups />
+          </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/notes">
+            <Notes />
           </PrivateRoute>
           {process.env.NODE_ENV === 'development' ? (
             <Route path="/testing-student-progress">

@@ -4,7 +4,7 @@ import { Header }           from 'views/atoms/Text/Header';
 import { Subheader }        from 'views/atoms/Text/Subheader';
 import welcome              from 'views/assets/welcome-page.svg';
 import { Button }           from 'views/molecules/Button';
-import { ButtonColor }      from 'views/Color';
+import { ButtonColor, BasicColor }      from 'views/Color';
 import { TypoIcon }         from 'views/atoms/Text';
 import { dictionary }       from 'views/pages/Welcome/dictionary';
 import { Modal }            from 'views/atoms/Modal';
@@ -20,6 +20,8 @@ import {
   Description,
   Illustration,
   Actions,
+  SigninActions,
+  SignupActions,
   Legal,
   ModalContent,
   ModalStyles,
@@ -89,20 +91,30 @@ export const Welcome: FC = () => {
       <Illustration src={welcome} alt=''/>
 
       <Actions>
-        <Link to={'/login'}>
+        <SignupActions>
+          <Button
+            value    ={dictionary[language].schoolSignUp}
+            color    ={BasicColor.blue}
+            darkText ={true}
+            style    ={{width: 'unset'}}
+            onClick  ={() => history.push('/teacher/selectCreateType')}
+          />
+          <Button
+            value    ={dictionary[language].parentSignUp}
+            color    ={ButtonColor.join}
+            darkText ={true}
+            style    ={{width: 'unset'}}
+            onClick  ={() => history.push('/parent/create')}
+          />
+        </SignupActions>
+        <SigninActions>
           <Button
             value={dictionary[language].login}
             color={ButtonColor.login}
-            onClick={() => {}}
+            style    ={{width: 'unset'}}
+            onClick={() => history.push('/login')}
           />
-        </Link>
-        <Button
-          value    ={dictionary[language].join}
-          color    ={ButtonColor.join}
-          darkText ={true}
-          // onClick={() => setDeployModal(true)}
-          onClick  ={() => history.push('/parent/create')}
-        />
+        </SigninActions>
       </Actions>
 
       <Legal>

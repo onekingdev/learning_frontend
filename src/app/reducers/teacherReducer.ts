@@ -1,40 +1,23 @@
-const teacherReducer = (state: any, action: any) => {
+import * as TYPE from '../types';
+
+const INITIAL_STATE = {
+};
+const TEACHERReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
+// const TEACHERReducer = (state = INITIAL_STATE, action: {type: string, payload: ITEACHER}) => {
   switch (action.type) {
-    case 'TEACHER_CREATES_STUDENT':
+    case TYPE.TEACHER_SET_DATA:
       return {
         ...state,
-        students: [...state.students, action.payload],
+        ...action.payload
       };
-    case 'TEACHER_AUTH_STUDENT':
+    case TYPE.TEACHER_AUTH:
       return {
         ...state,
-        auth: action.payload,
+        token: action.payload,
       };
-    case 'TEACHER_CREATE_GROUP':
-      return {
-        ...state,
-        groups: [...state.groups, action.payload],
-      };
-    case 'TEACHER_REMOVE_GROUP':
-      return {
-        ...state,
-        groups: state.groups.filter(
-          (group: {id: string}) => group.id !== action.payload
-        ),
-      };
-    case 'TEACHER_ADD_STUDENT':
-      return {
-        ...state,
-        groupMembers: [...state.groupMembers, action.payload],
-      };
-    case 'TEACHER_REMOVE_STUDENT':
-      return {
-        ...state,
-        groupMembers: state.groupMembers.filter(
-          (member: {id: string}) => member.id !== action.payload
-        ),
-      };
+    default:
+      return state;
   }
 };
 
-export default teacherReducer;
+export default TEACHERReducer;

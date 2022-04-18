@@ -2,14 +2,14 @@ import styled                                   from 'styled-components';
 import { BasicColor, ButtonColor, shadeColor }  from 'views/Color';
 
 type ButtonWrapperProps = {
-  bgcolor?: ButtonColor;
+  bgcolor?: ButtonColor | BasicColor;
 };
 
 export const ButtonWrapper = styled.button<ButtonWrapperProps>`
   background-color: ${props => props.bgcolor || BasicColor.greenSoft};
   color: ${BasicColor.white};
   padding: 18px 32px;
-  height: 49px;
+  height: fit-content;
   border-radius: 20px;
   width: 100%;
   text-align: center;

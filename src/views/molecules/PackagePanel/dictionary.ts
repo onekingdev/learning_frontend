@@ -10,6 +10,9 @@ export const dictionary: any = Object.freeze({
         pickOneAreaOfKnowledge: 'Pick one Area of Knowledge',
         monthly:'Monthly',
         yearly: 'Yearly',
+        classroomPlanInclude: 'Classroom Plan Include',
+        classroomPlanDescription: 'Math, ELA, Science, Sight Words, Financial Literacy, Health and Safety',
+        requestFromSponsor: 'Sponsor Email',
     },
     'TH' :{
         goldPackage: 'Gold บรรจุุภัณฑ์',
@@ -22,6 +25,9 @@ export const dictionary: any = Object.freeze({
         pickOneAreaOfKnowledge: 'เลือกความรู้ด้านใดด้านหนึ่ง',
         monthly:'รายเดือน',
         yearly: 'รายปี',
+        classroomPlanInclude: 'Classroom Plan Include',
+        classroomPlanDescription: 'คณิตศาสตร์, ELA, วิทยาศาสตร์, สายตา, ความรู้ทางการเงิน, สุขภาพและความปลอดภัย',
+        requestFromSponsor: 'Sponsor Email',
     },
     'ES_MX': {
         goldPackage: 'Gold Paquete',
@@ -34,5 +40,8 @@ export const dictionary: any = Object.freeze({
         pickOneAreaOfKnowledge: 'Elige un área de conocimiento',
         monthly:'Mensual',
         yearly: 'Anual',
+        classroomPlanInclude: 'Plan de aula incluido',
+        classroomPlanDescription: 'Matemáticas, ELA, Ciencias, Palabras de uso frecuente, Educación financiera, Salud y seguridad',
+        requestFromSponsor: 'Correo electrónico del patrocinador',
     }
 });

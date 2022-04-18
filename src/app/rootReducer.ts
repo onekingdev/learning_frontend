@@ -6,6 +6,8 @@ import avatar              from './reducers/avatarReducer';
 import interests           from './reducers/interestReducer'
 import guardian            from './reducers/guardianReducer'
 import grade               from './reducers/gradeReducer'
+import teacher               from './reducers/teacherReducer'
+
 
 export default combineReducers({
     user,
@@ -14,5 +16,6 @@ export default combineReducers({
     avatar,
     interests,
     guardian,
-    grade
+    grade,
+    teacher
 });
