@@ -1,5 +1,5 @@
 export const dictionary:any = Object.freeze({
-    'EN_US': {
+    "EN_US": {
         ChangeToYearly: 'Change to Yearly',
         CancelPlan: 'Cancel Plan',
         CancelChildrenPlan: 'Cancel Children plan',
@@ -12,7 +12,7 @@ export const dictionary:any = Object.freeze({
         membershipCancelationsFailed: 'Membership cancelations failed',
         submit: 'Submit'
     },
-    'TH': {
+    "TH": {
         ChangeToYearly: 'เปลี่ยนเป็นรายปี',
         CancelPlan: 'ยกเลิกแผน',
         CancelChildrenPlan: 'ยกเลิก แผนสำหรับเด็ก',

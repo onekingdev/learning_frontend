@@ -30,7 +30,7 @@ export const dictionary: any = Object.freeze({
     with_google: 'เข้าสู่ระบบด้วย Google',
     about: 'เกี่ยวกับเรา',
     privacy: 'นโยบายความเป็นส่วนตัว',
-    children_privacy: 'นโยบายความเป็นส่วนตัวของเด็ก',
+    children_privacy: "นโยบายความเป็นส่วนตัวของเด็ก",
     or: 'หรือ',
   },
   'ES_MX': {
@@ -47,7 +47,7 @@ export const dictionary: any = Object.freeze({
     with_google: 'Iniciar sesión con Google',
     about: 'Sobre nosotros',
     privacy: 'Política de privacidad',
-    children_privacy: 'Política de privacidad para niños',
+    children_privacy: "Política de privacidad para niños",
     or: 'o',
   },
 });

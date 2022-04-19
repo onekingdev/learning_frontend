@@ -1,4 +1,4 @@
-import { AnyStyledComponent } from 'styled-components';
+import { AnyStyledComponent } from "styled-components";
 
 export interface IAnswer {
   id: string;

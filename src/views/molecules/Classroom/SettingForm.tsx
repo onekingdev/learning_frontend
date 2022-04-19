@@ -25,7 +25,7 @@ import commonDictionary          from 'constants/commonDictionary'
 
 const SettingForm = (props: any) => {
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : 'EN_US'
+    language            = language? language : "EN_US"
 
     const { enqueueSnackbar } =  useSnackbar();
     const classes =              useStyles();
@@ -162,7 +162,7 @@ const SettingForm = (props: any) => {
                                     </Grid>
                                 </Grid>
                             </Grid>
-
+                            
                             <Grid item xs={12}>
                                 <TextField
                                     label       = {dictionary[language]?.classroomName}

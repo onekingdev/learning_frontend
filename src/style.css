@@ -368,3 +368,8 @@ body {
     height: 5px;
     border-radius: 10px;
   }
+
+  .dragged .item {
+    opacity: 0.1;
+    transition-duration: 200ms;
+  }

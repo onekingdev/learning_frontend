@@ -13,12 +13,12 @@ import MenuItem                  from '@mui/material/MenuItem';
 import Button                    from 'views/molecules/MuiButton';
 import {ButtonColor, BasicColor} from 'views/Color';
 import commonDictionary          from 'constants/commonDictionary'
-import DateTimePicker            from 'react-datetime-picker';
+// import DateTimePicker            from 'react-datetime-picker';
 import Paper                     from '@mui/material/Paper';
 import {useStyles} from './Style'
 const AddNewStudent = (props: any) => {
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : 'EN_US'
+    language            = language? language : "EN_US"
 
     const { enqueueSnackbar } =  useSnackbar();
     const classes             =  useStyles();
@@ -86,7 +86,7 @@ const AddNewStudent = (props: any) => {
                             height      = {250}
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <DateTimePicker
                             value={date}
                             onChange={(e: any) => {
@@ -97,7 +97,7 @@ const AddNewStudent = (props: any) => {
                             }}
                         />
                         <div className='err-text'>{validateMsg.date}</div>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12} md={12} lg={12}>
                         <Button
                             value     = {dictionary[language]?.send}

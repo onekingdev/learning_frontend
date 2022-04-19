@@ -68,8 +68,8 @@ const MuiTextField: FC<MuiTextFieldProps> = ({
             },
             '& .MuiInputBase-root': height > 0 ? {
               height: height,
-              justifyContent: 'start',
-              alignItems: 'start',
+              justifyContent: "start",
+              alignItems: "start",
             } : {}
         }
     })

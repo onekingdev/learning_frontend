@@ -45,7 +45,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
   const paymentFormRef      = useRef<PaymentFormFunc>(null)
   const { enqueueSnackbar } = useSnackbar();
   let language:string  = useSelector((state: any) => state.user.language);
-  language             = language? language : 'EN_US'
+  language             = language? language : "EN_US"
 //   const [couponCode, setCouponCode] = useState('');
   const [subtotal,      setSubtotal]     = useState(0);
   const [agreeLicense,  setAgreeLicense] = useState(false)

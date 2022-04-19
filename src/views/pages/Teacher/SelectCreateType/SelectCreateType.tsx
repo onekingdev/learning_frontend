@@ -25,7 +25,7 @@ export const SelectCreateType: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language.toUpperCase() : 'EN_US'
+  language            = language? language.toUpperCase() : "EN_US"
 
   const [loading, setLoading]   = useState(false);
   const [username, setUsername] = useState('');

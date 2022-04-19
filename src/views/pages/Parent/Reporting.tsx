@@ -29,7 +29,7 @@ export const ParentReporting: FC = () => {
 
     (async () => {
       // Get All Subject
-      const res:any = await query('', AreasOfKnowledge(), user.token).catch(e => ({success: false}));
+      const res:any = await query(``, AreasOfKnowledge(), user.token).catch(e => ({success: false}));
       if(res.success === false) {
         return
       }
@@ -40,7 +40,7 @@ export const ParentReporting: FC = () => {
         setAreasOfKnowledge(result.data.areasOfKnowledge)
         let iii = 4;
         for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
-            if (result.data.areasOfKnowledge[i].name === 'Sight Words') {
+            if (result.data.areasOfKnowledge[i].name === "Sight Words") {
                 iii = i;
                 break;
             }
@@ -53,7 +53,7 @@ export const ParentReporting: FC = () => {
     if (activeSubjectId !== -1 && parseInt(studentId) > 0) {
       (async () => {
         // Get Topic Report
-        const res:any = await query('', TopicReport(parseInt(studentId), activeSubjectId), user.token).catch(e => ({success: false}));
+        const res:any = await query(``, TopicReport(parseInt(studentId), activeSubjectId), user.token).catch(e => ({success: false}));
         if(res.success === false) {
           return
         }

@@ -15,10 +15,10 @@ const colors = [
     '#C6CACC'
 ];
 const masteryColors = {
-    'NP': '#919699',
-    'N': '#EC5858',
-    'C': '#F4C222',
-    'M': '#26B824'
+    "NP": "#919699",
+    "N": "#EC5858",
+    "C": "#F4C222",
+    "M": "#26B824"
 }
 
 const Subject = styled.div`
@@ -56,23 +56,23 @@ interface ISingleGroup {
     activeAokId?: string,
 }
 
-const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokId='' }) => {
+const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokId="" }) => {
     const history = useHistory();
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : 'EN_US'
+    language            = language? language : "EN_US"
     const [opened, setOpened] = useState<boolean>(false);
     const toggle = () => setOpened(val => !val);
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {
         return <SingleGroup activeAokId={activeAokId} key={id} main={item.main} extra={item.extra} deep={deep+1} />
     }) : '';
     let bgColor = masteryColors.NP;
-    if (main.mastery === 'NP') {
+    if (main.mastery === "NP") {
         bgColor = masteryColors.NP;
-    } else if (main.mastery === 'N') {
+    } else if (main.mastery === "N") {
         bgColor = masteryColors.N;
-    } else if (main.mastery === 'C') {
+    } else if (main.mastery === "C") {
         bgColor = masteryColors.C;
-    } else if (main.mastery === 'M') {
+    } else if (main.mastery === "M") {
         bgColor = masteryColors.M;
     }
     if (main === {}) {
@@ -83,7 +83,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
             flexDirection: 'column',
             width: '100%',
         }}>
-            <div id={'aok-id-' + main.aokId} style={{
+            <div id={"aok-id-" + main.aokId} style={{
                 display: 'flex',
                 // backgroundColor: colors[deep],
                 backgroundColor: bgColor,
@@ -125,14 +125,14 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
                         cursor: 'pointer',
                         marginLeft: `calc(${deep}rem + 2rem)`,
                     }} onClick={() => {
-                        if (main.aokId !== '') {
+                        if (main.aokId !== "") {
                             // history.push('/question/PATH/' + aokId)
                             history.push('/question/AI/' + main.aokId)
                             // alert("Developing now, will be released soon 🎓")
                         }
                     }}>{dictionary[language]?.practice}</TypoBtn>
                 </div>
-            : '' }
+            : "" }
             { children }
         </div>
     }
@@ -140,7 +140,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
 
 const MarkTableSubject = ({
     data=[],
-    activeSubjectId='',
+    activeSubjectId="",
 }: {
     data: any[];
     activeSubjectId: string,

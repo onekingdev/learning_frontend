@@ -1,5 +1,5 @@
 export const CANCEL_REASONS: any = {
-  'EN_US':[
+  "EN_US":[
     {
       id: 0,
       value: 'reason0',
@@ -26,7 +26,7 @@ export const CANCEL_REASONS: any = {
       label: 'Busy/not enough time',
     },
   ],
-  'TH':[
+  "TH":[
     {
       id: 0,
       value: 'reason0',
@@ -53,7 +53,7 @@ export const CANCEL_REASONS: any = {
       label: 'Busy/not enough time',
     },
   ],
-  'ES_MX':[
+  "ES_MX":[
     {
       id: 0,
       value: 'reason0',
