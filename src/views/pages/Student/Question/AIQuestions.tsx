@@ -28,6 +28,7 @@ import useSound from 'use-sound';
 import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
 import audioError from 'views/assets/audios/wrong-answer-sound.wav';
 import { LoadingSpinner } from 'views/atoms/Spinner';
+import * as TYPES from 'app/types'
 
 interface RoutePresentationParams {
   mode: string;
@@ -264,41 +265,15 @@ export const AIQuestion: FC = () => {
         setIsLessonFinished(true)
         setLoading(true)
         const res = await newFinishBlock(aiBlock.id, earning.energyCharge, hits, errors, bonusCoins, any2String(answers), state.earning, user.token, dispatch)
-        console.log('result:', res)
+        if (res.success) {
+          console.log('success')
+          dispatch({
+            type: TYPES.EARNING_COIN_UP, payload: 100 + bonusCoins
+          })
+        }
         setLoading(false)
       }
-
     }
-
-    // if (aiBlock) {
-    //   if (aiBlock.block.questions.length < questionCounter + 2) {
-    //     setLoading(true)
-    //     setIsLessonFinished(true);
-    //     setLoading(true);
-    //     let correctCount = 0;
-    //     let wrongCount = 0;
-    //     for (const data of answerResult) {
-    //       if (data.isCorrect) correctCount++;
-    //       else wrongCount++;
-    //     }
-    //     const finishBlockResult = await finishBlock(
-    //       aiBlock.id,
-    //       earning.energyCharge,
-    //       correctCount,
-    //       wrongCount,
-    //       bonusCoins,
-    //       state.earning,
-    //       arrObjToString(answerResult),
-    //       state.user.token,
-    //       dispatch
-    //     );
-
-    //     await setQuestionsInAI(true);
-
-    //     setLoading(false);
-    //   }
-    // }
-    // const counter = questionCounter + 1;
   };
 
   useEffect(() => {

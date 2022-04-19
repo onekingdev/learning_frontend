@@ -10,12 +10,17 @@ const INITIAL_STATE = {
     balance: 0,
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
-const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: IEarning}) => {
+const earningReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
   switch (action.type) {
     case TYPE.EARNING_SET_DATA:
       return {
         ...state,
         ...action.payload
+      };
+    case TYPE.EARNING_COIN_UP:
+      return {
+        ...state,
+        balance: state.balance + action.payload
       };
     case TYPE.EARNING_ENERGY_UP:
       if(state.energyCharge >= 10) return {...state}

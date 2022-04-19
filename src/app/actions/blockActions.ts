@@ -159,18 +159,5 @@ export const newFinishBlock = async (blkPTId: string, batteryLevel: number, hits
     if (result.errors) {
         return { success: false, msg: result.errors[0].message };
     }
-
-    // const { student } = result.data.finishBlockPresentation
-    // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
-    // dispatch({
-    //     type: TYPES.EARNING_SET_DATA, payload: {
-    //         ...earning,
-    //         level_name: student.level.name,
-    //         level: student.level.amount,
-    //         exp: parseInt(student.points),
-    //         expMax: student.level.pointsRequired,
-    //         balance: student.coinWallet.balance,
-    //     }
-    // })
     return { success: true, msg: 'Success!', res: result }
 }
