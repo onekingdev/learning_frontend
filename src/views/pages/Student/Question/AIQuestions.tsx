@@ -12,21 +12,26 @@ import {
 import { FinishLesson } from 'views/organisms/FinishLesson';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
-import { MultipleChoiceText } from 'views/molecules/QuestionTypes/MultipleChoiceText';
-import { MultipleChoiceSightWord } from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import { createNewAiBlock, finishBlock } from 'app/actions/blockActions';
-import { IAIBlock, IAIQuestion, IQuestion } from 'app/entities/block';
+import { createNewAiBlock, newFinishBlock } from 'app/actions/blockActions';
+import { IAIBlock, IAIQuestion } from 'app/entities/block';
 import { Store } from 'app/configureStore';
 import * as TYPE from 'app/types';
 import { getNextLevel } from 'app/actions/userActions';
 import { QUESTION_POINT_UNIT } from 'constants/common';
 import { NewMultipleChoiceText } from 'views/molecules/QuestionTypes/MultipleChoiceTextNew';
+import { MultipleSelectQuestion } from 'views/molecules/QuestionTypes/MultipleSelectQuestion';
+import { SortOrderQuestion } from 'views/molecules/QuestionTypes/SortOrderQuestion';
+import { RelateQuestion } from 'views/molecules/QuestionTypes/RelateQuestion';
+import { TypeInQuestion } from 'views/molecules/QuestionTypes/TypeInQuestion';
+import useSound from 'use-sound';
+import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
+import audioError from 'views/assets/audios/wrong-answer-sound.wav';
 
-interface RoutePresentationParams {
-  mode: string;
-  aokId: string;       //Area of Knowledge Id on AI or Path mode, BlockPresentationId on BlockID mode
-}
+// interface RoutePresentationParams {
+//   mode: string;
+//   aokId: string;       //Area of Knowledge Id on AI or Path mode, BlockPresentationId on BlockID mode
+// }
 
 interface BlockQuestionInput {
   question: number;
@@ -38,6 +43,8 @@ const EXP_UNIT = 5;
 
 export const AIQuestion: FC = () => {
 
+  const [playHit] = useSound(audioCheck);
+  const [playError] = useSound(audioError);
   const earning = useSelector((state: any) => state.earning);
   const user = useSelector((state: any) => state.user);
   const student = useSelector((state: any) => state.student)
@@ -46,13 +53,16 @@ export const AIQuestion: FC = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { aokId } = useParams<RoutePresentationParams>();
+  // const { aokId } = useParams<RoutePresentationParams>();
   const [aiBlock, setAiBlock] = useState<IAIBlock>();
-  const [question, setQuestion] = useState<IAIQuestion>();
   const [questions, setQuestions] = useState<Array<IAIQuestion>>();
+  const [answers, setAnswers] = useState<Array<any>>([])
+  const [hits, setHits] = useState(0)
+  const [errors, setErrors] = useState(0)
+  const [prevHit, setPrevHit] = useState<boolean>(earning.energyCharge > 0 ? true : false)
   const [questionCounter, setQuestionCounter] = useState(0);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
-  const [answerResult, setAnswerResult] = useState<BlockQuestionInput[]>([]);
+  const [answerResult, setAnswerResult] = useState<boolean[]>([]);
   const [points, setPoints] = useState<number>(0);
   const [loading, setLoading] = useState(false)
   const [nextMaxExp, setNextMaxExp] = useState(0)
@@ -81,22 +91,50 @@ export const AIQuestion: FC = () => {
         break
       case 'MS':
         component = (
-          <p>MS</p>
+          <MultipleSelectQuestion
+            question={question}
+            nextQuestion={handleNextQuestion}
+            totalQuestions={length}
+            questionCounter={questionCounter}
+            onAnswer={onAnswer}
+            blockPresentation={block}
+          />
         )
         break
       case 'O':
         component = (
-          <p>O</p>
+          <SortOrderQuestion
+            question={question}
+            nextQuestion={handleNextQuestion}
+            totalQuestions={length}
+            questionCounter={questionCounter}
+            onAnswer={onAnswer}
+            blockPresentation={block}
+          />
         )
         break
       case 'R':
         component = (
-          <p>R</p>
+          <RelateQuestion
+            question={question}
+            nextQuestion={handleNextQuestion}
+            totalQuestions={length}
+            questionCounter={questionCounter}
+            onAnswer={onAnswer}
+            blockPresentation={block}
+          />
         )
         break
       case 'T':
         component = (
-          <p>T</p>
+          <TypeInQuestion
+            question={question}
+            nextQuestion={handleNextQuestion}
+            totalQuestions={length}
+            questionCounter={questionCounter}
+            onAnswer={onAnswer}
+            blockPresentation={block}
+          />
         )
         break
       default:
@@ -112,15 +150,19 @@ export const AIQuestion: FC = () => {
     else setNextMaxExp(res)
   }
 
-  const onAnswer = (result: BlockQuestionInput) => {
-    //test
-    // result.isCorrect = true;
-    increaseExp(result.isCorrect);
+  const onAnswer = (result: any, isCorrect: boolean) => {
 
-    setAnswerResult([...answerResult, result]);
-    if (result.isCorrect) {
+    increaseExp(isCorrect);
+    setAnswers([...answers, result]);
+    setAnswerResult([...answerResult, isCorrect])
+    isCorrect ? setHits(hits + 1) : setErrors(errors + 1)
+    isCorrect ? playHit() : playError()
+    setPrevHit(isCorrect)
+    if (isCorrect) {
       setPoints(points + QUESTION_POINT_UNIT);
     }
+
+    upgradeEnergy(isCorrect)
   };
 
   const increaseExp = async (isCorrect: boolean) => {
@@ -144,28 +186,18 @@ export const AIQuestion: FC = () => {
     setOpenDg(!openDg);
   };
 
-  const upgradeEnergy = () => {
-    const currentResult = answerResult[answerResult.length - 1]?.isCorrect;
-    console.log('Answer Result: ', answerResult)
-    console.log('current Result is: ', currentResult);
-    if (currentResult === false) dispatch({ type: TYPE.EARNING_ENERGY_RESET });
-    if (answerResult.length < 2) {
-      if (earning.energyCharge > 0 && currentResult) {
+  const upgradeEnergy = (isCorrect: boolean) => {
+
+    if (isCorrect) {
+      if (prevHit) {
+        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1))))
         dispatch({ type: TYPE.EARNING_ENERGY_UP });
-        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * QUESTION_POINT_UNIT / 10)))
-        console.log('bonus coins is ', bonusCoins)
-      }
-      return
-    }
-    const lastResult = answerResult[answerResult.length - 2]?.isCorrect;
-    if (currentResult) {
-      if (!lastResult) return;
-      else {
-        dispatch({ type: TYPE.EARNING_ENERGY_UP });
-        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1) * QUESTION_POINT_UNIT / 10)))
       }
     }
-    // console.log('bonus coins is ', bonusCoins)
+    else {
+      dispatch({ type: TYPE.EARNING_ENERGY_RESET });
+    }
+    console.log('bonus coins is ', bonusCoins)
   };
 
   const setQuestionsInAI = async (mounted: boolean) => {
@@ -179,8 +211,7 @@ export const AIQuestion: FC = () => {
       return false;
     }
     if (mounted) {
-      console.log(res)
-      setAiBlock(res);
+      setAiBlock(res)
       setQuestions(res.block.questions)
       loadingContext.done()
     }
@@ -195,61 +226,86 @@ export const AIQuestion: FC = () => {
     setBonusCoins(0)
   }
 
-  const arrObjToString = (arrObj: any) => {
-    let str = '[';
-    for (const obj of arrObj) {
-      str += '{'
-      for (const key in obj) {
-        if (key === 'isCorrect') continue;
-        str += key
-        str += ': '
-        if (typeof (obj[key]) === 'string') str += '"' + obj[key] + '"'
-        else str += obj[key]
-        str += ','
+  const any2String = (param: any): string => {
+    let str = ''
+    if (Array.isArray(param)) {
+      str += '['
+      for (let i = 0; i < param.length; i++) {
+        if (i === param.length - 1)
+          str += any2String(param[i])
+        else
+          str += (any2String(param[i]) + ',')
       }
-      str += '},'
-    }
-    str += ']'
-    return str;
+      str += ']'
+    } else if (typeof param !== 'string' && typeof param !== 'number') {
+      str += '{'
+      const keys = Object.keys(param)
+      for (let i = 0; i < keys.length; i++) {
+        if (i === keys.length - 1)
+          str += (keys[i] + ':' + any2String(param[keys[i]]))
+        else
+          str += (keys[i] + ':' + any2String(param[keys[i]]) + ',')
+      }
+      str += '}'
+      // let stringifiedObj = Object.entries(param).map(x => x.join(':')).join('\n')
+    } else str = '"' + param.toString() + '"'
+    return str
   }
 
   const handleNextQuestion = async () => {
+    if (questions && aiBlock) {
+      if (questions.length - 1 > questionCounter) {
+        setQuestionCounter(questionCounter + 1);
 
-    if (aiBlock) {
-      if (aiBlock.block.questions.length < questionCounter + 2) {
-        setLoading(true)
-        setIsLessonFinished(true);
-        setLoading(true);
-        let correctCount = 0;
-        let wrongCount = 0;
-        for (const data of answerResult) {
-          if (data.isCorrect) correctCount++;
-          else wrongCount++;
-        }
-        const finishBlockResult = await finishBlock(
-          aiBlock.id,
-          earning.energyCharge,
-          correctCount,
-          wrongCount,
-          bonusCoins,
-          state.earning,
-          arrObjToString(answerResult),
-          state.user.token,
-          dispatch
-        );
-
-        await setQuestionsInAI(true);
-
-        setLoading(false);
+      } else {
+        console.log('finished.')
+        console.log('batteryLevel:', earning.energyCharge)
+        console.log('blockPresentationId:', aiBlock.id)
+        console.log('bonusCoins:', bonusCoins)
+        console.log('erros:', errors)
+        console.log('hits:', hits)
+        console.log('questions:', any2String(answers))
+        const res = await newFinishBlock(aiBlock.id, earning.energyCharge, hits, errors, bonusCoins, any2String(answers), state.earning, user.token, dispatch)
+        console.log('result:', res)
       }
+
     }
+
+    // if (aiBlock) {
+    //   if (aiBlock.block.questions.length < questionCounter + 2) {
+    //     setLoading(true)
+    //     setIsLessonFinished(true);
+    //     setLoading(true);
+    //     let correctCount = 0;
+    //     let wrongCount = 0;
+    //     for (const data of answerResult) {
+    //       if (data.isCorrect) correctCount++;
+    //       else wrongCount++;
+    //     }
+    //     const finishBlockResult = await finishBlock(
+    //       aiBlock.id,
+    //       earning.energyCharge,
+    //       correctCount,
+    //       wrongCount,
+    //       bonusCoins,
+    //       state.earning,
+    //       arrObjToString(answerResult),
+    //       state.user.token,
+    //       dispatch
+    //     );
+
+    //     await setQuestionsInAI(true);
+
+    //     setLoading(false);
+    //   }
+    // }
     // const counter = questionCounter + 1;
-    setQuestionCounter(questionCounter + 1);
   };
 
   useEffect(() => {
 
     setNextMaxExp(student.nextLevel.pointsRequired)
+    setAnswers([])
     let mounted = true
     setQuestionsInAI(mounted)
 
@@ -257,19 +313,6 @@ export const AIQuestion: FC = () => {
       mounted = false
     }
   }, [])
-
-  // useEffect(() => {
-  //   console.log('qustions;',questions)
-  //   console.log('Qustions block',aiBlock)
-  // }, [questions])
-
-  useEffect(() => {
-    setQuestion(aiBlock?.block.questions[questionCounter]);
-  }, [aiBlock, questionCounter]);
-
-  useEffect(() => {
-    upgradeEnergy();
-  }, [answerResult]);
 
   return (
     <Wrapper>
@@ -285,7 +328,7 @@ export const AIQuestion: FC = () => {
           <>
             <ProgressWrapper id='lesson-progress'>
               <LessonProgress
-                currentQuestion={questionCounter + 1}
+                currentQuestion={questionCounter}
                 topic={aiBlock.block.topicGrade.topic.name}
                 totalQuestions={questions.length}
                 questions={questions}
