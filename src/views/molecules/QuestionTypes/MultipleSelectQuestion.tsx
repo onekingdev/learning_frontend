@@ -43,6 +43,7 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
   useEffect(() => {
     setIsAnswered(false);
     setChecked(new Array(question.answerOptions.length).fill(false))
+    console.log('current:',questionCounter, 'total: ',totalQuestions)
   }, [question]);
 
   const handleNextButtonClicked = () => {

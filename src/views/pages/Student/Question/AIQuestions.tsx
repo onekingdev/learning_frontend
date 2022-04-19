@@ -27,6 +27,7 @@ import { TypeInQuestion } from 'views/molecules/QuestionTypes/TypeInQuestion';
 import useSound from 'use-sound';
 import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
 import audioError from 'views/assets/audios/wrong-answer-sound.wav';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 // interface RoutePresentationParams {
 //   mode: string;
@@ -258,15 +259,10 @@ export const AIQuestion: FC = () => {
         setQuestionCounter(questionCounter + 1);
 
       } else {
-        console.log('finished.')
-        console.log('batteryLevel:', earning.energyCharge)
-        console.log('blockPresentationId:', aiBlock.id)
-        console.log('bonusCoins:', bonusCoins)
-        console.log('erros:', errors)
-        console.log('hits:', hits)
-        console.log('questions:', any2String(answers))
+        setLoading(true)
         const res = await newFinishBlock(aiBlock.id, earning.energyCharge, hits, errors, bonusCoins, any2String(answers), state.earning, user.token, dispatch)
         console.log('result:', res)
+        setLoading(false)
       }
 
     }
@@ -317,40 +313,43 @@ export const AIQuestion: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        {isLessonFinished ? (
-          <FinishLesson
-            loading={loading}
-            tokens={points}
-            energy={bonusCoins}
-            onNextLesson={onNextLesson}
-          />
-        ) : aiBlock && questions ? (
-          <>
-            <ProgressWrapper id='lesson-progress'>
-              <LessonProgress
-                currentQuestion={questionCounter}
-                topic={aiBlock.block.topicGrade.topic.name}
-                totalQuestions={questions.length}
-                questions={questions}
-                answerResult={answerResult}
-                combocount={state.earning.energyCharge}
+        {
+          loading ? <LoadingSpinner /> :
+            isLessonFinished ? (
+              <FinishLesson
+                loading={loading}
+                tokens={points}
+                energy={bonusCoins}
+                onNextLesson={onNextLesson}
               />
-            </ProgressWrapper>
-            <CardDialog
-              isOpen={openDg}
-              open={congratulations}
-              dialogContent={<LevelUpDgContent close={congratulations} />}
-              fullWidth="true"
-            />
-            <Container id="container">
-              {renderQuestion(
-                questions[questionCounter],
-                aiBlock,
-                questions.length
-              )}
-            </Container>
-          </>
-        ) : null}
+            ) : aiBlock && questions ? (
+              <>
+                <ProgressWrapper id='lesson-progress'>
+                  <LessonProgress
+                    currentQuestion={questionCounter}
+                    topic={aiBlock.block.topicGrade.topic.name}
+                    totalQuestions={questions.length}
+                    questions={questions}
+                    answerResult={answerResult}
+                    combocount={state.earning.energyCharge}
+                  />
+                </ProgressWrapper>
+                <CardDialog
+                  isOpen={openDg}
+                  open={congratulations}
+                  dialogContent={<LevelUpDgContent close={congratulations} />}
+                  fullWidth="true"
+                />
+                <Container id="container">
+                  {renderQuestion(
+                    questions[questionCounter],
+                    aiBlock,
+                    questions.length
+                  )}
+                </Container>
+              </>
+            ) : null
+        }
       </StudentMenu>
     </Wrapper>
   );

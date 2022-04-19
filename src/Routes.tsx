@@ -39,6 +39,7 @@ import TeacherPayment            from 'views/pages/Teacher/Payment/Payment'
 import Classroom                 from 'views/pages/Teacher/Classroom/Classroom'
 import Students                  from 'views/pages/Teacher/Students/Students'
 import Groups                    from 'views/pages/Teacher/Students/Groups'
+import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
 
 import 'animate.css';
 
@@ -96,7 +97,8 @@ export function Routes() {
             path="/question/:mode/:aokId"
             requireAuth={false}
           >
-            <Question />
+            {/* <Question /> */}
+            <AIQuestion />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/avatar" >
             <Avatar />
