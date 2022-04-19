@@ -29,10 +29,10 @@ import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
 import audioError from 'views/assets/audios/wrong-answer-sound.wav';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 
-// interface RoutePresentationParams {
-//   mode: string;
-//   aokId: string;       //Area of Knowledge Id on AI or Path mode, BlockPresentationId on BlockID mode
-// }
+interface RoutePresentationParams {
+  mode: string;
+  aokId: string;       //Area of Knowledge Id on AI or Path mode, BlockPresentationId on BlockID mode
+}
 
 interface BlockQuestionInput {
   question: number;
@@ -54,7 +54,7 @@ export const AIQuestion: FC = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  // const { aokId } = useParams<RoutePresentationParams>();
+  const { aokId } = useParams<RoutePresentationParams>();
   const [aiBlock, setAiBlock] = useState<IAIBlock>();
   const [questions, setQuestions] = useState<Array<IAIQuestion>>();
   const [answers, setAnswers] = useState<Array<any>>([])
@@ -203,8 +203,8 @@ export const AIQuestion: FC = () => {
 
   const setQuestionsInAI = async (mounted: boolean) => {
     const res: any = await createNewAiBlock(
-      11, // parseInt(aokId),
-      15, // student.id,
+      parseInt(aokId),    //11
+      student.id, //15
       user.token,
     );
     if (!res.success) {
@@ -223,8 +223,10 @@ export const AIQuestion: FC = () => {
     setQuestionCounter(0);
     setIsLessonFinished(false)
     setAnswerResult([]);
+    setQuestions([])
     setPoints(0)
     setBonusCoins(0)
+    setQuestionsInAI(true)
   }
 
   const any2String = (param: any): string => {
@@ -259,6 +261,7 @@ export const AIQuestion: FC = () => {
         setQuestionCounter(questionCounter + 1);
 
       } else {
+        setIsLessonFinished(true)
         setLoading(true)
         const res = await newFinishBlock(aiBlock.id, earning.energyCharge, hits, errors, bonusCoins, any2String(answers), state.earning, user.token, dispatch)
         console.log('result:', res)
@@ -304,6 +307,7 @@ export const AIQuestion: FC = () => {
     setAnswers([])
     let mounted = true
     setQuestionsInAI(mounted)
+    setIsLessonFinished(false)
 
     return () => {
       mounted = false
@@ -314,41 +318,40 @@ export const AIQuestion: FC = () => {
     <Wrapper>
       <StudentMenu>
         {
-          loading ? <LoadingSpinner /> :
-            isLessonFinished ? (
-              <FinishLesson
-                loading={loading}
-                tokens={points}
-                energy={bonusCoins}
-                onNextLesson={onNextLesson}
-              />
-            ) : aiBlock && questions ? (
-              <>
-                <ProgressWrapper id='lesson-progress'>
-                  <LessonProgress
-                    currentQuestion={questionCounter}
-                    topic={aiBlock.block.topicGrade.topic.name}
-                    totalQuestions={questions.length}
-                    questions={questions}
-                    answerResult={answerResult}
-                    combocount={state.earning.energyCharge}
-                  />
-                </ProgressWrapper>
-                <CardDialog
-                  isOpen={openDg}
-                  open={congratulations}
-                  dialogContent={<LevelUpDgContent close={congratulations} />}
-                  fullWidth="true"
+          isLessonFinished ? (
+            <FinishLesson
+              loading={loading}
+              tokens={points}
+              energy={bonusCoins}
+              onNextLesson={onNextLesson}
+            />
+          ) : aiBlock && questions?.length ? (
+            <>
+              <ProgressWrapper id='lesson-progress'>
+                <LessonProgress
+                  currentQuestion={questionCounter}
+                  topic={aiBlock.block.topicGrade.topic.name}
+                  totalQuestions={questions.length}
+                  questions={questions}
+                  answerResult={answerResult}
+                  combocount={state.earning.energyCharge}
                 />
-                <Container id="container">
-                  {renderQuestion(
-                    questions[questionCounter],
-                    aiBlock,
-                    questions.length
-                  )}
-                </Container>
-              </>
-            ) : null
+              </ProgressWrapper>
+              <CardDialog
+                isOpen={openDg}
+                open={congratulations}
+                dialogContent={<LevelUpDgContent close={congratulations} />}
+                fullWidth="true"
+              />
+              <Container id="container">
+                {renderQuestion(
+                  questions[questionCounter],
+                  aiBlock,
+                  questions.length
+                )}
+              </Container>
+            </>
+          ) : null
         }
       </StudentMenu>
     </Wrapper>

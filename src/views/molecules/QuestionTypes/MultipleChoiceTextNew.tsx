@@ -43,12 +43,11 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
   language = language ? language : 'EN_US'
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
-  const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
+  const questionSoundURI = `${question.questionAudioUrl}`;
 
   useEffect(() => {
     setIsAnswered(false);
-    console.log('queston:', question)
-  }, []);
+  }, [question]);
 
   const readAnswer = (answerOption: any) => {
     const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
@@ -124,12 +123,9 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
             onClick={nextQuestion}
             disabled={!isAnswered}
             value={
-              isAnswered ?
-                totalQuestions === questionCounter + 1 ?
-                  dictionary[language]?.finish :
-                  dictionary[language]?.next
-                :
-                'Check'
+              totalQuestions === questionCounter + 1 ?
+                dictionary[language]?.finish :
+                dictionary[language]?.next
             }
             fullWidth={true}
             color={BasicColor.black}
