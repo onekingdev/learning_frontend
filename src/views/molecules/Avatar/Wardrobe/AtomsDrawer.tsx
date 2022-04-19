@@ -17,7 +17,7 @@ export const AtomsDrawer: FC<AtomDrawerProps> = ({ onAtomClick }) => {
   const [current, setCurrent] = useState(0)
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
 
   const setCurrentAtomId = (val: any) => {
     if (val < 4) {

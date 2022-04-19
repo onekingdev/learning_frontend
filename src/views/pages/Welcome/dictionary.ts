@@ -1,5 +1,5 @@
 export const dictionary:any = Object.freeze({
-  "EN_US": {
+  'EN_US': {
     practice: 'Practice, Play, Grow',
     description1:
       'Socrates makes learning fun while adjusting to your child\'s needs.',
@@ -9,9 +9,9 @@ export const dictionary:any = Object.freeze({
     about: 'About Us',
     privacy: 'Privacy Policy',
     children_privacy: "Children's Privacy Policy",
-    termAndConditions: "Terms & Conditions",
-    schoolSignUp: `School/Teacher Sign Up`,
-    parentSignUp: `Parent/Studentr Sign Up`,
+    termAndConditions: 'Terms & Conditions',
+    schoolSignUp: 'School/Teacher Sign Up',
+    parentSignUp: 'Parent/Studentr Sign Up',
   },
   'TH' :{
     practice: 'ฝึกฝน เล่น เติบโต',
@@ -22,10 +22,10 @@ export const dictionary:any = Object.freeze({
     join: 'เข้าร่วม',
     about: 'เกี่ยวกับเรา',
     privacy: 'นโยบายความเป็นส่วนตัว',
-    children_privacy: "นโยบายความเป็นส่วนตัวของเด็ก",
-    termAndConditions: "ข้อตกลงและเงื่อนไข",
-    schoolSignUp: `โรงเรียน/ครู ลงทะเบียน`,
-    parentSignUp: `ผู้ปกครอง/นักเรียนลงทะเบียน`,
+    children_privacy: 'นโยบายความเป็นส่วนตัวของเด็ก',
+    termAndConditions: 'ข้อตกลงและเงื่อนไข',
+    schoolSignUp: 'โรงเรียน/ครู ลงทะเบียน',
+    parentSignUp: 'ผู้ปกครอง/นักเรียนลงทะเบียน',
   },
   'ES_MX': {
     practice: 'Practica, Juega, Crece',
@@ -36,9 +36,9 @@ export const dictionary:any = Object.freeze({
     join: 'Unirse',
     about: 'Sobre nosotras',
     privacy: 'Política de privacidad',
-    children_privacy: "Política de privacidad para niños",
-    termAndConditions: "Términos y condiciones",
-    schoolSignUp: `Registro de escuela/maestro`,
-    parentSignUp: `Registro de padres/estudiantes`,
+    children_privacy: 'Política de privacidad para niños',
+    termAndConditions: 'Términos y condiciones',
+    schoolSignUp: 'Registro de escuela/maestro',
+    parentSignUp: 'Registro de padres/estudiantes',
   }
 });

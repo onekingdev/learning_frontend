@@ -19,7 +19,7 @@ export const LevelUpDgContent: FC<Props> = ({ close }) => {
 
   const earning           = useSelector((state: any) => state.earning);
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : "EN_US"
+  language                = language? language : 'EN_US'
 
   const config = {
     num: [1, 10],

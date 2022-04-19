@@ -34,11 +34,12 @@ import { KidsProgress }          from 'views/pages/Student/Progress/Progress';
 //teacher center
 import { SelectCreateType }      from 'views/pages/Teacher/SelectCreateType/SelectCreateType';
 import TeacherSignup             from 'views/pages/Teacher/TeacherSignup/TeacherSignup';
-import SchoolSignup              from 'views/pages/Teacher/SchoolSignup/SchoolSignup'
-import TeacherPayment            from 'views/pages/Teacher/Payment/Payment'
-import Classroom                 from 'views/pages/Teacher/Classroom/Classroom'
-import Students                  from 'views/pages/Teacher/Students/Students'
-import Groups                    from 'views/pages/Teacher/Students/Groups'
+import SchoolSignup              from 'views/pages/Teacher/SchoolSignup/SchoolSignup';
+import TeacherPayment            from 'views/pages/Teacher/Payment/Payment';
+import Classroom                 from 'views/pages/Teacher/Classroom/Classroom';
+import Students                  from 'views/pages/Teacher/Students/Students';
+import Groups                    from 'views/pages/Teacher/Students/Groups';
+import ControlAOK                from 'views/pages/Teacher/ControlAOK/ControlAOK';
 
 import 'animate.css';
 
@@ -198,7 +199,8 @@ export function Routes() {
             <Groups />
           </PrivateRoute>
           {process.env.NODE_ENV === 'development' ? (
-            <Route path="/testing-student-progress">
+            <Route path="/teacher/control-aok">
+              <ControlAOK />
             </Route>
           ) : null}
           <Redirect from="/" to="/login" />

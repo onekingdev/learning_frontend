@@ -6,4 +6,3 @@ export const dictionary:any = Object.freeze({
     'ES_MX': {
     }
   });
-  

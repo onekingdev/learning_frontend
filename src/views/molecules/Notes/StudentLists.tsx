@@ -13,7 +13,7 @@ import MenuItem                  from '@mui/material/MenuItem';
 import Button                    from 'views/molecules/MuiButton';
 import {ButtonColor, BasicColor} from 'views/Color';
 import commonDictionary          from 'constants/commonDictionary'
-// import DateTimePicker            from 'react-datetime-picker';
+import DateTimePicker            from 'react-datetime-picker';
 import Paper                     from '@mui/material/Paper';
 import Checkbox                  from '@mui/material/Checkbox';
 import {
@@ -27,7 +27,7 @@ import { database } from 'app/firebase';
 
 const StudentLists = (props: any) => {
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : "EN_US"
+    language            = language? language : 'EN_US'
 
     const { enqueueSnackbar } =  useSnackbar();
     const classes             =  useStyles();

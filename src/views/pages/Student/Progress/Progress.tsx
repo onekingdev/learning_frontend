@@ -32,26 +32,26 @@ const Wrapper = styled.div`
 `;
 
 const masteryColors = {
-    "NP": "#919699",
-    "N": "#EC5858",
-    "C": "#F4C222",
-    "M": "#26B824"
+    'NP': '#919699',
+    'N': '#EC5858',
+    'C': '#F4C222',
+    'M': '#26B824'
 }
 
 export const KidsProgress = () => {
     const user              = useSelector((state: any) => state.user);
     const student           = useSelector((state: any) => state.student);
     let language:string     = useSelector((state: any) => state.user.language);
-    language                = language? language : "EN_US"
+    language                = language? language : 'EN_US'
 
     const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
-    const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>("");
+    const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>('');
     const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
     const [data, setData]                         = useState<any[]>([]);
     useEffect(() => {
         (async () => {
             // Get All Subject
-            const res:any = await query(``, AreasOfKnowledge(), user.token).catch(e => ({success: false}));
+            const res:any = await query('', AreasOfKnowledge(), user.token).catch(e => ({success: false}));
             if(res.success === false) {
                 return
             }
@@ -62,7 +62,7 @@ export const KidsProgress = () => {
                 setAreasOfKnowledge(result.data.areasOfKnowledge)
                 let iii = 4;
                 for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
-                    if (result.data.areasOfKnowledge[i].name === "Sight Words") {
+                    if (result.data.areasOfKnowledge[i].name === 'Sight Words') {
                         iii = i;
                         break;
                     }
@@ -79,7 +79,7 @@ export const KidsProgress = () => {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
-                const res:any = await query(``, TopicReport(parseInt(student.id), activeSubjectId), user.token).catch(e => ({success: false}));
+                const res:any = await query('', TopicReport(parseInt(student.id), activeSubjectId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
                 return
                 }
@@ -120,20 +120,20 @@ export const KidsProgress = () => {
     const subSubjects1 = subSubjects.map((subSubject, id) => {
         let bgColor = masteryColors.NP;
         if (data && data[id] && data[id].mastery) {
-            if (data[id].mastery === "NP") {
+            if (data[id].mastery === 'NP') {
                 bgColor = masteryColors.NP;
-            } else if (data[id].mastery === "N") {
+            } else if (data[id].mastery === 'N') {
                 bgColor = masteryColors.N;
-            } else if (data[id].mastery === "C") {
+            } else if (data[id].mastery === 'C') {
                 bgColor = masteryColors.C;
-            } else if (data[id].mastery === "M") {
+            } else if (data[id].mastery === 'M') {
                 bgColor = masteryColors.M;
             }
         }
         return ({
             ...subSubject,
-            aokId: data && data[id] && data[id].id ? data[id].id : "",
-            text: data && data[id] && data[id].name ? data[id].name : "",
+            aokId: data && data[id] && data[id].id ? data[id].id : '',
+            text: data && data[id] && data[id].name ? data[id].name : '',
             bgColor: bgColor,
             active: false,
         })
@@ -141,19 +141,19 @@ export const KidsProgress = () => {
     const subSubjectsMobile1 = subSubjectsMobile.map((subSubject, id) => {
         let bgColor = masteryColors.NP;
         if (data && data[id] && data[id].mastery) {
-            if (data[id].mastery === "NP") {
+            if (data[id].mastery === 'NP') {
                 bgColor = masteryColors.NP;
-            } else if (data[id].mastery === "N") {
+            } else if (data[id].mastery === 'N') {
                 bgColor = masteryColors.N;
-            } else if (data[id].mastery === "C") {
+            } else if (data[id].mastery === 'C') {
                 bgColor = masteryColors.C;
-            } else if (data[id].mastery === "M") {
+            } else if (data[id].mastery === 'M') {
                 bgColor = masteryColors.M;
             }
         }
         return ({
             ...subSubject,
-            text: data && data[id] && data[id].name ? data[id].name : "",
+            text: data && data[id] && data[id].name ? data[id].name : '',
             bgColor: bgColor,
             active: false,
         })
@@ -207,7 +207,7 @@ export const KidsProgress = () => {
                 <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    flexWrap: "wrap",
+                    flexWrap: 'wrap',
                     width: '100%',
                     paddingTop: '1rem'
                 }}>
@@ -240,13 +240,13 @@ export const KidsProgress = () => {
                         flexShrink: 1,
                     }}></div>
                     <Box sx={{ minWidth: 120 }} style={{
-                        marginRight: "1rem"
+                        marginRight: '1rem'
                     }}>
                         <FormControl fullWidth style={{
-                            width: "17rem",
+                            width: '17rem',
                         }}>
                             <PcCom style={{
-                                paddingLeft: "1rem"
+                                paddingLeft: '1rem'
                             }}>
                                 <InputLabel id='demo-simple-select-label' style={{
                                     background: '#26B824',
@@ -271,7 +271,7 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                { ["Today's Answers", "Recent Answers", "Recent Incorrect Answers"].map((type, id) => (
+                                { ["Today's Answers", 'Recent Answers', 'Recent Incorrect Answers'].map((type, id) => (
                                     <MenuItem key={id} value={type}>{type}</MenuItem>
                                 )) }
                             </Select>
@@ -329,7 +329,7 @@ export const KidsProgress = () => {
                             top: `${path.top}%`,
                         }}>
                             {path.imgSrc({
-                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
+                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors['NP'],
                                 active: subSubjects1.length > id ? subSubjects1[id].active : false,
                                 mapWidth: mapWidth
                             })}
@@ -340,14 +340,14 @@ export const KidsProgress = () => {
                             top: `${path.top}%`,
                         }}>
                             {path.imgSrc({
-                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors["NP"],
+                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors['NP'],
                                 active: subSubjects1.length > id ? subSubjects1[id].active : false,
                             })}
                         </MobileCom>) }
                         { subSubjects1.map((subSubject, id) => <PcCom onClick={() => {
                             // history.push('/question/PATH/' + aokId)
-                            if (subSubject.aokId !== "") {
-                                smoothScroll("#aok-id-" + subSubject.aokId)
+                            if (subSubject.aokId !== '') {
+                                smoothScroll('#aok-id-' + subSubject.aokId)
                                 setActiveSubjectIdTable(subSubject.aokId);
                             }
                             // history.push('/question/AI/' + data[id].id)
@@ -363,14 +363,14 @@ export const KidsProgress = () => {
                             fontWeight: subSubject.active ? '600' : '400',
                             width: `${subSubject.width * mapWidth / 1366}px`,
                             // overflow: "hidden",
-                            height: "50px",
-                            textAlign: "center",
-                            display: "-webkit-box",
-                            WebkitBoxOrient: "vertical",
+                            height: '50px',
+                            textAlign: 'center',
+                            display: '-webkit-box',
+                            WebkitBoxOrient: 'vertical',
                             // "-webkit-box-orient": "vertical",
                             WebkitLineClamp: 3,
                             // "-webkit-line-clamp": 3,
-                            overflow: "hidden",
+                            overflow: 'hidden',
                         }}>{subSubject.text}</PcCom>)}
                         { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
                             position: 'absolute',
@@ -381,8 +381,8 @@ export const KidsProgress = () => {
                             fontWeight: subSubject.active ? '600' : '400',
                             width: `${subSubject.width * mapWidth / 390}px`,
                             zIndex: 20,
-                            height: "50px",
-                            textAlign: "center"
+                            height: '50px',
+                            textAlign: 'center'
                         }}>{subSubject.text}</MobileCom>)}
                     {/* </div> */}
                 </div>

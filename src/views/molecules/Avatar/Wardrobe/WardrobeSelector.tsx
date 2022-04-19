@@ -27,7 +27,7 @@ export const WardrobeSelector: FC = () => {
   const user          = useSelector((state: any) => state.user);
   const student       = useSelector((state: any) => state.student)
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
   const loadingContext = useContext(LoadingContext);
 
   const [reload, setReload] = useState(false)
