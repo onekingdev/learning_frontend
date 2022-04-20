@@ -9,8 +9,10 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
+import { TypoGeneralText } from 'views/atoms/Text';
 import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer } from './Styles'
-import { FormGroup, Grid, FormControlLabel, Checkbox } from '@mui/material';
+import RLDD from 'react-list-drag-and-drop/lib/RLDD';
+import { Grid } from '@mui/material';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -19,12 +21,20 @@ type ChoiceTextProps = {
   questionCounter: number;
   blockPresentation: IAIBlock;
   onAnswer: (result: {
-    multipleSelectAnswerOptions: Array<string>,
-    question: string
+    orderAnswerOptions: string[],
+    question: number
   }, isCorrect: boolean) => void;
 };
 
-export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
+interface Item {
+  id: number
+  isCorrect: boolean
+  order: number
+  answerText: string
+  image: string
+}
+
+export const SortOrderQuestion: FC<ChoiceTextProps> = ({
   question,
   nextQuestion,
   totalQuestions,
@@ -35,39 +45,48 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'EN_US'
   const [showAssistor, setShowAssistor] = useState(false);
-
+  const [items, setItems] = useState<Array<Item>>([])
+  const [answer, setAnswer] = useState<Array<number>>([])
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
-  const [checked, setChecked] = useState(new Array(question.answerOptions.length).fill(false))
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
 
+  const stringIds2Numbers = () => {
+    const res = []
+    const answer = []
+    for (const option of question.answerOptions) {
+      res.push({ ...option, id: +option.id })
+      answer.push(option.order)
+    }
+    setItems(res)
+    setAnswer(answer.sort())
+  }
   useEffect(() => {
+    stringIds2Numbers()
     setIsAnswered(false);
-    setChecked(new Array(question.answerOptions.length).fill(false))
-    console.log('current:',questionCounter, 'total: ',totalQuestions)
   }, [question]);
+
+  const getCurrentAnswer = () => {
+    const answer = []
+    const res = []
+    for (const item of items) {
+      answer.push(item.order)
+      res.push(item.answerText)
+    }
+
+    return { answer: answer, currentAnswer: res }
+  }
 
   const handleNextButtonClicked = () => {
     if (isAnswered)
       nextQuestion()
     else {
       setIsAnswered(true)
-
-      const answerIds = []
-      const trueAnswer = []
-      for (const option of question.answerOptions) {
-        trueAnswer.push(option.isCorrect)
-      }
-
-      for (let i = 0; i < trueAnswer.length; i++) {
-        if (trueAnswer[i] === true)
-          answerIds.push(question.answerOptions[i].id)
-      }
-
+      const currentAnswer = getCurrentAnswer()
       onAnswer({
-        question: question.id,
-        multipleSelectAnswerOptions: answerIds
+        question: +question.id,
+        orderAnswerOptions: currentAnswer.currentAnswer
       },
-        JSON.stringify(trueAnswer) === JSON.stringify(checked)
+        JSON.stringify(currentAnswer.answer) === JSON.stringify(answer)
       )
     }
   }
@@ -85,16 +104,25 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
   //   const audio = new Audio(answerSoundURI);
   //   audio.play();
   // };
+  const itemRenderer = (item: Item): JSX.Element => {
+    return (
+      <TypoGeneralText
+        className='item'
+        style={{
+          color: 'black',
+          background: 'white',
+          border: 'solid 1px white',
+          borderRadius: 5,
+          padding: '5px 20px',
+          cursor: 'pointer',
+        }}>{item.answerText}</TypoGeneralText>
+    );
+  };
 
-  const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const tempArray = [...checked]
-
-    // if checked count is bigger than 2, then selecting another one is impossible.
-    const idx = question.answerOptions.findIndex((x: { id: string; }) => x.id === event.target.value)
-    tempArray[idx] = event.target.checked
-    console.log(idx, tempArray)
-    setChecked(tempArray)
-  }
+  const handleRLDDChange = (reorderedItems: Array<Item>) => {
+    // console.log('Example.handleRLDDChange');
+    setItems(reorderedItems)
+  };
 
   return (
     <>
@@ -113,30 +141,16 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
           <Question>{question.questionText}</Question>
         </QuestionContainer>
         <AnswersContainer>
-          <FormGroup sx={{ marginLeft: 3 }}>
-            <Grid container alignItems={'start'} flexDirection='column'>
-              {question.answerOptions.map((option, index) => (
-                <Grid item key={option.id}>
-                  <FormControlLabel
-                    sx={{ color: 'white', }}
-                    key={option.id}
-                    label={option.answerText}
-                    value={option.id}
-                    // control={<Checkbox checked={checked[index]} onChange={handleCheckChange} />}
-                    control={
-                      <Checkbox
-                        checked={checked[index]}
-                        onChange={handleCheckChange}
-                        sx={{
-                          '&.MuiCheckbox-root': {
-                            color: 'yellow'
-                          }
-                        }} />}
-                  />
-                </Grid>
-              ))}
+          {items &&
+            <Grid container>
+              <RLDD
+                layout='vertical'
+                items={items}
+                itemRenderer={itemRenderer}
+                onChange={handleRLDDChange}
+              />
             </Grid>
-          </FormGroup>
+          }
         </AnswersContainer>
         <AssistorContainer>
           <Button

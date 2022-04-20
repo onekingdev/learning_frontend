@@ -4,7 +4,7 @@ import {BasicColor} from 'views/Color';
 
 type BatteryButtonProps = {
   value: string;
-  onClick: () => void;
+  // onClick: () => void;
 };
 
 const BatteryButtonStyle = styled.button`
@@ -17,10 +17,10 @@ const BatteryButtonStyle = styled.button`
   color: ${BasicColor.white};
   cursor: pointer;
 `;
-export const BatteryButton: FC<BatteryButtonProps> = ({value, onClick}) => {
+export const BatteryButton: FC<BatteryButtonProps> = ({value}) => {
   return (
     <>
-      <BatteryButtonStyle onClick={onClick}>{value}</BatteryButtonStyle>
+      <BatteryButtonStyle>{value}</BatteryButtonStyle>
     </>
   );
 };

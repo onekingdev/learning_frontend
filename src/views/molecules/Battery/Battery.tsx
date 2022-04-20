@@ -13,14 +13,15 @@ export const Battery: FC<BatteryProps> = ({ charge }) => {
   const [chargeArray, setChargeArray] = useState(new Array(10).fill(false));
   // const chargeArray = new Array(10).fill(false);
   const [play] = useSound(fullBatterySound);
-  const IncreaseCharge = () => {
+  const IncreaseCharge = (charge: number) => {
 
     if (charge === 10) play()
-    setChargeArray(new Array(10).fill(true, 0, charge))
+    const charges = new Array(10).fill(false)
+    setChargeArray(charges.fill(true, 0, charge))
   };
 
   useEffect(() => {
-    IncreaseCharge();
+    IncreaseCharge(charge);
   }, [charge])
 
 

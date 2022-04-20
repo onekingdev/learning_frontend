@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { IAIBlock, IAIQuestion } from 'app/entities/block';
+import { IAIBlock, IAIQuestion, IRelateAnswerOptionInput } from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
 import { Question } from 'views/atoms/Text/Question';
 import { Icon } from 'views/atoms/Icon/Icon';
@@ -9,8 +9,10 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
+import { TypoGeneralText } from 'views/atoms/Text';
 import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer } from './Styles'
-import { FormGroup, Grid, FormControlLabel, Checkbox } from '@mui/material';
+import RLDD from 'react-list-drag-and-drop/lib/RLDD';
+import { Grid, } from '@mui/material';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -19,12 +21,21 @@ type ChoiceTextProps = {
   questionCounter: number;
   blockPresentation: IAIBlock;
   onAnswer: (result: {
-    multipleSelectAnswerOptions: Array<string>,
+    relateAnswerOptions: IRelateAnswerOptionInput[],
     question: string
   }, isCorrect: boolean) => void;
 };
 
-export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
+interface Item {
+  id: number
+  isCorrect: boolean
+  order: number
+  key: string
+  value: string
+  image: string
+}
+
+export const RelateQuestion: FC<ChoiceTextProps> = ({
   question,
   nextQuestion,
   totalQuestions,
@@ -35,39 +46,47 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'EN_US'
   const [showAssistor, setShowAssistor] = useState(false);
-
+  const [items, setItems] = useState<Array<Item>>([])
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
-  const [checked, setChecked] = useState(new Array(question.answerOptions.length).fill(false))
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
 
+  const stringIds2Numbers = () => {
+    const res = []
+    const answer = []
+    for (const option of question.answerOptions) {
+      res.push({ ...option, id: +option.id })
+      answer.push(option.order)
+    }
+    setItems(res)
+  }
   useEffect(() => {
+    stringIds2Numbers()
+    console.log(question)
     setIsAnswered(false);
-    setChecked(new Array(question.answerOptions.length).fill(false))
-    console.log('current:',questionCounter, 'total: ',totalQuestions)
   }, [question]);
+
+  const getCurrentAnswer = () => {
+    // const answer = []
+    const res: IRelateAnswerOptionInput[] = []
+    for (const item of items) {
+      // answer.push(item.order)
+      res.push({ key: item.key, value: item.value })
+    }
+
+    return res
+  }
 
   const handleNextButtonClicked = () => {
     if (isAnswered)
       nextQuestion()
     else {
       setIsAnswered(true)
-
-      const answerIds = []
-      const trueAnswer = []
-      for (const option of question.answerOptions) {
-        trueAnswer.push(option.isCorrect)
-      }
-
-      for (let i = 0; i < trueAnswer.length; i++) {
-        if (trueAnswer[i] === true)
-          answerIds.push(question.answerOptions[i].id)
-      }
-
+      const currentAnswer: IRelateAnswerOptionInput[] = getCurrentAnswer()
       onAnswer({
         question: question.id,
-        multipleSelectAnswerOptions: answerIds
+        relateAnswerOptions: currentAnswer
       },
-        JSON.stringify(trueAnswer) === JSON.stringify(checked)
+        true
       )
     }
   }
@@ -85,16 +104,25 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
   //   const audio = new Audio(answerSoundURI);
   //   audio.play();
   // };
+  const itemRenderer = (item: Item): JSX.Element => {
+    return (
+      <TypoGeneralText
+        className='item'
+        style={{
+          color: 'black',
+          background: 'white',
+          border: 'solid 1px white',
+          borderRadius: 5,
+          padding: '5px 20px',
+          cursor: 'pointer'
+        }}>{item.key}</TypoGeneralText>
+    );
+  };
 
-  const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const tempArray = [...checked]
-
-    // if checked count is bigger than 2, then selecting another one is impossible.
-    const idx = question.answerOptions.findIndex((x: { id: string; }) => x.id === event.target.value)
-    tempArray[idx] = event.target.checked
-    console.log(idx, tempArray)
-    setChecked(tempArray)
-  }
+  const handleRLDDChange = (reorderedItems: Array<Item>) => {
+    // console.log('Example.handleRLDDChange');
+    setItems(reorderedItems)
+  };
 
   return (
     <>
@@ -113,30 +141,37 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
           <Question>{question.questionText}</Question>
         </QuestionContainer>
         <AnswersContainer>
-          <FormGroup sx={{ marginLeft: 3 }}>
-            <Grid container alignItems={'start'} flexDirection='column'>
-              {question.answerOptions.map((option, index) => (
-                <Grid item key={option.id}>
-                  <FormControlLabel
-                    sx={{ color: 'white', }}
+          {items &&
+            <Grid container spacing={3} justifyContent='center'>
+              <Grid item>
+                <RLDD
+                  items={items}
+                  itemRenderer={itemRenderer}
+                  onChange={handleRLDDChange}
+                />
+              </Grid>
+              <Grid item>
+                {question.answerOptions.map((option) => (
+                  <TypoGeneralText
                     key={option.id}
-                    label={option.answerText}
-                    value={option.id}
-                    // control={<Checkbox checked={checked[index]} onChange={handleCheckChange} />}
-                    control={
-                      <Checkbox
-                        checked={checked[index]}
-                        onChange={handleCheckChange}
-                        sx={{
-                          '&.MuiCheckbox-root': {
-                            color: 'yellow'
-                          }
-                        }} />}
-                  />
-                </Grid>
-              ))}
+                    style={{
+                      color: 'black',
+                      background: 'lightGray',
+                      border: 'solid 1px yellow',
+                      borderRadius: 5,
+                      padding: '5px 20px',
+                      cursor: 'not-allowed'
+                    }}>{option.value}
+                  </TypoGeneralText>
+                ))}
+              </Grid>
             </Grid>
-          </FormGroup>
+          }
+          {/* {items && <RLDD
+            items={items}
+            itemRenderer={itemRenderer}
+            onChange={handleRLDDChange}
+          />} */}
         </AnswersContainer>
         <AssistorContainer>
           <Button
@@ -144,7 +179,6 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
             onClick={handleNextButtonClicked}
             // disabled={!isAnswered}
             fullWidth={true}
-            color={BasicColor.black}
             value={
               isAnswered ?
                 totalQuestions === questionCounter + 1 ?
@@ -153,6 +187,7 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
                 :
                 'Check'
             }
+            color={BasicColor.black}
           />
           <Icon image={assistor} onClick={readQuestion} />
           <Icon image={videoIcon} onClick={closeVideoModal} />

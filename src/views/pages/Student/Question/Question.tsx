@@ -346,7 +346,7 @@ export const Question: FC = () => {
               topic={blockPresentation?.block?.topicGrade?.topic?.name}
               totalQuestions={blockPresentation.block.questions.length}
               questions={blockPresentation?.block?.questions}
-              answerResult={answerResult}
+              // answerResult={answerResult}
               combocount={state.earning.energyCharge}
             />
           </ProgressWrapper>

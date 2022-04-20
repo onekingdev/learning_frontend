@@ -2,7 +2,8 @@ import {
     FINISH_BLOCK_PRESENTATION,
     CREATE_AI_BLOCK_PRESENTATION,
     CREATE_PATH_BLOCK_PRESENTATION,
-    CREATE_NEW_AI_BLOCK
+    CREATE_NEW_AI_BLOCK,
+    FINISH_BLK_PT
 } from 'api/mutations/block'
 import mutation from 'api/mutations/get'
 import query from 'api/queries/get'
@@ -11,6 +12,19 @@ import { sendRawQuery } from 'api/queries/get';
 
 import * as TYPES from '../types'
 
+/**
+ * This is previous mutation for finishBlock
+ * @param block_presentation_id
+ * @param batteryLevel
+ * @param hits
+ * @param errors
+ * @param bonusCoins
+ * @param earning
+ * @param questionResults
+ * @param token
+ * @param dispatch
+ * @returns
+ */
 export const finishBlock = async (block_presentation_id: string, batteryLevel: number, hits: number, errors: number, bonusCoins: number, earning: object, questionResults: any, token: string, dispatch: any) => {
     const res: any = await mutation(FINISH_BLOCK_PRESENTATION(block_presentation_id, batteryLevel, hits, errors, bonusCoins, questionResults), token).catch(() => ({ success: false }));
     if (res.success === false) {
@@ -132,4 +146,18 @@ export const createNewAiBlock = async (aokId: number, studentId: number, token: 
         console.log(e)
         return { msg: 'Network error!', success: false }
     }
+}
+
+export const newFinishBlock = async (blkPTId: string, batteryLevel: number, hits: number, errors: number, bonusCoins: number, questions: string, earning: any, token: string, dispatch: any) => {
+    const res: any = await mutation(FINISH_BLK_PT(blkPTId, batteryLevel, hits, errors, bonusCoins, questions), token).catch(() => ({ success: false }));
+    if (res.success === false) {
+        return { success: false, msg: 'Network Error' };
+    }
+
+    const result: any = await res.json();
+
+    if (result.errors) {
+        return { success: false, msg: result.errors[0].message };
+    }
+    return { success: true, msg: 'Success!', res: result }
 }

@@ -120,5 +120,15 @@ export interface IAIQuestion {
     order: number
   }[]
   questionType: 'T' | 'MC' | 'O' | 'R' | 'MS'
-  answerOptions: Array<Object>
+  answerOptions: Array<any>
+}
+
+export interface ITypeInAnswerOptionInput {
+  answerOption: number
+  typedAnswer: string
+}
+
+export interface IRelateAnswerOptionInput {
+  key: string
+  value: string
 }
