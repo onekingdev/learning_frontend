@@ -39,7 +39,6 @@ import TeacherPayment            from 'views/pages/Teacher/Payment/Payment'
 import Classroom                 from 'views/pages/Teacher/Classroom/Classroom'
 import Students                  from 'views/pages/Teacher/Students/Students'
 import Groups                    from 'views/pages/Teacher/Students/Groups'
-import AddStudent                from 'views/pages/Teacher/AddStudent/AddStudent';
 import Assignment                    from 'views/pages/Teacher/Assignment/Assignment'
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
 
@@ -200,9 +199,6 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups">
             <Groups />
-          </PrivateRoute>
-          <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent">
-            <AddStudent />
           </PrivateRoute>
           {process.env.NODE_ENV === 'development' ? (
             <Route path="/test">
