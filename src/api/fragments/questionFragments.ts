@@ -94,14 +94,6 @@ image
 audioFile
 video
 `
-export const NEW_T_ANSWER_OPTION = `
-answerText
-explanation
-image
-caseSensitive
-audioFile
-video
-`
 
 export const NEW_O_ANSWER_OPTION = `
 order

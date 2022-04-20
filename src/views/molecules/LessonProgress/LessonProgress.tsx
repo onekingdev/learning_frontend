@@ -1,14 +1,12 @@
-import { FC, useEffect } from 'react';
-import styled from 'styled-components';
-import { LessonProgressTitle } from './LessonProgressTitle';
-import { LessonProgressBar } from './LessonProgressBar';
-import { ScreenSize } from 'constants/screenSize';
-import { BasicColor } from 'views/Color';
+import { FC, useEffect }            from 'react';
+import styled                       from 'styled-components';
+import { LessonProgressTitle }      from './LessonProgressTitle';
+import { LessonProgressBar }        from './LessonProgressBar';
+import { ScreenSize }               from 'constants/screenSize';
+import { BasicColor }               from 'views/Color';
 import { LessonProgressLightening } from './LessonProgressLightening';
-import {
-  LESSON_PROGRESS_BAR_HEIGHT,
-  LESSON_PROGRESS_BAR_MOBILE_HEIGHT
-} from 'constants/common';
+import { LESSON_PROGRESS_BAR_HEIGHT,
+LESSON_PROGRESS_BAR_MOBILE_HEIGHT } from 'constants/common';
 
 type LessonProgressProps = {
   topic: string;
@@ -16,7 +14,7 @@ type LessonProgressProps = {
   totalQuestions: number;
   finished?: boolean;
   questions?: any
-  answerResult?: boolean[];
+  answerResult?: BlockQuestionInput[];
   combocount: number;
 };
 
@@ -40,19 +38,19 @@ export const LessonProgress: FC<LessonProgressProps> = ({
   combocount
 }) => {
   // !! Added bar array builder function
-  const buildBars = (totalQuestions: number, answerResult: boolean[]) => {
+  const buildBars = (totalQuestions: number, answerResult: BlockQuestionInput[]) => {
     const bars = [];
     // TODO add logic inside this loop to build a
     // TODO proper progress bar
     for (let i = 0; i < totalQuestions; i++) {
-      if (answerResult[i] === true) bars.push({ color: BasicColor.green });
-      else if (answerResult[i] === false) bars.push({ color: BasicColor.red });
-      else bars.push({ color: null });
-    }
+        if (answerResult[i]?.isCorrect === true) bars.push({color: BasicColor.green});
+        else if (answerResult[i]?.isCorrect === false) bars.push({color: BasicColor.red});
+        else bars.push({color: null});
+      }
     return bars;
   };
 
-  useEffect(() => { }, [currentQuestion]);
+  useEffect(() => {}, [currentQuestion]);
 
   return (
     <StyledLessonProgressWrapper id='lesson-progress-wrapper'>
@@ -69,8 +67,8 @@ export const LessonProgress: FC<LessonProgressProps> = ({
             <LessonProgressBar bgColor={bar.color} key={i}></LessonProgressBar>
           )
         )}
-        <div className='lightening' style={combocount ? {} : { display: 'none' }}>
-          <LessonProgressLightening combocount={combocount} />
+        <div className='lightening' style={combocount?{}:{display: 'none'}}>
+          <LessonProgressLightening combocount={combocount}/>
         </div>
       </StyledLessonProgressBarWrapper>
     </StyledLessonProgressWrapper>

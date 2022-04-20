@@ -28,7 +28,7 @@ export const Energy: FC<EnergyProps> = ({ charge }) => {
           <Icon image={lightning} size={IconSize.small} />
         </IconContainer>
         <Battery charge={charge} />
-        <BatteryButton value={charge * 10 + ' % '} />
+        <BatteryButton value={charge * 10 + ' % '} onClick={() => console.log('Hella yes')} />
       </EnergyStyle>
     </>
   );
@@ -39,3 +39,4 @@ const IconContainer = styled.div`
     display: none;
   }
 `;
+

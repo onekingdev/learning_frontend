@@ -39,7 +39,7 @@ import TeacherPayment            from 'views/pages/Teacher/Payment/Payment'
 import Classroom                 from 'views/pages/Teacher/Classroom/Classroom'
 import Students                  from 'views/pages/Teacher/Students/Students'
 import Groups                    from 'views/pages/Teacher/Students/Groups'
-import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
+import Assignment                    from 'views/pages/Teacher/Assignment/Assignment'
 
 import 'animate.css';
 
@@ -97,8 +97,7 @@ export function Routes() {
             path="/question/:mode/:aokId"
             requireAuth={false}
           >
-            {/* <Question /> */}
-            <AIQuestion />
+            <Question />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/avatar" >
             <Avatar />
@@ -200,7 +199,8 @@ export function Routes() {
             <Groups />
           </PrivateRoute>
           {process.env.NODE_ENV === 'development' ? (
-            <Route path="/testing-student-progress">
+            <Route path="/test">
+              <Assignment />
             </Route>
           ) : null}
           <Redirect from="/" to="/login" />

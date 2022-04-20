@@ -1,16 +1,18 @@
-import { FC, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { IAIBlock, IAIQuestion } from 'app/entities/block';
+import { FC, useEffect, useState } from 'react';
+import styled                      from 'styled-components';
+import { useSelector }             from 'react-redux';
+import { IAIBlock, IAIQuestion }      from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
-import { Question } from 'views/atoms/Text/Question';
-import { Icon } from 'views/atoms/Icon/Icon';
-import videoIcon from 'views/assets/others/video-assistor.png';
-import assistor from 'views/assets/text-to-speech.svg';
-import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
-import Button from 'views/molecules/MuiButton';
-import { dictionary } from 'views/pages/Student/Question/dictionary'
-import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer } from './Styles'
-import { FormGroup, Grid, FormControlLabel, Checkbox } from '@mui/material';
+import { ScreenSize }              from 'constants/screenSize';
+import { Question }                from 'views/atoms/Text/Question';
+import { Icon }                    from 'views/atoms/Icon/Icon';
+import videoIcon                   from 'views/assets/others/video-assistor.png';
+import assistor                    from 'views/assets/text-to-speech.svg';
+import { TextOption }              from 'views/atoms/QuestionOptions/Textoption';
+import { VideoModalAssistor }      from 'views/organisms/VideoModalAssistor';
+import Button                      from 'views/molecules/MuiButton';
+import { Store }                   from 'app/configureStore';
+import { dictionary }              from 'views/pages/Student/Question/dictionary'
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -18,11 +20,14 @@ type ChoiceTextProps = {
   totalQuestions: number;
   questionCounter: number;
   blockPresentation: IAIBlock;
-  onAnswer: (result: {
-    multipleSelectAnswerOptions: Array<string>,
-    question: string
-  }, isCorrect: boolean) => void;
+  onAnswer: (result: BlockQuestionInput) => void;
 };
+
+interface BlockQuestionInput {
+  question: number;
+  answerOption: number;
+  isCorrect: boolean;
+}
 
 export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
   question,
@@ -32,45 +37,26 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
   blockPresentation,
   onAnswer,
 }) => {
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'EN_US'
+  const state = useSelector((state: Store) => state.blockPresentation);
+  let language:string     = useSelector((state: any) => state.user.language);
+  language                = language? language : "EN_US"
   const [showAssistor, setShowAssistor] = useState(false);
-
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
-  const [checked, setChecked] = useState(new Array(question.answerOptions.length).fill(false))
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
-
   useEffect(() => {
     setIsAnswered(false);
-    setChecked(new Array(question.answerOptions.length).fill(false))
-    console.log('current:',questionCounter, 'total: ',totalQuestions)
-  }, [question]);
+    console.log('queston:', question)
+  }, []);
 
-  const handleNextButtonClicked = () => {
-    if (isAnswered)
-      nextQuestion()
-    else {
-      setIsAnswered(true)
+  const handleAnswer = (result: BlockQuestionInput) => {
+    setIsAnswered(true);
+    result.question = parseInt(question.id);
+    onAnswer(result);
+    // question: -1,
+    // answerOption: answer.id,
+    // isCorrect: answer.isCorrect
+  };
 
-      const answerIds = []
-      const trueAnswer = []
-      for (const option of question.answerOptions) {
-        trueAnswer.push(option.isCorrect)
-      }
-
-      for (let i = 0; i < trueAnswer.length; i++) {
-        if (trueAnswer[i] === true)
-          answerIds.push(question.answerOptions[i].id)
-      }
-
-      onAnswer({
-        question: question.id,
-        multipleSelectAnswerOptions: answerIds
-      },
-        JSON.stringify(trueAnswer) === JSON.stringify(checked)
-      )
-    }
-  }
   const closeVideoModal = () => {
     setShowAssistor(!showAssistor);
   };
@@ -80,21 +66,11 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
     audio.play();
   };
 
-  // const readAnswer = (answerOption: any) => {
-  //   const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
-  //   const audio = new Audio(answerSoundURI);
-  //   audio.play();
-  // };
-
-  const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const tempArray = [...checked]
-
-    // if checked count is bigger than 2, then selecting another one is impossible.
-    const idx = question.answerOptions.findIndex((x: { id: string; }) => x.id === event.target.value)
-    tempArray[idx] = event.target.checked
-    console.log(idx, tempArray)
-    setChecked(tempArray)
-  }
+  const readAnswer = (answerOption: any) => {
+    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
+    const audio = new Audio(answerSoundURI);
+    audio.play();
+  };
 
   return (
     <>
@@ -113,51 +89,108 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
           <Question>{question.questionText}</Question>
         </QuestionContainer>
         <AnswersContainer>
-          <FormGroup sx={{ marginLeft: 3 }}>
-            <Grid container alignItems={'start'} flexDirection='column'>
-              {question.answerOptions.map((option, index) => (
-                <Grid item key={option.id}>
-                  <FormControlLabel
-                    sx={{ color: 'white', }}
-                    key={option.id}
-                    label={option.answerText}
-                    value={option.id}
-                    // control={<Checkbox checked={checked[index]} onChange={handleCheckChange} />}
-                    control={
-                      <Checkbox
-                        checked={checked[index]}
-                        onChange={handleCheckChange}
-                        sx={{
-                          '&.MuiCheckbox-root': {
-                            color: 'yellow'
-                          }
-                        }} />}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </FormGroup>
         </AnswersContainer>
         <AssistorContainer>
           <Button
-            bgColor={!isAnswered ? ButtonColor.login : ButtonColor.next}
-            onClick={handleNextButtonClicked}
-            // disabled={!isAnswered}
+            bgColor={ButtonColor.next}
+            onClick={nextQuestion}
+            disabled={!isAnswered}
             fullWidth={true}
             color={BasicColor.black}
-            value={
-              isAnswered ?
-                totalQuestions === questionCounter + 1 ?
-                  dictionary[language]?.finish :
-                  dictionary[language]?.next
-                :
-                'Check'
-            }
+            value={totalQuestions === questionCounter + 1 ? dictionary[language]?.finish : dictionary[language]?.next}
           />
           <Icon image={assistor} onClick={readQuestion} />
-          <Icon image={videoIcon} onClick={closeVideoModal} />
+          <Icon image={videoIcon} onClick={closeVideoModal}/>
         </AssistorContainer>
       </BlackBoard>
     </>
   );
 };
+
+const BlackBoard = styled.div`
+  background-color: #13705f;
+  border: 7px solid #5c2100;
+  border-radius: 16px;
+  @media (min-width: ${ScreenSize.tablet}) {
+    margin: 1rem;
+    height: auto;
+  }
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    height: 100%;
+  }
+`;
+const AnswersContainer = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    flex-direction: row;
+    grid-gap: 10px;
+  }
+`;
+
+const ImageAssetContainer = styled.div<{
+  imageLength?: number;
+}>`
+  display: ${(props: any) => (props.imageLength > 0 ? 'grid' : 'none')};
+  grid-template-columns: repeat(auto-fit, minmax(110px, 300px));
+  justify-content: center;
+  width: 100%;
+  grid-gap: 10px;
+  margin: 10px auto;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    width: 50%;
+  }
+`;
+const ImageAsset = styled.img`
+  width: 100%;
+`;
+const QuestionContainer = styled.div`
+  width: 90%;
+  margin: 5px auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    justify-content: left;
+  }
+`;
+const BlockAnswers = styled.div<{
+  isAnswered: boolean;
+}>`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding-left: 5px;
+  display: ${props => (props.isAnswered ? 'initial' : 'none')};
+`;
+const TextOptionsList = styled.div`
+  width: 90%;
+  margin: 20px auto;
+  position: relative;
+  text-align: left;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    height: 50%;
+    margin: 20px auto;
+    width: 70%;
+  }
+`;
+
+const AssistorContainer = styled.div`
+  width: 95%;
+  max-width: 400px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 30px auto;
+`;
+const AnswerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;

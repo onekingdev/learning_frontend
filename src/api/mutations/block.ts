@@ -1,15 +1,15 @@
 import { STUDENT } from '../fragments/studentFragments';
 import { BLOCK_PRESENTATON } from '../fragments/blockFragments'
 import { BLOCK_PRESENTATION_QUERY } from '../queries/questions'
-import { NEW_MC_ANSWER_OPTION, NEW_R_ANSWER_OPTION, TOPIC_GRADE, NEW_O_ANSWER_OPTION, NEW_T_ANSWER_OPTION } from 'api/fragments/questionFragments';
+import { NEW_MC_ANSWER_OPTION, NEW_R_ANSWER_OPTION, TOPIC_GRADE, NEW_O_ANSWER_OPTION } from 'api/fragments/questionFragments';
 // import { QUESTION } from '../fragments/questionFragments'
 export const FINISH_BLOCK_PRESENTATION = (
-  block_presentation_id: string,
-  batteryLevel: number,
-  hits: number,
-  errors: number,
-  bonusCoins: number,
-  questionResults: any
+    block_presentation_id: string,
+    batteryLevel: number,
+    hits: number,
+    errors: number,
+    bonusCoins: number,
+    questionResults: any
 ) => `
 finishBlockPresentation( blockPresentationId: ${block_presentation_id}, batteryLevel: ${batteryLevel}, errors: ${errors}, hits: ${hits}, bonusCoins: ${bonusCoins}, questions: ${questionResults} ) {
     blockPresentation{
@@ -20,30 +20,9 @@ finishBlockPresentation( blockPresentationId: ${block_presentation_id}, batteryL
     }
 }
 `;
-export const FINISH_BLK_PT = (
-  blkPTId: string,
-  batteryLevel: number,
-  hits: number,
-  errors: number,
-  bonusCoins: number,
-  questions: string
-) => `
-finishBlockPresentation(
-  batteryLevel: ${batteryLevel},
-  blockPresentationId: ${blkPTId},
-  bonusCoins: ${bonusCoins},
-  errors: ${errors},
-  hits: ${hits},
-  questions: ${questions}
-) {
-  blockPresentation{
-    ${BLOCK_PRESENTATON}
-  }
-}
-`;
 
 export const CREATE_AI_BLOCK_PRESENTATION = (
-  aokId: number,
+    aokId: number,
 ) => `
 createAiBlockPresentation( aokId: ${aokId}) {
     blockPresentation ${BLOCK_PRESENTATION_QUERY}
@@ -51,8 +30,8 @@ createAiBlockPresentation( aokId: ${aokId}) {
 `;
 
 export const CREATE_PATH_BLOCK_PRESENTATION = (
-  studentId: number,
-  topicId: number,
+    studentId: number,
+    topicId: number,
 ) => `
 createPathBlockPresentation( studentId: ${studentId}, topicId: ${topicId}) {
     blockPresentation ${BLOCK_PRESENTATION_QUERY}
@@ -61,8 +40,8 @@ createPathBlockPresentation( studentId: ${studentId}, topicId: ${topicId}) {
 
 
 export const CREATE_NEW_AI_BLOCK = (
-  aokId: number,
-  studentId: number
+    aokId: number,
+    studentId: number
 ) => `
 mutation AIBlock {
     createAiBlockPresentation(aokId: ${aokId}, studentId: ${studentId}) {
@@ -96,7 +75,7 @@ mutation AIBlock {
                 ${NEW_MC_ANSWER_OPTION}
               }
               ... on TypeInAnswerOptionSchema {
-                ${NEW_T_ANSWER_OPTION}
+                ${NEW_MC_ANSWER_OPTION}
               }
               ... on OrderAnswerOptionSchema {
                 ${NEW_O_ANSWER_OPTION}
