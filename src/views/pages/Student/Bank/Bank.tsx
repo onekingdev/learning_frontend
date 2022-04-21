@@ -11,7 +11,6 @@ import { Interest }                  from 'views/molecules/StudentBank/Interest'
 import { PageTitle }                 from 'views/molecules/PageTitle';
 import { dictionary }                from './dictionary'
 import { Wrapper, GridItem, Img }    from './Styles';
-
 export const Bank: FC = () => {
 
   const student        = useSelector((state: any) => state.student)

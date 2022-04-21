@@ -42,9 +42,8 @@ import Groups                    from 'views/pages/Teacher/Students/Groups'
 import AddStudent                from 'views/pages/Teacher/AddStudent/AddStudent';
 import Assignment                    from 'views/pages/Teacher/Assignment/Assignment'
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
-import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
-import 'animate.css';
 
+import 'animate.css';
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
@@ -198,9 +197,6 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/students">
             <Students />
-          </PrivateRoute>
-          <PrivateRoute loading={false} requireAuth={false} path="/teacher/settings">
-            <TeacherSettings />
           </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups">
             <Groups />
