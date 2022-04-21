@@ -33,11 +33,13 @@ export const BgRight = styled.img`
     position    : absolute;
     right       : 0;
     bottom      : 0;
+    z-index     : -1;
 `;
 
 export const BgLeft = styled.img`
     position    : absolute;
     left        : 0;
+    z-index     : -1;
     top         : 0;
 `;
 

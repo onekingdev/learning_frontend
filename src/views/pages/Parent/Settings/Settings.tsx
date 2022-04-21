@@ -8,9 +8,9 @@ import {
   LSText,
   LSBlueTextButton,
 } from 'views/molecules/Setting/utils/Style';
-import { SettingForm }      from 'views/organisms/Setting/Profile';
-import { Payment }          from 'views/organisms/Setting/Payment';
-import { MembershipDetail } from 'views/organisms/Setting/Details';
+import { SettingForm }      from 'views/organisms/Setting/Parent/Profile';
+import { Payment }          from 'views/organisms/Setting/Parent/Payment';
+import { MembershipDetail } from 'views/organisms/Setting/Parent/Details';
 import { CssBaseline }      from '@mui/material';
 import { LoadingContext }   from 'react-router-loading';
 import { TypoTitle }        from 'views/atoms/Text';
