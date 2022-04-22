@@ -54,7 +54,7 @@ const KidsList: FC = () => {
   const [children,  setChildren] = useState<kid[]>([]);
   const [audiences, setAudiences] = useState<any>();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
 
   const langs = [{
     name: 'English',
@@ -294,7 +294,7 @@ const KidsList: FC = () => {
           <GridItem item xs={12} md={1.5}>
             <Button
               bgColor={BasicColor.red}
-              onClick={() => history.push("/login")}
+              onClick={() => history.push('/login')}
               value={dictionary[language]?.studentLogin}
             />
           </GridItem>

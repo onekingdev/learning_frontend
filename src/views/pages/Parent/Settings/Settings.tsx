@@ -1,16 +1,15 @@
 import { FC, useEffect, useContext } from 'react';
-import { Grid }                      from '@mui/material';
+import { Button, Grid }                      from '@mui/material';
 import { ParentPgContainer }         from 'views/molecules/ParentPgContainer/ParentPgContainer';
 import { Title }                     from 'views/molecules/Setting/utils/Style';
 import {
   TextGroup,
   LSLabel,
   LSText,
-  LSBlueTextButton,
 } from 'views/molecules/Setting/utils/Style';
-import { SettingForm }      from 'views/organisms/Setting/Profile';
-import { Payment }          from 'views/organisms/Setting/Payment';
-import { MembershipDetail } from 'views/organisms/Setting/Details';
+import { SettingForm }      from 'views/organisms/Setting/Parent/Profile';
+import { Payment }          from 'views/organisms/Setting/Parent/Payment';
+import { MembershipDetail } from 'views/organisms/Setting/Parent/Details';
 import { CssBaseline }      from '@mui/material';
 import { LoadingContext }   from 'react-router-loading';
 import { TypoTitle }        from 'views/atoms/Text';
@@ -23,7 +22,7 @@ import {
 export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
   useEffect(() => {
     if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     loadingContext.done();
@@ -42,7 +41,7 @@ export const Settings: FC = () => {
             <TextGroup>
               <LSLabel>{dictionary[language]?.questions}</LSLabel>
               <LSText>{dictionary[language]?.reachUsAndWeWillHelpYou}</LSText>
-              <LSBlueTextButton href="#">{dictionary[language]?.contact}</LSBlueTextButton>
+              <Button href='#'>{dictionary[language]?.contact}</Button>
             </TextGroup>
           </Grid>
           <Grid item xs={12} md={6}>

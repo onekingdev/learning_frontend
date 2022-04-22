@@ -2,7 +2,7 @@ import { FC, JSXElementConstructor, Key, ReactElement, useState }               
 import FormLabel                                      from '@mui/material/FormLabel';
 import RadioGroup                                     from '@mui/material/RadioGroup';
 import { BasicColor }                                 from 'views/Color';
-import { LSLabel, LSButtonContainer, LSButton }       from './utils/Style';
+import { LSLabel, LSButtonContainer }       from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
 import { doCancelMembership }                         from 'app/actions/guardianActions'
 import { useSelector }                                from 'react-redux'
@@ -10,6 +10,7 @@ import { useSnackbar }                                from 'notistack';
 import { LoadingSpinner }                             from 'views/atoms/Spinner';
 import { CANCEL_REASONS }                             from 'constants/parent'
 import { dictionary }                                 from './dictionary'
+import { Button } from '@mui/material';
 interface ICancelFormProps {
   open: () => void
   refresh: () => void
@@ -68,12 +69,12 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) =>
           }
         </RadioGroup>
         <LSButtonContainer>
-          <LSButton
+          <Button
             variant='contained'
             onClick={onSubmit}
           >
             {dictionary[language]?.submit}
-          </LSButton>
+          </Button>
         </LSButtonContainer>
       </LSFormControl>
   );

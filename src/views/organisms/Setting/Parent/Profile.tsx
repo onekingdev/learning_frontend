@@ -10,16 +10,13 @@ import {
   LSShadowContainer,
   LSButtonContainer,
   LSGridRow,
-  LSTextField,
   LSTitle,
   LSText,
   LSLabel,
-  LSButton,
-  LSBlueTextButton
 } from 'views/molecules/Setting/utils/Style';
 import { settingPage }             from 'views/molecules/Setting/utils/Theme';
 import { useDispatch, useSelector }from 'react-redux';
-import { ThemeProvider }           from '@mui/material';
+import { Button, TextField, ThemeProvider }           from '@mui/material';
 import { LSDialog }                from 'views/molecules/Setting/LSDialog';
 import { PwdResetForm }            from './PwdResetFrom';
 import { useSnackbar }             from 'notistack';
@@ -31,7 +28,7 @@ export const SettingForm: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
 
   const toggleOpenPwdRstDg = () => {
     setOpenPwdRstDg(!openPwdRstDg)
@@ -97,7 +94,7 @@ export const SettingForm: FC = () => {
                 </LSLabel>
               </Grid>
               <Grid item lg={8} xs={12}>
-                <LSTextField
+                <TextField
                   margin='normal'
                   required
                   size='small'
@@ -124,18 +121,18 @@ export const SettingForm: FC = () => {
                     <PwdResetForm open={toggleOpenPwdRstDg} />
                   }
                 />
-                <LSBlueTextButton onClick={toggleOpenPwdRstDg}>
+                <Button onClick={toggleOpenPwdRstDg}>
                 {dictionary[language]?.changePassword}
-                </LSBlueTextButton>
+                </Button>
               </Grid>
             </LSGridRow>
             <LSButtonContainer>
-              <LSButton
+              <Button
                 type={dictionary[language]?.submit}
                 variant='contained'
               >
                 {dictionary[language]?.submit}
-              </LSButton>
+              </Button>
             </LSButtonContainer>
           </Box>
         </LSShadowContainer>

@@ -1,16 +1,15 @@
 import { FC, useEffect, useState } from 'react';
-import Box                         from '@mui/material/Box';
+import {Box, Button}                         from '@mui/material';
 import { useSelector }             from 'react-redux'
 import {
   LSButtonContainer, LSText,
   LSPaperMoney, LSLabel, LSInputBase
-}                                  from './utils/Style';
-import { doUpdateBroughtPlan }     from 'app/actions/guardianActions';
+}                                  from 'views/molecules/Setting/utils/Style';
+// import { doUpdateBroughtPlan }     from 'app/actions/guardianActions';
 import { useSnackbar }             from 'notistack';
 import { LoadingContainer }        from 'views/atoms/Loading'
 import ReactLoading                from 'react-loading';
 import { BasicColor }              from 'views/Color';
-import { Button } from '@mui/material';
 
 interface IUpgradeProps {
   onConfirm: () => void
@@ -25,15 +24,20 @@ const text = [
   'Your credit card on file will be charged for this upgrade.',
 ]
 
-export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, plan, refresh }) => {
+export const TeacherPlanUpgrade: FC<IUpgradeProps> = ({ onConfirm, plan, refresh }) => {
   const guardian = useSelector((state: any) => state.guardian);
-  const user = useSelector((state: any) => state.user);
+  // const user = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false)
 
   const onSubmitBtnClicked = async () => {
     setLoading(true)
-    const res: any = await doUpdateBroughtPlan(guardian.id, plan.id, user.token)
+    // TODO: update query when the backend is done
+    // const res: any = await doUpdateBroughtPlan(guardian.id, plan.id, user.token)
+
+    // Remove this when the backend is done;
+    const res = {status: false}
+
     if (res.status) {
       enqueueSnackbar('Student Package updated successfully', { variant: 'success' })
       onConfirm()

@@ -1,19 +1,63 @@
-import styled                                from 'styled-components';
-import { FC, useState, useEffect }           from 'react';
-import { Button, Grid, Paper, TableRow, TableHead, TableContainer, TableCell, TableBody, Table }                              from '@mui/material';
-import { useSelector }                       from 'react-redux'
-import { LSLabel, LSText } from './utils/Style';
-import { LSDialog }                          from './LSDialog';
-import { CancelPlanForm }                    from './CancelPlanForm';
-import { useDialog }                         from './utils/useDialog';
-import { Upgrade }                           from './Upgrade';
-import { doFetchAvailableBroughtPlans }      from 'app/actions/guardianActions'
-import { dictionary }                        from './dictionary'
+import styled from 'styled-components';
+import { FC, useState, useEffect } from 'react';
+import {
+  Button,
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
+import { useSelector } from 'react-redux'
+import { LSDialog } from 'views/molecules/Setting/LSDialog';
+import { useDialog } from 'views/molecules/Setting/utils/useDialog';
+import { LSLabel, LSText } from 'views/molecules/Setting/utils/Style';
+import { TeacherCancelPlanForm } from './TeacherCancelPlanForm';
+import { TeacherPlanUpgrade } from './TeacherPlanUpgrade';
+import { doFetchAvailableBroughtPlans } from 'app/actions/guardianActions'
+import { dictionary } from './dictionary'
+
 interface IPlanList {
   refresh: boolean
 }
 
-export const PlanList: FC<IPlanList> = ({refresh}) => {
+const fake_plans = [
+  {
+    id: 1,
+    plan: {
+      name: 'Gold',
+      priceMonth: '12USD',
+      priceYear: '108USD',
+    },
+    period: 'MONTHLY',
+    expiredAt: '22-06-08',
+  },
+  {
+    id: 2,
+    plan: {
+      name: 'Gold',
+      priceMonth: '12USD',
+      priceYear: '108USD',
+    },
+    period: 'MONTHLY',
+    expiredAt: '22-06-08',
+  },
+  {
+    id: 3,
+    plan: {
+      name: 'Gold',
+      priceMonth: '12USD',
+      priceYear: '108USD',
+    },
+    period: 'YEARLY',
+    expiredAt: '22-06-08',
+  },
+]
+
+export const TeacherPlanList: FC<IPlanList> = ({ refresh }) => {
 
   // for change to yearly dialog
   const [isUpdateOpen, update] = useState(false)
@@ -24,8 +68,8 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
   const [tag, seTag] = useState(0)
   const [plans, setPlans] = useState<Array<any>>([])
   const [changed, setChanged] = useState(false)
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'EN_US'
 
   const toggleChanged = () => {
     setChanged(!changed)
@@ -45,14 +89,15 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
 
   const fetchAvailableBrougthPlans = async (mounted: boolean) => {
     setPlans([])
-    const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
-    if (res !== null) {
-      if (mounted) {
-        setPlans(
-          res
-        )
-      } else return
-    }
+    setPlans(fake_plans)
+    // const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
+    // if (res !== null) {
+    //   if (mounted) {
+    //     setPlans(
+    //       res
+    //     )
+    //   } else return
+    // }
   }
 
   useEffect(() => {
@@ -94,7 +139,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
                         <LSLabel>{row.expiredAt?.slice(0, 10)}</LSLabel>
                       </Grid>
                       <Grid item md={4} xs={4}>
-                        <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth:row.plan.priceYear} {row.plan.currency}</LSLabel>
+                        <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth : row.plan.priceYear} {row.plan.currency}</LSLabel>
                       </Grid>
                     </StyledGrid>
                   </Grid>
@@ -112,7 +157,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
                   </Grid>
                 </StyledTableCell>
               </TableRow>
-            )): null}
+            )) : null}
           </TableBody>
         </Table>
       </TableContainer>
@@ -122,7 +167,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
         title={dictionary[language]?.CancelChildrenPlan}
         contentText={dictionary[language]?.YouAreCancellingOneChildSoloArea}
         dialogContent={
-          <CancelPlanForm
+          <TeacherCancelPlanForm
             plan={plans[tag]}
             open={open}
             refresh={toggleChanged}
@@ -134,7 +179,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
         open={openUpdate}
         title={dictionary[language]?.Upgrade}
         dialogContent={
-          <Upgrade
+          <TeacherPlanUpgrade
             plan={plans[tag]}
             onConfirm={openUpdate}
             onCancel={onCancelUpgrade}
