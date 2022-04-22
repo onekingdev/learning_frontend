@@ -26,9 +26,15 @@ export const dictionary:any = Object.freeze({
         setSchoolHours: 'Set School Hours',
         language: 'Language',
         games: 'Games',
-        gameConst: 'Game Cost',
+        gameCost: 'Game Cost',
         timeZone: 'Time Zone',
-
+        monday: 'Monday',
+        tuesday: 'Tuesday',
+        wednesday: 'Wednesday',
+        thursday: 'Thursday',
+        friday: 'Friday',
+        saturday: 'Saturday',
+        sunday: 'Sunday',
     },
     "TH": {
         addNew: 'Add New',
@@ -57,8 +63,14 @@ export const dictionary:any = Object.freeze({
         setSchoolHours: 'Set School Hours',
         language: 'Language',
         games: 'Games',
-        gameConst: 'Game Cost',
+        gameCost: 'Game Cost',
         timeZone: 'Time Zone',
+        tuesday: 'Tuesday',
+        wednesday: 'Wednesday',
+        thursday: 'Thursday',
+        friday: 'Friday',
+        saturday: 'Saturday',
+        sunday: 'Sunday',
 
     },
     'ES_MX': {
@@ -88,7 +100,13 @@ export const dictionary:any = Object.freeze({
         setSchoolHours: 'Set School Hours',
         language: 'Language',
         games: 'Games',
-        gameConst: 'Game Cost',
+        gameCost: 'Game Cost',
         timeZone: 'Time Zone',
+        tuesday: 'Tuesday',
+        wednesday: 'Wednesday',
+        thursday: 'Thursday',
+        friday: 'Friday',
+        saturday: 'Saturday',
+        sunday: 'Sunday',
     }
 });

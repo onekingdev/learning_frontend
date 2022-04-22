@@ -96,7 +96,7 @@
     "husky": "^6.0.0"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=2048 start",
+    "start": "react-scripts --max_old_space_size=3048 start",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "build-github": "CI=false && react-scripts build",
