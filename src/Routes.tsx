@@ -40,10 +40,10 @@ import Classroom                 from 'views/pages/Teacher/Classroom/Classroom'
 import Students                  from 'views/pages/Teacher/Students/Students'
 import Groups                    from 'views/pages/Teacher/Students/Groups'
 import AddStudent                from 'views/pages/Teacher/AddStudent/AddStudent';
-import Assignment                    from 'views/pages/Teacher/Assignment/Assignment'
-import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
-import SettingForm from 'views/molecules/Classroom/SettingForm'
-import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
+import Assignment                from 'views/pages/Teacher/Assignment/Assignment'
+import { AIQuestion }            from 'views/pages/Student/Question/AIQuestions';
+import TeacherSettings           from 'views/pages/Teacher/Settings/Settings'
+import Certificates              from 'views/pages/Teacher/Certificates/Certificates';
 import 'animate.css';
 
 
@@ -203,17 +203,20 @@ export function Routes() {
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/settings">
             <TeacherSettings />
           </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/certificates">
+            <Certificates />
+          </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups">
             <Groups />
           </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent">
             <AddStudent />
           </PrivateRoute>
-          {/* {process.env.NODE_ENV === 'development' ? ( */}
+          {process.env.NODE_ENV === 'development' ? (
             <Route path="/test">
-              <SettingForm isOpen={true} close={()=>{}}/>
+              <Assignment />
             </Route>
-          {/* ) : null} */}
+          ) : null}
           <Redirect from="/" to="/login" />
         </Switch>
     </FadeIn>

@@ -22,7 +22,7 @@ import MenuItem                  from '@mui/material/MenuItem';
 import Button                    from 'views/molecules/MuiButton';
 import {ButtonColor, BasicColor} from 'views/Color';
 import commonDictionary          from 'constants/commonDictionary'
-import Switch                    from 'views/molecules/MuiSwitch'
+
 const SettingForm = (props: any) => {
     let language:string = useSelector((state: any) => state.user.language);
     language            = language? language : "EN_US"
@@ -106,7 +106,6 @@ const SettingForm = (props: any) => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <FormLabel>{dictionary[language]?.games}</FormLabel>
-                                        <Switch></Switch>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TextField
@@ -162,44 +161,8 @@ const SettingForm = (props: any) => {
                                         <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
                                     </Grid>
                                 </Grid>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={2}>
-                                        <Formtitle>{dictionary[language]?.monday}</Formtitle>
-                                    </Grid>
-                                    <Grid item xs={2}>
-                                        <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
-                                    </Grid>
-                                    <Grid item xs={3.5}>
-                                        <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
-                                    </Grid>
-                                    <Grid item xs={1}>
-                                        <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
-                                    </Grid>
-                                    <Grid item xs={3.5}>
-                                        <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
-                                    </Grid>
-                                </Grid>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={12}>
-                                        <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
-                                    </Grid>
-                                </Grid>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={12}>
-                                        <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
-                                    </Grid>
-                                </Grid>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={12}>
-                                        <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
-                                    </Grid>
-                                </Grid>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={12}>
-                                        <Formtitle>{dictionary[language]?.setSchoolHours}</Formtitle>
-                                    </Grid>
-                                </Grid>
                             </Grid>
+                            
                             <Grid item xs={12}>
                                 <TextField
                                     label       = {dictionary[language]?.classroomName}

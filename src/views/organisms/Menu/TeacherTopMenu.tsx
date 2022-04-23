@@ -56,6 +56,20 @@ export const TopMenu: FC<TopMenuProps> = ({
     <>
       <TopMenuStyles style={navOp ? {background: '#FFFFFF00', paddingTop: '45px'}:{background: '#FFFFFF', boxShadow:'gray 0px 0px 6px 0px', paddingTop: '45px'}}>
         <Sidebar />
+        <FormControl className={classes.formControl}>
+          {/* <InputLabel id='menu'>{dictionary[language]?.menu}</InputLabel> */}
+          <Select
+            labelId='menu'
+            id='menu-select'
+            label='Menu'
+            // onChange={handleChange}
+            sx={{backgroundColor: 'white'}}
+          >
+            {/* <MenuItem value={'Settings'}>{dictionary[language]?.settings}</MenuItem> */}
+            {/* <MenuItem value={'ManageKids'}>{dictionary[language]?.manageKids}</MenuItem> */}
+            {/* <MenuItem value={'SignOut'}>{dictionary[language]?.signOut}</MenuItem> */}
+          </Select>
+        </FormControl>
         <LogoContainer>
           <LogoImg  src={logoTitle} />
         </LogoContainer>
