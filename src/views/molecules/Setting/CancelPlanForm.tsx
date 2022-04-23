@@ -2,14 +2,13 @@ import { FC, JSXElementConstructor, Key, ReactElement, useState }               
 import FormLabel                                      from '@mui/material/FormLabel';
 import RadioGroup                                     from '@mui/material/RadioGroup';
 import { BasicColor }                                 from 'views/Color';
-import { LSLabel, LSButtonContainer }       from './utils/Style';
+import { LSLabel, LSButtonContainer, LSButton }       from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
 import { doCancelBroughtPlan } from 'app/actions/guardianActions';
 import { useSelector }         from 'react-redux'
 import { useSnackbar }         from 'notistack';
 import { LoadingSpinner }      from 'views/atoms/Spinner';
 import { CANCEL_REASONS }      from 'constants/parent'
-import { Button } from '@mui/material';
 
 interface ICancelFormProps {
   // onConfirm: (arg: string) => void
@@ -70,12 +69,12 @@ export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan, refresh }) =>
         }
       </RadioGroup>
       <LSButtonContainer>
-        <Button
+        <LSButton
           variant='contained'
           onClick={onSubmit}
         >
           {'Submit'}
-        </Button>
+        </LSButton>
       </LSButtonContainer>
     </LSFormControl>
   );

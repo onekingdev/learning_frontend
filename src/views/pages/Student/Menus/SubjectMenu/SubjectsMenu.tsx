@@ -49,7 +49,7 @@ export const SubjectsMenu: FC = () => {
       <Wrapper>
         <StudentMenu>
           <TitleContainer>
-            <RibbonText body={dictionary[language].title} />
+            <RibbonText body={dictionary[language]?.title} />
           </TitleContainer>
           <SubjectsCardsContainer>
             {areasOfKnowledge.map((areaOfKnowledge: IAreasOfKnowledge) => (

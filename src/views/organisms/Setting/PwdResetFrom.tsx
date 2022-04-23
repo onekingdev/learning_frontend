@@ -1,27 +1,27 @@
-import { FC, useState } from 'react';
-import { settingPage } from 'views/molecules/Setting/utils/Theme';
-import { Button, TextField, ThemeProvider } from '@mui/material';
-import { LSGridRow, LSLabel } from 'views/molecules/Setting/utils/Style';
-import { Grid } from '@mui/material';
-import { LSButtonContainer } from 'views/molecules/Setting/utils/Style';
-import { doUpdateGuardianEmailPassword } from 'app/actions/guardianActions';
-import { useSelector } from 'react-redux';
-import { useSnackbar } from 'notistack';
-import { LoadingSpinner } from 'views/atoms/Spinner';
-import { dictionary } from '../../Parent/dictionary'
+import { FC, useState }                    from 'react';
+import { settingPage }                     from 'views/molecules/Setting/utils/Theme';
+import { ThemeProvider }                   from '@mui/material';
+import { LSGridRow, LSLabel, LSTextField } from 'views/molecules/Setting/utils/Style';
+import { Grid }                            from '@mui/material';
+import { LSButtonContainer, LSButton }     from 'views/molecules/Setting/utils/Style';
+import { doUpdateGuardianEmailPassword }   from 'app/actions/guardianActions';
+import { useSelector }                     from 'react-redux';
+import { useSnackbar }                     from 'notistack';
+import { LoadingSpinner }                  from 'views/atoms/Spinner';
+import { dictionary }                      from './dictionary'
 
 interface DialogProps {
     open: () => (void)
 }
-export const TeacherPwdResetForm: FC<DialogProps> = ({ open }) => {
+export const PwdResetForm: FC<DialogProps> = ({ open }) => {
 
     const [pwd, setPwd] = useState({ password: '', confirm: '' })
     const { enqueueSnackbar } = useSnackbar();
     const [errorMsg, setErrorMsg] = useState('')
     const user = useSelector((state: any) => state.user);
     const [loading, setLoading] = useState(false)
-    let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : "EN_US"
+    let language:string = useSelector((state: any) => state.user.language);
+    language            = language? language : "EN_US"
     // Whenever an input changes value, change the corresponding state variable
     const handleInputChange = (event: any) => {
         event.preventDefault();
@@ -47,23 +47,23 @@ export const TeacherPwdResetForm: FC<DialogProps> = ({ open }) => {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        // // Verify that the passwords match
-        // if (!validatePwd()) return
+        // Verify that the passwords match
+        if (!validatePwd()) return
 
-        // // Call Userfront.resetPassword()
-        // setLoading(true)
-        // const res: any = await doUpdateGuardianEmailPassword('', user.username, pwd.password, user.token)
-        // if (res === null)
-        //     enqueueSnackbar(dictionary[language]?.passwordResetError, { variant: 'error' })
-        // else enqueueSnackbar(dictionary[language]?.passwordResetSuccess, { variant: 'success' });
-        // setLoading(false)
-        // open()
+        // Call Userfront.resetPassword()
+        setLoading(true)
+        const res: any = await doUpdateGuardianEmailPassword('', user.username, pwd.password, user.token)
+        if (res === null)
+            enqueueSnackbar(dictionary[language]?.passwordResetError, { variant: 'error' })
+        else enqueueSnackbar(dictionary[language]?.passwordResetSuccess, { variant: 'success' });
+        setLoading(false)
+        open()
     }
     return (
         loading ?
             <LoadingSpinner />
             :
-            <>
+            <ThemeProvider theme={settingPage}>
                 <LSGridRow container spacing={3}>
                     <Grid item lg={4} xs={12}>
                         <LSLabel>
@@ -71,7 +71,7 @@ export const TeacherPwdResetForm: FC<DialogProps> = ({ open }) => {
                         </LSLabel>
                     </Grid>
                     <Grid item lg={8} xs={12}>
-                        <TextField
+                        <LSTextField
                             error={errorMsg ? true : false}
                             size='small'
                             id='outlined-password-input'
@@ -87,11 +87,11 @@ export const TeacherPwdResetForm: FC<DialogProps> = ({ open }) => {
                     </Grid>
                     <Grid item lg={4} xs={12}>
                         <LSLabel>
-                            {dictionary[language]?.confirmPassword}
+                        {dictionary[language]?.confirmPassword}
                         </LSLabel>
                     </Grid>
                     <Grid item lg={8} xs={12}>
-                        <TextField
+                        <LSTextField
                             size='small'
                             id='outlined-password-confirm'
                             label={dictionary[language]?.confirm}
@@ -103,15 +103,15 @@ export const TeacherPwdResetForm: FC<DialogProps> = ({ open }) => {
                     </Grid>
                 </LSGridRow>
                 <LSButtonContainer>
-                    <Button
+                    <LSButton
                         type='submit'
                         variant='contained'
                         onClick={handleSubmit}
                     >
                         {dictionary[language]?.submit}
-                    </Button>
+                    </LSButton>
                 </LSButtonContainer>
-            </>
+            </ThemeProvider>
     );
 }
 

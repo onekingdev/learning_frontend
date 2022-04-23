@@ -1,8 +1,15 @@
 import styled                                from 'styled-components';
 import { FC, useState, useEffect }           from 'react';
-import { Button, Grid, Paper, TableRow, TableHead, TableContainer, TableCell, TableBody, Table }                              from '@mui/material';
+import Table                                 from '@mui/material/Table';
+import TableBody                             from '@mui/material/TableBody';
+import TableCell                             from '@mui/material/TableCell';
+import TableContainer                        from '@mui/material/TableContainer';
+import TableHead                             from '@mui/material/TableHead';
+import TableRow                              from '@mui/material/TableRow';
+import Paper                                 from '@mui/material/Paper';
+import { Grid }                              from '@mui/material';
 import { useSelector }                       from 'react-redux'
-import { LSLabel, LSText } from './utils/Style';
+import { LSLabel, LSText, LSBlueTextButton } from './utils/Style';
 import { LSDialog }                          from './LSDialog';
 import { CancelPlanForm }                    from './CancelPlanForm';
 import { useDialog }                         from './utils/useDialog';
@@ -25,7 +32,7 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
   const [plans, setPlans] = useState<Array<any>>([])
   const [changed, setChanged] = useState(false)
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : "EN_US"
 
   const toggleChanged = () => {
     setChanged(!changed)
@@ -66,10 +73,10 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
   return (
     <div>
       <TableContainer component={Paper} >
-        <Table aria-label='simple table' size='small' >
+        <Table aria-label="simple table" size="small" >
           <StyledTableHead >
             <TableRow>
-              <TableCell align='center'>
+              <TableCell align="center">
                 <LSLabel fontSize={17} textAlign='center'>{dictionary[language]?.plan}</LSLabel>
                 <LSText textAlign='center' fontSize={13}>{dictionary[language]?.getThreeMonthsFREEForAnnualPlan}</LSText>
               </TableCell>
@@ -77,11 +84,12 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
           </StyledTableHead>
           <TableBody>
             {plans.length > 0 ? plans.map((row, index) => (
+              // row.status &&
               <TableRow
                 hover
                 key={row.id}
               >
-                <StyledTableCell component='th' scope='row' bgcolor={colors[index % 4]}>
+                <StyledTableCell component="th" scope="row" bgcolor={colors[index % 4]}>
                   <Grid container>
                     <Grid item md={3} xs={12}>
                       <LSLabel >{row.plan.name}</LSLabel>
@@ -100,14 +108,14 @@ export const PlanList: FC<IPlanList> = ({refresh}) => {
                   </Grid>
                   <Grid container>
                     <Grid item md={6} xs={12}>
-                      <Button
+                      <LSBlueTextButton
                         disabled={row.period === 'MONTHLY' ? false : true}
                         onClick={() => onUpgradeBtnClick(index)}
                       >{dictionary[language]?.ChangeToYearly}
-                      </Button>
+                      </LSBlueTextButton>
                     </Grid>
                     <Grid item md={6} xs={12}>
-                      <Button onClick={() => onBtnClick(index)}>{dictionary[language]?.CancelPlan}</Button>
+                      <LSBlueTextButton onClick={() => onBtnClick(index)}>{dictionary[language]?.CancelPlan}</LSBlueTextButton>
                     </Grid>
                   </Grid>
                 </StyledTableCell>

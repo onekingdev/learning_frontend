@@ -27,7 +27,7 @@ export const database = getDatabase(app);
 const language = 'EN_US';
 const userProgress = [
   {
-    title: dictionary[language].ela,
+    title: dictionary[language]?.ela,
     color: BasicColor.red,
     progress: [
       false,
@@ -43,7 +43,7 @@ const userProgress = [
     ],
   },
   {
-    title: dictionary[language].math,
+    title: dictionary[language]?.math,
     color: BasicColor.orange,
     progress: [
       false,
@@ -59,7 +59,7 @@ const userProgress = [
     ],
   },
   {
-    title: dictionary[language].sight,
+    title: dictionary[language]?.sight,
     color: BasicColor.yellow,
     progress: [
       false,
@@ -75,7 +75,7 @@ const userProgress = [
     ],
   },
   {
-    title: dictionary[language].science,
+    title: dictionary[language]?.science,
     color: BasicColor.green,
     progress: [
       false,
@@ -91,7 +91,7 @@ const userProgress = [
     ],
   },
   {
-    title: dictionary[language].health,
+    title: dictionary[language]?.health,
     color: BasicColor.aqua,
     progress: [
       false,

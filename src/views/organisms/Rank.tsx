@@ -21,7 +21,7 @@ export const Rank: FC = () => {
   return (
     <>
       <RankStyles>
-        <Title isDark={true}># {dictionary[language].rank}</Title>
+        <Title isDark={true}># {dictionary[language]?.rank}</Title>
         <RankUsersContainer>
           {ranking.map((name, i) => {
             return (

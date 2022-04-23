@@ -49,9 +49,9 @@ export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) =>
         )}
         <PriceBadge price={price} />
         <StyledBg>
-          <p>{dictionary[language].buyCardDescription}</p>
+          <p>{dictionary[language]?.buyCardDescription}</p>
           <p className="dollars">${price}</p>
-          <button onClick={() => onCardClick()}>{dictionary[language].buy}</button>
+          <button onClick={() => onCardClick()}>{dictionary[language]?.buy}</button>
         </StyledBg>
       </StyledCard>
     </CardContainer>

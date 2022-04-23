@@ -33,13 +33,11 @@ export const BgRight = styled.img`
     position    : absolute;
     right       : 0;
     bottom      : 0;
-    z-index     : -1;
 `;
 
 export const BgLeft = styled.img`
     position    : absolute;
     left        : 0;
-    z-index     : -1;
     top         : 0;
 `;
 
@@ -48,7 +46,7 @@ export const TeacherTitleBar = styled.div`
     width       : 385px;
     height      : 81px;
     margin-left : 266px;
-    margin-top  : 54px;
+    margin-top  : 60px;
     font-size   : 40px;
     color       : white;
     background  : url(${teacher_title_bar_img}), #FFFFFF;

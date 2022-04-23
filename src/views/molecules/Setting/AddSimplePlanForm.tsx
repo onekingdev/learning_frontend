@@ -211,13 +211,13 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
         >
           <Grid container alignItems='center'>
             <Grid item xs={6}>
-              <LSFormControlLabel value={plans[0]?.name} control={<LSRadio />} label={dictionary[language].radioLabelGold} />
+              <LSFormControlLabel value={plans[0]?.name} control={<LSRadio />} label={dictionary[language]?.radioLabelGold} />
             </Grid>
             <Grid item xs={6}>
               <TypoBtn>${plans[0]?.priceMonth}</TypoBtn>
             </Grid>
             <Grid item xs={6}>
-              <LSFormControlLabel value={plans[1]?.name} control={<LSRadio checked={checked[0] || checked[1] || checked[2] || checked[3] || checked[4]} />} label={dictionary[language].radioLabelCombo} />
+              <LSFormControlLabel value={plans[1]?.name} control={<LSRadio checked={checked[0] || checked[1] || checked[2] || checked[3] || checked[4]} />} label={dictionary[language]?.radioLabelCombo} />
             </Grid>
             <Grid item xs={6}>
               <TypoBtn>${plans[1]?.priceMonth}</TypoBtn>
@@ -226,7 +226,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
               {renderComboChildren(combo)}
             </Grid>
             <Grid item xs={6}>
-              <LSFormControlLabel value={plans[2]?.name} control={<LSRadio />} label={dictionary[language].radioLabelSolo} />
+              <LSFormControlLabel value={plans[2]?.name} control={<LSRadio />} label={dictionary[language]?.radioLabelSolo} />
             </Grid>
             <Grid item xs={6}>
               <TypoBtn>${plans[2]?.priceMonth}</TypoBtn>
@@ -236,7 +236,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
             </Grid>
           </Grid>
         </RadioGroup>
-        <TypoDescription >{dictionary[language].paymentCardMessage}</TypoDescription>
+        <TypoDescription >{dictionary[language]?.paymentCardMessage}</TypoDescription>
         <LSInputBase
           fullWidth
           disabled
@@ -250,7 +250,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
           <Button
             bgColor={BasicColor.green}
             onClick={onSubmit}
-            value={dictionary[language].submit}
+            value={dictionary[language]?.submit}
           />
         </LSButtonContainer>
       </div> :

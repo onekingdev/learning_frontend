@@ -21,7 +21,7 @@ export const Games: FC = () => {
         <StudentMenu>
           <GamesContainer>
             <GamesTitle>
-              <Title isDark={true}>{dictionary[language].title}</Title>
+              <Title isDark={true}>{dictionary[language]?.title}</Title>
             </GamesTitle>
             <GameMainMenu />
           </GamesContainer>

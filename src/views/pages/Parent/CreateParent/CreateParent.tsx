@@ -47,7 +47,7 @@ const CreateParent: FC = () => {
   const [couponCode, setCouponCode] = useState('');
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : "EN_US"
 
   function validateEmail (email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -68,7 +68,7 @@ const CreateParent: FC = () => {
     setLoading(true);
     const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
     /*------------------------ free account for first releae -S-------------------------*
-    const result: any = await createGuardian(email, firstName, lastName, userName, password,'FREE', dispatch)
+    const result: any = await createGuardian(email, firstName, lastName, userName, password,"FREE", dispatch)
     /*------------------------ free account for first releae -E-------------------------*/
 
     setLoading(false);
@@ -158,7 +158,7 @@ const CreateParent: FC = () => {
               </Grid>
               {/* <Grid item xs={12}>
                 <TextField
-                  label='Parent Username'
+                  label="Parent Username"
                   onChange={e => {
                     setUserName(e.target.value);
                     handleFormChange(
@@ -173,7 +173,7 @@ const CreateParent: FC = () => {
               <Grid item xs={12}>
                 <TextField
                   label={dictionary[language]?.password}
-                  type='password'
+                  type="password"
                   onChange={e => {
                     setPassword(e.target.value);
                     handleFormChange(
@@ -188,7 +188,7 @@ const CreateParent: FC = () => {
               <Grid item xs={12} md={12}>
                 <TextField
                   label={dictionary[language]?.confirmPassword}
-                  type='password'
+                  type="password"
                   onChange={e => {
                     // setConfPassword(e.target.value);
                     handleFormChange(
@@ -211,47 +211,47 @@ const CreateParent: FC = () => {
                     setCouponCode(e.target.value);
                   }}
                   value={couponCode}
-                  type='special code'
+                  type="special code"
                 />
               </Grid>
             </Grid>
-            <div className='flex'>
+            <div className="flex">
               <Button
                 bgColor={BasicColor.green}
                 onClick={handleCreate}
                 value={dictionary[language]?.createAccount}
-                margin='45px 0 0 0'
+                margin="45px 0 0 0"
                 loading={loading}
               />
             </div>
-            <div className='p-b-95 p-t-30 font-s-15 inline'>
+            <div className="p-b-95 p-t-30 font-s-15 inline">
               {dictionary[language]?.byClickingCreateAccountYouAgreeToLearnWithSocrates}{' '}
-              <div className='font-w-9 inline'>
+              <div className="font-w-9 inline">
                 {dictionary[language]?.privacyPolicy}, {dictionary[language]?.termsAndConditions}
               </div>{' '}
-              {dictionary[language]?.and} <div className='font-w-9 inline'>{dictionary[language]?.childrenPrivacyPolicy}</div>
+              {dictionary[language]?.and} <div className="font-w-9 inline">{dictionary[language]?.childrenPrivacyPolicy}</div>
             </div>
           </FormContainer>
           <ContactContainer>
             <ContactHeader>
-              <img src={SocratesImg} className='p-l-20 p-r-10' />
-              <div className='font-s-60 line-h-75 font-w-6 text-center p-r-25'>
+              <img src={SocratesImg} className="p-l-20 p-r-10" />
+              <div className="font-s-60 line-h-75 font-w-6 text-center p-r-25">
               {dictionary[language]?.welcome} <br />
               {dictionary[language]?.toSocrates}
               </div>
             </ContactHeader>
             <ContactBody>
-              <div className='font-w-8 font-s-30 line-h-35 p-b-25'>
+              <div className="font-w-8 font-s-30 line-h-35 p-b-25">
                 {dictionary[language]?.contactUs}
               </div>
-              <div className='flex-col'>
-                <div className='font-w-7 font-s-35 p-b-20'>
+              <div className="flex-col">
+                <div className="font-w-7 font-s-35 p-b-20">
                   {dictionary[language]?.weAreHappyToHelpYou}
                 </div>
-                <div className='flex justify-space-between'>
-                  <ButtonText className='p-1-10' onClick={() => location.href='https://www.withsocrates.com/contact/'}>{dictionary[language]?.contactUs}</ButtonText>
+                <div className="flex justify-space-between">
+                  <ButtonText className="p-1-10" onClick={() => location.href='https://www.withsocrates.com/contact/'}>{dictionary[language]?.contactUs}</ButtonText>
                   <ButtonText onClick={() => location.href='https://www.withsocrates.com/faq/'}>{dictionary[language]?.FAQ}</ButtonText>
-                  <ButtonText className='p-r-10' onClick={() => location.href='https://www.withsocrates.com/membership/'}>{dictionary[language]?.plans}</ButtonText>
+                  <ButtonText className="p-r-10" onClick={() => location.href='https://www.withsocrates.com/membership/'}>{dictionary[language]?.plans}</ButtonText>
                 </div>
               </div>
             </ContactBody>
