@@ -67,8 +67,8 @@ export const SelectCreateType: FC = () => {
   return (
     <Login>
       <Greet
-        header    ={dictionary[language].welcome}
-        // subheader ={dictionary[language].instructions}
+        header    ={dictionary[language]?.welcome}
+        // subheader ={dictionary[language]?.instructions}
         logo      ={logo}
         classroomIllustration ={classroom}
         greetingIllustration  ={greeting}
@@ -77,9 +77,9 @@ export const SelectCreateType: FC = () => {
         <StyledContainer >
           <ContentWrapper>
             <DesktopWelcome>
-              <Header>{dictionary[language].practicePlayGrow}</Header>
-              <Content>{dictionary[language].content}</Content>
-              {/* <Subheader>{dictionary[language].instructions}</Subheader> */}
+              <Header>{dictionary[language]?.practicePlayGrow}</Header>
+              <Content>{dictionary[language]?.content}</Content>
+              {/* <Subheader>{dictionary[language]?.instructions}</Subheader> */}
             </DesktopWelcome>
             <Actions
               createClassAction   = {() => history.push('/teacher/teacherSignup')}
@@ -89,16 +89,16 @@ export const SelectCreateType: FC = () => {
           <TermsContainer>
             <Grid container >
               <Grid item xs={3}>
-                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.WithSocrates.com'}>{dictionary[language].about}</TypoBtn>
+                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.WithSocrates.com'}>{dictionary[language]?.about}</TypoBtn>
               </Grid>
               <Grid item xs={3}>
-                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.withsocrates.com/privacy-policy/'}>{dictionary[language].privacy}</TypoBtn>
+                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.withsocrates.com/privacy-policy/'}>{dictionary[language]?.privacy}</TypoBtn>
               </Grid>
               <Grid item xs={3}>
-                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'}>{dictionary[language].children_privacy}</TypoBtn>
+                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'}>{dictionary[language]?.children_privacy}</TypoBtn>
               </Grid>
               <Grid item xs={3}>
-                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.withsocrates.com/terms-conditions/'}>{dictionary[language].termCondition}</TypoBtn>
+                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.withsocrates.com/terms-conditions/'}>{dictionary[language]?.termCondition}</TypoBtn>
               </Grid>
             </Grid>
           </TermsContainer>
