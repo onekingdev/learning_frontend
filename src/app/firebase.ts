@@ -1,13 +1,12 @@
-import { initializeApp }                  from 'firebase/app';
-import { getDatabase, set, ref, onValue } from 'firebase/database';
+import { initializeApp } from 'firebase/app';
+import { getDatabase } from 'firebase/database';
 import {
   getStorage,
   ref as assetRef,
   getDownloadURL,
   listAll,
-}                                         from 'firebase/storage';
-import { BasicColor }                     from 'views/Color';
-import { dictionary }                     from 'views/pages/Student/Progress/dictionary';
+  uploadBytes,
+} from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAdf707dGjrJOLJVuES5V-Reu6RuaJuvug',
@@ -21,122 +20,10 @@ const firebaseConfig = {
   measurementId: 'G-SLPK83H4DF',
 };
 
+
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 
-const language = 'EN_US';
-const userProgress = [
-  {
-    title: dictionary[language]?.ela,
-    color: BasicColor.red,
-    progress: [
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-    ],
-  },
-  {
-    title: dictionary[language]?.math,
-    color: BasicColor.orange,
-    progress: [
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-    ],
-  },
-  {
-    title: dictionary[language]?.sight,
-    color: BasicColor.yellow,
-    progress: [
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-    ],
-  },
-  {
-    title: dictionary[language]?.science,
-    color: BasicColor.green,
-    progress: [
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-    ],
-  },
-  {
-    title: dictionary[language]?.health,
-    color: BasicColor.aqua,
-    progress: [
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      true,
-    ],
-  },
-];
-
-const ranking = ['Tony', 'Emily', 'Albert', 'Viri', 'Candy'];
-
-export function writeProgress() {
-  const db = getDatabase(app);
-  set(ref(db, 'progress/test_user'), userProgress);
-}
-
-export const getProgress = (update: any) => {
-  const db = getDatabase(app);
-  const progressRef = ref(db, 'progress/test_user');
-  onValue(progressRef, snapshot => {
-    const data = snapshot.val();
-    update(data);
-  });
-};
-
-export function writeRanking() {
-  const db = getDatabase(app);
-  set(ref(db, 'ranking/test_user'), ranking);
-}
-
-export const getRanking = (update: any) => {
-  const db = getDatabase(app);
-  const progressRef = ref(db, 'ranking/test_user');
-  onValue(progressRef, snapshot => {
-    const data = snapshot.val();
-    update(data);
-  });
-};
 
 export const getAvatarAsset = (directory: any, image: any, setPhoto: any) => {
   const storage = getStorage();
@@ -239,3 +126,142 @@ export const getDownUrlByFilename = async (dir: string, filename: string) => {
     return null
   }
 };
+
+
+export const uploadTeacherCertificateFileOnFirebase = async (file: any, filename: string) => {
+
+  const storage = getStorage();
+  const imageRef = assetRef(storage, `assets/certificates/${filename}`)
+
+  try {
+    const snapshot = await uploadBytes(imageRef, file)
+    return { success: true, snapshot: snapshot }
+  } catch (error: any) {
+    return { success: false, error: error.message }
+  }
+
+};
+
+export const fetchTeacherCertificateFilesFromFirebase = async (setUrls: Function) => {
+  const storage = getStorage();
+  const listRef = assetRef(storage, `assets/certificates`);
+  listAll(listRef).then(res => {
+    Promise.all(res.items.map(getDownloadURL)).then(urls => {
+      setUrls(urls)
+    });
+  });
+};
+
+// const language = 'EN_US';
+// const userProgress = [
+//   {
+//     title: dictionary[language].ela,
+//     color: BasicColor.red,
+//     progress: [
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//     ],
+//   },
+//   {
+//     title: dictionary[language].math,
+//     color: BasicColor.orange,
+//     progress: [
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//     ],
+//   },
+//   {
+//     title: dictionary[language].sight,
+//     color: BasicColor.yellow,
+//     progress: [
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//     ],
+//   },
+//   {
+//     title: dictionary[language].science,
+//     color: BasicColor.green,
+//     progress: [
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//     ],
+//   },
+//   {
+//     title: dictionary[language].health,
+//     color: BasicColor.aqua,
+//     progress: [
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       false,
+//       true,
+//       false,
+//       true,
+//     ],
+//   },
+// ];
+
+// const ranking = ['Tony', 'Emily', 'Albert', 'Viri', 'Candy'];
+
+// export function writeProgress() {
+//   const db = getDatabase(app);
+//   set(ref(db, 'progress/test_user'), userProgress);
+// }
+
+// export const getProgress = (update: any) => {
+//   const db = getDatabase(app);
+//   const progressRef = ref(db, 'progress/test_user');
+//   onValue(progressRef, snapshot => {
+//     const data = snapshot.val();
+//     update(data);
+//   });
+// };
+
+// export function writeRanking() {
+//   const db = getDatabase(app);
+//   set(ref(db, 'ranking/test_user'), ranking);
+// }
+
+// export const getRanking = (update: any) => {
+//   const db = getDatabase(app);
+//   const progressRef = ref(db, 'ranking/test_user');
+//   onValue(progressRef, snapshot => {
+//     const data = snapshot.val();
+//     update(data);
+//   });
+// };

@@ -1,21 +1,20 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
-import Box from '@mui/material/Box';
+import { Box, Button } from '@mui/material';
 import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
-import { LSBlueTextButton } from 'views/molecules/Setting/utils/Style'
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanForm';
 import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
-import { PlanList } from 'views/molecules/Setting/PlanList';
-import { CancelMembershipForm } from 'views/molecules/Setting/CancelMembershipForm';
+import { TeacherCancelMembershipForm } from './Forms/TeacherCancelMembershipForm';
 import { useSelector } from 'react-redux';
 import { dictionary } from './dictionary'
-export const MembershipDetail: FC = () => {
+import { TeacherPlanList } from './Forms/TeacherPlanList';
+import { TeacherAddSimplePlanForm } from './Forms/TeacherAddSimplePlanForm';
+export const TeacherMembershipDetail: FC = () => {
 
   const { isOpen, open } = useDialog()
   const { isAddOpen, openAdd } = useAddDialog()
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'EN_US'
 
   // State to refresh component
   const [value, setValue] = useState(false);
@@ -39,21 +38,21 @@ export const MembershipDetail: FC = () => {
               // fullWidth='true'
               // contentText={dictionary[language]?.chooseTheNewPlan}
               dialogContent={
-                <AddSimplePlanForm
+                <TeacherAddSimplePlanForm
                   open={openAdd}
                   refresh={refresh}
                 />
               }
             />
           </Box>
-          <PlanList refresh={value} />
+          <TeacherPlanList refresh={value} />
           <BtnContainer >
-            <LSBlueTextButton onClick={openAdd}>
+            <Button onClick={openAdd}>
               {dictionary[language]?.addAPlan}
-            </LSBlueTextButton>
-            <LSBlueTextButton onClick={open}>
+            </Button>
+            <Button onClick={open}>
               {dictionary[language]?.cancelMembership}
-            </LSBlueTextButton>
+            </Button>
           </BtnContainer>
           <LSDialog
             isOpen={isOpen}
@@ -61,7 +60,7 @@ export const MembershipDetail: FC = () => {
             title={dictionary[language]?.cancelMembership}
             contentText={dictionary[language]?.thankYouForYourPlan}
             dialogContent={
-              <CancelMembershipForm
+              <TeacherCancelMembershipForm
                 open={open}
                 refresh={refresh}
               />

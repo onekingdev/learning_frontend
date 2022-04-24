@@ -66,7 +66,7 @@ export const Welcome: FC = () => {
                   <TextInput label={'email'} />
                   <Button
                     onClick={sendEmail}
-                    value={dictionary[language]?.join}
+                    value={dictionary[language].join}
                     color={ButtonColor.join}
                     darkText={true}
                   />
@@ -77,13 +77,13 @@ export const Welcome: FC = () => {
         </Modal>
       ) : null}
       <Body>
-        <Header isDark={true}>{dictionary[language]?.practice}</Header>
+        <Header isDark={true}>{dictionary[language].practice}</Header>
         <Description>
           <Subheader isDark={true}>
-            {dictionary[language]?.description1}
+            {dictionary[language].description1}
           </Subheader>
           <Subheader isDark={true}>
-            {dictionary[language]?.description2}
+            {dictionary[language].description2}
           </Subheader>
         </Description>
       </Body>
@@ -93,14 +93,14 @@ export const Welcome: FC = () => {
       <Actions>
         <SignupActions>
           <Button
-            value    ={dictionary[language]?.schoolSignUp}
+            value    ={dictionary[language].schoolSignUp}
             color    ={BasicColor.blue}
             darkText ={true}
             style    ={{width: 'unset'}}
             onClick  ={() => history.push('/teacher/selectCreateType')}
           />
           <Button
-            value    ={dictionary[language]?.parentSignUp}
+            value    ={dictionary[language].parentSignUp}
             color    ={ButtonColor.join}
             darkText ={true}
             style    ={{width: 'unset'}}
@@ -109,7 +109,7 @@ export const Welcome: FC = () => {
         </SignupActions>
         <SigninActions>
           <Button
-            value={dictionary[language]?.login}
+            value={dictionary[language].login}
             color={ButtonColor.login}
             style    ={{width: 'unset'}}
             onClick={() => history.push('/login')}
@@ -119,16 +119,16 @@ export const Welcome: FC = () => {
 
       <Legal>
         <TypoIcon onClick={() => location.href='https://www.WithSocrates.com'}>
-          {dictionary[language]?.about}
+          {dictionary[language].about}
         </TypoIcon >
         <TypoIcon onClick={() => location.href='https://www.withsocrates.com/privacy-policy/'} >
-          {dictionary[language]?.privacy}
+          {dictionary[language].privacy}
         </TypoIcon >
         <TypoIcon onClick={() => location.href='https://www.withsocrates.com/terms-conditions/'} >
-          {dictionary[language]?.termAndConditions}
+          {dictionary[language].termAndConditions}
         </TypoIcon >
         <TypoIcon onClick={() => location.href='https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'} >
-          {dictionary[language]?.children_privacy}
+          {dictionary[language].children_privacy}
         </TypoIcon >
       </Legal>
     </Wrapper>

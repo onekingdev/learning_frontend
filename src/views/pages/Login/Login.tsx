@@ -67,8 +67,8 @@ export const LogIn: FC = () => {
   return (
     <Login>
       <Greet
-        header    ={dictionary[language]?.welcome}
-        // subheader ={dictionary[language]?.instructions}
+        header    ={dictionary[language].welcome}
+        // subheader ={dictionary[language].instructions}
         logo      ={logo}
         classroomIllustration ={classroom}
         greetingIllustration  ={greeting}
@@ -77,25 +77,25 @@ export const LogIn: FC = () => {
         <StyledContainer >
           <LoginWrapper>
             <DesktopWelcome>
-              <Header>{dictionary[language]?.welcome}</Header>
-              {/* <Subheader>{dictionary[language]?.instructions}</Subheader> */}
+              <Header>{dictionary[language].welcome}</Header>
+              {/* <Subheader>{dictionary[language].instructions}</Subheader> */}
             </DesktopWelcome>
             <Form
-              login={dictionary[language]?.login}
-              emailLabel={dictionary[language]?.userName}
-              password={dictionary[language]?.password}
-              forgot={dictionary[language]?.forgot}
-              wrongPasswordMessage={dictionary[language]?.error}
+              login={dictionary[language].login}
+              emailLabel={dictionary[language].userName}
+              password={dictionary[language].password}
+              forgot={dictionary[language].forgot}
+              wrongPasswordMessage={dictionary[language].error}
               passwordValidator={validatePassword}
               setUsername={setUsername}
               setPassword={setPassword}
             />
             <Actions
-              googleText={dictionary[language]?.with_google}
+              googleText={dictionary[language].with_google}
               googleColor={ButtonColor.google}
               googleAction={() => console.log('google auth')} // !! remove console.logs!!!
-              or={dictionary[language]?.or}
-              loginText={dictionary[language]?.login}
+              or={dictionary[language].or}
+              loginText={dictionary[language].login}
               loginColor={ButtonColor.login}
               loginAction={loginAction}
               loading={loading}
@@ -105,16 +105,16 @@ export const LogIn: FC = () => {
           <TermsContainer>
             <Grid container >
               <Grid item xs={3}>
-                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.WithSocrates.com'}>{dictionary[language]?.about}</TypoBtn>
+                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.WithSocrates.com'}>{dictionary[language].about}</TypoBtn>
               </Grid>
               <Grid item xs={3}>
-                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.withsocrates.com/privacy-policy/'}>{dictionary[language]?.privacy}</TypoBtn>
+                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.withsocrates.com/privacy-policy/'}>{dictionary[language].privacy}</TypoBtn>
               </Grid>
               <Grid item xs={3}>
-                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'}>{dictionary[language]?.children_privacy}</TypoBtn>
+                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'}>{dictionary[language].children_privacy}</TypoBtn>
               </Grid>
               <Grid item xs={3}>
-                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.withsocrates.com/terms-conditions/'}>{dictionary[language]?.termCondition}</TypoBtn>
+                <TypoBtn style={{color: 'white', textAlign:'center'}} onClick={() => location.href = 'https://www.withsocrates.com/terms-conditions/'}>{dictionary[language].termCondition}</TypoBtn>
               </Grid>
             </Grid>
           </TermsContainer>

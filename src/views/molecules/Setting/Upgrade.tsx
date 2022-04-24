@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import Box                         from '@mui/material/Box';
 import { useSelector }             from 'react-redux'
 import {
-  LSButtonContainer, LSButton, LSText,
+  LSButtonContainer, LSText,
   LSPaperMoney, LSLabel, LSInputBase
 }                                  from './utils/Style';
 import { doUpdateBroughtPlan }     from 'app/actions/guardianActions';
@@ -10,6 +10,7 @@ import { useSnackbar }             from 'notistack';
 import { LoadingContainer }        from 'views/atoms/Loading'
 import ReactLoading                from 'react-loading';
 import { BasicColor }              from 'views/Color';
+import { Button } from '@mui/material';
 
 interface IUpgradeProps {
   onConfirm: () => void
@@ -74,12 +75,12 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, plan, refresh }) => {
         // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
         />
         <LSButtonContainer style={{ marginTop: '32px' }}>
-          <LSButton
+          <Button
             variant='contained'
             onClick={onSubmitBtnClicked}
           >
             {'Upgrade'}
-          </LSButton>
+          </Button>
         </LSButtonContainer>
       </div>
   );

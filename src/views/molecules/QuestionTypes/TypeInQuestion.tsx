@@ -46,6 +46,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
     setIsAnswered(false);
     setTypedAnswer('')
     setDisabled(false)
+    console.log('queston:', question)
   }, [question]);
 
   const handleNextButtonClicked = () => {
@@ -70,17 +71,17 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
   const closeVideoModal = () => {
     setShowAssistor(!showAssistor);
   };
-  // const readAnswer = (answerOption: any) => {
-  //   const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
-  //   const audio = new Audio(answerSoundURI);
-  //   audio.play();
-  // };
 
   const readQuestion = () => {
     const audio = new Audio(questionSoundURI);
     audio.play();
   };
 
+  // const readAnswer = (answerOption: any) => {
+  //   const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
+  //   const audio = new Audio(answerSoundURI);
+  //   audio.play();
+  // };
 
   return (
     <>

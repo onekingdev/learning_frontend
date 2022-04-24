@@ -23,42 +23,42 @@ export const GameMainMenu: FC = () => {
     <>
       <GameMainMenuStyle>
         <GameMenuButton
-          gameMode={dictionary[language]?.arcade}
+          gameMode={dictionary[language].arcade}
           gameModeImage={arcade}
           color={BasicColor.red}
           onClick={() => history.push('/games/arcade')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={dictionary[language]?.sport}
+          gameMode={dictionary[language].sport}
           gameModeImage={sport}
           color={BasicColor.blue}
           onClick={() => history.push('/games/sport')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={dictionary[language]?.learning}
+          gameMode={dictionary[language].learning}
           gameModeImage={learning}
           color={BasicColor.green}
           onClick={() => history.push('/games/learning')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={dictionary[language]?.skill}
+          gameMode={dictionary[language].skill}
           gameModeImage={skill}
           color={BasicColor.purple}
           onClick={() => history.push('/games/skill')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={dictionary[language]?.adventure}
+          gameMode={dictionary[language].adventure}
           gameModeImage={adventure}
           color={BasicColor.aqua}
           onClick={() => history.push('/games/adventure')}
           isButton={true}
         />
         <GameMenuButton
-          gameMode={dictionary[language]?.strategy}
+          gameMode={dictionary[language].strategy}
           gameModeImage={strategy}
           color={BasicColor.yellow}
           onClick={() => history.push('/games/strategy')}

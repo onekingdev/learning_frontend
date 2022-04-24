@@ -6,7 +6,6 @@ import { useSelector }           from 'react-redux';
 import styled, { keyframes }     from 'styled-components';
 import { LogIn }                 from 'views/pages/Login/Login';
 import { Welcome }               from 'views/pages/Welcome/Welcome';
-import { Question }              from 'views/pages/Student/Question/Question';
 import { Avatar }                from 'views/pages/Student/Avatar/Avatar';
 import { MyProfile }             from 'views/pages/Student/Settings/MyProfile';
 import { Backpack }              from 'views/pages/Student/Backpack/Backpack';
@@ -22,7 +21,7 @@ import CreateParent              from 'views/pages/Parent/CreateParent/CreatePar
 import KidsList                  from 'views/pages/Parent/KidsList/KidsList';
 import { Store }                 from 'app/configureStore';
 import { Settings }              from 'views/pages/Parent/Settings/Settings';
-import { Report }                from 'views/pages/Parent/Report/Report';
+// import { Report }                from 'views/pages/Parent/Report/Report';
 import { Bank }                  from 'views/pages/Student/Bank/Bank';
 import { Cards }                 from 'views/pages/Student/Collectibles/ByCards';
 import { MyCardCollection }      from 'views/pages/Student/Collectibles/MyCards';
@@ -42,8 +41,11 @@ import Groups                    from 'views/pages/Teacher/Students/Groups'
 import AddStudent                from 'views/pages/Teacher/AddStudent/AddStudent';
 import Assignment                    from 'views/pages/Teacher/Assignment/Assignment'
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
-
+import SettingForm from 'views/molecules/Classroom/SettingForm'
+import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
 import 'animate.css';
+import Certificates from 'views/pages/Teacher/Certificates/Certificates';
+
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
   const user = useSelector((state: Store) => state.user);
@@ -108,12 +110,6 @@ export function Routes() {
           <PrivateRoute loading={true} path="/wardrobe" >
             <Wardrobe />
           </PrivateRoute>
-          {/* <PrivateRoute loading={true} path="/collectibles/category_:categoryId/:collectibleId">
-            <CardCollectible />
-          </PrivateRoute>
-          <PrivateRoute loading={true} path="/collectibles/category_:categoryId">
-            <CardCollectible />
-          </PrivateRoute> */}
           <PrivateRoute loading={true} path="/collectibles/cards">
             <Cards />
           </PrivateRoute>
@@ -159,9 +155,9 @@ export function Routes() {
           <PrivateRoute loading={true} path="/student/settings">
             <Settings />
           </PrivateRoute>
-          <PrivateRoute loading={true} path="/parent/report">
+          {/* <PrivateRoute loading={true} path="/parent/report">
             <Report />
-          </PrivateRoute>
+          </PrivateRoute> */}
           <PrivateRoute
             loading={true}
             path="/parent/reporting/:studentId"
@@ -198,17 +194,23 @@ export function Routes() {
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/students">
             <Students />
           </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/settings">
+            <TeacherSettings />
+          </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/teacher/certificates">
+            <Certificates />
+          </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups">
             <Groups />
           </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent">
             <AddStudent />
           </PrivateRoute>
-          {process.env.NODE_ENV === 'development' ? (
+          {/* {process.env.NODE_ENV === 'development' ? ( */}
             <Route path="/test">
-              <Assignment />
+              <SettingForm isOpen={true} close={()=>{}}/>
             </Route>
-          ) : null}
+          {/* ) : null} */}
           <Redirect from="/" to="/login" />
         </Switch>
     </FadeIn>

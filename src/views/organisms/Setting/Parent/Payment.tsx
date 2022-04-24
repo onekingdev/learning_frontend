@@ -5,7 +5,6 @@ import { useDialog }            from 'views/molecules/Setting/utils/useDialog';
 import {
   LSShadowContainer,  LSGridRow,
   LSTitle,  LSText,
-  LSBlueTextButton
 }                               from 'views/molecules/Setting/utils/Style';
 import { LSDialog }             from 'views/molecules/Setting/LSDialog';
 import { PaymentForm }          from 'views/molecules/PaymentMethod/PaymentForm';
@@ -16,6 +15,7 @@ import { useSelector }          from 'react-redux'
 import payment                  from 'views/assets/payment/payment.jpg'
 import creditCardType           from 'credit-card-type'
 import { dictionary }           from './dictionary'
+import { Button } from '@mui/material';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 interface PaymentFormFunc {
   handleOrder(): void;
@@ -28,7 +28,7 @@ export const Payment: FC = () => {
   const guardian = useSelector((state: any) => state.guardian);
   const cardType = creditCardType(guardian.paymentMethod.cardNumber)
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
 
   const openEdit = () => edit(!isEdit);
 
@@ -65,9 +65,9 @@ export const Payment: FC = () => {
       </LSGridRow>
       <LSGridRow container>
         <Grid item lg={4} xs={4}>
-          <LSBlueTextButton onClick={open}>
+          <Button onClick={open}>
             {dictionary[language]?.addNew}
-          </LSBlueTextButton>
+          </Button>
           <LSDialog
             isOpen={isOpen}
             open={open}
@@ -79,7 +79,7 @@ export const Payment: FC = () => {
           />
         </Grid>
         <Grid item lg={8} xs={8}>
-          <LSBlueTextButton onClick={() => edit(true)}>{dictionary[language]?.edit}</LSBlueTextButton>
+          <Button onClick={() => edit(true)}>{dictionary[language]?.edit}</Button>
         </Grid>
         <LSDialog
           isOpen={isEdit}
