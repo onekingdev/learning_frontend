@@ -14,7 +14,7 @@ import {
   LSText,
   LSLabel,
 } from 'views/molecules/Setting/utils/Style';
-import { settingPage }             from 'views/molecules/Setting/utils/Theme';
+import { settingPage }             from 'views/Theme';
 import { useDispatch, useSelector }from 'react-redux';
 import { Button, TextField, ThemeProvider }           from '@mui/material';
 import { LSDialog }                from 'views/molecules/Setting/LSDialog';

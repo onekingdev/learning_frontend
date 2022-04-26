@@ -18,8 +18,6 @@ import AssignmentTable from 'views/molecules/Table/AssignmentTable';
 import TextField from '@mui/material/TextField';
 import { Box } from '@mui/material';
 import DateTimePicker            from 'react-datetime-picker';
-import Button                    from 'views/molecules/MuiButton';
-import {ButtonColor, BasicColor} from 'views/Color';
 
 const Assignment: FC = () => {
   const loadingContext    = useContext(LoadingContext);
@@ -73,10 +71,6 @@ const Assignment: FC = () => {
           <AssignmentTable>
             <AssignPanelContainer>
               <StudentPanel>
-                <StudentItemContainer>
-                  <input type="checkbox" name="" id={`student-all`} />
-                  <label htmlFor={`student-all`}>All Student</label>
-                </StudentItemContainer>
                 {students.map((student, id) => (
                   <StudentItemContainer>
                     <input type="checkbox" name="" id={`student-${id}`} />
@@ -118,8 +112,7 @@ const Assignment: FC = () => {
                   placeholder='10'
                 />
                 <Box style={{
-                  width: "100%",
-                  marginTop: "1rem"
+                  width: "100%"
                 }}>
                   <label htmlFor="">Assignment Start Date</label><br />
                   <DateTimePicker
@@ -131,8 +124,7 @@ const Assignment: FC = () => {
                   />
                 </Box>
                 <Box style={{
-                  width: "100%",
-                  marginTop: "1rem"
+                  width: "100%"
                 }}>
                   <label htmlFor="">Assignment End Date (Leave in blank for no end date)</label><br />
                   <DateTimePicker
@@ -143,14 +135,6 @@ const Assignment: FC = () => {
                       }}
                   />
                 </Box>
-                <Button
-                  margin="10px 0px"
-                  value     = {dictionary[language]?.assign}
-                  bgColor   = {BasicColor.green}
-                  // onClick   = {handleSubmit}
-                  align     = {'left'}
-                  fullWidth = { true }
-                />
               </AssignPanel>
             </AssignPanelContainer>
           </AssignmentTable>

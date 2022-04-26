@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
 import { DialogTitle, ThemeProvider } from '@mui/material';
 import { BasicColor } from 'views/Color';
-import { settingPage } from './utils/Theme';
+import { settingPage } from '../../Theme';
 import { LSDialogContent, LSDialogContentText } from './utils/Style';
 
 

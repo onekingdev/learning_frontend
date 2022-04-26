@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { settingPage } from 'views/molecules/Setting/utils/Theme';
+import { settingPage } from 'views/Theme';
 import { Button, TextField, ThemeProvider } from '@mui/material';
 import { LSGridRow, LSLabel } from 'views/molecules/Setting/utils/Style';
 import { Grid } from '@mui/material';

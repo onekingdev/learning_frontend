@@ -1,7 +1,6 @@
 import * as TYPE from '../types';
 
 const INITIAL_STATE = {
-  reLoadImgs: false
 };
 const TEACHERReducer = (state = INITIAL_STATE, action: { type: string, payload: any }) => {
   // const TEACHERReducer = (state = INITIAL_STATE, action: {type: string, payload: ITEACHER}) => {
@@ -15,11 +14,6 @@ const TEACHERReducer = (state = INITIAL_STATE, action: { type: string, payload: 
       return {
         ...state,
         token: action.payload,
-      };
-    case TYPE.TEACHER_RELOAD_IMAGES:
-      return {
-        ...state,
-        reLoadImgs: !state.reLoadImgs,
       };
     default:
       return state;

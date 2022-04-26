@@ -3,7 +3,7 @@ import { ParentPgNav } from 'views/molecules/ParentPgNav/ParentPgNav'
 import bg_left_img from 'views/assets/teacher_bg_left.svg'
 import bg_right_img from 'views/assets/teacher_bg_right.svg'
 import { ThemeProvider } from '@mui/material';
-import { settingPage } from 'views/molecules/Setting/utils/Theme';
+import { settingPage } from 'views/Theme';
 
 import {
   Container,

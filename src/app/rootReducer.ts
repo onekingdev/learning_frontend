@@ -7,6 +7,7 @@ import interests           from './reducers/interestReducer'
 import guardian            from './reducers/guardianReducer'
 import grade               from './reducers/gradeReducer'
 import teacher               from './reducers/teacherReducer'
+import certificate         from './reducers/certificateReducer'
 
 
 export default combineReducers({
@@ -17,5 +18,6 @@ export default combineReducers({
     interests,
     guardian,
     grade,
-    teacher
+    teacher,
+    certificate
 });

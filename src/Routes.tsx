@@ -208,8 +208,7 @@ export function Routes() {
           </PrivateRoute>
           {/* {process.env.NODE_ENV === 'development' ? ( */}
             <Route path="/test">
-              {/* <SettingForm isOpen={true} close={()=>{}}/> */}
-              <Assignment />
+              <SettingForm isOpen={true} close={()=>{}}/>
             </Route>
           {/* ) : null} */}
           <Redirect from="/" to="/login" />

@@ -15,16 +15,8 @@ export const settingPage = createTheme({
     },
   },
   components: {
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-
-        }
-      }
-    },
     MuiRadio: {
       styleOverrides: {
-
         root: {
           color: BasicColor.green,
           '& .MuiSvgIcon-root': {
@@ -38,6 +30,7 @@ export const settingPage = createTheme({
         contained: {
           borderRadius: 15,
           minWidth: 150,
+          maxWidth: 250,
         },
         root: {
           textTransform: 'unset',
@@ -52,9 +45,8 @@ export const settingPage = createTheme({
       styleOverrides: {
         root: {
           width: '100%',
-          // borderColor: BasicColor.blue,
         },
-      }
+      },
     },
     MuiOutlinedInput: {
       styleOverrides: {
