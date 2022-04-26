@@ -45,7 +45,6 @@ export const SentCertDgContent: FC = () => {
                         justifyContent: 'center'
                     }}
                 >
-
                     <input
                         value={title}
                         onChange={handleTitleChange}
