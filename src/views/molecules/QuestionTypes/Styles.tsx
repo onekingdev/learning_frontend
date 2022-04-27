@@ -49,9 +49,9 @@ export const QuestionContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  @media screen and (min-width: ${ScreenSize.desktop}) {
-    justify-content: left;
-  }
+  // @media screen and (min-width: ${ScreenSize.desktop}) {
+  //   justify-content: left;
+  // }
 `;
 export const BlockAnswers = styled.div<{
   isAnswered: boolean;

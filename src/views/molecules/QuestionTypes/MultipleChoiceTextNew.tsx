@@ -6,6 +6,7 @@ import { Question } from 'views/atoms/Text/Question';
 import { Icon } from 'views/atoms/Icon/Icon';
 import videoIcon from 'views/assets/others/video-assistor.png';
 import assistor from 'views/assets/text-to-speech.svg';
+import playQuestionSound from 'views/assets/play-sound.svg'
 import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
@@ -94,7 +95,18 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
       <BlackBoard>
         <QuestionContainer>
           <Question>{question.questionText}</Question>
-          <Icon image={assistor} onClick={readQuestion} />
+          {
+            question.questionAudioAssets[0].audioFile ?
+              < img
+                src={playQuestionSound}
+                onClick={() => {
+                  readQuestionAudioAsset();
+                }}
+                style={{
+                  cursor: 'pointer'
+                }}
+              /> : null
+          }
         </QuestionContainer>
         <AnswersContainer>
           <TextOptionsList>
@@ -129,15 +141,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
             fullWidth={true}
             color={BasicColor.black}
           />
-          {
-            question.questionAudioAssets[0].audioFile ?
-              < Icon
-                image={assistor}
-                onClick={() => {
-                  readQuestionAudioAsset();
-                }}
-              /> : null
-          }
+          <Icon image={assistor} onClick={readQuestion} />
           <Icon image={videoIcon} onClick={closeVideoModal} />
         </AssistorContainer>
       </BlackBoard>
