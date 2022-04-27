@@ -9,7 +9,6 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
-import { Store } from 'app/configureStore';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
 import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer, TextOptionsList, AnswerContainer, BlockAnswers, ImageAssetContainer, ImageAsset } from './Styles'
 
@@ -49,11 +48,11 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
     setIsAnswered(false);
   }, [question]);
 
-  const readAnswer = (answerOption: any) => {
-    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
-    const audio = new Audio(answerSoundURI);
-    audio.play();
-  };
+  // const readAnswer = (answerOption: any) => {
+  //   const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
+  //   const audio = new Audio(answerSoundURI);
+  //   audio.play();
+  // };
 
   const handleAnswer = (result: BlockQuestionInput) => {
     setIsAnswered(true);
@@ -64,6 +63,11 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
     // question: -1,
     // answerOption: answer.id,
     // isCorrect: answer.isCorrect
+  };
+
+  const readQuestionAudioAsset = () => {
+    const audio = new Audio(question.questionAudioAssets[0].audioFile);
+    audio.play();
   };
 
   const readQuestion = () => {
@@ -90,6 +94,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
       <BlackBoard>
         <QuestionContainer>
           <Question>{question.questionText}</Question>
+          <Icon image={assistor} onClick={readQuestion} />
         </QuestionContainer>
         <AnswersContainer>
           <TextOptionsList>
@@ -99,12 +104,6 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
                 <TextOption
                   answer={option}
                   onClick={handleAnswer}
-                />
-                <Icon
-                  image={assistor}
-                  onClick={() => {
-                    readAnswer(option);
-                  }}
                 />
               </AnswerContainer>
             ))}
@@ -130,7 +129,15 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
             fullWidth={true}
             color={BasicColor.black}
           />
-          <Icon image={assistor} onClick={readQuestion} />
+          {
+            question.questionAudioAssets[0].audioFile ?
+              < Icon
+                image={assistor}
+                onClick={() => {
+                  readQuestionAudioAsset();
+                }}
+              /> : null
+          }
           <Icon image={videoIcon} onClick={closeVideoModal} />
         </AssistorContainer>
       </BlackBoard>

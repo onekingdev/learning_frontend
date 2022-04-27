@@ -86,6 +86,11 @@ mutation AIBlock {
               image
               order
             }
+            questionAudioAssets {
+              audioFile
+              id
+              order
+            }
             answerOptions {
               id
               isCorrect

@@ -72,12 +72,5 @@ export const settingPage = createTheme({
         },
       }
     },
-    MuiInputBase: {
-      styleOverrides: {
-        root: {
-          // borderColor:
-        }
-      }
-    }
   }
 });

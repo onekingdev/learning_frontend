@@ -1,5 +1,5 @@
 import { FC, useEffect, useContext, useState }  from 'react';
-import { useSelector }                     from 'react-redux';
+import { useSelector }      from 'react-redux';
 import { LoadingContext }   from 'react-router-loading';
 import { useHistory }       from 'react-router-dom';
 
@@ -12,9 +12,6 @@ import isle             from 'views/assets/islands/fillers/island.svg';
 import rock             from 'views/assets/islands/fillers/rock.svg';
 import rock2            from 'views/assets/islands/fillers/rock-2.svg';
 import boulder          from 'views/assets/islands/fillers/rocxk.svg';
-// import background       from 'views/assets/colored-shapes-bg.svg';
-
-
 import {
   Wrapper,
   Boat,

@@ -119,6 +119,11 @@ export interface IAIQuestion {
     image: string
     order: number
   }[]
+  questionAudioAssets: {
+    id: number
+    audioFile: string
+    order: number
+  }[]
   questionType: 'T' | 'MC' | 'O' | 'R' | 'MS'
   answerOptions: Array<any>
 }

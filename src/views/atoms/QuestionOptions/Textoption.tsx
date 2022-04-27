@@ -3,8 +3,6 @@ import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
 import { ScreenSize } from 'constants/screenSize';
-import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
-import audioError from 'views/assets/audios/wrong-answer-sound.wav';
 import { TypoGeneralText } from '../Text';
 
 interface BlockQuestionInput {
@@ -21,14 +19,12 @@ type TextOptionProps = {
 export const TextOption: FC<TextOptionProps> = ({ answer, onClick }) => {
 
   const [isAnswered, setIsAnswered] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
 
   useEffect(() => {
     setIsAnswered(false);
   }, [answer])
 
   const handleAnswer = () => {
-    setIsCorrect(answer.isCorrect)
     setIsAnswered(true);
     const inputAnswer: BlockQuestionInput = {
       question: -1,
@@ -40,12 +36,6 @@ export const TextOption: FC<TextOptionProps> = ({ answer, onClick }) => {
 
   return (
     <>
-      <audio
-        src={isAnswered ?
-          isCorrect ? audioCheck : audioError
-          : ''}
-        autoPlay={isAnswered ? true : false}
-      />
       <TextOptionStyles
         onClick={() => handleAnswer()}
         isCorrect={isAnswered && answer?.isCorrect}
