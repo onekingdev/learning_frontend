@@ -22,16 +22,24 @@ const AddNewStudent = (props: any) => {
 
     const { enqueueSnackbar } =  useSnackbar();
     const classes             =  useStyles();
-
+    
+    const [title, setTitle] = useState('');
+    const [text, setText]   = useState('');
+    const [date, setDate]   = useState<Date>();
     const [validateMsg, setValidateMsg] = useState<{[key: string]: any}>({
         title   : null,
         text    : null,
         date    : null,
     });
-    const [title, setTitle] = useState('');
-    const [text, setText]   = useState('');
-    const [date, setDate]   = useState<Date>();
 
+    useEffect(() => {
+    },[])
+    
+    const handleSubmit = () => {
+        if (!formValidation()) return;
+        props.close();
+    }
+    
     const formValidation = () => {
         const validateMsgTemp = {...validateMsg};
         let valiResult        = true;
@@ -44,18 +52,11 @@ const AddNewStudent = (props: any) => {
         setValidateMsg(validateMsgTemp);
         return valiResult;
     };
-
-    const handleSubmit = () => {
-        if (!formValidation()) return;
-        props.close();
-    }
-
     const handleFormChange = (field: string, errMsg: string) => {
         setValidateMsg({...validateMsg, [field]: errMsg});
     }
 
-    useEffect(() => {
-    },[])
+
     return (
         <Paper elevation={24} className={classes.paper}>
             <div >
