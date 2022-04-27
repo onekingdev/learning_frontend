@@ -12,6 +12,7 @@ import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
 import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer, TextOptionsList, AnswerContainer, BlockAnswers, ImageAssetContainer, ImageAsset } from './Styles'
+import { Box, Container } from '@mui/material';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -93,11 +94,11 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
         />
       ) : null}
       <BlackBoard>
-        <QuestionContainer>
+        <Box sx={{display:'flex', justifyContent: 'center', alignItems: 'center', marginTop: 5}}>
           <Question>{question.questionText}</Question>
           {
-            question.questionAudioAssets[0].audioFile ?
-              < img
+            question.questionAudioAssets[0]?.audioFile ?
+              <img
                 src={playQuestionSound}
                 onClick={() => {
                   readQuestionAudioAsset();
@@ -107,7 +108,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
                 }}
               /> : null
           }
-        </QuestionContainer>
+        </Box>
         <AnswersContainer>
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />

@@ -44,7 +44,7 @@ export const ImageAsset = styled.img`
 `;
 export const QuestionContainer = styled.div`
   width: 90%;
-  margin: 5px auto;
+  margin: 15px auto;
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
