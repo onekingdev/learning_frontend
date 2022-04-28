@@ -39,7 +39,8 @@ import Classroom                 from 'views/pages/Teacher/Classroom/Classroom'
 import Students                  from 'views/pages/Teacher/Students/Students'
 import Groups                    from 'views/pages/Teacher/Students/Groups'
 import AddStudent                from 'views/pages/Teacher/AddStudent/AddStudent';
-import Assignment                    from 'views/pages/Teacher/Assignment/Assignment'
+import Assignment                    from 'views/pages/Teacher/Assignment/Assignment';
+import Results                    from 'views/pages/Teacher/Results/Results';
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
 import SettingForm from 'views/molecules/Classroom/SettingForm'
 import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
@@ -207,9 +208,13 @@ export function Routes() {
             <AddStudent />
           </PrivateRoute>
           {/* {process.env.NODE_ENV === 'development' ? ( */}
-            <Route path="/test">
+            <Route path="/assignment">
               {/* <SettingForm isOpen={true} close={()=>{}}/> */}
               <Assignment />
+            </Route>
+            <Route path="/results">
+              {/* <SettingForm isOpen={true} close={()=>{}}/> */}
+              <Results />
             </Route>
           {/* ) : null} */}
           <Redirect from="/" to="/login" />
