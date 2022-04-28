@@ -23,7 +23,7 @@ interface ICancelFormProps {
 export const CancelPlanForm: FC<ICancelFormProps> = ({ open, plan, refresh }) => {
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
 
   const [value, setValue] = useState(CANCEL_REASONS[language][0].value);
   const user = useSelector((state: any) => state.user);

@@ -1,5 +1,5 @@
 export const dictionary:any = Object.freeze({
-    "EN_US": {
+    'EN_US': {
         addNew: 'Add New',
         classroomName: 'Classroom Name',
         newClassroom: 'New Classroom',
@@ -36,7 +36,7 @@ export const dictionary:any = Object.freeze({
         saturday: 'Saturday',
         sunday: 'Sunday',
     },
-    "TH": {
+    'TH': {
         addNew: 'Add New',
         classroomName: 'Classroom Name',
         newClassroom: 'New Classroom',

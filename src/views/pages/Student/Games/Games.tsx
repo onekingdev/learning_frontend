@@ -10,7 +10,7 @@ import { useSelector, useDispatch }             from 'react-redux'
 export const Games: FC = () => {
   const loadingContext  = useContext(LoadingContext);
   let language:string   = useSelector((state: any) => state.user.language);
-  language              = language? language : "EN_US"
+  language              = language? language : 'EN_US'
   useEffect(() => {
     loadingContext.done();
   }, []);

@@ -25,7 +25,7 @@ import commonDictionary          from 'constants/commonDictionary'
 import Switch                    from 'views/molecules/MuiSwitch'
 const SettingForm = (props: any) => {
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : "EN_US"
+    language            = language? language : 'EN_US'
 
     const { enqueueSnackbar } =  useSnackbar();
     const classes =              useStyles();

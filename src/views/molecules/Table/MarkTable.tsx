@@ -13,10 +13,10 @@ const colors = [
     '#C6CACC'
 ];
 const masteryColors = {
-    "NP": "#919699",
-    "N": "#EC5858",
-    "C": "#F4C222",
-    "M": "#26B824"
+    'NP': '#919699',
+    'N': '#EC5858',
+    'C': '#F4C222',
+    'M': '#26B824'
 }
 
 const Subject = styled.div`
@@ -81,13 +81,13 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
         return <SingleGroup key={id} main={item.main} extra={item.extra} deep={deep+1} />
     }) : '';
     let bgColor = masteryColors.NP;
-    if (main.mastery === "NP") {
+    if (main.mastery === 'NP') {
         bgColor = masteryColors.NP;
-    } else if (main.mastery === "N") {
+    } else if (main.mastery === 'N') {
         bgColor = masteryColors.N;
-    } else if (main.mastery === "C") {
+    } else if (main.mastery === 'C') {
         bgColor = masteryColors.C;
-    } else if (main.mastery === "M") {
+    } else if (main.mastery === 'M') {
         bgColor = masteryColors.M;
     }
     if (main === {}) {
@@ -219,14 +219,14 @@ const MarkTable = ({
         { data && data.rootTopicsByAok && data.rootTopicsByAok.length > 0 ? data?.rootTopicsByAok?.map((aok: any, id: number) => (
             <SingleGroup key={id} main={{
                 item1: aok?.name,
-                item2: aok?.report?.accuracy ? aok?.report?.accuracy + "%" : '0%',
+                item2: aok?.report?.accuracy ? aok?.report?.accuracy + '%' : '0%',
                 item3: aok?.report?.correctQuestion ? aok?.report?.correctQuestion : '0',
                 item4: aok?.report?.questionsAnswered ? aok?.report?.questionsAnswered : '0',
                 mastery: aok?.mastery
             }} extra={aok?.subTopics.map((subTopic1: any) => ({
                 main: {
                     item1: subTopic1?.name,
-                    item2: subTopic1?.report?.accuracy ? subTopic1?.report?.accuracy + "%" : '0%',
+                    item2: subTopic1?.report?.accuracy ? subTopic1?.report?.accuracy + '%' : '0%',
                     item3: subTopic1?.report?.correctQuestion ? subTopic1?.report?.correctQuestion : '0',
                     item4: subTopic1?.report?.questionsAnswered ? subTopic1?.report?.questionsAnswered : '0',
                     mastery: subTopic1?.mastery
@@ -234,7 +234,7 @@ const MarkTable = ({
                 extra: subTopic1?.subTopics.map((subTopic2: any) => ({
                     main: {
                         item1: subTopic2?.name,
-                        item2: subTopic2?.report?.accuracy ? subTopic2?.report?.accuracy + "%" : '0%',
+                        item2: subTopic2?.report?.accuracy ? subTopic2?.report?.accuracy + '%' : '0%',
                         item3: subTopic2?.report?.correctQuestion ? subTopic2?.report?.correctQuestion : '0',
                         item4: subTopic2?.report?.questionsAnswered ? subTopic2?.report?.questionsAnswered : '0',
                         mastery: subTopic2?.mastery
@@ -242,7 +242,7 @@ const MarkTable = ({
                     extra: subTopic1?.subTopics.map((subTopic3: any) => ({
                         main: {
                             item1: subTopic3?.name,
-                            item2: subTopic3?.report?.accuracy ? subTopic3?.report?.accuracy + "%" : '0%',
+                            item2: subTopic3?.report?.accuracy ? subTopic3?.report?.accuracy + '%' : '0%',
                             item3: subTopic3?.report?.correctQuestion ? subTopic3?.report?.correctQuestion : '0',
                             item4: subTopic3?.report?.questionsAnswered ? subTopic3?.report?.questionsAnswered : '0',
                             mastery: subTopic3?.mastery

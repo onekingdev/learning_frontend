@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export const StudentSettingsAccordian: FC = () => {
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : "EN_US"
+  language                = language? language : 'EN_US'
   return (
     <Container sx={{marginTop: 2, marginBottom: 2, borderRadius: 10}}>
       <Accordion sx={{ marginBottom: 2 }}>

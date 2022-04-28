@@ -73,7 +73,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
   const guardian = useSelector((state: any) => state.guardian);
   const { enqueueSnackbar } = useSnackbar();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
   // const comboChildren = dictionary['EN_US'].combo
   const [plans, setPlans] = useState<Array<any>>([])
 

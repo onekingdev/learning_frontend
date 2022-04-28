@@ -33,7 +33,7 @@ export const Backpack: FC = () => {
   const history         = useHistory();
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
 
   useEffect(() => {
     loadingContext.done();

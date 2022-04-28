@@ -17,7 +17,7 @@ export const Bank: FC = () => {
   const student        = useSelector((state: any) => state.student)
   const interests      = useSelector((state: any) => state.interests.interests)
   let language:string  = useSelector((state: any) => state.user.language);
-  language             = language? language : "EN_US"
+  language             = language? language : 'EN_US'
   const loadingContext = useContext(LoadingContext);
   const bankMovement   = student.bankWallet.bankmovementSet
 

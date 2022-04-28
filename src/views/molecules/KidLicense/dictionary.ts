@@ -1,9 +1,9 @@
 export const dictionary:any = Object.freeze({
-    "EN_US": {
+    'EN_US': {
         memberSince: 'Member Since',
         userName: 'User Name',
     },
-    "TH": {
+    'TH': {
         memberSince: 'สมาชิกตั้งแต่',
         userName: 'ชื่อผู้ใช้',
     },

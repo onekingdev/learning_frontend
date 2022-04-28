@@ -53,7 +53,7 @@ const Students: FC = () => {
   let language:string     = useSelector((state: any) => state.user.language);
   const history           = useHistory();
 
-  language                = language? language : "EN_US"
+  language                = language? language : 'EN_US'
 
   const [isOpenNewForm, setIsOpenNewForm] = useState(false);
   const [isOpenNewType, setIsOpenNewType] = useState(false);
@@ -63,7 +63,7 @@ const Students: FC = () => {
   const [studentForEdit, setStudentForEdit] = useState({});
 
   const onNew = () => {
-    console.log("will open")
+    console.log('will open')
     setIsOpenNewType(true)
   }
 

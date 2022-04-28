@@ -38,7 +38,7 @@ export const KidsTreasureTrack: FC = () => {
     const loadingContext = useContext(LoadingContext);
     const avatar = useSelector((state: any) => state.avatar)
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : "EN_US"
+    language            = language? language : 'EN_US'
 
     const [earnedCoin, setEarnedCoin] = useState<number>(0); //Math.ceil(Math.random() * 1000)
 
@@ -117,7 +117,7 @@ export const KidsTreasureTrack: FC = () => {
             // console.log(user)
             if (user && user.token) {
                 // Get Topic Report
-                const res:any = await query(``, HonorRoll, user.token).catch(e => ({success: false}));
+                const res:any = await query('', HonorRoll, user.token).catch(e => ({success: false}));
                 if (res.success === false) {
                   return
                 }
@@ -291,14 +291,14 @@ export const KidsTreasureTrack: FC = () => {
                                     </Typography>
                                     { (rankKids.length === 5 && addPls.length === 5 && initRanks.length === 5) ?
                                     <table style={{
-                                        width: "100%",
-                                        padding: "0 1rem"
+                                        width: '100%',
+                                        padding: '0 1rem'
                                     }}>
                                         <tbody>
                                             { rankKids.map((kid, i) => {
                                                 return (
                                                 <UserRankTreasureTrack
-                                                    additionalPl={addPls[i].toString() + "px"}
+                                                    additionalPl={addPls[i].toString() + 'px'}
                                                     active={addPls[i] === 0}
                                                     coinsEarned={kid.blockTransactionCoins}
                                                     userRank={initRanks[i]}
@@ -311,7 +311,7 @@ export const KidsTreasureTrack: FC = () => {
                                                 );
                                             }) }
                                         </tbody>
-                                    </table> : "" }
+                                    </table> : '' }
                                 </div>
                             </CardContent>
                         </Card>
