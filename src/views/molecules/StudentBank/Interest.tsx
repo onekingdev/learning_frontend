@@ -26,7 +26,7 @@ interface InterestProp {
 export const Interest: FC<InterestProp> = ({interests}) => {
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : "EN_US"
 
   const columns: readonly Column[] = [
     { id: 'name', label: dictionary[language]?.savingsTitle, minWidth: 100 },

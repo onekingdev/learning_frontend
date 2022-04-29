@@ -19,7 +19,7 @@ export const MyProfile: FC = () => {
   const avatar = useSelector((state: any) => state.avatar)
   const student = useSelector((state: any) => state.student);
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : 'EN_US'
+  language                = language? language : "EN_US"
 
   useEffect(() => {
     loadingContext.done();

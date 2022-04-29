@@ -23,7 +23,7 @@ export const MyCardCollection: FC = () => {
   const user = useSelector((state: any) => state.user);
   const [categories, setCategories] = useState([]);
   let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'EN_US'
+  language = language ? language : "EN_US"
 
   useEffect(() => {
     let ignore = false;

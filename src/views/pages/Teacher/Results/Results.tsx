@@ -3,10 +3,23 @@ import { useSelector }          from 'react-redux';
 import { LoadingContext }       from 'react-router-loading';
 import { TeacherPgContainer }   from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
 import { dictionary }           from './dictionary';
+import { SubjectCard }          from 'views/atoms/SubjectCard';
+import ElaOrignal               from 'views/assets/packageIcons/ela_original.svg';
+import MathOrignal               from 'views/assets/packageIcons/math_original.svg';
+import ScienceOrignal               from 'views/assets/packageIcons/science_original.svg';
+import SightOrignal               from 'views/assets/packageIcons/sight_original.svg';
+import FinancialOrignal               from 'views/assets/packageIcons/financial_original.svg';
+import HealthOrignal               from 'views/assets/packageIcons/health_original.svg';
+import { SubjectCardContainer, TableContainer, AssignPanelContainer, StudentPanel, AssignPanel, StudentItemContainer } from './style';
+import MarkTable             from 'views/molecules/Table/MarkTable';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
-import { TableContainer, Table, Table2 } from './style';
+import AssignmentTable from 'views/molecules/Table/AssignmentTable';
+import TextField from '@mui/material/TextField';
+import { Box } from '@mui/material';
+import DateTimePicker            from 'react-datetime-picker';
 import Button                    from 'views/molecules/MuiButton';
+import {ButtonColor, BasicColor} from 'views/Color';
 
 const Assignment: FC = () => {
   const loadingContext    = useContext(LoadingContext);
@@ -48,107 +61,99 @@ const Assignment: FC = () => {
   return (
     <TeacherPgContainer onlyLogoImgNav={true} title={dictionary[language]?.title}>
       <>
+        <SubjectCardContainer>
+            <SubjectCard bgColor='#EC5858' imgUrl={ElaOrignal} text='ELA' />
+            <SubjectCard bgColor='#EC5858' imgUrl={MathOrignal} text='MATH' />
+            <SubjectCard bgColor='#EC5858' imgUrl={ScienceOrignal} text='SCIENCE' />
+            <SubjectCard bgColor='#EC5858' imgUrl={SightOrignal} text='SIGHT WORDS' />
+            <SubjectCard bgColor='#EC5858' imgUrl={FinancialOrignal} text='FINANCIAL LITERACY' />
+            <SubjectCard bgColor='#EC5858' imgUrl={HealthOrignal} text='HEALTH & SAFETY' />
+        </SubjectCardContainer>
         <TableContainer>
-          <Table>
-            <thead>
-              <th>Name of the Assignement</th>
-              <th>Area of Knowledge</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>State</th>
-              <th>Results</th>
-            </thead>
-            <tbody>
-              {[1,2,3,4,5].map((singleRow, _id) => {
-                return (
-                  <tr>
-                    <td>Name of the Assignement</td>
-                    <td>Financial Literacy</td>
-                    <td>04/05/2022</td>
-                    <td>04/05/2022</td>
-                    <td>In progress</td>
-                    <td>0/10 - 0%</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </Table>
-          <Table2>
-            <thead>
-              <th style={{
-
-              }}>Name of the Student</th>
-              <th style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}>
-                <p style={{
-                  color: "#3F3F3F"
-                }}>Progress(</p>
-                <p style={{
-                  color: "#21B95C"
-                }}>correct</p>
-                <p>/</p>
-                <p style={{
-                  color: "#EC5858"
-                }}>incorrect</p>
-                <p>/</p>
-                <p style={{
-                  color: "#F4C222"
-                }}>not anser</p>
-                <p style={{
-                  color: "#3F3F3F"
-                }}>)</p>
-              </th>
-              <th>State</th>
-              <th>Resutls</th>
-              <th>Actions</th>
-            </thead>
-            <tbody>
-              <tr style={{
-                verticalAlign: 'middle'
-              }}>
-                <td style={{
-                  textAlign: 'center'
-                }}>Lois Lane</td>
-                <td>
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{
-                      width: "30%",
-                      height: "1.2rem",
-                      background: "#21B95C",
-                    }} />
-                    <div style={{
-                      width: "30%",
-                      height: "1.2rem",
-                      background: "#EC5858",
-                    }} />
-                    <div style={{
-                      width: "30%",
-                      height: "1.2rem",
-                      background: "#F4C222",
-                    }} />
-                  </div>
-                </td>
-                <td style={{
-                  textAlign: 'center'
-                }}>Completed </td>
-                <td style={{
-                  textAlign: 'center'
-                }}>15-20 - 80%</td>
-                <td style={{
-                  textAlign: 'center'
+          <AssignmentTable>
+            <AssignPanelContainer>
+              <StudentPanel>
+                <StudentItemContainer>
+                  <input type="checkbox" name="" id={`student-all`} />
+                  <label htmlFor={`student-all`}>All Student</label>
+                </StudentItemContainer>
+                {students.map((student, id) => (
+                  <StudentItemContainer>
+                    <input type="checkbox" name="" id={`student-${id}`} />
+                    <label htmlFor={`student-${id}`}>{student}</label>
+                  </StudentItemContainer>
+                ))}
+              </StudentPanel>
+              <AssignPanel>
+                <TextField
+                  style={{
+                    width: "100%"
+                  }}
+                  label="Assignment Name (Optional)"
+                  variant="standard"
+                  color="warning"
+                  focused
+                  placeholder='Represent the value of a currency with an amount of a different currency'
+                />
+                <TextField
+                  style={{
+                    width: "100%",
+                    marginTop: "1rem"
+                  }}
+                  label="Number of Questions"
+                  variant="standard"
+                  color="warning"
+                  focused
+                  placeholder='10'
+                />
+                <TextField
+                  style={{
+                    width: "100%",
+                    marginTop: "1rem"
+                  }}
+                  label="Assignment Start Date"
+                  variant="standard"
+                  color="warning"
+                  focused
+                  placeholder='10'
+                />
+                <Box style={{
+                  width: "100%",
+                  marginTop: "1rem"
                 }}>
-                  <Button width={24} height={24} value='Finish' />
-                  <Button width={24} height={24} value='Extend' />
-                </td>
-              </tr>
-            </tbody>
-          </Table2>
+                  <label htmlFor="">Assignment Start Date</label><br />
+                  <DateTimePicker
+                      value={date}
+                      onChange={(e: any) => {
+                          setDate(e);
+                          console.log(e)
+                      }}
+                  />
+                </Box>
+                <Box style={{
+                  width: "100%",
+                  marginTop: "1rem"
+                }}>
+                  <label htmlFor="">Assignment End Date (Leave in blank for no end date)</label><br />
+                  <DateTimePicker
+                      value={date}
+                      onChange={(e: any) => {
+                          setDate(e);
+                          console.log(e)
+                      }}
+                  />
+                </Box>
+                <Button
+                  margin="10px 0px"
+                  value     = {dictionary[language]?.assign}
+                  bgColor   = {BasicColor.green}
+                  // onClick   = {handleSubmit}
+                  align     = {'left'}
+                  fullWidth = { true }
+                />
+              </AssignPanel>
+            </AssignPanelContainer>
+          </AssignmentTable>
         </TableContainer>
       </>
     </TeacherPgContainer>

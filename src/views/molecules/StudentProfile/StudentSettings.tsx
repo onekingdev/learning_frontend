@@ -8,7 +8,7 @@ import { dictionary }       from 'views/pages/Student/Settings/dictionary'
 export const StudentSettings: FC = () => {
 
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : 'EN_US'
+  language                = language? language : "EN_US"
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

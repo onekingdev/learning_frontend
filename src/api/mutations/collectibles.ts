@@ -1,4 +1,4 @@
-import { CARD } from 'api/fragments/collectibleFragments';
+import { CARD } from "api/fragments/collectibleFragments";
 
 export const PURCHASE_CARD_PACK = (
   collectibleCategory: number,

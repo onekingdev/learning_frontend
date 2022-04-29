@@ -74,7 +74,7 @@ interface MovementProp {
 export const TxHistoryTable: FC<MovementProp> = ({movement}) => {
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : "EN_US"
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);

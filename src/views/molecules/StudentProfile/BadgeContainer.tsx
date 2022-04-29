@@ -25,7 +25,7 @@ export const BadgeContainer: FC = () => {
   ];
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : 'EN_US'
+  language                = language? language : "EN_US"
   const size = isMobile ? 40: 120
   return (
     <>

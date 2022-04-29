@@ -13,7 +13,7 @@ export const AvatarItemWithSkinTone: FC<SvgProps> = ({ url, skinTone }) => {
   const [img, setImg] = useState('')
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : "EN_US"
 
   const updateAvatar = async () => {
     // fetch if skinTone is not zero

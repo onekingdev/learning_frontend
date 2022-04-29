@@ -32,7 +32,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({type, price, isSpecialCode,
   const [sponsorEmail, setSponsorEmail]   = useState('')
   const [plan, setPlan] = useState('month');
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : "EN_US"
   // const handleCheckPath = (path: string, isChecked: boolean) => {
   //   let temp:any = [];
   //   temp = [...paths];
@@ -49,7 +49,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({type, price, isSpecialCode,
     <TeacherContainer>
       { disabled && (<Mask />) }
       <TeacherHeader>
-        <Avatar src={type === 'School' ? schoolMark : classroomMark} />
+        <Avatar src={type === "School" ? schoolMark : classroomMark} />
         <b className="font-c-white">{type}</b>
       </TeacherHeader>
       <TeacherBody>

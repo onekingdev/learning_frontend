@@ -16,7 +16,7 @@ export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
 
   const isMobile      = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : "EN_US"
   const [current, setCurrent] = useState(0)
   const handleAvatarClick = (i: number) => {
     select(i)

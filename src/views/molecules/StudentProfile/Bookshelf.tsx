@@ -19,7 +19,7 @@ import { useSelector }        from 'react-redux'
 export const BookShelf: FC = () => {
 
     let language:string     = useSelector((state: any) => state.user.language);
-    language                = language? language : 'EN_US'
+    language                = language? language : "EN_US"
 
     const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
     const itemSize = isMobile ? 40 : 120
