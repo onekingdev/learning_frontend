@@ -15,7 +15,7 @@ interface BalanceProp {
 export const AccountBalance: FC<BalanceProp> = ({ balance }) => {
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
 
   return (
     <BankPaper flex_direction='row' bg_color={BasicColor.blue} >

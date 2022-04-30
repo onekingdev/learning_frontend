@@ -64,7 +64,7 @@ const TeacherSignup: FC = () => {
   const [couponCode, setCouponCode] = useState('');
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "EN_US"
+  language            = language? language : 'EN_US'
 
   function validateEmail (email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)

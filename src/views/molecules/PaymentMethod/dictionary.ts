@@ -31,7 +31,7 @@ export const dictionary: any = Object.freeze({
         coupon: 'Coupon',
         total: 'Total',
         firstRenewal: 'First Renewal',
-        youDidNotSelectAnyChildrenNumber: `Failed! You didn't select any children number`,
+        youDidNotSelectAnyChildrenNumber: 'Failed! You didn\'t select any children number',
         yourSubscriptionHasBeenSuccessfullyCreated: 'Your subscription has been successfully created!'
     },
     'TH' :{
@@ -66,7 +66,7 @@ export const dictionary: any = Object.freeze({
         coupon: 'คูปอง',
         total: 'ทั้งหมด',
         firstRenewal: 'ต่ออายุครั้งแรก',
-        youDidNotSelectAnyChildrenNumber: `ล้มเหลว! คุณไม่ได้เลือกหมายเลขลูกใด ๆ`,
+        youDidNotSelectAnyChildrenNumber: 'ล้มเหลว! คุณไม่ได้เลือกหมายเลขลูกใด ๆ',
         yourSubscriptionHasBeenSuccessfullyCreated: 'สร้างการสมัครของคุณสำเร็จแล้ว!'
     },
     'ES_MX': {
@@ -101,7 +101,7 @@ export const dictionary: any = Object.freeze({
         coupon: 'Cupón',
         total: 'Total',
         firstRenewal: 'Primera Renovación',
-        youDidNotSelectAnyChildrenNumber: `¡Ha fallado! No seleccionaste ningún número de niños`,
+        youDidNotSelectAnyChildrenNumber: '¡Ha fallado! No seleccionaste ningún número de niños',
         yourSubscriptionHasBeenSuccessfullyCreated: '¡Tu suscripción ha sido creada con éxito!'
     }
 });
