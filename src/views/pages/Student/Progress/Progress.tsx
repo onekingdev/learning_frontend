@@ -357,7 +357,9 @@ export const KidsProgress = () => {
                         {subSubjects1 && subSubjects1.map((singleInfo, id) => {
                             if (singleInfo && singleInfo.text) {
                                 const _id = id + 1;
-                                console.log(singleInfo)
+                                const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
+                                    Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
+                                ) : 0
                                 return (
                                     <div style={{
                                         position: 'absolute',
@@ -379,10 +381,15 @@ export const KidsProgress = () => {
                                                     ((lineCount - _id%(lineCount + verticalCount)) * (100 / lineCount) + '%')
                                                 )
                                             ),
+                                        // width: rotatingStatus === 0 ? 100 / lineCount + 'vw' : unitHeight + 'rem',
+                                        // marginLeft: rotatingStatus === 0 ? '0' : `${unitHeight / 3}rem`,
+                                        // marginTop: rotatingStatus === 0 ? '0' : `-${100 / lineCount / 6}vw`,
+                                        // height: rotatingStatus === 0 ? unitHeight + 'rem' : 100 / lineCount + 'vw',
                                         width: 100 / lineCount + '%',
                                         height: unitHeight + 'rem',
                                         padding: '10px 16px',
-                                        boxSizing: 'border-box'
+                                        boxSizing: 'border-box',
+                                        // transform: `rotate(${90 * rotatingStatus}deg)`
                                     }}>
                                         <div style={{
                                             width: `100%`,
