@@ -84,7 +84,7 @@ export const Sidebar: FC = () => {
                 isOpen={open}
                 open={openTutorial}
                 // title = {VIDEO_TUTORIAL_EXPLAIN}
-                // fullWidth='true'
+                fullWidth='true'
                 dialogContent={
                     <div >
                         <ExplainText>{VIDEO_TUTORIAL_EXPLAIN[language]}</ExplainText>
