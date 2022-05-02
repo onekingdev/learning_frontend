@@ -32,7 +32,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({type, price, isSpecialCode,
   const [sponsorEmail, setSponsorEmail]   = useState('')
   const [plan, setPlan] = useState('month');
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
   // const handleCheckPath = (path: string, isChecked: boolean) => {
   //   let temp:any = [];
   //   temp = [...paths];

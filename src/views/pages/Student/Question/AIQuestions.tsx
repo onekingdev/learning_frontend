@@ -27,10 +27,8 @@ import { TypeInQuestion } from 'views/molecules/QuestionTypes/TypeInQuestion';
 import useSound from 'use-sound';
 import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
 import audioError from 'views/assets/audios/wrong-answer-sound.wav';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 import * as TYPES from 'app/types'
-import Backdrop from '@mui/material/Backdrop';
-import Typography from '@mui/material/Typography';
-import { RollCorrect } from 'views/molecules/QuestionRollContents/RollCorrect';
 
 interface RoutePresentationParams {
   mode: string;
@@ -63,7 +61,7 @@ export const AIQuestion: FC = () => {
   const [answers, setAnswers] = useState<Array<any>>([])
   const [hits, setHits] = useState(0)
   const [errors, setErrors] = useState(0)
-  // const [prevHit, setPrevHit] = useState<boolean>(earning.energyCharge > 0 ? true : false)
+  const [prevHit, setPrevHit] = useState<boolean>(earning.energyCharge > 0 ? true : false)
   const [questionCounter, setQuestionCounter] = useState(0);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
   const [answerResult, setAnswerResult] = useState<boolean[]>([]);
@@ -72,9 +70,7 @@ export const AIQuestion: FC = () => {
   const [nextMaxExp, setNextMaxExp] = useState(0)
   const [openDg, setOpenDg] = useState(false);
   const [bonusCoins, setBonusCoins] = useState(0)
-  const [wrongRoll, setWrongRoll] = useState(0)
-  const [correctRoll, setCorrectRoll] = useState(0)
-  const [openBd, setOpenBd] = useState(false)
+
 
   const renderQuestion = (
     question: IAIQuestion,
@@ -149,23 +145,6 @@ export const AIQuestion: FC = () => {
     }
     return component
   }
-  const renderBackdropContent = (
-    correctInRoll: number,
-    wrongInRoll: number
-  ) => {
-    let component: any
-
-    if (correctInRoll > 0) {
-      component = (
-        <RollCorrect rollcount={correctInRoll} />
-      )
-    } else {
-      component = (
-        <Typography sx={{ color: 'white' }}>You answered wrong {wrongInRoll} in roll</Typography>
-      )
-    }
-    return component
-  }
 
   const updateNextLevel = async (currentLevelAmount: number) => {
     const res: any = await getNextLevel(currentLevelAmount, user.token, dispatch)
@@ -178,22 +157,13 @@ export const AIQuestion: FC = () => {
     increaseExp(isCorrect);
     setAnswers([...answers, result]);
     setAnswerResult([...answerResult, isCorrect])
-
+    isCorrect ? setHits(hits + 1) : setErrors(errors + 1)
+    isCorrect ? playHit() : playError()
+    setPrevHit(isCorrect)
     if (isCorrect) {
-      playHit()
-      setHits(hits + 1)
-      setCorrectRoll(correctRoll + 1)
-      if (correctRoll > 0) setOpenBd(true)
-      setWrongRoll(0)
       setPoints(points + QUESTION_POINT_UNIT);
-    } else {
-      playError()
-      setErrors(errors + 1)
-      setWrongRoll(wrongRoll + 1)
-      if (wrongRoll > 0) setOpenBd(true)
-      setCorrectRoll(0)
     }
-    // setPrevHit(isCorrect)
+
     upgradeEnergy(isCorrect)
   };
 
@@ -221,7 +191,7 @@ export const AIQuestion: FC = () => {
   const upgradeEnergy = (isCorrect: boolean) => {
 
     if (isCorrect) {
-      if (correctRoll > 0) {
+      if (prevHit) {
         setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1))))
         dispatch({ type: TYPE.EARNING_ENERGY_UP });
       }
@@ -322,15 +292,6 @@ export const AIQuestion: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        <Backdrop
-          open={false} // openBd
-          onClick={() => setOpenBd(false)}
-          sx={{ zIndex: 1000 }}
-        >
-          {
-            renderBackdropContent(correctRoll, wrongRoll)
-          }
-        </Backdrop>
         {
           isLessonFinished ? (
             <FinishLesson

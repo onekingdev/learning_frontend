@@ -19,7 +19,7 @@ export const SubjectsMenu: FC = () => {
   const dispatch        = useDispatch();
   const history         = useHistory();
   let language:string   = useSelector((state: any) => state.user.language);
-  language              = language? language : "EN_US"
+  language              = language? language : "en-us"
   const [areasOfKnowledge, setTopics] = useState<IAreasOfKnowledge[]>([]);
 
   const handleData = (data: any) => {

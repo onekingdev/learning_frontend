@@ -1,15 +1,15 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         setUpYourAccount: 'Set up your account',
         chooseYourPlan: 'Choose your plan',
         ready: 'Ready'
     },
-    'TH': {
+    'th': {
         setUpYourAccount: 'ตั้งค่าบัญชีของคุณ',
         chooseYourPlan: 'เลือกแผนของคุณ',
         ready: 'พร้อม'
     },
-    'ES_MX': {
+    'es-mx': {
         setUpYourAccount: 'Configurar tu cuenta',
         chooseYourPlan: 'Elige tu plan',
         ready: 'Lista'

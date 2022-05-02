@@ -28,7 +28,7 @@ export const Payment: FC = () => {
   const guardian = useSelector((state: any) => state.guardian);
   const cardType = creditCardType(guardian.paymentMethod.cardNumber)
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
 
   const openEdit = () => edit(!isEdit);
 

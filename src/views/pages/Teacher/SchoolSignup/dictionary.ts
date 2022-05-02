@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         schoolSignup: 'School Signup',
         schoolType  : 'School Type',
         district    : 'District',
@@ -29,7 +29,7 @@ export const dictionary: any = Object.freeze({
         FAQ: 'FAQ',
         plans: 'Plans'
     },
-    'TH' :{
+    'th' :{
         schoolSignup: 'สมัครเรียน',
         schoolType: 'schoolType',
         district    : 'District',
@@ -59,7 +59,7 @@ export const dictionary: any = Object.freeze({
         FAQ: 'คำถามที่พบบ่อย',
         plans: 'แผน'
     },
-    'ES_MX': {
+    'es-mx': {
         schoolSignup: 'Registro de la escuela',
         schoolType: 'schoolType',
         district    : 'District',

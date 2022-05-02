@@ -1,5 +1,5 @@
 export const dictionary:any = Object.freeze({
-  'EN_US': {
+  'en-us': {
     practice: 'Practice, Play, Grow',
     description1:
       'Socrates makes learning fun while adjusting to your child\'s needs.',
@@ -13,7 +13,7 @@ export const dictionary:any = Object.freeze({
     schoolSignUp: 'School/Teacher Sign Up',
     parentSignUp: 'Parent/Studentr Sign Up',
   },
-  'TH' :{
+  'th' :{
     practice: 'ฝึกฝน เล่น เติบโต',
     description1:
       'โสกราตีสทำให้การเรียนรู้เป็นเรื่องสนุกพร้อมทั้งปรับให้เข้ากับความต้องการของลูก',
@@ -27,7 +27,7 @@ export const dictionary:any = Object.freeze({
     schoolSignUp: 'โรงเรียน/ครู ลงทะเบียน',
     parentSignUp: 'ผู้ปกครอง/นักเรียนลงทะเบียน',
   },
-  'ES_MX': {
+  'es-mx': {
     practice: 'Practica, Juega, Crece',
     description1:
       'Sócrates hace que el aprendizaje sea divertido mientras se adapta a las necesidades de su hijo.',

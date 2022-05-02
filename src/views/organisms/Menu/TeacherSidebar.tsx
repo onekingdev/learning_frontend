@@ -54,7 +54,7 @@ export const Sidebar: FC = () => {
     const classes =              useStyles();
 
     let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'EN_US'
+    language = language ? language : 'en-us'
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (

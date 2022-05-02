@@ -1,15 +1,15 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         classroom: 'Classroom',
         students: 'Students',
         group: 'Group,'
     },
-    'TH' :{
+    'th' :{
         classroom: 'Classroom',
         students: 'Students',
         group: 'Group,'
     },
-    'ES_MX': {
+    'es-mx': {
         classroom: 'Classroom',
         students: 'Students',
         group: 'Group,'

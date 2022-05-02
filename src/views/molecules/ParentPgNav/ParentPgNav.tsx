@@ -35,7 +35,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   // const dispatch = useDispatch()
   const classes = useStyles();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
   const handleChange = (event:any) => {
     switch(event.target.value) {
       case 'Settings' :

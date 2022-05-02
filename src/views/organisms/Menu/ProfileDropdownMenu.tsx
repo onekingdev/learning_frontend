@@ -16,7 +16,7 @@ export const ProfileDropDownMenu: FC = () => {
   const avatar  = useSelector((state: any) => state.avatar);
   const open    = Boolean(anchorEl);
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };

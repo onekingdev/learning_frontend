@@ -1,15 +1,15 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
       practicePlayGrow: 'Practice Play Grow',
       createClassroomAccount: 'Create Classroom Account',
       createSchoolAccount: 'Create School Account',
     },
-    'TH' :{
+    'th' :{
       practicePlayGrow: 'ฝึกฝน เล่น เติบโต',
       createClassroomAccount: 'Crear cuenta de aula',
       createSchoolAccount: 'สร้างบัญชีโรงเรียน',
     },
-    'ES_MX': {
+    'es-mx': {
       practicePlayGrow: 'Practica Juega Crece',
       createClassroomAccount: 'สร้างบัญชีห้องเรียน',
       createSchoolAccount: 'Crear cuenta escolar',

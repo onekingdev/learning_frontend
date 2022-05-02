@@ -19,7 +19,7 @@ export const ParentPgStepper: FC<ParentPgStepperProps> = ({step}) => {
   // const dispatch = useDispatch()
   // const [age, setAge] = useState('');
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
 
   useEffect(() => {
   }, []);
