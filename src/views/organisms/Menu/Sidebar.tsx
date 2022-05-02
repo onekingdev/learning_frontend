@@ -86,21 +86,23 @@ export const Sidebar: FC = () => {
                 // title = {VIDEO_TUTORIAL_EXPLAIN}
                 fullWidth='true'
                 dialogContent={
-                    <div >
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
                         <ExplainText>{VIDEO_TUTORIAL_EXPLAIN[language]}</ExplainText>
-                        <YouTube
-                            videoId={TUTORIAL_VDO_URL}
-                            opts={{
-                                width: `${TUTORIAL_VDO_DG_WIDTH}`,
-                                height: `${TUTORIAL_VDO_DG_HEIGHT}`,
-                                playerVars: {
-                                    autoplay: 0,
-                                    controls: 0
-                                }
-                            }}
-                        />
+                        <Box sx={{ width: TUTORIAL_VDO_DG_WIDTH, height: TUTORIAL_VDO_DG_HEIGHT, backgroundColor: 'black' }}>
+                            <YouTube
+                                videoId={TUTORIAL_VDO_URL}
+                                opts={{
+                                    width: `${TUTORIAL_VDO_DG_WIDTH}`,
+                                    height: `${TUTORIAL_VDO_DG_HEIGHT}`,
+                                    playerVars: {
+                                        autoplay: 0,
+                                        controls: 0
+                                    }
+                                }}
+                            />
+                        </Box>
                         {/* <VideoPlayer src={TUTORIAL_VDO_URL} /> */}
-                    </div>
+                    </Box>
                 }
             />
             <Button onClick={toggleDrawer(true)}>
