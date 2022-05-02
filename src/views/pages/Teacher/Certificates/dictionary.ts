@@ -5,7 +5,7 @@ export const dictionary: any = Object.freeze({
         select: 'Select',
         studentsName: 'Students Name'
     },
-    'th': {
+    '': {
         certificates: 'ใบรับรอง',
         uploadImage: 'อัพโหลดภาพ',
         select: 'เลือก',

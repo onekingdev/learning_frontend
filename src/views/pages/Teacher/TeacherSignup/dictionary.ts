@@ -25,7 +25,7 @@ export const dictionary: any = Object.freeze({
         FAQ: 'FAQ',
         plans: 'Plans'
     },
-    'th' :{
+    '' :{
         teacherSignup: 'สมัครครู',
         email: 'อีเมล',
         fieldIsRequired: 'ต้องระบุข้อมูล',

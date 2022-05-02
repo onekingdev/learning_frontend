@@ -11,7 +11,7 @@ export const dictionary:any = Object.freeze({
     science: 'SCIECNE',
     health: 'HEALTH'
   },
-  'th' :{
+  '' :{
     title    : 'ความคืบหน้า',
     practice : 'ฝึกฝน',
     reviewQuestionsAnswered: 'ทบทวนคำถามที่ได้รับคำตอบ',

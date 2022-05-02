@@ -21,7 +21,7 @@ const gems = [
     value: 'LEGENDARY',
     description: {
       'en-us': 'LEGENDARY',
-      'th': 'ตำนาน',
+      '': 'ตำนาน',
       'es-mx': 'LEGENDARIA'
     }
   },
@@ -30,7 +30,7 @@ const gems = [
     value: 'EPIC',
     description: {
       'en-us': 'EPIC',
-      'th': 'มหากาพย์',
+      '': 'มหากาพย์',
       'es-mx': 'ÉPICA'
     }
   },
@@ -39,7 +39,7 @@ const gems = [
     value: 'RARE',
     description: {
       'en-us': 'RARE',
-      'th': 'หายาก',
+      '': 'หายาก',
       'es-mx': 'EXTRAÑA'
     }
   },
@@ -48,7 +48,7 @@ const gems = [
     value: 'COMMON',
     description: {
       'en-us': 'COMMON',
-      'th': 'ทั่วไป',
+      '': 'ทั่วไป',
       'es-mx': 'COMÚN'
     }
   },
@@ -56,7 +56,7 @@ const gems = [
 
 export const Gems: FC<GemsProps> = ({ select, actives }) => {
   let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language.toUpperCase() : 'en-us'
+  language = language ? language : 'en-us'
   const [selected, setSelected] = useState('')
 
   const onGemClick = (id: number) => {

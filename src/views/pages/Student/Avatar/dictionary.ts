@@ -11,7 +11,7 @@ export const dictionary: any = Object.freeze({
         buy: 'BUY',
         failed: 'Failed!'
     },
-    'th' :{
+    '' :{
         myAvatar: 'อวตารของฉัน',
         wardrobe: 'ตู้เสื้อผ้า',
         setUserAvatarSuccessfully: 'ตั้งค่าอวาตาร์ผู้ใช้สำเร็จ!',

@@ -12,7 +12,7 @@ export const dictionary: any = Object.freeze({
         importExcel: 'Import an Excel',
         save: 'Save',
     },
-    'th' :{
+    '' :{
         classroom: 'Classroom',
         name: 'Name',
         lastName: 'Last Name',

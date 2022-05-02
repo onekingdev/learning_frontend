@@ -4,7 +4,7 @@ export const dictionary: any = Object.freeze({
       createClassroomAccount: 'Create Classroom Account',
       createSchoolAccount: 'Create School Account',
     },
-    'th' :{
+    '' :{
       practicePlayGrow: 'ฝึกฝน เล่น เติบโต',
       createClassroomAccount: 'Crear cuenta de aula',
       createSchoolAccount: 'สร้างบัญชีโรงเรียน',

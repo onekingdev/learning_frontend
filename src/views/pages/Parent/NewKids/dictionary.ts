@@ -20,7 +20,7 @@ export const dictionary: any = Object.freeze({
         financialLiteracy: 'FINANCIAL LITERACY',
         healthAndSafety: 'HEALTH & SAFETY',
     },
-    'th': {
+    '': {
         addingANewChild : 'การเพิ่มเด็กใหม่',
         pleaseCompleteTheFollowingToGetYourChildStarted : 'โปรดกรอกข้อมูลต่อไปนี้เพื่อให้บุตรหลานของคุณเริ่มต้น',
         selectYourPackage: 'เลือกแพ็คเกจของคุณ',

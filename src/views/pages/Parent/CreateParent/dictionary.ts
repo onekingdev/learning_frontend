@@ -23,7 +23,7 @@ export const dictionary: any = Object.freeze({
         FAQ: 'FAQ',
         plans: 'Plans'
     },
-    'th' :{
+    '' :{
         parentSignup: 'สมัครผู้ปกครอง',
         email: 'อีเมล',
         fieldIsRequired: 'ต้องระบุข้อมูล',

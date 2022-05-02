@@ -285,3 +285,25 @@ export const doSetOldUser = async (token: string) => {
       return { msg: 'Set old user error!', status: false }
   }
 }
+
+export const doUpdateUserLanguage = async (language: string,token: string) => {
+
+  try {
+      const res: any = await sendRawQuery(
+          `mutation {
+            updateUserLanguage(language: "${language}"){
+              user{
+                id
+              }
+            }
+          }`,
+          token
+      );
+      return res.msg ?
+          { msg: res.msg, success: false } :
+          { ...res.data, success: true }
+  } catch(e) {
+      console.log(e)
+      return { msg: 'Network error! Updating user language failed', success: false }
+  }
+}

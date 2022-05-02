@@ -12,7 +12,7 @@ export const dictionary:any = Object.freeze({
         membershipCancelationsFailed: 'Membership cancelations failed',
         submit: 'Submit'
     },
-    'th': {
+    '': {
         ChangeToYearly: 'เปลี่ยนเป็นรายปี',
         CancelPlan: 'ยกเลิกแผน',
         CancelChildrenPlan: 'ยกเลิก แผนสำหรับเด็ก',

@@ -10,8 +10,8 @@ const INITIAL_STATE = {
   isStaff: null,
   isActive: null,
   dateJoined: null,
-  language: null,
-  // language: 'en-us',     // test for language
+  // language: null,
+  language: 'en-us',     // test for language
   profile: {
     role: null,
   },
@@ -26,7 +26,7 @@ const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUse
       return {
         ...state,
         ...action.payload,
-        // language: 'en-us',     // test for language
+        language: 'en-us',     // test for language
 
       };
     case TYPE.USER_SET_REWARDFUL_ID:

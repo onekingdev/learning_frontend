@@ -29,7 +29,7 @@ export const dictionary: any = Object.freeze({
         FAQ: 'FAQ',
         plans: 'Plans'
     },
-    'th' :{
+    '' :{
         schoolSignup: 'สมัครเรียน',
         schoolType: 'schoolType',
         district    : 'District',

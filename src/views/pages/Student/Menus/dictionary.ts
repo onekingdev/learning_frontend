@@ -29,7 +29,7 @@ export const dictionary:any = Object.freeze({
         manageSubscription: 'Manage Subscription',
         help: 'Help',
     },
-    'th' :{
+    '' :{
         rank: 'อันดับ',
         level: 'ระดับ',
         exp: 'หมดอายุ',

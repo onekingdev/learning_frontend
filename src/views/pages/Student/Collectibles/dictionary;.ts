@@ -5,7 +5,7 @@ export const dictionary: any = Object.freeze({
         myCards: 'MY CARDS',
         collectibleCards: 'Collectible Cards'
     },
-    'th' :{
+    '' :{
         myCollection: 'คอลเลกชันของฉัน',
         buyCards: 'ซื้อบัตร',
         myCards: 'บัตรของฉัน',

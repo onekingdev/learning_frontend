@@ -12,7 +12,7 @@ export const dictionary:any = Object.freeze({
         logout: 'Logout',
         tutorial: 'TUTORIAL'
     },
-    'th' :{
+    '' :{
         rank: 'อันดับ',
         level: 'ระดับ',
         exp: 'หมดอายุ',

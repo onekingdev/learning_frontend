@@ -3,7 +3,7 @@ export const dictionary:any = Object.freeze({
         memberSince: 'Member Since',
         userName: 'User Name',
     },
-    'th': {
+    '': {
         memberSince: 'สมาชิกตั้งแต่',
         userName: 'ชื่อผู้ใช้',
     },

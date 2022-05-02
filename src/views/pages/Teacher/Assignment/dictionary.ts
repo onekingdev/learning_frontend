@@ -3,7 +3,7 @@ export const dictionary: any = Object.freeze({
         title: 'Assignment',
         assign: 'Assign'
     },
-    'th' :{
+    '' :{
         title: 'Assignment',
         assign: 'Assign'
     },

@@ -10,7 +10,7 @@ export const dictionary:any = Object.freeze({
         on: 'On',
         off: 'Off',
     },
-    'th' :{
+    '' :{
         profile: 'ประวัติโดยย่อ',
         settings: 'การตั้งค่า',
         badges: 'ป้าย',

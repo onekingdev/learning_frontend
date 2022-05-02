@@ -7,7 +7,7 @@ export const dictionary:any = Object.freeze({
     science: 'SCIENCE',
     sight: 'SIGHT WORDS',
   },
-  'th' :{
+  '' :{
     title: 'ฝึกฝน',
     math: 'คณิตศาสตร์',
     ela: 'มันจบแล้วหรอ',

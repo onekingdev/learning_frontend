@@ -26,7 +26,7 @@ const combo = [
   {
     label: {
       'en-us': 'Math',
-      'th': 'คณิตศาสตร์',
+      '': 'คณิตศาสตร์',
       'es-mx': 'Matemáticas'
     },
     value: 'combo_math'
@@ -34,7 +34,7 @@ const combo = [
   {
     label: {
       'en-us': 'ELA + Sight Words',
-      'th': 'ELA + คำสายตา',
+      '': 'ELA + คำสายตา',
       'es-mx': 'ELA + Palabras visuales'
     },
     value: 'combo_esw'
@@ -42,7 +42,7 @@ const combo = [
   {
     label: {
       'en-us': 'Science',
-      'th': 'ศาสตร์',
+      '': 'ศาสตร์',
       'es-mx': 'Ciencia'
     },
     value: 'combo_science'
@@ -50,7 +50,7 @@ const combo = [
   {
     label: {
       'en-us': 'Financial Literacy',
-      'th': 'ความรู้ทางการเงิน',
+      '': 'ความรู้ทางการเงิน',
       'es-mx': 'Educación financiera'
     },
     value: 'combo_finance'
@@ -58,7 +58,7 @@ const combo = [
   {
     label: {
       'en-us': 'Health & Safety',
-      'th': 'สุขภาพ & ความปลอดภัย',
+      '': 'สุขภาพ & ความปลอดภัย',
       'es-mx': 'Salud & La seguridad'
     },
     value: 'combo_health'

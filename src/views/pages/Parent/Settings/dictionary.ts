@@ -10,7 +10,7 @@ export const     dictionary:any = Object.freeze({
     radioLabelCombo: 'Combo Package(Pick 2)',
     radioLabelSolo: 'Solo Package',
   },
-  'th': {
+  '': {
     radioLabelGold: 'แพ็คเกจทอง',
     radioLabelCombo: 'แพ็กเกจคอมโบ (เลือก 2)',
     radioLabelSolo: 'แพ็คเกจเดี่ยว',
