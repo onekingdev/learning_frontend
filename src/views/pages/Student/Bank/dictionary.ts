@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         bank: 'BANK',
         latestTransactions: 'Latest Transactions',
         deposit: 'Deposit',
@@ -15,7 +15,7 @@ export const dictionary: any = Object.freeze({
         amount: 'Amount',
         amountIsEmpty: 'Amount is empty'
     },
-    '' :{
+    'TH' :{
         bank: 'ธนาคาร',
         latestTransactions: 'ธุรกรรมล่าสุด',
         deposit: 'เงินฝาก',
@@ -31,7 +31,7 @@ export const dictionary: any = Object.freeze({
         amount: 'จำนวน',
         amountIsEmpty: 'จำนวนเงินว่างเปล่า'
     },
-    'es-mx': {
+    'ES_MX': {
         bank: 'BANCO',
         latestTransactions: 'Últimas transacciones',
         deposit: 'Depósito',

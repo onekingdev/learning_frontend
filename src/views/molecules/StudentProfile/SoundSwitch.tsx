@@ -10,7 +10,7 @@ export const SoundSwitch: FC = () => {
     const dispatch          = useDispatch()
     const isSoundOn         = useSelector((state: any) => state.user.sound);
     let language:string     = useSelector((state: any) => state.user.language);
-    language                = language? language : 'en-us'
+    language                = language? language : 'EN_US'
 
     const handleChange = () => {
         dispatch({ type: USER_SET_TOGGLE_SOUND })

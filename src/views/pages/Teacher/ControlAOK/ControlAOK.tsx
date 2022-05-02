@@ -5,7 +5,7 @@ import { TeacherPgContainer }   from 'views/molecules/TeacherPgContainer/Teacher
 
 const ControlAOK: FC = () => {
     let language:string     = useSelector((state: any) => state.user.language);
-    language                = language? language : 'en-us'
+    language                = language? language : 'EN_US'
     return (
         <TeacherPgContainer onlyLogoImgNav={true} title={dictionary[language]?.assignment}>
             <>

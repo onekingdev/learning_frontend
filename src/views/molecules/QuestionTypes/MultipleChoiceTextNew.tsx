@@ -2,17 +2,15 @@ import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IAIBlock, IAIQuestion } from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
-import { Question } from 'views/atoms/Text/Question';
 import { Icon } from 'views/atoms/Icon/Icon';
 import videoIcon from 'views/assets/others/video-assistor.png';
 import assistor from 'views/assets/text-to-speech.svg';
-import playQuestionSound from 'views/assets/play-sound.svg'
 import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
-import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer, TextOptionsList, AnswerContainer, BlockAnswers, ImageAssetContainer, ImageAsset } from './Styles'
-import { Box, Container } from '@mui/material';
+import { BlackBoard, AnswersContainer, AssistorContainer, TextOptionsList, AnswerContainer, BlockAnswers, ImageAssetContainer, ImageAsset } from './Styles'
+import { QuestionBoxTitle } from './QuestionBoxTitle';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -41,7 +39,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
   onAnswer,
 }) => {
   let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  language = language ? language : 'EN_US'
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const questionSoundURI = `${question.questionAudioUrl}`;
@@ -67,11 +65,6 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
     // isCorrect: answer.isCorrect
   };
 
-  const readQuestionAudioAsset = () => {
-    const audio = new Audio(question.questionAudioAssets[0].audioFile);
-    audio.play();
-  };
-
   const readQuestion = () => {
     const audio = new Audio(questionSoundURI);
     audio.play();
@@ -94,21 +87,12 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
         />
       ) : null}
       <BlackBoard>
-        <Box sx={{display:'flex', justifyContent: 'center', alignItems: 'center', marginTop: 5}}>
-          <Question>{question.questionText}</Question>
-          {
-            question.questionAudioAssets[0]?.audioFile ?
-              <img
-                src={playQuestionSound}
-                onClick={() => {
-                  readQuestionAudioAsset();
-                }}
-                style={{
-                  cursor: 'pointer'
-                }}
-              /> : null
+        <QuestionBoxTitle
+          title={question.questionText}
+          audioFile = {
+            question.questionAudioAssets[0]?.audioFile
           }
-        </Box>
+        />
         <AnswersContainer>
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />

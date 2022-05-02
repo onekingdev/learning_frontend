@@ -16,7 +16,7 @@ import { useSelector }    from 'react-redux';
 export const GameMainMenu: FC = () => {
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  language            = language? language : 'EN_US'
   const history = useHistory();
 
   return (

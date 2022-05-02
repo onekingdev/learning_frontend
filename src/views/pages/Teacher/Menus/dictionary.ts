@@ -1,5 +1,5 @@
 export const dictionary:any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         rank: 'Rank',
         level: 'Level',
         exp: 'Exp',
@@ -12,7 +12,7 @@ export const dictionary:any = Object.freeze({
         logout: 'Logout',
         tutorial: 'TUTORIAL'
     },
-    '' :{
+    'TH' :{
         rank: 'อันดับ',
         level: 'ระดับ',
         exp: 'หมดอายุ',
@@ -25,7 +25,7 @@ export const dictionary:any = Object.freeze({
         tutorial: 'กวดวิชา',
         logout: 'ออกจากระบบ',
     },
-    'es-mx': {
+    'ES_MX': {
         rank: 'Rango',
         level: 'Nivel',
         exp: 'Exp',

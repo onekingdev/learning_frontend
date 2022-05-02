@@ -1,19 +1,19 @@
 export const dictionary: any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         support: 'Support',
         menu: 'Menu',
         settings: 'Settings',
         manageKids: 'Manage Kids',
         signOut: 'Sign Out'
     },
-    '' :{
+    'TH' :{
         support: 'สนับสนุน',
         menu: 'เมนู',
         settings: 'การตั้งค่า',
         manageKids: 'จัดการเด็ก',
         signOut: 'ออกจากระบบ'
     },
-    'es-mx': {
+    'ES_MX': {
         support: 'Apoyo',
         menu: 'Menú',
         settings: 'Ajustes',

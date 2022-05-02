@@ -20,7 +20,7 @@ type FinishLessonProps = {
 export const FinishLesson: FC<FinishLessonProps> = ({tokens, energy, loading, onNextLesson}) => {
 
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : 'en-us'
+  language                = language? language : 'EN_US'
 
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>

@@ -1,19 +1,19 @@
 export const dictionary:any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         treasureTrack: 'Treasure Track',
         honorRoll: 'Honor Roll',
         earn: 'EARNED',
         coins: 'COINS',
         you: 'You'
     },
-    '': {
+    'TH': {
         treasureTrack: 'ติดตามสมบัติ',
         honorRoll: 'เกียรติยศม้วน',
         earn: 'รับ',
         coins: 'เหรียญ',
         you: 'คุณ'
     },
-    'es-mx': {
+    'ES_MX': {
         treasureTrack: 'Pista del tesoro',
         honorRoll: 'cuadro de honor',
         earn: 'GANADO',

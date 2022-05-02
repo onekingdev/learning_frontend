@@ -98,7 +98,7 @@ export const Payment: FC = () => {
   // };
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  language            = language? language : 'EN_US'
 
   const onChangePackage = (type: string, count: number, period: string) => {
     plans[type].childCount    = count;

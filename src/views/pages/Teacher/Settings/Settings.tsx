@@ -10,7 +10,7 @@ import { TeacherMembershipDetail } from 'views/organisms/Setting/Teacher/Details
 const TeacherSettings: FC = () => {
   let language: string = useSelector((state: any) => state.user.language);
 
-  language = language ? language : "en-us"
+  language = language ? language : "EN_US"
   useEffect(() => {
 
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();

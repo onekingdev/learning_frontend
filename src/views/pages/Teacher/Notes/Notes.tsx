@@ -43,7 +43,7 @@ const Notes: FC = () => {
   const user              = useSelector((state: any) => state.user);
   const guardian          = useSelector((state: any) => state.guardian);
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : 'en-us'
+  language                = language? language : 'EN_US'
 
   const [data, setData]   = useState<any>([]);
   const [isOpenNewForm, setIsOpenNewForm] = useState(false);

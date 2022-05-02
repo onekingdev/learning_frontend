@@ -10,7 +10,7 @@ export const ImageUploader: FC = () => {
     const [open, setOpen] = useState(false)
 
     let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'en-us'
+    language = language ? language.toUpperCase() : 'EN_US'
 
     const close = () => {
         setOpen(false)

@@ -14,7 +14,7 @@ export const ReportProgress: FC = () => {
   // }, []);
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  language            = language? language : 'EN_US'
 
   const lessonProps = [
     {

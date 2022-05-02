@@ -5,7 +5,7 @@ import { dictionary }   from 'views/pages/Student/Settings/dictionary'
 export const Awards: FC = () => {
 
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : 'en-us'
+  language                = language? language : 'EN_US'
 
   return (
     <>

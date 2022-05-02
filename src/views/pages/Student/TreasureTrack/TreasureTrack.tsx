@@ -38,7 +38,7 @@ export const KidsTreasureTrack: FC = () => {
     const loadingContext = useContext(LoadingContext);
     const avatar = useSelector((state: any) => state.avatar)
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : 'en-us'
+    language            = language? language : 'EN_US'
 
     const [earnedCoin, setEarnedCoin] = useState<number>(0); //Math.ceil(Math.random() * 1000)
 
@@ -437,7 +437,7 @@ export const PcCom = styled.div`
         display: none;
     }
     &:hover {
-        cursor: pointer;
+        // cursor: pointer;
         // font-size: 1.1rem;
     }
 `;

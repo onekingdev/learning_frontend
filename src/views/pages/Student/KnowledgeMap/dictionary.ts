@@ -1,8 +1,8 @@
 export const dictionary:any = Object.freeze({
-    'en-us': {
+    'EN_US': {
     },
-    '' :{
+    'TH' :{
     },
-    'es-mx': {
+    'ES_MX': {
     }
   });

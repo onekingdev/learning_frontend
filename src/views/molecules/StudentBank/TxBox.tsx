@@ -16,7 +16,7 @@ export const TxBox: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  language            = language? language : 'EN_US'
   const user = useSelector((state: any) => state.user);
 
   const [depositAmount, setDepositAmount] = useState(0)

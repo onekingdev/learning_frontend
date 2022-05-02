@@ -1,17 +1,17 @@
 export const dictionary: any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         certificates: 'Certificates',
         uploadImage: 'Upload Image',
         select: 'Select',
         studentsName: 'Students Name'
     },
-    '': {
+    'TH': {
         certificates: 'ใบรับรอง',
         uploadImage: 'อัพโหลดภาพ',
         select: 'เลือก',
         studentsName: 'ชื่อของนักเรียน'
     },
-    'es-mx': {
+    'ES_MX': {
         certificates: 'Certificados',
         uploadImage: 'Cargar imagen',
         select: 'Seleccione',

@@ -152,7 +152,7 @@ export const fetchTeacherCertificateFilesFromFirebase = async (setUrls: Function
   });
 };
 
-// const language = 'en-us';
+// const language = 'EN_US';
 // const userProgress = [
 //   {
 //     title: dictionary[language].ela,

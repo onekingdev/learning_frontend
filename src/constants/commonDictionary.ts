@@ -1,11 +1,11 @@
 const dictionary: any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         fieldIsRequired: 'Field is required',
     },
-    '' :{
+    'TH' :{
         fieldIsRequired: 'ต้องระบุข้อมูล',
     },
-    'es-mx': {
+    'ES_MX': {
         fieldIsRequired: 'Se requiere campo',
     }
 });

@@ -1,6 +1,6 @@
 
 export const dictionary:any = Object.freeze({
-  'en-us': {
+  'EN_US': {
     title    : 'Progress',
     practice : 'Practice',
     reviewQuestionsAnswered: 'Review Questions Answered',
@@ -11,7 +11,7 @@ export const dictionary:any = Object.freeze({
     science: 'SCIECNE',
     health: 'HEALTH'
   },
-  '' :{
+  'TH' :{
     title    : 'ความคืบหน้า',
     practice : 'ฝึกฝน',
     reviewQuestionsAnswered: 'ทบทวนคำถามที่ได้รับคำตอบ',
@@ -22,7 +22,7 @@ export const dictionary:any = Object.freeze({
     science: 'ศาสตร์',
     health: 'สุขภาพ'
   },
-  'es-mx': {
+  'ES_MX': {
     title    : 'Progreso',
     practice : 'Práctica',
     reviewQuestionsAnswered: 'Preguntas de revisión respondidas',
