@@ -15,7 +15,7 @@ export const ColorPickerDropdown: FC<ColorPickerProp> = ({ select }) => {
   const toggling = () => setIsOpen(!isOpen);
   const [selectedOption, setSelectedOption] = useState(SKIN_PICKER[0].hex);
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
 
   const onOptionClicked = (value: any) => () => {
     setSelectedOption(value);

@@ -1,5 +1,5 @@
 export const     dictionary:any = Object.freeze({
-  'EN_US': {
+  'en-us': {
     settings: 'Settings',
     questions: 'questions',
     reachUsAndWeWillHelpYou: 'Reach us and we will help you',
@@ -10,7 +10,7 @@ export const     dictionary:any = Object.freeze({
     radioLabelCombo: 'Combo Package(Pick 2)',
     radioLabelSolo: 'Solo Package',
   },
-  'TH': {
+  '': {
     radioLabelGold: 'แพ็คเกจทอง',
     radioLabelCombo: 'แพ็กเกจคอมโบ (เลือก 2)',
     radioLabelSolo: 'แพ็คเกจเดี่ยว',
@@ -21,7 +21,7 @@ export const     dictionary:any = Object.freeze({
     reachUsAndWeWillHelpYou: 'ติดต่อเราและเราจะช่วยคุณ',
     contact: ' ติดต่อ',
   },
-  'ES_MX': {
+  'es-mx': {
     submit: 'Entregar',
     radioLabelGold: 'Paquete de oro',
     radioLabelCombo: 'Paquete combinado (Elige 2)',

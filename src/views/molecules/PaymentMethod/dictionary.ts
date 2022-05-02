@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         paymentMethod: 'Payment Method',
         creditOrDebitCard: 'Credit or debit card',
         cardNumber: 'Card Number ex: (XXXX-XXXX-XXXX-XXXX)',
@@ -34,7 +34,7 @@ export const dictionary: any = Object.freeze({
         youDidNotSelectAnyChildrenNumber: 'Failed! You didn\'t select any children number',
         yourSubscriptionHasBeenSuccessfullyCreated: 'Your subscription has been successfully created!'
     },
-    'TH' :{
+    '' :{
         paymentMethod: 'วิธีการชำระเงิน',
         creditOrDebitCard: 'Credit or debit card',
         cardNumber: 'Card หมายเลขอดีต: (XXXX-XXXX-XXXX-XXXX)',
@@ -69,7 +69,7 @@ export const dictionary: any = Object.freeze({
         youDidNotSelectAnyChildrenNumber: 'ล้มเหลว! คุณไม่ได้เลือกหมายเลขลูกใด ๆ',
         yourSubscriptionHasBeenSuccessfullyCreated: 'สร้างการสมัครของคุณสำเร็จแล้ว!'
     },
-    'ES_MX': {
+    'es-mx': {
         paymentMethod: 'Método de pago',
         creditOrDebitCard: 'Credit or debit card',
         cardNumber: 'Card Número ex: (XXXX-XXXX-XXXX-XXXX)',

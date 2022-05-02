@@ -38,33 +38,11 @@ const masteryColors = {
     'M': '#26B824'
 }
 
-const screen_width = window.innerWidth;
-let lineCount = 10;
-let verticalCount = 3;
-const unitHeight = 5;
-if (screen_width < 450) {
-    lineCount = 4;
-    verticalCount = 2;
-} else if (screen_width < 768) {
-    lineCount = 4;
-    verticalCount = 2;
-} else if (screen_width < 1024) {
-    lineCount = 4;
-    verticalCount = 2;
-} else if (screen_width < 1366) {
-    lineCount = 10;
-    verticalCount = 3;
-} else {
-    lineCount = 10;
-    verticalCount = 3;
-}
-console.log(screen_width, lineCount)
-
 export const KidsProgress = () => {
     const user              = useSelector((state: any) => state.user);
     const student           = useSelector((state: any) => state.student);
     let language:string     = useSelector((state: any) => state.user.language);
-    language                = language? language : 'EN_US'
+    language                = language? language : 'en-us'
 
     const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
     const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>('');
@@ -329,16 +307,7 @@ export const KidsProgress = () => {
                     paddingLeft: '0px',
                     paddingRight: '0px',
                     overflow: 'hidden',
-                    background: '#EB7738',
-                    minHeight: (
-                        (
-                            Math.ceil(subSubjects1.length / (lineCount + verticalCount)) * (verticalCount + 1) -
-                            (
-                                subSubjects1.length % (lineCount + verticalCount) === 0 || subSubjects1.length % (lineCount + verticalCount) > lineCount ?
-                                0 :
-                                verticalCount
-                            )
-                        ) * unitHeight) + 'rem'
+                    background: '#EB7738'
                 }}>
                     {/* <div style={{
                         position: 'relative',
@@ -354,70 +323,7 @@ export const KidsProgress = () => {
                                 width: '100%'
                             }} src={ProgressMapMobile} alt='ProgressMapMobile' />
                         </MobileCom>
-                        {subSubjects1 && subSubjects1.map((singleInfo, id) => {
-                            if (singleInfo && singleInfo.text) {
-                                const _id = id + 1;
-                                const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
-                                    Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
-                                ) : 0
-                                return (
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: (new Array(verticalCount - 1)).fill(true).map((_, id_) => lineCount + id_ + 1).indexOf(_id % (lineCount + verticalCount)) >= 0 ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
-                                            (Math.floor(_id/(lineCount + verticalCount))) * (unitHeight * (verticalCount + 1))  + (id%(lineCount + verticalCount) - lineCount + 1)*unitHeight + 'rem' :
-                                            (
-                                                _id % (lineCount + verticalCount) === 0 ?
-                                                (Math.floor(_id/(lineCount + verticalCount)) - 1) * (unitHeight * (verticalCount + 1)) + verticalCount*unitHeight + 'rem' :
-                                                Math.floor((_id)/(lineCount + verticalCount)) * (unitHeight * (verticalCount + 1)) + 'rem'
-                                            ),
-                                        left: (new Array(verticalCount - 1)).fill(true).map((_, id_) => lineCount + id_ + 1).indexOf(_id % (lineCount + verticalCount)) >= 0 ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
-                                            ((lineCount - 1) * (Math.floor(_id/(lineCount + verticalCount)) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
-                                            (
-                                                _id % (lineCount + verticalCount) === 0 ?
-                                                ((lineCount - 1) * ((Math.floor(_id/(lineCount + verticalCount)) - 1) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
-                                                (
-                                                    (Math.floor(_id/(lineCount + verticalCount)) % 2 === 0) ?
-                                                    ((_id%(lineCount + verticalCount) - 1) * (100 / lineCount) + '%') :
-                                                    ((lineCount - _id%(lineCount + verticalCount)) * (100 / lineCount) + '%')
-                                                )
-                                            ),
-                                        // width: rotatingStatus === 0 ? 100 / lineCount + 'vw' : unitHeight + 'rem',
-                                        // marginLeft: rotatingStatus === 0 ? '0' : `${unitHeight / 3}rem`,
-                                        // marginTop: rotatingStatus === 0 ? '0' : `-${100 / lineCount / 6}vw`,
-                                        // height: rotatingStatus === 0 ? unitHeight + 'rem' : 100 / lineCount + 'vw',
-                                        width: 100 / lineCount + '%',
-                                        height: unitHeight + 'rem',
-                                        padding: '10px 16px',
-                                        boxSizing: 'border-box',
-                                        // transform: `rotate(${90 * rotatingStatus}deg)`
-                                    }}>
-                                        <div style={{
-                                            width: `100%`,
-                                            height: '100%',
-                                            background: singleInfo.bgColor,
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            textAlign: 'center',
-                                            fontSize: '0.7rem',
-                                            transform: singleInfo.active ? 'scale(1.2)' : 'scale(1)',
-                                            outline: singleInfo.active ? '2px solid black' : 'none',
-                                            cursor: 'pointer',
-                                        }} onClick={() => {
-                                            if (singleInfo.aokId !== '') {
-                                                smoothScroll('#aok-id-' + singleInfo.aokId)
-                                                setActiveSubjectIdTable(singleInfo.aokId);
-                                            }
-                                        }}>
-                                        {singleInfo.text}
-                                        </div>
-                                    </div>
-                                )
-                            } else {
-                                return <></>
-                            }
-                        })}
-                        {/* { paths.map((path, id) => <PcCom key={id} style={{
+                        { paths.map((path, id) => <PcCom key={id} style={{
                             position: 'absolute',
                             left: `${path.left}%`,
                             top: `${path.top}%`,
@@ -477,7 +383,7 @@ export const KidsProgress = () => {
                             zIndex: 20,
                             height: '50px',
                             textAlign: 'center'
-                        }}>{subSubject.text}</MobileCom>)} */}
+                        }}>{subSubject.text}</MobileCom>)}
                     {/* </div> */}
                 </div>
             </Container>

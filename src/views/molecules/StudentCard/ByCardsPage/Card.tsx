@@ -18,7 +18,7 @@ type CardProps = {
 
 export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) => {
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language.toUpperCase() : 'EN_US'
+  language            = language? language : 'en-us'
 
   const onCardClick = () => {
     // This is prop from parent component, when card is clicked, this calls function of parent.

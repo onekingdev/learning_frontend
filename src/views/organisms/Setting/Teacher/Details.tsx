@@ -14,7 +14,7 @@ export const TeacherMembershipDetail: FC = () => {
   const { isOpen, open } = useDialog()
   const { isAddOpen, openAdd } = useAddDialog()
   let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'EN_US'
+  language = language ? language : 'en-us'
 
   // State to refresh component
   const [value, setValue] = useState(false);

@@ -59,7 +59,7 @@ interface ISingleGroup {
 const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokId='' }) => {
     const history = useHistory();
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : 'EN_US'
+    language            = language? language : 'en-us'
     const [opened, setOpened] = useState<boolean>(false);
     const toggle = () => setOpened(val => !val);
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {

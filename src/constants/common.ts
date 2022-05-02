@@ -10,16 +10,16 @@ export const LANGUAGES = [
     {
         id: 1,
         label: 'English',
-        value: 'EN_US'
+        value: 'en-us'
     },
     {
         id: 2,
         label: 'Spanish',
-        value: 'ES_MX'
+        value: 'es-mx'
     },
     {
         id: 3,
         label: 'Thai',
-        value: 'TH'
+        value: ''
     },
 ]

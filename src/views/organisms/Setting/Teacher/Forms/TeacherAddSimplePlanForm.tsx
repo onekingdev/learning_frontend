@@ -25,41 +25,41 @@ interface IAddPlanProps {
 const combo = [
   {
     label: {
-      'EN_US': 'Math',
-      'TH': 'คณิตศาสตร์',
-      'ES_MX': 'Matemáticas'
+      'en-us': 'Math',
+      '': 'คณิตศาสตร์',
+      'es-mx': 'Matemáticas'
     },
     value: 'combo_math'
   },
   {
     label: {
-      'EN_US': 'ELA + Sight Words',
-      'TH': 'ELA + คำสายตา',
-      'ES_MX': 'ELA + Palabras visuales'
+      'en-us': 'ELA + Sight Words',
+      '': 'ELA + คำสายตา',
+      'es-mx': 'ELA + Palabras visuales'
     },
     value: 'combo_esw'
   },
   {
     label: {
-      'EN_US': 'Science',
-      'TH': 'ศาสตร์',
-      'ES_MX': 'Ciencia'
+      'en-us': 'Science',
+      '': 'ศาสตร์',
+      'es-mx': 'Ciencia'
     },
     value: 'combo_science'
   },
   {
     label: {
-      'EN_US': 'Financial Literacy',
-      'TH': 'ความรู้ทางการเงิน',
-      'ES_MX': 'Educación financiera'
+      'en-us': 'Financial Literacy',
+      '': 'ความรู้ทางการเงิน',
+      'es-mx': 'Educación financiera'
     },
     value: 'combo_finance'
   },
   {
     label: {
-      'EN_US': 'Health & Safety',
-      'TH': 'สุขภาพ & ความปลอดภัย',
-      'ES_MX': 'Salud & La seguridad'
+      'en-us': 'Health & Safety',
+      '': 'สุขภาพ & ความปลอดภัย',
+      'es-mx': 'Salud & La seguridad'
     },
     value: 'combo_health'
   },
@@ -73,8 +73,8 @@ export const TeacherAddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) =
   const guardian = useSelector((state: any) => state.guardian);
   const { enqueueSnackbar } = useSnackbar();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
-  // const comboChildren = dictionary['EN_US'].combo
+  language            = language? language : 'en-us'
+  // const comboChildren = dictionary['en-us'].combo
   const [plans, setPlans] = useState<Array<any>>([])
 
   const [parentState, setParentState] = useState('')

@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         choosePackageInfo: 'When signing up for Socrates, children can get one or more areas of knowledge to learn from our growing selection.Choose the Solo package for one area, Combo package for any two, or Gold Package to get it all!',
         math: 'Math',
         elaSgithWords: 'ELA + SIGHT WORDS',
@@ -28,7 +28,7 @@ export const dictionary: any = Object.freeze({
         package: 'package',
         subtotal: 'Subtotal',
     },
-    'TH' :{
+    '' :{
         choosePackageInfo: 'เมื่อสมัครใช้ Socrates เด็กๆ จะได้รับความรู้อย่างน้อยหนึ่งด้านเพื่อเรียนรู้จากการเลือกที่เพิ่มขึ้น เลือกแพ็คเกจ Solo สำหรับหนึ่งพื้นที่ แพ็คเกจ Combo สำหรับสองคน หรือแพ็คเกจ Gold เพื่อรับทั้งหมด!',
         math: 'คณิตศาสตร์',
         elaSgithWords: 'ELA + คำมองเห็น',
@@ -57,7 +57,7 @@ export const dictionary: any = Object.freeze({
         package: 'บรรจุุภัณฑ์',
         subtotal: 'ยอดรวม',
     },
-    'ES_MX': {
+    'es-mx': {
         choosePackageInfo: 'Al inscribirse en Sócrates, los niños pueden obtener una o más áreas de conocimiento para aprender de nuestra creciente selección. ¡Elija el paquete Solo para un área, el paquete combinado para dos o el paquete Gold para obtenerlo todo!',
         math: 'Matemáticas',
         elaSgithWords: 'ELA + PALABRAS VISIBLES',

@@ -57,7 +57,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     const user      = useSelector((state: Store) => state.user)
     const guardian  = useSelector((state: any) => state.guardian)
     let language:string  = useSelector((state: any) => state.user.language);
-    language             = language? language : 'EN_US'
+    language             = language? language : 'en-us'
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
     console.log(countries)

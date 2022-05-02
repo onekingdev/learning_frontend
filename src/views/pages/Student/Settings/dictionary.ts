@@ -1,5 +1,5 @@
 export const dictionary:any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         profile: '\'s Profile',
         settings: 'Settings',
         badges: 'Badges',
@@ -10,7 +10,7 @@ export const dictionary:any = Object.freeze({
         on: 'On',
         off: 'Off',
     },
-    'TH' :{
+    '' :{
         profile: 'ประวัติโดยย่อ',
         settings: 'การตั้งค่า',
         badges: 'ป้าย',
@@ -21,7 +21,7 @@ export const dictionary:any = Object.freeze({
         on: 'บน',
         off: 'ปิด',
     },
-    'ES_MX': {
+    'es-mx': {
         profile: 'Perfil',
         settings: 'Ajustes',
         badges: 'Insignias',

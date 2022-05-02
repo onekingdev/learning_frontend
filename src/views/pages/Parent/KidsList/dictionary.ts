@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         yourChildLicense: 'Your Child License',
         download: 'download',
         change: 'change',
@@ -14,7 +14,7 @@ export const dictionary: any = Object.freeze({
         studentLogin: 'Student Login',
         yourChildren: 'Your Children',
     },
-    'TH' :{
+    '' :{
         yourChildLicense: 'ใบอนุญาตลูกของคุณ',
         download: 'ดาวน์โหลด',
         change: 'เปลี่ยน',
@@ -29,7 +29,7 @@ export const dictionary: any = Object.freeze({
         studentLogin: 'เข้าสู่ระบบนักศึกษา',
         yourChildren: 'ลูก ๆ ของคุณ',
     },
-    'ES_MX': {
+    'es-mx': {
         yourChildLicense: 'Su licencia de niño',
         download: 'descargar',
         change: 'cambiar',

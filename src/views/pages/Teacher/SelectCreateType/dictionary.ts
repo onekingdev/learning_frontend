@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
       practicePlayGrow: 'Practice Play Grow',
       termCondition: 'Terms & Conditions',
       instructions: 'To log in please enter your name and password',
@@ -19,7 +19,7 @@ export const dictionary: any = Object.freeze({
       Donec cras nulla habitant lectus adipiscing erat est. Dignissim sem aenean amet quam quam mauris. Faucibus donec tincidunt sed mi faucibus elit. 
       Sit rhoncus sit venenatis, scelerisque aliquet viverra sem vitae. Pharetra amet porttitor nunc sit sed. Duis leo a, aliquet nunc, nibh. `
     },
-    'TH' :{
+    '' :{
       practicePlayGrow: 'ฝึกฝน เล่น เติบโต',
       termCondition: 'ข้อตกลงและเงื่อนไข',
       instructions: 'เข้าสู่ระบบ กรุณาใส่ชื่อและรหัสผ่านของคุณ',
@@ -39,7 +39,7 @@ export const dictionary: any = Object.freeze({
       Donec cras nulla habitant lectus adipiscing erat est. Dignissim sem aenean amet quam quam mauris. Faucibus donec tincidunt sed mi faucibus elit. 
       Sit rhoncus sit venenatis, scelerisque aliquet viverra sem vitae. Pharetra amet porttitor nunc sit sed. Duis leo a, aliquet nunc, nibh. `
     },
-    'ES_MX': {
+    'es-mx': {
       practicePlayGrow: 'Practica Juega Crece',
       termCondition: 'Términos y condiciones',
       instructions: 'Para iniciar sesión por favor ingrese su nombre y contraseña',

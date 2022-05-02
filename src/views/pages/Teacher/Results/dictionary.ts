@@ -1,13 +1,13 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         title: 'Results',
         finish: 'Finish'
     },
-    'TH' :{
+    '' :{
         title: 'Results',
         finish: 'Finish'
     },
-    'ES_MX': {
+    'es-mx': {
         title: 'Results',
         finish: 'Finish'
     }

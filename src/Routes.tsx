@@ -41,7 +41,6 @@ import Groups                    from 'views/pages/Teacher/Students/Groups'
 import AddStudent                from 'views/pages/Teacher/AddStudent/AddStudent';
 import Assignment                    from 'views/pages/Teacher/Assignment/Assignment';
 import Results                    from 'views/pages/Teacher/Results/Results';
-import ProgressStudent                    from 'views/pages/Teacher/ProgressStudent/ProgressStudent';
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
 import ControlAOK                from 'views/pages/Teacher/ControlAOK/ControlAOK';
 import SettingForm from 'views/molecules/Classroom/SettingForm'
@@ -220,9 +219,6 @@ export function Routes() {
           <Route path="/results">
             {/* <SettingForm isOpen={true} close={()=>{}}/> */}
             <Results />
-          </Route>
-          <Route path="/teacher-progress">
-            <ProgressStudent />
           </Route>
           {/* ) : null} */}
           <Redirect from="/" to="/login" />
