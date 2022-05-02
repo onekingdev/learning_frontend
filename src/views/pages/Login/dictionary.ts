@@ -16,7 +16,7 @@ export const dictionary: any = Object.freeze({
     children_privacy: "Children's Privacy Policy",
     or: 'or',
   },
-  '' :{
+  'th' :{
     welcome: 'ยินดีต้อนรับกลับ!',
     termCondition: 'ข้อตกลงและเงื่อนไข',
     instructions: 'เข้าสู่ระบบ กรุณาใส่ชื่อและรหัสผ่านของคุณ',

@@ -6,7 +6,7 @@ export const dictionary: any = Object.freeze({
         manageKids: 'Manage Kids',
         signOut: 'Sign Out'
     },
-    '' :{
+    'th' :{
         support: 'สนับสนุน',
         menu: 'เมนู',
         settings: 'การตั้งค่า',

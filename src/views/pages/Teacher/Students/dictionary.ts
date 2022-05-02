@@ -4,7 +4,7 @@ export const dictionary: any = Object.freeze({
         students: 'Students',
         group: 'Group,'
     },
-    '' :{
+    'th' :{
         classroom: 'Classroom',
         students: 'Students',
         group: 'Group,'

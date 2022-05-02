@@ -19,7 +19,7 @@ export const dictionary: any = Object.freeze({
       Donec cras nulla habitant lectus adipiscing erat est. Dignissim sem aenean amet quam quam mauris. Faucibus donec tincidunt sed mi faucibus elit. 
       Sit rhoncus sit venenatis, scelerisque aliquet viverra sem vitae. Pharetra amet porttitor nunc sit sed. Duis leo a, aliquet nunc, nibh. `
     },
-    '' :{
+    'th' :{
       practicePlayGrow: 'ฝึกฝน เล่น เติบโต',
       termCondition: 'ข้อตกลงและเงื่อนไข',
       instructions: 'เข้าสู่ระบบ กรุณาใส่ชื่อและรหัสผ่านของคุณ',

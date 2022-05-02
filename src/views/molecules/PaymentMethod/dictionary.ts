@@ -34,7 +34,7 @@ export const dictionary: any = Object.freeze({
         youDidNotSelectAnyChildrenNumber: 'Failed! You didn\'t select any children number',
         yourSubscriptionHasBeenSuccessfullyCreated: 'Your subscription has been successfully created!'
     },
-    '' :{
+    'th' :{
         paymentMethod: 'วิธีการชำระเงิน',
         creditOrDebitCard: 'Credit or debit card',
         cardNumber: 'Card หมายเลขอดีต: (XXXX-XXXX-XXXX-XXXX)',

@@ -36,7 +36,7 @@ export const dictionary:any = Object.freeze({
         saturday: 'Saturday',
         sunday: 'Sunday',
     },
-    '': {
+    'th': {
         addNew: 'Add New',
         classroomName: 'Classroom Name',
         newClassroom: 'New Classroom',

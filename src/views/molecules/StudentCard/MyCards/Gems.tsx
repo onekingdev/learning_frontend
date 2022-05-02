@@ -21,7 +21,7 @@ const gems = [
     value: 'LEGENDARY',
     description: {
       'en-us': 'LEGENDARY',
-      '': 'ตำนาน',
+      'th': 'ตำนาน',
       'es-mx': 'LEGENDARIA'
     }
   },
@@ -30,7 +30,7 @@ const gems = [
     value: 'EPIC',
     description: {
       'en-us': 'EPIC',
-      '': 'มหากาพย์',
+      'th': 'มหากาพย์',
       'es-mx': 'ÉPICA'
     }
   },
@@ -39,7 +39,7 @@ const gems = [
     value: 'RARE',
     description: {
       'en-us': 'RARE',
-      '': 'หายาก',
+      'th': 'หายาก',
       'es-mx': 'EXTRAÑA'
     }
   },
@@ -48,7 +48,7 @@ const gems = [
     value: 'COMMON',
     description: {
       'en-us': 'COMMON',
-      '': 'ทั่วไป',
+      'th': 'ทั่วไป',
       'es-mx': 'COMÚN'
     }
   },

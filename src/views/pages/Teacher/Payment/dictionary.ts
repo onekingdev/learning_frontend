@@ -28,7 +28,7 @@ export const dictionary: any = Object.freeze({
         package: 'package',
         subtotal: 'Subtotal',
     },
-    '' :{
+    'th' :{
         choosePackageInfo: 'เมื่อสมัครใช้ Socrates เด็กๆ จะได้รับความรู้อย่างน้อยหนึ่งด้านเพื่อเรียนรู้จากการเลือกที่เพิ่มขึ้น เลือกแพ็คเกจ Solo สำหรับหนึ่งพื้นที่ แพ็คเกจ Combo สำหรับสองคน หรือแพ็คเกจ Gold เพื่อรับทั้งหมด!',
         math: 'คณิตศาสตร์',
         elaSgithWords: 'ELA + คำมองเห็น',

@@ -14,7 +14,7 @@ export const dictionary: any = Object.freeze({
         studentLogin: 'Student Login',
         yourChildren: 'Your Children',
     },
-    '' :{
+    'th' :{
         yourChildLicense: 'ใบอนุญาตลูกของคุณ',
         download: 'ดาวน์โหลด',
         change: 'เปลี่ยน',

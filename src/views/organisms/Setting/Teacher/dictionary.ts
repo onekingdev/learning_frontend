@@ -29,7 +29,7 @@ export const dictionary:any = Object.freeze({
         passwordResetSuccess: 'Password reset success!',
         edit: 'Edit',
     },
-    "": {
+    "th": {
         membershipDetails: 'รายละเอียดสมาชิก',
         addPlanPackage: 'เพิ่มแผน/หรือแพ็คเกจ',
         chooseTheNewPlan: 'เลือกแผนใหม่',

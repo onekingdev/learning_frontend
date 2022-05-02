@@ -4,7 +4,7 @@ export const dictionary: any = Object.freeze({
         chooseYourPlan: 'Choose your plan',
         ready: 'Ready'
     },
-    '': {
+    'th': {
         setUpYourAccount: 'ตั้งค่าบัญชีของคุณ',
         chooseYourPlan: 'เลือกแผนของคุณ',
         ready: 'พร้อม'

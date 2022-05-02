@@ -15,7 +15,7 @@ export const dictionary: any = Object.freeze({
         amount: 'Amount',
         amountIsEmpty: 'Amount is empty'
     },
-    '' :{
+    'th' :{
         bank: 'ธนาคาร',
         latestTransactions: 'ธุรกรรมล่าสุด',
         deposit: 'เงินฝาก',

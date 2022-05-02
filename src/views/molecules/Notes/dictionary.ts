@@ -6,7 +6,7 @@ export const dictionary:any = Object.freeze({
         text: 'Text',
         date: 'Date',
     },
-    '': {
+    'th': {
         addNew: 'Add New',
         send: 'Send',
         title: 'Title',

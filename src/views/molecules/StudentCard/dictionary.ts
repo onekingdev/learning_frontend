@@ -3,7 +3,7 @@ export const dictionary: any = Object.freeze({
     buyCardDescription: 'BUY A PACK OF 3 CARDS FOR',
     buy: 'BUY',
   },
-  '' :{
+  'th' :{
     buyCardDescription: 'ซื้อแพ็คการ์ด 3 ใบในราคา',
     buy: 'ซื้อ',
   },

@@ -14,7 +14,7 @@ export const dictionary: any = Object.freeze({
         classroomPlanDescription: 'Math, ELA, Science, Sight Words, Financial Literacy, Health and Safety',
         requestFromSponsor: 'Sponsor Email',
     },
-    '' :{
+    'th' :{
         goldPackage: 'Gold บรรจุุภัณฑ์',
         comboPackage: 'Combo บรรจุุภัณฑ์',
         solePakcage: 'Sole บรรจุุภัณฑ์',

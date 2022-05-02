@@ -6,7 +6,7 @@ export const dictionary:any = Object.freeze({
         coins: 'COINS',
         you: 'You'
     },
-    '': {
+    'th': {
         treasureTrack: 'ติดตามสมบัติ',
         honorRoll: 'เกียรติยศม้วน',
         earn: 'รับ',

@@ -7,7 +7,7 @@ export const dictionary:any = Object.freeze({
     skill     : 'Skill',
     strategy  : 'Strategy'
   },
-  '' :{
+  'th' :{
     arcade    : 'อาร์เคด',
     learning  : 'การเรียนรู้',
     adventure : 'การผจญภัย',
