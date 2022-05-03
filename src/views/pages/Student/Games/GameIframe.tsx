@@ -1,15 +1,9 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
-import { Title } from 'views/atoms/Text/Title';
-import { GameMainMenu } from 'views/organisms/GameMainMenu';
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
-import { dictionary } from './dictionary';
-import { GamesContainer, GamesTitle, Wrapper } from './Style';
-import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
-import { useHistory }     from 'react-router-dom';
-
+import { Box, Button, IconButton } from '@mui/material';
+import { useHistory } from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface GameIframeParams {
   token: string
@@ -33,17 +27,26 @@ export const GameIframe: FC = () => {
       }}
       id='game-iframe-container'
     >
-      <Button
-        variant='contained'
-        sx={{ position: 'absolute', top: '5%', left: '10%' }}
+      <IconButton
+        aria-label='close'
+        color='secondary'
+        size='large'
+        sx={{ position: 'absolute', top: '5%', right: '10%', background: 'white' }}
         onClick={() => history.goBack()}
       >
+        <CloseIcon />
+      </IconButton>
+      {/* <Button
+        variant='contained'
+
+      >
         Back
-      </Button>
+      </Button> */}
       <iframe
         style={{
-          width: '95%',
-          height: '95%',
+          width: '100%',
+          height: '99%',
+          border: 'none',
         }}
         onLoad={() => { loadingContext.done() }}
         src={process.env.REACT_APP_SERVER_URL + 'media/games/' + gamePath + '/gamePlay?token=' + token} />

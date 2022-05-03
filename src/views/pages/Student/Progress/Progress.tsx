@@ -53,10 +53,10 @@ if (screen_width < 450) {
     verticalCount = 2;
 } else if (screen_width < 1366) {
     lineCount = 10;
-    verticalCount = 1;
+    verticalCount = 3;
 } else {
     lineCount = 10;
-    verticalCount = 1;
+    verticalCount = 3;
 }
 console.log(screen_width, lineCount)
 
@@ -357,42 +357,32 @@ export const KidsProgress = () => {
                         {subSubjects1 && subSubjects1.map((singleInfo, id) => {
                             if (singleInfo && singleInfo.text) {
                                 const _id = id + 1;
-                                const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
-                                    Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
-                                ) : 0
+                                console.log(singleInfo)
                                 return (
                                     <div style={{
                                         position: 'absolute',
                                         top: (new Array(verticalCount - 1)).fill(true).map((_, id_) => lineCount + id_ + 1).indexOf(_id % (lineCount + verticalCount)) >= 0 ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
-                                            (Math.floor(_id / (lineCount + verticalCount))) * (unitHeight * (verticalCount + 1)) + (id % (lineCount + verticalCount) - lineCount + 1) * unitHeight + 'rem' :
+                                            (Math.floor(_id/(lineCount + verticalCount))) * (unitHeight * (verticalCount + 1))  + (id%(lineCount + verticalCount) - lineCount + 1)*unitHeight + 'rem' :
                                             (
                                                 _id % (lineCount + verticalCount) === 0 ?
-                                                    (Math.floor(_id / (lineCount + verticalCount)) - 1) * (unitHeight * (verticalCount + 1)) + verticalCount * unitHeight + 'rem' :
-                                                    Math.floor((_id) / (lineCount + verticalCount)) * (unitHeight * (verticalCount + 1)) + 'rem'
+                                                (Math.floor(_id/(lineCount + verticalCount)) - 1) * (unitHeight * (verticalCount + 1)) + verticalCount*unitHeight + 'rem' :
+                                                Math.floor((_id)/(lineCount + verticalCount)) * (unitHeight * (verticalCount + 1)) + 'rem'
                                             ),
                                         left: (new Array(verticalCount - 1)).fill(true).map((_, id_) => lineCount + id_ + 1).indexOf(_id % (lineCount + verticalCount)) >= 0 ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
-                                            ((lineCount - 1) * (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
+                                            ((lineCount - 1) * (Math.floor(_id/(lineCount + verticalCount)) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
                                             (
                                                 _id % (lineCount + verticalCount) === 0 ?
-                                                    ((lineCount - 1) * ((Math.floor(_id / (lineCount + verticalCount)) - 1) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
-                                                    (
-                                                        (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0) ?
-                                                            ((_id % (lineCount + verticalCount) - 1) * (100 / lineCount) + '%') :
-                                                            ((lineCount - _id % (lineCount + verticalCount)) * (100 / lineCount) + '%')
-                                                    )
+                                                ((lineCount - 1) * ((Math.floor(_id/(lineCount + verticalCount)) - 1) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
+                                                (
+                                                    (Math.floor(_id/(lineCount + verticalCount)) % 2 === 0) ?
+                                                    ((_id%(lineCount + verticalCount) - 1) * (100 / lineCount) + '%') :
+                                                    ((lineCount - _id%(lineCount + verticalCount)) * (100 / lineCount) + '%')
+                                                )
                                             ),
-                                        // width: rotatingStatus === 0 ? 100 / lineCount + 'vw' : unitHeight + 'rem',
-                                        // marginLeft: rotatingStatus === 0 ? '0' : `${unitHeight / 3}rem`,
-                                        // marginTop: rotatingStatus === 0 ? '0' : `-${100 / lineCount / 6}vw`,
-                                        // height: rotatingStatus === 0 ? unitHeight + 'rem' : 100 / lineCount + 'vw',
                                         width: 100 / lineCount + '%',
                                         height: unitHeight + 'rem',
                                         padding: '10px 16px',
-                                        boxSizing: 'border-box',
-                                        writingMode: rotatingStatus === 0 ? 'initial' : 'vertical-rl',
-                                        textOrientation: 'mixed',
-                                        transform: rotatingStatus === -1 ? "rotate(180deg)" : "rotate(0deg)",
-                                        // transform: `rotate(${90 * rotatingStatus}deg)`
+                                        boxSizing: 'border-box'
                                     }}>
                                         <div style={{
                                             width: `100%`,
