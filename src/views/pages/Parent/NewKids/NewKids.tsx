@@ -78,7 +78,7 @@ const NewKids: FC = () => {
   const [showTooltipGrade, setShowTooltipGrade]   = useState(false);
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
 
   const subjectIcons:any = {
     Gold: {

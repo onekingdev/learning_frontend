@@ -12,7 +12,7 @@ import {
 const GroupsPanel = (props: any) => {
 
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
 
   const data          = props.data;
 

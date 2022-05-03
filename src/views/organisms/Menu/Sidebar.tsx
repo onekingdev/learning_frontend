@@ -20,7 +20,6 @@ import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
 import { TypoIcon } from 'views/atoms/Text';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-// import { VideoPlayer } from 'views/molecules/VideoPlayer';
 import { SCREEN_MOBILE, TUTORIAL_VDO_URL } from 'constants/common';
 import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
 import { ScreenSize } from 'constants/screenSize';
@@ -41,7 +40,7 @@ export const Sidebar: FC = () => {
     const history = useHistory();
 
     let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'EN_US'
+    language = language ? language : 'en-us'
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (
@@ -84,23 +83,25 @@ export const Sidebar: FC = () => {
                 isOpen={open}
                 open={openTutorial}
                 // title = {VIDEO_TUTORIAL_EXPLAIN}
-                // fullWidth='true'
+                fullWidth='true'
                 dialogContent={
-                    <div >
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
                         <ExplainText>{VIDEO_TUTORIAL_EXPLAIN[language]}</ExplainText>
-                        <YouTube
-                            videoId={TUTORIAL_VDO_URL}
-                            opts={{
-                                width: `${TUTORIAL_VDO_DG_WIDTH}`,
-                                height: `${TUTORIAL_VDO_DG_HEIGHT}`,
-                                playerVars: {
-                                    autoplay: 0,
-                                    controls: 0
-                                }
-                            }}
-                        />
+                        <Box sx={{ width: TUTORIAL_VDO_DG_WIDTH, height: TUTORIAL_VDO_DG_HEIGHT, backgroundColor: 'black' }}>
+                            <YouTube
+                                videoId={TUTORIAL_VDO_URL}
+                                opts={{
+                                    width: `${TUTORIAL_VDO_DG_WIDTH}`,
+                                    height: `${TUTORIAL_VDO_DG_HEIGHT}`,
+                                    playerVars: {
+                                        autoplay: 0,
+                                        controls: 0
+                                    }
+                                }}
+                            />
+                        </Box>
                         {/* <VideoPlayer src={TUTORIAL_VDO_URL} /> */}
-                    </div>
+                    </Box>
                 }
             />
             <Button onClick={toggleDrawer(true)}>

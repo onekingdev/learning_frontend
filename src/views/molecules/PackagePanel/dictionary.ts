@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         goldPackage: 'Gold Package',
         comboPackage: 'Combo Package',
         solePakcage: 'Sole Package',
@@ -14,7 +14,7 @@ export const dictionary: any = Object.freeze({
         classroomPlanDescription: 'Math, ELA, Science, Sight Words, Financial Literacy, Health and Safety',
         requestFromSponsor: 'Sponsor Email',
     },
-    'TH' :{
+    'th' :{
         goldPackage: 'Gold บรรจุุภัณฑ์',
         comboPackage: 'Combo บรรจุุภัณฑ์',
         solePakcage: 'Sole บรรจุุภัณฑ์',
@@ -29,7 +29,7 @@ export const dictionary: any = Object.freeze({
         classroomPlanDescription: 'คณิตศาสตร์, ELA, วิทยาศาสตร์, สายตา, ความรู้ทางการเงิน, สุขภาพและความปลอดภัย',
         requestFromSponsor: 'Sponsor Email',
     },
-    'ES_MX': {
+    'es-mx': {
         goldPackage: 'Gold Paquete',
         comboPackage: 'Combo Paquete',
         solePakcage: 'Sole Paquete',

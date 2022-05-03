@@ -22,7 +22,7 @@ import {
 export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
   useEffect(() => {
     if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     loadingContext.done();

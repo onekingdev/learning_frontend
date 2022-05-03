@@ -69,7 +69,7 @@ export const TeacherPlanList: FC<IPlanList> = ({ refresh }) => {
   const [plans, setPlans] = useState<Array<any>>([])
   const [changed, setChanged] = useState(false)
   let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'EN_US'
+  language = language ? language : 'en-us'
 
   const toggleChanged = () => {
     setChanged(!changed)

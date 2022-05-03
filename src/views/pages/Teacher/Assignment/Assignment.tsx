@@ -26,7 +26,7 @@ const Assignment: FC = () => {
   const user              = useSelector((state: any) => state.user);
   const guardian          = useSelector((state: any) => state.guardian);
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : "EN_US"
+  language                = language? language : "en-us"
 
   useEffect(() => {
 

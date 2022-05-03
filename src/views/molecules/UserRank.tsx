@@ -35,7 +35,7 @@ export const UserRank: FC<UserRankProps> = ({userRank, userName, userIcon}) => {
 
 export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank, userName, userHead, userAccessory, userClothes, active=false, coinsEarned='0', additionalPl='' }) => {
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
   return (
     <tr>
       <td>

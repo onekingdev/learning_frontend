@@ -29,7 +29,7 @@ export const AtomsSelector: FC<AtomsProps> = ({
   const student       = useSelector((state: any) => state.student)
   const earning       = useSelector((state: any) => state.earning);
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
 
   const { enqueueSnackbar } = useSnackbar();
   const purchaseAvatarItem = async (id: number, price: number) => {

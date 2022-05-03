@@ -20,43 +20,43 @@ const gems = [
     img: gem_legendary,
     value: 'LEGENDARY',
     description: {
-      'EN_US': 'LEGENDARY',
-      'TH': 'ตำนาน',
-      'ES_MX': 'LEGENDARIA'
+      'en-us': 'LEGENDARY',
+      'th': 'ตำนาน',
+      'es-mx': 'LEGENDARIA'
     }
   },
   {
     img: gem_epic,
     value: 'EPIC',
     description: {
-      'EN_US': 'EPIC',
-      'TH': 'มหากาพย์',
-      'ES_MX': 'ÉPICA'
+      'en-us': 'EPIC',
+      'th': 'มหากาพย์',
+      'es-mx': 'ÉPICA'
     }
   },
   {
     img: gem_rare,
     value: 'RARE',
     description: {
-      'EN_US': 'RARE',
-      'TH': 'หายาก',
-      'ES_MX': 'EXTRAÑA'
+      'en-us': 'RARE',
+      'th': 'หายาก',
+      'es-mx': 'EXTRAÑA'
     }
   },
   {
     img: gem_common,
     value: 'COMMON',
     description: {
-      'EN_US': 'COMMON',
-      'TH': 'ทั่วไป',
-      'ES_MX': 'COMÚN'
+      'en-us': 'COMMON',
+      'th': 'ทั่วไป',
+      'es-mx': 'COMÚN'
     }
   },
 ]
 
 export const Gems: FC<GemsProps> = ({ select, actives }) => {
   let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language.toUpperCase() : 'EN_US'
+  language = language ? language : 'en-us'
   const [selected, setSelected] = useState('')
 
   const onGemClick = (id: number) => {

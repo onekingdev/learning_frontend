@@ -54,11 +54,11 @@ const KidsList: FC = () => {
   const [children,  setChildren] = useState<kid[]>([]);
   const [audiences, setAudiences] = useState<any>();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'EN_US'
+  language            = language? language : 'en-us'
 
   const langs = [{
     name: 'English',
-    value: 'EN_US'
+    value: 'en-us'
   }]
 
   const Kid = (props: any) => {

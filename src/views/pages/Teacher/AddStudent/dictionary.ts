@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'EN_US': {
+    'en-us': {
         classroom: 'Classroom',
         name: 'Name',
         lastName: 'Last Name',
@@ -12,7 +12,7 @@ export const dictionary: any = Object.freeze({
         importExcel: 'Import an Excel',
         save: 'Save',
     },
-    'TH' :{
+    'th' :{
         classroom: 'Classroom',
         name: 'Name',
         lastName: 'Last Name',
@@ -25,7 +25,7 @@ export const dictionary: any = Object.freeze({
         importExcel: 'Import an Excel',
         save: 'Save',
     },
-    'ES_MX': {
+    'es-mx': {
         classroom: 'Classroom',
         name: 'Name',
         lastName: 'Last Name',
