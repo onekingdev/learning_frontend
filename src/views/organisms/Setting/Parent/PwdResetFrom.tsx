@@ -21,7 +21,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
     const user = useSelector((state: any) => state.user);
     const [loading, setLoading] = useState(false)
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : 'en-us'
+    language            = language? language : 'EN_US'
     // Whenever an input changes value, change the corresponding state variable
     const handleInputChange = (event: any) => {
         event.preventDefault();

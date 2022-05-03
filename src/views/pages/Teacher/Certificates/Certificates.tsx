@@ -41,7 +41,7 @@ const Certificates: FC = () => {
     dispatch({ type: TYPES.CERTIFICATE_SELECT_IMAGE, payload: certImgs[id] })
   }
 
-  language = language ? language : 'en-us'
+  language = language ? language.toUpperCase() : 'EN_US'
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     fetchTeacherCertificateFilesFromFirebase(setCertImgs)

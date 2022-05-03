@@ -14,7 +14,7 @@ import { dictionary }       from './dictionary'
 
 const License = (props: any) => {
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  language            = language? language : 'EN_US'
     return (
       <ResponsiveLicense id="license">
         <LicenseHeader>

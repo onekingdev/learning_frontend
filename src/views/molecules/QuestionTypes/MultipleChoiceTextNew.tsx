@@ -39,7 +39,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
   onAnswer,
 }) => {
   let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  language = language ? language : 'EN_US'
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const questionSoundURI = `${question.questionAudioUrl}`;

@@ -1,19 +1,19 @@
 export const dictionary:any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         addNew: 'Add New',
         send: 'Send',
         title: 'Title',
         text: 'Text',
         date: 'Date',
     },
-    'th': {
+    'TH': {
         addNew: 'Add New',
         send: 'Send',
         title: 'Title',
         text: 'Text',
         date: 'Date',
     },
-    'es-mx': {
+    'ES_MX': {
         addNew: 'Add New',
         send: 'Send',
         title: 'Title',

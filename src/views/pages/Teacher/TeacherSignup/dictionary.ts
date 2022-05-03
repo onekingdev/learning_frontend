@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         teacherSignup: 'Teacher Signup',
         email: 'Email',
         fieldIsRequired: 'Field is required',
@@ -25,7 +25,7 @@ export const dictionary: any = Object.freeze({
         FAQ: 'FAQ',
         plans: 'Plans'
     },
-    'th' :{
+    'TH' :{
         teacherSignup: 'สมัครครู',
         email: 'อีเมล',
         fieldIsRequired: 'ต้องระบุข้อมูล',
@@ -51,7 +51,7 @@ export const dictionary: any = Object.freeze({
         FAQ: 'คำถามที่พบบ่อย',
         plans: 'แผน'
     },
-    'es-mx': {
+    'ES_MX': {
         teacherSignup: 'Registro de maestros',
         email: 'Correo electrónico',
         fieldIsRequired: 'Se requiere campo',

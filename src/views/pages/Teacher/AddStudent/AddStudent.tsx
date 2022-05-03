@@ -78,7 +78,7 @@ const AddStudent: FC = () => {
   const user              = useSelector((state: any) => state.user);
   const guardian          = useSelector((state: any) => state.guardian);
   let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : "en-us"
+  language                = language? language : "EN_US"
   const TableRef          = useRef<MuiTableFunc>(null)
 
   const [audiences, setAudiences] = useState([]);
@@ -196,7 +196,7 @@ const AddStudent: FC = () => {
           label: dictionary[language]?.language,
           minWidth: 50,
           editComponent: 'Select',
-          selectDatas: [{id:'en-us', name: 'English'}, {id:'th', name: 'Thai'}, {id:'es-mx', name: 'Spanish'}],
+          selectDatas: [{id:'EN_US', name: 'English'}, {id:'TH', name: 'Thai'}, {id:'ES_MX', name: 'Spanish'}],
           format: (value: any) => value?.name,
         },
       ]);

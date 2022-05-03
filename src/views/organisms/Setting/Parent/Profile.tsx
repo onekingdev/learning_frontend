@@ -28,7 +28,7 @@ export const SettingForm: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  language            = language? language : 'EN_US'
 
   const toggleOpenPwdRstDg = () => {
     setOpenPwdRstDg(!openPwdRstDg)

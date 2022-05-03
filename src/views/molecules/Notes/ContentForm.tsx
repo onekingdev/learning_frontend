@@ -18,7 +18,7 @@ import Paper                     from '@mui/material/Paper';
 import {useStyles} from './Style'
 const AddNewStudent = (props: any) => {
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : 'en-us'
+    language            = language? language : 'EN_US'
 
     const { enqueueSnackbar } =  useSnackbar();
     const classes             =  useStyles();

@@ -1,5 +1,5 @@
 export const dictionary:any = Object.freeze({
-  'en-us': {
+  'EN_US': {
     title     : 'Games',
     arcade    : 'Arcade',
     learning  : 'Learning',
@@ -8,7 +8,7 @@ export const dictionary:any = Object.freeze({
     skill     : 'Skill',
     strategy  : 'Strategy',
   },
-  'th' :{
+  'TH' :{
     title     : 'เกม',
     arcade    : 'อาร์เคด',
     learning  : 'การเรียนรู้',
@@ -17,7 +17,7 @@ export const dictionary:any = Object.freeze({
     skill     : 'ทักษะ',
     strategy  : 'กลยุทธ์'
   },
-  'es-mx': {
+  'ES_MX': {
     title     : 'Juegos',
     arcade    : 'Arcada',
     learning  : 'Aprendiendo',

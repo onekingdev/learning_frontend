@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         addingANewChild : 'Adding a New Child',
         pleaseCompleteTheFollowingToGetYourChildStarted : 'Please complete the following to get your child started',
         selectYourPackage: ' Select Your Package',
@@ -20,7 +20,7 @@ export const dictionary: any = Object.freeze({
         financialLiteracy: 'FINANCIAL LITERACY',
         healthAndSafety: 'HEALTH & SAFETY',
     },
-    'th': {
+    'TH': {
         addingANewChild : 'การเพิ่มเด็กใหม่',
         pleaseCompleteTheFollowingToGetYourChildStarted : 'โปรดกรอกข้อมูลต่อไปนี้เพื่อให้บุตรหลานของคุณเริ่มต้น',
         selectYourPackage: 'เลือกแพ็คเกจของคุณ',
@@ -41,7 +41,7 @@ export const dictionary: any = Object.freeze({
         financialLiteracy: 'ความรู้ทางการเงิน',
         healthAndSafety: 'สุขภาพและความปลอดภัย',
     },
-    'es-mx': {
+    'ES_MX': {
         addingANewChild : 'Agregar un nuevo niño',
         pleaseCompleteTheFollowingToGetYourChildStarted : 'Complete lo siguiente para que su hijo comience',
         selectYourPackage: 'Seleccione su paquete',

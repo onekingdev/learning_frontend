@@ -43,7 +43,7 @@ export const SortOrderQuestion: FC<ChoiceTextProps> = ({
   onAnswer,
 }) => {
   let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  language = language ? language : 'EN_US'
   const [showAssistor, setShowAssistor] = useState(false);
   const [items, setItems] = useState<Array<Item>>([])
   const [answer, setAnswer] = useState<Array<number>>([])

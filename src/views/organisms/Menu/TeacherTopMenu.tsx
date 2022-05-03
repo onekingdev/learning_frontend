@@ -51,7 +51,7 @@ export const TopMenu: FC<TopMenuProps> = ({
   const history = useHistory();
   const classes = useStyles();
   let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : "en-us"
+  language            = language? language : "EN_US"
   return (
     <>
       <TopMenuStyles style={navOp ? {background: '#FFFFFF00', paddingTop: '45px'}:{background: '#FFFFFF', boxShadow:'gray 0px 0px 6px 0px', paddingTop: '45px'}}>

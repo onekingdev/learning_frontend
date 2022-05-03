@@ -1,11 +1,11 @@
 export const dictionary: any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         assignment : 'Assignment ',
     },
-    'th' :{
+    'TH' :{
         assignment: 'Assignment',
     },
-    'es-mx': {
+    'ES_MX': {
         assignment: 'Assignment',
     }
 });

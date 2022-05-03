@@ -1,5 +1,5 @@
 export const dictionary:any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         membershipDetails: 'Membership Details',
         addPlanPackage: 'Add Plan/or Package',
         chooseTheNewPlan: 'Choose the new plan',
@@ -29,7 +29,7 @@ export const dictionary:any = Object.freeze({
         passwordResetSuccess: 'Password reset success!',
         edit: 'Edit',
     },
-    'th': {
+    'TH': {
         membershipDetails: 'รายละเอียดสมาชิก',
         addPlanPackage: 'เพิ่มแผน/หรือแพ็คเกจ',
         chooseTheNewPlan: 'เลือกแผนใหม่',
@@ -59,7 +59,7 @@ export const dictionary:any = Object.freeze({
         passwordResetSuccess: 'รีเซ็ตรหัสผ่านสำเร็จ!',
         edit: 'แก้ไข',
     },
-    'es-mx': {
+    'ES_MX': {
         membershipDetails: 'Detalles de la membresía',
         addPlanPackage: 'Agregar Plan/o Paquete',
         chooseTheNewPlan: 'CElige el nuevo plan',

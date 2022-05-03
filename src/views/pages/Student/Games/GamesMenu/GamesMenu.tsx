@@ -39,7 +39,7 @@ export const GamesMenu: FC = () => {
   const user            = useSelector((state: any) => state.user)
   const student         = useSelector((state: any) => state.student)
   let language:string   = useSelector((state: any) => state.user.language);
-  language              = language? language : 'en-us'
+  language              = language? language : 'EN_US'
   const dispatch        = useDispatch()
 
   const [loading,   setLoading]   = useState(false)

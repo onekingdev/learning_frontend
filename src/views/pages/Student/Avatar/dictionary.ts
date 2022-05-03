@@ -1,5 +1,5 @@
 export const dictionary: any = Object.freeze({
-    'en-us': {
+    'EN_US': {
         myAvatar: 'My Avatar',
         wardrobe: 'Wardrobe',
         setUserAvatarSuccessfully: 'Set user avatar successfully!',
@@ -11,7 +11,7 @@ export const dictionary: any = Object.freeze({
         buy: 'BUY',
         failed: 'Failed!'
     },
-    'th' :{
+    'TH' :{
         myAvatar: 'อวตารของฉัน',
         wardrobe: 'ตู้เสื้อผ้า',
         setUserAvatarSuccessfully: 'ตั้งค่าอวาตาร์ผู้ใช้สำเร็จ!',
@@ -23,7 +23,7 @@ export const dictionary: any = Object.freeze({
         buy: 'ซื้อ',
         failed: 'ล้มเหลว!'
     },
-    'es-mx': {
+    'ES_MX': {
         myAvatar: 'Mi avatar',
         wardrobe: 'Armario',
         setUserAvatarSuccessfully: '¡Establecer avatar de usuario con éxito!',

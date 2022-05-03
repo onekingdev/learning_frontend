@@ -18,7 +18,7 @@ export const Actions: FC<LoginActionsProps> = ({
 }) => {
 
     let language:string = useSelector((state: any) => state.user.language);
-    language            = language? language : 'en-us'
+    language            = language? language : 'EN_US'
 
   return (
     <StyledActions>

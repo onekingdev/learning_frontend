@@ -48,7 +48,6 @@ import SettingForm from 'views/molecules/Classroom/SettingForm'
 import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
 import 'animate.css';
 import Certificates from 'views/pages/Teacher/Certificates/Certificates';
-import { GameIframe } from 'views/pages/Student/Games/GameIframe';
 
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
@@ -140,9 +139,6 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute loading={true} exact path="/games/:category">
             <GamesMenu />
-          </PrivateRoute>
-          <PrivateRoute loading={true} exact path="/games/:token/:gamePath">
-            <GameIframe />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/map">
             <KnowledgeMap />

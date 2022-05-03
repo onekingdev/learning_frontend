@@ -1,6 +1,6 @@
 
 export const dictionary:any = Object.freeze({
-  'en-us': {
+  'EN_US': {
     youFinishedYourLessons: 'You finished your lessons!',
     lessonComplete: 'Lesson Complete',
     coins: 'Coins',
@@ -13,7 +13,7 @@ export const dictionary:any = Object.freeze({
     finish: 'Finish',
     next: 'Next',
   },
-  'th' :{
+  'TH' :{
     youFinishedYourLessons: 'คุณเรียนจบแล้ว!',
     lessonComplete: 'บทเรียนเสร็จสมบูรณ์',
     coins: 'เหรียญ',
@@ -26,7 +26,7 @@ export const dictionary:any = Object.freeze({
     finish: 'เสร็จสิ้น',
     next: 'ต่อไป',
   },
-  'es-mx': {
+  'ES_MX': {
     youFinishedYourLessons: '¡Terminaste tus lecciones!',
     lessonComplete: 'Lección completa',
     coins: 'monedas',
