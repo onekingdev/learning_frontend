@@ -29,9 +29,9 @@ export const MyProfile: FC = () => {
       <StudentMenu>
         <Container >
           <div style={{ display: isMobile ? 'none' : 'block' }}>
-            <PageTitle title={language === "ex-mx" ? dictionary[language]?.profile + " de " + student.firstName :  student.firstName +"'s "+ dictionary[language]?.profile} />
+            <PageTitle title={student.firstName + dictionary[language]?.profile} />
           </div>
-          <ProfileMobileTitle title={language === "ex-mx" ? dictionary[language]?.profile + " de " + student.firstName :  student.firstName +"'s "+ dictionary[language]?.profile} />
+          <ProfileMobileTitle title={student.firstName + '\'s profile'} />
           <Grid container justifyContent={'center'}>
             <Grid item sm={3} sx={{ display: isMobile ? 'none' : 'block' }}>
               <AvatarSet

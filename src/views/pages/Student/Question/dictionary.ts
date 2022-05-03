@@ -37,7 +37,7 @@ export const dictionary:any = Object.freeze({
     yourLevelIsNow: 'Tu nivel es ahora',
     continue: 'Continuar',
     finish: 'Finalizar',
-    next: 'Siguiente',
+    next: 'Próxima',
   }
 });
 

@@ -13,23 +13,23 @@ export const dictionary:any = Object.freeze({
     'th' :{
         profile: 'ประวัติโดยย่อ',
         settings: 'การตั้งค่า',
-        badges: 'เหรียญตรา',
+        badges: 'ป้าย',
         awards: 'รางวัล',
-        language: 'Idioma',
+        language: 'ภาษา',
         account: 'บัญชี',
         sound: 'เสียง',
-        on: 'เปิด',
+        on: 'บน',
         off: 'ปิด',
     },
     'es-mx': {
         profile: 'Perfil',
         settings: 'Ajustes',
         badges: 'Insignias',
+        language: 'Idioma',
         awards: 'Premios',
-        language: 'idioma',
         account: 'Cuenta',
         sound: 'Sonar',
-        on: 'activado',
+        on: 'Sobre',
         off: 'Apagada',
     }
   });
