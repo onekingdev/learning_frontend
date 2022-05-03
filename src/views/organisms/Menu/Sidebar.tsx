@@ -20,6 +20,7 @@ import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
 import { TypoIcon } from 'views/atoms/Text';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
+// import { VideoPlayer } from 'views/molecules/VideoPlayer';
 import { SCREEN_MOBILE, TUTORIAL_VDO_URL } from 'constants/common';
 import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
 import { ScreenSize } from 'constants/screenSize';
@@ -83,25 +84,23 @@ export const Sidebar: FC = () => {
                 isOpen={open}
                 open={openTutorial}
                 // title = {VIDEO_TUTORIAL_EXPLAIN}
-                fullWidth='true'
+                // fullWidth='true'
                 dialogContent={
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
+                    <div >
                         <ExplainText>{VIDEO_TUTORIAL_EXPLAIN[language]}</ExplainText>
-                        <Box sx={{ width: TUTORIAL_VDO_DG_WIDTH, height: TUTORIAL_VDO_DG_HEIGHT, backgroundColor: 'black' }}>
-                            <YouTube
-                                videoId={TUTORIAL_VDO_URL}
-                                opts={{
-                                    width: `${TUTORIAL_VDO_DG_WIDTH}`,
-                                    height: `${TUTORIAL_VDO_DG_HEIGHT}`,
-                                    playerVars: {
-                                        autoplay: 0,
-                                        controls: 0
-                                    }
-                                }}
-                            />
-                        </Box>
+                        <YouTube
+                            videoId={TUTORIAL_VDO_URL}
+                            opts={{
+                                width: `${TUTORIAL_VDO_DG_WIDTH}`,
+                                height: `${TUTORIAL_VDO_DG_HEIGHT}`,
+                                playerVars: {
+                                    autoplay: 0,
+                                    controls: 0
+                                }
+                            }}
+                        />
                         {/* <VideoPlayer src={TUTORIAL_VDO_URL} /> */}
-                    </Box>
+                    </div>
                 }
             />
             <Button onClick={toggleDrawer(true)}>

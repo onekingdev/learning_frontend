@@ -104,7 +104,7 @@ export const VIDEO_TUTORIAL_EXPLAIN:any = {
   'en-us':
     'Welcome to Socrates! Here you will find the video explaining how to use the platform!',
   'th':
-    'ยินดีต้อนรับสู่โสกราตีส! คุณจะพบวิดีโออธิบายวิธีใช้แพลตฟอร์มได้ที่นี่!',
+    'ยินดีต้อนรับสู่โสกราตีส! รับชมวิดีโออธิบายวิธีการใช้โปรแกรมได้ที่นี่!',
   'es-mx':
     '¡Bienvenido a Sócrates! ¡Aquí encontrarás el video que explica cómo usar la plataforma!'
 }

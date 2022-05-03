@@ -14,7 +14,7 @@ export const dictionary:any = Object.freeze({
   'th' :{
     title    : 'ความคืบหน้า',
     practice : 'ฝึกฝน',
-    reviewQuestionsAnswered: 'ทบทวนคำถามที่ได้รับคำตอบ',
+    reviewQuestionsAnswered: 'ทบทวนคำตอบ',
     reviewQuestions: 'คำถามทบทวน',
     ela: 'ELA',
     math: 'คณิตศาสตร์',
@@ -25,7 +25,7 @@ export const dictionary:any = Object.freeze({
   'es-mx': {
     title    : 'Progreso',
     practice : 'Práctica',
-    reviewQuestionsAnswered: 'Preguntas de revisión respondidas',
+    reviewQuestionsAnswered: 'Revisar preguntas respondidas',
     reviewQuestions: 'Preguntas de revisión',
     ela: 'ELA',
     math: 'MATEMÁTICAS',

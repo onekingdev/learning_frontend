@@ -43,6 +43,7 @@
     "moment": "^2.29.1",
     "notistack": "^2.0.3",
     "particles-bg": "^2.5.5",
+    "plyr-react": "^3.2.1",
     "promise-hook": "^0.1.4",
     "react": "^17.0.2",
     "react-animations": "^1.0.0",
