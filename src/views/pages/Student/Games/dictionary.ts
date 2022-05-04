@@ -18,7 +18,7 @@ export const dictionary:any = Object.freeze({
     strategy  : 'กลยุทธ์'
   },
   'es-mx': {
-    title     : 'Mapa de Progreso by Juegos',
+    title     : 'Mapa de progreso',
     arcade    : 'Arcade',
     learning  : 'Educativos',
     adventure : 'Aventuras',

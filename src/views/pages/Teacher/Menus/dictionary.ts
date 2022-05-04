@@ -31,7 +31,7 @@ export const dictionary:any = Object.freeze({
         exp: 'Exp',
         questions: 'PREGUNTAS',
         games: 'JUEGOS',
-        progress: 'MAPA DE PROGRESO',
+        progress: 'Mapa de progreso',
         myStuff: 'MIS COSAS',
         bank: 'BANCO',
         profile: 'PERFIL',

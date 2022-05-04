@@ -3,8 +3,6 @@ import styled         from 'styled-components';
 import { BasicColor } from 'views/Color';
 import { LevelUp }    from 'views/atoms/Text/LevelUp';
 import { ScreenSize } from 'constants/screenSize';
-import { dictionary } from './dictionary'
-import { useSelector }from 'react-redux';
 
 type LessonProgressTitleProps = {
   topic: string;
@@ -21,13 +19,9 @@ export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
   finished,
   questions,
 }) => {
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
-
   const questionText = finished
     ? 'Good job!'
-    : dictionary[language]?.question + currentQuestion + ` ${dictionary[language]?.of} ` + totalQuestions;
+    : 'Question ' + currentQuestion + ' of ' + totalQuestions;
   return (
     <LessonProgressTitleWrapper>
       <LessonProgressTopic>

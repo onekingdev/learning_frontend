@@ -19,17 +19,15 @@ export const GamesContainer = styled.div`
 `;
 
 export const GamesTitle     = styled.div`
-  width           : fit-content;
-  max-width       : 70vw;
+  width           : 50%;
+  max-width       : 300px;
   height          : 50%;
   padding         : 10px;
-  padding-left    : 50px;
-  padding-right    : 50px;
   display         : flex;
   text-align      : center;
   align-items     : center;
   justify-content : center;
   background      : url(${titleBackground}) center no-repeat;
-  background-size : 100% 100%;
+  background-size : contain;
   margin-bottom   : 20px;
 `;

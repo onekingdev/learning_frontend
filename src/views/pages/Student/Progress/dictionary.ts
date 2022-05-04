@@ -13,7 +13,7 @@ export const dictionary:any = Object.freeze({
   },
   'th' :{
     title    : 'ความคืบหน้า',
-    practice : 'ฝึกหัด',
+    practice : 'ฝึกฝน',
     reviewQuestionsAnswered: 'ทบทวนคำตอบ',
     reviewQuestions: 'คำถามทบทวน',
     ela: 'ELA',
