@@ -4,20 +4,29 @@ export const dictionary:any = Object.freeze({
         honorRoll: 'Honor Roll',
         earn: 'EARNED',
         coins: 'COINS',
-        you: 'You'
+        you: 'You',
+        socrates: "Socrates",
+        classroom: 'Classroom',
+        school: 'School',
     },
     'th': {
-        treasureTrack: 'ติดตามสมบัติ',
-        honorRoll: 'เกียรติยศม้วน',
+        treasureTrack: 'ล่าสมบัติ',
+        honorRoll: 'ลำดับเกียรติยศ',
         earn: 'รับ',
         coins: 'เหรียญ',
-        you: 'คุณ'
+        you: 'คุณ',
+        socrates: "โสกราตีส",
+        classroom: 'ห้องเรียน',
+        school: 'โรงเรียน',
     },
     'es-mx': {
         treasureTrack: 'Pista del tesoro',
         honorRoll: 'cuadro de honor',
-        earn: 'GANADO',
+        earn: 'GANADAS',
         coins: 'MONEDAS',
-        you: 'Tú'
+        you: 'Tú',
+        socrates: "Sócrates",
+        classroom: 'Salón',
+        school: 'Escuela',
     }
   });

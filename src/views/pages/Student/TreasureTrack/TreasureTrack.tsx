@@ -283,9 +283,9 @@ export const KidsTreasureTrack: FC = () => {
                                                 'aria-labelledby': 'basic-button',
                                                 }}
                                             >
-                                                <MenuItem onClick={() => handleClose('Socrates')}>Socrates</MenuItem>
-                                                <MenuItem onClick={() => handleClose('Classroom')}>Classroom</MenuItem>
-                                                <MenuItem onClick={() => handleClose('School')}>School</MenuItem>
+                                                <MenuItem onClick={() => handleClose('Socrates')}>{dictionary[language]?.socrates}</MenuItem>
+                                                <MenuItem onClick={() => handleClose('Classroom')}>{dictionary[language]?.classroom}</MenuItem>
+                                                <MenuItem onClick={() => handleClose('School')}>{dictionary[language]?.school}</MenuItem>
                                             </Menu>
                                         </div>
                                     </Typography>

@@ -16,11 +16,11 @@ export const dictionary:any = Object.freeze({
     strategy  : 'กลยุทธ์'
   },
   'es-mx': {
-    arcade    : 'Arcada',
-    learning  : 'Aprendiendo',
+    arcade    : 'Arcade',
+    learning  : 'Educativos',
     adventure : 'Aventuras',
-    sport     : 'Deporte',
-    skill     : 'Habilidad',
-    strategy  : 'Estrategia'
+    sport     : 'Deportes',
+    skill     : 'Habilidades',
+    strategy  : 'Estrategias'
   }
 });

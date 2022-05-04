@@ -9,7 +9,7 @@ export const dictionary: any = Object.freeze({
     'th' :{
         support: 'สนับสนุน',
         menu: 'เมนู',
-        settings: 'การตั้งค่า',
+        settings: 'รางวัล',
         manageKids: 'จัดการเด็ก',
         signOut: 'ออกจากระบบ'
     },

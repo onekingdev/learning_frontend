@@ -29,13 +29,19 @@ import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
 import audioError from 'views/assets/audios/wrong-answer-sound.wav';
 import * as TYPES from 'app/types'
 import Backdrop from '@mui/material/Backdrop';
+import Typography from '@mui/material/Typography';
 import { RollCorrect } from 'views/molecules/QuestionRollContents/RollCorrect';
 import { FullBatteryPopup } from 'views/molecules/QuestionRollContents/FullBatteryPopup';
-import { RollWrong } from 'views/molecules/QuestionRollContents/RollWrong';
 
 interface RoutePresentationParams {
   mode: string;
   aokId: string;       //Area of Knowledge Id on AI or Path mode, BlockPresentationId on BlockID mode
+}
+
+interface BlockQuestionInput {
+  question: number;
+  answerOption: number;
+  isCorrect: boolean;
 }
 
 const EXP_UNIT = 5;
@@ -146,6 +152,8 @@ export const AIQuestion: FC = () => {
     return component
   }
   const renderBackdropContent = (
+    correctInRoll: number,
+    wrongInRoll: number,
     fullBattery: boolean,
   ) => {
     let component: any
@@ -156,13 +164,13 @@ export const AIQuestion: FC = () => {
       )
     } else {
 
-      if (correctRoll > 0) {
+      if (correctInRoll > 0) {
         component = (
-          <RollCorrect />
+          <RollCorrect rollcount={correctInRoll} />
         )
       } else {
         component = (
-          <RollWrong />
+          <Typography sx={{ color: 'white' }}>You answered wrong {wrongInRoll} in roll</Typography>
         )
       }
     }
@@ -186,14 +194,14 @@ export const AIQuestion: FC = () => {
       playHit()
       setHits(hits + 1)
       setCorrectRoll(correctRoll + 1)
-      if ((correctRoll + 1) % 3 === 0) setOpenBd(true)
+      // if (correctRoll > 0) setOpenBd(true)
       setWrongRoll(0)
       setPoints(points + QUESTION_POINT_UNIT);
     } else {
       playError()
       setErrors(errors + 1)
       setWrongRoll(wrongRoll + 1)
-      if ((wrongRoll + 1) % 3 === 0) setOpenBd(true)
+      // if (wrongRoll > 0) setOpenBd(true)
       setCorrectRoll(0)
     }
     // setPrevHit(isCorrect)
@@ -336,7 +344,7 @@ export const AIQuestion: FC = () => {
           sx={{ zIndex: 1000 }}
         >
           {
-            renderBackdropContent(fullBattery)
+            renderBackdropContent(correctRoll, wrongRoll, fullBattery)
           }
         </Backdrop>
         {
