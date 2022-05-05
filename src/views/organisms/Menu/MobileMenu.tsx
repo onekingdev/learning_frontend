@@ -37,7 +37,7 @@ export const MobileMenu: FC = () => {
         left: 0,
         zIndex: 1000,
         padding: 1,
-        overflow: 'hidden'
+        // overflow: 'hidden'
       }}
     >
       <Sidebar />

@@ -113,51 +113,6 @@ export const BarChart = ({ student }: BarChartProps) => {
 
     const [barChartData, setBarChartData] = useState<iChartData[]>([]);
     const [barChartData2, setBarChartData2] = useState<iChartData[]>([]);
-    const [areaChartData, setAreaChartData] = useState<iChartData[]>([]);
-    useEffect(() => {
-        // setBarChartData([
-        //     {x: 0, y: 750},
-        //     {x: 1, y: 200},
-        //     {x: 2, y: 1700},
-        //     {x: 3, y: 300},
-        //     {x: 4, y: 100},
-        //     {x: 5, y: 800},
-        //     {x: 6, y: 100},
-        //     // {x: 7, y: 2900},
-        //     // {x: 8, y: 1600},
-        //     // {x: 9, y: 800},
-        //     // {x: 10, y: 600},
-        //     // {x: 11, y: 1500},
-        // ]);
-        // setBarChartData2([
-        //     {x: 0, y: 250},
-        //     {x: 1, y: 100},
-        //     {x: 2, y: 1400},
-        //     {x: 3, y: 800},
-        //     {x: 4, y: 900},
-        //     {x: 5, y: 300},
-        //     {x: 6, y: 500},
-        //     // {x: 7, y: 2900},
-        //     // {x: 8, y: 1600},
-        //     // {x: 9, y: 800},
-        //     // {x: 10, y: 600},
-        //     // {x: 11, y: 1500},
-        // ]);
-        setAreaChartData([
-            {x: 0, y: 375},
-            {x: 1, y: 100},
-            {x: 2, y: 850},
-            {x: 3, y: 150},
-            {x: 4, y: 50},
-            {x: 5, y: 400},
-            {x: 6, y: 50},
-            // {x: 7, y: 1450},
-            // {x: 8, y: 800},
-            // {x: 9, y: 400},
-            // {x: 10, y: 300},
-            // {x: 11, y: 750},
-        ]);
-    }, []);
 
     const chartContainerRef = useRef<HTMLDivElement>(null);
     const [chartWidth, setChartWidth] = useState<number>(0);
