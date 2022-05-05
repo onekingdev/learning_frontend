@@ -13,12 +13,12 @@ export const dictionary:any = Object.freeze({
     'th' :{
         profile: 'ประวัติโดยย่อ',
         settings: 'การตั้งค่า',
-        badges: 'เหรียญตรา',
+        badges: 'ป้าย',
         awards: 'รางวัล',
         language: 'ภาษา',
         account: 'บัญชี',
         sound: 'เสียง',
-        on: 'เปิด',
+        on: 'บน',
         off: 'ปิด',
     },
     'es-mx': {
@@ -29,7 +29,7 @@ export const dictionary:any = Object.freeze({
         awards: 'Premios',
         account: 'Cuenta',
         sound: 'Sonar',
-        on: 'activado',
+        on: 'Sobre',
         off: 'Apagada',
     }
   });

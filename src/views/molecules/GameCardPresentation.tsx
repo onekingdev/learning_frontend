@@ -24,17 +24,13 @@ export const GameCardPresentation: FC<GameCardProps> = ({
 }) => {
   const history = useHistory();
   const handlePlay = () => {
-    // setLoading(true)
-    // const url = process.env.REACT_APP_SERVER_URL + 'media/games/' + gamePath + '/gamePlay?token=' + token;
-    // location.href = url;
-
-    // console.log({ token, gamePath })
-    history.push('/games/' + token + '/' + gamePath)
+    setLoading(true)
+    const url = process.env.REACT_APP_SERVER_URL + 'media/games/' + gamePath + '/gamePlay?token=' + token;
+    location.href = url;
   }
-
   return (
     <>
-      <GameCardStyles onClick={handlePlay}>
+      <GameCardStyles onClick={() => history.push('/games/' + token + '/' + gamePath)}>
         <GameCardTitleContainer>
           <UserInfo isDark={true}>{gameName}</UserInfo>
         </GameCardTitleContainer>

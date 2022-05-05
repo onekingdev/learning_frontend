@@ -18,12 +18,12 @@ export const dictionary:any = Object.freeze({
     strategy  : 'กลยุทธ์'
   },
   'es-mx': {
-    title     : 'Mapa de progreso',
-    arcade    : 'Arcade',
-    learning  : 'Educativos',
+    title     : 'Juegos',
+    arcade    : 'Arcada',
+    learning  : 'Aprendiendo',
     adventure : 'Aventuras',
-    sport     : 'Deportes',
-    skill     : 'Habilidades',
-    strategy  : 'Estrategias'
+    sport     : 'Deporte',
+    skill     : 'Habilidad',
+    strategy  : 'Estrategia'
   }
 });

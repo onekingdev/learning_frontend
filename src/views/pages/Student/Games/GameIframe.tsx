@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
 import { useParams } from 'react-router-dom';
-import { Box, IconButton } from '@mui/material';
+import { Box, Button, IconButton } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -36,6 +36,12 @@ export const GameIframe: FC = () => {
       >
         <CloseIcon />
       </IconButton>
+      {/* <Button
+        variant='contained'
+
+      >
+        Back
+      </Button> */}
       <iframe
         style={{
           width: '100%',
