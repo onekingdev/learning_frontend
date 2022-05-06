@@ -22,4 +22,3 @@ yarn-error.log*
 
 /.firebase
 pnpm-lock.yaml
-/src/api/fragments
