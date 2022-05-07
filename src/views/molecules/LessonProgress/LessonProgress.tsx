@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { LessonProgressTitle } from './LessonProgressTitle';
 import { LessonProgressBar } from './LessonProgressBar';
@@ -51,10 +51,6 @@ export const LessonProgress: FC<LessonProgressProps> = ({
     }
     return bars;
   };
-
-  useEffect(() => {
-    console.log({currentQuestion})
-   }, [currentQuestion]);
 
   return (
     <StyledLessonProgressWrapper id='lesson-progress-wrapper'>

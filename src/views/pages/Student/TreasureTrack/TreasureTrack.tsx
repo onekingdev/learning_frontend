@@ -13,8 +13,6 @@ import ArrowDropDownIcon    from '@mui/icons-material/ArrowDropDown';
 import { useSelector }      from 'react-redux';
 import Menu                 from '@mui/material/Menu';
 import MenuItem             from '@mui/material/MenuItem';
-import { Container as MContainer, Backdrop, Button } from '@mui/material';
-import CloseIcon            from '@mui/icons-material/Close';
 import { UserRankTreasureTrack } from 'views/molecules/UserRank';
 import { ScreenSize }            from 'constants/screenSize';
 import { HonorRoll }             from 'api/fragments/honorRollFragments';
@@ -32,7 +30,6 @@ import {
 import GoldMedal from 'views/assets/gold-metal.png';
 import SilverMedal from 'views/assets/silver-metal.png';
 import BronzeMedal from 'views/assets/bronze-metal.png';
-import { BasicColor }       from 'views/Color';
 
 const Wrapper = styled.div`
     background-image  : url(${background});
@@ -191,50 +188,11 @@ export const KidsTreasureTrack: FC = () => {
                 for (let i = 0; i < lastWeekQuestions.length; i++) {
                     totalQuestions += lastWeekQuestions[i].questions;
                 }
+                console.log(totalQuestions);
                 setQuestions(totalQuestions);
             })();
         }
     }, [student.id, user.token]);
-
-    const [medalModalOpened, setMedalModalOpened] = useState<number>(0);
-    const [zoom, setZoom] = useState<boolean>(false);
-    const closeMedal = () => {
-        setZoom(true);
-        setTimeout(() => {
-            setMedalModalOpened(0);
-        }, 1500);
-    }
-    useEffect(() => {
-        const medal = localStorage.getItem("learning-socrates-last-medal") || "";
-        const time = localStorage.getItem("learning-socrates-last-medal-time") || "";
-        const now = new Date();
-        now.setDate(now.getDate() - now.getDay());
-        const thisWeekSunday = now;
-        const lastWeek = thisWeekSunday.getTime() - (new Date(time)).getTime() > 0;
-        if (lastWeek) {
-            localStorage.removeItem("learning-socrates-last-medal");
-            localStorage.removeItem("learning-socrates-last-medal-time");
-        }
-        if (160 <= questions && questions < 320) {
-            if (medal === "") {
-                setMedalModalOpened(1);
-                localStorage.setItem("learning-socrates-last-medal", "bronze");
-                localStorage.setItem("learning-socrates-last-medal-time", (new Date()).toString());
-            }
-        } else if (320 < questions && questions < 480) {
-            if (medal === "" || medal === "bronze") {
-                setMedalModalOpened(2);
-                localStorage.setItem("learning-socrates-last-medal", "silver");
-                localStorage.setItem("learning-socrates-last-medal-time", (new Date()).toString());
-            }
-        } else if (questions >= 480) {
-            if (medal === "" || medal === "bronze" || medal === "silver") {
-                setMedalModalOpened(3);
-                localStorage.setItem("learning-socrates-last-medal", "gold");
-                localStorage.setItem("learning-socrates-last-medal-time", (new Date()).toString());
-            }
-        }
-    }, [questions]);
     return (
         <Wrapper>
             <StudentMenu>
@@ -384,34 +342,6 @@ export const KidsTreasureTrack: FC = () => {
                         </Card>
                     </PanelWrapper>
                 </Container>
-                <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1, display: 'flex', flexDirection: 'column' }}
-                    open={medalModalOpened > 0}
-                >
-                    <MContainer sx={{ width: 'auto', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                        {medalModalOpened === 1 && <img style={{
-                            width: "20rem",
-                            transform: zoom ? "scale(2.5)" : "scale(1)",
-                            opacity: zoom ? "0.3" : "1",
-                            transition: "all 1.5s"
-                        }} src={BronzeMedal} alt="BronzeMedal" onClick={closeMedal} />}
-                        {medalModalOpened === 2 && <img style={{
-                            width: "20rem",
-                            transform: zoom ? "scale(2.5)" : "scale(1)",
-                            opacity: zoom ? "0.3" : "1",
-                            transition: "all 1.5s"
-                        }} src={SilverMedal} alt="SilverMedal" onClick={closeMedal} />}
-                        {medalModalOpened === 3 && <img style={{
-                            width: "20rem",
-                            transform: zoom ? "scale(2.5)" : "scale(1)",
-                            opacity: zoom ? "0.3" : "1",
-                            transition: "all 1.5s"
-                        }} src={GoldMedal} alt="GoldMedal" onClick={closeMedal} />}
-                        {/* <Button sx={{ borderRadius: '100%', background: BasicColor.green, padding: '10px' }} variant="contained" onClick={() => setMedalModalOpened(0)} >
-                            <CloseIcon />
-                        </Button> */}
-                    </MContainer>
-                </Backdrop>
             </StudentMenu>
         </Wrapper>
     )
