@@ -311,11 +311,7 @@ export const Question: FC = () => {
     if (mode === 'PATH') setQuestionsInPath();
     if (mode === 'BlockID') setQuestionBySpecificBlockPresentation();
   }, [])
-
-  useEffect(() => {
-    console.log('Block Presentation Id is : ', blockPresentation?.id)
-    console.log('Block Presentation is,', blockPresentation)
-  }, [blockPresentation])
+  
   useEffect(() => {
     setQuestion(blockPresentation?.block.questions[questionCounter]);
   }, [blockPresentation, questionCounter]);
@@ -323,6 +319,11 @@ export const Question: FC = () => {
   useEffect(() => {
     upgradeEnergy();
   }, [answerResult]);
+
+  useEffect(() => {
+    console.log('Block Presentation Id is : ', blockPresentation?.id)
+    console.log('Block Presentation is,', blockPresentation)
+  }, [blockPresentation])
 
   return (
     <Wrapper>
