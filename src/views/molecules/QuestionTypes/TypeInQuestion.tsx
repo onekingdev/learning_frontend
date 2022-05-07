@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { IAIBlock, IAIQuestion, ITypeInAnswerOptionInput } from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
+import { Question } from 'views/atoms/Text/Question';
 import { Icon } from 'views/atoms/Icon/Icon';
 import videoIcon from 'views/assets/others/video-assistor.png';
 import assistor from 'views/assets/text-to-speech.svg';
@@ -9,10 +10,8 @@ import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
 import { TypoGeneralText } from 'views/atoms/Text';
-import { BlackBoard, AnswersContainer, AssistorContainer } from './Styles'
+import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer } from './Styles'
 import { TextField } from '@mui/material';
-import { QuestionBoxTitle } from './QuestionBoxTitle';
-import { styled } from '@mui/material/styles';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -25,27 +24,6 @@ type ChoiceTextProps = {
     question: string
   }, isCorrect: boolean) => void;
 };
-
-const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: 'green',
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: 'green',
-  },
-  '& .MuiOutlinedInput-root': {
-    background: 'white',
-    '& fieldset': {
-      borderColor: 'softgreen',
-    },
-    '&:hover fieldset': {
-      borderColor: 'yellow',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'green',
-    },
-  },
-});
 
 export const TypeInQuestion: FC<ChoiceTextProps> = ({
   question,
@@ -117,23 +95,19 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
         />
       ) : null}
       <BlackBoard>
-        <QuestionBoxTitle
-          title={question.questionText}
-          audioFile={
-            question.questionAudioAssets[0]?.audioFile
-          }
-        />
+        <QuestionContainer>
+          <Question>{question.questionText}</Question>
+        </QuestionContainer>
         <AnswersContainer>
+          {/* <BlockAnswers isAnswered={isAnswered} /> */}
           <TypoGeneralText style={{ color: 'white' }}>
             The answer is
           </TypoGeneralText>
-          <CssTextField
+          <TextField
             disabled={disabled}
-            sx={{ minWidth: 200 }}
+            sx={{ width: 200 }}
             value={typedAnswer}
             onChange={(e: any) => setTypedAnswer(e.target.value)}
-            // variant='filled'
-            autoFocus
           />
           <TypoGeneralText style={{ color: 'white' }}>
             .
@@ -153,6 +127,15 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
                 :
                 'Check'
             }
+          // value={
+          //   totalQuestions === questionCounter + 1 ?
+          //     isAnswered ?
+          //       dictionary[language]?.finish :
+          //       'Check'
+          //     : isAnswered ?
+          //       dictionary[language]?.next :
+          //       'Check'
+          // }
           />
           <Icon image={assistor} onClick={readQuestion} />
           <Icon image={videoIcon} onClick={closeVideoModal} />

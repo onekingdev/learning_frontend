@@ -30,7 +30,7 @@ export const dictionary:any = Object.freeze({
     youFinishedYourLessons: '¡Terminaste tus lecciones!',
     lessonComplete: 'Lección completa',
     coins: 'monedas',
-    bonus: 'Prima',
+    bonus: 'Bono',
     ofEnergy: 'de energía',
     nextLesson: 'Siguiente lección',
     levelUp: '¡ELEVAR A MISMO NIVEL!',

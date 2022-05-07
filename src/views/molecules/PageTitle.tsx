@@ -26,10 +26,15 @@ const CardTitle = styled.div`
   background-image: url(${ribbon});
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  width: fit-content;
+  max-width: 80vw;
+  background-size: 100% 100%;
   padding: 15px;
+  padding-left: 50px;
+  padding-right: 50px;
   margin-top: 50px;
-
+  margin-left: auto;
+  margin-right: auto;
   @media screen and (max-width: ${ScreenSize.phone}) {
     width: 100%;
     margin: 0;

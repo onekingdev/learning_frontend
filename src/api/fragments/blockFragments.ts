@@ -39,6 +39,9 @@ export const BLOCK = `
 
 export const BLOCK_PRESENTATON = `
         id
+        identifier
+        isActive
+        randomSlug
         hits
         errors
         total
