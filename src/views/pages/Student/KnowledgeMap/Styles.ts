@@ -57,9 +57,9 @@ export const Island = styled.img<{
   margin-right   : auto;
   margin-top     : 4rem;
   cursor         : pointer;
-  &:hover {
-    transform: scale(1.1);
-  }
+  // &:hover {
+  //   transform: scale(1.1);
+  // }
   @media (min-width: ${ScreenSize.tablet}) {
     width: 30vw;
   }
@@ -81,5 +81,6 @@ export const Filler = styled.img`
 export const Subject = styled.div`
   display               : grid;
   grid-template-columns : 70% 30%;
+  place-items: center;
 `;
 

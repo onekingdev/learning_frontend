@@ -52,13 +52,15 @@ export const LessonProgress: FC<LessonProgressProps> = ({
     return bars;
   };
 
-  useEffect(() => { }, [currentQuestion]);
+  useEffect(() => {
+    // console.log(currentQuestion)
+   }, [currentQuestion]);
 
   return (
     <StyledLessonProgressWrapper id='lesson-progress-wrapper'>
       <LessonProgressTitle
         topic={topic}
-        currentQuestion={currentQuestion}
+        currentQuestion={currentQuestion + 1}
         totalQuestions={totalQuestions}
         finished={finished}
         questions={questions}

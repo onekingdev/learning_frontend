@@ -13,7 +13,7 @@ import { FinishLesson } from 'views/organisms/FinishLesson';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import { createNewAiBlock, newFinishBlock } from 'app/actions/blockActions';
+import { createNewAiBlock, doGetQuestionBlockById, newFinishBlock } from 'app/actions/blockActions';
 import { IAIBlock, IAIQuestion } from 'app/entities/block';
 import { Store } from 'app/configureStore';
 import * as TYPE from 'app/types';
@@ -52,7 +52,7 @@ export const AIQuestion: FC = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { aokId } = useParams<RoutePresentationParams>();
+  const { aokId, mode } = useParams<RoutePresentationParams>();
   const [aiBlock, setAiBlock] = useState<IAIBlock>();
   const [questions, setQuestions] = useState<Array<IAIQuestion>>();
   const [answers, setAnswers] = useState<Array<any>>([])
@@ -151,6 +151,7 @@ export const AIQuestion: FC = () => {
     let component: any
 
     if (fullBattery) {
+      setFullBattery(!fullBattery)
       component = (
         <FullBatteryPopup />
       )
@@ -227,7 +228,7 @@ export const AIQuestion: FC = () => {
       if (correctRoll > 0) {
         if (earning.energyCharge === 9) {
           setOpenBd(true)
-          setFullBattery(true)
+          setFullBattery(!fullBattery)
         }
         setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1))))
         dispatch({ type: TYPE.EARNING_ENERGY_UP });
@@ -240,15 +241,29 @@ export const AIQuestion: FC = () => {
   };
 
   const setQuestionsInAI = async (mounted: boolean) => {
-    const res: any = await createNewAiBlock(
-      parseInt(aokId),    //11
-      student.id, //15
-      user.token,
-    );
+    let res: any
+    switch (mode) {
+      case 'AI':
+        res = await createNewAiBlock(
+          parseInt(aokId),    //11
+          student.id, //15
+          user.token,
+        );
+        break
+      case 'BlockID':
+        res = await doGetQuestionBlockById(
+          parseInt(aokId), // in this case, aokId becomse blockID 1033
+          user.token
+        )
+        break
+      default: break
+    }
+
     if (!res.success) {
       enqueueSnackbar(res.msg, { variant: 'error' });
       return false;
     }
+    console.log({res})
     if (mounted) {
       setAiBlock(res)
       setQuestions(res.block.questions)
@@ -301,7 +316,7 @@ export const AIQuestion: FC = () => {
       } else {
         setIsLessonFinished(true)
         setLoading(true)
-        const res = await newFinishBlock(aiBlock.id, earning.energyCharge, hits, errors, bonusCoins, any2String(answers), state.earning, user.token, dispatch)
+        const res = await newFinishBlock(aiBlock.id, earning.energyCharge, hits, errors, bonusCoins, any2String(answers), state.earning, user.token)
         if (res.success) {
           console.log('success')
           dispatch({

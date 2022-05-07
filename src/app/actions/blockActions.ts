@@ -3,7 +3,8 @@ import {
     CREATE_AI_BLOCK_PRESENTATION,
     CREATE_PATH_BLOCK_PRESENTATION,
     CREATE_NEW_AI_BLOCK,
-    FINISH_BLK_PT
+    FINISH_BLK_PT,
+    GET_QUESIONS
 } from 'api/mutations/block'
 import mutation from 'api/mutations/get'
 import query from 'api/queries/get'
@@ -53,7 +54,7 @@ export const finishBlock = async (block_presentation_id: string, batteryLevel: n
 }
 
 
-export const createAiBlockPresentation = async (aokId: number, token: string, dispatch?: any) => {
+export const createAiBlockPresentation = async (aokId: number, token: string) => {
     // export const createAiBlockPresentation = async (aokId: number, token: string) => {
     const res: any = await mutation(CREATE_AI_BLOCK_PRESENTATION(aokId), token).catch(() => ({ success: false }));
     if (res.success === false) {
@@ -79,7 +80,7 @@ export const createAiBlockPresentation = async (aokId: number, token: string, di
     return { success: true, msg: 'Success!', data: blockPresentation }
 }
 
-export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string, dispatch: any) => {
+export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string) => {
     // export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string) => {
     const res: any = await mutation(CREATE_PATH_BLOCK_PRESENTATION(studentId, topicId), token).catch(() => ({ success: false }));
     if (res.success === false) {
@@ -105,7 +106,7 @@ export const createPathBlockPresentation = async (studentId: number, topicId: nu
     return { success: true, msg: 'Success!', data: blockPresentation }
 }
 
-export const getBlockPresentationById = async (blockPresentationId: number, token: string, dispatch: any) => {
+export const getBlockPresentationById = async (blockPresentationId: number, token: string) => {
     // export const createAiBlockPresentation = async (aokId: number, token: string) => {
     const res: any = await query(`blockPresentationById(id:${blockPresentationId})`, BLOCK_PRESENTATION_QUERY, token).catch(() => ({ success: false }));
     if (res.success === false) {
@@ -132,7 +133,7 @@ export const getBlockPresentationById = async (blockPresentationId: number, toke
 }
 
 
-export const createNewAiBlock = async (aokId: number, studentId: number, token: string, dispatch?: any) => {
+export const createNewAiBlock = async (aokId: number, studentId: number, token: string) => {
 
     try {
         const res: any = await sendRawQuery(
@@ -148,7 +149,7 @@ export const createNewAiBlock = async (aokId: number, studentId: number, token: 
     }
 }
 
-export const newFinishBlock = async (blkPTId: string, batteryLevel: number, hits: number, errors: number, bonusCoins: number, questions: string, earning: any, token: string, dispatch: any) => {
+export const newFinishBlock = async (blkPTId: string, batteryLevel: number, hits: number, errors: number, bonusCoins: number, questions: string, earning: any, token: string) => {
     const res: any = await mutation(FINISH_BLK_PT(blkPTId, batteryLevel, hits, errors, bonusCoins, questions), token).catch(() => ({ success: false }));
     if (res.success === false) {
         return { success: false, msg: 'Network Error' };
@@ -161,3 +162,21 @@ export const newFinishBlock = async (blkPTId: string, batteryLevel: number, hits
     }
     return { success: true, msg: 'Success!', res: result }
 }
+
+// Get Question Block By Id, this is for test
+export const doGetQuestionBlockById = async (blkId: number, token: string) => {
+
+    try {
+        const res: any = await sendRawQuery(
+            GET_QUESIONS(blkId),
+            token
+        );
+        return res.msg ?
+            { msg: res.msg, success: false } :
+            { ...res.data.blockPresentationById, success: true }
+    } catch (e) {
+        console.log(e)
+        return { msg: 'Network error!', success: false }
+    }
+}
+

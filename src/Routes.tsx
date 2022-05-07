@@ -49,6 +49,7 @@ import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
 import 'animate.css';
 import Certificates from 'views/pages/Teacher/Certificates/Certificates';
 import { GameIframe } from 'views/pages/Student/Games/GameIframe';
+import { SortOrderBeautifulDnd } from 'views/molecules/QuestionTypes/SortOrderBeautifulDnd';
 
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
@@ -212,6 +213,9 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent">
             <AddStudent />
+          </PrivateRoute>
+          <PrivateRoute loading={false} requireAuth={false} path="/dnd">
+            <SortOrderBeautifulDnd />
           </PrivateRoute>
           <Route path="/teacher/control-aok">
             <ControlAOK />
