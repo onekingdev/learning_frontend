@@ -20,7 +20,7 @@ export const dictionary: any = Object.freeze({
         latestTransactions: 'ธุรกรรมล่าสุด',
         deposit: 'เงินฝาก',
         withdrawal: 'การถอนเงิน',
-        interest: 'ดอกเบี้ย',
+        interest: 'ระดับออมทรัพย์',
         accountBalance: 'ยอดเงินในบัญชี',
         levels: 'ดอกเบี้ย',
         savingsTitle: 'ชื่อออมทรัพย์',

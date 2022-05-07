@@ -24,7 +24,6 @@ export const LessonProgressTitle: FC<LessonProgressTitleProps> = ({
 
   let language:string = useSelector((state: any) => state.user.language);
   language            = language? language : 'en-us'
-  console.log(currentQuestion)
   const questionText = finished
     ? 'Good job!'
     : dictionary[language]?.Question + currentQuestion.toString() + ` ${dictionary[language]?.of} ` + totalQuestions;
