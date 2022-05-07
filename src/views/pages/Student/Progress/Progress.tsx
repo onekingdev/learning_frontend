@@ -8,8 +8,8 @@ import MenuItem                from '@mui/material/MenuItem';
 import FormControl             from '@mui/material/FormControl';
 import Select                  from '@mui/material/Select';
 import TitleProgressBackground from 'views/assets/title-games-background.png';
-// import ProgressMap             from 'views/assets/student/process/map.svg';
-// import ProgressMapMobile       from 'views/assets/student/process/progress-map-mobile.svg';
+import ProgressMap             from 'views/assets/student/process/map.svg';
+import ProgressMapMobile       from 'views/assets/student/process/progress-map-mobile.svg';
 import MarkTableSubject        from 'views/molecules/Table/MarkTableSubject';
 import { LoadingContext }      from 'react-router-loading';
 import { ScreenSize }          from 'constants/screenSize';
@@ -344,7 +344,7 @@ export const KidsProgress = () => {
                         position: 'relative',
                         width: ScreenSize.widescreen
                     }}> */}
-                        {/* <PcCom>
+                        <PcCom>
                             <img style={{
                                 width: '100%'
                             }} src={ProgressMap} alt='ProgressMap' />
@@ -353,7 +353,7 @@ export const KidsProgress = () => {
                             <img style={{
                                 width: '100%'
                             }} src={ProgressMapMobile} alt='ProgressMapMobile' />
-                        </MobileCom> */}
+                        </MobileCom>
                         {subSubjects1 && subSubjects1.map((singleInfo, id) => {
                             if (singleInfo && singleInfo.text) {
                                 const _id = id + 1;

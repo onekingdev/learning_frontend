@@ -10,7 +10,7 @@ export const dictionary:any = Object.freeze({
         school: 'School',
     },
     'th': {
-        treasureTrack: 'ล่าสมบัติ',
+        treasureTrack: 'ติดตามสมบัติ',
         honorRoll: 'ลำดับเกียรติยศ',
         earn: 'รับ',
         coins: 'เหรียญ',

@@ -59,7 +59,6 @@ createPathBlockPresentation( studentId: ${studentId}, topicId: ${topicId}) {
 }
 `;
 
-
 export const CREATE_NEW_AI_BLOCK = (
   aokId: number,
   studentId: number
@@ -116,3 +115,118 @@ mutation AIBlock {
     }
   }
 `;
+
+
+export const CREATE_QUESTION_BLOCK = (
+  studentId: number,
+  questionIds: Array<number>
+) => `
+mutation createBlockPresentationByQuestionId{
+  createBlockPresentationByQuestionId(
+    studentId:${studentId},
+    questionIds:[${questionIds.toString()}]
+  ){
+    blockPresentation {
+      ${BLOCK_PRESENTATON}
+      block {
+        topicGrade{
+            ${TOPIC_GRADE}
+            topic {
+                videoAssistor
+                name
+            }
+          }
+        questions {
+          id
+          questionType
+          questionText
+          questionAudioUrl
+          questionImageAssets{
+            id
+            image
+            order
+          }
+          questionAudioAssets {
+            audioFile
+            id
+            order
+          }
+          answerOptions {
+            id
+            isCorrect
+            ... on MultipleChoiceAnswerOptionSchema {
+              ${NEW_MC_ANSWER_OPTION}
+            }
+            ... on MultipleSelectAnswerOptionSchema {
+              ${NEW_MC_ANSWER_OPTION}
+            }
+            ... on TypeInAnswerOptionSchema {
+              ${NEW_T_ANSWER_OPTION}
+            }
+            ... on OrderAnswerOptionSchema {
+              ${NEW_O_ANSWER_OPTION}
+            }
+            ... on RelateAnswerOptionSchema {
+              ${NEW_R_ANSWER_OPTION}
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+// TODO: This is for development test, no need for production
+export const GET_QUESIONS = (
+  blockId: number
+) => `{
+  blockPresentationById(id: ${blockId}) {
+    ${BLOCK_PRESENTATON}
+    block {
+      topicGrade{
+          ${TOPIC_GRADE}
+          topic {
+              videoAssistor
+              name
+          }
+        }
+      questions {
+        id
+        questionType
+        questionText
+        questionAudioUrl
+        questionImageAssets{
+          id
+          image
+          order
+        }
+        questionAudioAssets {
+          audioFile
+          id
+          order
+        }
+        answerOptions {
+          id
+          isCorrect
+          ... on MultipleChoiceAnswerOptionSchema {
+            ${NEW_MC_ANSWER_OPTION}
+          }
+          ... on MultipleSelectAnswerOptionSchema {
+            ${NEW_MC_ANSWER_OPTION}
+          }
+          ... on TypeInAnswerOptionSchema {
+            ${NEW_T_ANSWER_OPTION}
+          }
+          ... on OrderAnswerOptionSchema {
+            ${NEW_O_ANSWER_OPTION}
+          }
+          ... on RelateAnswerOptionSchema {
+            ${NEW_R_ANSWER_OPTION}
+          }
+        }
+      }
+    }
+  }
+}
+`

@@ -11,7 +11,7 @@ export const dictionary:any = Object.freeze({
         off: 'Off',
     },
     'th' :{
-        profile: 'ข้อมูลส่วนตัว',
+        profile: 'ประวัติโดยย่อ',
         settings: 'การตั้งค่า',
         badges: 'เหรียญตรา',
         awards: 'รางวัล',

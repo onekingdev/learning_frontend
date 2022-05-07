@@ -16,7 +16,6 @@ import MenuItem             from '@mui/material/MenuItem';
 import { UserRankTreasureTrack } from 'views/molecules/UserRank';
 import { ScreenSize }            from 'constants/screenSize';
 import { HonorRoll }             from 'api/fragments/honorRollFragments';
-import { LastWeekAndCoinsQuestions } from 'api/fragments/studentFragments';
 import query                     from 'api/queries/get';
 import { AvatarSet }             from 'views/molecules/Avatar/AvatarSet';
 import background                from 'views/assets/colored-shapes-bg.svg';
@@ -27,9 +26,6 @@ import {
     TreasureIslands,
     TreasureIslandsMobile
 } from './positionInfo';
-import GoldMedal from 'views/assets/gold-metal.png';
-import SilverMedal from 'views/assets/silver-metal.png';
-import BronzeMedal from 'views/assets/bronze-metal.png';
 
 const Wrapper = styled.div`
     background-image  : url(${background});
@@ -58,8 +54,7 @@ export const KidsTreasureTrack: FC = () => {
         // setEarnedCoin(Math.ceil(Math.random() * 1000));
     };
 
-    const [questions, setQuestions] = useState<number>(0);
-    const initialNumber = Math.ceil(questions / 20);
+    const initialNumber = Math.ceil(earnedCoin / 40);
 
     const mapBgRef = useRef<HTMLDivElement>(null);
 
@@ -113,9 +108,7 @@ export const KidsTreasureTrack: FC = () => {
         )
     }, [initialNumber, mapWidth]);
 
-    const user = useSelector((state: any) => state.user);
-    const student = useSelector((state: any) => state.student);
-    console.log(student);
+    const user           = useSelector((state: any) => state.user);
     const [rankKids, setRankKids] = useState<any[]>([]);
     const [initRanks, setInitRanks] = useState<number[]>([]);
     const [addPls, setAddPls] = useState<number[]>([]);
@@ -174,25 +167,7 @@ export const KidsTreasureTrack: FC = () => {
                 loadingContext.done();
             }
         })();
-    }, [user]);
-    useEffect(() => {
-        if (student?.id && user?.token) {
-            (async () => {
-                const res: any = await query('', LastWeekAndCoinsQuestions(1), user.token).catch(e => ({ success: false }));
-                if (res.success === false) {
-                    return;
-                }
-                const result:any = await res.json();
-                const { lastWeekQuestions } = result.data.students.filter((_student: any) => _student.id === student?.id)[0];
-                let totalQuestions = 0
-                for (let i = 0; i < lastWeekQuestions.length; i++) {
-                    totalQuestions += lastWeekQuestions[i].questions;
-                }
-                console.log(totalQuestions);
-                setQuestions(totalQuestions);
-            })();
-        }
-    }, [student.id, user.token]);
+    }, []);
     return (
         <Wrapper>
             <StudentMenu>
@@ -229,9 +204,9 @@ export const KidsTreasureTrack: FC = () => {
                                             left: `${left}%`,
                                             top: `${top}%`,
                                             zIndex: 10,
-                                            opacity: questions / 166 < id ? '0.6' : '1',
+                                            opacity: earnedCoin / 250 < id ? '0.6' : '1',
                                         }}
-                                    ><Comp />{questions / 166 > id && id > 0 ? <img style={{ position: "absolute", width: "72px", bottom: "-36px" }} src={id === 3 ? GoldMedal : (id === 2 ? SilverMedal : (id === 1 ? BronzeMedal : ''))}/> : null}</PcCom>) }
+                                    ><Comp /></PcCom>) }
                                     { TreasureIslandsMobile.map(({Comp, left, top}, id) => <MobileCom
                                         key={id}
                                         style={{

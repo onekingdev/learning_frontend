@@ -17,8 +17,6 @@ import {
 import TitleGameBackground             from 'views/assets/title-games-background.png';
 import { Typography }              from 'views/atoms/Text/typography';
 import { ImageAvatar } from '../Avatar/DefaultAvatar';
-import query                 from 'api/queries/get';
-import { LastWeekAndCoinsQuestions } from 'api/fragments/studentFragments';
 
 
 const ChartHeaderContrainer = styled.div`
@@ -113,6 +111,51 @@ export const BarChart = ({ student }: BarChartProps) => {
 
     const [barChartData, setBarChartData] = useState<iChartData[]>([]);
     const [barChartData2, setBarChartData2] = useState<iChartData[]>([]);
+    const [areaChartData, setAreaChartData] = useState<iChartData[]>([]);
+    useEffect(() => {
+        setBarChartData([
+            {x: 0, y: 750},
+            {x: 1, y: 200},
+            {x: 2, y: 1700},
+            {x: 3, y: 300},
+            {x: 4, y: 100},
+            {x: 5, y: 800},
+            {x: 6, y: 100},
+            // {x: 7, y: 2900},
+            // {x: 8, y: 1600},
+            // {x: 9, y: 800},
+            // {x: 10, y: 600},
+            // {x: 11, y: 1500},
+        ]);
+        setBarChartData2([
+            {x: 0, y: 250},
+            {x: 1, y: 100},
+            {x: 2, y: 1400},
+            {x: 3, y: 800},
+            {x: 4, y: 900},
+            {x: 5, y: 300},
+            {x: 6, y: 500},
+            // {x: 7, y: 2900},
+            // {x: 8, y: 1600},
+            // {x: 9, y: 800},
+            // {x: 10, y: 600},
+            // {x: 11, y: 1500},
+        ]);
+        setAreaChartData([
+            {x: 0, y: 375},
+            {x: 1, y: 100},
+            {x: 2, y: 850},
+            {x: 3, y: 150},
+            {x: 4, y: 50},
+            {x: 5, y: 400},
+            {x: 6, y: 50},
+            // {x: 7, y: 1450},
+            // {x: 8, y: 800},
+            // {x: 9, y: 400},
+            // {x: 10, y: 300},
+            // {x: 11, y: 750},
+        ]);
+    }, []);
 
     const chartContainerRef = useRef<HTMLDivElement>(null);
     const [chartWidth, setChartWidth] = useState<number>(0);
@@ -130,44 +173,6 @@ export const BarChart = ({ student }: BarChartProps) => {
             }
         }, 1000);
     }, []);
-
-    const user = useSelector((state: any) => state.user);
-    useEffect(() => {
-        if (student?.id && user?.token) {
-            (async () => {
-                const res: any = await query('', LastWeekAndCoinsQuestions(1), user.token).catch(e => ({ success: false }));
-                if (res.success !== false) {
-                    const result:any = await res.json();
-                    if(result.errors && !result.data) {
-                        alert(result.errors[0].message);
-                    } else {
-                        const { lastWeekCoins, lastWeekQuestions } = result.data.students.filter((_student: any) => _student.id === student?.id)[0];
-                        // setBarChartData(lastWeekQuestions.map((_question: any) => ({ x: new Date(_question.day).getDay(), y: _question.question})))
-                        let chartData1 = [];
-                        chartData1 = [0, 1, 2, 3, 4, 5, 6].map(_day => {
-                            const dayQuestion = lastWeekQuestions.filter((_question: any) => new Date(_question.day).getDay() === _day)
-                            if (dayQuestion.length > 0) {
-                                return { x: _day, y: dayQuestion[0].questions }
-                            } else {
-                                return { x: _day, y: 0 }
-                            }
-                        });
-                        setBarChartData(chartData1);
-                        let chartData2 = [];
-                        chartData2 = [0, 1, 2, 3, 4, 5, 6].map(_day => {
-                            const dayCoins = lastWeekCoins.filter((_coin: any) => new Date(_coin.day).getDay() === _day)
-                            if (dayCoins.length > 0) {
-                                return { x: _day, y: parseInt(dayCoins[0].coins) }
-                            } else {
-                                return { x: _day, y: 0 }
-                            }
-                        });
-                        setBarChartData2(chartData2)
-                    }
-                }
-            })()
-        }
-    }, [student, user]);
     return (
         <div style={{ position: 'relative', maxWidth: '768px', margin: 'auto'}}>
             <MobileCom>

@@ -202,17 +202,3 @@ export const STUDENT_RAW = `
         points
         intPeriodStartAt
 `;
-
-export const LastWeekAndCoinsQuestions = (weekCount: number) => `
-    students {
-        id
-        lastWeekQuestions(weekCount: ${weekCount}) {
-            day
-            questions
-        } 
-        lastWeekCoins(weekCount: ${weekCount}) {
-            day
-            coins
-        } 
-    }
-`;
