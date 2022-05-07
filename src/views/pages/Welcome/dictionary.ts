@@ -11,7 +11,7 @@ export const dictionary:any = Object.freeze({
     children_privacy: "Children's Privacy Policy",
     termAndConditions: 'Terms & Conditions',
     schoolSignUp: 'School/Teacher Sign Up',
-    parentSignUp: 'Parent/Student Sign Up',
+    parentSignUp: 'Parent/Studentr Sign Up',
   },
   'th' :{
     practice: 'ฝึกฝน เล่น เติบโต',

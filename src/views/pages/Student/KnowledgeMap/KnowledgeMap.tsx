@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useEffect, useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { useHistory } from 'react-router-dom';
@@ -24,7 +24,11 @@ import { Box, Typography } from '@mui/material';
 export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
+  const student = useSelector((state: any) => state.student);
   const areasOfKnowledge: Array<any> = useSelector((state: any) => state.student.guardianstudentplan.subject);
+
+
+  // const [areasOfKnowledge, setAreasOfKnowledge] = useState([]);
   const [loadedImgNum, setLoadedImgNum] = useState(0)
   const [boatX, setBoatX] = useState(window.innerWidth / 2)
   const [boatY, setBoatY] = useState(window.innerHeight / 2)
@@ -67,6 +71,13 @@ export const KnowledgeMap: FC = () => {
   };
 
   const dragonNum = randRange(0, areasOfKnowledge.length);
+
+  // useEffect(() => {
+  //   // setAreasOfKnowledge(student?.guardianstudentplan?.subject);
+  //   // loadingContext.done();
+
+  // }, []);
+
   return (
     <Wrapper>
       <StudentMenu>

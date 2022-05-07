@@ -44,21 +44,14 @@ let verticalCount = 3;
 const unitHeight = 5;
 if (screen_width < 450) {
     lineCount = 4;
-    verticalCount = 2;
+    verticalCount = 3;
 } else if (screen_width < 768) {
-    lineCount = 4;
+    lineCount = 6;
     verticalCount = 2;
-} else if (screen_width < 1024) {
-    lineCount = 4;
-    verticalCount = 2;
-} else if (screen_width < 1366) {
-    lineCount = 10;
-    verticalCount = 1;
 } else {
     lineCount = 10;
     verticalCount = 0;
 }
-console.log(screen_width, lineCount)
 
 export const KidsProgress = () => {
     const user              = useSelector((state: any) => state.user);

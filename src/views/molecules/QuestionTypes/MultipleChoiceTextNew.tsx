@@ -42,17 +42,17 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
   language = language ? language : 'en-us'
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
+  const questionSoundURI = `${question.questionAudioUrl}`;
 
   useEffect(() => {
     setIsAnswered(false);
   }, [question]);
 
-  const readAnswer = (answerOption: any) => {
-    if (!answerOption.answerAudioUrl) return
-    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
-    const audio = new Audio(answerSoundURI);
-    audio.play();
-  };
+  // const readAnswer = (answerOption: any) => {
+  //   const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
+  //   const audio = new Audio(answerSoundURI);
+  //   audio.play();
+  // };
 
   const handleAnswer = (result: BlockQuestionInput) => {
     setIsAnswered(true);
@@ -60,11 +60,13 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
       question: question.id,
       multipleChoiceAnswerOption: result.answerOption,
     }, result.isCorrect);
+    // question: -1,
+    // answerOption: answer.id,
+    // isCorrect: answer.isCorrect
   };
 
   const readQuestion = () => {
-    if (!question.questionAudioUrl) return
-    const audio = new Audio(question.questionAudioUrl);
+    const audio = new Audio(questionSoundURI);
     audio.play();
   };
 
@@ -87,7 +89,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
       <BlackBoard>
         <QuestionBoxTitle
           title={question.questionText}
-          audioFile={
+          audioFile = {
             question.questionAudioAssets[0]?.audioFile
           }
         />
@@ -100,15 +102,6 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
                   answer={option}
                   onClick={handleAnswer}
                 />
-                {
-                  !(question.questionAudioAssets[0]?.audioFile) &&
-                  <Icon
-                    image={assistor}
-                    onClick={() => {
-                      readAnswer(option);
-                    }}
-                  />
-                }
               </AnswerContainer>
             ))}
           </TextOptionsList>
