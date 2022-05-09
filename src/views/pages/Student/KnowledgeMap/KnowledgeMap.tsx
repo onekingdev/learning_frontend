@@ -109,19 +109,22 @@ export const KnowledgeMap: FC = () => {
                     <Typography
                       variant='h3'
                       sx={{
+                        maxWidth: 210,
                         position: 'absolute',
                         top: '50%',
-                        transform: 'translateY(-10%)',
+                        // transform: 'translateY(-10%)',
                         left: 0,
                         right: 0,
                         margin: 'auto',
-                        fontFamily: "'Quicksand', sans-serif",
+                        fontFamily: 'Quicksand',
                         textShadow: '0 0 0.05em #fff, 0 0 0.2em #fe05e1, 0 0 0.3em #fe05e1 1px 1px 0.4em #c11a2b',
                         color: 'white',
-                        fontWeight: 'bold',
+                        fontWeight: '700',
                         textAlign: 'center',
+                        fontSize: 30,
                         cursor: 'pointer',
-                        WebkitTextStroke: '2px #' + Math.floor(Math.random() * 16777215).toString(16),
+                        background: '#FB8500',
+                        // WebkitTextStroke: '1px #' + Math.floor(Math.random() * 16777215).toString(16),
 
                       }}>{areaOfKnowledge.name}
                     </Typography>

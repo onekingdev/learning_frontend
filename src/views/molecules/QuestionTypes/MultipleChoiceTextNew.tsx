@@ -47,9 +47,9 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
     setIsAnswered(false);
   }, [question]);
 
-  const readAnswer = (answerOption: any) => {
-    if (!answerOption.answerAudioUrl) return
-    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
+  const readAnswer = (option: any) => {
+    if (!option.audioFile) return
+    const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${option.audioFile}`;
     const audio = new Audio(answerSoundURI);
     audio.play();
   };

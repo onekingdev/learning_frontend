@@ -56,9 +56,6 @@ export const TOPIC = `
 export const TOPIC_GRADE = `
 
         id
-        identifier
-        isActive
-        randomSlug
         standardCode
 
 `;

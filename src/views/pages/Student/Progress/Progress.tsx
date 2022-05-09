@@ -8,8 +8,8 @@ import MenuItem                from '@mui/material/MenuItem';
 import FormControl             from '@mui/material/FormControl';
 import Select                  from '@mui/material/Select';
 import TitleProgressBackground from 'views/assets/title-games-background.png';
-import ProgressMap             from 'views/assets/student/process/map.svg';
-import ProgressMapMobile       from 'views/assets/student/process/progress-map-mobile.svg';
+// import ProgressMap             from 'views/assets/student/process/map.svg';
+// import ProgressMapMobile       from 'views/assets/student/process/progress-map-mobile.svg';
 import MarkTableSubject        from 'views/molecules/Table/MarkTableSubject';
 import { LoadingContext }      from 'react-router-loading';
 import { ScreenSize }          from 'constants/screenSize';
@@ -40,20 +40,17 @@ const masteryColors = {
 
 const screen_width = window.innerWidth;
 let lineCount = 10;
-let verticalCount = 0;
-let unitHeight = 8;
+let verticalCount = 3;
+const unitHeight = 5;
 if (screen_width < 450) {
     lineCount = 4;
-    verticalCount = 0;
-    unitHeight = 4;
+    verticalCount = 3;
 } else if (screen_width < 768) {
     lineCount = 6;
-    verticalCount = 0;
-    unitHeight = 5;
+    verticalCount = 2;
 } else {
     lineCount = 10;
     verticalCount = 0;
-    unitHeight = 8;
 }
 
 export const KidsProgress = () => {
@@ -135,7 +132,7 @@ export const KidsProgress = () => {
         setActiveSubjectId(event.target.value);
     };
 
-    const subSubjects1 = data.map((subSubject, id) => {
+    const subSubjects1 = subSubjects.map((subSubject, id) => {
         let bgColor = masteryColors.NP;
         if (data && data[id] && data[id].mastery) {
             if (data[id].mastery === 'NP') {
@@ -156,7 +153,7 @@ export const KidsProgress = () => {
             active: false,
         })
     })
-    const subSubjectsMobile1 = data.map((subSubject, id) => {
+    const subSubjectsMobile1 = subSubjectsMobile.map((subSubject, id) => {
         let bgColor = masteryColors.NP;
         if (data && data[id] && data[id].mastery) {
             if (data[id].mastery === 'NP') {
@@ -325,97 +322,92 @@ export const KidsProgress = () => {
                     paddingLeft: '0px',
                     paddingRight: '0px',
                     overflow: 'hidden',
-                    backgroundImage: `url("map.svg")`,
-                    backgroundColor: `rgb(235, 119, 56)`,
-                    backgroundRepeat: 'repeat',
+                    background: '#EB7738',
                     minHeight: (
                         (
-                            Math.ceil(data.length / (lineCount + verticalCount))
-                            // (
-                            //     data.length % (lineCount + verticalCount) === 0 || data.length % (lineCount + verticalCount) > lineCount ?
-                            //     0 :
-                            //     verticalCount
-                            // )
-                        ) * unitHeight * 1.5) + 'rem'
+                            Math.ceil(subSubjects1.length / (lineCount + verticalCount)) * (verticalCount + 1) -
+                            (
+                                subSubjects1.length % (lineCount + verticalCount) === 0 || subSubjects1.length % (lineCount + verticalCount) > lineCount ?
+                                0 :
+                                verticalCount
+                            )
+                        ) * unitHeight) + 'rem'
                 }}>
                     {/* <div style={{
                         position: 'relative',
                         width: ScreenSize.widescreen
                     }}> */}
-                    {/* <PcCom
-                        style={{
-                        }}
-                    >
-                    </PcCom>
-                    <MobileCom
-                        style={{
-                            backgroundImage: `url("progress-map-mobile.svg")`,
-                            backgroundColor: `rgb(235, 119, 56)`,
-                            backgroundRepeat: 'repeat'
-                        }}
-                    >
-                    </MobileCom> */}
-                    {subSubjects1 && subSubjects1.map((singleInfo, id) => {
-                        if (singleInfo && singleInfo.text) {
-                            const _id = id + 1;
-                            const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
-                                Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
-                            ) : 0
-                            return (
-                                <div style={{
-                                    position: 'absolute',
-                                    top: (_id % (verticalCount + lineCount)) > lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
-                                        (Math.floor(_id / (lineCount + verticalCount))) * ((unitHeight * 1.5) * (verticalCount + 1)) + (id % (lineCount + verticalCount) - lineCount + 1) * (unitHeight * 1.5) + 'rem' :
-                                        (
-                                            _id % (lineCount + verticalCount) === 0 ?
-                                                (Math.floor(_id / (lineCount + verticalCount)) - 1) * ((unitHeight * 1.5) * (verticalCount + 1)) + verticalCount * (unitHeight * 1.5) + 'rem' :
-                                                Math.floor((_id) / (lineCount + verticalCount)) * ((unitHeight * 1.5) * (verticalCount + 1)) + 'rem'
-                                        ),
-                                    left: (_id % (verticalCount + lineCount)) >= lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
-                                        ((lineCount - 1) * (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
-                                        (
-                                            _id % (lineCount + verticalCount) === 0 ?
-                                                ((lineCount - 1) * ((Math.floor(_id / (lineCount + verticalCount)) - 1) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
-                                                (
-                                                    (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0) ?
-                                                        ((_id % (lineCount + verticalCount) - 1) * (100 / lineCount) + '%') :
-                                                        ((lineCount - _id % (lineCount + verticalCount)) * (100 / lineCount) + '%')
-                                                )
-                                        ),
-                                    width: ((_id % (verticalCount + lineCount)) === 0 || (_id % (verticalCount + lineCount)) >= lineCount) ? 100 / (lineCount + Math.floor(lineCount / 8)) + '%' : 100 / lineCount + '%',
-                                    height: ((_id % (verticalCount + lineCount)) === 0 || (_id % (verticalCount + lineCount)) >= lineCount) ? unitHeight * 1.5 + 'rem' : unitHeight + 'rem',
-                                    padding: '10px 16px',
-                                    boxSizing: 'border-box',
-                                    writingMode: rotatingStatus === 0 ? 'initial' : 'vertical-rl',
-                                    textOrientation: 'mixed',
-                                    transform: rotatingStatus === -1 ? "rotate(180deg)" : "rotate(0deg)",
-                                }}>
+                        {/* <PcCom>
+                            <img style={{
+                                width: '100%'
+                            }} src={ProgressMap} alt='ProgressMap' />
+                        </PcCom>
+                        <MobileCom>
+                            <img style={{
+                                width: '100%'
+                            }} src={ProgressMapMobile} alt='ProgressMapMobile' />
+                        </MobileCom> */}
+                        {subSubjects1 && subSubjects1.map((singleInfo, id) => {
+                            if (singleInfo && singleInfo.text) {
+                                const _id = id + 1;
+                                const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
+                                    Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
+                                ) : 0
+                                return (
                                     <div style={{
-                                        width: `100%`,
-                                        height: '100%',
-                                        background: singleInfo.bgColor,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        textAlign: 'center',
-                                        fontSize: '0.7rem',
-                                        transform: singleInfo.active ? 'scale(1.2)' : 'scale(1)',
-                                        outline: singleInfo.active ? '2px solid black' : 'none',
-                                        cursor: 'pointer',
-                                    }} onClick={() => {
-                                        if (singleInfo.aokId !== '') {
-                                            smoothScroll('#aok-id-' + singleInfo.aokId)
-                                            setActiveSubjectIdTable(singleInfo.aokId);
-                                        }
+                                        position: 'absolute',
+                                        top: (_id % (verticalCount + lineCount)) > lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
+                                            (Math.floor(_id / (lineCount + verticalCount))) * ((unitHeight * 1.5) * (verticalCount + 1)) + (id % (lineCount + verticalCount) - lineCount + 1) * (unitHeight * 1.5) + 'rem' :
+                                            (
+                                                _id % (lineCount + verticalCount) === 0 ?
+                                                    (Math.floor(_id / (lineCount + verticalCount)) - 1) * ((unitHeight * 1.5) * (verticalCount + 1)) + verticalCount * (unitHeight * 1.5) + 'rem' :
+                                                    Math.floor((_id) / (lineCount + verticalCount)) * ((unitHeight * 1.5) * (verticalCount + 1)) + 'rem'
+                                            ),
+                                        left: (_id % (verticalCount + lineCount)) >= lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
+                                            ((lineCount - 1) * (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
+                                            (
+                                                _id % (lineCount + verticalCount) === 0 ?
+                                                    ((lineCount - 1) * ((Math.floor(_id / (lineCount + verticalCount)) - 1) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
+                                                    (
+                                                        (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0) ?
+                                                            ((_id % (lineCount + verticalCount) - 1) * (100 / lineCount) + '%') :
+                                                            ((lineCount - _id % (lineCount + verticalCount)) * (100 / lineCount) + '%')
+                                                    )
+                                            ),
+                                        width: ((_id % (verticalCount + lineCount)) === 0 || (_id % (verticalCount + lineCount)) >= lineCount) ? 100 / (lineCount + 2) + '%' : 100 / lineCount + '%',
+                                        height: ((_id % (verticalCount + lineCount)) === 0 || (_id % (verticalCount + lineCount)) >= lineCount) ? unitHeight * 1.5 + 'rem' : unitHeight + 'rem',
+                                        padding: '10px 16px',
+                                        boxSizing: 'border-box',
+                                        writingMode: rotatingStatus === 0 ? 'initial' : 'vertical-rl',
+                                        textOrientation: 'mixed',
+                                        transform: rotatingStatus === -1 ? "rotate(180deg)" : "rotate(0deg)",
                                     }}>
-                                    {singleInfo.text}
+                                        <div style={{
+                                            width: `100%`,
+                                            height: '100%',
+                                            background: singleInfo.bgColor,
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            textAlign: 'center',
+                                            fontSize: '0.7rem',
+                                            transform: singleInfo.active ? 'scale(1.2)' : 'scale(1)',
+                                            outline: singleInfo.active ? '2px solid black' : 'none',
+                                            cursor: 'pointer',
+                                        }} onClick={() => {
+                                            if (singleInfo.aokId !== '') {
+                                                smoothScroll('#aok-id-' + singleInfo.aokId)
+                                                setActiveSubjectIdTable(singleInfo.aokId);
+                                            }
+                                        }}>
+                                        {singleInfo.text}
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        } else {
-                            return <></>
-                        }
-                    })}
+                                )
+                            } else {
+                                return <></>
+                            }
+                        })}
                         {/* { paths.map((path, id) => <PcCom key={id} style={{
                             position: 'absolute',
                             left: `${path.left}%`,

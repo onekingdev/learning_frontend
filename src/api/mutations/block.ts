@@ -73,6 +73,7 @@ mutation AIBlock {
               topic {
                   videoAssistor
                   name
+                  standardTopic
               }
             }
           questions {

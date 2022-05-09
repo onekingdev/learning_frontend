@@ -32,7 +32,8 @@ const CardTitle = styled.div`
   padding: 15px;
   padding-left: 50px;
   padding-right: 50px;
-  margin-top: 50px;
+  margin-top: 120px;
+  margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
   @media screen and (max-width: ${ScreenSize.phone}) {
