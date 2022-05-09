@@ -78,6 +78,7 @@ export const KidsProgress = () => {
                 alert(result.errors[0].message);
             } else {
                 setAreasOfKnowledge(result.data.areasOfKnowledge)
+                console.log(result.data.areasOfKnowledge)
                 let iii = 4;
                 for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
                     if (result.data.areasOfKnowledge[i].name === 'Sight Words') {
@@ -107,6 +108,7 @@ export const KidsProgress = () => {
                 } else {
                     // console.log(result.data.rootTopicsByAok)
                     setData(result.data.rootTopicsByAok);
+                    console.log(result.data.rootTopicsByAok)
                 }
                 // if (firstLoad) {
                 //     setFirstLoad(false);
@@ -115,18 +117,18 @@ export const KidsProgress = () => {
           })();
         }
       }, [activeSubjectId]);
-    const grades = [
-        'Kindergarten',
-        '1st Grade',
-        '2nd Grade',
-        '3rd Grade',
-        '4th Grade',
-        '5th Grade',
-        '6th Grade',
-        '7th Grade',
-        '8th Grade',
-    ]
-    const [grade, setGrade] = useState<string>(grades[0]);
+    // const grades = [
+    //     'Kindergarten',
+    //     '1st Grade',
+    //     '2nd Grade',
+    //     '3rd Grade',
+    //     '4th Grade',
+    //     '5th Grade',
+    //     '6th Grade',
+    //     '7th Grade',
+    //     '8th Grade',
+    // ]
+    const [grade, setGrade] = useState<string>(dictionary[language]?.grades[0]);
 
     const handleGradeChange = (event: any) => {
         setGrade(event.target.value);
@@ -238,8 +240,7 @@ export const KidsProgress = () => {
                             <Select
                                 id='demo-simple-select'
                                 value={grade}
-                                disabled
-                                // onChange={handleGradeChange}
+                                onChange={handleGradeChange}
                                 SelectDisplayProps={{
                                     style: {
                                         background: '#1771B9',
@@ -247,7 +248,7 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                { grades.map((grade, id) => (
+                                { dictionary[language]?.grades.map((grade: any, id: number) => (
                                     <MenuItem key={id} value={grade}>{grade}</MenuItem>
                                 )) }
                             </Select>
