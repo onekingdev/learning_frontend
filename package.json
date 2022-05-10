@@ -41,6 +41,7 @@
     "firebase": "^9.6.5",
     "html-to-image": "^1.9.0",
     "is-svg": "^4.3.2",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "notistack": "^2.0.3",
     "particles-bg": "^2.5.5",
@@ -81,6 +82,7 @@
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
+    "@types/lodash": "^4.14.182",
     "@types/react-animations": "^1.0.0",
     "@types/react-loading-overlay": "^1.0.1",
     "@types/react-payment-inputs": "^1.1.0",

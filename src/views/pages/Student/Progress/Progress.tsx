@@ -23,6 +23,7 @@ import styled             from 'styled-components';
 import background     from 'views/assets/colored-shapes-bg.svg';
 import { subSubjects, subSubjectsMobile, paths, pathsMobile } from './positionInfo';
 import { smoothScroll } from 'views/utils';
+import _ from 'lodash';
 
 const Wrapper = styled.div`
     background-image  : url(${background});
@@ -56,6 +57,12 @@ if (screen_width < 450) {
     unitHeight = 8;
 }
 
+const getAllTopic: any = (subSubjectList: Array<any>) => {
+    return subSubjectList.map(subSubject => {
+        return subSubject.subTopics.length > 0 ? [subSubject, getAllTopic(subSubject.subTopics)] : [subSubject]
+    })
+}
+
 export const KidsProgress = () => {
     const user              = useSelector((state: any) => state.user);
     const student           = useSelector((state: any) => state.student);
@@ -78,6 +85,7 @@ export const KidsProgress = () => {
                 alert(result.errors[0].message);
             } else {
                 setAreasOfKnowledge(result.data.areasOfKnowledge)
+                console.log(result.data.areasOfKnowledge)
                 let iii = 4;
                 for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
                     if (result.data.areasOfKnowledge[i].name === 'Sight Words') {
@@ -115,18 +123,18 @@ export const KidsProgress = () => {
           })();
         }
       }, [activeSubjectId]);
-    const grades = [
-        'Kindergarten',
-        '1st Grade',
-        '2nd Grade',
-        '3rd Grade',
-        '4th Grade',
-        '5th Grade',
-        '6th Grade',
-        '7th Grade',
-        '8th Grade',
-    ]
-    const [grade, setGrade] = useState<string>(grades[0]);
+    // const grades = [
+    //     'Kindergarten',
+    //     '1st Grade',
+    //     '2nd Grade',
+    //     '3rd Grade',
+    //     '4th Grade',
+    //     '5th Grade',
+    //     '6th Grade',
+    //     '7th Grade',
+    //     '8th Grade',
+    // ]
+    const [grade, setGrade] = useState<string>(dictionary[language]?.grades[0]);
 
     const handleGradeChange = (event: any) => {
         setGrade(event.target.value);
@@ -134,48 +142,47 @@ export const KidsProgress = () => {
     const handleSubjectChange = (event: any) => {
         setActiveSubjectId(event.target.value);
     };
-
-    const subSubjects1 = data.map((subSubject, id) => {
+    const subSubjects1 = _.flattenDeep(getAllTopic(data)).map((_subSubject: any, id) => {
         let bgColor = masteryColors.NP;
-        if (data && data[id] && data[id].mastery) {
-            if (data[id].mastery === 'NP') {
+        if (_subSubject.mastery) {
+            if (_subSubject.mastery === 'NP') {
                 bgColor = masteryColors.NP;
-            } else if (data[id].mastery === 'N') {
+            } else if (_subSubject.mastery === 'N') {
                 bgColor = masteryColors.N;
-            } else if (data[id].mastery === 'C') {
+            } else if (_subSubject.mastery === 'C') {
                 bgColor = masteryColors.C;
-            } else if (data[id].mastery === 'M') {
+            } else if (_subSubject.mastery === 'M') {
                 bgColor = masteryColors.M;
             }
         }
         return ({
-            ...subSubject,
-            aokId: data && data[id] && data[id].id ? data[id].id : '',
-            text: data && data[id] && data[id].name ? data[id].name : '',
+            ..._subSubject,
+            aokId: _subSubject.id || '',
+            text: _subSubject.name || '',
             bgColor: bgColor,
             active: false,
         })
     })
-    const subSubjectsMobile1 = data.map((subSubject, id) => {
-        let bgColor = masteryColors.NP;
-        if (data && data[id] && data[id].mastery) {
-            if (data[id].mastery === 'NP') {
-                bgColor = masteryColors.NP;
-            } else if (data[id].mastery === 'N') {
-                bgColor = masteryColors.N;
-            } else if (data[id].mastery === 'C') {
-                bgColor = masteryColors.C;
-            } else if (data[id].mastery === 'M') {
-                bgColor = masteryColors.M;
-            }
-        }
-        return ({
-            ...subSubject,
-            text: data && data[id] && data[id].name ? data[id].name : '',
-            bgColor: bgColor,
-            active: false,
-        })
-    })
+    // const subSubjectsMobile1 = data.map((subSubject, id) => {
+    //     let bgColor = masteryColors.NP;
+    //     if (data && data[id] && data[id].mastery) {
+    //         if (data[id].mastery === 'NP') {
+    //             bgColor = masteryColors.NP;
+    //         } else if (data[id].mastery === 'N') {
+    //             bgColor = masteryColors.N;
+    //         } else if (data[id].mastery === 'C') {
+    //             bgColor = masteryColors.C;
+    //         } else if (data[id].mastery === 'M') {
+    //             bgColor = masteryColors.M;
+    //         }
+    //     }
+    //     return ({
+    //         ...subSubject,
+    //         text: data && data[id] && data[id].name ? data[id].name : '',
+    //         bgColor: bgColor,
+    //         active: false,
+    //     })
+    // })
 
     const mapBgRef = useRef<HTMLDivElement>(null);
     const [mapWidth, setMapWidth] = useState<number>(1366);
@@ -238,8 +245,7 @@ export const KidsProgress = () => {
                             <Select
                                 id='demo-simple-select'
                                 value={grade}
-                                disabled
-                                // onChange={handleGradeChange}
+                                onChange={handleGradeChange}
                                 SelectDisplayProps={{
                                     style: {
                                         background: '#1771B9',
@@ -247,7 +253,7 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                { grades.map((grade, id) => (
+                                { dictionary[language]?.grades.map((grade: any, id: number) => (
                                     <MenuItem key={id} value={grade}>{grade}</MenuItem>
                                 )) }
                             </Select>
@@ -330,7 +336,7 @@ export const KidsProgress = () => {
                     backgroundRepeat: 'repeat',
                     minHeight: (
                         (
-                            Math.ceil(data.length / (lineCount + verticalCount))
+                            Math.ceil(subSubjects1.length / (lineCount + verticalCount))
                             // (
                             //     data.length % (lineCount + verticalCount) === 0 || data.length % (lineCount + verticalCount) > lineCount ?
                             //     0 :

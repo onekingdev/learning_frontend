@@ -60,7 +60,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
     const history = useHistory();
     let language:string = useSelector((state: any) => state.user.language);
     language            = language? language : 'en-us'
-    const [opened, setOpened] = useState<boolean>(false);
+    const [opened, setOpened] = useState<boolean>(true);
     const toggle = () => setOpened(val => !val);
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {
         return <SingleGroup activeAokId={activeAokId} key={id} main={item.main} extra={item.extra} deep={deep+1} />
