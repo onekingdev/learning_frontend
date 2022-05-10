@@ -11,6 +11,7 @@ import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
 import { BlackBoard, AnswersContainer, AssistorContainer, TextOptionsList, AnswerContainer, BlockAnswers, ImageAssetContainer, ImageAsset } from './Styles'
 import { QuestionBoxTitle } from './QuestionBoxTitle';
+import { shuffle } from 'views/utils';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -94,7 +95,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
         <AnswersContainer>
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
-            {question.answerOptions.map((option, i) => (
+            {shuffle(question.answerOptions).map((option, i) => (
               <AnswerContainer key={i}>
                 <TextOption
                   answer={option}
