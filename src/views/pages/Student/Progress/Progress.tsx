@@ -23,6 +23,7 @@ import styled             from 'styled-components';
 import background     from 'views/assets/colored-shapes-bg.svg';
 import { subSubjects, subSubjectsMobile, paths, pathsMobile } from './positionInfo';
 import { smoothScroll } from 'views/utils';
+import _ from 'lodash';
 
 const Wrapper = styled.div`
     background-image  : url(${background});
@@ -54,6 +55,12 @@ if (screen_width < 450) {
     lineCount = 10;
     verticalCount = 0;
     unitHeight = 8;
+}
+
+const getAllTopic: any = (subSubjectList: Array<any>) => {
+    return subSubjectList.map(subSubject => {
+        return subSubject.subTopics.length > 0 ? [subSubject, getAllTopic(subSubject.subTopics)] : [subSubject]
+    })
 }
 
 export const KidsProgress = () => {
@@ -108,7 +115,6 @@ export const KidsProgress = () => {
                 } else {
                     // console.log(result.data.rootTopicsByAok)
                     setData(result.data.rootTopicsByAok);
-                    console.log(result.data.rootTopicsByAok)
                 }
                 // if (firstLoad) {
                 //     setFirstLoad(false);
@@ -136,48 +142,47 @@ export const KidsProgress = () => {
     const handleSubjectChange = (event: any) => {
         setActiveSubjectId(event.target.value);
     };
-
-    const subSubjects1 = data.map((subSubject, id) => {
+    const subSubjects1 = _.flattenDeep(getAllTopic(data)).map((_subSubject: any, id) => {
         let bgColor = masteryColors.NP;
-        if (data && data[id] && data[id].mastery) {
-            if (data[id].mastery === 'NP') {
+        if (_subSubject.mastery) {
+            if (_subSubject.mastery === 'NP') {
                 bgColor = masteryColors.NP;
-            } else if (data[id].mastery === 'N') {
+            } else if (_subSubject.mastery === 'N') {
                 bgColor = masteryColors.N;
-            } else if (data[id].mastery === 'C') {
+            } else if (_subSubject.mastery === 'C') {
                 bgColor = masteryColors.C;
-            } else if (data[id].mastery === 'M') {
+            } else if (_subSubject.mastery === 'M') {
                 bgColor = masteryColors.M;
             }
         }
         return ({
-            ...subSubject,
-            aokId: data && data[id] && data[id].id ? data[id].id : '',
-            text: data && data[id] && data[id].name ? data[id].name : '',
+            ..._subSubject,
+            aokId: _subSubject.id || '',
+            text: _subSubject.name || '',
             bgColor: bgColor,
             active: false,
         })
     })
-    const subSubjectsMobile1 = data.map((subSubject, id) => {
-        let bgColor = masteryColors.NP;
-        if (data && data[id] && data[id].mastery) {
-            if (data[id].mastery === 'NP') {
-                bgColor = masteryColors.NP;
-            } else if (data[id].mastery === 'N') {
-                bgColor = masteryColors.N;
-            } else if (data[id].mastery === 'C') {
-                bgColor = masteryColors.C;
-            } else if (data[id].mastery === 'M') {
-                bgColor = masteryColors.M;
-            }
-        }
-        return ({
-            ...subSubject,
-            text: data && data[id] && data[id].name ? data[id].name : '',
-            bgColor: bgColor,
-            active: false,
-        })
-    })
+    // const subSubjectsMobile1 = data.map((subSubject, id) => {
+    //     let bgColor = masteryColors.NP;
+    //     if (data && data[id] && data[id].mastery) {
+    //         if (data[id].mastery === 'NP') {
+    //             bgColor = masteryColors.NP;
+    //         } else if (data[id].mastery === 'N') {
+    //             bgColor = masteryColors.N;
+    //         } else if (data[id].mastery === 'C') {
+    //             bgColor = masteryColors.C;
+    //         } else if (data[id].mastery === 'M') {
+    //             bgColor = masteryColors.M;
+    //         }
+    //     }
+    //     return ({
+    //         ...subSubject,
+    //         text: data && data[id] && data[id].name ? data[id].name : '',
+    //         bgColor: bgColor,
+    //         active: false,
+    //     })
+    // })
 
     const mapBgRef = useRef<HTMLDivElement>(null);
     const [mapWidth, setMapWidth] = useState<number>(1366);
@@ -331,7 +336,7 @@ export const KidsProgress = () => {
                     backgroundRepeat: 'repeat',
                     minHeight: (
                         (
-                            Math.ceil(data.length / (lineCount + verticalCount))
+                            Math.ceil(subSubjects1.length / (lineCount + verticalCount))
                             // (
                             //     data.length % (lineCount + verticalCount) === 0 || data.length % (lineCount + verticalCount) > lineCount ?
                             //     0 :
