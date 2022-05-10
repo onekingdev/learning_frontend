@@ -28,8 +28,22 @@ export const TopicReport = (studentId: number, aokId: number) => `
     }
 `
 
+export const TopicReportByAokAndGrade = (studentId: number, aokId: number, gradeId: number) => `
+    rootTopicsByAokAndGrade(aokId: ${ aokId }, gradeId: ${gradeId}) {
+        ${ TopicFields(studentId) }
+        ${ TopicsRecursive(studentId) }
+    }
+`
+
 export const AreasOfKnowledge =() => `
     areasOfKnowledge {
+        id
+        name
+    }
+`
+
+export const Grades = () => `
+    grades {
         id
         name
     }

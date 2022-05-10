@@ -1,8 +1,6 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { useState, memo, useCallback } from "react";
 import styled from "styled-components";
-import { DragDropContext, Droppable, Draggable, DropResult  } from "react-beautiful-dnd";
-const { useState, memo } = React;
+import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
 
 const data = {
   tasks: {
@@ -31,12 +29,12 @@ const data = {
     },
     col2: {
       id: "col2",
-      title: "Progress",
+      title: "Nouns",
       taskIds: []
     },
     col3: {
       id: "col3",
-      title: "Done",
+      title: "Word",
       taskIds: []
     }
   },
@@ -143,11 +141,10 @@ const Column = memo(({ column, tasks, index }: ColumnProps) => (
   </Draggable>
 ));
 
-
-export const SortOrderBeautifulDnd: React.FC = () => {
+export const SortOrderBeautifulDnd = (): JSX.Element => {
   const [state, setState] = useState(data);
 
-  const onDragEnd = ({ destination, source, draggableId, type }: DropResult) => {
+  const onDragEnd = useCallback(({ destination, source, draggableId, type }: DropResult) => {
     if (!destination) {
       return;
     }
@@ -160,6 +157,7 @@ export const SortOrderBeautifulDnd: React.FC = () => {
 
     if (type === "column") {
       const newColOrd = Array.from(state.columnOrder);
+      console.log({ newColOrd }, 'state:', state.columnOrder)
       newColOrd.splice(source.index, 1);
       newColOrd.splice(destination.index, 0, draggableId);
 
@@ -215,7 +213,8 @@ export const SortOrderBeautifulDnd: React.FC = () => {
       }
     };
     setState(newState);
-  }
+    // console.log({ newState })
+  }, [])
   return (
     <DragDropContext
       onDragEnd={onDragEnd}
@@ -235,3 +234,4 @@ export const SortOrderBeautifulDnd: React.FC = () => {
     </DragDropContext>
   );
 }
+
