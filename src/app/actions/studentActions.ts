@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as TYPES from '../types'
-import query from 'api/queries/get'
+import query, { fetchRawData } from 'api/queries/get'
 import { STUDENT_WALLET_QUERY } from 'api/queries/users'
 import {
   CREATE_STUDENT,
@@ -308,27 +308,27 @@ export const doUpdateUserLanguage = async (language: string, token: string) => {
   }
 }
 
+
+/**
+ * Introduce swr
+ * @param studentId number
+ * @param token string
+ * @returns array of tx data if successful, undefined if error
+ */
 export const doFetchWalletTransactions = async (studentId: number, token: string) => {
 
-  try {
-    const res: any = await sendRawQuery(
-      `query {
-            coinWalletTransactionsById(studentId: ${studentId}){
-              id
-              date
-              comment
-              amount
-              description
-              side
-            }
-          }`,
-      token
-    );
-    return res.msg ?
-      { msg: res.msg, success: false } :
-      { data: [...res.data?.coinWalletTransactionsById], success: true }
-  } catch (e) {
-    console.log(e)
-    return { msg: 'Network error! Fetching wallet tx data failed.', success: false }
-  }
+  const res: any = await fetchRawData(
+    `query {
+      coinWalletTransactionsById(studentId: ${studentId}){
+        id
+        date
+        comment
+        amount
+        description
+        side
+      }
+    }`,
+    token
+  );
+  return res.data.coinWalletTransactionsById
 }
