@@ -17,7 +17,7 @@ import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
 import { Container }            from './Style';
 import { dictionary }           from './dictionary'
 import { useSelector }       from 'react-redux';
-import { TopicReportByAokAndGrade, AreasOfKnowledge, Grades } from 'api/fragments/topicFragments';
+import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
 import styled             from 'styled-components';
 import background     from 'views/assets/colored-shapes-bg.svg';
@@ -73,11 +73,6 @@ export const KidsProgress = () => {
     const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>('');
     const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
     const [data, setData]                         = useState<any[]>([]);
-    const [activeGradeId, setActiveGradeId]   = useState<number>(-1);
-    const [grades, setGrades] = useState<Array<{
-        id: string,
-        name: string
-    }>>([]);
     useEffect(() => {
         (async () => {
             // Get All Subject
@@ -106,31 +101,11 @@ export const KidsProgress = () => {
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
-        (async () => {
-            loadingContext.start();
-            // Get Topic Report
-            const res:any = await query('', Grades()).catch(e => ({success: false}));
-            if(res.success === false) {
-            return
-            }
-            const result:any = await res.json();
-            if(result.errors && !result.data) {
-                alert(result.errors[0].message);
-            } else {
-                if (result.data.grades.length > 0) {
-                    setGrades(result.data.grades);
-                    console.log(result.data.grades[0].id)
-                    setActiveGradeId(result.data.grades[0].id);
-                }
-            }
-          })();
-    }, []);
-    useEffect(() => {
-        if (activeSubjectId !== -1 && activeGradeId !== -1) {
+        if (activeSubjectId !== -1) {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
-                const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
+                const res:any = await query('', TopicReport(parseInt(student.id), activeSubjectId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
                 return
                 }
@@ -138,7 +113,8 @@ export const KidsProgress = () => {
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
-                    setData(result.data.rootTopicsByAokAndGrade);
+                    // console.log(result.data.rootTopicsByAok)
+                    setData(result.data.rootTopicsByAok);
                 }
                 // if (firstLoad) {
                 //     setFirstLoad(false);
@@ -146,10 +122,22 @@ export const KidsProgress = () => {
                 // }
           })();
         }
-      }, [activeSubjectId, activeGradeId]);
+      }, [activeSubjectId]);
+    // const grades = [
+    //     'Kindergarten',
+    //     '1st Grade',
+    //     '2nd Grade',
+    //     '3rd Grade',
+    //     '4th Grade',
+    //     '5th Grade',
+    //     '6th Grade',
+    //     '7th Grade',
+    //     '8th Grade',
+    // ]
+    const [grade, setGrade] = useState<string>(dictionary[language]?.grades[0]);
 
     const handleGradeChange = (event: any) => {
-        setActiveGradeId(event.target.value);
+        setGrade(event.target.value);
     };
     const handleSubjectChange = (event: any) => {
         setActiveSubjectId(event.target.value);
@@ -256,7 +244,7 @@ export const KidsProgress = () => {
                             }}>Grade</InputLabel> */}
                             <Select
                                 id='demo-simple-select'
-                                value={activeGradeId}
+                                value={grade}
                                 onChange={handleGradeChange}
                                 SelectDisplayProps={{
                                     style: {
@@ -265,8 +253,8 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                { grades.map((grade: any, id: number) => (
-                                    <MenuItem key={id} value={grade.id}>{grade.name}</MenuItem>
+                                { dictionary[language]?.grades.map((grade: any, id: number) => (
+                                    <MenuItem key={id} value={grade}>{grade}</MenuItem>
                                 )) }
                             </Select>
                         </FormControl>
@@ -499,6 +487,9 @@ export const KidsProgress = () => {
                 </div>
             </Container>
             <Container>
+                {
+                    console.log({data})
+                }
                 <MarkTableSubject
                     data={data}
                     activeSubjectId={activeSubjectIdTable}

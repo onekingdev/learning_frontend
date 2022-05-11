@@ -127,7 +127,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0, activeAokI
                     }} onClick={() => {
                         if (main.aokId !== '') {
                             // history.push('/question/PATH/' + aokId)
-                            history.push('/question/AI/' + main.aokId)
+                            history.push('/question/PATH/' + main.aokId)
                             // alert("Developing now, will be released soon 🎓")
                         }
                     }}>{dictionary[language]?.practice}</TypoBtn>

@@ -13,7 +13,7 @@ import { FinishLesson } from 'views/organisms/FinishLesson';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import { createNewAiBlock, doGetQuestionBlockById, newFinishBlock } from 'app/actions/blockActions';
+import { createNewAiBlock, createNewPathBlock, doGetQuestionBlockById, newFinishBlock } from 'app/actions/blockActions';
 import { IAIBlock, IAIQuestion } from 'app/entities/block';
 import { Store } from 'app/configureStore';
 import * as TYPE from 'app/types';
@@ -245,6 +245,13 @@ export const AIQuestion: FC = () => {
     switch (mode) {
       case 'AI':
         res = await createNewAiBlock(
+          parseInt(aokId),    //11
+          student.id, //15
+          user.token,
+        );
+        break
+      case 'PATH':
+        res = await createNewPathBlock(
           parseInt(aokId),    //11
           student.id, //15
           user.token,

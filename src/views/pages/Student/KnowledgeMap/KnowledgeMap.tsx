@@ -11,6 +11,7 @@ import isle from 'views/assets/islands/fillers/island.svg';
 import rock from 'views/assets/islands/fillers/rock.svg';
 import rock2 from 'views/assets/islands/fillers/rock-2.svg';
 import boulder from 'views/assets/islands/fillers/rocxk.svg';
+import { ScreenSize } from 'constants/screenSize';
 import {
   Wrapper,
   Boat,
@@ -20,8 +21,10 @@ import {
   Subject
 } from './Styles';
 import { Box, Typography } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 export const KnowledgeMap: FC = () => {
+  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
   const areasOfKnowledge: Array<any> = useSelector((state: any) => state.student.guardianstudentplan.subject);
@@ -93,8 +96,8 @@ export const KnowledgeMap: FC = () => {
                         transform: 'scale(1.1)'
                       },
                       position: 'relative',
-                      height: 300,
-                      width: 600
+                      height: isMobile ? 'auto' : 300,
+                      width: isMobile ? '100%' : 600,
                     }}
                     onClick={e => {
                       animateBoat(e, `/question/AI/${areaOfKnowledge.id}`);
@@ -121,7 +124,7 @@ export const KnowledgeMap: FC = () => {
                         color: 'white',
                         fontWeight: '700',
                         textAlign: 'center',
-                        fontSize: 30,
+                        fontSize: isMobile ? 12 : 30,
                         cursor: 'pointer',
                         background: '#FB8500',
                         // WebkitTextStroke: '1px #' + Math.floor(Math.random() * 16777215).toString(16),

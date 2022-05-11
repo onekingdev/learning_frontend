@@ -27,7 +27,7 @@ const CardTitle = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   width: fit-content;
-  max-width: 80vw;
+  // max-width: 80vw;
   background-size: 100% 100%;
   padding: 15px;
   padding-left: 50px;

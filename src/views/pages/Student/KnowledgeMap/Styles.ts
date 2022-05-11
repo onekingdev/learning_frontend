@@ -14,7 +14,7 @@ export const Boat = styled.img`
   position   : absolute;
   top        : ${window.innerHeight / 2}px;
   left       : ${window.innerWidth / 2}px;
-  height     : 140px;
+  height     : 100px;
   transition : top 6s, left 4s;
   @media (min-width: ${ScreenSize.desktop}) {
     height: 280px;

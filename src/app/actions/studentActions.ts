@@ -1,14 +1,14 @@
-import axios                    from 'axios';
-import * as TYPES               from '../types'
-import query                    from 'api/queries/get'
+import axios from 'axios';
+import * as TYPES from '../types'
+import query from 'api/queries/get'
 import { STUDENT_WALLET_QUERY } from 'api/queries/users'
 import {
   CREATE_STUDENT,
   CHANGE_STUDENT_GRADE,
   CHANGE_STUDENT_PASSWORD
-}                               from 'api/mutations/students'
-import mutation                 from 'api/mutations/get'
-import { sendRawQuery }         from 'api/queries/get';
+} from 'api/mutations/students'
+import mutation from 'api/mutations/get'
+import { sendRawQuery } from 'api/queries/get';
 
 
 export const studentSetData = (payload: any) => {
@@ -97,29 +97,29 @@ export const setBlockPresentation = (payload: string) => ({
 })
 
 // export const setAvatar = (payload: any, dispatch: any) => {
-export const setAvatar = (payload: any) => {
-  axios({
-    url: <string>process.env.REACT_APP_SERVER_URL,
-    method: 'post',
-    data: {
-      query: `
-      mutation setFavoriteAvatarCollection {
-        setFavoriteAvatarCollection(
-              avatarAccessorie: ${payload.accessory},
-              avatarClothes: ${payload.clothes},
-              avatarHead: ${payload.head},
-              avatarPants: ${payload.pants}
-              studentId:1
-            ) {
-              favoriteAvatarCollection {
-                  id
-              }
-       }
-   }
-        `
-    }
-  })
-}
+// export const setAvatar = (payload: any) => {
+//   axios({
+//     url: <string>process.env.REACT_APP_SERVER_URL,
+//     method: 'post',
+//     data: {
+//       query: `
+//       mutation setFavoriteAvatarCollection {
+//         setFavoriteAvatarCollection(
+//               avatarAccessorie: ${payload.accessory},
+//               avatarClothes: ${payload.clothes},
+//               avatarHead: ${payload.head},
+//               avatarPants: ${payload.pants}
+//               studentId:1
+//             ) {
+//               favoriteAvatarCollection {
+//                   id
+//               }
+//        }
+//    }
+//         `
+//     }
+//   })
+// }
 
 export const setCoinWallet = async (studentId: number, token: string, dispatch: any) => {
   const res: any = await query(`studentById(id: "${studentId}")`, STUDENT_WALLET_QUERY, token).catch(() => ({ success: false }));
@@ -267,43 +267,68 @@ export const changeStudentPassword = async (
 export const doSetOldUser = async (token: string) => {
 
   try {
-      const res: any = await sendRawQuery(
-          `mutation IsNew {
+    const res: any = await sendRawQuery(
+      `mutation IsNew {
             updateIsNew {
               student{
                 isNew
               }
             }
           }`,
-          token
-      );
-      return res.msg ?
-          { msg: res.msg, status: false } :
-          { ...res.data.IsNew, status: true }
-  } catch(e) {
-      console.log(e)
-      return { msg: 'Set old user error!', status: false }
+      token
+    );
+    return res.msg ?
+      { msg: res.msg, status: false } :
+      { ...res.data.IsNew, status: true }
+  } catch (e) {
+    console.log(e)
+    return { msg: 'Set old user error!', status: false }
   }
 }
 
-export const doUpdateUserLanguage = async (language: string,token: string) => {
+export const doUpdateUserLanguage = async (language: string, token: string) => {
 
   try {
-      const res: any = await sendRawQuery(
-          `mutation {
+    const res: any = await sendRawQuery(
+      `mutation {
             updateUserLanguage(language: "${language}"){
               user{
                 id
               }
             }
           }`,
-          token
-      );
-      return res.msg ?
-          { msg: res.msg, success: false } :
-          { ...res.data, success: true }
-  } catch(e) {
-      console.log(e)
-      return { msg: 'Network error! Updating user language failed', success: false }
+      token
+    );
+    return res.msg ?
+      { msg: res.msg, success: false } :
+      { ...res.data, success: true }
+  } catch (e) {
+    console.log(e)
+    return { msg: 'Network error! Updating user language failed', success: false }
+  }
+}
+
+export const doFetchWalletTransactions = async (studentId: number, token: string) => {
+
+  try {
+    const res: any = await sendRawQuery(
+      `query {
+            coinWalletTransactionsById(studentId: ${studentId}){
+              id
+              date
+              comment
+              amount
+              description
+              side
+            }
+          }`,
+      token
+    );
+    return res.msg ?
+      { msg: res.msg, success: false } :
+      { data: [...res.data?.coinWalletTransactionsById], success: true }
+  } catch (e) {
+    console.log(e)
+    return { msg: 'Network error! Fetching wallet tx data failed.', success: false }
   }
 }
