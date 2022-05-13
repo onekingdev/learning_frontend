@@ -57,7 +57,7 @@ export const BookShelf: FC = () => {
             <Stack direction='row' justifyContent='space-evenly' width='100%'  sx={{ padding: 2,background: '#85431F', borderRadius: '10px 10px 0 0' }}>
                 <Subheader style={{ color: 'white', textAlign: 'center' }}> {dictionary[language]?.settings} </Subheader>
                 <Subheader style={{ color: 'white', textAlign: 'center' }}> {dictionary[language]?.badges} </Subheader>
-                <Subheader style={{ color: 'white', textAlign: 'center' }}> {dictionary[language]?.settings} </Subheader>
+                <Subheader style={{ color: 'white', textAlign: 'center' }}> {dictionary[language]?.awards} </Subheader>
             </Stack>
             <Stack direction='row' justifyContent='space-around' width='100%' >
                 <img src={leg_img} />

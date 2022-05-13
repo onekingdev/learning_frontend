@@ -48,14 +48,3 @@ export const Grades = () => `
         name
     }
 `
-
-export const AvaliableGrades = (id: number) => `
-    areaOfKnowledgeById(id: ${id}) {
-        audience {
-            gradeSet {
-                id
-                name
-            }
-        }
-    }
-`
