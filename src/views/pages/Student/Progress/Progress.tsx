@@ -17,7 +17,7 @@ import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
 import { Container }            from './Style';
 import { dictionary }           from './dictionary'
 import { useSelector }       from 'react-redux';
-import { TopicReportByAokAndGrade, AreasOfKnowledge, Grades } from 'api/fragments/topicFragments';
+import { TopicReportByAokAndGrade, AreasOfKnowledge, Grades, AvaliableGrades } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
 import styled             from 'styled-components';
 import background     from 'views/assets/colored-shapes-bg.svg';
@@ -79,52 +79,37 @@ export const KidsProgress = () => {
         name: string
     }>>([]);
     useEffect(() => {
-        (async () => {
-            // Get All Subject
-            const res:any = await query('', AreasOfKnowledge(), user.token).catch(e => ({success: false}));
-            if(res.success === false) {
-                return
-            }
-            const result:any = await res.json();
-            if(result.errors && !result.data) {
-                alert(result.errors[0].message);
-            } else {
-                setAreasOfKnowledge(result.data.areasOfKnowledge)
-                console.log(result.data.areasOfKnowledge)
-                let iii = 4;
-                for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
-                    if (result.data.areasOfKnowledge[i].name === 'Sight Words') {
-                        iii = i;
-                        break;
-                    }
-                }
-                setActiveSubjectId(result.data.areasOfKnowledge[iii].id)
-                // setSubject(result.data.areasOfKnowledge[0].id);
-            }
-        })();
-    }, [user]);
+        if (student) {
+            (async () => {
+                setAreasOfKnowledge(student.guardianstudentplan.subject);
+                setActiveSubjectId(student.guardianstudentplan.subject[0].id)
+            })();
+        }
+    }, [student]);
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
-        (async () => {
-            loadingContext.start();
-            // Get Topic Report
-            const res:any = await query('', Grades()).catch(e => ({success: false}));
-            if(res.success === false) {
-            return
-            }
-            const result:any = await res.json();
-            if(result.errors && !result.data) {
-                alert(result.errors[0].message);
-            } else {
-                if (result.data.grades.length > 0) {
-                    setGrades(result.data.grades);
-                    console.log(result.data.grades[0].id)
-                    setActiveGradeId(result.data.grades[0].id);
+        if (activeSubjectId > 0) {
+            (async () => {
+                loadingContext.start();
+                // Get Topic Report
+                const res:any = await query('', AvaliableGrades(activeSubjectId)).catch(e => ({success: false}));
+                if(res.success === false) {
+                    return
                 }
-            }
-          })();
-    }, []);
+                const result:any = await res.json();
+                if(result.errors && !result.data) {
+                    alert(result.errors[0].message);
+                } else {
+                    console.log(result.data)
+                    if (result.data.areaOfKnowledgeById.audience.gradeSet.length > 0) {
+                        setGrades(result.data.areaOfKnowledgeById.audience.gradeSet);
+                        setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
+                    }
+                }
+            })();
+        }
+    }, [activeSubjectId]);
     useEffect(() => {
         if (activeSubjectId !== -1 && activeGradeId !== -1) {
             (async () => {
@@ -499,9 +484,6 @@ export const KidsProgress = () => {
                 </div>
             </Container>
             <Container>
-                {
-                    console.log({data})
-                }
                 <MarkTableSubject
                     data={data}
                     activeSubjectId={activeSubjectIdTable}
