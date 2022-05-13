@@ -149,7 +149,7 @@ export const AIQuestion: FC = () => {
 
   const renderBackdropContent = (
   ) => {
-    if (correctRoll === 10) {
+    if (correctRoll === 11) {
       return (
         <FullBatteryPopup />
       )
