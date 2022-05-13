@@ -4,6 +4,7 @@ import fullBattery from 'views/assets/question/full-battery.gif'
 
 export const FullBatteryPopup: FC = () => {
 
+  console.log('full battery!')
   return (
     <Box
       sx={{
