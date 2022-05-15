@@ -62,7 +62,6 @@ export const KidsTreasureTrack: FC = () => {
     };
 
     const [questions, setQuestions] = useState<number>(0);
-    const [questionLastDay, setQuestionLastDay] = useState<string>("");
     const initialNumber = Math.ceil(questions / 20);
 
     const mapBgRef = useRef<HTMLDivElement>(null);
@@ -192,9 +191,6 @@ export const KidsTreasureTrack: FC = () => {
                 for (let i = 0; i < lastWeekQuestions.length; i++) {
                     totalQuestions += lastWeekQuestions[i].questions;
                 }
-                if (lastWeekQuestions.length > 0) {
-                    setQuestionLastDay(lastWeekQuestions[lastWeekQuestions.length - 1].day);
-                }
                 setQuestions(totalQuestions);
             })();
         }
@@ -219,7 +215,6 @@ export const KidsTreasureTrack: FC = () => {
             localStorage.removeItem("learning-socrates-last-medal");
             localStorage.removeItem("learning-socrates-last-medal-time");
         }
-        setMedalModalOpened(3);
         if (160 <= questions && questions < 320) {
             if (medal === "") {
                 setMedalModalOpened(1);
@@ -394,117 +389,24 @@ export const KidsTreasureTrack: FC = () => {
                     open={medalModalOpened > 0}
                 >
                     <MContainer sx={{ width: 'auto', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                        {medalModalOpened === 1 && <div style={{
-                            background: 'linear-gradient(#EE9C21, #FFDDAB, #EE9C21)',
-                            textAlign: "center",
-                            position: "relative",
-                            borderRadius: "64px",
-                            padding: "40px 15px"
-                        }}>
-                            <div
-                                style={{
-                                    color: "black",
-                                    position: "absolute",
-                                    right: "50px",
-                                    top: "25px"
-                                }}
-                                onClick={() => setMedalModalOpened(0)}
-                            >
-                                <CloseIcon/>
-                            </div>
-                            <p style={{
-                                position: 'absolute',
-                                left: '50px',
-                                top: '25px',
-                                margin: 0
-                            }}>{questionLastDay}</p>
-                            <p style={{
-                                fontWeight: 700,
-                                fontSize: "50px",
-                                color: "black",
-                                fontFamily: "QuickSand"
-                            }}>Congratulation! <br />You have earned</p>
-                            <img style={{
-                                width: "20rem",
-                                transform: zoom ? "scale(2.5)" : "scale(1)",
-                                opacity: zoom ? "0.3" : "1",
-                                transition: "all 1.5s"
-                            }} src={BronzeMedal} alt="BronzeMedal" onClick={closeMedal} />
-                        </div>}
-                        {medalModalOpened === 2 && <div style={{
-                            background: 'linear-gradient(#A1A1A1, #FFFFFF, #969696)',
-                            textAlign: "center",
-                            position: "relative",
-                            borderRadius: "64px",
-                            padding: "40px 15px"
-                        }}>
-                            <div
-                                style={{
-                                    color: "black",
-                                    position: "absolute",
-                                    right: "50px",
-                                    top: "25px"
-                                }}
-                                onClick={() => setMedalModalOpened(0)}
-                            >
-                                <CloseIcon/>
-                            </div>
-                            <p style={{
-                                position: 'absolute',
-                                left: '50px',
-                                top: '25px',
-                                margin: 0
-                            }}>{questionLastDay}</p>
-                            <p style={{
-                                fontWeight: 700,
-                                fontSize: "50px",
-                                color: "black",
-                                fontFamily: "QuickSand"
-                            }}>Congratulation! <br />You have earned</p>
-                            <img style={{
-                                width: "20rem",
-                                transform: zoom ? "scale(2.5)" : "scale(1)",
-                                opacity: zoom ? "0.3" : "1",
-                                transition: "all 1.5s"
-                            }} src={SilverMedal} alt="SilverMedal" onClick={closeMedal} />
-                        </div>}
-                        {medalModalOpened === 3 && <div style={{
-                            background: 'linear-gradient(#FCDF7A, #FFF5CF, #FCDF7A)',
-                            textAlign: "center",
-                            position: "relative",
-                            borderRadius: "64px",
-                            padding: "40px 15px"
-                        }}>
-                            <div
-                                style={{
-                                    color: "black",
-                                    position: "absolute",
-                                    right: "50px",
-                                    top: "25px"
-                                }}
-                                onClick={() => setMedalModalOpened(0)}
-                            >
-                                <CloseIcon/>
-                            </div>
-                            <p style={{
-                                position: 'absolute',
-                                left: '50px',
-                                top: '25px',
-                                margin: 0
-                            }}>{questionLastDay}</p>
-                            <p style={{
-                                fontWeight: 700,
-                                fontSize: "50px",
-                                color: "black",
-                                fontFamily: "QuickSand"
-                            }}>Congratulation! <br />You have earned</p>
-                            <img style={{
-                                width: "20rem",
-                                transform: zoom ? "scale(2.5)" : "scale(1)",
-                                opacity: zoom ? "0.3" : "1",
-                                transition: "all 1.5s"
-                            }} src={GoldMedal} alt="GoldMedal" onClick={closeMedal} />
-                        </div>}
+                        {medalModalOpened === 1 && <img style={{
+                            width: "20rem",
+                            transform: zoom ? "scale(2.5)" : "scale(1)",
+                            opacity: zoom ? "0.3" : "1",
+                            transition: "all 1.5s"
+                        }} src={BronzeMedal} alt="BronzeMedal" onClick={closeMedal} />}
+                        {medalModalOpened === 2 && <img style={{
+                            width: "20rem",
+                            transform: zoom ? "scale(2.5)" : "scale(1)",
+                            opacity: zoom ? "0.3" : "1",
+                            transition: "all 1.5s"
+                        }} src={SilverMedal} alt="SilverMedal" onClick={closeMedal} />}
+                        {medalModalOpened === 3 && <img style={{
+                            width: "20rem",
+                            transform: zoom ? "scale(2.5)" : "scale(1)",
+                            opacity: zoom ? "0.3" : "1",
+                            transition: "all 1.5s"
+                        }} src={GoldMedal} alt="GoldMedal" onClick={closeMedal} />}
                         {/* <Button sx={{ borderRadius: '100%', background: BasicColor.green, padding: '10px' }} variant="contained" onClick={() => setMedalModalOpened(0)} >
                             <CloseIcon />
                         </Button> */}

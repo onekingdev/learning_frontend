@@ -26,26 +26,6 @@ type ChoiceTextProps = {
   }, isCorrect: boolean) => void;
 };
 
-const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: 'green',
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: 'green',
-  },
-  '& .MuiOutlinedInput-root': {
-    background: 'white',
-    '& fieldset': {
-      borderColor: 'softgreen',
-    },
-    '&:hover fieldset': {
-      borderColor: 'yellow',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'green',
-    },
-  },
-});
 
 export const TypeInQuestion: FC<ChoiceTextProps> = ({
   question,
@@ -124,20 +104,13 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
           }
         />
         <AnswersContainer>
-          <TypoGeneralText style={{ color: 'white' }}>
-            The answer is
-          </TypoGeneralText>
-          <CssTextField
+          <input
             disabled={disabled}
-            sx={{ minWidth: 200 }}
+            style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end' }}
             value={typedAnswer}
             onChange={(e: any) => setTypedAnswer(e.target.value)}
-            // variant='filled'
             autoFocus
           />
-          <TypoGeneralText style={{ color: 'white' }}>
-            .
-          </TypoGeneralText>
         </AnswersContainer>
         <AssistorContainer>
           <Button
@@ -155,7 +128,10 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
             }
           />
           <Icon image={assistor} onClick={readQuestion} />
-          <Icon image={videoIcon} onClick={closeVideoModal} />
+          {
+            blockPresentation?.block?.topicGrade?.topic?.videoAssistor &&
+            <Icon image={videoIcon} onClick={closeVideoModal} />
+          }
         </AssistorContainer>
       </BlackBoard>
     </>
