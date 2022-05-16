@@ -1,7 +1,6 @@
 import { FC } from 'react';
-import { Question } from 'views/atoms/Text/Question';
-import playQuestionSound from 'views/assets/play-sound.svg'
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { numberWithCommas } from 'views/utils';
 
 
 interface QuestionBoxEquationProps {
@@ -17,7 +16,7 @@ export const QuestionEquation: FC<QuestionBoxEquationProps> = ({
       {
         ops && ops.map((op, index) => (
           <Typography variant='h4' sx={{ color: 'white', textAlign: index !== 1 ? 'end' : 'start' }}>
-            {op}
+            {Number.isInteger(+op) ? numberWithCommas(+op) : op}
           </Typography>
         ))
       }

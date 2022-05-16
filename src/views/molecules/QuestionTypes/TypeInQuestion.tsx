@@ -8,11 +8,8 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
-import { TypoGeneralText } from 'views/atoms/Text';
 import { BlackBoard, AnswersContainer, AssistorContainer } from './Styles'
-import { TextField } from '@mui/material';
 import { QuestionBoxTitle } from './QuestionBoxTitle';
-import { styled } from '@mui/material/styles';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
