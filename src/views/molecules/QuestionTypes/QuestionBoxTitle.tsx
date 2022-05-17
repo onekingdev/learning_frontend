@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Question } from 'views/atoms/Text/Question';
 import playQuestionSound from 'views/assets/play-sound.svg'
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { QuestionEquation } from './QuestionEquation';
 
 
@@ -21,18 +21,14 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
 
   const extractQuestion = (str: string) => {
 
-    const firstBracketIndex = str.indexOf('{')
+    const firstBracketIndex = str.indexOf('$')
     return str.slice(1, firstBracketIndex)
   }
 
-  const extractEquation = (str: string) => {
-    const regex = /(?<=\{).+?(?=\})/g
+  const extractMathjaxText = (str: string) => {
+    const regex = /(?<=\$).+?(?=\$)/g
     const matches = str.match(regex)
-    if (matches) {
-      const arrayOps = matches[0].split(',')
-      console.log({ arrayOps })
-      return matches[0].split(',')
-    } else return null
+    return matches ? matches[0] : ''
   }
 
   return (
@@ -57,7 +53,7 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
         }
       </Box>
       {
-        title.charAt(0) === '@' && <QuestionEquation ops={extractEquation(title)} />
+        title.charAt(0) === '@' && <QuestionEquation tex={extractMathjaxText(title)} />
       }
     </Container>
   );

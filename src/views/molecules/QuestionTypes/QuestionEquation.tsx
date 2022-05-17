@@ -1,30 +1,23 @@
 import { FC } from 'react';
-import { Box, Typography } from '@mui/material';
-import { numberWithCommas } from 'views/utils';
+import { Box } from '@mui/material';
+import MathJax from 'react-mathjax';
+import he from 'he'
 
 
-interface QuestionBoxEquationProps {
-  ops: string[] | null
+interface QuestionBoxEquationPrtex {
+  tex: string
 }
 
-export const QuestionEquation: FC<QuestionBoxEquationProps> = ({
-  ops,
+export const QuestionEquation: FC<QuestionBoxEquationPrtex> = ({
+  tex,
 }) => {
-
   return (
-    <Box sx={{ width: 200, margin: 2 }}>
-      {
-        ops && ops.map((op, index) => (
-          <Typography variant='h4' sx={{ color: 'white', textAlign: index !== 1 ? 'end' : 'start' }}>
-            {Number.isInteger(+op) ? numberWithCommas(+op) : op}
-          </Typography>
-        ))
-      }
-      <hr style={{
-        height: 3,
-        border: 'none',
-        background: 'white'
-      }} />
+    <Box sx={{ width: 200, margin: 2, fontSize: 30, color: 'white' }}>
+      <MathJax.Provider>
+        <MathJax.Node
+          formula={he.decode(tex)}
+        />
+      </MathJax.Provider>
     </Box>
   );
 };
