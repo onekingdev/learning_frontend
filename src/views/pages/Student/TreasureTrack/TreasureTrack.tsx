@@ -219,7 +219,6 @@ export const KidsTreasureTrack: FC = () => {
             localStorage.removeItem("learning-socrates-last-medal");
             localStorage.removeItem("learning-socrates-last-medal-time");
         }
-        setMedalModalOpened(3);
         if (160 <= questions && questions < 320) {
             if (medal === "") {
                 setMedalModalOpened(1);
