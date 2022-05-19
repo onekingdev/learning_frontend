@@ -219,19 +219,20 @@ export const KidsTreasureTrack: FC = () => {
             localStorage.removeItem("learning-socrates-last-medal");
             localStorage.removeItem("learning-socrates-last-medal-time");
         }
-        if (100 <= questions && questions < 250) {
+        setMedalModalOpened(3);
+        if (160 <= questions && questions < 320) {
             if (medal === "") {
                 setMedalModalOpened(1);
                 localStorage.setItem("learning-socrates-last-medal", "bronze");
                 localStorage.setItem("learning-socrates-last-medal-time", (new Date()).toString());
             }
-        } else if (250 < questions && questions < 500) {
+        } else if (320 < questions && questions < 480) {
             if (medal === "" || medal === "bronze") {
                 setMedalModalOpened(2);
                 localStorage.setItem("learning-socrates-last-medal", "silver");
                 localStorage.setItem("learning-socrates-last-medal-time", (new Date()).toString());
             }
-        } else if (questions >= 500) {
+        } else if (questions >= 480) {
             if (medal === "" || medal === "bronze" || medal === "silver") {
                 setMedalModalOpened(3);
                 localStorage.setItem("learning-socrates-last-medal", "gold");
