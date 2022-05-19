@@ -82,7 +82,7 @@ export const KidsProgress = () => {
         if (student) {
             (async () => {
                 setAreasOfKnowledge(student.guardianstudentplan.subject);
-                setActiveSubjectId(student.guardianstudentplan.subject[0].id)
+                setActiveSubjectId(student.guardianstudentplan.subject.filter((_subject: any) => _subject.name === "Financial LIteracy")[0].id || student.guardianstudentplan.subject[0].id);
             })();
         }
     }, [student]);
@@ -104,6 +104,7 @@ export const KidsProgress = () => {
                     console.log(result.data)
                     if (result.data.areaOfKnowledgeById.audience.gradeSet.length > 0) {
                         setGrades(result.data.areaOfKnowledgeById.audience.gradeSet);
+                        // setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet.filter((grade: any) => grade.name === "1st Grade")[0]?.id || result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
                         setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
                     }
                 }
@@ -368,7 +369,7 @@ export const KidsProgress = () => {
                                 Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
                             ) : 0
                             return (
-                                <div style={{
+                                <div key={id} style={{
                                     position: 'absolute',
                                     top: (_id % (verticalCount + lineCount)) > lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
                                         (Math.floor(_id / (lineCount + verticalCount))) * ((unitHeight * 1.5) * (verticalCount + 1)) + (id % (lineCount + verticalCount) - lineCount + 1) * (unitHeight * 1.5) + 'rem' :

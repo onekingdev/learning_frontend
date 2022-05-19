@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { useHistory } from 'react-router-dom';
@@ -14,24 +14,26 @@ import boulder from 'views/assets/islands/fillers/rocxk.svg';
 import { ScreenSize } from 'constants/screenSize';
 import {
   Wrapper,
-  Boat,
   Ocean,
-  Island,
   Filler,
-  Subject
 } from './Styles';
-import { Box, Typography } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery'
+import { Box, Typography, useMediaQuery } from '@mui/material';
 
+const positions = [
+  'end',
+  'center',
+  'start',
+]
 export const KnowledgeMap: FC = () => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
   const areasOfKnowledge: Array<any> = useSelector((state: any) => state.student.guardianstudentplan.subject);
   const [loadedImgNum, setLoadedImgNum] = useState(0)
   const [boatX, setBoatX] = useState(window.innerWidth / 2)
   const [boatY, setBoatY] = useState(window.innerHeight / 2)
-
+  const fillers = [isle, rock, boulder, barrell, rock2]
+  const [dragonNumber, setDragonNumber] = useState(0)
   const onImgLoad = () => {
 
     setLoadedImgNum(loadedImgNum + 1)
@@ -52,28 +54,26 @@ export const KnowledgeMap: FC = () => {
 
     setTimeout(() => {
       history.push(route);
-    }, 3300);
+    }, 3000);
 
   };
 
-  const randRange = (max: number, min: number) => Math.round(Math.random() * (max - min)) + min;
+  useEffect(() => {
+    const dragonNum = getRandomNumber(areasOfKnowledge.length);
+    setDragonNumber(dragonNum)
+  }, [])
 
-  const getFiller = () => {
-
-    const uniqueFillers = [boat, barrell, dragon];
-    const fillers = [isle, rock, boulder, rock2];
-    if (getRandomNumber(8) === 8) {
-      return uniqueFillers[getRandomNumber(2)];
-    }
-    return fillers[getRandomNumber(3)];
-
-  };
-
-  const dragonNum = randRange(0, areasOfKnowledge.length);
   return (
     <Wrapper>
       <StudentMenu>
-        <Boat src={boat} style={{ position: 'absolute', left: boatX - 100, top: boatY - 100 }} />
+        <img src={boat} style={{
+          position: 'absolute',
+          left: boatX - 100,
+          top: boatY - 100,
+          transition: 'top 2s, left 3s',
+          height: isMobile ? 80 : 250,
+          zIndex: 1
+        }} />
         <Ocean >
           {areasOfKnowledge.map(
             (
@@ -85,10 +85,13 @@ export const KnowledgeMap: FC = () => {
               },
               i
             ) => {
-              const fill = getFiller();
-
               return (
-                <Subject key={i}
+                <Box key={i}
+                  sx={{
+                    display: 'grid',
+                    gridTemplateRows: '70% 30%',
+                    placeItems: positions[i % 3],
+                  }}
                 >
                   <Box
                     sx={{
@@ -96,25 +99,31 @@ export const KnowledgeMap: FC = () => {
                         transform: 'scale(1.1)'
                       },
                       position: 'relative',
-                      height: isMobile ? 'auto' : 300,
-                      width: isMobile ? '100%' : 600,
+                      height: isMobile ? 100 : 300,
+                      width: isMobile ? 'auto' : 600,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
                     }}
                     onClick={e => {
                       animateBoat(e, `/question/AI/${areaOfKnowledge.id}`);
                     }}
                   >
-                    <Island
+                    <img
                       src={`${process.env.REACT_APP_SERVER_URL}media/${areaOfKnowledge.islandImage}`}
-                      isActive={areaOfKnowledge.isActive}
                       onLoad={onImgLoad}
                       onError={onImgLoad}
+                      style={{
+                        width: isMobile ? 100 : 300,
+                        opacity: areaOfKnowledge.isActive ? 1 : 0.5
+                      }}
                     />
                     <Typography
                       variant='h3'
                       sx={{
-                        maxWidth: 210,
+                        maxWidth: isMobile ? 100 : 200,
                         position: 'absolute',
-                        top: '50%',
+                        top: '40%',
                         // transform: 'translateY(-10%)',
                         left: 0,
                         right: 0,
@@ -128,21 +137,18 @@ export const KnowledgeMap: FC = () => {
                         cursor: 'pointer',
                         background: '#FB8500',
                         // WebkitTextStroke: '1px #' + Math.floor(Math.random() * 16777215).toString(16),
-
                       }}>{areaOfKnowledge.name}
                     </Typography>
                   </Box>
                   <Box>
-                    {i === dragonNum && <Filler src={dragon} />}
-                    {i % 2 === 0 && <Filler src={fill} />}
-                    {i % 5 === 0 && <Filler src={fill} />}
+                    <Filler src={i === dragonNumber ? dragon : fillers[getRandomNumber(20) % 5]} />
                   </Box>
-                </Subject>
+                </Box>
               );
             }
           )}
         </Ocean>
       </StudentMenu>
-    </Wrapper>
+    </Wrapper >
   );
 };
