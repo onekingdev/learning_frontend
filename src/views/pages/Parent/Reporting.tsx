@@ -17,7 +17,6 @@ export const ParentReporting: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const user           = useSelector((state: any) => state.user);
   const guardian       = useSelector((state: any) => state.guardian);
-  const currentStudent  = guardian.guardianstudentSet.find((element: any) => element.student.id === studentId)
 
   const [student, setStudent] = useState<any>();
   const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
@@ -58,6 +57,7 @@ export const ParentReporting: FC = () => {
           return
         }
         const result:any = await res.json();
+        console.log(result);
         if(result.errors && !result.data) {
           alert(result.errors[0].message);
         } else {
@@ -71,6 +71,7 @@ export const ParentReporting: FC = () => {
     for (const guardianStudent of guardian.guardianstudentSet) {
       if (guardianStudent?.student.id === studentId) {
         setStudent(guardianStudent?.student)
+        console.log(guardianStudent?.student)
       }
     }
   }, []);

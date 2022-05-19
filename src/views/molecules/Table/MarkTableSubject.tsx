@@ -151,22 +151,22 @@ const MarkTableSubject = ({
                 aokId: aok?.id,
                 item: aok?.name,
                 mastery: aok?.mastery,
-                button: aok?.subTopics.length ? false : true,
-            }} extra={aok?.subTopics.map((subTopic1: any) => ({
+                button: aok?.subTopicsByGrade.length ? false : true,
+            }} extra={aok?.subTopicsByGrade.map((subTopic1: any) => ({
                 main: {
                     aokId: subTopic1?.id,
                     item: subTopic1?.name,
                     mastery: subTopic1?.mastery,
-                    button: subTopic1?.subTopics.length ? false : true,
+                    button: subTopic1?.subTopicsByGrade.length ? false : true,
                 },
-                extra: subTopic1?.subTopics.map((subTopic2: any) => ({
+                extra: subTopic1?.subTopicsByGrade.map((subTopic2: any) => ({
                     main: {
                         aokId: subTopic2?.id,
                         item: subTopic2?.name,
                         mastery: subTopic2?.mastery,
-                        button: subTopic2?.subTopics.length ? false : true,
+                        button: subTopic2?.subTopicsByGrade.length ? false : true,
                     },
-                    extra: subTopic1?.subTopics.map((subTopic3: any) => ({
+                    extra: subTopic1?.subTopicsByGrade.map((subTopic3: any) => ({
                         main: {
                             aokId: subTopic3?.id,
                             item: subTopic3?.name,

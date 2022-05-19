@@ -17,7 +17,7 @@ import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
 import { Container }            from './Style';
 import { dictionary }           from './dictionary'
 import { useSelector }       from 'react-redux';
-import { TopicReportByAokAndGrade, AreasOfKnowledge, Grades, AvaliableGrades } from 'api/fragments/topicFragments';
+import { TopicReportByAokAndGrade, TopicReportWithGrade, AreasOfKnowledge, Grades, AvaliableGrades } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
 import styled             from 'styled-components';
 import background     from 'views/assets/colored-shapes-bg.svg';
@@ -59,7 +59,7 @@ if (screen_width < 450) {
 
 const getAllTopic: any = (subSubjectList: Array<any>) => {
     return subSubjectList.map(subSubject => {
-        return subSubject.subTopics.length > 0 ? [subSubject, getAllTopic(subSubject.subTopics)] : [subSubject]
+        return subSubject.subTopicsByGrade.length > 0 ? [subSubject, getAllTopic(subSubject.subTopicsByGrade)] : [subSubject]
     })
 }
 
@@ -114,16 +114,19 @@ export const KidsProgress = () => {
         if (activeSubjectId !== -1 && activeGradeId !== -1) {
             (async () => {
                 loadingContext.start();
+                console.log(activeSubjectId, activeGradeId);
                 // Get Topic Report
-                const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
+                // const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
+                const res:any = await query('', TopicReportWithGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
                 return
                 }
-                const result:any = await res.json();
+                const result: any = await res.json();
+                console.log(result);
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
-                    setData(result.data.rootTopicsByAokAndGrade);
+                    setData(result.data.rootTopicsByAok);
                 }
                 // if (firstLoad) {
                 //     setFirstLoad(false);
