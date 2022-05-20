@@ -7,7 +7,7 @@ type BodyProps = {
   isDark?: boolean;
 };
 
-export const Question = styled.h3<BodyProps>`
+export const QuestionOld = styled.h3<BodyProps>`
   font-family: ${Typography.primary};
   color: ${props => (props.isDark ? BasicColor.black : BasicColor.white)};
   font-size: 28px;
