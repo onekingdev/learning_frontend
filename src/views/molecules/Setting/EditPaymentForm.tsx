@@ -12,10 +12,12 @@ import { GUARDIAN_PAYMENT_METHOD_INFO } from 'app/types'
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import commonDictionary from 'constants/commonDictionary'
 import { Container } from '@mui/material';
+import { images } from './utils/images'
 
 interface DialogProps {
     open: () => (void)
 }
+
 
 export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
     const dispatch = useDispatch()
@@ -30,6 +32,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
 
     const {
         wrapperProps,
+        getCardImageProps,
         getCardNumberProps,
         getExpiryDateProps,
         getCVCProps
@@ -102,11 +105,12 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
             `
         }
     }
+
     const [paymentMethodInfo, setPaymentMethodInfo] = useState({
         address1: guardian.paymentMethod.address1,
         address2: guardian.paymentMethod.address2,
         cardCvc: guardian.paymentMethod.cardCvc,
-        cardExpiryDate: guardian.paymentMethod.cardExpMonth + '/' + guardian.paymentMethod.cardExpYear,
+        cardExpiryDate: ('0' + guardian.paymentMethod.cardExpMonth).slice(-2) + ' / ' + guardian.paymentMethod.cardExpYear?.slice(-2),
         cardFirstName: guardian.paymentMethod.cardFirstName,
         cardLastName: guardian.paymentMethod.cardLastName,
         cardNumber: guardian.paymentMethod.cardNumber,
@@ -148,7 +152,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                 payload: {
                     ...paymentMethodInfo,
                     cardExpMonth: paymentMethodInfo.cardExpiryDate.slice(0, 2),
-                    cardExpYear: '20' + paymentMethodInfo.cardExpiryDate.slice(-2)
+                    cardExpYear: paymentMethodInfo.cardExpiryDate.slice(-2)
                 }
             });
         }
@@ -161,13 +165,13 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
 
     return (
         <>
-            {loading &&
+            {loading ?
                 <LoadingSpinner />
-            }
-            {!loading &&
+                :
                 <Grid container spacing={2} marginTop={1} justifyContent='center'>
                     <Grid item xs={12} md={12}>
                         <PaymentInputsWrapper {...wrapperProps} styles={style}>
+                            <svg {...getCardImageProps({ images })} />
                             <input {...getCardNumberProps({
                                 onChange: (e: any) => setPaymentMethodInfo({ ...paymentMethodInfo, cardNumber: e.target.value })
                             })} value={paymentMethodInfo.cardNumber} />
@@ -284,7 +288,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                     />
                 </Grid> */}
                     <Grid item>
-                        <Container sx={{marginBottom: 2}}>
+                        <Container sx={{ marginBottom: 2 }}>
                             <Button
                                 bgColor={BasicColor.green}
                                 onClick={handleOrder}

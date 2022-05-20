@@ -101,6 +101,7 @@ export const KidsProgress = () => {
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
+                    console.log(result.data)
                     if (result.data.areaOfKnowledgeById.audience.gradeSet.length > 0) {
                         setGrades(result.data.areaOfKnowledgeById.audience.gradeSet);
                         // setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet.filter((grade: any) => grade.name === "1st Grade")[0]?.id || result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
@@ -114,6 +115,7 @@ export const KidsProgress = () => {
         if (activeSubjectId !== -1 && activeGradeId !== -1) {
             (async () => {
                 loadingContext.start();
+                console.log(activeSubjectId, activeGradeId);
                 // Get Topic Report
                 // const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
                 const res:any = await query('', TopicReportWithGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
@@ -121,6 +123,7 @@ export const KidsProgress = () => {
                 return
                 }
                 const result: any = await res.json();
+                console.log(result);
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {

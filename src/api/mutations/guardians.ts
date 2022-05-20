@@ -1,11 +1,11 @@
-import { GUARDIAN_STUDENT, GUARDIAN, }                  from '../fragments/guardianFragments';
-import { COUPON_COODE, }                                from '../fragments/paymentFragments';
-import { USER, USER_PROFILE }                           from '../fragments/userFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, GUARDIAN_STUDENT_PLAN_RAW,  ORDER, PLAN, PLAN_RAW } from '../fragments/paymentFragments'
-import { STUDENT, STUDENT_RAW, STUDENT_GRADE }                                      from '../fragments/studentFragments'
-import { AUDIENCES }                                    from '../fragments/peopleFragments'
-import { AREA_OF_KNOWLEDGE }                            from '../fragments/areaOfKnowledgeFragments'
-import { GRADES }                                       from '../fragments/peopleFragments'
+import { GUARDIAN_STUDENT, GUARDIAN, } from '../fragments/guardianFragments';
+import { COUPON_COODE, } from '../fragments/paymentFragments';
+import { USER, USER_PROFILE } from '../fragments/userFragments'
+import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, GUARDIAN_STUDENT_PLAN_RAW, ORDER, PLAN, PLAN_RAW } from '../fragments/paymentFragments'
+import { STUDENT, STUDENT_RAW, STUDENT_GRADE } from '../fragments/studentFragments'
+import { AUDIENCES } from '../fragments/peopleFragments'
+import { AREA_OF_KNOWLEDGE } from '../fragments/areaOfKnowledgeFragments'
+import { GRADES } from '../fragments/peopleFragments'
 
 export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string) => `
 	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}") {
@@ -232,7 +232,6 @@ mutation AddGuardianPlan {
 export const UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN = (
     guardianId: number,
     orderDetailId: number,
-
 ) => `
 mutation UpdateGuardianPlan {
     updateGuardianPlan(
@@ -245,6 +244,19 @@ mutation UpdateGuardianPlan {
         id
       }
       urlRedirect
+    }
+  }
+`
+
+export const CONFIRM_UPDATE_GUARDIAN_PLAN = (
+    orderId: number,
+) => `
+mutation {
+    confirmUpdateGuardianPlan(orderId: ${orderId}) {
+      order {
+        id
+      }
+      status
     }
   }
 `
