@@ -28,61 +28,6 @@ export const TopicReport = (studentId: number, aokId: number) => `
     }
 `
 
-export const TopicReportWithGrade = (studentId: number, aokId: number, gradeId: number) => `
-    rootTopicsByAok(aokId: ${ aokId }) {
-        ${ TopicFields(studentId) }
-        ${ TopicsRecursive(studentId) }
-        subTopicsByGrade(gradeId: ${gradeId}){
-            id
-            mastery(student: ${studentId})
-            name
-            report(student: ${ studentId }) {
-                questionsAnswered
-                correctQuestion
-                accuracy
-            }
-            topicgradeSet{
-                grade{
-                    id
-                    name
-                }
-            }
-            subTopicsByGrade(gradeId: ${gradeId}){
-                id
-                mastery(student: ${studentId})
-                name
-                report(student: ${ studentId }) {
-                    questionsAnswered
-                    correctQuestion
-                    accuracy
-                }
-                topicgradeSet{
-                    grade{
-                        id
-                        name
-                    }
-                }
-                subTopicsByGrade(gradeId: ${gradeId}){
-                    id
-                    mastery(student: ${studentId})
-                    name
-                    report(student: ${ studentId }) {
-                        questionsAnswered
-                        correctQuestion
-                        accuracy
-                    }
-                    topicgradeSet{
-                        grade{
-                            id
-                            name
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
-
 export const TopicReportByAokAndGrade = (studentId: number, aokId: number, gradeId: number) => `
     rootTopicsByAokAndGrade(aokId: ${ aokId }, gradeId: ${gradeId}) {
         ${ TopicFields(studentId) }

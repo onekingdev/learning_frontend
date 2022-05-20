@@ -17,7 +17,7 @@ import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
 import { Container }            from './Style';
 import { dictionary }           from './dictionary'
 import { useSelector }       from 'react-redux';
-import { TopicReportByAokAndGrade, TopicReportWithGrade, AreasOfKnowledge, Grades, AvaliableGrades } from 'api/fragments/topicFragments';
+import { TopicReportByAokAndGrade, AreasOfKnowledge, Grades, AvaliableGrades } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
 import styled             from 'styled-components';
 import background     from 'views/assets/colored-shapes-bg.svg';
@@ -59,7 +59,7 @@ if (screen_width < 450) {
 
 const getAllTopic: any = (subSubjectList: Array<any>) => {
     return subSubjectList.map(subSubject => {
-        return subSubject.subTopicsByGrade.length > 0 ? [subSubject, getAllTopic(subSubject.subTopicsByGrade)] : [subSubject]
+        return subSubject.subTopics.length > 0 ? [subSubject, getAllTopic(subSubject.subTopics)] : [subSubject]
     })
 }
 
@@ -82,7 +82,7 @@ export const KidsProgress = () => {
         if (student) {
             (async () => {
                 setAreasOfKnowledge(student.guardianstudentplan.subject);
-                setActiveSubjectId(student.guardianstudentplan.subject.filter((_subject: any) => _subject.name === "Financial LIteracy")[0].id || student.guardianstudentplan.subject[0].id);
+                setActiveSubjectId(student.guardianstudentplan.subject[0].id)
             })();
         }
     }, [student]);
@@ -104,7 +104,6 @@ export const KidsProgress = () => {
                     console.log(result.data)
                     if (result.data.areaOfKnowledgeById.audience.gradeSet.length > 0) {
                         setGrades(result.data.areaOfKnowledgeById.audience.gradeSet);
-                        // setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet.filter((grade: any) => grade.name === "1st Grade")[0]?.id || result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
                         setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
                     }
                 }
@@ -115,19 +114,16 @@ export const KidsProgress = () => {
         if (activeSubjectId !== -1 && activeGradeId !== -1) {
             (async () => {
                 loadingContext.start();
-                console.log(activeSubjectId, activeGradeId);
                 // Get Topic Report
-                // const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
-                const res:any = await query('', TopicReportWithGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
+                const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
                 return
                 }
-                const result: any = await res.json();
-                console.log(result);
+                const result:any = await res.json();
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
-                    setData(result.data.rootTopicsByAok);
+                    setData(result.data.rootTopicsByAokAndGrade);
                 }
                 // if (firstLoad) {
                 //     setFirstLoad(false);
@@ -369,7 +365,7 @@ export const KidsProgress = () => {
                                 Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
                             ) : 0
                             return (
-                                <div key={id} style={{
+                                <div style={{
                                     position: 'absolute',
                                     top: (_id % (verticalCount + lineCount)) > lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
                                         (Math.floor(_id / (lineCount + verticalCount))) * ((unitHeight * 1.5) * (verticalCount + 1)) + (id % (lineCount + verticalCount) - lineCount + 1) * (unitHeight * 1.5) + 'rem' :

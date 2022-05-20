@@ -4,7 +4,7 @@ import { IBlockPresentation }      from 'app/entities/block';
 import { IQuestion }               from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
 import { ScreenSize }              from 'constants/screenSize';
-import { Question }                from 'views/atoms/Text/Question';
+// import { Question }                from 'views/atoms/Text/Question';
 import { Icon }                    from 'views/atoms/Icon/Icon';
 import videoAssistorIcon           from 'views/assets/video.svg'
 import soundAssistorIcon           from 'views/assets/play-sound.svg'
@@ -92,7 +92,7 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
       ) : null}
       <BlackBoard>
         <AnswerContainer>
-          <Question>{question.questionText}</Question>
+          {/* <Question>{question.questionText}</Question> */}
           <Icon image={soundAssistorIcon} onClick={readQuestionAudioAsset} />
         </AnswerContainer>
         <AnswersContainer>

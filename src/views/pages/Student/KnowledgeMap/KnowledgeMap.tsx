@@ -66,14 +66,16 @@ export const KnowledgeMap: FC = () => {
   return (
     <Wrapper>
       <StudentMenu>
-        <img src={boat} style={{
-          position: 'absolute',
-          left: boatX - 100,
-          top: boatY - 100,
-          transition: 'top 2s, left 3s',
-          height: isMobile ? 80 : 250,
-          zIndex: 1
-        }} />
+        <img src={boat}
+          id='boat'
+          style={{
+            position: 'absolute',
+            left: boatX - 100,
+            top: boatY - 100,
+            transition: 'top 2s, left 3s',
+            height: isMobile ? 80 : 200,
+            zIndex: 1
+          }} />
         <Ocean >
           {areasOfKnowledge.map(
             (
@@ -99,7 +101,7 @@ export const KnowledgeMap: FC = () => {
                         transform: 'scale(1.1)'
                       },
                       position: 'relative',
-                      height: isMobile ? 100 : 300,
+                      height: isMobile ? 100 : 250,
                       width: isMobile ? 'auto' : 600,
                       display: 'flex',
                       justifyContent: 'center',
@@ -114,7 +116,7 @@ export const KnowledgeMap: FC = () => {
                       onLoad={onImgLoad}
                       onError={onImgLoad}
                       style={{
-                        width: isMobile ? 100 : 300,
+                        width: isMobile ? 100 : 400,
                         opacity: areaOfKnowledge.isActive ? 1 : 0.5
                       }}
                     />

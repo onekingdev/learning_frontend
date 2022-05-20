@@ -100,7 +100,8 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
             question.questionAudioAssets[0]?.audioFile
           }
         />
-        <AnswersContainer>
+        <AnswersContainer
+        >
           <input
             disabled={disabled}
             style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end' }}
