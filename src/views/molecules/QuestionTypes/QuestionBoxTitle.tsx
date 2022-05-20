@@ -1,6 +1,7 @@
 import { FC } from 'react';
+import { Question } from 'views/atoms/Text/Question';
 import playQuestionSound from 'views/assets/play-sound.svg'
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { QuestionEquation } from './QuestionEquation';
 
 
@@ -32,16 +33,12 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
 
   return (
     <Container sx={{
-      display: 'flex',
-      justifyContent: 'center',
-       alignItems: 'center',
-        flexDirection: 'column',
-        minHeight: 200,
+      display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'
     }}>
-      <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', marginTop: 5, width: '100%' }}>
-        <Typography variant='h4' sx={{color: 'white'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
+        <Question>
           {title.charAt(0) === '@' ? extractQuestion(title) : title}
-        </Typography>
+        </Question>
         {
           audioFile ?
             <img

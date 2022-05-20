@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { IAIBlock, IAIQuestion } from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
-// import { Question } from 'views/atoms/Text/Question';
+import { Question } from 'views/atoms/Text/Question';
 import { Icon } from 'views/atoms/Icon/Icon';
 import videoIcon from 'views/assets/others/video-assistor.png';
 import assistor from 'views/assets/text-to-speech.svg';
@@ -138,7 +138,7 @@ export const SortOrderQuestion: FC<ChoiceTextProps> = ({
       ) : null}
       <BlackBoard>
         <QuestionContainer>
-          {/* <Question>{question.questionText}</Question> */}
+          <Question>{question.questionText}</Question>
         </QuestionContainer>
         <AnswersContainer>
           {items &&

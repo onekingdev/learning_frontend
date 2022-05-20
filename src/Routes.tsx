@@ -50,7 +50,6 @@ import 'animate.css';
 import Certificates from 'views/pages/Teacher/Certificates/Certificates';
 import { GameIframe } from 'views/pages/Student/Games/GameIframe';
 import { SortOrderBeautifulDnd } from 'views/molecules/QuestionTypes/SortOrderBeautifulDnd';
-import { ProgressReview } from 'views/pages/Student/Progress/ProgressReview';
 
 
 const PrivateRoute = ({requireAuth = true, loading = false, ...rest}) => {
@@ -133,9 +132,6 @@ export function Routes() {
           </PrivateRoute>
           <PrivateRoute loading={true} path="/progress">
             <KidsProgress />
-          </PrivateRoute>
-          <PrivateRoute loading={true} exact path="/review">
-            <ProgressReview />
           </PrivateRoute>
           <PrivateRoute loading={true} path="/backpack">
             <Backpack />
