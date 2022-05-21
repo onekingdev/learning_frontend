@@ -13,7 +13,7 @@ import { FinishLesson } from 'views/organisms/FinishLesson';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import { createNewAiBlock, doGetQuestionBlockById, newFinishBlock } from 'app/actions/blockActions';
+import { createNewAiBlock, createNewPathBlock, doGetQuestionBlockById, newFinishBlock } from 'app/actions/blockActions';
 import { IAIBlock, IAIQuestion } from 'app/entities/block';
 import { Store } from 'app/configureStore';
 import * as TYPE from 'app/types';
@@ -32,6 +32,7 @@ import Backdrop from '@mui/material/Backdrop';
 import { RollCorrect } from 'views/molecules/QuestionRollContents/RollCorrect';
 import { FullBatteryPopup } from 'views/molecules/QuestionRollContents/FullBatteryPopup';
 import { RollWrong } from 'views/molecules/QuestionRollContents/RollWrong';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 interface RoutePresentationParams {
   mode: string;
@@ -70,8 +71,8 @@ export const AIQuestion: FC = () => {
   const [wrongRoll, setWrongRoll] = useState(0)
   const [correctRoll, setCorrectRoll] = useState(0)
   const [openBd, setOpenBd] = useState(false)
-  const [fullBattery, setFullBattery] = useState(false)
 
+  // console.log('render...')
   const renderQuestion = (
     question: IAIQuestion,
     block: IAIBlock,
@@ -145,30 +146,24 @@ export const AIQuestion: FC = () => {
     }
     return component
   }
-  const renderBackdropContent = (
-    fullBattery: boolean,
-  ) => {
-    let component: any
 
-    if (fullBattery) {
-      setFullBattery(!fullBattery)
-      component = (
+  const renderBackdropContent = (
+  ) => {
+    if (correctRoll === 11) {
+      return (
         <FullBatteryPopup />
       )
     } else {
-
-      if (correctRoll > 0) {
-        component = (
+      if (correctRoll % 3 === 0 && correctRoll > 0) {
+        return (
           <RollCorrect />
         )
-      } else {
-        component = (
+      } else if (wrongRoll % 3 === 0 && wrongRoll > 0) {
+        return (
           <RollWrong />
         )
-      }
+      } else return null
     }
-
-    return component
   }
 
   const updateNextLevel = async (currentLevelAmount: number) => {
@@ -227,8 +222,8 @@ export const AIQuestion: FC = () => {
     if (isCorrect) {
       if (correctRoll > 0) {
         if (earning.energyCharge === 9) {
+          // setFullBattery(true)
           setOpenBd(true)
-          setFullBattery(!fullBattery)
         }
         setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1))))
         dispatch({ type: TYPE.EARNING_ENERGY_UP });
@@ -237,7 +232,7 @@ export const AIQuestion: FC = () => {
     else {
       dispatch({ type: TYPE.EARNING_ENERGY_RESET });
     }
-    console.log('bonus coins is ', bonusCoins)
+    // console.log('bonus coins is ', bonusCoins)
   };
 
   const setQuestionsInAI = async (mounted: boolean) => {
@@ -245,6 +240,13 @@ export const AIQuestion: FC = () => {
     switch (mode) {
       case 'AI':
         res = await createNewAiBlock(
+          parseInt(aokId),    //11
+          student.id, //15
+          user.token,
+        );
+        break
+      case 'PATH':
+        res = await createNewPathBlock(
           parseInt(aokId),    //11
           student.id, //15
           user.token,
@@ -263,7 +265,7 @@ export const AIQuestion: FC = () => {
       enqueueSnackbar(res.msg, { variant: 'error' });
       return false;
     }
-    console.log({res})
+    console.log({ res })
     if (mounted) {
       setAiBlock(res)
       setQuestions(res.block.questions)
@@ -351,7 +353,7 @@ export const AIQuestion: FC = () => {
           sx={{ zIndex: 1000 }}
         >
           {
-            renderBackdropContent(fullBattery)
+            renderBackdropContent()
           }
         </Backdrop>
         {
@@ -388,7 +390,8 @@ export const AIQuestion: FC = () => {
                 )}
               </Container>
             </>
-          ) : null
+          ) :
+            <LoadingSpinner />
         }
       </StudentMenu>
     </Wrapper>

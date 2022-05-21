@@ -68,8 +68,6 @@ export const SCHOOLS_PERSONNEL = `
 
 export const GRADES = `
     id
-    identifier
-    randomSlug
     slug
     name
 `;
@@ -92,6 +90,12 @@ export const GUARIDANS_GENDER = `
 `
 
 export const AUDIENCES = `
+        id
+        slug
+        standardCode
+        name
+`;
+export const AUDIENCES_ALL = `
         id
         identifier
         isActive

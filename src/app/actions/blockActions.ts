@@ -4,7 +4,8 @@ import {
     CREATE_PATH_BLOCK_PRESENTATION,
     CREATE_NEW_AI_BLOCK,
     FINISH_BLK_PT,
-    GET_QUESIONS
+    GET_QUESIONS,
+    CREATE_NEW_PATH_BLOCK
 } from 'api/mutations/block'
 import mutation from 'api/mutations/get'
 import query from 'api/queries/get'
@@ -143,6 +144,24 @@ export const createNewAiBlock = async (aokId: number, studentId: number, token: 
         return res.msg ?
             { msg: res.msg, success: false } :
             { ...res.data.createAiBlockPresentation.blockPresentation, success: true }
+    } catch (e) {
+        console.log(e)
+        return { msg: 'Network error!', success: false }
+    }
+}
+
+export const createNewPathBlock = async (topicId: number, studentId: number, token: string) => {
+
+    console.log({topicId, studentId})
+    try {
+        const res: any = await sendRawQuery(
+            CREATE_NEW_PATH_BLOCK(topicId, studentId),
+            token
+        );
+        console.log({res})
+        return res.msg ?
+            { msg: res.msg, success: false } :
+            { ...res.data.createPathBlockPresentation.blockPresentation, success: true }
     } catch (e) {
         console.log(e)
         return { msg: 'Network error!', success: false }

@@ -43,9 +43,11 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
   language = language ? language : 'en-us'
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
+  const [shuffled, setShuffled] = useState<Array<any>>([])
 
   useEffect(() => {
     setIsAnswered(false);
+    setShuffled(shuffle([...question.answerOptions]))
   }, [question]);
 
   const readAnswer = (option: any) => {
@@ -95,7 +97,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
         <AnswersContainer>
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
-            {shuffle(question.answerOptions).map((option, i) => (
+            {shuffled.map((option, i) => (
               <AnswerContainer key={i}>
                 <TextOption
                   answer={option}
@@ -135,7 +137,10 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
             color={BasicColor.black}
           />
           <Icon image={assistor} onClick={readQuestion} />
-          <Icon image={videoIcon} onClick={closeVideoModal} />
+          {
+            blockPresentation?.block?.topicGrade?.topic?.videoAssistor &&
+            <Icon image={videoIcon} onClick={closeVideoModal} />
+          }
         </AssistorContainer>
       </BlackBoard>
     </>

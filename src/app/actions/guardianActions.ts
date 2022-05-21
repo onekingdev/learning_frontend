@@ -1,15 +1,17 @@
-import mutationFetch    from 'api/mutations/get';
-import { CREATE_GUARDIAN,
+import mutationFetch from 'api/mutations/get';
+import {
+    CREATE_GUARDIAN,
     UPDATE_EMAIL_PASSWORD,
     FETCH_GUARDIAN_AVAILABLE_BOUGHT_PLANS,
     UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN,
     CANCEL_GUARDIAN_BOUGHT_PLAN,
     FETCH_PLANS,
     ADD_STUDENT_PLAN_PACKAGE,
-    CANCEL_MEMBERSHIP
- }                      from 'api/mutations/guardians';
+    CANCEL_MEMBERSHIP,
+    CONFIRM_UPDATE_GUARDIAN_PLAN
+} from 'api/mutations/guardians';
 import { sendRawQuery } from 'api/queries/get';
-import * as TYPES       from 'app/types'
+import * as TYPES from 'app/types'
 
 export const createGuardian = async (email: string, firstName: string, lastName: string, userName: string, password: string, couponCode: string, dispatch: any) => {
     const res: any = await mutationFetch(
@@ -63,62 +65,75 @@ export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: num
             UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN(guardianId, orderDetailId),
             token
         );
-        return res.msg ? {status: false} : res.data.updateGuardianPlan;
+        return res.msg ? { status: false } : res.data.updateGuardianPlan;
     }
     catch {
-        return {status: false}
+        return { status: false }
     }
 }
 
-export const doFetchPlans = async ( token: string) => {
+export const doConfirmUpdate = async (orderId: number, token: string) => {
+    try {
+        const res: any = await sendRawQuery(
+            CONFIRM_UPDATE_GUARDIAN_PLAN(orderId),
+            token
+        );
+        return res.msg ? { status: false } : res.data.confirmUpdateGuardianPlan;
+    }
+    catch {
+        return { status: false }
+    }
+}
+
+export const doFetchPlans = async (token: string) => {
     try {
         const res: any = await sendRawQuery(
             FETCH_PLANS,
             token
         );
-        return res.msg ? {status: false} : res.data.plans;
+        return res.msg ? { status: false } : res.data.plans;
     }
     catch {
-        return {status: false}
+        return { status: false }
     }
 }
 
-export const doCancelBroughtPlan = async ( orderDetailId: number, reason: string, token: string) => {
+export const doCancelBroughtPlan = async (orderDetailId: number, reason: string, token: string) => {
     try {
         const res: any = await sendRawQuery(
-            CANCEL_GUARDIAN_BOUGHT_PLAN( orderDetailId, reason),
+            CANCEL_GUARDIAN_BOUGHT_PLAN(orderDetailId, reason),
             token
         );
-        return res.msg ? {status: false} : res.data.cancelGuardianPlan;
+        return res.msg ? { status: false } : res.data.cancelGuardianPlan;
     }
     catch {
-        return {status: false}
+        return { status: false }
     }
 }
 
-export const doAddStudentPlan = async ( guardianId: number, planId: number, token: string) => {
+export const doAddStudentPlan = async (guardianId: number, planId: number, token: string) => {
     try {
         const res: any = await sendRawQuery(
-            ADD_STUDENT_PLAN_PACKAGE( guardianId, planId),
+            ADD_STUDENT_PLAN_PACKAGE(guardianId, planId),
             token
         );
 
-        return res.msg ? {msg: res.msg, status: false} : {...res.data.cancelGuardianPlan, status: true};
+        return res.msg ? { msg: res.msg, status: false } : { ...res.data.cancelGuardianPlan, status: true };
     }
-    catch(e) {
-        return {msg:e, status: false}
+    catch (e) {
+        return { msg: e, status: false }
     }
 }
-export const doCancelMembership = async ( guardianId: number, reason: string, token: string) => {
+export const doCancelMembership = async (guardianId: number, reason: string, token: string) => {
     try {
         const res: any = await sendRawQuery(
-            CANCEL_MEMBERSHIP( guardianId, reason),
+            CANCEL_MEMBERSHIP(guardianId, reason),
             token
         );
-        return res.msg ? {status: false} : res.data.cancelMemberShip ;
+        return res.msg ? { status: false } : res.data.cancelMemberShip;
     }
     catch {
-        return {status: false}
+        return { status: false }
     }
 }
 

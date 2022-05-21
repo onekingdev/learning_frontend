@@ -16,6 +16,7 @@ import { TypoGeneralText } from 'views/atoms/Text';
 import { Battery } from 'views/molecules/Battery/Battery';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import BottomNavigation from '@mui/material/BottomNavigation';
+import { Box } from '@mui/material';
 
 
 export const MobileMenu: FC = () => {
@@ -24,51 +25,54 @@ export const MobileMenu: FC = () => {
   const earning = useSelector((state: any) => state.earning);
 
   return (
-    <BottomNavigation
-      sx={{
-        display: mobile ? 'flex' : 'none',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        backgroundColor: BasicColor.blue,
-        justifyContent: 'space-evenly',
-        position: 'fixed',
-        bottom: 0,
-        right: 0,
-        left: 0,
-        zIndex: 1000,
-        padding: 1,
-        // overflow: 'hidden'
-      }}
-    >
-      <Sidebar />
-      <Icon
-        image={home}
-        size={IconSize.medium}
-        onClick={() => history.push('/home')}
-      />
-      <Icon image={modality} onClick={() => history.push('/map')} size={IconSize.medium} />
-      <IconDropdownContainer>
-        <IconDropDown
-          icon={energyButton}
-          content={
-            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-              <TypoGeneralText style={{ color: BasicColor.green, margin: 0 }}>{+earning.energyCharge * 10 + '%'}</TypoGeneralText>
-              <Battery charge={earning.energyCharge} />
-            </div>
-          }
+    <Box>
+      {mobile && <Box sx={{ height: 70, width: '100%' }} />}
+      <BottomNavigation
+        sx={{
+          display: mobile ? 'flex' : 'none',
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
+          backgroundColor: BasicColor.blue,
+          justifyContent: 'space-evenly',
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          left: 0,
+          zIndex: 1000,
+          padding: 1,
+          // overflow: 'hidden'
+        }}
+      >
+        <Sidebar />
+        <Icon
+          image={home}
+          size={IconSize.medium}
+          onClick={() => history.push('/home')}
         />
-      </IconDropdownContainer>
-      <IconDropdownContainer>
-        <IconDropDown
-          icon={walletIcon}
-          content={
-            <TypoGeneralText>
-              {'$' + earning.balance}
-            </TypoGeneralText>
-          }
-        />
-      </IconDropdownContainer>
-    </BottomNavigation>
+        <Icon image={modality} onClick={() => history.push('/map')} size={IconSize.medium} />
+        <IconDropdownContainer>
+          <IconDropDown
+            icon={energyButton}
+            content={
+              <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                <TypoGeneralText style={{ color: BasicColor.green, margin: 0 }}>{+earning.energyCharge * 10 + '%'}</TypoGeneralText>
+                <Battery charge={earning.energyCharge} />
+              </div>
+            }
+          />
+        </IconDropdownContainer>
+        <IconDropdownContainer>
+          <IconDropDown
+            icon={walletIcon}
+            content={
+              <TypoGeneralText>
+                {'$' + earning.balance}
+              </TypoGeneralText>
+            }
+          />
+        </IconDropdownContainer>
+      </BottomNavigation>
+    </Box>
   );
 };
 

@@ -1,3 +1,5 @@
+import { NEW_MC_ANSWER_OPTION, NEW_R_ANSWER_OPTION, TOPIC_GRADE, NEW_O_ANSWER_OPTION, NEW_T_ANSWER_OPTION } from 'api/fragments/questionFragments';
+
 export const BLOCK_CONFIGURATION_KEYWORD = `
     {
         id
@@ -83,3 +85,53 @@ export const QUESTION_AUDIO_ASSETS = `
         updateTimestamp
         audioFile
 }`
+
+export const QUESTION_BLOCK = `
+blockPresentation {
+        ${BLOCK_PRESENTATON}
+        block {
+          topicGrade{
+              ${TOPIC_GRADE}
+              topic {
+                  videoAssistor
+                  name
+              }
+            }
+          questions {
+            id
+            questionType
+            questionText
+            questionAudioUrl
+            questionImageAssets{
+              id
+              image
+              order
+            }
+            questionAudioAssets {
+              audioFile
+              id
+              order
+            }
+            answerOptions {
+              id
+              isCorrect
+              ... on MultipleChoiceAnswerOptionSchema {
+                ${NEW_MC_ANSWER_OPTION}
+              }
+              ... on MultipleSelectAnswerOptionSchema {
+                ${NEW_MC_ANSWER_OPTION}
+              }
+              ... on TypeInAnswerOptionSchema {
+                ${NEW_T_ANSWER_OPTION}
+              }
+              ... on OrderAnswerOptionSchema {
+                ${NEW_O_ANSWER_OPTION}
+              }
+              ... on RelateAnswerOptionSchema {
+                ${NEW_R_ANSWER_OPTION}
+              }
+            }
+          }
+        }
+      }
+`
