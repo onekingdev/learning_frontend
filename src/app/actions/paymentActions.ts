@@ -1,15 +1,15 @@
-import { PLAN_QUERY } from 'api/queries/payments'
-import queryFetch from 'api/queries/get';
+import { PLAN_QUERY }   from 'api/queries/payments'
+import queryFetch       from 'api/queries/get';
 import {
     CREATE_ORDER,
     CONFIRM_PAYMENT_ORDER,
     CREATE_ORDER_WITH_OUT_PAY,
     FETCH_PAYMENT_METHOD,
     CHANGE_PAYMENT_METHOD_INFO
-} from 'api/mutations/payments';
+}                       from 'api/mutations/payments';
 import { sendRawQuery } from 'api/queries/get';
-import mutationFetch from 'api/mutations/get';
-import * as TYPES from 'app/types'
+import mutationFetch    from 'api/mutations/get';
+import * as TYPES       from 'app/types'
 
 export const createOrder = async (
     cardCvc: string,
@@ -208,8 +208,8 @@ export const doChangePaymentMethod = async (guradianId: number, paymentInfo: any
             CHANGE_PAYMENT_METHOD_INFO(guradianId, paymentInfo),
             token
         );
-        return res.msg ? { status: false, msg: res.msg } : res.data.changePaymentMethod;
-    } catch (e: any) {
-        return { status: false, msg: e.message }
+        return res.msg ? { status: false } : res.data.changePaymentMethod;
+    } catch {
+        return { status: false }
     }
 }

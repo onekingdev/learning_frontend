@@ -25,6 +25,8 @@ export const PAYMENT_METHOD = `
 export const PLAN = `
     id
     identifier
+    createTimestamp
+    updateTimestamp
     name
     description
     areaOfKnowledge
@@ -41,6 +43,8 @@ export const PLAN = `
 export const PLAN_RAW = `
   id
   identifier
+  createTimestamp
+  updateTimestamp
   name
   description
   areaOfKnowledge
@@ -83,6 +87,7 @@ export const GUARDIAN_STUDENT_PLAN_RAW = `
     expiredAt
     period
     price
+
 `
 
 export const ORDER_DETAIL = `

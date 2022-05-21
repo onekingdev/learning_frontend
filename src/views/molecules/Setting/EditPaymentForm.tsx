@@ -1,29 +1,21 @@
-import {
-    useState, FC,
-    // useEffect
-} from 'react';
+import { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import Button from 'views/molecules/MuiButton'
 import TextField from 'views/molecules/MuiTextField'
 import { css } from 'styled-components';
 import { BasicColor } from 'views/Color';
 import Grid from '@mui/material/Grid';
-import {
-    doChangePaymentMethod,
-    // doFetchPaymentMethod
-} from 'app/actions/paymentActions';
+import { doChangePaymentMethod } from 'app/actions/paymentActions';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
 import { useSnackbar } from 'notistack';
 import { GUARDIAN_PAYMENT_METHOD_INFO } from 'app/types'
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import commonDictionary from 'constants/commonDictionary'
 import { Container } from '@mui/material';
-import { images } from './utils/images'
 
 interface DialogProps {
     open: () => (void)
 }
-
 
 export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
     const dispatch = useDispatch()
@@ -38,7 +30,6 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
 
     const {
         wrapperProps,
-        getCardImageProps,
         getCardNumberProps,
         getExpiryDateProps,
         getCVCProps
@@ -111,12 +102,11 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
             `
         }
     }
-
     const [paymentMethodInfo, setPaymentMethodInfo] = useState({
         address1: guardian.paymentMethod.address1,
         address2: guardian.paymentMethod.address2,
         cardCvc: guardian.paymentMethod.cardCvc,
-        cardExpiryDate: ('0' + guardian.paymentMethod.cardExpMonth).slice(-2) + ' / ' + guardian.paymentMethod.cardExpYear?.slice(-2),
+        cardExpiryDate: guardian.paymentMethod.cardExpMonth + '/' + guardian.paymentMethod.cardExpYear,
         cardFirstName: guardian.paymentMethod.cardFirstName,
         cardLastName: guardian.paymentMethod.cardLastName,
         cardNumber: guardian.paymentMethod.cardNumber,
@@ -127,6 +117,20 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
         phone: guardian.paymentMethod.phone,
     })
 
+    // const fetchPaymentData = async (mounted: boolean) => {
+    //     const guardianId = guardian.id
+    //     const res = await doFetchPaymentMethod(guardianId, user.token)
+    //     if (res !== null) {
+    //         if (mounted)
+    //             setPaymentMethodInfo(
+    //                 {
+    //                     ...validateRst,
+    //                     cardExpiryDate: (+res.cardExpMonth < 10 ? '0' + res.cardExpMonth : res.cardExpMonth) + ' / ' + res.cardExpYear.slice(-2),
+    //                     ...res
+    //                 }
+    //             )
+    //     } else return
+    // }
 
     const handleFormChange = (field: string, errMsg: string) => {
         setValidateRst({ ...validateRst, [field]: errMsg })
@@ -144,59 +148,38 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                 payload: {
                     ...paymentMethodInfo,
                     cardExpMonth: paymentMethodInfo.cardExpiryDate.slice(0, 2),
-                    cardExpYear: paymentMethodInfo.cardExpiryDate.slice(-2)
+                    cardExpYear: '20' + paymentMethodInfo.cardExpiryDate.slice(-2)
                 }
             });
         }
-        else {
-            console.log(res.msg)
-            enqueueSnackbar(res.msg, { variant: 'error' })
-        }
+        else
+            enqueueSnackbar('Payment method update failed', { variant: 'error' })
         setLoading(false)
         open()
     }
 
-    // useEffect(() => {
-
-    //     const fetchPaymentData = async () => {
-    //         const guardianId = guardian.id
-    //         const res = await doFetchPaymentMethod(guardianId, user.token)
-    //         if (res !== null) {
-    //             setPaymentMethodInfo(
-    //                 {
-    //                     ...validateRst,
-    //                     cardExpiryDate: (+res.cardExpMonth < 10 ? '0' + res.cardExpMonth : res.cardExpMonth) + ' / ' + res.cardExpYear.slice(-2),
-    //                     ...res
-    //                 }
-    //             )
-    //         }
-    //     }
-
-    //     fetchPaymentData()
-    // }, [])
-
 
     return (
         <>
-            {loading ?
+            {loading &&
                 <LoadingSpinner />
-                :
-                <Grid container spacing={2} marginTop={1} justifyContent='center' sx={{minHeight: 200}}>
+            }
+            {!loading &&
+                <Grid container spacing={2} marginTop={1} justifyContent='center'>
                     <Grid item xs={12} md={12}>
                         <PaymentInputsWrapper {...wrapperProps} styles={style}>
-                            <svg {...getCardImageProps({ images })} />
                             <input {...getCardNumberProps({
                                 onChange: (e: any) => setPaymentMethodInfo({ ...paymentMethodInfo, cardNumber: e.target.value })
-                            })} value={paymentMethodInfo?.cardNumber || ''} />
+                            })} value={paymentMethodInfo.cardNumber} />
                             <input {...getExpiryDateProps({
                                 onChange: (e: any) => setPaymentMethodInfo({ ...paymentMethodInfo, cardExpiryDate: e.target.value })
                             }
                             )}
-                                value={paymentMethodInfo?.cardExpiryDate || ''} />
+                                value={paymentMethodInfo.cardExpiryDate} />
                             <input {...getCVCProps({
                                 onChange: (e: any) => setPaymentMethodInfo({ ...paymentMethodInfo, cardCvc: e.target.value })
                             })}
-                                value={paymentMethodInfo?.cardCvc || ''}
+                                value={paymentMethodInfo.cardCvc}
                             />
                         </PaymentInputsWrapper>
                     </Grid>
@@ -209,7 +192,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.address1}
                             helperText={validateRst.address1}
-                            value={paymentMethodInfo?.address1 || ''}
+                            value={paymentMethodInfo.address1}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -221,7 +204,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.address2}
                             helperText={validateRst.address2}
-                            value={paymentMethodInfo?.address2 || ''}
+                            value={paymentMethodInfo.address2}
                         />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -233,7 +216,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.city}
                             helperText={validateRst.city}
-                            value={paymentMethodInfo?.city || ''}
+                            value={paymentMethodInfo.city}
                         />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -245,7 +228,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.state}
                             helperText={validateRst.state}
-                            value={paymentMethodInfo?.state || ''}
+                            value={paymentMethodInfo.state}
                         />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -257,7 +240,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.postCode}
                             helperText={validateRst.postCode}
-                            value={paymentMethodInfo?.postCode || ''}
+                            value={paymentMethodInfo.postCode}
                         />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -269,7 +252,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.country}
                             helperText={validateRst.country}
-                            value={paymentMethodInfo?.country || ''}
+                            value={paymentMethodInfo.country}
                         />
                     </Grid>
                     <Grid item xs={12} md={12}>
@@ -281,7 +264,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.phone}
                             helperText={validateRst.phone}
-                            value={paymentMethodInfo?.phone || ''}
+                            value={paymentMethodInfo.phone}
                         />
                     </Grid>
                     {/* <Grid item xs={6} md={6}>
@@ -301,7 +284,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                     />
                 </Grid> */}
                     <Grid item>
-                        <Container sx={{ marginBottom: 2 }}>
+                        <Container sx={{marginBottom: 2}}>
                             <Button
                                 bgColor={BasicColor.green}
                                 onClick={handleOrder}

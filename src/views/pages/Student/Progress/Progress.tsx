@@ -57,9 +57,9 @@ if (screen_width < 450) {
     unitHeight = 8;
 }
 
-const getAllTopic: any = (subSubjectList: Array<any>) => {
+const getAllTopic: any = (subSubjectList: Array<any>, deep: number) => {
     return subSubjectList.map(subSubject => {
-        return subSubject.subTopicsByGrade.length > 0 ? [subSubject, getAllTopic(subSubject.subTopicsByGrade)] : [subSubject]
+        return (deep !== 1 || subSubject.subTopicsByGrade.length > 0) ? [subSubject, getAllTopic(subSubject.subTopicsByGrade, deep + 1)] : []
     })
 }
 
@@ -121,6 +121,7 @@ export const KidsProgress = () => {
                 return
                 }
                 const result: any = await res.json();
+                console.log(result.data.rootTopicsByAok);
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
@@ -140,7 +141,7 @@ export const KidsProgress = () => {
     const handleSubjectChange = (event: any) => {
         setActiveSubjectId(event.target.value);
     };
-    const subSubjects1 = _.flattenDeep(getAllTopic(data)).map((_subSubject: any, id) => {
+    const subSubjects1 = _.flattenDeep(getAllTopic(data, 1)).map((_subSubject: any, id) => {
         let bgColor = masteryColors.NP;
         if (_subSubject.mastery) {
             if (_subSubject.mastery === 'NP') {
@@ -359,7 +360,7 @@ export const KidsProgress = () => {
                         }}
                     >
                     </MobileCom> */}
-                    {subSubjects1 && subSubjects1.map((singleInfo, id) => {
+                    {subSubjects1.length > 0 ? subSubjects1.map((singleInfo, id) => {
                         if (singleInfo && singleInfo.text) {
                             const _id = id + 1;
                             const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
@@ -419,7 +420,10 @@ export const KidsProgress = () => {
                         } else {
                             return <></>
                         }
-                    })}
+                    }) : <p style={{
+                        textAlign: "center",
+                        fontSize: "3rem"
+                    }}>There is no Subjects</p>}
                         {/* { paths.map((path, id) => <PcCom key={id} style={{
                             position: 'absolute',
                             left: `${path.left}%`,
