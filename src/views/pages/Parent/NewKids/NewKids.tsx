@@ -38,7 +38,7 @@ import financial_sole from 'views/assets/packageIcons/financial_sole.svg';
 import health_sole from 'views/assets/packageIcons/health_sole.svg';
 import { LoadingContext } from 'react-router-loading';
 import { createStudent } from 'views/../app/actions/studentActions'
-import { getGrades } from 'views/../app/actions/gradeActions'
+// import { getGrades } from 'views/../app/actions/gradeActions'
 import { getAudiencesWithGrades } from 'app/actions/audienceActions'
 import InfoIcon from '@mui/icons-material/Info';
 import { useSnackbar } from 'notistack';
@@ -86,46 +86,28 @@ const NewKids: FC = () => {
 
   const subjectIconsById: any = {
     Gold: {
-      '1': math_gold,
-      '2': financial_gold,
-      '5': science_gold,
-      '7': ela_gold,
-      '8': health_gold,
-      '9': ela_gold,
-      '10': ela_gold,
-      '11': health_gold,
-      '12': science_gold,
-      '13': math_gold,
-      '14': science_gold,
-      '15': financial_gold,
+      'Mat': math_gold,
+      'Fin': financial_gold,
+      'Sci': science_gold,
+      'ELA': ela_gold,
+      'Hea': health_gold,
+      'Sig': ela_gold,
     },
     Combo: {
-      '1': math_combo,
-      '2': financial_combo,
-      '5': science_combo,
-      '7': ela_combo,
-      '8': health_combo,
-      '9': ela_combo,
-      '10': ela_combo,
-      '11': health_combo,
-      '12': science_combo,
-      '13': math_combo,
-      '14': science_combo,
-      '15': financial_combo,
+      'Mat': math_combo,
+      'Fin': financial_combo,
+      'Sci': science_combo,
+      'ELA': ela_combo,
+      'Hea': health_combo,
+      'Sig': ela_combo,
     },
     Sole: {
-      '1': math_sole,
-      '2': financial_sole,
-      '5': science_sole,
-      '7': ela_sole,
-      '8': health_sole,
-      '9': ela_sole,
-      '10': ela_sole,
-      '11': health_sole,
-      '12': science_sole,
-      '13': math_sole,
-      '14': science_sole,
-      '15': financial_sole,
+      'Mat': math_sole,
+      'Fin': financial_sole,
+      'Sci': science_sole,
+      'ELA': ela_sole,
+      'Hea': health_sole,
+      'Sig': ela_sole,
     }
   }
 
@@ -254,20 +236,21 @@ const NewKids: FC = () => {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return false;
     }
+    console.log({ result })
     setAudiences(result.data);
     return true;
   }
-  const setGradeData = async () => {
-    const result: any = await getGrades(
-      user.token,
-      dispatch
-    );
-    if (!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-    return true;
-  }
+  // const setGradeData = async () => {
+  //   const result: any = await getGrades(
+  //     user.token,
+  //     dispatch
+  //   );
+  //   if (!result.success) {
+  //     enqueueSnackbar(result.msg, { variant: 'error' });
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   const onPageInit = async () => {
 
@@ -307,12 +290,13 @@ const NewKids: FC = () => {
                   <Select
                     labelId='select-audience-label'
                     id='select-audience'
-                    value={audience ? audience : {}}
+                    value={audience?.standardCode || ''}
                     label={dictionary[language]?.selectYourCurriculum}
                     className={`${classes.select} err-border`}
                     onChange={(e: any) => {
-                      setAudience(e.target.value);
-                      setGrades(e.target.value.gradeSet)
+                      const _audience: any = audiences.find((item: any) => item.standardCode === e.target.value)
+                      setAudience(_audience);
+                      setGrades(_audience?.gradeSet)
                       setGrade({})
                       validateMsg.grade = null
                       validateMsg.audience = '';
@@ -330,7 +314,7 @@ const NewKids: FC = () => {
                     displayEmpty={true}
                   >
                     {audiences?.length > 0 && audiences.map((value: any, index: number) => (
-                      <MenuItem value={value} key={index}>
+                      <MenuItem value={value.standardCode} key={index}>
                         {value.name}
                       </MenuItem>
                     ))}
@@ -368,7 +352,7 @@ const NewKids: FC = () => {
                   <Select
                     labelId='select-package-label'
                     id='select-package'
-                    value={currentPackage ? currentPackage : ''}
+                    value={currentPackage?.plan.id || ''}
                     label={dictionary[language]?.selectYourPackage}
                     className={`${classes.select} ${currentPackage?.plan?.name === 'Gold'
                       ? classes.goldInput
@@ -377,13 +361,17 @@ const NewKids: FC = () => {
                         : classes.soleInput
                       } err-border`}
                     onChange={e => {
-                      setCurrentPackage(e.target.value);
+                      const selected: any = availablePackages.find((_package: any) => _package.plan.id === e.target.value)
+                      setCurrentPackage(selected);
+                      // filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US').
 
-                      if (e.target.value?.plan?.name === 'Gold') setPaths(e.target.value?.plan?.subjects)
+                      if (selected.plan?.name === 'Gold') setPaths(selected.plan?.subjects.
+                        filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US')
+                        )
                       else setPaths([]);
                       handleFormChange(
                         'packageName',
-                        e.target.value.length === 0 ? `${dictionary[language]?.fieldIsRequired}` : ''
+                        selected.length === 0 ? `${dictionary[language]?.fieldIsRequired}` : ''
                       );
                     }}
                     sx={
@@ -397,9 +385,9 @@ const NewKids: FC = () => {
                     }
                     displayEmpty={true}
                   >
-                    {availablePackages.map((value, index) => (
-                      <MenuItem value={value} key={index}>
-                        {value?.plan?.name}
+                    {availablePackages.map((_package) => (
+                      <MenuItem value={_package.plan.id} key={_package.id}>
+                        {_package?.plan?.name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -416,49 +404,51 @@ const NewKids: FC = () => {
               {currentPackage && (
                 <Grid item xs={12}>
                   <Subjects color={currentPackage?.plan?.name}>
-                    {currentPackage?.plan?.subjects.map((subject: any, index: number) => (
-                      <Subject key={index}>
-                        {currentPackage?.plan?.name === 'Gold' && (
-                          <SubjectIcon src={subjectIconsById.Gold[subject?.id]} />
-                        )}
-                        {currentPackage?.plan?.name === 'Combo' && (
-                          <>
-                            <Checkbox
-                              sx={{
-                                color: BasicColor.aqua,
-                                '&.Mui-checked': { color: BasicColor.aqua },
-                                padding: '0px',
-                                paddingLeft: '9px',
-                                paddingRight: '9px',
-                              }}
-                              onChange={e =>
-                                handleCheckPath(subject, e.target.checked)
-                              }
-                              checked={paths.indexOf(subject) !== -1}
-                            />
-                            <SubjectIcon src={subjectIconsById.Combo[subject?.id]} />
-                          </>
-                        )}
-                        {currentPackage?.plan?.name === 'Sole' && (
-                          <>
-                            <Radio
-                              value={subject}
-                              onClick={() => setPaths([subject])}
-                              checked={paths[0] === subject}
-                              sx={{
-                                color: BasicColor.greenSoft,
-                                '&.Mui-checked': { color: BasicColor.greenSoft },
-                                padding: '0px',
-                                paddingLeft: '9px',
-                                paddingRight: '9px',
-                              }}
-                            />
-                            <SubjectIcon src={subjectIconsById.Sole[subject?.id]} />
-                          </>
-                        )}
-                        <SubjectTitle>{subject.name}</SubjectTitle>
-                      </Subject>
-                    ))}
+                    {currentPackage?.plan?.subjects.
+                      filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US').
+                      map((subject: any, index: number) => (
+                        <Subject key={index}>
+                          {currentPackage?.plan?.name === 'Gold' && (
+                            <SubjectIcon src={subjectIconsById.Gold[subject?.universalAreaKnowledge.name.slice(0, 3)]} />
+                          )}
+                          {currentPackage?.plan?.name === 'Combo' && (
+                            <>
+                              <Checkbox
+                                sx={{
+                                  color: BasicColor.aqua,
+                                  '&.Mui-checked': { color: BasicColor.aqua },
+                                  padding: '0px',
+                                  paddingLeft: '9px',
+                                  paddingRight: '9px',
+                                }}
+                                onChange={e =>
+                                  handleCheckPath(subject, e.target.checked)
+                                }
+                                checked={paths.indexOf(subject) !== -1}
+                              />
+                              <SubjectIcon src={subjectIconsById.Combo[subject?.universalAreaKnowledge.name.slice(0, 3)]} />
+                            </>
+                          )}
+                          {currentPackage?.plan?.name === 'Sole' && (
+                            <>
+                              <Radio
+                                value={subject}
+                                onClick={() => setPaths([subject])}
+                                checked={paths[0] === subject}
+                                sx={{
+                                  color: BasicColor.greenSoft,
+                                  '&.Mui-checked': { color: BasicColor.greenSoft },
+                                  padding: '0px',
+                                  paddingLeft: '9px',
+                                  paddingRight: '9px',
+                                }}
+                              />
+                              <SubjectIcon src={subjectIconsById.Sole[subject?.universalAreaKnowledge.name.slice(0, 3)]} />
+                            </>
+                          )}
+                          <SubjectTitle>{subject.name}</SubjectTitle>
+                        </Subject>
+                      ))}
                   </Subjects>
                 </Grid>
               )}
@@ -552,11 +542,12 @@ const NewKids: FC = () => {
                   <Select
                     labelId='select-grade-label'
                     id='select-grade'
-                    value={grade ? grade : ''}
+                    value={grade?.id || ''}
                     label={dictionary[language]?.selectYourGrade}
                     className={`${classes.select} err-border`}
                     onChange={e => {
-                      setGrade(e.target.value);
+                      const selectedGrade: any = grades.find((item: any) => item.id === e.target.value)
+                      setGrade(selectedGrade);
                       handleFormChange(
                         'grade',
                         ''
@@ -573,8 +564,8 @@ const NewKids: FC = () => {
                     }
                     displayEmpty={true}
                   >
-                    {grades?.length > 0 && grades.map((value: any, index: number) => (
-                      <MenuItem value={value} key={index}>
+                    {grades?.length > 0 && grades.map((value: any) => (
+                      <MenuItem value={value.id} key={value.id}>
                         {value.name}
                       </MenuItem>
                     ))}

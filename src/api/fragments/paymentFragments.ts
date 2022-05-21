@@ -25,8 +25,6 @@ export const PAYMENT_METHOD = `
 export const PLAN = `
     id
     identifier
-    createTimestamp
-    updateTimestamp
     name
     description
     areaOfKnowledge

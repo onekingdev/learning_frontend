@@ -1,11 +1,17 @@
-import { useState, FC } from 'react';
+import {
+    useState, FC,
+    // useEffect
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import Button from 'views/molecules/MuiButton'
 import TextField from 'views/molecules/MuiTextField'
 import { css } from 'styled-components';
 import { BasicColor } from 'views/Color';
 import Grid from '@mui/material/Grid';
-import { doChangePaymentMethod } from 'app/actions/paymentActions';
+import {
+    doChangePaymentMethod,
+    // doFetchPaymentMethod
+} from 'app/actions/paymentActions';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
 import { useSnackbar } from 'notistack';
 import { GUARDIAN_PAYMENT_METHOD_INFO } from 'app/types'
@@ -121,20 +127,6 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
         phone: guardian.paymentMethod.phone,
     })
 
-    // const fetchPaymentData = async (mounted: boolean) => {
-    //     const guardianId = guardian.id
-    //     const res = await doFetchPaymentMethod(guardianId, user.token)
-    //     if (res !== null) {
-    //         if (mounted)
-    //             setPaymentMethodInfo(
-    //                 {
-    //                     ...validateRst,
-    //                     cardExpiryDate: (+res.cardExpMonth < 10 ? '0' + res.cardExpMonth : res.cardExpMonth) + ' / ' + res.cardExpYear.slice(-2),
-    //                     ...res
-    //                 }
-    //             )
-    //     } else return
-    // }
 
     const handleFormChange = (field: string, errMsg: string) => {
         setValidateRst({ ...validateRst, [field]: errMsg })
@@ -161,6 +153,25 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
         setLoading(false)
         open()
     }
+
+    // useEffect(() => {
+
+    //     const fetchPaymentData = async () => {
+    //         const guardianId = guardian.id
+    //         const res = await doFetchPaymentMethod(guardianId, user.token)
+    //         if (res !== null) {
+    //             setPaymentMethodInfo(
+    //                 {
+    //                     ...validateRst,
+    //                     cardExpiryDate: (+res.cardExpMonth < 10 ? '0' + res.cardExpMonth : res.cardExpMonth) + ' / ' + res.cardExpYear.slice(-2),
+    //                     ...res
+    //                 }
+    //             )
+    //         }
+    //     }
+
+    //     fetchPaymentData()
+    // }, [])
 
 
     return (
