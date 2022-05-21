@@ -153,7 +153,8 @@ const NewKids: FC = () => {
     if (childIdx === childNum) history.push('/kids/list');
     const temp = [...availablePackages];
     const inex = temp.indexOf(currentPackage);
-    delete temp[inex];
+    // delete temp[inex];
+    temp.splice(inex, 1)
     setAvailablePackages(temp);
 
     setChildIdx(childIdx + 1);
@@ -236,7 +237,6 @@ const NewKids: FC = () => {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return false;
     }
-    console.log({ result })
     setAudiences(result.data);
     return true;
   }
