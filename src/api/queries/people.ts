@@ -13,6 +13,13 @@ export const AUDIENCES_WITH_GRADE_QUERY = `{
     gradeSet {
         ${GRADES}
     }
+}
+`
+export const AUDIENCES_WITH_GRADE_QUERY_OLD = `{
+    ${AUDIENCES}
+    gradeSet {
+        ${GRADES}
+    }
     areaofknowledgeSet
     ${AREA_OF_KNOWLEDGE_QUERY}
 }

@@ -37,12 +37,16 @@ export const AREA_OF_KNOWLEDGE = `
 
 export const AREA_OF_KNOWLEDGE_RAW = `
     id
-    identifier
     name
-    createTimestamp
-    updateTimestamp
+    audience {
+        id
+        standardCode
+        name
+    }
+    universalAreaKnowledge{
+        name
+      }
     hexColor
-    slug
     image
     islandImage
     isActive

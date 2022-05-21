@@ -59,7 +59,7 @@ if (screen_width < 450) {
 
 const getAllTopic: any = (subSubjectList: Array<any>, deep: number) => {
     return subSubjectList.map(subSubject => {
-        return (deep !== 1 || subSubject.subTopicsByGrade.length > 0) ? [subSubject, getAllTopic(subSubject.subTopicsByGrade, deep + 1)] : []
+        return (deep !== 1 || subSubject.subTopicsByGrade.length > 0) ? [subSubject, getAllTopic(subSubject.subTopicsByGrade, deep + 1)] : [subSubject]
     })
 }
 
@@ -141,7 +141,7 @@ export const KidsProgress = () => {
     const handleSubjectChange = (event: any) => {
         setActiveSubjectId(event.target.value);
     };
-    const subSubjects1 = _.flattenDeep(getAllTopic(data, 1)).map((_subSubject: any, id) => {
+    const subSubjects1 = _.flattenDeep(getAllTopic(data, 1)).filter((__subSubject: any) => __subSubject.standardTopic).map((_subSubject: any, id) => {
         let bgColor = masteryColors.NP;
         if (_subSubject.mastery) {
             if (_subSubject.mastery === 'NP') {
@@ -162,6 +162,7 @@ export const KidsProgress = () => {
             active: false,
         })
     })
+    console.log(subSubjects1)
     // const subSubjectsMobile1 = data.map((subSubject, id) => {
     //     let bgColor = masteryColors.NP;
     //     if (data && data[id] && data[id].mastery) {

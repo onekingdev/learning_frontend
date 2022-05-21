@@ -32,10 +32,12 @@ export const TopicReportWithGrade = (studentId: number, aokId: number, gradeId: 
     rootTopicsByAok(aokId: ${ aokId }) {
         ${ TopicFields(studentId) }
         ${ TopicsRecursive(studentId) }
+        standardTopic
         subTopicsByGrade(gradeId: ${gradeId}){
             id
             mastery(student: ${studentId})
             name
+            standardTopic
             report(student: ${ studentId }) {
                 questionsAnswered
                 correctQuestion
@@ -56,6 +58,7 @@ export const TopicReportWithGrade = (studentId: number, aokId: number, gradeId: 
                     correctQuestion
                     accuracy
                 }
+                standardTopic
                 topicgradeSet{
                     grade{
                         id
@@ -71,6 +74,7 @@ export const TopicReportWithGrade = (studentId: number, aokId: number, gradeId: 
                         correctQuestion
                         accuracy
                     }
+                    standardTopic
                     topicgradeSet{
                         grade{
                             id

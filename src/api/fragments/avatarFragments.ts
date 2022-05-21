@@ -26,19 +26,11 @@ export const AVATAR = `
     name
     image
     price
-    avatarpurchasetransactionSet {
-        ${AVATAR_PURCHASE_TRANSACTION}
-    }
 `
 
 export const AVATAR_RAW = `
     id
-    identifier
     isActive
-    deletedTimestamp
-    randomSlug
-    createTimestamp
-    updateTimestamp
     typeOf
     name
     image

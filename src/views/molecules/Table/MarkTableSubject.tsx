@@ -147,31 +147,31 @@ const MarkTableSubject = ({
 }) => {
     return (<MarkTableDiv>
         { data && data.length > 0 ? data?.map((aok: any, id: number) => (
-            aok?.subTopicsByGrade?.length ? <SingleGroup activeAokId={activeSubjectId} key={id} main={{
+            (aok?.subTopicsByGrade.length > 0 || aok?.standardTopic) ? <SingleGroup activeAokId={activeSubjectId} key={id} main={{
                 aokId: aok?.id,
                 item: aok?.name,
                 mastery: aok?.mastery,
-                button: aok?.subTopicsByGrade?.length ? false : true,
+                button: aok?.standardTopic ? true : false,
             }} extra={aok?.subTopicsByGrade.map((subTopic1: any) => ({
                 main: {
                     aokId: subTopic1?.id,
                     item: subTopic1?.name,
                     mastery: subTopic1?.mastery,
-                    button: subTopic1?.subTopicsByGrade?.length ? false : true,
+                    button: subTopic1?.standardTopic ? true : false,
                 },
                 extra: subTopic1?.subTopicsByGrade.map((subTopic2: any) => ({
                     main: {
                         aokId: subTopic2?.id,
                         item: subTopic2?.name,
                         mastery: subTopic2?.mastery,
-                        button: subTopic2?.subTopicsByGrade?.length ? false : true,
+                        button: subTopic2?.standardTopic ? true : false,
                     },
                     extra: subTopic1?.subTopicsByGrade.map((subTopic3: any) => ({
                         main: {
                             aokId: subTopic3?.id,
                             item: subTopic3?.name,
                             mastery: subTopic3?.mastery,
-                            button: true,
+                            button: subTopic3?.standardTopic ? true : false,
                         },
                     }))
                 }))
