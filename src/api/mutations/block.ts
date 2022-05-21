@@ -195,4 +195,3 @@ export const GET_QUESIONS = (
   }
 }
 `
-

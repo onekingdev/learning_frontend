@@ -16,15 +16,15 @@ import { Box } from '@mui/material';
 import { USER_AVATAR_SIZE } from 'constants/common';
 
 type TopMenuProps = {
-  rank: number;
-  level: number;
-  exp: number;
-  expMax: number;
-  icon: string;
-  userName: string;
-  progress: number;
-  energyCharge: number;
-  balance: number;
+  rank         : number;
+  level        : number;
+  exp          : number;
+  expMax       : number;
+  icon         : string;
+  userName     : string;
+  progress     : number;
+  energyCharge : number;
+  balance      : number;
 };
 
 export const TopMenu: FC<TopMenuProps> = ({
