@@ -1,8 +1,11 @@
-import { STUDENT_RAW }                                      from './studentFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN_RAW, PLAN }  from '../fragments/paymentFragments'
-import { COUPON_COODE, }                                    from '../fragments/paymentFragments';
-import { GRADES }                                           from '../fragments/peopleFragments'
-import {AVATAR, AVATAR_RAW}                                             from './avatarFragments'
+import { STUDENT_RAW } from './studentFragments'
+import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN_RAW, PLAN } from '../fragments/paymentFragments'
+import { COUPON_COODE, } from '../fragments/paymentFragments';
+import { GRADES } from '../fragments/peopleFragments'
+import {
+    // AVATAR,
+    AVATAR_RAW
+} from './avatarFragments'
 export const GUARDIAN_STUDENT = `
     id
     identifier
@@ -10,6 +13,13 @@ export const GUARDIAN_STUDENT = `
 `;
 
 export const GUARDIAN_RAW = `
+    id
+    isActive
+    firstName
+    lastName
+    gender
+`;
+export const GUARDIAN_RAW_OLD = `
     id
     identifier
     isActive

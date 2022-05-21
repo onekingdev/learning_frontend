@@ -30,12 +30,7 @@ export const AVATAR = `
 
 export const AVATAR_RAW = `
     id
-    identifier
     isActive
-    deletedTimestamp
-    randomSlug
-    createTimestamp
-    updateTimestamp
     typeOf
     name
     image

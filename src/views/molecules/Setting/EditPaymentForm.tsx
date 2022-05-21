@@ -148,8 +148,10 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                 }
             });
         }
-        else
-            enqueueSnackbar('Payment method update failed', { variant: 'error' })
+        else {
+            console.log(res.msg)
+            enqueueSnackbar(res.msg, { variant: 'error' })
+        }
         setLoading(false)
         open()
     }
@@ -179,22 +181,22 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
             {loading ?
                 <LoadingSpinner />
                 :
-                <Grid container spacing={2} marginTop={1} justifyContent='center'>
+                <Grid container spacing={2} marginTop={1} justifyContent='center' sx={{minHeight: 200}}>
                     <Grid item xs={12} md={12}>
                         <PaymentInputsWrapper {...wrapperProps} styles={style}>
                             <svg {...getCardImageProps({ images })} />
                             <input {...getCardNumberProps({
                                 onChange: (e: any) => setPaymentMethodInfo({ ...paymentMethodInfo, cardNumber: e.target.value })
-                            })} value={paymentMethodInfo.cardNumber} />
+                            })} value={paymentMethodInfo?.cardNumber || ''} />
                             <input {...getExpiryDateProps({
                                 onChange: (e: any) => setPaymentMethodInfo({ ...paymentMethodInfo, cardExpiryDate: e.target.value })
                             }
                             )}
-                                value={paymentMethodInfo.cardExpiryDate} />
+                                value={paymentMethodInfo?.cardExpiryDate || ''} />
                             <input {...getCVCProps({
                                 onChange: (e: any) => setPaymentMethodInfo({ ...paymentMethodInfo, cardCvc: e.target.value })
                             })}
-                                value={paymentMethodInfo.cardCvc}
+                                value={paymentMethodInfo?.cardCvc || ''}
                             />
                         </PaymentInputsWrapper>
                     </Grid>
@@ -207,7 +209,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.address1}
                             helperText={validateRst.address1}
-                            value={paymentMethodInfo.address1}
+                            value={paymentMethodInfo?.address1 || ''}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -219,7 +221,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.address2}
                             helperText={validateRst.address2}
-                            value={paymentMethodInfo.address2}
+                            value={paymentMethodInfo?.address2 || ''}
                         />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -231,7 +233,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.city}
                             helperText={validateRst.city}
-                            value={paymentMethodInfo.city}
+                            value={paymentMethodInfo?.city || ''}
                         />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -243,7 +245,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.state}
                             helperText={validateRst.state}
-                            value={paymentMethodInfo.state}
+                            value={paymentMethodInfo?.state || ''}
                         />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -255,7 +257,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.postCode}
                             helperText={validateRst.postCode}
-                            value={paymentMethodInfo.postCode}
+                            value={paymentMethodInfo?.postCode || ''}
                         />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -267,7 +269,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.country}
                             helperText={validateRst.country}
-                            value={paymentMethodInfo.country}
+                            value={paymentMethodInfo?.country || ''}
                         />
                     </Grid>
                     <Grid item xs={12} md={12}>
@@ -279,7 +281,7 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
                             }}
                             error={!!validateRst.phone}
                             helperText={validateRst.phone}
-                            value={paymentMethodInfo.phone}
+                            value={paymentMethodInfo?.phone || ''}
                         />
                     </Grid>
                     {/* <Grid item xs={6} md={6}>

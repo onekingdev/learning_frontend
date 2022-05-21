@@ -1,7 +1,7 @@
-import { PLAN } from '../fragments/paymentFragments'
+import { PLAN_RAW } from '../fragments/paymentFragments'
 
 export const PLAN_QUERY = `
     {
-        ${PLAN}
+        ${PLAN_RAW}
     }
 `;
