@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import { useSelector } from 'react-redux'
+import Box                         from '@mui/material/Box';
+import { useSelector }             from 'react-redux'
 import {
   LSButtonContainer, LSText,
   LSPaperMoney, LSLabel, LSInputBase
-} from './utils/Style';
-import { doConfirmUpdate, doUpdateBroughtPlan } from 'app/actions/guardianActions';
-import { useSnackbar } from 'notistack';
-import { LoadingContainer } from 'views/atoms/Loading'
-import ReactLoading from 'react-loading';
-import { BasicColor } from 'views/Color';
+}                                  from './utils/Style';
+import { doUpdateBroughtPlan }     from 'app/actions/guardianActions';
+import { useSnackbar }             from 'notistack';
+import { LoadingContainer }        from 'views/atoms/Loading'
+import ReactLoading                from 'react-loading';
+import { BasicColor }              from 'views/Color';
 import { Button } from '@mui/material';
 
 interface IUpgradeProps {
@@ -35,13 +35,7 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, plan, refresh }) => {
     setLoading(true)
     const res: any = await doUpdateBroughtPlan(guardian.id, plan.id, user.token)
     if (res.status) {
-      const res2: any = await doConfirmUpdate(res.order.id, user.token)
-      console.log({ res2 })
-      if (res2.status)
-        enqueueSnackbar('Student Package updated successfully' + res.order.id, { variant: 'success' })
-      else {
-        enqueueSnackbar('Confirming update failed' + res.order.id, { variant: 'error' })
-      }
+      enqueueSnackbar('Student Package updated successfully', { variant: 'success' })
       onConfirm()
       refresh()
     } else {

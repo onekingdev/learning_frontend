@@ -17,7 +17,7 @@ import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
 import { Container }            from './Style';
 import { dictionary }           from './dictionary'
 import { useSelector }       from 'react-redux';
-import { TopicReportByAokAndGrade, TopicReportWithGrade, AreasOfKnowledge, Grades, AvaliableGrades } from 'api/fragments/topicFragments';
+import { TopicReportByAokAndGrade, AreasOfKnowledge, Grades } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
 import styled             from 'styled-components';
 import background     from 'views/assets/colored-shapes-bg.svg';
@@ -57,9 +57,9 @@ if (screen_width < 450) {
     unitHeight = 8;
 }
 
-const getAllTopic: any = (subSubjectList: Array<any>, deep: number) => {
+const getAllTopic: any = (subSubjectList: Array<any>) => {
     return subSubjectList.map(subSubject => {
-        return (deep !== 1 || subSubject.subTopicsByGrade.length > 0) ? [subSubject, getAllTopic(subSubject.subTopicsByGrade, deep + 1)] : [subSubject]
+        return subSubject.subTopics.length > 0 ? [subSubject, getAllTopic(subSubject.subTopics)] : [subSubject]
     })
 }
 
@@ -79,53 +79,66 @@ export const KidsProgress = () => {
         name: string
     }>>([]);
     useEffect(() => {
-        if (student) {
-            (async () => {
-                setAreasOfKnowledge(student.guardianstudentplan.subject);
-                setActiveSubjectId(student.guardianstudentplan.subject.filter((_subject: any) => _subject.name === "Financial LIteracy")[0].id || student.guardianstudentplan.subject[0].id);
-            })();
-        }
-    }, [student]);
+        (async () => {
+            // Get All Subject
+            const res:any = await query('', AreasOfKnowledge(), user.token).catch(e => ({success: false}));
+            if(res.success === false) {
+                return
+            }
+            const result:any = await res.json();
+            if(result.errors && !result.data) {
+                alert(result.errors[0].message);
+            } else {
+                setAreasOfKnowledge(result.data.areasOfKnowledge)
+                console.log(result.data.areasOfKnowledge)
+                let iii = 4;
+                for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
+                    if (result.data.areasOfKnowledge[i].name === 'Sight Words') {
+                        iii = i;
+                        break;
+                    }
+                }
+                setActiveSubjectId(result.data.areasOfKnowledge[iii].id)
+                // setSubject(result.data.areasOfKnowledge[0].id);
+            }
+        })();
+    }, [user]);
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
-        if (activeSubjectId > 0) {
-            (async () => {
-                loadingContext.start();
-                // Get Topic Report
-                const res:any = await query('', AvaliableGrades(activeSubjectId)).catch(e => ({success: false}));
-                if(res.success === false) {
-                    return
+        (async () => {
+            loadingContext.start();
+            // Get Topic Report
+            const res:any = await query('', Grades()).catch(e => ({success: false}));
+            if(res.success === false) {
+            return
+            }
+            const result:any = await res.json();
+            if(result.errors && !result.data) {
+                alert(result.errors[0].message);
+            } else {
+                if (result.data.grades.length > 0) {
+                    setGrades(result.data.grades);
+                    console.log(result.data.grades[0].id)
+                    setActiveGradeId(result.data.grades[0].id);
                 }
-                const result:any = await res.json();
-                if(result.errors && !result.data) {
-                    alert(result.errors[0].message);
-                } else {
-                    if (result.data.areaOfKnowledgeById.audience.gradeSet.length > 0) {
-                        setGrades(result.data.areaOfKnowledgeById.audience.gradeSet);
-                        // setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet.filter((grade: any) => grade.name === "1st Grade")[0]?.id || result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
-                        setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
-                    }
-                }
-            })();
-        }
-    }, [activeSubjectId]);
+            }
+          })();
+    }, []);
     useEffect(() => {
         if (activeSubjectId !== -1 && activeGradeId !== -1) {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
-                // const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
-                const res:any = await query('', TopicReportWithGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
+                const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
                 if(res.success === false) {
                 return
                 }
-                const result: any = await res.json();
-                console.log(result.data.rootTopicsByAok);
+                const result:any = await res.json();
                 if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
-                    setData(result.data.rootTopicsByAok);
+                    setData(result.data.rootTopicsByAokAndGrade);
                 }
                 // if (firstLoad) {
                 //     setFirstLoad(false);
@@ -141,7 +154,7 @@ export const KidsProgress = () => {
     const handleSubjectChange = (event: any) => {
         setActiveSubjectId(event.target.value);
     };
-    const subSubjects1 = _.flattenDeep(getAllTopic(data, 1)).filter((__subSubject: any) => __subSubject.standardTopic).map((_subSubject: any, id) => {
+    const subSubjects1 = _.flattenDeep(getAllTopic(data)).map((_subSubject: any, id) => {
         let bgColor = masteryColors.NP;
         if (_subSubject.mastery) {
             if (_subSubject.mastery === 'NP') {
@@ -162,7 +175,6 @@ export const KidsProgress = () => {
             active: false,
         })
     })
-    console.log(subSubjects1)
     // const subSubjectsMobile1 = data.map((subSubject, id) => {
     //     let bgColor = masteryColors.NP;
     //     if (data && data[id] && data[id].mastery) {
@@ -361,14 +373,14 @@ export const KidsProgress = () => {
                         }}
                     >
                     </MobileCom> */}
-                    {subSubjects1.length > 0 ? subSubjects1.map((singleInfo, id) => {
+                    {subSubjects1 && subSubjects1.map((singleInfo, id) => {
                         if (singleInfo && singleInfo.text) {
                             const _id = id + 1;
                             const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
                                 Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
                             ) : 0
                             return (
-                                <div key={id} style={{
+                                <div style={{
                                     position: 'absolute',
                                     top: (_id % (verticalCount + lineCount)) > lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
                                         (Math.floor(_id / (lineCount + verticalCount))) * ((unitHeight * 1.5) * (verticalCount + 1)) + (id % (lineCount + verticalCount) - lineCount + 1) * (unitHeight * 1.5) + 'rem' :
@@ -421,10 +433,7 @@ export const KidsProgress = () => {
                         } else {
                             return <></>
                         }
-                    }) : <p style={{
-                        textAlign: "center",
-                        fontSize: "3rem"
-                    }}>There is no Subjects</p>}
+                    })}
                         {/* { paths.map((path, id) => <PcCom key={id} style={{
                             position: 'absolute',
                             left: `${path.left}%`,

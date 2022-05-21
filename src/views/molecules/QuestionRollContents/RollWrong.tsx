@@ -52,7 +52,12 @@ export const RollWrong: FC = () => {
 
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
-  const id = Math.floor(Math.random() * 100 % 4)
+  const [id, setId] = useState(0)
+
+  useEffect(() => {
+    setId(Math.floor(Math.random() * 10) % 4)
+  }, [])
+
   return (
     <Box
       sx={{

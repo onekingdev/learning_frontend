@@ -33,15 +33,15 @@ export const mutation = (
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      query: `mutation
+      query: `mutation 
         {
           ${mutationName}{
             ${queryName}
             ${query}
           }
-
+         
         }
-
+      
       `
     }),
   })
@@ -50,12 +50,12 @@ export const mutation = (
     .catch(handleError);
 };
 
-export const get_async = (
+export const get_async =  (
   queryName: string,
   query: string,
   token?: string
 ) => {
-  if (token)
+  if(token)
     return fetch(<string>process.env.REACT_APP_SERVER_URL, {
       method: 'POST',
       headers: {
@@ -81,12 +81,11 @@ export const get_async = (
   })
 };
 
-
 export const sendRawQuery = async (
   query: string,
   token?: string
 ) => {
-  const res: any = await fetch(<string>process.env.REACT_APP_SERVER_URL, {
+  const res:any = await fetch(<string>process.env.REACT_APP_SERVER_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -98,37 +97,17 @@ export const sendRawQuery = async (
       `,
     }),
   }).catch(e => {
-    return { success: false, msg: e.message }
+    return {success: false, msg: e.message}
   })
 
-  if (res.success === false)
-    return { success: false, msg: res.error }
+  if(res.success === false)
+  return {success: false, msg: res.error}
 
   const result = await res.json()
-  if (result.errors) {
-    return { success: false, msg: result.errors[0].message };
+  if(result.errors) {
+    return {success: false, msg: result.errors[0].message};
   }
 
   else return result
-};
-
-export const fetchRawData = async (
-  query: string,
-  token?: string
-) => {
-  const res: any = await fetch(<string>process.env.REACT_APP_SERVER_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token && { 'Authorization': `Bearer ${token}` }),
-    },
-    body: JSON.stringify({
-      query: `
-        ${query}
-      `,
-    }),
-  })
-  const result = await res.json()
-  return result
 };
 export default get_async;

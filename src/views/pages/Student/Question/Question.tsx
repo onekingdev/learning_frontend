@@ -12,6 +12,7 @@ import {
 import { FinishLesson } from 'views/organisms/FinishLesson';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
+import { MultipleChoiceText } from 'views/molecules/QuestionTypes/MultipleChoiceText';
 import { MultipleChoiceSightWord } from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import { finishBlock } from 'app/actions/blockActions';
@@ -67,19 +68,32 @@ export const Question: FC = () => {
     totalQuestions: number,
     blockPresentation: IBlockPresentation
   ) => {
-    const types = [{
-      type: 'SightWord',
-      component: (
-        <MultipleChoiceSightWord
-          question={question}
-          nextQuestion={handleNextQuestion}
-          totalQuestions={totalQuestions}
-          questionCounter={questionCounter}
-          onAnswer={onAnswer}
-          blockPresentation={blockPresentation}
-        />
-      )
-    },
+    const types = [
+      {
+        type: 'Text',
+        component: (
+          <MultipleChoiceText
+            question={question}
+            nextQuestion={handleNextQuestion}
+            totalQuestions={totalQuestions}
+            questionCounter={questionCounter}
+            onAnswer={onAnswer}
+            blockPresentation={blockPresentation}
+          />
+        )
+      }, {
+        type: 'SightWord',
+        component: (
+          <MultipleChoiceSightWord
+            question={question}
+            nextQuestion={handleNextQuestion}
+            totalQuestions={totalQuestions}
+            questionCounter={questionCounter}
+            onAnswer={onAnswer}
+            blockPresentation={blockPresentation}
+          />
+        )
+      },
 
     ];
 

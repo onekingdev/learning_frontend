@@ -190,18 +190,6 @@ export const STUDENT_RAW = `
         id
         identifier
         isActive
-        firstName
-        lastName
-        fullName
-        dob
-        gender
-        points
-        intPeriodStartAt
-`;
-export const STUDENT_RAW_OLD = `
-        id
-        identifier
-        isActive
         deletedTimestamp
         randomSlug
         createTimestamp
@@ -221,10 +209,10 @@ export const LastWeekAndCoinsQuestions = (weekCount: number) => `
         lastWeekQuestions(weekCount: ${weekCount}) {
             day
             questions
-        }
+        } 
         lastWeekCoins(weekCount: ${weekCount}) {
             day
             coins
-        }
+        } 
     }
 `;

@@ -3,36 +3,36 @@ import {
     useState,
     forwardRef,
     useImperativeHandle
-} from 'react';
+}                                   from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Store } from 'app/configureStore';
-import paypal from 'views/assets/paypal.svg';
-import apple from 'views/assets/apple-pay.svg';
-import visacard from 'views/assets/visacard.svg';
-import Button from 'views/molecules/MuiButton';
-import TextField from 'views/molecules/MuiTextField';
-import { BasicColor } from 'views/Color';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import { Store }                    from 'app/configureStore';
+import paypal                       from 'views/assets/paypal.svg';
+import apple                        from 'views/assets/apple-pay.svg';
+import visacard                     from 'views/assets/visacard.svg';
+import Button                       from 'views/molecules/MuiButton';
+import TextField                    from 'views/molecules/MuiTextField';
+import { BasicColor }               from 'views/Color';
+import Radio                        from '@mui/material/Radio';
+import RadioGroup                   from '@mui/material/RadioGroup';
+import FormControlLabel             from '@mui/material/FormControlLabel';
+import Divider                      from '@mui/material/Divider';
+import Grid                         from '@mui/material/Grid';
+import FormControl                  from '@mui/material/FormControl';
+import Select                       from '@mui/material/Select';
+import InputLabel                   from '@mui/material/InputLabel';
+import MenuItem                     from '@mui/material/MenuItem';
 import {
     createOrder,
     confirmPaymentOrder,
     createOrderWithOutPay
-} from 'app/actions/paymentActions'
+}                                   from 'app/actions/paymentActions'
 import {
     useStripe,
     useElements,
     // CardNumberElement,
     // CardExpiryElement,
     // CardCvcElement,
-} from '@stripe/react-stripe-js';
+}                                   from '@stripe/react-stripe-js';
 import {
     useStyles,
     PayPal,
@@ -42,73 +42,70 @@ import {
     Title,
     CardContent
 } from './Style'
-import {
-    Country,
-    // State
-} from 'country-state-city';
-import commonDictionary from 'constants/commonDictionary'
-import { dictionary } from './dictionary'
+import { Country, State }   from 'country-state-city';
+import commonDictionary     from 'constants/commonDictionary'
+import { dictionary }       from './dictionary'
 interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): void;
     handleUpdate(): void;
 }
 export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
-    const dispatch = useDispatch()
-    const classes = useStyles();
-    const stripe = useStripe();
-    const elements = useElements();
-    const user = useSelector((state: Store) => state.user)
-    const guardian = useSelector((state: any) => state.guardian)
-    let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'en-us'
+    const dispatch  = useDispatch()
+    const classes   = useStyles();
+    const stripe    = useStripe();
+    const elements  = useElements();
+    const user      = useSelector((state: Store) => state.user)
+    const guardian  = useSelector((state: any) => state.guardian)
+    let language:string  = useSelector((state: any) => state.user.language);
+    language             = language? language : 'en-us'
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
-    // console.log(countries)
+    console.log(countries)
     // const [paymentMethod, setPaymentMethod] = useState('card')
     const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(
         isSpecialCode ? {
-            firstName: '',
-            lastName: '',
-            addressOne: null,
+            firstName   : '',
+            lastName    : '',
+            addressOne  : null,
             // addressTwo: null,
-            state: null,
-            city: null,
-            zip: null,
-            country: '',
-            phone: null,
+            state       : null,
+            city        : null,
+            zip         : null,
+            country     : '',
+            phone       : null,
         } : {
-            firstName: null,
-            lastName: null,
-            cardNumber: null,
-            expiryDate: null,
-            cvc: null,
-            addressOne: null,
+            firstName   : null,
+            lastName    : null,
+            cardNumber  : null,
+            expiryDate  : null,
+            cvc         : null,
+            addressOne  : null,
             // addressTwo: null,
-            state: null,
-            city: null,
-            zip: null,
-            country: '',
-            phone: null,
+            state       : null,
+            city        : null,
+            zip         : null,
+            country     : '',
+            phone       : null,
         });
 
     const [data, setData] = useState({
-        paymentMethod: 'card',
-        firstName: guardian.firstName,
-        lastName: guardian.lastName,
-        cardNumber: '',
-        cardExpMonth: '',
-        cardExpYear: '',
-        cvc: '',
-        addressOne: '',
-        addressTwo: '',
-        state: '',
-        city: '',
-        zip: '',
+        paymentMethod   : 'card',
+        firstName       : guardian.firstName,
+        lastName        : guardian.lastName,
+        cardNumber      : '',
+        cardExpMonth    : '',
+        cardExpYear     : '',
+        cvc             : '',
+        addressOne      : '',
+        addressTwo      : '',
+        state           : '',
+        city            : '',
+        zip             : '',
         // country: { name: '', isoCode: '' },
-        country: countries[232],
-        phone: '',
-        couponCode: '',
-        price: 0
+        country         : countries[232],
+        phone           : '',
+        couponCode      : '',
+        price           : 0
     })
     const arrObjToString = (arrObj: any) => {
         let str = '[';
@@ -461,7 +458,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={6} md={6}>
                     <TextField
-                        label={`${dictionary[language]?.state} / ${dictionary[language]?.province}`}
+                        label={`${dictionary[language]?.state} / ${dictionary[language]?.province}` }
                         onChange={(e: any) => {
                             handleFormChange('state', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                             setData({ ...data, state: e.target.value })
@@ -473,7 +470,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={6} md={6}>
                     <TextField
-                        label={`${dictionary[language]?.zip} / ${dictionary[language]?.postalCode}`}
+                        label={`${dictionary[language]?.zip} / ${dictionary[language]?.postalCode}` }
                         onChange={(e: any) => {
                             handleFormChange('zip', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                             setData({ ...data, zip: e.target.value })

@@ -1,20 +1,18 @@
 import { FC, useEffect, useState } from 'react';
 import styled                      from 'styled-components';
+import { useSelector }             from 'react-redux';
 import { IBlockPresentation }      from 'app/entities/block';
 import { IQuestion }               from 'app/entities/block';
 import { BasicColor, ButtonColor } from 'views/Color';
 import { ScreenSize }              from 'constants/screenSize';
 import { Question }                from 'views/atoms/Text/Question';
 import { Icon }                    from 'views/atoms/Icon/Icon';
-import videoAssistorIcon           from 'views/assets/video.svg'
-import soundAssistorIcon           from 'views/assets/play-sound.svg'
+import videoIcon                   from 'views/assets/others/video-assistor.png';
+import assistor                    from 'views/assets/text-to-speech.svg';
 import { TextOption }              from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor }      from 'views/organisms/VideoModalAssistor';
 import Button                      from 'views/molecules/MuiButton';
-import { useSelector }             from 'react-redux';
 import { Store }                   from 'app/configureStore';
-import videoIcon                   from 'views/assets/videoIcon.svg';
-import assistor                    from 'views/assets/text-to-speech.svg';
 import { dictionary }              from 'views/pages/Student/Question/dictionary'
 
 type ChoiceTextProps = {
@@ -32,7 +30,7 @@ interface BlockQuestionInput {
   isCorrect: boolean;
 }
 
-export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
+export const MultipleChoiceText: FC<ChoiceTextProps> = ({
   question,
   nextQuestion,
   totalQuestions,
@@ -41,12 +39,11 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
   onAnswer,
 }) => {
   const state = useSelector((state: Store) => state.blockPresentation);
-  const [showAssistor, setShowAssistor] = useState(false);
-  const [isAnswered, setIsAnswered] = useState<boolean>(false);
   let language:string     = useSelector((state: any) => state.user.language);
   language                = language? language : 'en-us'
+  const [showAssistor, setShowAssistor] = useState(false);
+  const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
-
   useEffect(() => {
     setIsAnswered(false);
   }, [question.answeroptionSet]);
@@ -66,12 +63,6 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
     audio.play();
   };
 
-  const readQuestionAudioAsset = () => {
-    const audio = new Audio(question.questionAudioAssets[0].audioFile);
-    audio.play();
-  };
-
-
   const readAnswer = (answerOption: any) => {
     const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
     const audio = new Audio(answerSoundURI);
@@ -80,21 +71,20 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
 
   return (
     <>
-      {showAssistor ? (
+      {(showAssistor && blockPresentation?.block?.topicGrade?.topic?.videoAssistor) ? (
         <VideoModalAssistor
           onClick={closeVideoModal}
           source={
             blockPresentation
-              ? blockPresentation?.block.topicGrade.topic.videoAssistor
+              ? blockPresentation?.block?.topicGrade?.topic?.videoAssistor
               : ''
           }
         />
       ) : null}
       <BlackBoard>
-        <AnswerContainer>
+        <QuestionContainer>
           <Question>{question.questionText}</Question>
-          <Icon image={soundAssistorIcon} onClick={readQuestionAudioAsset} />
-        </AnswerContainer>
+        </QuestionContainer>
         <AnswersContainer>
           <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
@@ -104,14 +94,20 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
                   answer={option}
                   onClick={handleAnswer}
                 />
+                <Icon
+                  image={assistor}
+                  onClick={() => {
+                    readAnswer(option);
+                  }}
+                />
               </AnswerContainer>
             ))}
           </TextOptionsList>
           <ImageAssetContainer
             imageLength={question.questionImageAssets.length}
           >
-            {question.questionImageAssets.map((item, i) => (
-              <ImageAsset key={i} src={item.image} alt="" />
+            {question.questionImageAssets.map((item,i) => (
+              <ImageAsset key={i} src={item.image} alt='' />
             ))}
           </ImageAssetContainer>
         </AnswersContainer>
@@ -124,19 +120,13 @@ export const MultipleChoiceSightWord: FC<ChoiceTextProps> = ({
             color={BasicColor.black}
             value={totalQuestions === questionCounter + 1 ? dictionary[language]?.finish : dictionary[language]?.next}
           />
-          {/* <IconVideoContainer onClick={closeVideoModal}>
-          <Icon image={videoIcon} />
-        </IconVideoContainer> */}
-          <Icon
-            image={videoAssistorIcon}
-            onClick={closeVideoModal}
-          />
+          <Icon image={assistor} onClick={readQuestion} />
+          <Icon image={videoIcon} onClick={closeVideoModal}/>
         </AssistorContainer>
       </BlackBoard>
     </>
   );
 };
-
 
 const BlackBoard = styled.div`
   background-color: #13705f;
@@ -216,9 +206,9 @@ const AssistorContainer = styled.div`
   max-width: 400px;
   height: 40px;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  grid-gap: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
   margin: 30px auto;
 `;
 const AnswerContainer = styled.div`

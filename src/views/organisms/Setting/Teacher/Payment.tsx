@@ -64,7 +64,7 @@ export const TeacherPaymentInfo: FC = () => {
         </Grid>
       </LSGridRow>
       <LSGridRow container>
-        {/* <Grid item lg={4} xs={4}>
+        <Grid item lg={4} xs={4}>
           <Button onClick={open}>
             {dictionary[language]?.addNew}
           </Button>
@@ -77,7 +77,7 @@ export const TeacherPaymentInfo: FC = () => {
               </Elements>
             }
           />
-        </Grid> */}
+        </Grid>
         <Grid item lg={8} xs={8}>
           <Button onClick={() => edit(true)}>{dictionary[language]?.edit}</Button>
         </Grid>

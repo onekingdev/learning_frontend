@@ -8,8 +8,11 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
+import { TypoGeneralText } from 'views/atoms/Text';
 import { BlackBoard, AnswersContainer, AssistorContainer } from './Styles'
+import { TextField } from '@mui/material';
 import { QuestionBoxTitle } from './QuestionBoxTitle';
+import { styled } from '@mui/material/styles';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -23,6 +26,26 @@ type ChoiceTextProps = {
   }, isCorrect: boolean) => void;
 };
 
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: 'green',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'green',
+  },
+  '& .MuiOutlinedInput-root': {
+    background: 'white',
+    '& fieldset': {
+      borderColor: 'softgreen',
+    },
+    '&:hover fieldset': {
+      borderColor: 'yellow',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'green',
+    },
+  },
+});
 
 export const TypeInQuestion: FC<ChoiceTextProps> = ({
   question,
@@ -100,15 +123,21 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
             question.questionAudioAssets[0]?.audioFile
           }
         />
-        <AnswersContainer
-        >
-          <input
+        <AnswersContainer>
+          <TypoGeneralText style={{ color: 'white' }}>
+            The answer is
+          </TypoGeneralText>
+          <CssTextField
             disabled={disabled}
-            style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end' }}
+            sx={{ minWidth: 200 }}
             value={typedAnswer}
             onChange={(e: any) => setTypedAnswer(e.target.value)}
+            // variant='filled'
             autoFocus
           />
+          <TypoGeneralText style={{ color: 'white' }}>
+            .
+          </TypoGeneralText>
         </AnswersContainer>
         <AssistorContainer>
           <Button
@@ -126,10 +155,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
             }
           />
           <Icon image={assistor} onClick={readQuestion} />
-          {
-            blockPresentation?.block?.topicGrade?.topic?.videoAssistor &&
-            <Icon image={videoIcon} onClick={closeVideoModal} />
-          }
+          <Icon image={videoIcon} onClick={closeVideoModal} />
         </AssistorContainer>
       </BlackBoard>
     </>

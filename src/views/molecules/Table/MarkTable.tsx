@@ -184,14 +184,10 @@ const MarkTable = ({
                     height: '100%',
                     border: 'none',
                     outline: 'none',
-                }} name='' id='' value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}
-            >
-                {areasOfKnowledge && typeof areasOfKnowledge === 'object' && areasOfKnowledge.length > 0 ? areasOfKnowledge.map((subject: any, id) => {
-                    if (subject?.name === "Test AoK" || subject?.name === "USA Math" || subject?.name === "ELA") return null
-                    return (
-                        <option key={id} value={subject?.id}>{subject?.name}</option>
-                    )
-                }) : '' }
+                }} name='' id='' value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
+            { areasOfKnowledge && typeof areasOfKnowledge === 'object' && areasOfKnowledge.length > 0 ? areasOfKnowledge.map((subject, id) => (
+                <option key={id} value={subject?.id}>{ subject?.name }</option>
+            )) : '' }
             </select>
             <Mark>Accuracy</Mark>
             <Mark>Correct</Mark>

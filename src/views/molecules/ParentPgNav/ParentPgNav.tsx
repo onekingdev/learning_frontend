@@ -1,26 +1,26 @@
-import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux'
+import { FC, useEffect } from 'react';
+import styled            from 'styled-components';
+import { useHistory}     from 'react-router-dom';
+import { useSelector }   from 'react-redux'
 // import { useDispatch } from 'react-redux';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMarkRounded';
-import { BasicColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
-import { useStyles } from './Style';
-import logoTitle from 'views/assets/logo-learn.svg'
-// import home from 'views/assets/home_pc.svg'
-import avatar from 'views/assets/socrates-icon.svg'
-import { dictionary } from './dictionary'
+import InputLabel        from '@mui/material/InputLabel';
+import MenuItem          from '@mui/material/MenuItem';
+import FormControl       from '@mui/material/FormControl';
+import Select            from '@mui/material/Select';
+import Avatar            from '@mui/material/Avatar';
+import Button            from '@mui/material/Button';
+import QuestionMarkIcon  from '@mui/icons-material/QuestionMarkRounded';
+import { BasicColor }    from 'views/Color';
+import { ScreenSize }    from 'constants/screenSize';
+import { useStyles }     from './Style';
+import logoTitle         from 'views/assets/logo-learn.svg'
+import home              from 'views/assets/home_pc.svg'
+import avatar            from 'views/assets/socrates-icon.svg'
+import { dictionary }    from './dictionary'
 import {
   LogoContainer,
   LogoImg,
-  // Home,
+  Home,
   NameAvatarGroup,
   SupportBtnContainer,
   AvatarContainer,
@@ -30,26 +30,23 @@ type ParentPgNavProps = {
   onlyLogoImg: boolean;
 };
 
-export const ParentPgNav: FC<ParentPgNavProps> = ({ onlyLogoImg }) => {
+export const ParentPgNav: FC<ParentPgNavProps> = ({onlyLogoImg}) => {
   const history = useHistory();
   // const dispatch = useDispatch()
   const classes = useStyles();
-  const [selected, setSelected] = useState('')
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
-  const handleChange = (event: any) => {
-    setSelected(event.target.value)
-    switch (event.target.value) {
-      case 'Settings':
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : 'en-us'
+  const handleChange = (event:any) => {
+    switch(event.target.value) {
+      case 'Settings' :
         history.push('/parent/setting')
         break;
-      case 'ManageKids':
+      case 'ManageKids' :
         history.push('/kids/list')
         break;
-      case 'SignOut':
+      case 'SignOut' :
         history.push('/')
         break;
-      default: break;
     }
   };
   const onSupport = () => {
@@ -58,9 +55,9 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({ onlyLogoImg }) => {
   useEffect(() => {
   }, []);
 
-  if (onlyLogoImg) return (
+  if(onlyLogoImg) return(
     <Container>
-      <LogoImg src={logoTitle} />
+      <LogoImg  src={logoTitle} />
     </Container>
   )
   else return (
@@ -80,13 +77,13 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({ onlyLogoImg }) => {
         >
           {dictionary[language]?.support}
         </Button>
-        <Avatar className={classes.questionMarkButton} id='questionMarkButton' onClick={() => location.href = 'https://www.withsocrates.com/contact/'}>
-          {/* https://www.withsocrates.com/contact/ */}
+        <Avatar className={classes.questionMarkButton} id='questionMarkButton' onClick={() => location.href='https://www.withsocrates.com/contact/'}>
+        {/* https://www.withsocrates.com/contact/ */}
           <QuestionMarkIcon />
         </Avatar>
       </SupportBtnContainer>
       <LogoContainer>
-        <LogoImg src={logoTitle} />
+        <LogoImg  src={logoTitle} />
       </LogoContainer>
       <NameAvatarGroup>
         <FormControl className={classes.formControl}>
@@ -95,9 +92,8 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({ onlyLogoImg }) => {
             labelId='menu'
             id='menu-select'
             label='Menu'
-            value={selected ? selected : ''}
             onChange={handleChange}
-            sx={{ backgroundColor: 'white' }}
+            sx={{backgroundColor: 'white'}}
           >
             <MenuItem value={'Settings'}>{dictionary[language]?.settings}</MenuItem>
             <MenuItem value={'ManageKids'}>{dictionary[language]?.manageKids}</MenuItem>
@@ -105,7 +101,7 @@ export const ParentPgNav: FC<ParentPgNavProps> = ({ onlyLogoImg }) => {
           </Select>
         </FormControl>
         <AvatarContainer>
-          <Avatar sx={{ bgcolor: '#22BAAF', height: '60px', width: '60px', marginLeft: '15px' }} alt='Remy Sharp' src={avatar} />
+          <Avatar sx={{ bgcolor: '#22BAAF', height:'60px', width:'60px', marginLeft: '15px'}} alt='Remy Sharp' src={avatar} />
         </AvatarContainer>
       </NameAvatarGroup>
     </Container>

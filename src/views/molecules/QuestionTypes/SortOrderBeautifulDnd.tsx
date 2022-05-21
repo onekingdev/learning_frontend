@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable, DropResult  } from "react-beautiful-dnd";
 const { useState, memo } = React;
@@ -155,6 +156,18 @@ export const SortOrderBeautifulDnd: React.FC = () => {
       destination.index === source.index
     ) {
       return;
+    }
+
+    if (type === "column") {
+      const newColOrd = Array.from(state.columnOrder);
+      newColOrd.splice(source.index, 1);
+      newColOrd.splice(destination.index, 0, draggableId);
+
+      const newState = {
+        ...state,
+        columnOrder: newColOrd
+      };
+      setState(newState);
     }
 
     const startcol: any = state.columns[source.droppableId as keyof Object];
