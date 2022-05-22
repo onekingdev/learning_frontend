@@ -94,10 +94,13 @@ export const Welcome: FC = () => {
         <SignupActions>
           <Button
             value    ={dictionary[language]?.schoolSignUp}
-            color    ={BasicColor.blue}
+            // color    ={BasicColor.blue}
+            color    ={BasicColor.gray40}
             darkText ={true}
             style    ={{width: 'unset'}}
-            onClick  ={() => history.push('/teacher/selectCreateType')}
+            // onClick  ={() => history.push('/teacher/selectCreateType')}
+            onClick  ={() =>{}}
+
           />
           <Button
             value    ={dictionary[language]?.parentSignUp}
