@@ -75,7 +75,8 @@ export const UserRankTreasureTrack: FC<UserRankTreasureTrackProps> = ({userRank,
       <td style={{
         fontSize: '0.8rem'
       }}>
-      <div>{ coinsEarned }{dictionary[language]?.coins} <br />{dictionary[language]?.earn}</div>
+      <div>{ coinsEarned } {' '}
+      {dictionary[language]?.coins} <br />{dictionary[language]?.earn}</div>
       </td>
     </tr>
   )
