@@ -25,7 +25,7 @@ export const login = async (username: string, password: string, dispatch: any, l
   const { token } = result.data.tokenAuth
 
   //  TODO:
-  //  await doUpdateUserLanguage(language, token)
+   await doUpdateUserLanguage(language, token)
 
   const res_who: any = await query('whoami', WHOAMI_QUERY, token).catch(() => ({ success: false }));
 
