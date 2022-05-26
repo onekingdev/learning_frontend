@@ -1,7 +1,7 @@
-import * as React from "react";
+import { useState, memo } from "react";
 import styled from "styled-components";
-import { DragDropContext, Droppable, Draggable, DropResult  } from "react-beautiful-dnd";
-const { useState, memo } = React;
+import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
+import { Box } from "@mui/material";
 
 const data = {
   tasks: {
@@ -25,21 +25,16 @@ const data = {
   columns: {
     col1: {
       id: "col1",
-      title: "Todo",
+      title: "Question Options",
       taskIds: ["task1", "task2", "task3", "task4"]
     },
     col2: {
       id: "col2",
-      title: "Progress",
+      title: "Answer options",
       taskIds: []
     },
-    col3: {
-      id: "col3",
-      title: "Done",
-      taskIds: []
-    }
   },
-  columnOrder: ["col1", "col2", "col3"]
+  columnOrder: ["col1", "col2"]
 };
 
 const TaskContainer = styled.div<{ isDragging: boolean }>`
@@ -78,28 +73,12 @@ const Task = memo(({ task, index }: TaskProps) => {
   );
 });
 
-const Container = styled.div<{ isDragging: boolean }>`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  background-color: ${props => (props.isDragging ? "lightgreen" : "white")};
-`;
-const Title = styled.h3`
-  padding: 8px;
-`;
 const List = styled.div<{ isDraggingOver: boolean }>`
   padding: 8px;
   transition: background 0.1s;
   background-color: ${props =>
     props.isDraggingOver ? "lightgrey" : "inherit "};
   flex-grow: 1;
-`;
-
-const Columns = styled.div`
-  display: flex;
 `;
 
 interface Column {
@@ -114,32 +93,26 @@ interface ColumnProps {
 }
 
 const Column = memo(({ column, tasks, index }: ColumnProps) => (
-  <Draggable draggableId={column.id} index={index}>
-    {(provided, snapshot) => (
-      <Container
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        isDragging={snapshot.isDragging}
-        ref={provided.innerRef}
-      >
-        <Title {...provided.dragHandleProps}>{column.title}</Title>
-        <Droppable droppableId={column.id} type="task">
-          {(provided, snapshot) => (
-            <List
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              isDraggingOver={snapshot.isDraggingOver}
-            >
-              {tasks.map((t, i) => (
-                <Task key={t.id} task={t} index={i} />
-              ))}
-              {provided.placeholder}
-            </List>
-          )}
-        </Droppable>
-      </Container>
-    )}
-  </Draggable>
+  <Box sx={{
+    border: 'solid 1px red',
+    margin: 5,
+  }}>
+
+    <Droppable droppableId={column.id} type="task">
+      {(provided, snapshot) => (
+        <List
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+          isDraggingOver={snapshot.isDraggingOver}
+        >
+          {tasks.map((t, i) => (
+            <Task key={t.id} task={t} index={i} />
+          ))}
+          {provided.placeholder}
+        </List>
+      )}
+    </Droppable>
+  </Box>
 ));
 
 
@@ -207,18 +180,14 @@ export const SortOrderBeautifulDnd: React.FC = () => {
     <DragDropContext
       onDragEnd={onDragEnd}
     >
-      <Droppable droppableId="columns" direction="horizontal" type="column">
-        {provided => (
-          <Columns {...provided.droppableProps} ref={provided.innerRef}>
-            {state.columnOrder.map((id, i) => {
-              const col: any = state.columns[id as keyof Object];
-              const tasks = col.taskIds.map((taskid: any) => state.tasks[taskid as keyof Object]);
-              return <Column key={id} column={col} tasks={tasks} index={i} />;
-            })}
-            {provided.placeholder}
-          </Columns>
-        )}
-      </Droppable>
-    </DragDropContext>
+      {state.columnOrder.map((id, i) => {
+        const col: any = state.columns[id as keyof Object];
+        const tasks = col.taskIds.map((taskid: any) => state.tasks[taskid as keyof Object]);
+        return <Column key={id} column={col} tasks={tasks} index={i} />;
+      })}
+      {
+        // <Column column={state.columns.col1} tasks={state.columns.col1.taskIds.map((taskid: any) => state.tasks[taskid as keyof Object])} index={0} />
+      }
+    </DragDropContext >
   );
 }

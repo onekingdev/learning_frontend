@@ -25,8 +25,8 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
   }
 
   const extractMathjaxText = (str: string) => {
-    const regex = /(?<=\$).+?(?=\$)/g
-    // const regex = /(?:\$).+?(?=\$)/g    //changed because of IPAD, Need to test
+    // const regex = /(?<=\$).+?(?=\$)/g
+    const regex = /(?:\$).+?(?=\$)/g    //changed because of IPAD, Need to test
     const matches = str.match(regex)
     return matches ? matches[0] : ''
   }

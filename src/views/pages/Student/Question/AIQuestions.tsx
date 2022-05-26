@@ -256,7 +256,7 @@ export const AIQuestion: FC = () => {
         break
       case 'BlockID':
         res = await doGetQuestionBlockById(
-          parseInt(aokId), // in this case, aokId becomse blockID 1033
+          parseInt(aokId), // in this case, aokId becomse blockID 1033, 1358(math typein)
           user.token
         )
         break
