@@ -24,7 +24,6 @@ const positions = [
   'center',
   'start',
 ]
-const strokeWidth = 4
 
 // REMEMBER: changed hex values
 // #EC5858 -> #762C2C
@@ -36,7 +35,10 @@ const strokeWidth = 4
 
 
 export const KnowledgeMap: FC = () => {
+
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
+  const strokeWidth = isMobile ? 2 : 4
+
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
   const areasOfKnowledge: Array<any> = useSelector((state: any) => state.student.guardianstudentplan.subject);
