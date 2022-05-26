@@ -25,8 +25,8 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
   }
 
   const extractMathjaxText = (str: string) => {
-    // const regex = /(?<=\$).+?(?=\$)/g
-    const regex = /(?:\$).+?(?=\$)/g    //changed because of IPAD, Need to test
+    const regex = /(?<=\$).+?(?=\$)/g
+    // const regex = /(?:\$).+?(?=\$)/g    //changed because of IPAD, Need to test
     const matches = str.match(regex)
     return matches ? matches[0] : ''
   }
@@ -35,12 +35,12 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
     <Container sx={{
       display: 'flex',
       justifyContent: 'center',
-       alignItems: 'center',
-        flexDirection: 'column',
-        minHeight: 200,
+      alignItems: 'center',
+      flexDirection: 'column',
+      minHeight: 200,
     }}>
       <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', marginTop: 5, width: '100%' }}>
-        <Typography variant='h4' sx={{color: 'white'}}>
+        <Typography variant='h4' sx={{ color: 'white' }}>
           {title.charAt(0) === '@' ? extractQuestion(title) : title}
         </Typography>
         {

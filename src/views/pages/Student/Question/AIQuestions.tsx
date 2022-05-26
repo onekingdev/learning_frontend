@@ -33,6 +33,7 @@ import { RollCorrect } from 'views/molecules/QuestionRollContents/RollCorrect';
 import { FullBatteryPopup } from 'views/molecules/QuestionRollContents/FullBatteryPopup';
 import { RollWrong } from 'views/molecules/QuestionRollContents/RollWrong';
 import { LoadingSpinner } from 'views/atoms/Spinner';
+import { useHistory } from 'react-router-dom';
 
 interface RoutePresentationParams {
   mode: string;
@@ -43,6 +44,7 @@ const EXP_UNIT = 5;
 
 export const AIQuestion: FC = () => {
 
+  const history = useHistory();
   const [playHit] = useSound(audioCheck);
   const [playError] = useSound(audioError);
   const earning = useSelector((state: any) => state.earning);
@@ -258,20 +260,22 @@ export const AIQuestion: FC = () => {
           user.token
         )
         break
-      default: break
+      default:
+        history.push('/map')
+        break
     }
-
     if (!res.success) {
       enqueueSnackbar(res.msg, { variant: 'error' });
-      return false;
+      // return false;
+      return
     }
-    console.log({ res })
     if (mounted) {
       setAiBlock(res)
       setQuestions(res.block.questions)
       loadingContext.done()
     }
-    return true;
+    return
+    // return true;
   }
 
   const onNextLesson = () => {

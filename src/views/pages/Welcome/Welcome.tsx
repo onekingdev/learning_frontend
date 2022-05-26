@@ -89,7 +89,7 @@ export const Welcome: FC = () => {
         <Body>
           {/* <Header isDark={true}>{dictionary[language]?.practice}</Header> */}
           <Typography variant='h3' style={{ fontWeight: 800 }}>{dictionary[language]?.practice}</Typography>
-          <Box
+          {/* <Box
             sx={{
               position: 'absolute',
               right: '3vw',
@@ -98,7 +98,7 @@ export const Welcome: FC = () => {
             }}>
 
             <LanguageSelect />
-          </Box>
+          </Box> */}
           <Description>
             <Subheader isDark={true}>
               {dictionary[language]?.description1}

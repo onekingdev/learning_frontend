@@ -24,6 +24,17 @@ const positions = [
   'center',
   'start',
 ]
+const strokeWidth = 4
+
+// REMEMBER: changed hex values
+// #EC5858 -> #762C2C
+// #F4C222 -> #D18316
+// #22BAAF -> #115D57
+// #26B824 -> #135C12
+// #CC5B1D -> #662D0E
+// #A685E2 -> #534271
+
+
 export const KnowledgeMap: FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   const loadingContext = useContext(LoadingContext);
@@ -79,12 +90,7 @@ export const KnowledgeMap: FC = () => {
         <Ocean >
           {areasOfKnowledge.map(
             (
-              areaOfKnowledge: {
-                id: number;
-                islandImage: string;
-                isActive: boolean;
-                name: string
-              },
+              areaOfKnowledge: any,
               i
             ) => {
               return (
@@ -121,24 +127,26 @@ export const KnowledgeMap: FC = () => {
                       }}
                     />
                     <Typography
-                      variant='h3'
+                      variant='h4'
                       sx={{
                         maxWidth: isMobile ? 100 : 200,
                         position: 'absolute',
                         top: '40%',
-                        // transform: 'translateY(-10%)',
                         left: 0,
                         right: 0,
                         margin: 'auto',
                         fontFamily: 'Quicksand',
-                        textShadow: '0 0 0.05em #fff, 0 0 0.2em #fe05e1, 0 0 0.3em #fe05e1 1px 1px 0.4em #c11a2b',
                         color: 'white',
                         fontWeight: '700',
                         textAlign: 'center',
                         fontSize: isMobile ? 12 : 30,
                         cursor: 'pointer',
-                        background: '#FB8500',
-                        // WebkitTextStroke: '1px #' + Math.floor(Math.random() * 16777215).toString(16),
+                        textShadow: `
+                          ${strokeWidth * Math.cos(0)}px 0 0 ${areaOfKnowledge.hexColor},
+                          ${strokeWidth * Math.cos(Math.PI / 8)}px ${strokeWidth * Math.sin(Math.PI / 8)}px 0 ${areaOfKnowledge.hexColor},
+                          ${strokeWidth * Math.cos(Math.PI / 4)}px ${strokeWidth * Math.sin(Math.PI / 4)}px 0 ${areaOfKnowledge.hexColor},
+                          ${strokeWidth * Math.cos(Math.PI * 3 / 8)}px ${strokeWidth * Math.sin(Math.PI * 3 / 8)}px 0 ${areaOfKnowledge.hexColor}
+                          `
                       }}>{areaOfKnowledge.name}
                     </Typography>
                   </Box>
