@@ -7,8 +7,8 @@ import { AUDIENCES } from '../fragments/peopleFragments'
 import { AREA_OF_KNOWLEDGE } from '../fragments/areaOfKnowledgeFragments'
 import { GRADES } from '../fragments/peopleFragments'
 
-export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string) => `
-	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}") {
+export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string, language: string) => `
+	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}", language: "${language}") {
         guardian {
             ${GUARDIAN}
         }

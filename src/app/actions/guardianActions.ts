@@ -13,9 +13,9 @@ import {
 import { sendRawQuery } from 'api/queries/get';
 import * as TYPES from 'app/types'
 
-export const createGuardian = async (email: string, firstName: string, lastName: string, userName: string, password: string, couponCode: string, dispatch: any) => {
+export const createGuardian = async (email: string, firstName: string, lastName: string, userName: string, password: string, couponCode: string, dispatch: any, language: string) => {
     const res: any = await mutationFetch(
-        CREATE_GUARDIAN(email, firstName, lastName, userName, password, couponCode)
+        CREATE_GUARDIAN(email, firstName, lastName, userName, password, couponCode, language)
     ).catch(() => ({ success: 'false' }));
 
     if (res.success === false) {
