@@ -4,7 +4,7 @@ import { useSnackbar }                                       from 'notistack';
 import { useDispatch }                                       from 'react-redux'
 import { login, resetReducer }                               from 'app/actions/userActions'
 import { Header }                                            from 'views/atoms/Text/Header';
-import { Subheader }                                         from 'views/atoms/Text/Subheader';
+// import { Subheader }                                         from 'views/atoms/Text/Subheader';
 import { ButtonColor }                                       from 'views/Color';
 import logo                                                  from 'views/assets/socrates-logo.svg';
 import classroom                                             from 'views/assets/teacher-and-children.svg';
@@ -15,8 +15,8 @@ import { Greet }                                             from 'views/molecul
 import { Login, StyledContainer, LoginWrapper, DesktopWelcome, TermsContainer }  from './Style';
 import { dictionary }                                        from './dictionary';
 import { useSelector }        from 'react-redux';
-import { ScreenSize }         from 'constants/screenSize';
-import { Container, Grid }    from '@mui/material';
+// import { ScreenSize }         from 'constants/screenSize';
+import { Grid }    from '@mui/material';
 import { TypoBtn }            from 'views/atoms/Text';
 
 export const LogIn: FC = () => {
@@ -38,7 +38,7 @@ export const LogIn: FC = () => {
   const loginAction = async () => {
 
     setLoading(true);
-    const result:any = await login(username, password, dispatch);
+    const result:any = await login(username, password, dispatch, language);
     setLoading(false);
 
     if(!result.success) {

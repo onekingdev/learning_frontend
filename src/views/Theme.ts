@@ -74,3 +74,61 @@ export const settingPage = createTheme({
     },
   }
 });
+
+export const welcomePage = createTheme({
+  palette: {
+    primary: {
+      main: BasicColor.green,
+      contrastText: '#ffffff',
+      light: BasicColor.greenShadow,
+      dark: BasicColor.greenShadow
+    },
+    secondary: {
+      main: '#919699',
+      contrastText: '#ffffff',
+    },
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: 15,
+          ':focus': {
+            outline: 0,
+            border: 0,
+          },
+
+          '& fieldset': {
+            borderColor: BasicColor.greenSoft,
+          },
+          ':hover fieldset': {
+            borderColor: BasicColor.greenSoft
+          },
+        },
+        input: {
+          ':focus :valid': {
+            outline: 0,
+            border: 0
+          },
+        },
+      }
+    },
+    MuiLink:{
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          color: 'black',
+          textAlign: 'center',
+          fontSize: '0.8rem'
+        }
+      }
+    }
+  }
+});

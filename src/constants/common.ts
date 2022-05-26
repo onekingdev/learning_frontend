@@ -14,12 +14,12 @@ export const LANGUAGES = [
     },
     {
         id: 2,
-        label: 'Spanish',
+        label: 'Española',
         value: 'es-mx'
     },
     {
         id: 3,
-        label: 'Thai',
+        label: 'ไทย',
         value: 'th'
     },
 ]

@@ -52,6 +52,7 @@ const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUse
     case TYPE.USER_RESET:
       return {
         ...INITIAL_STATE,
+        language: state.language,
         rewardfulId: state.rewardfulId};
     default:
       return state;

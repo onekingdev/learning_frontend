@@ -38,7 +38,7 @@ export const SelectCreateType: FC = () => {
   const loginAction = async () => {
 
     setLoading(true);
-    const result:any = await login(username, password, dispatch);
+    const result:any = await login(username, password, dispatch, language);
     setLoading(false);
 
     if(!result.success) {
