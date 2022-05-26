@@ -28,7 +28,7 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
     // const regex = /(?<=\$).+?(?=\$)/g
     const regex = /(?:\$).+?(?=\$)/g    //changed because of IPAD, Need to test
     const matches = str.match(regex)
-    return matches ? matches[0] : ''
+    return matches ? matches[0].slice(1) : ''
   }
 
   return (
