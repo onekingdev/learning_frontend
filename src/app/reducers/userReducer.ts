@@ -29,6 +29,11 @@ const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUse
         // language: 'en-us',     // test for language
 
       };
+    case TYPE.USER_SET_TOKEN:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case TYPE.USER_SET_REWARDFUL_ID:
       return {
         ...state,

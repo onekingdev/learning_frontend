@@ -23,3 +23,10 @@ export const LANGUAGES = [
         value: 'th'
     },
 ]
+
+export enum USER_TYPE {
+    teacher = 'teacher',
+    student = 'student',
+    guardian = 'guardian',
+    noPlans = 'noPlans',
+  }

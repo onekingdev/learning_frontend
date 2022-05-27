@@ -18,6 +18,7 @@ import { useSelector }        from 'react-redux';
 // import { ScreenSize }         from 'constants/screenSize';
 import { Grid }    from '@mui/material';
 import { TypoBtn }            from 'views/atoms/Text';
+import { USER_TYPE } from 'constants/common';
 
 export const LogIn: FC = () => {
   const history   = useHistory();
@@ -46,14 +47,17 @@ export const LogIn: FC = () => {
       return;
     }
     switch(result.userType) {
-      case 'student' :
+      case USER_TYPE.student :
         history.push('/home')
         return;
-      case 'guardian' :
+      case USER_TYPE.guardian :
         history.push('/kids/list')
         return;
-      case 'teacher' :
+      case USER_TYPE.teacher :
         history.push('/kids/list')
+        return;
+      case USER_TYPE.noPlans :
+        history.push('/parent/payment')
         return;
       default:
         history.push('/home')
