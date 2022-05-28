@@ -77,8 +77,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
             country: '',
             phone: null,
         } : {
-            firstName: null,
-            lastName: null,
+            firstName: '',
+            lastName: '',
             cardNumber: null,
             expiryDate: null,
             cvc: null,
@@ -312,7 +312,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
             </>}
             <div style={{ fontSize: '24px', fontWeight: '700', paddingTop: '15px', paddingBottom: '15px' }}>{dictionary[language]?.billingInformation}</div>
             <Grid container spacing={4}>
-                {/* <Grid item xs={6}>
+                <Grid item xs={6}>
                     <TextField
                         label={dictionary[language]?.firstName}
                         onChange={(e: any) => {
@@ -335,7 +335,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                         helperText={validateRst.lastName}
                         value={data.lastName}
                     />
-                </Grid> */}
+                </Grid>
                 {!isSpecialCode &&
                     <Grid item xs={12}>
                         {/* <TextField

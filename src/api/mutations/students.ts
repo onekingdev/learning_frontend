@@ -1,9 +1,9 @@
 
-import { USER, USER_PROFILE }                           from '../fragments/userFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
+// import { USER, USER_PROFILE }                           from '../fragments/userFragments'
+// import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
 import { STUDENT }                                      from '../fragments/studentFragments'
 import {
-    GUARDIAN_STUDENT,
+    // GUARDIAN_STUDENT,
     GUARDIAN,
 } from '../fragments/guardianFragments';
 
@@ -22,17 +22,6 @@ export const CREATE_STUDENT = (
         guardian {
             ${GUARDIAN}
         }
-        student {
-            ${STUDENT}
-        }
-        user {
-            ${USER}
-        }
-        profile {
-            ${USER_PROFILE}
-        }
-        token
-        refreshToken
 	}
 `;
 

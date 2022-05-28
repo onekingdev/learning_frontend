@@ -117,8 +117,8 @@ const NewKids: FC = () => {
 
   const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
     packageName: null,
-    firstName: null,
-    lastName: null,
+    firstName: '',
+    lastName: '',
     userId: null,
     password: null,
     confPassword: null,
@@ -154,7 +154,7 @@ const NewKids: FC = () => {
     });
 
     setFirstName('');
-    setLastName('');
+    // setLastName('');
     setUserId('');
     setPassword('');
     setConfPassword('');

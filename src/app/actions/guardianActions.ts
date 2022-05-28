@@ -16,7 +16,7 @@ import * as TYPES from 'app/types'
 export const createGuardian = async (email: string, firstName: string, lastName: string, userName: string, password: string, couponCode: string, dispatch: any, language: string) => {
     const res: any = await mutationFetch(
         CREATE_GUARDIAN(email, firstName, lastName, userName, password, couponCode, language)
-    ).catch(() => ({ success: 'false' }));
+    ).catch(() => ({ success: false }));
 
     if (res.success === false) {
         return { success: false, msg: 'Network Error!' };
