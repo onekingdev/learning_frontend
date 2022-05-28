@@ -1,27 +1,27 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { LoadingContext }           from 'react-router-loading';
-import { useSnackbar }              from 'notistack';
-import { toPng }                    from 'html-to-image';
-import { saveAs }                   from 'file-saver';
-import { useHistory }               from 'react-router-dom';
-import InputLabel                   from '@mui/material/InputLabel';
-import MenuItem                     from '@mui/material/MenuItem';
-import FormControl                  from '@mui/material/FormControl';
-import Select                       from '@mui/material/Select';
-import license                      from 'views/assets/student-license.svg';
-import License                      from 'views/molecules/KidLicense/KidLicense';
-import TextField                    from 'views/molecules/MuiTextField';
-import Button                       from 'views/molecules/MuiButton';
-import { ParentPgContainer }        from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { LSDialog }                 from 'views/molecules/Setting/LSDialog';
-import { BasicColor }               from 'views/Color';
-import { Store }                    from 'app/configureStore';
-import { changeStudentGrade }       from 'app/actions/studentActions';
-import { changeStudentPassword }    from 'app/actions/studentActions';
-import { ImageAvatar }              from 'views/molecules/Avatar/DefaultAvatar';
-import { getAudiencesWithGrades}    from 'app/actions/audienceActions'
-import { dictionary }               from './dictionary';
+import { LoadingContext } from 'react-router-loading';
+import { useSnackbar } from 'notistack';
+import { toPng } from 'html-to-image';
+import { saveAs } from 'file-saver';
+import { useHistory } from 'react-router-dom';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import license from 'views/assets/student-license.svg';
+import License from 'views/molecules/KidLicense/KidLicense';
+import TextField from 'views/molecules/MuiTextField';
+import Button from 'views/molecules/MuiButton';
+import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { LSDialog } from 'views/molecules/Setting/LSDialog';
+import { BasicColor } from 'views/Color';
+import { Store } from 'app/configureStore';
+import { changeStudentGrade } from 'app/actions/studentActions';
+import { changeStudentPassword } from 'app/actions/studentActions';
+import { ImageAvatar } from 'views/molecules/Avatar/DefaultAvatar';
+// import { getAudiencesWithGrades } from 'app/actions/audienceActions'
+import { dictionary } from './dictionary';
 
 import {
   Title,
@@ -32,29 +32,30 @@ import {
   GridContainer,
   GridItem,
 } from './Style';
+import { Link, Typography } from '@mui/material';
 
-interface kid {
-  username: string;
-  password: string;
-  grade: string;
-  avatar: string;
-}
+// interface kid {
+//   username: string;
+//   password: string;
+//   grade: string;
+//   avatar: string;
+// }
 
 const KidsList: FC = () => {
-  const loadingContext      = useContext(LoadingContext);
+  const loadingContext = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
-  const classes             = useStyles();
-  const user      = useSelector((state: Store) => state?.user);
-  const guardian  = useSelector((state: any) => state?.guardian)
-  const student   = useSelector((state: any) => state?.student)
+  const classes = useStyles();
+  const user = useSelector((state: Store) => state?.user);
+  const guardian = useSelector((state: any) => state?.guardian)
+  const student = useSelector((state: any) => state?.student)
 
-  const history  = useHistory();
+  const history = useHistory();
   const dispatch = useDispatch()
 
-  const [children,  setChildren] = useState<kid[]>([]);
-  const [audiences, setAudiences] = useState<any>();
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  // const [children, setChildren] = useState<kid[]>([]);
+  // const [audiences, setAudiences] = useState<any>();
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
 
   const langs = [{
     name: 'English',
@@ -63,16 +64,16 @@ const KidsList: FC = () => {
 
   const Kid = (props: any) => {
 
-    const userName  = props?.user?.username;
-    const kidLanguage  = props?.user?.language;
+    const userName = props?.user?.username;
+    const kidLanguage = props?.user?.language;
     // const parentName  = user?.username;
     // const fullName    = props?.fullName;
     const studentId = props?.id;
     const grades = props?.audience?.gradeSet;
-    const [grade,   setGrade]     = useState(props?.grade?.grade);
-    const [newPwd,  setNewPwd]    = useState('');
-    const [loading, setLoading]   = useState(false);
-    const [openLicense,   setOpenLicense]   = useState(false);
+    const [grade, setGrade] = useState(props?.grade?.grade);
+    const [newPwd, setNewPwd] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [openLicense, setOpenLicense] = useState(false);
     const [openChangePwd, setOpenChangePwd] = useState(false);
 
     const openLicenseDlg = () => {
@@ -120,25 +121,25 @@ const KidsList: FC = () => {
 
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-      loadingContext?.done();
+    //   loadingContext?.done();
 
-    }, []);
+    // }, []);
 
     return (
       <KidContainer>
         <LSDialog
-          isOpen        ={openLicense}
-          open          ={openLicenseDlg}
-          title         ={dictionary[language]?.yourChildLicense}
-          fullWidth     ='true'
-          dialogContent ={
+          isOpen={openLicense}
+          open={openLicenseDlg}
+          title={dictionary[language]?.yourChildLicense}
+          fullWidth='true'
+          dialogContent={
             <>
               <License
-                parentName ={user?.username}
-                username   ={userName}
-                membership ={props?.guardianstudentplanSet?.legnth > 0 ? new Date(props?.guardianstudentplanSet[0]?.expiredAt) : ''}
+                parentName={user?.username}
+                username={userName}
+                membership={props?.guardianstudentplanSet?.legnth > 0 ? new Date(props?.guardianstudentplanSet[0]?.expiredAt) : ''}
               />
               <GridContainer container>
                 <GridItem item md={6} xs={12}>
@@ -161,11 +162,11 @@ const KidsList: FC = () => {
           }
         />
         <LSDialog
-          isOpen        ={openChangePwd}
-          open          ={openChangePwdDlg}
-          title         ={dictionary[language]?.changeYourPassword}
-          fullWidth     ='true'
-          dialogContent ={
+          isOpen={openChangePwd}
+          open={openChangePwdDlg}
+          title={dictionary[language]?.changeYourPassword}
+          fullWidth='true'
+          dialogContent={
             <>
               <GridContainer container>
                 <GridItem item md={12} xs={12}>
@@ -200,21 +201,21 @@ const KidsList: FC = () => {
 
         <GridContainer container className='align-center'>
           <GridItem item xs={6} md={0.7}
-              onClick={() => history.push('/parent/reporting/' + studentId)}
-              sx={{
-                marginRight: 2,
-                '&:hover': {
-                  cursor: 'pointer'
-                }
-              }}
-              >
+            onClick={() => history.push('/parent/reporting/' + studentId)}
+            sx={{
+              marginRight: 2,
+              '&:hover': {
+                cursor: 'pointer'
+              }
+            }}
+          >
             <ImageAvatar
-              name = {student?.fullName? student?.fullName:'F'}
-              accessory = {props?.currentAvatarAccessories ? props?.currentAvatarAccessories : null}
-              head      = {props?.currentAvatarHead ? props?.currentAvatarHead : null}
-              clothes   = {props?.currentAvatarClothes ? props?.currentAvatarClothes : null}
-            // skinTone={null}
-              size      = {70}
+              name={student?.fullName ? student?.fullName : 'F'}
+              accessory={props?.currentAvatarAccessories ? props?.currentAvatarAccessories : null}
+              head={props?.currentAvatarHead ? props?.currentAvatarHead : null}
+              clothes={props?.currentAvatarClothes ? props?.currentAvatarClothes : null}
+              // skinTone={null}
+              size={70}
             />
             {/* <Avatar src={props?.avatar} onClick={() => history?.push('/parent/reporting')} /> */}
           </GridItem>
@@ -233,12 +234,12 @@ const KidsList: FC = () => {
                 {dictionary[language]?.selectYourGrade}
               </InputLabel>
               <Select
-                labelId   ='select-grade-label'
-                id        ='select-grade'
-                value     ={grades?.length > 0 ? grades[grades?.findIndex((item: any) => item?.id === grade?.id)] : ''}
-                label     ={dictionary[language]?.selectYourGrade}
-                className ={`${classes?.select} err-border`}
-                onChange  ={async (e) => {
+                labelId='select-grade-label'
+                id='select-grade'
+                value={grades?.length > 0 ? grades[grades?.findIndex((item: any) => item?.id === grade?.id)] : ''}
+                label={dictionary[language]?.selectYourGrade}
+                className={`${classes?.select} err-border`}
+                onChange={async (e) => {
                   setGrade(e?.target?.value);
                   const res = await changeStudentGrade(e?.target?.value?.id, props?.id, user?.token, dispatch)
                   if (!res?.success) {
@@ -261,12 +262,12 @@ const KidsList: FC = () => {
                 {dictionary[language]?.selectYourLanguage}
               </InputLabel>
               <Select
-                labelId   ='select-lang-label'
-                id        ='select-lang'
-                value     ={langs[langs?.findIndex((item: any) => item?.value === kidLanguage)]}
-                label     ={dictionary[language]?.selectYourLanguage}
-                className ={`${classes.select} err-border`}
-                onChange  ={async () => {
+                labelId='select-lang-label'
+                id='select-lang'
+                value={langs[langs?.findIndex((item: any) => item?.value === kidLanguage)]}
+                label={dictionary[language]?.selectYourLanguage}
+                className={`${classes.select} err-border`}
+                onChange={async () => {
                   // setGrade(e.target.value);
                   // console.log(props)
                   // const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
@@ -304,30 +305,43 @@ const KidsList: FC = () => {
   };
 
   useEffect(() => {
-    onInit();
+    if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+    loadingContext.done();
+
+    // onInit();
   }, []);
 
-  const onInit = async () => {
+  // const onInit = async () => {
 
-    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+  //   if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
-    const guardianStudents  = guardian?.guardianstudentSet
-    const students          = [];
+  //   // const guardianStudents = guardian?.guardianstudentSet
+  //   // const students = [];
 
-    for (const guardianStudent of guardianStudents) {
-      students.push(guardianStudent?.student)
-    }
-    setChildren(students)
-    loadingContext.done();
-  }
+  //   // for (const guardianStudent of guardianStudents) {
+  //   //   students.push(guardianStudent?.student)
+  //   // }
+  //   // setChildren(students)
+  //   loadingContext.done();
+  // }
 
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
       <Container>
         <Title>{dictionary[language]?.yourChildren}</Title>
-        {children?.map((child, index) => (
-          <Kid {...child} index={index} key={index}></Kid>
+        {guardian.guardianstudentSet.map((child: any, index: number) => (
+          <Kid {...child.student} index={index} key={child.id}></Kid>
         ))}
+        {
+          guardian.availableGuardianstudentplan.length ?
+            <Typography variant='h6'>You can register
+              {' ' + guardian.availableGuardianstudentplan.length + ' '}
+              more children <Link href='/kids/new'>here</Link>.</Typography>
+            : null
+        }
+        {/* {children?.map((child, index) => (
+          <Kid {...child} index={index} key={index}></Kid>
+        ))} */}
       </Container>
     </ParentPgContainer>
   );

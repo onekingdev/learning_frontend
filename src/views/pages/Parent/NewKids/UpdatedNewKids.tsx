@@ -38,7 +38,6 @@ import financial_sole from 'views/assets/packageIcons/financial_sole.svg';
 import health_sole from 'views/assets/packageIcons/health_sole.svg';
 import { LoadingContext } from 'react-router-loading';
 import { createStudent } from 'views/../app/actions/studentActions'
-// import { getGrades } from 'views/../app/actions/gradeActions'
 import { getAudiencesWithGrades } from 'app/actions/audienceActions'
 import InfoIcon from '@mui/icons-material/Info';
 import { useSnackbar } from 'notistack';
@@ -59,11 +58,8 @@ const NewKids: FC = () => {
   const classes = useStyles();
   const guardian = useSelector((state: any) => state.guardian)
   const user = useSelector((state: any) => state.user)
-  // const grades = useSelector((state: any) => state.grade)
   const { enqueueSnackbar } = useSnackbar();
-
-  const [availablePackages, setAvailablePackages] = useState<any[]>([]);
-  // const availablePlans: any[] = guardian.availableGuardianstudentplan
+  const availablePlans: any[] = guardian.availableGuardianstudentplan
   const [audiences, setAudiences] = useState([]);
   const [grades, setGrades] = useState([]);
   const [currentPackage, setCurrentPackage] = useState<any>();
@@ -74,9 +70,6 @@ const NewKids: FC = () => {
   const [confPassword, setConfPassword] = useState('');
   const [audience, setAudience] = useState<any>();
   const [grade, setGrade] = useState<any>();
-  const [childNum, setChildNum] = useState(0);
-  const [childIdx, setChildIdx] = useState(1);
-  const [childs, setChilds] = useState([{}]);
   const [paths, setPaths] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -137,31 +130,20 @@ const NewKids: FC = () => {
     setValidateMsg({ ...validateMsg, [field]: errMsg });
   };
 
-  const handlePrev = () => { };
 
   const handleNext = async () => {
     if (!formValidation()) return;
-    // return;
-    // if (childIdx === childNum) {
-    //   saveChild(childs[childIdx]);
-    //   return;
-    // }
+
     setLoading(true)
     if (!await saveChild()) {
       setLoading(false)
       return;
     }
 
-    // Update redux state - available plans
-    // Previous code snippet
-    if (childIdx === childNum) history.push('/kids/list');
-    const temp = [...availablePackages];
-    const inex = temp.indexOf(currentPackage);
-    // delete temp[inex];
-    temp.splice(inex, 1)
-    setAvailablePackages(temp);
+    enqueueSnackbar("Succeed in adding a new child", { variant: 'success' });
 
-    setChildIdx(childIdx + 1);
+    if (availablePlans.length === 1) history.push('/kids/list');
+
     setValidateMsg({
       firstName: null,
       lastName: null,
@@ -170,7 +152,7 @@ const NewKids: FC = () => {
       confPassword: null,
       grade: null,
     });
-    setCurrentPackage(temp[0]);
+
     setFirstName('');
     setLastName('');
     setUserId('');
@@ -202,21 +184,6 @@ const NewKids: FC = () => {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return false;
     }
-
-    setChilds([
-      ...childs,
-      {
-        package: currentPackage,
-        firstName: firstName,
-        lastName: lastName,
-        userId: userId,
-        password: password,
-        grade: grade,
-        currentPackage_id: currentPackage.id,
-        listSubjectId: listSubjectId,
-        studentPlan: studentPlan,
-      },
-    ]);
     return true;
   };
 
@@ -234,47 +201,22 @@ const NewKids: FC = () => {
   };
 
   const setAudienceData = async () => {
-    const result: any = await getAudiencesWithGrades(
-      // user.token,
-      // dispatch
-    );
+    const result: any = await getAudiencesWithGrades()
     if (!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
+      enqueueSnackbar(result.msg, { variant: 'error' })
       return false;
     }
-    setAudiences(result.data);
+    setAudiences(result.data)
     return true;
   }
-  // const setGradeData = async () => {
-  //   const result: any = await getGrades(
-  //     user.token,
-  //     dispatch
-  //   );
-  //   if (!result.success) {
-  //     enqueueSnackbar(result.msg, { variant: 'error' });
-  //     return false;
-  //   }
-  //   return true;
-  // }
 
+  // const goldCount: number = guardianStudentPlans.reduce((counter: number, { plan }: any) => { return plan.name === 'Gold' ? counter + 1 : counter }, 0)
   const onPageInit = async () => {
 
-    if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+    if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget()
 
-    const guardianStudentPlans = guardian.guardianstudentplanSet;
-    const temp_availblePlans = [];
-
-    for (const guardianStudentPlan of guardianStudentPlans) {
-      temp_availblePlans.push(guardianStudentPlan?.plan)
-    }
-
-    // const goldCount: number = guardianStudentPlans.reduce((counter: number, { plan }: any) => { return plan.name === 'Gold' ? counter + 1 : counter }, 0)
-
-    setAvailablePackages(guardianStudentPlans);
-    setChildNum(guardianStudentPlans.length);
-    // await setGradeData();
-    await setAudienceData();
-    loadingContext.done();
+    await setAudienceData()
+    loadingContext.done()
 
   }
   useEffect(() => {
@@ -346,14 +288,6 @@ const NewKids: FC = () => {
 
               {/* Select Available Packages */}
               <Grid item xs={12}>
-                {/* <TextField label='Select Your Package' variant='outlined' fullWidth sx={{backgroundColor: 'white'}} value={packageName}
-                                onChange={(e) => {
-                                    setPackageName(e.target.value);
-                                    handleFormChange('packageName',e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
-                                }}
-                                error={!!validateMsg.packageName}
-                                helperText={validateMsg.packageName}
-                            /> */}
                 <FormControl fullWidth>
                   <InputLabel id='select-package-label'>
                     {dictionary[language]?.selectYourPackage}
@@ -370,10 +304,8 @@ const NewKids: FC = () => {
                         : classes.soleInput
                       } err-border`}
                     onChange={e => {
-                      // const selected: any = availablePackages.find((_package: any) => _package.plan.id === e.target.value)
-                      const selected: any = guardian.availableGuardianstudentplan.find(({ plan }: any) => plan.id === e.target.value)
+                      const selected: any = availablePlans.find(({ plan }: any) => plan.id === e.target.value)
                       setCurrentPackage(selected);
-                      // filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US').
 
                       if (selected.plan?.name === 'Gold') setPaths(selected.plan?.subjects.
                         filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US')
@@ -395,8 +327,7 @@ const NewKids: FC = () => {
                     }
                     displayEmpty={true}
                   >
-                    {/* {availablePackages.map((_package) => ( */}
-                    {guardian.availableGuardianstudentplan.map((plan: any) => (
+                    {availablePlans.map((plan: any) => (
                       <MenuItem value={plan.plan.id} key={plan.id}>
                         {plan?.plan?.name}
                       </MenuItem>
@@ -597,29 +528,16 @@ const NewKids: FC = () => {
                   <div className='err-text'>{validateMsg.grade}</div>
                 </FormControl>
               </Grid>
-              <Grid item xs={12} md={12} lg={6}>
-                {childIdx > 0 && (
-                  <Button
-                    value={dictionary[language]?.previousKid}
-                    bgColor={ButtonColor.create}
-                    onClick={handlePrev}
-                    disabled={true}
-                  />
-                )}
-              </Grid>
               <LSGridRow item xs={12} md={12} lg={6}>
                 <Button
-                  value={guardian.availableGuardianstudentplan.length > 1 ? dictionary[language]?.nextKid : dictionary[language]?.finish}
-                  // value={childNum !== childIdx ? dictionary[language]?.nextKid : dictionary[language]?.finish}
+                  value={availablePlans.length > 1 ? dictionary[language]?.nextKid : dictionary[language]?.finish}
                   bgColor={
-                    // childNum !== childIdx
-                    guardian.availableGuardianstudentplan.length > 1
+                    availablePlans.length > 1
                       ? ButtonColor.nextKid
                       : ButtonColor.create
                   }
                   onClick={handleNext}
-                  disabled={guardian.availableGuardianstudentplan.length < 1 ? true : false}
-                  // disabled={availablePackages.length < 1 ? true : false}
+                  disabled={availablePlans.length < 1 ? true : false}
                   align='right'
                   loading={loading}
                 />

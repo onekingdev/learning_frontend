@@ -25,7 +25,7 @@ import { Settings }              from 'views/pages/Parent/Settings/Settings';
 import { Bank }                  from 'views/pages/Student/Bank/Bank';
 import { Cards }                 from 'views/pages/Student/Collectibles/ByCards';
 import { MyCardCollection }      from 'views/pages/Student/Collectibles/MyCards';
-import NewKids                   from 'views/pages/Parent/NewKids/NewKids';
+import NewKids                   from 'views/pages/Parent/NewKids/UpdatedNewKids';
 import { Spinner }               from 'views/atoms/Spinner';
 import { ParentReporting }       from 'views/pages/Parent/Reporting';
 import { KidsTreasureTrack }     from 'views/pages/Student/TreasureTrack/TreasureTrack';

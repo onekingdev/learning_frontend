@@ -79,4 +79,10 @@ export const GUARDIAN = `
     paymentMethod {
         ${PAYMENT_METHOD}
     }
+    availableGuardianstudentplan{
+        id
+        plan{
+            ${PLAN}
+        }
+      }
 `
