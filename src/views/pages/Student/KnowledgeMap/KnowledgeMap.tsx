@@ -110,7 +110,7 @@ export const KnowledgeMap: FC = () => {
                       },
                       position: 'relative',
                       height: isMobile ? 100 : 250,
-                      width: isMobile ? 'auto' : 600,
+                      width: isMobile ? 'auto' : '40vw',
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center'

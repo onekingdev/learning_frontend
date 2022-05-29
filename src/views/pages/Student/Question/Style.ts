@@ -1,7 +1,7 @@
 
-import styled         from 'styled-components';
+import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
-import background     from 'views/assets/colored-shapes-bg.svg';
+import background from 'views/assets/colored-shapes-bg.svg';
 import { BasicColor } from 'views/Color';
 
 export const Wrapper = styled.div`
@@ -17,13 +17,11 @@ export const Wrapper = styled.div`
 `;
 
 export const ProgressWrapper = styled.div`
-  // position        : relative;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 100;
   display         : flex;
   justify-content : center;
-  margin-bottom   : 100px;
-  @media (max-width: ${ScreenSize.phone}) {
-    margin-bottom   : 60px;
-  }
 `;
 
 export const Options = styled.div`
@@ -72,11 +70,10 @@ export const Container = styled.div`
   flex-direction  : column;
   justify-content : center;
   margin          : 0 auto;
-  padding-bottom  : 70px;
-  padding-top     : 20px;
   text-align      : center;
 
   @media (min-width: ${ScreenSize.tablet}) {
+    // margin-top: 120px;
     max-width: 1366px;
   }
 `;

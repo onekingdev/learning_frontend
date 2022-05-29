@@ -8,7 +8,7 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
-import { BlackBoard, AnswersContainer, AssistorContainer } from './Styles'
+import { BlackBoard, AssistorContainer } from './Styles'
 import { QuestionBoxTitle } from './QuestionBoxTitle';
 
 type ChoiceTextProps = {
@@ -69,11 +69,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
   const closeVideoModal = () => {
     setShowAssistor(!showAssistor);
   };
-  // const readAnswer = (answerOption: any) => {
-  //   const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
-  //   const audio = new Audio(answerSoundURI);
-  //   audio.play();
-  // };
+
 
   const readQuestion = () => {
     const audio = new Audio(questionSoundURI);
@@ -100,16 +96,13 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
             question.questionAudioAssets[0]?.audioFile
           }
         />
-        <AnswersContainer
-        >
-          <input
-            disabled={disabled}
-            style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end' }}
-            value={typedAnswer}
-            onChange={(e: any) => setTypedAnswer(e.target.value)}
-            autoFocus
-          />
-        </AnswersContainer>
+        <input
+          disabled={disabled}
+          style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end' }}
+          value={typedAnswer}
+          onChange={(e: any) => setTypedAnswer(e.target.value)}
+          autoFocus
+        />
         <AssistorContainer>
           <Button
             bgColor={!isAnswered ? ButtonColor.login : ButtonColor.next}

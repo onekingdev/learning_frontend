@@ -20,12 +20,6 @@ type LessonProgressProps = {
   combocount: number;
 };
 
-interface BlockQuestionInput {
-  question: number;
-  answerOption: number;
-  isCorrect: boolean;
-}
-
 type ProgressBar = {
   color: BasicColor | null;
 };
@@ -76,8 +70,6 @@ export const LessonProgress: FC<LessonProgressProps> = ({
 };
 
 const StyledLessonProgressWrapper = styled.div`
-  position: fixed;
-  z-index: 100;
   width: 100%;
   margin-left: auto;
   margin-right: auto;

@@ -1,9 +1,11 @@
-import { FC }         from 'react';
-import styled         from 'styled-components';
-import { Header }     from 'views/atoms/Text/Header';
-import { Subheader }  from 'views/atoms/Text/Subheader';
+import { FC } from 'react';
+import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
-
+import {
+  Box,
+  Typography,
+  useMediaQuery
+} from '@mui/material';
 type GreetProps = {
   header: string;
   logo: string;
@@ -17,13 +19,21 @@ export const Greet: FC<GreetProps> = ({
   classroomIllustration,
   greetingIllustration,
 }) => {
+  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   return (
     <div>
-      <MobileWelcome>
-        <Header isDark={true}>{header}</Header>
-      </MobileWelcome>
+      <Typography
+        variant='h4'
+        sx={
+          !isTablet ?
+            { display: 'none' } :
+            { margin: 5, textAlign: 'center', fontWeight: 'bold' }}>
+        {header}
+      </Typography>
 
-      <Illustrations>
+      <Box sx={{
+        display: isTablet ? 'none' : 'unset'
+      }}>
         <Logo src={logo} alt="Learn with Socrates logo" />
         <ClassroomIlustration
           src={classroomIllustration}
@@ -33,25 +43,10 @@ export const Greet: FC<GreetProps> = ({
           src={greetingIllustration}
           alt="Teach with student's illustration"
         />
-      </Illustrations>
+      </Box>
     </div>
   );
 };
-
-const MobileWelcome = styled.div`
-  padding: 4rem 1rem 2rem 1rem;
-  text-align: center;
-  @media (min-width: ${ScreenSize.tablet}) {
-    display: none;
-  }
-`;
-
-const Illustrations = styled.div`
-  display: none;
-  @media (min-width: ${ScreenSize.tablet}) {
-    display: unset;
-  }
-`;
 
 const Logo = styled.img`
   @media (min-width: ${ScreenSize.tablet}) {
