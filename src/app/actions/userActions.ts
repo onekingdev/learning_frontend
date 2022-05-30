@@ -59,7 +59,7 @@ export const login = async (username: string, password: string, dispatch: any, l
   const user = result_who.data.whoami;
   const user_redux: any = (({ lastLogin, isSuperuser, username, firstName, lastName, email, isStaff, isActive, dateJoined, language, profile }) => ({ lastLogin, isSuperuser, username, firstName, lastName, email, isStaff, isActive, dateJoined, language, profile }))(user)
 
-  dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user_redux } })
+  // dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user_redux } })
   dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user_redux, token: token } })
 
   if (student) {

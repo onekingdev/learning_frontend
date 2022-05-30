@@ -31,3 +31,23 @@ export interface IStudentPlan {
   organizationSet: [];
   schoolSet: [];
 }
+
+export interface KidsListProps {
+  username: string
+  password: string
+  // grade: string
+  avatar: string
+  language: string
+  user: any
+  student: any
+  id: any
+  audience: any
+  grade: any
+  guardianstudentplanSet: any
+  currentAvatarAccessories: any
+  currentAvatarHead: any
+  currentAvatarClothes: any
+  firstName: string
+  parentName: string
+  dateJoined: string
+}

@@ -37,6 +37,57 @@ export const GUARDIAN = `
     couponCode {
         ${COUPON_COODE}
     }
+    guardianstudentplanSet {
+        plan {
+            ${PLAN}
+        }
+        ${GUARDIAN_STUDENT}
+        student {
+            ${STUDENT_RAW}
+            currentAvatarHead{
+                ${AVATAR_RAW}
+            }
+            currentAvatarAccessories{
+                ${AVATAR_RAW}
+            }
+            currentAvatarClothes{
+                ${AVATAR_RAW}
+            }
+            currentAvatarPants{
+                ${AVATAR_RAW}
+            }
+            audience {
+                gradeSet {
+                    ${GRADES}
+                }
+            }
+            grade {
+                grade{
+                    ${GRADES}
+                }
+            }
+            user{
+                id
+                username
+                language
+            }
+        }
+    }
+    paymentMethod {
+        ${PAYMENT_METHOD}
+    }
+    availableGuardianstudentplan{
+        id
+        plan{
+            ${PLAN}
+        }
+      }
+`
+export const GUARDIAN_OLD = `
+    ${GUARDIAN_RAW}
+    couponCode {
+        ${COUPON_COODE}
+    }
     guardianstudentSet {
         ${GUARDIAN_STUDENT}
         student {
@@ -71,9 +122,39 @@ export const GUARDIAN = `
         }
     }
     guardianstudentplanSet {
-        ${GUARDIAN_STUDENT_PLAN_RAW}
         plan {
             ${PLAN}
+        }
+        ${GUARDIAN_STUDENT}
+        student {
+            ${STUDENT_RAW}
+            currentAvatarHead{
+                ${AVATAR_RAW}
+            }
+            currentAvatarAccessories{
+                ${AVATAR_RAW}
+            }
+            currentAvatarClothes{
+                ${AVATAR_RAW}
+            }
+            currentAvatarPants{
+                ${AVATAR_RAW}
+            }
+            audience {
+                gradeSet {
+                    ${GRADES}
+                }
+            }
+            grade {
+                grade{
+                    ${GRADES}
+                }
+            }
+            user{
+                id
+                username
+                language
+            }
         }
     }
     paymentMethod {

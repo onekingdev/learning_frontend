@@ -56,10 +56,9 @@ const NewKids: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
-  const guardian = useSelector((state: any) => state.guardian)
+  const availablePlans: any[] = useSelector((state: any) => state.guardian.availableGuardianstudentplan)
   const user = useSelector((state: any) => state.user)
   const { enqueueSnackbar } = useSnackbar();
-  const availablePlans: any[] = guardian.availableGuardianstudentplan
   const [audiences, setAudiences] = useState([]);
   const [grades, setGrades] = useState([]);
   const [currentPackage, setCurrentPackage] = useState<any>();
@@ -143,10 +142,12 @@ const NewKids: FC = () => {
     enqueueSnackbar("Succeed in adding a new child", { variant: 'success' });
 
     if (availablePlans.length === 1) history.push('/kids/list');
+    setCurrentPackage(null)
+    setAudience(null)
 
     setValidateMsg({
-      firstName: null,
-      lastName: null,
+      firstName: '',
+      lastName: '',
       userId: null,
       password: null,
       confPassword: null,
@@ -206,7 +207,10 @@ const NewKids: FC = () => {
       enqueueSnackbar(result.msg, { variant: 'error' })
       return false;
     }
+    if (result.data.length < 1) return false
     setAudiences(result.data)
+    // setAudience(result.data[1]) // sets default curriculum as US
+    // setGrades(result.data[1].gradeSet) // set US curriculum Grades
     return true;
   }
 
@@ -262,9 +266,9 @@ const NewKids: FC = () => {
                     }
                     displayEmpty={true}
                   >
-                    {audiences?.length > 0 && audiences.map((value: any, index: number) => (
-                      <MenuItem value={value.standardCode} key={index}>
-                        {value.name}
+                    {audiences?.length > 0 && audiences.map((_audience: any, index: number) => (
+                      <MenuItem value={_audience.standardCode} key={index}>
+                        {_audience.name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -295,7 +299,7 @@ const NewKids: FC = () => {
                   <Select
                     labelId='select-package-label'
                     id='select-package'
-                    value={currentPackage?.plan.id || ''}
+                    value={currentPackage?.plan?.id || ''}
                     label={dictionary[language]?.selectYourPackage}
                     className={`${classes.select} ${currentPackage?.plan?.name === 'Gold'
                       ? classes.goldInput
@@ -306,9 +310,10 @@ const NewKids: FC = () => {
                     onChange={e => {
                       const selected: any = availablePlans.find(({ plan }: any) => plan.id === e.target.value)
                       setCurrentPackage(selected);
+                      console.log({ selected, audience })
 
                       if (selected.plan?.name === 'Gold') setPaths(selected.plan?.subjects.
-                        filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US')
+                        filter((sub: any) => sub.audience.standardCode === audience?.standardCode || sub.audience.standardCode === 'US')
                       )
                       else setPaths([]);
                       handleFormChange(
@@ -347,7 +352,7 @@ const NewKids: FC = () => {
                 <Grid item xs={12}>
                   <Subjects color={currentPackage?.plan?.name}>
                     {currentPackage?.plan?.subjects.
-                      filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US').
+                      filter((sub: any) => sub.audience.standardCode === audience?.standardCode || sub.audience.standardCode === 'US').
                       map((subject: any, index: number) => (
                         <Subject key={index}>
                           {currentPackage?.plan?.name === 'Gold' && (

@@ -1,18 +1,14 @@
 import * as TYPE from '../types';
 const INITIAL_STATE = {
     id: null,
-    identifier: null,
     isActive: null,
-    deletedTimestamp: null,
-    randomSlug: null,
-    createTimestamp: null,
-    updateTimestamp: null,
     name: null,
     lastName: null,
     gender: null,
     cardExpMonth: null,
     cardExpYear: null,
     paymentMethod: {},
+    availableGuardianstudentplan: []
 };
 // const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
 const guardianReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
@@ -20,7 +16,8 @@ const guardianReducer = (state = INITIAL_STATE, action: {type: string, payload: 
     case TYPE.GUARDIAN_SET_DATA:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        availableGuardianstudentplan: action.payload.availableGuardianstudentplan
       };
     case TYPE.GUARDIAN_SET_ACCESORY:
       return {

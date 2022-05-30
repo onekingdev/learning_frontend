@@ -10,6 +10,7 @@ import TawkMessengerReact          from '@tawk.to/tawk-messenger-react';
 import * as TYPES from 'app/types'
 
 import './style.css'
+import { Spinner } from 'views/atoms/Spinner';
 declare global {
   interface Window {
     Tawk_API?: any;
@@ -38,7 +39,7 @@ export default () => {
 
   return (
     <Provider store={persist.store}>
-      <PersistGate loading={true} persistor={persist.persistor}>
+      <PersistGate loading={<Spinner />} persistor={persist.persistor}>
         <SnackbarProvider maxSnack={3}>
           <TawkMessengerReact
             propertyId="58cecc295b89e2149e1b042f"

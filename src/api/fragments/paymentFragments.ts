@@ -74,9 +74,6 @@ export const GUARDIAN_STUDENT_PLAN = `
 `
 export const GUARDIAN_STUDENT_PLAN_RAW = `
     id
-    identifier
-    randomSlug
-    slug
     cancelReason
     isCancel
     isPaid

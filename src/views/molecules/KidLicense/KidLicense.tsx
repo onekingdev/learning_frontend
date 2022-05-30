@@ -1,66 +1,74 @@
-import logo                           from 'views/assets/logo-learn-white.svg'
-import styled                         from 'styled-components';
-import { useSelector }                from 'react-redux'
-import socrates                       from 'views/assets/socrates.svg'
-import TextField                      from 'views/molecules/MuiTextField'
+import logo from 'views/assets/logo-learn-white.svg'
+import styled from 'styled-components';
+import { useSelector } from 'react-redux'
+import socrates from 'views/assets/socrates.svg'
+import TextField from 'views/molecules/MuiTextField'
 import { LicenseHeader, LicenseBody } from './Style'
-import QRCode                         from 'react-qr-code';
-import { LSGridRow, LSText }          from 'views/molecules/Setting/utils/Style';
-import { Grid }             from '@mui/material';
-import { TypoGeneralText }  from 'views/atoms/Text';
-import { BasicColor}        from 'views/Color';
-import { ScreenSize }       from 'constants/screenSize';
-import { dictionary }       from './dictionary'
+import QRCode from 'react-qr-code';
+import { LSGridRow, LSText } from 'views/molecules/Setting/utils/Style';
+import { Grid } from '@mui/material';
+import { TypoGeneralText } from 'views/atoms/Text';
+import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
+import { dictionary } from './dictionary'
+import { FC } from 'react'
 
-const License = (props: any) => {
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
-    return (
-      <ResponsiveLicense id="license">
-        <LicenseHeader>
-          <Img src={ logo } />
-          <LSText fontSize={25} >
-            LEARNING LICENSE
-          </LSText>
-        </LicenseHeader>
-        <LicenseBody>
-          <div className="flex justify-space-between align-center">
-            <Img src={socrates} />
-            <div className="flex flex-col h-full justify-space-between">
-              <DialogTextField
-                label={dictionary[language]?.memberSince}
-                value={typeof(props?.membership) === 'object' ? `${props.membership.getFullYear()}-${props.membership.getMonth() + 1}-${props.membership.getDate()}` : ''}
-                // onChange={(e) => updateUsername(e.target.value)}
-              />
-              <DialogTextField
-                label={dictionary[language]?.userName}
-                value={props?.username}
-                // onChange={(e) => updateUsername(e.target.value)}
-              />
-            </div>
-            <div >
-              <QRCode value={props?.username} size={window.innerWidth > 600 ? 100 : 65} />
-            </div>
+
+interface LicenseProps {
+  parentName: string
+  kidName: string
+  membership: string
+}
+
+const License: FC<LicenseProps> = ({
+  parentName,
+  kidName,
+  membership
+}) => {
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
+  return (
+    <ResponsiveLicense id="license">
+      <LicenseHeader>
+        <Img src={logo} />
+        <LSText fontSize={25} >
+          LEARNING LICENSE
+        </LSText>
+      </LicenseHeader>
+      <LicenseBody>
+        <div className="flex justify-space-between align-center">
+          <Img src={socrates} />
+          <div className="flex flex-col h-full justify-space-between">
+            <DialogTextField
+              label={dictionary[language]?.memberSince}
+              value={membership}
+            />
+            <DialogTextField
+              label={dictionary[language]?.userName}
+              value={kidName}
+            />
           </div>
-          <div className="flex align-center">
-            <Grid container>
-              <LSGridRow item md={4} xs={12}>
-                {/* <LicenseUsername> */}
-                <Username >
-                  {props?.parentName}
-                </Username>
-                {/* </LicenseUsername> */}
-              </LSGridRow>
-              <LSGridRow item md={8} xs={12} justifyContent='center'>
-                <TypoGeneralText style={{ textAlign:'center'}}>
-                  www.learnwithsocrates.com
-                </TypoGeneralText>
-              </LSGridRow>
-            </Grid>
+          <div >
+            <QRCode value={kidName} size={window.innerWidth > 600 ? 100 : 65} />
           </div>
-        </LicenseBody>
-      </ResponsiveLicense>
-    )
+        </div>
+        <div className="flex align-center">
+          <Grid container>
+            <LSGridRow item md={4} xs={12}>
+              <Username >
+                {parentName}
+              </Username>
+            </LSGridRow>
+            <LSGridRow item md={8} xs={12} justifyContent='center'>
+              <TypoGeneralText style={{ textAlign: 'center' }}>
+                www.learnwithsocrates.com
+              </TypoGeneralText>
+            </LSGridRow>
+          </Grid>
+        </div>
+      </LicenseBody>
+    </ResponsiveLicense>
+  )
 }
 
 export default License
