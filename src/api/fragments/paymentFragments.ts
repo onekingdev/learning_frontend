@@ -2,9 +2,6 @@ import {AREA_OF_KNOWLEDGE, AREA_OF_KNOWLEDGE_RAW} from './areaOfKnowledgeFragmen
 import {STUDENT}           from './studentFragments'
 export const PAYMENT_METHOD = `
   id
-  randomSlug
-  createTimestamp
-  updateTimestamp
   method
   cardFirstName
   cardLastName
@@ -20,7 +17,6 @@ export const PAYMENT_METHOD = `
   country
   phone
   isDefault
-  slug
 `
 export const PLAN = `
     id
