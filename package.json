@@ -61,7 +61,7 @@
     "react-mathjax": "^1.0.1",
     "react-payment-inputs": "^1.1.9",
     "react-qr-code": "^2.0.3",
-    "react-query": "^3.34.14",
+    "react-query": "^3.39.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
     "react-router-loading": "^0.4.0",

@@ -132,3 +132,12 @@ export const COUPON_COODE = `
   expiredAt
   stripeCouponId
 `
+
+export const AVAILABLE_PLANS = `
+  availableGuardianstudentplan {
+    id
+    plan {
+      ${PLAN}
+    }
+  }
+`

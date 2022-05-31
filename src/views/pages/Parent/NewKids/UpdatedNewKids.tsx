@@ -1,8 +1,17 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import Grid from '@mui/material/Grid';
+import { useSelector } from 'react-redux';
+import {
+  Checkbox,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Radio,
+  Select,
+  Tooltip,
+} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import {
   useStyles, Subjects,
@@ -12,12 +21,6 @@ import {
   Title, Tip, Container, Welcome, PaperContainer,
 } from './Style';
 import welcome from 'views/assets/welcome-kid-new.svg';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
-import Radio from '@mui/material/Radio';
 import Button from 'views/molecules/MuiButton';
 import TextField from 'views/molecules/MuiTextField';
 import { ButtonColor, BasicColor } from 'views/Color';
@@ -37,11 +40,9 @@ import science_sole from 'views/assets/packageIcons/science_sole.svg';
 import financial_sole from 'views/assets/packageIcons/financial_sole.svg';
 import health_sole from 'views/assets/packageIcons/health_sole.svg';
 import { LoadingContext } from 'react-router-loading';
-import { createStudent } from 'views/../app/actions/studentActions'
 import { getAudiencesWithGrades } from 'app/actions/audienceActions'
 import InfoIcon from '@mui/icons-material/Info';
 import { useSnackbar } from 'notistack';
-import Tooltip from '@mui/material/Tooltip';
 import {
   CURRICULUM_TOOLTIP,
   GRADE_TOOLTIP
@@ -49,15 +50,22 @@ import {
 import { LSGridRow } from 'views/molecules/Setting/utils/Style';
 import { dictionary } from './dictionary';
 import commonDictionary from 'constants/commonDictionary'
+import {
+  useQuery,
+  useQueryClient,
+  useMutation,
+} from 'react-query'
+import { doCreateStudentPlan, doFetchGuardianAvailablePlans } from 'app/actions/guardianActions';
 
 const NewKids: FC = () => {
+  const queryClient = useQueryClient()
   const loadingContext = useContext(LoadingContext);
-
   const history = useHistory();
-  const dispatch = useDispatch();
   const classes = useStyles();
-  const availablePlans: any[] = useSelector((state: any) => state.guardian.availableGuardianstudentplan)
-  const user = useSelector((state: any) => state.user)
+  const token = useSelector((state: any) => state.user.token)
+  const guardianId = useSelector((state: any) => state.guardian.id)
+
+  const { status, data: availablePlans } = useQuery(['fetch-plans-list', guardianId, token], () => doFetchGuardianAvailablePlans(guardianId, token))
   const { enqueueSnackbar } = useSnackbar();
   const [audiences, setAudiences] = useState([]);
   const [grades, setGrades] = useState([]);
@@ -73,7 +81,54 @@ const NewKids: FC = () => {
   const [loading, setLoading] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [showTooltipGrade, setShowTooltipGrade] = useState(false);
-
+  const create = useMutation((value: any) => doCreateStudentPlan(
+    value.audience,
+    value.firstName,
+    value.lastName,
+    value.userId,
+    value.password,
+    value.currentPackageId,
+    value.listSubjectIds,
+    value.studentPlan,
+    value.gradeId,
+    value.token
+  ), {
+    onSuccess: async data => {
+      if (data.message) {
+        enqueueSnackbar(data.message, { variant: 'error' })
+      }
+      else {
+        queryClient.setQueryData(['fetch-plans-list', guardianId, token], data)
+        console.log({
+          data,
+          availablePlans
+        })
+        data.length === 0 && history.push('/kids/list');
+        enqueueSnackbar('Student Create Succeed!', { variant: 'success' })
+        setCurrentPackage(null)
+        setAudience(null)
+        // setUserId('');
+        setPassword('');
+        setConfPassword('');
+        setGrade(null);
+        setValidateMsg({
+          firstName: '',
+          lastName: '',
+          userId: '',
+          password: null,
+          confPassword: null,
+          grade: null,
+        });
+      }
+    },
+    onError: async (error: any) => {
+      enqueueSnackbar(error.message, { variant: 'error' })
+    },
+    onSettled: async () => {
+      setLoading(false)
+      console.log({ availablePlans })
+    }
+  })
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
 
@@ -134,33 +189,7 @@ const NewKids: FC = () => {
     if (!formValidation()) return;
 
     setLoading(true)
-    if (!await saveChild()) {
-      setLoading(false)
-      return;
-    }
-
-    enqueueSnackbar("Succeed in adding a new child", { variant: 'success' });
-
-    if (availablePlans.length === 1) history.push('/kids/list');
-    setCurrentPackage(null)
-    setAudience(null)
-
-    setValidateMsg({
-      firstName: '',
-      lastName: '',
-      userId: null,
-      password: null,
-      confPassword: null,
-      grade: null,
-    });
-
-    setFirstName('');
-    // setLastName('');
-    setUserId('');
-    setPassword('');
-    setConfPassword('');
-    setGrade({});
-    setLoading(false)
+    saveChild()
   };
 
   const saveChild = async () => {
@@ -168,24 +197,18 @@ const NewKids: FC = () => {
     const studentPlan = 1;
     for (const path of paths)
       listSubjectId.push(parseInt(path.id));
-    const result: any = await createStudent(
-      audience?.id,
-      firstName,
-      lastName,
-      userId,
-      password,
-      currentPackage.id,
-      listSubjectId,
-      studentPlan,
-      grade.id,
-      user.token,
-      dispatch
-    );
-    if (!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-    return true;
+    create.mutate({
+      audience: audience?.id,
+      firstName: firstName,
+      lastName: lastName,
+      userId: userId,
+      password: password,
+      currentPackageId: currentPackage.id,
+      listSubjectIds: listSubjectId,
+      studentPlan: studentPlan,
+      gradeId: grade.id,
+      token: token
+    })
   };
 
   const formValidation = () => {
@@ -220,16 +243,19 @@ const NewKids: FC = () => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget()
 
     await setAudienceData()
-    loadingContext.done()
-
+    // loadingContext.done()
   }
   useEffect(() => {
     onPageInit();
   }, []);
 
+  if (status === 'success') {
+    loadingContext.done()
+  }
+
   return (
     <ParentPgContainer onlyLogoImgNav={false}>
-      <Container>
+      {availablePlans && <Container>
         <PaperContainer>
           <Paper elevation={3} className={classes.paper}>
             <Title>{dictionary[language]?.addingANewChild}</Title>
@@ -310,7 +336,6 @@ const NewKids: FC = () => {
                     onChange={e => {
                       const selected: any = availablePlans.find(({ plan }: any) => plan.id === e.target.value)
                       setCurrentPackage(selected);
-                      console.log({ selected, audience })
 
                       if (selected.plan?.name === 'Gold') setPaths(selected.plan?.subjects.
                         filter((sub: any) => sub.audience.standardCode === audience?.standardCode || sub.audience.standardCode === 'US')
@@ -553,7 +578,7 @@ const NewKids: FC = () => {
         <Welcome>
           <img src={welcome} />
         </Welcome>
-      </Container>
+      </Container>}
     </ParentPgContainer>
   );
 };
