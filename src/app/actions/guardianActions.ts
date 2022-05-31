@@ -150,7 +150,7 @@ export const doFetchGuardianStudents = async (guardianId: number, token: string)
         FETCH_GUARDIAN_STUDENTS(guardianId),
         token
     );
-    return res.data.guardianById
+    return res.data.guardianById?.guardianstudentplanSet ?? res.errors[0]
 }
 
 export const doFetchGuardianPlans = async (guardianId: number, token: string) => {

@@ -2,6 +2,9 @@ export const numberWithCommas = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+export const getMessage = (error: any) => error.message
+
+
 // Fisher-Yates shuffle method
 export const shuffle = (array: Array<any>) => {
     for (let i = array.length - 1; i > 0; i--) {
