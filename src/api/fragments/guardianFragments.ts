@@ -40,6 +40,11 @@ export const GUARDIAN = `
     paymentMethod {
         ${PAYMENT_METHOD}
     }
+    guardianstudentplanSet {
+        plan {
+            id
+        }
+    }
 `
 export const GUARDIAN_OLD = `
     ${GUARDIAN_RAW}
