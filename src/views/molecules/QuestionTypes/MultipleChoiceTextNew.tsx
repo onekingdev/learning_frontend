@@ -12,6 +12,8 @@ import { dictionary } from 'views/pages/Student/Question/dictionary'
 import { BlackBoard, AnswersContainer, AssistorContainer, TextOptionsList, AnswerContainer, BlockAnswers, ImageAssetContainer, ImageAsset } from './Styles'
 import { QuestionBoxTitle } from './QuestionBoxTitle';
 import { shuffle } from 'views/utils';
+import { Box, Grid } from '@mui/material';
+import he from 'he'
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -89,32 +91,71 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
       ) : null}
       <BlackBoard>
         <QuestionBoxTitle
-          title={question.questionText}
+          // title={question.questionText}
+          title={he.decode(question.questionText)}
           audioFile={
             question.questionAudioAssets[0]?.audioFile
           }
         />
         <AnswersContainer>
-          <TextOptionsList>
+          <Box
+            width='90%'
+            display={question.answerOptions[0]?.image ? 'flex' : 'block'}
+            justifyContent='center'
+            alignItems='center'
+          >
+            <Grid container justifyContent={'center'} spacing={2}>
+              <BlockAnswers isAnswered={isAnswered} />
+              {shuffled && shuffled.map((option, i) => {
+                return (
+                  <Grid item key={option.id}>
+                    {/* <AnswerContainer key={i}> */}
+                    <TextOption
+                      answer={option}
+                      onClick={handleAnswer}
+                    />
+                    {
+                      !(question.questionAudioAssets[0]?.audioFile) && option.answerAudioUrl &&
+                      <Icon
+                        image={assistor}
+                        onClick={() => {
+                          readAnswer(option);
+                        }}
+                      />
+                    }
+                    {/* </AnswerContainer> */}
+                  </Grid>
+                )
+
+              }
+              )}
+            </Grid>
+          </Box>
+          {/* <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
-            {shuffled.map((option, i) => (
-              <AnswerContainer key={i}>
-                <TextOption
-                  answer={option}
-                  onClick={handleAnswer}
-                />
-                {
-                  !(question.questionAudioAssets[0]?.audioFile) &&
-                  <Icon
-                    image={assistor}
-                    onClick={() => {
-                      readAnswer(option);
-                    }}
+            {shuffled.map((option, i) => {
+              return (
+
+                <AnswerContainer key={i}>
+                  <TextOption
+                    answer={option}
+                    onClick={handleAnswer}
                   />
-                }
-              </AnswerContainer>
-            ))}
-          </TextOptionsList>
+                  {
+                    !(question.questionAudioAssets[0]?.audioFile) && option.answerAudioUrl &&
+                    <Icon
+                      image={assistor}
+                      onClick={() => {
+                        readAnswer(option);
+                      }}
+                    />
+                  }
+                </AnswerContainer>
+              )
+
+            }
+            )}
+          </TextOptionsList> */}
           <ImageAssetContainer
             imageLength={question.questionImageAssets?.length}
           >

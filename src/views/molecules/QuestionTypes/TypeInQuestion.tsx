@@ -10,7 +10,8 @@ import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
 import { BlackBoard, AssistorContainer } from './Styles'
 import { QuestionBoxTitle } from './QuestionBoxTitle';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
+import { ScreenSize } from 'constants/screenSize';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -33,6 +34,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
   blockPresentation,
   onAnswer,
 }) => {
+  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
   const [showAssistor, setShowAssistor] = useState(false);
@@ -94,6 +96,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
         <Box
           display='flex'
           gap={3}
+          flexDirection={isTablet ? 'column-reverse' : 'row'}
           justifyContent='center'
         >
           <Box
@@ -146,7 +149,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
               gap={2}
             >
               {question.questionImageAssets?.map((item, i) => (
-                <img style={{ maxHeight: 700 }} key={i} src={item.image} alt='' />
+                <img style={{ maxHeight: 700, maxWidth: '100%' }} key={i} src={item.image} alt='' />
               ))}
             </Box>
           }

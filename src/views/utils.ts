@@ -4,6 +4,17 @@ export const numberWithCommas = (x: number) => {
 
 export const getMessage = (error: any) => error.message
 
+export const isValidUrl = (_string: string) => {
+    if (!_string) return false
+    return _string.slice(0, 5) === 'http:' || _string.slice(0, 6) === 'https:'
+    // let url_string;
+    // try {
+    //     url_string = new URL(_string);
+    // } catch (_) {
+    //     return false;
+    // }
+    // return url_string.protocol === "http:" || url_string.protocol === "https:";
+}
 
 // Fisher-Yates shuffle method
 export const shuffle = (array: Array<any>) => {
