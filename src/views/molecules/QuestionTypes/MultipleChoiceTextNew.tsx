@@ -13,7 +13,6 @@ import { BlackBoard, AnswersContainer, AssistorContainer, TextOptionsList, Answe
 import { QuestionBoxTitle } from './QuestionBoxTitle';
 import { shuffle } from 'views/utils';
 import { Box, Grid } from '@mui/material';
-import he from 'he'
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -92,7 +91,7 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
       <BlackBoard>
         <QuestionBoxTitle
           // title={question.questionText}
-          title={he.decode(question.questionText)}
+          title={question.questionText}
           audioFile={
             question.questionAudioAssets[0]?.audioFile
           }

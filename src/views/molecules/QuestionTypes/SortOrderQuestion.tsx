@@ -13,6 +13,7 @@ import { TypoGeneralText } from 'views/atoms/Text';
 import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer } from './Styles'
 import RLDD from 'react-list-drag-and-drop/lib/RLDD';
 import { Grid } from '@mui/material';
+import { QuestionBoxTitle } from './QuestionBoxTitle';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -137,9 +138,12 @@ export const SortOrderQuestion: FC<ChoiceTextProps> = ({
         />
       ) : null}
       <BlackBoard>
-        <QuestionContainer>
-          {/* <Question>{question.questionText}</Question> */}
-        </QuestionContainer>
+        <QuestionBoxTitle
+          title={question.questionText}
+          audioFile={
+            question.questionAudioAssets[0]?.audioFile
+          }
+        />
         <AnswersContainer>
           {items &&
             <Grid container>

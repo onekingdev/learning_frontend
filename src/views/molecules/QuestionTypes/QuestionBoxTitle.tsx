@@ -3,6 +3,7 @@ import playQuestionSound from 'views/assets/play-sound.svg'
 import { Box, Container, Typography, useMediaQuery } from '@mui/material';
 import { QuestionEquation } from './QuestionEquation';
 import { ScreenSize } from 'constants/screenSize';
+import he from 'he'
 
 
 interface QuestionBoxTitleProps {
@@ -42,7 +43,7 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
     }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 5, width: '100%' }}>
         <Typography variant='h5' sx={{ color: 'white' }}>
-          {title.charAt(0) === '@' ? extractQuestion(title) : title}
+          {title.charAt(0) === '@' ? extractQuestion(title) : he.decode(title)}
         </Typography>
         {
           audioFile ?
