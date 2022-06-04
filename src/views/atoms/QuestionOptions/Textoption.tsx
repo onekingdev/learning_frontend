@@ -66,7 +66,7 @@ export const TextOption: FC<TextOptionProps> = ({ answer, onClick }) => {
               <img
                 style={{
                   margin: isTablet ? 2 : 10,
-                  minWidth: isTablet ? '20vw' : 100,
+                  minWidth: isTablet ? '10vw' : 100,
                   // minHeight: isTablet ? '20vw' : 200,
                   height: isTablet ? '20vw' : 200
                 }}

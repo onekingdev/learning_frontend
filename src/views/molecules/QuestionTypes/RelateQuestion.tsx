@@ -10,8 +10,8 @@ import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
 import { BlackBoard, AssistorContainer } from './Styles'
 import { Box } from '@mui/material';
-import { QuestionBoxTitle } from './QuestionBoxTitle';
-import { RelateQuestionDnd } from './RelateQuestionDnd';
+import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
+import { RelateQuestionDnd } from './Elements/RelateQuestionDnd';
 
 type ChoiceTextProps = {
   question: IAIQuestion;

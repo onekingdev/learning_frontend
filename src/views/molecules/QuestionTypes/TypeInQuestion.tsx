@@ -9,7 +9,7 @@ import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
 import { BlackBoard, AssistorContainer } from './Styles'
-import { QuestionBoxTitle } from './QuestionBoxTitle';
+import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
 import { Box, useMediaQuery } from '@mui/material';
 import { ScreenSize } from 'constants/screenSize';
 

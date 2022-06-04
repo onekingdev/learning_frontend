@@ -49,7 +49,7 @@ import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
 import 'animate.css';
 import Certificates from 'views/pages/Teacher/Certificates/Certificates';
 import { GameIframe } from 'views/pages/Student/Games/GameIframe';
-import { SortOrderBeautifulDnd } from 'views/molecules/QuestionTypes/SortOrderBeautifulDnd';
+import { SortOrderBeautifulDnd } from 'views/molecules/QuestionTypes/Elements/SortOrderBeautifulDnd';
 import { ProgressReview } from 'views/pages/Student/Progress/ProgressReview';
 
 

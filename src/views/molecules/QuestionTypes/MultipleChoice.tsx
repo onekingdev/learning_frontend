@@ -9,8 +9,8 @@ import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
-import { BlackBoard, AnswersContainer, AssistorContainer, TextOptionsList, AnswerContainer, BlockAnswers, ImageAssetContainer, ImageAsset } from './Styles'
-import { QuestionBoxTitle } from './QuestionBoxTitle';
+import { BlackBoard, AnswersContainer, AssistorContainer, BlockAnswers, ImageAssetContainer, ImageAsset, AnswerContainer } from './Styles'
+import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
 import { shuffle } from 'views/utils';
 import { Box, Grid } from '@mui/material';
 
@@ -32,7 +32,7 @@ interface BlockQuestionInput {
   isCorrect: boolean;
 }
 
-export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
+export const MultipleChoice: FC<ChoiceTextProps> = ({
   question,
   nextQuestion,
   totalQuestions,
@@ -103,26 +103,26 @@ export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
             justifyContent='center'
             alignItems='center'
           >
-            <Grid container justifyContent={'center'} spacing={2}>
+            <Grid container justifyContent={'center'} spacing={1}>
               <BlockAnswers isAnswered={isAnswered} />
-              {shuffled && shuffled.map((option, i) => {
+              {shuffled && shuffled.map((option) => {
                 return (
                   <Grid item key={option.id}>
-                    {/* <AnswerContainer key={i}> */}
-                    <TextOption
-                      answer={option}
-                      onClick={handleAnswer}
-                    />
-                    {
-                      !(question.questionAudioAssets[0]?.audioFile) && option.answerAudioUrl &&
-                      <Icon
-                        image={assistor}
-                        onClick={() => {
-                          readAnswer(option);
-                        }}
+                    <AnswerContainer>
+                      <TextOption
+                        answer={option}
+                        onClick={handleAnswer}
                       />
-                    }
-                    {/* </AnswerContainer> */}
+                      {
+                        !(question.questionAudioAssets[0]?.audioFile) && option.answerAudioUrl &&
+                        <Icon
+                          image={assistor}
+                          onClick={() => {
+                            readAnswer(option);
+                          }}
+                        />
+                      }
+                    </AnswerContainer>
                   </Grid>
                 )
 

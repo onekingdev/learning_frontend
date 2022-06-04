@@ -12,7 +12,7 @@ import {
 import { FinishLesson } from 'views/organisms/FinishLesson';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
-import { MultipleChoiceSightWord } from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
+import { MultipleChoiceSightWord } from 'views/molecules/QuestionTypes/Elements/MultipleChoiceSightWord';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import { finishBlock } from 'app/actions/blockActions';
 import { IBlockPresentation, IQuestion } from 'app/entities/block';

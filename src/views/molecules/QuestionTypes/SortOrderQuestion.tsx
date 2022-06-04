@@ -13,7 +13,7 @@ import { TypoGeneralText } from 'views/atoms/Text';
 import { BlackBoard, QuestionContainer, AnswersContainer, AssistorContainer } from './Styles'
 import RLDD from 'react-list-drag-and-drop/lib/RLDD';
 import { Grid } from '@mui/material';
-import { QuestionBoxTitle } from './QuestionBoxTitle';
+import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
 
 type ChoiceTextProps = {
   question: IAIQuestion;

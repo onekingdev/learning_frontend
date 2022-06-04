@@ -20,7 +20,7 @@ import { Store } from 'app/configureStore';
 import * as TYPE from 'app/types';
 import { getNextLevel } from 'app/actions/userActions';
 import { QUESTION_POINT_UNIT, USER_AVATAR_SIZE } from 'constants/common';
-import { NewMultipleChoiceText } from 'views/molecules/QuestionTypes/MultipleChoiceTextNew';
+import { MultipleChoice } from 'views/molecules/QuestionTypes/MultipleChoice';
 import { MultipleSelectQuestion } from 'views/molecules/QuestionTypes/MultipleSelectQuestion';
 import { SortOrderQuestion } from 'views/molecules/QuestionTypes/SortOrderQuestion';
 import { RelateQuestion } from 'views/molecules/QuestionTypes/RelateQuestion';
@@ -87,7 +87,7 @@ export const AIQuestion: FC = () => {
     switch (question.questionType) {
       case 'MC':
         component = (
-          <NewMultipleChoiceText
+          <MultipleChoice
             question={question}
             nextQuestion={handleNextQuestion}
             totalQuestions={length}
