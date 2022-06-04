@@ -1,61 +1,28 @@
-import { useState, memo, forwardRef, useImperativeHandle, useEffect } from "react";
-import styled from "styled-components";
-import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
-import { Grid, Typography } from "@mui/material";
-import { DndDragItem } from "./DndDragItem";
+import { shuffle } from 'lodash';
+import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { SortDraggibleOption } from './SortDraggableOption';
+import { QuestionsList } from './Styles';
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { ScreenSize } from 'constants/screenSize';
 
-interface QuestionOption {
-  id: string;
-  key: string;
-  value: string;
-}
-
-interface QuestionOptionProps {
-  option: QuestionOption;
-  index: number;
-}
-
-const QuestionOption = memo(({ option, index }: QuestionOptionProps) => {
-  return (
-    <Draggable draggableId={option.id} index={index}>
-      {(provided, snapshot) => (
-        <DndDragItem
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-          isDragging={snapshot.isDragging}
-        >
-          <Typography variant='h5'>
-            {option.value}
-          </Typography>
-        </DndDragItem>
-      )}
-    </Draggable>
-  );
-});
-
-
-interface RelateQuestionDndProps {
+interface SortOrderDndProps {
   options: Array<any>
 }
-export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ options }, ref) => {
+export const SortOrderDnd = forwardRef<any, SortOrderDndProps>(({ options }, ref) => {
+  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   const [state, setState] = useState<any>(null);
 
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) {
       return;
     }
-    if (destination.droppableId === source.droppableId) {
-      return;
-    }
-    const sourceList: any = state[source.droppableId as keyof Object]
-    const destinationList: any = state[destination.droppableId as keyof Object]
-    const temp = { ...state }
-    destinationList.splice(destination.index, 0, sourceList[source.index])
-    sourceList.splice(source.index, 1)
-    temp[source.droppableId as keyof Object] = sourceList
-    temp[destination.droppableId as keyof Object] = destinationList
-    setState(temp)
+
+    const answers = Array.from(state)
+    answers.splice(source.index, 1);
+    answers.splice(destination.index, 0, state[source.index]);
+
+    setState(answers)
     return
   }
 
@@ -68,101 +35,41 @@ export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ opti
   )
 
   const getCurrentAnswer = () => {
-    return [
-      {
-        key: options[0]?.key,
-        value: state.answers1[0]?.value
-      },
-      {
-        key: options[1]?.key,
-        value: state.answers2[0]?.value
-      },
-    ]
+    const res = []
+    for (const option of state) {
+      res.push(option.answerText)
+    }
+    return res
   }
   const checkAnswer = () => {
-    return options[0]?.key === state.answers1[0]?.key && options[1]?.key === state.answers2[0]?.key
+    console.log({ state, options })
+    return !state.some((option: any, index: number) => option.order !== index + 1)
   }
 
   useEffect(() => {
-    setState({ questions: [...options], answers1: new Array(0), answers2: new Array(0), })
+    setState(shuffle(options))
   }, [options])
   return (
     state &&
     <DragDropContext
       onDragEnd={onDragEnd}
     >
-      <Droppable droppableId='questions' direction="horizontal">
+      <Droppable droppableId='questions' direction={isTablet ? 'vertical' : 'horizontal'}>
         {(provided, snapshot) => (
           <QuestionsList
             ref={provided.innerRef}
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
+            isTablet={isTablet}
           >
-            {state.questions.map((q: any, i: number) => (
-              <QuestionOption key={q.id} option={q} index={i} />
+            {state.map((q: any, i: number) => (
+              <SortDraggibleOption key={q.id} value={q.answerText} index={i} />
             ))}
             {provided.placeholder}
           </QuestionsList>
         )}
       </Droppable>
-      <Grid container justifyContent='center' alignItems='center' spacing={2}>
-        {
-          options.map((option, index) => {
-            const droppableId = 'answers' + (index + 1)
-            const words: any = state[droppableId as keyof Object]
-            return (
-              <Grid item key={option.id}>
-                <Typography color='white' variant='h5'>{option.key}</Typography>
-                <Droppable droppableId={droppableId} direction="horizontal">
-                  {(provided, snapshot) => (
-                    <AnswersList
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      isDraggingOver={snapshot.isDraggingOver}
-                    >
-                      {
-                        words.map((q: any, i: any) => (<QuestionOption key={q.id} option={q} index={i} />))
-                      }
-                      {provided.placeholder}
-                    </AnswersList>
-                  )}
-                </Droppable>
-              </Grid>
-            )
-          }
-          )
-        }
-      </Grid>
     </DragDropContext >
   );
 })
 
-
-
-const QuestionsList = styled.div<{ isDraggingOver: boolean }>`
-  border: dashed 1px gray;
-  transition: background 0.1s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 100px;
-  max-width: 500px;
-  background-color: ${props =>
-    props.isDraggingOver ? "rgba(10,10,10,0.3)" : "inherit "};
-  margin-bottom: 20px;
-`;
-const AnswersList = styled.div<{ isDraggingOver: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  border: dashed 1px gray;
-  height: 80px;
-  background-color: ${props =>
-    props.isDraggingOver ? "rgba(10,10,10,0.3)" : "inherit "};
-  width: 100%;
-  min-width: 200px;
-`;

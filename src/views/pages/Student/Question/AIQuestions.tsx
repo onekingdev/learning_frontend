@@ -64,7 +64,6 @@ export const AIQuestion: FC = () => {
   const [answers, setAnswers] = useState<Array<any>>([])
   const [hits, setHits] = useState(0)
   const [errors, setErrors] = useState(0)
-  // const [prevHit, setPrevHit] = useState<boolean>(earning.energyCharge > 0 ? true : false)
   const [questionCounter, setQuestionCounter] = useState(0);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
   const [answerResult, setAnswerResult] = useState<boolean[]>([]);

@@ -86,7 +86,13 @@ export const RelateQuestion: FC<ChoiceTextProps> = ({
             question.questionAudioAssets[0]?.audioFile
           }
         />
-        <Box>
+        <Box
+          id='dnd-container'
+          display='flex'
+          flexDirection='column'
+          justifyContent='center'
+          alignItems='center'
+        >
           {
             question.answerOptions &&
             <RelateQuestionDnd options={question.answerOptions} ref={dndRef} />

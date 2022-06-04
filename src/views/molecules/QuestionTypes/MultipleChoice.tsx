@@ -5,7 +5,6 @@ import { BasicColor, ButtonColor } from 'views/Color';
 import { Icon } from 'views/atoms/Icon/Icon';
 import videoIcon from 'views/assets/others/video-assistor.png';
 import assistor from 'views/assets/text-to-speech.svg';
-import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
@@ -13,6 +12,7 @@ import { BlackBoard, AnswersContainer, AssistorContainer, BlockAnswers, ImageAss
 import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
 import { shuffle } from 'views/utils';
 import { Box, Grid } from '@mui/material';
+import { MCOption } from './Elements/MCOption';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -109,7 +109,7 @@ export const MultipleChoice: FC<ChoiceTextProps> = ({
                 return (
                   <Grid item key={option.id}>
                     <AnswerContainer>
-                      <TextOption
+                      <MCOption
                         answer={option}
                         onClick={handleAnswer}
                       />

@@ -124,7 +124,7 @@ export const KnowledgeMap: FC = () => {
                       onLoad={onImgLoad}
                       onError={onImgLoad}
                       style={{
-                        width: isMobile ? 100 : 400,
+                        width: isMobile ? 150 : 400,
                         opacity: areaOfKnowledge.isActive ? 1 : 0.5
                       }}
                     />

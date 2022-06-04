@@ -113,7 +113,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
             />
             <input
               disabled={disabled}
-              style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end', margin: 5 }}
+              style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end'}}
               value={typedAnswer}
               onChange={(e: any) => setTypedAnswer(e.target.value)}
               autoFocus

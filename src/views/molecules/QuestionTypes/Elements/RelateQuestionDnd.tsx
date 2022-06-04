@@ -1,13 +1,16 @@
-import { useState, forwardRef, useImperativeHandle, useEffect } from "react";
-import styled from "styled-components";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { Grid, Typography } from "@mui/material";
-import { DraggableOption } from "./DraggableOption";
+import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { Grid, Typography } from '@mui/material';
+import { DraggableOption } from './DraggableOption';
+import { AnswersList, QuestionsList } from './Styles';
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { ScreenSize } from 'constants/screenSize';
 
 interface RelateQuestionDndProps {
   options: Array<any>
 }
 export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ options }, ref) => {
+  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   const [state, setState] = useState<any>(null);
 
   const onDragEnd = ({ destination, source }: DropResult) => {
@@ -67,12 +70,13 @@ export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ opti
     <DragDropContext
       onDragEnd={onDragEnd}
     >
-      <Droppable droppableId='questions' direction="horizontal">
+      <Droppable droppableId='questions' direction={isTablet ? 'vertical' : 'horizontal'}>
         {(provided, snapshot) => (
           <QuestionsList
             ref={provided.innerRef}
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
+            isTablet={isTablet}
           >
             {state.questions.map((q: any, i: number) => (
               <DraggableOption key={q.id} option={q} index={i} />
@@ -89,7 +93,7 @@ export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ opti
             return (
               <Grid item key={option.id}>
                 <Typography color='white' variant='h5'>{option.key}</Typography>
-                <Droppable droppableId={droppableId} direction="horizontal">
+                <Droppable droppableId={droppableId} direction='horizontal'>
                   {(provided, snapshot) => (
                     <AnswersList
                       ref={provided.innerRef}
@@ -114,31 +118,3 @@ export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ opti
 })
 
 
-
-const QuestionsList = styled.div<{ isDraggingOver: boolean }>`
-  border: dashed 1px gray;
-  transition: background 0.1s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 100px;
-  max-width: 500px;
-  background-color: ${props =>
-    props.isDraggingOver ? "rgba(10,10,10,0.3)" : "inherit "};
-  margin-bottom: 20px;
-`;
-const AnswersList = styled.div<{ isDraggingOver: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  border: dashed 1px gray;
-  height: 80px;
-  background-color: ${props =>
-    props.isDraggingOver ? "rgba(10,10,10,0.3)" : "inherit "};
-  width: 100%;
-  min-width: 200px;
-`;
