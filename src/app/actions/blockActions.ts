@@ -5,10 +5,11 @@ import {
     CREATE_NEW_AI_BLOCK,
     FINISH_BLK_PT,
     GET_QUESIONS,
-    CREATE_NEW_PATH_BLOCK
+    CREATE_NEW_PATH_BLOCK,
+    FETCH_STUDENT_ANSWER_HISTORY
 } from 'api/mutations/block'
 import mutation from 'api/mutations/get'
-import query from 'api/queries/get'
+import query, { fetchQuery } from 'api/queries/get'
 import { BLOCK_PRESENTATION_QUERY } from 'api/queries/questions'
 import { sendRawQuery } from 'api/queries/get';
 
@@ -199,3 +200,10 @@ export const doGetQuestionBlockById = async (blkId: number, token: string) => {
     }
 }
 
+export const doFetchStudentAnswerHistory = async (studentId: number, token: string) => {
+    const res: any = await fetchQuery(
+        FETCH_STUDENT_ANSWER_HISTORY(studentId),
+        token
+    );
+    return res.data.blockQuestionPresentationHistoryByStudentId ?? res.errors[0]
+}
