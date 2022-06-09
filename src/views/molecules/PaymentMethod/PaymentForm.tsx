@@ -77,8 +77,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
             country: '',
             phone: null,
         } : {
-            firstName: null,
-            lastName: null,
+            firstName: '',
+            lastName: '',
             cardNumber: null,
             expiryDate: null,
             cvc: null,

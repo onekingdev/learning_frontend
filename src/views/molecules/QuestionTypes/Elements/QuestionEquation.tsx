@@ -12,7 +12,7 @@ export const QuestionEquation: FC<QuestionBoxEquationPrtex> = ({
   tex,
 }) => {
   return (
-    <Box sx={{ width: 200, margin: 2, fontSize: 30, color: 'white' }}>
+    <Box sx={{ minWidth: 200, fontSize: 30, color: 'white' }}>
       <MathJax.Provider>
         <MathJax.Node
           formula={he.decode(tex)}

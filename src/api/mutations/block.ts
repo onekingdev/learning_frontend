@@ -195,3 +195,52 @@ export const GET_QUESIONS = (
   }
 }
 `
+
+export const FETCH_STUDENT_ANSWER_HISTORY = (
+  studentId: number,
+) => `
+query {
+  blockQuestionPresentationHistoryByStudentId(id: ${studentId}) {
+    id
+    blockQuestionPresentation{
+      id
+      topic {
+        name
+        areaOfKnowledge {
+          name
+        }
+      }
+      blockPresentation{
+        createTimestamp
+        block{
+          questions{
+            id
+            questionType
+            questionText
+            answerOptions {
+              id
+              isCorrect
+              ... on MultipleChoiceAnswerOptionSchema {
+                ${NEW_MC_ANSWER_OPTION}
+              }
+              ... on MultipleSelectAnswerOptionSchema {
+                ${NEW_MC_ANSWER_OPTION}
+              }
+              ... on TypeInAnswerOptionSchema {
+                ${NEW_T_ANSWER_OPTION}
+              }
+              ... on OrderAnswerOptionSchema {
+                ${NEW_O_ANSWER_OPTION}
+              }
+              ... on RelateAnswerOptionSchema {
+                ${NEW_R_ANSWER_OPTION}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+`

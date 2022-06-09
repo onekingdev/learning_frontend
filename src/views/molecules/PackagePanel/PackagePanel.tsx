@@ -60,8 +60,8 @@ export const PackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
           <>
             {!isSpecialCode &&
               <div className="flex flex-col p-t-10 p-b-15 font-s-20 font-w-7 w-300">
-                <b>{dictionary[language]?.numberOfChildren}</b>
-                <br />
+                {/* <b>{dictionary[language]?.numberOfChildren}</b>
+                <br /> */}
                 <div className="flex flex-row" style={{ flexWrap: 'unset' }}>
                   <Button
                     sx={{

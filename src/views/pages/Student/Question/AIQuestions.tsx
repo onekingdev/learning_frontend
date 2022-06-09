@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack';
 import { LessonProgress } from 'views/molecules/LessonProgress/LessonProgress';
 import { useParams } from 'react-router-dom';
 import { LoadingContext } from 'react-router-loading';
+import useMediaQuery from '@mui/material/useMediaQuery'
 import {
   Container,
   Wrapper,
@@ -18,8 +19,8 @@ import { IAIBlock, IAIQuestion } from 'app/entities/block';
 import { Store } from 'app/configureStore';
 import * as TYPE from 'app/types';
 import { getNextLevel } from 'app/actions/userActions';
-import { QUESTION_POINT_UNIT } from 'constants/common';
-import { NewMultipleChoiceText } from 'views/molecules/QuestionTypes/MultipleChoiceTextNew';
+import { QUESTION_POINT_UNIT, USER_AVATAR_SIZE } from 'constants/common';
+import { MultipleChoice } from 'views/molecules/QuestionTypes/MultipleChoice';
 import { MultipleSelectQuestion } from 'views/molecules/QuestionTypes/MultipleSelectQuestion';
 import { SortOrderQuestion } from 'views/molecules/QuestionTypes/SortOrderQuestion';
 import { RelateQuestion } from 'views/molecules/QuestionTypes/RelateQuestion';
@@ -33,6 +34,7 @@ import { RollCorrect } from 'views/molecules/QuestionRollContents/RollCorrect';
 import { FullBatteryPopup } from 'views/molecules/QuestionRollContents/FullBatteryPopup';
 import { RollWrong } from 'views/molecules/QuestionRollContents/RollWrong';
 import { LoadingSpinner } from 'views/atoms/Spinner';
+import { ScreenSize } from 'constants/screenSize';
 import { useHistory } from 'react-router-dom';
 
 interface RoutePresentationParams {
@@ -44,6 +46,7 @@ const EXP_UNIT = 5;
 
 export const AIQuestion: FC = () => {
 
+  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
   const history = useHistory();
   const [playHit] = useSound(audioCheck);
   const [playError] = useSound(audioError);
@@ -61,7 +64,6 @@ export const AIQuestion: FC = () => {
   const [answers, setAnswers] = useState<Array<any>>([])
   const [hits, setHits] = useState(0)
   const [errors, setErrors] = useState(0)
-  // const [prevHit, setPrevHit] = useState<boolean>(earning.energyCharge > 0 ? true : false)
   const [questionCounter, setQuestionCounter] = useState(0);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
   const [answerResult, setAnswerResult] = useState<boolean[]>([]);
@@ -84,7 +86,7 @@ export const AIQuestion: FC = () => {
     switch (question.questionType) {
       case 'MC':
         component = (
-          <NewMultipleChoiceText
+          <MultipleChoice
             question={question}
             nextQuestion={handleNextQuestion}
             totalQuestions={length}
@@ -370,7 +372,7 @@ export const AIQuestion: FC = () => {
             />
           ) : aiBlock && questions?.length ? (
             <>
-              <ProgressWrapper id='lesson-progress'>
+              <ProgressWrapper id='lesson-progress' style={{top: isMobile ? 0 : USER_AVATAR_SIZE + 15}}>
                 <LessonProgress
                   currentQuestion={questionCounter}
                   topic={aiBlock.block.topicGrade.topic.name}

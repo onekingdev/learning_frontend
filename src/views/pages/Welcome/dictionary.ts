@@ -25,7 +25,7 @@ export const dictionary:any = Object.freeze({
     children_privacy: 'นโยบายความเป็นส่วนตัวของเด็ก',
     termAndConditions: 'ข้อตกลงและเงื่อนไข',
     schoolSignUp: 'โรงเรียน/ครู ลงทะเบียน',
-    parentSignUp: 'ผู้ปกครอง/นักเรียนลงทะเบียน',
+    parentSignUp: 'ผู้ปกครอง/รักเรียน ลงทะเบียน',
   },
   'es-mx': {
     practice: 'Practica, Juega, Crece',

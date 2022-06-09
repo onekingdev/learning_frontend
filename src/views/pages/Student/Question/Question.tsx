@@ -12,7 +12,6 @@ import {
 import { FinishLesson } from 'views/organisms/FinishLesson';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { LevelUpDgContent } from 'views/atoms/ParticlgBg';
-import { MultipleChoiceSightWord } from 'views/molecules/QuestionTypes/MultipleChoiceSightWord';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import { finishBlock } from 'app/actions/blockActions';
 import { IBlockPresentation, IQuestion } from 'app/entities/block';
@@ -60,32 +59,6 @@ export const Question: FC = () => {
   const [nextMaxExp, setNextMaxExp] = useState(0)
   const [openDg, setOpenDg] = useState(false);
   const [bonusCoins, setBonusCoins] = useState(0)
-
-  const renderTypes = (
-    question: IQuestion,
-    type: string,
-    totalQuestions: number,
-    blockPresentation: IBlockPresentation
-  ) => {
-    const types = [{
-      type: 'SightWord',
-      component: (
-        <MultipleChoiceSightWord
-          question={question}
-          nextQuestion={handleNextQuestion}
-          totalQuestions={totalQuestions}
-          questionCounter={questionCounter}
-          onAnswer={onAnswer}
-          blockPresentation={blockPresentation}
-        />
-      )
-    },
-
-    ];
-
-    const filterType = types.find((item: any) => item.type === type);
-    return filterType?.component;
-  };
 
   const updateNextLevel = async (currentLevelAmount: number) => {
     const res: any = await getNextLevel(currentLevelAmount, user.token, dispatch)
@@ -339,15 +312,6 @@ export const Question: FC = () => {
             dialogContent={<LevelUpDgContent close={congratulations} />}
             fullWidth="true"
           />
-          <Container id="container">
-            {renderTypes(
-              question,
-              // blockPresentation.block.typeOf.name,
-              question.questionAudioAssets.length > 0 ? 'SightWord' : 'Text',
-              blockPresentation.block.questions.length,
-              blockPresentation
-            )}
-          </Container>
         </StudentMenu>
       ) : null}
     </Wrapper>

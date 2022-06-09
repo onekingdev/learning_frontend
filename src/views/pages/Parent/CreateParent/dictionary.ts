@@ -24,7 +24,7 @@ export const dictionary: any = Object.freeze({
         plans: 'Plans'
     },
     'th' :{
-        parentSignup: 'สมัครผู้ปกครอง',
+        parentSignup: 'สมัครสมาชิกผู้ปกครอง',
         email: 'อีเมล',
         fieldIsRequired: 'ต้องระบุข้อมูล',
         thisIsNotEmailAddress: 'นี่ไม่ใช่ที่อยู่อีเมล',
@@ -34,18 +34,18 @@ export const dictionary: any = Object.freeze({
         confirmPassword: 'ยืนยันรหัสผ่าน',
         passwordIsNotMatchedWithConfirmPassword: 'รหัสผ่านไม่ตรงกับยืนยันรหัสผ่าน',
         couponCode: 'รหัสคูปอง',
-        createAccount: 'สร้างบัญชี',
-        byClickingCreateAccountYouAgreeToLearnWithSocrates: 'การคลิกสร้างบัญชีแสดงว่าคุณยอมรับของ Learn With Socrates',
+        createAccount: 'ยืนยัน',
+        byClickingCreateAccountYouAgreeToLearnWithSocrates: 'การยืนยันสมัครสมาชิกแสดงว่าท่านยอมรับ',
         privacyPolicy: 'นโยบายความเป็นส่วนตัว',
         termsAndConditions: 'ข้อตกลงและเงื่อนไข',
         and: 'และ',
-        childrenPrivacyPolicy: 'นโยบายความเป็นส่วนตัวของเด็ก',
+        childrenPrivacyPolicy: 'นโยบายความเป็นส่วนตัวของบุตรหลาน ของ Learn with Socrates',
         welcome: 'ยินดีต้อนรับ',
-        toSocrates: 'ถึงโสกราตีส',
+        toSocrates: 'เข้าสู่โสกราตีส',
         contactUs: 'ติดต่อเรา',
-        weAreHappyToHelpYou: 'เรายินดีช่วยเหลือคุณ',
+        weAreHappyToHelpYou: 'เรายินดีช่วยเหลือท่าน',
         FAQ: 'คำถามที่พบบ่อย',
-        plans: 'แผน'
+        plans: 'แพน'
     },
     'es-mx': {
         parentSignup: 'Registro de padres',

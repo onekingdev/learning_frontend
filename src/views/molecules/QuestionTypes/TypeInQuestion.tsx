@@ -8,8 +8,10 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
-import { BlackBoard, AnswersContainer, AssistorContainer } from './Styles'
-import { QuestionBoxTitle } from './QuestionBoxTitle';
+import { BlackBoard, AssistorContainer } from './Styles'
+import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
+import { Box, useMediaQuery } from '@mui/material';
+import { ScreenSize } from 'constants/screenSize';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -32,6 +34,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
   blockPresentation,
   onAnswer,
 }) => {
+  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
   const [showAssistor, setShowAssistor] = useState(false);
@@ -69,11 +72,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
   const closeVideoModal = () => {
     setShowAssistor(!showAssistor);
   };
-  // const readAnswer = (answerOption: any) => {
-  //   const answerSoundURI = `${process.env.REACT_APP_SERVER_URL}${answerOption.answerAudioUrl}`;
-  //   const audio = new Audio(answerSoundURI);
-  //   audio.play();
-  // };
+
 
   const readQuestion = () => {
     const audio = new Audio(questionSoundURI);
@@ -94,43 +93,67 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
         />
       ) : null}
       <BlackBoard>
-        <QuestionBoxTitle
-          title={question.questionText}
-          audioFile={
-            question.questionAudioAssets[0]?.audioFile
-          }
-        />
-        <AnswersContainer
+        <Box
+          display='flex'
+          gap={3}
+          flexDirection={isTablet ? 'column-reverse' : 'row'}
+          justifyContent='center'
         >
-          <input
-            disabled={disabled}
-            style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end' }}
-            value={typedAnswer}
-            onChange={(e: any) => setTypedAnswer(e.target.value)}
-            autoFocus
-          />
-        </AnswersContainer>
-        <AssistorContainer>
-          <Button
-            bgColor={!isAnswered ? ButtonColor.login : ButtonColor.next}
-            onClick={handleNextButtonClicked}
-            fullWidth={true}
-            color={BasicColor.black}
-            value={
-              isAnswered ?
-                totalQuestions === questionCounter + 1 ?
-                  dictionary[language]?.finish :
-                  dictionary[language]?.next
-                :
-                'Check'
-            }
-          />
-          <Icon image={assistor} onClick={readQuestion} />
+          <Box
+            display='flex'
+            flexDirection='column'
+            alignItems={'center'}
+            gap={5}
+          >
+            <QuestionBoxTitle
+              title={question.questionText}
+              audioFile={
+                question.questionAudioAssets[0]?.audioFile
+              }
+            />
+            <input
+              disabled={disabled}
+              style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end'}}
+              value={typedAnswer}
+              onChange={(e: any) => setTypedAnswer(e.target.value)}
+              autoFocus
+            />
+            <AssistorContainer>
+              <Button
+                bgColor={!isAnswered ? ButtonColor.login : ButtonColor.next}
+                onClick={handleNextButtonClicked}
+                fullWidth={true}
+                color={BasicColor.black}
+                value={
+                  isAnswered ?
+                    totalQuestions === questionCounter + 1 ?
+                      dictionary[language]?.finish :
+                      dictionary[language]?.next
+                    :
+                    'Check'
+                }
+              />
+              <Icon image={assistor} onClick={readQuestion} />
+              {
+                blockPresentation?.block?.topicGrade?.topic?.videoAssistor &&
+                <Icon image={videoIcon} onClick={closeVideoModal} />
+              }
+            </AssistorContainer>
+          </Box>
           {
-            blockPresentation?.block?.topicGrade?.topic?.videoAssistor &&
-            <Icon image={videoIcon} onClick={closeVideoModal} />
+            question.questionImageAssets.length > 0 &&
+            <Box
+              id='image-asset-container'
+              display={'flex'}
+              justifyContent='center'
+              gap={2}
+            >
+              {question.questionImageAssets?.map((item, i) => (
+                <img style={{ maxHeight: 700, maxWidth: '100%' }} key={i} src={item.image} alt='' />
+              ))}
+            </Box>
           }
-        </AssistorContainer>
+        </Box>
       </BlackBoard>
     </>
   );

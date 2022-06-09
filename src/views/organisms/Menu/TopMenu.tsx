@@ -54,7 +54,7 @@ export const TopMenu: FC<TopMenuProps> = ({
   const history = useHistory();
   return (
     <>
-      {!isMobile && <Box sx={{ height: USER_AVATAR_SIZE + 15, width: '100%' }} />}
+      {!isMobile && <Box sx={{ height: USER_AVATAR_SIZE + 15 + 'px', width: '100%' }} />}
       <TopMenuStyles style={navOp ? { background: '#FFFFFF00' } : { background: '#FFFFFF', boxShadow: 'gray 0px 0px 6px 0px' }}>
         <Sidebar />
         <Icon

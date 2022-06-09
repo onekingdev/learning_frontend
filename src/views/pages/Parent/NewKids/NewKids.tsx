@@ -63,6 +63,7 @@ const NewKids: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [availablePackages, setAvailablePackages] = useState<any[]>([]);
+  // const availablePlans: any[] = guardian.availableGuardianstudentplan
   const [audiences, setAudiences] = useState([]);
   const [grades, setGrades] = useState([]);
   const [currentPackage, setCurrentPackage] = useState<any>();
@@ -150,6 +151,9 @@ const NewKids: FC = () => {
       setLoading(false)
       return;
     }
+
+    // Update redux state - available plans
+    // Previous code snippet
     if (childIdx === childNum) history.push('/kids/list');
     const temp = [...availablePackages];
     const inex = temp.indexOf(currentPackage);
@@ -198,6 +202,7 @@ const NewKids: FC = () => {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return false;
     }
+
     setChilds([
       ...childs,
       {
@@ -262,6 +267,8 @@ const NewKids: FC = () => {
     for (const guardianStudentPlan of guardianStudentPlans) {
       temp_availblePlans.push(guardianStudentPlan?.plan)
     }
+
+    // const goldCount: number = guardianStudentPlans.reduce((counter: number, { plan }: any) => { return plan.name === 'Gold' ? counter + 1 : counter }, 0)
 
     setAvailablePackages(guardianStudentPlans);
     setChildNum(guardianStudentPlans.length);
@@ -336,6 +343,8 @@ const NewKids: FC = () => {
                   <div className='err-text'>{validateMsg.audience}</div>
                 </FormControl>
               </Grid>
+
+              {/* Select Available Packages */}
               <Grid item xs={12}>
                 {/* <TextField label='Select Your Package' variant='outlined' fullWidth sx={{backgroundColor: 'white'}} value={packageName}
                                 onChange={(e) => {
@@ -361,13 +370,14 @@ const NewKids: FC = () => {
                         : classes.soleInput
                       } err-border`}
                     onChange={e => {
-                      const selected: any = availablePackages.find((_package: any) => _package.plan.id === e.target.value)
+                      // const selected: any = availablePackages.find((_package: any) => _package.plan.id === e.target.value)
+                      const selected: any = guardian.availableGuardianstudentplan.find(({ plan }: any) => plan.id === e.target.value)
                       setCurrentPackage(selected);
                       // filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US').
 
                       if (selected.plan?.name === 'Gold') setPaths(selected.plan?.subjects.
                         filter((sub: any) => sub.audience.standardCode === audience.standardCode || sub.audience.standardCode === 'US')
-                        )
+                      )
                       else setPaths([]);
                       handleFormChange(
                         'packageName',
@@ -385,9 +395,10 @@ const NewKids: FC = () => {
                     }
                     displayEmpty={true}
                   >
-                    {availablePackages.map((_package) => (
-                      <MenuItem value={_package.plan.id} key={_package.id}>
-                        {_package?.plan?.name}
+                    {/* {availablePackages.map((_package) => ( */}
+                    {guardian.availableGuardianstudentplan.map((plan: any) => (
+                      <MenuItem value={plan.plan.id} key={plan.id}>
+                        {plan?.plan?.name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -598,14 +609,17 @@ const NewKids: FC = () => {
               </Grid>
               <LSGridRow item xs={12} md={12} lg={6}>
                 <Button
-                  value={childNum !== childIdx ? dictionary[language]?.nextKid : dictionary[language]?.finish}
+                  value={guardian.availableGuardianstudentplan.length > 1 ? dictionary[language]?.nextKid : dictionary[language]?.finish}
+                  // value={childNum !== childIdx ? dictionary[language]?.nextKid : dictionary[language]?.finish}
                   bgColor={
-                    childNum !== childIdx
+                    // childNum !== childIdx
+                    guardian.availableGuardianstudentplan.length > 1
                       ? ButtonColor.nextKid
                       : ButtonColor.create
                   }
                   onClick={handleNext}
-                  disabled={availablePackages.length < 1 ? true : false}
+                  disabled={guardian.availableGuardianstudentplan.length < 1 ? true : false}
+                  // disabled={availablePackages.length < 1 ? true : false}
                   align='right'
                   loading={loading}
                 />

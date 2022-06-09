@@ -2,9 +2,6 @@ import {AREA_OF_KNOWLEDGE, AREA_OF_KNOWLEDGE_RAW} from './areaOfKnowledgeFragmen
 import {STUDENT}           from './studentFragments'
 export const PAYMENT_METHOD = `
   id
-  randomSlug
-  createTimestamp
-  updateTimestamp
   method
   cardFirstName
   cardLastName
@@ -20,7 +17,6 @@ export const PAYMENT_METHOD = `
   country
   phone
   isDefault
-  slug
 `
 export const PLAN = `
     id
@@ -74,9 +70,6 @@ export const GUARDIAN_STUDENT_PLAN = `
 `
 export const GUARDIAN_STUDENT_PLAN_RAW = `
     id
-    identifier
-    randomSlug
-    slug
     cancelReason
     isCancel
     isPaid
@@ -134,4 +127,13 @@ export const COUPON_COODE = `
   trialDay
   expiredAt
   stripeCouponId
+`
+
+export const AVAILABLE_PLANS = `
+  availableGuardianstudentplan {
+    id
+    plan {
+      ${PLAN}
+    }
+  }
 `

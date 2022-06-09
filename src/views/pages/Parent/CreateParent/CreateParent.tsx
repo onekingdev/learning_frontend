@@ -1,18 +1,18 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
-import { useSnackbar }    from 'notistack';
-import { useHistory }     from 'react-router-dom';
-import { useDispatch, useSelector }    from 'react-redux';
-import Grid               from '@mui/material/Grid';
-import Button             from 'views/molecules/MuiButton';
-import TextField                from 'views/molecules/MuiTextField';
-import { BasicColor }           from 'views/Color';
-import { ParentPgContainer }    from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { ParentPgStepper }      from 'views/molecules/ParentPgStepper/ParentPgStepper';
-import SocratesImg              from 'views/assets/socrates.svg';
-import { createGuardian }       from 'app/actions/guardianActions'
+import { useSnackbar } from 'notistack';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Grid from '@mui/material/Grid';
+import Button from 'views/molecules/MuiButton';
+import TextField from 'views/molecules/MuiTextField';
+import { BasicColor } from 'views/Color';
+import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
+import SocratesImg from 'views/assets/socrates.svg';
+import { createGuardian } from 'app/actions/guardianActions'
 import { Button as ButtonText } from 'views/atoms/Text/Button';
-import { dictionary }           from './dictionary';
+import { dictionary } from './dictionary';
 import {
   Container,
   FormContainer,
@@ -21,20 +21,20 @@ import {
   ContactHeader,
   ContactBody,
 } from './Style';
-import commonDictionary                           from 'constants/commonDictionary'
+import commonDictionary from 'constants/commonDictionary'
 
 const CreateParent: FC = () => {
-  const loadingContext                = useContext(LoadingContext);
-  const history                       = useHistory();
-  const dispatch                      = useDispatch();
-  const {enqueueSnackbar}             = useSnackbar();
-  const [userName, setUserName]       = useState('');
-  const [password, setPassword]       = useState('');
-  const [email, setEmail]             = useState('');
-  const [firstName, setFirstName]     = useState('');
-  const [lastName, setLastName]       = useState('');
+  const loadingContext = useContext(LoadingContext);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   // const [confPassword, setConfPassword] = useState('');
-  const [validateMsg, setValidateMsg] = useState<{[key: string]: any}>({
+  const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
     email: null,
     firstName: null,
     lastName: null,
@@ -43,37 +43,37 @@ const CreateParent: FC = () => {
     confPassword: null,
   });
   // const [errMsg, setErrMsg] = useState('');
-  const [loading, setLoading]       = useState(false);
+  const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState('');
 
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
 
-  function validateEmail (email: string) {
+  function validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
   useEffect(() => {
-    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+    if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     loadingContext.done()
   }, [])
 
   const handleFormChange = (field: string, errMsg: string) => {
-    setValidateMsg({...validateMsg, [field]: errMsg});
+    setValidateMsg({ ...validateMsg, [field]: errMsg });
   };
 
   const handleCreate = async () => {
     if (!formValidation()) return;
 
     setLoading(true);
-    const result: any = await createGuardian(email, firstName, lastName, userName, password,couponCode, dispatch)
+    const result: any = await createGuardian(email, firstName, lastName, userName, password, couponCode, dispatch, language)
     /*------------------------ free account for first releae -S-------------------------*
     const result: any = await createGuardian(email, firstName, lastName, userName, password,'FREE', dispatch)
     /*------------------------ free account for first releae -E-------------------------*/
 
     setLoading(false);
 
-    if(!result.success) {
+    if (!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return;
     }
@@ -82,7 +82,7 @@ const CreateParent: FC = () => {
   };
 
   const formValidation = () => {
-    const validateMsgTemp = {...validateMsg};
+    const validateMsgTemp = { ...validateMsg };
     let valiResult = true;
     for (const key in validateMsg) {
       if (validateMsg[key] === null) {
@@ -109,6 +109,8 @@ const CreateParent: FC = () => {
               <Grid item xs={12}>
                 <TextField
                   label={dictionary[language]?.email}
+                  type='email'
+                  focused
                   onChange={e => {
                     setEmail(e.target.value);
                     // handleFormChange(
@@ -117,7 +119,8 @@ const CreateParent: FC = () => {
                     // );
                     /*------------- set username to email -S--------------------------*/
                     setUserName(e.target.value);
-                    setValidateMsg({...validateMsg,
+                    setValidateMsg({
+                      ...validateMsg,
                       email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
                       userName: ''
                     });
@@ -138,12 +141,15 @@ const CreateParent: FC = () => {
                       e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : ''
                     );
                   }}
+                  type='text'
                   error={!!validateMsg.firstName}
                   helperText={validateMsg.firstName}
+                  value={firstName}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  value={lastName}
                   label={dictionary[language]?.parentLastName}
                   onChange={e => {
                     setLastName(e.target.value);
@@ -152,6 +158,7 @@ const CreateParent: FC = () => {
                       e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : ''
                     );
                   }}
+                  type='text'
                   error={!!validateMsg.lastName}
                   helperText={validateMsg.lastName}
                 />
@@ -196,8 +203,8 @@ const CreateParent: FC = () => {
                       e.target.value.length === 0
                         ? dictionary[language]?.fieldIsRequired
                         : password !== e.target.value
-                        ? dictionary[language]?.passwordIsNotMatchedWithConfirmPassword
-                        : ''
+                          ? dictionary[language]?.passwordIsNotMatchedWithConfirmPassword
+                          : ''
                     );
                   }}
                   error={!!validateMsg.confPassword}
@@ -236,8 +243,8 @@ const CreateParent: FC = () => {
             <ContactHeader>
               <img src={SocratesImg} className='p-l-20 p-r-10' />
               <div className='font-s-60 line-h-75 font-w-6 text-center p-r-25'>
-              {dictionary[language]?.welcome} <br />
-              {dictionary[language]?.toSocrates}
+                {dictionary[language]?.welcome} <br />
+                {dictionary[language]?.toSocrates}
               </div>
             </ContactHeader>
             <ContactBody>
@@ -249,9 +256,9 @@ const CreateParent: FC = () => {
                   {dictionary[language]?.weAreHappyToHelpYou}
                 </div>
                 <div className='flex justify-space-between'>
-                  <ButtonText className='p-1-10' onClick={() => location.href='https://www.withsocrates.com/contact/'}>{dictionary[language]?.contactUs}</ButtonText>
-                  <ButtonText onClick={() => location.href='https://www.withsocrates.com/faq/'}>{dictionary[language]?.FAQ}</ButtonText>
-                  <ButtonText className='p-r-10' onClick={() => location.href='https://www.withsocrates.com/membership/'}>{dictionary[language]?.plans}</ButtonText>
+                  <ButtonText className='p-1-10' onClick={() => location.href = 'https://www.withsocrates.com/contact/'}>{dictionary[language]?.contactUs}</ButtonText>
+                  <ButtonText onClick={() => location.href = 'https://www.withsocrates.com/faq/'}>{dictionary[language]?.FAQ}</ButtonText>
+                  <ButtonText className='p-r-10' onClick={() => location.href = 'https://www.withsocrates.com/membership/'}>{dictionary[language]?.plans}</ButtonText>
                 </div>
               </div>
             </ContactBody>
