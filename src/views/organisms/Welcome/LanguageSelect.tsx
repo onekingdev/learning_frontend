@@ -15,7 +15,7 @@ export const dictionary: any = Object.freeze({
     language: 'ภาษา',
   },
   'es-mx': {
-    language: 'Idioma',
+    language: 'Español',
   }
 });
 

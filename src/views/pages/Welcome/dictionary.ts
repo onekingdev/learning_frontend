@@ -14,13 +14,13 @@ export const dictionary:any = Object.freeze({
     parentSignUp: 'Parent/Student Sign Up',
   },
   'th' :{
+    about: 'Sobre Nosotros',
     practice: 'ฝึกฝน เล่น เติบโต',
     description1:
       'โสกราตีสเป็นการเรียนรู้ออนไลน์ที่ปรับระดับความยากง่ายของเนื้อหาตามความก้าวหน้าของนักเรียนรายบุคคลตามการประมวลผลของ AI',
     description2: 'เข้าร่วมเป็นสมาชิกเพี่อเริ่มต้นเส้นทางการเรียนรู้ที่ดีของเด็กในอนาคต',
     login: 'เข้าสู่ระบบ',
     join: 'เข้าร่วม',
-    about: 'เกี่ยวกับเรา',
     privacy: 'นโยบายความเป็นส่วนตัว',
     children_privacy: 'นโยบายความเป็นส่วนตัวของเด็ก',
     termAndConditions: 'ข้อตกลงและเงื่อนไข',

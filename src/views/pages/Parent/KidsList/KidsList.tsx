@@ -39,8 +39,8 @@ const KidsList: FC = () => {
                 <>
                   {data.some((item: any) => isNull(item.student)) &&
                     <Typography variant='h6'>
-                      Please finish registration for your children
-                      <Link href='/kids/new'> here</Link>
+                      {dictionary[language]?.finish}
+                      <Link href='/kids/new'> {dictionary[language]?.here}</Link>
                       .
                     </Typography>
                   }

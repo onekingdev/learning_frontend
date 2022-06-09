@@ -1,9 +1,9 @@
-import TitleKidBackground              from 'views/assets/title-kids-background.png';
-import ReportCheckIcon                 from 'views/assets/parent/report-check.png';
-import ReportCoinIcon                  from 'views/assets/parent/report-coin.png';
-import styled                          from 'styled-components';
-import { ScreenSize }                  from 'constants/screenSize';
-import { useSelector }                 from 'react-redux';
+import TitleKidBackground from 'views/assets/title-kids-background.png';
+import ReportCheckIcon from 'views/assets/parent/report-check.png';
+import ReportCoinIcon from 'views/assets/parent/report-coin.png';
+import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
+import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import 'react-vis/dist/style.css';
 import {
@@ -13,12 +13,13 @@ import {
     YAxis,
     VerticalGridLines,
     HorizontalGridLines,
-}                                      from 'react-vis';
-import TitleGameBackground             from 'views/assets/title-games-background.png';
-import { Typography }              from 'views/atoms/Text/typography';
+} from 'react-vis';
+import TitleGameBackground from 'views/assets/title-games-background.png';
+import { Typography } from 'views/atoms/Text/typography';
 import { ImageAvatar } from '../Avatar/DefaultAvatar';
-import query                 from 'api/queries/get';
+import query from 'api/queries/get';
 import { LastWeekAndCoinsQuestions } from 'api/fragments/studentFragments';
+import { dictionary } from './dictionary';
 
 
 const ChartHeaderContrainer = styled.div`
@@ -111,6 +112,8 @@ interface BarChartProps {
 // export const BarChart = ({ student }: { student: any }) => {
 export const BarChart = ({ student }: BarChartProps) => {
 
+    const user = useSelector((state: any) => state.user)
+    const language = user.language || 'en-us'
     const [barChartData, setBarChartData] = useState<iChartData[]>([]);
     const [barChartData2, setBarChartData2] = useState<iChartData[]>([]);
 
@@ -131,14 +134,14 @@ export const BarChart = ({ student }: BarChartProps) => {
         }, 1000);
     }, []);
 
-    const user = useSelector((state: any) => state.user);
+    // const user = useSelector((state: any) => state.user);
     useEffect(() => {
         if (student?.id && user?.token) {
             (async () => {
                 const res: any = await query('', LastWeekAndCoinsQuestions(1), user.token).catch(e => ({ success: false }));
                 if (res.success !== false) {
-                    const result:any = await res.json();
-                    if(result.errors && !result.data) {
+                    const result: any = await res.json();
+                    if (result.errors && !result.data) {
                         alert(result.errors[0].message);
                     } else {
                         const { lastWeekCoins, lastWeekQuestions } = result.data.students.filter((_student: any) => _student.id === student?.id)[0];
@@ -169,7 +172,7 @@ export const BarChart = ({ student }: BarChartProps) => {
         }
     }, [student, user]);
     return (
-        <div style={{ position: 'relative', maxWidth: '768px', margin: 'auto'}}>
+        <div style={{ position: 'relative', maxWidth: '768px', margin: 'auto' }}>
             <MobileCom>
                 <img style={{
                     position: 'absolute',
@@ -191,22 +194,22 @@ export const BarChart = ({ student }: BarChartProps) => {
                     paddingTop: '1rem',
                     paddingBottom: '1rem',
                     zIndex: 20,
-                }}>Your Children</h3>
+                }}>{dictionary[language]?.yourChildren}</h3>
             </MobileCom>
             <ChartHeaderContrainer>
                 {
                     student && <ImageAvatar
-                        name      = {student.fullName ? student.fullName : 'F'}
-                        accessory = {student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
-                        head      = {student.currentAvatarHead ? student.currentAvatarHead : null}
-                        clothes   = {student.currentAvatarClothes ? student.currentAvatarClothes : null}
+                        name={student.fullName ? student.fullName : 'F'}
+                        accessory={student.currentAvatarAccessories ? student.currentAvatarAccessories : null}
+                        head={student.currentAvatarHead ? student.currentAvatarHead : null}
+                        clothes={student.currentAvatarClothes ? student.currentAvatarClothes : null}
                         // skinTone={null}
-                        size      = {150}
+                        size={150}
                     />
                 }
                 <ChartTitleGroup>
                     <ChartTitleBG src={TitleKidBackground} alt='Kid Title Bg' />
-                    <ChartTitle>{student?.fullName} <span><br/></span> Progress Report</ChartTitle>
+                    <ChartTitle>{student?.fullName} <span><br /></span>{dictionary[language]?.yourChildren}</ChartTitle>
                 </ChartTitleGroup>
             </ChartHeaderContrainer>
             <div ref={chartContainerRef} style={{
@@ -228,7 +231,7 @@ export const BarChart = ({ student }: BarChartProps) => {
                         text: {
                             fontSize: '1rem'
                         }
-                    }} width={52}/>
+                    }} width={52} />
                     {/* <AreaSeries fill={'#F4C222'} opacity={0.54} data={areaChartData} curve={'curveMonotoneX'} />
                     <LineSeries fill={'#F4C222'} opacity={0.54} data={areaChartData} curve={'curveMonotoneX'} /> */}
                     <VerticalBarSeries color='#26B824' barWidth={0.7} data={barChartData} opacity={0.6} />
@@ -246,7 +249,7 @@ export const BarChart = ({ student }: BarChartProps) => {
                     alignItems: 'center'
                 }}>
                     <img src={ReportCheckIcon} alt='ReportCheckIcon' />
-                    <span style={{marginLeft: '0.5rem'}}>correct answers</span>
+                    <span style={{ marginLeft: '0.5rem' }}>{dictionary[language]?.correctAnswers}</span>
                 </div>
                 <div style={{
                     display: 'flex',
@@ -254,7 +257,7 @@ export const BarChart = ({ student }: BarChartProps) => {
                     alignItems: 'center'
                 }}>
                     <img src={ReportCoinIcon} alt='ReportCoinIcon' />
-                    <span style={{marginLeft: '0.5rem'}}>coins earned</span>
+                    <span style={{ marginLeft: '0.5rem' }}>{dictionary[language]?.coinsEarned}</span>
                 </div>
             </div>
         </div>

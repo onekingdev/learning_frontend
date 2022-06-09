@@ -17,7 +17,7 @@ export const dictionary: any = Object.freeze({
         support: 'Apoyo',
         menu: 'Menú',
         settings: 'Ajustes',
-        manageKids: 'Administrar niñas',
+        manageKids: 'Administrar niños',
         signOut: 'Desconectar'
     }
 });

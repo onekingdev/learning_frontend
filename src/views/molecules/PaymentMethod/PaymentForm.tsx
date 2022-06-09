@@ -425,7 +425,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 }
                 <Grid item xs={12}>
                     <TextField
-                        label={dictionary[language]?.addressLine + ' 1'}
+                        label={dictionary[language]?.addressLine1}
                         onChange={(e: any) => {
                             handleFormChange('addressOne', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                             setData({ ...data, addressOne: e.target.value })
@@ -437,7 +437,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        label={dictionary[language]?.addressLine + ' 2(optinoal)'}
+                        label={dictionary[language]?.addressLine2}
                         onChange={(e: any) => {
                             // handleFormChange('addressTwo',e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                             setData({ ...data, addressTwo: e.target.value });

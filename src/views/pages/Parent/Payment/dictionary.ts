@@ -58,7 +58,7 @@ export const dictionary: any = Object.freeze({
         subtotal: 'Subtotal',
     },
     'es-mx': {
-        choosePackageInfo: 'Al inscribirse en Sócrates, los niños pueden obtener una o más áreas de conocimiento para aprender de nuestra creciente selección. ¡Elija el paquete Solo para un área, el paquete combinado para dos o el paquete Gold para obtenerlo todo!',
+        choosePackageInfo: 'Al inscribirse en Sócrates, los niños pueden obtener una o más áreas de conocimiento para aprender de nuestra creciente selección. ¡Elija el Paquete Sole para un área, el Paquete Combo para dos o el Paquete Gold para obtenerlo todo!',
         math: 'Matemáticas',
         elaSgithWords: 'ELA + PALABRAS VISIBLES',
         science: 'CIENCIA',
