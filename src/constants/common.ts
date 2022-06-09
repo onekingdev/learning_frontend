@@ -23,39 +23,3 @@ export const LANGUAGES = [
         value: 'th'
     },
 ]
-export const REVIEW_PERIODS = [
-    {
-        id: 1,
-        label: {
-            'en-us': 'Today\'s Answers',
-            'es-mx': 'Las respuestas de hoy',
-            'th': 'คำตอบวันนี้',
-        },
-        value: 'today'
-    },
-    {
-        id: 2,
-        label: {
-            'en-us': 'Recent Answers',
-            'es-mx': 'Respuestas recientes',
-            'th': 'คำตอบล่าสุด',
-        },
-        value: 'recent'
-    },
-    {
-        id: 3,
-        label: {
-            'en-us': 'Recent Incorrect Answers',
-            'es-mx': 'Respuestas incorrectas recientes',
-            'th': 'คำตอบที่ไม่ถูกต้องล่าสุด',
-        },
-        value: 'recent-incorrect'
-    },
-]
-
-export enum USER_TYPE {
-    teacher = 'teacher',
-    student = 'student',
-    guardian = 'guardian',
-    noPlans = 'noPlans',
-}

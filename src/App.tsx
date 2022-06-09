@@ -8,13 +8,8 @@ import { SnackbarProvider }        from 'notistack';
 import { BrowserRouter as Router } from 'react-router-dom';
 import TawkMessengerReact          from '@tawk.to/tawk-messenger-react';
 import * as TYPES from 'app/types'
-import {
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query'
-const queryClient = new QueryClient()
+
 import './style.css'
-import { Spinner } from 'views/atoms/Spinner';
 declare global {
   interface Window {
     Tawk_API?: any;
@@ -43,19 +38,16 @@ export default () => {
 
   return (
     <Provider store={persist.store}>
-      <PersistGate loading={<Spinner />} persistor={persist.persistor}>
+      <PersistGate loading={true} persistor={persist.persistor}>
         <SnackbarProvider maxSnack={3}>
           <TawkMessengerReact
             propertyId="58cecc295b89e2149e1b042f"
             widgetId="default"
             onLoad={onLoad}
             useRef={tawkMessengerRef}/>
-            <QueryClientProvider client={queryClient}>
-
           <Router>
             <Routes />
           </Router>
-            </QueryClientProvider>
         </SnackbarProvider>
       </PersistGate>
     </Provider>

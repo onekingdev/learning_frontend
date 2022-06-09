@@ -1,9 +1,7 @@
 import { FC } from 'react';
 import playQuestionSound from 'views/assets/play-sound.svg'
-import { Box, Container, Typography, useMediaQuery } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { QuestionEquation } from './QuestionEquation';
-import { ScreenSize } from 'constants/screenSize';
-import he from 'he'
 
 
 interface QuestionBoxTitleProps {
@@ -15,7 +13,6 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
   title,
   audioFile,
 }) => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
   const readQuestionAudioAsset = () => {
     const audio = new Audio(audioFile);
     audio.play();
@@ -40,10 +37,11 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'column',
+      minHeight: 200,
     }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 5, width: '100%' }}>
-        <Typography variant='h5' sx={{ color: 'white' }}>
-          {title.charAt(0) === '@' ? extractQuestion(title) : he.decode(title)}
+      <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', marginTop: 5, width: '100%' }}>
+        <Typography variant='h4' sx={{ color: 'white' }}>
+          {title.charAt(0) === '@' ? extractQuestion(title) : title}
         </Typography>
         {
           audioFile ?
@@ -53,8 +51,7 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
                 readQuestionAudioAsset();
               }}
               style={{
-                cursor: 'pointer',
-                height: isMobile ? 60 : 'auto',
+                cursor: 'pointer'
               }}
             /> : null
         }

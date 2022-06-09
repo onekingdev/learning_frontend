@@ -27,7 +27,7 @@ export const ImageAvatar: FC<AvatarProps> = ({ clothes, accessory, head, skinTon
           {accessory && <CurrentAccessory src={accessory.image} style={{ width: size, marginTop: -size / 2 }} />}
         </div>
         :
-        <TypoTitle style={{color: BasicColor.blue}}>{name.slice(0,2).toUpperCase()}</TypoTitle>
+        <TypoTitle style={{color: BasicColor.blue}}>{name.charAt(0).toUpperCase()}</TypoTitle>
       }
     </Avatar>
   )

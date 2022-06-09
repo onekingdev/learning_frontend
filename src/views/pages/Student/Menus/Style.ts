@@ -5,7 +5,7 @@ export const TopMenuContainer = styled.div`
   width           : 100%;
   display         : flex;
   justify-content : center;
-  @media screen and (max-width: ${ScreenSize.phone}) {
+  @media screen and (max-width: ${ScreenSize.tablet}) {
     display: none;
   }
 `;

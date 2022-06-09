@@ -8,22 +8,15 @@ import {
     FETCH_PLANS,
     ADD_STUDENT_PLAN_PACKAGE,
     CANCEL_MEMBERSHIP,
-    CONFIRM_UPDATE_GUARDIAN_PLAN,
-    FETCH_GUARDIAN_STUDENTS,
-    FETCH_AVAILABLE_PLANS,
-    FETCH_STUDENT_BY_ID,
-    FETCH_GUARDIAN_PLANS
+    CONFIRM_UPDATE_GUARDIAN_PLAN
 } from 'api/mutations/guardians';
-import {
-    CREATE_STUDENT, CREATE_STUDENT_PLAN,
-} from 'api/mutations/students'
-import { fetchQuery, sendRawQuery } from 'api/queries/get';
+import { sendRawQuery } from 'api/queries/get';
 import * as TYPES from 'app/types'
 
-export const createGuardian = async (email: string, firstName: string, lastName: string, userName: string, password: string, couponCode: string, dispatch: any, language: string) => {
+export const createGuardian = async (email: string, firstName: string, lastName: string, userName: string, password: string, couponCode: string, dispatch: any) => {
     const res: any = await mutationFetch(
-        CREATE_GUARDIAN(email, firstName, lastName, userName, password, couponCode, language)
-    ).catch(() => ({ success: false }));
+        CREATE_GUARDIAN(email, firstName, lastName, userName, password, couponCode)
+    ).catch(() => ({ success: 'false' }));
 
     if (res.success === false) {
         return { success: false, msg: 'Network Error!' };
@@ -72,11 +65,10 @@ export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: num
             UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN(guardianId, orderDetailId),
             token
         );
-        return res.msg ? { status: false, message: res.msg } : res.data.updateGuardianPlan;
+        return res.msg ? { status: false } : res.data.updateGuardianPlan;
     }
-    catch (e: any) {
-        console.log(e)
-        return { status: false, message: e.message }
+    catch {
+        return { status: false }
     }
 }
 
@@ -144,66 +136,4 @@ export const doCancelMembership = async (guardianId: number, reason: string, tok
         return { status: false }
     }
 }
-
-export const doFetchGuardianStudents = async (guardianId: number, token: string) => {
-    const res: any = await fetchQuery(
-        FETCH_GUARDIAN_STUDENTS(guardianId),
-        token
-    );
-    return res.data.guardianById?.guardianstudentplanSet ?? res.errors[0]
-}
-
-export const doFetchGuardianPlans = async (guardianId: number, token: string) => {
-    const res: any = await fetchQuery(
-        FETCH_GUARDIAN_PLANS(guardianId),
-        token
-    );
-    return res.data?.guardianStudentPlanByGuardianId ?? res.errors[0]
-}
-
-export const doFetchStudentById = async (studentId: number, token: string) => {
-    const res: any = await fetchQuery(
-        FETCH_STUDENT_BY_ID(studentId),
-        token
-    );
-    return res.data.studentById
-}
-
-export const doFetchGuardianAvailablePlans = async (guardianId: number, token: string) => {
-    const res: any = await fetchQuery(
-        FETCH_AVAILABLE_PLANS(guardianId),
-        token
-    );
-    return res.data.guardianById.availableGuardianstudentplan
-}
-
-export const doCreateStudentPlan = async (
-    audience: string,
-    firstName: string,
-    lastName: string,
-    username: string,
-    password: string,
-    guardianStudentPlanId: number,
-    listSubjectId: number[],
-    studentPlan: number,
-    gradeId: number,
-    token: string,
-) => {
-    const res: any = await fetchQuery(
-        CREATE_STUDENT_PLAN(
-            audience,
-            firstName,
-            lastName,
-            username,
-            password,
-            guardianStudentPlanId,
-            listSubjectId,
-            studentPlan,
-            gradeId,
-        ),
-        token
-    );
-    return res.data?.createStudent?.guardian.availableGuardianstudentplan ?? res.errors[0] // when django returns error message on fail
-}
-
 

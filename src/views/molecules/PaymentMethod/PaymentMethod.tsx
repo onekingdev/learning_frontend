@@ -89,8 +89,8 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
 //     setCouponPrice(5);
 //   }
 
-//   useEffect(() => {
-//   }, []);
+  useEffect(() => {
+  }, []);
 
   useEffect(() => {
     const price_gold = plans.Gold.currentPrice / 100 * offRate * ((plans.Gold.childCount - 1 > 0) ? (plans.Gold.childCount - 1) : 0) + (plans.Gold.childCount > 0 ? 1 : 0 ) * plans.Gold.currentPrice;

@@ -1,31 +1,29 @@
 import { useState, useEffect, useContext, FC, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
-import { Title } from 'views/atoms/Text';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useHistory }           from 'react-router-dom';
+import { StudentMenu }         from 'views/pages/Student/Menus/StudentMenu';
+import { Title }               from 'views/atoms/Text';
+import Box                     from '@mui/material/Box';
+import InputLabel              from '@mui/material/InputLabel';
+import MenuItem                from '@mui/material/MenuItem';
+import FormControl             from '@mui/material/FormControl';
+import Select                  from '@mui/material/Select';
 import TitleProgressBackground from 'views/assets/title-games-background.png';
-import ProgressMap from 'views/assets/student/process/map.svg';
-import ProgressMapMobile from 'views/assets/student/process/progress-map-mobile.svg';
-import MarkTableSubject from 'views/molecules/Table/MarkTableSubject';
-import { LoadingContext } from 'react-router-loading';
-import { ScreenSize } from 'constants/screenSize';
-import { MobileCom, PcCom } from '../TreasureTrack/TreasureTrack';
-import { Container } from './Style';
-import { dictionary } from './dictionary'
-import { useSelector } from 'react-redux';
+import ProgressMap             from 'views/assets/student/process/map.svg';
+import ProgressMapMobile       from 'views/assets/student/process/progress-map-mobile.svg';
+import MarkTableSubject        from 'views/molecules/Table/MarkTableSubject';
+import { LoadingContext }      from 'react-router-loading';
+import { ScreenSize }          from 'constants/screenSize';
+import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
+import { Container }            from './Style';
+import { dictionary }           from './dictionary'
+import { useSelector }       from 'react-redux';
 import { TopicReportByAokAndGrade, TopicReportWithGrade, AreasOfKnowledge, Grades, AvaliableGrades } from 'api/fragments/topicFragments';
-import query from 'api/queries/get';
-import styled from 'styled-components';
-import background from 'views/assets/colored-shapes-bg.svg';
+import query                 from 'api/queries/get';
+import styled             from 'styled-components';
+import background     from 'views/assets/colored-shapes-bg.svg';
 import { subSubjects, subSubjectsMobile, paths, pathsMobile } from './positionInfo';
 import { smoothScroll } from 'views/utils';
 import _ from 'lodash';
-import { PageTitle } from 'views/molecules/PageTitle';
-import { Button } from '@mui/material';
 
 const Wrapper = styled.div`
     background-image  : url(${background});
@@ -66,16 +64,16 @@ const getAllTopic: any = (subSubjectList: Array<any>, deep: number) => {
 }
 
 export const KidsProgress = () => {
-    const user = useSelector((state: any) => state.user);
-    const student = useSelector((state: any) => state.student);
-    let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'en-us'
+    const user              = useSelector((state: any) => state.user);
+    const student           = useSelector((state: any) => state.student);
+    let language:string     = useSelector((state: any) => state.user.language);
+    language                = language? language : 'en-us'
 
-    const [activeSubjectId, setActiveSubjectId] = useState<number>(-1);
+    const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
     const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>('');
     const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
-    const [data, setData] = useState<any[]>([]);
-    const [activeGradeId, setActiveGradeId] = useState<number>(-1);
+    const [data, setData]                         = useState<any[]>([]);
+    const [activeGradeId, setActiveGradeId]   = useState<number>(-1);
     const [grades, setGrades] = useState<Array<{
         id: string,
         name: string
@@ -95,12 +93,12 @@ export const KidsProgress = () => {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
-                const res: any = await query('', AvaliableGrades(activeSubjectId)).catch(e => ({ success: false }));
-                if (res.success === false) {
+                const res:any = await query('', AvaliableGrades(activeSubjectId)).catch(e => ({success: false}));
+                if(res.success === false) {
                     return
                 }
-                const result: any = await res.json();
-                if (result.errors && !result.data) {
+                const result:any = await res.json();
+                if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
                     if (result.data.areaOfKnowledgeById.audience.gradeSet.length > 0) {
@@ -118,24 +116,24 @@ export const KidsProgress = () => {
                 loadingContext.start();
                 // Get Topic Report
                 // const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
-                const res: any = await query('', TopicReportWithGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({ success: false }));
-                if (res.success === false) {
-                    return
+                const res:any = await query('', TopicReportWithGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
+                if(res.success === false) {
+                return
                 }
                 const result: any = await res.json();
                 console.log(result.data.rootTopicsByAok);
-                if (result.errors && !result.data) {
+                if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
                     setData(result.data.rootTopicsByAok);
                 }
                 // if (firstLoad) {
                 //     setFirstLoad(false);
-                loadingContext.done();
+                    loadingContext.done();
                 // }
-            })();
+          })();
         }
-    }, [activeSubjectId, activeGradeId]);
+      }, [activeSubjectId, activeGradeId]);
 
     const handleGradeChange = (event: any) => {
         setActiveGradeId(event.target.value);
@@ -208,8 +206,29 @@ export const KidsProgress = () => {
     const handleTypeChange = (e: any) => setType(e.target.value);
     return (<Wrapper>
         <StudentMenu>
-            <PageTitle title={dictionary[language]?.title} />
             <Container>
+                <div style={{
+                    width: '500px',
+                    maxWidth: 'calc(100vw - 100px)',
+                    height: '80px',
+                    position: 'relative',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <img style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        zIndex: 10,
+                    }} src={TitleProgressBackground} alt='TitleProgressBackground' />
+                    <Title style={{
+                        zIndex: 20,
+                        color: 'black',
+                        paddingLeft: '1rem',
+                        paddingRight: '1rem',
+                    }}>{dictionary[language]?.title}</Title>
+                </div>
                 <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -234,9 +253,9 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                {grades.map((grade: any, id: number) => (
+                                { grades.map((grade: any, id: number) => (
                                     <MenuItem key={id} value={grade.id}>{grade.name}</MenuItem>
-                                ))}
+                                )) }
                             </Select>
                         </FormControl>
                     </Box>
@@ -247,16 +266,7 @@ export const KidsProgress = () => {
                     <Box sx={{ minWidth: 120 }} style={{
                         marginRight: '1rem'
                     }}>
-                        <Button
-                            variant='contained'
-                            sx={{height: '100%'}}
-                            onClick={() => {
-                                history.push('/review')
-                            }}
-                        >
-                            {dictionary[language]?.reviewQuestionsAnswered}
-                        </Button>
-                        {/* <FormControl fullWidth style={{
+                        <FormControl fullWidth style={{
                             width: '17rem',
                         }}>
                             <PcCom style={{
@@ -285,11 +295,11 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                {["Today's Answers", 'Recent Answers', 'Recent Incorrect Answers'].map((type, id) => (
+                                { ["Today's Answers", 'Recent Answers', 'Recent Incorrect Answers'].map((type, id) => (
                                     <MenuItem key={id} value={type}>{type}</MenuItem>
-                                ))}
+                                )) }
                             </Select>
-                        </FormControl> */}
+                        </FormControl>
                     </Box>
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
@@ -308,9 +318,9 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                {areasOfKnowledge.map((subject, id) => (
+                                { areasOfKnowledge.map((subject, id) => (
                                     <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
-                                ))}
+                                )) }
                             </Select>
                         </FormControl>
                     </Box>
@@ -404,7 +414,7 @@ export const KidsProgress = () => {
                                             setActiveSubjectIdTable(singleInfo.aokId);
                                         }
                                     }}>
-                                        {singleInfo.text}
+                                    {singleInfo.text}
                                     </div>
                                 </div>
                             )
@@ -415,7 +425,7 @@ export const KidsProgress = () => {
                         textAlign: "center",
                         fontSize: "3rem"
                     }}>There is no Subjects</p>}
-                    {/* { paths.map((path, id) => <PcCom key={id} style={{
+                        {/* { paths.map((path, id) => <PcCom key={id} style={{
                             position: 'absolute',
                             left: `${path.left}%`,
                             top: `${path.top}%`,

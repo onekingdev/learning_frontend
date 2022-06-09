@@ -46,7 +46,7 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, plan, refresh }) => {
       refresh()
     } else {
       onConfirm()
-      enqueueSnackbar(res.message, { variant: 'error' })
+      enqueueSnackbar('Student Package update failed', { variant: 'error' })
     }
     setLoading(false)
   }

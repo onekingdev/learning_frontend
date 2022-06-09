@@ -1,34 +1,31 @@
-import styled from 'styled-components';
-import { FC, useState, useEffect } from 'react';
-import { Button, Grid, Paper, TableRow, TableHead, TableContainer, TableCell, TableBody, Table, Typography } from '@mui/material';
-import { useSelector } from 'react-redux'
+import styled                                from 'styled-components';
+import { FC, useState, useEffect }           from 'react';
+import { Button, Grid, Paper, TableRow, TableHead, TableContainer, TableCell, TableBody, Table }                              from '@mui/material';
+import { useSelector }                       from 'react-redux'
 import { LSLabel, LSText } from './utils/Style';
-import { LSDialog } from './LSDialog';
-import { CancelPlanForm } from './CancelPlanForm';
-import { useDialog } from './utils/useDialog';
-import { Upgrade } from './Upgrade';
-import { doFetchAvailableBroughtPlans, doFetchGuardianPlans } from 'app/actions/guardianActions'
-import { dictionary } from './dictionary'
-import { useQuery } from 'react-query'
+import { LSDialog }                          from './LSDialog';
+import { CancelPlanForm }                    from './CancelPlanForm';
+import { useDialog }                         from './utils/useDialog';
+import { Upgrade }                           from './Upgrade';
+import { doFetchAvailableBroughtPlans }      from 'app/actions/guardianActions'
+import { dictionary }                        from './dictionary'
 interface IPlanList {
   refresh: boolean
 }
 
-export const PlanList: FC<IPlanList> = ({ refresh }) => {
+export const PlanList: FC<IPlanList> = ({refresh}) => {
 
   // for change to yearly dialog
-
   const [isUpdateOpen, update] = useState(false)
   const openUpdate = () => update(!isUpdateOpen);
   const user = useSelector((state: any) => state.user);
   const guardian = useSelector((state: any) => state.guardian);
-  const { data, error, isLoading } = useQuery(['fetch-plans-list', guardian.id, user.token], () => doFetchGuardianPlans(guardian.id, user.token))
   const { isOpen, open } = useDialog()
   const [tag, seTag] = useState(0)
-  // const [plans, setPlans] = useState<Array<any>>([])
+  const [plans, setPlans] = useState<Array<any>>([])
   const [changed, setChanged] = useState(false)
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : 'en-us'
 
   const toggleChanged = () => {
     setChanged(!changed)
@@ -46,113 +43,105 @@ export const PlanList: FC<IPlanList> = ({ refresh }) => {
 
   const onCancelUpgrade = () => openUpdate()
 
-  // const fetchAvailableBrougthPlans = async (mounted: boolean) => {
-  //   setPlans([])
-  //   const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
-  //   if (res !== null) {
-  //     if (mounted) {
-  //       setPlans(
-  //         res
-  //       )
-  //     } else return
-  //   }
-  // }
+  const fetchAvailableBrougthPlans = async (mounted: boolean) => {
+    setPlans([])
+    const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
+    if (res !== null) {
+      if (mounted) {
+        setPlans(
+          res
+        )
+      } else return
+    }
+  }
 
-  // useEffect(() => {
-  //   let mounted = true
-  //   fetchAvailableBrougthPlans(mounted)
-  //   return () => {
-  //     mounted = false
-  //   }
-  // }, [refresh, changed]);
-  if (isLoading) return <Typography variant='caption'> Loading...</Typography>
-  if (error) {
-    const getMessage = (error: any) => error.message
-    const message = getMessage(error)
-    return <Typography variant='caption' color={'red'}> {message}</Typography> }
-  if (data.message) return <Typography variant='caption'> {data.message}</Typography>
+  useEffect(() => {
+    let mounted = true
+    fetchAvailableBrougthPlans(mounted)
+    return () => {
+      mounted = false
+    }
+  }, [refresh, changed]);
+
   return (
     <div>
-      {
-        !data.message &&
-        <TableContainer component={Paper} >
-          <Table aria-label='simple table' size='small' >
-            <StyledTableHead >
-              <TableRow>
-                <TableCell align='center'>
-                  <LSLabel fontSize={17} textAlign='center'>{dictionary[language]?.plan}</LSLabel>
-                  <LSText textAlign='center' fontSize={13}>{dictionary[language]?.getThreeMonthsFREEForAnnualPlan}</LSText>
-                </TableCell>
+      <TableContainer component={Paper} >
+        <Table aria-label='simple table' size='small' >
+          <StyledTableHead >
+            <TableRow>
+              <TableCell align='center'>
+                <LSLabel fontSize={17} textAlign='center'>{dictionary[language]?.plan}</LSLabel>
+                <LSText textAlign='center' fontSize={13}>{dictionary[language]?.getThreeMonthsFREEForAnnualPlan}</LSText>
+              </TableCell>
+            </TableRow>
+          </StyledTableHead>
+          <TableBody>
+            {plans.length > 0 ? plans.map((row, index) => (
+              <TableRow
+                hover
+                key={row.id}
+              >
+                <StyledTableCell component='th' scope='row' bgcolor={colors[index % 4]}>
+                  <Grid container>
+                    <Grid item md={3} xs={12}>
+                      <LSLabel >{row.plan.name}</LSLabel>
+                    </Grid>
+                    <StyledGrid container item md={9} xs={12} >
+                      <Grid item md={4} xs={4}>
+                        <LSLabel>{row.period}</LSLabel>
+                      </Grid>
+                      <Grid item md={4} xs={4}>
+                        <LSLabel>{row.expiredAt?.slice(0, 10)}</LSLabel>
+                      </Grid>
+                      <Grid item md={4} xs={4}>
+                        <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth:row.plan.priceYear} {row.plan.currency}</LSLabel>
+                      </Grid>
+                    </StyledGrid>
+                  </Grid>
+                  <Grid container>
+                    <Grid item md={6} xs={12}>
+                      <Button
+                        disabled={row.period === 'MONTHLY' ? false : true}
+                        onClick={() => onUpgradeBtnClick(index)}
+                      >{dictionary[language]?.ChangeToYearly}
+                      </Button>
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                      <Button onClick={() => onBtnClick(index)}>{dictionary[language]?.CancelPlan}</Button>
+                    </Grid>
+                  </Grid>
+                </StyledTableCell>
               </TableRow>
-            </StyledTableHead>
-            <TableBody>
-              {data.map((row: any, index: number) => (
-                <TableRow
-                  hover
-                  key={row.id}
-                >
-                  <StyledTableCell component='th' scope='row' bgcolor={colors[index % 4]}>
-                    <Grid container>
-                      <Grid item md={3} xs={12}>
-                        <LSLabel >{row.plan.name}</LSLabel>
-                      </Grid>
-                      <StyledGrid container item md={9} xs={12} >
-                        <Grid item md={4} xs={4}>
-                          <LSLabel>{row.period}</LSLabel>
-                        </Grid>
-                        <Grid item md={4} xs={4}>
-                          <LSLabel>{row.expiredAt?.slice(0, 10)}</LSLabel>
-                        </Grid>
-                        <Grid item md={4} xs={4}>
-                          <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth : row.plan.priceYear} {row.plan.currency}</LSLabel>
-                        </Grid>
-                      </StyledGrid>
-                    </Grid>
-                    <Grid container>
-                      <Grid item md={6} xs={12}>
-                        <Button
-                          disabled={row.period === 'MONTHLY' ? false : true}
-                          onClick={() => onUpgradeBtnClick(index)}
-                        >{dictionary[language]?.ChangeToYearly}
-                        </Button>
-                      </Grid>
-                      <Grid item md={6} xs={12}>
-                        <Button onClick={() => onBtnClick(index)}>{dictionary[language]?.CancelPlan}</Button>
-                      </Grid>
-                    </Grid>
-                  </StyledTableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <LSDialog
-            isOpen={isOpen}
+            )): null}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <LSDialog
+        isOpen={isOpen}
+        open={open}
+        title={dictionary[language]?.CancelChildrenPlan}
+        contentText={dictionary[language]?.YouAreCancellingOneChildSoloArea}
+        dialogContent={
+          <CancelPlanForm
+            plan={plans[tag]}
             open={open}
-            title={dictionary[language]?.CancelChildrenPlan}
-            contentText={dictionary[language]?.YouAreCancellingOneChildSoloArea}
-            dialogContent={
-              <CancelPlanForm
-                plan={data[tag]}
-                open={open}
-                refresh={toggleChanged}
-              />
-            }
+            refresh={toggleChanged}
           />
-          <LSDialog
-            isOpen={isUpdateOpen}
-            open={openUpdate}
-            title={dictionary[language]?.Upgrade}
-            dialogContent={
-              <Upgrade
-                plan={data[tag]}
-                onConfirm={openUpdate}
-                onCancel={onCancelUpgrade}
-                refresh={toggleChanged}
-              />
-            }
+        }
+      />
+      <LSDialog
+        isOpen={isUpdateOpen}
+        open={openUpdate}
+        title={dictionary[language]?.Upgrade}
+        dialogContent={
+          <Upgrade
+            plan={plans[tag]}
+            onConfirm={openUpdate}
+            onCancel={onCancelUpgrade}
+            refresh={toggleChanged}
           />
-        </TableContainer>
-      }
+        }
+      />
     </div>
   );
 }

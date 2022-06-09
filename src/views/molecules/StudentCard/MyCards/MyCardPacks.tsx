@@ -1,5 +1,7 @@
 import { FC, useCallback, useState } from 'react';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { ScreenSize } from 'constants/screenSize';
 import { MyCardPack } from './MyCardPack';
 import {
   doFetchCategoryCollectibles,

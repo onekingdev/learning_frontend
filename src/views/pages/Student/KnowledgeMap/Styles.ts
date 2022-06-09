@@ -18,6 +18,7 @@ export const Ocean = styled.div`
   background-repeat     : no-repeat;
   background-size       : cover;
   @media (min-width: ${ScreenSize.desktop}) {
+    min-height            : unset;
     padding               : 2rem;
     padding-top           : 3em;
     padding-bottom        : 3em;

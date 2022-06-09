@@ -1,11 +1,10 @@
-import { FC } from 'react';
-import styled from 'styled-components';
-import { Divider } from 'views/atoms/Divider';
+import { FC }          from 'react';
+import styled          from 'styled-components';
+import { Divider }     from 'views/atoms/Divider';
 import { ButtonColor } from 'views/Color';
-import { ScreenSize } from 'constants/screenSize';
-import Button from 'views/molecules/MuiButton';
-import { BasicColor } from 'views/Color';
-import GoogleIcon from '@mui/icons-material/Google';
+import { ScreenSize }  from 'constants/screenSize';
+import Button          from 'views/molecules/MuiButton';
+import { BasicColor }  from 'views/Color';
 
 type LoginActionsProps = {
   googleText: string;
@@ -35,7 +34,7 @@ export const Actions: FC<LoginActionsProps> = ({
 
       <Action>
         <Button
-          value={loading ? 'Loading...' : loginText}
+          value={loading?'Loading...':loginText}
           bgColor={loginColor}
           color={BasicColor.white}
           onClick={loginAction}
@@ -53,7 +52,6 @@ export const Actions: FC<LoginActionsProps> = ({
           fullWidth={true}
           loading={loading}
           disabled={disabled}
-          startIcon={<GoogleIcon />}
         />
       </Action>
 

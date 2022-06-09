@@ -131,22 +131,4 @@ export const fetchRawData = async (
   const result = await res.json()
   return result
 };
-
-export const fetchQuery = async (
-  query: string,
-  token?: string
-) => {
-  return fetch(<string>process.env.REACT_APP_SERVER_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token && { 'Authorization': `Bearer ${token}` }),
-    },
-    body: JSON.stringify({
-      query: `
-        ${query}
-      `,
-    })
-  }).then((response: any) => response.json())
-};
 export default get_async;

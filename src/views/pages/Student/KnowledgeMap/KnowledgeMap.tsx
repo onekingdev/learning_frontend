@@ -110,7 +110,7 @@ export const KnowledgeMap: FC = () => {
                       },
                       position: 'relative',
                       height: isMobile ? 100 : 250,
-                      width: isMobile ? 'auto' : '40vw',
+                      width: isMobile ? 'auto' : 600,
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center'
@@ -124,7 +124,7 @@ export const KnowledgeMap: FC = () => {
                       onLoad={onImgLoad}
                       onError={onImgLoad}
                       style={{
-                        width: isMobile ? 150 : 400,
+                        width: isMobile ? 100 : 400,
                         opacity: areaOfKnowledge.isActive ? 1 : 0.5
                       }}
                     />

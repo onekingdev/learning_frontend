@@ -5,14 +5,13 @@ import { BasicColor, ButtonColor } from 'views/Color';
 import { Icon } from 'views/atoms/Icon/Icon';
 import videoIcon from 'views/assets/others/video-assistor.png';
 import assistor from 'views/assets/text-to-speech.svg';
+import { TextOption } from 'views/atoms/QuestionOptions/Textoption';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
-import { BlackBoard, AnswersContainer, AssistorContainer, BlockAnswers, ImageAssetContainer, ImageAsset, AnswerContainer } from './Styles'
-import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
+import { BlackBoard, AnswersContainer, AssistorContainer, TextOptionsList, AnswerContainer, BlockAnswers, ImageAssetContainer, ImageAsset } from './Styles'
+import { QuestionBoxTitle } from './QuestionBoxTitle';
 import { shuffle } from 'views/utils';
-import { Box, Grid } from '@mui/material';
-import { MCOption } from './Elements/MCOption';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -32,7 +31,7 @@ interface BlockQuestionInput {
   isCorrect: boolean;
 }
 
-export const MultipleChoice: FC<ChoiceTextProps> = ({
+export const NewMultipleChoiceText: FC<ChoiceTextProps> = ({
   question,
   nextQuestion,
   totalQuestions,
@@ -90,71 +89,32 @@ export const MultipleChoice: FC<ChoiceTextProps> = ({
       ) : null}
       <BlackBoard>
         <QuestionBoxTitle
-          // title={question.questionText}
           title={question.questionText}
           audioFile={
             question.questionAudioAssets[0]?.audioFile
           }
         />
         <AnswersContainer>
-          <Box
-            width='90%'
-            display={question.answerOptions[0]?.image ? 'flex' : 'block'}
-            justifyContent='center'
-            alignItems='center'
-          >
-            <Grid container justifyContent={'center'} spacing={1}>
-              <BlockAnswers isAnswered={isAnswered} />
-              {shuffled && shuffled.map((option) => {
-                return (
-                  <Grid item key={option.id}>
-                    <AnswerContainer>
-                      <MCOption
-                        answer={option}
-                        onClick={handleAnswer}
-                      />
-                      {
-                        !(question.questionAudioAssets[0]?.audioFile) && option.answerAudioUrl &&
-                        <Icon
-                          image={assistor}
-                          onClick={() => {
-                            readAnswer(option);
-                          }}
-                        />
-                      }
-                    </AnswerContainer>
-                  </Grid>
-                )
-
-              }
-              )}
-            </Grid>
-          </Box>
-          {/* <TextOptionsList>
+          <TextOptionsList>
             <BlockAnswers isAnswered={isAnswered} />
-            {shuffled.map((option, i) => {
-              return (
-
-                <AnswerContainer key={i}>
-                  <TextOption
-                    answer={option}
-                    onClick={handleAnswer}
+            {shuffled.map((option, i) => (
+              <AnswerContainer key={i}>
+                <TextOption
+                  answer={option}
+                  onClick={handleAnswer}
+                />
+                {
+                  !(question.questionAudioAssets[0]?.audioFile) &&
+                  <Icon
+                    image={assistor}
+                    onClick={() => {
+                      readAnswer(option);
+                    }}
                   />
-                  {
-                    !(question.questionAudioAssets[0]?.audioFile) && option.answerAudioUrl &&
-                    <Icon
-                      image={assistor}
-                      onClick={() => {
-                        readAnswer(option);
-                      }}
-                    />
-                  }
-                </AnswerContainer>
-              )
-
-            }
-            )}
-          </TextOptionsList> */}
+                }
+              </AnswerContainer>
+            ))}
+          </TextOptionsList>
           <ImageAssetContainer
             imageLength={question.questionImageAssets?.length}
           >

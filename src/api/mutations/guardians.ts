@@ -1,15 +1,14 @@
 import { GUARDIAN_STUDENT, GUARDIAN, } from '../fragments/guardianFragments';
-import { AVAILABLE_PLANS, COUPON_COODE, } from '../fragments/paymentFragments';
+import { COUPON_COODE, } from '../fragments/paymentFragments';
 import { USER, USER_PROFILE } from '../fragments/userFragments'
 import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, GUARDIAN_STUDENT_PLAN_RAW, ORDER, PLAN, PLAN_RAW } from '../fragments/paymentFragments'
 import { STUDENT, STUDENT_RAW, STUDENT_GRADE } from '../fragments/studentFragments'
 import { AUDIENCES } from '../fragments/peopleFragments'
 import { AREA_OF_KNOWLEDGE } from '../fragments/areaOfKnowledgeFragments'
 import { GRADES } from '../fragments/peopleFragments'
-import { AVATAR_RAW } from 'api/fragments/avatarFragments';
 
-export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string, language: string) => `
-	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}", language: "${language}") {
+export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string) => `
+	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}") {
         guardian {
             ${GUARDIAN}
         }
@@ -185,7 +184,6 @@ query getActiveGuardianPlan {
     }
   }
 `
-
 export const CANCEL_GUARDIAN_BOUGHT_PLAN = (
     orderDetailId: number,
     reason: string
@@ -277,116 +275,4 @@ query plans {
       isActive
     }
   }
-`
-export const FETCH_GUARDIAN_STUDENTS = (
-  guardianId: number,
-) => `
-query {
-guardianById(id: "${guardianId}"){
-  guardianstudentplanSet{
-    id
-    student{
-      ${STUDENT_RAW}
-      currentAvatarHead{
-          ${AVATAR_RAW}
-      }
-      currentAvatarAccessories{
-          ${AVATAR_RAW}
-      }
-      currentAvatarClothes{
-          ${AVATAR_RAW}
-      }
-      currentAvatarPants{
-          ${AVATAR_RAW}
-      }
-      audience {
-          gradeSet {
-              ${GRADES}
-          }
-      }
-      grade {
-          grade{
-              ${GRADES}
-          }
-      }
-      user{
-          id
-          username
-          language
-      }
-    }
-  }
-}
-}
-`
-export const FETCH_GUARDIAN_PLANS = (
-  guardianId: number,
-) => `
-query{
-  guardianStudentPlanByGuardianId(guardianId: "${guardianId}") {
-    id,
-    plan {
-      id
-      identifier
-      name
-      description
-      areaOfKnowledge
-      slug
-      priceMonth
-      priceYear
-      currency
-      isCancel
-    }
-    period
-    expiredAt
-    plan {
-      ${PLAN_RAW}
-    }
-  }
-}
-`
-export const FETCH_STUDENT_BY_ID = (
-  studentId: number,
-) => `
-query {
-  studentById (id: "${studentId}"){
-    ${STUDENT_RAW}
-    currentAvatarHead{
-        ${AVATAR_RAW}
-    }
-    currentAvatarAccessories{
-        ${AVATAR_RAW}
-    }
-    currentAvatarClothes{
-        ${AVATAR_RAW}
-    }
-    currentAvatarPants{
-        ${AVATAR_RAW}
-    }
-    audience {
-        gradeSet {
-            ${GRADES}
-        }
-    }
-    grade {
-        grade{
-            ${GRADES}
-        }
-    }
-    user{
-        id
-        username
-        language
-    }
-  }
-}
-`
-export const FETCH_AVAILABLE_PLANS = (
-  guardianId: number,
-) => `
-query {
-  guardianById(id: "${guardianId}") {
-    ${AVAILABLE_PLANS}
-  }
-}
 `
