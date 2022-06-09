@@ -21,10 +21,18 @@ export const ReviewBox: FC<{ block: any }> = ({ block }) => {
             <Typography variant='h5'>Subject: <span style={{ fontWeight: 'bold' }}>{block.blockQuestionPresentation[0].topic?.areaOfKnowledge?.name}</span></Typography>
             <Typography variant='h6'>Topic:{block.blockQuestionPresentation[0].topic?.name}</Typography>
             <Carousel
+                navButtonsWrapperProps={{   // Move the buttons to the bottom. Unsetting top here to override default style.
+                    style: {
+                        bottom: '0',
+                        top: 'unset',
+                        height: 'unset'
+                    }
+                }}
                 autoPlay={false}
                 indicators={false}
                 animation='slide'
                 cycleNavigation={false}
+                navButtonsAlwaysVisible
                 duration={500}
                 height={300}
             >

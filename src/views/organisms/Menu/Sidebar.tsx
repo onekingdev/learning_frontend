@@ -28,15 +28,17 @@ import { SET_OLD_USER } from 'app/types';
 import { dictionary } from 'views/pages/Student/Menus/dictionary'
 import YouTube from 'react-youtube';
 import { TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH } from 'constants/common';
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 export const Sidebar: FC = () => {
+
+    const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
 
     const [state, setState] = useState(false)
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
     const isNew = useSelector((state: any) => state.student.isNew);
     const token = useSelector((state: any) => state.user.token);
-    const [isMobile, setMobile] = useState(false)
     const history = useHistory();
 
     let language: string = useSelector((state: any) => state.user.language);
@@ -69,10 +71,6 @@ export const Sidebar: FC = () => {
             if (mounted)
                 setOpen(true)
         }
-        // check device is mobile, do mobile view
-        if (window.innerWidth > SCREEN_MOBILE) {
-            setMobile(false);
-        } else setMobile(true);
 
         return () => { mounted = false }
     }, [])
