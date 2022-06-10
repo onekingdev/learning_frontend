@@ -5,9 +5,9 @@ export const dictionary: any = Object.freeze({
         ready: 'Ready'
     },
     'th': {
-        setUpYourAccount: 'สมัครสมาชิก',
-        chooseYourPlan: 'เลือกแพลนผู้ใช้',
-        ready: 'พร้อมเข้าสู่ระบบ'
+        setUpYourAccount: 'ตั้งค่าบัญชีของคุณ',
+        chooseYourPlan: 'เลือกแผนของคุณ',
+        ready: 'พร้อม'
     },
     'es-mx': {
         setUpYourAccount: 'Configurar tu cuenta',

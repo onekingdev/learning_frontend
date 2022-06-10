@@ -363,10 +363,26 @@ query {
     currentAvatarPants{
         ${AVATAR_RAW}
     }
+    guardianstudentplan {
+      subject {
+        id
+        name
+      }
+    }
     audience {
         gradeSet {
             ${GRADES}
         }
+    }
+    areaofknowledgestudentreportSet {
+      id
+      areaOfKnowledge {
+        id
+        name
+      }
+      questionsAnswered
+      correctQuestion
+      accuracy
     }
     grade {
         grade{

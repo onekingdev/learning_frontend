@@ -1,8 +1,7 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { ScreenSize } from 'constants/screenSize';
-import { useSelector } from 'react-redux';
 
 const colors = [
     '#CC5B1D',
@@ -72,13 +71,13 @@ interface ISingleGroup {
     deep?: number,
 }
 
-const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
+const SingleGroup: FC<ISingleGroup> = ({ main = {}, extra = [], deep = 0 }) => {
     const [opened, setOpened] = useState<boolean>(false);
     const toggle = () => setOpened(val => !val);
     const [markOpened, setMarkOpened] = useState<boolean>(false);
     const toggleMark = () => setMarkOpened(val => !val);
     const children = opened ? extra.map((item: ISingleGroup, id: number) => {
-        return <SingleGroup key={id} main={item.main} extra={item.extra} deep={deep+1} />
+        return <SingleGroup key={id} main={item.main} extra={item.extra} deep={deep + 1} />
     }) : '';
     let bgColor = masteryColors.NP;
     if (main.mastery === 'NP') {
@@ -130,7 +129,7 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                     }} />
                     <span>{main.item1}</span>
                 </Subject>
-                { main.item2 !== 'Accuracy' ? <Mark style={{
+                {main.item2 !== 'Accuracy' ? <Mark style={{
                     paddingLeft: `${deep + 1.5}rem`,
                     border: '1px solid black'
                 }} onClick={toggleMark}>
@@ -139,25 +138,25 @@ const SingleGroup: FC<ISingleGroup> = ({ main={}, extra=[], deep = 0 }) => {
                     }} />
                     <div>
                         <div>Accuracy {main.item2}</div>
-                        { markOpened ? <>
+                        {markOpened ? <>
                             <span style={{
                                 marginRight: '1rem'
                             }}>Correct {main.item3}</span>
                             <span>Total {main.item4}</span>
-                        </> : '' }
+                        </> : ''}
                     </div>
-                </Mark> : '' }
+                </Mark> : ''}
             </MobileCom>
-            { children }
+            {children}
         </div>
     }
 }
 
 const MarkTable = ({
-    activeSubjectId=-1,
-    onChangeActiveIdHandler=()=>{},
-    data=[],
-    areasOfKnowledge=[],
+    activeSubjectId = -1,
+    onChangeActiveIdHandler = () => { },
+    data = [],
+    areasOfKnowledge = [],
 }: {
     activeSubjectId: number;
     onChangeActiveIdHandler: (x: number) => void;
@@ -186,12 +185,17 @@ const MarkTable = ({
                     outline: 'none',
                 }} name='' id='' value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}
             >
-                {areasOfKnowledge && typeof areasOfKnowledge === 'object' && areasOfKnowledge.length > 0 ? areasOfKnowledge.map((subject: any, id) => {
+                {
+                    areasOfKnowledge && areasOfKnowledge.map((subject: any) => <option key={subject.id} value={subject.id || ''}>{subject?.name}</option>)
+                }
+
+                {/* -----This is old code---------- */}
+                {/* {areasOfKnowledge && typeof areasOfKnowledge === 'object' && areasOfKnowledge.length > 0 ? areasOfKnowledge.map((subject: any, id) => {
                     if (subject?.name === "Test AoK" || subject?.name === "USA Math" || subject?.name === "ELA") return null
                     return (
                         <option key={id} value={subject?.id}>{subject?.name}</option>
                     )
-                }) : '' }
+                }) : ''} */}
             </select>
             <Mark>Accuracy</Mark>
             <Mark>Correct</Mark>
@@ -214,13 +218,13 @@ const MarkTable = ({
                 height: '100%',
                 border: 'none',
                 outline: 'none',
-            }} name='' id='' value={activeSubjectId} onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
-            { areasOfKnowledge.map((subject, id) => (
-                <option key={id} value={subject?.id}>{ subject?.name }</option>
-            )) }
+            }} name='' id='' onChange={e => onChangeActiveIdHandler(parseInt(e.target.value))}>
+                {areasOfKnowledge.map((subject, id) => (
+                    <option key={id} value={subject?.id}>{subject?.name}</option>
+                ))}
             </select>
         </MobileCom>
-        { data && data.rootTopicsByAok && data.rootTopicsByAok.length > 0 ? data?.rootTopicsByAok?.map((aok: any, id: number) => (
+        {data && data.rootTopicsByAok && data.rootTopicsByAok.length > 0 ? data?.rootTopicsByAok?.map((aok: any, id: number) => (
             <SingleGroup key={id} main={{
                 item1: aok?.name,
                 item2: aok?.report?.accuracy ? aok?.report?.accuracy + '%' : '0%',
@@ -254,7 +258,7 @@ const MarkTable = ({
                     }))
                 }))
             }))} deep={1} />
-        )) : '' }
+        )) : null}
     </MarkTableDiv>);
 };
 

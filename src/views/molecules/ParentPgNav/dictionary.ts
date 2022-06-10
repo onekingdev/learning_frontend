@@ -7,17 +7,17 @@ export const dictionary: any = Object.freeze({
         signOut: 'Sign Out'
     },
     'th' :{
-        support: 'ช่วยเหลือ',
+        support: 'สนับสนุน',
         menu: 'เมนู',
-        settings: 'ตั้งค่า',
-        manageKids: 'จัดการผู้ใช้',
+        settings: 'รางวัล',
+        manageKids: 'จัดการเด็ก',
         signOut: 'ออกจากระบบ'
     },
     'es-mx': {
         support: 'Apoyo',
         menu: 'Menú',
         settings: 'Ajustes',
-        manageKids: 'Administrar niños',
+        manageKids: 'Administrar niñas',
         signOut: 'Desconectar'
     }
 });

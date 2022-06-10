@@ -1,7 +1,7 @@
 export const     dictionary:any = Object.freeze({
   'en-us': {
     settings: 'Settings',
-    questions: 'Have questions',
+    questions: 'questions',
     reachUsAndWeWillHelpYou: 'Reach us and we will help you',
     contact: ' Contact',
     paymentCardMessage: 'Your credit card on file will be charged for this plan.',
@@ -17,8 +17,8 @@ export const     dictionary:any = Object.freeze({
     submit: 'ส่ง',
     paymentCardMessage: 'บัตรเครดิตของคุณในระบบจะถูกเรียกเก็บเงินสำหรับแผนนี้',
     settings: 'การตั้งค่า',
-    questions: 'มีคำถาม ติดต่อเราได้ที่',
-    reachUsAndWeWillHelpYou: '',
+    questions: 'คำถาม',
+    reachUsAndWeWillHelpYou: 'ติดต่อเราและเราจะช่วยคุณ',
     contact: ' ติดต่อ',
   },
   'es-mx': {
@@ -28,7 +28,7 @@ export const     dictionary:any = Object.freeze({
     radioLabelSolo: 'Paquete individual',
     paymentCardMessage: 'Su tarjeta de crédito registrada será cargada por este plan.',
     settings: 'Ajustes',
-    questions: 'Tiene preguntas',
+    questions: 'preguntas',
     reachUsAndWeWillHelpYou: 'Contáctanos y te ayudaremos',
     contact: ' Contacto',
   }

@@ -14,7 +14,7 @@ export const LANGUAGES = [
     },
     {
         id: 2,
-        label: 'Español',
+        label: 'Española',
         value: 'es-mx'
     },
     {

@@ -27,7 +27,7 @@ import { Cards }                 from 'views/pages/Student/Collectibles/ByCards'
 import { MyCardCollection }      from 'views/pages/Student/Collectibles/MyCards';
 import NewKids                   from 'views/pages/Parent/NewKids/UpdatedNewKids';
 import { Spinner }               from 'views/atoms/Spinner';
-import { ParentReporting }       from 'views/pages/Parent/Reporting';
+import { ParentReporting }       from 'views/pages/Parent/KidReport/Reporting';
 import { KidsTreasureTrack }     from 'views/pages/Student/TreasureTrack/TreasureTrack';
 import { KidsProgress }          from 'views/pages/Student/Progress/Progress';
 //teacher center

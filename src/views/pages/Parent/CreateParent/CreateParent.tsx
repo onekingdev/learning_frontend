@@ -255,7 +255,7 @@ const CreateParent: FC = () => {
                 <div className='font-w-7 font-s-35 p-b-20'>
                   {dictionary[language]?.weAreHappyToHelpYou}
                 </div>
-                <div className='flex justify-space-between' style={{gap: '20px'}}>
+                <div className='flex justify-space-between'>
                   <ButtonText className='p-1-10' onClick={() => location.href = 'https://www.withsocrates.com/contact/'}>{dictionary[language]?.contactUs}</ButtonText>
                   <ButtonText onClick={() => location.href = 'https://www.withsocrates.com/faq/'}>{dictionary[language]?.FAQ}</ButtonText>
                   <ButtonText className='p-r-10' onClick={() => location.href = 'https://www.withsocrates.com/membership/'}>{dictionary[language]?.plans}</ButtonText>

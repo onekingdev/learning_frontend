@@ -1,8 +1,6 @@
 export const dictionary: any = Object.freeze({
     'en-us': {
         yourChildLicense: 'Your Child License',
-        finish: 'Please finish registration for your children ',
-        here: 'here',
         download: 'download',
         change: 'change',
         return: 'Return',
@@ -17,8 +15,6 @@ export const dictionary: any = Object.freeze({
         yourChildren: 'Your Children',
     },
     'th' :{
-        finish: 'กรุณาเสร็จสิ้นการลงทะเบียนสำหรับบุตรหลานของคุณ ',
-        here: 'ที่นี่',
         yourChildLicense: 'ใบอนุญาตลูกของคุณ',
         download: 'ดาวน์โหลด',
         change: 'เปลี่ยน',
@@ -27,15 +23,13 @@ export const dictionary: any = Object.freeze({
         password: 'รหัสผ่าน',
         passwordFieldIsRequired: 'ต้องระบุช่องรหัสผ่าน',
         userName: 'ชื่อผู้ใช้',
-        selectYourGrade: 'ระดับชั้น',
-        selectYourLanguage: 'ภาษา',
+        selectYourGrade: 'เลือกเกรดของคุณ',
+        selectYourLanguage: 'เลือกภาษาของคุณ',
         changePassword: 'เปลี่ยนรหัสผ่าน',
-        studentLogin: 'เข้าสู่ระบบผู้เรียน',
-        yourChildren: 'ผู้เรียน',
+        studentLogin: 'เข้าสู่ระบบนักศึกษา',
+        yourChildren: 'ลูก ๆ ของคุณ',
     },
     'es-mx': {
-        finish: 'Por favor termine el registro para sus hijos ',
-        here: 'aquí',
         yourChildLicense: 'Su licencia de niño',
         download: 'descargar',
         change: 'cambiar',
