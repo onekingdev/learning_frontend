@@ -32,7 +32,7 @@ const License: FC<LicenseProps> = ({
       <LicenseHeader>
         <Img src={logo} />
         <LSText fontSize={25} >
-          LEARNING LICENSE
+          {dictionary[language]?.license}
         </LSText>
       </LicenseHeader>
       <LicenseBody>

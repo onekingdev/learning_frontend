@@ -29,10 +29,10 @@ export const dictionary: any = Object.freeze({
         subtotal: 'Subtotal',
     },
     'th' :{
-        choosePackageInfo: 'เมื่อสมัครใช้ Socrates เด็กๆ จะได้รับความรู้อย่างน้อยหนึ่งด้านเพื่อเรียนรู้จากการเลือกที่เพิ่มขึ้น เลือกแพ็คเกจ Solo สำหรับหนึ่งพื้นที่ แพ็คเกจ Combo สำหรับสองคน หรือแพ็คเกจ Gold เพื่อรับทั้งหมด!',
+        choosePackageInfo: 'เมื่อสมัครใช้ Socrates เด็กๆสามารถเลือกเรียนได้ หนึ่ง สอง หรือ เลือกทุกวิชาตามแพ็คเก็ตข้างล่างนี้ ',
         math: 'คณิตศาสตร์',
-        elaSgithWords: 'ELA + คำมองเห็น',
-        science: 'ศาสตร์',
+        elaSgithWords: 'อังกฤษ + คำศัพท์',
+        science: 'วิทยาศาสตร์',
         financialLiteracy: 'ความรู้ทางการเงิน',
         healthAndSafety: 'สุขภาพและความปลอดภัย',
         receive: 'Receive',
@@ -58,7 +58,7 @@ export const dictionary: any = Object.freeze({
         subtotal: 'Subtotal',
     },
     'es-mx': {
-        choosePackageInfo: 'Al inscribirse en Sócrates, los niños pueden obtener una o más áreas de conocimiento para aprender de nuestra creciente selección. ¡Elija el paquete Solo para un área, el paquete combinado para dos o el paquete Gold para obtenerlo todo!',
+        choosePackageInfo: 'Al inscribirse en Sócrates, los niños pueden obtener una o más áreas de conocimiento para aprender de nuestra creciente selección. ¡Elija el Paquete Sole para un área, el Paquete Combo para dos o el Paquete Gold para obtenerlo todo!',
         math: 'Matemáticas',
         elaSgithWords: 'ELA + PALABRAS VISIBLES',
         science: 'CIENCIA',

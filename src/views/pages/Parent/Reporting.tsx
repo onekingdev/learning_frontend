@@ -76,7 +76,6 @@ export const ParentReporting: FC = () => {
           width: '100%'
         }}>
           <BarChart student={student} studentId={studentId} />
-          {/* <BarChart student={student}  /> */}
           <MarkTable
             areasOfKnowledge={areasOfKnowledge}
             data={data}

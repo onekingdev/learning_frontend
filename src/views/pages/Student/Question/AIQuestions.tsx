@@ -30,12 +30,10 @@ import audioCheck from 'views/assets/audios/correct-winning-sound.wav';
 import audioError from 'views/assets/audios/wrong-answer-sound.wav';
 import * as TYPES from 'app/types'
 import Backdrop from '@mui/material/Backdrop';
-import { RollCorrect } from 'views/molecules/QuestionRollContents/RollCorrect';
-import { FullBatteryPopup } from 'views/molecules/QuestionRollContents/FullBatteryPopup';
-import { RollWrong } from 'views/molecules/QuestionRollContents/RollWrong';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { ScreenSize } from 'constants/screenSize';
 import { useHistory } from 'react-router-dom';
+import { QuestionPopup } from 'views/molecules/QuestionRollContents/QuestionPopup';
 
 interface RoutePresentationParams {
   mode: string;
@@ -146,25 +144,24 @@ export const AIQuestion: FC = () => {
         break
       default:
         break
-
     }
     return component
   }
 
-  const renderBackdropContent = (
-  ) => {
+  const renderBackdropContent = () => {
+
     if (correctRoll === 11) {
       return (
-        <FullBatteryPopup />
+        <QuestionPopup type='BATTERY' />
       )
     } else {
       if (correctRoll % 3 === 0 && correctRoll > 0) {
         return (
-          <RollCorrect />
+          <QuestionPopup type='CORRECT' />
         )
       } else if (wrongRoll % 3 === 0 && wrongRoll > 0) {
         return (
-          <RollWrong />
+          <QuestionPopup type='WRONG' />
         )
       } else return null
     }

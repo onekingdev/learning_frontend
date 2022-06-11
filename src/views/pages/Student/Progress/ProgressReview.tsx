@@ -1,9 +1,7 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { dictionary } from './dictionary'
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import background from 'views/assets/colored-shapes-bg.svg';
 import { LoadingContext } from 'react-router-loading';
 import { PageTitle } from 'views/molecules/PageTitle';
 import { useHistory } from 'react-router-dom';
@@ -11,28 +9,18 @@ import {
     Box,
     Button,
     Container,
-    Grid
 } from '@mui/material';
 import { BasicColor } from 'views/Color';
-import { ReviewBox } from 'views/molecules/ProgressReview/ReviewBox';
 import {
     useQuery,
-    useQueryClient,
-    useMutation,
 } from 'react-query'
-import { LoadingSpinner } from 'views/atoms/Spinner';
 import { doFetchStudentAnswerHistory } from 'app/actions/blockActions';
 import { getMessage } from 'views/utils';
 import { ReviewBlocks } from 'views/molecules/ProgressReview/ReviewBlocks';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { PeriodSelect } from 'views/molecules/ProgressReview/PeriodSelect';
+import { Wrapper } from './Style';
 
-const Wrapper = styled.div`
-    background-image  : url(${background});
-    background-repeat: repeat-y;
-    background-size: cover;
-    min-height: 100vh;
-`;
 
 // const mockup = {
 //     subject: 'Math',

@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { BasicColor } from 'views/Color';
-import { Box, Typography } from '@mui/material';
+import { ScreenSize } from 'constants/screenSize';
+import { Box, useMediaQuery } from '@mui/material';
 
 interface BlockQuestionInput {
   question: number;
@@ -13,7 +14,8 @@ type MCOptionProps = {
   onClick: (result: BlockQuestionInput) => void
 }
 
-export const MCOption: FC<MCOptionProps> = ({ answer, onClick }) => {
+export const MCOptionImage: FC<MCOptionProps> = ({ answer, onClick }) => {
+  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
 
   const [isAnswered, setIsAnswered] = useState(false);
 
@@ -46,7 +48,6 @@ export const MCOption: FC<MCOptionProps> = ({ answer, onClick }) => {
       alignItems='center'
       onClick={() => handleAnswer()}
       margin={1}
-      padding={1}
       borderRadius={2}
       bgcolor={
         isAnswered ?
@@ -55,7 +56,16 @@ export const MCOption: FC<MCOptionProps> = ({ answer, onClick }) => {
           : 'white'
       }
     >
-      <Typography variant='h5' style={{ margin: 0, textAlign: 'center' }}>{answer?.answerText || 'EMPTY'}</Typography>
+      {
+        <img
+          style={{
+            margin: isTablet ? 2 : 10,
+            minWidth: isTablet ? '10vw' : 100,
+            height: isTablet ? '40vw' : 200
+          }}
+          alt={answer?.id}
+          src={answer?.answerText}
+        />}
     </Box>
   )
 }

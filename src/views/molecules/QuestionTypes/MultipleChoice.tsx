@@ -8,11 +8,13 @@ import assistor from 'views/assets/text-to-speech.svg';
 import { VideoModalAssistor } from 'views/organisms/VideoModalAssistor';
 import Button from 'views/molecules/MuiButton';
 import { dictionary } from 'views/pages/Student/Question/dictionary'
-import { BlackBoard, AnswersContainer, AssistorContainer, BlockAnswers, ImageAssetContainer, ImageAsset, AnswerContainer } from './Styles'
+import { BlackBoard, AnswersContainer, AssistorContainer, BlockAnswers, ImageAsset, AnswerContainer } from './Styles'
 import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
-import { shuffle } from 'views/utils';
-import { Box, Grid } from '@mui/material';
+import { isValidUrl, shuffle } from 'views/utils';
+import { Box, Grid, useMediaQuery } from '@mui/material';
+import { ScreenSize } from 'constants/screenSize';
 import { MCOption } from './Elements/MCOption';
+import { MCOptionImage } from './Elements/MCOptionImage';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -40,6 +42,7 @@ export const MultipleChoice: FC<ChoiceTextProps> = ({
   blockPresentation,
   onAnswer,
 }) => {
+  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
   const [showAssistor, setShowAssistor] = useState(false);
@@ -90,7 +93,6 @@ export const MultipleChoice: FC<ChoiceTextProps> = ({
       ) : null}
       <BlackBoard>
         <QuestionBoxTitle
-          // title={question.questionText}
           title={question.questionText}
           audioFile={
             question.questionAudioAssets[0]?.audioFile
@@ -98,70 +100,57 @@ export const MultipleChoice: FC<ChoiceTextProps> = ({
         />
         <AnswersContainer>
           <Box
-            width='90%'
-            display={question.answerOptions[0]?.image ? 'flex' : 'block'}
             justifyContent='center'
             alignItems='center'
+            display='flex'
+            flexDirection={isTablet ? 'column-reverse' : 'row'}
           >
+            <BlockAnswers isAnswered={isAnswered} />
             <Grid container justifyContent={'center'} spacing={1}>
-              <BlockAnswers isAnswered={isAnswered} />
               {shuffled && shuffled.map((option) => {
                 return (
-                  <Grid item key={option.id}>
-                    <AnswerContainer>
-                      <MCOption
+                  isValidUrl(option.answerText) ? // check whether option is image
+                    <Grid item key={option.id} spacing={2}>
+                      <MCOptionImage
                         answer={option}
                         onClick={handleAnswer}
                       />
-                      {
-                        !(question.questionAudioAssets[0]?.audioFile) && option.answerAudioUrl &&
-                        <Icon
-                          image={assistor}
-                          onClick={() => {
-                            readAnswer(option);
-                          }}
+                    </Grid> :
+                    <Grid item key={option.id} xs={12}>
+                      <AnswerContainer>
+                        <MCOption
+                          answer={option}
+                          onClick={handleAnswer}
                         />
-                      }
-                    </AnswerContainer>
-                  </Grid>
+                        {
+                          !(question.questionAudioAssets[0]?.audioFile) && // hide for sight words, sight word will have questionAudiosAssets.
+                          <Icon
+                            image={assistor}
+                            onClick={() => {
+                              readAnswer(option);
+                            }}
+                          />
+                        }
+                      </AnswerContainer>
+                    </Grid>
                 )
-
               }
               )}
             </Grid>
-          </Box>
-          {/* <TextOptionsList>
-            <BlockAnswers isAnswered={isAnswered} />
-            {shuffled.map((option, i) => {
-              return (
-
-                <AnswerContainer key={i}>
-                  <TextOption
-                    answer={option}
-                    onClick={handleAnswer}
-                  />
-                  {
-                    !(question.questionAudioAssets[0]?.audioFile) && option.answerAudioUrl &&
-                    <Icon
-                      image={assistor}
-                      onClick={() => {
-                        readAnswer(option);
-                      }}
-                    />
-                  }
-                </AnswerContainer>
-              )
-
+            {
+              question &&
+              question.questionImageAssets.length > 0 &&
+              <Grid container justifyContent={'center'} spacing={1}>
+                {
+                  question.questionImageAssets?.map((item, i) => (
+                    <Grid item>
+                      <ImageAsset key={i} src={item.image} alt='' />
+                    </Grid>
+                  ))
+                }
+              </Grid>
             }
-            )}
-          </TextOptionsList> */}
-          <ImageAssetContainer
-            imageLength={question.questionImageAssets?.length}
-          >
-            {question.questionImageAssets?.map((item, i) => (
-              <ImageAsset key={i} src={item.image} alt='' />
-            ))}
-          </ImageAssetContainer>
+          </Box>
         </AnswersContainer>
         <AssistorContainer>
           <Button

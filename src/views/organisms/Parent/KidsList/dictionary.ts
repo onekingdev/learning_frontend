@@ -31,9 +31,9 @@ export const dictionary: any = Object.freeze({
     },
     'es-mx': {
         yourChildLicense: 'Su licencia de niño',
-        download: 'descargar',
+        download: 'Descargar',
         change: 'cambiar',
-        return: 'Regreso',
+        return: 'Regresar',
         changeYourPassword: 'Cambia tu contraseña',
         password: 'Clave',
         passwordFieldIsRequired: 'El campo de contraseña es obligatorio',
