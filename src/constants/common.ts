@@ -59,3 +59,8 @@ export enum USER_TYPE {
     guardian = 'guardian',
     noPlans = 'noPlans',
 }
+
+export enum FONT_FAMILY {
+    primary = 'Roboto',
+    secondary = "'Quicksand', sans-serif",
+  }

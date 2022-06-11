@@ -1,12 +1,10 @@
-import { useEffect, useContext, useState, FC } from 'react';
+import { useState, FC } from 'react';
 import {
     Box,
-    Container,
     Grid,
     Pagination
 } from '@mui/material';
 import { ReviewBox } from 'views/molecules/ProgressReview/ReviewBox';
-import usePagination from '@mui/material/usePagination/usePagination';
 
 export const ReviewBlocks: FC<{ blocks: any }> = ({ blocks }) => {
 
