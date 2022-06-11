@@ -1,6 +1,6 @@
-import { FC, useState } from 'react'
-import { toPng } from 'html-to-image'
-import { saveAs } from 'file-saver'
+import { FC, useRef, useState } from 'react'
+// import { toPng } from 'html-to-image'
+// import { saveAs } from 'file-saver'
 import License from 'views/molecules/KidLicense/KidLicense'
 import Button from 'views/molecules/MuiButton'
 import { BasicColor } from 'views/Color'
@@ -10,6 +10,7 @@ import {
   GridItem,
 } from './Style'
 import { Box } from '@mui/material'
+import { exportComponentAsPNG } from 'react-component-export-image'
 
 interface LisenceDgProps {
   language: string
@@ -27,24 +28,27 @@ const LicenseDgContent: FC<LisenceDgProps> = ({
   close
 }) => {
   const [loading, setLoading] = useState(false);
+  const certRef = useRef<any>(null)
   const handleDownloadBtnClicked = () => {
 
     setLoading(true)
-    const licenseElm: any = document.querySelector('#license');
-    toPng(licenseElm).then(function (dataUrl) {
-      saveAs(dataUrl, `${kidName}-license`);
-      setLoading(false)
-    });
-
+    // const licenseElm: any = document.querySelector('#license');
+    // toPng(licenseElm).then(function (dataUrl) {
+    //   saveAs(dataUrl, `${kidName}-license`);
+    // });
+    exportComponentAsPNG(certRef)
+    setLoading(false)
   };
 
   return (
     <Box>
-      <License
-        parentName={parentName || ''}
-        kidName={kidName || ''}
-        membership={dateJoined?.slice(0, 10) || ''}
-      />
+      <div ref={certRef}>
+        <License
+          parentName={parentName || ''}
+          kidName={kidName || ''}
+          membership={dateJoined?.slice(0, 10) || ''}
+        />
+      </div>
       <GridContainer container>
         <GridItem item md={6} xs={12}>
           <Button

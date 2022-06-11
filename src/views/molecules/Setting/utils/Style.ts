@@ -82,32 +82,6 @@ export const LSFormControlLabel = styled(FormControlLabel)`
     }
   }
 `;
-
-/*--------------------------------------------------------------------------------------------*/
-/*                                          Button                                            */
-/*--------------------------------------------------------------------------------------------*/
-// export const LSButton = styled(Button)<{
-//   bgcolor?: string;
-// }>`
-//   &.MuiButton-root {
-//     ${props => (props.bgcolor ? 'background-color:' + props.bgcolor + ';' : '')}
-//     border-radius: 20px;
-//     height: 49px;
-//     width: 215px;
-//     text-transform: unset;
-//     font-size: 16px;
-//     color: white;
-//     font-family: ${Typography.primary};
-//     @media screen and (max-width: 540px) {
-//       margin: 10px;
-//     }
-//     &:hover {
-//       // transform scale(1.01)
-//       opacity: 0.8;
-//       background-color: ${BasicColor.greenShadow}
-//     }
-//   }
-// `;
 export const LSButtonContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -118,33 +92,6 @@ export const LSButtonContainer = styled.div`
     align-items: center;
   }
 `;
-
-// export const LSBlueTextButton = styled(Button)`
-//   &.MuiButton-root {
-//     text-decoration: underline;
-//     text-transform: unset;
-//     color: ${BasicColor.blue};
-//     font-family: ${Typography.primary};
-//     font-weight: 600;
-//     font-size: 14px;
-//     @media screen and (max-width: 540px) {
-//       font-size: 0.8em;
-//     }
-//   }
-// `;
-
-// export const LSWhiteTextButton = styled(Button)`
-//   &.MuiButton-root {
-//     text-transform: unset;
-//     color: white;
-//     font-family: ${Typography.primary};
-//     font-weight: 600;
-//     font-size: 14px;
-//     @media screen and (max-width: 540px) {
-//       font-size: 0.8em;
-//     }
-//   }
-// `;
 
 /*--------------------------------------------------------------------------------------------*/
 /*                                           GRID                                             */
@@ -187,23 +134,6 @@ export const LSShadowContainer = styled(Box)<{
     padding: 10px 22px 10px 22px;
   }
 `;
-
-// export const LSTextField = styled(TextField)`
-//   height: 44px;
-//   width: 100%;
-//   border-radius: 10px;
-//   margin-right: 15px;
-//   padding: 10px, 0px, 10px, 20px;
-//   & .MuiOutlinedInput-root {
-//     & fieldset {
-//       border: 1px solid #1771b9;
-//       border-radius: 10px;
-//     }
-//     &:hover fieldset {
-//       border: 1px solid #1771b9;
-//     }
-//   }
-// `;
 export const LSTitle = styled.p<{
   fontSize?: number;
   mt?: number;

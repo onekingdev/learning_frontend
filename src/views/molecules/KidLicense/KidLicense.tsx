@@ -24,9 +24,11 @@ const License: FC<LicenseProps> = ({
   parentName,
   kidName,
   membership
-}) => {
+}
+) => {
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
+
   return (
     <ResponsiveLicense id="license">
       <LicenseHeader>
@@ -52,20 +54,20 @@ const License: FC<LicenseProps> = ({
             <QRCode value={kidName} size={window.innerWidth > 600 ? 100 : 65} />
           </div>
         </div>
-        <div className="flex align-center">
-          <Grid container>
-            <LSGridRow item md={4} xs={12}>
-              <Username >
-                {parentName}
-              </Username>
-            </LSGridRow>
-            <LSGridRow item md={8} xs={12} justifyContent='center'>
-              <TypoGeneralText style={{ textAlign: 'center' }}>
-                www.learnwithsocrates.com
-              </TypoGeneralText>
-            </LSGridRow>
-          </Grid>
-        </div>
+        {/* <div className="flex align-center"> */}
+        <Grid container>
+          <LSGridRow item md={4} xs={12}>
+            <Username >
+              {parentName}
+            </Username>
+          </LSGridRow>
+          <LSGridRow item md={8} xs={12}>
+            <TypoGeneralText style={{ textAlign: 'center' }}>
+              www.learnwithsocrates.com
+            </TypoGeneralText>
+          </LSGridRow>
+        </Grid>
+        {/* </div> */}
       </LicenseBody>
     </ResponsiveLicense>
   )
