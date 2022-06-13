@@ -11,6 +11,7 @@ declare module '@mui/material/styles' {
   interface PaletteOptions {
     neutral?: PaletteOptions['primary'];
     yellow?: PaletteOptions['primary'];
+    aqua?: PaletteOptions['primary'];
   }
 }
 
@@ -19,6 +20,7 @@ declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
     neutral: true;
     yellow: true;
+    aqua: true;
   }
 }
 
@@ -105,31 +107,39 @@ export const themeTeacher = createTheme({
       light: BasicColor.greenShadow,
       dark: BasicColor.greenShadow
     },
+    yellow: {
+      main: BasicColor.yellow,
+      light: BasicColor.yellowLight,
+      dark: BasicColor.yellowDark,
+    },
     secondary: {
-      main: '#919699',
+      main: BasicColor.blue,
+      light: BasicColor.blueLight,
+      dark: BasicColor.blueDark,
       contrastText: '#ffffff',
     },
+    aqua: {
+      main: BasicColor.aqua,
+      light: BasicColor.aquaLight,
+      dark: BasicColor.aquaDark,
+    },
+    // secondary: {
+    //   main: '#919699',
+    //   contrastText: '#ffffff',
+    // },
   },
   components: {
-    MuiRadio: {
-      styleOverrides: {
-        root: {
-          color: BasicColor.green,
-          '& .MuiSvgIcon-root': {
-            fontSize: 30,
-          },
-        }
-      }
-    },
     MuiButton: {
       styleOverrides: {
         contained: {
-          borderRadius: 15,
+          borderRadius: 20,
           minWidth: 150,
           maxWidth: 250,
         },
         root: {
           textTransform: 'unset',
+          height: 50,
+          minWidth: 150,
         },
         text: {
           color: BasicColor.blue,
@@ -137,12 +147,36 @@ export const themeTeacher = createTheme({
         }
       }
     },
-    MuiTextField: {
+    MuiGrid: {
+      styleOverrides: {
+        item: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }
+      }
+    },
+    MuiLink: {
+      variants: [
+        {
+          props: { variant: 'body1' },
+          style: ({ theme }) => ({
+            fontSize: 16,
+            [theme.breakpoints.down('sm')]: {
+              fontSize: 12,
+            },
+            color: 'white',
+            textAlign: 'center'
+          })
+        },
+      ],
       styleOverrides: {
         root: {
-          width: '100%',
-        },
-      },
+          textDecoration: 'none',
+          textAlign: 'center',
+          fontSize: '0.8rem'
+        }
+      }
     },
     MuiOutlinedInput: {
       styleOverrides: {
@@ -165,6 +199,51 @@ export const themeTeacher = createTheme({
             outline: 0,
             border: 0
           },
+        },
+      }
+    },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          color: BasicColor.green,
+          '& .MuiSvgIcon-root': {
+            fontSize: 30,
+          },
+        }
+      }
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+        },
+      },
+    },
+    MuiTypography: {
+      variants: [
+        {
+          props: { variant: 'body1' },
+          style: ({ theme }) => ({
+            fontSize: 24,
+            [theme.breakpoints.down('sm')]: {
+              fontSize: 12,
+            }
+          })
+        },
+        {
+          props: { variant: 'h4' },
+          style: ({ theme }) => ({
+            fontSize: 40,
+            [theme.breakpoints.down('sm')]: {
+              fontSize: 24,
+            }
+          })
+        },
+      ],
+      styleOverrides: {
+        root: {
+          textAlign: 'center',
+          color: 'black',
         },
       }
     },

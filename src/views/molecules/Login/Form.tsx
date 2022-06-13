@@ -16,11 +16,11 @@ export const Form: FC<FormProps> = ({
   setPassword
 }) => {
   return (
-    <Box sx={{
-      display: 'flex',
-      gap: 3,
-      flexDirection: 'column',
-    }}>
+    <Box
+      display='flex'
+      gap={3}
+      flexDirection= 'column'
+      >
       <StyledTextField
         onChange={(e) => setUsername(e.target.value)}
         label={emailLabel}

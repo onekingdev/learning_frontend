@@ -20,6 +20,8 @@ export enum BasicColor {
   blueLight = '#1b86dc',
   red = '#EC5858',
   aqua = '#22BAAF',
+  aquaDark = '#1FA99f',
+  aquaLight = '#25CBBF',
   darkGreen = '#13705F',
   purple = '#A685E2',
   pink = '#CE2489',

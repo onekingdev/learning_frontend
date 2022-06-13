@@ -31,7 +31,6 @@ import { ParentReporting } from 'views/pages/Parent/KidReport/Reporting';
 import { KidsTreasureTrack } from 'views/pages/Student/TreasureTrack/TreasureTrack';
 import { KidsProgress } from 'views/pages/Student/Progress/Progress';
 //teacher center
-import { SelectCreateType } from 'views/pages/Teacher/SelectCreateType/SelectCreateType';
 import TeacherSignup from 'views/pages/Teacher/TeacherSignup/TeacherSignup';
 import SchoolSignup from 'views/pages/Teacher/SchoolSignup/SchoolSignup'
 import TeacherPayment from 'views/pages/Teacher/Payment/Payment'
@@ -51,6 +50,7 @@ import Certificates from 'views/pages/Teacher/Certificates/Certificates';
 import { GameIframe } from 'views/pages/Student/Games/GameIframe';
 import { ProgressReview } from 'views/pages/Student/Progress/ProgressReview';
 import { Error404 } from 'views/pages/Welcome/Error404';
+import { TeacherCreateAccount } from 'views/pages/Teacher/SelectCreateType/TeacherCreateAccount';
 
 
 const PrivateRoute = ({ requireAuth = true, loading = false, ...rest }) => {
@@ -190,7 +190,8 @@ export function Routes() {
         </PrivateRoute>
 
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/selectCreateType">
-          <SelectCreateType />
+          <TeacherCreateAccount />
+          {/* <SelectCreateType /> */}
         </PrivateRoute>
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/teacherSignup">
           <TeacherSignup />

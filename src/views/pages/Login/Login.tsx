@@ -14,17 +14,17 @@ import { dictionary } from './dictionary';
 import { useSelector } from 'react-redux';
 import {
   Box,
-  Container,
-  Grid,
   Link,
+  ThemeProvider,
   Typography,
   useMediaQuery
 } from '@mui/material';
-import { TypoBtn } from 'views/atoms/Text';
 import { BasicColor } from 'views/Color';
 import { USER_TYPE } from 'constants/common';
 import background from 'views/assets/colored-shapes-bg.svg';
 import { ScreenSize } from 'constants/screenSize';
+import { welcomePage } from 'views/Theme';
+import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
 
 export const LogIn: FC = () => {
   const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
@@ -72,58 +72,65 @@ export const LogIn: FC = () => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        backgroundImage: `url(${background})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        minHeight: '100vh',
-        display: 'grid',
-        gridTemplateRows: isTablet ? 'auto 1fr' : 'unset',
-        ...(!isTablet && { gridTemplateColumns: '1fr 1fr', }),
-      }}>
-      <Greet
-        header={dictionary[language]?.welcome}
-        // subheader ={dictionary[language]?.instructions}
-        logo={logo}
-        classroomIllustration={classroom}
-        greetingIllustration={greeting}
-      />
-      <Container
+    <ThemeProvider theme={welcomePage}>
+      <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-around',
-          background: BasicColor.blue,
-          borderRadius: isTablet ? '30px 30px 0 0' : 0,
-        }}
-      >
+          backgroundImage: `url(${background})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          minHeight: '100vh',
+          display: isTablet ? 'flex' : 'grid',
+          ...(isTablet && { flexDirection: 'column', }),
+          ...(!isTablet && { gridTemplateColumns: '1fr 1fr' }),
+        }}>
         <Box
-          width={isTablet ? '100%' : '70%'}
-          mt={5}
+          id='logo-container'
+          display={isTablet ? 'flex' : 'none'}
+          justifyContent={'start'}
+          ml={2}
+          mt={1}
+        >
+          <img src={logo} alt='Learn with Socrates logo' style={{ width: isTablet ? '50%' : 'auto' }} />
+        </Box>
+        <Greet
+          header={dictionary[language]?.welcome}
+          // subheader ={dictionary[language]?.instructions}
+          logo={logo}
+          classroomIllustration={classroom}
+          greetingIllustration={greeting}
+        />
+
+        <Box
+          id='actions-container'
+          flexGrow={1}
+          pl={3}
+          pr={isTablet ? 3 : 20}
+          pt={isTablet ? 2 : 10}
+          display='flex'
+          justifyContent='space-between'
+          flexDirection='column'
+          borderRadius={isTablet ? '30px 30px 0 0' : 0}
           sx={{
-            ...(isTablet && { marginLeft: 'auto', marginRight: 'auto' }),
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
+            background: BasicColor.blue
           }}
         >
+          <Box flexGrow={1} minHeight={30} />
           <Typography
             variant='h4'
             sx={
               isTablet ?
                 { display: 'none' } :
-                { color: 'white', margin: 5, textAlign: 'center', fontWeight: 'bold' }}>
+                { color: 'white', margin: 5, textAlign:'unset' }}>
             {dictionary[language]?.welcome}
           </Typography>
-          <Typography variant='h5' sx={{ color: 'white' }}>{dictionary[language]?.login}</Typography>
+          <Typography variant='h5' mb={2} sx={{ color: 'white', textAlign: 'unset' }}>{dictionary[language]?.login}</Typography>
           <Form
             emailLabel={dictionary[language]?.userName}
             password={dictionary[language]?.password}
             setUsername={setUsername}
             setPassword={setPassword}
           />
-          <Link href={`${process.env.REACT_APP_SERVER_URL}password_reset/`} style={{ cursor: 'pointer', color: 'white' }}>{dictionary[language]?.forgot}</Link>
+          <Link href={`${process.env.REACT_APP_SERVER_URL}password_reset/`} mt={2} style={{ cursor: 'pointer', color: 'white', textAlign: 'unset' }}>{dictionary[language]?.forgot}</Link>
           <Actions
             googleText={dictionary[language]?.with_google}
             googleColor={ButtonColor.google}
@@ -135,22 +142,10 @@ export const LogIn: FC = () => {
             loading={loading}
             disabled={true}
           />
+          <Box flexGrow={1} minHeight={30} />
+          <TermsAndConditions />
         </Box>
-        <Grid container sx={{ width: isTablet ? '100%' : '70%' }}>
-          <Grid item xs={3}>
-            <TypoBtn style={{ color: 'white', textAlign: 'center' }} onClick={() => location.href = 'https://www.WithSocrates.com'}>{dictionary[language]?.about}</TypoBtn>
-          </Grid>
-          <Grid item xs={3}>
-            <TypoBtn style={{ color: 'white', textAlign: 'center' }} onClick={() => location.href = 'https://www.withsocrates.com/privacy-policy/'}>{dictionary[language]?.privacy}</TypoBtn>
-          </Grid>
-          <Grid item xs={3}>
-            <TypoBtn style={{ color: 'white', textAlign: 'center' }} onClick={() => location.href = 'https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en'}>{dictionary[language]?.children_privacy}</TypoBtn>
-          </Grid>
-          <Grid item xs={3}>
-            <TypoBtn style={{ color: 'white', textAlign: 'center' }} onClick={() => location.href = 'https://www.withsocrates.com/terms-conditions/'}>{dictionary[language]?.termCondition}</TypoBtn>
-          </Grid>
-        </Grid>
-      </Container >
-    </Box >
+      </Box >
+    </ThemeProvider>
   );
 };
