@@ -50,3 +50,8 @@ export const smoothScroll = (targetEl: any, offset = -100, duration = 500) => {
     };
     requestAnimationFrame(animation);
 }
+
+
+export function validateEmail (email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }

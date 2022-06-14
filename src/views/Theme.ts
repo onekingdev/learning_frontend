@@ -121,6 +121,7 @@ export const themeTeacher = createTheme({
     aqua: {
       main: BasicColor.aqua,
       light: BasicColor.aquaLight,
+      contrastText: '#ffffff',
       dark: BasicColor.aquaDark,
     },
     // secondary: {
@@ -133,7 +134,7 @@ export const themeTeacher = createTheme({
       styleOverrides: {
         contained: {
           borderRadius: 20,
-          minWidth: 150,
+          minWidth: 120,
           maxWidth: 250,
         },
         root: {
@@ -174,7 +175,6 @@ export const themeTeacher = createTheme({
         root: {
           textDecoration: 'none',
           textAlign: 'center',
-          fontSize: '0.8rem'
         }
       }
     },
@@ -236,15 +236,12 @@ export const themeTeacher = createTheme({
             fontSize: 40,
             [theme.breakpoints.down('sm')]: {
               fontSize: 24,
-            }
+            },
+            fontWeight: 'bold'
           })
         },
       ],
       styleOverrides: {
-        root: {
-          textAlign: 'center',
-          color: 'black',
-        },
       }
     },
   }
@@ -338,12 +335,23 @@ export const welcomePage = createTheme({
       }
     },
     MuiLink: {
+      variants: [
+        {
+          props: { variant: 'body1' },
+          style: ({ theme }) => ({
+            fontSize: 16,
+            [theme.breakpoints.down('sm')]: {
+              fontSize: 12,
+            },
+            color: 'black',
+            textAlign: 'center'
+          })
+        },
+      ],
       styleOverrides: {
         root: {
           textDecoration: 'none',
-          color: 'black',
           textAlign: 'center',
-          fontSize: '0.8rem'
         }
       }
     },

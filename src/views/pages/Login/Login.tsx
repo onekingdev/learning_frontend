@@ -23,7 +23,7 @@ import { BasicColor } from 'views/Color';
 import { USER_TYPE } from 'constants/common';
 import background from 'views/assets/colored-shapes-bg.svg';
 import { ScreenSize } from 'constants/screenSize';
-import { welcomePage } from 'views/Theme';
+import { themeTeacher } from 'views/Theme';
 import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
 
 export const LogIn: FC = () => {
@@ -72,7 +72,7 @@ export const LogIn: FC = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={welcomePage}>
+    <ThemeProvider theme={themeTeacher}>
       <Box
         sx={{
           backgroundImage: `url(${background})`,
@@ -102,7 +102,6 @@ export const LogIn: FC = () => {
 
         <Box
           id='actions-container'
-          flexGrow={1}
           pl={3}
           pr={isTablet ? 3 : 20}
           pt={isTablet ? 2 : 10}

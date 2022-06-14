@@ -9,19 +9,18 @@ import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
 import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
 import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper';
-import SocratesImg from 'views/assets/socrates.svg';
 import { createGuardian } from 'app/actions/guardianActions'
-import { Button as ButtonText } from 'views/atoms/Text/Button';
 import { dictionary } from './dictionary';
 import {
   Container,
   FormContainer,
-  ContactContainer,
   Title,
-  ContactHeader,
-  ContactBody,
 } from './Style';
 import commonDictionary from 'constants/commonDictionary'
+import ContactBox from 'views/organisms/ContactBox';
+import FormBottomDescription from 'views/organisms/FormBottomDescription';
+import { ThemeProvider } from '@mui/material';
+import { themeTeacher } from 'views/Theme';
 
 const CreateParent: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -94,13 +93,9 @@ const CreateParent: FC = () => {
     return valiResult;
   };
 
-  // useEffect(() => {
-  //   if (!errMsg) return;
-  // }, [errMsg]);
-
   return (
     <ParentPgContainer onlyLogoImgNav={true}>
-      <>
+      <ThemeProvider theme={themeTeacher}>
         <ParentPgStepper step={1} />
         <Container>
           <FormContainer>
@@ -231,40 +226,11 @@ const CreateParent: FC = () => {
                 loading={loading}
               />
             </div>
-            <div className='p-b-95 p-t-30 font-s-15 inline'>
-              {dictionary[language]?.byClickingCreateAccountYouAgreeToLearnWithSocrates}{' '}
-              <div className='font-w-9 inline'>
-                {dictionary[language]?.privacyPolicy}, {dictionary[language]?.termsAndConditions}
-              </div>{' '}
-              {dictionary[language]?.and} <div className='font-w-9 inline'>{dictionary[language]?.childrenPrivacyPolicy}</div>
-            </div>
+            <FormBottomDescription language={language} />
           </FormContainer>
-          <ContactContainer>
-            <ContactHeader>
-              <img src={SocratesImg} className='p-l-20 p-r-10' />
-              <div className='font-s-60 line-h-75 font-w-6 text-center p-r-25'>
-                {dictionary[language]?.welcome} <br />
-                {dictionary[language]?.toSocrates}
-              </div>
-            </ContactHeader>
-            <ContactBody>
-              <div className='font-w-8 font-s-30 line-h-35 p-b-25'>
-                {dictionary[language]?.contactUs}
-              </div>
-              <div className='flex-col'>
-                <div className='font-w-7 font-s-35 p-b-20'>
-                  {dictionary[language]?.weAreHappyToHelpYou}
-                </div>
-                <div className='flex justify-space-between' style={{gap: '20px'}}>
-                  <ButtonText className='p-1-10' onClick={() => location.href = 'https://www.withsocrates.com/contact/'}>{dictionary[language]?.contactUs}</ButtonText>
-                  <ButtonText onClick={() => location.href = 'https://www.withsocrates.com/faq/'}>{dictionary[language]?.FAQ}</ButtonText>
-                  <ButtonText className='p-r-10' onClick={() => location.href = 'https://www.withsocrates.com/membership/'}>{dictionary[language]?.plans}</ButtonText>
-                </div>
-              </div>
-            </ContactBody>
-          </ContactContainer>
+          <ContactBox language={language} />
         </Container>
-      </>
+      </ThemeProvider>
     </ParentPgContainer>
   );
 };

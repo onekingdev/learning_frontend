@@ -64,3 +64,9 @@ export enum FONT_FAMILY {
     primary = 'Roboto',
     secondary = "'Quicksand', sans-serif",
   }
+
+export const SCHOOL_TYPES = [
+    'Private',
+    'Charter',
+    'Public'
+]

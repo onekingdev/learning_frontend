@@ -14,7 +14,6 @@ import {
   Box,
   Button,
   Grid,
-  Link,
   ThemeProvider,
   useMediaQuery
 } from '@mui/material';
@@ -31,6 +30,7 @@ import {
 import { Typography } from '@mui/material';
 import { LanguageSelect } from 'views/organisms/Welcome/LanguageSelect';
 import { ScreenSize } from 'constants/screenSize';
+import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
 
 export const Welcome: FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
@@ -110,7 +110,7 @@ export const Welcome: FC = () => {
 
         <Illustration src={welcome} alt='' />
 
-        <Grid container justifyContent='center' spacing={2} mt='3vh' maxWidth={'sm'}>
+        <Grid container justifyContent='center' spacing={2} mt='3vh' maxWidth={'sm'} mb={5}>
           <Grid item xs={12} sm={6}>
             <Button
               onClick={() => history.push('/teacher/selectCreateType')}
@@ -144,29 +144,7 @@ export const Welcome: FC = () => {
             </Button>
           </Grid>
         </Grid>
-
-        <Grid container margin={2}>
-          <Grid item xs={3} >
-            <Link href='https://www.WithSocrates.com'>
-              {dictionary[language]?.about}
-            </Link >
-          </Grid>
-          <Grid item xs={3} >
-            <Link href='https://www.withsocrates.com/privacy-policy/' >
-              {dictionary[language]?.privacy}
-            </Link >
-          </Grid>
-          <Grid item xs={3} >
-            <Link href='https://www.withsocrates.com/terms-conditions/' >
-              {dictionary[language]?.termAndConditions}
-            </Link >
-          </Grid>
-          <Grid item xs={3} >
-            <Link href='https://www.learnwithsocrates.com/index.php/main/policy/children_privacy/en' >
-              {dictionary[language]?.children_privacy}
-            </Link >
-          </Grid>
-        </Grid>
+        <TermsAndConditions />
       </Wrapper>
     </ThemeProvider>
   );

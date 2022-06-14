@@ -72,8 +72,8 @@ export const TeacherCreateAccount: FC = () => {
           }}
         >
           <Box flexGrow={1} minHeight={30} />
-          <Typography variant='h4' sx={{ color: 'white' }}>{dictionary[language]?.practicePlayGrow}</Typography>
-          <Typography variant='body1' sx={{ color: 'white' }}>{dictionary[language]?.content}</Typography>
+          <Typography variant='h4' mb={2} color='white' textAlign='center'>{dictionary[language]?.practicePlayGrow}</Typography>
+          <Typography variant='body1' color='white' textAlign='center'>{dictionary[language]?.content}</Typography>
           <Grid container spacing={2} mt={isTablet ? 3 : 5}>
             <Grid item xs={12} sm={6}>
               <Button

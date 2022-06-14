@@ -1,36 +1,51 @@
-import { FC, useEffect, ReactChildren, ReactChild } from 'react';
-import { ParentPgNav }                              from 'views/molecules/ParentPgNav/ParentPgNav'
-import bg_left_img              from 'views/assets/teacher_bg_left.svg'
-import bg_right_img             from 'views/assets/teacher_bg_right.svg'
-import Menu                     from 'views/pages/Teacher/Menus/TeacherMenu';
+import { FC, ReactChildren, ReactChild } from 'react';
+import Menu from 'views/pages/Teacher/Menus/TeacherMenu';
+import logo from 'views/assets/socrates-logo.svg';
 
+import { TeacherPgWrapper } from 'views/atoms/TeacherPgWrapper';
 import {
+  Box,
   Container,
-  BgLeft,
-  BgRight,
-  Center,
-  TeacherTitleBar
-} from './Style'
+  ThemeProvider,
+  useMediaQuery,
+} from '@mui/material';
+import { themeTeacher } from 'views/Theme';
+import { ScreenSize } from 'constants/screenSize';
 
 type ParentPgContainerProps = {
   onlyLogoImgNav: boolean;
-  title?: string;
   children: ReactChild | ReactChildren;
+  title?: string
 };
 
-export const TeacherPgContainer: FC<ParentPgContainerProps> = ({onlyLogoImgNav, children=(<></>), title=''}) => {
+export const TeacherPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav, title, children = (<></>) }) => {
+  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
 
-  useEffect(() => {
-    console.log(title)
-  }, []);
   return (
-    <Container>
-        <Menu></Menu>
-        <BgLeft src={bg_left_img} />
-        <BgRight src={bg_right_img} />
-        {/* <ParentPgNav onlyLogoImg={onlyLogoImgNav}/> */}
-        {title && <TeacherTitleBar>{title}</TeacherTitleBar>}
-        <Center>{children}</Center>
-    </Container>
+    <ThemeProvider theme={themeTeacher}>
+      <TeacherPgWrapper>
+        <Container maxWidth='xl'>
+          <Box
+            pt={5}
+            pb={5}
+          >
+            {onlyLogoImgNav ?
+              <Box
+                id='socrates-logo-container'
+                pl={isTablet ? 0 : 20}
+                mb={isTablet ? 2 : 10}
+              >
+                <img src={logo} style={{
+                  height: isTablet ? 50 : 'auto'
+                }} />
+              </Box>
+              :
+              <Menu />}
+            {/* {title && <TeacherTitleBar>{title}</TeacherTitleBar>} */}
+            {children}
+          </Box>
+        </Container>
+      </TeacherPgWrapper>
+    </ThemeProvider>
   );
 };
