@@ -28,6 +28,7 @@ mutation {
             }
         }
         token
+        refreshToken
 	}
 }
 `;

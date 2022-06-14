@@ -23,7 +23,7 @@ export const doCreateSchool = async (
         zip,
       )
   );
-  return res.data?.createSchool?.user ?? res.errors[0] // when django returns error message on fail
+  return res.data?.createSchool ?? res.errors[0] // when django returns error message on fail
 }
 
 export const doCreateTeacher = async (

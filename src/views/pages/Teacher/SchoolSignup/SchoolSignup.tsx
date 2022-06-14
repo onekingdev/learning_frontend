@@ -28,6 +28,7 @@ import {
 } from 'react-query'
 import { doCreateSchool } from 'app/actions';
 import { SCHOOL_TYPES } from 'constants/common';
+import { USER_SET_DATA } from 'app/types';
 
 const SchoolSignup: FC = () => {
   const isTablet = useSocratesMediaQuery('xs')
@@ -46,7 +47,10 @@ const SchoolSignup: FC = () => {
   const [zip, setZip] = useState('');
   const [country, setCountry] = useState(countries[232])
   const [district, setDistrict] = useState('')
+  const [loading, setLoading] = useState(false);
 
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
   const createSchool = useMutation(() => doCreateSchool(
     country.name, district, email, schoolName, password, schoolType, userName, zip
   ), {
@@ -54,8 +58,12 @@ const SchoolSignup: FC = () => {
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {
-        console.log({ data })
         enqueueSnackbar('School Create Succeed!', { variant: 'success' })
+        dispatch({
+          type: USER_SET_DATA,
+          payload: { ...data.user, token: data.token, refreshToken: data.refreshToken },
+        });
+        history.push('/teacher/payment/School')
       }
     },
     onError: async (error: any) => {
@@ -79,11 +87,7 @@ const SchoolSignup: FC = () => {
     password: null,
     confPassword: null
   });
-  // const [errMsg, setErrMsg] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
 
   useEffect(() => {
     onPageInit();
@@ -105,19 +109,9 @@ const SchoolSignup: FC = () => {
   };
 
   const handleCreate = async () => {
-    console.log({
-      country: country.name,
-      district,
-      email,
-      schoolName,
-      password,
-      schoolType,
-      userName,
-      zip,
-    })
+    setLoading(true)
     if (!formValidation()) return;
-
-
+    createSchool.mutate()
   };
 
   const formValidation = () => {
@@ -238,12 +232,6 @@ const SchoolSignup: FC = () => {
                   onChange={async (e: any) => {
                     handleFormChange('country', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                     setCountry(e.target.value)
-                    // setGrade(e.target.value);
-                    // console.log(props)
-                    // const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
-                    // if(!res.success) {
-                    //     enqueueSnackbar(res.msg, { variant: 'error' });
-                    // }
                   }}
                   sx={
                     validateMsg.country

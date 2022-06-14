@@ -34,7 +34,7 @@ const MuiButton: FC<MuiButtonProps> = ({
   color,
   bgColor,
   borderColor,
-  zIndex=1,
+  zIndex,
   radius=20,
   // loadingPosition='',
   className='',
