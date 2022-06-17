@@ -4,6 +4,8 @@ import { fetchQuery } from 'api/queries/get';
 export const doCreateSchool = async (
   country: string,
   district: string,
+  firstName: string,
+  lastName: string,
   email: string,
   name: string,
   password: string,
@@ -15,6 +17,8 @@ export const doCreateSchool = async (
       CREATE_SCHOOL(
         country,
         district,
+        firstName,
+        lastName,
         email,
         name,
         password,

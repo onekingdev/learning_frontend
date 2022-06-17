@@ -3,6 +3,8 @@ import { USER, USER_PROFILE } from 'api/fragments/userFragments';
 export const CREATE_SCHOOL = (
     country: string,
     district: string,
+    firstName: string,
+    lastName: string,
     email: string,
     name: string,
     password: string,
@@ -14,6 +16,8 @@ mutation {
 	createSchool (
         country: "${country}",
         district: "${district}",
+        firstName: "${firstName}",
+        lastName: "${lastName}",
         email: "${email}",
         name: "${name}",
         password: "${password}",

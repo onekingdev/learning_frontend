@@ -40,6 +40,8 @@ const SchoolSignup: FC = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const [userName, setUserName] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [schoolType, setSchoolType] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -52,7 +54,7 @@ const SchoolSignup: FC = () => {
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
   const createSchool = useMutation(() => doCreateSchool(
-    country.name, district, email, schoolName, password, schoolType, userName, zip
+    country.name, district, firstName, lastName, email, schoolName, password, schoolType, userName, zip
   ), {
     onSuccess: async data => {
       if (data.message) {
@@ -79,6 +81,8 @@ const SchoolSignup: FC = () => {
   const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
     email: null,
     schoolName: null,
+    lastName: null,
+    firstName: null,
     district: null,
     schoolType: null,
     zip: null,
@@ -134,7 +138,7 @@ const SchoolSignup: FC = () => {
         justifyContent={'center'}
       >
         <FormContainer isMobile={isTablet}>
-          <Typography variant='h4'>{dictionary[language]?.schoolName}</Typography>
+          <Typography variant='h4'>{dictionary[language]?.schoolSignup}</Typography>
           <Grid container spacing={3} mt={2}>
             <Grid item xs={12}>
               <TextField
@@ -149,6 +153,36 @@ const SchoolSignup: FC = () => {
                 }}
                 error={!!validateMsg.schoolName}
                 helperText={validateMsg.schoolName}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label={dictionary[language]?.firstName}
+                onChange={e => {
+                  setFirstName(e.target.value);
+                  handleFormChange(
+                    'firstName',
+                    e.target.value?.length === 0 ? dictionary[language]?.fieldIsRequired : ''
+                  );
+
+                }}
+                error={!!validateMsg.firstName}
+                helperText={validateMsg.firstName}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label={dictionary[language]?.lastName}
+                onChange={e => {
+                  setLastName(e.target.value);
+                  handleFormChange(
+                    'lastName',
+                    e.target.value?.length === 0 ? dictionary[language]?.fieldIsRequired : ''
+                  );
+
+                }}
+                error={!!validateMsg.lastName}
+                helperText={validateMsg.lastName}
               />
             </Grid>
             <Grid item xs={12}>
