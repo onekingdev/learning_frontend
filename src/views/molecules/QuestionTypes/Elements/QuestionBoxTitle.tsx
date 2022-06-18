@@ -4,6 +4,7 @@ import { Box, Container, Typography, useMediaQuery } from '@mui/material';
 import { QuestionEquation } from './QuestionEquation';
 import { ScreenSize } from 'constants/screenSize';
 import he from 'he'
+import { extractMathjaxText, extractQuestion } from 'views/utils';
 
 
 interface QuestionBoxTitleProps {
@@ -20,19 +21,6 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
     const audio = new Audio(audioFile);
     audio.play();
   };
-
-  const extractQuestion = (str: string) => {
-
-    const firstBracketIndex = str.indexOf('$')
-    return str.slice(1, firstBracketIndex)
-  }
-
-  const extractMathjaxText = (str: string) => {
-    // const regex = /(?<=\$).+?(?=\$)/g
-    const regex = /(?:\$).+?(?=\$)/g    //changed because of IPAD, Need to test
-    const matches = str.match(regex)
-    return matches ? matches[0].slice(1) : ''
-  }
 
   return (
     <Container sx={{

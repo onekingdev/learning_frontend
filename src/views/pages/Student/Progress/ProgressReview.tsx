@@ -9,6 +9,7 @@ import {
     Box,
     Button,
     Container,
+    Typography,
 } from '@mui/material';
 import { BasicColor } from 'views/Color';
 import {
@@ -18,7 +19,7 @@ import { doFetchStudentAnswerHistory } from 'app/actions/blockActions';
 import { getMessage } from 'views/utils';
 import { ReviewBlocks } from 'views/molecules/ProgressReview/ReviewBlocks';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import { PeriodSelect } from 'views/molecules/ProgressReview/PeriodSelect';
+// import { PeriodSelect } from 'views/molecules/ProgressReview/PeriodSelect';
 import { Wrapper } from './Style';
 
 
@@ -37,7 +38,6 @@ export const ProgressReview = () => {
     const { data: blocks, isLoading, error } = useQuery(['fetch-answer-history', studentId, token], () => doFetchStudentAnswerHistory(studentId, token))
     const history = useHistory();
 
-    console.log({ isLoading, blocks })
     useEffect(() => {
         !isLoading && loadingContext.done();
     }, [isLoading]);
@@ -47,8 +47,8 @@ export const ProgressReview = () => {
                 <PageTitle title={dictionary[language]?.title} />
                 <Container>
                     <Box
-                    display='flex'
-                    justifyContent={'space-between'}
+                        display='flex'
+                        justifyContent={'space-between'}
                     >
                         <Button
                             variant='contained'
@@ -61,11 +61,12 @@ export const ProgressReview = () => {
                         >
                             return
                         </Button>
-                        <PeriodSelect />
+                        {/* <PeriodSelect /> */}
                     </Box>
                     {
-                        error ? <p>{getMessage(error)}</p> :
+                        error ? <Typography color='red'>{getMessage(error)}</Typography> :
                             <Box
+                                id='blocks-container'
                                 sx={{
                                     backgroundColor: BasicColor.greenSoft + 'A0',
                                     minHeight: '90vh',

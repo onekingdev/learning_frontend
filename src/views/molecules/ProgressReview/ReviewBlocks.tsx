@@ -25,13 +25,11 @@ export const ReviewBlocks: FC<{ blocks: any }> = ({ blocks }) => {
             flexDirection={'column'}
             alignItems='space-between'
         >
-
-            <Grid container columnSpacing={3} rowSpacing={4} justifyContent='center'>
+            <Grid container spacing={4} justifyContent='center'>
                 {data.map((block: any) => (
                     <Grid item key={block.id}>
                         <Box
                             width={320}
-                            height={425}
                             id='quesion-box'
                         >
                             <ReviewBox block={block} />

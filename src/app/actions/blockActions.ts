@@ -205,5 +205,5 @@ export const doFetchStudentAnswerHistory = async (studentId: number, token: stri
         FETCH_STUDENT_ANSWER_HISTORY(studentId),
         token
     );
-    return res.data.blockQuestionPresentationHistoryByStudentId ?? res.errors[0]
+    return res.data?.blockQuestionPresentationHistoryByStudentId ?? res.errors[0]
 }

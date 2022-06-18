@@ -2,6 +2,19 @@ export const numberWithCommas = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+export const extractMathjaxText = (str: string) => {
+    // const regex = /(?<=\$).+?(?=\$)/g
+    const regex = /(?:\$).+?(?=\$)/g    //changed because of IPAD, Need to test
+    const matches = str.match(regex)
+    return matches ? matches[0].slice(1) : ''
+  }
+
+export const extractQuestion = (str: string) => {
+
+    const firstBracketIndex = str.indexOf('$')
+    return str.slice(1, firstBracketIndex)
+  }
+
 export const getMessage = (error: any) => error.message
 
 export const isValidUrl = (_string: string) => {

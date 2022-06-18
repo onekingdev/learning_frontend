@@ -1,5 +1,6 @@
 import {
-    Paper, Typography,
+    Box,
+    Paper
 } from '@mui/material';
 import { FC } from 'react';
 import Carousel from 'react-material-ui-carousel'
@@ -7,19 +8,15 @@ import { BasicColor } from 'views/Color';
 import { ReviewQuestion } from './ReviewQuestion';
 
 export const ReviewBox: FC<{ block: any }> = ({ block }) => {
+    console.log({ block })
     return (block &&
         <Paper
+            id='question-block'
             sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-around',
-                padding: 1,
                 height: '100%',
+                padding: 2
             }}
         >
-            <Typography variant='h6' textAlign={'center'}>Answer {block.blockQuestionPresentation[0]?.blockPresentation?.createTimestamp.slice(0, 10)}</Typography>
-            <Typography variant='h5'>Subject: <span style={{ fontWeight: 'bold' }}>{block.blockQuestionPresentation[0].topic?.areaOfKnowledge?.name}</span></Typography>
-            <Typography variant='h6'>Topic:{block.blockQuestionPresentation[0].topic?.name}</Typography>
             <Carousel
                 navButtonsWrapperProps={{   // Move the buttons to the bottom. Unsetting top here to override default style.
                     style: {
@@ -34,13 +31,13 @@ export const ReviewBox: FC<{ block: any }> = ({ block }) => {
                 cycleNavigation={false}
                 navButtonsAlwaysVisible
                 duration={500}
-                height={300}
+                height={400}
             >
                 {
-                    block.blockQuestionPresentation[0]?.blockPresentation?.block?.questions &&
-                    block.blockQuestionPresentation[0]?.blockPresentation?.block?.questions.map((question: any) => (
-                        <Paper
-                            key={question.id}
+                    block.blockQuestionPresentation &&
+                    block.blockQuestionPresentation.map((element: any, index: number) => (
+                        <Box
+                            key={element.id}
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -50,11 +47,17 @@ export const ReviewBox: FC<{ block: any }> = ({ block }) => {
                             }}
                         >
                             <ReviewQuestion
-                                questionText={question.questionText}
-                                questionType={question.questionType}
-                                answerOptions={question.answerOptions}
+                                questionText={element.question.questionText}
+                                questionType={element.question.questionType}
+                                answerOptions={element.question.answerOptions}
+                                index={index}
+                                chosenAnswer={element.chosenAnswer}
+                                status={element.status}
+                                typedAnswer={element.typedAnswer}
+                                subject={element.topic?.areaOfKnowledge?.name}
+                                topic={element.topic?.name}
                             />
-                        </Paper>
+                        </Box>
                     ))
 
                 }

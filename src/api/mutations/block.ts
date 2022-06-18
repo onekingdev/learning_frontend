@@ -210,33 +210,49 @@ query {
           name
         }
       }
-      blockPresentation{
-        createTimestamp
-        block{
-          questions{
-            id
-            questionType
-            questionText
-            answerOptions {
-              id
-              isCorrect
-              ... on MultipleChoiceAnswerOptionSchema {
-                ${NEW_MC_ANSWER_OPTION}
-              }
-              ... on MultipleSelectAnswerOptionSchema {
-                ${NEW_MC_ANSWER_OPTION}
-              }
-              ... on TypeInAnswerOptionSchema {
-                ${NEW_T_ANSWER_OPTION}
-              }
-              ... on OrderAnswerOptionSchema {
-                ${NEW_O_ANSWER_OPTION}
-              }
-              ... on RelateAnswerOptionSchema {
-                ${NEW_R_ANSWER_OPTION}
-              }
-            }
+      typedAnswer
+      status
+      question {
+        id
+        questionType
+        questionText
+        answerOptions {
+          id
+          isCorrect
+          ... on MultipleChoiceAnswerOptionSchema {
+            ${NEW_MC_ANSWER_OPTION}
           }
+          ... on MultipleSelectAnswerOptionSchema {
+            ${NEW_MC_ANSWER_OPTION}
+          }
+          ... on TypeInAnswerOptionSchema {
+            ${NEW_T_ANSWER_OPTION}
+          }
+          ... on OrderAnswerOptionSchema {
+            ${NEW_O_ANSWER_OPTION}
+          }
+          ... on RelateAnswerOptionSchema {
+            ${NEW_R_ANSWER_OPTION}
+          }
+        }
+      }
+      chosenAnswer {
+        id
+        isCorrect
+        ... on MultipleChoiceAnswerOptionSchema {
+          ${NEW_MC_ANSWER_OPTION}
+        }
+        ... on MultipleSelectAnswerOptionSchema {
+          ${NEW_MC_ANSWER_OPTION}
+        }
+        ... on TypeInAnswerOptionSchema {
+          ${NEW_T_ANSWER_OPTION}
+        }
+        ... on OrderAnswerOptionSchema {
+          ${NEW_O_ANSWER_OPTION}
+        }
+        ... on RelateAnswerOptionSchema {
+          ${NEW_R_ANSWER_OPTION}
         }
       }
     }
