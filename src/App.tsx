@@ -1,12 +1,12 @@
-import { Routes }                  from 'Routes';
-import { useEffect, useRef }                  from 'react';
-import { Provider }                from 'react-redux';
-import store                       from './app/configureStore';
-import { PersistGate }             from 'redux-persist/integration/react';
-import { useState }                from 'react';
-import { SnackbarProvider }        from 'notistack';
+import { Routes } from 'Routes';
+import { useEffect, useRef } from 'react';
+import { Provider } from 'react-redux';
+import store from './app/configureStore';
+import { PersistGate } from 'redux-persist/integration/react';
+import { useState } from 'react';
+import { SnackbarProvider } from 'notistack';
 import { BrowserRouter as Router } from 'react-router-dom';
-import TawkMessengerReact          from '@tawk.to/tawk-messenger-react';
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import * as TYPES from 'app/types'
 import {
   QueryClient,
@@ -29,12 +29,12 @@ export default () => {
     window.Tawk_API?.hideWidget();
   };
   useEffect(() => {
-      console.log(Rewardful?.referral)
+    console.log(Rewardful?.referral)
   }, [])
 
   useEffect(() => {
-    if(Rewardful?.referral) {
-      persist.store.dispatch({type: TYPES.USER_SET_REWARDFUL_ID, payload: Rewardful.referral});
+    if (Rewardful?.referral) {
+      persist.store.dispatch({ type: TYPES.USER_SET_REWARDFUL_ID, payload: Rewardful.referral });
       console.log('Current referral ID: ', Rewardful.referral);
     } else {
       console.log('No referral present.');
@@ -49,13 +49,12 @@ export default () => {
             propertyId="58cecc295b89e2149e1b042f"
             widgetId="default"
             onLoad={onLoad}
-            useRef={tawkMessengerRef}/>
-            <QueryClientProvider client={queryClient}>
-
-          <Router>
-            <Routes />
-          </Router>
-            </QueryClientProvider>
+            useRef={tawkMessengerRef} />
+          <QueryClientProvider client={queryClient}>
+            <Router>
+              <Routes />
+            </Router>
+          </QueryClientProvider>
         </SnackbarProvider>
       </PersistGate>
     </Provider>
