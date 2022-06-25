@@ -1,14 +1,24 @@
-import { GUARDIAN_STUDENT, GUARDIAN, } from '../fragments/guardianFragments';
-import { AVAILABLE_PLANS, COUPON_COODE, } from '../fragments/paymentFragments';
-import { USER, USER_PROFILE } from '../fragments/userFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, GUARDIAN_STUDENT_PLAN_RAW, ORDER, PLAN, PLAN_RAW } from '../fragments/paymentFragments'
-import { STUDENT, STUDENT_RAW, STUDENT_GRADE } from '../fragments/studentFragments'
-import { AUDIENCES } from '../fragments/peopleFragments'
-import { AREA_OF_KNOWLEDGE } from '../fragments/areaOfKnowledgeFragments'
-import { GRADES } from '../fragments/peopleFragments'
-import { AVATAR_RAW } from 'api/fragments/avatarFragments';
+import {GUARDIAN} from '../fragments/guardianFragments';
+import {USER, USER_PROFILE} from '../fragments/userFragments';
+import {
+  GUARDIAN_STUDENT_PLAN,
+  ORDER,
+  PLAN_RAW,
+  AVAILABLE_PLANS,
+} from '../fragments/paymentFragments';
+import {STUDENT_RAW} from '../fragments/studentFragments';
+import {GRADES} from '../fragments/peopleFragments';
+import {AVATAR_RAW} from 'api/fragments/avatarFragments';
 
-export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: string, username: string, password: string, couponCode: string, language: string) => `
+export const CREATE_GUARDIAN = (
+  email: string,
+  firstName: string,
+  lastName: string,
+  username: string,
+  password: string,
+  couponCode: string,
+  language: string
+) => `
 	createGuardian(email: "${email}", username: "${username}", password: "${password}", coupon: "${couponCode}", lastName: "${lastName}", firstName: "${firstName}", language: "${language}") {
         guardian {
             ${GUARDIAN}
@@ -25,17 +35,17 @@ export const CREATE_GUARDIAN = (email: string, firstName: string, lastName: stri
 `;
 
 export const CREATE_ORDER = (
-    cardCvc: string,
-    cardExpMonth: string,
-    cardExpYear: string,
-    cardFirstName: string,
-    cardLastName: string,
-    cardNumber: string,
-    discountCode: string,
-    guardianId: number,
-    orderDetailInput: {},
-    paymentMethod: string,
-    returnUrl: string,
+  cardCvc: string,
+  cardExpMonth: string,
+  cardExpYear: string,
+  cardFirstName: string,
+  cardLastName: string,
+  cardNumber: string,
+  discountCode: string,
+  guardianId: number,
+  orderDetailInput: {},
+  paymentMethod: string,
+  returnUrl: string
 ) => `
     createOrder(cardCvc: "${cardCvc}", cardExpMonth: "${cardExpMonth}", cardExpYear: "${cardExpYear}", cardFirstName: "${cardFirstName}", cardLastName: "${cardLastName}", cardNumber: "${cardNumber}", discountCode: "${discountCode}", guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}, paymentMethod: "${paymentMethod}", returnUrl: "${returnUrl}"){
         order{
@@ -46,9 +56,7 @@ export const CREATE_ORDER = (
     }
 `;
 
-export const CONFIRM_PAYMENT_ORDER = (
-    orderId: number,
-) => `
+export const CONFIRM_PAYMENT_ORDER = (orderId: number) => `
     confirmPaymentOrder(orderId: ${orderId}){
         order{
             ${ORDER}
@@ -56,25 +64,22 @@ export const CONFIRM_PAYMENT_ORDER = (
         status
     }
 
-`
+`;
 
-export const CHANGE_PAYMENT_METHOD = (
-    guardianId: number,
-    method: string
-) => `
+export const CHANGE_PAYMENT_METHOD = (guardianId: number, method: string) => `
     changePaymentMethod(guardianId: ${guardianId}, method: ${method}){
         status
     }
-`
+`;
 
 export const CREATE_GUARDIAN_STUDENT_PLAN = (
-    guardianId: number,
-    listSubjectId: number,
-    period: string,
-    planId: number,
-    price: number,
-    returnUrl: string,
-    studentId: number
+  guardianId: number,
+  listSubjectId: number,
+  period: string,
+  planId: number,
+  price: number,
+  returnUrl: string,
+  studentId: number
 ) => `
     createGuardianStudentPlan(
         guardianId: ${guardianId},
@@ -93,13 +98,13 @@ export const CREATE_GUARDIAN_STUDENT_PLAN = (
         }
         urlRedirect
     }
-`
+`;
 
 export const UPDATE_GUARDIAN_STUDENT_PLAN = (
-    guardianStudentPlanId: number,
-    period: string,
-    price: number,
-    returnUrl: string
+  guardianStudentPlanId: number,
+  period: string,
+  price: number,
+  returnUrl: string
 ) => `
     updateGuardianStudentPlan(
         guardianStudentPlanId: ${guardianStudentPlanId},
@@ -115,11 +120,11 @@ export const UPDATE_GUARDIAN_STUDENT_PLAN = (
         }
         urlRedirect
     }
-`
+`;
 
 export const CANCEL_GUARDIAN_STUDENT_PLAN = (
-    guardianStudentPlanId: number,
-    reason: string,
+  guardianStudentPlanId: number,
+  reason: string
 ) => `
     cancelGuardianStudentPlan(
         guardianStudentPlanId: ${guardianStudentPlanId},
@@ -129,24 +134,21 @@ export const CANCEL_GUARDIAN_STUDENT_PLAN = (
             ${GUARDIAN_STUDENT_PLAN}
         }
     }
-`
+`;
 
-export const CANCEL_MEMBERSHIP = (
-    guardianId: number,
-    reason: string
-) => `
+export const CANCEL_MEMBERSHIP = (guardianId: number, reason: string) => `
     cancelMembership(
         guardianId: ${guardianId},
         reason: "${reason}"
     ) {
         status
     }
-`
+`;
 
 export const UPDATE_EMAIL_PASSWORD = (
-    email: string,
-    username: string,
-    password: string
+  email: string,
+  username: string,
+  password: string
 ) => `
 mutation {
     changeGuardianEmailPassword(email: "${email}", username: "${username}", password: "${password}"){
@@ -158,10 +160,8 @@ mutation {
       }
     }
 }
-`
-export const FETCH_GUARDIAN_AVAILABLE_BOUGHT_PLANS = (
-    guardianId: number,
-) => `
+`;
+export const FETCH_GUARDIAN_AVAILABLE_BOUGHT_PLANS = (guardianId: number) => `
 query getActiveGuardianPlan {
     guardianAvailableBroughtPlan(guardianId: "${guardianId}"){
       id,
@@ -184,24 +184,22 @@ query getActiveGuardianPlan {
       expiredAt
     }
   }
-`
+`;
 
 export const CANCEL_GUARDIAN_BOUGHT_PLAN = (
-    orderDetailId: number,
-    reason: string
-
+  orderDetailId: number,
+  reason: string
 ) => `
 mutation cancelGuardianPlan {
     cancelGuardianPlan(orderDetailId: "${orderDetailId}", reason: "${reason}") {
       status
     }
   }
-`
+`;
 
 export const ADD_STUDENT_PLAN_PACKAGE = (
-    guardianId: number,
-    planId: number
-
+  guardianId: number,
+  planId: number
 ) => `
 mutation AddGuardianPlan {
     addGuardianPlan(
@@ -229,11 +227,11 @@ mutation AddGuardianPlan {
       status
     }
   }
-`
+`;
 
 export const UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN = (
-    guardianId: number,
-    orderDetailId: number,
+  guardianId: number,
+  orderDetailId: number
 ) => `
 mutation UpdateGuardianPlan {
     updateGuardianPlan(
@@ -248,11 +246,9 @@ mutation UpdateGuardianPlan {
       urlRedirect
     }
   }
-`
+`;
 
-export const CONFIRM_UPDATE_GUARDIAN_PLAN = (
-    orderId: number,
-) => `
+export const CONFIRM_UPDATE_GUARDIAN_PLAN = (orderId: number) => `
 mutation {
     confirmUpdateGuardianPlan(orderId: ${orderId}) {
       order {
@@ -261,26 +257,16 @@ mutation {
       status
     }
   }
-`
+`;
 
 export const FETCH_PLANS = `
 query plans {
     plans {
-      id
-      name
-      description
-      areaOfKnowledge
-      priceMonth
-      priceYear
-      currency
-      isCancel
-      isActive
+      ${PLAN_RAW}
     }
   }
-`
-export const FETCH_GUARDIAN_STUDENTS = (
-  guardianId: number,
-) => `
+`;
+export const FETCH_GUARDIAN_STUDENTS = (guardianId: number) => `
 query {
 guardianById(id: "${guardianId}"){
   guardianstudentplanSet{
@@ -318,25 +304,11 @@ guardianById(id: "${guardianId}"){
   }
 }
 }
-`
-export const FETCH_GUARDIAN_PLANS = (
-  guardianId: number,
-) => `
+`;
+export const FETCH_GUARDIAN_PLANS = (guardianId: number) => `
 query{
   guardianStudentPlanByGuardianId(guardianId: "${guardianId}") {
     id,
-    plan {
-      id
-      identifier
-      name
-      description
-      areaOfKnowledge
-      slug
-      priceMonth
-      priceYear
-      currency
-      isCancel
-    }
     period
     expiredAt
     plan {
@@ -344,10 +316,8 @@ query{
     }
   }
 }
-`
-export const FETCH_STUDENT_BY_ID = (
-  studentId: number,
-) => `
+`;
+export const FETCH_STUDENT_BY_ID = (studentId: number) => `
 query {
   studentById (id: "${studentId}"){
     ${STUDENT_RAW}
@@ -396,13 +366,11 @@ query {
     }
   }
 }
-`
-export const FETCH_AVAILABLE_PLANS = (
-  guardianId: number,
-) => `
+`;
+export const FETCH_AVAILABLE_PLANS = (guardianId: number) => `
 query {
   guardianById(id: "${guardianId}") {
     ${AVAILABLE_PLANS}
   }
 }
-`
+`;

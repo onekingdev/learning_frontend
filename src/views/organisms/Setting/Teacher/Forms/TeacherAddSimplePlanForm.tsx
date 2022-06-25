@@ -9,7 +9,7 @@ import { BasicColor }                                              from 'views/C
 import Button                                                      from 'views/molecules/MuiButton';
 import { LSButtonContainer, LSRadio, LSFormControlLabel, LSInputBase } from 'views/molecules/Setting/utils/Style';
 import { dictionary }                                              from 'views/pages/Parent/Settings/dictionary';
-import { doAddStudentPlan, doFetchPlans }                          from 'app/actions/guardianActions';
+import { doAddStudentPlan, doFetchPlanTypes }                          from 'app/actions/guardianActions';
 import { useSelector }                                             from 'react-redux'
 import { useSnackbar }                                             from 'notistack';
 import { LoadingSpinner }                                          from 'views/atoms/Spinner';
@@ -85,7 +85,7 @@ export const TeacherAddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) =
 
   const fetchPlans = async (mounted: boolean) => {
 
-    const res = await doFetchPlans(user.token)
+    const res = await doFetchPlanTypes(user.token)
     if (res !== null) {
       if (mounted)
         setPlans(res)

@@ -93,17 +93,26 @@ export const doConfirmUpdate = async (orderId: number, token: string) => {
     }
 }
 
-export const doFetchPlans = async (token: string) => {
-    try {
-        const res: any = await sendRawQuery(
-            FETCH_PLANS,
-            token
-        );
-        return res.msg ? { status: false } : res.data.plans;
-    }
-    catch {
-        return { status: false }
-    }
+// export const doFetchPlanTypes = async (token: string) => {
+//     try {
+//         const res: any = await sendRawQuery(
+//             FETCH_PLANS,
+//             token
+//         );
+//         return res.msg ? { status: false } : res.data.plans;
+//     }
+//     catch {
+//         return { status: false }
+//     }
+// }
+
+
+export const doFetchPlanTypes = async (token: string) => {
+    const res: any = await fetchQuery(
+        FETCH_PLANS,
+        token
+    );
+    return res.data.plans ?? res.errors[0]
 }
 
 export const doCancelBroughtPlan = async (orderDetailId: number, reason: string, token: string) => {

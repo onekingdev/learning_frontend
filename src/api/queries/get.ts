@@ -132,6 +132,8 @@ export const fetchRawData = async (
   return result
 };
 
+
+// For React-query
 export const fetchQuery = async (
   query: string,
   token?: string

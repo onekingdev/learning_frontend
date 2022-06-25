@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanForm';
+import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanFormNew';
 import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
 import { PlanList } from 'views/molecules/Setting/PlanList';
 import { CancelMembershipForm } from 'views/molecules/Setting/CancelMembershipForm';
