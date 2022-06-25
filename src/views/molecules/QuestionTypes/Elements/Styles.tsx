@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
 
 export const QuestionsList = styled.div<{ isDraggingOver: boolean, isTablet?: boolean }>`
   border: dashed 1px gray;
@@ -30,4 +31,17 @@ export const AnswersList = styled.div<{ isDraggingOver: boolean }>`
     props.isDraggingOver ? "rgba(10,10,10,0.3)" : "rgba(15,15,15,0.1)"};
   width: 100%;
   min-width: 200px;
+`;
+
+export const AnswersContainer = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  @media screen and (min-width: ${ScreenSize.desktop}) {
+    flex-direction: row;
+    grid-gap: 10px;
+  }
 `;

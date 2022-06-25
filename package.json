@@ -106,7 +106,7 @@
   },
   "scripts": {
     "start": "react-scripts --max_old_space_size=3048 start",
-    "dev": "react-scripts start",
+    "dev": "react-scripts --max_old_space_size=4048 start",
     "build": "react-scripts build",
     "build-github": "CI=false && react-scripts build",
     "build-win": "set CI=false&&react-scripts build",

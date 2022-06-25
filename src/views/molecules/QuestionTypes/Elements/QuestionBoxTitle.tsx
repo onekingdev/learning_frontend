@@ -47,9 +47,7 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
             /> : null
         }
       </Box>
-      {
-        title.charAt(0) === '@' && <QuestionEquation tex={extractMathjaxText(title)} />
-      }
+      {title.charAt(0) === '@' && title.slice(0,5) !== '@TYPE' && <QuestionEquation tex={extractMathjaxText(title)} />}
     </Container>
   );
 };

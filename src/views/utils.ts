@@ -12,6 +12,7 @@ export const extractMathjaxText = (str: string) => {
 export const extractQuestion = (str: string) => {
 
     const firstBracketIndex = str.indexOf('$')
+    if(str.slice(0,4) === 'TYPE') return str.slice(5, firstBracketIndex)
     return str.slice(1, firstBracketIndex)
   }
 

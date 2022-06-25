@@ -52,7 +52,7 @@ export const ReviewQuestion: FC<ReviewQuestionProps> = ({
                         </Grid>
                         <Box>
                             <Typography>Your answer was</Typography>
-                            <ReviewMCOption value={chosenAnswer[0].answerText} />
+                            <ReviewMCOption value={chosenAnswer[0]?.answerText} />
                         </Box>
                         <Typography variant='h6' textAlign={'center'}>
                             {status}

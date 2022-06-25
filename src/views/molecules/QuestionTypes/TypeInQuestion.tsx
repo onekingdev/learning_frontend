@@ -12,6 +12,7 @@ import { BlackBoard, AssistorContainer } from './Styles'
 import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
 import { Box, useMediaQuery } from '@mui/material';
 import { ScreenSize } from 'constants/screenSize';
+import { TypeInMultiple } from './Elements/TypeInMultiple';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -65,7 +66,7 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
       },
         question.answerOptions[0].caseSensitive ?
           typedAnswer === question.answerOptions[0].answerText :
-          typedAnswer.toLowerCase() === question.answerOptions[0].answerText.toLowerCase()
+          typedAnswer.toLowerCase().trim() === question.answerOptions[0].answerText.toLowerCase().trim()
       )
     }
   }
@@ -79,6 +80,36 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
     audio.play();
   };
 
+  const renderQuesionContent = (type: string) => {
+    switch (type) {
+      case 'TYPE':
+        return <TypeInMultiple
+          questionText={question.questionText}
+          getAnswerText={setTypedAnswer}
+        />
+      default:
+        return <Box
+          display='flex'
+          flexDirection='column'
+          alignItems={'center'}
+          gap={5}
+        >
+          <QuestionBoxTitle
+            title={question.questionText}
+            audioFile={
+              question.questionAudioAssets[0]?.audioFile
+            }
+          />
+          <input
+            disabled={disabled}
+            style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end' }}
+            value={typedAnswer}
+            onChange={(e: any) => setTypedAnswer(e.target.value)}
+            autoFocus
+          />
+        </Box>
+    }
+  }
 
   return (
     <>
@@ -99,53 +130,14 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
           flexDirection={isTablet ? 'column-reverse' : 'row'}
           justifyContent='center'
         >
-          <Box
-            display='flex'
-            flexDirection='column'
-            alignItems={'center'}
-            gap={5}
-          >
-            <QuestionBoxTitle
-              title={question.questionText}
-              audioFile={
-                question.questionAudioAssets[0]?.audioFile
-              }
-            />
-            <input
-              disabled={disabled}
-              style={{ width: 200, fontSize: 25, padding: 5, textAlign: 'end'}}
-              value={typedAnswer}
-              onChange={(e: any) => setTypedAnswer(e.target.value)}
-              autoFocus
-            />
-            <AssistorContainer>
-              <Button
-                bgColor={!isAnswered ? ButtonColor.login : ButtonColor.next}
-                onClick={handleNextButtonClicked}
-                fullWidth={true}
-                color={BasicColor.black}
-                value={
-                  isAnswered ?
-                    totalQuestions === questionCounter + 1 ?
-                      dictionary[language]?.finish :
-                      dictionary[language]?.next
-                    :
-                    'Check'
-                }
-              />
-              <Icon image={assistor} onClick={readQuestion} />
-              {
-                blockPresentation?.block?.topicGrade?.topic?.videoAssistor &&
-                <Icon image={videoIcon} onClick={closeVideoModal} />
-              }
-            </AssistorContainer>
-          </Box>
+          {renderQuesionContent(question.questionText?.slice(0, 4))}
           {
             question.questionImageAssets.length > 0 &&
             <Box
               id='image-asset-container'
               display={'flex'}
               justifyContent='center'
+              alignItems={'center'}
               gap={2}
             >
               {question.questionImageAssets?.map((item, i) => (
@@ -154,6 +146,27 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
             </Box>
           }
         </Box>
+        <AssistorContainer>
+          <Button
+            bgColor={!isAnswered ? ButtonColor.login : ButtonColor.next}
+            onClick={handleNextButtonClicked}
+            fullWidth={true}
+            color={BasicColor.black}
+            value={
+              isAnswered ?
+                totalQuestions === questionCounter + 1 ?
+                  dictionary[language]?.finish :
+                  dictionary[language]?.next
+                :
+                'Check'
+            }
+          />
+          <Icon image={assistor} onClick={readQuestion} />
+          {
+            blockPresentation?.block?.topicGrade?.topic?.videoAssistor &&
+            <Icon image={videoIcon} onClick={closeVideoModal} />
+          }
+        </AssistorContainer>
       </BlackBoard>
     </>
   );
