@@ -6,7 +6,7 @@ import {
   PLAN_RAW,
   AVAILABLE_PLANS,
 } from '../fragments/paymentFragments';
-import {STUDENT_RAW} from '../fragments/studentFragments';
+import {ORDER_RAW, STUDENT_RAW} from '../fragments/studentFragments';
 import {GRADES} from '../fragments/peopleFragments';
 import {AVATAR_RAW} from 'api/fragments/avatarFragments';
 
@@ -56,14 +56,16 @@ export const CREATE_ORDER = (
     }
 `;
 
+// For confirming new plan in parent/setting page
 export const CONFIRM_PAYMENT_ORDER = (orderId: number) => `
-    confirmPaymentOrder(orderId: ${orderId}){
-        order{
-            ${ORDER}
-        }
-        status
+  mutation {
+    confirmPaymentOrder(orderId: ${orderId}) {
+      order{
+        ${ORDER_RAW}
+      }
+      status
     }
-
+  }
 `;
 
 export const CHANGE_PAYMENT_METHOD = (guardianId: number, method: string) => `
@@ -199,12 +201,13 @@ mutation cancelGuardianPlan {
 
 export const ADD_STUDENT_PLAN_PACKAGE = (
   guardianId: number,
-  planId: number
+  planId: number,
+  period: string // Monthly || Yearly
 ) => `
 mutation AddGuardianPlan {
     addGuardianPlan(
       guardianId: "${guardianId}",
-      orderDetailInput: [{planId: ${planId}, quantity: 1, period: "Monthly"}],
+      orderDetailInput: [{planId: ${planId}, quantity: 1, period: "${period}"}],
       returnUrl: "https://www.example.com/", coupon: "ZXC") {
       guardian {
         id

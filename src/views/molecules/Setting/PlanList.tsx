@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import { Button, Grid, Paper, TableRow, TableHead, TableContainer, TableCell, TableBody, Table, Typography } from '@mui/material';
 import { useSelector } from 'react-redux'
 import { LSLabel, LSText } from './utils/Style';
@@ -7,14 +7,15 @@ import { LSDialog } from './LSDialog';
 import { CancelPlanForm } from './CancelPlanForm';
 import { useDialog } from './utils/useDialog';
 import { Upgrade } from './Upgrade';
-import { doFetchAvailableBroughtPlans, doFetchGuardianPlans } from 'app/actions/guardianActions'
+import { doFetchGuardianPlans } from 'app/actions/guardianActions'
 import { dictionary } from './dictionary'
 import { useQuery } from 'react-query'
+import { getMessage } from 'views/utils';
 interface IPlanList {
   refresh: boolean
 }
 
-export const PlanList: FC<IPlanList> = ({ refresh }) => {
+export const PlanList: FC<IPlanList> = () => {
 
   // for change to yearly dialog
 
@@ -22,7 +23,7 @@ export const PlanList: FC<IPlanList> = ({ refresh }) => {
   const openUpdate = () => update(!isUpdateOpen);
   const user = useSelector((state: any) => state.user);
   const guardian = useSelector((state: any) => state.guardian);
-  const { data, error, isLoading } = useQuery(['fetch-plans-list', guardian.id, user.token], () => doFetchGuardianPlans(guardian.id, user.token))
+  const { data, error, isLoading } = useQuery(['fetch-bought-plans-list', guardian.id, user.token], () => doFetchGuardianPlans(guardian.id, user.token))
   const { isOpen, open } = useDialog()
   const [tag, seTag] = useState(0)
   // const [plans, setPlans] = useState<Array<any>>([])
@@ -66,10 +67,7 @@ export const PlanList: FC<IPlanList> = ({ refresh }) => {
   //   }
   // }, [refresh, changed]);
   if (isLoading) return <Typography variant='caption'> Loading...</Typography>
-  if (error) {
-    const getMessage = (error: any) => error.message
-    const message = getMessage(error)
-    return <Typography variant='caption' color={'red'}> {message}</Typography> }
+  if (error) return <Typography variant='caption' color={'red'}> {getMessage(error)}</Typography>
   if (data.message) return <Typography variant='caption'> {data.message}</Typography>
   return (
     <div>
@@ -125,7 +123,7 @@ export const PlanList: FC<IPlanList> = ({ refresh }) => {
               ))}
             </TableBody>
           </Table>
-          <LSDialog
+          <LSDialog // Cancel Children Plan
             isOpen={isOpen}
             open={open}
             title={dictionary[language]?.CancelChildrenPlan}

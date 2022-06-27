@@ -1,11 +1,11 @@
-import { LEVEL }             from './levelFragments'
-import { COIN_WALLET }       from './coinWalletFragments'
-import { BANK_WALLET }       from './bankFragments'
-import { AUDIENCES }         from './peopleFragments'
-import { AREA_OF_KNOWLEDGE } from './areaOfKnowledgeFragments'
-import { GRADES }            from './peopleFragments'
-import {AVATAR}              from './avatarFragments'
-import {BATTERY_RAW}         from './batteryFragments'
+import {LEVEL} from './levelFragments';
+import {COIN_WALLET} from './coinWalletFragments';
+import {BANK_WALLET} from './bankFragments';
+import {AUDIENCES} from './peopleFragments';
+import {AREA_OF_KNOWLEDGE} from './areaOfKnowledgeFragments';
+import {GRADES} from './peopleFragments';
+import {AVATAR} from './avatarFragments';
+import {BATTERY_RAW} from './batteryFragments';
 
 export const GUARIDAN_STUDENT_PLAN_RAW = `
     id
@@ -18,8 +18,7 @@ export const GUARIDAN_STUDENT_PLAN_RAW = `
     expiredAt
     period
     price
-`
-
+`;
 
 export const ORDER_DETAIL_RAW = `
     id
@@ -40,7 +39,20 @@ export const ORDER_DETAIL_RAW = `
     isCancel
     slug
     total
-`
+`;
+
+export const ORDER_RAW = `
+id
+identifier
+createTimestamp
+updateTimestamp
+discount
+isPaid
+slug
+total
+subTotal
+discountCode
+`;
 
 export const STUDENT_TOPIC_MASTERY = `
         id

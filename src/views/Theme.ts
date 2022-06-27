@@ -24,6 +24,12 @@ declare module '@mui/material/Button' {
   }
 }
 
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    error: true;
+  }
+}
+
 export const settingPage = createTheme({
   palette: {
     primary: {
@@ -39,6 +45,13 @@ export const settingPage = createTheme({
 
   },
   components: {
+    MuiTypography: {
+      styleOverrides: {
+
+      },
+      variants: [
+      ]
+    },
     MuiRadio: {
       styleOverrides: {
         root: {

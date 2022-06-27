@@ -13,8 +13,8 @@ export const MembershipDetail: FC = () => {
 
   const { isOpen, open } = useDialog()
   const { isAddOpen, openAdd } = useAddDialog()
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
 
   // State to refresh component
   const [value, setValue] = useState(false);
@@ -31,17 +31,12 @@ export const MembershipDetail: FC = () => {
         </LSTitle>
         <Box >
           <Box sx={{ display: 'flex', justifyContent: 'center', margin: 2 }}>
-            <LSDialog
+            <LSDialog // Add a new plan dialog
               isOpen={isAddOpen}
               open={openAdd}
               title={dictionary[language]?.addPlanPackage}
-              // fullWidth='true'
-              // contentText={dictionary[language]?.chooseTheNewPlan}
               dialogContent={
-                <AddSimplePlanForm
-                  open={openAdd}
-                  refresh={refresh}
-                />
+                <AddSimplePlanForm />
               }
             />
           </Box>

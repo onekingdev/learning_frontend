@@ -1,6 +1,5 @@
 import * as React                                                  from 'react';
-import { FC, useEffect, useState }                                 from 'react';
-import Box                                                         from '@mui/material/Box';
+import { FC, useState }                                 from 'react';
 import FormControlLabel                                            from '@mui/material/FormControlLabel';
 import { Checkbox, Radio, Grid }                                   from '@mui/material';
 import RadioGroup                                                  from '@mui/material/RadioGroup';
@@ -9,7 +8,7 @@ import { BasicColor }                                              from 'views/C
 import Button                                                      from 'views/molecules/MuiButton';
 import { LSButtonContainer, LSRadio, LSFormControlLabel, LSInputBase } from 'views/molecules/Setting/utils/Style';
 import { dictionary }                                              from 'views/pages/Parent/Settings/dictionary';
-import { doAddStudentPlan, doFetchPlanTypes }                          from 'app/actions/guardianActions';
+import { doAddStudentPlan }                          from 'app/actions/guardianActions';
 import { useSelector }                                             from 'react-redux'
 import { useSnackbar }                                             from 'notistack';
 import { LoadingSpinner }                                          from 'views/atoms/Spinner';
@@ -82,20 +81,10 @@ export const TeacherAddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) =
   const [checked, setChecked] = useState(new Array(combo.length).fill(false));
   const [loading, setLoading] = useState(false)
 
-
-  const fetchPlans = async (mounted: boolean) => {
-
-    const res = await doFetchPlanTypes(user.token)
-    if (res !== null) {
-      if (mounted)
-        setPlans(res)
-    }
-  }
-
   const onSubmit = async () => {
 
     setLoading(true)
-    const res: any = await doAddStudentPlan(guardian.id, plans.find(element => element.name === parentState).id, user.token)
+    const res: any = await doAddStudentPlan(guardian.id, plans.find(element => element.name === parentState).id, 'Monthly',user.token)
     if (res.status) {
       enqueueSnackbar('Student Package added successfully', { variant: 'success' })
       refresh()
@@ -144,13 +133,6 @@ export const TeacherAddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) =
     }
   };
 
-  useEffect(() => {
-    let mounted = true
-    // fetchPlans(mounted)
-    return () => {
-      mounted = false
-    }
-  }, []);
   interface ChildrenProps {
     label: any
     value: string

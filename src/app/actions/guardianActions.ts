@@ -12,10 +12,11 @@ import {
     FETCH_GUARDIAN_STUDENTS,
     FETCH_AVAILABLE_PLANS,
     FETCH_STUDENT_BY_ID,
-    FETCH_GUARDIAN_PLANS
+    FETCH_GUARDIAN_PLANS,
+    CONFIRM_PAYMENT_ORDER
 } from 'api/mutations/guardians';
 import {
-    CREATE_STUDENT, CREATE_STUDENT_PLAN,
+    CREATE_STUDENT_PLAN,
 } from 'api/mutations/students'
 import { fetchQuery, sendRawQuery } from 'api/queries/get';
 import * as TYPES from 'app/types'
@@ -128,19 +129,34 @@ export const doCancelBroughtPlan = async (orderDetailId: number, reason: string,
     }
 }
 
-export const doAddStudentPlan = async (guardianId: number, planId: number, token: string) => {
+
+// For React-query
+export const doAddStudentPlan = async (
+    guardianId: number, planId: number, period: string, token: string
+) => {
+    const res: any = await fetchQuery(
+        ADD_STUDENT_PLAN_PACKAGE(guardianId, planId, period),
+            token
+    );
+    return res.data?.addGuardianPlan ?? res.errors[0] // when django returns error message on fail
+}
+
+// Resend confirm mutation when add new plan succeed.
+export const confirmPaymentOrder = async (
+    orderId: number, token: string
+) => {
     try {
         const res: any = await sendRawQuery(
-            ADD_STUDENT_PLAN_PACKAGE(guardianId, planId),
+            CONFIRM_PAYMENT_ORDER(orderId),
             token
         );
-
-        return res.msg ? { msg: res.msg, status: false } : { ...res.data.cancelGuardianPlan, status: true };
+        return res.msg ? { msg: res.msg } : res.data.confirmPaymentOrder;
     }
-    catch (e) {
-        return { msg: e, status: false }
+    catch (e: any) {
+        return { msg: e.message }
     }
 }
+
 export const doCancelMembership = async (guardianId: number, reason: string, token: string) => {
     try {
         const res: any = await sendRawQuery(

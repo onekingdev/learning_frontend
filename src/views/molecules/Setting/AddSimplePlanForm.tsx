@@ -95,7 +95,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
   const onSubmit = async () => {
 
     setLoading(true)
-    const res: any = await doAddStudentPlan(guardian.id, plans.find(element => element.name === parentState).id, user.token)
+    const res: any = await doAddStudentPlan(guardian.id, plans.find(element => element.name === parentState).id, 'Monthly', user.token)
     if (res.status) {
       enqueueSnackbar('Student Package added successfully', { variant: 'success' })
       refresh()

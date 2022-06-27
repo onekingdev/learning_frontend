@@ -65,6 +65,7 @@ interface DialogProps {
 }
 const StyledDialog = styled(Dialog) <DialogProps>`
 & .MuiPaper-root {
+  padding: 20px;
   max-width: ${props => props.wide === 'true' ? '100%;' : 'auto;'}
   overflow-y: visible
 }
