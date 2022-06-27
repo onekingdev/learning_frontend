@@ -45,7 +45,7 @@ export const dictionary: any = Object.freeze({
         contactUs: 'ติดต่อเรา',
         weAreHappyToHelpYou: 'เรายินดีช่วยเหลือท่าน',
         FAQ: 'คำถามที่พบบ่อย',
-        plans: 'แพน'
+        plans: 'แพลน'
     },
     'es-mx': {
         parentSignup: 'Registro de padres',
