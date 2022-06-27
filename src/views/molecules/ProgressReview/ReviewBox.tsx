@@ -1,6 +1,7 @@
 import {
     Box,
-    Paper
+    Paper,
+    Typography
 } from '@mui/material';
 import { FC } from 'react';
 import Carousel from 'react-material-ui-carousel'
@@ -17,6 +18,7 @@ export const ReviewBox: FC<{ block: any }> = ({ block }) => {
                 padding: 2
             }}
         >
+            <Typography color='blue'>{block.updateTimestamp.slice(0, 19)}</Typography>
             <Carousel
                 navButtonsWrapperProps={{   // Move the buttons to the bottom. Unsetting top here to override default style.
                     style: {

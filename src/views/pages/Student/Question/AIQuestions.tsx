@@ -323,9 +323,8 @@ export const AIQuestion: FC = () => {
         setLoading(true)
         const res = await newFinishBlock(aiBlock.id, earning.energyCharge, hits, errors, bonusCoins, any2String(answers), state.earning, user.token)
         if (res.success) {
-          console.log('success')
           dispatch({
-            type: TYPES.EARNING_COIN_UP, payload: 100 + bonusCoins
+            type: TYPES.EARNING_COIN_UP, payload: hits * 10 + bonusCoins
           })
         }
         setLoading(false)
@@ -369,7 +368,7 @@ export const AIQuestion: FC = () => {
             />
           ) : aiBlock && questions?.length ? (
             <>
-              <ProgressWrapper id='lesson-progress' style={{top: isMobile ? 0 : USER_AVATAR_SIZE + 15}}>
+              <ProgressWrapper id='lesson-progress' style={{ top: isMobile ? 0 : USER_AVATAR_SIZE + 15 }}>
                 <LessonProgress
                   currentQuestion={questionCounter}
                   topic={aiBlock.block.topicGrade.topic.name}

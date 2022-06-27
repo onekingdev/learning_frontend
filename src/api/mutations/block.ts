@@ -202,6 +202,7 @@ export const FETCH_STUDENT_ANSWER_HISTORY = (
 query {
   blockQuestionPresentationHistoryByStudentId(id: ${studentId}) {
     id
+    updateTimestamp
     blockQuestionPresentation{
       id
       topic {

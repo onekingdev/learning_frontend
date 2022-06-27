@@ -54,7 +54,7 @@ export const ReviewQuestion: FC<ReviewQuestionProps> = ({
                             <Typography>Your answer was</Typography>
                             <ReviewMCOption value={chosenAnswer[0]?.answerText} />
                         </Box>
-                        <Typography variant='h6' textAlign={'center'}>
+                        <Typography variant='h6' textAlign={'center'} color={status === 'CORRECT' ? BasicColor.green : 'red'}>
                             {status}
                         </Typography>
                         <Typography>The Correct Answer is: </Typography>
@@ -65,7 +65,7 @@ export const ReviewQuestion: FC<ReviewQuestionProps> = ({
                     questionType === 'T' &&
                     <>
                         <Typography>Your Answer was : {typedAnswer}</Typography>
-                        <Typography variant='h6' textAlign={'center'}>
+                        <Typography variant='h6' textAlign={'center'} color={status === 'CORRECT' ? BasicColor.green : 'red'}>
                             {status}
                         </Typography>
                         <Typography>The Correct Answer is: {
@@ -110,7 +110,7 @@ export const ReviewQuestion: FC<ReviewQuestionProps> = ({
                                 <Typography color={BasicColor.blue}>{option.key}:{option.value}</Typography>
                             ))}
                         </Box>
-                        <Typography variant='h6' textAlign={'center'}>
+                        <Typography variant='h6' textAlign={'center'} color={status === 'CORRECT' ? BasicColor.green : 'red'}>
                             {status}
                         </Typography>
                         <Typography>Correct answer is the same as question</Typography>
@@ -133,7 +133,7 @@ export const ReviewQuestion: FC<ReviewQuestionProps> = ({
                                 <Typography color={BasicColor.darkBrown}>{option.answerText}</Typography>
                             ))}
                         </Box>
-                        <Typography variant='h6' textAlign={'center'}>
+                        <Typography variant='h6' textAlign={'center'} color={status === 'CORRECT' ? BasicColor.green : 'red'}>
                             {status}
                         </Typography>
                         <Typography>Correct answer is</Typography>

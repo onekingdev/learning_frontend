@@ -1,4 +1,5 @@
 import {
+    Box,
     Typography,
 } from '@mui/material';
 import { FC } from 'react';
@@ -28,8 +29,15 @@ export const ReviewQuestionTitle: FC<ReviewQuestionTitleProps> = ({
                     />
                 </MathJax.Provider>
             </> :
-            <Typography color={BasicColor.darkBrown} fontWeight='bold'>
-                {index + 1}. {questionText}
-            </Typography>
+            questionText.slice(0, 4) === 'TYPE' ?
+                <Box>
+                    <Typography >
+                        {questionText && extractQuestion(questionText)}
+                        {he.decode(extractMathjaxText(questionText).replaceAll('B', '__').replaceAll(',',''))}
+                    </Typography>
+                </Box> :
+                <Typography color={BasicColor.darkBrown} fontWeight='bold'>
+                    {index + 1}. {questionText}
+                </Typography>
     )
 }
