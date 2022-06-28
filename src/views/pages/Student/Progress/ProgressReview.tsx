@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { dictionary } from './dictionary'
 import { useSelector } from 'react-redux';
@@ -19,8 +19,9 @@ import { doFetchStudentAnswerHistory } from 'app/actions/blockActions';
 import { getMessage } from 'views/utils';
 import { ReviewBlocks } from 'views/molecules/ProgressReview/ReviewBlocks';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-// import { PeriodSelect } from 'views/molecules/ProgressReview/PeriodSelect';
+import { PeriodSelect } from 'views/molecules/ProgressReview/PeriodSelect';
 import { Wrapper } from './Style';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 
 
 // const mockup = {
@@ -32,10 +33,11 @@ import { Wrapper } from './Style';
 export const ProgressReview = () => {
     const token = useSelector((state: any) => state.user.token);
     const studentId = useSelector((state: any) => state.student.id);
+    const [args, setArgs] = useState<any>({ period: 1, status: 'ALL' })
     let language: string = useSelector((state: any) => state.user.language);
     language = language ? language : 'en-us'
     const loadingContext = useContext(LoadingContext);
-    const { data: blocks, isLoading, error } = useQuery(['fetch-answer-history', studentId, token], () => doFetchStudentAnswerHistory(studentId, token))
+    const { data: blocks, isLoading, error } = useQuery(['fetch-answer-history', studentId, args.period, args.status, token], () => doFetchStudentAnswerHistory(studentId, args.period, args.status, token))
     const history = useHistory();
 
     useEffect(() => {
@@ -45,6 +47,7 @@ export const ProgressReview = () => {
         <Wrapper>
             <StudentMenu>
                 <PageTitle title={dictionary[language]?.title} />
+
                 <Container>
                     <Box
                         display='flex'
@@ -61,9 +64,9 @@ export const ProgressReview = () => {
                         >
                             return
                         </Button>
-                        {/* <PeriodSelect /> */}
+                        <PeriodSelect update={setArgs} />
                     </Box>
-                    {
+                    {isLoading ? <LoadingSpinner /> :
                         error ? <Typography color='red'>{getMessage(error)}</Typography> :
                             <Box
                                 id='blocks-container'

@@ -46,7 +46,7 @@ export const LanguageSelect: FC = () => {
         <Select
           labelId="language-select-label"
           id="language-select"
-          value={lang}
+          value={lang || 'en-us'}
           label={dictionary[language]?.language}
           onChange={handleChange}
         >

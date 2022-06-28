@@ -1,36 +1,42 @@
 import { FC, useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { REVIEW_PERIODS } from 'constants/common';
 
-export const PeriodSelect: FC = () => {
-  const [period, setPeriod] = useState('');
+interface PeriodSelectProps {
+  update: (params: any) => void
+}
+
+export const PeriodSelect: FC<PeriodSelectProps> = ({
+  update
+}) => {
+  const [period, setPeriod] = useState<any>({});
   let language = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
 
   const handleChange = (event: SelectChangeEvent) => {
-    setPeriod(event.target.value);
+    const temp = REVIEW_PERIODS.find(element => element.id === event.target.value)
+    setPeriod(temp);
+    update(temp?.value)
   };
 
   return (
     <FormControl >
-      <InputLabel id="demo-simple-select-label">Review</InputLabel>
       <Select
         labelId="language-select-label"
         id="language-select"
-        value={period}
+        value={period.id || 'today'}
         onChange={handleChange}
+        sx={{ minWidth: 100 }}
       >
         {
           REVIEW_PERIODS.map((period) => (
-            <MenuItem key={period.id} value={period.value}>{period.label[language as keyof Object]}</MenuItem>
+            <MenuItem key={period.id} value={period.id}>{period.label[language as keyof Object]}</MenuItem>
           ))
         }
       </Select>
     </FormControl>
-    // </Box>
   );
 }

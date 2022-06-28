@@ -21,7 +21,6 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
     const audio = new Audio(audioFile);
     audio.play();
   };
-  console.log({ title })
 
   return (
     <Container sx={{
@@ -31,9 +30,13 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
       flexDirection: 'column',
     }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 5, width: '100%' }}>
-        <Typography variant='h5' sx={{ color: 'white' }}>
-          {title.charAt(0) === '@' ? extractQuestion(title) : he.decode(title)}
-        </Typography>
+        {
+          title.charAt(0) === '@' ?
+            <Typography variant='h5' sx={{ color: 'white' }}>
+              {extractQuestion(title)}
+            </Typography> :
+            <div style={{ color: 'white', fontSize: 30 }} dangerouslySetInnerHTML={{ __html: he.decode(title) }} />
+        }
         {
           audioFile ?
             <img
@@ -48,7 +51,7 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
             /> : null
         }
       </Box>
-      {title.charAt(0) === '@' && title.slice(0, 5) !== '@TYPE' && <QuestionEquation tex={extractMathjaxText(title)} />}
+      {title.charAt(0) === '@' && <QuestionEquation tex={extractMathjaxText(title)} />}
     </Container>
   );
 };

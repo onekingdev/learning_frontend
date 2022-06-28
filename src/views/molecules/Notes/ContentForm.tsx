@@ -22,7 +22,7 @@ const AddNewStudent = (props: any) => {
 
     const { enqueueSnackbar } =  useSnackbar();
     const classes             =  useStyles();
-
+    
     const [title, setTitle] = useState('');
     const [text, setText]   = useState('');
     const [date, setDate]   = useState<Date>();
@@ -34,12 +34,12 @@ const AddNewStudent = (props: any) => {
 
     useEffect(() => {
     },[])
-
+    
     const handleSubmit = () => {
         if (!formValidation()) return;
         props.close();
     }
-
+    
     const formValidation = () => {
         const validateMsgTemp = {...validateMsg};
         let valiResult        = true;

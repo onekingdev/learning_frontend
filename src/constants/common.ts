@@ -25,31 +25,40 @@ export const LANGUAGES = [
 ]
 export const REVIEW_PERIODS = [
     {
-        id: 1,
+        id: 'today',
         label: {
             'en-us': 'Today\'s Answers',
             'es-mx': 'Las respuestas de hoy',
             'th': 'คำตอบวันนี้',
         },
-        value: 'today'
+        value: {
+            period: 1,
+            status: 'ALL'
+        }
     },
     {
-        id: 2,
+        id: 'recent',
         label: {
             'en-us': 'Recent Answers',
             'es-mx': 'Respuestas recientes',
             'th': 'คำตอบล่าสุด',
         },
-        value: 'recent'
+        value: {
+            period: 7,
+            status: 'ALL'
+        }
     },
     {
-        id: 3,
+        id: 'recent-incorrect',
         label: {
             'en-us': 'Recent Incorrect Answers',
             'es-mx': 'Respuestas incorrectas recientes',
             'th': 'คำตอบที่ไม่ถูกต้องล่าสุด',
         },
-        value: 'recent-incorrect'
+        value: {
+            period: 7,
+            status: 'INCORRECT'
+        }
     },
 ]
 
