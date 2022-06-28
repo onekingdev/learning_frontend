@@ -9,7 +9,6 @@ import { BasicColor } from 'views/Color';
 import { ReviewQuestion } from './ReviewQuestion';
 
 export const ReviewBox: FC<{ block: any }> = ({ block }) => {
-    console.log({ block })
     return (block &&
         <Paper
             id='question-block'

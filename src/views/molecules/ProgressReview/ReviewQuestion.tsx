@@ -3,6 +3,7 @@ import {
 } from '@mui/material';
 import { FC } from 'react';
 import { BasicColor } from 'views/Color';
+import { isValidUrl } from 'views/utils';
 import { ReviewMCOption } from './ReviewMCOption';
 import { ReviewQuestionTitle } from './ReviewQuestionTitle';
 
@@ -42,23 +43,25 @@ export const ReviewQuestion: FC<ReviewQuestionProps> = ({
                 {
                     questionType === 'MC' &&
                     <>
-                        <Grid container justifyContent={'center'} spacing={2}
+                        <Grid container justifyContent={'center'} columnSpacing={2}
                         >
-                            {answerOptions.map(option => (
-                                <Grid item>
-                                    <ReviewMCOption value={option.answerText} />
+                            {answerOptions.map((option, index) => (
+                                <Grid item key={option.id} xs={isValidUrl(option.answerText) ? 3 : 12} justifyContent='center'>
+                                    <ReviewMCOption value={option.answerText} index={index + 1} />
                                 </Grid>
                             ))}
                         </Grid>
-                        <Box>
-                            <Typography>Your answer was</Typography>
+                        <Typography>Your answer was</Typography>
+                        <Box display='flex' justifyContent={'center'}>
                             <ReviewMCOption value={chosenAnswer[0]?.answerText} />
                         </Box>
                         <Typography variant='h6' textAlign={'center'} color={status === 'CORRECT' ? BasicColor.green : 'red'}>
                             {status}
                         </Typography>
                         <Typography>The Correct Answer is: </Typography>
-                        <ReviewMCOption value={answerOptions.find(element => element.isCorrect === true)?.answerText} />
+                        <Box display='flex' justifyContent={'center'}>
+                            <ReviewMCOption value={answerOptions.find(element => element.isCorrect === true)?.answerText} />
+                        </Box>
                     </>
                 }
                 {

@@ -7,16 +7,18 @@ import { isValidUrl } from 'views/utils';
 
 interface ReviewMCOptionProps {
     value: string
+    index?: number
 }
 
 export const ReviewMCOption: FC<ReviewMCOptionProps> = ({
-    value
+    value,
+    index
 }) => {
     return (
-        <Box display='flex' justifyContent='center'>
-            {
-                isValidUrl(value) ? <img src={value} style={{ height: 50 }} /> : <Typography color={BasicColor.darkGreen}>{value}</Typography>
-            }
-        </Box>
+        isValidUrl(value) ?
+            <Box display='flex' justifyContent={'center'}>
+                <img src={value} style={{ height: 50 }} />
+            </Box> :
+            <Typography color={BasicColor.darkGreen} >{index && index + '. '}{value}</Typography>
     )
 }

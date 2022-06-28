@@ -16,7 +16,6 @@ export const ReviewBlocks: FC<{ blocks: any }> = ({ blocks }) => {
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
         setData(_blocks.slice(value * PER_PAGE - PER_PAGE, PER_PAGE * value))
-
     };
     return (
         <Box
