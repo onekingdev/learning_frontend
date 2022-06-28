@@ -8,14 +8,14 @@ import { SettingBarColor } from 'views/Color';
 import { SoundSwitch } from './SoundSwitch';
 import { LanguageSelect } from './StudentSettingsLanguageSelect';
 import { dictionary }       from 'views/pages/Student/Settings/dictionary'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const StudentSettingsAccordian: FC = () => {
   let language:string     = useSelector((state: any) => state.user.language);
   language                = language? language : 'en-us'
   return (
     <Container sx={{marginTop: 2, marginBottom: 2, borderRadius: 10}}>
-      <Accordion sx={{ marginBottom: 2 }}>
+      <Accordion sx={{ marginBottom: 2 }} defaultExpanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -28,7 +28,7 @@ export const StudentSettingsAccordian: FC = () => {
           <LanguageSelect />
         </AccordionDetails>
       </Accordion>
-      <Accordion sx={{ marginBottom: 2 }}>
+      {/* <Accordion sx={{ marginBottom: 2 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -39,7 +39,7 @@ export const StudentSettingsAccordian: FC = () => {
         </AccordionSummary>
         <AccordionDetails>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
       <Accordion>
         <AccordionSummary
           aria-controls="panel2a-content"

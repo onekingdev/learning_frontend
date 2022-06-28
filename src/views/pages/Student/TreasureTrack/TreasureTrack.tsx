@@ -128,6 +128,7 @@ export const KidsTreasureTrack: FC = () => {
             // console.log(user)
             if (user && user.token) {
                 // Get Topic Report
+                console.log('calling honor Roll!')
                 const res:any = await query('', HonorRoll, user.token).catch(e => ({success: false}));
                 if (res.success === false) {
                   return

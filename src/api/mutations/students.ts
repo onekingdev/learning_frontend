@@ -1,9 +1,6 @@
 
-// import { USER, USER_PROFILE }                           from '../fragments/userFragments'
-// import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
 import { STUDENT } from '../fragments/studentFragments'
 import {
-    // GUARDIAN_STUDENT,
     GUARDIAN,
 } from '../fragments/guardianFragments';
 import { AVAILABLE_PLANS } from 'api/fragments/paymentFragments';
@@ -75,3 +72,18 @@ export const CHANGE_STUDENT_PASSWORD = (
 	}
 `;
 
+// For student badges
+export const FETCH_USER_BADGES = (
+    studentId: number,
+) => `
+{
+    studentBadgesByStudentId(id: ${studentId}) {
+        id
+        badge {
+            id
+            image
+            type
+        }
+    }
+}
+`
