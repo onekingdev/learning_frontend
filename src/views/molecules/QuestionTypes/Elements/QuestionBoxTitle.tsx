@@ -21,7 +21,6 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
     const audio = new Audio(audioFile);
     audio.play();
   };
-  console.log({ title })
 
   return (
     <Container sx={{
