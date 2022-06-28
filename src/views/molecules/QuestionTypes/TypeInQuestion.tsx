@@ -13,7 +13,6 @@ import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
 import { Box, useMediaQuery } from '@mui/material';
 import { ScreenSize } from 'constants/screenSize';
 import { TypeInMultiple } from './Elements/TypeInMultiple';
-import { TypeInFraction } from './Elements/TypeInFraction';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -88,12 +87,6 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
           questionText={question.questionText}
           getAnswerText={setTypedAnswer}
         />
-      case 'FRAC':
-        return <TypeInFraction
-          answer={question.answerOptions[0]?.answerText?.split('|')}
-          questionText={question.questionText}
-          getAnswerText={setTypedAnswer}
-        />
       default:
         return <Box
           display='flex'
@@ -134,9 +127,8 @@ export const TypeInQuestion: FC<ChoiceTextProps> = ({
         <Box
           display='flex'
           gap={3}
-          flexDirection={isTablet ? 'column' : 'row'}
+          flexDirection={isTablet ? 'column-reverse' : 'row'}
           justifyContent='center'
-          alignItems={'center'}
         >
           {renderQuesionContent(question.questionText?.slice(0, 4))}
           {

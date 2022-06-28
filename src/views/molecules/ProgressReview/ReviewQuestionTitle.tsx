@@ -3,6 +3,7 @@ import {
     Typography,
 } from '@mui/material';
 import { FC } from 'react';
+import { BasicColor } from 'views/Color';
 import { extractMathjaxText, extractQuestion } from 'views/utils';
 import he from 'he'
 import MathJax from 'react-mathjax';
@@ -21,7 +22,7 @@ export const ReviewQuestionTitle: FC<ReviewQuestionTitleProps> = ({
     return (
         questionText.charAt(0) === '@' ?
             <>
-                <div dangerouslySetInnerHTML={{ __html: he.decode(index + 1 + '. ' + questionString) }} />
+                <Typography>{index + 1}. {questionString}</Typography>
                 <MathJax.Provider>
                     <MathJax.Node
                         formula={he.decode(extractMathjaxText(questionText))}
@@ -32,9 +33,11 @@ export const ReviewQuestionTitle: FC<ReviewQuestionTitleProps> = ({
                 <Box>
                     <Typography >
                         {questionText && extractQuestion(questionText)}
-                        {he.decode(extractMathjaxText(questionText).replaceAll('B', '__').replaceAll(',', ''))}
+                        {he.decode(extractMathjaxText(questionText).replaceAll('B', '__').replaceAll(',',''))}
                     </Typography>
                 </Box> :
-                <div dangerouslySetInnerHTML={{ __html: he.decode(index + 1 + '. ' + questionText) }} />
+                <Typography color={BasicColor.darkBrown} fontWeight='bold'>
+                    {index + 1}. {questionText}
+                </Typography>
     )
 }

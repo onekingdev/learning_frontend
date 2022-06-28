@@ -90,7 +90,7 @@ export const ReviewQuestion: FC<ReviewQuestionProps> = ({
                             }}
                         >
                             {chosenAnswer.map(option => (
-                                <Typography color={BasicColor.greenShadow} key={option.id}>
+                                <Typography color={BasicColor.greenShadow}>
                                     {option.key}:
                                     <span style={{ color: 'darkmagenta' }}>
                                         {option.value}
