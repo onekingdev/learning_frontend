@@ -30,7 +30,7 @@ export const dictionary: any = Object.freeze({
         selectYourGrade: 'ระดับชั้น',
         selectYourLanguage: 'ภาษา',
         changePassword: 'เปลี่ยนรหัสผ่าน',
-        studentLogin: 'เข้าสู่ระบบผู้เรียน',
+        studentLogin: 'เข้าสู่ระบบผู้ใช้',
         yourChildren: 'ผู้เรียน',
     },
     'es-mx': {
