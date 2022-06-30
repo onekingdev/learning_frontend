@@ -36,7 +36,7 @@ export const dictionary: any = Object.freeze({
         financialLiteracy: 'ความรู้ทางการเงิน',
         healthAndSafety: 'สุขภาพและความปลอดภัย',
         receive: 'รับส่วนลด',
-        offThesePricesForEachAdditionalChildOnYourAccount: 'ลดราคาเหล่านี้สำหรับเด็กแต่ละคนเพิ่มเติมในบัญชีของคุณ',
+        offThesePricesForEachAdditionalChildOnYourAccount: 'เมื่อลงทะเบียนเรียนสำหรับผู้ใช้คนที่สองและผู้ใช้ถัดไป',
         billingInformation: 'ข้อมูลการเรียกเก็บเงิน',
         firstName: 'ชื่อจริง',
         lastName: 'นามสกุล',

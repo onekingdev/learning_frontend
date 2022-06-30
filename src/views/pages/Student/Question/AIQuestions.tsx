@@ -313,7 +313,7 @@ export const AIQuestion: FC = () => {
           isLessonFinished ? (
             <FinishLesson
               loading={loading}
-              tokens={hits * QUESTION_POINT_UNIT + bonusCoins}
+              tokens={hits * QUESTION_POINT_UNIT}
               energy={bonusCoins}
               onNextLesson={onNextLesson}
             />

@@ -200,7 +200,7 @@ query {
   blockQuestionPresentationHistoryByStudentIdAndPeriodAndAnswerstate(id: ${studentId}, period: ${period}, answerState: "${answerStatus}") {
     id
     updateTimestamp
-    blockQuestionPresentation{
+    blockQuestionPresentation(answerState: "${answerStatus}") {
       id
       topic {
         name

@@ -46,7 +46,7 @@ if (screen_width < 450) {
 }
 
 const getAllTopic: any = (subSubjectList: Array<any>, deep: number) => {
-    return subSubjectList.map(subSubject => {
+    return subSubjectList && subSubjectList.map(subSubject => {
         return (deep !== 1 || subSubject.subTopicsByGrade.length > 0) ? [subSubject, getAllTopic(subSubject.subTopicsByGrade, deep + 1)] : [subSubject]
     })
 }
@@ -109,11 +109,11 @@ export const KidsProgress = () => {
                     return
                 }
                 const result: any = await res.json();
-                console.log(result.data.rootTopicsByAok);
+                console.log(result.data.rootTopicsByAokAndGrade);
                 if (result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
-                    setData(result.data.rootTopicsByAok);
+                    setData(result.data.rootTopicsByAokAndGrade);
                 }
                 // if (firstLoad) {
                 //     setFirstLoad(false);
