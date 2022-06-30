@@ -23,13 +23,6 @@ import { PeriodSelect } from 'views/molecules/ProgressReview/PeriodSelect';
 import { Wrapper } from './Style';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 
-
-// const mockup = {
-//     subject: 'Math',
-//     topic: 'Add',
-//     isCorrect: false,
-// }
-
 export const ProgressReview = () => {
     const token = useSelector((state: any) => state.user.token);
     const studentId = useSelector((state: any) => state.student.id);
@@ -47,7 +40,6 @@ export const ProgressReview = () => {
         <Wrapper>
             <StudentMenu>
                 <PageTitle title={dictionary[language]?.title} />
-
                 <Container>
                     <Box
                         display='flex'

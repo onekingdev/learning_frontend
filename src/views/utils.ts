@@ -69,3 +69,29 @@ export const smoothScroll = (targetEl: any, offset = -100, duration = 500) => {
 export function validateEmail (email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
+
+export const any2String = (param: any): string => {
+    let str = ''
+    if (Array.isArray(param)) {
+      str += '['
+      for (let i = 0; i < param.length; i++) {
+        if (i === param.length - 1)
+          str += any2String(param[i])
+        else
+          str += (any2String(param[i]) + ',')
+      }
+      str += ']'
+    } else if (typeof param !== 'string' && typeof param !== 'number') {
+      str += '{'
+      const keys = Object.keys(param)
+      for (let i = 0; i < keys.length; i++) {
+        if (i === keys.length - 1)
+          str += (keys[i] + ':' + any2String(param[keys[i]]))
+        else
+          str += (keys[i] + ':' + any2String(param[keys[i]]) + ',')
+      }
+      str += '}'
+      // let stringifiedObj = Object.entries(param).map(x => x.join(':')).join('\n')
+    } else str = '"' + param.toString() + '"'
+    return str
+  }

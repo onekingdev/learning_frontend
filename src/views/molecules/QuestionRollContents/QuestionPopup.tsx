@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 
@@ -102,15 +102,10 @@ const images = [
     background: 'linear-gradient(180deg, #F4FFB0 -37.63%, #FFFFFF 78.26%)'
   },
 ]
-export const QuestionPopup: FC<{ type: string }> = ({ type }) => {
+export const QuestionPopup: FC<{ type: string, random: number }> = ({ type, random }) => {
 
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
-  const [id, setId] = useState(0)
-
-  useEffect(() => {
-    setId(Math.floor(Math.random() * 100 % 4))
-  }, [])
 
   return (
     type === 'BATTERY' ?
@@ -132,7 +127,7 @@ export const QuestionPopup: FC<{ type: string }> = ({ type }) => {
       <Box
         margin={1}
         sx={{
-          background: images[id].background,
+          background: images[random].background,
           borderRadius: 5,
           padding: 2,
           display: 'flex',
@@ -151,18 +146,18 @@ export const QuestionPopup: FC<{ type: string }> = ({ type }) => {
                 textAlign: 'center',
                 marginBottom: 2,
                 textShadow: `
-                ${strokeWidth * Math.cos(0)}px 0 0 ${images[id].hex},
-                ${strokeWidth * Math.cos(Math.PI / 8)}px ${strokeWidth * Math.sin(Math.PI / 8)}px 0 ${images[id].hex},
-                ${strokeWidth * Math.cos(Math.PI / 4)}px ${strokeWidth * Math.sin(Math.PI / 4)}px 0 ${images[id].hex},
-                ${strokeWidth * Math.cos(Math.PI * 3 / 8)}px ${strokeWidth * Math.sin(Math.PI * 3 / 8)}px 0 ${images[id].hex}
+                ${strokeWidth * Math.cos(0)}px 0 0 ${images[random].hex},
+                ${strokeWidth * Math.cos(Math.PI / 8)}px ${strokeWidth * Math.sin(Math.PI / 8)}px 0 ${images[random].hex},
+                ${strokeWidth * Math.cos(Math.PI / 4)}px ${strokeWidth * Math.sin(Math.PI / 4)}px 0 ${images[random].hex},
+                ${strokeWidth * Math.cos(Math.PI * 3 / 8)}px ${strokeWidth * Math.sin(Math.PI * 3 / 8)}px 0 ${images[random].hex}
                 `
               }}
             >
-              {type === 'CORRECT' && images[id].message.correct[language as keyof Object]}
-              {type === 'WRONG' && images[id].message.wrong[language as keyof Object]}
+              {type === 'CORRECT' && images[random].message.correct[language as keyof Object]}
+              {type === 'WRONG' && images[random].message.wrong[language as keyof Object]}
             </Typography>
-            {type === 'CORRECT' && <img src={images[id].image.correct} style={{ width: '60%' }} />}
-            {type === 'WRONG' && <img src={images[id].image.wrong} style={{ width: '60%' }} />}
+            {type === 'CORRECT' && <img src={images[random].image.correct} style={{ width: '60%' }} />}
+            {type === 'WRONG' && <img src={images[random].image.wrong} style={{ width: '60%' }} />}
           </>
         }
       </Box>

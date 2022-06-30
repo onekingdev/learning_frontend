@@ -34,6 +34,7 @@ import { LoadingSpinner } from 'views/atoms/Spinner';
 import { ScreenSize } from 'constants/screenSize';
 import { useHistory } from 'react-router-dom';
 import { QuestionPopup } from 'views/molecules/QuestionRollContents/QuestionPopup';
+import { any2String } from 'views/utils';
 
 interface RoutePresentationParams {
   mode: string;
@@ -65,7 +66,6 @@ export const AIQuestion: FC = () => {
   const [questionCounter, setQuestionCounter] = useState(0);
   const [isLessonFinished, setIsLessonFinished] = useState(false);
   const [answerResult, setAnswerResult] = useState<boolean[]>([]);
-  const [points, setPoints] = useState<number>(0);
   const [loading, setLoading] = useState(false)
   const [nextMaxExp, setNextMaxExp] = useState(0)
   const [openDg, setOpenDg] = useState(false);
@@ -73,8 +73,9 @@ export const AIQuestion: FC = () => {
   const [wrongRoll, setWrongRoll] = useState(0)
   const [correctRoll, setCorrectRoll] = useState(0)
   const [openBd, setOpenBd] = useState(false)
+  const [prevHit, setPrevHit] = useState(false)
+  const [popupType, setPopupType] = useState('')
 
-  // console.log('render...')
   const renderQuestion = (
     question: IAIQuestion,
     block: IAIBlock,
@@ -148,25 +149,6 @@ export const AIQuestion: FC = () => {
     return component
   }
 
-  const renderBackdropContent = () => {
-
-    if (correctRoll === 11) {
-      return (
-        <QuestionPopup type='BATTERY' />
-      )
-    } else {
-      if (correctRoll % 3 === 0 && correctRoll > 0) {
-        return (
-          <QuestionPopup type='CORRECT' />
-        )
-      } else if (wrongRoll % 3 === 0 && wrongRoll > 0) {
-        return (
-          <QuestionPopup type='WRONG' />
-        )
-      } else return null
-    }
-  }
-
   const updateNextLevel = async (currentLevelAmount: number) => {
     const res: any = await getNextLevel(currentLevelAmount, user.token, dispatch)
     if (res.msg) setNextMaxExp(earning.expMax)
@@ -181,20 +163,35 @@ export const AIQuestion: FC = () => {
 
     if (isCorrect) {
       playHit()
+      setPrevHit(true)
+      setWrongRoll(0)
       setHits(hits + 1)
       setCorrectRoll(correctRoll + 1)
-      if ((correctRoll + 1) % 3 === 0) setOpenBd(true)
-      setWrongRoll(0)
-      setPoints(points + QUESTION_POINT_UNIT);
+      if (
+        earning.energyCharge > 0 // Last answer of the last block was right
+        || prevHit // the previous answer was correct
+      ) {
+        if (earning.energyCharge === 9 || (correctRoll + 1) % 3 === 0) {
+          earning.energyCharge === 9 ?
+            setPopupType('BATTERY') :
+            setPopupType('CORRECT');
+          setOpenBd(true)
+        }
+        dispatch({ type: TYPE.EARNING_ENERGY_UP });
+        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : (earning.energyCharge + 1)))
+      }
     } else {
       playError()
       setErrors(errors + 1)
       setWrongRoll(wrongRoll + 1)
-      if ((wrongRoll + 1) % 3 === 0) setOpenBd(true)
+      if ((wrongRoll + 1) % 3 === 0) {
+        setPopupType('WRONG')
+        setOpenBd(true)
+      }
       setCorrectRoll(0)
+      setPrevHit(false)
+      dispatch({ type: TYPE.EARNING_ENERGY_RESET });
     }
-    // setPrevHit(isCorrect)
-    upgradeEnergy(isCorrect)
   };
 
   const increaseExp = async (isCorrect: boolean) => {
@@ -216,24 +213,6 @@ export const AIQuestion: FC = () => {
   // Open Congratulations dialog when user passes the max exp of current level.
   const congratulations = () => {
     setOpenDg(!openDg);
-  };
-
-  const upgradeEnergy = (isCorrect: boolean) => {
-
-    if (isCorrect) {
-      if (correctRoll > 0) {
-        if (earning.energyCharge === 9) {
-          // setFullBattery(true)
-          setOpenBd(true)
-        }
-        setBonusCoins(bonusCoins + (earning.energyCharge > 9 ? 10 : ((earning.energyCharge + 1))))
-        dispatch({ type: TYPE.EARNING_ENERGY_UP });
-      }
-    }
-    else {
-      dispatch({ type: TYPE.EARNING_ENERGY_RESET });
-    }
-    // console.log('bonus coins is ', bonusCoins)
   };
 
   const setQuestionsInAI = async (mounted: boolean) => {
@@ -282,36 +261,11 @@ export const AIQuestion: FC = () => {
     setIsLessonFinished(false)
     setAnswerResult([]);
     setQuestions([])
-    setPoints(0)
+    setHits(0)
     setBonusCoins(0)
     setQuestionsInAI(true)
   }
 
-  const any2String = (param: any): string => {
-    let str = ''
-    if (Array.isArray(param)) {
-      str += '['
-      for (let i = 0; i < param.length; i++) {
-        if (i === param.length - 1)
-          str += any2String(param[i])
-        else
-          str += (any2String(param[i]) + ',')
-      }
-      str += ']'
-    } else if (typeof param !== 'string' && typeof param !== 'number') {
-      str += '{'
-      const keys = Object.keys(param)
-      for (let i = 0; i < keys.length; i++) {
-        if (i === keys.length - 1)
-          str += (keys[i] + ':' + any2String(param[keys[i]]))
-        else
-          str += (keys[i] + ':' + any2String(param[keys[i]]) + ',')
-      }
-      str += '}'
-      // let stringifiedObj = Object.entries(param).map(x => x.join(':')).join('\n')
-    } else str = '"' + param.toString() + '"'
-    return str
-  }
 
   const handleNextQuestion = async () => {
     if (questions && aiBlock) {
@@ -350,19 +304,16 @@ export const AIQuestion: FC = () => {
       <StudentMenu>
         <Backdrop
           open={openBd}
-          // open={false}
           onClick={() => setOpenBd(false)}
           sx={{ zIndex: 1000 }}
         >
-          {
-            renderBackdropContent()
-          }
+          <QuestionPopup type={popupType} random={Math.floor(Math.random() * 4)} />
         </Backdrop>
         {
           isLessonFinished ? (
             <FinishLesson
               loading={loading}
-              tokens={points}
+              tokens={hits * QUESTION_POINT_UNIT + bonusCoins}
               energy={bonusCoins}
               onNextLesson={onNextLesson}
             />

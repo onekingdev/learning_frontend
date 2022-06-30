@@ -39,7 +39,7 @@ const dictionary: any = Object.freeze({
     from_your_account: 'จากบัญชีของคุณ.',
     monthly: 'รายเดือน',
     number_of_schools: 'จำนวนโรงเรียน',
-    plans: 'แพลน',
+    plans: 'แผน',
     priviacy_policy: 'นโยบายความเป็นส่วนตัว',
     select_one_of_the_following_plans: 'เลือกแผนใดแผนหนึ่งต่อไปนี้',
     submit: 'ส่ง',
