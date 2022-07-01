@@ -110,7 +110,7 @@ export const MultipleChoice: FC<ChoiceTextProps> = ({
               {shuffled && shuffled.map((option) => {
                 return (
                   isValidUrl(option.answerText) ? // check whether option is image
-                    <Grid item key={option.id} spacing={2}>
+                    <Grid item key={option.id} >
                       <MCOptionImage
                         answer={option}
                         onClick={handleAnswer}

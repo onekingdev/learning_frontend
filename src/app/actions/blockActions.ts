@@ -227,7 +227,6 @@ export const newFinishBlock = async (
   errors: number,
   bonusCoins: number,
   questions: string,
-  earning: any,
   token: string
 ) => {
   const res: any = await mutation(
@@ -269,5 +268,5 @@ export const doFetchStudentAnswerHistory = async (
     FETCH_STUDENT_ANSWER_HISTORY(studentId, period, answerStatus),
     token
   );
-  return res.data?.blockQuestionPresentationHistoryByStudentIdAndPeriodAndAnswerstate ?? res.errors[0];
+  return res.data?.blockPresentationsByStudentIdAndPeriodAndAnswerstate ?? res.errors[0];
 };
