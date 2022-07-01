@@ -1,4 +1,4 @@
-import { useState, FC } from 'react';
+import { useState, FC, useEffect } from 'react';
 import {
     Box,
     Grid,
@@ -9,14 +9,17 @@ import { ReviewBox } from 'views/molecules/ProgressReview/ReviewBox';
 export const ReviewBlocks: FC<{ blocks: any }> = ({ blocks }) => {
 
     const [page, setPage] = useState(1)
-    const _blocks = Array.from(blocks)
     const PER_PAGE = 9
-    const [data, setData] = useState(_blocks.slice(0, PER_PAGE))
-    const count = Math.ceil(_blocks.length / PER_PAGE)
+    const [data, setData] = useState(blocks.slice(0, PER_PAGE))
+    const count = Math.ceil(blocks.length / PER_PAGE)
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-        setData(_blocks.slice(value * PER_PAGE - PER_PAGE, PER_PAGE * value))
+        setData(blocks.slice(value * PER_PAGE - PER_PAGE, PER_PAGE * value))
     };
+    useEffect(() => {
+        setPage(1)
+        setData(blocks.slice(0, PER_PAGE))
+    }, [blocks])
     return (
         <Box
             display='flex'

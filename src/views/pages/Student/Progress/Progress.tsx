@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, FC, useRef } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import Box from '@mui/material/Box';
@@ -10,7 +10,7 @@ import { LoadingContext } from 'react-router-loading';
 import { Container, Wrapper } from './Style';
 import { dictionary } from './dictionary'
 import { useSelector } from 'react-redux';
-import {  TopicReportWithGrade, AvaliableGrades } from 'api/fragments/topicFragments';
+import { TopicReportWithGrade, AvaliableGrades } from 'api/fragments/topicFragments';
 import query from 'api/queries/get';
 
 import { smoothScroll } from 'views/utils';
@@ -74,14 +74,17 @@ export const KidsProgress = () => {
             })();
         }
     }, [student]);
-    const [firstLoad, setFirstLoad] = useState<boolean>(true);
+    // const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const loadingContext = useContext(LoadingContext);
     useEffect(() => {
         if (activeSubjectId > 0) {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
-                const res: any = await query('', AvaliableGrades(activeSubjectId)).catch(e => ({ success: false }));
+                const res: any = await query('', AvaliableGrades(activeSubjectId)).catch(e => {
+                    console.log(e.message)
+                    return { success: false }
+                });
                 if (res.success === false) {
                     return
                 }
@@ -129,7 +132,7 @@ export const KidsProgress = () => {
     const handleSubjectChange = (event: any) => {
         setActiveSubjectId(event.target.value);
     };
-    const subSubjects1 = _.flattenDeep(getAllTopic(data, 1)).filter((__subSubject: any) => __subSubject.standardTopic).map((_subSubject: any, id) => {
+    const subSubjects1 = _.flattenDeep(getAllTopic(data, 1)).filter((__subSubject: any) => __subSubject.standardTopic).map((_subSubject: any) => {
         let bgColor = masteryColors.NP;
         if (_subSubject.mastery) {
             if (_subSubject.mastery === 'NP') {
@@ -153,183 +156,182 @@ export const KidsProgress = () => {
     console.log(subSubjects1)
 
     const mapBgRef = useRef<HTMLDivElement>(null);
-    const [mapWidth, setMapWidth] = useState<number>(1366);
-    useEffect(() => {
-        const timer = setInterval(() => {
-            if (mapBgRef.current?.clientWidth) {
-                setMapWidth(val => {
-                    if (val === mapBgRef.current?.clientWidth) {
-                        clearInterval(timer);
-                        return val
-                    } else {
-                        return mapBgRef.current?.clientWidth || 0
-                    }
-                });
-            }
-        }, 1000);
-    }, []);
+    // const [mapWidth, setMapWidth] = useState<number>(1366);
+    // useEffect(() => {
+    //     const timer = setInterval(() => {
+    //         if (mapBgRef.current?.clientWidth) {
+    //             setMapWidth(val => {
+    //                 if (val === mapBgRef.current?.clientWidth) {
+    //                     clearInterval(timer);
+    //                     return val
+    //                 } else {
+    //                     return mapBgRef.current?.clientWidth || 0
+    //                 }
+    //             });
+    //         }
+    //     }, 1000);
+    // }, []);
 
     const history = useHistory();
-    const [type, setType] = useState<string>();
-    const handleTypeChange = (e: any) => setType(e.target.value);
+
     return (
-    <Wrapper>
-        <StudentMenu>
-            <PageTitle title={dictionary[language]?.title} />
-            <Container>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap',
-                    width: '100%',
-                    paddingTop: '1rem'
-                }}>
-                    <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth>
-                            {/* <InputLabel id='demo-simple-select-label' style={{
+        <Wrapper>
+            <StudentMenu>
+                <PageTitle title={dictionary[language]?.title} />
+                <Container>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        flexWrap: 'wrap',
+                        width: '100%',
+                        paddingTop: '1rem'
+                    }}>
+                        <Box sx={{ minWidth: 120 }}>
+                            <FormControl fullWidth>
+                                {/* <InputLabel id='demo-simple-select-label' style={{
                                 background: '#1771B9',
                                 color: 'white'
                             }}>Grade</InputLabel> */}
-                            <Select
-                                id='demo-simple-select'
-                                value={activeGradeId}
-                                onChange={handleGradeChange}
-                                SelectDisplayProps={{
-                                    style: {
-                                        background: '#1771B9',
-                                        color: 'white'
-                                    }
-                                }}
-                            >
-                                {grades.map((grade: any, id: number) => (
-                                    <MenuItem key={id} value={grade.id}>{grade.name}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Box>
-                    <div style={{
-                        flexGrow: 1,
-                        flexShrink: 1,
-                    }}></div>
-                    <Box sx={{ minWidth: 120 }} style={{
-                        marginRight: '1rem'
-                    }}>
-                        <Button
-                            variant='contained'
-                            sx={{height: '100%'}}
-                            onClick={() => {
-                                history.push('/review')
-                            }}
-                        >
-                            {dictionary[language]?.reviewQuestionsAnswered}
-                        </Button>
-                    </Box>
-                    <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth>
-                            <Select
-                                id='demo-simple-select'
-                                value={activeSubjectId}
-                                onChange={handleSubjectChange}
-                                SelectDisplayProps={{
-                                    style: {
-                                        background: '#CE2489',
-                                        color: 'white'
-                                    }
-                                }}
-                            >
-                                {areasOfKnowledge.map((subject, id) => (
-                                    <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Box>
-                </div>
-                <div ref={mapBgRef} style={{
-                    position: 'relative',
-                    width: '100%',
-                    paddingLeft: '0px',
-                    paddingRight: '0px',
-                    overflow: 'hidden',
-                    backgroundImage: `url("map.svg")`,
-                    backgroundColor: `rgb(235, 119, 56)`,
-                    backgroundRepeat: 'repeat',
-                    minHeight: (
-                        (
-                            Math.ceil(subSubjects1.length / (lineCount + verticalCount))
-                        ) * unitHeight * 1.5) + 'rem'
-                }}>
-                    {subSubjects1.length > 0 ? subSubjects1.map((singleInfo, id) => {
-                        if (singleInfo && singleInfo.text) {
-                            const _id = id + 1;
-                            const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
-                                Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
-                            ) : 0
-                            return (
-                                <div key={id} style={{
-                                    position: 'absolute',
-                                    top: (_id % (verticalCount + lineCount)) > lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
-                                        (Math.floor(_id / (lineCount + verticalCount))) * ((unitHeight * 1.5) * (verticalCount + 1)) + (id % (lineCount + verticalCount) - lineCount + 1) * (unitHeight * 1.5) + 'rem' :
-                                        (
-                                            _id % (lineCount + verticalCount) === 0 ?
-                                                (Math.floor(_id / (lineCount + verticalCount)) - 1) * ((unitHeight * 1.5) * (verticalCount + 1)) + verticalCount * (unitHeight * 1.5) + 'rem' :
-                                                Math.floor((_id) / (lineCount + verticalCount)) * ((unitHeight * 1.5) * (verticalCount + 1)) + 'rem'
-                                        ),
-                                    left: (_id % (verticalCount + lineCount)) >= lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
-                                        ((lineCount - 1) * (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
-                                        (
-                                            _id % (lineCount + verticalCount) === 0 ?
-                                                ((lineCount - 1) * ((Math.floor(_id / (lineCount + verticalCount)) - 1) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
-                                                (
-                                                    (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0) ?
-                                                        ((_id % (lineCount + verticalCount) - 1) * (100 / lineCount) + '%') :
-                                                        ((lineCount - _id % (lineCount + verticalCount)) * (100 / lineCount) + '%')
-                                                )
-                                        ),
-                                    width: ((_id % (verticalCount + lineCount)) === 0 || (_id % (verticalCount + lineCount)) >= lineCount) ? 100 / (lineCount + Math.floor(lineCount / 8)) + '%' : 100 / lineCount + '%',
-                                    height: ((_id % (verticalCount + lineCount)) === 0 || (_id % (verticalCount + lineCount)) >= lineCount) ? unitHeight * 1.5 + 'rem' : unitHeight + 'rem',
-                                    padding: '10px 16px',
-                                    boxSizing: 'border-box',
-                                    writingMode: rotatingStatus === 0 ? 'initial' : 'vertical-rl',
-                                    textOrientation: 'mixed',
-                                    transform: rotatingStatus === -1 ? "rotate(180deg)" : "rotate(0deg)",
-                                }}>
-                                    <div style={{
-                                        width: `100%`,
-                                        height: '100%',
-                                        background: singleInfo.bgColor,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        textAlign: 'center',
-                                        fontSize: '0.7rem',
-                                        transform: singleInfo.active ? 'scale(1.2)' : 'scale(1)',
-                                        outline: singleInfo.active ? '2px solid black' : 'none',
-                                        cursor: 'pointer',
-                                    }} onClick={() => {
-                                        if (singleInfo.aokId !== '') {
-                                            smoothScroll('#aok-id-' + singleInfo.aokId)
-                                            setActiveSubjectIdTable(singleInfo.aokId);
+                                <Select
+                                    id='demo-simple-select'
+                                    value={activeGradeId}
+                                    onChange={handleGradeChange}
+                                    SelectDisplayProps={{
+                                        style: {
+                                            background: '#1771B9',
+                                            color: 'white'
                                         }
+                                    }}
+                                >
+                                    {grades.map((grade: any, id: number) => (
+                                        <MenuItem key={id} value={grade.id}>{grade.name}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                        <div style={{
+                            flexGrow: 1,
+                            flexShrink: 1,
+                        }}></div>
+                        <Box sx={{ minWidth: 120 }} style={{
+                            marginRight: '1rem'
+                        }}>
+                            <Button
+                                variant='contained'
+                                sx={{ height: '100%' }}
+                                onClick={() => {
+                                    history.push('/review')
+                                }}
+                            >
+                                {dictionary[language]?.reviewQuestionsAnswered}
+                            </Button>
+                        </Box>
+                        <Box sx={{ minWidth: 120 }}>
+                            <FormControl fullWidth>
+                                <Select
+                                    id='demo-simple-select'
+                                    value={activeSubjectId}
+                                    onChange={handleSubjectChange}
+                                    SelectDisplayProps={{
+                                        style: {
+                                            background: '#CE2489',
+                                            color: 'white'
+                                        }
+                                    }}
+                                >
+                                    {areasOfKnowledge.map((subject, id) => (
+                                        <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </div>
+                    <div ref={mapBgRef} style={{
+                        position: 'relative',
+                        width: '100%',
+                        paddingLeft: '0px',
+                        paddingRight: '0px',
+                        overflow: 'hidden',
+                        backgroundImage: `url("map.svg")`,
+                        backgroundColor: `rgb(235, 119, 56)`,
+                        backgroundRepeat: 'repeat',
+                        minHeight: (
+                            (
+                                Math.ceil(subSubjects1.length / (lineCount + verticalCount))
+                            ) * unitHeight * 1.5) + 'rem'
+                    }}>
+                        {subSubjects1.length > 0 ? subSubjects1.map((singleInfo, id) => {
+                            if (singleInfo && singleInfo.text) {
+                                const _id = id + 1;
+                                const rotatingStatus = (_id % (lineCount + verticalCount) >= lineCount || _id % (lineCount + verticalCount) === 0) ? (
+                                    Math.floor((_id - 1) / (lineCount + verticalCount)) % 2 === 0 ? 1 : -1
+                                ) : 0
+                                return (
+                                    <div key={id} style={{
+                                        position: 'absolute',
+                                        top: (_id % (verticalCount + lineCount)) > lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
+                                            (Math.floor(_id / (lineCount + verticalCount))) * ((unitHeight * 1.5) * (verticalCount + 1)) + (id % (lineCount + verticalCount) - lineCount + 1) * (unitHeight * 1.5) + 'rem' :
+                                            (
+                                                _id % (lineCount + verticalCount) === 0 ?
+                                                    (Math.floor(_id / (lineCount + verticalCount)) - 1) * ((unitHeight * 1.5) * (verticalCount + 1)) + verticalCount * (unitHeight * 1.5) + 'rem' :
+                                                    Math.floor((_id) / (lineCount + verticalCount)) * ((unitHeight * 1.5) * (verticalCount + 1)) + 'rem'
+                                            ),
+                                        left: (_id % (verticalCount + lineCount)) >= lineCount ? // (_id % (lineCount + verticalCount) === 11 || _id % (lineCount + verticalCount) === 12) ?
+                                            ((lineCount - 1) * (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
+                                            (
+                                                _id % (lineCount + verticalCount) === 0 ?
+                                                    ((lineCount - 1) * ((Math.floor(_id / (lineCount + verticalCount)) - 1) % 2 === 0 ? (100 / lineCount) : 0) + '%') :
+                                                    (
+                                                        (Math.floor(_id / (lineCount + verticalCount)) % 2 === 0) ?
+                                                            ((_id % (lineCount + verticalCount) - 1) * (100 / lineCount) + '%') :
+                                                            ((lineCount - _id % (lineCount + verticalCount)) * (100 / lineCount) + '%')
+                                                    )
+                                            ),
+                                        width: ((_id % (verticalCount + lineCount)) === 0 || (_id % (verticalCount + lineCount)) >= lineCount) ? 100 / (lineCount + Math.floor(lineCount / 8)) + '%' : 100 / lineCount + '%',
+                                        height: ((_id % (verticalCount + lineCount)) === 0 || (_id % (verticalCount + lineCount)) >= lineCount) ? unitHeight * 1.5 + 'rem' : unitHeight + 'rem',
+                                        padding: '10px 16px',
+                                        boxSizing: 'border-box',
+                                        writingMode: rotatingStatus === 0 ? 'initial' : 'vertical-rl',
+                                        textOrientation: 'mixed',
+                                        transform: rotatingStatus === -1 ? "rotate(180deg)" : "rotate(0deg)",
                                     }}>
-                                        {singleInfo.text}
+                                        <div style={{
+                                            width: `100%`,
+                                            height: '100%',
+                                            background: singleInfo.bgColor,
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            textAlign: 'center',
+                                            fontSize: '0.7rem',
+                                            transform: singleInfo.active ? 'scale(1.2)' : 'scale(1)',
+                                            outline: singleInfo.active ? '2px solid black' : 'none',
+                                            cursor: 'pointer',
+                                        }} onClick={() => {
+                                            if (singleInfo.aokId !== '') {
+                                                smoothScroll('#aok-id-' + singleInfo.aokId)
+                                                setActiveSubjectIdTable(singleInfo.aokId);
+                                            }
+                                        }}>
+                                            {singleInfo.text}
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        } else {
-                            return <></>
-                        }
-                    }) : <p style={{
-                        textAlign: "center",
-                        fontSize: "3rem"
-                    }}>There is no Subjects</p>}
-                </div>
-            </Container>
-            <Container>
-                <MarkTableSubject
-                    data={data}
-                    activeSubjectId={activeSubjectIdTable}
-                />
-            </Container>
-        </StudentMenu>
-    </Wrapper>)
+                                )
+                            } else {
+                                return <></>
+                            }
+                        }) : <p style={{
+                            textAlign: "center",
+                            fontSize: "3rem"
+                        }}>There is no Subjects</p>}
+                    </div>
+                </Container>
+                <Container>
+                    <MarkTableSubject
+                        data={data}
+                        activeSubjectId={activeSubjectIdTable}
+                    />
+                </Container>
+            </StudentMenu>
+        </Wrapper>)
 }
