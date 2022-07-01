@@ -1,24 +1,38 @@
 import { useState, useEffect, useContext, FC, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
+import { Title } from 'views/atoms/Text';
 import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import TitleProgressBackground from 'views/assets/title-games-background.png';
+import ProgressMap from 'views/assets/student/process/map.svg';
+import ProgressMapMobile from 'views/assets/student/process/progress-map-mobile.svg';
 import MarkTableSubject from 'views/molecules/Table/MarkTableSubject';
 import { LoadingContext } from 'react-router-loading';
-import { Container, Wrapper } from './Style';
+import { ScreenSize } from 'constants/screenSize';
+import { MobileCom, PcCom } from '../TreasureTrack/TreasureTrack';
+import { Container } from './Style';
 import { dictionary } from './dictionary'
 import { useSelector } from 'react-redux';
-import {  TopicReportWithGrade, AvaliableGrades } from 'api/fragments/topicFragments';
+import { TopicReportByAokAndGrade, TopicReportWithGrade, AreasOfKnowledge, Grades, AvaliableGrades } from 'api/fragments/topicFragments';
 import query from 'api/queries/get';
-
+import styled from 'styled-components';
+import background from 'views/assets/colored-shapes-bg.svg';
+import { subSubjects, subSubjectsMobile, paths, pathsMobile } from './positionInfo';
 import { smoothScroll } from 'views/utils';
 import _ from 'lodash';
 import { PageTitle } from 'views/molecules/PageTitle';
 import { Button } from '@mui/material';
 
-
+const Wrapper = styled.div`
+    background-image  : url(${background});
+    background-repeat : no-repeat;
+    background-size   : cover;
+    height            : 100vh;
+`;
 
 const masteryColors = {
     'NP': '#919699',
@@ -151,6 +165,26 @@ export const KidsProgress = () => {
         })
     })
     console.log(subSubjects1)
+    // const subSubjectsMobile1 = data.map((subSubject, id) => {
+    //     let bgColor = masteryColors.NP;
+    //     if (data && data[id] && data[id].mastery) {
+    //         if (data[id].mastery === 'NP') {
+    //             bgColor = masteryColors.NP;
+    //         } else if (data[id].mastery === 'N') {
+    //             bgColor = masteryColors.N;
+    //         } else if (data[id].mastery === 'C') {
+    //             bgColor = masteryColors.C;
+    //         } else if (data[id].mastery === 'M') {
+    //             bgColor = masteryColors.M;
+    //         }
+    //     }
+    //     return ({
+    //         ...subSubject,
+    //         text: data && data[id] && data[id].name ? data[id].name : '',
+    //         bgColor: bgColor,
+    //         active: false,
+    //     })
+    // })
 
     const mapBgRef = useRef<HTMLDivElement>(null);
     const [mapWidth, setMapWidth] = useState<number>(1366);
@@ -172,8 +206,7 @@ export const KidsProgress = () => {
     const history = useHistory();
     const [type, setType] = useState<string>();
     const handleTypeChange = (e: any) => setType(e.target.value);
-    return (
-    <Wrapper>
+    return (<Wrapper>
         <StudentMenu>
             <PageTitle title={dictionary[language]?.title} />
             <Container>
@@ -223,9 +256,47 @@ export const KidsProgress = () => {
                         >
                             {dictionary[language]?.reviewQuestionsAnswered}
                         </Button>
+                        {/* <FormControl fullWidth style={{
+                            width: '17rem',
+                        }}>
+                            <PcCom style={{
+                                paddingLeft: '1rem'
+                            }}>
+                                <InputLabel id='demo-simple-select-label' style={{
+                                    background: '#26B824',
+                                    color: 'white',
+                                }}>{dictionary[language]?.reviewQuestionsAnswered}</InputLabel>
+                            </PcCom>
+                            <MobileCom>
+                                <InputLabel id='demo-simple-select-label' style={{
+                                    background: '#26B824',
+                                    color: 'white',
+                                }}>{dictionary[language]?.reviewQuestions}</InputLabel>
+                            </MobileCom>
+                            <Select
+                                id='demo-simple-select'
+                                value={type}
+                                disabled
+                                onChange={handleTypeChange}
+                                SelectDisplayProps={{
+                                    style: {
+                                        background: '#26B824',
+                                        color: 'white'
+                                    }
+                                }}
+                            >
+                                {["Today's Answers", 'Recent Answers', 'Recent Incorrect Answers'].map((type, id) => (
+                                    <MenuItem key={id} value={type}>{type}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl> */}
                     </Box>
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
+                            {/* <InputLabel id='demo-simple-select-label' style={{
+                                background: '#CE2489',
+                                color: 'white'
+                            }}>Subject</InputLabel> */}
                             <Select
                                 id='demo-simple-select'
                                 value={activeSubjectId}
@@ -256,8 +327,30 @@ export const KidsProgress = () => {
                     minHeight: (
                         (
                             Math.ceil(subSubjects1.length / (lineCount + verticalCount))
+                            // (
+                            //     data.length % (lineCount + verticalCount) === 0 || data.length % (lineCount + verticalCount) > lineCount ?
+                            //     0 :
+                            //     verticalCount
+                            // )
                         ) * unitHeight * 1.5) + 'rem'
                 }}>
+                    {/* <div style={{
+                        position: 'relative',
+                        width: ScreenSize.widescreen
+                    }}> */}
+                    {/* <PcCom
+                        style={{
+                        }}
+                    >
+                    </PcCom>
+                    <MobileCom
+                        style={{
+                            backgroundImage: `url("progress-map-mobile.svg")`,
+                            backgroundColor: `rgb(235, 119, 56)`,
+                            backgroundRepeat: 'repeat'
+                        }}
+                    >
+                    </MobileCom> */}
                     {subSubjects1.length > 0 ? subSubjects1.map((singleInfo, id) => {
                         if (singleInfo && singleInfo.text) {
                             const _id = id + 1;
@@ -322,6 +415,68 @@ export const KidsProgress = () => {
                         textAlign: "center",
                         fontSize: "3rem"
                     }}>There is no Subjects</p>}
+                    {/* { paths.map((path, id) => <PcCom key={id} style={{
+                            position: 'absolute',
+                            left: `${path.left}%`,
+                            top: `${path.top}%`,
+                        }}>
+                            {path.imgSrc({
+                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors['NP'],
+                                active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                                mapWidth: mapWidth
+                            })}
+                        </PcCom>) }
+                        { pathsMobile.map((path, id) => <MobileCom key={id} style={{
+                            position: 'absolute',
+                            left: `${path.left}%`,
+                            top: `${path.top}%`,
+                        }}>
+                            {path.imgSrc({
+                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors['NP'],
+                                active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                            })}
+                        </MobileCom>) }
+                        { subSubjects1.map((subSubject, id) => <PcCom onClick={() => {
+                            // history.push('/question/PATH/' + aokId)
+                            if (subSubject.aokId !== '') {
+                                smoothScroll('#aok-id-' + subSubject.aokId)
+                                setActiveSubjectIdTable(subSubject.aokId);
+                            }
+                            // history.push('/question/AI/' + data[id].id)
+                            // console.log(data[id].id)
+                            // alert("Developing now, will be released soon 🎓")
+                        }} key={id} style={{
+                            position: 'absolute',
+                            transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
+                            // transform: `translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
+                            left: `${subSubject.left}%`,
+                            top: `${subSubject.top}%`,
+                            // fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
+                            fontWeight: subSubject.active ? '600' : '400',
+                            width: `${subSubject.width * mapWidth / 1366}px`,
+                            // overflow: "hidden",
+                            height: '50px',
+                            textAlign: 'center',
+                            display: '-webkit-box',
+                            WebkitBoxOrient: 'vertical',
+                            // "-webkit-box-orient": "vertical",
+                            WebkitLineClamp: 3,
+                            // "-webkit-line-clamp": 3,
+                            overflow: 'hidden',
+                        }}>{subSubject.text}</PcCom>)}
+                        { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
+                            position: 'absolute',
+                            transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
+                            left: `${subSubject.left}%`,
+                            top: `${subSubject.top}%`,
+                            fontSize: '11px',
+                            fontWeight: subSubject.active ? '600' : '400',
+                            width: `${subSubject.width * mapWidth / 390}px`,
+                            zIndex: 20,
+                            height: '50px',
+                            textAlign: 'center'
+                        }}>{subSubject.text}</MobileCom>)} */}
+                    {/* </div> */}
                 </div>
             </Container>
             <Container>

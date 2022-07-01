@@ -269,5 +269,5 @@ export const doFetchStudentAnswerHistory = async (
     FETCH_STUDENT_ANSWER_HISTORY(studentId, period, answerStatus),
     token
   );
-  return res.data?.blockPresentationsByStudentIdAndPeriodAndAnswerstate ?? res.errors[0];
+  return res.data?.blockQuestionPresentationHistoryByStudentIdAndPeriodAndAnswerstate ?? res.errors[0];
 };

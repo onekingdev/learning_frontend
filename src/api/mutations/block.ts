@@ -197,10 +197,10 @@ export const FETCH_STUDENT_ANSWER_HISTORY = (
   answerStatus: string
 ) => `
 query {
-  blockPresentationsByStudentIdAndPeriodAndAnswerstate(id: ${studentId}, period: ${period}, answerState: "${answerStatus}") {
+  blockQuestionPresentationHistoryByStudentIdAndPeriodAndAnswerstate(id: ${studentId}, period: ${period}, answerState: "${answerStatus}") {
     id
     updateTimestamp
-    blockquestionpresentationSet(answerState: "${answerStatus}") {
+    blockQuestionPresentation{
       id
       topic {
         name
