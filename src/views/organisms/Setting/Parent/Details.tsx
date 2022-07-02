@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
@@ -13,8 +13,7 @@ export const MembershipDetail: FC = () => {
 
   const { isOpen, open } = useDialog()
   const { isAddOpen, openAdd } = useAddDialog()
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  const language: string = useSelector((state: any) => state.user.language) || 'en-us'
 
   return (
     <Box>
