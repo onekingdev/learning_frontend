@@ -67,7 +67,7 @@ export const doFetchAvailableBroughtPlans = async (guardianId: number, token: st
     return res.msg ? null : res.data.guardianAvailableBroughtPlan;
 }
 
-export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: number, token: string) => {
+export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: string, token: string) => {
     try {
         const res: any = await sendRawQuery(
             UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN(guardianId, orderDetailId),
@@ -76,7 +76,6 @@ export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: num
         return res.msg ? { status: false, message: res.msg } : res.data.updateGuardianPlan;
     }
     catch (e: any) {
-        console.log(e)
         return { status: false, message: e.message }
     }
 }
@@ -94,19 +93,6 @@ export const doConfirmUpdate = async (orderId: number, token: string) => {
     }
 }
 
-// export const doFetchPlanTypes = async (token: string) => {
-//     try {
-//         const res: any = await sendRawQuery(
-//             FETCH_PLANS,
-//             token
-//         );
-//         return res.msg ? { status: false } : res.data.plans;
-//     }
-//     catch {
-//         return { status: false }
-//     }
-// }
-
 
 export const doFetchPlanTypes = async (token: string) => {
     const res: any = await fetchQuery(
@@ -116,7 +102,7 @@ export const doFetchPlanTypes = async (token: string) => {
     return res.data.plans ?? res.errors[0]
 }
 
-export const doCancelBroughtPlan = async (orderDetailId: number, reason: string, token: string) => {
+export const doCancelBroughtPlan = async (orderDetailId: string, reason: string, token: string) => {
     try {
         const res: any = await sendRawQuery(
             CANCEL_GUARDIAN_BOUGHT_PLAN(orderDetailId, reason),
@@ -157,18 +143,16 @@ export const confirmPaymentOrder = async (
     }
 }
 
-export const doCancelMembership = async (guardianId: number, reason: string, token: string) => {
-    try {
-        const res: any = await sendRawQuery(
-            CANCEL_MEMBERSHIP(guardianId, reason),
+export const doCancelMembership = async (
+    guardianId: number, reason: string, token: string
+  ) => {
+    const res: any = await fetchQuery(
+        CANCEL_MEMBERSHIP(guardianId, reason),
             token
-        );
-        return res.msg ? { status: false } : res.data.cancelMemberShip;
-    }
-    catch {
-        return { status: false }
-    }
-}
+    );
+    return res.data?.cancelMemberShip ?? res.errors[0] // when django returns error message on fail
+  }
+
 
 export const doFetchGuardianStudents = async (guardianId: number, token: string) => {
     const res: any = await fetchQuery(
@@ -183,7 +167,7 @@ export const doFetchGuardianPlans = async (guardianId: number, token: string) =>
         FETCH_GUARDIAN_PLANS(guardianId),
         token
     );
-    return res.data?.guardianStudentPlanByGuardianId ?? res.errors[0]
+    return res.data?.guardianById?.orderSet ?? res.errors[0]
 }
 
 export const doFetchStudentById = async (studentId: number, token: string) => {

@@ -68,15 +68,6 @@ export const GUARDIAN_STUDENT_PLAN = `
     price
 
 `
-export const GUARDIAN_STUDENT_PLAN_RAW = `
-    id
-    cancelReason
-    isCancel
-    isPaid
-    expiredAt
-    period
-    price
-`
 
 export const ORDER_DETAIL = `
     id

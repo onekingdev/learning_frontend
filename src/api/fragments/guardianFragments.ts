@@ -1,5 +1,5 @@
 import { STUDENT_RAW } from './studentFragments'
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN_RAW, PLAN } from '../fragments/paymentFragments'
+import { PAYMENT_METHOD, PLAN, PLAN_RAW } from '../fragments/paymentFragments'
 import { COUPON_COODE, } from '../fragments/paymentFragments';
 import { GRADES } from '../fragments/peopleFragments'
 import {
@@ -129,4 +129,21 @@ export const GUARDIAN_OLD = `
             ${PLAN}
         }
       }
+`
+export const GUARDIAN_ORDERS = `
+orderSet {
+  id
+  orderdetailSet{
+    id
+    quantity
+    period
+    total
+    expiredAt
+    isCancel
+    isPaid
+    plan {
+      ${PLAN_RAW}
+    }
+  }
+}
 `

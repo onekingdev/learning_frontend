@@ -1,4 +1,4 @@
-import {GUARDIAN} from '../fragments/guardianFragments';
+import {GUARDIAN, GUARDIAN_ORDERS} from '../fragments/guardianFragments';
 import {USER, USER_PROFILE} from '../fragments/userFragments';
 import {
   GUARDIAN_STUDENT_PLAN,
@@ -139,12 +139,17 @@ export const CANCEL_GUARDIAN_STUDENT_PLAN = (
 `;
 
 export const CANCEL_MEMBERSHIP = (guardianId: number, reason: string) => `
-    cancelMembership(
-        guardianId: ${guardianId},
-        reason: "${reason}"
-    ) {
-        status
-    }
+mutation{
+  cancelMembership(
+      guardianId: ${guardianId},
+      reason: "${reason}"
+  ) {
+      status
+      guardian {
+        ${GUARDIAN_ORDERS}
+      }
+  }
+}
 `;
 
 export const UPDATE_EMAIL_PASSWORD = (
@@ -189,12 +194,15 @@ query getActiveGuardianPlan {
 `;
 
 export const CANCEL_GUARDIAN_BOUGHT_PLAN = (
-  orderDetailId: number,
+  orderDetailId: string,
   reason: string
 ) => `
 mutation cancelGuardianPlan {
-    cancelGuardianPlan(orderDetailId: "${orderDetailId}", reason: "${reason}") {
+    cancelGuardianPlan(orderDetailId: ${orderDetailId}, reason: "${reason}") {
       status
+      guardian {
+        ${GUARDIAN_ORDERS}
+      }
     }
   }
 `;
@@ -234,12 +242,12 @@ mutation AddGuardianPlan {
 
 export const UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN = (
   guardianId: number,
-  orderDetailId: number
+  orderDetailId: string
 ) => `
 mutation UpdateGuardianPlan {
     updateGuardianPlan(
-      guardianId: "${guardianId}",
-      orderDetailId: "${orderDetailId}",
+      guardianId: ${guardianId},
+      orderDetailId: ${orderDetailId},
       period: "YEARLY",
       returnUrl: "https://www.example.com/") {
       status
@@ -254,10 +262,10 @@ mutation UpdateGuardianPlan {
 export const CONFIRM_UPDATE_GUARDIAN_PLAN = (orderId: number) => `
 mutation {
     confirmUpdateGuardianPlan(orderId: ${orderId}) {
-      order {
-        id
-      }
       status
+      guardian {
+        ${GUARDIAN_ORDERS}
+      }
     }
   }
 `;
@@ -308,18 +316,15 @@ guardianById(id: "${guardianId}"){
 }
 }
 `;
+
 export const FETCH_GUARDIAN_PLANS = (guardianId: number) => `
-query{
-  guardianStudentPlanByGuardianId(guardianId: "${guardianId}") {
-    id,
-    period
-    expiredAt
-    plan {
-      ${PLAN_RAW}
-    }
+{
+  guardianById(id: "${guardianId}") {
+    ${GUARDIAN_ORDERS}
   }
 }
 `;
+
 export const FETCH_STUDENT_BY_ID = (studentId: number) => `
 query {
   studentById (id: "${studentId}"){
@@ -377,3 +382,5 @@ query {
   }
 }
 `;
+
+

@@ -11,141 +11,106 @@ import { doFetchGuardianPlans } from 'app/actions/guardianActions'
 import { dictionary } from './dictionary'
 import { useQuery } from 'react-query'
 import { getMessage } from 'views/utils';
-interface IPlanList {
-  refresh: boolean
-}
 
-export const PlanList: FC<IPlanList> = () => {
-
-  // for change to yearly dialog
+export const PlanList: FC = () => {
 
   const [isUpdateOpen, update] = useState(false)
   const openUpdate = () => update(!isUpdateOpen);
-  const user = useSelector((state: any) => state.user);
-  const guardian = useSelector((state: any) => state.guardian);
-  const { data, error, isLoading } = useQuery(['fetch-bought-plans-list', guardian.id, user.token], () => doFetchGuardianPlans(guardian.id, user.token))
+  const { token, language } = useSelector((state: any) => state.user);
+  const lang = language || 'en-us'
+  const guardianId = useSelector((state: any) => state.guardian.id);
+  const { data, error, isLoading } = useQuery(['fetch-orders-list', guardianId, token], () => doFetchGuardianPlans(guardianId, token))
   const { isOpen, open } = useDialog()
   const [tag, seTag] = useState(0)
-  // const [plans, setPlans] = useState<Array<any>>([])
-  const [changed, setChanged] = useState(false)
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
-
-  const toggleChanged = () => {
-    setChanged(!changed)
-  }
-
-  const onBtnClick = (id: number) => {
-    seTag(id)
-    open()
-  }
-
-  const onUpgradeBtnClick = (id: number) => {
-    seTag(id)
-    openUpdate()
-  }
 
   const onCancelUpgrade = () => openUpdate()
 
-  // const fetchAvailableBrougthPlans = async (mounted: boolean) => {
-  //   setPlans([])
-  //   const res = await doFetchAvailableBroughtPlans(guardian.id, user.token)
-  //   if (res !== null) {
-  //     if (mounted) {
-  //       setPlans(
-  //         res
-  //       )
-  //     } else return
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   let mounted = true
-  //   fetchAvailableBrougthPlans(mounted)
-  //   return () => {
-  //     mounted = false
-  //   }
-  // }, [refresh, changed]);
   if (isLoading) return <Typography variant='caption'> Loading...</Typography>
   if (error) return <Typography variant='caption' color={'red'}> {getMessage(error)}</Typography>
   if (data.message) return <Typography variant='caption'> {data.message}</Typography>
   return (
     <div>
       {
-        !data.message &&
         <TableContainer component={Paper} >
           <Table aria-label='simple table' size='small' >
             <StyledTableHead >
               <TableRow>
                 <TableCell align='center'>
-                  <LSLabel fontSize={17} textAlign='center'>{dictionary[language]?.plan}</LSLabel>
-                  <LSText textAlign='center' fontSize={13}>{dictionary[language]?.getThreeMonthsFREEForAnnualPlan}</LSText>
+                  <LSLabel fontSize={17} textAlign='center'>{dictionary[lang]?.plan}</LSLabel>
+                  <LSText textAlign='center' fontSize={13}>{dictionary[lang]?.getThreeMonthsFREEForAnnualPlan}</LSText>
                 </TableCell>
               </TableRow>
             </StyledTableHead>
             <TableBody>
-              {data.map((row: any, index: number) => (
-                <TableRow
-                  hover
-                  key={row.id}
-                >
-                  <StyledTableCell component='th' scope='row' bgcolor={colors[index % 4]}>
-                    <Grid container>
-                      <Grid item md={3} xs={12}>
-                        <LSLabel >{row.plan.name}</LSLabel>
-                      </Grid>
-                      <StyledGrid container item md={9} xs={12} >
-                        <Grid item md={4} xs={4}>
-                          <LSLabel>{row.period}</LSLabel>
+              {data.filter((element: any) => element.orderdetailSet[0]?.isPaid) // Only display paid orders
+                .map((row: any, index: number) => (
+                  <TableRow
+                    hover
+                    key={row.id}
+                  >
+                    <StyledTableCell component='th' scope='row' bgcolor={colors[index % 4]}>
+                      <Grid container>
+                        <Grid item md={3} xs={12}>
+                          <LSLabel >{row.orderdetailSet[0]?.plan?.name}({row.orderdetailSet[0]?.quantity})</LSLabel>
                         </Grid>
-                        <Grid item md={4} xs={4}>
-                          <LSLabel>{row.expiredAt?.slice(0, 10)}</LSLabel>
-                        </Grid>
-                        <Grid item md={4} xs={4}>
-                          <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth : row.plan.priceYear} {row.plan.currency}</LSLabel>
-                        </Grid>
-                      </StyledGrid>
-                    </Grid>
-                    <Grid container>
-                      <Grid item md={6} xs={12}>
-                        <Button
-                          disabled={row.period === 'MONTHLY' ? false : true}
-                          onClick={() => onUpgradeBtnClick(index)}
-                        >{dictionary[language]?.ChangeToYearly}
-                        </Button>
+                        <StyledGrid container item md={9} xs={12} >
+                          <Grid item md={4} xs={4}>
+                            <LSLabel>{row.orderdetailSet[0]?.period}</LSLabel>
+                          </Grid>
+                          <Grid item md={4} xs={4}>
+                            <LSLabel>{row.orderdetailSet[0]?.expiredAt?.slice(0, 10)}</LSLabel>
+                          </Grid>
+                          <Grid item md={4} xs={4}>
+                            <LSLabel>{row.orderdetailSet[0]?.total} {row.orderdetailSet[0]?.currency} </LSLabel>
+                          </Grid>
+                        </StyledGrid>
                       </Grid>
-                      <Grid item md={6} xs={12}>
-                        <Button onClick={() => onBtnClick(index)}>{dictionary[language]?.CancelPlan}</Button>
+                      <Grid container>
+                        <Grid item md={6} xs={12}>
+                          <Button
+                            disabled={(row.orderdetailSet[0]?.period === 'YEARLY' || row.orderdetailSet[0]?.isCancel) ? true : false}
+                            onClick={() => {
+                              seTag(index)
+                              openUpdate()
+                            }}
+                          >{dictionary[lang]?.ChangeToYearly}
+                          </Button>
+                        </Grid>
+                        <Grid item md={6} xs={12}>
+                          <Button onClick={() => {
+                            seTag(index)
+                            open()
+                          }}
+                            disabled={row.orderdetailSet[0]?.isCancel}
+                          >{row.orderdetailSet[0]?.isCancel ? dictionary[lang]?.canceled : dictionary[lang]?.CancelPlan}</Button>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </StyledTableCell>
-                </TableRow>
-              ))}
+                    </StyledTableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
           <LSDialog // Cancel Children Plan
             isOpen={isOpen}
             open={open}
-            title={dictionary[language]?.CancelChildrenPlan}
-            contentText={dictionary[language]?.YouAreCancellingOneChildSoloArea}
+            title={dictionary[lang]?.CancelChildrenPlan}
+            contentText={dictionary[lang]?.YouAreCancellingOneChildSoloArea}
             dialogContent={
               <CancelPlanForm
-                plan={data[tag]}
+                orderId={data[tag].orderdetailSet[0]?.id}
                 open={open}
-                refresh={toggleChanged}
               />
             }
           />
-          <LSDialog
+          <LSDialog // Upgrade to yearly dialog
             isOpen={isUpdateOpen}
             open={openUpdate}
-            title={dictionary[language]?.Upgrade}
+            title={dictionary[lang]?.Upgrade}
             dialogContent={
               <Upgrade
-                plan={data[tag]}
+                order={data[tag]}
                 onConfirm={openUpdate}
                 onCancel={onCancelUpgrade}
-                refresh={toggleChanged}
               />
             }
           />

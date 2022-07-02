@@ -29,15 +29,15 @@ export default () => {
     window.Tawk_API?.hideWidget();
   };
   useEffect(() => {
-    console.log(Rewardful?.referral)
+    // console.log(Rewardful?.referral)
   }, [])
 
   useEffect(() => {
     if (Rewardful?.referral) {
       persist.store.dispatch({ type: TYPES.USER_SET_REWARDFUL_ID, payload: Rewardful.referral });
-      console.log('Current referral ID: ', Rewardful.referral);
+      // console.log('Current referral ID: ', Rewardful.referral);
     } else {
-      console.log('No referral present.');
+      // console.log('No referral present.');
     }
   }, [Rewardful])
 

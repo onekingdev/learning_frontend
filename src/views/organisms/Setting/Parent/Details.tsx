@@ -16,13 +16,6 @@ export const MembershipDetail: FC = () => {
   let language: string = useSelector((state: any) => state.user.language);
   language = language ? language : 'en-us'
 
-  // State to refresh component
-  const [value, setValue] = useState(false);
-  const refresh = () => {
-    // it re-renders the component
-    setValue(!value);
-  }
-
   return (
     <Box>
       <LSShadowContainer >
@@ -40,7 +33,7 @@ export const MembershipDetail: FC = () => {
               }
             />
           </Box>
-          <PlanList refresh={value} />
+          <PlanList />
           <BtnContainer >
             <Button onClick={openAdd}>
               {dictionary[language]?.addAPlan}
@@ -57,7 +50,6 @@ export const MembershipDetail: FC = () => {
             dialogContent={
               <CancelMembershipForm
                 open={open}
-                refresh={refresh}
               />
             }
           />

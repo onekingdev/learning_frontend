@@ -99,10 +99,6 @@ const NewKids: FC = () => {
       }
       else {
         queryClient.setQueryData(['fetch-plans-list', guardianId, token], data)
-        console.log({
-          data,
-          availablePlans
-        })
         data.length === 0 && history.push('/kids/list');
         enqueueSnackbar('Student Create Succeed!', { variant: 'success' })
         setCurrentPackage(null)
