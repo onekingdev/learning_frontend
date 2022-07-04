@@ -46,7 +46,7 @@ const KidsList: FC = () => {
                   }
                   {data.map((item: any, index: number) => (
                     item.student &&
-                    <KidsListItem {...item.student} index={index} key={item.id} language={language} parentName={user.username} dateJoined={user.dateJoined} user={user}/>
+                    <KidsListItem {...item.student} index={index} key={item.id} language={language} parentName={user.username} dateJoined={user.dateJoined} token={user.token}/>
                   ))}
                 </>
         }
