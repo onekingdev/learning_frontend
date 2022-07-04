@@ -44,12 +44,12 @@ const KidsListItem: FC<KidsListProps> = ({
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch()
-  const langs = [{
-    name: 'English',
-    value: 'en-us'
-  }]
+  // const langs = [{
+  //   name: 'English',
+  //   value: 'en-us'
+  // }]
   const userName = user?.username;
-  const kidLanguage = user?.language;
+  // const kidLanguage = user?.language;
   const studentId = id;
   const grades = audience?.gradeSet;
   const [_grade, setGrade] = useState(grade?.grade);

@@ -150,7 +150,7 @@ export const doCancelMembership = async (
         CANCEL_MEMBERSHIP(guardianId, reason),
             token
     );
-    return res.data?.cancelMemberShip ?? res.errors[0] // when django returns error message on fail
+    return res.data ?? res.errors[0]// when django returns error message on fail
   }
 
 

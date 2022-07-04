@@ -35,10 +35,11 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open }) => {
     guardian.id, reason, user.token
   ), {
     onSuccess: async data => {
+      console.log({ data })
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {
-        queryClient.setQueryData(['fetch-orders-list', guardian.id, user.token], data.guardian?.orderSet || [])
+        queryClient.setQueryData(['fetch-orders-list', guardian.id, user.token], data.cancelMembership?.guardian?.orderSet || [])
         enqueueSnackbar(dictionary[language]?.membershipCanceledSuccessfully, { variant: 'success' })
         open()
       }
