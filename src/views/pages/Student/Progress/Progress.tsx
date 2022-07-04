@@ -102,7 +102,7 @@ export const KidsProgress = () => {
         }
     }, [activeSubjectId]);
     useEffect(() => {
-        if (activeSubjectId !== -1 && activeGradeId !== -1) {
+        if (activeSubjectId !== -1 && activeGradeId !== -1 && student) {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
@@ -112,7 +112,7 @@ export const KidsProgress = () => {
                     return
                 }
                 const result: any = await res.json();
-                console.log(result.data.rootTopicsByAokAndGrade);
+                // console.log(result.data.rootTopicsByAokAndGrade);
                 if (result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
