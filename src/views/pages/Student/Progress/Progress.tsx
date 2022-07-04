@@ -16,7 +16,7 @@ import query from 'api/queries/get';
 import { smoothScroll } from 'views/utils';
 import _ from 'lodash';
 import { PageTitle } from 'views/molecules/PageTitle';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 
 
@@ -107,7 +107,7 @@ export const KidsProgress = () => {
                 loadingContext.start();
                 // Get Topic Report
                 // const res:any = await query('', TopicReportByAokAndGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({success: false}));
-                const res: any = await query('', TopicReportWithGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(e => ({ success: false }));
+                const res: any = await query('', TopicReportWithGrade(parseInt(student.id), activeSubjectId, activeGradeId), user.token).catch(() => ({ success: false }));
                 if (res.success === false) {
                     return
                 }
@@ -132,27 +132,29 @@ export const KidsProgress = () => {
     const handleSubjectChange = (event: any) => {
         setActiveSubjectId(event.target.value);
     };
-    const subSubjects1 = _.flattenDeep(getAllTopic(data, 1)).filter((__subSubject: any) => __subSubject.standardTopic).map((_subSubject: any) => {
-        let bgColor = masteryColors.NP;
-        if (_subSubject.mastery) {
-            if (_subSubject.mastery === 'NP') {
-                bgColor = masteryColors.NP;
-            } else if (_subSubject.mastery === 'N') {
-                bgColor = masteryColors.N;
-            } else if (_subSubject.mastery === 'C') {
-                bgColor = masteryColors.C;
-            } else if (_subSubject.mastery === 'M') {
-                bgColor = masteryColors.M;
+    const subSubjects1 = _.flattenDeep(getAllTopic(data, 1))
+        .filter((__subSubject: any) => __subSubject.standardTopic)
+        .map((_subSubject: any) => {
+            let bgColor = masteryColors.NP;
+            if (_subSubject.mastery) {
+                if (_subSubject.mastery === 'NP') {
+                    bgColor = masteryColors.NP;
+                } else if (_subSubject.mastery === 'N') {
+                    bgColor = masteryColors.N;
+                } else if (_subSubject.mastery === 'C') {
+                    bgColor = masteryColors.C;
+                } else if (_subSubject.mastery === 'M') {
+                    bgColor = masteryColors.M;
+                }
             }
-        }
-        return ({
-            ..._subSubject,
-            aokId: _subSubject.id || '',
-            text: _subSubject.name || '',
-            bgColor: bgColor,
-            active: false,
+            return ({
+                ..._subSubject,
+                aokId: _subSubject.id || '',
+                text: _subSubject.name || '',
+                bgColor: bgColor,
+                active: false,
+            })
         })
-    })
     console.log(subSubjects1)
 
     const mapBgRef = useRef<HTMLDivElement>(null);
@@ -320,10 +322,9 @@ export const KidsProgress = () => {
                             } else {
                                 return <></>
                             }
-                        }) : <p style={{
-                            textAlign: "center",
-                            fontSize: "3rem"
-                        }}>There is no Subjects</p>}
+                        }) :
+                            <Typography margin={10} color='white' variant='h6' textAlign='center'>There are no subjects.</Typography>
+                        }
                     </div>
                 </Container>
                 <Container>
