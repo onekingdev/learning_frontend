@@ -70,7 +70,8 @@ export const KidsProgress = () => {
         if (student) {
             (async () => {
                 setAreasOfKnowledge(student.guardianstudentplan.subject);
-                setActiveSubjectId(student.guardianstudentplan.subject.filter((_subject: any) => _subject.name === "Financial LIteracy")[0].id || student.guardianstudentplan.subject[0].id);
+                // setActiveSubjectId(student.guardianstudentplan.subject.filter((_subject: any) => _subject.name === "Financial LIteracy")[0]?.id || student.guardianstudentplan.subject[0]?.id);
+                setActiveSubjectId(student.guardianstudentplan.subject[0]?.id);
             })();
         }
     }, [student]);
@@ -102,7 +103,7 @@ export const KidsProgress = () => {
         }
     }, [activeSubjectId]);
     useEffect(() => {
-        if (activeSubjectId !== -1 && activeGradeId !== -1 && student) {
+        if (activeSubjectId !== -1 && activeGradeId !== -1) {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
