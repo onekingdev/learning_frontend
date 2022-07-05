@@ -96,7 +96,7 @@ export const KidsProgress = () => {
                     if (result.data.areaOfKnowledgeById.audience.gradeSet.length > 0) {
                         setGrades(result.data.areaOfKnowledgeById.audience.gradeSet);
                         // setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet.filter((grade: any) => grade.name === "1st Grade")[0]?.id || result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
-                        setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet[0].id);
+                        setActiveGradeId(result.data.areaOfKnowledgeById.audience.gradeSet[0]?.id || -1);
                     }
                 }
             })();
