@@ -1,6 +1,10 @@
-import { FC, useEffect, useState, useContext, useRef } from 'react';
+import {
+  FC, useEffect, useState,
+  // useContext,
+  useRef
+} from 'react';
 import { useSelector } from 'react-redux';
-import { LoadingContext } from 'react-router-loading';
+// import { LoadingContext } from 'react-router-loading';
 import { useSnackbar } from 'notistack';
 import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
 import Table from 'views/molecules/MuiTable';
@@ -9,82 +13,31 @@ import { dictionary } from './dictionary'
 import Button from 'views/molecules/MuiButton';
 import { BasicColor } from 'views/Color';
 import { getAudiencesWithGrades } from 'app/actions/audienceActions'
-import { OutTable, ExcelRenderer } from 'react-excel-renderer';
-import Menu from 'views/pages/Teacher/Menus/TeacherMenu';
-const data = [
-  {
-    name: 'arminssssssssssss s'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  },
-  {
-    name: 'aaron'
-  }
-]
+import {
+  // OutTable,
+  ExcelRenderer
+} from 'react-excel-renderer';
+// import Menu from 'views/pages/Teacher/Menus/TeacherMenu';
+import { useHistory } from 'react-router-dom';
+import { LANGUAGES } from 'constants/common';
+
 interface MuiTableFunc {
   getData(): any;
   handleAddData(): void;
 }
 const AddStudent: FC = () => {
 
-  const loadingContext = useContext(LoadingContext);
+  const history = useHistory();
+  // const loadingContext = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
-  const user = useSelector((state: any) => state.user);
-  const guardian = useSelector((state: any) => state.guardian);
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : "en-us"
+  // const user = useSelector((state: any) => state.user);
+  // const guardian = useSelector((state: any) => state.guardian);
+  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
   const TableRef = useRef<MuiTableFunc>(null)
 
   const [audiences, setAudiences] = useState([]);
   const [columns, setColumns] = useState<Column[]>([]);
   const [tableData, setTableData] = useState<any>([])
-  console.log("updated")
   // const columns: Column[] = [
   //   { id: 'name', label: dictionary[language]?.name, minWidth: 170 },
   //   { id: 'lastName', label: dictionary[language]?.lastName, minWidth: 100 },
@@ -126,28 +79,25 @@ const AddStudent: FC = () => {
   //   },
   // ];
 
-  const sampleData = [
-    {
-      name: 'India',
-      lastName: 'string',
-      username: 'number',
-      password: 'number',
-      audience: { id: '123', name: 'id 123 name' },
-      grade: { id: '123', name: 'id 123 name' },
-      language: { id: '123', name: 'id 123 name' },
-    }
-  ]
+  // const sampleData = [
+  //   {
+  //     name: 'India',
+  //     lastName: 'string',
+  //     username: 'number',
+  //     password: 'number',
+  //     audience: { id: '123', name: 'id 123 name' },
+  //     grade: { id: '123', name: 'id 123 name' },
+  //     language: { id: '123', name: 'id 123 name' },
+  //   }
+  // ]
 
-  const [isOpenNewForm, setIsOpenNewForm] = useState(false);
+  // const [isOpenNewForm, setIsOpenNewForm] = useState(false);
 
-  const onNew = () => {
-    console.log("will open")
-    setIsOpenNewForm(true)
-  }
+  // const onNew = () => {
+  //   console.log("will open")
+  //   setIsOpenNewForm(true)
+  // }
 
-  const onClassroom = (classroom: any) => {
-
-  }
 
   const setAudienceData = async () => {
     const result: any = await getAudiencesWithGrades(
@@ -223,6 +173,9 @@ const AddStudent: FC = () => {
 
   const handleSave = () => {
     console.log(TableRef?.current?.getData())
+
+    // TODO Redirect to classrooms page when saving success, else show error message
+    history.push('/teacher/classrooms')
   }
 
   const handleChangeExcelFile = (e: any) => {
@@ -240,7 +193,7 @@ const AddStudent: FC = () => {
         for (let i = 0; i < resp.rows[0].length; i++) {
           const col = resp.rows[0][i]
           console.log({ col })
-          const temp: any = {};
+          // const temp: any = {};
           for (const column of columns) {
             if (column?.label === col) {
               excelHeader.push(column?.id)

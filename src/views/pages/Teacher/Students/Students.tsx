@@ -78,7 +78,7 @@ const Students: FC = () => {
   }, []);
 
   return (
-    <TeacherPgContainer onlyLogoImgNav={true} title={dictionary[language]?.classroom}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom}>
       <>
       <TabContainer>
         <SelectedTab onClick={() => history.push('/teacher/students')}>{dictionary[language]?.students}</SelectedTab>

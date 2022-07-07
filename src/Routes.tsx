@@ -204,17 +204,13 @@ export function Routes() {
         </PrivateRoute>
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/classrooms" component={Classrooms} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent" component={AddStudent} />
-        <PrivateRoute loading={false} requireAuth={false} path="/teacher/students">
-          <Students />
-        </PrivateRoute>
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/students" component={Students} />
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups" component={Groups} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/settings">
           <TeacherSettings />
         </PrivateRoute>
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/certificates">
           <Certificates />
-        </PrivateRoute>
-        <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups">
-          <Groups />
         </PrivateRoute>
         <Route path="/teacher/control-aok">
           <ControlAOK />

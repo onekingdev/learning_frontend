@@ -9,6 +9,7 @@ import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPg
 import ClassroomPanel from 'views/molecules/Classroom/ClassroomPanel'
 import AddClassroomForm from 'views/molecules/Classroom/AddClassroomForm'
 import commonDictionary from 'constants/commonDictionary'
+import { useHistory } from 'react-router-dom';
 
 const data = [
   {
@@ -36,7 +37,8 @@ const Classrooms: FC = () => {
   // const {enqueueSnackbar} = useSnackbar();
   // const {token}              = useSelector((state: any) => state.user);
   // const guardian          = useSelector((state: any) => state.guardian);
-  const language: string = useSelector((state: any) => state.user.language) || 'en-us';
+    const history = useHistory();
+    const language: string = useSelector((state: any) => state.user.language) || 'en-us';
 
   const [isOpenNewForm, setIsOpenNewForm] = useState(false);
 
@@ -46,6 +48,8 @@ const Classrooms: FC = () => {
 
   const onClassroom = (classroom: any) => {
     console.log({classroom})
+    // TODO Redirect to the Classroom/students page with teacher info
+    history.push('/teacher/students')
   }
   useEffect(() => {
 
