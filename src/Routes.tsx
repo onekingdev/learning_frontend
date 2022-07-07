@@ -27,7 +27,7 @@ import { Cards } from 'views/pages/Student/Collectibles/ByCards';
 import { MyCardCollection } from 'views/pages/Student/Collectibles/MyCards';
 import NewKids from 'views/pages/Parent/NewKids/UpdatedNewKids';
 import { Spinner } from 'views/atoms/Spinner';
-import { ParentReporting } from 'views/pages/Parent/KidReport/Reporting';
+import { Reporting } from 'views/pages/Parent/KidReport/Reporting';
 import { KidsTreasureTrack } from 'views/pages/Student/TreasureTrack/TreasureTrack';
 import { KidsProgress } from 'views/pages/Student/Progress/Progress';
 //teacher center
@@ -134,7 +134,7 @@ export function Routes() {
         <PrivateRoute loading={true} path="/progress">
           <KidsProgress />
         </PrivateRoute>
-        <PrivateRoute loading={true} exact path="/review">
+        <PrivateRoute loading={true} exactv path="/review">
           <ProgressReview />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/backpack">
@@ -167,15 +167,7 @@ export function Routes() {
         <PrivateRoute loading={true} path="/student/settings">
           <Settings />
         </PrivateRoute>
-        {/* <PrivateRoute loading={true} path="/parent/report">
-            <Report />
-          </PrivateRoute> */}
-        <PrivateRoute
-          loading={true}
-          path="/parent/reporting/:studentId"
-        >
-          <ParentReporting />
-        </PrivateRoute>
+        <PrivateRoute loading={true} path="/report/:reviewer/:studentId" component={Reporting} />
         <PrivateRoute loading={true} path="/parent/payment">
           <Payment />
         </PrivateRoute>

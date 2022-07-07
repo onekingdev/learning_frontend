@@ -72,9 +72,9 @@ export const CardDialog: FC<LSDialogProps> = ({
 
 
 // Styled components
-interface DialogProps {
-  wide?: string
-}
+// interface DialogProps {
+//   wide?: string
+// }
 // const StyledDialog = styled(Dialog) <DialogProps>`
 // & .MuiPaper-root {
 //   max-width: ${props => props.wide === 'true' ? '100%;' : 'auto;'}

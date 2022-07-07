@@ -130,7 +130,7 @@ const KidsListItem: FC<KidsListProps> = ({
 
       <GridContainer container className='align-center' columnSpacing={2}>
         <GridItem item xs={6} md={1}
-          onClick={() => history.push('/parent/reporting/' + studentId)}
+          onClick={() => history.push('/report/parent/' + studentId)}
           sx={{
             marginRight: 2,
             '&:hover': {
