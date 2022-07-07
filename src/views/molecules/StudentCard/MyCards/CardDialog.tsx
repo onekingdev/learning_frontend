@@ -1,14 +1,14 @@
-import { FC }         from 'react';
-import * as React     from 'react';
-import Dialog         from '@mui/material/Dialog';
-import IconButton     from '@mui/material/IconButton';
-import CloseIcon      from '@mui/icons-material/Close';
-import styled         from 'styled-components';
+import { FC } from 'react';
+import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
 import { BasicColor } from 'views/Color';
 import { LSDialogContent, LSDialogContentText } from 'views/molecules/Setting/utils/Style';
-import { Subheader }  from 'views/atoms/Text';
-import { DialogTitle } from '@mui/material';
+import { Subheader } from 'views/atoms/Text';
+import { DialogTitle, Divider } from '@mui/material';
 
 type LSDialogProps = {
   title?: string
@@ -36,23 +36,24 @@ export const CardDialog: FC<LSDialogProps> = ({
   }
 
   return (
-      <StyledDialog open={isOpen} onClose={open} scroll='body' wide={fullWidth}>
-        <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} sx={{zIndex: 2}}>
-          <CloseIcon />
-        </StyledIconBtn>
-        <DialogTitle>
-          <Subheader style={{color: BasicColor.blue, textAlign:'center'}}>{title ? title: ''}</Subheader>
-        </DialogTitle>
-        <LSDialogContent>
-          {
-            contentText ?
-              <LSDialogContentText>
-                {contentText}
-              </LSDialogContentText> : null
-          }
-          {dialogContent}
-        </LSDialogContent>
-      </StyledDialog>
+    <StyledDialog open={isOpen} onClose={open} scroll='body' wide={fullWidth}>
+      <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} sx={{ zIndex: 2 }}>
+        <CloseIcon />
+      </StyledIconBtn>
+      <DialogTitle sx={{ color: BasicColor.blue, textAlign: 'center' }}
+      >
+        {title}
+      </DialogTitle>
+      <LSDialogContent>
+        {
+          contentText ?
+            <LSDialogContentText>
+              {contentText}
+            </LSDialogContentText> : null
+        }
+        {dialogContent}
+      </LSDialogContent>
+    </StyledDialog>
   );
 }
 

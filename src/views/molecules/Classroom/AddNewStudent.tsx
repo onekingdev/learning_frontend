@@ -1,33 +1,23 @@
 import { useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
-import { Grid, FormControl, Select } from '@mui/material';
+import { useState } from 'react'
+import { Box, Button, Grid } from '@mui/material';
 import { dictionary } from './dictionary'
-import {
-    useStyles,
-} from './Style'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import InputLabel from '@mui/material/InputLabel';
 import TextField from 'views/molecules/MuiTextField';
-import { getAudiencesWithGrades } from 'app/actions/audienceActions'
-import { useSnackbar } from 'notistack';
-import MenuItem from '@mui/material/MenuItem';
-import Button from 'views/molecules/MuiButton';
-import { BasicColor } from 'views/Color';
 import commonDictionary from 'constants/commonDictionary'
 import { LANGUAGES } from 'constants/common';
 
 const AddNewStudent = (props: any) => {
     const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
-
-    const { enqueueSnackbar } = useSnackbar();
-    const classes = useStyles();
-
-    const [audiences, setAudiences] = useState([]);
-    const [audience, setAudience] = useState();
-    const [className, setClassName] = useState('')
+    const [studentName, setStudentName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [userName, setUserName] = useState('')
+    const [pwd, setPwd] = useState('')
     const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
-        className: null,
-        audience: null,
+        studentName: null,
+        lastName: null,
+        userName: null,
+        pwd: null,
     });
 
     const formValidation = () => {
@@ -43,19 +33,6 @@ const AddNewStudent = (props: any) => {
         return valiResult;
     };
 
-    const setAudienceData = async () => {
-        const result: any = await getAudiencesWithGrades(
-            // user.token,
-            // dispatch
-        );
-        if (!result.success) {
-            enqueueSnackbar(result.msg, { variant: 'error' });
-            return false;
-        }
-        setAudiences(result.data);
-        return true;
-    }
-
     const handleSubmit = () => {
         if (!formValidation()) return;
         props.close();
@@ -65,72 +42,75 @@ const AddNewStudent = (props: any) => {
         setValidateMsg({ ...validateMsg, [field]: errMsg });
     }
 
-    useEffect(() => {
-        setAudienceData();
-    }, [])
     return (
         <CardDialog
             isOpen={props.isOpen}
             open={props.close}
-            title={dictionary[language]?.newClassroom}
+            title={dictionary[language]?.newStudent}
             dialogContent={
-                <Grid container spacing={4}>
-                    <Grid item xs={12}>
-                        <TextField
-                            label={dictionary[language]?.classroomName}
-                            onChange={(e: any) => {
-                                handleFormChange('className', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
-                                setClassName(e.target.value)
-                            }}
-                            error={!!validateMsg.className}
-                            helperText={validateMsg.className}
-                            value={className}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormControl fullWidth>
-                            <InputLabel id='select-audience-label'>
-                                {dictionary[language]?.selectYourCurriculum}
-                            </InputLabel>
-                            <Select
-                                labelId='select-audience-label'
-                                id='select-audience'
-                                value={audience ? audience : {}}
-                                label={dictionary[language]?.selectYourCurriculum}
-                                className={`${classes.select} err-border`}
+                <Box padding={1}>
+                    <Grid container spacing={4}>
+                        <Grid item xs={12}>
+                            <TextField
+                                label={dictionary[language]?.student_name}
                                 onChange={(e: any) => {
-                                    setAudience(e.target.value);
-                                    validateMsg.audience = '';
-                                    setValidateMsg({ ...validateMsg });
+                                    handleFormChange('studentName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                    setStudentName(e.target.value)
                                 }}
-                                sx={
-                                    validateMsg.audience ? {
-                                        '& fieldset': {
-                                            borderColor: `${BasicColor.red} !important`,
-                                        },
-                                    } : {}
-                                }
-                                displayEmpty={true}
+                                error={!!validateMsg.studentName}
+                                helperText={validateMsg.studentName}
+                                value={studentName}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label={dictionary[language]?.lastName}
+                                onChange={(e: any) => {
+                                    handleFormChange('lastName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                    setLastName(e.target.value)
+                                }}
+                                error={!!validateMsg.lastName}
+                                helperText={validateMsg.lastName}
+                                value={lastName}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label={dictionary[language]?.username}
+                                onChange={(e: any) => {
+                                    handleFormChange('userName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                    setUserName(e.target.value)
+                                }}
+                                error={!!validateMsg.userName}
+                                helperText={validateMsg.userName}
+                                value={userName}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label={dictionary[language]?.password}
+                                onChange={(e: any) => {
+                                    handleFormChange('className', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                    setPwd(e.target.value)
+                                }}
+                                error={!!validateMsg.pwd}
+                                helperText={validateMsg.pwd}
+                                value={pwd}
+                            />
+                        </Grid>
+                        <Grid item xs={12} justifyContent='start'>
+                            <Button
+                                onClick={handleSubmit}
+                                variant='contained'
+                                sx={{
+                                    maxWidth: 'fit-content'
+                                }}
                             >
-                                {audiences?.length > 0 && audiences.map((value: any, index: number) => (
-                                    <MenuItem value={value} key={index}>
-                                        {value.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                            <div className='err-text'>{validateMsg.audience}</div>
-                        </FormControl>
+                                {commonDictionary[language]?.create_account_add}
+                            </Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} md={12} lg={12}>
-                        <Button
-                            value={dictionary[language]?.createClassroom}
-                            bgColor={BasicColor.green}
-                            onClick={handleSubmit}
-                            align={'right'}
-                            fullWidth={true}
-                        />
-                    </Grid>
-                </Grid>
+                </Box>
             }
         />
     )

@@ -19,7 +19,7 @@ import { ScreenSize } from 'constants/screenSize';
 /*--------------------------------------------------------------------------------------------*/
 export const LSDialogContent = styled(DialogContent)`
   &.MuiDialogContent-root {
-    padding: 0 40px 0 40px;
+    padding: 5px 40px 0 40px;
     @media screen and (max-width: 540px) {
       padding: 5px;
     }
