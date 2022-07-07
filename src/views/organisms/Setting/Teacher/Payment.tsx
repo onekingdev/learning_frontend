@@ -1,52 +1,42 @@
-import { FC, useState, useRef } from 'react';
-import styled                   from 'styled-components';
-import Grid                     from '@mui/material/Grid';
-import { useDialog }            from 'views/molecules/Setting/utils/useDialog';
+import { FC, useState } from 'react';
+import styled from 'styled-components';
+import Grid from '@mui/material/Grid';
 import {
-  LSShadowContainer,  LSGridRow,
-  LSTitle,  LSText,
-}                               from 'views/molecules/Setting/utils/Style';
-import { LSDialog }             from 'views/molecules/Setting/LSDialog';
-import { PaymentForm }          from 'views/molecules/PaymentMethod/PaymentForm';
-import { EditPaymentForm }      from 'views/molecules/Setting/EditPaymentForm';
-import { Elements }             from '@stripe/react-stripe-js';
-import { loadStripe }           from '@stripe/stripe-js';
-import { useSelector }          from 'react-redux'
-import payment                  from 'views/assets/payment/payment.jpg'
-import creditCardType           from 'credit-card-type'
-import { dictionary }           from './dictionary'
-import { Button } from '@mui/material';
+  LSGridRow,
+  LSTitle, LSText,
+} from 'views/molecules/Setting/utils/Style';
+import { LSDialog } from 'views/molecules/Setting/LSDialog';
+import { EditPaymentForm } from 'views/molecules/Setting/EditPaymentForm';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { useSelector } from 'react-redux'
+import payment from 'views/assets/payment/payment.jpg'
+import creditCardType from 'credit-card-type'
+import { dictionary } from './dictionary'
+import { Button, Paper, useMediaQuery } from '@mui/material';
+import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
+import { ScreenSize } from 'constants/screenSize';
+import { LANGUAGES } from 'constants/common';
+
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
-interface PaymentFormFunc {
-  handleOrder(): void;
-  handleUpdate(): void;
-}
 
 export const TeacherPaymentInfo: FC = () => {
-  const { isOpen, open } = useDialog()
+  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
   const [isEdit, edit] = useState(false)
   const guardian = useSelector((state: any) => state.guardian);
   const cardType = creditCardType(guardian.paymentMethod.cardNumber)
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
 
   const openEdit = () => edit(!isEdit);
 
-  // const onEditConfirm = () => {
-  //   openEdit()
-  // }
-  const paymentFormRef = useRef<PaymentFormFunc>(null)
-
-
-  const onConfirm = () => {
-    open()
-  }
-
-  const onCancel = () => open();
-
   return (
-    // guardian.paymentMethod.cardNumber ?
-    <LSShadowContainer>
+    <Paper
+      elevation={5}
+      sx={{
+        ...PARENT_PAPER_STYLE,
+        width: isMobile ? '100%' : 640
+      }}
+    >
       <LSTitle>
         {dictionary[language]?.yourPaymentMethod}
       </LSTitle>
@@ -92,7 +82,7 @@ export const TeacherPaymentInfo: FC = () => {
           }
         />
       </LSGridRow>
-    </LSShadowContainer>
+    </Paper>
     //  : null
   );
 }

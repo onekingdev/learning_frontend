@@ -3,7 +3,7 @@ import { ParentPgNav } from 'views/molecules/ParentPgNav/ParentPgNav'
 import { ThemeProvider } from '@mui/material';
 import { settingPage } from 'views/Theme';
 
-import { ParentPageTitle } from '../PageTitle';
+import { ParentPageTitle, TeacherPageTitle } from '../PageTitle';
 
 type ParentPgContainerProps = {
   onlyLogoImgNav: boolean;
@@ -17,7 +17,7 @@ export const TeacherSettingPgContainer: FC<ParentPgContainerProps> = ({ onlyLogo
     <ThemeProvider theme={settingPage}>
       <ParentPgNav onlyLogoImg={onlyLogoImgNav} />
       {
-        title && <ParentPageTitle title={title} />
+        title && <TeacherPageTitle title={title} />
       }
       {children}
     </ThemeProvider>

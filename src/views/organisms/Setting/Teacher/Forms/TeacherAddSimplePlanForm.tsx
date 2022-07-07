@@ -1,25 +1,20 @@
-import * as React                                                  from 'react';
-import { FC, useState }                                 from 'react';
-import FormControlLabel                                            from '@mui/material/FormControlLabel';
-import { Checkbox, Radio, Grid }                                   from '@mui/material';
-import RadioGroup                                                  from '@mui/material/RadioGroup';
-import { FormGroup }                                               from '@mui/material';
-import { BasicColor }                                              from 'views/Color';
-import Button                                                      from 'views/molecules/MuiButton';
+import * as React from 'react';
+import { FC, useState } from 'react';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { Checkbox, Radio, Grid } from '@mui/material';
+import RadioGroup from '@mui/material/RadioGroup';
+import { FormGroup } from '@mui/material';
+import { BasicColor } from 'views/Color';
+import Button from 'views/molecules/MuiButton';
 import { LSButtonContainer, LSRadio, LSFormControlLabel, LSInputBase } from 'views/molecules/Setting/utils/Style';
-import { dictionary }                                              from 'views/pages/Parent/Settings/dictionary';
-import { doAddStudentPlan }                          from 'app/actions/guardianActions';
-import { useSelector }                                             from 'react-redux'
-import { useSnackbar }                                             from 'notistack';
-import { LoadingSpinner }                                          from 'views/atoms/Spinner';
+import { dictionary } from 'views/pages/Parent/Settings/dictionary';
+import { doAddStudentPlan } from 'app/actions/guardianActions';
+import { useSelector } from 'react-redux'
+import { useSnackbar } from 'notistack';
+import { LoadingSpinner } from 'views/atoms/Spinner';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ScreenSize } from 'constants/screenSize';
 import { TypoBtn, TypoDescription } from 'views/atoms/Text';
-
-interface IAddPlanProps {
-  open: () => void
-  refresh: () => void
-}
 
 const combo = [
   {
@@ -64,15 +59,15 @@ const combo = [
   },
 ]
 
-export const TeacherAddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
+export const TeacherAddSimplePlanForm: FC<{ open: () => void }> = ({ open }) => {
 
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
-  const width = isMobile ? 300: 500
+  const width = isMobile ? 300 : 500
   const user = useSelector((state: any) => state.user);
   const guardian = useSelector((state: any) => state.guardian);
   const { enqueueSnackbar } = useSnackbar();
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
   // const comboChildren = dictionary['en-us'].combo
   const [plans, setPlans] = useState<Array<any>>([])
 
@@ -84,10 +79,9 @@ export const TeacherAddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) =
   const onSubmit = async () => {
 
     setLoading(true)
-    const res: any = await doAddStudentPlan(guardian.id, plans.find(element => element.name === parentState).id, 'Monthly',user.token)
+    const res: any = await doAddStudentPlan(guardian.id, plans.find(element => element.name === parentState).id, 'Monthly', user.token)
     if (res.status) {
       enqueueSnackbar('Student Package added successfully', { variant: 'success' })
-      refresh()
     } else
       enqueueSnackbar(res.msg, { variant: 'error' })
 
@@ -148,42 +142,42 @@ export const TeacherAddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) =
       sx={{ marginLeft: 3 }}
     >
       <Grid container alignItems={'center'}>
-      {
-        comboChildren.map((comboChild, index) => (
-          <Grid item md={6} xs={12}>
-            <FormControlLabel
-              key={index}
-              label={comboChild.label[language as keyof Object]}
-              value={comboChild.value}
-              control={<Radio />}
-            />
-          </Grid>
-        ))
-      }
+        {
+          comboChildren.map((comboChild, index) => (
+            <Grid item md={6} xs={12}>
+              <FormControlLabel
+                key={index}
+                label={comboChild.label[language as keyof Object]}
+                value={comboChild.value}
+                control={<Radio />}
+              />
+            </Grid>
+          ))
+        }
       </Grid>
     </RadioGroup>
   }
 
   const renderComboChildren = (comboChildren: Array<ChildrenProps>) => {
     return <FormGroup sx={{ marginLeft: 3 }}>
-        <Grid container alignItems={'center'}>
-          {comboChildren.map((comboChild, index) => (
-            <Grid item md={6} xs={12}>
-              <FormControlLabel
-                key={index}
-                label={comboChild.label[language as keyof Object]}
-                value={comboChild.value}
-                control={<Checkbox checked={checked[index]} onChange={handleCheckChange} />}
-              />
-            </Grid>
-          ))}
-        </Grid>
+      <Grid container alignItems={'center'}>
+        {comboChildren.map((comboChild, index) => (
+          <Grid item md={6} xs={12}>
+            <FormControlLabel
+              key={index}
+              label={comboChild.label[language as keyof Object]}
+              value={comboChild.value}
+              control={<Checkbox checked={checked[index]} onChange={handleCheckChange} />}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </FormGroup>
   }
 
   return (
     !loading && plans.length ?
-      <div style={{width: width}}>
+      <div style={{ width: width }}>
         <RadioGroup
           aria-labelledby='canceling-reason-label'
           name='radio-buttons-group'

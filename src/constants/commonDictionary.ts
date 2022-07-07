@@ -1,11 +1,13 @@
 const dictionary: any = Object.freeze({
   'en-us': {
+    add_new: 'Add New',
     and: 'and',
     annually: 'Annually',
     by_click_create_agree:
-      'By clicking Create Account, you agree to Learn With Socrates’s',
+    'By clicking Create Account, you agree to Learn With Socrates’s',
     children_privacy_policy: 'Children’s Privacy Policy',
     choose_your_plan: 'Choose your plan',
+    classroom:'Classroom',
     contact_us: 'Contact Us',
     discounted: 'discounted',
     failed_to_confirm_a_new_plan: 'Failed to confirm a new plan!',
@@ -25,12 +27,14 @@ const dictionary: any = Object.freeze({
     welcome: 'Welcome',
   },
   th: {
+    add_new: 'เพิ่มใหม่',
     and: 'และ',
     annually: 'รายปี',
     by_click_create_agree: 'การยืนยันสมัครสมาชิกแสดงว่าท่านยอมรับ',
     children_privacy_policy:
-      'นโยบายความเป็นส่วนตัวของบุตรหลาน ของ Learn with Socrates',
+    'นโยบายความเป็นส่วนตัวของบุตรหลาน ของ Learn with Socrates',
     choose_your_plan: 'เลือกแพลนผู้ใช้',
+    classroom:'ห้องเรียน',
     contact_us: 'ติดต่อเรา',
     discounted: 'ส่วนลด',
     failed_to_confirm_a_new_plan: 'ไม่สามารถยืนยันแผนใหม่!',
@@ -50,12 +54,14 @@ const dictionary: any = Object.freeze({
     welcome: 'ยินดีต้อนรับ',
   },
   'es-mx': {
+    add_new: 'Agregar nueva',
     and: 'y',
     annually: 'Anualmente',
     by_click_create_agree: 'Al hacer clic en Crear cuenta, aceptas',
     children_privacy_policy:
       'Política de Privacidad para niños de Learn With Socrates',
     choose_your_plan: 'Elige tu plan',
+    classroom:'Aula',
     contact_us: 'Contacta con Nosotros',
     discounted: 'descontado',
     failed_to_confirm_a_new_plan: '¡No se pudo confirmar un nuevo plan!',

@@ -4,6 +4,7 @@ import ribbon         from 'views/assets/ribbon.svg';
 import { ScreenSize } from 'constants/screenSize';
 import { TypoHeader } from 'views/atoms/Text';
 import dark_green_ribbon_sharp from 'views/assets/others/dark_green_ribbon_sharp.svg'
+import { BasicColor } from 'views/Color';
 
 export const PageTitle: FC<{title: string}> = ({title}) => {
   return (
@@ -13,6 +14,13 @@ export const PageTitle: FC<{title: string}> = ({title}) => {
   );
 };
 export const ParentPageTitle: FC<{title: string}> = ({title}) => {
+  return (
+    <ParentTitleContainer>
+      <TypoHeader style={{margin: 0, color: 'white'}}>{title}</TypoHeader>
+    </ParentTitleContainer>
+  );
+};
+export const TeacherPageTitle: FC<{title: string}> = ({title}) => {
   return (
     <ParentTitleContainer>
       <TypoHeader style={{margin: 0, color: 'white'}}>{title}</TypoHeader>
@@ -49,12 +57,13 @@ const ParentTitleContainer = styled.div`
   background-size: contain;
   padding: 15px;
   margin-top: 50px;
+  margin-bottom: 30px;
 
   @media screen and (max-width: ${ScreenSize.phone}) {
     width: 100%;
     margin: 0;
     padding: 10px 0 10px 0;
     background-image: none;
-    background-color: orange;
+    background-color: ${BasicColor.darkGreen};
   }
 `;
