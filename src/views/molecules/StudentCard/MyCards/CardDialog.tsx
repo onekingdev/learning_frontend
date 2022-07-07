@@ -66,6 +66,7 @@ const StyledDialog = styled(Dialog) <DialogProps>`
   max-width: ${props => props.wide === 'true' ? '100%;' : 'auto;'}
   border-radius: 30px;
   overflow: hidden;
+  padding: 10px;
   @media screen and (max-width: ${ScreenSize.tablet}) {
     width: 90vw;
   }

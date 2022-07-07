@@ -3,9 +3,6 @@ export const USER_PROFILE = `
     role
 `
 
-export const USER_LANGUAGE=`
-`
-
 export const USER = `
     id
     password
