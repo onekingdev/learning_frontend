@@ -310,7 +310,7 @@ export const Question: FC = () => {
             isOpen={openDg}
             open={congratulations}
             dialogContent={<LevelUpDgContent close={congratulations} />}
-            fullWidth="true"
+            fullWidth={true}
           />
         </StudentMenu>
       ) : null}

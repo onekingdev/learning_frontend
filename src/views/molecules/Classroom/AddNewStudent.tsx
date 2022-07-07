@@ -90,7 +90,7 @@ const AddNewStudent = (props: any) => {
                             <TextField
                                 label={dictionary[language]?.password}
                                 onChange={(e: any) => {
-                                    handleFormChange('className', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                    handleFormChange('pwd', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                     setPwd(e.target.value)
                                 }}
                                 error={!!validateMsg.pwd}

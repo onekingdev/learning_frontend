@@ -64,7 +64,6 @@ export const Gemcard: FC<ICollectibleCard> = ({
       </StyledCard>
       <TypoGeneralText style={{ textAlign: 'center' }}>{amount} / 1</TypoGeneralText>
       <CardDialog
-        fullWidth='true'
         dialogContent={
           purchased ?
             <CardDescription

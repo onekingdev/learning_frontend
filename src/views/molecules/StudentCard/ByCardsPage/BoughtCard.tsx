@@ -77,7 +77,6 @@ export const BoughtCard: FC<ICollectibleCardDescription> = ({ imgUrl, firebaseNa
         </div>
       }
       <CardDialog
-        fullWidth='true'
         dialogContent={
           <CardDescription
             imgUrl={imgUrl}

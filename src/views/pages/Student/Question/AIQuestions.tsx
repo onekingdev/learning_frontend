@@ -341,7 +341,7 @@ export const AIQuestion: FC = () => {
                 isOpen={openDg}
                 open={congratulations}
                 dialogContent={<LevelUpDgContent close={congratulations} />}
-                fullWidth="true"
+                fullWidth={true}
               />
               <Container id="container">
                 {renderQuestion(

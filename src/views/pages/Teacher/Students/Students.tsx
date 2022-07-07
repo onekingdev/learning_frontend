@@ -15,6 +15,7 @@ import { useHistory } from 'react-router-dom';
 import { dictionary } from './dictionary'
 import { TabContainer, Tab, SelectedTab } from './Style'
 import { LANGUAGES } from 'constants/common';
+
 const data = [
   {
     name: 'armin',
@@ -85,7 +86,7 @@ const Students: FC = () => {
         <EditStudentForm
           data={studentForEdit}
           isOpen={isOpenEditStudent}
-          clse={() => setIsOpenEditStudent(true)}
+          close={() => setIsOpenEditStudent(false)}
         />
         <ChooseNewStudentTypeDlg
           isOpen={isOpenNewType}
@@ -95,7 +96,6 @@ const Students: FC = () => {
         />
         <AddExistStudentDlg isOpen={isExistingNewAccountDlgOpen} close={() => setIsExistingNewAccountDlgOpen(false)} />
         <AddNewStudent isOpen={isAddNewAccountDlgOpen} close={() => setIsAddNewAccountDlgOpen(false)} />
-        {/* <AddClassroomForm isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} /> */}
         <StudentsPanel data={data} onNew={onNew} onStudent={onStudent} />
       </>
     </TeacherPgContainer>

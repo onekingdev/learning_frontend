@@ -80,12 +80,14 @@ export const Sidebar: FC = () => {
             <CardDialog
                 isOpen={open}
                 open={openTutorial}
-                // title = {VIDEO_TUTORIAL_EXPLAIN}
-                fullWidth='true'
+                title={VIDEO_TUTORIAL_EXPLAIN[language]}
+                fullWidth={true}
                 dialogContent={
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
-                        <ExplainText>{VIDEO_TUTORIAL_EXPLAIN[language]}</ExplainText>
-                        <Box sx={{ width: TUTORIAL_VDO_DG_WIDTH, height: TUTORIAL_VDO_DG_HEIGHT, backgroundColor: 'black' }}>
+                        <Box
+                            width={isMobile ? '100%' : TUTORIAL_VDO_DG_WIDTH}
+                            height={isMobile ? 'auto' : TUTORIAL_VDO_DG_WIDTH}
+                            sx={{ backgroundColor: 'black' }}>
                             <YouTube
                                 videoId={TUTORIAL_VDO_URL}
                                 opts={{
