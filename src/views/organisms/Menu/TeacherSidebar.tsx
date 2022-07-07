@@ -79,6 +79,7 @@ export const TeacherSidebar: FC = () => {
                             <MenuTitle>{dictionary[language]?.classrooms}</MenuTitle>
                         </AccordionSummary>
                         <AccordionDetails>
+                            <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.classrooms}</MenuItem>
                             <MenuItem onClick={() => handleMenu('/teacher/addstudent')}>{dictionary[language]?.addStudents}</MenuItem>
                             <MenuItem onClick={() => handleMenu('/teacher/classroom')}>{dictionary[language]?.manageGroups}</MenuItem>
                             <MenuItem onClick={() => handleMenu('/teacher/classroom')}>{dictionary[language]?.studentDetail}</MenuItem>

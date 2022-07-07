@@ -266,7 +266,7 @@ const AddStudent: FC = () => {
     });
   }
   return (
-    <TeacherPgContainer onlyLogoImgNav={true} title={dictionary[language]?.classroom}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom}>
       <>
         <div style={{ width: '100%' }}>
           <Button

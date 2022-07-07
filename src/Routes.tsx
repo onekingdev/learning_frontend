@@ -34,7 +34,7 @@ import { KidsProgress } from 'views/pages/Student/Progress/Progress';
 import TeacherSignup from 'views/pages/Teacher/TeacherSignup/TeacherSignup';
 import SchoolSignup from 'views/pages/Teacher/SchoolSignup/SchoolSignup'
 import TeacherPayment from 'views/pages/Teacher/Payment/Payment'
-import Classroom from 'views/pages/Teacher/Classroom/Classroom'
+import Classrooms from 'views/pages/Teacher/Classroom/Classrooms'
 import Students from 'views/pages/Teacher/Students/Students'
 import Groups from 'views/pages/Teacher/Students/Groups'
 import AddStudent from 'views/pages/Teacher/AddStudent/AddStudent';
@@ -202,7 +202,8 @@ export function Routes() {
         <PrivateRoute loading={true} requireAuth={false} path="/teacher/payment/:productType">
           <TeacherPayment />
         </PrivateRoute>
-        <PrivateRoute loading={false} requireAuth={false} path="/teacher/classroom" component={Classroom} />
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/classrooms" component={Classrooms} />
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent" component={AddStudent} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/students">
           <Students />
         </PrivateRoute>
@@ -215,7 +216,6 @@ export function Routes() {
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups">
           <Groups />
         </PrivateRoute>
-        <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent" component={AddStudent} />
         <Route path="/teacher/control-aok">
           <ControlAOK />
         </Route>

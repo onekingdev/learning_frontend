@@ -25,7 +25,7 @@ export const TeacherPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav,
   return (
     <ThemeProvider theme={themeTeacher}>
       <TeacherPgWrapper>
-        <Container maxWidth='xl' sx={{ padding: 0, paddingBottom: 5 }}>
+        <Container maxWidth='xl' sx={{ padding: 0, paddingBottom: 5, minHeight: '100vh' }}>
           {onlyLogoImgNav ?
             <Box
               id='socrates-logo-container'
