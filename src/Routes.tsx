@@ -40,7 +40,6 @@ import Groups from 'views/pages/Teacher/Students/Groups'
 import AddStudent from 'views/pages/Teacher/AddStudent/AddStudent';
 import Assignment from 'views/pages/Teacher/Assignment/Assignment';
 import Results from 'views/pages/Teacher/Results/Results';
-import ProgressStudent from 'views/pages/Teacher/ProgressStudent/ProgressStudent';
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
 import ControlAOK from 'views/pages/Teacher/ControlAOK/ControlAOK';
 // import SettingForm from 'views/molecules/Classroom/SettingForm'
@@ -51,6 +50,7 @@ import { GameIframe } from 'views/pages/Student/Games/GameIframe';
 import { ProgressReview } from 'views/pages/Student/Progress/ProgressReview';
 import { Error404 } from 'views/pages/Welcome/Error404';
 import { TeacherCreateAccount } from 'views/pages/Teacher/SelectCreateType/TeacherCreateAccount';
+import Notes from 'views/pages/Teacher/Notes/Notes';
 
 
 const PrivateRoute = ({ requireAuth = true, loading = false, ...rest }) => {
@@ -198,27 +198,15 @@ export function Routes() {
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent" component={AddStudent} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/students" component={Students} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/groups" component={Groups} />
-        <PrivateRoute loading={false} requireAuth={false} path="/teacher/settings">
-          <TeacherSettings />
-        </PrivateRoute>
-        <PrivateRoute loading={false} requireAuth={false} path="/teacher/certificates">
-          <Certificates />
-        </PrivateRoute>
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/settings" component={TeacherSettings} />
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/notes" component={Notes} />
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/certificates" component={Certificates} />
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/assignments" component={Assignment} />
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/results" component={Results} />
         <Route path="/teacher/control-aok">
           <ControlAOK />
         </Route>
         {/* {process.env.NODE_ENV === 'development' ? ( */}
-        <Route path="/assignment">
-          {/* <SettingForm isOpen={true} close={()=>{}}/> */}
-          <Assignment />
-        </Route>
-        <Route path="/results">
-          {/* <SettingForm isOpen={true} close={()=>{}}/> */}
-          <Results />
-        </Route>
-        <Route path="/teacher-progress">
-          <ProgressStudent />
-        </Route>
         {/* ) : null} */}
         <Route path="*" component={Error404} />
         {/* <Redirect from="/" to="/login" /> */}

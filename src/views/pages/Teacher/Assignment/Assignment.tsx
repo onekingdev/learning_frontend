@@ -59,7 +59,7 @@ const Assignment: FC = () => {
   }, [user]);
   const [date, setDate]   = useState<Date>();
   return (
-    <TeacherPgContainer onlyLogoImgNav={true} title={dictionary[language]?.title}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title}>
       <>
         <SubjectCardContainer>
             <SubjectCard bgColor='#EC5858' imgUrl={ElaOrignal} text='ELA' />

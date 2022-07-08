@@ -15,6 +15,7 @@ import { useHistory } from 'react-router-dom';
 import { dictionary } from './dictionary'
 import { TabContainer, Tab, SelectedTab } from './Style'
 import { LANGUAGES } from 'constants/common';
+import { Button } from '@mui/material';
 
 const data = [
   {
@@ -80,8 +81,8 @@ const Students: FC = () => {
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom}>
       <>
         <TabContainer>
-          <SelectedTab onClick={() => history.push('/teacher/students')}>{dictionary[language]?.students}</SelectedTab>
-          <Tab onClick={() => history.push('/teacher/groups')}>{dictionary[language]?.group}</Tab>
+          <Button variant='text' sx={{ color: 'gray' }} onClick={() => history.push('/teacher/students')}>{dictionary[language]?.students}</Button>
+          <Button variant='text' onClick={() => history.push('/teacher/groups')}>{dictionary[language]?.group}</Button>
         </TabContainer>
         <EditStudentForm
           data={studentForEdit}

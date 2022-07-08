@@ -7,6 +7,7 @@ import { ImageUploader } from 'views/molecules/TeacherCertificates/ImageUploader
 import { fetchTeacherCertificateFilesFromFirebase } from 'app/firebase';
 import { StudentChkboxList } from 'views/molecules/TeacherCertificates/StudentChkboxList';
 import * as TYPES from 'app/types'
+import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
 
 const mockStudents = [
   {
@@ -52,7 +53,7 @@ const Certificates: FC = () => {
   }, [reLoadImgs]);
 
   return (
-    <TeacherSettingPgContainer onlyLogoImgNav={true} title={dictionary[language]?.certificates}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.certificates}>
       <Container maxWidth={false} sx={{ marginTop: 5, marginBottom: 5, display: 'flex', justifyContent: 'center' }}>
         <Grid container justifyContent={'center'} spacing={5}>
           <Grid item>
@@ -89,7 +90,7 @@ const Certificates: FC = () => {
           </Grid>
         </Grid>
       </Container >
-    </TeacherSettingPgContainer >
+    </TeacherPgContainer >
   );
 };
 export default Certificates

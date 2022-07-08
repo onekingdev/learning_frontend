@@ -25,6 +25,7 @@ const EditStudent = (props: any) => {
     const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
     const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
     const history = useHistory();
+    const [confirm, setConfirm] = useState(true)
 
     const { enqueueSnackbar } = useSnackbar();
     const classes = useStyles();

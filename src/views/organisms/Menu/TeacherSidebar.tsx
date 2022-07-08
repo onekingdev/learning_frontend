@@ -81,10 +81,10 @@ export const TeacherSidebar: FC = () => {
                         <AccordionDetails>
                             <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.classrooms}</MenuItem>
                             <MenuItem onClick={() => handleMenu('/teacher/addstudent')}>{dictionary[language]?.addStudents}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/classroom')}>{dictionary[language]?.manageGroups}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/classroom')}>{dictionary[language]?.studentDetail}</MenuItem>
+                            <MenuItem onClick={() => handleMenu('/teacher/groups')}>{dictionary[language]?.manageGroups}</MenuItem>
+                            <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.studentDetail}</MenuItem>
                             <MenuItem onClick={() => handleMenu('/teacher/notes')}>{dictionary[language]?.notesForKids}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/classroom')}>{dictionary[language]?.classroomSettings}</MenuItem>
+                            <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.classroomSettings}</MenuItem>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion className={classes.menuContainer}>
@@ -97,7 +97,7 @@ export const TeacherSidebar: FC = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <MenuItem onClick={() => handleMenu('/teacher/assignments')}>{dictionary[language]?.createAssignments}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/viewResults')}>{dictionary[language]?.viewResults}</MenuItem>
+                            <MenuItem onClick={() => handleMenu('/teacher/results')}>{dictionary[language]?.viewResults}</MenuItem>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion className={classes.menuContainer}>
@@ -109,7 +109,7 @@ export const TeacherSidebar: FC = () => {
                             <MenuTitle>{dictionary[language]?.certificates}</MenuTitle>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MenuItem onClick={() => handleMenu('/teacher/addCertificates')}>{dictionary[language]?.addCertificates}</MenuItem>
+                            <MenuItem onClick={() => handleMenu('/teacher/certificates')}>{dictionary[language]?.addCertificates}</MenuItem>
                             <MenuItem onClick={() => handleMenu('/teacher/viewCertificates')}>{dictionary[language]?.viewCertificates}</MenuItem>
                         </AccordionDetails>
                     </Accordion>
@@ -133,10 +133,6 @@ export const TeacherSidebar: FC = () => {
                     <LineMenu>
                         <MenuMark src={helpMark} />
                         <MenuTitle onClick={() => handleMenu('/teacher/help')}>{dictionary[language]?.help}</MenuTitle>
-                    </LineMenu>
-                    <LineMenu >
-                        <MenuMark src={helpMark} />
-                        <MenuTitle onClick={() => handleMenu('/teacher/settings')}>{dictionary[language]?.settings}</MenuTitle>
                     </LineMenu>
                     <LineMenu>
                         <MenuMark src={helpMark} />

@@ -7,7 +7,7 @@ const ControlAOK: FC = () => {
     let language:string     = useSelector((state: any) => state.user.language);
     language                = language? language : 'en-us'
     return (
-        <TeacherPgContainer onlyLogoImgNav={true} title={dictionary[language]?.assignment}>
+        <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.assignment}>
             <>
             </>
         </TeacherPgContainer>
