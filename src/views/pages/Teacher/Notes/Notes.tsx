@@ -53,7 +53,7 @@ const Notes: FC = () => {
   }, []);
 
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.notes}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.notes} current='notes'>
       <Box display='flex' justifyContent={'center'}>
         <ContentForm />
         <StudentLists data={data} setData={setData} />

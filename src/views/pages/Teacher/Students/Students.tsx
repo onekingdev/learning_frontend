@@ -16,6 +16,7 @@ import { dictionary } from './dictionary'
 import { TabContainer, Tab, SelectedTab } from './Style'
 import { LANGUAGES } from 'constants/common';
 import { Button } from '@mui/material';
+import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
 
 const data = [
   {
@@ -78,28 +79,24 @@ const Students: FC = () => {
   }, []);
 
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom} current='students' >
       <>
-        <TabContainer>
-          <Button variant='text' sx={{ color: 'gray' }} onClick={() => history.push('/teacher/students')}>{dictionary[language]?.students}</Button>
-          <Button variant='text' onClick={() => history.push('/teacher/groups')}>{dictionary[language]?.group}</Button>
-        </TabContainer>
-        <EditStudentForm
-          data={studentForEdit}
-          isOpen={isOpenEditStudent}
-          close={() => setIsOpenEditStudent(false)}
-        />
-        <ChooseNewStudentTypeDlg
-          isOpen={isOpenNewType}
-          close={() => setIsOpenNewType(false)}
-          openExistingNewAccountDlg={() => setIsExistingNewAccountDlgOpen(true)}
-          openNewAccountDlg={() => setIsAddNewAccountDlgOpen(true)}
-        />
-        <AddExistStudentDlg isOpen={isExistingNewAccountDlgOpen} close={() => setIsExistingNewAccountDlgOpen(false)} />
-        <AddNewStudent isOpen={isAddNewAccountDlgOpen} close={() => setIsAddNewAccountDlgOpen(false)} />
-        <StudentsPanel data={data} onNew={onNew} onStudent={onStudent} />
-      </>
-    </TeacherPgContainer>
-  );
+          <EditStudentForm
+            data={studentForEdit}
+            isOpen={isOpenEditStudent}
+            close={() => setIsOpenEditStudent(false)}
+          />
+          <ChooseNewStudentTypeDlg
+            isOpen={isOpenNewType}
+            close={() => setIsOpenNewType(false)}
+            openExistingNewAccountDlg={() => setIsExistingNewAccountDlgOpen(true)}
+            openNewAccountDlg={() => setIsAddNewAccountDlgOpen(true)}
+          />
+          <AddExistStudentDlg isOpen={isExistingNewAccountDlgOpen} close={() => setIsExistingNewAccountDlgOpen(false)} />
+          <AddNewStudent isOpen={isAddNewAccountDlgOpen} close={() => setIsAddNewAccountDlgOpen(false)} />
+          <StudentsPanel data={data} onNew={onNew} onStudent={onStudent} />
+        </>
+      </TeacherPgContainer>
+      );
 };
-export default Students
+      export default Students

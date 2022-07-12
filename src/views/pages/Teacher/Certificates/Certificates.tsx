@@ -8,6 +8,7 @@ import { fetchTeacherCertificateFilesFromFirebase } from 'app/firebase';
 import { StudentChkboxList } from 'views/molecules/TeacherCertificates/StudentChkboxList';
 import * as TYPES from 'app/types'
 import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
 
 const mockStudents = [
   {
@@ -53,9 +54,9 @@ const Certificates: FC = () => {
   }, [reLoadImgs]);
 
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.certificates}>
-      <Container maxWidth={false} sx={{ marginTop: 5, marginBottom: 5, display: 'flex', justifyContent: 'center' }}>
-        <Grid container justifyContent={'center'} spacing={5}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.certificates} current='certificates'>
+      <Container maxWidth={false} sx={{ marginBottom: 5 }}>
+        <Grid container mt={1} justifyContent={'center'} spacing={5}>
           <Grid item>
             <Box sx={{ maxWidth: 900 }}>
               <Grid container spacing={6} >

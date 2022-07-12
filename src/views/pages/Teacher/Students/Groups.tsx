@@ -13,6 +13,7 @@ import { dictionary } from './dictionary'
 import { useHistory } from 'react-router-dom';
 import { TabContainer, Tab, SelectedTab } from './Style'
 import { Button } from '@mui/material';
+import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
 const data = [
   {
     name: 'armin',
@@ -74,13 +75,8 @@ const Students: FC = () => {
   }, []);
 
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom} current='groups'>
       <>
-        <TabContainer>
-          <Button variant='text' onClick={() => history.push('/teacher/students')}>{dictionary[language]?.students}</Button>
-          <Button variant='text' sx={{ color: 'gray' }} onClick={() => history.push('/teacher/groups')}>{dictionary[language]?.group}</Button>
-        </TabContainer>
-
         <ChooseNewStudentTypeDlg
           isOpen={isOpenNewType}
           close={() => setIsOpenNewType(false)}

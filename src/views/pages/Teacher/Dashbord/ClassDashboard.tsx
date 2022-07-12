@@ -5,7 +5,7 @@ import {
 import { useSelector } from 'react-redux';
 import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
 import commonDictionary from 'constants/commonDictionary'
-import { Avatar, Box, Container, Grid, Paper, Typography, useMediaQuery } from '@mui/material';
+import { Avatar, Box, Container, Grid, Paper, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
 import coin from 'views/assets/coin.svg'
 import target from 'views/assets/target.svg'
 import question_icon from 'views/assets/nav-icons/question.png';
@@ -16,6 +16,7 @@ import { doFetchClassLeaders } from 'app/actions';
 import { getMessage } from 'views/utils';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { ImageAvatar } from 'views/molecules/Avatar/DefaultAvatar';
+import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
 
 const leaders = [
   {
@@ -45,7 +46,7 @@ const ClassDashboard: FC = () => {
   // if (error) return <Typography variant='caption' color={'red'}> {getMessage(error)}</Typography>
   // if (leaders.message) return <Typography variant='caption'> {leaders.message}</Typography>
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.class_dashboard}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.class_dashboard} current='dashboard'>
       <Container maxWidth={'lg'}>
         <Grid container justifyContent='center' spacing={2} alignItems='start' mt={2}>
           <Grid item xs={12} sm={6}>
@@ -132,7 +133,7 @@ const ClassDashboard: FC = () => {
               <Grid container spacing={1} padding={1}>
 
                 <Grid item xs={3}>
-                  <img src={question_icon} style={{ height: 45 }}/>
+                  <img src={question_icon} style={{ height: 45 }} />
                 </Grid>
                 <Grid item xs={7}>
                   <Typography textAlign={'start'} width='100%'>{'Class Question Answered'}</Typography>
@@ -142,7 +143,7 @@ const ClassDashboard: FC = () => {
                 </Grid>
 
                 <Grid item xs={3}>
-                  <img src={coin} style={{ height: 45 }}/>
+                  <img src={coin} style={{ height: 45 }} />
                 </Grid>
                 <Grid item xs={7}>
                   <Typography textAlign={'start'} width='100%'>{'Class Coins Earned'}</Typography>

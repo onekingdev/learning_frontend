@@ -10,6 +10,7 @@ import {
 import { themeTeacher } from 'views/Theme';
 import notFoundPageImage from 'views/assets/others/404image.svg'
 import { Typography } from '@mui/material';
+import commonDictionary from 'constants/commonDictionary'
 import { Wrapper } from './Style';
 
 export const Error404: FC = () => {
@@ -26,7 +27,7 @@ export const Error404: FC = () => {
       <Wrapper>
         <Box display='flex' flexDirection='column' alignItems='center' gap={3}>
           <Typography variant='h1' fontWeight={'bold'}>Opps!</Typography>
-          <Typography variant='h4'>Something went wrong.</Typography>
+          <Typography variant='h4'>{commonDictionary[language]?.something_wrong}</Typography>
           <Typography variant='h5'>Error404: Page not found</Typography>
           <img src={notFoundPageImage}
             style={{ maxWidth: '100%', maxHeight: '60vh' }}

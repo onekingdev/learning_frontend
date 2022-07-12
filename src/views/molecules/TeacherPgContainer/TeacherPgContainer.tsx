@@ -12,14 +12,16 @@ import { themeTeacher } from 'views/Theme';
 import { ScreenSize } from 'constants/screenSize';
 import { TeacherPageTitle } from '../PageTitle';
 import { USER_AVATAR_SIZE } from 'constants/common';
+import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
 
 type ParentPgContainerProps = {
   onlyLogoImgNav: boolean;
   children: ReactChild | ReactChildren;
   title?: string
+  current?: string
 };
 
-export const TeacherPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav, title, children = (<></>) }) => {
+export const TeacherPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav, title, current, children = (<></>) }) => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
 
   return (
@@ -40,6 +42,7 @@ export const TeacherPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav,
             :
             <Menu />}
           {title && <TeacherPageTitle title={title} />}
+          {current && <ClassroomMenu current={current} />}
           <Box>
             {children}
           </Box>
