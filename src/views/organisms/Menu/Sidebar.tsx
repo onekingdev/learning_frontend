@@ -223,11 +223,3 @@ export const StyledListItem = styled(ListItem)`
     justify-content: flex-end;
 }
 `
-const ExplainText = styled.p`
-    font-size: 22px;
-    text-align: center;
-    color: ${BasicColor.blue};
-    @media screen and (max-width: ${ScreenSize.phone}) {
-        font-size: 16px;
-    }
-`

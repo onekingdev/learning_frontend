@@ -57,6 +57,20 @@ export const doCreateTeacher = async (
   return res.data?.createTeacher?.user ?? res.errors[0] // when django returns error message on fail
 }
 
+export const doFetchClassLeaders = async (token: string) => {
+  // TODO: update to real query when production
+  return {data: [
+    {
+      name: 'Charly',
+      coins: 540,
+    },
+    {
+      name: 'Candy',
+      coins: 240,
+    },
+  ]}
+}
+
 export const teacherCreatesStudent = (payload: string) => ({
   type: 'TEACHER_CREATE_STUDENT',
   payload,

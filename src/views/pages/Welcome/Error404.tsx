@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { resetReducer } from 'app/actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,21 +6,16 @@ import {
   Box,
   Button,
   ThemeProvider,
-  useMediaQuery
 } from '@mui/material';
 import { themeTeacher } from 'views/Theme';
 import notFoundPageImage from 'views/assets/others/404image.svg'
 import { Typography } from '@mui/material';
-import { ScreenSize } from 'constants/screenSize';
 import { Wrapper } from './Style';
 
 export const Error404: FC = () => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
-
   const history = useHistory();
   const dispatch = useDispatch();
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  const language: string = useSelector((state: any) => state.user.language) || 'en-us';
 
   useEffect(() => {
     resetReducer(dispatch);

@@ -151,4 +151,5 @@ export const fetchQuery = async (
     })
   }).then((response: any) => response.json())
 };
+
 export default get_async;

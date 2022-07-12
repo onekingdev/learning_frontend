@@ -62,7 +62,7 @@ const ParentTitleContainer = styled.div`
   @media screen and (max-width: ${ScreenSize.phone}) {
     width: 100%;
     margin: 0;
-    padding: 10px 0 10px 0;
+    padding: 20px 0;
     background-image: none;
     background-color: ${BasicColor.darkGreen};
   }

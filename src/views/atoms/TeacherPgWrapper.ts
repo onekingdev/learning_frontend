@@ -1,3 +1,4 @@
+import { ScreenSize } from 'constants/screenSize';
 import styled from 'styled-components';
 import bg_left_img from 'views/assets/teacher_bg_left.svg'
 import bg_right_img from 'views/assets/teacher_bg_right.svg'
@@ -9,6 +10,9 @@ export const TeacherPgWrapper = styled.div`
   background-position: left top, right bottom;
   height            : 100vh;
   height: fit-content;
+  @media screen and (max-width: ${ScreenSize.phone}) {
+    background: none;
+  }
 `;
 
 

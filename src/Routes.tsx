@@ -51,6 +51,7 @@ import { ProgressReview } from 'views/pages/Student/Progress/ProgressReview';
 import { Error404 } from 'views/pages/Welcome/Error404';
 import { TeacherCreateAccount } from 'views/pages/Teacher/SelectCreateType/TeacherCreateAccount';
 import Notes from 'views/pages/Teacher/Notes/Notes';
+import ClassDashboard from 'views/pages/Teacher/Dashbord/ClassDashboard';
 
 
 const PrivateRoute = ({ requireAuth = true, loading = false, ...rest }) => {
@@ -203,6 +204,7 @@ export function Routes() {
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/certificates" component={Certificates} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/assignments" component={Assignment} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/results" component={Results} />
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/dashboard" component={ClassDashboard} />
         <Route path="/teacher/control-aok">
           <ControlAOK />
         </Route>

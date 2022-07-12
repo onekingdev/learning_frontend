@@ -113,10 +113,11 @@ export const Welcome: FC = () => {
         <Grid container justifyContent='center' spacing={2} mt='3vh' maxWidth={'sm'} mb={5}>
           <Grid item xs={12} sm={6}>
             <Button
-              onClick={() => history.push('/teacher/selectCreateType')}
+              // onClick={() => history.push('/teacher/selectCreateType')}
+              onClick={() => history.push('/teacher/classrooms')}
               variant='contained'
               color='secondary'
-              disabled={true}
+              // disabled={true}
             >
               {dictionary[language]?.schoolSignUp}
             </Button>

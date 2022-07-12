@@ -17,6 +17,7 @@ import helpMark from 'views/assets/menu/helpMark.svg';
 import manageSubMark from 'views/assets/menu/manageSubMark.svg';
 import reportMark from 'views/assets/menu/reportMark.svg';
 import { useStyles } from './Style'
+import commonDictionary from 'constants/commonDictionary'
 import {
     Accordion,
     AccordionSummary,
@@ -85,6 +86,7 @@ export const TeacherSidebar: FC = () => {
                             <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.studentDetail}</MenuItem>
                             <MenuItem onClick={() => handleMenu('/teacher/notes')}>{dictionary[language]?.notesForKids}</MenuItem>
                             <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.classroomSettings}</MenuItem>
+                            <MenuItem onClick={() => handleMenu('/teacher/dashboard')}>{commonDictionary[language]?.class_dashboard}</MenuItem>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion className={classes.menuContainer}>

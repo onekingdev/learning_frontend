@@ -7,6 +7,7 @@ const dictionary: any = Object.freeze({
     'By clicking Create Account, you agree to Learn With Socrates’s',
     children_privacy_policy: 'Children’s Privacy Policy',
     choose_your_plan: 'Choose your plan',
+    class_dashboard: 'Class Dashboard',
     classroom:'Classroom',
     classrooms:'Classrooms',
     contact_us: 'Contact Us',
@@ -36,6 +37,7 @@ const dictionary: any = Object.freeze({
     children_privacy_policy:
     'นโยบายความเป็นส่วนตัวของบุตรหลาน ของ Learn with Socrates',
     choose_your_plan: 'เลือกแพลนผู้ใช้',
+    class_dashboard: 'แดชบอร์ดของชั้นเรียน',
     classroom:'ห้องเรียน',
     classrooms:'ห้องเรียน',
     contact_us: 'ติดต่อเรา',
@@ -65,6 +67,7 @@ const dictionary: any = Object.freeze({
     children_privacy_policy:
     'Política de Privacidad para niños de Learn With Socrates',
     choose_your_plan: 'Elige tu plan',
+    class_dashboard: 'Tablero de clase',
     classroom:'Aula',
     classrooms:'Aulas',
     contact_us: 'Contacta con Nosotros',
