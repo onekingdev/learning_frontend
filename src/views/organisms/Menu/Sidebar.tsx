@@ -85,14 +85,14 @@ export const Sidebar: FC = () => {
                 dialogContent={
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
                         <Box
-                            width={isMobile ? '100%' : TUTORIAL_VDO_DG_WIDTH}
-                            height={isMobile ? 'auto' : TUTORIAL_VDO_DG_WIDTH}
+                            // width={isMobile ? '100%' : TUTORIAL_VDO_DG_WIDTH}
+                            // height={isMobile ? 'auto' : TUTORIAL_VDO_DG_WIDTH}
                             sx={{ backgroundColor: 'black' }}>
                             <YouTube
                                 videoId={TUTORIAL_VDO_URL}
                                 opts={{
-                                    width: `${TUTORIAL_VDO_DG_WIDTH}`,
-                                    height: `${TUTORIAL_VDO_DG_HEIGHT}`,
+                                    // width: `${TUTORIAL_VDO_DG_WIDTH}`,
+                                    // height: `${TUTORIAL_VDO_DG_HEIGHT}`,
                                     playerVars: {
                                         autoplay: 0,
                                         controls: 0

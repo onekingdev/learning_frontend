@@ -13,10 +13,7 @@ import AddNewStudent from 'views/molecules/Classroom/AddNewStudent'
 import EditStudentForm from 'views/molecules/Classroom/EditStudentForm'
 import { useHistory } from 'react-router-dom';
 import { dictionary } from './dictionary'
-import { TabContainer, Tab, SelectedTab } from './Style'
 import { LANGUAGES } from 'constants/common';
-import { Button } from '@mui/material';
-import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
 
 const data = [
   {
