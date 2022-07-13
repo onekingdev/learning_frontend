@@ -89,9 +89,9 @@ export const AddSimplePlanForm: FC = () => {
         onChange={handleRadioChange}
       >{
           plans.map((plan: any) => {
-            return <Grid container alignItems='center' >
+            return <Grid container alignItems='center' key={plan.id}>
               <Grid item xs={6}>
-                <LSFormControlLabel value={plan.name} control={<LSRadio />} label={dictionary[language]?.[plan.slug as keyof Object]} />
+                <FormControlLabel value={plan.name} control={<LSRadio />} label={commonDictionary[language]?.[plan.slug as keyof Object] || ''} />
               </Grid>
               <Grid item xs={6}>
                 <Typography variant='body1' textAlign='center'>{yearly ? plan.priceYear : plan.priceMonth}<span style={{ fontSize: '0.8rem' }}>{plan.currency}/{yearly ? commonDictionary[language]?.annually : commonDictionary[language]?.monthly}</span></Typography>
