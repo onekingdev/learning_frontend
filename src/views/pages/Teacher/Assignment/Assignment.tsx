@@ -1,74 +1,58 @@
-import { FC, useEffect, useState, useContext }    from 'react';
-import { useSelector }          from 'react-redux';
-import { LoadingContext }       from 'react-router-loading';
-import { TeacherPgContainer }   from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
-import { dictionary }           from './dictionary';
-import { SubjectCard }          from 'views/atoms/SubjectCard';
-import ElaOrignal               from 'views/assets/packageIcons/ela_original.svg';
-import MathOrignal               from 'views/assets/packageIcons/math_original.svg';
-import ScienceOrignal               from 'views/assets/packageIcons/science_original.svg';
-import SightOrignal               from 'views/assets/packageIcons/sight_original.svg';
-import FinancialOrignal               from 'views/assets/packageIcons/financial_original.svg';
-import HealthOrignal               from 'views/assets/packageIcons/health_original.svg';
-import { SubjectCardContainer, TableContainer, AssignPanelContainer, StudentPanel, AssignPanel, StudentItemContainer } from './style';
-import MarkTable             from 'views/molecules/Table/MarkTable';
-import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
-import query                 from 'api/queries/get';
+import { FC, useEffect, useState, useContext, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { LoadingContext } from 'react-router-loading';
+import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { dictionary } from './dictionary';
+import { SubjectCard } from 'views/atoms/SubjectCard';
+import ElaOrignal from 'views/assets/packageIcons/ela_original.svg';
+import MathOrignal from 'views/assets/packageIcons/math_original.svg';
+import ScienceOrignal from 'views/assets/packageIcons/science_original.svg';
+import SightOrignal from 'views/assets/packageIcons/sight_original.svg';
+import FinancialOrignal from 'views/assets/packageIcons/financial_original.svg';
+import HealthOrignal from 'views/assets/packageIcons/health_original.svg';
+import { TableContainer, AssignPanelContainer, StudentPanel, AssignPanel, StudentItemContainer } from './style';
+import { AreasOfKnowledge } from 'api/fragments/topicFragments';
+import query from 'api/queries/get';
 import AssignmentTable from 'views/molecules/Table/AssignmentTable';
 import TextField from '@mui/material/TextField';
-import { Box } from '@mui/material';
-import DateTimePicker            from 'react-datetime-picker';
-import Button                    from 'views/molecules/MuiButton';
-import {ButtonColor, BasicColor} from 'views/Color';
+import { Box, Container, Grid } from '@mui/material';
+import DateTimePicker from 'react-datetime-picker';
+import Button from 'views/molecules/MuiButton';
+import { BasicColor } from 'views/Color';
+import { doFetchAOKsByAudienceId } from 'app/actions/audienceActions';
+import { useQuery } from 'react-query';
+import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
 
 const Assignment: FC = () => {
-  const loadingContext    = useContext(LoadingContext);
-  const user              = useSelector((state: any) => state.user);
-  const guardian          = useSelector((state: any) => state.guardian);
-  let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : "en-us"
+  const loadingContext = useContext(LoadingContext);
+  const { token } = useSelector((state: any) => state.user);
+  const guardian = useSelector((state: any) => state.guardian);
+  const language = useSelector((state: any) => state.user.language) || 'en-us';
+  const { data: aoks, isLoading, error } = useQuery(['fetch-aok-list', 2], () => doFetchAOKsByAudienceId(2))
 
   useEffect(() => {
 
-    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+    if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
   }, []);
 
-  const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
-  const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
-  const [data, setData]                         = useState<any[]>([]);
+  const [activeSubjectId, setActiveSubjectId] = useState('');
 
-  const [students, setStudents]                 = useState<string[]>(["Lorena Sanchez","Lorena Sanchez","Lorena Sanchez","Lorena Sanchez","Lorena Sanchez","Lorena Sanchez","Lorena Sanchez"]);
+  const [students, setStudents] = useState<string[]>(["Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez"]);
   useEffect(() => {
 
-    if(window.Tawk_API?.onLoaded) if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+    if (window.Tawk_API?.onLoaded) if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+  }, []);
+  const [date, setDate] = useState<Date>();
 
-    (async () => {
-      // Get All Subject
-      const res:any = await query(``, AreasOfKnowledge(), user.token).catch(e => ({success: false}));
-      if(res.success === false) {
-        return
-      }
-      const result:any = await res.json();
-      if(result.errors && !result.data) {
-        alert(result.errors[0].message);
-      } else {
-        setAreasOfKnowledge(result.data.areasOfKnowledge)
-      }
-    })();
-  }, [user]);
-  const [date, setDate]   = useState<Date>();
+  const onSubjectSelect = useCallback((id: string) => {
+    setActiveSubjectId(id)
+  }, []);
+
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title} current='assignments'>
-      <>
-        <SubjectCardContainer>
-            <SubjectCard bgColor='#EC5858' imgUrl={ElaOrignal} text='ELA' />
-            <SubjectCard bgColor='#EC5858' imgUrl={MathOrignal} text='MATH' />
-            <SubjectCard bgColor='#EC5858' imgUrl={ScienceOrignal} text='SCIENCE' />
-            <SubjectCard bgColor='#EC5858' imgUrl={SightOrignal} text='SIGHT WORDS' />
-            <SubjectCard bgColor='#EC5858' imgUrl={FinancialOrignal} text='FINANCIAL LITERACY' />
-            <SubjectCard bgColor='#EC5858' imgUrl={HealthOrignal} text='HEALTH & SAFETY' />
-        </SubjectCardContainer>
+      <Container>
+        {aoks && <SlideShowSubjects subjects={aoks} />}
         <TableContainer>
           <AssignmentTable>
             <AssignPanelContainer>
@@ -123,11 +107,11 @@ const Assignment: FC = () => {
                 }}>
                   <label htmlFor="">Assignment Start Date</label><br />
                   <DateTimePicker
-                      value={date}
-                      onChange={(e: any) => {
-                          setDate(e);
-                          console.log(e)
-                      }}
+                    value={date}
+                    onChange={(e: any) => {
+                      setDate(e);
+                      console.log(e)
+                    }}
                   />
                 </Box>
                 <Box style={{
@@ -136,26 +120,26 @@ const Assignment: FC = () => {
                 }}>
                   <label htmlFor="">Assignment End Date (Leave in blank for no end date)</label><br />
                   <DateTimePicker
-                      value={date}
-                      onChange={(e: any) => {
-                          setDate(e);
-                          console.log(e)
-                      }}
+                    value={date}
+                    onChange={(e: any) => {
+                      setDate(e);
+                      console.log(e)
+                    }}
                   />
                 </Box>
                 <Button
                   margin="10px 0px"
-                  value     = {dictionary[language]?.assign}
-                  bgColor   = {BasicColor.green}
+                  value={dictionary[language]?.assign}
+                  bgColor={BasicColor.green}
                   // onClick   = {handleSubmit}
-                  align     = {'left'}
-                  fullWidth = { true }
+                  align={'left'}
+                  fullWidth={true}
                 />
               </AssignPanel>
             </AssignPanelContainer>
           </AssignmentTable>
         </TableContainer>
-      </>
+      </Container>
     </TeacherPgContainer>
   );
 };

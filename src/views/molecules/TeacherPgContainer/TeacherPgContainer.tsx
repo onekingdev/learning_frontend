@@ -6,13 +6,12 @@ import {
   Box,
   Container,
   ThemeProvider,
-  useMediaQuery,
 } from '@mui/material';
 import { themeTeacher } from 'views/Theme';
-import { ScreenSize } from 'constants/screenSize';
 import { TeacherPageTitle } from '../PageTitle';
 import { USER_AVATAR_SIZE } from 'constants/common';
 import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 type ParentPgContainerProps = {
   onlyLogoImgNav: boolean;
@@ -22,7 +21,7 @@ type ParentPgContainerProps = {
 };
 
 export const TeacherPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav, title, current, children = (<></>) }) => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+  const isMobile = useSocratesMediaQuery('xs')
 
   return (
     <ThemeProvider theme={themeTeacher}>
@@ -43,7 +42,7 @@ export const TeacherPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav,
             <Menu />}
           {title && <TeacherPageTitle title={title} />}
           {current && <ClassroomMenu current={current} />}
-          <Box>
+          <Box mt={5} mb={5}>
             {children}
           </Box>
           <Box height={USER_AVATAR_SIZE + 10} width={100} display={isMobile ? 'block' : 'none'} />

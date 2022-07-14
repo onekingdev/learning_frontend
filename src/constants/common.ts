@@ -79,3 +79,13 @@ export const SCHOOL_TYPES = [
     'Charter',
     'Public'
 ]
+
+export const SUBJECT_COLORS = [
+    '#FF0000',
+    '#00FF00',
+    '#0000FF',
+    '#FFDD00',
+    '#DD00FF',
+    '#FFCC00',
+    '#CC00FF',
+]

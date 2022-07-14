@@ -69,6 +69,7 @@
     "react-router-loading": "^0.4.0",
     "react-scripts": "5.0.0",
     "react-slick": "^0.29.0",
+    "react-slideshow-image": "^4.0.2",
     "react-vis": "^1.11.7",
     "react-youtube": "^8.0.0",
     "recharts": "^2.1.8",

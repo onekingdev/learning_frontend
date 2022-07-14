@@ -20,7 +20,7 @@ declare global {
     Tawk_API?: any;
   }
 }
-declare const rewardful: any;
+// declare const rewardful: any;
 declare const Rewardful: any;
 export default () => {
   const [persist] = useState(store());

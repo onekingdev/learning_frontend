@@ -1,13 +1,4 @@
 import styled         from 'styled-components';
-import {ScreenSize}   from '../../../../constants/screenSize';
-import { makeStyles } from '@mui/styles'
-
-export const SubjectCardContainer = styled.div`
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-`;
 
 export const TableContainer = styled.div`
     width: 100%;

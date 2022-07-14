@@ -1,3 +1,4 @@
+import 'animate.css';
 import { useEffect } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import { Route, Switch } from 'react-router-loading';
@@ -13,7 +14,6 @@ import { Games } from 'views/pages/Student/Games/Games';
 import { GamesMenu } from 'views/pages/Student/Games/GamesMenu/GamesMenu';
 import { ConfirmAccount } from 'views/pages/ConfirmAccount/ConfirmAccount';
 import { KnowledgeMap } from 'views/pages/Student/KnowledgeMap/KnowledgeMap';
-import { SubjectsMenu } from 'views/pages/Student/Menus/SubjectMenu/SubjectsMenu';
 import { TopicsMenu } from 'views/pages/Student/Menus/TopicsMenu/TopicsMenu';
 import { Wardrobe } from 'views/pages/Student/Avatar/Wardrobe';
 import { Payment } from 'views/pages/Parent/Payment/Payment';
@@ -21,7 +21,6 @@ import CreateParent from 'views/pages/Parent/CreateParent/CreateParent';
 import KidsList from 'views/pages/Parent/KidsList/KidsList';
 import { Store } from 'app/configureStore';
 import { Settings } from 'views/pages/Parent/Settings/Settings';
-// import { Report }                from 'views/pages/Parent/Report/Report';
 import { Bank } from 'views/pages/Student/Bank/Bank';
 import { Cards } from 'views/pages/Student/Collectibles/ByCards';
 import { MyCardCollection } from 'views/pages/Student/Collectibles/MyCards';
@@ -42,9 +41,7 @@ import Assignment from 'views/pages/Teacher/Assignment/Assignment';
 import Results from 'views/pages/Teacher/Results/Results';
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
 import ControlAOK from 'views/pages/Teacher/ControlAOK/ControlAOK';
-// import SettingForm from 'views/molecules/Classroom/SettingForm'
 import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
-import 'animate.css';
 import Certificates from 'views/pages/Teacher/Certificates/Certificates';
 import { GameIframe } from 'views/pages/Student/Games/GameIframe';
 import { ProgressReview } from 'views/pages/Student/Progress/ProgressReview';
@@ -156,9 +153,6 @@ export function Routes() {
         </PrivateRoute>
         <PrivateRoute loading={true} path="/confirmation">
           <ConfirmAccount />
-        </PrivateRoute>
-        <PrivateRoute loading={true} path="/subjects">
-          <SubjectsMenu />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/topic/:topicId">
           <TopicsMenu />
