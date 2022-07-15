@@ -215,8 +215,6 @@ query {
         questionType
         questionText
         answerOptions {
-          id
-          isCorrect
           ... on MultipleChoiceAnswerOptionSchema {
             ${NEW_MC_ANSWER_OPTION}
           }
@@ -235,8 +233,6 @@ query {
         }
       }
       chosenAnswer {
-        id
-        isCorrect
         ... on MultipleChoiceAnswerOptionSchema {
           ${NEW_MC_ANSWER_OPTION}
         }

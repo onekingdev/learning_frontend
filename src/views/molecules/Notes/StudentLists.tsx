@@ -13,7 +13,6 @@ import MenuItem                  from '@mui/material/MenuItem';
 import Button                    from 'views/molecules/MuiButton';
 import {ButtonColor, BasicColor} from 'views/Color';
 import commonDictionary          from 'constants/commonDictionary'
-// import DateTimePicker            from 'react-datetime-picker';
 import Paper                     from '@mui/material/Paper';
 import Checkbox                  from '@mui/material/Checkbox';
 import {

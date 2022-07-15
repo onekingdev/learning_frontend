@@ -1,16 +1,10 @@
-import { FC, useEffect, useState, useContext, useCallback } from 'react';
+import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
 import { dictionary } from './dictionary';
-import { SubjectCard } from 'views/atoms/SubjectCard';
-import { TableContainer, AssignPanelContainer, StudentPanel, AssignPanel, StudentItemContainer } from './style';
-import { AreasOfKnowledge } from 'api/fragments/topicFragments';
-import query from 'api/queries/get';
-import AssignmentTable from 'views/molecules/Table/AssignmentTable';
+import { StudentItemContainer } from './style';
 import { Box, Button, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material';
-import DateTimePicker from 'react-datetime-picker';
-import { BasicColor } from 'views/Color';
 import { doFetchSubjectsAndGradeByAudienceId } from 'app/actions/audienceActions';
 import { useQuery } from 'react-query';
 import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';

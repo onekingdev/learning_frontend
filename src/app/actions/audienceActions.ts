@@ -41,3 +41,18 @@ export const doFetchSubjectsAndGradeByAudienceId = async (audienceId: number) =>
   }`);
   return res.data?.audienceById ?? res.errors[0];
 };
+
+export const doFetchTopicsByGradeAndSubject = async (subjectId: number, gradeId: number) => {
+  const res: any = await fetchQuery(`{
+    rootTopicsByAokAndGrade(aokId: ${subjectId}, gradeId: ${gradeId}) {
+      id
+      standardTopic
+      name
+      subTopics{
+        id
+        name
+      }
+    }
+  }`);
+  return res.data?.rootTopicsByAokAndGrade ?? res.errors[0];
+};
