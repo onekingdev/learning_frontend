@@ -8,14 +8,16 @@ import { TableContainer, AssignPanelContainer, StudentPanel, AssignPanel, Studen
 import { AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query from 'api/queries/get';
 import AssignmentTable from 'views/molecules/Table/AssignmentTable';
-import TextField from '@mui/material/TextField';
-import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
+import { Box, Button, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material';
 import DateTimePicker from 'react-datetime-picker';
-import Button from 'views/molecules/MuiButton';
 import { BasicColor } from 'views/Color';
 import { doFetchSubjectsAndGradeByAudienceId } from 'app/actions/audienceActions';
 import { useQuery } from 'react-query';
 import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
+
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const Assignment: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -33,16 +35,18 @@ const Assignment: FC = () => {
   const [activeSubjectId, setActiveSubjectId] = useState('');
   const [activeGradeId, setActiveGradeId] = useState('')
 
-  const [students, setStudents] = useState<string[]>(["Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez"]);
+  const [students, setStudents] = useState<string[]>(['Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez']);
 
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
   }, []);
   const [date, setDate] = useState<Date>();
+  const [startDate, setStartDate] = useState<Date | null>()
+  const [endDate, setEndDate] = useState<Date | null>()
 
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title} current='assignments'>
-      <Container maxWidth='lg'>
+      <Container maxWidth='lg' >
         {audience &&
           <SlideShowSubjects
             subjects={audience.areaofknowledgeSet}
@@ -51,116 +55,124 @@ const Assignment: FC = () => {
             }}
           />
         }
-        {audience &&
-          <FormControl fullWidth>
-            {/* <InputLabel id="grade-select-label">Grade</InputLabel> */}
-            <Select
-              labelId="grade-select-label"
-              id="grade-select"
-              value={activeGradeId || ''}
-              SelectDisplayProps={{
-                style: {
-                  background: '#1771B9',
-                  color: 'white',
-                  padding: 10
+        <Box
+          sx={{ border: 'solid #A3A5A5 1px' }}
+        >
+          {audience &&
+            <FormControl fullWidth>
+              <InputLabel id='grade-select-label' sx={{
+                padding: 'none',
+                color: 'white',
+                ...(activeGradeId && { display: 'none' })
+              }}>Select Grade
+              </InputLabel>
+              <Select
+                labelId='grade-select-label'
+                id='grade-select'
+                value={activeGradeId || ''}
+                SelectDisplayProps={{
+                  style: {
+                    background: '#1771B9',
+                    color: 'white',
+                    padding: 15
+                  }
+                }}
+                variant='filled'
+                onChange={(e) => setActiveGradeId(e.target.value)}
+              >{
+                  audience.gradeSet.map((item: any) => (
+                    <MenuItem value={item.id}>{item.name}</MenuItem>
+                  ))
                 }
-              }}
-              variant='filled'
-              onChange={(e) => setActiveGradeId(e.target.value)}
-            >{
-                audience.gradeSet.map((item: any) => (
-                  <MenuItem value={item.id}>{item.name}</MenuItem>
-                ))
-              }
-            </Select>
-          </FormControl>
-        }
-        <TableContainer>
-          <AssignmentTable>
-            <AssignPanelContainer>
-              <StudentPanel>
-                <StudentItemContainer>
-                  <input type="checkbox" name="" id={`student-all`} />
-                  <label htmlFor={`student-all`}>All Student</label>
-                </StudentItemContainer>
-                {students.map((student, id) => (
+              </Select>
+            </FormControl>
+          }
+          <Box
+            padding={2}
+            sx={{ background: '#E3E5E5' }}
+          >
+            <Grid container columnSpacing={3} rowSpacing={6} padding={2}>
+              <Grid item xs={12} md={4}>
+
+                <Paper elevation={5} sx={{
+                  height: '100%',
+                  width: '100%',
+                  padding: 2
+                }}>
                   <StudentItemContainer>
-                    <input type="checkbox" name="" id={`student-${id}`} />
-                    <label htmlFor={`student-${id}`}>{student}</label>
+                    <input type='checkbox' name='' id={`student-all`} />
+                    <label htmlFor={`student-all`}>All Student</label>
                   </StudentItemContainer>
-                ))}
-              </StudentPanel>
-              <AssignPanel>
-                <TextField
-                  style={{
-                    width: "100%"
-                  }}
-                  label="Assignment Name (Optional)"
-                  variant="standard"
-                  color="warning"
-                  focused
-                  placeholder='Represent the value of a currency with an amount of a different currency'
-                />
-                <TextField
-                  style={{
-                    width: "100%",
-                    marginTop: "1rem"
-                  }}
-                  label="Number of Questions"
-                  variant="standard"
-                  color="warning"
-                  focused
-                  placeholder='10'
-                />
-                <TextField
-                  style={{
-                    width: "100%",
-                    marginTop: "1rem"
-                  }}
-                  label="Assignment Start Date"
-                  variant="standard"
-                  color="warning"
-                  focused
-                  placeholder='10'
-                />
-                <Box style={{
-                  width: "100%",
-                  marginTop: "1rem"
+                  {students.map((student, id) => (
+                    <StudentItemContainer>
+                      <input type='checkbox' name='' id={`student-${id}`} />
+                      <label htmlFor={`student-${id}`}>{student}</label>
+                    </StudentItemContainer>
+                  ))}
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <Paper elevation={5} sx={{
+                  height: '100%',
+                  width: '100%',
+                  padding: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2
                 }}>
-                  <label htmlFor="">Assignment Start Date</label><br />
-                  <DateTimePicker
-                    value={date}
-                    onChange={(e: any) => {
-                      setDate(e);
-                      console.log(e)
+                  <TextField
+                    style={{
+                      width: '100%'
                     }}
+                    label='Assignment Name (Optional)'
+                    variant='standard'
+                    color='warning'
+                    focused
+                    placeholder='Represent the value of a currency with an amount of a different currency'
                   />
-                </Box>
-                <Box style={{
-                  width: "100%",
-                  marginTop: "1rem"
-                }}>
-                  <label htmlFor="">Assignment End Date (Leave in blank for no end date)</label><br />
-                  <DateTimePicker
-                    value={date}
-                    onChange={(e: any) => {
-                      setDate(e);
-                      console.log(e)
+                  <TextField
+                    style={{
+                      width: '100%',
+                      marginTop: '1rem'
                     }}
+                    label='Number of Questions'
+                    variant='standard'
+                    color='warning'
+                    focused
+                    placeholder='10'
                   />
-                </Box>
-                <Button
-                  margin="10px 0px"
-                  value={dictionary[language]?.assign}
-                  bgColor={BasicColor.green}
-                  // onClick   = {handleSubmit}
-                  align={'left'}
-                  fullWidth={true}
-                />
-              </AssignPanel>
-            </AssignPanelContainer>
-          </AssignmentTable>
-        </TableContainer>
+                  <Box>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <Box display='flex' flexDirection='column' gap={2} mt={2}>
+                        <DatePicker
+                          label='Assignment Start Date'
+                          value={startDate}
+                          onChange={(newValue) => {
+                            setStartDate(newValue);
+                          }}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                        <DatePicker
+                          label='Assignment End Date (Leave in blank for no end date)'
+                          value={endDate}
+                          onChange={(newValue) => {
+                            setEndDate(newValue);
+                          }}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Box>
+                    </LocalizationProvider>
+                  </Box>
+                  <Button
+                    variant='contained'
+                  >
+                    {dictionary[language]?.assign}
+                  </Button>
+                </Paper>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
       </Container>
     </TeacherPgContainer>
   );
