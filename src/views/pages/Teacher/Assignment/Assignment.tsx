@@ -9,11 +9,11 @@ import { AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query from 'api/queries/get';
 import AssignmentTable from 'views/molecules/Table/AssignmentTable';
 import TextField from '@mui/material/TextField';
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import DateTimePicker from 'react-datetime-picker';
 import Button from 'views/molecules/MuiButton';
 import { BasicColor } from 'views/Color';
-import { doFetchAOKsByAudienceId } from 'app/actions/audienceActions';
+import { doFetchSubjectsAndGradeByAudienceId } from 'app/actions/audienceActions';
 import { useQuery } from 'react-query';
 import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
 
@@ -22,7 +22,7 @@ const Assignment: FC = () => {
   const { token } = useSelector((state: any) => state.user);
   const guardian = useSelector((state: any) => state.guardian);
   const language = useSelector((state: any) => state.user.language) || 'en-us';
-  const { data: aoks, isLoading, error } = useQuery(['fetch-aok-list', 2], () => doFetchAOKsByAudienceId(2))
+  const { data: audience, isLoading, error } = useQuery(['fetch-subjects-grades-list', 2], () => doFetchSubjectsAndGradeByAudienceId(2))
 
   useEffect(() => {
 
@@ -31,6 +31,7 @@ const Assignment: FC = () => {
   }, []);
 
   const [activeSubjectId, setActiveSubjectId] = useState('');
+  const [activeGradeId, setActiveGradeId] = useState('')
 
   const [students, setStudents] = useState<string[]>(["Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez"]);
 
@@ -42,13 +43,37 @@ const Assignment: FC = () => {
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title} current='assignments'>
       <Container maxWidth='lg'>
-        {aoks &&
+        {audience &&
           <SlideShowSubjects
-            subjects={aoks}
+            subjects={audience.areaofknowledgeSet}
             onSlideClick={(id: string) => {
               setActiveSubjectId(id)
             }}
           />
+        }
+        {audience &&
+          <FormControl fullWidth>
+            {/* <InputLabel id="grade-select-label">Grade</InputLabel> */}
+            <Select
+              labelId="grade-select-label"
+              id="grade-select"
+              value={activeGradeId || ''}
+              SelectDisplayProps={{
+                style: {
+                  background: '#1771B9',
+                  color: 'white',
+                  padding: 10
+                }
+              }}
+              variant='filled'
+              onChange={(e) => setActiveGradeId(e.target.value)}
+            >{
+                audience.gradeSet.map((item: any) => (
+                  <MenuItem value={item.id}>{item.name}</MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
         }
         <TableContainer>
           <AssignmentTable>

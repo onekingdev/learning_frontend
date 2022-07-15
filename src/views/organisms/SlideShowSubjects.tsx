@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { SUBJECT_COLORS } from 'constants/common';
 import { SubjectCard } from 'views/atoms/SubjectCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination  } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import 'swiper/css';
 import 'swiper/css/navigation'
 import "swiper/css/pagination"
@@ -19,9 +19,11 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
     <Swiper
       slidesPerView={3}
       spaceBetween={10}
-      onClick={(swiper, e) => {
-        setCheckedIndex(swiper.clickedIndex)
-        onSlideClick(subjects[swiper.clickedIndex].id)
+      onClick={(swiper) => {
+        if (swiper.clickedIndex) {
+          setCheckedIndex(swiper.clickedIndex)
+          onSlideClick(subjects[swiper.clickedIndex].id)
+        }
       }}
       pagination={{
         clickable: true,
@@ -32,11 +34,11 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
         {
           // when window width is >= 1366px
           1366: {
-            slidesPerView: 7,
+            slidesPerView: 6,
             spaceBetween: 25
           },
           1024: {
-            slidesPerView: 6,
+            slidesPerView: 5,
             spaceBetween: 20
           },
           768: {

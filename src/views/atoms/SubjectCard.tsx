@@ -23,7 +23,7 @@ export const SubjectCard: FC<ISubjectBox> = ({ imgUrl, bgColor, text, isChecked 
             padding={2}
             sx={{
                 background: bgColor,
-                boxShadow: isChecked ? `0px 1px 20px 0px #06D6A0` : 'none',
+                boxShadow: isChecked ? `2px 2px 20px 2px ${bgColor}` : 'none',
                 borderRadius: 5,
                 cursor: 'pointer'
             }}
