@@ -1,14 +1,13 @@
 import { FC, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { dictionary } from './dictionary'
-import { TeacherSettingPgContainer } from 'views/molecules/TeacherPgContainer/TeacherSettingPgContainer';
 import { Container, Grid, Box } from '@mui/material';
 import { ImageUploader } from 'views/molecules/TeacherCertificates/ImageUploader';
 import { fetchTeacherCertificateFilesFromFirebase } from 'app/firebase';
 import { StudentChkboxList } from 'views/molecules/TeacherCertificates/StudentChkboxList';
 import * as TYPES from 'app/types'
 import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
-import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
+import { LANGUAGES } from 'constants/common';
 
 const mockStudents = [
   {
@@ -30,7 +29,7 @@ const mockStudents = [
 ]
 
 const Certificates: FC = () => {
-  let language: string = useSelector((state: any) => state.user.language);
+  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
   const [certImgs, setCertImgs] = useState<Array<any>>([])
   const [selectedId, setSelectedId] = useState<any>(null)
 
@@ -43,7 +42,6 @@ const Certificates: FC = () => {
     dispatch({ type: TYPES.CERTIFICATE_SELECT_IMAGE, payload: certImgs[id] })
   }
 
-  language = language ? language : 'en-us'
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     fetchTeacherCertificateFilesFromFirebase(setCertImgs)

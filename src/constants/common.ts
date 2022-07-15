@@ -81,11 +81,11 @@ export const SCHOOL_TYPES = [
 ]
 
 export const SUBJECT_COLORS = [
-    '#FF0000',
-    '#00FF00',
-    '#0000FF',
-    '#FFDD00',
-    '#DD00FF',
+    '#EC5858',
+    '#CC5B1D',
+    '#26B824',
+    '#F4C222',
+    '#A685E2',
     '#FFCC00',
-    '#CC00FF',
+    '#22BAAF',
 ]

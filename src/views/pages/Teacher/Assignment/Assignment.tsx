@@ -4,12 +4,6 @@ import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
 import { dictionary } from './dictionary';
 import { SubjectCard } from 'views/atoms/SubjectCard';
-import ElaOrignal from 'views/assets/packageIcons/ela_original.svg';
-import MathOrignal from 'views/assets/packageIcons/math_original.svg';
-import ScienceOrignal from 'views/assets/packageIcons/science_original.svg';
-import SightOrignal from 'views/assets/packageIcons/sight_original.svg';
-import FinancialOrignal from 'views/assets/packageIcons/financial_original.svg';
-import HealthOrignal from 'views/assets/packageIcons/health_original.svg';
 import { TableContainer, AssignPanelContainer, StudentPanel, AssignPanel, StudentItemContainer } from './style';
 import { AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query from 'api/queries/get';
@@ -39,20 +33,23 @@ const Assignment: FC = () => {
   const [activeSubjectId, setActiveSubjectId] = useState('');
 
   const [students, setStudents] = useState<string[]>(["Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez", "Lorena Sanchez"]);
-  useEffect(() => {
 
+  useEffect(() => {
     if (window.Tawk_API?.onLoaded) if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
   }, []);
   const [date, setDate] = useState<Date>();
 
-  const onSubjectSelect = useCallback((id: string) => {
-    setActiveSubjectId(id)
-  }, []);
-
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title} current='assignments'>
-      <Container>
-        {aoks && <SlideShowSubjects subjects={aoks} />}
+      <Container maxWidth='lg'>
+        {aoks &&
+          <SlideShowSubjects
+            subjects={aoks}
+            onSlideClick={(id: string) => {
+              setActiveSubjectId(id)
+            }}
+          />
+        }
         <TableContainer>
           <AssignmentTable>
             <AssignPanelContainer>

@@ -6,15 +6,15 @@ interface ISubjectBox extends BoxProps {
     imgUrl?: string
     bgColor?: string
     text?: string
-    isChecked: boolean
+    isChecked?: boolean
 }
 export const SubjectCard: FC<ISubjectBox> = ({ imgUrl, bgColor, text, isChecked }) => {
     const isMobile = useSocratesMediaQuery('xs')
 
     return (
         <Box
-            width={isMobile ? 80 : 200}
-            height={isMobile ? 90 : 215}
+            width={isMobile ? 60 : 120}
+            height={isMobile ? 60 : 120}
             display='flex'
             flexDirection={'column'}
             justifyContent='space-between'
@@ -28,7 +28,7 @@ export const SubjectCard: FC<ISubjectBox> = ({ imgUrl, bgColor, text, isChecked 
                 cursor: 'pointer'
             }}
         >
-            <img src={imgUrl} style={{ width: isMobile ? 60 : 150 }} alt='imgUrl' />
-            <Typography fontWeight={'bold'}>{text}</Typography>
+            <img src={imgUrl} style={{ width: isMobile ? 40 : 100 }} alt='imgUrl' />
+            <Typography fontWeight={'bold'} textAlign='center' color='white'>{text}</Typography>
         </Box>)
 }
