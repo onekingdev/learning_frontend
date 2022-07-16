@@ -46,7 +46,7 @@ const Assignment: FC = () => {
   }, [user]);
   const [date, setDate]   = useState<Date>();
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title} current='results'>
       <>
         <TableContainer>
           <Table>
