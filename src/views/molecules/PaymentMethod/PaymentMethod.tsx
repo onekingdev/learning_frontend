@@ -29,6 +29,8 @@ type PaymentMethodProps = {
         Gold: any,
         Combo: any,
         Sole: any,
+        Teacher: any,
+        School: any,
     };
     offRate: number;
     isSpecialCode: boolean;

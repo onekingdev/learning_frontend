@@ -11,7 +11,7 @@ import { themeTeacher } from 'views/Theme';
 import notFoundPageImage from 'views/assets/others/404image.svg'
 import { Typography } from '@mui/material';
 import commonDictionary from 'constants/commonDictionary'
-import { Wrapper } from './Style';
+import { Wrapper } from './Welcome/Style';
 
 export const Error404: FC = () => {
   const history = useHistory();

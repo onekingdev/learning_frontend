@@ -12,7 +12,6 @@ import { MyProfile } from 'views/pages/Student/Settings/MyProfile';
 import { Backpack } from 'views/pages/Student/Backpack/Backpack';
 import { Games } from 'views/pages/Student/Games/Games';
 import { GamesMenu } from 'views/pages/Student/Games/GamesMenu/GamesMenu';
-import { ConfirmAccount } from 'views/pages/ConfirmAccount/ConfirmAccount';
 import { KnowledgeMap } from 'views/pages/Student/KnowledgeMap/KnowledgeMap';
 import { TopicsMenu } from 'views/pages/Student/Menus/TopicsMenu/TopicsMenu';
 import { Wardrobe } from 'views/pages/Student/Avatar/Wardrobe';
@@ -45,7 +44,7 @@ import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
 import Certificates from 'views/pages/Teacher/Certificates/Certificates';
 import { GameIframe } from 'views/pages/Student/Games/GameIframe';
 import { ProgressReview } from 'views/pages/Student/Progress/ProgressReview';
-import { Error404 } from 'views/pages/Welcome/Error404';
+import { Error404 } from 'views/pages/Error404';
 import { TeacherCreateAccount } from 'views/pages/Teacher/SelectCreateType/TeacherCreateAccount';
 import Notes from 'views/pages/Teacher/Notes/Notes';
 import ClassDashboard from 'views/pages/Teacher/Dashbord/ClassDashboard';
@@ -151,9 +150,6 @@ export function Routes() {
         <PrivateRoute loading={true} path="/map">
           <KnowledgeMap />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/confirmation">
-          <ConfirmAccount />
-        </PrivateRoute>
         <PrivateRoute loading={true} path="/topic/:topicId">
           <TopicsMenu />
         </PrivateRoute>
@@ -179,17 +175,14 @@ export function Routes() {
 
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/selectCreateType">
           <TeacherCreateAccount />
-          {/* <SelectCreateType /> */}
         </PrivateRoute>
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/teacherSignup">
           <TeacherSignup />
         </PrivateRoute>
-        <PrivateRoute loading={true} requireAuth={false} path="/teacher/schoolSignup">
-          <SchoolSignup />
-        </PrivateRoute>
         <PrivateRoute loading={true} requireAuth={false} path="/teacher/payment/:productType">
           <TeacherPayment />
         </PrivateRoute>
+        <PrivateRoute loading={true} requireAuth={false} path="/teacher/schoolSignup" component={SchoolSignup} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/classrooms" component={Classrooms} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent" component={AddStudent} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/students" component={Students} />

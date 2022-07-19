@@ -27,11 +27,12 @@ import {
   useMutation,
 } from 'react-query'
 import { doCreateSchool } from 'app/actions';
-import { SCHOOL_TYPES } from 'constants/common';
+import { LANGUAGES, SCHOOL_TYPES } from 'constants/common';
 import { USER_SET_DATA } from 'app/types';
+import { validateEmail } from 'views/utils';
 
 const SchoolSignup: FC = () => {
-  const isTablet = useSocratesMediaQuery('xs')
+  const isMobile = useSocratesMediaQuery('xs')
   const countries = Country.getAllCountries()
   const classes = useStyles();
 
@@ -51,8 +52,8 @@ const SchoolSignup: FC = () => {
   const [district, setDistrict] = useState('')
   const [loading, setLoading] = useState(false);
 
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+
   const createSchool = useMutation(() => doCreateSchool(
     country.name, district, firstName, lastName, email, schoolName, password, schoolType, userName, zip
   ), {
@@ -97,10 +98,6 @@ const SchoolSignup: FC = () => {
     onPageInit();
   }, [])
 
-  function validateEmail(email: string) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  }
-
   const onPageInit = async () => {
 
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
@@ -137,7 +134,7 @@ const SchoolSignup: FC = () => {
         display='flex'
         justifyContent={'center'}
       >
-        <FormContainer isMobile={isTablet}>
+        <FormContainer isMobile={isMobile}>
           <Typography variant='h4'>{dictionary[language]?.schoolSignup}</Typography>
           <Grid container spacing={3} mt={2}>
             <Grid item xs={12}>
@@ -292,19 +289,12 @@ const SchoolSignup: FC = () => {
                 label={dictionary[language]?.email}
                 onChange={e => {
                   setEmail(e.target.value);
-                  // handleFormChange(
-                  //   'email',
-                  //   e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? 'This is not email address' : ''
-                  // );
-                  /*------------- set username to email -S--------------------------*/
                   setUserName(e.target.value);
                   setValidateMsg({
                     ...validateMsg,
                     email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
                     userName: ''
                   });
-                  /*------------- set username to email -E--------------------------*/
-
                 }}
                 error={!!validateMsg.email}
                 helperText={validateMsg.email}
