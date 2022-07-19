@@ -9,7 +9,7 @@ import {
 import Grid from '@mui/material/Grid';
 import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { dictionary } from './dictionary';
 import { Country } from 'country-state-city';
 import FormControl from '@mui/material/FormControl';

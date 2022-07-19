@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useContext }    from 'react';
 import { useSelector }          from 'react-redux';
 import { LoadingContext }       from 'react-router-loading';
 import { useSnackbar }          from 'notistack';
-import { TeacherPgContainer }   from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer }   from 'views/molecules/PgContainers/TeacherPgContainer';
 import ContentForm              from 'views/molecules/Notes/ContentForm'
 import StudentLists             from 'views/molecules/Notes/StudentLists'
 import { dictionary }           from './dictionary'

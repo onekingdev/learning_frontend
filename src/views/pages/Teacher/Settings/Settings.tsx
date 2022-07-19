@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 import { TeacherSettingProfile } from 'views/organisms/Setting/Teacher/Profile';
 import { TeacherPaymentInfo } from 'views/organisms/Setting/Teacher/Payment';
 import { TeacherMembershipDetail } from 'views/organisms/Setting/Teacher/Details';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 
 const TeacherSettings: FC = () => {
   const language: string = useSelector((state: any) => state.user.language) || 'en-us'

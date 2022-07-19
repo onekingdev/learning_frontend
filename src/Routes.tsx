@@ -49,6 +49,7 @@ import { TeacherCreateAccount } from 'views/pages/Teacher/SelectCreateType/Teach
 import Notes from 'views/pages/Teacher/Notes/Notes';
 import ClassDashboard from 'views/pages/Teacher/Dashbord/ClassDashboard';
 import ClassroomSettings from 'views/pages/Teacher/ClassroomSettings/ClassroomSettings';
+import Schools from 'views/pages/Teacher/Schools/Schools';
 
 
 const PrivateRoute = ({ requireAuth = true, loading = false, ...rest }) => {
@@ -194,6 +195,7 @@ export function Routes() {
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/results" component={Results} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/dashboard" component={ClassDashboard} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/classroomSettings" component={ClassroomSettings} />
+        <PrivateRoute loading={false} requireAuth={false} path="/admin/schools" component={Schools} />
         <Route path="/teacher/control-aok">
           <ControlAOK />
         </Route>

@@ -1,3 +1,5 @@
+import { COUPON_COODE } from "./paymentFragments"
+
 export const TEACHER_SCHEMA = `
     id
     identifier
@@ -20,4 +22,23 @@ export const TEACHER_SCHEMA = `
     district
     schoolpersonnelPtr: SchoolPersonnelSchema!
     classroomSet: [ClassroomSchema!]!
+`
+
+export const SUBSCRIBER = `
+    id
+    identifier
+    isActive
+    deletedTimestamp
+    randomSlug
+    createTimestamp
+    updateTimestamp
+    firstName
+    lastName
+    gender
+    hasOrder
+    zip
+    country
+    couponCode {
+        ${COUPON_COODE}
+    }
 `

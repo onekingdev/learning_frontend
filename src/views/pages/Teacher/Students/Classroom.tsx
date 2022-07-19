@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { dictionary } from './dictionary'
 import { LANGUAGES } from 'constants/common';
 

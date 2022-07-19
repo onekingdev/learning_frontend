@@ -73,9 +73,9 @@ export enum FONT_FAMILY {
   }
 
 export const SCHOOL_TYPES = [
-    'Private',
-    'Charter',
-    'Public'
+    'PRIVATE',
+    'CHARTER',
+    'PUBLIC'
 ]
 
 export const SUBJECT_COLORS = [

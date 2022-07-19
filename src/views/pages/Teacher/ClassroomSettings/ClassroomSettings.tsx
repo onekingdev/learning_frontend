@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import commonDictionary from 'constants/commonDictionary'
 import { Box, Button, Grid, List, ListItem, Paper, Select, Switch, TextField, Typography } from '@mui/material';
 import { BasicColor } from 'views/Color';

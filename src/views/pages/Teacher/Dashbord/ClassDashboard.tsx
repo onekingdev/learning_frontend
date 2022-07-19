@@ -3,7 +3,7 @@ import {
   // useContext
 } from 'react';
 import { useSelector } from 'react-redux';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import commonDictionary from 'constants/commonDictionary'
 import { Avatar, Box, Container, Grid, Paper, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
 import coin from 'views/assets/coin.svg'

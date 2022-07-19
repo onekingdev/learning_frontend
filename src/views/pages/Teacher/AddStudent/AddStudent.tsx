@@ -6,7 +6,7 @@ import {
 import { useSelector } from 'react-redux';
 // import { LoadingContext } from 'react-router-loading';
 import { useSnackbar } from 'notistack';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import Table from 'views/molecules/MuiTable';
 import { Column } from 'views/molecules/MuiTable';
 import { dictionary } from './dictionary'

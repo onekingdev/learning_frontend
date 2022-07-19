@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { dictionary } from './dictionary';
 import { Country } from 'country-state-city';
 import FormControl from '@mui/material/FormControl';
@@ -61,12 +61,14 @@ const SchoolSignup: FC = () => {
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {
+        console.log({ data })
         enqueueSnackbar('School Create Succeed!', { variant: 'success' })
         dispatch({
           type: USER_SET_DATA,
           payload: { ...data.user, token: data.token, refreshToken: data.refreshToken },
         });
-        history.push('/teacher/payment/School')
+        // history.push('/teacher/payment/School')
+        history.push('/admin/schools')
       }
     },
     onError: async (error: any) => {

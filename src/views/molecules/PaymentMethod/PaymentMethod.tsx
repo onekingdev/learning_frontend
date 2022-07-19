@@ -2,10 +2,8 @@ import { FC, useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import moment from 'moment';
-// import Grid from '@mui/material/Grid';
 import payOrderLog from 'views/assets/pay-order-log.svg';
 import Button from 'views/molecules/MuiButton';
-// import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
 import { PaymentForm } from './PaymentForm';
 import { useSelector } from 'react-redux';
@@ -24,12 +22,14 @@ import {
     OrderItemContent,
     OrderTip,
 } from './Style';
+import { LANGUAGES } from 'constants/common';
+
 type PaymentMethodProps = {
     plans: {
         Gold: any,
         Combo: any,
         Sole: any,
-        Teacher: any,
+        Classroom: any,
         School: any,
     };
     offRate: number;
@@ -40,7 +40,6 @@ interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): any;
     handleUpdate(): void;
 }
-// export const PaymentMethod: FC<PaymentMethodProps> = ({prices, plans, childrenCounts, offRate}) => {
 export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode, sponsorEmail }) => {
 
     const history = useHistory();
@@ -49,18 +48,18 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     const { enqueueSnackbar } = useSnackbar();
     const couponCode = useSelector((state: any) => state.guardian.couponCode)
     trialExpiraton.setDate(trialExpiraton.getDate() + (couponCode?.trialDay || 0))
-    let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'en-us'
-    //   const [couponCode, setCouponCode] = useState('');
+    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
     const [subtotal, setSubtotal] = useState(0);
     const [agreeLicense, setAgreeLicense] = useState(false)
     const [loading, setLoading] = useState(false)
-    //   const [couponPrice, setCouponPrice] = useState(0);
 
     const handleOrder = async () => {
         /*----------------------- if not selected any package, show error and break -S----------------------*/
-        console.log(plans.Gold?.childCount ? plans.Gold?.childCount : 0 + plans.Combo?.childCount ? plans.Combo?.childCount : 0 + plans.Sole?.childCount ? plans.Sole?.childCount : 0);
-        if ((plans.Gold?.childCount ? plans.Gold?.childCount : 0 + plans.Combo?.childCount ? plans.Combo?.childCount : 0 + plans.Sole?.childCount ? plans.Sole?.childCount : 0) < 1) {
+        if (((plans.Gold?.childCount || 0) +
+            (plans.Combo?.childCount || 0) +
+            (plans.Classroom?.childCount || 0) +
+            (plans.School?.childCount || 0) +
+            (plans.Sole?.childCount || 0)) < 1) {
             enqueueSnackbar(dictionary[language]?.youDidNotSelectAnyChildrenNumber, { variant: 'error' });
             return
         }
@@ -82,6 +81,8 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             //     type: TYPES.GUARDIAN_SET_AVAILABLE_PLANS,
             //     payload: plans,
             // });
+            // TODO: check user type, and when parent redirect to kids/new,
+            //          when subscriber redirect to schools
             history.push('/kids/new')
         }
         else
@@ -101,7 +102,9 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
         const price_gold = plans.Gold.currentPrice / 100 * offRate * ((plans.Gold.childCount - 1 > 0) ? (plans.Gold.childCount - 1) : 0) + (plans.Gold.childCount > 0 ? 1 : 0) * plans.Gold.currentPrice;
         const price_combo = plans.Combo.currentPrice / 100 * offRate * ((plans.Combo.childCount - 1 > 0) ? (plans.Combo.childCount - 1) : 0) + (plans.Combo.childCount > 0 ? 1 : 0) * plans.Combo.currentPrice;
         const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0) * plans.Sole.currentPrice;
-        setSubtotal(price_gold + price_combo + price_sole)
+        const price_school = plans.School.currentPrice / 100 * offRate * ((plans.School.childCount - 1 > 0) ? (plans.School.childCount - 1) : 0) + (plans.School.childCount > 0 ? 1 : 0) * plans.School.currentPrice;
+        const price_classroom = plans.Classroom.currentPrice / 100 * offRate * ((plans.Classroom.childCount - 1 > 0) ? (plans.Classroom.childCount - 1) : 0) + (plans.Classroom.childCount > 0 ? 1 : 0) * plans.Classroom.currentPrice;
+        setSubtotal(price_gold + price_combo + price_sole + price_school + price_classroom)
     }, [plans])
     return (
         <Container>
@@ -136,6 +139,20 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                                 <OrderItemContent>${plans.Sole.currentPrice} / {plans.Sole.period}</OrderItemContent>
                             </OrderItem>
                         }
+                        {
+                            plans.School.childCount > 0 &&
+                            <OrderItem>
+                                <OrderItemTitle>{plans.School.childCount} School {dictionary[language]?.package} </OrderItemTitle>
+                                <OrderItemContent>${plans.School.currentPrice} / {plans.School.period}</OrderItemContent>
+                            </OrderItem>
+                        }
+                        {
+                            plans.Classroom.childCount > 0 &&
+                            <OrderItem>
+                                <OrderItemTitle>{plans.Classroom.childCount} Classroom {dictionary[language]?.package} </OrderItemTitle>
+                                <OrderItemContent>${plans.Classroom.currentPrice} / {plans.Classroom.period}</OrderItemContent>
+                            </OrderItem>
+                        }
                         {/* <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>
                     <Grid item md={6} xs={10}>
                     <TextField
@@ -154,13 +171,13 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                         />
                     </Grid>
                 </Grid> */}
-                        <OrderItem style={{display: 'none'}}>
+                        <OrderItem style={{ display: 'none' }}>
                             <OrderItemTitleContainer>
                                 <OrderItemTitle>{dictionary[language]?.subtotal}</OrderItemTitle>
                             </OrderItemTitleContainer>
                             <OrderItemContent>${subtotal.toFixed(2)}</OrderItemContent>
                         </OrderItem>
-                        <OrderItem style={{display: 'none'}}>
+                        <OrderItem style={{ display: 'none' }}>
                             <OrderItemTitleContainer>
                                 <OrderItemTitle>{dictionary[language]?.coupon}:<div style={{ fontWeight: 400, fontSize: '16px' }}>&nbsp;{dictionary[language]?.year}</div></OrderItemTitle>
                             </OrderItemTitleContainer>
@@ -174,7 +191,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                             <OrderItemContent>
                                 {/* <div style={{display: 'flex'}}>${(subtotal - couponPrice).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div> */}
                                 <div style={{ display: 'flex' }}>${(subtotal).toFixed(2)}</div>
-                                <div style={{ fontWeight: 400, lineHeight: '12px', fontSize: '10px' }}>{dictionary[language]?.firstRenewal} : { moment(trialExpiraton).format('YYYY-MM-DD')}</div>
+                                <div style={{ fontWeight: 400, lineHeight: '12px', fontSize: '10px' }}>{dictionary[language]?.firstRenewal} : {moment(trialExpiraton).format('YYYY-MM-DD')}</div>
                             </OrderItemContent>
                         </OrderItem>
                         <OrderTip>

@@ -1,3 +1,4 @@
+import { SUBSCRIBER } from 'api/fragments/teacherFraments';
 import { USER, USER_PROFILE } from 'api/fragments/userFragments';
 
 export const CREATE_SCHOOL = (
@@ -33,6 +34,9 @@ mutation {
         }
         token
         refreshToken
+        subscriber {
+            ${SUBSCRIBER}
+        }
 	}
 }
 `;

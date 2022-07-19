@@ -1,7 +1,7 @@
 import { FC, useEffect, useState, useContext }    from 'react';
 import { useSelector }          from 'react-redux';
 import { LoadingContext }       from 'react-router-loading';
-import { TeacherPgContainer }   from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer }   from 'views/molecules/PgContainers/TeacherPgContainer';
 import { dictionary }           from './dictionary';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';

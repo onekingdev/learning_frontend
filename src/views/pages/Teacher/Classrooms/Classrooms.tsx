@@ -5,7 +5,7 @@ import {
 import { useSelector } from 'react-redux';
 // import { LoadingContext }       from 'react-router-loading';
 // import { useSnackbar }          from 'notistack';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import ClassroomPanel from 'views/molecules/Classroom/ClassroomPanel'
 import AddClassroomForm from 'views/molecules/Classroom/AddClassroomForm'
 import commonDictionary from 'constants/commonDictionary'

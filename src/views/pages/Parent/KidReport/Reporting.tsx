@@ -8,7 +8,7 @@ import { TopicReport } from 'api/fragments/topicFragments';
 import { useQuery } from 'react-query'
 import { doFetchStudentById } from 'app/actions/guardianActions';
 import { KidReporting } from 'views/organisms/Reporting';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 
 interface StudentIdParam {
   studentId: string;

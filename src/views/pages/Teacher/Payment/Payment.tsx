@@ -8,9 +8,10 @@ import { loadStripe } from '@stripe/stripe-js';
 import { PaymentMethod } from 'views/molecules/PaymentMethod/PaymentMethod';
 import PackagePanel from 'views/molecules/PackagePanel/TeacherPackagePanel';
 import { PackageContainer } from './Style';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { getPlans } from 'app/actions/paymentActions'
 import { dictionary } from './dictionary';
+import { LANGUAGES } from 'constants/common';
 
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 
@@ -40,18 +41,27 @@ const Payment: FC = () => {
       currentPrice: 0,
       priceMonth: 0,
       priceYear: 0
-    }
+    },
+    School: {
+      currentPrice: 0,
+      priceMonth: 0,
+      priceYear: 0
+    },
+    Classroom: {
+      currentPrice: 0,
+      priceMonth: 0,
+      priceYear: 0
+    },
   })
   const [sponsorEmail, setSponsorEmail] = useState('')
 
   const [isSpecialCode, setIsSpecialCode] = useState(false)
   const [showPaymentMethod, setShowPaymentMethod] = useState(true);
   const [offRate, setOffRate] = useState(50);
+  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
 
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
-
-  const onChangePackage = (type: string, count: number, period: string, sponsor: string) => {
+  const onChangePackage = (count: number, period: string, sponsor: string) => {
+    const type = productType === 'School' ? 'School' : 'Classroom'
     console.log({
       type, count, period, sponsor
     })
@@ -59,6 +69,7 @@ const Payment: FC = () => {
     plans[type].childCount = count;
     plans[type].period = period;
     plans[type].currentPrice = (period === 'month' ? plans[type].priceMonth : plans[type].priceYear)
+    console.log({ddplans: plans[type]})
     setSponsorEmail(sponsor)
     setPlans({ ...plans })
   };
@@ -72,13 +83,16 @@ const Payment: FC = () => {
     const plans_re_object: any = {
       Gold: [],
       Combo: [],
-      Sole: []
+      Sole: [],
+      School: [],
+      Classroom: []
     };
     for (const plan of result.data) {
       const name: any = plan.name;
       plans_re_object[name] = plan;
       plans_re_object[name].currentPrice = plan.priceMonth;
     }
+    console.log({plans_re_object})
     setPlans(plans_re_object)
     // setPackPrice(plans_re_object)
 
@@ -102,9 +116,9 @@ const Payment: FC = () => {
         <PackageContainer>
           <PackagePanel
             type={productType}
-            price={plans[productType] ? (plans?.Classroom?.currentPrice) : 0}
+            price={plans[productType] ? (plans[productType].currentPrice) : 0}
             onChange={(childrenCount, plan, sponsor) =>
-              onChangePackage(productType, childrenCount, plan, sponsor)
+              onChangePackage(childrenCount, plan, sponsor)
             }
             isSpecialCode={isSpecialCode}
             language={language}

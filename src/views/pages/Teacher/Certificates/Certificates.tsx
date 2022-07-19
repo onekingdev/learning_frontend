@@ -6,7 +6,7 @@ import { ImageUploader } from 'views/molecules/TeacherCertificates/ImageUploader
 import { fetchTeacherCertificateFilesFromFirebase } from 'app/firebase';
 import { StudentChkboxList } from 'views/molecules/TeacherCertificates/StudentChkboxList';
 import * as TYPES from 'app/types'
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { LANGUAGES } from 'constants/common';
 
 const mockStudents = [
