@@ -68,7 +68,11 @@ const SchoolSignup: FC = () => {
           payload: { ...data.user, token: data.token, refreshToken: data.refreshToken },
         });
         // history.push('/teacher/payment/School')
-        history.push('/admin/schools')
+        const userType = data.user?.profile?.role || 'USER'
+
+        if (userType === 'SUBSCRIBER')
+          history.push('/admin/schools')
+          // history.push('/admin/schools') // Need to be update
       }
     },
     onError: async (error: any) => {

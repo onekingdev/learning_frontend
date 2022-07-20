@@ -128,3 +128,16 @@ export const AVAILABLE_PLANS = `
     }
   }
 `
+export const DISCOUNT_CODE_DETAIL = `
+  id
+  identifier
+  isActive
+  deletedTimestamp
+  randomSlug
+  code
+  percentage
+  trialDay
+  expiredAt
+  stripeCouponId
+  type
+`

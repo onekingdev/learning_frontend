@@ -1,4 +1,4 @@
-import { SUBSCRIBER } from 'api/fragments/teacherFraments';
+import { SCHOOL_TEACHER, SUBSCRIBER, TEACHER_SCHEMA, _TEACHERSCHEMA } from 'api/fragments/teacherFraments';
 import { USER, USER_PROFILE } from 'api/fragments/userFragments';
 
 export const CREATE_SCHOOL = (
@@ -48,19 +48,17 @@ export const CREATE_TEACHER = (
     firstName: string,
     lastName: string,
     password: string,
-    schoolId: string,
     userName: string,
     zip: string,
 ) => `
 mutation {
 	createTeacher (
         country: "${country}",
-        couponCode: "${couponCode}",
+        ${couponCode ? 'couponCode: ' + couponCode + ',' : ''}
         email: "${email}",
         firstName: "${firstName}",
         lastName: "${lastName}",
         password: "${password}",
-        schoolId: "${schoolId}",
         username: "${userName}",
         zip: "${zip}",
     ) {
@@ -71,6 +69,9 @@ mutation {
             }
         }
         token
+        teacher {
+            ${_TEACHERSCHEMA}
+        }
 	}
 }
 `;

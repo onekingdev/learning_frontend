@@ -37,6 +37,31 @@ export const doCreateTeacher = async (
   firstName: string,
   lastName: string,
   password: string,
+  userName: string,
+  zip: string,
+) => {
+  const res: any = await fetchQuery(
+      CREATE_TEACHER(
+        country,
+        couponCode,
+        email,
+        firstName,
+        lastName,
+        password,
+        userName,
+        zip,
+      )
+  );
+  return res.data?.createTeacher ?? res.errors[0] // when django returns error message on fail
+}
+
+export const doFetchSubscriberSchools = async (
+  country: string,
+  couponCode: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string,
   schoolId: string,
   userName: string,
   zip: string,
@@ -49,7 +74,6 @@ export const doCreateTeacher = async (
         firstName,
         lastName,
         password,
-        schoolId,
         userName,
         zip,
       )

@@ -1,3 +1,4 @@
+import { _TEACHERSCHEMA } from 'api/fragments/teacherFraments';
 import { GUARDIAN, }                  from '../fragments/guardianFragments';
 import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
 
@@ -16,15 +17,24 @@ export const CREATE_ORDER = (
     postCode: string,
     country: string,
     phone: string,
-    guardianId: number,
+    guardianId: number | undefined,
+    teacherId: number | undefined,
+    schoolId: number | undefined,
     orderDetailInput: {},
     paymentMethod: string,
     returnUrl: string,
 ) => `
-    createOrder(address1: "${address1}", address2: "${address2}", cardCvc: "${cardCvc}", cardExpMonth: "${cardExpMonth}", cardExpYear: "${cardExpYear}", cardFirstName: "${cardFirstName}", cardLastName: "${cardLastName}", cardNumber: "${cardNumber}", city: "${city}", country: "${country}", guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}, paymentMethod: "${paymentMethod}", phone: "${phone}", postCode: "${postCode}", returnUrl: "${returnUrl}", state: "${state}"){
-        guardian {
-            ${GUARDIAN}
-        }
+    createOrder(
+        address1: "${address1}",
+        address2: "${address2}",
+        cardCvc: "${cardCvc}", cardExpMonth: "${cardExpMonth}", cardExpYear: "${cardExpYear}", cardFirstName: "${cardFirstName}", cardLastName: "${cardLastName}", cardNumber: "${cardNumber}", city: "${city}", country: "${country}",
+        ${ guardianId ? ('guardianId: ' + guardianId + ','):''}
+        ${ teacherId ? ('teacherId: ' + teacherId + ','):''}
+        ${ schoolId ? ('schoolId: ' + schoolId + ','):''}
+        orderDetailInput: ${orderDetailInput},
+        paymentMethod: "${paymentMethod}",
+        phone: "${phone}", postCode: "${postCode}", returnUrl: "${returnUrl}", state: "${state}"
+        ){
         order{
             ${ORDER}
         }
@@ -42,10 +52,17 @@ export const CREATE_ORDER_WITH_OUT_PAY = (
     postCode: string,
     country: string,
     phone: string,
-    guardianId: number,
+    guardianId: number | null,
+    teacherId: number | null,
+    schoolId: number | null,
     orderDetailInput: {},
 ) => `
-    createOrderWithOutPay(guardianId: "${guardianId}", orderDetailInput: ${orderDetailInput}){
+    createOrderWithOutPay(
+        ${ guardianId && 'guardianId: ' + guardianId + ','}
+        ${ teacherId && 'teacherId: ' + teacherId + ','}
+        ${ schoolId && 'schoolId: ' + schoolId + ','}
+        orderDetailInput: ${orderDetailInput},
+        ){
         guardian {
             ${GUARDIAN}
         }

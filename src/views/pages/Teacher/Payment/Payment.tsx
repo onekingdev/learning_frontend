@@ -16,7 +16,7 @@ import { LANGUAGES } from 'constants/common';
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 
 interface ProductTypeParam {
-  productType: string;
+  productType: 'Classroom' | 'School';
 }
 
 const Payment: FC = () => {

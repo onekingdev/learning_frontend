@@ -180,9 +180,8 @@ export function Routes() {
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/teacherSignup">
           <TeacherSignup />
         </PrivateRoute>
-        <PrivateRoute loading={true} requireAuth={false} path="/teacher/payment/:productType">
-          <TeacherPayment />
-        </PrivateRoute>
+
+        <PrivateRoute loading={true} requireAuth={false} path="/teacher/payment/:productType" component={TeacherPayment} />
         <PrivateRoute loading={true} requireAuth={false} path="/teacher/schoolSignup" component={SchoolSignup} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/classrooms" component={Classrooms} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/addStudent" component={AddStudent} />

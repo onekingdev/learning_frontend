@@ -72,6 +72,25 @@ export const GRADES = `
     name
 `;
 
+export const GRADE_SCHEMA = `
+    id
+    identifier
+    isActive
+    deletedTimestamp
+    randomSlug
+    createTimestamp
+    updateTimestamp
+    slug
+    audience {
+        id
+    }
+    classroomSet: [ClassroomSchema!]!
+    topicgradeSet: [TopicGradeSchema!]!
+    studentgradeSet: [StudentGradeSchema!]!
+    questionSet: [QuestionSchema!]!
+    name: String
+`
+
 export const PREREQUISITES = `
     {
         id

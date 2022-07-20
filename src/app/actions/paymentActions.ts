@@ -25,7 +25,9 @@ export const createOrder = async (
     postCode: string,
     country: string,
     phone: string,
-    guardianId: number,
+    guardianId: number | undefined,
+    teacherId: number | undefined,
+    schoolId: number | undefined,
     orderDetailInput: {},
     paymentMethod: string,
     returnUrl: string,
@@ -48,6 +50,8 @@ export const createOrder = async (
             country,
             phone,
             guardianId,
+            teacherId,
+            schoolId,
             orderDetailInput,
             paymentMethod,
             returnUrl
@@ -67,10 +71,10 @@ export const createOrder = async (
 
     const { guardian, status } = result.data.createOrder;
 
-    dispatch({
-        type: TYPES.GUARDIAN_SET_DATA,
-        payload: guardian,
-    });
+    // dispatch({
+    //     type: TYPES.GUARDIAN_SET_DATA,
+    //     payload: guardian,
+    // });
     // dispatch({
     //     type: TYPES.GUARDIAN_SET_GUEARDIAN_STUDENT_PLAN,
     //     payload: order.orderdetailSet.guardianstudentplanSet || []
@@ -90,13 +94,15 @@ export const createOrderWithOutPay = async (
     postCode: string,
     country: string,
     phone: string,
-    guardianId: number,
+    guardianId: number | null,
+    teacherId: number | null,
+    schoolId: number | null,
     orderDetailInput: {},
     token: string,
     dispatch: any
 ) => {
     const res: any = await mutationFetch(
-        CREATE_ORDER_WITH_OUT_PAY(cardFirstName, cardLastName, address1, address2, city, state, postCode, country, phone, guardianId, orderDetailInput),
+        CREATE_ORDER_WITH_OUT_PAY(cardFirstName, cardLastName, address1, address2, city, state, postCode, country, phone, guardianId, teacherId, schoolId, orderDetailInput),
         token
     ).catch(() => ({ success: false }));
 
@@ -110,10 +116,12 @@ export const createOrderWithOutPay = async (
         return { success: false, msg: result.errors[0].message };
     }
     const { guardian, status } = result.data.createOrderWithOutPay;
-    dispatch({
-        type: TYPES.GUARDIAN_SET_DATA,
-        payload: guardian,
-    });
+    // dispatch({
+    //     type: TYPES.GUARDIAN_SET_DATA,
+    //     payload: guardian,
+    // });
+
+    // This is not used in new kids page
     // dispatch({
     //     type: TYPES.GUARDIAN_SET_GUEARDIAN_STUDENT_PLAN,
     //     payload: order.orderdetailSet.guardianstudentplanSet || []
@@ -148,10 +156,11 @@ export const confirmPaymentOrder = async (
     if (status !== 'success')
         return { success: false, msg: 'Cofirmation Failed' }
 
-    dispatch({
-        type: TYPES.GUARDIAN_SET_DATA,
-        payload: guardian,
-    });
+    // This is not used in new kids page
+    // dispatch({
+    //     type: TYPES.GUARDIAN_SET_DATA,
+    //     payload: guardian,
+    // });
 
     if (status === 'success')
         return { success: true, msg: 'Success', data: result.data.confirmPaymentOrder }

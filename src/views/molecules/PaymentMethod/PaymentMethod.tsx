@@ -6,7 +6,7 @@ import payOrderLog from 'views/assets/pay-order-log.svg';
 import Button from 'views/molecules/MuiButton';
 import { BasicColor } from 'views/Color';
 import { PaymentForm } from './PaymentForm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { dictionary } from './dictionary'
 import {
     Container,
@@ -23,6 +23,7 @@ import {
     OrderTip,
 } from './Style';
 import { LANGUAGES } from 'constants/common';
+import { TEACHER_ADD_ORDER } from 'app/types';
 
 type PaymentMethodProps = {
     plans: {
@@ -48,10 +49,12 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     const { enqueueSnackbar } = useSnackbar();
     const couponCode = useSelector((state: any) => state.guardian.couponCode)
     trialExpiraton.setDate(trialExpiraton.getDate() + (couponCode?.trialDay || 0))
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    const user = useSelector((state: any) => state.user)
+    const language = user.language || LANGUAGES[0].value;
     const [subtotal, setSubtotal] = useState(0);
     const [agreeLicense, setAgreeLicense] = useState(false)
     const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
 
     const handleOrder = async () => {
         /*----------------------- if not selected any package, show error and break -S----------------------*/
@@ -82,8 +85,30 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             //     payload: plans,
             // });
             // TODO: check user type, and when parent redirect to kids/new,
+            const userType = user.profile.role
+            const order = result.data.order
+            console.log({ order, userType })
+            switch (userType) {
+                case 'TEACHER':
+                    dispatch({
+                        type: TEACHER_ADD_ORDER,
+                        payload: order
+                    })
+                    history.push('/teacher/classrooms')
+                    break;
+                case 'SUBSCRIBER':
+                    history.push('/kids/new')
+                    break;
+                case 'GUARDIAN':
+                    history.push('/kids/new')
+                    break;
+                default: break
+            }
+            // dispatch({
+            //     type: USER_SET_DATA,
+            //     payload: { ...data.user, token: data.token, refreshToken: data.refreshToken },
+            //   });
             //          when subscriber redirect to schools
-            history.push('/kids/new')
         }
         else
             enqueueSnackbar(`Failed! ${result.msg}`, { variant: 'error' });

@@ -125,8 +125,7 @@ const NewKids: FC = () => {
       console.log({ availablePlans })
     }
   })
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  const language: string = useSelector((state: any) => state.user.language) || 'en-us';
 
   const subjectIconsById: any = {
     Gold: {

@@ -57,6 +57,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     const elements = useElements();
     const user = useSelector((state: Store) => state.user)
     const guardian = useSelector((state: any) => state.guardian)
+    const school = useSelector((state: any) => state.school)
+    const teacher = useSelector((state: any) => state.teacher)
     const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
@@ -88,8 +90,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
 
     const [data, setData] = useState({
         paymentMethod: 'card',
-        firstName: guardian.firstName,
-        lastName: guardian.lastName,
+        firstName: user.firstName,
+        lastName: user.lastName,
         cardNumber: '',
         cardExpMonth: '',
         cardExpYear: '',
@@ -199,10 +201,12 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 'add 2',
                 'city',
                 'state',
-                'postcode',
-                'country',
-                'phone',
-                guardian.id,
+                'posntry',
+                'photcode',
+                'coune',
+                guardian?.id || null,
+                teacher?.id || null,
+                school?.id || null,
                 orderDetailInputs,
                 user.token,
                 dispatch
@@ -224,7 +228,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 data.zip,
                 data.country.isoCode,
                 data.phone,
-                guardian.id,
+                guardian?.id,
+                teacher?.id,
+                school?.id,
                 orderDetailInputs,
                 'Card',
                 'https://',
