@@ -1,3 +1,4 @@
+import { LANGUAGES } from 'constants/common';
 import * as TYPE from '../types';
 
 const INITIAL_STATE = {
@@ -10,7 +11,7 @@ const INITIAL_STATE = {
   isStaff: null,
   isActive: null,
   dateJoined: null,
-  language: null,
+  language: LANGUAGES[0].value,
   profile: {
     role: null,
   },

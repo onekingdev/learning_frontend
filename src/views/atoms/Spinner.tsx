@@ -1,11 +1,12 @@
-import { FC }                from 'react';
+import { FC } from 'react';
 import styled, { keyframes } from 'styled-components';
 // import socrates              from 'views/assets/socrates.svg';
-import boat                  from 'views/assets/islands/fillers/boat.svg';
-import shapes                from 'views/assets/colored-shapes-bg.svg';
-import ReactLoading          from 'react-loading';
-import { LoadingContainer }  from 'views/atoms/Loading'
-import { BasicColor }        from 'views/Color';
+import boat from 'views/assets/islands/fillers/boat.svg';
+import shapes from 'views/assets/colored-shapes-bg.svg';
+import ReactLoading from 'react-loading';
+import { LoadingContainer } from 'views/atoms/Loading'
+import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
 
 export const LoadingSpinner: FC = () => (
   <LoadingContainer>
@@ -15,28 +16,20 @@ export const LoadingSpinner: FC = () => (
 
 export const Spinner: any = () => {
   return (
-    <Shapes>
+    <Wrapper>
       <Icon src={boat} />
-    </Shapes>
+    </Wrapper>
   );
 };
 
-const Shapes = styled.div`
-  background-image: url(${shapes});
-  width: 100vw;
-  height: 100vh;
+export const Wrapper = styled.div`
   overflow: hidden;
+  background-image  : url(${shapes});
+  background-repeat : no-repeat;
+  background-size   : cover;
+  height            : 100vh;
 `;
 
-// const rotate = keyframes`
-//   from {
-//     transform: rotate(0deg);
-//   }
-
-//   to {
-//     transform: rotate(360deg);
-//   }
-// `;
 const move = keyframes`
   from {
     left: 0vw;
@@ -62,9 +55,9 @@ const Icon = styled.img`
   position: absolute;
   top: 30%;
   height: 300px;
-  // margin-top: -250px;
-  // margin-left: -250px;
   z-index: 1;
-  // animation: ${move} 6s linear infinite;
   animation: ${move} 10s linear infinite;
+  @media screen and (max-width: ${ScreenSize.tablet}) {
+    height: 100px;
+  }
 `;

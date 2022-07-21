@@ -177,10 +177,7 @@ export function Routes() {
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/selectCreateType">
           <TeacherCreateAccount />
         </PrivateRoute>
-        <PrivateRoute loading={false} requireAuth={false} path="/teacher/teacherSignup">
-          <TeacherSignup />
-        </PrivateRoute>
-
+        <PrivateRoute loading={false} requireAuth={false} path="/teacher/teacherSignup" component={TeacherSignup} />
         <PrivateRoute loading={true} requireAuth={false} path="/teacher/payment/:productType" component={TeacherPayment} />
         <PrivateRoute loading={true} requireAuth={false} path="/teacher/schoolSignup" component={SchoolSignup} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/classrooms" component={Classrooms} />
