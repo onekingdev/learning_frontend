@@ -8,7 +8,7 @@ import {
   ClassroomMark,
   ClassroomText
 } from './Style'
-import commonDictionary          from 'constants/commonDictionary'
+import commonDictionary from 'constants/commonDictionary'
 
 interface ClassroomPanelProps {
   classrooms: any[]
@@ -16,8 +16,9 @@ interface ClassroomPanelProps {
   onClassroom: (p: any) => void
 }
 
-const ClassroomPanel:FC<ClassroomPanelProps> = ({classrooms, onNew, onClassroom}) => {
-  const language: string = useSelector((state: any) => state.user.language) || 'en-us';
+const ClassroomPanel: FC<ClassroomPanelProps> = ({ classrooms, onNew, onClassroom }) => {
+  const language = useSelector((state: any) => state.user.language);
+  console.log({ classrooms })
   return (
     <Container>
       <Grid container justifyContent={'start'}>
@@ -28,6 +29,7 @@ const ClassroomPanel:FC<ClassroomPanelProps> = ({classrooms, onNew, onClassroom}
           </ClassroomItem>
         </Grid>
         {
+          classrooms &&
           classrooms.map((item: any, index: number) =>
             <Grid item key={index} xs={4} sm={3} md={1.5}>
               <ClassroomItem key={index} onClick={() => { onClassroom(item) }}>

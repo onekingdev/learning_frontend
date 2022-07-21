@@ -87,7 +87,7 @@ const TeacherSignup: FC = () => {
     email: null,
     firstName: null,
     lastName: null,
-    schoolName: null,
+    // schoolName: null,
     zip: null,
     Country: '',
     userName: null,

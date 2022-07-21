@@ -17,7 +17,7 @@ const Classrooms: FC = () => {
   // const {token}              = useSelector((state: any) => state.user);
   // const guardian          = useSelector((state: any) => state.guardian);
     const history = useHistory();
-    const language: string = useSelector((state: any) => state.user.language) || 'en-us';
+    const language = useSelector((state: any) => state.user.language);
     const {classrooms} = useSelector((state:any) => state.teacher)
 
   const [isOpenNewForm, setIsOpenNewForm] = useState(false);

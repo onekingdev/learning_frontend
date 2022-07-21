@@ -18,10 +18,10 @@ import { LANGUAGES } from 'constants/common';
 import { useHistory } from 'react-router-dom';
 import { doAddClassroomToTeacher } from 'app/actions';
 import { TEACHER_ADD_CLASSROOM } from 'app/types';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const AddClassroomForm = (props: any) => {
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
-    const { token } = useSelector((state: any) => state.user)
+    const { token, language } = useSelector((state: any) => state.user)
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -35,6 +35,7 @@ const AddClassroomForm = (props: any) => {
         className: null,
         audience: null,
     });
+    const [loading, setLoading] = useState(false)
 
     const formValidation = () => {
         const validateMsgTemp = { ...validateMsg };
@@ -64,26 +65,20 @@ const AddClassroomForm = (props: any) => {
 
     const handleSubmit = async () => {
         if (!formValidation()) return;
-        console.log({ audience, className })
 
-        if (audience && className) {
+        setLoading(true)
 
-            const res: any = await doAddClassroomToTeacher(audience, className, token)
-            console.log({ res })
-            if (res.status) {
-                console.log({ classroom: res.data })
-                dispatch({
-                    type: TEACHER_ADD_CLASSROOM,
-                    payload: res.data,
-                });
-            } else {
-                enqueueSnackbar(res.message, { variant: 'error' })
-            }
+        const res: any = await doAddClassroomToTeacher(audience, className, token)
+        if (res.status) {
+            dispatch({
+                type: TEACHER_ADD_CLASSROOM,
+                payload: res.data,
+            });
+            props.close()
+        } else {
+            enqueueSnackbar(res.message, { variant: 'error' })
         }
-        else enqueueSnackbar('Fill all fields', { variant: 'error' })
-
-        // TODO: Redirect to add students page
-        // history.push('/teacher/addstudent')
+        setLoading(false)
     }
 
     const handleFormChange = (field: string, errMsg: string) => {
@@ -148,11 +143,12 @@ const AddClassroomForm = (props: any) => {
                         </FormControl>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button
+                        <LoadingButton
                             onClick={handleSubmit}
                             variant='contained'
+                            loading={loading}
                         >{dictionary[language]?.createClassroom}
-                        </Button>
+                        </LoadingButton>
                     </Grid>
                 </Grid>
             }

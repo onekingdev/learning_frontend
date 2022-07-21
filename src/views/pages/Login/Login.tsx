@@ -50,7 +50,7 @@ export const LogIn: FC = () => {
     }
 
     const { student, guardian, teacher, user, token } = result.data
-    dispatch({ type: TYPES.USER_SET_DATA, payload: {...user, token} });
+    dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user, token } });
 
 
     const userType = user.profile?.role || USER_TYPE.user
@@ -90,8 +90,10 @@ export const LogIn: FC = () => {
       case USER_TYPE.teacher:
         // Set teacher state
         dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
-
-        history.push('/teacher/classrooms')
+        if (teacher.hasOrder)
+          history.push('/teacher/classrooms')
+        else
+          history.push('/teacher/payment')
         break;
       default:
         history.push('/')
