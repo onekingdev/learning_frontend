@@ -1,17 +1,22 @@
-import { SCHOOL_TEACHER, SUBSCRIBER, TEACHER_SCHEMA, _TEACHERSCHEMA } from 'api/fragments/teacherFraments';
-import { USER, USER_PROFILE } from 'api/fragments/userFragments';
+import {
+  _CLASSROOM_SCHEMA,
+  SUBSCRIBER,
+  _TEACHERSCHEMA,
+  _TEACHER_CLASSROOM,
+} from 'api/fragments/teacherFraments';
+import {USER, USER_PROFILE} from 'api/fragments/userFragments';
 
 export const CREATE_SCHOOL = (
-    country: string,
-    district: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    name: string,
-    password: string,
-    type: string,
-    userName: string,
-    zip: string,
+  country: string,
+  district: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  name: string,
+  password: string,
+  type: string,
+  userName: string,
+  zip: string
 ) => `
 mutation {
 	createSchool (
@@ -42,14 +47,14 @@ mutation {
 `;
 
 export const CREATE_TEACHER = (
-    country: string,
-    couponCode: string,
-    email: string,
-    firstName: string,
-    lastName: string,
-    password: string,
-    userName: string,
-    zip: string,
+  country: string,
+  couponCode: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string,
+  userName: string,
+  zip: string
 ) => `
 mutation {
 	createTeacher (
@@ -74,4 +79,17 @@ mutation {
         }
 	}
 }
+`;
+
+export const ADD_CLASS_TO_TEACHER = (
+  audienceId: string | number,
+  name: string
+) => `
+mutation {
+    createClassroom (audienceId: ${audienceId}, name: "${name}") {
+      classroom {
+        ${_CLASSROOM_SCHEMA}
+      }
+    }
+  }
 `;

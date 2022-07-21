@@ -1,4 +1,4 @@
-import { _TEACHERSCHEMA } from 'api/fragments/teacherFraments';
+import { _CLASSROOM_SCHEMA, _TEACHERSCHEMA } from 'api/fragments/teacherFraments';
 import { GUARDIAN, }                  from '../fragments/guardianFragments';
 import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
 
@@ -80,10 +80,13 @@ export const CONFIRM_PAYMENT_ORDER = (
         guardian {
             ${GUARDIAN}
         }
-        order{
-            ${ORDER}
-        }
         status
+        teacher {
+            ${_TEACHERSCHEMA}
+            classrooms {
+                ${_CLASSROOM_SCHEMA}
+            }
+        }
     }
 
 `

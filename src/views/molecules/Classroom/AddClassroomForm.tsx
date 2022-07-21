@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { Grid, FormControl, Select, Button } from '@mui/material';
 import { dictionary } from './dictionary'
@@ -16,16 +16,20 @@ import { BasicColor } from 'views/Color';
 import commonDictionary from 'constants/commonDictionary'
 import { LANGUAGES } from 'constants/common';
 import { useHistory } from 'react-router-dom';
+import { doAddClassroomToTeacher } from 'app/actions';
+import { TEACHER_ADD_CLASSROOM } from 'app/types';
 
 const AddClassroomForm = (props: any) => {
     const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    const { token } = useSelector((state: any) => state.user)
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const { enqueueSnackbar } = useSnackbar();
     const classes = useStyles();
 
     const [audiences, setAudiences] = useState([]);
-    const [audience, setAudience] = useState();
+    const [audience, setAudience] = useState('');
     const [className, setClassName] = useState('')
     const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
         className: null,
@@ -58,11 +62,28 @@ const AddClassroomForm = (props: any) => {
         return true;
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!formValidation()) return;
+        console.log({ audience, className })
+
+        if (audience && className) {
+
+            const res: any = await doAddClassroomToTeacher(audience, className, token)
+            console.log({ res })
+            if (res.status) {
+                console.log({ classroom: res.data })
+                dispatch({
+                    type: TEACHER_ADD_CLASSROOM,
+                    payload: res.data,
+                });
+            } else {
+                enqueueSnackbar(res.message, { variant: 'error' })
+            }
+        }
+        else enqueueSnackbar('Fill all fields', { variant: 'error' })
 
         // TODO: Redirect to add students page
-        history.push('/teacher/addstudent')
+        // history.push('/teacher/addstudent')
     }
 
     const handleFormChange = (field: string, errMsg: string) => {
@@ -99,11 +120,12 @@ const AddClassroomForm = (props: any) => {
                             <Select
                                 labelId='select-audience-label'
                                 id='select-audience'
-                                value={audience ? audience : {}}
+                                value={audience || ''}
                                 label={dictionary[language]?.selectYourCurriculum}
                                 className={`${classes.select} err-border`}
                                 onChange={(e: any) => {
-                                    setAudience(e.target.value);
+                                    const selected: any = audiences.find((p: any) => p.id === e.target.value)
+                                    setAudience(selected?.id || '');
                                     validateMsg.audience = '';
                                     setValidateMsg({ ...validateMsg });
                                 }}
@@ -117,7 +139,7 @@ const AddClassroomForm = (props: any) => {
                                 displayEmpty={true}
                             >
                                 {audiences?.length > 0 && audiences.map((value: any, index: number) => (
-                                    <MenuItem value={value} key={index}>
+                                    <MenuItem value={value.id} key={index}>
                                         {value.name}
                                     </MenuItem>
                                 ))}

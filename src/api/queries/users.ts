@@ -5,6 +5,7 @@ import { COIN_WALLET }                                  from '../fragments/coinW
 import {
     GUARDIAN,
 } from '../fragments/guardianFragments';
+import { _CLASSROOM_SCHEMA, _TEACHERSCHEMA } from 'api/fragments/teacherFraments';
 export const USERS_QUERY = `
     {
         ${USER}
@@ -26,6 +27,14 @@ export const WHOAMI_QUERY = `
         }
         profile {
             ${USER_PROFILE}
+        }
+        schoolpersonnel {
+            teacher {
+                ${_TEACHERSCHEMA}
+                classrooms {
+                    ${_CLASSROOM_SCHEMA}
+                }
+            }
         }
     }
 `;

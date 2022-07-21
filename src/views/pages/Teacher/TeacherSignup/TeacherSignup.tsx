@@ -47,7 +47,7 @@ const TeacherSignup: FC = () => {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [schoolName, setSchoolName] = useState('');
+  // const [schoolName, setSchoolName] = useState('');
   const [zip, setZip] = useState('');
   const [country, setCountry] = useState(countries[232])
   const [couponCode, setCouponCode] = useState('');
@@ -70,6 +70,7 @@ const TeacherSignup: FC = () => {
           type: TEACHER_SET_DATA,
           payload: data.teacher,
         });
+        history.push('/teacher/payment/Classroom')
       }
     },
     onError: async (error: any) => {
@@ -77,7 +78,7 @@ const TeacherSignup: FC = () => {
     },
     onSettled: async () => {
       setLoading(false)
-      history.push('/teacher/payment/Classroom')
+
     }
   })
 
@@ -165,7 +166,7 @@ const TeacherSignup: FC = () => {
                 helperText={validateMsg.lastName}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 label={dictionary[language]?.schoolName}
                 onChange={e => {
@@ -178,7 +179,7 @@ const TeacherSignup: FC = () => {
                 error={!!validateMsg.schoolName}
                 helperText={validateMsg.schoolName}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 label={dictionary[language]?.email}

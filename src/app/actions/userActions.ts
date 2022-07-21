@@ -1,72 +1,163 @@
-import mutation from 'api/mutations/get'
-import { TOKEN_AUTH } from 'api/mutations/users'
-import query, { sendRawQuery } from 'api/queries/get'
-import { WHOAMI_QUERY } from 'api/queries/users'
-import { INTEREST_QUERY } from 'api/queries/interests'
-import { NEXT_LEVEL_QUERY } from 'api/queries/questions'
-// import { getGrades }           from 'views/../app/actions/gradeActions'
+// import mutation from 'api/mutations/get';
+import {TOKEN_AUTH} from 'api/mutations/users';
+import query, {sendRawQuery} from 'api/queries/get';
+import {WHOAMI_QUERY} from 'api/queries/users';
+import {INTEREST_QUERY} from 'api/queries/interests';
+import {NEXT_LEVEL_QUERY} from 'api/queries/questions';
 
+import * as TYPES from 'app/types';
+import {doUpdateUserLanguage} from './studentActions';
+import {USER_TYPE} from 'constants/common';
 
-import * as TYPES from 'app/types'
-import { doUpdateUserLanguage } from './studentActions'
-import { USER_TYPE } from 'constants/common'
+export const login = async (
+  username: string,
+  password: string,
+  dispatch: any,
+  language: string
+) => {
+  // const res: any = await mutation(TOKEN_AUTH(username, password)).catch(() => ({
+  //   success: false,
+  // }));
+  // if (res.success === false) {
+  //   return {success: false, msg: 'Network Error'};
+  // }
 
-export const login = async (username: string, password: string, dispatch: any, language: string) => {
-  const res: any = await mutation(TOKEN_AUTH(username, password)).catch(() => ({ success: false }));
-  if (res.success === false) {
-    return { success: false, msg: 'Network Error' };
-  }
+  // const result: any = await res.json();
 
-  const result: any = await res.json();
+  // if (result.errors) {
+  //   return {success: false, msg: result.errors[0].message};
+  // }
 
-  if (result.errors) {
-    return { success: false, msg: result.errors[0].message };
-  }
-
-  const { token } = result.data.tokenAuth
+  // const {token} = result.data.tokenAuth;
   // dispatch({ type: TYPES.USER_SET_TOKEN, payload: { token: token } })
 
+  const tokenAuth = await sendRawQuery(TOKEN_AUTH(username, password));
+  if (tokenAuth.msg) return {success: false, message: tokenAuth.msg};
 
-  // Update user language from welcome page
-  await doUpdateUserLanguage(language, token)
+  const {token} = tokenAuth.data.tokenAuth;
+  // const res: any = await sendRawQuery(
+  //   UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN(guardianId, orderDetailId),
+  //   token
+  // );
+  // return res.msg
+  //   ? {status: false, message: res.msg}
+  //   : res.data.updateGuardianPlan;
 
-  const res_who: any = await query('whoami', WHOAMI_QUERY, token).catch(() => ({ success: false }));
+  // 🌎Update user language from welcome page, language is selected from language select
+  await doUpdateUserLanguage(language, token);
 
-  if (res_who.success === false) {
-    return { success: false, msg: 'Network Error!' };
+  // const res_who: any = await query('whoami', WHOAMI_QUERY, token).catch(() => ({
+  //   success: false,
+  // }));
+  // if (res_who.success === false) {
+  //   return {success: false, msg: 'Network Error!'};
+  // }
+  // const result_who: any = await res_who.json();
+  // if (result_who.errors && !result_who.data) {
+  //   return {success: false, msg: result_who.errors[0].message};
+  // }
+
+  const result_who: any = await sendRawQuery(WHOAMI_QUERY, token);
+  if (result_who.msg) return {success: false, message: result_who.msg};
+
+  const {guardian, student, profile, teacher, subscriber} = result_who.data.whoami;
+
+  const user = result_who.data.whoami;
+  const user_redux: any = (({
+    lastLogin,
+    isSuperuser,
+    username,
+    firstName,
+    lastName,
+    email,
+    isStaff,
+    isActive,
+    dateJoined,
+    language,
+    profile,
+  }) => ({
+    lastLogin,
+    isSuperuser,
+    username,
+    firstName,
+    lastName,
+    email,
+    isStaff,
+    isActive,
+    dateJoined,
+    language,
+    profile,
+  }))(user);
+  dispatch({type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token}});
+
+  switch (profile.role) {
+    case USER_TYPE.guardian:
+      return {guardian, success: true};
+    case USER_TYPE.student:
+      return {student, success: true};
+    case USER_TYPE.teacher:
+      return {teacher, success: true};
+    case USER_TYPE.subscriber:
+      return {subscriber, success: true};
+    default:
+      break;
   }
 
-  const result_who: any = await res_who.json();
-
-  if (result_who.errors && !result_who.data) {
-    return { success: false, msg: result_who.errors[0].message };
-  }
-  const { guardian, student } = result_who.data.whoami;
-
-
-
-  const res_interests: any = await query('interests', INTEREST_QUERY, token).catch(() => ({ success: false }));
+  const res_interests: any = await query(
+    'interests',
+    INTEREST_QUERY,
+    token
+  ).catch(() => ({success: false}));
   if (res_interests.success === false) {
-    return { success: false, msg: 'Network Error!' };
+    return {success: false, msg: 'Network Error!'};
   }
 
   const result_interests: any = await res_interests.json();
 
   if (result_interests.errors && !result_interests.data) {
-    return { success: false, msg: result_interests.errors[0].message };
+    return {success: false, msg: result_interests.errors[0].message};
   }
-  const interests = result_interests.data.interests
-  const user = result_who.data.whoami;
-  const user_redux: any = (({ lastLogin, isSuperuser, username, firstName, lastName, email, isStaff, isActive, dateJoined, language, profile }) => ({ lastLogin, isSuperuser, username, firstName, lastName, email, isStaff, isActive, dateJoined, language, profile }))(user)
+  const interests = result_interests.data.interests;
+
+  // const user = result_who.data.whoami;
+  // const user_redux: any = (({
+  //   lastLogin,
+  //   isSuperuser,
+  //   username,
+  //   firstName,
+  //   lastName,
+  //   email,
+  //   isStaff,
+  //   isActive,
+  //   dateJoined,
+  //   language,
+  //   profile,
+  // }) => ({
+  //   lastLogin,
+  //   isSuperuser,
+  //   username,
+  //   firstName,
+  //   lastName,
+  //   email,
+  //   isStaff,
+  //   isActive,
+  //   dateJoined,
+  //   language,
+  //   profile,
+  // }))(user);
 
   // dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user_redux } })
-  dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user_redux, token: token } })
+  // dispatch({type: TYPES.USER_SET_DATA, payload: {...user_redux, token: token}});
 
   if (student) {
-    dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user_redux, token: token } })
-    dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
     dispatch({
-      type: TYPES.EARNING_SET_DATA, payload: {
+      type: TYPES.USER_SET_DATA,
+      payload: {...user_redux, token: token},
+    });
+    dispatch({type: TYPES.STUDENT_SET_DATA, payload: student});
+    dispatch({
+      type: TYPES.EARNING_SET_DATA,
+      payload: {
         rank: 1,
         level_name: student.level.name,
         level: student.level.amount,
@@ -75,39 +166,62 @@ export const login = async (username: string, password: string, dispatch: any, l
         progress: 0,
         energyCharge: student.battery.level,
         balance: student.coinWallet.balance,
-      }
-    })
-    dispatch({ type: TYPES.AVATAR_SET_DEFAULT_LOGIN, payload: student })
-    dispatch({ type: TYPES.INTEREST_SET_DATA, payload: interests })
-    return { success: true, msg: 'Successfully Logined!', userType: USER_TYPE.student }
-  }
-  else if (guardian) {
-    dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian })
+      },
+    });
+    dispatch({type: TYPES.AVATAR_SET_DEFAULT_LOGIN, payload: student});
+    dispatch({type: TYPES.INTEREST_SET_DATA, payload: interests});
+    return {
+      success: true,
+      msg: 'Successfully Logined!',
+      userType: USER_TYPE.student,
+    };
+  } else if (guardian) {
+    dispatch({type: TYPES.GUARDIAN_SET_DATA, payload: guardian});
     if (guardian.guardianstudentplanSet?.length === 0)
-      return { success: true, msg: 'Successfully Logged in!', userType: USER_TYPE.noPlans }
-    return { success: true, msg: 'Successfully Logined!', userType: USER_TYPE.guardian }
-  }
-  else {
+      return {
+        success: true,
+        msg: 'Successfully Logged in!',
+        userType: USER_TYPE.noPlans,
+      };
+    return {
+      success: true,
+      msg: 'Successfully Logined!',
+      userType: USER_TYPE.guardian,
+    };
+  } else {
     // dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
-    return { success: true, msg: 'Successfully Logined!', userType: USER_TYPE.teacher }
+    return {
+      success: true,
+      msg: 'Successfully Logined!',
+      userType: profile.role,
+    };
   }
-}
+};
 
-export const getNextLevel = async (currentLevelAmount: number, token: string, dispatch: any) => {
-  const res: any = await sendRawQuery(NEXT_LEVEL_QUERY(currentLevelAmount), token)
+export const getNextLevel = async (
+  currentLevelAmount: number,
+  token: string,
+  dispatch: any
+) => {
+  const res: any = await sendRawQuery(
+    NEXT_LEVEL_QUERY(currentLevelAmount),
+    token
+  );
   if (!res.msg) {
-    dispatch({ type: TYPES.STUDENT_SET_NEXT_LEVEL, payload: res.data.nextLevelByAmount });
+    dispatch({
+      type: TYPES.STUDENT_SET_NEXT_LEVEL,
+      payload: res.data.nextLevelByAmount,
+    });
     return res.data.nextLevelByAmount;
-  }
-  else return { msg: res.msg }
-}
+  } else return {msg: res.msg};
+};
 
 export const resetReducer = async (dispatch: any) => {
-  dispatch({ type: TYPES.AVATAR_RESET });
-  dispatch({ type: TYPES.EARNING_RESET });
-  dispatch({ type: TYPES.GRADE_RESET });
-  dispatch({ type: TYPES.GUARDIAN_RESET });
-  dispatch({ type: TYPES.INTEREST_RESET })
-  dispatch({ type: TYPES.STUDENT_RESET });
-  dispatch({ type: TYPES.USER_RESET });
-}
+  dispatch({type: TYPES.AVATAR_RESET});
+  dispatch({type: TYPES.EARNING_RESET});
+  dispatch({type: TYPES.GRADE_RESET});
+  dispatch({type: TYPES.GUARDIAN_RESET});
+  dispatch({type: TYPES.INTEREST_RESET});
+  dispatch({type: TYPES.STUDENT_RESET});
+  dispatch({type: TYPES.USER_RESET});
+};

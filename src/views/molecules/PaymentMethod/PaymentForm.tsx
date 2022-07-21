@@ -247,7 +247,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                     dispatch
                 )
                 result.success = result_confirm.success;
-                result.data.order = result_confirm.data.order;
+                result.data = result_confirm.data;
             }
         }
 

@@ -1,38 +1,31 @@
-import { COUPON_COODE, DISCOUNT_CODE_DETAIL, ORDER, PAYMENT_METHOD, PLAN } from "./paymentFragments"
-import { GRADES } from "./peopleFragments"
+import { COUPON_COODE, DISCOUNT_CODE_DETAIL, PAYMENT_METHOD, PLAN } from "./paymentFragments"
+import { AUDIENCES, GRADES } from "./peopleFragments"
 
-export const CLASSROOM_SCHEMA = `
+export const _CLASSROOM_SCHEMA = `
     id
     identifier
     isActive
     name
-    grade {
-        ${GRADES}
-    }
-    language: String
-    audience: AudienceSchema!
-    enableGames: Boolean!
-    gameCostPercentage: Int!
-    timeZoneValue: String!
-    timeZoneOffset: Int!
-    goalCoinsPerDay: Int!
-    mondayStart: Time
-    mondayEnd: Time
-    tuesdayStart: Time
-    tuesdayEnd: Time
-    wednesdayStart: Time
-    wednesdayEnd: Time
-    thursdayStart: Time
-    thursdayEnd: Time
-    fridayStart: Time
-    fridayEnd: Time
-    saturdayStart: Time
-    saturdayEnd: Time
-    sundayStart: Time
-    sundayEnd: Time
-    groupSet: [GroupSchema!]!
-    teacherclassroom: TeacherClassroomSchema
-    studentSet: [StudentSchema!]!
+    language
+    enableGames
+    gameCostPercentage
+    timeZoneValue
+    timeZoneOffset
+    goalCoinsPerDay
+    mondayStart
+    mondayEnd
+    tuesdayStart
+    tuesdayEnd
+    wednesdayStart
+    wednesdayEnd
+    thursdayStart
+    thursdayEnd
+    fridayStart
+    fridayEnd
+    saturdayStart
+    saturdayEnd
+    sundayStart
+    sundayEnd
 `
 
 export const TEACHER_SCHEMA = `
@@ -51,13 +44,22 @@ export const TEACHER_SCHEMA = `
     country
     district
     classroomSet {
-        ${CLASSROOM_SCHEMA}
+        ${_CLASSROOM_SCHEMA}
     }
 `
 
+export const _TEACHER_CLASSROOM = `
+    id
+    isActive
+    cancelReason
+    isCancel
+    isPaid
+    expiredAt
+    period
+    price
+`
 export const _TEACHERSCHEMA = `
     id
-    identifier
     isActive
     firstName
     lastName

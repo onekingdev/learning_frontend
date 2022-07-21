@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   zip: null,
   country: null,
   orderSet: <any>[],
+  classrooms: <any>[],
 };
 const TEACHERReducer = (
   state = INITIAL_STATE,
@@ -28,6 +29,11 @@ const TEACHERReducer = (
       return {
         ...state,
         orderSet: state.orderSet.push(action.payload),
+      };
+    case TYPE.TEACHER_ADD_CLASSROOM:
+      return {
+        ...state,
+        classrooms: state.classrooms.push(action.payload),
       };
     default:
       return state;

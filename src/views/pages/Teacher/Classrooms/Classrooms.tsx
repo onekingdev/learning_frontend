@@ -11,27 +11,6 @@ import AddClassroomForm from 'views/molecules/Classroom/AddClassroomForm'
 import commonDictionary from 'constants/commonDictionary'
 import { useHistory } from 'react-router-dom';
 
-const data = [
-  {
-    name: 'Candy'
-  },
-  {
-    name: 'Viri'
-  },
-  {
-    name: 'Armin'
-  },
-  {
-    name: 'Bruce'
-  },
-  {
-    name: 'Tum'
-  },
-  {
-    name: 'aaron'
-  },
-]
-
 const Classrooms: FC = () => {
   // const loadingContext    = useContext(LoadingContext);
   // const {enqueueSnackbar} = useSnackbar();
@@ -39,6 +18,7 @@ const Classrooms: FC = () => {
   // const guardian          = useSelector((state: any) => state.guardian);
     const history = useHistory();
     const language: string = useSelector((state: any) => state.user.language) || 'en-us';
+    const {classrooms} = useSelector((state:any) => state.teacher)
 
   const [isOpenNewForm, setIsOpenNewForm] = useState(false);
 
@@ -61,7 +41,7 @@ const Classrooms: FC = () => {
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.classrooms}>
       <>
         <AddClassroomForm isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} />
-        <ClassroomPanel data={data} onNew={onNew} onClassroom={onClassroom} />
+        <ClassroomPanel classrooms={classrooms} onNew={onNew} onClassroom={onClassroom} />
       </>
     </TeacherPgContainer>
   );

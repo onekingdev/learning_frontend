@@ -45,7 +45,7 @@ export const Payment: FC = () => {
   })
   const [isSpecialCode, setIsSpecialCode]         = useState(false)
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
-  const [offRate, setOffRate]                     = useState(50);
+  const [offRate, setOffRate]                     = useState(100);
 
 
   const language:string = useSelector((state: any) => state.user.language) || 'en-us';
@@ -161,7 +161,7 @@ export const Payment: FC = () => {
           {showPaymentMethod && (
             <PaymentMethod
               plans         = {plans}
-              offRate       = {offRate}
+              offRate       = {100}
               isSpecialCode = {isSpecialCode}
             />
           )}

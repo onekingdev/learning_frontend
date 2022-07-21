@@ -128,7 +128,7 @@ const Payment: FC = () => {
           {showPaymentMethod && (
             <PaymentMethod
               plans={plans}
-              offRate={offRate}
+              offRate={100}
               isSpecialCode={isSpecialCode}
               sponsorEmail={sponsorEmail}
             />

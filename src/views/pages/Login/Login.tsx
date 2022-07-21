@@ -17,23 +17,21 @@ import {
   Link,
   ThemeProvider,
   Typography,
-  useMediaQuery
 } from '@mui/material';
 import { BasicColor } from 'views/Color';
-import { USER_TYPE } from 'constants/common';
+import { LANGUAGES, USER_TYPE } from 'constants/common';
 import background from 'views/assets/colored-shapes-bg.svg';
-import { ScreenSize } from 'constants/screenSize';
 import { themeTeacher } from 'views/Theme';
 import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 export const LogIn: FC = () => {
-  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
+  const isTablet = useSocratesMediaQuery('sm')
+
   const history = useHistory();
   const dispatch = useDispatch()
   const { enqueueSnackbar } = useSnackbar();
-
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
 
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState('');
@@ -57,7 +55,7 @@ export const LogIn: FC = () => {
         history.push('/kids/list')
         return;
       case USER_TYPE.teacher:
-        history.push('/kids/list')
+        history.push('/teacher/classrooms')
         return;
       case USER_TYPE.noPlans:
         history.push('/parent/payment')

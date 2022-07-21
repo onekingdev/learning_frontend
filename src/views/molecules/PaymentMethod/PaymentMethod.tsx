@@ -23,7 +23,7 @@ import {
     OrderTip,
 } from './Style';
 import { LANGUAGES } from 'constants/common';
-import { TEACHER_ADD_ORDER } from 'app/types';
+import { TEACHER_ADD_ORDER, TEACHER_SET_DATA } from 'app/types';
 
 type PaymentMethodProps = {
     plans: {
@@ -87,12 +87,13 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             // TODO: check user type, and when parent redirect to kids/new,
             const userType = user.profile.role
             const order = result.data.order
-            console.log({ order, userType })
+            const teacher = result.data.teacher
+            console.log({ order, userType, teacher })
             switch (userType) {
                 case 'TEACHER':
                     dispatch({
-                        type: TEACHER_ADD_ORDER,
-                        payload: order
+                        type: TEACHER_SET_DATA,
+                        payload: teacher
                     })
                     history.push('/teacher/classrooms')
                     break;
@@ -124,11 +125,16 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     //   }, []);
 
     useEffect(() => {
-        const price_gold = plans.Gold.currentPrice / 100 * offRate * ((plans.Gold.childCount - 1 > 0) ? (plans.Gold.childCount - 1) : 0) + (plans.Gold.childCount > 0 ? 1 : 0) * plans.Gold.currentPrice;
-        const price_combo = plans.Combo.currentPrice / 100 * offRate * ((plans.Combo.childCount - 1 > 0) ? (plans.Combo.childCount - 1) : 0) + (plans.Combo.childCount > 0 ? 1 : 0) * plans.Combo.currentPrice;
-        const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0) * plans.Sole.currentPrice;
-        const price_school = plans.School.currentPrice / 100 * offRate * ((plans.School.childCount - 1 > 0) ? (plans.School.childCount - 1) : 0) + (plans.School.childCount > 0 ? 1 : 0) * plans.School.currentPrice;
-        const price_classroom = plans.Classroom.currentPrice / 100 * offRate * ((plans.Classroom.childCount - 1 > 0) ? (plans.Classroom.childCount - 1) : 0) + (plans.Classroom.childCount > 0 ? 1 : 0) * plans.Classroom.currentPrice;
+        // const price_gold = plans.Gold.currentPrice / 100 * offRate * ((plans.Gold.childCount - 1 > 0) ? (plans.Gold.childCount - 1) : 0) + (plans.Gold.childCount > 0 ? 1 : 0) * plans.Gold.currentPrice;
+        // const price_combo = plans.Combo.currentPrice / 100 * offRate * ((plans.Combo.childCount - 1 > 0) ? (plans.Combo.childCount - 1) : 0) + (plans.Combo.childCount > 0 ? 1 : 0) * plans.Combo.currentPrice;
+        // const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0) * plans.Sole.currentPrice;
+        // const price_school = plans.School.currentPrice / 100 * offRate * ((plans.School.childCount - 1 > 0) ? (plans.School.childCount - 1) : 0) + (plans.School.childCount > 0 ? 1 : 0) * plans.School.currentPrice;
+        // const price_classroom = plans.Classroom.currentPrice / 100 * offRate * ((plans.Classroom.childCount - 1 > 0) ? (plans.Classroom.childCount - 1) : 0) + (plans.Classroom.childCount > 0 ? 1 : 0) * plans.Classroom.currentPrice;
+        const price_gold = plans.Gold.currentPrice / 100 * offRate * (plans.Gold.childCount || 0);
+        const price_combo = plans.Combo.currentPrice / 100 * offRate * (plans.Combo.childCount || 0)
+        const price_sole = plans.Sole.currentPrice / 100 * offRate * (plans.Sole.childCount || 0)
+        const price_school = plans.School.currentPrice / 100 * offRate * (plans.School.childCount || 0)
+        const price_classroom = plans.Classroom.currentPrice / 100 * offRate * (plans.Classroom.childCount || 0)
         setSubtotal(price_gold + price_combo + price_sole + price_school + price_classroom)
     }, [plans])
     return (
