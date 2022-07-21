@@ -1,5 +1,5 @@
 import {GUARDIAN, GUARDIAN_ORDERS} from '../fragments/guardianFragments';
-import {USER, USER_PROFILE} from '../fragments/userFragments';
+import {_USER, USER_PROFILE} from '../fragments/userFragments';
 import {
   GUARDIAN_STUDENT_PLAN,
   ORDER,
@@ -24,7 +24,7 @@ export const CREATE_GUARDIAN = (
             ${GUARDIAN}
         }
         user {
-            ${USER}
+            ${_USER}
         }
         profile {
             ${USER_PROFILE}

@@ -3,7 +3,7 @@ export const USER_PROFILE = `
     role
 `
 
-export const USER = `
+export const _USER = `
     id
     password
     lastLogin

@@ -4,7 +4,7 @@ import {
   _TEACHERSCHEMA,
   _TEACHER_CLASSROOM,
 } from 'api/fragments/teacherFraments';
-import {USER, USER_PROFILE} from 'api/fragments/userFragments';
+import {_USER, USER_PROFILE} from 'api/fragments/userFragments';
 
 export const CREATE_SCHOOL = (
   country: string,
@@ -32,7 +32,7 @@ mutation {
         zip: "${zip}",
     ) {
         user {
-            ${USER}
+            ${_USER}
             profile {
                 ${USER_PROFILE}
             }
@@ -68,7 +68,7 @@ mutation {
         zip: "${zip}",
     ) {
         user {
-            ${USER}
+            ${_USER}
             profile {
                 ${USER_PROFILE}
             }
