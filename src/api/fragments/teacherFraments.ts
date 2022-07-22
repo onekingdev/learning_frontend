@@ -1,5 +1,4 @@
 import { COUPON_COODE, DISCOUNT_CODE_DETAIL, PAYMENT_METHOD, PLAN } from "./paymentFragments"
-import { AUDIENCES, GRADES } from "./peopleFragments"
 
 export const _CLASSROOM_SCHEMA = `
     id
@@ -26,6 +25,7 @@ export const _CLASSROOM_SCHEMA = `
     saturdayEnd
     sundayStart
     sundayEnd
+    isEmpty
 `
 
 export const TEACHER_SCHEMA = `

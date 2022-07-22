@@ -1,67 +1,36 @@
 import {
   FC, useEffect, useState,
-  // useContext
 } from 'react';
 import { useSelector } from 'react-redux';
-// import { LoadingContext } from 'react-router-loading';
-// import { useSnackbar } from 'notistack';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import StudentsPanel from 'views/molecules/Classroom/StudentsPanel'
 import ChooseNewStudentTypeDlg from 'views/molecules/Classroom/ChooseNewStudentTypeDlg'
 import AddExistStudentDlg from 'views/molecules/Classroom/AddExistStudent'
 import AddNewStudent from 'views/molecules/Classroom/AddNewStudent'
 import EditStudentForm from 'views/molecules/Classroom/EditStudentForm'
-import { useHistory } from 'react-router-dom';
 import { dictionary } from './dictionary'
-import { LANGUAGES } from 'constants/common';
-
-const data = [
-  {
-    name: 'armin',
-    type: 'normal',
-    grade: 'greade',
-    lastName: 'last name',
-    classroom: 'classroom',
-    username: 'user name',
-  }, {
-    name: 'armin',
-    type: 'normal',
-    grade: 'greade',
-    lastName: 'last name',
-    classroom: 'classroom',
-    username: 'user name',
-  }, {
-    name: 'armin',
-    type: 'normal',
-    grade: 'greade',
-    lastName: 'last name',
-    classroom: 'classroom',
-    username: 'user name',
-  }, {
-    name: 'armin',
-    type: 'normal',
-    grade: 'greade',
-    lastName: 'last name',
-    classroom: 'classroom',
-    username: 'user name',
-  },
-]
+import { useQuery } from 'react-query';
+import { doFetchClassroomStudents } from 'app/actions';
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { Typography } from '@mui/material';
+import { getMessage } from 'views/utils';
 
 const Students: FC = () => {
-  // const loadingContext    = useContext(LoadingContext);
-  // const {enqueueSnackbar} = useSnackbar();
-  // const user              = useSelector((state: any) => state.user);
-  // const guardian          = useSelector((state: any) => state.guardian);
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
-  const history = useHistory();
+  const { language, token } = useSelector((state: any) => state.user);
+  const { currentClassId } = useSelector((state: any) => state.teacher);
   const [isOpenNewType, setIsOpenNewType] = useState(false);
   const [isExistingNewAccountDlgOpen, setIsExistingNewAccountDlgOpen] = useState(false);
   const [isAddNewAccountDlgOpen, setIsAddNewAccountDlgOpen] = useState(false);
   const [isOpenEditStudent, setIsOpenEditStudent] = useState(false);
   const [studentForEdit, setStudentForEdit] = useState({});
 
+  const { data: students, isLoading, error } = useQuery(
+    ['fetch-classroom-students', currentClassId, token],
+    () => doFetchClassroomStudents(currentClassId, token),
+    { refetchIntervalInBackground: false }
+  )
+
   const onNew = () => {
-    console.log('will open')
     setIsOpenNewType(true)
   }
 
@@ -78,22 +47,26 @@ const Students: FC = () => {
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom} current='students' >
       <>
-          <EditStudentForm
-            data={studentForEdit}
-            isOpen={isOpenEditStudent}
-            close={() => setIsOpenEditStudent(false)}
-          />
-          <ChooseNewStudentTypeDlg
-            isOpen={isOpenNewType}
-            close={() => setIsOpenNewType(false)}
-            openExistingNewAccountDlg={() => setIsExistingNewAccountDlgOpen(true)}
-            openNewAccountDlg={() => setIsAddNewAccountDlgOpen(true)}
-          />
-          <AddExistStudentDlg isOpen={isExistingNewAccountDlgOpen} close={() => setIsExistingNewAccountDlgOpen(false)} />
-          <AddNewStudent isOpen={isAddNewAccountDlgOpen} close={() => setIsAddNewAccountDlgOpen(false)} />
-          <StudentsPanel data={data} onNew={onNew} onStudent={onStudent} />
-        </>
-      </TeacherPgContainer>
-      );
+        <EditStudentForm
+          data={studentForEdit}
+          isOpen={isOpenEditStudent}
+          close={() => setIsOpenEditStudent(false)}
+        />
+        <ChooseNewStudentTypeDlg
+          isOpen={isOpenNewType}
+          close={() => setIsOpenNewType(false)}
+          openExistingNewAccountDlg={() => setIsExistingNewAccountDlgOpen(true)}
+          openNewAccountDlg={() => setIsAddNewAccountDlgOpen(true)}
+        />
+        <AddExistStudentDlg isOpen={isExistingNewAccountDlgOpen} close={() => setIsExistingNewAccountDlgOpen(false)} />
+        <AddNewStudent isOpen={isAddNewAccountDlgOpen} close={() => setIsAddNewAccountDlgOpen(false)} />
+        {
+          isLoading ? <LoadingSpinner /> : error ?
+            <Typography variant='h5' color='red'>{getMessage(error)}</Typography> :
+            <StudentsPanel students={students} onNew={onNew} onStudent={onStudent} />
+        }
+      </>
+    </TeacherPgContainer>
+  );
 };
-      export default Students
+export default Students

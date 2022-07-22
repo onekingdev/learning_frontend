@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux'
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import addClassroomImgMark from 'views/assets/addClassroom.svg'
 import ClassroomItemImg from 'views/assets/classroom-item.svg'
 import {
@@ -18,7 +18,6 @@ interface ClassroomPanelProps {
 
 const ClassroomPanel: FC<ClassroomPanelProps> = ({ classrooms, onNew, onClassroom }) => {
   const language = useSelector((state: any) => state.user.language);
-  console.log({ classrooms })
   return (
     <Container>
       <Grid container justifyContent={'start'}>
@@ -31,10 +30,13 @@ const ClassroomPanel: FC<ClassroomPanelProps> = ({ classrooms, onNew, onClassroo
         {
           classrooms &&
           classrooms.map((item: any, index: number) =>
-            <Grid item key={index} xs={4} sm={3} md={1.5}>
+            <Grid item key={index} xs={4} sm={3} md={1.5} alignItems='start'>
               <ClassroomItem key={index} onClick={() => { onClassroom(item) }}>
                 <ClassroomMark src={ClassroomItemImg} />
                 <ClassroomText>{item.name}</ClassroomText>
+                {
+                  item.isEmpty && <Typography fontSize={12} color='gray'>{'(Empty)'}</Typography>
+                }
               </ClassroomItem>
             </Grid>
           )

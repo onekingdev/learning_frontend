@@ -1,24 +1,19 @@
 import {
   FC, useEffect, useState,
-  // useContext
 } from 'react';
-import { useSelector } from 'react-redux';
-// import { LoadingContext }       from 'react-router-loading';
-// import { useSnackbar }          from 'notistack';
+import { useDispatch, useSelector } from 'react-redux';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import ClassroomPanel from 'views/molecules/Classroom/ClassroomPanel'
 import AddClassroomForm from 'views/molecules/Classroom/AddClassroomForm'
 import commonDictionary from 'constants/commonDictionary'
 import { useHistory } from 'react-router-dom';
+import { TEACHER_SET_CURRENT_CLASSROOM, TEACHER_SET_CURRENT_CLASSROOM_ID } from 'app/types';
 
 const Classrooms: FC = () => {
-  // const loadingContext    = useContext(LoadingContext);
-  // const {enqueueSnackbar} = useSnackbar();
-  // const {token}              = useSelector((state: any) => state.user);
-  // const guardian          = useSelector((state: any) => state.guardian);
-    const history = useHistory();
-    const language = useSelector((state: any) => state.user.language);
-    const {classrooms} = useSelector((state:any) => state.teacher)
+  const history = useHistory();
+  const dispatch = useDispatch()
+  const language = useSelector((state: any) => state.user.language);
+  const { classrooms } = useSelector((state: any) => state.teacher)
 
   const [isOpenNewForm, setIsOpenNewForm] = useState(false);
 
@@ -27,9 +22,21 @@ const Classrooms: FC = () => {
   }
 
   const onClassroom = (classroom: any) => {
-    console.log({classroom})
+
+    dispatch({
+      type: TEACHER_SET_CURRENT_CLASSROOM_ID,
+      payload: classroom.id,
+    });
+    if (classroom.isEmpty) {
+      dispatch({
+        type: TEACHER_SET_CURRENT_CLASSROOM,
+        payload: classroom,
+      });
+      history.push('/teacher/addStudent')
+    }
     // TODO Redirect to the Classroom/students page with teacher info
-    history.push('/teacher/students')
+    else
+      history.push('/teacher/students')
   }
   useEffect(() => {
 

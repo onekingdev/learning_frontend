@@ -1,9 +1,10 @@
 import {_USER, USER_PROFILE} from '../fragments/userFragments';
-import {STUDENT} from '../fragments/studentFragments';
+import {STUDENT, _STUDENT} from '../fragments/studentFragments';
 import {COIN_WALLET} from '../fragments/coinWalletFragments';
 
 import {GUARDIAN} from '../fragments/guardianFragments';
 import {_CLASSROOM_SCHEMA, _TEACHERSCHEMA} from 'api/fragments/teacherFraments';
+import { AVATAR } from 'api/fragments/avatarFragments';
 export const USERS_QUERY = `
     {
         ${_USER}
@@ -13,6 +14,47 @@ export const USERS_QUERY = `
 
     }
 `;
+
+export const STUDENT_SCHEMA = `
+    ${_STUDENT}
+    currentAvatarHead {
+        ${AVATAR}
+    }
+    currentAvatarAccessories {
+        ${AVATAR}
+    }
+    currentAvatarClothes {
+        ${AVATAR}
+    }
+    currentAvatarPants {
+        ${AVATAR}
+    }
+`
+
+export const CLASSROOM_SCHEMA = `
+${_CLASSROOM_SCHEMA}
+audience {
+    id
+    gradeSet {
+        id
+        name
+    }
+}
+`
+
+export const TEACHERSCHEMA = `
+${_TEACHERSCHEMA}
+classrooms {
+    ${_CLASSROOM_SCHEMA}
+    audience {
+        id
+        gradeSet {
+            id
+            name
+        }
+    }
+}
+`
 
 /**
  * Nameing conventions
@@ -35,10 +77,7 @@ export const WHOAMI_QUERY = `
                 ${GUARDIAN}
             }
             teacher {
-                ${_TEACHERSCHEMA}
-                classrooms {
-                    ${_CLASSROOM_SCHEMA}
-                }
+                ${TEACHERSCHEMA}
             }
             subscriber {
                 id

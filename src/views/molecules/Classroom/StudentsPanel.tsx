@@ -1,27 +1,35 @@
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
+import { FC } from 'react';
 import chair from 'views/assets/chair.svg'
 import {
   StudentItem,
   StudentText
 } from './Style'
-const StudentPanel = (props: any) => {
 
-  const data = props.data;
+interface StudentPanelProps {
+  students: Array<any>
+  onStudent: (param: any) => void
+  onNew: () => void
+}
+
+const StudentPanel: FC<StudentPanelProps> = ({ students, onStudent, onNew }) => {
+
   return (
-    <Grid container spacing={2} justifyContent='center'>
+    <Grid container spacing={10} justifyContent='center'>
       {
-        data.map((item: any, index: number) =>
-          <Grid item >
-            <StudentItem key={index} onClick={() => { props.onStudent(item) }}>
+        students && students.map((item: any, index: number) =>
+          <Grid item key={item.id}>
+            <StudentItem key={index} onClick={() => onStudent(item)}>
               <img src={chair} />
-              <StudentText>{item.name}</StudentText>
+              <StudentText>{item.fullName || 'No Name'}</StudentText>
             </StudentItem>
           </Grid>
         )
       }
       <Grid item>
-        <StudentItem onClick={() => { props.onNew() }}>
+        <StudentItem onClick={() => onNew()}>
           <img src={chair} />
+          <Typography color='red' sx={{position:'absolute', bottom: 15}}>{'Add'}</Typography>
         </StudentItem>
       </Grid>
     </Grid>

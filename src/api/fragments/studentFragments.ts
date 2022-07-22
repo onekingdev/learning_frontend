@@ -210,6 +210,19 @@ export const STUDENT_RAW = `
         points
         intPeriodStartAt
 `;
+
+export const _STUDENT = `
+id
+isActive
+firstName
+lastName
+fullName
+dob
+gender
+points
+intPeriodStartAt
+isNew
+`
 export const STUDENT_RAW_OLD = `
         id
         identifier

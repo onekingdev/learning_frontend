@@ -2,9 +2,9 @@ import {
   _CLASSROOM_SCHEMA,
   SUBSCRIBER,
   _TEACHERSCHEMA,
-  _TEACHER_CLASSROOM,
 } from 'api/fragments/teacherFraments';
 import {_USER, USER_PROFILE} from 'api/fragments/userFragments';
+import { STUDENT_SCHEMA } from 'api/queries/users';
 
 export const CREATE_SCHOOL = (
   country: string,
@@ -78,6 +78,15 @@ mutation {
             ${_TEACHERSCHEMA}
         }
 	}
+}
+`;
+
+export const CLASSROMM_STUDENTS = (
+  classroomId: number | string
+) => `{
+  studentsByClassroomId(classroomId: ${classroomId}){
+    ${STUDENT_SCHEMA}
+  }
 }
 `;
 

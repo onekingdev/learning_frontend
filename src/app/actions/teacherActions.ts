@@ -1,9 +1,11 @@
 import {
   ADD_CLASS_TO_TEACHER,
+  CLASSROMM_STUDENTS,
   CREATE_SCHOOL,
   CREATE_TEACHER,
 } from 'api/mutations/teacher';
 import {fetchQuery, sendRawQuery} from 'api/queries/get';
+import { CLASSROOM_SCHEMA } from 'api/queries/users';
 
 export const doCreateSchool = async (
   country: string,
@@ -117,6 +119,39 @@ export const doFetchClassLeaders = async (token: string) => {
       },
     ],
   };
+};
+
+export const doAddStudentsToClassroom = async (students: string, token: string) => {
+  try {
+    const res: any = await sendRawQuery(`
+    mutation {
+      createStudentsToClassroom(
+        students: ${students}
+      ){
+        classroom {
+          ${CLASSROOM_SCHEMA}
+        }
+      }
+    }`,
+      token
+    );
+    return res.msg
+      ? {status: false, message: res.msg}
+      : {status: true, data: res.data.createStudentsToClassroom.classroom};
+  } catch (e: any) {
+    return {status: false, message: e.message};
+  }
+}
+
+export const doFetchClassroomStudents = async (
+  classroomId: number | string,
+  token: string
+) => {
+  const res: any = await fetchQuery(
+    CLASSROMM_STUDENTS(classroomId),
+    token
+  );
+  return res.data?.studentsByClassroomId?? res.errors[0]; // when django returns error message on fail
 };
 
 export const teacherCreatesStudent = (payload: string) => ({

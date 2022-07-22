@@ -8,6 +8,8 @@ const INITIAL_STATE = {
   country: null,
   orderSet: <any>[],
   classrooms: Array<any>(0),
+  currentClass: null,
+  currentClassId: null
 };
 const TEACHERReducer = (
   state = INITIAL_STATE,
@@ -29,6 +31,16 @@ const TEACHERReducer = (
       return {
         ...state,
         orderSet: state.orderSet.push(action.payload),
+      };
+    case TYPE.TEACHER_SET_CURRENT_CLASSROOM:
+      return {
+        ...state,
+        currentClass: action.payload,
+      };
+    case TYPE.TEACHER_SET_CURRENT_CLASSROOM_ID:
+      return {
+        ...state,
+        currentClassId: action.payload,
       };
     case TYPE.TEACHER_ADD_CLASSROOM:
       return {

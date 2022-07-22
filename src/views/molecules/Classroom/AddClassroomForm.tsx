@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { Grid, FormControl, Select, Button } from '@mui/material';
+import { Grid, FormControl, Select } from '@mui/material';
 import { dictionary } from './dictionary'
 import {
     useStyles,
@@ -11,18 +11,14 @@ import TextField from 'views/molecules/MuiTextField';
 import { getAudiencesWithGrades } from 'app/actions/audienceActions'
 import { useSnackbar } from 'notistack';
 import MenuItem from '@mui/material/MenuItem';
-// import Button                    from 'views/molecules/MuiButton';
 import { BasicColor } from 'views/Color';
 import commonDictionary from 'constants/commonDictionary'
-import { LANGUAGES } from 'constants/common';
-import { useHistory } from 'react-router-dom';
 import { doAddClassroomToTeacher } from 'app/actions';
 import { TEACHER_ADD_CLASSROOM } from 'app/types';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 const AddClassroomForm = (props: any) => {
     const { token, language } = useSelector((state: any) => state.user)
-    const history = useHistory();
     const dispatch = useDispatch();
 
     const { enqueueSnackbar } = useSnackbar();
@@ -51,10 +47,7 @@ const AddClassroomForm = (props: any) => {
     };
 
     const setAudienceData = async () => {
-        const result: any = await getAudiencesWithGrades(
-            // user.token,
-            // dispatch
-        );
+        const result: any = await getAudiencesWithGrades();
         if (!result.success) {
             enqueueSnackbar(result.msg, { variant: 'error' });
             return false;

@@ -21,6 +21,21 @@ export const getAudiencesWithGrades = async () => {
   return {success: true, msg: 'Success', data: audiences};
 };
 
+export const doFetchAudiencesWithGrade = async () => {
+  const res: any = await fetchQuery(`{
+    audiences {
+      id
+      name
+      standardCode
+      gradeSet {
+        id
+        name
+      }
+    }
+  }`);
+  return res.data?.audiences ?? res.errors[0];
+}
+
 
 export const doFetchSubjectsAndGradeByAudienceId = async (audienceId: number) => {
   const res: any = await fetchQuery(`{

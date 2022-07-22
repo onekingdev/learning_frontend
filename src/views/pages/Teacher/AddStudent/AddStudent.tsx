@@ -1,25 +1,22 @@
 import {
   FC, useEffect, useState,
-  // useContext,
   useRef
 } from 'react';
-import { useSelector } from 'react-redux';
-// import { LoadingContext } from 'react-router-loading';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import Table from 'views/molecules/MuiTable';
-import { Column } from 'views/molecules/MuiTable';
 import { dictionary } from './dictionary'
 import Button from 'views/molecules/MuiButton';
 import { BasicColor } from 'views/Color';
-import { getAudiencesWithGrades } from 'app/actions/audienceActions'
 import {
-  // OutTable,
   ExcelRenderer
 } from 'react-excel-renderer';
-// import Menu from 'views/pages/Teacher/Menus/TeacherMenu';
 import { useHistory } from 'react-router-dom';
-import { LANGUAGES } from 'constants/common';
+import { doAddStudentsToClassroom } from 'app/actions';
+import { any2String } from 'views/utils';
+import { TEACHER_SET_CURRENT_CLASSROOM } from 'app/types';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 interface MuiTableFunc {
   getData(): any;
@@ -28,140 +25,45 @@ interface MuiTableFunc {
 const AddStudent: FC = () => {
 
   const history = useHistory();
-  // const loadingContext = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
-  // const user = useSelector((state: any) => state.user);
-  // const guardian = useSelector((state: any) => state.guardian);
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const dispatch = useDispatch()
+  const { language, token } = useSelector((state: any) => state.user);
   const TableRef = useRef<MuiTableFunc>(null)
+  const [loading, setLoading] = useState(false)
 
-  const [audiences, setAudiences] = useState([]);
-  const [columns, setColumns] = useState<Column[]>([]);
   const [tableData, setTableData] = useState<any>([])
-  // const columns: Column[] = [
-  //   { id: 'name', label: dictionary[language]?.name, minWidth: 170 },
-  //   { id: 'lastName', label: dictionary[language]?.lastName, minWidth: 100 },
-  //   {
-  //     id: 'username',
-  //     label: dictionary[language]?.username,
-  //     minWidth: 170,
-  //     required: true,
-  //   },
-  //   {
-  //     id: 'password',
-  //     label: dictionary[language]?.password,
-  //     minWidth: 170,
-  //   },
-  //   {
-  //     id: 'audience',
-  //     label: dictionary[language]?.audience,
-  //     minWidth: 170,
-  //     editComponent: 'Select',
-  //     selectDatas: [{id:'123', name: 'id 123 name'}, {id:'1244', name: 'id 1244 name'}],
-  //     format: (value: any) => value?.name,
+  const gradeSet = useSelector((state: any) => state.teacher?.currentClass?.audience?.gradeSet) || []
+  const classroomId = useSelector((state: any) => state.teacher.currentClass.id)
 
-  //   },
-  //   {
-  //     id: 'grade',
-  //     label: dictionary[language]?.grade,
-  //     minWidth: 170,
-  //     editComponent: 'Select',
-  //     selectDatas: [{id:'123', name: 'id 123 name'}, {id:'1244', name: 'id 1244 name'}],
-  //     format: (value: any) => value?.name,
-  //   },
-  //   {
-  //     id: 'language',
-  //     label: dictionary[language]?.language,
-  //     minWidth: 170,
-  //     editComponent: 'Select',
-  //     selectDatas: [{id:'123', name: 'id 123 name'}, {id:'1244', name: 'id 1244 name'}],
-  //     format: (value: any) => value?.name,
-  //   },
-  // ];
-
-  // const sampleData = [
-  //   {
-  //     name: 'India',
-  //     lastName: 'string',
-  //     username: 'number',
-  //     password: 'number',
-  //     audience: { id: '123', name: 'id 123 name' },
-  //     grade: { id: '123', name: 'id 123 name' },
-  //     language: { id: '123', name: 'id 123 name' },
-  //   }
-  // ]
-
-  // const [isOpenNewForm, setIsOpenNewForm] = useState(false);
-
-  // const onNew = () => {
-  //   console.log("will open")
-  //   setIsOpenNewForm(true)
-  // }
-
-
-  const setAudienceData = async () => {
-    const result: any = await getAudiencesWithGrades(
-      // user.token,
-      // dispatch
-    );
-    if (!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
-      return false;
-    }
-
-    console.log('audience data is', result.data)
-    setAudiences(result.data);
-    setColumns([
-      { id: 'name', label: dictionary[language]?.name, minWidth: 50 },
-      { id: 'lastName', label: dictionary[language]?.lastName, minWidth: 50 },
-      {
-        id: 'username',
-        label: dictionary[language]?.username,
-        minWidth: 50,
-        required: true,
-      },
-      {
-        id: 'password',
-        label: dictionary[language]?.password,
-        minWidth: 50,
-      },
-      {
-        id: 'audience',
-        label: dictionary[language]?.audience,
-        minWidth: 50,
-        editComponent: 'Select',
-        selectDatas: result.data,
-        format: (value: any) => value?.name,
-      },
-      {
-        id: 'grade',
-        label: dictionary[language]?.grade,
-        minWidth: 50,
-        editComponent: 'Select',
-        selectDatas: [{ id: '123', name: 'id 123 name' }, { id: '1244', name: 'id 1244 name' }],
-        format: (value: any) => value?.name,
-      },
-      {
-        id: 'language',
-        label: dictionary[language]?.language,
-        minWidth: 50,
-        editComponent: 'Select',
-        selectDatas: [{ id: 'en-us', name: 'English' }, { id: 'th', name: 'Thai' }, { id: 'es-mx', name: 'Spanish' }],
-        format: (value: any) => value?.name,
-      },
-    ]);
-    return true;
-  }
+  const columns = [
+    // { id: 'index', label: 'No', maxWidth: 10 },
+    { id: 'name', label: dictionary[language]?.name, minWidth: 50 },
+    { id: 'lastName', label: dictionary[language]?.lastName, minWidth: 50 },
+    {
+      id: 'username',
+      label: dictionary[language]?.username,
+      minWidth: 50,
+      required: true,
+    },
+    {
+      id: 'password',
+      label: dictionary[language]?.password,
+      minWidth: 50,
+    },
+    {
+      id: 'grade',
+      label: dictionary[language]?.grade,
+      minWidth: 50,
+      editComponent: 'Select',
+      selectDatas: gradeSet || [],
+      format: (value: any) => value?.name,
+    },
+  ]
 
   useEffect(() => {
 
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
-    onPageInit();
   }, []);
-
-  const onPageInit = async () => {
-    await setAudienceData();
-  }
 
   const handleNew = () => {
     TableRef?.current?.handleAddData();
@@ -171,11 +73,39 @@ const AddStudent: FC = () => {
     document?.getElementById('file-input')?.click();
   }
 
-  const handleSave = () => {
-    console.log(TableRef?.current?.getData())
+  const handleSave = async () => {
+    const tableData = TableRef?.current?.getData() || []
+    const queryParams: Array<any> = []
 
-    // TODO Redirect to classrooms page when saving success, else show error message
-    history.push('/teacher/classrooms')
+    for (const row of tableData) {
+      queryParams.push({
+        classroomId,
+        gradeId: row.grade || '',
+        name: row.name || '',
+        lastName: row.lastName || '',
+        password: row.password || '',
+        username: row.username || ''
+      })
+    }
+
+    setLoading(true)
+    const res = await doAddStudentsToClassroom(any2String(queryParams), token)
+    if (res.message) {
+      enqueueSnackbar(res.message, { variant: 'error' })
+
+      setLoading(false)
+    } else {
+      console.log({ res })
+      dispatch({
+        type: TEACHER_SET_CURRENT_CLASSROOM,
+        payload: res,
+      });
+      setLoading(false)
+
+      history.push('/teacher/students')
+    }
+
+
   }
 
   const handleChangeExcelFile = (e: any) => {
@@ -211,10 +141,6 @@ const AddStudent: FC = () => {
         }
         console.log("data is ", excelData)
         setTableData(excelData)
-        // this.setState({
-        //   cols: resp.cols,
-        //   rows: resp.rows
-        // });
       }
     });
   }
@@ -238,14 +164,18 @@ const AddStudent: FC = () => {
           />
           <input id="file-input" type="file" name="name" style={{ display: "none" }} onChange={handleChangeExcelFile} />
         </div>
-        <Table columns={columns} tableData={tableData} audiences={audiences} ref={TableRef}></Table>
-        <Button
-          bgColor={BasicColor.yellow}
+        <Table columns={columns} tableData={tableData} ref={TableRef}></Table>
+        <LoadingButton
           onClick={handleSave}
-          align="right"
-          value={dictionary[language]?.save}
-          margin="20px"
-        />
+          loading={loading}
+          variant='contained'
+          sx={{
+            float: 'right',
+            margin: 5
+          }}
+        >
+          {dictionary[language]?.save}
+        </LoadingButton>
       </>
     </TeacherPgContainer>
   );
