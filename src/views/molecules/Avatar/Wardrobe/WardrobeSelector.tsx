@@ -26,8 +26,7 @@ export const WardrobeSelector: FC = () => {
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
   const user          = useSelector((state: any) => state.user);
   const student       = useSelector((state: any) => state.student)
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  const language = useSelector((state: any) => state.user.language);
   const loadingContext = useContext(LoadingContext);
 
   const [reload, setReload] = useState(false)
@@ -51,7 +50,7 @@ export const WardrobeSelector: FC = () => {
     setAvatarItems(data.data.avatars);
   };
   const handleError = (error: any) => {
-    console.log(error);
+    // console.log(error);
   };
 
   const setFavorite = async () => {

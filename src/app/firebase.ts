@@ -25,24 +25,24 @@ const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 
 
-export const getAvatarAsset = (directory: any, image: any, setPhoto: any) => {
-  const storage = getStorage();
-  getDownloadURL(assetRef(storage, `assets/avatar/${directory}/${image}`))
-    .then(url => {
-      setPhoto(url);
-    })
-    .catch(err => {
-      console.log('Error in pic getting', err);
-    });
-};
+// export const getAvatarAsset = (directory: any, image: any, setPhoto: any) => {
+//   const storage = getStorage();
+//   getDownloadURL(assetRef(storage, `assets/avatar/${directory}/${image}`))
+//     .then(url => {
+//       setPhoto(url);
+//     })
+//     .catch(err => {
+//       // console.log('Error in pic getting', err);
+//     });
+// };
 
-export const getAvatarDir = async (dir: any, setDir: any) => {
-  const storage = getStorage();
-  const listRef = assetRef(storage, `assets/avatar/${dir}`);
-  listAll(listRef).then(res => {
-    Promise.all(res.items.map(getDownloadURL)).then(setDir);
-  });
-};
+// export const getAvatarDir = async (dir: any, setDir: any) => {
+//   const storage = getStorage();
+//   const listRef = assetRef(storage, `assets/avatar/${dir}`);
+//   listAll(listRef).then(res => {
+//     Promise.all(res.items.map(getDownloadURL)).then(setDir);
+//   });
+// };
 
 /**
  * Card collectible page, when user buys a pack of 3 cards, download files from firebase
@@ -51,28 +51,28 @@ export const getAvatarDir = async (dir: any, setDir: any) => {
  * @param dir directory name in firebase currently bought
  * @param getBoughtCards function to set states with image urls
  */
-export const buyCardsWithFilenames = async (
-  filenames: Array<{ image: string }>,
-  dir: string,
-  getBoughtCards: any
-) => {
-  const storage = getStorage();
-  const links = [];
+// export const buyCardsWithFilenames = async (
+//   filenames: Array<{ image: string }>,
+//   dir: string,
+//   getBoughtCards: any
+// ) => {
+//   const storage = getStorage();
+//   const links = [];
 
-  try {
-    for (const filename of filenames) {
-      const fileRef = assetRef(
-        storage,
-        `assets/collectible/${dir}/${filename.image}`
-      );
-      links.push(await getDownloadURL(fileRef));
-    }
-    getBoughtCards(links);
-  } catch (e) {
-    console.log(e);
-    getBoughtCards([]);
-  }
-};
+//   try {
+//     for (const filename of filenames) {
+//       const fileRef = assetRef(
+//         storage,
+//         `assets/collectible/${dir}/${filename.image}`
+//       );
+//       links.push(await getDownloadURL(fileRef));
+//     }
+//     getBoughtCards(links);
+//   } catch (e) {
+//     // console.log(e);
+//     getBoughtCards([]);
+//   }
+// };
 
 /**
  * Get total images of current category by file names
@@ -80,27 +80,27 @@ export const buyCardsWithFilenames = async (
  * @param dir currently selected category
  * @param setAllCards set links for all cards of current category
  */
-export const getAllCards = async (
-  filenames: Array<string>,
-  dir: string,
-  setAllCards: any
-) => {
-  const storage = getStorage();
-  const links = [];
+// export const getAllCards = async (
+//   filenames: Array<string>,
+//   dir: string,
+//   setAllCards: any
+// ) => {
+//   const storage = getStorage();
+//   const links = [];
 
-  for (const filename of filenames) {
-    try {
-      const fileRef = assetRef(
-        storage,
-        `assets/collectible/${dir}/${filename}`
-      );
-      links.push(await getDownloadURL(fileRef));
-    } catch {
-      links.push('No Image');
-    }
-  }
-  setAllCards(links);
-};
+//   for (const filename of filenames) {
+//     try {
+//       const fileRef = assetRef(
+//         storage,
+//         `assets/collectible/${dir}/${filename}`
+//       );
+//       links.push(await getDownloadURL(fileRef));
+//     } catch {
+//       links.push('No Image');
+//     }
+//   }
+//   setAllCards(links);
+// };
 
 /**
  * @author Bruce Lee
@@ -121,8 +121,8 @@ export const getDownUrlByFilename = async (dir: string, filename: string) => {
       return url
     }
     else return null
-  } catch (e) {
-    console.log('error from firebase:', e)
+  } catch {
+    // console.error(e)
     return null
   }
 };

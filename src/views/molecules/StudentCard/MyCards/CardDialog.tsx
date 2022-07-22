@@ -43,8 +43,9 @@ export const CardDialog: FC<LSDialogProps> = ({
       sx={{
         '& .MuiPaper-root': {
           borderRadius: 5,
-          padding: 2,
+          // padding: 2,
           paddingTop: 5,
+          paddingBottom: 5,
         }
       }}
     >

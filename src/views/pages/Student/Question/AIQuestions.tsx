@@ -157,7 +157,6 @@ export const AIQuestion: FC = () => {
 
   const onAnswer = (result: any, isCorrect: boolean) => {
 
-    console.log({ answers })
     increaseExp(isCorrect);
     setAnswers([...answers, result]);
     setAnswerResult([...answerResult, isCorrect])
@@ -276,7 +275,6 @@ export const AIQuestion: FC = () => {
       } else {
         setIsLessonFinished(true)
         setLoading(true)
-        console.log({ answers: any2String(answers) })
         try {
           const res = await newFinishBlock(aiBlock.id, earning.energyCharge, hits, errors, bonusCoins, any2String(answers), user.token)
           if (res.success) {

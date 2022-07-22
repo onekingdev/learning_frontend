@@ -36,7 +36,7 @@ export const SubTopicsCarousel: FC<SubTopicProps> = ({name, subTopics,id}) => {
       history.push(`/question/presentation_${blockPresentationId}`)
     }
     else {
-      console.log('else')
+      // console.log('else')
     }
   }
 

@@ -95,7 +95,6 @@ const AddStudents: FC = () => {
 
       setLoading(false)
     } else {
-      console.log({ res })
       dispatch({
         type: TEACHER_SET_CURRENT_CLASSROOM,
         payload: res,
@@ -110,11 +109,10 @@ const AddStudents: FC = () => {
 
   const handleChangeExcelFile = (e: any) => {
     const fileObj = e.target.files[0];
-    console.log('handle excel')
     //just pass the fileObj as parameter
     ExcelRenderer(fileObj, (err: any, resp: any) => {
       if (err) {
-        console.log(err);
+        // console.log(err);
       }
       else {
         if (resp.rows?.length < 1) return;
@@ -122,7 +120,6 @@ const AddStudents: FC = () => {
         const excelData: any = [];
         for (let i = 0; i < resp.rows[0].length; i++) {
           const col = resp.rows[0][i]
-          console.log({ col })
           // const temp: any = {};
           for (const column of columns) {
             if (column?.label === col) {
@@ -139,7 +136,6 @@ const AddStudents: FC = () => {
           }
           excelData.push(rowData);
         }
-        console.log("data is ", excelData)
         setTableData(excelData)
       }
     });

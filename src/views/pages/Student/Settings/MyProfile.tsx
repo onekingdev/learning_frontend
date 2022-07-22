@@ -23,11 +23,9 @@ export const MyProfile: FC = () => {
   const student = useSelector((state: any) => state.student);
   const user = useSelector((state: any) => state.user);
 
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  const language = useSelector((state: any) => state.user.language);
   const { data: badges, error, isLoading } = useQuery(['user-badges', student.id, user.token], () => doFetchUserBadges(student.id, user.token))
 
-  console.log({ badges, error, isLoading })
   useEffect(() => {
     !isLoading && loadingContext.done();
   }, [isLoading]);

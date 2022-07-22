@@ -242,7 +242,7 @@ const NewKids: FC = () => {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return false;
     }
-    console.log({ result })
+    // console.log({ result })
     setAudiences(result.data);
     return true;
   }

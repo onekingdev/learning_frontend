@@ -70,7 +70,6 @@ const ClassroomSettings: FC = (props: any) => {
     ]
   })
 
-  console.log({ times: settings.schoolDayTime })
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.classroom_settings} current='classroomSettings'>
       <Box display='flex' gap={2} padding={1} alignItems={'center'} mt={2} flexDirection='column'>

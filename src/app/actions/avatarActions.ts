@@ -52,7 +52,7 @@ export const doSetUserAvatar = async (studentId: number, favoriteId: number, tok
             { msg: res.msg, status: false } :
             { ...res.data.setCurrentFavoriteAvatarCollection.favoriteAvatarCollection, status: true }
     } catch(e) {
-        console.log(e)
+        // console.log(e)
         return { msg: 'Set user avatar action error!', status: false }
     }
 }

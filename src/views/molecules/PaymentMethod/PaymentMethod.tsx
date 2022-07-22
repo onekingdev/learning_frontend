@@ -23,7 +23,7 @@ import {
     OrderTip,
 } from './Style';
 import { LANGUAGES } from 'constants/common';
-import { TEACHER_ADD_ORDER, TEACHER_SET_DATA } from 'app/types';
+import { TEACHER_SET_DATA } from 'app/types';
 
 type PaymentMethodProps = {
     plans: {
@@ -86,9 +86,8 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             // });
             // TODO: check user type, and when parent redirect to kids/new,
             const userType = user.profile.role
-            const order = result.data.order
             const teacher = result.data.teacher
-            console.log({ order, userType, teacher })
+            // console.log({ order, userType, teacher })
             switch (userType) {
                 case 'TEACHER':
                     dispatch({

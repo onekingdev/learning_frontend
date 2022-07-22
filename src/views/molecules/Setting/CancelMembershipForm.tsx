@@ -35,7 +35,7 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open }) => {
     guardian.id, reason, user.token
   ), {
     onSuccess: async data => {
-      console.log({ data })
+      // console.log({ data })
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {

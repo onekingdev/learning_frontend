@@ -58,7 +58,7 @@ export const ParentReporting: FC = () => {
           return
         }
         const result: any = await res.json();
-        console.log(result);
+        // console.log(result);
         if (result.errors && !result.data) {
           alert(result.errors[0].message);
         } else {

@@ -1,12 +1,12 @@
 import { FC, useState, useEffect } from 'react';
-import styled                      from 'styled-components';
-import coin                        from 'views/assets/coin.svg';
-import ReactLoading                from 'react-loading';
-import { getDownUrlByFilename }    from 'app/firebase';
-import { BasicColor }              from 'views/Color';
-import { ScreenSize }              from 'constants/screenSize';
-import { dictionary }              from '../dictionary'
-import { useSelector }             from 'react-redux';
+import styled from 'styled-components';
+import coin from 'views/assets/coin.svg';
+import ReactLoading from 'react-loading';
+import { getDownUrlByFilename } from 'app/firebase';
+import { BasicColor } from 'views/Color';
+import { ScreenSize } from 'constants/screenSize';
+import { dictionary } from '../dictionary'
+import { useSelector } from 'react-redux';
 
 type CardProps = {
   category: string;
@@ -16,9 +16,8 @@ type CardProps = {
   buy: (id: number, price: number) => void;
 };
 
-export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) => {
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+export const Card: FC<CardProps> = ({ id, buy, price, category, firebaseName }) => {
+  const language = useSelector((state: any) => state.user.language);
 
   const onCardClick = () => {
     // This is prop from parent component, when card is clicked, this calls function of parent.
@@ -32,7 +31,7 @@ export const Card: FC<CardProps> = ({id, buy, price, category, firebaseName}) =>
       'Categories',
       firebaseName ? firebaseName + '.png' : ''
     );
-    setImgurl(link?link:'')
+    setImgurl(link || '')
   };
 
   useEffect(() => {
@@ -62,7 +61,7 @@ interface PriceBadgeProps {
   price: number;
 }
 
-const PriceBadge: FC<PriceBadgeProps> = ({price}) => (
+const PriceBadge: FC<PriceBadgeProps> = ({ price }) => (
   <StyledPrice>
     <p>{price}</p>
     <img src={coin} alt={'coin'} />

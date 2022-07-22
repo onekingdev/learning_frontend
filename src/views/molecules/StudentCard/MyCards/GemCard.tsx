@@ -40,7 +40,7 @@ export const Gemcard: FC<ICollectibleCard> = ({
 
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(firebaseName, imgUrl);
-    setImg(link ? link : '');
+    setImg(link || '');
   };
 
   useEffect(() => {

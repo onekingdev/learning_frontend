@@ -56,7 +56,7 @@ export const fetchFile = async (url: string) => {
         }
         else return ''
     } catch (e) {
-        console.log(e)
+        // console.log(e)
         return ''
     }
 }

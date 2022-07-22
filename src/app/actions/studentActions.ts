@@ -172,7 +172,7 @@ export const doSetOldUser = async (token: string) => {
       ? {msg: res.msg, status: false}
       : {...res.data.IsNew, status: true};
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return {msg: 'Set old user error!', status: false};
   }
 };
@@ -193,7 +193,7 @@ export const doUpdateUserLanguage = async (language: string, token: string) => {
       ? {msg: res.msg, success: false}
       : {...res.data, success: true};
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return {
       msg: 'Network error! Updating user language failed',
       success: false,

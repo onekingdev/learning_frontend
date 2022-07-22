@@ -60,7 +60,6 @@ const TeacherSignup: FC = () => {
         enqueueSnackbar(data.message, { variant: 'error' })
       }
       else {
-        console.log({ data })
         enqueueSnackbar('Teacher Create Succeed!', { variant: 'success' })
         dispatch({
           type: USER_SET_DATA,

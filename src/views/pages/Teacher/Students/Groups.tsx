@@ -58,7 +58,6 @@ const Students: FC = () => {
   const [isAddNewAccountDlgOpen, setIsAddNewAccountDlgOpen] = useState(false);
 
   const onNew = () => {
-    console.log('will open')
     setIsOpenNewType(true)
   }
 

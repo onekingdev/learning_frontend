@@ -122,7 +122,6 @@ const NewKids: FC = () => {
     },
     onSettled: async () => {
       setLoading(false)
-      console.log({ availablePlans })
     }
   })
   const language: string = useSelector((state: any) => state.user.language) || 'en-us';

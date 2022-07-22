@@ -62,14 +62,10 @@ const Payment: FC = () => {
 
   const onChangePackage = (count: number, period: string, sponsor: string) => {
     const type = productType === 'School' ? 'School' : 'Classroom'
-    console.log({
-      type, count, period, sponsor
-    })
     if (!plans[type]) return;
     plans[type].childCount = count;
     plans[type].period = period;
     plans[type].currentPrice = (period === 'month' ? plans[type].priceMonth : plans[type].priceYear)
-    console.log({ddplans: plans[type]})
     setSponsorEmail(sponsor)
     setPlans({ ...plans })
   };
@@ -92,7 +88,6 @@ const Payment: FC = () => {
       plans_re_object[name] = plan;
       plans_re_object[name].currentPrice = plan.priceMonth;
     }
-    console.log({plans_re_object})
     setPlans(plans_re_object)
     // setPackPrice(plans_re_object)
 

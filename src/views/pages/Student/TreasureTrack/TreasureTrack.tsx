@@ -123,10 +123,8 @@ export const KidsTreasureTrack: FC = () => {
     const [addPls, setAddPls] = useState<number[]>([]);
     useEffect(() => {
         (async () => {
-            // console.log(user)
             if (user && user.token) {
                 // Get Topic Report
-                console.log('calling honor Roll!')
                 const res: any = await query('', HonorRoll, user.token).catch((e: any) => ({ success: false }));
                 if (res.success === false) {
                     return
@@ -138,7 +136,7 @@ export const KidsTreasureTrack: FC = () => {
                     if (result.data.coinWallets.length > 0) {
                         let index = -1;
                         const temp = result.data.coinWallets
-                        console.log(temp)
+                        // console.log(temp)
                         temp.sort((a: any, b: any) => {
                             if (b.blockTransactionCoins === a.blockTransactionCoins) {
                                 return b.student.user.username === user.username ? 1 : -1;
