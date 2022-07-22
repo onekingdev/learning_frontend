@@ -35,7 +35,7 @@ import TeacherPayment from 'views/pages/Teacher/Payment/Payment'
 import Classrooms from 'views/pages/Teacher/Classrooms/Classrooms'
 import Students from 'views/pages/Teacher/Students/Students'
 import Groups from 'views/pages/Teacher/Students/Groups'
-import AddStudent from 'views/pages/Teacher/AddStudent/AddStudent';
+import AddStudent from 'views/pages/Teacher/AddStudents/AddStudents';
 import Assignment from 'views/pages/Teacher/Assignment/Assignment';
 import Results from 'views/pages/Teacher/Results/Results';
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';

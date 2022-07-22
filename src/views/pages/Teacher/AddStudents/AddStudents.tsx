@@ -22,7 +22,7 @@ interface MuiTableFunc {
   getData(): any;
   handleAddData(): void;
 }
-const AddStudent: FC = () => {
+const AddStudents: FC = () => {
 
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
@@ -180,4 +180,4 @@ const AddStudent: FC = () => {
     </TeacherPgContainer>
   );
 };
-export default AddStudent
+export default AddStudents

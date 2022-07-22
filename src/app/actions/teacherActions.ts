@@ -5,7 +5,7 @@ import {
   CREATE_TEACHER,
 } from 'api/mutations/teacher';
 import {fetchQuery, sendRawQuery} from 'api/queries/get';
-import { CLASSROOM_SCHEMA } from 'api/queries/users';
+import {CLASSROOM_SCHEMA, STUDENT_SCHEMA} from 'api/queries/users';
 
 export const doCreateSchool = async (
   country: string,
@@ -121,9 +121,13 @@ export const doFetchClassLeaders = async (token: string) => {
   };
 };
 
-export const doAddStudentsToClassroom = async (students: string, token: string) => {
+export const doAddStudentsToClassroom = async (
+  students: string,
+  token: string
+) => {
   try {
-    const res: any = await sendRawQuery(`
+    const res: any = await sendRawQuery(
+      `
     mutation {
       createStudentsToClassroom(
         students: ${students}
@@ -141,17 +145,51 @@ export const doAddStudentsToClassroom = async (students: string, token: string) 
   } catch (e: any) {
     return {status: false, message: e.message};
   }
-}
+};
+
+export const doAddOneStudentToClassroom = async (
+  classroomId: string | number,
+  gradeId: string | number,
+  lastName: string,
+  name: string,
+  password: string,
+  username: string,
+  token: string
+) => {
+  try {
+    const res: any = await sendRawQuery(
+      `mutation {
+        createStudentToClassroom(
+          classroomId: ${classroomId},
+          gradeId: ${gradeId},
+          lastName: "${lastName}",
+          name: "${name}",
+          password: "${password}",
+          username: "${username}"
+        ) {
+          classroom {
+            studentSet {
+              ${STUDENT_SCHEMA}
+            }
+          }
+        }
+      }`,
+      token
+    );
+    return res.msg
+      ? {status: false, message: res.msg}
+      :  res.data.createStudentToClassroom.classroom.studentSet;
+  } catch (e: any) {
+    return {status: false, message: e.message};
+  }
+};
 
 export const doFetchClassroomStudents = async (
   classroomId: number | string,
   token: string
 ) => {
-  const res: any = await fetchQuery(
-    CLASSROMM_STUDENTS(classroomId),
-    token
-  );
-  return res.data?.studentsByClassroomId?? res.errors[0]; // when django returns error message on fail
+  const res: any = await fetchQuery(CLASSROMM_STUDENTS(classroomId), token);
+  return res.data?.studentsByClassroomId ?? res.errors[0]; // when django returns error message on fail
 };
 
 export const teacherCreatesStudent = (payload: string) => ({

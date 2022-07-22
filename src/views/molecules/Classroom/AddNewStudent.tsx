@@ -1,24 +1,63 @@
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import { Box, Button, Grid } from '@mui/material';
+import { Box, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import { dictionary } from './dictionary'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import TextField from 'views/molecules/MuiTextField';
 import commonDictionary from 'constants/commonDictionary'
-import { LANGUAGES } from 'constants/common';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { doAddOneStudentToClassroom } from 'app/actions';
+import { useSnackbar } from 'notistack';
+import { useMutation, useQueryClient } from 'react-query';
 
 const AddNewStudent = (props: any) => {
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    const { language, token } = useSelector((state: any) => state.user);
+    const gradeSet = useSelector((state: any) => state.teacher?.currentClass?.audience?.gradeSet) || []
+    const { currentClassId } = useSelector((state: any) => state.teacher);
+    const queryClient = useQueryClient()
+
+    const { enqueueSnackbar } = useSnackbar();
+
     const [studentName, setStudentName] = useState('')
     const [lastName, setLastName] = useState('')
     const [userName, setUserName] = useState('')
     const [pwd, setPwd] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [gradeId, setGradeId] = useState('')
     const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
         studentName: null,
         lastName: null,
         userName: null,
         pwd: null,
+        gradeId: null
     });
+
+
+    const addNewStudent = useMutation(() => doAddOneStudentToClassroom(currentClassId,
+        gradeId,
+        lastName,
+        studentName,
+        pwd,
+        userName,
+        token), {
+        onSuccess: async data => {
+            if (data.message) {
+                enqueueSnackbar(data.message, { variant: 'error' })
+            }
+            else {
+                console.log({ data })
+                queryClient.setQueryData(['fetch-classroom-students', currentClassId, token], data)
+            }
+            enqueueSnackbar('Add student Succeed', { variant: 'success' })
+        },
+        onError: async (error: any) => {
+            enqueueSnackbar(error.message, { variant: 'error' })
+        },
+        onSettled: async () => {
+            setLoading(false)
+            props.close()
+        }
+    })
 
     const formValidation = () => {
         const validateMsgTemp = { ...validateMsg };
@@ -35,7 +74,9 @@ const AddNewStudent = (props: any) => {
 
     const handleSubmit = () => {
         if (!formValidation()) return;
-        props.close();
+
+        setLoading(true)
+        addNewStudent.mutate()
     }
 
     const handleFormChange = (field: string, errMsg: string) => {
@@ -87,6 +128,26 @@ const AddNewStudent = (props: any) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
+                            <FormControl variant="outlined" fullWidth>
+                                <InputLabel id="demo-simple-select-label">{commonDictionary[language]?.select_grade}</InputLabel>
+                                <Select
+                                    label={commonDictionary[language]?.select_grade}
+                                    value={gradeId || ''}
+                                    onChange={(e) => {
+                                        handleFormChange('gradeId', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                        const selectedGrade = gradeSet.find((item: any) => item.id === e.target.value) || {}
+                                        setGradeId(selectedGrade.id)
+                                    }}
+                                    error={!!validateMsg.gradeId}
+                                // helperText={validateMsg.gradeId}
+                                >
+                                    {gradeSet.length > 0 && gradeSet.map((grade: any) => (
+                                        <MenuItem value={grade.id} key={grade.id}>{grade.name}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
                             <TextField
                                 label={dictionary[language]?.password}
                                 onChange={(e: any) => {
@@ -99,7 +160,8 @@ const AddNewStudent = (props: any) => {
                             />
                         </Grid>
                         <Grid item xs={12} justifyContent='start'>
-                            <Button
+                            <LoadingButton
+                                loading={loading}
                                 onClick={handleSubmit}
                                 variant='contained'
                                 sx={{
@@ -107,7 +169,7 @@ const AddNewStudent = (props: any) => {
                                 }}
                             >
                                 {commonDictionary[language]?.create_account_add}
-                            </Button>
+                            </LoadingButton>
                         </Grid>
                     </Grid>
                 </Box>

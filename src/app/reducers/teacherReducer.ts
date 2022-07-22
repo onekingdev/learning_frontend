@@ -47,6 +47,8 @@ const TEACHERReducer = (
         ...state,
         classrooms: [...state.classrooms, action.payload],
       };
+    case TYPE.TEACHER_RESET:
+      return INITIAL_STATE;
     default:
       return state;
   }

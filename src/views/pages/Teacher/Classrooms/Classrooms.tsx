@@ -27,11 +27,11 @@ const Classrooms: FC = () => {
       type: TEACHER_SET_CURRENT_CLASSROOM_ID,
       payload: classroom.id,
     });
+    dispatch({
+      type: TEACHER_SET_CURRENT_CLASSROOM,
+      payload: classroom,
+    });
     if (classroom.isEmpty) {
-      dispatch({
-        type: TEACHER_SET_CURRENT_CLASSROOM,
-        payload: classroom,
-      });
       history.push('/teacher/addStudent')
     }
     // TODO Redirect to the Classroom/students page with teacher info

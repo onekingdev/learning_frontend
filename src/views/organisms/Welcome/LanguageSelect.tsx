@@ -12,7 +12,7 @@ import commonDictionary from 'constants/commonDictionary'
 
 export const LanguageSelect: FC = () => {
   const dispatch = useDispatch()
-  const language = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const language = useSelector((state: any) => state.user.language);
 
   const handleChange = (event: SelectChangeEvent) => {
     dispatch({ type: USER_SET_LANGUAGE, payload: event.target.value });
