@@ -170,6 +170,29 @@ export const doAddOneStudentToClassroom = async (
   }
 };
 
+export const doAddExistingStudentToClassroom = async (
+  classroomId: number | string,
+  name: string,
+  password: string,
+  token: string
+) => {
+  const res: any = await fetchQuery(`mutation {
+    importStudentToClassroom(
+      classroomId: ${classroomId},
+      username: "${name}",
+      password: "${password}"
+      ) {
+      classroom {
+        studentSet {
+          ${STUDENT_SCHEMA}
+        }
+      }
+    }
+  }
+  `, token);
+  return res.data?.classroom.studentSet || res.errors[0]; // when django returns error message on fail
+};
+
 export const doCreateGroup = async (
   classroomId: number | string,
   name: string,

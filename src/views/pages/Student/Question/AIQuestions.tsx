@@ -311,8 +311,10 @@ export const AIQuestion: FC = () => {
           open={openBd}
           onClick={() => setOpenBd(false)}
           sx={{ zIndex: 1000 }}
-        >
-          <QuestionPopup type={popupType} random={Math.floor(Math.random() * 4)} />
+        >{
+            openBd &&
+            <QuestionPopup type={popupType} />
+          }
         </Backdrop>
         {
           isLessonFinished ? (

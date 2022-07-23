@@ -1,10 +1,11 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, IconButton } from '@mui/material';
 import { FC } from 'react';
 import chair from 'views/assets/chair.svg'
 import {
   StudentItem,
   StudentText
 } from './Style'
+import AddIcon from '@mui/icons-material/Add';
 
 interface StudentPanelProps {
   students: Array<any>
@@ -21,7 +22,7 @@ const StudentPanel: FC<StudentPanelProps> = ({ students, onStudent, onNew }) => 
           <Grid item key={item.id}>
             <StudentItem key={index} onClick={() => onStudent(item)}>
               <img src={chair} />
-              <StudentText>{item.fullName || 'No Name'}</StudentText>
+              <StudentText>{item.firstName || 'No Name'}</StudentText>
             </StudentItem>
           </Grid>
         )
@@ -29,7 +30,9 @@ const StudentPanel: FC<StudentPanelProps> = ({ students, onStudent, onNew }) => 
       <Grid item>
         <StudentItem onClick={() => onNew()}>
           <img src={chair} />
-          <Typography color='red' sx={{position:'absolute', bottom: 15}}>{'Add'}</Typography>
+          <IconButton aria-label="add-student" sx={{ position: 'absolute', bottom: 15 }}>
+            <AddIcon sx={{ fontSize: 30 }} />
+          </IconButton>
         </StudentItem>
       </Grid>
     </Grid>

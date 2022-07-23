@@ -1,18 +1,23 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { dictionary } from './dictionary'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import TextField from 'views/molecules/MuiTextField';
-// import { useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import commonDictionary from 'constants/commonDictionary'
-import { LANGUAGES } from 'constants/common';
+import { useMutation } from '@tanstack/react-query';
+import { doAddExistingStudentToClassroom } from 'app/actions';
+import { queryClient } from 'index';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const AddExistStudent = (props: any) => {
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    const { language, token } = useSelector((state: any) => state.user);
+    const { currentClassId } = useSelector((state: any) => state.teacher);
+    const { enqueueSnackbar } = useSnackbar();
 
-    // const { enqueueSnackbar } = useSnackbar();
 
+    const [loading, setLoading] = useState(false)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
 
@@ -20,6 +25,28 @@ const AddExistStudent = (props: any) => {
         username: null,
         password: null,
     });
+
+    const addExistingStudent = useMutation(() => doAddExistingStudentToClassroom(
+        currentClassId,
+        username,
+        password,
+        token), {
+        onSuccess: async data => {
+            if (data.message) {
+                enqueueSnackbar(data.message, { variant: 'error' })
+            } else {
+                queryClient.setQueryData(['fetch-classroom-students', currentClassId], data)
+                enqueueSnackbar('Add student Succeed', { variant: 'success' })
+            }
+        },
+        onError: async (error: any) => {
+            enqueueSnackbar(error.message, { variant: 'error' })
+        },
+        onSettled: async () => {
+            setLoading(false)
+            props.close()
+        }
+    })
 
     const formValidation = () => {
         const validateMsgTemp = { ...validateMsg };
@@ -36,7 +63,7 @@ const AddExistStudent = (props: any) => {
 
     const handleSubmit = () => {
         if (!formValidation()) return;
-        props.close();
+        addExistingStudent.mutate()
     }
 
     const handleFormChange = (field: string, errMsg: string) => {
@@ -80,15 +107,16 @@ const AddExistStudent = (props: any) => {
                             />
                         </Grid>
                         <Grid item xs={12} justifyContent='start'>
-                            <Button
+                            <LoadingButton
                                 onClick={handleSubmit}
                                 variant='contained'
                                 sx={{
                                     maxWidth: 'fit-content'
                                 }}
+                                loading={loading}
                             >
                                 {dictionary[language]?.addAcctAndToTheClass}
-                            </Button>
+                            </LoadingButton>
                         </Grid>
                     </Grid>
                 </div>
