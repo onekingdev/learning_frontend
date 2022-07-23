@@ -128,7 +128,6 @@ export const Question: FC = () => {
   //     });
   //     loadingContext.done();
   //   } catch (error) {
-  //     console.log('Error de dispatch', error);
   //   }
   // };
 

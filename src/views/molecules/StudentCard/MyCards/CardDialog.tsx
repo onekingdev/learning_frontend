@@ -5,8 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
 import { BasicColor } from 'views/Color';
-import { LSDialogContent, LSDialogContentText } from 'views/molecules/Setting/utils/Style';
-import { DialogTitle } from '@mui/material';
+import { LSDialogContentText } from 'views/molecules/Setting/utils/Style';
+import { DialogContent, DialogTitle, Divider } from '@mui/material';
 
 type LSDialogProps = {
   title?: string
@@ -43,8 +43,7 @@ export const CardDialog: FC<LSDialogProps> = ({
       sx={{
         '& .MuiPaper-root': {
           borderRadius: 5,
-          // padding: 2,
-          paddingTop: 5,
+          paddingTop: 2,
           paddingBottom: 5,
         }
       }}
@@ -52,13 +51,16 @@ export const CardDialog: FC<LSDialogProps> = ({
       <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} sx={{ zIndex: 2 }}>
         <CloseIcon />
       </StyledIconBtn>
-      {title &&
+      {title && <>
         <DialogTitle sx={{ color: BasicColor.blue, textAlign: 'center' }}
         >
           {title}
         </DialogTitle>
+        <Divider />
+      </>
       }
-      <LSDialogContent>
+      <DialogContent
+      >
         {
           contentText ?
             <LSDialogContentText>
@@ -66,10 +68,19 @@ export const CardDialog: FC<LSDialogProps> = ({
             </LSDialogContentText> : null
         }
         {dialogContent}
-      </LSDialogContent>
+      </DialogContent>
     </Dialog>
   );
 }
+
+// export const LSDialogContent = styled(DialogContent)`
+//   // &.MuiDialogContent-root {
+//   //   padding: 15px 40px 0 40px;
+//   //   @media screen and (max-width: 540px) {
+//   //     padding: 10px;
+//   //   }
+//   // }
+// `;
 
 
 // Styled components

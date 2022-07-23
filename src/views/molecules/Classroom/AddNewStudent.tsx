@@ -8,7 +8,7 @@ import commonDictionary from 'constants/commonDictionary'
 import LoadingButton from '@mui/lab/LoadingButton';
 import { doAddOneStudentToClassroom } from 'app/actions';
 import { useSnackbar } from 'notistack';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const AddNewStudent = (props: any) => {
     const { language, token } = useSelector((state: any) => state.user);
@@ -45,8 +45,7 @@ const AddNewStudent = (props: any) => {
                 enqueueSnackbar(data.message, { variant: 'error' })
             }
             else {
-                console.log({ data })
-                queryClient.setQueryData(['fetch-classroom-students', currentClassId, token], data)
+                queryClient.setQueryData(['fetch-classroom-students', currentClassId], data)
                 enqueueSnackbar('Add student Succeed', { variant: 'success' })
             }
         },

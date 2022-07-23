@@ -9,7 +9,7 @@ import AddExistStudentDlg from 'views/molecules/Classroom/AddExistStudent'
 import AddNewStudent from 'views/molecules/Classroom/AddNewStudent'
 import EditStudentForm from 'views/molecules/Classroom/EditStudentForm'
 import { dictionary } from './dictionary'
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { doFetchClassroomStudents } from 'app/actions';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { Typography } from '@mui/material';
@@ -25,9 +25,9 @@ const Students: FC = () => {
   const [studentForEdit, setStudentForEdit] = useState({});
 
   const { data: students, isLoading, error } = useQuery(
-    ['fetch-classroom-students', currentClassId, token],
+    ['fetch-classroom-students', currentClassId],
     () => doFetchClassroomStudents(currentClassId, token),
-    { refetchIntervalInBackground: false }
+    { refetchIntervalInBackground: false, initialData: [] }
   )
 
   const onNew = () => {
@@ -61,7 +61,7 @@ const Students: FC = () => {
         <AddExistStudentDlg isOpen={isExistingNewAccountDlgOpen} close={() => setIsExistingNewAccountDlgOpen(false)} />
         <AddNewStudent isOpen={isAddNewAccountDlgOpen} close={() => setIsAddNewAccountDlgOpen(false)} />
         {
-          isLoading ? <LoadingSpinner /> : error ?
+          isLoading ? <LoadingSpinner /> : error ? students &&
             <Typography variant='h5' color='red'>{getMessage(error)}</Typography> :
             <StudentsPanel students={students} onNew={onNew} onStudent={onStudent} />
         }

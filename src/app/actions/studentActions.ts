@@ -171,9 +171,8 @@ export const doSetOldUser = async (token: string) => {
     return res.msg
       ? {msg: res.msg, status: false}
       : {...res.data.IsNew, status: true};
-  } catch (e) {
-    // console.log(e);
-    return {msg: 'Set old user error!', status: false};
+  } catch (e: any) {
+    return {msg: e.message, status: false};
   }
 };
 
@@ -193,7 +192,6 @@ export const doUpdateUserLanguage = async (language: string, token: string) => {
       ? {msg: res.msg, success: false}
       : {...res.data, success: true};
   } catch (e) {
-    // console.log(e);
     return {
       msg: 'Network error! Updating user language failed',
       success: false,
@@ -235,5 +233,5 @@ export const doFetchWalletTransactions = async (
  */
 export const doFetchUserBadges = async (studentId: number, token: string) => {
   const res: any = await fetchQuery(FETCH_USER_BADGES(studentId), token);
-  return res.data?.studentBadgesByStudentId ?? res.errors[0]
+  return res.data?.studentBadgesByStudentId ?? res.errors[0];
 };

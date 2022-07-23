@@ -11,7 +11,6 @@ type GameCardProps = {
   price: number;
   gamePath: string;
   token: string;
-  setLoading: any;
 };
 
 export const GameCardPresentation: FC<GameCardProps> = ({
@@ -20,7 +19,6 @@ export const GameCardPresentation: FC<GameCardProps> = ({
   price,
   gamePath,
   token,
-  setLoading
 }) => {
   const history = useHistory();
   const handlePlay = () => {
@@ -28,7 +26,6 @@ export const GameCardPresentation: FC<GameCardProps> = ({
     // const url = process.env.REACT_APP_SERVER_URL + 'media/games/' + gamePath + '/gamePlay?token=' + token;
     // location.href = url;
 
-    // console.log({ token, gamePath })
     history.push('/games/' + token + '/' + gamePath)
   }
 

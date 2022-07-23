@@ -125,7 +125,7 @@ export const KidsTreasureTrack: FC = () => {
         (async () => {
             if (user && user.token) {
                 // Get Topic Report
-                const res: any = await query('', HonorRoll, user.token).catch((e: any) => ({ success: false }));
+                const res: any = await query('', HonorRoll, user.token).catch(() => ({ success: false }));
                 if (res.success === false) {
                     return
                 }
@@ -136,7 +136,6 @@ export const KidsTreasureTrack: FC = () => {
                     if (result.data.coinWallets.length > 0) {
                         let index = -1;
                         const temp = result.data.coinWallets
-                        // console.log(temp)
                         temp.sort((a: any, b: any) => {
                             if (b.blockTransactionCoins === a.blockTransactionCoins) {
                                 return b.student.user.username === user.username ? 1 : -1;
@@ -179,7 +178,7 @@ export const KidsTreasureTrack: FC = () => {
     useEffect(() => {
         if (student?.id && user?.token) {
             (async () => {
-                const res: any = await query('', LastWeekAndCoinsQuestions(1), user.token).catch((e: any) => ({ success: false }));
+                const res: any = await query('', LastWeekAndCoinsQuestions(1), user.token).catch(() => ({ success: false }));
                 if (res.success === false) {
                     return;
                 }

@@ -8,11 +8,7 @@ import { SnackbarProvider } from 'notistack';
 import { BrowserRouter as Router } from 'react-router-dom';
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import * as TYPES from 'app/types'
-import {
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query'
-const queryClient = new QueryClient()
+
 import './style.css'
 import { Spinner } from 'views/atoms/Spinner';
 declare global {
@@ -28,16 +24,10 @@ export default () => {
   const onLoad = () => {
     window.Tawk_API?.hideWidget();
   };
-  useEffect(() => {
-    // console.log(Rewardful?.referral)
-  }, [])
 
   useEffect(() => {
     if (Rewardful?.referral) {
       persist.store.dispatch({ type: TYPES.USER_SET_REWARDFUL_ID, payload: Rewardful.referral });
-      // console.log('Current referral ID: ', Rewardful.referral);
-    } else {
-      // console.log('No referral present.');
     }
   }, [Rewardful])
 
@@ -50,11 +40,9 @@ export default () => {
             widgetId="default"
             onLoad={onLoad}
             useRef={tawkMessengerRef} />
-          <QueryClientProvider client={queryClient}>
-            <Router>
-              <Routes />
-            </Router>
-          </QueryClientProvider>
+          <Router>
+            <Routes />
+          </Router>
         </SnackbarProvider>
       </PersistGate>
     </Provider>

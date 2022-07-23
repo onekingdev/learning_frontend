@@ -41,6 +41,7 @@ export const ORDER_DETAIL_RAW = `
     total
 `;
 
+
 export const ORDER_RAW = `
 id
 identifier
@@ -211,18 +212,7 @@ export const STUDENT_RAW = `
         intPeriodStartAt
 `;
 
-export const _STUDENT = `
-id
-isActive
-firstName
-lastName
-fullName
-dob
-gender
-points
-intPeriodStartAt
-isNew
-`
+
 export const STUDENT_RAW_OLD = `
         id
         identifier

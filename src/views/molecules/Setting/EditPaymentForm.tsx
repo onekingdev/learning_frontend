@@ -149,7 +149,6 @@ export const EditPaymentForm: FC<DialogProps> = ({ open }) => {
             });
         }
         else {
-            // console.log(res.msg)
             enqueueSnackbar(res.msg, { variant: 'error' })
         }
         setLoading(false)

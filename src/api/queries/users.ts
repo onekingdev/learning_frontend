@@ -1,10 +1,11 @@
 import {_USER, USER_PROFILE} from '../fragments/userFragments';
-import {STUDENT, _STUDENT} from '../fragments/studentFragments';
+import {STUDENT} from '../fragments/studentFragments';
 import {COIN_WALLET} from '../fragments/coinWalletFragments';
 
 import {GUARDIAN} from '../fragments/guardianFragments';
 import {_CLASSROOM_SCHEMA, _TEACHERSCHEMA} from 'api/fragments/teacherFraments';
 import { AVATAR } from 'api/fragments/avatarFragments';
+import { _GROUP, _STUDENT } from 'api/fragments/peopleFragments';
 export const USERS_QUERY = `
     {
         ${_USER}
@@ -38,6 +39,12 @@ audience {
     gradeSet {
         id
         name
+    }
+}
+groupSet {
+    ${_GROUP}
+    studentSet {
+        ${_STUDENT}
     }
 }
 `

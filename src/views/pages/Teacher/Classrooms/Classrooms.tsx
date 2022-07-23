@@ -23,6 +23,8 @@ const Classrooms: FC = () => {
 
   const onClassroom = (classroom: any) => {
 
+    if(!classroom) return
+
     dispatch({
       type: TEACHER_SET_CURRENT_CLASSROOM_ID,
       payload: classroom.id,

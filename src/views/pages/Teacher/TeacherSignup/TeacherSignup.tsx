@@ -25,7 +25,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 import {
   useMutation,
-} from 'react-query'
+} from '@tanstack/react-query'
 import { doCreateTeacher } from 'app/actions';
 import FormContainer from 'views/atoms/FormContainer';
 import ContactBox from 'views/organisms/ContactBox';

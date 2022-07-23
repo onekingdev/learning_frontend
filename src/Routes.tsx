@@ -13,7 +13,6 @@ import { Backpack } from 'views/pages/Student/Backpack/Backpack';
 import { Games } from 'views/pages/Student/Games/Games';
 import { GamesMenu } from 'views/pages/Student/Games/GamesMenu/GamesMenu';
 import { KnowledgeMap } from 'views/pages/Student/KnowledgeMap/KnowledgeMap';
-import { TopicsMenu } from 'views/pages/Student/Menus/TopicsMenu/TopicsMenu';
 import { Wardrobe } from 'views/pages/Student/Avatar/Wardrobe';
 import { Payment } from 'views/pages/Parent/Payment/Payment';
 import CreateParent from 'views/pages/Parent/CreateParent/CreateParent';
@@ -136,7 +135,7 @@ export function Routes() {
         <PrivateRoute loading={true} exactv path="/review">
           <ProgressReview />
         </PrivateRoute>
-        <PrivateRoute loading={true} path="/backpack">
+        <PrivateRoute loading={false} path="/backpack">
           <Backpack />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/games/categories">
@@ -150,9 +149,6 @@ export function Routes() {
         </PrivateRoute>
         <PrivateRoute loading={true} path="/map">
           <KnowledgeMap />
-        </PrivateRoute>
-        <PrivateRoute loading={true} path="/topic/:topicId">
-          <TopicsMenu />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/parent/setting">
           <Settings />

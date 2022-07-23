@@ -1,6 +1,9 @@
+import { GROUP } from 'api/fragments/peopleFragments';
 import {
   ADD_CLASS_TO_TEACHER,
   CLASSROMM_STUDENTS,
+  CLASSROOM_GROUPS,
+  CREATE_GROUP,
   CREATE_SCHOOL,
   CREATE_TEACHER,
 } from 'api/mutations/teacher';
@@ -184,12 +187,41 @@ export const doAddOneStudentToClassroom = async (
   }
 };
 
+export const doCreateGroup = async (
+  classroomId: number | string,
+  name: string,
+  students: string,
+  token: string
+) => {
+  const res: any = await fetchQuery(`mutation {
+    createGroup(
+      classroomId: ${classroomId},
+      name: "${name}",
+      studentIds: ${students}
+      ) {
+        group {
+          ${GROUP}
+        }
+    }
+  }
+  `, token);
+  return res.data?.createGroup.group ?? res.errors[0]; // when django returns error message on fail
+};
+
 export const doFetchClassroomStudents = async (
   classroomId: number | string,
   token: string
 ) => {
   const res: any = await fetchQuery(CLASSROMM_STUDENTS(classroomId), token);
-  return res.data?.studentsByClassroomId ?? res.errors[0]; // when django returns error message on fail
+  return res.data?.studentsByClassroomId || res.errors[0]; // when django returns error message on fail
+};
+
+export const doFetchClassroomGroups = async (
+  classroomId: number | string,
+  token: string
+) => {
+  const res: any = await fetchQuery(CLASSROOM_GROUPS(classroomId), token);
+  return res.data?.classroomById?.groupSet || res.errors[0]; // when django returns error message on fail
 };
 
 export const teacherCreatesStudent = (payload: string) => ({

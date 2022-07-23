@@ -9,7 +9,7 @@ import { confirmPaymentOrder, doAddStudentPlan, doFetchPlanTypes } from 'app/act
 import { useSelector } from 'react-redux'
 import { useSnackbar } from 'notistack';
 import { LoadingSpinner } from 'views/atoms/Spinner';
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { getMessage } from 'views/utils';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useHistory } from 'react-router-dom';

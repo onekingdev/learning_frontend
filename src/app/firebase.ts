@@ -32,7 +32,6 @@ export const database = getDatabase(app);
 //       setPhoto(url);
 //     })
 //     .catch(err => {
-//       // console.log('Error in pic getting', err);
 //     });
 // };
 
@@ -69,7 +68,6 @@ export const database = getDatabase(app);
 //     }
 //     getBoughtCards(links);
 //   } catch (e) {
-//     // console.log(e);
 //     getBoughtCards([]);
 //   }
 // };

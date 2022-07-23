@@ -1,6 +1,5 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC } from 'react';
 import { useHistory }     from 'react-router-dom';
-import { LoadingContext } from 'react-router-loading';
 import backpackHook       from 'views/assets/backpack-hook.svg';
 import { BackpackButton } from 'views/atoms/BackpackButton';
 import avatarButton       from 'views/assets/avatar-button.svg';
@@ -10,7 +9,6 @@ import backpackFace       from 'views/assets/backpack-face.svg';
 import backpackLeft       from 'views/assets/backpack-left.svg';
 import backpackRight      from 'views/assets/backpack-right.svg';
 import { StudentMenu }    from 'views/pages/Student/Menus/StudentMenu';
-import { useSelector }    from 'react-redux';
 
 import {
   Wrapper,
@@ -29,15 +27,7 @@ import {
 
 export const Backpack: FC = () => {
 
-  const loadingContext  = useContext(LoadingContext);
   const history         = useHistory();
-
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
-
-  useEffect(() => {
-    loadingContext.done();
-  }, []);
   return (
     <>
       <Wrapper>

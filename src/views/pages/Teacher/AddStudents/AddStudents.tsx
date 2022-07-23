@@ -17,6 +17,7 @@ import { doAddStudentsToClassroom } from 'app/actions';
 import { any2String } from 'views/utils';
 import { TEACHER_SET_CURRENT_CLASSROOM } from 'app/types';
 import LoadingButton from '@mui/lab/LoadingButton';
+import commonDictionary from 'constants/commonDictionary'
 
 interface MuiTableFunc {
   getData(): any;
@@ -112,7 +113,7 @@ const AddStudents: FC = () => {
     //just pass the fileObj as parameter
     ExcelRenderer(fileObj, (err: any, resp: any) => {
       if (err) {
-        // console.log(err);
+        enqueueSnackbar('Error fetching excel', { variant: 'error' })
       }
       else {
         if (resp.rows?.length < 1) return;
@@ -170,7 +171,7 @@ const AddStudents: FC = () => {
             margin: 5
           }}
         >
-          {dictionary[language]?.save}
+          {commonDictionary[language]?.done}
         </LoadingButton>
       </>
     </TeacherPgContainer>

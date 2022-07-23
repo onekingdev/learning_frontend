@@ -1,90 +1,87 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
-import { useSnackbar } from 'notistack';
-import { loadStripe } from '@stripe/stripe-js';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import GroupsPanel from 'views/molecules/Classroom/GroupsPanel'
-import ChooseNewStudentTypeDlg from 'views/molecules/Classroom/ChooseNewStudentTypeDlg'
-import AddExistStudentDlg from 'views/molecules/Classroom/AddExistStudent'
-import AddNewStudent from 'views/molecules/Classroom/AddNewStudent'
 import { dictionary } from './dictionary'
-import { useHistory } from 'react-router-dom';
+import AddGroupForm from 'views/molecules/Classroom/AddGroupForm';
+import { useQuery } from '@tanstack/react-query';
+import { doFetchClassroomGroups } from 'app/actions';
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { Typography } from '@mui/material';
+import { getMessage } from 'views/utils';
 
-const data = [
-  {
-    name: 'armin',
-    type: 'normal',
-    grade: 'greade',
-    lastName: 'last name',
-    classroom: 'classroom',
-    username: 'user name',
-  }, {
-    name: 'armin',
-    type: 'normal',
-    grade: 'greade',
-    lastName: 'last name',
-    classroom: 'classroom',
-    username: 'user name',
-  }, {
-    name: 'armin',
-    type: 'normal',
-    grade: 'greade',
-    lastName: 'last name',
-    classroom: 'classroom',
-    username: 'user name',
-  }, {
-    name: 'armin',
-    type: 'normal',
-    grade: 'greade',
-    lastName: 'last name',
-    classroom: 'classroom',
-    username: 'user name',
-  },
-]
+// const data = [
+//   {
+//     name: 'armin',
+//     type: 'normal',
+//     grade: 'greade',
+//     lastName: 'last name',
+//     classroom: 'classroom',
+//     username: 'user name',
+//   }, {
+//     name: 'armin',
+//     type: 'normal',
+//     grade: 'greade',
+//     lastName: 'last name',
+//     classroom: 'classroom',
+//     username: 'user name',
+//   }, {
+//     name: 'armin',
+//     type: 'normal',
+//     grade: 'greade',
+//     lastName: 'last name',
+//     classroom: 'classroom',
+//     username: 'user name',
+//   }, {
+//     name: 'armin',
+//     type: 'normal',
+//     grade: 'greade',
+//     lastName: 'last name',
+//     classroom: 'classroom',
+//     username: 'user name',
+//   },
+// ]
 
-const Students: FC = () => {
+const ClassroomGroups: FC = () => {
   const loadingContext = useContext(LoadingContext);
-  const { enqueueSnackbar } = useSnackbar();
-  const user = useSelector((state: any) => state.user);
-  const guardian = useSelector((state: any) => state.guardian);
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
-  const history = useHistory();
+  const { token, language } = useSelector((state: any) => state.user);
+  const { currentClassId } = useSelector((state: any) => state.teacher);
 
-  const [isOpenNewForm, setIsOpenNewForm] = useState(false);
-  const [isOpenNewType, setIsOpenNewType] = useState(false);
-  const [isExistingNewAccountDlgOpen, setIsExistingNewAccountDlgOpen] = useState(false);
-  const [isAddNewAccountDlgOpen, setIsAddNewAccountDlgOpen] = useState(false);
+  const { data: groups, isLoading, error } = useQuery(
+    ['classroom-groups', currentClassId],
+    () => doFetchClassroomGroups(currentClassId, token),
+    { refetchIntervalInBackground: false }
+  )
+  const [isOpenGroupDialog, setIsOpenGroupDialog] = useState(false);
 
   const onNew = () => {
-    setIsOpenNewType(true)
+    setIsOpenGroupDialog(true)
   }
 
-  const onStudent = (classroom: any) => {
+  const onGroup = (classroom: any) => {
 
   }
   useEffect(() => {
 
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
-
-  }, []);
+    !isLoading && loadingContext.done()
+  }, [isLoading]);
 
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom} current='groups'>
       <>
-        <ChooseNewStudentTypeDlg
-          isOpen={isOpenNewType}
-          close={() => setIsOpenNewType(false)}
-          openExistingNewAccountDlg={() => setIsExistingNewAccountDlgOpen(true)}
-          openNewAccountDlg={() => setIsAddNewAccountDlgOpen(true)}
-        />
-        <AddExistStudentDlg isOpen={isExistingNewAccountDlgOpen} close={() => setIsExistingNewAccountDlgOpen(false)} />
-        <AddNewStudent isOpen={isAddNewAccountDlgOpen} close={() => setIsAddNewAccountDlgOpen(false)} />
-        {/* <AddClassroomForm isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} /> */}
-        <GroupsPanel data={data} onNew={onNew} onStudent={onStudent} />
+        <AddGroupForm isOpen={isOpenGroupDialog} close={() => setIsOpenGroupDialog(false)} />
+        {
+          isLoading ?
+            <LoadingSpinner /> :
+            error ?
+              <Typography color='red'>{getMessage(error)}</Typography> :
+              groups &&
+              <GroupsPanel groups={groups} onNew={onNew} onGroup={onGroup} />
+        }
       </>
     </TeacherPgContainer>
   );
 };
-export default Students
+export default ClassroomGroups

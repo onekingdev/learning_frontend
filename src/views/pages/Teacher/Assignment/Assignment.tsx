@@ -6,7 +6,7 @@ import { dictionary } from './dictionary';
 import { StudentItemContainer } from './style';
 import { Box, Button, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material';
 import { doFetchSubjectsAndGradeByAudienceId } from 'app/actions/audienceActions';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';

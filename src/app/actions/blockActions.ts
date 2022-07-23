@@ -191,7 +191,6 @@ export const createNewAiBlock = async (
           success: true,
         };
   } catch (e) {
-    console.log(e);
     return {msg: 'Network error!', success: false};
   }
 };
@@ -201,22 +200,19 @@ export const createNewPathBlock = async (
   studentId: number,
   token: string
 ) => {
-  console.log({topicId, studentId});
   try {
     const res: any = await sendRawQuery(
       CREATE_NEW_PATH_BLOCK(topicId, studentId),
       token
     );
-    console.log({res});
     return res.msg
       ? {msg: res.msg, success: false}
       : {
           ...res.data.createPathBlockPresentation.blockPresentation,
           success: true,
         };
-  } catch (e) {
-    console.log(e);
-    return {msg: 'Network error!', success: false};
+  } catch (e: any) {
+    return {msg: e.message, success: false};
   }
 };
 
@@ -252,9 +248,8 @@ export const doGetQuestionBlockById = async (blkId: number, token: string) => {
     return res.msg
       ? {msg: res.msg, success: false}
       : {...res.data.blockPresentationById, success: true};
-  } catch (e) {
-    console.log(e);
-    return {msg: 'Network error!', success: false};
+  } catch (e: any) {
+    return {msg: e.message, success: false};
   }
 };
 
@@ -268,5 +263,8 @@ export const doFetchStudentAnswerHistory = async (
     FETCH_STUDENT_ANSWER_HISTORY(studentId, period, answerStatus),
     token
   );
-  return res.data?.blockPresentationsByStudentIdAndPeriodAndAnswerstate ?? res.errors[0];
+  return (
+    res.data?.blockPresentationsByStudentIdAndPeriodAndAnswerstate ??
+    res.errors[0]
+  );
 };

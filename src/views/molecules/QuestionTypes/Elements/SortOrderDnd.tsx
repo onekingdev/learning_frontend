@@ -42,7 +42,6 @@ export const SortOrderDnd = forwardRef<any, SortOrderDndProps>(({ options }, ref
     return res
   }
   const checkAnswer = () => {
-    // console.log({ state, options })
     return !state.some((option: any, index: number) => option.order !== index + 1)
   }
 

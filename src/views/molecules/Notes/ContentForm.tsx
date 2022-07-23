@@ -93,7 +93,6 @@ const AddNewStudent = (props: any) => {
                                 handleFormChange('date', e === null ? commonDictionary[language]?.fieldIsRequired : '');
                                 // setDate(e.target.value);
                                 setDate(e);
-                                console.log(e)
                             }}
                         />
                         <div className='err-text'>{validateMsg.date}</div>

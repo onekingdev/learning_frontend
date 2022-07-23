@@ -43,7 +43,6 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
   useEffect(() => {
     setIsAnswered(false);
     setChecked(new Array(question.answerOptions.length).fill(false))
-    // console.log('current:',questionCounter, 'total: ',totalQuestions)
   }, [question]);
 
   const handleNextButtonClicked = () => {
@@ -92,7 +91,6 @@ export const MultipleSelectQuestion: FC<ChoiceTextProps> = ({
     // if checked count is bigger than 2, then selecting another one is impossible.
     const idx = question.answerOptions.findIndex((x: { id: string; }) => x.id === event.target.value)
     tempArray[idx] = event.target.checked
-    // console.log(idx, tempArray)
     setChecked(tempArray)
   }
 

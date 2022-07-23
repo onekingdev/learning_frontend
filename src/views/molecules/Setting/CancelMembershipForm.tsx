@@ -11,8 +11,8 @@ import { LoadingSpinner } from 'views/atoms/Spinner';
 import { CANCEL_REASONS } from 'constants/parent'
 import { dictionary } from './dictionary'
 import { Button } from '@mui/material';
-import { useMutation, } from 'react-query'
-import { useQueryClient } from 'react-query';
+import { useMutation, } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query';
 
 interface ICancelFormProps {
   open: () => void
@@ -35,7 +35,6 @@ export const CancelMembershipForm: FC<ICancelFormProps> = ({ open }) => {
     guardian.id, reason, user.token
   ), {
     onSuccess: async data => {
-      // console.log({ data })
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {

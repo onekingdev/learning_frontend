@@ -29,7 +29,6 @@ export const TypeInFraction: FC<TypeInFractionProps> = ({
     for (const answer in temp) {
       userAnswerText.push(temp[answer as keyof Object])
     }
-    // console.log({ temp })
     setUserAnswer(temp)
     getAnswerText(userAnswerText.join('|'))
   }

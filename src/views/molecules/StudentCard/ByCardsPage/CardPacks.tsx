@@ -46,7 +46,6 @@ export const CardPacks: FC<CardPropArray> = ({ cards }) => {
         enqueueSnackbar(res.msg, { variant: 'error' })
       } else {
         setPurchasedItems(res)
-        // console.log(res)
         enqueueSnackbar('Card Purchase Success!', { variant: 'success' })
       }
     } catch {

@@ -1,3 +1,16 @@
+export const _STUDENT = `
+id
+isActive
+firstName
+lastName
+fullName
+dob
+gender
+points
+intPeriodStartAt
+isNew
+`
+
 export const ORGANIZATIONS = `
     {
         id
@@ -28,16 +41,14 @@ export const ORGANIZATIONS_PERSONNEL = `
     }
 `;
 
-export const GROUPS = `
-        id
-        identifier
-        isActive
-        randomSlug
-        name
-        internalCode
-        population
-        slug
+export const _GROUP = `
+id
+isActive
+name
 `;
+
+
+
 
 export const SCHOOLS = `
     {
@@ -124,4 +135,12 @@ export const AUDIENCES_ALL = `
         slug
         standardCode
         name
+`;
+export const GROUP = `
+id
+isActive
+name
+studentSet {
+    ${_STUDENT}
+}
 `;

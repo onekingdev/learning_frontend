@@ -11,7 +11,7 @@ import { Interest } from 'views/molecules/StudentBank/Interest';
 import { PageTitle } from 'views/molecules/PageTitle';
 import { dictionary } from './dictionary'
 import { Wrapper, GridItem, Img } from './Styles';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { doFetchInterests } from 'app/actions/bankActions';
 
 
@@ -20,7 +20,7 @@ export const Bank: FC = () => {
 
   const student = useSelector((state: any) => state.student)
   const { language } = useSelector((state: any) => state.user)
-  const { data: interests } = useQuery('fetch-interest', doFetchInterests, { refetchIntervalInBackground: false})
+  const { data: interests } = useQuery(['fetch-interest'], doFetchInterests, { refetchIntervalInBackground: false})
 
   const loadingContext = useContext(LoadingContext);
   const bankMovement = student.bankWallet.bankmovementSet

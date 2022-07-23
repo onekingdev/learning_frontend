@@ -1,3 +1,4 @@
+import { GROUP } from 'api/fragments/peopleFragments';
 import {
   _CLASSROOM_SCHEMA,
   SUBSCRIBER,
@@ -86,6 +87,36 @@ export const CLASSROMM_STUDENTS = (
 ) => `{
   studentsByClassroomId(classroomId: ${classroomId}){
     ${STUDENT_SCHEMA}
+  }
+}
+`;
+
+export const CLASSROOM_GROUPS = (
+  classroomId: number | string
+) => `{
+  classroomById(id: "${classroomId}"){
+    groupSet {
+      ${GROUP}
+    }
+  }
+}
+`;
+
+export const CREATE_GROUP = (
+  classroomId: number | string,
+  name: string,
+  students: Array<number|string>,
+) => `mutation {
+  createGroup(
+    classroomId: ${classroomId},
+    name: "${name}",
+    studentIds: ${students}
+    ){
+      classroom {
+        groupSet {
+          ${GROUP}
+        }
+      }
   }
 }
 `;

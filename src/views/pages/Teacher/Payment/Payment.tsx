@@ -10,7 +10,6 @@ import PackagePanel from 'views/molecules/PackagePanel/TeacherPackagePanel';
 import { PackageContainer } from './Style';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { getPlans } from 'app/actions/paymentActions'
-import { dictionary } from './dictionary';
 import { LANGUAGES } from 'constants/common';
 
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');

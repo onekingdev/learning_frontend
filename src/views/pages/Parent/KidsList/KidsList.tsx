@@ -8,7 +8,7 @@ import {
 } from './Style';
 import { Box, Link, Typography } from '@mui/material';
 import KidsListItem from 'views/organisms/Parent/KidsList/KidsListItem';
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { doFetchGuardianStudents } from 'app/actions/guardianActions';
 import { isNull } from 'lodash';
 import { LoadingSpinner } from 'views/atoms/Spinner';

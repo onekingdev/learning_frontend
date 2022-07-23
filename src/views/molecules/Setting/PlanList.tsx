@@ -9,7 +9,7 @@ import { useDialog } from './utils/useDialog';
 import { Upgrade } from './Upgrade';
 import { doFetchGuardianPlans } from 'app/actions/guardianActions'
 import { dictionary } from './dictionary'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getMessage } from 'views/utils';
 
 export const PlanList: FC = () => {

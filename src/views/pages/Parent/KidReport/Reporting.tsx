@@ -5,7 +5,7 @@ import { LoadingContext } from 'react-router-loading';
 import query from 'api/queries/get';
 import { useSelector } from 'react-redux';
 import { TopicReport } from 'api/fragments/topicFragments';
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { doFetchStudentById } from 'app/actions/guardianActions';
 import { KidReporting } from 'views/organisms/Reporting';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';

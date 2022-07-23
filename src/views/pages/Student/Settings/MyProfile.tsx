@@ -12,7 +12,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { ScreenSize } from 'constants/screenSize';
 import { Wrapper } from '../Bank/Styles';
 import { dictionary } from './dictionary'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { doFetchUserBadges } from 'app/actions';
 import { getMessage } from 'views/utils';
 

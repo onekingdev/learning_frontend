@@ -9,7 +9,6 @@ import {
 } from 'api/mutations/payments';
 import { sendRawQuery } from 'api/queries/get';
 import mutationFetch from 'api/mutations/get';
-import * as TYPES from 'app/types'
 
 export const createOrder = async (
     cardCvc: string,
@@ -32,7 +31,6 @@ export const createOrder = async (
     paymentMethod: string,
     returnUrl: string,
     token: string,
-    dispatch: any
 ) => {
     const res: any = await mutationFetch(
         CREATE_ORDER(
@@ -69,7 +67,7 @@ export const createOrder = async (
         return { success: false, msg: result.errors[0].message };
     }
 
-    const { guardian, status } = result.data.createOrder;
+    const { status } = result.data.createOrder;
 
     // dispatch({
     //     type: TYPES.GUARDIAN_SET_DATA,
@@ -99,7 +97,6 @@ export const createOrderWithOutPay = async (
     schoolId: number | null,
     orderDetailInput: {},
     token: string,
-    dispatch: any
 ) => {
     const res: any = await mutationFetch(
         CREATE_ORDER_WITH_OUT_PAY(cardFirstName, cardLastName, address1, address2, city, state, postCode, country, phone, guardianId, teacherId, schoolId, orderDetailInput),
@@ -115,7 +112,7 @@ export const createOrderWithOutPay = async (
     if (result.errors) {
         return { success: false, msg: result.errors[0].message };
     }
-    const { guardian, status } = result.data.createOrderWithOutPay;
+    const { status } = result.data.createOrderWithOutPay;
     // dispatch({
     //     type: TYPES.GUARDIAN_SET_DATA,
     //     payload: guardian,
@@ -134,7 +131,6 @@ export const createOrderWithOutPay = async (
 export const confirmPaymentOrder = async (
     orderId: number,
     token: string,
-    dispatch: any
 ) => {
     const res: any = await mutationFetch(
         CONFIRM_PAYMENT_ORDER(orderId),

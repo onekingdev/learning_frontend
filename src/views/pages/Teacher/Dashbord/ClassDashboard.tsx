@@ -11,7 +11,7 @@ import target from 'views/assets/target.svg'
 import question_icon from 'views/assets/nav-icons/question.png';
 import { ScreenSize } from 'constants/screenSize';
 import { BasicColor } from 'views/Color';
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { doFetchClassLeaders } from 'app/actions';
 import { getMessage } from 'views/utils';
 import { LoadingSpinner } from 'views/atoms/Spinner';

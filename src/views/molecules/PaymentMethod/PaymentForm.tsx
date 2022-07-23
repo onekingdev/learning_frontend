@@ -176,7 +176,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
         //         name: data.firstName + ' ' + data.lastName,
         //         phone: data.phone
         //     },
-        // }).catch(console.log);
+        // }).catch();
         // if(result.error) return {success: false, result: result.error.message};
         // /*------------------------ send request to backend to create payment -S-----------------------------*/
         let orderDetailInputs: any = [];
@@ -209,7 +209,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 school?.id || null,
                 orderDetailInputs,
                 user.token,
-                dispatch
             )
             result.data.email = user.email;
         }
@@ -235,7 +234,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 'Card',
                 'https://',
                 user.token,
-                dispatch
             )
 
             // // /*------------------------ send request to backend to create payment -E-----------------------------*/
@@ -244,7 +242,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 const result_confirm = await confirmPaymentOrder(
                     result.data.order.id,
                     user.token,
-                    dispatch
                 )
                 result.success = result_confirm.success;
                 result.data = result_confirm.data;
@@ -497,7 +494,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                                 handleFormChange('country', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                                 setData({ ...data, country: e.target.value })
                                 // setGrade(e.target.value);
-                                // console.log(props)
                                 // const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
                                 // if(!res.success) {
                                 //     enqueueSnackbar(res.msg, { variant: 'error' });

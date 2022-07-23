@@ -14,7 +14,7 @@ import {
 import { BasicColor } from 'views/Color';
 import {
     useQuery,
-} from 'react-query'
+} from '@tanstack/react-query'
 import { doFetchStudentAnswerHistory } from 'app/actions/blockActions';
 import { getMessage } from 'views/utils';
 import { ReviewBlocks } from 'views/molecules/ProgressReview/ReviewBlocks';

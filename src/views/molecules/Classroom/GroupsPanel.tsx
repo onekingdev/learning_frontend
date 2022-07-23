@@ -1,34 +1,39 @@
-import { useSelector }          from 'react-redux'
-import { Grid }                 from '@mui/material';
-import { dictionary }           from './dictionary'
-import groupsImg                from 'views/assets/studentGroups.svg'
-import newGroupImg              from 'views/assets/newStudentGroup.svg'
+import { useSelector } from 'react-redux'
+import { Grid } from '@mui/material';
+import groupsImg from 'views/assets/studentGroups.svg'
+import newGroupImg from 'views/assets/newStudentGroup.svg'
+import commonDictionary from 'constants/commonDictionary'
 
 import {
-    Container,
-    GroupItem,
-    GroupMark,
-    GroupText }               from './Style'
-const GroupsPanel = (props: any) => {
+  Container,
+  GroupItem,
+  GroupMark,
+  GroupText
+} from './Style'
+import { FC } from 'react';
 
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+interface GroupsPanelProps {
+  groups: Array<any>
+  onGroup: (param: any) => void
+  onNew: () => void
+}
 
-  const data          = props.data;
+const GroupsPanel:FC<GroupsPanelProps> = ({groups, onGroup, onNew}) => {
+  const { token, language } = useSelector((state: any) => state.user)
 
   return (
     <Container>
-    {
-      data.map((item:any, index: number) =>
-      <GroupItem key={index} onClick={() => {props.onGroup(item)}}>
-          <GroupMark src={groupsImg} />
-          <GroupText>{item.name}</GroupText>
-      </GroupItem>
-      )
-    }
-      <GroupItem onClick={() => {props.onNew()}}>
-          <GroupMark src={newGroupImg} />
-          <GroupText>{dictionary[language]?.addNew}</GroupText>
+      {
+        groups.map((item: any, index: number) =>
+          <GroupItem key={index} onClick={() => { onGroup(item) }}>
+            <GroupMark src={groupsImg} />
+            <GroupText>{item.name}</GroupText>
+          </GroupItem>
+        )
+      }
+      <GroupItem onClick={() => { onNew() }}>
+        <GroupMark src={newGroupImg} />
+        <GroupText>{commonDictionary[language]?.add_new}</GroupText>
       </GroupItem>
     </Container>
   )

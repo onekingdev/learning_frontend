@@ -87,7 +87,6 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             // TODO: check user type, and when parent redirect to kids/new,
             const userType = user.profile.role
             const teacher = result.data.teacher
-            // console.log({ order, userType, teacher })
             switch (userType) {
                 case 'TEACHER':
                     dispatch({

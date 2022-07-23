@@ -25,7 +25,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import FormBottomDescription from 'views/organisms/FormBottomDescription';
 import {
   useMutation,
-} from 'react-query'
+} from '@tanstack/react-query'
 import { doCreateSchool } from 'app/actions';
 import { LANGUAGES, SCHOOL_TYPES } from 'constants/common';
 import { USER_SET_DATA } from 'app/types';

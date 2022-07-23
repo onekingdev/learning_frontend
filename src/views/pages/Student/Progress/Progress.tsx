@@ -82,8 +82,7 @@ export const KidsProgress = () => {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
-                const res: any = await query('', AvaliableGrades(activeSubjectId)).catch(e => {
-                    console.log(e.message)
+                const res: any = await query('', AvaliableGrades(activeSubjectId)).catch(() => {
                     return { success: false }
                 });
                 if (res.success === false) {
@@ -113,7 +112,6 @@ export const KidsProgress = () => {
                     return
                 }
                 const result: any = await res.json();
-                // console.log(result.data.rootTopicsByAokAndGrade);
                 if (result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
@@ -156,7 +154,6 @@ export const KidsProgress = () => {
                 active: false,
             })
         })
-    console.log(subSubjects1)
 
     const mapBgRef = useRef<HTMLDivElement>(null);
     // const [mapWidth, setMapWidth] = useState<number>(1366);

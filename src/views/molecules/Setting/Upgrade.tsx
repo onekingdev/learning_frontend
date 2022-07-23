@@ -11,7 +11,7 @@ import { LoadingContainer } from 'views/atoms/Loading'
 import ReactLoading from 'react-loading';
 import { BasicColor } from 'views/Color';
 import { Button } from '@mui/material';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface IUpgradeProps {
   onConfirm: () => void

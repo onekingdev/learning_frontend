@@ -10,7 +10,7 @@ import { useSnackbar } from 'notistack';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { CANCEL_REASONS } from 'constants/parent'
 import { Button } from '@mui/material';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface ICancelFormProps {
   // onConfirm: (arg: string) => void

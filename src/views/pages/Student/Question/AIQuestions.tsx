@@ -204,9 +204,8 @@ export const AIQuestion: FC = () => {
       congratulations();
 
       const nextLevelMax: any = await updateNextLevel(earning.level)
-      if (nextLevelMax.msg) {
-        // console.log(nextLevelMax.msg)
-      } else setNextMaxExp(nextLevelMax)
+      if (!nextLevelMax.msg)
+        setNextMaxExp(nextLevelMax)
     } else dispatch({ type: TYPE.EXP_UPDATE, payload: { exp: currentExp, expMax: expMax } });
   };
 
