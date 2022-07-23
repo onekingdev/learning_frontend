@@ -33,7 +33,7 @@ import SchoolSignup from 'views/pages/Teacher/SchoolSignup/SchoolSignup'
 import TeacherPayment from 'views/pages/Teacher/Payment/Payment'
 import Classrooms from 'views/pages/Teacher/Classrooms/Classrooms'
 import Students from 'views/pages/Teacher/Students/Students'
-import Groups from 'views/pages/Teacher/Students/Groups'
+import Groups from 'views/pages/Teacher/Groups'
 import AddStudent from 'views/pages/Teacher/AddStudents/AddStudents';
 import Assignment from 'views/pages/Teacher/Assignment/Assignment';
 import Results from 'views/pages/Teacher/Results/Results';
@@ -46,7 +46,7 @@ import { ProgressReview } from 'views/pages/Student/Progress/ProgressReview';
 import { Error404 } from 'views/pages/Error404';
 import { TeacherCreateAccount } from 'views/pages/Teacher/SelectCreateType/TeacherCreateAccount';
 import Notes from 'views/pages/Teacher/Notes/Notes';
-import ClassDashboard from 'views/pages/Teacher/Dashbord/ClassDashboard';
+import ClassDashboard from 'views/pages/Teacher/ClassDashboard';
 import ClassroomSettings from 'views/pages/Teacher/ClassroomSettings/ClassroomSettings';
 import Schools from 'views/pages/Teacher/Schools/Schools';
 

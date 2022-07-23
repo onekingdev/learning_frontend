@@ -3,45 +3,13 @@ import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import GroupsPanel from 'views/molecules/Classroom/GroupsPanel'
-import { dictionary } from './dictionary'
 import AddGroupForm from 'views/molecules/Classroom/AddGroupForm';
 import { useQuery } from '@tanstack/react-query';
 import { doFetchClassroomGroups } from 'app/actions';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { Typography } from '@mui/material';
 import { getMessage } from 'views/utils';
-
-// const data = [
-//   {
-//     name: 'armin',
-//     type: 'normal',
-//     grade: 'greade',
-//     lastName: 'last name',
-//     classroom: 'classroom',
-//     username: 'user name',
-//   }, {
-//     name: 'armin',
-//     type: 'normal',
-//     grade: 'greade',
-//     lastName: 'last name',
-//     classroom: 'classroom',
-//     username: 'user name',
-//   }, {
-//     name: 'armin',
-//     type: 'normal',
-//     grade: 'greade',
-//     lastName: 'last name',
-//     classroom: 'classroom',
-//     username: 'user name',
-//   }, {
-//     name: 'armin',
-//     type: 'normal',
-//     grade: 'greade',
-//     lastName: 'last name',
-//     classroom: 'classroom',
-//     username: 'user name',
-//   },
-// ]
+import commonDictionary from 'constants/commonDictionary'
 
 const ClassroomGroups: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -69,7 +37,7 @@ const ClassroomGroups: FC = () => {
   }, [isLoading]);
 
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom} current='groups'>
+    <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.classroom} current='groups'>
       <>
         <AddGroupForm isOpen={isOpenGroupDialog} close={() => setIsOpenGroupDialog(false)} />
         {

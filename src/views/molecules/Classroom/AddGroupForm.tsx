@@ -18,6 +18,7 @@ const AddGroupForm = (props: any) => {
     const [selected, setSelected] = useState<Array<any>>([])
     const { currentClass } = useSelector((state: any) => state.teacher)
     const [groupName, setGroupName] = useState('')
+    const { enqueueSnackbar } = useSnackbar();
 
     const { data: students } = useQuery(
         ['fetch-classroom-students', currentClassId],
@@ -47,7 +48,6 @@ const AddGroupForm = (props: any) => {
         }
     })
 
-    const { enqueueSnackbar } = useSnackbar();
 
     const [loading, setLoading] = useState(false)
 

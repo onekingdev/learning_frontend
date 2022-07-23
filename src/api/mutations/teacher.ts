@@ -102,25 +102,6 @@ export const CLASSROOM_GROUPS = (
 }
 `;
 
-export const CREATE_GROUP = (
-  classroomId: number | string,
-  name: string,
-  students: Array<number|string>,
-) => `mutation {
-  createGroup(
-    classroomId: ${classroomId},
-    name: "${name}",
-    studentIds: ${students}
-    ){
-      classroom {
-        groupSet {
-          ${GROUP}
-        }
-      }
-  }
-}
-`;
-
 export const ADD_CLASS_TO_TEACHER = (
   audienceId: string | number,
   name: string

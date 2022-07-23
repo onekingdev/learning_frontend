@@ -3,7 +3,6 @@ import {
   ADD_CLASS_TO_TEACHER,
   CLASSROMM_STUDENTS,
   CLASSROOM_GROUPS,
-  CREATE_GROUP,
   CREATE_SCHOOL,
   CREATE_TEACHER,
 } from 'api/mutations/teacher';
@@ -108,22 +107,6 @@ export const doAddClassroomToTeacher = async (
   }
 };
 
-export const doFetchClassLeaders = async (token: string) => {
-  // TODO: update to real query when production
-  return {
-    data: [
-      {
-        name: 'Charly',
-        coins: 540,
-      },
-      {
-        name: 'Candy',
-        coins: 240,
-      },
-    ],
-  };
-};
-
 export const doAddStudentsToClassroom = async (
   students: string,
   token: string
@@ -205,7 +188,34 @@ export const doCreateGroup = async (
     }
   }
   `, token);
-  return res.data?.createGroup.group ?? res.errors[0]; // when django returns error message on fail
+  return res.data?.createGroup.group || res.errors[0]; // when django returns error message on fail
+};
+
+export const doCreateDashboardData = async (
+  classroomId: number | string,
+  token: string
+) => {
+  const res: any = await fetchQuery(`mutation {
+    classroomReport(
+      classroomId: ${classroomId},
+      ) {
+      coinsToday
+      goalCoinsPerDay
+      correctQuestionsCountToday
+      correctQuestionsCountYesterday
+      coinsYesterday
+      classLeadersYesterday {
+        student {
+          ${STUDENT_SCHEMA}
+        }
+        coinsSum
+      }
+      coinsAll
+      questionsAll
+    }
+  }
+  `, token);
+  return res.data?.classroomReport || res.errors[0]; // when django returns error message on fail
 };
 
 export const doFetchClassroomStudents = async (
