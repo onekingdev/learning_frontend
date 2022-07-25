@@ -54,7 +54,7 @@ export const TopMenu: FC = () => {
             {firstName} {lastName}
           </Typography>
           <Typography textAlign={'end'}>
-            {currentClass.name}
+            {currentClass?.name}
           </Typography>
         </Box>
         <Avatar sx={{ bgcolor: '#22BAAF', height: '60px', width: '60px', marginLeft: '15px' }} alt='Remy Sharp' src={avatar} />
