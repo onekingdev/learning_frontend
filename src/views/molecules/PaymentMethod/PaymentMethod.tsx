@@ -23,7 +23,7 @@ import {
     OrderTip,
 } from './Style';
 import { LANGUAGES } from 'constants/common';
-import { TEACHER_SET_DATA } from 'app/types';
+import { GUARDIAN_SET_DATA, TEACHER_SET_DATA } from 'app/types';
 
 type PaymentMethodProps = {
     plans: {
@@ -86,7 +86,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             // });
             // TODO: check user type, and when parent redirect to kids/new,
             const userType = user.profile.role
-            const teacher = result.data.teacher
+            const { teacher, guardian } = result.data
             switch (userType) {
                 case 'TEACHER':
                     dispatch({
@@ -99,6 +99,10 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     history.push('/kids/new')
                     break;
                 case 'GUARDIAN':
+                    dispatch({
+                        type: GUARDIAN_SET_DATA,
+                        payload: guardian,
+                    });
                     history.push('/kids/new')
                     break;
                 default: break

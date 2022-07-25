@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { Grid, FormControl, Select } from '@mui/material';
 import { dictionary } from './dictionary'
@@ -14,12 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import { BasicColor } from 'views/Color';
 import commonDictionary from 'constants/commonDictionary'
 import { doAddClassroomToTeacher } from 'app/actions';
-import { TEACHER_ADD_CLASSROOM } from 'app/types';
+// import { TEACHER_ADD_CLASSROOM } from 'app/types';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { queryClient } from 'index'
 
 const AddClassroomForm = (props: any) => {
     const { token, language } = useSelector((state: any) => state.user)
-    const dispatch = useDispatch();
+    const teacherId = useSelector((state: any) => state.teacher.id)
 
     const { enqueueSnackbar } = useSnackbar();
     const classes = useStyles();
@@ -63,10 +64,11 @@ const AddClassroomForm = (props: any) => {
 
         const res: any = await doAddClassroomToTeacher(audience, className, token)
         if (res.status) {
-            dispatch({
-                type: TEACHER_ADD_CLASSROOM,
-                payload: res.data,
-            });
+            queryClient.setQueryData(['teacher-classrooms', teacherId], (classrooms: Array<any> | undefined) => [...classrooms || [], res.data])
+            // dispatch({
+            //     type: TEACHER_ADD_CLASSROOM,
+            //     payload: res.data,
+            // });
             props.close()
         } else {
             enqueueSnackbar(res.message, { variant: 'error' })
