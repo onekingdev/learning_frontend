@@ -14,9 +14,8 @@ import { any2String } from 'views/utils';
 // src\index.tsx
 const AddGroupForm = (props: any) => {
     const { language, token } = useSelector((state: any) => state.user);
-    const { currentClassId } = useSelector((state: any) => state.teacher);
+    const { currentClassId, currentClass } = useSelector((state: any) => state.teacher);
     const [selected, setSelected] = useState<Array<any>>([])
-    const { currentClass } = useSelector((state: any) => state.teacher)
     const [groupName, setGroupName] = useState('')
     const { enqueueSnackbar } = useSnackbar();
 

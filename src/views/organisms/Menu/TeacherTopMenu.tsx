@@ -6,19 +6,17 @@ import {
   AppBar,
   Avatar,
   Box,
+  Typography,
   useMediaQuery
 } from '@mui/material';
 import { ScreenSize } from 'constants/screenSize';
 import { BasicColor } from 'views/Color';
+import { useSelector } from 'react-redux';
 
-type TopMenuProps = {
-  data?: any
-};
 
-export const TopMenu: FC<TopMenuProps> = ({
-  data = null
-}) => {
+export const TopMenu: FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+  const { currentClass, firstName, lastName } = useSelector((state: any) => state.teacher)
 
   const [navOp, setNavOp] = useState(true)
   const changeNavBarOpacity = () => {
@@ -51,7 +49,14 @@ export const TopMenu: FC<TopMenuProps> = ({
       <Sidebar />
       <img src={logoTitle} />
       <Box display={isMobile ? 'none' : 'flex'} alignItems='center' >
-        Candy Rosenberg
+        <Box>
+          <Typography textAlign={'end'} fontWeight='bold'>
+            {firstName} {lastName}
+          </Typography>
+          <Typography textAlign={'end'}>
+            {currentClass.name}
+          </Typography>
+        </Box>
         <Avatar sx={{ bgcolor: '#22BAAF', height: '60px', width: '60px', marginLeft: '15px' }} alt='Remy Sharp' src={avatar} />
       </Box>
     </AppBar >

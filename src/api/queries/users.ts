@@ -84,7 +84,7 @@ export const WHOAMI_QUERY = `
                 ${GUARDIAN}
             }
             teacher {
-                ${TEACHERSCHEMA}
+                ${_TEACHERSCHEMA}
             }
             subscriber {
                 id
