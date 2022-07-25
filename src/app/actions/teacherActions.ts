@@ -5,6 +5,7 @@ import {
   CLASSROOM_GROUPS,
   CREATE_SCHOOL,
   CREATE_TEACHER,
+  TEACHER_CLASSROOMS,
 } from 'api/mutations/teacher';
 import {fetchQuery, sendRawQuery} from 'api/queries/get';
 import {CLASSROOM_SCHEMA, STUDENT_SCHEMA} from 'api/queries/users';
@@ -255,6 +256,14 @@ export const doFetchClassroomGroups = async (
 ) => {
   const res: any = await fetchQuery(CLASSROOM_GROUPS(classroomId), token);
   return res.data?.classroomById?.groupSet || res.errors[0]; // when django returns error message on fail
+};
+
+export const doFetchTeacherClassrooms = async (
+  teacherId: number | string,
+  token: string
+) => {
+  const res: any = await fetchQuery(TEACHER_CLASSROOMS(teacherId), token);
+  return res.data?.teacherById?.classrooms || res.errors[0]; // when django returns error message on fail
 };
 
 export const teacherCreatesStudent = (payload: string) => ({

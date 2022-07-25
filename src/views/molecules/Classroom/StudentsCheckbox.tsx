@@ -31,12 +31,12 @@ export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
         <Paper sx={{
             width: 300,
             background: '#22BAAF33',
-            padding: '30px 50px',
+            // padding: '30px 50px',
             display: 'flex',
             alignItems: 'start',
             flexDirection: 'column'
         }}>
-            <FormControlLabel
+            {/* <FormControlLabel
                 label={'All'}
                 value={-1}
                 sx={{
@@ -45,7 +45,7 @@ export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
                 control={
                     <Checkbox checked={all} onChange={handleSelectAll} />
                 }
-            />
+            /> */}
             {
                 students.map(student => (
                     <FormControlLabel

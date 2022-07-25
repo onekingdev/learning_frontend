@@ -10,7 +10,6 @@ import PackagePanel from 'views/molecules/PackagePanel/TeacherPackagePanel';
 import { PackageContainer } from './Style';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { getPlans } from 'app/actions/paymentActions'
-import { LANGUAGES } from 'constants/common';
 
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 
@@ -21,7 +20,7 @@ interface ProductTypeParam {
 const Payment: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
-  const user = useSelector((state: any) => state.user);
+  const {token, language} = useSelector((state: any) => state.user);
   const guardian = useSelector((state: any) => state.guardian);
   const { productType } = useParams<ProductTypeParam>();
 
@@ -57,7 +56,6 @@ const Payment: FC = () => {
   const [isSpecialCode, setIsSpecialCode] = useState(false)
   const [showPaymentMethod, setShowPaymentMethod] = useState(true);
   const [offRate, setOffRate] = useState(50);
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
 
   const onChangePackage = (count: number, period: string, sponsor: string) => {
     const type = productType === 'School' ? 'School' : 'Classroom'
@@ -70,7 +68,7 @@ const Payment: FC = () => {
   };
 
   const setPlanData = async () => {
-    const result: any = await getPlans(user.token);
+    const result: any = await getPlans(token);
     if (!result.success) {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return;

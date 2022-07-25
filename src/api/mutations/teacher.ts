@@ -4,8 +4,8 @@ import {
   SUBSCRIBER,
   _TEACHERSCHEMA,
 } from 'api/fragments/teacherFraments';
-import {_USER, USER_PROFILE} from 'api/fragments/userFragments';
-import { STUDENT_SCHEMA } from 'api/queries/users';
+import { _USER, USER_PROFILE } from 'api/fragments/userFragments';
+import { CLASSROOM_SCHEMA, STUDENT_SCHEMA } from 'api/queries/users';
 
 export const CREATE_SCHOOL = (
   country: string,
@@ -102,6 +102,17 @@ export const CLASSROOM_GROUPS = (
 }
 `;
 
+export const TEACHER_CLASSROOMS = (
+  teacherId: number | string
+) => `{
+  teacherById(id: "${teacherId}"){
+    classrooms {
+      ${CLASSROOM_SCHEMA}
+    }
+  }
+}
+`;
+
 export const ADD_CLASS_TO_TEACHER = (
   audienceId: string | number,
   name: string
@@ -110,6 +121,13 @@ mutation {
     createClassroom (audienceId: ${audienceId}, name: "${name}") {
       classroom {
         ${_CLASSROOM_SCHEMA}
+          audience {
+          id
+          gradeSet {
+              id
+              name
+          }
+        }
       }
     }
   }

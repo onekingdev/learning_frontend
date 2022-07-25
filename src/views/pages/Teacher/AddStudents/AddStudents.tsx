@@ -98,7 +98,7 @@ const AddStudents: FC = () => {
     } else {
       dispatch({
         type: TEACHER_SET_CURRENT_CLASSROOM,
-        payload: res,
+        payload: res.data,
       });
       setLoading(false)
 

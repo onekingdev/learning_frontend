@@ -68,7 +68,7 @@ const AddGroupForm = (props: any) => {
         <CardDialog
             isOpen={props.isOpen}
             open={props.close}
-            title={currentClass.name}
+            title={currentClass.name || commonDictionary[language]?.classroom}
             dialogContent={
                 <Box display='flex' flexDirection={'column'} alignItems='center' gap={2}>
                     <TextField

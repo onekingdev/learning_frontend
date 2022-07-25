@@ -8,12 +8,23 @@ import AddClassroomForm from 'views/molecules/Classroom/AddClassroomForm'
 import commonDictionary from 'constants/commonDictionary'
 import { useHistory } from 'react-router-dom';
 import { TEACHER_SET_CURRENT_CLASSROOM, TEACHER_SET_CURRENT_CLASSROOM_ID } from 'app/types';
+import { doFetchTeacherClassrooms } from 'app/actions';
+import { useQuery } from '@tanstack/react-query';
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { Typography } from '@mui/material';
+import { getMessage } from 'views/utils';
 
 const Classrooms: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
-  const language = useSelector((state: any) => state.user.language);
-  const { classrooms } = useSelector((state: any) => state.teacher)
+  const { language, token } = useSelector((state: any) => state.user);
+  const teacherId = useSelector((state: any) => state.teacher.id)
+  // const { classrooms } = useSelector((state: any) => state.teacher)
+  const { data: classrooms, isLoading, error } = useQuery(
+    ['teacher-classrooms', teacherId],
+    () => doFetchTeacherClassrooms(teacherId, token),
+    { refetchIntervalInBackground: false }
+  )
 
   const [isOpenNewForm, setIsOpenNewForm] = useState(false);
 
@@ -23,7 +34,7 @@ const Classrooms: FC = () => {
 
   const onClassroom = (classroom: any) => {
 
-    if(!classroom) return
+    if (!classroom) return
 
     dispatch({
       type: TEACHER_SET_CURRENT_CLASSROOM_ID,
@@ -50,7 +61,12 @@ const Classrooms: FC = () => {
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.classrooms}>
       <>
         <AddClassroomForm isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} />
-        <ClassroomPanel classrooms={classrooms} onNew={onNew} onClassroom={onClassroom} />
+        {
+          isLoading ? <LoadingSpinner /> :
+            error ? <Typography color='red'>{getMessage(error)}</Typography> :
+              classrooms &&
+              <ClassroomPanel classrooms={classrooms} onNew={onNew} onClassroom={onClassroom} />
+        }
       </>
     </TeacherPgContainer>
   );
