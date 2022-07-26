@@ -50,5 +50,4 @@ export interface KidsListProps {
   firstName: string
   parentName: string
   dateJoined: string
-  token: string
 }

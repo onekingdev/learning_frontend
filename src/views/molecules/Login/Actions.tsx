@@ -10,7 +10,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 type LoginActionsProps = {
   googleText: string;
   googleColor: ButtonColor;
-  googleAction?: () => void;
+  googleAction: () => void;
   or: string;
   loginText: string;
   loginColor: ButtonColor;

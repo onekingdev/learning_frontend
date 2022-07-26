@@ -2,16 +2,16 @@ export const dictionary: any = Object.freeze({
     'en-us': {
         classroom: 'Classroom',
         students: 'Students',
-        group: 'Group'
+        group: 'Group,'
     },
     'th' :{
         classroom: 'Classroom',
         students: 'Students',
-        group: 'Group'
+        group: 'Group,'
     },
     'es-mx': {
         classroom: 'Classroom',
         students: 'Students',
-        group: 'Group'
+        group: 'Group,'
     }
 });

@@ -68,6 +68,15 @@ export const GUARDIAN_STUDENT_PLAN = `
     price
 
 `
+export const GUARDIAN_STUDENT_PLAN_RAW = `
+    id
+    cancelReason
+    isCancel
+    isPaid
+    expiredAt
+    period
+    price
+`
 
 export const ORDER_DETAIL = `
     id
@@ -127,17 +136,4 @@ export const AVAILABLE_PLANS = `
       ${PLAN}
     }
   }
-`
-export const DISCOUNT_CODE_DETAIL = `
-  id
-  identifier
-  isActive
-  deletedTimestamp
-  randomSlug
-  code
-  percentage
-  trialDay
-  expiredAt
-  stripeCouponId
-  type
 `

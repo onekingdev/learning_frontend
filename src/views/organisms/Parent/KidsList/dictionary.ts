@@ -23,10 +23,10 @@ export const dictionary: any = Object.freeze({
         password: 'รหัสผ่าน',
         passwordFieldIsRequired: 'ต้องระบุช่องรหัสผ่าน',
         userName: 'ชื่อผู้ใช้',
-        selectYourGrade: 'ระดับชั้น',
-        selectYourLanguage: 'ภาษา',
+        selectYourGrade: 'เลือกเกรดของคุณ',
+        selectYourLanguage: 'เลือกภาษาของคุณ',
         changePassword: 'เปลี่ยนรหัสผ่าน',
-        studentLogin: 'เข้าสู่ระบบผู้ใช้',
+        studentLogin: 'เข้าสู่ระบบนักศึกษา',
         yourChildren: 'ลูก ๆ ของคุณ',
     },
     'es-mx': {

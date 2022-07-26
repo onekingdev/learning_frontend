@@ -5,10 +5,6 @@ export const BlackBoard = styled.div`
   background-color: #13705f;
   border: 7px solid #5c2100;
   border-radius: 16px;
-  min-height: 400px;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
   @media (min-width: ${ScreenSize.tablet}) {
     margin: 1rem;
     height: auto;

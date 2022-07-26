@@ -1,34 +1,33 @@
-import { FC } from 'react';
-import { Box, BoxProps, Typography } from '@mui/material';
-import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+import { FC } from "react";
+import styled from "styled-components";
 
-interface ISubjectBox extends BoxProps {
-    imgUrl?: string
-    bgColor?: string
-    text?: string
-    isChecked?: boolean
+interface ISubjectBox {
+    imgUrl?: string;
+    bgColor?: string;
+    text?: string;
 }
-export const SubjectCard: FC<ISubjectBox> = ({ imgUrl, bgColor, text, isChecked }) => {
-    const isMobile = useSocratesMediaQuery('xs')
+export const SubjectCard: FC<ISubjectBox> = ({ imgUrl="", bgColor="", text="" }) => {
+    return (<SubjectBox bgColor={bgColor}>
+        <img src={imgUrl} alt="imgUrl" />
+        <h2>{text}</h2>
+    </SubjectBox>)
+}
 
-    return (
-        <Box
-            width={isMobile ? 60 : 120}
-            height={isMobile ? 60 : 120}
-            display='flex'
-            flexDirection={'column'}
-            justifyContent='space-between'
-            alignItems={'center'}
-            margin={2}
-            padding={2}
-            sx={{
-                background: bgColor,
-                boxShadow: isChecked ? `2px 2px 20px 2px ${bgColor}` : 'none',
-                borderRadius: 5,
-                cursor: 'pointer'
-            }}
-        >
-            <img src={imgUrl} style={{ width: isMobile ? 40 : 100 }} alt='imgUrl' />
-            <Typography fontWeight={'bold'} textAlign='center' color='white'>{text}</Typography>
-        </Box>)
+interface ISubjectBox {
+    bgColor?: string;
 }
+const SubjectBox = styled.div<ISubjectBox>`
+    width: 10rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: ${props => props?.bgColor ?? "white"};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h2 {
+        color: #3F3F3F;
+        font-size: 2rem;
+        text-align: center;
+    }
+`;

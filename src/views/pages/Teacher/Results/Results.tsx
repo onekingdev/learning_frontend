@@ -1,7 +1,7 @@
 import { FC, useEffect, useState, useContext }    from 'react';
 import { useSelector }          from 'react-redux';
 import { LoadingContext }       from 'react-router-loading';
-import { TeacherPgContainer }   from 'views/molecules/PgContainers/TeacherPgContainer';
+import { TeacherPgContainer }   from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
 import { dictionary }           from './dictionary';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
 import query                 from 'api/queries/get';
@@ -46,7 +46,7 @@ const Assignment: FC = () => {
   }, [user]);
   const [date, setDate]   = useState<Date>();
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title} current='results'>
+    <TeacherPgContainer onlyLogoImgNav={true} title={dictionary[language]?.title}>
       <>
         <TableContainer>
           <Table>

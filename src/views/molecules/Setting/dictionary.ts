@@ -2,7 +2,6 @@ export const dictionary:any = Object.freeze({
     'en-us': {
         ChangeToYearly: 'Change to Yearly',
         CancelPlan: 'Cancel Plan',
-        canceled: 'Canceled',
         CancelChildrenPlan: 'Cancel Children plan',
         YouAreCancellingOneChildSoloArea: 'You are cancelling 1 child solo area',
         Upgrade: 'Upgrade',
@@ -15,7 +14,6 @@ export const dictionary:any = Object.freeze({
     },
     'th': {
         ChangeToYearly: 'เปลี่ยนเป็นรายปี',
-        canceled: 'ยกเลิก',
         CancelPlan: 'ยกเลิกแพลน',
         CancelChildrenPlan: 'ยกเลิก แผนสำหรับเด็ก',
         YouAreCancellingOneChildSoloArea: 'คุณกำลังยกเลิกโซนโซโล่เด็ก 1 รายการ',
@@ -31,7 +29,6 @@ export const dictionary:any = Object.freeze({
     'es-mx': {
         ChangeToYearly: 'Cambiar a Anual',
         CancelPlan: 'Cancelar plan',
-        canceled: 'Cancelada',
         CancelChildrenPlan: 'Cancelar plan Niños',
         YouAreCancellingOneChildSoloArea: 'Estás cancelando el área individual de 1 niño',
         Upgrade: 'Mejora',

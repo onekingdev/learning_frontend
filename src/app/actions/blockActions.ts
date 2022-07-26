@@ -1,19 +1,19 @@
 import {
-  FINISH_BLOCK_PRESENTATION,
-  CREATE_AI_BLOCK_PRESENTATION,
-  CREATE_PATH_BLOCK_PRESENTATION,
-  CREATE_NEW_AI_BLOCK,
-  FINISH_BLK_PT,
-  GET_QUESIONS,
-  CREATE_NEW_PATH_BLOCK,
-  FETCH_STUDENT_ANSWER_HISTORY,
-} from 'api/mutations/block';
-import mutation from 'api/mutations/get';
-import query, {fetchQuery} from 'api/queries/get';
-import {BLOCK_PRESENTATION_QUERY} from 'api/queries/questions';
-import {sendRawQuery} from 'api/queries/get';
+    FINISH_BLOCK_PRESENTATION,
+    CREATE_AI_BLOCK_PRESENTATION,
+    CREATE_PATH_BLOCK_PRESENTATION,
+    CREATE_NEW_AI_BLOCK,
+    FINISH_BLK_PT,
+    GET_QUESIONS,
+    CREATE_NEW_PATH_BLOCK,
+    FETCH_STUDENT_ANSWER_HISTORY
+} from 'api/mutations/block'
+import mutation from 'api/mutations/get'
+import query, { fetchQuery } from 'api/queries/get'
+import { BLOCK_PRESENTATION_QUERY } from 'api/queries/questions'
+import { sendRawQuery } from 'api/queries/get';
 
-import * as TYPES from '../types';
+import * as TYPES from '../types'
 
 /**
  * This is previous mutation for finishBlock
@@ -28,243 +28,182 @@ import * as TYPES from '../types';
  * @param dispatch
  * @returns
  */
-export const finishBlock = async (
-  block_presentation_id: string,
-  batteryLevel: number,
-  hits: number,
-  errors: number,
-  bonusCoins: number,
-  earning: object,
-  questionResults: any,
-  token: string,
-  dispatch: any
-) => {
-  const res: any = await mutation(
-    FINISH_BLOCK_PRESENTATION(
-      block_presentation_id,
-      batteryLevel,
-      hits,
-      errors,
-      bonusCoins,
-      questionResults
-    ),
-    token
-  ).catch(() => ({success: false}));
-  if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
-  }
+export const finishBlock = async (block_presentation_id: string, batteryLevel: number, hits: number, errors: number, bonusCoins: number, earning: object, questionResults: any, token: string, dispatch: any) => {
+    const res: any = await mutation(FINISH_BLOCK_PRESENTATION(block_presentation_id, batteryLevel, hits, errors, bonusCoins, questionResults), token).catch(() => ({ success: false }));
+    if (res.success === false) {
+        return { success: false, msg: 'Network Error' };
+    }
 
-  const result: any = await res.json();
+    const result: any = await res.json();
 
-  if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
-  }
+    if (result.errors) {
+        return { success: false, msg: result.errors[0].message };
+    }
 
-  const {student} = result.data.finishBlockPresentation;
-  dispatch({type: TYPES.STUDENT_SET_DATA, payload: student});
-  dispatch({
-    type: TYPES.EARNING_SET_DATA,
-    payload: {
-      ...earning,
-      level_name: student.level.name,
-      level: student.level.amount,
-      exp: parseInt(student.points),
-      expMax: student.level.pointsRequired,
-      balance: student.coinWallet.balance,
-    },
-  });
-  return {success: true, msg: 'Success!'};
-};
+    const { student } = result.data.finishBlockPresentation
+    dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
+    dispatch({
+        type: TYPES.EARNING_SET_DATA, payload: {
+            ...earning,
+            level_name: student.level.name,
+            level: student.level.amount,
+            exp: parseInt(student.points),
+            expMax: student.level.pointsRequired,
+            balance: student.coinWallet.balance,
+        }
+    })
+    return { success: true, msg: 'Success!' }
+}
 
-export const createAiBlockPresentation = async (
-  aokId: number,
-  token: string
-) => {
-  // export const createAiBlockPresentation = async (aokId: number, token: string) => {
-  const res: any = await mutation(
-    CREATE_AI_BLOCK_PRESENTATION(aokId),
-    token
-  ).catch(() => ({success: false}));
-  if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
-  }
 
-  const result: any = await res.json();
+export const createAiBlockPresentation = async (aokId: number, token: string) => {
+    // export const createAiBlockPresentation = async (aokId: number, token: string) => {
+    const res: any = await mutation(CREATE_AI_BLOCK_PRESENTATION(aokId), token).catch(() => ({ success: false }));
+    if (res.success === false) {
+        return { success: false, msg: 'Network Error' };
+    }
 
-  if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
-  }
+    const result: any = await res.json();
 
-  const {blockPresentation} = result.data.createAiBlockPresentation;
-  // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
-  // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
-  //     ...earning,
-  //     level_name: student.level.name,
-  //     level: student.level.amount,
-  //     exp: parseInt(student.points),
-  //     expMax: student.level.pointsRequired,
-  //     balance: student.coinWallet.balance,
-  // }})
-  return {success: true, msg: 'Success!', data: blockPresentation};
-};
+    if (result.errors) {
+        return { success: false, msg: result.errors[0].message };
+    }
 
-export const createPathBlockPresentation = async (
-  studentId: number,
-  topicId: number,
-  token: string
-) => {
-  // export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string) => {
-  const res: any = await mutation(
-    CREATE_PATH_BLOCK_PRESENTATION(studentId, topicId),
-    token
-  ).catch(() => ({success: false}));
-  if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
-  }
+    const { blockPresentation } = result.data.createAiBlockPresentation
+    // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
+    // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
+    //     ...earning,
+    //     level_name: student.level.name,
+    //     level: student.level.amount,
+    //     exp: parseInt(student.points),
+    //     expMax: student.level.pointsRequired,
+    //     balance: student.coinWallet.balance,
+    // }})
+    return { success: true, msg: 'Success!', data: blockPresentation }
+}
 
-  const result: any = await res.json();
+export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string) => {
+    // export const createPathBlockPresentation = async (studentId: number, topicId: number, token: string) => {
+    const res: any = await mutation(CREATE_PATH_BLOCK_PRESENTATION(studentId, topicId), token).catch(() => ({ success: false }));
+    if (res.success === false) {
+        return { success: false, msg: 'Network Error' };
+    }
 
-  if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
-  }
+    const result: any = await res.json();
 
-  const {blockPresentation} = result.data.createPathBlockPresentation;
-  // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
-  // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
-  //     ...earning,
-  //     level_name: student.level.name,
-  //     level: student.level.amount,
-  //     exp: parseInt(student.points),
-  //     expMax: student.level.pointsRequired,
-  //     balance: student.coinWallet.balance,
-  // }})
-  return {success: true, msg: 'Success!', data: blockPresentation};
-};
+    if (result.errors) {
+        return { success: false, msg: result.errors[0].message };
+    }
 
-export const getBlockPresentationById = async (
-  blockPresentationId: number,
-  token: string
-) => {
-  // export const createAiBlockPresentation = async (aokId: number, token: string) => {
-  const res: any = await query(
-    `blockPresentationById(id:${blockPresentationId})`,
-    BLOCK_PRESENTATION_QUERY,
-    token
-  ).catch(() => ({success: false}));
-  if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
-  }
+    const { blockPresentation } = result.data.createPathBlockPresentation
+    // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
+    // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
+    //     ...earning,
+    //     level_name: student.level.name,
+    //     level: student.level.amount,
+    //     exp: parseInt(student.points),
+    //     expMax: student.level.pointsRequired,
+    //     balance: student.coinWallet.balance,
+    // }})
+    return { success: true, msg: 'Success!', data: blockPresentation }
+}
 
-  const result: any = await res.json();
+export const getBlockPresentationById = async (blockPresentationId: number, token: string) => {
+    // export const createAiBlockPresentation = async (aokId: number, token: string) => {
+    const res: any = await query(`blockPresentationById(id:${blockPresentationId})`, BLOCK_PRESENTATION_QUERY, token).catch(() => ({ success: false }));
+    if (res.success === false) {
+        return { success: false, msg: 'Network Error' };
+    }
 
-  if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
-  }
+    const result: any = await res.json();
 
-  const {blockPresentationById} = result.data;
-  // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
-  // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
-  //     ...earning,
-  //     level_name: student.level.name,
-  //     level: student.level.amount,
-  //     exp: parseInt(student.points),
-  //     expMax: student.level.pointsRequired,
-  //     balance: student.coinWallet.balance,
-  // }})
-  return {success: true, msg: 'Success!', data: blockPresentationById};
-};
+    if (result.errors) {
+        return { success: false, msg: result.errors[0].message };
+    }
 
-export const createNewAiBlock = async (
-  aokId: number,
-  studentId: number,
-  token: string
-) => {
-  try {
-    const res: any = await sendRawQuery(
-      CREATE_NEW_AI_BLOCK(aokId, studentId),
-      token
-    );
-    return res.msg
-      ? {msg: res.msg, success: false}
-      : {
-          ...res.data.createAiBlockPresentation.blockPresentation,
-          success: true,
-        };
-  } catch (e) {
-    return {msg: 'Network error!', success: false};
-  }
-};
+    const { blockPresentationById } = result.data
+    // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
+    // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
+    //     ...earning,
+    //     level_name: student.level.name,
+    //     level: student.level.amount,
+    //     exp: parseInt(student.points),
+    //     expMax: student.level.pointsRequired,
+    //     balance: student.coinWallet.balance,
+    // }})
+    return { success: true, msg: 'Success!', data: blockPresentationById }
+}
 
-export const createNewPathBlock = async (
-  topicId: number,
-  studentId: number,
-  token: string
-) => {
-  try {
-    const res: any = await sendRawQuery(
-      CREATE_NEW_PATH_BLOCK(topicId, studentId),
-      token
-    );
-    return res.msg
-      ? {msg: res.msg, success: false}
-      : {
-          ...res.data.createPathBlockPresentation.blockPresentation,
-          success: true,
-        };
-  } catch (e: any) {
-    return {msg: e.message, success: false};
-  }
-};
 
-export const newFinishBlock = async (
-  blkPTId: string,
-  batteryLevel: number,
-  hits: number,
-  errors: number,
-  bonusCoins: number,
-  questions: string,
-  token: string
-) => {
-  const res: any = await mutation(
-    FINISH_BLK_PT(blkPTId, batteryLevel, hits, errors, bonusCoins, questions),
-    token
-  ).catch(() => ({success: false}));
-  if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
-  }
+export const createNewAiBlock = async (aokId: number, studentId: number, token: string) => {
 
-  const result: any = await res.json();
+    try {
+        const res: any = await sendRawQuery(
+            CREATE_NEW_AI_BLOCK(aokId, studentId),
+            token
+        );
+        return res.msg ?
+            { msg: res.msg, success: false } :
+            { ...res.data.createAiBlockPresentation.blockPresentation, success: true }
+    } catch (e) {
+        console.log(e)
+        return { msg: 'Network error!', success: false }
+    }
+}
 
-  if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
-  }
-  return {success: true, msg: 'Success!', res: result};
-};
+export const createNewPathBlock = async (topicId: number, studentId: number, token: string) => {
+
+    console.log({topicId, studentId})
+    try {
+        const res: any = await sendRawQuery(
+            CREATE_NEW_PATH_BLOCK(topicId, studentId),
+            token
+        );
+        console.log({res})
+        return res.msg ?
+            { msg: res.msg, success: false } :
+            { ...res.data.createPathBlockPresentation.blockPresentation, success: true }
+    } catch (e) {
+        console.log(e)
+        return { msg: 'Network error!', success: false }
+    }
+}
+
+export const newFinishBlock = async (blkPTId: string, batteryLevel: number, hits: number, errors: number, bonusCoins: number, questions: string, earning: any, token: string) => {
+    const res: any = await mutation(FINISH_BLK_PT(blkPTId, batteryLevel, hits, errors, bonusCoins, questions), token).catch(() => ({ success: false }));
+    if (res.success === false) {
+        return { success: false, msg: 'Network Error' };
+    }
+
+    const result: any = await res.json();
+
+    if (result.errors) {
+        return { success: false, msg: result.errors[0].message };
+    }
+    return { success: true, msg: 'Success!', res: result }
+}
 
 // Get Question Block By Id, this is for test
 export const doGetQuestionBlockById = async (blkId: number, token: string) => {
-  try {
-    const res: any = await sendRawQuery(GET_QUESIONS(blkId), token);
-    return res.msg
-      ? {msg: res.msg, success: false}
-      : {...res.data.blockPresentationById, success: true};
-  } catch (e: any) {
-    return {msg: e.message, success: false};
-  }
-};
 
-export const doFetchStudentAnswerHistory = async (
-  studentId: number,
-  period: number,
-  answerStatus: string,
-  token: string
-) => {
-  const res: any = await fetchQuery(
-    FETCH_STUDENT_ANSWER_HISTORY(studentId, period, answerStatus),
-    token
-  );
-  return (
-    res.data?.blockPresentationsByStudentIdAndPeriodAndAnswerstate ??
-    res.errors[0]
-  );
-};
+    try {
+        const res: any = await sendRawQuery(
+            GET_QUESIONS(blkId),
+            token
+        );
+        return res.msg ?
+            { msg: res.msg, success: false } :
+            { ...res.data.blockPresentationById, success: true }
+    } catch (e) {
+        console.log(e)
+        return { msg: 'Network error!', success: false }
+    }
+}
+
+export const doFetchStudentAnswerHistory = async (studentId: number, token: string) => {
+    const res: any = await fetchQuery(
+        FETCH_STUDENT_ANSWER_HISTORY(studentId),
+        token
+    );
+    return res.data.blockQuestionPresentationHistoryByStudentId ?? res.errors[0]
+}

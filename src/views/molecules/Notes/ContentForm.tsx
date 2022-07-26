@@ -13,6 +13,7 @@ import MenuItem                  from '@mui/material/MenuItem';
 import Button                    from 'views/molecules/MuiButton';
 import {ButtonColor, BasicColor} from 'views/Color';
 import commonDictionary          from 'constants/commonDictionary'
+// import DateTimePicker            from 'react-datetime-picker';
 import Paper                     from '@mui/material/Paper';
 import {useStyles} from './Style'
 const AddNewStudent = (props: any) => {
@@ -21,7 +22,7 @@ const AddNewStudent = (props: any) => {
 
     const { enqueueSnackbar } =  useSnackbar();
     const classes             =  useStyles();
-
+    
     const [title, setTitle] = useState('');
     const [text, setText]   = useState('');
     const [date, setDate]   = useState<Date>();
@@ -33,12 +34,12 @@ const AddNewStudent = (props: any) => {
 
     useEffect(() => {
     },[])
-
+    
     const handleSubmit = () => {
         if (!formValidation()) return;
         props.close();
     }
-
+    
     const formValidation = () => {
         const validateMsgTemp = {...validateMsg};
         let valiResult        = true;
@@ -93,6 +94,7 @@ const AddNewStudent = (props: any) => {
                                 handleFormChange('date', e === null ? commonDictionary[language]?.fieldIsRequired : '');
                                 // setDate(e.target.value);
                                 setDate(e);
+                                console.log(e)
                             }}
                         />
                         <div className='err-text'>{validateMsg.date}</div>

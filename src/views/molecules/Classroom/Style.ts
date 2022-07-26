@@ -28,10 +28,10 @@ export const ClassroomText = styled.div`
 
 export const StudentItem = styled.div`
   position      : relative;
-  // margin-left   : 30px;
-  // margin-right  : 30px;
-  // margin-top    : 40px;
-  // margin-bottom : 40px;
+  margin-left   : 30px;
+  margin-right  : 30px;
+  margin-top    : 40px;
+  margin-bottom : 40px;
   display       : flex;
   flex-direction: column;
   align-items   : center;

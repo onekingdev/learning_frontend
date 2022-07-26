@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
-import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
 import { dictionary } from './dictionary';
 import { Country } from 'country-state-city';
 import FormControl from '@mui/material/FormControl';
@@ -25,14 +25,13 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import FormBottomDescription from 'views/organisms/FormBottomDescription';
 import {
   useMutation,
-} from '@tanstack/react-query'
+} from 'react-query'
 import { doCreateSchool } from 'app/actions';
-import { LANGUAGES, SCHOOL_TYPES } from 'constants/common';
+import { SCHOOL_TYPES } from 'constants/common';
 import { USER_SET_DATA } from 'app/types';
-import { validateEmail } from 'views/utils';
 
 const SchoolSignup: FC = () => {
-  const isMobile = useSocratesMediaQuery('xs')
+  const isTablet = useSocratesMediaQuery('xs')
   const countries = Country.getAllCountries()
   const classes = useStyles();
 
@@ -41,8 +40,6 @@ const SchoolSignup: FC = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const [userName, setUserName] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
   const [schoolType, setSchoolType] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -52,10 +49,10 @@ const SchoolSignup: FC = () => {
   const [district, setDistrict] = useState('')
   const [loading, setLoading] = useState(false);
 
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
-
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
   const createSchool = useMutation(() => doCreateSchool(
-    country.name, district, firstName, lastName, email, schoolName, password, schoolType, userName, zip
+    country.name, district, email, schoolName, password, schoolType, userName, zip
   ), {
     onSuccess: async data => {
       if (data.message) {
@@ -66,12 +63,7 @@ const SchoolSignup: FC = () => {
           type: USER_SET_DATA,
           payload: { ...data.user, token: data.token, refreshToken: data.refreshToken },
         });
-        // history.push('/teacher/payment/School')
-        const userType = data.user?.profile?.role || 'USER'
-
-        if (userType === 'SUBSCRIBER')
-          history.push('/admin/schools')
-          // history.push('/admin/schools') // Need to be update
+        history.push('/teacher/payment/School')
       }
     },
     onError: async (error: any) => {
@@ -87,8 +79,6 @@ const SchoolSignup: FC = () => {
   const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
     email: null,
     schoolName: null,
-    lastName: null,
-    firstName: null,
     district: null,
     schoolType: null,
     zip: null,
@@ -102,6 +92,10 @@ const SchoolSignup: FC = () => {
   useEffect(() => {
     onPageInit();
   }, [])
+
+  function validateEmail(email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
 
   const onPageInit = async () => {
 
@@ -139,8 +133,8 @@ const SchoolSignup: FC = () => {
         display='flex'
         justifyContent={'center'}
       >
-        <FormContainer isMobile={isMobile}>
-          <Typography variant='h4'>{dictionary[language]?.schoolSignup}</Typography>
+        <FormContainer isMobile={isTablet}>
+          <Typography variant='h4'>{dictionary[language]?.schoolName}</Typography>
           <Grid container spacing={3} mt={2}>
             <Grid item xs={12}>
               <TextField
@@ -155,36 +149,6 @@ const SchoolSignup: FC = () => {
                 }}
                 error={!!validateMsg.schoolName}
                 helperText={validateMsg.schoolName}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={dictionary[language]?.firstName}
-                onChange={e => {
-                  setFirstName(e.target.value);
-                  handleFormChange(
-                    'firstName',
-                    e.target.value?.length === 0 ? dictionary[language]?.fieldIsRequired : ''
-                  );
-
-                }}
-                error={!!validateMsg.firstName}
-                helperText={validateMsg.firstName}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={dictionary[language]?.lastName}
-                onChange={e => {
-                  setLastName(e.target.value);
-                  handleFormChange(
-                    'lastName',
-                    e.target.value?.length === 0 ? dictionary[language]?.fieldIsRequired : ''
-                  );
-
-                }}
-                error={!!validateMsg.lastName}
-                helperText={validateMsg.lastName}
               />
             </Grid>
             <Grid item xs={12}>
@@ -294,12 +258,19 @@ const SchoolSignup: FC = () => {
                 label={dictionary[language]?.email}
                 onChange={e => {
                   setEmail(e.target.value);
+                  // handleFormChange(
+                  //   'email',
+                  //   e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? 'This is not email address' : ''
+                  // );
+                  /*------------- set username to email -S--------------------------*/
                   setUserName(e.target.value);
                   setValidateMsg({
                     ...validateMsg,
                     email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
                     userName: ''
                   });
+                  /*------------- set username to email -E--------------------------*/
+
                 }}
                 error={!!validateMsg.email}
                 helperText={validateMsg.email}

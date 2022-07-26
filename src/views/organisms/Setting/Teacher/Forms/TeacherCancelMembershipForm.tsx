@@ -6,23 +6,27 @@ import { LSLabel, LSButtonContainer } from 'views/molecules/Setting/utils/Style'
 import { LSFormControl } from 'views/molecules/Setting/utils/Style';
 // import { doCancelMembership }                         from 'app/actions/guardianActions'
 import { useSelector } from 'react-redux'
-// import { useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { CANCEL_REASONS } from 'constants/parent'
 import { dictionary } from './dictionary'
 import { Button, FormControlLabel, Radio } from '@mui/material';
-import { LANGUAGES } from 'constants/common';
+interface ICancelFormProps {
+  open: () => void
+  refresh: () => void
+}
 
 
-export const TeacherCancelMembershipForm: FC<{ open: () => void }> = ({ open }) => {
+export const TeacherCancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) => {
 
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
 
   const [value, setValue] = useState(CANCEL_REASONS[language][0].value);
   const [loading, setLoading] = useState(false)
-  // const guardian = useSelector((state: any) => state.guardian);
-  // const user = useSelector((state: any) => state.user);
-  // const { enqueueSnackbar } = useSnackbar();
+  const guardian = useSelector((state: any) => state.guardian);
+  const user = useSelector((state: any) => state.user);
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = () => {
     setLoading(true)

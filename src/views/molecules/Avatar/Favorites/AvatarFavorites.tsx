@@ -1,8 +1,11 @@
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { ScreenSize } from 'constants/screenSize';
-import { ImageAvatar } from '../DefaultAvatar';
-import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+
+import styled           from 'styled-components';
+import { ScreenSize }   from 'constants/screenSize';
+import { ImageAvatar }  from '../DefaultAvatar';
+import useMediaQuery    from '@mui/material/useMediaQuery'
+import { useSelector }  from 'react-redux';
+import { dictionary }   from 'views/pages/Student/Avatar/dictionary'
 
 interface FavoritProps {
   select: (id: number) => (void)
@@ -11,13 +14,16 @@ interface FavoritProps {
 
 export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
 
-  const isMobile = useSocratesMediaQuery('xs')
+  const isMobile      = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : 'en-us'
   const [current, setCurrent] = useState(0)
   const handleAvatarClick = (i: number) => {
     select(i)
     setCurrent(i)
   }
 
+  // const isMobile = window.innerWidth > SCREEN_MOBILE ? false : true
   const [placeholders, setPlaceHolders] = useState<Array<string>>([])
   useEffect(() => {
     // in case there are less than 4 favorite avatars for current user.
@@ -40,8 +46,8 @@ export const AvatarFavorites: FC<FavoritProps> = ({ select, favorites }) => {
         </Drawer>
       ))}
       {
-        placeholders.map((_, id) => (
-          <Drawer key={id} />
+        placeholders.map((_,id) => (
+        <Drawer key={id} />
         ))
       }
     </>

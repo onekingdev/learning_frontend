@@ -113,6 +113,8 @@ blockPresentation {
               order
             }
             answerOptions {
+              id
+              isCorrect
               ... on MultipleChoiceAnswerOptionSchema {
                 ${NEW_MC_ANSWER_OPTION}
               }

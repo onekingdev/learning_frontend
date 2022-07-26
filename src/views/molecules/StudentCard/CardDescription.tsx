@@ -20,7 +20,7 @@ export const CardDescription: FC<ICollectibleCardDescription> = ({
 
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(firebaseName, imgUrl);
-    setImg(link || '');
+    setImg(link ? link : '');
   };
 
   const reverseIds = [8, 11, 12]

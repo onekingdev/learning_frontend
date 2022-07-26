@@ -1,5 +1,6 @@
 import { AUDIENCES } from './peopleFragments'
 import { TOPIC }     from './questionFragments'
+import { GROUPS }    from './peopleFragments'
 export const UNIVERSAL_AREA_KNOWLEDGE = `
     id
     identifier
@@ -27,6 +28,9 @@ export const AREA_OF_KNOWLEDGE = `
     }
     topicSet{
         ${TOPIC}
+    }
+    groupSet{
+        ${GROUPS}
     }
     name
 `

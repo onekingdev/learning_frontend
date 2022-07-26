@@ -5,6 +5,7 @@ import { BasicColor }            from 'views/Color';
 import {Typography}              from 'views/atoms/Text/typography';
 import FormControl               from '@mui/material/FormControl';
 import {
+  DialogContent,
   DialogContentText,
   Radio,
   FormControlLabel,
@@ -16,7 +17,14 @@ import { ScreenSize } from 'constants/screenSize';
 /*--------------------------------------------------------------------------------------------*/
 /*                                         Dialog                                             */
 /*--------------------------------------------------------------------------------------------*/
-
+export const LSDialogContent = styled(DialogContent)`
+  &.MuiDialogContent-root {
+    padding: 0 40px 0 40px;
+    @media screen and (max-width: 540px) {
+      padding: 5px;
+    }
+  }
+`;
 export const LSDialogContentText = styled(DialogContentText)`
   &.MuiDialogContentText-root {
     padding: 20px;

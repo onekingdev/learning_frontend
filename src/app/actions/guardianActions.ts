@@ -12,11 +12,10 @@ import {
     FETCH_GUARDIAN_STUDENTS,
     FETCH_AVAILABLE_PLANS,
     FETCH_STUDENT_BY_ID,
-    FETCH_GUARDIAN_PLANS,
-    CONFIRM_PAYMENT_ORDER
+    FETCH_GUARDIAN_PLANS
 } from 'api/mutations/guardians';
 import {
-    CREATE_STUDENT_PLAN,
+    CREATE_STUDENT, CREATE_STUDENT_PLAN,
 } from 'api/mutations/students'
 import { fetchQuery, sendRawQuery } from 'api/queries/get';
 import * as TYPES from 'app/types'
@@ -67,7 +66,7 @@ export const doFetchAvailableBroughtPlans = async (guardianId: number, token: st
     return res.msg ? null : res.data.guardianAvailableBroughtPlan;
 }
 
-export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: string, token: string) => {
+export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: number, token: string) => {
     try {
         const res: any = await sendRawQuery(
             UPDATE_GUARDIAN_AVAILABLE_BOUGHT_PLAN(guardianId, orderDetailId),
@@ -76,6 +75,7 @@ export const doUpdateBroughtPlan = async (guardianId: number, orderDetailId: str
         return res.msg ? { status: false, message: res.msg } : res.data.updateGuardianPlan;
     }
     catch (e: any) {
+        console.log(e)
         return { status: false, message: e.message }
     }
 }
@@ -93,16 +93,20 @@ export const doConfirmUpdate = async (orderId: number, token: string) => {
     }
 }
 
-
-export const doFetchPlanTypes = async (token: string) => {
-    const res: any = await fetchQuery(
-        FETCH_PLANS,
-        token
-    );
-    return res.data.plans ?? res.errors[0]
+export const doFetchPlans = async (token: string) => {
+    try {
+        const res: any = await sendRawQuery(
+            FETCH_PLANS,
+            token
+        );
+        return res.msg ? { status: false } : res.data.plans;
+    }
+    catch {
+        return { status: false }
+    }
 }
 
-export const doCancelBroughtPlan = async (orderDetailId: string, reason: string, token: string) => {
+export const doCancelBroughtPlan = async (orderDetailId: number, reason: string, token: string) => {
     try {
         const res: any = await sendRawQuery(
             CANCEL_GUARDIAN_BOUGHT_PLAN(orderDetailId, reason),
@@ -115,44 +119,31 @@ export const doCancelBroughtPlan = async (orderDetailId: string, reason: string,
     }
 }
 
-
-// For React-query
-export const doAddStudentPlan = async (
-    guardianId: number, planId: number, period: string, token: string
-) => {
-    const res: any = await fetchQuery(
-        ADD_STUDENT_PLAN_PACKAGE(guardianId, planId, period),
-            token
-    );
-    return res.data?.addGuardianPlan ?? res.errors[0] // when django returns error message on fail
-}
-
-// Resend confirm mutation when add new plan succeed.
-export const confirmPaymentOrder = async (
-    orderId: number, token: string
-) => {
+export const doAddStudentPlan = async (guardianId: number, planId: number, token: string) => {
     try {
         const res: any = await sendRawQuery(
-            CONFIRM_PAYMENT_ORDER(orderId),
+            ADD_STUDENT_PLAN_PACKAGE(guardianId, planId),
             token
         );
-        return res.msg ? { msg: res.msg } : res.data.confirmPaymentOrder;
+
+        return res.msg ? { msg: res.msg, status: false } : { ...res.data.cancelGuardianPlan, status: true };
     }
-    catch (e: any) {
-        return { msg: e.message }
+    catch (e) {
+        return { msg: e, status: false }
     }
 }
-
-export const doCancelMembership = async (
-    guardianId: number, reason: string, token: string
-  ) => {
-    const res: any = await fetchQuery(
-        CANCEL_MEMBERSHIP(guardianId, reason),
+export const doCancelMembership = async (guardianId: number, reason: string, token: string) => {
+    try {
+        const res: any = await sendRawQuery(
+            CANCEL_MEMBERSHIP(guardianId, reason),
             token
-    );
-    return res.data ?? res.errors[0]// when django returns error message on fail
-  }
-
+        );
+        return res.msg ? { status: false } : res.data.cancelMemberShip;
+    }
+    catch {
+        return { status: false }
+    }
+}
 
 export const doFetchGuardianStudents = async (guardianId: number, token: string) => {
     const res: any = await fetchQuery(
@@ -167,7 +158,7 @@ export const doFetchGuardianPlans = async (guardianId: number, token: string) =>
         FETCH_GUARDIAN_PLANS(guardianId),
         token
     );
-    return res.data?.guardianById?.orderSet ?? res.errors[0]
+    return res.data?.guardianStudentPlanByGuardianId ?? res.errors[0]
 }
 
 export const doFetchStudentById = async (studentId: number, token: string) => {

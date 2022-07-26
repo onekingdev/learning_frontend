@@ -8,7 +8,8 @@ import { dictionary }                 from './dictionary';
 
 export const Wardrobe: FC = () => {
 
-  const language = useSelector((state: any) => state.user.language);
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : 'en-us'
 
   return (
     <Wrapper>

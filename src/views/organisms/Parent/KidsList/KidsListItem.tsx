@@ -38,18 +38,17 @@ const KidsListItem: FC<KidsListProps> = ({
   grade,
   dateJoined,
   parentName,
-  token
 }) => {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch()
-  // const langs = [{
-  //   name: 'English',
-  //   value: 'en-us'
-  // }]
+  const langs = [{
+    name: 'English',
+    value: 'en-us'
+  }]
   const userName = user?.username;
-  // const kidLanguage = user?.language;
+  const kidLanguage = user?.language;
   const studentId = id;
   const grades = audience?.gradeSet;
   const [_grade, setGrade] = useState(grade?.grade);
@@ -63,7 +62,7 @@ const KidsListItem: FC<KidsListProps> = ({
     if (newPwd?.length < 1) return;
 
     setLoading(true);
-    const result: any = await changeStudentPassword(newPwd, studentId, token, dispatch)
+    const result: any = await changeStudentPassword(newPwd, studentId, user?.token, dispatch)
     setLoading(false);
 
     if (!result?.success) {
@@ -129,8 +128,8 @@ const KidsListItem: FC<KidsListProps> = ({
       />
 
       <GridContainer container className='align-center' columnSpacing={2}>
-        <GridItem item xs={6} md={1}
-          onClick={() => history.push('/report/parent/' + studentId)}
+        <GridItem item xs={6} md={0.7}
+          onClick={() => history.push('/parent/reporting/' + studentId)}
           sx={{
             marginRight: 2,
             '&:hover': {
@@ -147,13 +146,13 @@ const KidsListItem: FC<KidsListProps> = ({
             size={70}
           />
         </GridItem>
-        <GridItem item xs={6} md={2}>
+        <GridItem item xs={6} md={1.3}>
           <LicenseButton src={license} onClick={() => setOpenLicense(true)} />
         </GridItem>
         <GridItem item xs={12} md={2}>
           <TextField
             label={dictionary[language]?.userName}
-            value={user.username}
+            value={userName}
           />
         </GridItem>
         <GridItem item xs={12} md={2}>
@@ -169,7 +168,7 @@ const KidsListItem: FC<KidsListProps> = ({
               className={`${classes?.select} err-border`}
               onChange={async (e) => {
                 setGrade(e?.target?.value);
-                const res = await changeStudentGrade(e?.target?.value?.id, id, token, dispatch)
+                const res = await changeStudentGrade(e?.target?.value?.id, id, user?.token, dispatch)
                 if (!res?.success) {
                   enqueueSnackbar(res?.msg, { variant: 'error' });
                 }
@@ -184,7 +183,7 @@ const KidsListItem: FC<KidsListProps> = ({
             </Select>
           </FormControl>
         </GridItem>
-        {/* <GridItem item xs={12} md={2}>
+        <GridItem item xs={12} md={2}>
           <FormControl fullWidth>
             <InputLabel id='select-lang-label'>
               {dictionary[language]?.selectYourLanguage}
@@ -197,6 +196,7 @@ const KidsListItem: FC<KidsListProps> = ({
               className={`${classes.select} err-border`}
               onChange={async () => {
                 // setGrade(e.target.value);
+                // console.log(props)
                 // const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
                 // if(!res.success) {
                 //   enqueueSnackbar(res.msg, { variant: 'error' });
@@ -211,15 +211,15 @@ const KidsListItem: FC<KidsListProps> = ({
               ))}
             </Select>
           </FormControl>
-        </GridItem> */}
-        <GridItem item xs={12} md={2}>
+        </GridItem>
+        <GridItem item xs={12} md={1.5}>
           <Button
             bgColor={BasicColor.shadeBrown}
             onClick={() => setOpenChangePwd(true)}
             value={dictionary[language]?.changePassword}
           />
         </GridItem>
-        <GridItem item xs={12} md={2}>
+        <GridItem item xs={12} md={1.5}>
           <Button
             bgColor={BasicColor.red}
             onClick={() => history.push('/login')}

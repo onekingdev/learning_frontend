@@ -1,60 +1,46 @@
-import { FC, JSXElementConstructor, Key, ReactElement, useState } from 'react';
-import FormLabel from '@mui/material/FormLabel';
-import RadioGroup from '@mui/material/RadioGroup';
-import { BasicColor } from 'views/Color';
-import { LSLabel, LSButtonContainer } from './utils/Style';
+import { FC, JSXElementConstructor, Key, ReactElement, useState }                               from 'react';
+import FormLabel                                      from '@mui/material/FormLabel';
+import RadioGroup                                     from '@mui/material/RadioGroup';
+import { BasicColor }                                 from 'views/Color';
+import { LSLabel, LSButtonContainer }       from './utils/Style';
 import { LSFormControl, LSRadio, LSFormControlLabel } from './utils/Style';
-import { doCancelMembership } from 'app/actions/guardianActions'
-import { useSelector } from 'react-redux'
-import { useSnackbar } from 'notistack';
-import { LoadingSpinner } from 'views/atoms/Spinner';
-import { CANCEL_REASONS } from 'constants/parent'
-import { dictionary } from './dictionary'
+import { doCancelMembership }                         from 'app/actions/guardianActions'
+import { useSelector }                                from 'react-redux'
+import { useSnackbar }                                from 'notistack';
+import { LoadingSpinner }                             from 'views/atoms/Spinner';
+import { CANCEL_REASONS }                             from 'constants/parent'
+import { dictionary }                                 from './dictionary'
 import { Button } from '@mui/material';
-import { useMutation, } from '@tanstack/react-query'
-import { useQueryClient } from '@tanstack/react-query';
-
 interface ICancelFormProps {
   open: () => void
+  refresh: () => void
 }
 
 
-export const CancelMembershipForm: FC<ICancelFormProps> = ({ open }) => {
+export const CancelMembershipForm: FC<ICancelFormProps> = ({ open, refresh }) => {
 
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : 'en-us'
 
   const [value, setValue] = useState(CANCEL_REASONS[language][0].value);
   const [loading, setLoading] = useState(false)
   const guardian = useSelector((state: any) => state.guardian);
   const user = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
-  const queryClient = useQueryClient()
-
-  const cancelMembership = useMutation((reason: string) => doCancelMembership(
-    guardian.id, reason, user.token
-  ), {
-    onSuccess: async data => {
-      if (data.message) {
-        enqueueSnackbar(data.message, { variant: 'error' })
-      } else {
-        queryClient.setQueryData(['fetch-orders-list', guardian.id, user.token], data.cancelMembership?.guardian?.orderSet || [])
-        enqueueSnackbar(dictionary[language]?.membershipCanceledSuccessfully, { variant: 'success' })
-        open()
-      }
-    },
-    onError: async (error: any) => {
-      enqueueSnackbar(error.message, { variant: 'error' })
-    },
-    onSettled: async () => {
-      setLoading(false)
-    }
-  })
 
   const onSubmit = () => {
     setLoading(true)
     const reason = CANCEL_REASONS[language].find((element: { value: any; }) => element.value === value)?.label
-    cancelMembership.mutate(reason)
+    // TODO: send cancel membership mutation
+    const res: any = doCancelMembership(guardian.id, reason ? reason : '', user.token)
+    if (res.status) {
+      enqueueSnackbar(dictionary[language]?.membershipCanceledSuccessfully, { variant: 'success' })
+    } else
+    enqueueSnackbar(dictionary[language]?.membershipCancelationsFailed, { variant: 'error' })
+
+    setLoading(false)
+    open()
+    refresh()
   }
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {

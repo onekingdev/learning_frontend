@@ -104,13 +104,15 @@ const images = [
 ]
 export const QuestionPopup: FC<{ type: string }> = ({ type }) => {
 
-  const language: string = useSelector((state: any) => state.user.language);
-  const [popup, setPopup] = useState<null | any>(null)
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
+  const [id, setId] = useState(0)
 
   useEffect(() => {
-    setPopup(images[Math.floor(Math.random() * 4)])
+    setId(Math.floor(Math.random() * 100 % 4))
   }, [])
-  return (popup && (
+
+  return (
     type === 'BATTERY' ?
       <Box
         margin={1}
@@ -130,7 +132,7 @@ export const QuestionPopup: FC<{ type: string }> = ({ type }) => {
       <Box
         margin={1}
         sx={{
-          background: popup?.background || '',
+          background: images[id].background,
           borderRadius: 5,
           padding: 2,
           display: 'flex',
@@ -149,22 +151,21 @@ export const QuestionPopup: FC<{ type: string }> = ({ type }) => {
                 textAlign: 'center',
                 marginBottom: 2,
                 textShadow: `
-                ${strokeWidth * Math.cos(0)}px 0 0 ${popup?.hex},
-                ${strokeWidth * Math.cos(Math.PI / 8)}px ${strokeWidth * Math.sin(Math.PI / 8)}px 0 ${popup?.hex},
-                ${strokeWidth * Math.cos(Math.PI / 4)}px ${strokeWidth * Math.sin(Math.PI / 4)}px 0 ${popup?.hex},
-                ${strokeWidth * Math.cos(Math.PI * 3 / 8)}px ${strokeWidth * Math.sin(Math.PI * 3 / 8)}px 0 ${popup?.hex}
+                ${strokeWidth * Math.cos(0)}px 0 0 ${images[id].hex},
+                ${strokeWidth * Math.cos(Math.PI / 8)}px ${strokeWidth * Math.sin(Math.PI / 8)}px 0 ${images[id].hex},
+                ${strokeWidth * Math.cos(Math.PI / 4)}px ${strokeWidth * Math.sin(Math.PI / 4)}px 0 ${images[id].hex},
+                ${strokeWidth * Math.cos(Math.PI * 3 / 8)}px ${strokeWidth * Math.sin(Math.PI * 3 / 8)}px 0 ${images[id].hex}
                 `
               }}
             >
-              {type === 'CORRECT' && popup.message?.correct[language as keyof Object]}
-              {type === 'WRONG' && popup.message?.wrong[language as keyof Object]}
+              {type === 'CORRECT' && images[id].message.correct[language as keyof Object]}
+              {type === 'WRONG' && images[id].message.wrong[language as keyof Object]}
             </Typography>
-            {type === 'CORRECT' && <img src={popup.image.correct} style={{ width: '60%' }} />}
-            {type === 'WRONG' && <img src={popup.image.wrong} style={{ width: '60%' }} />}
+            {type === 'CORRECT' && <img src={images[id].image.correct} style={{ width: '60%' }} />}
+            {type === 'WRONG' && <img src={images[id].image.wrong} style={{ width: '60%' }} />}
           </>
         }
       </Box>
-  )
   );
 };
 

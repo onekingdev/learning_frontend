@@ -1,41 +1,31 @@
-import { Grid, IconButton } from '@mui/material';
-import { FC } from 'react';
-import chair from 'views/assets/chair.svg'
+import { useSelector }                from 'react-redux'
+import { Grid }                 from '@mui/material';
+import { dictionary }           from './dictionary'
+import chair      from 'views/assets/chair.svg'
 import {
-  StudentItem,
-  StudentText
-} from './Style'
-import AddIcon from '@mui/icons-material/Add';
-
-interface StudentPanelProps {
-  students: Array<any>
-  onStudent: (param: any) => void
-  onNew: () => void
-}
-
-const StudentPanel: FC<StudentPanelProps> = ({ students, onStudent, onNew }) => {
-
+    Container,
+    StudentItem,
+    StudentMark,
+    StudentText }             from './Style'
+const StudentPanel = (props: any) => {
+  let language:string = useSelector((state: any) => state.user.language);
+  language            = language? language : 'en-us'
+  const data = props.data;
   return (
-    <Grid container spacing={10} justifyContent='center'>
-      {
-        students && students.map((item: any, index: number) =>
-          <Grid item key={item.id}>
-            <StudentItem key={index} onClick={() => onStudent(item)}>
-              <img src={chair} />
-              <StudentText>{item.firstName || 'No Name'}</StudentText>
-            </StudentItem>
-          </Grid>
-        )
-      }
-      <Grid item>
-        <StudentItem onClick={() => onNew()}>
-          <img src={chair} />
-          <IconButton aria-label="add-student" sx={{ position: 'absolute', bottom: 15 }}>
-            <AddIcon sx={{ fontSize: 30 }} />
-          </IconButton>
-        </StudentItem>
-      </Grid>
-    </Grid>
+    <Container>
+    {
+      data.map((item:any, index: number) =>
+      <StudentItem key={index} onClick={() => {props.onStudent(item)}}>
+          <StudentMark src={chair} />
+          <StudentText>{item.name}</StudentText>
+      </StudentItem>
+      )
+    }
+      <StudentItem onClick={() => {props.onNew()}}>
+          <StudentMark src={chair} />
+          <StudentText>{dictionary[language]?.addNew}</StudentText>
+      </StudentItem>
+    </Container>
   )
 }
 

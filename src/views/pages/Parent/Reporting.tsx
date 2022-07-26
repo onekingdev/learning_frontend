@@ -7,7 +7,7 @@ import { LoadingContext } from 'react-router-loading';
 import query from 'api/queries/get';
 import { useSelector } from 'react-redux';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { doFetchStudentById } from 'app/actions/guardianActions';
 
 interface StudentIdParam {
@@ -58,6 +58,7 @@ export const ParentReporting: FC = () => {
           return
         }
         const result: any = await res.json();
+        console.log(result);
         if (result.errors && !result.data) {
           alert(result.errors[0].message);
         } else {

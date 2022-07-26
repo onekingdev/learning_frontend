@@ -54,7 +54,7 @@ import {
   useQuery,
   useQueryClient,
   useMutation,
-} from '@tanstack/react-query'
+} from 'react-query'
 import { doCreateStudentPlan, doFetchGuardianAvailablePlans } from 'app/actions/guardianActions';
 
 const NewKids: FC = () => {
@@ -99,6 +99,10 @@ const NewKids: FC = () => {
       }
       else {
         queryClient.setQueryData(['fetch-plans-list', guardianId, token], data)
+        console.log({
+          data,
+          availablePlans
+        })
         data.length === 0 && history.push('/kids/list');
         enqueueSnackbar('Student Create Succeed!', { variant: 'success' })
         setCurrentPackage(null)
@@ -122,9 +126,11 @@ const NewKids: FC = () => {
     },
     onSettled: async () => {
       setLoading(false)
+      console.log({ availablePlans })
     }
   })
-  const language: string = useSelector((state: any) => state.user.language) || 'en-us';
+  let language: string = useSelector((state: any) => state.user.language);
+  language = language ? language : 'en-us'
 
   const subjectIconsById: any = {
     Gold: {

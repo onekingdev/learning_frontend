@@ -106,11 +106,11 @@ export const MultipleChoice: FC<ChoiceTextProps> = ({
             flexDirection={isTablet ? 'column-reverse' : 'row'}
           >
             <BlockAnswers isAnswered={isAnswered} />
-            <Grid container justifyContent={'center'} spacing={1} maxWidth={500}>
+            <Grid container justifyContent={'center'} spacing={1}>
               {shuffled && shuffled.map((option) => {
                 return (
                   isValidUrl(option.answerText) ? // check whether option is image
-                    <Grid item key={option.id} >
+                    <Grid item key={option.id} spacing={2}>
                       <MCOptionImage
                         answer={option}
                         onClick={handleAnswer}

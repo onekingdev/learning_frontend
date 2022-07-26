@@ -8,7 +8,7 @@ import {
 } from './Style';
 import { Box, Link, Typography } from '@mui/material';
 import KidsListItem from 'views/organisms/Parent/KidsList/KidsListItem';
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { doFetchGuardianStudents } from 'app/actions/guardianActions';
 import { isNull } from 'lodash';
 import { LoadingSpinner } from 'views/atoms/Spinner';
@@ -46,7 +46,7 @@ const KidsList: FC = () => {
                   }
                   {data.map((item: any, index: number) => (
                     item.student &&
-                    <KidsListItem {...item.student} index={index} key={item.id} language={language} parentName={user.username} dateJoined={user.dateJoined} token={user.token}/>
+                    <KidsListItem {...item.student} index={index} key={item.id} language={language} parentName={user.username} dateJoined={user.dateJoined} />
                   ))}
                 </>
         }

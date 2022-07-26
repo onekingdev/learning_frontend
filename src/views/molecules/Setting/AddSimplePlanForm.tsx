@@ -9,7 +9,7 @@ import { BasicColor }                                              from 'views/C
 import Button                                                      from 'views/molecules/MuiButton';
 import { LSButtonContainer, LSRadio, LSFormControlLabel, LSInputBase } from './utils/Style';
 import { dictionary }                                              from 'views/pages/Parent/Settings/dictionary';
-import { doAddStudentPlan, doFetchPlanTypes }                          from 'app/actions/guardianActions';
+import { doAddStudentPlan, doFetchPlans }                          from 'app/actions/guardianActions';
 import { useSelector }                                             from 'react-redux'
 import { useSnackbar }                                             from 'notistack';
 import { LoadingSpinner }                                          from 'views/atoms/Spinner';
@@ -85,7 +85,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
 
   const fetchPlans = async (mounted: boolean) => {
 
-    const res = await doFetchPlanTypes(user.token)
+    const res = await doFetchPlans(user.token)
     if (res !== null) {
       if (mounted)
         setPlans(res)
@@ -95,7 +95,7 @@ export const AddSimplePlanForm: FC<IAddPlanProps> = ({ open, refresh }) => {
   const onSubmit = async () => {
 
     setLoading(true)
-    const res: any = await doAddStudentPlan(guardian.id, plans.find(element => element.name === parentState).id, 'Monthly', user.token)
+    const res: any = await doAddStudentPlan(guardian.id, plans.find(element => element.name === parentState).id, user.token)
     if (res.status) {
       enqueueSnackbar('Student Package added successfully', { variant: 'success' })
       refresh()

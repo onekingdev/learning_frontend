@@ -1,4 +1,6 @@
 import styled         from 'styled-components';
+import {ScreenSize}   from '../../../../constants/screenSize';
+import { makeStyles } from '@mui/styles'
 
 export const TableContainer = styled.div`
     width: 100%;
@@ -49,7 +51,7 @@ export const Table2 = styled.table`
             border-top: none;
             border-right: 1px solid #13705F;
             border-bottom: 1px solid #13705F;
-
+            
             &:last-child {
                 border-right: none;
             }

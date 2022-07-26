@@ -1,9 +1,9 @@
 import { FC, useState, useEffect } from 'react';
-import styled from 'styled-components';
-import ProgressBar from '@ramonak/react-progress-bar';
-import { ScreenSize } from 'constants/screenSize';
-import { getDownUrlByFilename } from 'app/firebase';
-import { BasicColor } from 'views/Color';
+import styled                      from 'styled-components';
+import ProgressBar                 from '@ramonak/react-progress-bar';
+import { ScreenSize }              from 'constants/screenSize';
+import { getDownUrlByFilename }    from 'app/firebase';
+import { BasicColor }              from 'views/Color';
 
 interface ProgressBarProps {
   totalCount: number;
@@ -23,7 +23,7 @@ export const GemProgressBar: FC<ProgressBarProps> = ({
       'CategoriesBack',
       firebaseName ? 'back' + firebaseName + '.png' : ''
     );
-    setImgurl(link || '');
+    setImgurl(link?link:'');
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const GemProgressBar: FC<ProgressBarProps> = ({
   }, [firebaseName]);
   return (
     <ProgressBarContainer>
-      <div style={{ width: '80%' }}>
+      <div style={{width: '80%'}}>
         <StyledProgressLabel>
           {gainedCount}/{totalCount}
         </StyledProgressLabel>
@@ -57,7 +57,7 @@ export const GemProgressBar: FC<ProgressBarProps> = ({
         </div>
       </div>
       {imgurl ? (
-        <img src={imgurl} style={{ width: '60px', margin: '5px' }} />
+        <img src={imgurl} style={{width: '60px', margin: '5px'}} />
       ) : null}
     </ProgressBarContainer>
   );

@@ -40,7 +40,7 @@ export const Gemcard: FC<ICollectibleCard> = ({
 
   const fetchFirebaseUrls = async () => {
     const link = await getDownUrlByFilename(firebaseName, imgUrl);
-    setImg(link || '');
+    setImg(link ? link : '');
   };
 
   useEffect(() => {
@@ -64,6 +64,7 @@ export const Gemcard: FC<ICollectibleCard> = ({
       </StyledCard>
       <TypoGeneralText style={{ textAlign: 'center' }}>{amount} / 1</TypoGeneralText>
       <CardDialog
+        fullWidth='true'
         dialogContent={
           purchased ?
             <CardDescription

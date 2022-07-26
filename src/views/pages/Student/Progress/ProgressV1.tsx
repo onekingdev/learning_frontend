@@ -1,26 +1,26 @@
 import { useState, useEffect, useContext, FC, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
-import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
-import { Title } from 'views/atoms/Text';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useHistory }           from 'react-router-dom';
+import { StudentMenu }         from 'views/pages/Student/Menus/StudentMenu';
+import { Title }               from 'views/atoms/Text';
+import Box                     from '@mui/material/Box';
+import InputLabel              from '@mui/material/InputLabel';
+import MenuItem                from '@mui/material/MenuItem';
+import FormControl             from '@mui/material/FormControl';
+import Select                  from '@mui/material/Select';
 import TitleProgressBackground from 'views/assets/title-games-background.png';
-import ProgressMap from 'views/assets/student/process/map.svg';
-import ProgressMapMobile from 'views/assets/student/process/progress-map-mobile.svg';
-import MarkTableSubject from 'views/molecules/Table/MarkTableSubject';
-import { LoadingContext } from 'react-router-loading';
-import { ScreenSize } from 'constants/screenSize';
-import { MobileCom, PcCom } from '../TreasureTrack/TreasureTrack';
-import { Container } from './Style';
-import { dictionary } from './dictionary'
-import { useSelector } from 'react-redux';
+import ProgressMap             from 'views/assets/student/process/map.svg';
+import ProgressMapMobile       from 'views/assets/student/process/progress-map-mobile.svg';
+import MarkTableSubject        from 'views/molecules/Table/MarkTableSubject';
+import { LoadingContext }      from 'react-router-loading';
+import { ScreenSize }          from 'constants/screenSize';
+import { MobileCom, PcCom }    from '../TreasureTrack/TreasureTrack';
+import { Container }            from './Style';
+import { dictionary }           from './dictionary'
+import { useSelector }       from 'react-redux';
 import { TopicReport, AreasOfKnowledge } from 'api/fragments/topicFragments';
-import query from 'api/queries/get';
-import styled from 'styled-components';
-import background from 'views/assets/colored-shapes-bg.svg';
+import query                 from 'api/queries/get';
+import styled             from 'styled-components';
+import background     from 'views/assets/colored-shapes-bg.svg';
 import { subSubjects, subSubjectsMobile, paths, pathsMobile } from './positionInfo';
 import { smoothScroll } from 'views/utils';
 
@@ -39,29 +39,29 @@ const masteryColors = {
 }
 
 export const KidsProgress = () => {
-    const user = useSelector((state: any) => state.user);
-    const student = useSelector((state: any) => state.student);
-    let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'en-us'
+    const user              = useSelector((state: any) => state.user);
+    const student           = useSelector((state: any) => state.student);
+    let language:string     = useSelector((state: any) => state.user.language);
+    language                = language? language : 'en-us'
 
-    const [activeSubjectId, setActiveSubjectId] = useState<number>(-1);
+    const [activeSubjectId, setActiveSubjectId]   = useState<number>(-1);
     const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>('');
     const [areasOfKnowledge, setAreasOfKnowledge] = useState<any[]>([]);
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData]                         = useState<any[]>([]);
     useEffect(() => {
         (async () => {
             // Get All Subject
-            const res: any = await query('', AreasOfKnowledge(), user.token).catch(e => ({ success: false }));
-            if (res.success === false) {
+            const res:any = await query('', AreasOfKnowledge(), user.token).catch(e => ({success: false}));
+            if(res.success === false) {
                 return
             }
-            const result: any = await res.json();
-            if (result.errors && !result.data) {
+            const result:any = await res.json();
+            if(result.errors && !result.data) {
                 alert(result.errors[0].message);
             } else {
                 setAreasOfKnowledge(result.data.areasOfKnowledge)
                 let iii = 4;
-                for (let i = 0; i < result.data.areasOfKnowledge.length; i++) {
+                for (let i = 0; i < result.data.areasOfKnowledge.length; i ++) {
                     if (result.data.areasOfKnowledge[i].name === 'Sight Words') {
                         iii = i;
                         break;
@@ -79,20 +79,24 @@ export const KidsProgress = () => {
             (async () => {
                 loadingContext.start();
                 // Get Topic Report
-                const res: any = await query('', TopicReport(parseInt(student.id), activeSubjectId), user.token).catch(e => ({ success: false }));
-                if (res.success === false) {
-                    return
+                const res:any = await query('', TopicReport(parseInt(student.id), activeSubjectId), user.token).catch(e => ({success: false}));
+                if(res.success === false) {
+                return
                 }
-                const result: any = await res.json();
-                if (result.errors && !result.data) {
+                const result:any = await res.json();
+                if(result.errors && !result.data) {
                     alert(result.errors[0].message);
                 } else {
+                    // console.log(result.data.rootTopicsByAok)
                     setData(result.data.rootTopicsByAok);
                 }
-                loadingContext.done();
-            })();
+                // if (firstLoad) {
+                //     setFirstLoad(false);
+                    loadingContext.done();
+                // }
+          })();
         }
-    }, [activeSubjectId]);
+      }, [activeSubjectId]);
     const grades = [
         'Kindergarten',
         '1st Grade',
@@ -225,9 +229,9 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                {grades.map((grade, id) => (
+                                { grades.map((grade, id) => (
                                     <MenuItem key={id} value={grade}>{grade}</MenuItem>
-                                ))}
+                                )) }
                             </Select>
                         </FormControl>
                     </Box>
@@ -267,9 +271,9 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                {["Today's Answers", 'Recent Answers', 'Recent Incorrect Answers'].map((type, id) => (
+                                { ["Today's Answers", 'Recent Answers', 'Recent Incorrect Answers'].map((type, id) => (
                                     <MenuItem key={id} value={type}>{type}</MenuItem>
-                                ))}
+                                )) }
                             </Select>
                         </FormControl>
                     </Box>
@@ -290,9 +294,9 @@ export const KidsProgress = () => {
                                     }
                                 }}
                             >
-                                {areasOfKnowledge.map((subject, id) => (
+                                { areasOfKnowledge.map((subject, id) => (
                                     <MenuItem key={id} value={subject.id}>{subject.name}</MenuItem>
-                                ))}
+                                )) }
                             </Select>
                         </FormControl>
                     </Box>
@@ -309,76 +313,77 @@ export const KidsProgress = () => {
                         position: 'relative',
                         width: ScreenSize.widescreen
                     }}> */}
-                    <PcCom>
-                        <img style={{
-                            width: '100%'
-                        }} src={ProgressMap} alt='ProgressMap' />
-                    </PcCom>
-                    <MobileCom>
-                        <img style={{
-                            width: '100%'
-                        }} src={ProgressMapMobile} alt='ProgressMapMobile' />
-                    </MobileCom>
-                    {paths.map((path, id) => <PcCom key={id} style={{
-                        position: 'absolute',
-                        left: `${path.left}%`,
-                        top: `${path.top}%`,
-                    }}>
-                        {path.imgSrc({
-                            bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors['NP'],
-                            active: subSubjects1.length > id ? subSubjects1[id].active : false,
-                            mapWidth: mapWidth
-                        })}
-                    </PcCom>)}
-                    {pathsMobile.map((path, id) => <MobileCom key={id} style={{
-                        position: 'absolute',
-                        left: `${path.left}%`,
-                        top: `${path.top}%`,
-                    }}>
-                        {path.imgSrc({
-                            bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors['NP'],
-                            active: subSubjects1.length > id ? subSubjects1[id].active : false,
-                        })}
-                    </MobileCom>)}
-                    {subSubjects1.map((subSubject, id) => <PcCom onClick={() => {
-                        // history.push('/question/PATH/' + aokId)
-                        if (subSubject.aokId !== '') {
-                            smoothScroll('#aok-id-' + subSubject.aokId)
-                            setActiveSubjectIdTable(subSubject.aokId);
-                        }
-                        // history.push('/question/AI/' + data[id].id)
-                        // alert("Developing now, will be released soon 🎓")
-                    }} key={id} style={{
-                        position: 'absolute',
-                        transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
-                        // transform: `translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
-                        left: `${subSubject.left}%`,
-                        top: `${subSubject.top}%`,
-                        // fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
-                        fontWeight: subSubject.active ? '600' : '400',
-                        width: `${subSubject.width * mapWidth / 1366}px`,
-                        // overflow: "hidden",
-                        height: '50px',
-                        textAlign: 'center',
-                        display: '-webkit-box',
-                        WebkitBoxOrient: 'vertical',
-                        // "-webkit-box-orient": "vertical",
-                        WebkitLineClamp: 3,
-                        // "-webkit-line-clamp": 3,
-                        overflow: 'hidden',
-                    }}>{subSubject.text}</PcCom>)}
-                    {subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
-                        position: 'absolute',
-                        transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
-                        left: `${subSubject.left}%`,
-                        top: `${subSubject.top}%`,
-                        fontSize: '11px',
-                        fontWeight: subSubject.active ? '600' : '400',
-                        width: `${subSubject.width * mapWidth / 390}px`,
-                        zIndex: 20,
-                        height: '50px',
-                        textAlign: 'center'
-                    }}>{subSubject.text}</MobileCom>)}
+                        <PcCom>
+                            <img style={{
+                                width: '100%'
+                            }} src={ProgressMap} alt='ProgressMap' />
+                        </PcCom>
+                        <MobileCom>
+                            <img style={{
+                                width: '100%'
+                            }} src={ProgressMapMobile} alt='ProgressMapMobile' />
+                        </MobileCom>
+                        { paths.map((path, id) => <PcCom key={id} style={{
+                            position: 'absolute',
+                            left: `${path.left}%`,
+                            top: `${path.top}%`,
+                        }}>
+                            {path.imgSrc({
+                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors['NP'],
+                                active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                                mapWidth: mapWidth
+                            })}
+                        </PcCom>) }
+                        { pathsMobile.map((path, id) => <MobileCom key={id} style={{
+                            position: 'absolute',
+                            left: `${path.left}%`,
+                            top: `${path.top}%`,
+                        }}>
+                            {path.imgSrc({
+                                bgColor: subSubjects1.length > id ? subSubjects1[id].bgColor : masteryColors['NP'],
+                                active: subSubjects1.length > id ? subSubjects1[id].active : false,
+                            })}
+                        </MobileCom>) }
+                        { subSubjects1.map((subSubject, id) => <PcCom onClick={() => {
+                            // history.push('/question/PATH/' + aokId)
+                            if (subSubject.aokId !== '') {
+                                smoothScroll('#aok-id-' + subSubject.aokId)
+                                setActiveSubjectIdTable(subSubject.aokId);
+                            }
+                            // history.push('/question/AI/' + data[id].id)
+                            // console.log(data[id].id)
+                            // alert("Developing now, will be released soon 🎓")
+                        }} key={id} style={{
+                            position: 'absolute',
+                            transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
+                            // transform: `translate(${subSubject.tX * mapWidth / 1366}px, ${subSubject.tY * mapWidth / 1366}px)`,
+                            left: `${subSubject.left}%`,
+                            top: `${subSubject.top}%`,
+                            // fontSize: `${Math.max(14 * mapWidth / 1366, 8)}px`,
+                            fontWeight: subSubject.active ? '600' : '400',
+                            width: `${subSubject.width * mapWidth / 1366}px`,
+                            // overflow: "hidden",
+                            height: '50px',
+                            textAlign: 'center',
+                            display: '-webkit-box',
+                            WebkitBoxOrient: 'vertical',
+                            // "-webkit-box-orient": "vertical",
+                            WebkitLineClamp: 3,
+                            // "-webkit-line-clamp": 3,
+                            overflow: 'hidden',
+                        }}>{subSubject.text}</PcCom>)}
+                        { subSubjectsMobile1.map((subSubject, id) => <MobileCom key={id} style={{
+                            position: 'absolute',
+                            transform: `rotate(${subSubject.angle}deg) translate(${subSubject.tX * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px, ${subSubject.tY * mapWidth / parseInt(ScreenSize.phone.slice(0, -2))}px)`,
+                            left: `${subSubject.left}%`,
+                            top: `${subSubject.top}%`,
+                            fontSize: '11px',
+                            fontWeight: subSubject.active ? '600' : '400',
+                            width: `${subSubject.width * mapWidth / 390}px`,
+                            zIndex: 20,
+                            height: '50px',
+                            textAlign: 'center'
+                        }}>{subSubject.text}</MobileCom>)}
                     {/* </div> */}
                 </div>
             </Container>

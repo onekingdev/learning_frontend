@@ -5,6 +5,7 @@ import { useSelector, useDispatch }             from 'react-redux'
 
 import { GameCardPresentation } from 'views/molecules/GameCardPresentation';
 import { GameMenuButton }       from 'views/molecules/GameMenuButton';
+import { Spinner }              from 'views/atoms/Spinner';
 import { StudentMenu }          from 'views/pages/Student/Menus/StudentMenu';
 import { BasicColor }           from 'views/Color';
 import arcade                   from 'views/assets/arcade.svg';
@@ -37,9 +38,11 @@ export const GamesMenu: FC = () => {
   const {category}      = useParams<GameCategoryParams>();
   const user            = useSelector((state: any) => state.user)
   const student         = useSelector((state: any) => state.student)
-  const language   = useSelector((state: any) => state.user.language);
+  let language:string   = useSelector((state: any) => state.user.language);
+  language              = language? language : 'en-us'
   const dispatch        = useDispatch()
 
+  const [loading,   setLoading]   = useState(false)
   const [gameCards, setGameCards] = useState<GameCardParam[]>([])
 
   const gameMenuImgs = {
@@ -76,11 +79,12 @@ export const GamesMenu: FC = () => {
 
   const getGamesList = async () => {
 
-    const result = await getGameByCategory(dictionary[language][category], user.token)
+    const result = await getGameByCategory(dictionary[language][category], user.token, null)
     setGameCards(result.data)
 
   }
 
+  if(loading) return (<Spinner />)
   return (
     <>
       <Wrapper>
@@ -101,6 +105,7 @@ export const GamesMenu: FC = () => {
                 gamePath  = {item.path}
                 price     = {item.cost}
                 token     = {user.token}
+                setLoading= {setLoading}
                 key       = {i}
               />
             ))}

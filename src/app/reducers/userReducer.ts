@@ -1,6 +1,5 @@
-import { LANGUAGES } from 'constants/common';
 import * as TYPE from '../types';
-
+import { IUser } from '../entities/user';
 const INITIAL_STATE = {
   lastLogin: null,
   isSuperuser: null,
@@ -11,56 +10,55 @@ const INITIAL_STATE = {
   isStaff: null,
   isActive: null,
   dateJoined: null,
-  language: LANGUAGES[0].value,
+  language: null,
+  // language: 'en-us',     // test for language
   profile: {
     role: null,
   },
   token: null,
   rewardfulId: null,
-  sound: true,
+  sound: true
 };
-
-const userReducer = (
-  state = INITIAL_STATE,
-  action: {type: string; payload: any}
-) => {
+// const studentReducer = (state = INITIAL_STATE, action: {type: string, payload: any}) => {
+const userReducer = (state = INITIAL_STATE, action: {type: string, payload: IUser}) => {
   switch (action.type) {
     case TYPE.USER_SET_DATA:
       return {
         ...state,
         ...action.payload,
+        // language: 'en-us',     // test for language
+
       };
     case TYPE.USER_SET_TOKEN:
       return {
         ...state,
-        token: action.payload,
+        ...action.payload,
       };
     case TYPE.USER_SET_REWARDFUL_ID:
       return {
         ...state,
-        rewardfulId: action.payload,
-      };
+        rewardfulId: action.payload
+      }
     case TYPE.USER_SET_TOGGLE_SOUND:
       return {
         ...state,
-        sound: !state.sound,
+        sound: !state.sound
       };
     case TYPE.USER_SET_LANGUAGE:
       return {
         ...state,
-        language: action.payload,
+        language: action.payload
       };
     case TYPE.GUARDIAN_UPDATE_EMAIL_PWD:
       return {
         ...state,
-        email: action.payload.email,
+        email: action.payload.email
       };
     case TYPE.USER_RESET:
       return {
         ...INITIAL_STATE,
         language: state.language,
-        rewardfulId: state.rewardfulId,
-      };
+        rewardfulId: state.rewardfulId};
     default:
       return state;
   }

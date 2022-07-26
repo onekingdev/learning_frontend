@@ -1,8 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { BasicColor } from 'views/Color';
 import { Box, Typography } from '@mui/material';
-import MathJax from 'react-mathjax';
-import { extractMathjaxText } from 'views/utils';
 
 interface BlockQuestionInput {
   question: number;
@@ -57,15 +55,7 @@ export const MCOption: FC<MCOptionProps> = ({ answer, onClick }) => {
           : 'white'
       }
     >
-      {
-        answer?.answerText.charAt(0) === '@' ?
-          <MathJax.Provider>
-            <MathJax.Node
-              formula={extractMathjaxText(answer.answerText)}
-            />
-          </MathJax.Provider> :
-          <Typography variant='h5' style={{ margin: 0, textAlign: 'center' }}>{answer?.answerText || 'EMPTY'}</Typography>
-      }
+      <Typography variant='h5' style={{ margin: 0, textAlign: 'center' }}>{answer?.answerText || 'EMPTY'}</Typography>
     </Box>
   )
 }

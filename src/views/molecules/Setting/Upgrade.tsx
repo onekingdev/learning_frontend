@@ -11,12 +11,12 @@ import { LoadingContainer } from 'views/atoms/Loading'
 import ReactLoading from 'react-loading';
 import { BasicColor } from 'views/Color';
 import { Button } from '@mui/material';
-import { useQueryClient } from '@tanstack/react-query';
 
 interface IUpgradeProps {
   onConfirm: () => void
   onCancel: () => void
-  order: any
+  plan: any
+  refresh: () => void
 }
 
 const text = [
@@ -25,27 +25,25 @@ const text = [
   'Your credit card on file will be charged for this upgrade.',
 ]
 
-export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, order }) => {
+export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, plan, refresh }) => {
   const guardian = useSelector((state: any) => state.guardian);
   const user = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false)
-  const queryClient = useQueryClient()
 
   const onSubmitBtnClicked = async () => {
     setLoading(true)
-    const res: any = await doUpdateBroughtPlan(guardian.id, order.orderdetailSet[0]?.id, user.token)
+    const res: any = await doUpdateBroughtPlan(guardian.id, plan.id, user.token)
     if (res.status) {
       const res2: any = await doConfirmUpdate(res.order.id, user.token)
-      if (res2.status === "success") {
-        queryClient.setQueryData(['fetch-orders-list', guardian.id, user.token], res2.guardian?.orderSet || [])
-        enqueueSnackbar('Student Package updated successfully', { variant: 'success' })
-      }
-
+      console.log({ res2 })
+      if (res2.status)
+        enqueueSnackbar('Student Package updated successfully' + res.order.id, { variant: 'success' })
       else {
-        enqueueSnackbar('Confirming update failed', { variant: 'error' })
+        enqueueSnackbar('Confirming update failed' + res.order.id, { variant: 'error' })
       }
       onConfirm()
+      refresh()
     } else {
       onConfirm()
       enqueueSnackbar(res.message, { variant: 'error' })
@@ -67,7 +65,7 @@ export const Upgrade: FC<IUpgradeProps> = ({ onConfirm, order }) => {
           <LSText >{text[0]}</LSText>
           <LSLabel mt={0}>{'Annual Plan'}</LSLabel>
           <LSPaperMoney elevation={6}>
-            <LSLabel fontSize={24} color='darkblue' >{order.orderdetailSet[0]?.plan?.priceYear}{order.orderdetailSet[0]?.plan?.currency}<span style={{ fontSize: '14px', color: 'black' }}>{'/y'}</span></LSLabel>
+            <LSLabel fontSize={24} color='darkblue' >{plan?.plan.priceYear}{plan?.plan.currency}<span style={{ fontSize: '14px', color: 'black' }}>{'/year'}</span></LSLabel>
           </LSPaperMoney>
           <LSText mt={15} mb={20} textAlign='center'>{text[1]}</LSText>
           <LSText fontSize={15} margin={0} textAlign='center'>{text[2]}</LSText>

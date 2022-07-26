@@ -1,13 +1,38 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ICON_SIZE } from 'constants/icon';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
 import { BasicColor } from 'views/Color';
+import ListItem from '@mui/material/ListItem';
 import { Icon } from 'views/atoms/Icon/Icon';
+import progress_icon from 'views/assets/nav-icons/Progress.png';
+import question_icon from 'views/assets/nav-icons/question.png';
+import game_icon from 'views/assets/nav-icons/game.png';
+import bank_icon from 'views/assets/nav-icons/bank.png';
+import collectible_icon from 'views/assets/nav-icons/collectibles.png';
+import profile_icon from 'views/assets/nav-icons/profile.png';
+import tutorial_icon from 'views/assets/nav-icons/tutorial.png';
 import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
+import { TypoIcon } from 'views/atoms/Text';
+import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
+// import { VideoPlayer } from 'views/molecules/VideoPlayer';
+import { SCREEN_MOBILE, TUTORIAL_VDO_URL } from 'constants/common';
+import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
 import { ScreenSize } from 'constants/screenSize';
+import { doSetOldUser } from 'app/actions';
+import { SET_OLD_USER } from 'app/types';
 import { dictionary } from 'views/pages/Student/Menus/dictionary'
+import YouTube from 'react-youtube';
+import { TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH } from 'constants/common';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { MenuItem, MenuTitle, MenuMark, LineMenu } from './Style'
 import assignmentMark from 'views/assets/menu/assignmentMark.png';
@@ -16,25 +41,20 @@ import classroomMark from 'views/assets/menu/classroomMark.png';
 import helpMark from 'views/assets/menu/helpMark.svg';
 import manageSubMark from 'views/assets/menu/manageSubMark.svg';
 import reportMark from 'views/assets/menu/reportMark.svg';
-import { useStyles } from './Style'
-import commonDictionary from 'constants/commonDictionary'
-import {
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
-    Button,
-    Box,
-    Drawer,
-    ListItem,
-    useMediaQuery
-} from '@mui/material';
-export const TeacherSidebar: FC = () => {
+import { useStyles }             from './Style'
+export const Sidebar: FC = () => {
 
     const [state, setState] = useState(false)
-    const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+    const [open, setOpen] = useState(false)
+    const dispatch = useDispatch()
+    const isNew = useSelector((state: any) => state.student.isNew);
+    const token = useSelector((state: any) => state.user.token);
+    const [isMobile, setMobile] = useState(false)
     const history = useHistory();
-    const classes = useStyles();
-    const language: string = useSelector((state: any) => state.user.language) || 'en-us';
+    const classes =              useStyles();
+
+    let language: string = useSelector((state: any) => state.user.language);
+    language = language ? language : 'en-us'
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (
@@ -47,10 +67,34 @@ export const TeacherSidebar: FC = () => {
         setState(open);
     };
 
+    const openTutorial = () => {
+        setOpen(!open)
+    }
+
+    const setOldUser = async () => {
+        await doSetOldUser(token)
+        dispatch({ type: SET_OLD_USER })
+    }
+
     const handleMenu = (to: string) => {
         toggleDrawer(false);
         history.push(to)
     }
+
+    useEffect(() => {
+        let mounted = true
+        if (isNew) {
+            setOldUser()
+            if (mounted)
+                setOpen(true)
+        }
+        // check device is mobile, do mobile view
+        if (window.innerWidth > SCREEN_MOBILE) {
+            setMobile(false);
+        } else setMobile(true);
+
+        return () => { mounted = false }
+    }, [])
 
     return (
         <div>
@@ -66,7 +110,7 @@ export const TeacherSidebar: FC = () => {
                 onClose={toggleDrawer(false)}
             >
                 <Box
-                    sx={{ width: isMobile ? 250 : 350 }}
+                    sx={{ width: isMobile ? 150 : 250 }}
                     role='presentation'
                     // onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}
@@ -80,13 +124,11 @@ export const TeacherSidebar: FC = () => {
                             <MenuTitle>{dictionary[language]?.classrooms}</MenuTitle>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.classrooms}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/addstudent')}>{dictionary[language]?.addStudents}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/groups')}>{dictionary[language]?.manageGroups}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.studentDetail}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/notes')}>{dictionary[language]?.notesForKids}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/classrooms')}>{dictionary[language]?.classroomSettings}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/dashboard')}>{commonDictionary[language]?.class_dashboard}</MenuItem>
+                           <MenuItem onClick={() =>handleMenu('/teacher/addstudent')}>{dictionary[language]?.addStudents}</MenuItem>
+                           <MenuItem onClick={() =>handleMenu('/teacher/classroom')}>{dictionary[language]?.manageGroups}</MenuItem>
+                           <MenuItem onClick={() =>handleMenu('/teacher/classroom')}>{dictionary[language]?.studentDetail}</MenuItem>
+                           <MenuItem onClick={() =>handleMenu('/teacher/notes')}>{dictionary[language]?.notesForKids}</MenuItem>
+                           <MenuItem onClick={() =>handleMenu('/teacher/classroom')}>{dictionary[language]?.classroomSettings}</MenuItem>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion className={classes.menuContainer}>
@@ -98,8 +140,8 @@ export const TeacherSidebar: FC = () => {
                             <MenuTitle>{dictionary[language]?.assignments}</MenuTitle>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MenuItem onClick={() => handleMenu('/teacher/assignments')}>{dictionary[language]?.createAssignments}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/results')}>{dictionary[language]?.viewResults}</MenuItem>
+                            <MenuItem onClick={() =>handleMenu('/teacher/assignments')}>{dictionary[language]?.createAssignments}</MenuItem>
+                            <MenuItem onClick={() =>handleMenu('/teacher/viewResults')}>{dictionary[language]?.viewResults}</MenuItem>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion className={classes.menuContainer}>
@@ -111,8 +153,8 @@ export const TeacherSidebar: FC = () => {
                             <MenuTitle>{dictionary[language]?.certificates}</MenuTitle>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MenuItem onClick={() => handleMenu('/teacher/certificates')}>{dictionary[language]?.addCertificates}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/viewCertificates')}>{dictionary[language]?.viewCertificates}</MenuItem>
+                            <MenuItem onClick={() =>handleMenu('/teacher/addCertificates')}>{dictionary[language]?.addCertificates}</MenuItem>
+                            <MenuItem onClick={() =>handleMenu('/teacher/viewCertificates')}>{dictionary[language]?.viewCertificates}</MenuItem>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion className={classes.menuContainer}>
@@ -124,21 +166,17 @@ export const TeacherSidebar: FC = () => {
                             <MenuTitle>{dictionary[language]?.reports}</MenuTitle>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MenuItem onClick={() => handleMenu('/teacher/classroomProgress')}>{dictionary[language]?.classroomProgress}</MenuItem>
-                            <MenuItem onClick={() => handleMenu('/teacher/parentReport')}>{dictionary[language]?.parentReport}</MenuItem>
+                            <MenuItem onClick={() =>handleMenu('/teacher/classroomProgress')}>{dictionary[language]?.classroomProgress}</MenuItem>
+                            <MenuItem onClick={() =>handleMenu('/teacher/parentReport')}>{dictionary[language]?.parentReport}</MenuItem>
                         </AccordionDetails>
                     </Accordion>
                     <LineMenu>
                         <MenuMark src={manageSubMark} />
-                        <MenuTitle onClick={() => handleMenu('/teacher/settings')}>{dictionary[language]?.manageSubscription}</MenuTitle>
+                        <MenuTitle onClick={() =>handleMenu('/teacher/settings')}>{dictionary[language]?.manageSubscription}</MenuTitle>
                     </LineMenu>
                     <LineMenu>
                         <MenuMark src={helpMark} />
-                        <MenuTitle onClick={() => handleMenu('/teacher/help')}>{dictionary[language]?.help}</MenuTitle>
-                    </LineMenu>
-                    <LineMenu>
-                        <MenuMark src={helpMark} />
-                        <MenuTitle onClick={() => handleMenu('/')}>{dictionary[language]?.logout}</MenuTitle>
+                        <MenuTitle onClick={() =>handleMenu('/teacher/help')}>{dictionary[language]?.help}</MenuTitle>
                     </LineMenu>
                 </Box>
             </Drawer>
@@ -146,7 +184,7 @@ export const TeacherSidebar: FC = () => {
     );
 }
 
-export default TeacherSidebar
+export default Sidebar
 
 
 export const IconContainer = styled.div`
@@ -164,4 +202,12 @@ export const StyledListItem = styled(ListItem)`
 &.MuiListItem-root {
     justify-content: flex-end;
 }
+`
+const ExplainText = styled.p`
+    font-size: 22px;
+    text-align: center;
+    color: ${BasicColor.blue};
+    @media screen and (max-width: ${ScreenSize.phone}) {
+        font-size: 16px;
+    }
 `

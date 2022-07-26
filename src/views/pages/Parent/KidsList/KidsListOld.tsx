@@ -271,6 +271,7 @@ const KidsList: FC = () => {
                 className={`${classes.select} err-border`}
                 onChange={async () => {
                   // setGrade(e.target.value);
+                  // console.log(props)
                   // const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
                   // if(!res.success) {
                   //   enqueueSnackbar(res.msg, { variant: 'error' });

@@ -20,17 +20,20 @@ import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
 import { TypoIcon } from 'views/atoms/Text';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import { LANGUAGES, TUTORIAL_VDO_URL } from 'constants/common';
+import { SCREEN_MOBILE, TUTORIAL_VDO_URL } from 'constants/common';
 import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
+import { ScreenSize } from 'constants/screenSize';
 import { doSetOldUser } from 'app/actions';
 import { SET_OLD_USER } from 'app/types';
 import { dictionary } from 'views/pages/Student/Menus/dictionary'
 import YouTube from 'react-youtube';
-import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+import { TUTORIAL_VDO_DG_HEIGHT, TUTORIAL_VDO_DG_WIDTH } from 'constants/common';
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 export const Sidebar: FC = () => {
 
-    const isMobile = useSocratesMediaQuery('xs')
+    const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+
     const [state, setState] = useState(false)
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
@@ -38,7 +41,8 @@ export const Sidebar: FC = () => {
     const token = useSelector((state: any) => state.user.token);
     const history = useHistory();
 
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    let language: string = useSelector((state: any) => state.user.language);
+    language = language ? language : 'en-us'
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (
@@ -76,15 +80,17 @@ export const Sidebar: FC = () => {
             <CardDialog
                 isOpen={open}
                 open={openTutorial}
-                title={VIDEO_TUTORIAL_EXPLAIN[language]}
-                fullWidth={true}
+                // title = {VIDEO_TUTORIAL_EXPLAIN}
+                fullWidth='true'
                 dialogContent={
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
-                        <Box
-                            sx={{ backgroundColor: 'black' }}>
+                        <ExplainText>{VIDEO_TUTORIAL_EXPLAIN[language]}</ExplainText>
+                        <Box sx={{ width: TUTORIAL_VDO_DG_WIDTH, height: TUTORIAL_VDO_DG_HEIGHT, backgroundColor: 'black' }}>
                             <YouTube
                                 videoId={TUTORIAL_VDO_URL}
                                 opts={{
+                                    width: `${TUTORIAL_VDO_DG_WIDTH}`,
+                                    height: `${TUTORIAL_VDO_DG_HEIGHT}`,
                                     playerVars: {
                                         autoplay: 0,
                                         controls: 0
@@ -92,6 +98,7 @@ export const Sidebar: FC = () => {
                                 }}
                             />
                         </Box>
+                        {/* <VideoPlayer src={TUTORIAL_VDO_URL} /> */}
                     </Box>
                 }
             />
@@ -213,4 +220,12 @@ export const StyledListItem = styled(ListItem)`
 &.MuiListItem-root {
     justify-content: flex-end;
 }
+`
+const ExplainText = styled.p`
+    font-size: 22px;
+    text-align: center;
+    color: ${BasicColor.blue};
+    @media screen and (max-width: ${ScreenSize.phone}) {
+        font-size: 16px;
+    }
 `

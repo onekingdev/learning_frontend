@@ -90,7 +90,7 @@ export const sendRawQuery = async (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...( token && {'Authorization': `Bearer ${token}`})
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify({
       query: `
@@ -132,8 +132,6 @@ export const fetchRawData = async (
   return result
 };
 
-
-// For React-query
 export const fetchQuery = async (
   query: string,
   token?: string
@@ -151,5 +149,4 @@ export const fetchQuery = async (
     })
   }).then((response: any) => response.json())
 };
-
 export default get_async;

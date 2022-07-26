@@ -29,6 +29,9 @@ import {
 import {
     useStripe,
     useElements,
+    // CardNumberElement,
+    // CardExpiryElement,
+    // CardCvcElement,
 } from '@stripe/react-stripe-js';
 import {
     useStyles,
@@ -41,11 +44,10 @@ import {
 } from './Style'
 import {
     Country,
+    // State
 } from 'country-state-city';
 import commonDictionary from 'constants/commonDictionary'
 import { dictionary } from './dictionary'
-import { LANGUAGES } from 'constants/common';
-import { validatePhoneNumber } from 'views/utils';
 interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): void;
     handleUpdate(): void;
@@ -57,11 +59,12 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     const elements = useElements();
     const user = useSelector((state: Store) => state.user)
     const guardian = useSelector((state: any) => state.guardian)
-    const school = useSelector((state: any) => state.school)
-    const teacher = useSelector((state: any) => state.teacher)
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    let language: string = useSelector((state: any) => state.user.language);
+    language = language ? language : 'en-us'
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
+    // console.log(countries)
+    // const [paymentMethod, setPaymentMethod] = useState('card')
     const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(
         isSpecialCode ? {
             firstName: '',
@@ -90,8 +93,8 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
 
     const [data, setData] = useState({
         paymentMethod: 'card',
-        firstName: user.firstName,
-        lastName: user.lastName,
+        firstName: guardian.firstName,
+        lastName: guardian.lastName,
         cardNumber: '',
         cardExpMonth: '',
         cardExpYear: '',
@@ -125,7 +128,10 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     }
     const [plans, setPlans] = useState<any>()
 
-
+    const validatePhoneNumber = (pNumber: string) => {
+        const regex = new RegExp(/^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/);
+        return regex.test(pNumber);
+    }
 
     const formValidation = () => {
         const validateMsgTemp = { ...validateRst }
@@ -176,7 +182,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
         //         name: data.firstName + ' ' + data.lastName,
         //         phone: data.phone
         //     },
-        // }).catch();
+        // }).catch(console.log);
         // if(result.error) return {success: false, result: result.error.message};
         // /*------------------------ send request to backend to create payment -S-----------------------------*/
         let orderDetailInputs: any = [];
@@ -201,14 +207,13 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 'add 2',
                 'city',
                 'state',
-                'posntry',
-                'photcode',
-                'coune',
-                guardian?.id || null,
-                teacher?.id || null,
-                school?.id || null,
+                'postcode',
+                'country',
+                'phone',
+                guardian.id,
                 orderDetailInputs,
                 user.token,
+                dispatch
             )
             result.data.email = user.email;
         }
@@ -227,13 +232,12 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 data.zip,
                 data.country.isoCode,
                 data.phone,
-                guardian?.id,
-                teacher?.id,
-                school?.id,
+                guardian.id,
                 orderDetailInputs,
                 'Card',
                 'https://',
                 user.token,
+                dispatch
             )
 
             // // /*------------------------ send request to backend to create payment -E-----------------------------*/
@@ -242,9 +246,10 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 const result_confirm = await confirmPaymentOrder(
                     result.data.order.id,
                     user.token,
+                    dispatch
                 )
                 result.success = result_confirm.success;
-                result.data = result_confirm.data;
+                result.data.order = result_confirm.data.order;
             }
         }
 
@@ -494,6 +499,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                                 handleFormChange('country', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '');
                                 setData({ ...data, country: e.target.value })
                                 // setGrade(e.target.value);
+                                // console.log(props)
                                 // const res = await changeStudentGrade(e.target.value.id, props.id, user.token, dispatch)
                                 // if(!res.success) {
                                 //     enqueueSnackbar(res.msg, { variant: 'error' });

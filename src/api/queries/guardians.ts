@@ -1,5 +1,5 @@
-import { GUARDIAN }                   from '../fragments/guardianFragments';
-import { _USER, USER_PROFILE }                           from '../fragments/userFragments'
+import { GUARDIAN, GUARDIAN_STUDENT }                   from '../fragments/guardianFragments';
+import { USER, USER_PROFILE }                           from '../fragments/userFragments'
 export const GUARDIANS_QUERY = `
     {
         ${GUARDIAN}
@@ -8,7 +8,7 @@ export const GUARDIANS_QUERY = `
 
 export const WHOAMI_QUERY = `
     {
-        ${_USER}
+        ${USER}
         profile {
             ${USER_PROFILE}
         }

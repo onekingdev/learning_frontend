@@ -1,18 +1,14 @@
-import {GUARDIAN} from '../fragments/guardianFragments';
-import {_USER, USER_PROFILE} from '../fragments/userFragments';
-import {token} from '../fragments/tokenFragments';
+import { GUARDIAN, }          from '../fragments/guardianFragments';
+import { USER, USER_PROFILE } from '../fragments/userFragments'
+import { token }              from '../fragments/tokenFragments'
 
-export const CREATE_GUARDIAN = (
-  email: string,
-  username: string,
-  password: string
-) => `
+export const CREATE_GUARDIAN = (email: string, username: string, password: string) => `
 	createGuardian(email: "${email}", username: "${username}", password: "${password}") {
         guardian {
             ${GUARDIAN}
         }
         user {
-            ${_USER}
+            ${USER}
         }
         profile {
             ${USER_PROFILE}
@@ -23,9 +19,7 @@ export const CREATE_GUARDIAN = (
 `;
 
 export const TOKEN_AUTH = (username: string, password: string) => `
-mutation {
     tokenAuth(username: "${username}", password: "${password}") {
         ${token}
     }
-}
-`;
+`
