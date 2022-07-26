@@ -11,7 +11,6 @@ export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
     const [selected, setSeleted] = useState<Array<number>>([])
     // const [all, setAll] = useState(false)
 
-    // console.log({ selected })
     const handleStudentSelect = (id: number) => {
 
         const tempSeleted = [...selected]

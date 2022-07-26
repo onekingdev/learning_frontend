@@ -85,7 +85,6 @@ const EditStudent: FC<EditStudentProps> = ({
                 enqueueSnackbar(data.message, { variant: 'error' })
             }
             else {
-                console.log({ data })
                 await queryClient.refetchQueries(['fetch-classroom-students', _classId])
                 enqueueSnackbar('Update student Succeed', { variant: 'success' })
             }
@@ -110,15 +109,6 @@ const EditStudent: FC<EditStudentProps> = ({
 
     const handleSubmit = () => {
         setLoading(true)
-        console.log({
-            _id,
-            grade,
-            selected,
-            name,
-            lastName,
-            username,
-            classroom
-        })
         updateStudent.mutate()
         // close();
     }

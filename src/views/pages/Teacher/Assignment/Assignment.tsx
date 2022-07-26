@@ -71,10 +71,6 @@ const Assignment: FC = () => {
 
   const handleAssign = () => {
 
-    console.log({
-      selected,
-      ds: any2String(selected)
-    })
     setLoading(true)
     assignTask.mutate()
   }
