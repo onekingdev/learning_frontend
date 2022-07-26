@@ -8,10 +8,11 @@ interface IStudents {
 
 export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
 
-    const [selected, setSeleted] = useState<Array<number | string>>([])
+    const [selected, setSeleted] = useState<Array<number>>([])
     const [all, setAll] = useState(false)
 
-    const handleStudentSelect = (id: number | string) => {
+    console.log({ selected })
+    const handleStudentSelect = (id: number) => {
 
         const tempSeleted = [...selected]
         if (tempSeleted.includes(id)) {
@@ -56,7 +57,7 @@ export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
                             marginLeft: 5
                         }}
                         control={
-                            <Checkbox checked={selected.includes(student.id) || all} onChange={() => handleStudentSelect(student.id)} />
+                            <Checkbox checked={selected.includes(+student.id) || all} onChange={() => handleStudentSelect(+student.id)} />
                         }
                     />
                 ))

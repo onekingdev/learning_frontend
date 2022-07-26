@@ -9,7 +9,8 @@ const INITIAL_STATE = {
   orderSet: <any>[],
   classrooms: Array<any>(0),
   currentClass: null,
-  currentClassId: null
+  currentClassId: null,
+  assignmentTopicId: ''
 };
 const TEACHERReducer = (
   state = INITIAL_STATE,
@@ -41,6 +42,11 @@ const TEACHERReducer = (
       return {
         ...state,
         currentClassId: action.payload,
+      };
+    case TYPE.TEACHER_SET_ASSIGNMENT_TOPIC_ID:
+      return {
+        ...state,
+        assignmentTopicId: action.payload,
       };
     case TYPE.TEACHER_ADD_CLASSROOM:
       return {

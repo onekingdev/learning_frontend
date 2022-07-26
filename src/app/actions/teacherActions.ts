@@ -7,8 +7,8 @@ import {
   CREATE_TEACHER,
   TEACHER_CLASSROOMS,
 } from 'api/mutations/teacher';
-import {fetchQuery, sendRawQuery} from 'api/queries/get';
-import {CLASSROOM_SCHEMA, STUDENT_SCHEMA} from 'api/queries/users';
+import { fetchQuery, sendRawQuery } from 'api/queries/get';
+import { CLASSROOM_SCHEMA, STUDENT_SCHEMA } from 'api/queries/users';
 
 export const doCreateSchool = async (
   country: string,
@@ -101,10 +101,10 @@ export const doAddClassroomToTeacher = async (
       token
     );
     return res.msg
-      ? {status: false, message: res.msg}
-      : {status: true, data: res.data.createClassroom.classroom};
+      ? { status: false, message: res.msg }
+      : { status: true, data: res.data.createClassroom.classroom };
   } catch (e: any) {
-    return {status: false, message: e.message};
+    return { status: false, message: e.message };
   }
 };
 
@@ -127,10 +127,10 @@ export const doAddStudentsToClassroom = async (
       token
     );
     return res.msg
-      ? {status: false, message: res.msg}
-      : {status: true, data: res.data.createStudentsToClassroom.classroom};
+      ? { status: false, message: res.msg }
+      : { status: true, data: res.data.createStudentsToClassroom.classroom };
   } catch (e: any) {
-    return {status: false, message: e.message};
+    return { status: false, message: e.message };
   }
 };
 
@@ -164,10 +164,10 @@ export const doAddOneStudentToClassroom = async (
       token
     );
     return res.msg
-      ? {status: false, message: res.msg}
-      :  res.data.createStudentToClassroom.classroom.studentSet;
+      ? { status: false, message: res.msg }
+      : res.data.createStudentToClassroom.classroom.studentSet;
   } catch (e: any) {
-    return {status: false, message: e.message};
+    return { status: false, message: e.message };
   }
 };
 
@@ -248,6 +248,35 @@ export const doFetchClassroomStudents = async (
 ) => {
   const res: any = await fetchQuery(CLASSROMM_STUDENTS(classroomId), token);
   return res.data?.studentsByClassroomId || res.errors[0]; // when django returns error message on fail
+};
+
+export const doAssignTasksToStudents = async (
+  assignmentName: string,
+  numberofQuestions: number,
+  studentIds: Array<number>,
+  startDate: string,
+  endDate: string,
+  topicId: string | number,
+  token: string
+) => {
+  const res: any = await fetchQuery(
+    `
+    mutation {
+      assignStudentsHomework(
+        name:"${assignmentName}",
+        numberOfQuestions: ${numberofQuestions},
+        startAt: "${startDate}",
+        endAt: "${endDate}",
+        studentIds: [${studentIds}],
+        topicId: ${topicId}
+      ){
+        user{
+          id
+        }
+      }
+    }
+    `, token);
+  return res.data?.assignStudentsHomework || res.errors[0]; // when django returns error message on fail
 };
 
 export const doFetchClassroomGroups = async (
