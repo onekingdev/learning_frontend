@@ -24,6 +24,7 @@ import {
 } from './Style';
 import { LANGUAGES } from 'constants/common';
 import { GUARDIAN_SET_DATA, TEACHER_SET_DATA } from 'app/types';
+import { Typography } from '@mui/material';
 
 type PaymentMethodProps = {
     plans: {
@@ -47,10 +48,8 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     const trialExpiraton = new Date()
     const paymentFormRef = useRef<PaymentFormFunc>(null)
     const { enqueueSnackbar } = useSnackbar();
-    const couponCode = useSelector((state: any) => state.guardian.couponCode)
+    const {couponCode, language, profile} = useSelector((state: any) => state.user)
     trialExpiraton.setDate(trialExpiraton.getDate() + (couponCode?.trialDay || 0))
-    const user = useSelector((state: any) => state.user)
-    const language = user.language || LANGUAGES[0].value;
     const [subtotal, setSubtotal] = useState(0);
     const [agreeLicense, setAgreeLicense] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -85,7 +84,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             //     payload: plans,
             // });
             // TODO: check user type, and when parent redirect to kids/new,
-            const userType = user.profile.role
+            const userType = profile.role
             const { teacher, guardian } = result.data
             switch (userType) {
                 case 'TEACHER':
@@ -132,11 +131,11 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
         // const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0) * plans.Sole.currentPrice;
         // const price_school = plans.School.currentPrice / 100 * offRate * ((plans.School.childCount - 1 > 0) ? (plans.School.childCount - 1) : 0) + (plans.School.childCount > 0 ? 1 : 0) * plans.School.currentPrice;
         // const price_classroom = plans.Classroom.currentPrice / 100 * offRate * ((plans.Classroom.childCount - 1 > 0) ? (plans.Classroom.childCount - 1) : 0) + (plans.Classroom.childCount > 0 ? 1 : 0) * plans.Classroom.currentPrice;
-        const price_gold = plans.Gold.currentPrice / 100 * offRate * (plans.Gold.childCount || 0);
-        const price_combo = plans.Combo.currentPrice / 100 * offRate * (plans.Combo.childCount || 0)
-        const price_sole = plans.Sole.currentPrice / 100 * offRate * (plans.Sole.childCount || 0)
-        const price_school = plans.School.currentPrice / 100 * offRate * (plans.School.childCount || 0)
-        const price_classroom = plans.Classroom.currentPrice / 100 * offRate * (plans.Classroom.childCount || 0)
+        const price_gold = plans.Gold?.currentPrice / 100 * offRate * (plans.Gold?.childCount || 0);
+        const price_combo = plans.Combo?.currentPrice / 100 * offRate * (plans.Combo?.childCount || 0)
+        const price_sole = plans.Sole?.currentPrice / 100 * offRate * (plans.Sole?.childCount || 0)
+        const price_school = plans.School?.currentPrice / 100 * offRate * (plans.School?.childCount || 0)
+        const price_classroom = plans.Classroom?.currentPrice / 100 * offRate * (plans.Classroom?.childCount || 0)
         setSubtotal(price_gold + price_combo + price_sole + price_school + price_classroom)
     }, [plans])
     return (
@@ -152,35 +151,38 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                 {!isSpecialCode &&
                     <OrderBody>
                         {
-                            plans.Gold.childCount > 0 &&
+                            offRate < 100 && <Typography color='white' variant='h6'>You have {100 - offRate}% discount!</Typography>
+                        }
+                        {
+                            plans.Gold?.childCount > 0 &&
                             <OrderItem>
                                 <OrderItemTitle>{plans.Gold.childCount} Gold {dictionary[language]?.package} </OrderItemTitle>
                                 <OrderItemContent>${plans.Gold.currentPrice} / {plans.Gold.period}</OrderItemContent>
                             </OrderItem>
                         }
                         {
-                            plans.Combo.childCount > 0 &&
+                            plans.Combo?.childCount > 0 &&
                             <OrderItem>
                                 <OrderItemTitle>{plans.Combo.childCount} Combo {dictionary[language]?.package} </OrderItemTitle>
                                 <OrderItemContent>${plans.Combo.currentPrice} / {plans.Combo.period}</OrderItemContent>
                             </OrderItem>
                         }
                         {
-                            plans.Sole.childCount > 0 &&
+                            plans.Sole?.childCount > 0 &&
                             <OrderItem>
                                 <OrderItemTitle>{plans.Sole.childCount} Solo {dictionary[language]?.package} </OrderItemTitle>
                                 <OrderItemContent>${plans.Sole.currentPrice} / {plans.Sole.period}</OrderItemContent>
                             </OrderItem>
                         }
                         {
-                            plans.School.childCount > 0 &&
+                            plans.School?.childCount > 0 &&
                             <OrderItem>
                                 <OrderItemTitle>{plans.School.childCount} School {dictionary[language]?.package} </OrderItemTitle>
                                 <OrderItemContent>${plans.School.currentPrice} / {plans.School.period}</OrderItemContent>
                             </OrderItem>
                         }
                         {
-                            plans.Classroom.childCount > 0 &&
+                            plans.Classroom?.childCount > 0 &&
                             <OrderItem>
                                 <OrderItemTitle>{plans.Classroom.childCount} Classroom {dictionary[language]?.package} </OrderItemTitle>
                                 <OrderItemContent>${plans.Classroom.currentPrice} / {plans.Classroom.period}</OrderItemContent>

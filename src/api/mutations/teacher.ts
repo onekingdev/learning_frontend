@@ -1,3 +1,4 @@
+import { COUPON_COODE } from 'api/fragments/paymentFragments';
 import { GROUP } from 'api/fragments/peopleFragments';
 import {
   _CLASSROOM_SCHEMA,
@@ -60,7 +61,7 @@ export const CREATE_TEACHER = (
 mutation {
 	createTeacher (
         country: "${country}",
-        ${couponCode ? 'couponCode: ' + couponCode + ',' : ''}
+        ${couponCode ? 'couponCode: "' + couponCode + '",' : ''}
         email: "${email}",
         firstName: "${firstName}",
         lastName: "${lastName}",
@@ -77,6 +78,9 @@ mutation {
         token
         teacher {
             ${_TEACHERSCHEMA}
+            couponCode {
+              ${COUPON_COODE}
+            }
         }
 	}
 }

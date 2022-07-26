@@ -147,16 +147,10 @@ export const confirmPaymentOrder = async (
         return { success: false, msg: result.errors[0].message };
     }
 
-    const { guardian, status } = result.data.confirmPaymentOrder;
+    const { status } = result.data.confirmPaymentOrder;
 
     if (status !== 'success')
         return { success: false, msg: 'Cofirmation Failed' }
-
-    // This is not used in new kids page
-    // dispatch({
-    //     type: TYPES.GUARDIAN_SET_DATA,
-    //     payload: guardian,
-    // });
 
     if (status === 'success')
         return { success: true, msg: 'Success', data: result.data.confirmPaymentOrder }

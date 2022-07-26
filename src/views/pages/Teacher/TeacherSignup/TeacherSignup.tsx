@@ -63,7 +63,7 @@ const TeacherSignup: FC = () => {
         enqueueSnackbar('Teacher Create Succeed!', { variant: 'success' })
         dispatch({
           type: USER_SET_DATA,
-          payload: { ...data.user, token: data.token, refreshToken: data.refreshToken },
+          payload: { ...data.user, token: data.token, refreshToken: data.refreshToken, couponCode: data.teacher.couponCode },
         });
         dispatch({
           type: TEACHER_SET_DATA,

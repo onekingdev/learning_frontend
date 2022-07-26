@@ -13,6 +13,10 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import { IconButton } from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 export interface Column {
   id: string;
@@ -109,7 +113,7 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden', padding: 1 }} elevation={5}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label='sticky table'>
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -133,14 +137,14 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
           </TableHead>
           <TableBody>
             {editingIndex === newDataState &&
-              <TableRow hover role="checkbox" tabIndex={-1}>
+              <TableRow hover role='checkbox' tabIndex={-1}>
                 {columns.map((column) => {
                   const value = editingData[column.id];
 
                   if (column?.editComponent === 'Select')
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        <FormControl variant="standard" sx={{ m: 1, minWidth: 70 }}>
+                        <FormControl variant='standard' sx={{ m: 1, minWidth: 70 }}>
                           <Select
                             value={value || ''}
                             onChange={(e) => handleChange(newDataState, column.id, e.target.value)}
@@ -156,8 +160,8 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
                   else
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        <TextField id="standard-basic"
-                          variant="standard"
+                        <TextField id='standard-basic'
+                          variant='standard'
                           value={column.format ? column.format(value) : value}
                           onChange={(e) => handleChange(newDataState, column.id, e.target.value)}
                         />
@@ -165,8 +169,10 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
                     );
                 })}
                 <TableCell align={'right'} style={{ width: 145 }} >
-                  <Button variant="text" onClick={() => handleSave(newDataState)}>Save</Button>
-                  <Button variant="text" color="error" disabled={true}>Delete</Button>
+                  {/* <Button variant='text' onClick={() => handleSave(newDataState)}>Save</Button> */}
+                  <IconButton color='success' onClick={() => handleSave(newDataState)}><SaveIcon /></IconButton>
+                  {/* <Button variant='text' color='error' disabled={true}>Delete</Button> */}
+                  <IconButton color='error' disabled><DeleteIcon /></IconButton>
                 </TableCell>
               </TableRow>
             }
@@ -175,7 +181,7 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
               .map((row: any, index: number) => {
                 if (index === editingIndex - (page * rowsPerPage))
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
                       {columns.map((column) => {
                         const value = editingData[column.id] || '';
                         // if (column.id === 'grade') {
@@ -184,7 +190,7 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
                         if (column?.editComponent === 'Select')
                           return (
                             <TableCell key={column.id} align={column.align}>
-                              <FormControl variant="standard" sx={{ m: 1, minWidth: 70 }}>
+                              <FormControl variant='standard' sx={{ m: 1, minWidth: 70 }}>
                                 <Select
                                   value={value || ''}
                                   onChange={(e) => handleChange(page * rowsPerPage + index, column.id, e.target.value)}
@@ -200,8 +206,8 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
                         else
                           return (
                             <TableCell key={column.id} align={column.align} style={{ width: 145 }} >
-                              <TextField id="standard-basic"
-                                variant="standard"
+                              <TextField id='standard-basic'
+                                variant='standard'
                                 value={column.format ? column.format(value) : value}
                                 onChange={(e) => handleChange(page * rowsPerPage + index, column.id, e.target.value)}
                               />
@@ -209,20 +215,23 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
                           );
                       })}
                       <TableCell align={'right'} style={{ width: 145 }} >
-                        <Button variant="text" onClick={() => handleSave(page * rowsPerPage + index)}>Save</Button>
-                        <Button variant="text" color="error" disabled={editingIndex > notEditingState}>Delete</Button>
+                        <IconButton color='success' onClick={() => handleSave(page * rowsPerPage + index)}><SaveIcon /></IconButton>
+                        {/* <Button variant='text' onClick={() => handleSave(page * rowsPerPage + index)}>Save</Button> */}
+                        {/* <Button variant='text' color='error' disabled={editingIndex > notEditingState}>Delete</Button> */}
+                        <IconButton color='error' disabled={editingIndex > notEditingState}><DeleteIcon /></IconButton>
+
                       </TableCell>
                     </TableRow>
                   )
                 else
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
                       {columns.map((column) => {
                         const value = (column.id in row) ? row[column.id] : '';
                         return (
                           column.id === 'grade' ?
                             <TableCell key={column.id} align={column.align}>
-                              <FormControl variant="standard" sx={{ m: 1, minWidth: 70 }}>
+                              <FormControl variant='standard' sx={{ m: 1, minWidth: 70 }}>
                                 <Select
                                   value={value || ''}
                                   disabled
@@ -242,8 +251,10 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
                         );
                       })}
                       <TableCell align={'right'} style={{ width: 145 }} >
-                        <Button variant="text" onClick={() => handleEdit(page * rowsPerPage + index)} disabled={editingIndex > notEditingState}>Edit</Button>
-                        <Button variant="text" color="error" disabled={editingIndex > notEditingState} onClick={() => handleDelete(page * rowsPerPage + index)}>Delete</Button>
+                        {/* <Button variant='text' onClick={() => handleEdit(page * rowsPerPage + index)} disabled={editingIndex > notEditingState}>Edit</Button> */}
+                        <IconButton onClick={() => handleEdit(page * rowsPerPage + index)} disabled={editingIndex > notEditingState}><EditIcon /></IconButton>
+                        {/* <Button variant='text' color='error' disabled={editingIndex > notEditingState} onClick={() => handleDelete(page * rowsPerPage + index)}>Delete</Button> */}
+                        <IconButton color='error' disabled={editingIndex > notEditingState} onClick={() => handleDelete(page * rowsPerPage + index)}><DeleteIcon /></IconButton>
                       </TableCell>
                     </TableRow>
                   );
@@ -253,7 +264,7 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
-        component="div"
+        component='div'
         count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}

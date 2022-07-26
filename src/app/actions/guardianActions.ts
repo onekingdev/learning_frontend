@@ -19,7 +19,6 @@ import {
     CREATE_STUDENT_PLAN,
 } from 'api/mutations/students'
 import { fetchQuery, sendRawQuery } from 'api/queries/get';
-import * as TYPES from 'app/types'
 
 export const createGuardian = async (email: string, firstName: string, lastName: string, userName: string, password: string, couponCode: string, dispatch: any, language: string) => {
     const res: any = await mutationFetch(
@@ -36,18 +35,9 @@ export const createGuardian = async (email: string, firstName: string, lastName:
         return { success: false, msg: result.errors[0].message };
     }
 
-    const { guardian, user, token, refreshToken } = result.data.createGuardian;
 
-    dispatch({
-        type: TYPES.GUARDIAN_SET_DATA,
-        payload: guardian,
-    });
-    dispatch({
-        type: TYPES.USER_SET_DATA,
-        payload: { ...user, token: token, refreshToken: refreshToken },
-    });
 
-    return { success: true, msg: 'Success', data: result.data }
+    return { success: true, data: result.data.createGuardian }
 }
 
 export const doUpdateGuardianEmailPassword = async (email: string, username: string, password: string, token: string) => {

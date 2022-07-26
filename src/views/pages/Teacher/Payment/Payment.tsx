@@ -20,35 +20,40 @@ interface ProductTypeParam {
 const Payment: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const { enqueueSnackbar } = useSnackbar();
-  const {token, language} = useSelector((state: any) => state.user);
-  const guardian = useSelector((state: any) => state.guardian);
+  const { token, language, couponCode } = useSelector((state: any) => state.user);
   const { productType } = useParams<ProductTypeParam>();
+  const discount = +(couponCode?.percentage) || 0
 
   const [plans, setPlans] = useState<any>({
     Gold: {
       currentPrice: 0,
       priceMonth: 0,
-      priceYear: 0
+      priceYear: 0,
+      childCount: 0,
     },
     Combo: {
       currentPrice: 0,
       priceMonth: 0,
-      priceYear: 0
+      priceYear: 0,
+      childCount: 0,
     },
     Sole: {
       currentPrice: 0,
       priceMonth: 0,
-      priceYear: 0
+      priceYear: 0,
+      childCount: 0,
     },
     School: {
       currentPrice: 0,
       priceMonth: 0,
-      priceYear: 0
+      priceYear: 0,
+      childCount: 0,
     },
     Classroom: {
       currentPrice: 0,
       priceMonth: 0,
-      priceYear: 0
+      priceYear: 0,
+      childCount: 0,
     },
   })
   const [sponsorEmail, setSponsorEmail] = useState('')
@@ -95,7 +100,7 @@ const Payment: FC = () => {
 
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
-    if (parseInt(guardian?.couponCode?.percentage) === 100) setIsSpecialCode(true)
+    if (parseInt(couponCode?.percentage) === 100) setIsSpecialCode(true)
     // else setIsSpecialCode(true) //For always enable special code for first release
 
     setOffRate(50);
@@ -120,7 +125,7 @@ const Payment: FC = () => {
           {showPaymentMethod && (
             <PaymentMethod
               plans={plans}
-              offRate={100}
+              offRate={100 - discount}
               isSpecialCode={isSpecialCode}
               sponsorEmail={sponsorEmail}
             />

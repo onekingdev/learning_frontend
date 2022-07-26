@@ -5,7 +5,6 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 import { IUser } from './entities/user';
-import { Gender } from './entities/gender';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 export type Store = {

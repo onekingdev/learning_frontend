@@ -38,7 +38,7 @@ export const Reporting: FC = () => {
       (async () => {
         setLoading(true)
         // Get Topic Report
-        const res: any = await query('', TopicReport(parseInt(studentId), activeSubjectId), user.token).catch(e => ({ success: false }));
+        const res: any = await query('', TopicReport(parseInt(studentId), activeSubjectId), user.token).catch(() => ({ success: false }));
         if (res.success === false) {
           return
         }

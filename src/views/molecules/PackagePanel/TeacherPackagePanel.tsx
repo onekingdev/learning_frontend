@@ -62,8 +62,25 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
               <b>{cDictionary[language]?.choose_your_plan}</b>
               <br />
               <div className="flex flex-row" style={{ flexWrap: 'unset' }}>
-                <Button bgColor={BasicColor.blue} zIndex={plan === 'month' ? 2 : 0} fontSize={16} height={40} value={dictionary[language]?.monthly} onClick={() => { setPlan('month') }} />
-                <Button fontSize={16} height={40} zIndex={1} variant="outlined" color="black" borderColor="black" value={dictionary[language]?.yearly} margin="0 0 0 -50px" onClick={() => { setPlan('year') }} />
+                <Button
+                  bgColor={plan === 'month' ? BasicColor.blue : 'white'}
+                  color={plan === 'month' ? 'white' : BasicColor.blue}
+                  zIndex={plan === 'month' ? 2 : 0}
+                  fontSize={16}
+                  height={40}
+                  value={dictionary[language]?.monthly}
+                  onClick={() => { setPlan('month') }} />
+                <Button
+                  bgColor={plan === 'year' ? BasicColor.blue : 'white'}
+                  fontSize={16}
+                  height={40}
+                  zIndex={1}
+                  // variant="outlined"
+                  color={plan === 'year' ? 'white' : BasicColor.blue}
+                  // borderColor="black"
+                  value={dictionary[language]?.yearly}
+                  margin="0 0 0 -50px"
+                  onClick={() => { setPlan('year') }} />
               </div>
             </div>
           }
@@ -71,7 +88,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
             <b>{
               type === 'School' ?
                 cDictionary[language]?.number_of_schools :
-                dictionary[language]?.numberOfChildren}</b>
+                cDictionary[language]?.number_of_classrooms}</b>
             <br />
             <div className="flex flex-row">
               <ButtonGroup variant="outlined" aria-label="outlined button group">

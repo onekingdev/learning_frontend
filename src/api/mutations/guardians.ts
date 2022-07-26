@@ -25,9 +25,9 @@ export const CREATE_GUARDIAN = (
         }
         user {
             ${_USER}
-        }
-        profile {
-            ${USER_PROFILE}
+            profile {
+                ${USER_PROFILE}
+            }
         }
         token
         refreshToken

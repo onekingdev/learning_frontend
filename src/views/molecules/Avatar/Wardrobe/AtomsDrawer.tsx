@@ -6,7 +6,6 @@ import drawer_head        from 'views/assets/drawers/drawer-head.png';
 import drawer_clothes     from 'views/assets/drawers/drawer_clothes.png';
 import drawer_pants       from 'views/assets/drawers/drawer_pants.png';
 import floor              from 'views/assets/avatars/floor.png';
-import { useSelector }        from 'react-redux';
 
 interface AtomDrawerProps {
   onAtomClick?: (atomId: number) => (void)

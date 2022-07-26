@@ -21,6 +21,7 @@ import ContactBox from 'views/organisms/ContactBox';
 import FormBottomDescription from 'views/organisms/FormBottomDescription';
 import { ThemeProvider } from '@mui/material';
 import { themeTeacher } from 'views/Theme';
+import * as TYPES from 'app/types'
 
 const CreateParent: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -76,6 +77,18 @@ const CreateParent: FC = () => {
       enqueueSnackbar(result.msg, { variant: 'error' });
       return;
     }
+    const { guardian, user, token, refreshToken } = result.data;
+
+    dispatch({
+        type: TYPES.GUARDIAN_SET_DATA,
+        payload: guardian,
+    });
+
+    dispatch({
+        type: TYPES.USER_SET_DATA,
+        payload: { ...user, token: token, refreshToken: refreshToken, couponCode: guardian.couponCode },
+    });
+
     history.push('/parent/payment');
 
   };
@@ -101,31 +114,7 @@ const CreateParent: FC = () => {
           <FormContainer>
             <Title>{dictionary[language]?.parentSignup}</Title>
             <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <TextField
-                  label={dictionary[language]?.email}
-                  type='email'
-                  focused
-                  onChange={e => {
-                    setEmail(e.target.value);
-                    // handleFormChange(
-                    //   'email',
-                    //   e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? 'This is not email address' : ''
-                    // );
-                    /*------------- set username to email -S--------------------------*/
-                    setUserName(e.target.value);
-                    setValidateMsg({
-                      ...validateMsg,
-                      email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
-                      userName: ''
-                    });
-                    /*------------- set username to email -E--------------------------*/
 
-                  }}
-                  error={!!validateMsg.email}
-                  helperText={validateMsg.email}
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   label={dictionary[language]?.parentFirstName}
@@ -156,6 +145,31 @@ const CreateParent: FC = () => {
                   type='text'
                   error={!!validateMsg.lastName}
                   helperText={validateMsg.lastName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label={dictionary[language]?.email}
+                  type='email'
+                  focused
+                  onChange={e => {
+                    setEmail(e.target.value);
+                    // handleFormChange(
+                    //   'email',
+                    //   e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? 'This is not email address' : ''
+                    // );
+                    /*------------- set username to email -S--------------------------*/
+                    setUserName(e.target.value);
+                    setValidateMsg({
+                      ...validateMsg,
+                      email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
+                      userName: ''
+                    });
+                    /*------------- set username to email -E--------------------------*/
+
+                  }}
+                  error={!!validateMsg.email}
+                  helperText={validateMsg.email}
                 />
               </Grid>
               {/* <Grid item xs={12}>

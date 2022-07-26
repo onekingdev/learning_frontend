@@ -38,12 +38,12 @@ const AddStudents: FC = () => {
 
   const columns = [
     // { id: 'index', label: 'No', maxWidth: 10 },
-    { id: 'name', label: dictionary[language]?.name, minWidth: 50 },
-    { id: 'lastName', label: dictionary[language]?.lastName, minWidth: 50 },
+    { id: 'name', label: dictionary[language]?.name, minWidth: 30 },
+    { id: 'lastName', label: dictionary[language]?.lastName, minWidth: 30 },
     {
       id: 'username',
       label: dictionary[language]?.username,
-      minWidth: 50,
+      minWidth: 30,
       required: true,
     },
     {
@@ -171,7 +171,7 @@ const AddStudents: FC = () => {
             margin: 5
           }}
         >
-          {commonDictionary[language]?.done}
+          {commonDictionary[language]?.create_classroom}
         </LoadingButton>
       </>
     </TeacherPgContainer>

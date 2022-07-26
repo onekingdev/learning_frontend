@@ -14,10 +14,12 @@ const INITIAL_STATE = {
   language: LANGUAGES[0].value,
   profile: {
     role: null,
+    id: null,
   },
   token: null,
   rewardfulId: null,
   sound: true,
+  couponCode: {}
 };
 
 const userReducer = (

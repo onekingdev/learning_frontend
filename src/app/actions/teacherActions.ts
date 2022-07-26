@@ -191,7 +191,7 @@ export const doAddExistingStudentToClassroom = async (
     }
   }
   `, token);
-  return res.data?.classroom.studentSet || res.errors[0]; // when django returns error message on fail
+  return res.data?.importStudentToClassroom?.classroom?.studentSet || res.errors[0]; // when django returns error message on fail
 };
 
 export const doCreateGroup = async (
