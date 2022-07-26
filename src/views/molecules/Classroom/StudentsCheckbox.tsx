@@ -9,9 +9,9 @@ interface IStudents {
 export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
 
     const [selected, setSeleted] = useState<Array<number>>([])
-    const [all, setAll] = useState(false)
+    // const [all, setAll] = useState(false)
 
-    console.log({ selected })
+    // console.log({ selected })
     const handleStudentSelect = (id: number) => {
 
         const tempSeleted = [...selected]
@@ -20,9 +20,9 @@ export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
             setSeleted(filtered)
         } else setSeleted([...tempSeleted, id])
     }
-    const handleSelectAll = () => {
-        setAll(!all)
-    }
+    // const handleSelectAll = () => {
+    //     setAll(!all)
+    // }
 
     useEffect(() => {
         onChange(selected)
@@ -57,7 +57,7 @@ export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
                             marginLeft: 5
                         }}
                         control={
-                            <Checkbox checked={selected.includes(+student.id) || all} onChange={() => handleStudentSelect(+student.id)} />
+                            <Checkbox checked={selected.includes(+student.id)} onChange={() => handleStudentSelect(+student.id)} />
                         }
                     />
                 ))

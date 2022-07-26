@@ -22,7 +22,7 @@ const Students: FC = () => {
   const [isExistingNewAccountDlgOpen, setIsExistingNewAccountDlgOpen] = useState(false);
   const [isAddNewAccountDlgOpen, setIsAddNewAccountDlgOpen] = useState(false);
   const [isOpenEditStudent, setIsOpenEditStudent] = useState(false);
-  const [studentForEdit, setStudentForEdit] = useState({});
+  const [studentForEdit, setStudentForEdit] = useState<any>();
 
   const { data: students, isLoading, error } = useQuery(
     ['fetch-classroom-students', currentClassId],
@@ -46,12 +46,20 @@ const Students: FC = () => {
 
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom} current='students' >
-      <>
+      <>{
+        studentForEdit &&
         <EditStudentForm
-          data={studentForEdit}
-          isOpen={isOpenEditStudent}
-          close={() => setIsOpenEditStudent(false)}
+          _id={studentForEdit.id}
+          _gradeId={studentForEdit.grade.grade.id}
+          _firstName={studentForEdit.firstName}
+          _lastName={studentForEdit.lastName}
+          _username={studentForEdit.user.username}
+          _classId={currentClassId}
+          _isOpen={isOpenEditStudent}
+          _groupIds={studentForEdit.group}
+          _close={() => setIsOpenEditStudent(false)}
         />
+      }
         <ChooseNewStudentTypeDlg
           isOpen={isOpenNewType}
           close={() => setIsOpenNewType(false)}

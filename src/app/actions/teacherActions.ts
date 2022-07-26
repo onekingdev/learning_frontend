@@ -279,6 +279,39 @@ export const doAssignTasksToStudents = async (
   return res.data?.assignStudentsHomework || res.errors[0]; // when django returns error message on fail
 };
 
+export const doUpdateStudent = async (
+  token: string,
+  studentId: string | number,
+  classroomId?: string | number,
+  gradeId?:string | number,
+  groupIds?: Array<number | string>,
+  lastName?:string,
+  name?:string,
+  password?:string,
+  username?:string,
+) => {
+  const res: any = await fetchQuery(
+    `
+    mutation {
+      updateStudent(
+        studentId: ${studentId},
+        ${classroomId ? 'classroomId: "' + classroomId + '",' : ''}
+        ${gradeId ? 'gradeId: "' + gradeId + '",' : ''}
+        ${groupIds ? 'groupIds: [' + groupIds + '],' : ''}
+        ${lastName ? 'lastName: "' + lastName + '",' : ''}
+        ${name ? 'name: "' + name + '",' : ''}
+        ${password ? 'password: "' + password + '",' : ''}
+        ${username ? 'username: "' + username + '",' : ''}
+      ){
+        student{
+          ${STUDENT_SCHEMA}
+        }
+      }
+    }
+    `, token);
+  return res.data?.updateStudent?.student || res.errors[0]; // when django returns error message on fail
+};
+
 export const doFetchClassroomGroups = async (
   classroomId: number | string,
   token: string

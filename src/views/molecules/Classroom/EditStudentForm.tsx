@@ -1,83 +1,126 @@
 import { useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
-import { Grid, FormControl, Select, Avatar } from '@mui/material';
+import { useState, useEffect, FC } from 'react'
+import { Grid, FormControl, Select, Avatar, TextField, FormControlLabel, Checkbox, Typography, Box } from '@mui/material';
 import { dictionary } from './dictionary'
 import {
     Container,
-    useStyles,
 } from './Style'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import InputLabel from '@mui/material/InputLabel';
-import TextField from 'views/molecules/MuiTextField';
-import { getAudiencesWithGrades } from 'app/actions/audienceActions'
 import { useSnackbar } from 'notistack';
 import MenuItem from '@mui/material/MenuItem';
 import Button from 'views/molecules/MuiButton';
 import { BasicColor } from 'views/Color';
 import commonDictionary from 'constants/commonDictionary'
-import { LANGUAGES } from 'constants/common';
 import avatar from 'views/assets/avatars/girl-6.svg'
 import { useMediaQuery } from '@mui/material';
 import { ScreenSize } from 'constants/screenSize';
 import { useHistory } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { doFetchClassroomGroups, doFetchTeacherClassrooms, doUpdateStudent } from 'app/actions';
+import LoadingButton from '@mui/lab/LoadingButton';
 
-const EditStudent = (props: any) => {
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+interface EditStudentProps {
+    _id: string | number    // student Id
+    _firstName: string
+    _lastName: string
+    _username: string
+    _gradeId: string
+    _classId: string
+    _groupIds: Array<any>
+    _close: () => void
+    _isOpen: boolean
+}
+
+const EditStudent: FC<EditStudentProps> = ({
+    _firstName,
+    _id,
+    _lastName,
+    _username,
+    _isOpen,
+    _close,
+    _groupIds,
+    _gradeId,
+    _classId
+}) => {
+    const { language, token } = useSelector((state: any) => state.user);
     const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
     const history = useHistory();
-    const [confirm, setConfirm] = useState(true)
-
+    const gradeSet = useSelector((state: any) => state.teacher?.currentClass?.audience?.gradeSet) || []
+    const teacherId = useSelector((state: any) => state.teacher.id)
+    const queryClient = useQueryClient()
+    const { data: classrooms } = useQuery(
+        ['teacher-classrooms', teacherId],
+        () => doFetchTeacherClassrooms(teacherId, token),
+        { refetchIntervalInBackground: false }
+    )
+    const { data: groups } = useQuery(
+        ['classroom-groups', _classId],
+        () => doFetchClassroomGroups(_classId, token),
+        { refetchIntervalInBackground: false }
+    )
     const { enqueueSnackbar } = useSnackbar();
-    const classes = useStyles();
-
-    // const [audiences, setAudiences] = useState([]);
-    // const [audience, setAudience] = useState();
-    const [grades, setGrades] = useState([]);
-    const [classrooms, setClassrooms] = useState([]);
     const [name, setName] = useState('');
+    const [selected, setSelected] = useState<Array<string>>([])
     const [grade, setGrade] = useState('');
     const [lastName, setLastName] = useState('');
     const [classroom, setClassroom] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
-        name: null,
-        grade: null,
-        lastName: null,
-        classroom: null,
-        username: null,
-        password: null,
-    });
 
-    const formValidation = () => {
-        const validateMsgTemp = { ...validateMsg };
-        let valiResult = true;
-        for (const key in validateMsg) {
-            if (validateMsg[key] === null) {
-                validateMsgTemp[key] = commonDictionary[language]?.fieldIsRequired;
+    const [loading, setLoading] = useState(false)
+
+    const updateStudent = useMutation(() => doUpdateStudent(
+        token,
+        _id,
+        classroom,
+        grade,
+        selected,
+        lastName,
+        name,
+        password,
+        username), {
+        onSuccess: async data => {
+            if (data.message) {
+                enqueueSnackbar(data.message, { variant: 'error' })
             }
-            if (validateMsgTemp[key]) valiResult = false;
+            else {
+                console.log({ data })
+                await queryClient.refetchQueries(['fetch-classroom-students', _classId])
+                enqueueSnackbar('Update student Succeed', { variant: 'success' })
+            }
+        },
+        onError: async (error: any) => {
+            enqueueSnackbar(error.message, { variant: 'error' })
+        },
+        onSettled: async () => {
+            setLoading(false)
+            _close()
         }
-        setValidateMsg(validateMsgTemp);
-        return valiResult;
-    };
+    })
 
-    const setAudienceData = async () => {
-        const result: any = await getAudiencesWithGrades(
-            // user.token,
-            // dispatch
-        );
-        if (!result.success) {
-            enqueueSnackbar(result.msg, { variant: 'error' });
-            return false;
-        }
-        // setAudiences(result.data);
-        return true;
+    const handleStudentSelect = (id: string) => {
+
+        const tempSeleted = [...selected]
+        if (tempSeleted.includes(id)) {
+            const filtered = tempSeleted.filter(element => { return element !== id })
+            setSelected(filtered)
+        } else setSelected([...tempSeleted, id])
     }
 
     const handleSubmit = () => {
-        if (!formValidation()) return;
-        props.close();
+        setLoading(true)
+        console.log({
+            _id,
+            grade,
+            selected,
+            name,
+            lastName,
+            username,
+            classroom
+        })
+        updateStudent.mutate()
+        // close();
     }
 
     const handleRemove = () => {
@@ -89,29 +132,42 @@ const EditStudent = (props: any) => {
     const handleViewReport = () => {
 
         // TODO: Redirect to student progress page
-        history.push('/report/teacher/' + 247)
+        history.push('/report/teacher/' + _id)
 
     }
 
-    const handleAddToGroup = () => {
-
-    }
-
-    const handleFormChange = (field: string, errMsg: string) => {
-        setValidateMsg({ ...validateMsg, [field]: errMsg });
+    const updateSelected = (ids: Array<any>) => {
+        const temp = []
+        for (const id of ids) {
+            temp.push(id.id)
+        }
+        setSelected(temp)
     }
 
     useEffect(() => {
-        setAudienceData();
-    }, [])
+        updateSelected(_groupIds)
+        setName(_firstName)
+        setLastName(_lastName)
+        setUsername(_username)
+        setGrade(_gradeId)
+        setClassroom(_classId)
+    }, [
+        _firstName,
+        _id,
+        _lastName,
+        _username,
+        _groupIds,
+        _gradeId,
+        _classId
+    ])
     return (
         <Container>
             <CardDialog
-                isOpen={props.isOpen}
-                open={props.close}
+                isOpen={_isOpen}
+                open={_close}
                 dialogContent={
-                    <Grid container spacing={2}>
-                        <Grid item container xs={12} sm={4} spacing={2}>
+                    <Grid container spacing={3} mt={2} padding={1}>
+                        <Grid item container xs={12} sm={4} spacing={3}>
                             <Grid item xs={12}>
                                 <Avatar src={avatar}
                                     sx={{
@@ -135,57 +191,62 @@ const EditStudent = (props: any) => {
                             </Grid>
                         </Grid>
                         <Grid item xs={12} sm={8}>
-                            <Grid container spacing={1}>
+                            <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         label={dictionary[language]?.name}
                                         onChange={(e: any) => {
-                                            handleFormChange('name', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                             setName(e.target.value)
                                         }}
-                                        error={!!validateMsg.name}
-                                        helperText={validateMsg.name}
-                                        value={name}
+                                        value={name || ''}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         label={dictionary[language]?.lastName}
                                         onChange={(e: any) => {
-                                            handleFormChange('lastName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                             setLastName(e.target.value)
                                         }}
-                                        error={!!validateMsg.lastName}
-                                        helperText={validateMsg.lastName}
-                                        value={lastName}
+                                        value={lastName || ''}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         label={dictionary[language]?.username}
                                         onChange={(e: any) => {
-                                            handleFormChange('username', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                             setUsername(e.target.value)
                                         }}
-                                        error={!!validateMsg.username}
-                                        helperText={validateMsg.username}
-                                        value={username}
+                                        value={username || ''}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         label={dictionary[language]?.password}
                                         onChange={(e: any) => {
-                                            handleFormChange('password', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
                                             setPassword(e.target.value)
                                         }}
-                                        error={!!validateMsg.password}
-                                        helperText={validateMsg.password}
-                                        value={password}
+                                        value={password || ''}
+                                        variant='outlined'
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <FormControl fullWidth>
+                                    <FormControl variant="outlined" fullWidth>
+                                        <InputLabel id="demo-simple-select-label">{commonDictionary[language]?.select_grade}</InputLabel>
+                                        <Select
+                                            label={commonDictionary[language]?.select_grade}
+                                            id='select-grade'
+                                            value={grade || _gradeId}
+                                            onChange={(e) => {
+                                                const selectedGrade = gradeSet.find((item: any) => item.id === e.target.value) || {}
+                                                setGrade(selectedGrade.id)
+                                            }}
+                                        >
+                                            {gradeSet.length > 0 && gradeSet.map((grade: any) => (
+                                                <MenuItem value={grade.id} key={grade.id}>{grade.name}</MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                    {/* <FormControl fullWidth>
                                         <InputLabel id='select-grade-label'>
                                             {dictionary[language]?.grade}
                                         </InputLabel>
@@ -216,43 +277,59 @@ const EditStudent = (props: any) => {
                                             ))}
                                         </Select>
                                         <div className='err-text'>{validateMsg.grade}</div>
-                                    </FormControl>
+                                    </FormControl> */}
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <FormControl fullWidth>
-                                        <InputLabel id='select-classroom-label'>
-                                            {dictionary[language]?.classroom}
-                                        </InputLabel>
-                                        <Select
-                                            labelId='select-classroom-label'
-                                            id='select-classroom'
-                                            value={classroom ? classroom : {}}
-                                            label={dictionary[language]?.classroom}
-                                            className={`${classes.select} err-border`}
-                                            onChange={(e: any) => {
-                                                setClassroom(e.target.value);
-                                                validateMsg.classroom = '';
-                                                setValidateMsg({ ...validateMsg });
-                                            }}
-                                            sx={
-                                                validateMsg.classroom ? {
-                                                    '& fieldset': {
-                                                        borderColor: `${BasicColor.red} !important`,
-                                                    },
-                                                } : {}
-                                            }
-                                            displayEmpty={true}
-                                        >
-                                            {classrooms?.length > 0 && classrooms.map((value: any, index: number) => (
-                                                <MenuItem value={value} key={index}>
-                                                    {value.name}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                        <div className='err-text'>{validateMsg.classroom}</div>
-                                    </FormControl>
+                                    {
+                                        classrooms &&
+                                        <FormControl fullWidth>
+                                            <InputLabel id='select-classroom-label'>
+                                                {dictionary[language]?.classroom}
+                                            </InputLabel>
+                                            <Select
+                                                labelId='select-classroom-label'
+                                                id='select-classroom'
+                                                value={classroom}
+                                                label={dictionary[language]?.classroom}
+                                                onChange={(e: any) => {
+                                                    const selectedClassroom = classrooms.find((item: any) => item.id === e.target.value)
+                                                    setClassroom(selectedClassroom?.id);
+                                                }}
+                                                displayEmpty={true}
+                                            >
+                                                {classrooms.length > 0 && classrooms.map((value: any) => (
+                                                    <MenuItem value={value.id} key={value.id}>
+                                                        {value.name}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    }
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} sm={6}>
+                                    <Typography>Groups</Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Box>
+                                        {
+                                            groups && groups.map((group: any) => (
+                                                <FormControlLabel
+                                                    key={group.id}
+                                                    label={group.name || ''}
+                                                    value={group.id}
+                                                    sx={{
+                                                        marginLeft: 5
+                                                    }}
+                                                    control={
+                                                        <Checkbox checked={selected.includes(group.id)} onChange={() => handleStudentSelect(group.id)} />
+                                                    }
+                                                />
+                                            ))
+                                        }
+                                    </Box>
+                                </Grid>
+
+                                {/* <Grid item xs={12}>
                                     <Button
                                         value={'+ ' + dictionary[language]?.addToAGroup}
                                         color={BasicColor.blue}
@@ -261,7 +338,7 @@ const EditStudent = (props: any) => {
                                         fullWidth={true}
                                         variant={'text'}
                                     />
-                                </Grid>
+                                </Grid> */}
                             </Grid>
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -276,13 +353,14 @@ const EditStudent = (props: any) => {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <Button
-                                value={dictionary[language]?.save}
-                                bgColor={BasicColor.green}
+                            <LoadingButton
                                 onClick={handleSubmit}
-                                align={'right'}
                                 fullWidth={true}
-                            />
+                                loading={loading}
+                                variant='contained'
+                            >
+                                {dictionary[language]?.save}
+                            </LoadingButton>
                         </Grid>
                     </Grid>
                 }

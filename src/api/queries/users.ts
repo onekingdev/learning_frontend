@@ -30,6 +30,18 @@ export const STUDENT_SCHEMA = `
     currentAvatarPants {
         ${AVATAR}
     }
+    grade {
+        grade {
+            id
+        }
+    }
+    group {
+        id
+    }
+    user {
+        password
+        username
+    }
 `
 
 export const CLASSROOM_SCHEMA = `

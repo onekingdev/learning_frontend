@@ -194,7 +194,7 @@ export const themeTeacher = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: 15,
+          borderRadius: 10,
           ':focus': {
             outline: 0,
             border: 0,
@@ -229,6 +229,7 @@ export const themeTeacher = createTheme({
       styleOverrides: {
         root: {
           width: '100%',
+
         },
       },
     },

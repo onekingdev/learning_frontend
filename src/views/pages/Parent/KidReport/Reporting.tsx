@@ -30,6 +30,7 @@ export const Reporting: FC = () => {
     if (!isLoading) {
       const defaultId = student?.guardianstudentplan?.subject[0]?.id || -1
       setActiveSubjectId(defaultId)
+      loadingContext.done()
     }
   }, [isLoading]);
   useEffect(() => {
