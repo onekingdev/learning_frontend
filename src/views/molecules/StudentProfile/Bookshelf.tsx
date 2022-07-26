@@ -16,7 +16,11 @@ import { dictionary }       from 'views/pages/Student/Settings/dictionary'
 import { StudentSettings }  from 'views/molecules/StudentProfile/StudentSettings';
 import { useSelector }        from 'react-redux'
 
-export const BookShelf: FC = () => {
+interface BookShelfProps {
+    badges: any[]
+}
+
+export const BookShelf: FC<BookShelfProps> = ({badges}) => {
 
     let language:string     = useSelector((state: any) => state.user.language);
     language                = language? language : 'en-us'
@@ -43,7 +47,7 @@ export const BookShelf: FC = () => {
                 >
                     <Container sx={{ width: 'auto', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                         {openSetting && <StudentSettings />}
-                        {openBadge && <BadgeContainer />}
+                        {openBadge && badges && <BadgeContainer badges={badges}/>}
                         {openAward && <Awards />}
                         <Button sx={{ borderRadius: '100%', background: BasicColor.green, padding: '10px' }} variant="contained" onClick={handleClose} >
                             <CloseIcon />

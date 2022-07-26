@@ -1,23 +1,23 @@
 import { FC, useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { BarChart } from 'views/molecules/Chart/BarChart';
-import MarkTable from 'views/molecules/Table/MarkTable';
 import { LoadingContext } from 'react-router-loading';
 import query from 'api/queries/get';
 import { useSelector } from 'react-redux';
 import { TopicReport } from 'api/fragments/topicFragments';
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { doFetchStudentById } from 'app/actions/guardianActions';
-import { LoadingSpinner } from 'views/atoms/Spinner';
+import { KidReporting } from 'views/organisms/Reporting';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 
 interface StudentIdParam {
   studentId: string;
+  reviewer: string
 }
 
-export const ParentReporting: FC = () => {
+export const Reporting: FC = () => {
   const user = useSelector((state: any) => state.user);
-  const { studentId } = useParams<StudentIdParam>();
+  const { studentId, reviewer } = useParams<StudentIdParam>();
   const [loading, setLoading] = useState(false)
   const { data: student, isLoading } = useQuery(['fetch-kids-list', studentId, user.token], () => doFetchStudentById(+studentId, user.token))
 
@@ -52,27 +52,38 @@ export const ParentReporting: FC = () => {
       })();
       loadingContext.done()
     }
-  }, [activeSubjectId, studentId]);
+  }, [activeSubjectId, studentId, reviewer]);
 
   return (
-    <ParentPgContainer onlyLogoImgNav={false}>
-      {student &&
-        <div style={{
-          width: '100%'
-        }}>
-          <BarChart student={student} studentId={studentId} />
-          {
-            loading ? <LoadingSpinner /> :
-
-              <MarkTable
-                areasOfKnowledge={student.guardianstudentplan?.subject || []}
-                data={data}
-                activeSubjectId={activeSubjectId}
-                onChangeActiveIdHandler={setActiveSubjectId}
-              />
+    <>
+      {
+        reviewer === 'parent' &&
+        <ParentPgContainer onlyLogoImgNav={false}
+          children={
+            <KidReporting
+              student={student}
+              activeSubjectId={activeSubjectId}
+              data={data}
+              setActiveSubjectId={setActiveSubjectId}
+              isLoading={loading}
+            />
           }
-        </div>
+        />
       }
-    </ParentPgContainer>
+      {
+        reviewer === 'teacher' &&
+        <TeacherPgContainer onlyLogoImgNav={false}
+          children={
+            <KidReporting
+              student={student}
+              activeSubjectId={activeSubjectId}
+              data={data}
+              setActiveSubjectId={setActiveSubjectId}
+              isLoading={loading}
+            />
+          }
+        />
+      }
+    </>
   );
 };

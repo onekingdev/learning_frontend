@@ -28,6 +28,7 @@ export const dictionary:any = Object.freeze({
         parentReport: 'Parent Report',
         manageSubscription: 'Manage Subscription',
         help: 'Help',
+        settings: 'Settings',
     },
     'th' :{
         rank: 'อันดับ',
@@ -58,6 +59,7 @@ export const dictionary:any = Object.freeze({
         parentReport: 'รายงานผู้ปกครอง',
         manageSubscription: 'จัดการการสมัครสมาชิก',
         help: 'ช่วย',
+        settings: 'การตั้งค่า',
     },
     'es-mx': {
         rank: 'Rango',
@@ -88,5 +90,6 @@ export const dictionary:any = Object.freeze({
         parentReport: 'Informe principal',
         manageSubscription: 'Administrar suscripción',
         help: 'Ayudar',
+        settings: 'Ajustes',
     }
   });

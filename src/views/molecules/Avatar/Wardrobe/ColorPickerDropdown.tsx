@@ -3,8 +3,6 @@ import styled             from 'styled-components';
 import { SKIN_PICKER }    from 'constants/avatar';
 import ArrowDropDownIcon  from '@mui/icons-material/ArrowDropDown';
 import { ScreenSize }     from 'constants/screenSize';
-import { useSelector, useDispatch } from 'react-redux';
-import { dictionary }   from 'views/pages/Student/Avatar/dictionary'
 
 interface ColorPickerProp {
   select: (value: string) => void
@@ -14,8 +12,6 @@ export const ColorPickerDropdown: FC<ColorPickerProp> = ({ select }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
   const [selectedOption, setSelectedOption] = useState(SKIN_PICKER[0].hex);
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
 
   const onOptionClicked = (value: any) => () => {
     setSelectedOption(value);

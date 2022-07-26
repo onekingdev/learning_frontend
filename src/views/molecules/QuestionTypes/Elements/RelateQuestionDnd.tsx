@@ -45,14 +45,13 @@ export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ opti
     for (let i = 0; i < length; i++) {
       res.push({
         key: options[i]?.key,
-        value: state[('answers' + i) as keyof Object].value
+        value: state[('answers' + i) as keyof Object][0]?.value
       })
     }
     return res
   }
   const checkAnswer = () => {
-    console.log({ state, options })
-    return !options.some((option, index) => option.key !== state[('answers' + index) as keyof Object][0]?.key
+    return !options.some((option, index) => option.value !== state[('answers' + index) as keyof Object][0]?.value
     )
   }
 
@@ -62,7 +61,6 @@ export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ opti
     for (let i = 0; i < length; i++) {
       answers[('answers' + i) as keyof Object] = new Array(0)
     }
-    console.log({ answers })
     setState({ questions: [...options], ...answers })
   }, [options])
   return (

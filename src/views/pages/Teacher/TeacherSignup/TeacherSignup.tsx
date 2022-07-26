@@ -1,15 +1,14 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
 import { useSnackbar } from 'notistack';
-// import { useHistory } from 'react-router-dom';
 import {
-  // useDispatch,
+  useDispatch,
   useSelector
 } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
-import { TeacherPgContainer } from 'views/molecules/TeacherPgContainer/TeacherPgContainer';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { dictionary } from './dictionary';
 import { Country } from 'country-state-city';
 import FormControl from '@mui/material/FormControl';
@@ -26,39 +25,51 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 import {
   useMutation,
-} from 'react-query'
+} from '@tanstack/react-query'
 import { doCreateTeacher } from 'app/actions';
 import FormContainer from 'views/atoms/FormContainer';
 import ContactBox from 'views/organisms/ContactBox';
 import FormBottomDescription from 'views/organisms/FormBottomDescription';
+import { useHistory } from 'react-router-dom';
+import { TEACHER_SET_DATA, USER_SET_DATA } from 'app/types';
 
 const TeacherSignup: FC = () => {
   const isTablet = useSocratesMediaQuery('xs')
   const countries = Country.getAllCountries()
   const classes = useStyles();
-
+  const language: string = useSelector((state: any) => state.user.language) || 'en-us';
   const loadingContext = useContext(LoadingContext);
-  // const history = useHistory();
-  // const dispatch = useDispatch();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [schoolName, setSchoolName] = useState('');
+  // const [schoolName, setSchoolName] = useState('');
   const [zip, setZip] = useState('');
   const [country, setCountry] = useState(countries[232])
+  const [couponCode, setCouponCode] = useState('');
+
   const createTeacher = useMutation(() => doCreateTeacher(
-    country.name, couponCode, email, firstName, lastName, password, '0', userName, zip
+    country.name, couponCode, email, firstName, lastName, password, userName, zip
   ), {
     onSuccess: async data => {
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       }
       else {
-        console.log({ data })
-        enqueueSnackbar('Student Create Succeed!', { variant: 'success' })
+        enqueueSnackbar('Teacher Create Succeed!', { variant: 'success' })
+        dispatch({
+          type: USER_SET_DATA,
+          payload: { ...data.user, token: data.token, refreshToken: data.refreshToken },
+        });
+        dispatch({
+          type: TEACHER_SET_DATA,
+          payload: data.teacher,
+        });
+        history.push('/teacher/payment/Classroom')
       }
     },
     onError: async (error: any) => {
@@ -66,6 +77,7 @@ const TeacherSignup: FC = () => {
     },
     onSettled: async () => {
       setLoading(false)
+
     }
   })
 
@@ -74,7 +86,7 @@ const TeacherSignup: FC = () => {
     email: null,
     firstName: null,
     lastName: null,
-    schoolName: null,
+    // schoolName: null,
     zip: null,
     Country: '',
     userName: null,
@@ -83,10 +95,8 @@ const TeacherSignup: FC = () => {
   });
   // const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(false);
-  const [couponCode, setCouponCode] = useState('');
 
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+
 
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
@@ -126,29 +136,7 @@ const TeacherSignup: FC = () => {
         <FormContainer isMobile={isTablet}>
           <Typography variant='h4'>{dictionary[language]?.teacherSignup}</Typography>
           <Grid container spacing={3} mt={2}>
-            <Grid item xs={12}>
-              <TextField
-                label={dictionary[language]?.email}
-                onChange={e => {
-                  setEmail(e.target.value);
-                  // handleFormChange(
-                  //   'email',
-                  //   e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? 'This is not email address' : ''
-                  // );
-                  /*------------- set username to email -S--------------------------*/
-                  setUserName(e.target.value);
-                  setValidateMsg({
-                    ...validateMsg,
-                    email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
-                    userName: ''
-                  });
-                  /*------------- set username to email -E--------------------------*/
 
-                }}
-                error={!!validateMsg.email}
-                helperText={validateMsg.email}
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 label={dictionary[language]?.firstName}
@@ -177,7 +165,7 @@ const TeacherSignup: FC = () => {
                 helperText={validateMsg.lastName}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 label={dictionary[language]?.schoolName}
                 onChange={e => {
@@ -189,6 +177,29 @@ const TeacherSignup: FC = () => {
                 }}
                 error={!!validateMsg.schoolName}
                 helperText={validateMsg.schoolName}
+              />
+            </Grid> */}
+            <Grid item xs={12}>
+              <TextField
+                label={dictionary[language]?.email}
+                onChange={e => {
+                  setEmail(e.target.value);
+                  // handleFormChange(
+                  //   'email',
+                  //   e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? 'This is not email address' : ''
+                  // );
+                  /*------------- set username to email -S--------------------------*/
+                  setUserName(e.target.value);
+                  setValidateMsg({
+                    ...validateMsg,
+                    email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
+                    userName: ''
+                  });
+                  /*------------- set username to email -E--------------------------*/
+
+                }}
+                error={!!validateMsg.email}
+                helperText={validateMsg.email}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -284,6 +295,7 @@ const TeacherSignup: FC = () => {
                 type="special code"
               />
             </Grid>
+
           </Grid>
           <LoadingButton
             sx={{ marginTop: 5 }}

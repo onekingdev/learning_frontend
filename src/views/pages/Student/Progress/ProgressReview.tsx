@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { dictionary } from './dictionary'
 import { useSelector } from 'react-redux';
@@ -9,35 +9,30 @@ import {
     Box,
     Button,
     Container,
+    Typography,
 } from '@mui/material';
 import { BasicColor } from 'views/Color';
 import {
     useQuery,
-} from 'react-query'
+} from '@tanstack/react-query'
 import { doFetchStudentAnswerHistory } from 'app/actions/blockActions';
 import { getMessage } from 'views/utils';
 import { ReviewBlocks } from 'views/molecules/ProgressReview/ReviewBlocks';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { PeriodSelect } from 'views/molecules/ProgressReview/PeriodSelect';
 import { Wrapper } from './Style';
-
-
-// const mockup = {
-//     subject: 'Math',
-//     topic: 'Add',
-//     isCorrect: false,
-// }
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { LANGUAGES } from 'constants/common';
 
 export const ProgressReview = () => {
     const token = useSelector((state: any) => state.user.token);
     const studentId = useSelector((state: any) => state.student.id);
-    let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'en-us'
+    const [args, setArgs] = useState<any>({ period: 1, status: 'ALL' })
+    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
     const loadingContext = useContext(LoadingContext);
-    const { data: blocks, isLoading, error } = useQuery(['fetch-answer-history', studentId, token], () => doFetchStudentAnswerHistory(studentId, token))
+    const { data: blocks, isLoading, error } = useQuery(['fetch-answer-history', studentId, args.period, args.status, token], () => doFetchStudentAnswerHistory(studentId, args.period, args.status, token))
     const history = useHistory();
 
-    console.log({ isLoading, blocks })
     useEffect(() => {
         !isLoading && loadingContext.done();
     }, [isLoading]);
@@ -47,8 +42,8 @@ export const ProgressReview = () => {
                 <PageTitle title={dictionary[language]?.title} />
                 <Container>
                     <Box
-                    display='flex'
-                    justifyContent={'space-between'}
+                        display='flex'
+                        justifyContent={'space-between'}
                     >
                         <Button
                             variant='contained'
@@ -61,11 +56,12 @@ export const ProgressReview = () => {
                         >
                             return
                         </Button>
-                        <PeriodSelect />
+                        <PeriodSelect update={setArgs} />
                     </Box>
-                    {
-                        error ? <p>{getMessage(error)}</p> :
+                    {isLoading ? <LoadingSpinner /> :
+                        error ? <Typography color='red'>{getMessage(error)}</Typography> :
                             <Box
+                                id='blocks-container'
                                 sx={{
                                     backgroundColor: BasicColor.greenSoft + 'A0',
                                     minHeight: '90vh',

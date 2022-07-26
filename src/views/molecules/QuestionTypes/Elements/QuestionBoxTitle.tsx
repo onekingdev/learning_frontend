@@ -4,6 +4,7 @@ import { Box, Container, Typography, useMediaQuery } from '@mui/material';
 import { QuestionEquation } from './QuestionEquation';
 import { ScreenSize } from 'constants/screenSize';
 import he from 'he'
+import { extractMathjaxText, extractQuestion } from 'views/utils';
 
 
 interface QuestionBoxTitleProps {
@@ -21,19 +22,6 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
     audio.play();
   };
 
-  const extractQuestion = (str: string) => {
-
-    const firstBracketIndex = str.indexOf('$')
-    return str.slice(1, firstBracketIndex)
-  }
-
-  const extractMathjaxText = (str: string) => {
-    // const regex = /(?<=\$).+?(?=\$)/g
-    const regex = /(?:\$).+?(?=\$)/g    //changed because of IPAD, Need to test
-    const matches = str.match(regex)
-    return matches ? matches[0].slice(1) : ''
-  }
-
   return (
     <Container sx={{
       display: 'flex',
@@ -42,9 +30,13 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
       flexDirection: 'column',
     }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 5, width: '100%' }}>
-        <Typography variant='h5' sx={{ color: 'white' }}>
-          {title.charAt(0) === '@' ? extractQuestion(title) : he.decode(title)}
-        </Typography>
+        {
+          title.charAt(0) === '@' ?
+            <Typography variant='h5' sx={{ color: 'white' }}>
+              {extractQuestion(title)}
+            </Typography> :
+            <div style={{ color: 'white', fontSize: 30 }} dangerouslySetInnerHTML={{ __html: he.decode(title) }} />
+        }
         {
           audioFile ?
             <img
@@ -59,9 +51,7 @@ export const QuestionBoxTitle: FC<QuestionBoxTitleProps> = ({
             /> : null
         }
       </Box>
-      {
-        title.charAt(0) === '@' && <QuestionEquation tex={extractMathjaxText(title)} />
-      }
+      {title.charAt(0) === '@' && <QuestionEquation tex={extractMathjaxText(title)} />}
     </Container>
   );
 };

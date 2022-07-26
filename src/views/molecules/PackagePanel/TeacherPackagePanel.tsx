@@ -92,12 +92,12 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
             disabled={true}
           />
         </div>
-        {!isSpecialCode &&
+        {/* {!isSpecialCode &&
           <PriceContainer>
-            <Price> $ {price}</Price>
+            <Price> $ {(price * childrenCount).toFixed(2)}</Price>
             <Plan>/{plan}</Plan>
           </PriceContainer>
-        }
+        } */}
       </TeacherBody>
     </TeacherContainer>
   );

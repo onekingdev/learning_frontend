@@ -1,9 +1,9 @@
-  import { FC, useState, useEffect } from 'react';
-  import styled                      from 'styled-components'
-  import { BasicColor }              from 'views/Color';
-  import ReactLoading                from 'react-loading'
-  import { getDownUrlByFilename }    from 'app/firebase';
-  import { ScreenSize }              from 'constants/screenSize';
+import { FC, useState, useEffect } from 'react';
+import styled from 'styled-components'
+import { BasicColor } from 'views/Color';
+import ReactLoading from 'react-loading'
+import { getDownUrlByFilename } from 'app/firebase';
+import { ScreenSize } from 'constants/screenSize';
 
 type CardProps = {
   category: string
@@ -25,7 +25,7 @@ export const MyCardPack: FC<CardProps> = ({
       'Categories',
       firebaseName ? firebaseName + '.png' : ''
     );
-    setImgurl(link?link:'');
+    setImgurl(link || '');
   };
 
   useEffect(() => {
@@ -38,15 +38,15 @@ export const MyCardPack: FC<CardProps> = ({
     select(id)
   }
   return (
-    <CardContainer style={ isSelected ? {boxShadow: '0px 1px 20px 0px #FB8500'} : {} }>
+    <CardContainer style={isSelected ? { boxShadow: '0px 1px 20px 0px #FB8500' } : {}}>
       <h2>{category}</h2>
-    <StyledOverlay style={ purchased ? {display: 'none'} : {} }/>
-    <StyledCard >
-      {imgurl ?
-        <img src={imgurl} alt={'Category Image'} onClick={() => onCardSelect()}/>
-        :
-        <ReactLoading type='spinningBubbles' color={BasicColor.green} />}
-    </StyledCard>
+      <StyledOverlay style={purchased ? { display: 'none' } : {}} />
+      <StyledCard >
+        {imgurl ?
+          <img src={imgurl} alt={'Category Image'} onClick={() => onCardSelect()} />
+          :
+          <ReactLoading type='spinningBubbles' color={BasicColor.green} />}
+      </StyledCard>
     </CardContainer>
   )
 }

@@ -4,10 +4,10 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
-import { DialogTitle, ThemeProvider } from '@mui/material';
+import { DialogContent, DialogTitle, ThemeProvider } from '@mui/material';
 import { BasicColor } from 'views/Color';
 import { settingPage } from '../../Theme';
-import { LSDialogContent, LSDialogContentText } from './utils/Style';
+import { LSDialogContentText } from './utils/Style';
 
 
 type LSDialogProps = {
@@ -44,7 +44,8 @@ export const LSDialog: FC<LSDialogProps> = ({
         <DialogTitle sx={{ color: BasicColor.blue, textAlign: 'center' }}>
           {title ? title : ''}
         </DialogTitle>
-        <LSDialogContent>
+        <div></div>
+        <DialogContent>
           {
             contentText ?
               <LSDialogContentText>
@@ -52,7 +53,7 @@ export const LSDialog: FC<LSDialogProps> = ({
               </LSDialogContentText> : null
           }
           {dialogContent}
-        </LSDialogContent>
+        </DialogContent>
       </StyledDialog>
     </ThemeProvider>
   );
@@ -65,6 +66,7 @@ interface DialogProps {
 }
 const StyledDialog = styled(Dialog) <DialogProps>`
 & .MuiPaper-root {
+  padding: 20px;
   max-width: ${props => props.wide === 'true' ? '100%;' : 'auto;'}
   overflow-y: visible
 }

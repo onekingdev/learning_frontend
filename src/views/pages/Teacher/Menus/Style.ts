@@ -6,9 +6,9 @@ export const TopMenuContainer = styled.div`
   width           : 100%;
   display         : flex;
   justify-content : center;
+  gap: 40px;
   margin-bottom   : ${USER_AVATAR_SIZE + 10}px;
-  padding-top     : 45px;
-  @media screen and (max-width: ${ScreenSize.tablet}) {
+  @media screen and (max-width: ${ScreenSize.phone}) {
     display: none;
   }
 `;

@@ -23,7 +23,7 @@ import Button                    from 'views/molecules/MuiButton';
 import {ButtonColor, BasicColor} from 'views/Color';
 import commonDictionary          from 'constants/commonDictionary'
 import Switch                    from 'views/molecules/MuiSwitch'
-const SettingForm = (props: any) => {
+const ClassroomSettingForm = (props: any) => {
     let language:string = useSelector((state: any) => state.user.language);
     language            = language? language : 'en-us'
 
@@ -263,4 +263,4 @@ const SettingForm = (props: any) => {
     )
 }
 
-export default SettingForm
+export default ClassroomSettingForm

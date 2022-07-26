@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { dictionary } from './dictionary'
-import { TeacherSettingPgContainer } from 'views/molecules/TeacherPgContainer/TeacherSettingPgContainer';
 import { Container, Grid, Box } from '@mui/material';
 import { ImageUploader } from 'views/molecules/TeacherCertificates/ImageUploader';
 import { fetchTeacherCertificateFilesFromFirebase } from 'app/firebase';
 import { StudentChkboxList } from 'views/molecules/TeacherCertificates/StudentChkboxList';
 import * as TYPES from 'app/types'
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
+import { LANGUAGES } from 'constants/common';
 
 const mockStudents = [
   {
@@ -28,7 +29,7 @@ const mockStudents = [
 ]
 
 const Certificates: FC = () => {
-  let language: string = useSelector((state: any) => state.user.language);
+  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
   const [certImgs, setCertImgs] = useState<Array<any>>([])
   const [selectedId, setSelectedId] = useState<any>(null)
 
@@ -41,7 +42,6 @@ const Certificates: FC = () => {
     dispatch({ type: TYPES.CERTIFICATE_SELECT_IMAGE, payload: certImgs[id] })
   }
 
-  language = language ? language : 'en-us'
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     fetchTeacherCertificateFilesFromFirebase(setCertImgs)
@@ -52,9 +52,9 @@ const Certificates: FC = () => {
   }, [reLoadImgs]);
 
   return (
-    <TeacherSettingPgContainer onlyLogoImgNav={true} title={dictionary[language]?.certificates}>
-      <Container maxWidth={false} sx={{ marginTop: 5, marginBottom: 5, display: 'flex', justifyContent: 'center' }}>
-        <Grid container justifyContent={'center'} spacing={5}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.certificates} current='certificates'>
+      <Container maxWidth={false} sx={{ marginBottom: 5 }}>
+        <Grid container mt={1} justifyContent={'center'} spacing={5}>
           <Grid item>
             <Box sx={{ maxWidth: 900 }}>
               <Grid container spacing={6} >
@@ -89,7 +89,7 @@ const Certificates: FC = () => {
           </Grid>
         </Grid>
       </Container >
-    </TeacherSettingPgContainer >
+    </TeacherPgContainer >
   );
 };
 export default Certificates

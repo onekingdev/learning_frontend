@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FC, ReactChildren, ReactChild, forwardRef, RefObject, useImperativeHandle }       from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,8 +10,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 
@@ -19,6 +18,7 @@ export interface Column {
   id: string;
   label: string;
   minWidth?: number;
+  maxWidth?: number;
   align?: 'right';
   editComponent?: 'Edit' | 'Select';
   selectDatas?: any;
@@ -29,94 +29,23 @@ export interface Column {
 interface MuiTableProps {
   columns: Column[];
   tableData: any;
-  audiences?: Array<object>;
-}
-// const columns: readonly Column[] = [
-//   { id: 'name', label: 'Name', minWidth: 170 },
-//   { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-//   {
-//     id: 'population',
-//     label: 'Population',
-//     minWidth: 170,
-//     align: 'right',
-//     required: true,
-//     // format: (value: number) => value.toLocaleString('en-US'),
-//   },
-//   {
-//     id: 'size',
-//     label: 'Size\u00a0(km\u00b2)',
-//     minWidth: 170,
-//     align: 'right',
-//     // format: (value: number) => value.toLocaleString('en-US'),
-//   },
-//   {
-//     id: 'density',
-//     label: 'Density',
-//     minWidth: 170,
-//     align: 'right',
-//     editComponent: 'Select',
-//     selectDatas: ['123', '234'],
-//     // format: (value: number) => value.toFixed(2),
-//   },
-// ];
-
-interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
 }
 
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number,
-): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-];
 const newDataState = -1;
 const notEditingState = -2;
-// const MuiTable: FC<MuiTableProps> = React.forwardRef<null,MuiTableProps>(({ rootProps, isLoading, data, children }, ref) => {
-// const MuiTable: FC<MuiTableProps> = ({columns, tableData, audiences=[]}) => {
+
 interface MuiTableFunc {
-    getData(): any;
-    handleAddData(): void;
+  getData(): any;
+  handleAddData(): void;
 }
-const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
-// export default function MuiTable(props) {
-  const {tableData, columns, audiences} = props;
-  console.log("table data in table", tableData)
+
+const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) => {
+  const { tableData, columns } = props;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [editingIndex, setEditingIndex] = React.useState(notEditingState);
   const [data, setData] = React.useState<any>(tableData);
   const [editingData, setEditingData] = React.useState<any>({});
-  const [addData, setAddData] = React.useState<any>();
-  // const [audiences, setAudiences] = React.useState<any>([]);
-
-  React.useEffect(() => {
-  }, [])
 
   React.useEffect(() => {
     setData(tableData)
@@ -124,8 +53,8 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
 
   useImperativeHandle(ref, () => ({
     getData() {
-        const result = getData();
-        return result;
+      const result = getData();
+      return result;
     },
     handleAddData() {
       handleAddData()
@@ -142,20 +71,10 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
   };
 
   const handleSave = (index: number) => {
-    // const temp = JSON.parse(JSON.stringify(data));
-    // temp[index] = editingData;
-    // console.log("handle save", editingData, data, temp);
-    // {columns.map((column) => {
-    //   const value = (column.id in editingData) ? editingData[column.id] : '';
-    // }
-    // for(const key in columns) {
-    //   const column
-    //   if(column.id in editingData && )
-    // }
-    for(const column of columns) {
-      if(column?.required === true && !(column.id in editingData && editingData[column.id])) return;
+    for (const column of columns) {
+      if (column?.required === true && !(column.id in editingData && editingData[column.id])) return;
     }
-    if(index === newDataState) data.push(editingData);
+    if (index === newDataState) data.push(editingData);
     else data[index] = editingData;
     setData(data);
     setEditingIndex(notEditingState);
@@ -167,25 +86,28 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
   }
 
   const handleChange = (index: number, key: string, value: any) => {
+    // if (key === 'index') editingData[key] = data.length + 1 || 1
     editingData[key] = value;
-    setEditingData( {...editingData} )
+
+    setEditingData({ ...editingData })
   }
 
   const handleEdit = (index: number) => {
+
     setEditingIndex(index);
     setEditingData(data[index]);
   }
 
   const handleAddData = () => {
-    if(data.length > 40) return;
+    if (data.length > 30) return;
     setEditingIndex(newDataState);
     setEditingData({});
   }
 
   const getData = () => data;
-  console.log("columns is ",columns)
+
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <Paper sx={{ width: '100%', overflow: 'hidden', padding: 1 }} elevation={5}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -194,7 +116,10 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    ...(column.maxWidth && { maxWidth: column.maxWidth }),
+                    ...(column.minWidth && { minWidth: column.minWidth }),
+                  }}
                 >
                   {column.label}
                 </TableCell>
@@ -202,7 +127,7 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
               <TableCell
                 align={'right'}
                 style={{ width: 145 }}>
-                  Actions
+                Actions
               </TableCell>
             </TableRow>
           </TableHead>
@@ -210,23 +135,21 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
             {editingIndex === newDataState &&
               <TableRow hover role="checkbox" tabIndex={-1}>
                 {columns.map((column) => {
-                  const value = (column.id in editingData) ? editingData[column.id] : '';
-                  if(column.id === 'grade') {
-                    column.selectDatas = editingData?.audience?.gradeSet;
-                  }
-                  if(column?.editComponent === 'Select')
+                  const value = editingData[column.id];
+
+                  if (column?.editComponent === 'Select')
                     return (
                       <TableCell key={column.id} align={column.align}>
-                      <FormControl variant="standard" sx={{ m: 1, minWidth: 70 }}>
-                        <Select
-                          value={value}
-                          onChange={(e) =>handleChange(newDataState, column.id, e.target.value)}
-                        >
-                          {column?.selectDatas && column.selectDatas.map((selectData: any, index: number) => (
-                            <MenuItem value={selectData} key={index}>{selectData?.name}</MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 70 }}>
+                          <Select
+                            value={value || ''}
+                            onChange={(e) => handleChange(newDataState, column.id, e.target.value)}
+                          >
+                            {column?.selectDatas && column.selectDatas.map((selectData: any, index: number) => (
+                              <MenuItem value={selectData.id} key={index}>{selectData?.name}</MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
                       </TableCell>
 
                     );
@@ -236,12 +159,12 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
                         <TextField id="standard-basic"
                           variant="standard"
                           value={column.format ? column.format(value) : value}
-                          onChange={(e) =>handleChange(newDataState, column.id, e.target.value)}
+                          onChange={(e) => handleChange(newDataState, column.id, e.target.value)}
                         />
                       </TableCell>
                     );
                 })}
-                <TableCell align={'right'}  style={{ width: 145 }} >
+                <TableCell align={'right'} style={{ width: 145 }} >
                   <Button variant="text" onClick={() => handleSave(newDataState)}>Save</Button>
                   <Button variant="text" color="error" disabled={true}>Delete</Button>
                 </TableCell>
@@ -250,27 +173,27 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
             {data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any, index: number) => {
-                if(index === editingIndex - (page * rowsPerPage))
-                  return(
+                if (index === editingIndex - (page * rowsPerPage))
+                  return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                       {columns.map((column) => {
-                        const value = (column.id in editingData) ? editingData[column.id] : '';
-                        if(column.id === 'grade') {
-                          column.selectDatas = editingData?.audience?.gradeSet;
-                        }
-                        if(column?.editComponent === 'Select')
+                        const value = editingData[column.id] || '';
+                        // if (column.id === 'grade') {
+                        //   column.selectDatas = editingData?.audience?.gradeSet;
+                        // }
+                        if (column?.editComponent === 'Select')
                           return (
                             <TableCell key={column.id} align={column.align}>
-                            <FormControl variant="standard" sx={{ m: 1, minWidth: 70 }}>
-                              <Select
-                                value={value}
-                                onChange={(e) =>handleChange(page * rowsPerPage + index, column.id, e.target.value)}
-                              >
-                                {column?.selectDatas && column.selectDatas.map((selectData: any, index: number) => (
-                                  <MenuItem value={selectData} key={index}>{selectData?.name}</MenuItem>
-                                ))}
-                              </Select>
-                            </FormControl>
+                              <FormControl variant="standard" sx={{ m: 1, minWidth: 70 }}>
+                                <Select
+                                  value={value || ''}
+                                  onChange={(e) => handleChange(page * rowsPerPage + index, column.id, e.target.value)}
+                                >
+                                  {column?.selectDatas && column.selectDatas.map((selectData: any, index: number) => (
+                                    <MenuItem value={selectData.id} key={index}>{selectData?.name}</MenuItem>
+                                  ))}
+                                </Select>
+                              </FormControl>
                             </TableCell>
 
                           );
@@ -280,12 +203,12 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
                               <TextField id="standard-basic"
                                 variant="standard"
                                 value={column.format ? column.format(value) : value}
-                                onChange={(e) =>handleChange(page * rowsPerPage + index, column.id, e.target.value)}
+                                onChange={(e) => handleChange(page * rowsPerPage + index, column.id, e.target.value)}
                               />
                             </TableCell>
                           );
                       })}
-                      <TableCell align={'right'}  style={{ width: 145 }} >
+                      <TableCell align={'right'} style={{ width: 145 }} >
                         <Button variant="text" onClick={() => handleSave(page * rowsPerPage + index)}>Save</Button>
                         <Button variant="text" color="error" disabled={editingIndex > notEditingState}>Delete</Button>
                       </TableCell>
@@ -297,14 +220,28 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
                       {columns.map((column) => {
                         const value = (column.id in row) ? row[column.id] : '';
                         return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
+                          column.id === 'grade' ?
+                            <TableCell key={column.id} align={column.align}>
+                              <FormControl variant="standard" sx={{ m: 1, minWidth: 70 }}>
+                                <Select
+                                  value={value || ''}
+                                  disabled
+                                // onChange={(e) => handleChange(page * rowsPerPage + index, column.id, e.target.value)}
+                                >
+                                  {column?.selectDatas && column.selectDatas.map((selectData: any, index: number) => (
+                                    <MenuItem value={selectData.id} key={index}>{selectData?.name}</MenuItem>
+                                  ))}
+                                </Select>
+                              </FormControl>
+                            </TableCell> :
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
                         );
                       })}
-                      <TableCell align={'right'}  style={{ width: 145 }} >
+                      <TableCell align={'right'} style={{ width: 145 }} >
                         <Button variant="text" onClick={() => handleEdit(page * rowsPerPage + index)} disabled={editingIndex > notEditingState}>Edit</Button>
                         <Button variant="text" color="error" disabled={editingIndex > notEditingState} onClick={() => handleDelete(page * rowsPerPage + index)}>Delete</Button>
                       </TableCell>
@@ -323,8 +260,8 @@ const MuiTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref)=>{
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </Paper >
   );
 })
 
-export default MuiTable
+export default StudentsTable

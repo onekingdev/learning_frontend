@@ -1,7 +1,7 @@
 export const dictionary:any = Object.freeze({
     "en-us": {
         membershipDetails: 'Membership Details',
-        addPlanPackage: 'Add Plan/or Package',
+        addPlanPackage: 'Add Plan',
         chooseTheNewPlan: 'Choose the new plan',
         addAPlan: 'Add a Plan',
         cancelMembership: 'Cancel Membership',

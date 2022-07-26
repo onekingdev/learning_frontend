@@ -30,7 +30,7 @@ export const BoughtCard: FC<ICollectibleCardDescription> = ({ imgUrl, firebaseNa
     const res = await getDownUrlByFilename(_dir, _imgName)
     if (res) {
       if (mounted)
-        setUrl(res)
+        setUrl(res || '')
     }
   }
 
@@ -77,7 +77,6 @@ export const BoughtCard: FC<ICollectibleCardDescription> = ({ imgUrl, firebaseNa
         </div>
       }
       <CardDialog
-        fullWidth='true'
         dialogContent={
           <CardDescription
             imgUrl={imgUrl}

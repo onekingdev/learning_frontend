@@ -138,7 +138,7 @@ export const BarChart = ({ student }: BarChartProps) => {
     useEffect(() => {
         if (student?.id && user?.token) {
             (async () => {
-                const res: any = await query('', LastWeekAndCoinsQuestions(1), user.token).catch(e => ({ success: false }));
+                const res: any = await query('', LastWeekAndCoinsQuestions(1), user.token).catch(() => ({ success: false }));
                 if (res.success !== false) {
                     const result: any = await res.json();
                     if (result.errors && !result.data) {

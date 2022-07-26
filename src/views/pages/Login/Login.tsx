@@ -17,23 +17,22 @@ import {
   Link,
   ThemeProvider,
   Typography,
-  useMediaQuery
 } from '@mui/material';
 import { BasicColor } from 'views/Color';
-import { USER_TYPE } from 'constants/common';
+import { LANGUAGES, USER_TYPE } from 'constants/common';
 import background from 'views/assets/colored-shapes-bg.svg';
-import { ScreenSize } from 'constants/screenSize';
 import { themeTeacher } from 'views/Theme';
 import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+import * as TYPES from 'app/types';
 
 export const LogIn: FC = () => {
-  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
+  const isTablet = useSocratesMediaQuery('sm')
+
   const history = useHistory();
   const dispatch = useDispatch()
   const { enqueueSnackbar } = useSnackbar();
-
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
 
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState('');
@@ -42,28 +41,63 @@ export const LogIn: FC = () => {
   const loginAction = async () => {
 
     setLoading(true);
-    const result: any = await login(username, password, dispatch, language);
+    const result = await login(username, password, language);
     setLoading(false);
 
     if (!result.success) {
-      enqueueSnackbar(result.msg, { variant: 'error' });
+      enqueueSnackbar(result.message, { variant: 'error' });
       return;
     }
-    switch (result.userType) {
+
+    const { student, guardian, teacher, user, token } = result.data
+    dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user, token } });
+
+
+    const userType = user.profile?.role || USER_TYPE.user
+
+    switch (userType) {
+
       case USER_TYPE.student:
+        // Set student redux state
+        dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student || {} });
+        dispatch({
+          type: TYPES.EARNING_SET_DATA,
+          payload: {
+            rank: 1,
+            level_name: student.level.name,
+            level: student.level.amount,
+            exp: parseInt(student.points),
+            expMax: student.level.pointsRequired,
+            progress: 0,
+            energyCharge: student.battery.level,
+            balance: student.coinWallet.balance,
+          },
+        });
+        dispatch({ type: TYPES.AVATAR_SET_DEFAULT_LOGIN, payload: student });
+
         history.push('/home')
-        return;
+        break;
+
       case USER_TYPE.guardian:
-        history.push('/kids/list')
-        return;
+        // Set guardian state
+        dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian });
+
+        // Direct to payment page, when there are no bought plans
+        guardian.guardianstudentplanSet?.length === 0 ? history.push('/parent/payment') :
+          history.push('/kids/list')
+        break;
+
       case USER_TYPE.teacher:
-        history.push('/kids/list')
-        return;
-      case USER_TYPE.noPlans:
-        history.push('/parent/payment')
-        return;
+        // Set teacher state
+        dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
+        if (teacher.hasOrder)
+          history.push('/teacher/classrooms')
+        else
+          history.push('/teacher/payment')
+        break;
       default:
-        history.push('/home')
+        history.push('/')
+        break;
     }
   }
 
@@ -119,7 +153,7 @@ export const LogIn: FC = () => {
             sx={
               isTablet ?
                 { display: 'none' } :
-                { color: 'white', margin: 5, textAlign:'unset' }}>
+                { color: 'white', margin: 5, textAlign: 'unset' }}>
             {dictionary[language]?.welcome}
           </Typography>
           <Typography variant='h5' mb={2} sx={{ color: 'white', textAlign: 'unset' }}>{dictionary[language]?.login}</Typography>
@@ -133,7 +167,7 @@ export const LogIn: FC = () => {
           <Actions
             googleText={dictionary[language]?.with_google}
             googleColor={ButtonColor.google}
-            googleAction={() => console.log('google auth')} // !! remove console.logs!!!
+            // googleAction={() => console.log('google auth')} // !! remove console.logs!!!
             or={dictionary[language]?.or}
             loginText={dictionary[language]?.login}
             loginColor={ButtonColor.login}

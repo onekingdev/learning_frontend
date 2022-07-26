@@ -85,6 +85,8 @@ export const ANSWER_OPTION = `
 `;
 
 export const NEW_MC_ANSWER_OPTION = `
+id
+isCorrect
 answerText
 explanation
 image
@@ -92,6 +94,8 @@ answerAudioUrl
 video
 `
 export const NEW_T_ANSWER_OPTION = `
+id
+isCorrect
 answerText
 explanation
 image
@@ -100,6 +104,8 @@ video
 `
 
 export const NEW_O_ANSWER_OPTION = `
+id
+isCorrect
 order
 answerText
 image
@@ -107,6 +113,8 @@ video
 `
 
 export const NEW_R_ANSWER_OPTION = `
+id
+isCorrect
 key
 value
 keyImage

@@ -9,7 +9,6 @@ import { get }            from 'api/queries/get';
 import { AVATAR }         from 'api/fragments/avatarFragments';
 import { IAvatar }        from 'app/entities/avatar';
 import IconButton         from '@mui/material/IconButton';
-import StarIcon           from '@mui/icons-material/Star';
 import StarRoundedIcon    from '@mui/icons-material/StarRounded';
 import { Grid }           from '@mui/material';
 import { AvatarSet }      from '../AvatarSet';
@@ -26,8 +25,7 @@ export const WardrobeSelector: FC = () => {
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
   const user          = useSelector((state: any) => state.user);
   const student       = useSelector((state: any) => state.student)
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  const language = useSelector((state: any) => state.user.language);
   const loadingContext = useContext(LoadingContext);
 
   const [reload, setReload] = useState(false)
@@ -50,8 +48,8 @@ export const WardrobeSelector: FC = () => {
   const handleData = (data: any) => {
     setAvatarItems(data.data.avatars);
   };
-  const handleError = (error: any) => {
-    console.log(error);
+  const handleError = () => {
+    // enqueueSnackbar(error.message, { variant: 'error' });
   };
 
   const setFavorite = async () => {

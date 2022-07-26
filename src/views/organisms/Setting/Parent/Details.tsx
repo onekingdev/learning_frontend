@@ -1,8 +1,8 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { LSTitle, LSShadowContainer } from 'views/molecules/Setting/utils/Style';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanForm';
+import { AddSimplePlanForm } from 'views/molecules/Setting/AddSimplePlanFormNew';
 import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
 import { PlanList } from 'views/molecules/Setting/PlanList';
 import { CancelMembershipForm } from 'views/molecules/Setting/CancelMembershipForm';
@@ -13,15 +13,7 @@ export const MembershipDetail: FC = () => {
 
   const { isOpen, open } = useDialog()
   const { isAddOpen, openAdd } = useAddDialog()
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
-
-  // State to refresh component
-  const [value, setValue] = useState(false);
-  const refresh = () => {
-    // it re-renders the component
-    setValue(!value);
-  }
+  const language: string = useSelector((state: any) => state.user.language) || 'en-us'
 
   return (
     <Box>
@@ -31,21 +23,16 @@ export const MembershipDetail: FC = () => {
         </LSTitle>
         <Box >
           <Box sx={{ display: 'flex', justifyContent: 'center', margin: 2 }}>
-            <LSDialog
+            <LSDialog // Add a new plan dialog
               isOpen={isAddOpen}
               open={openAdd}
               title={dictionary[language]?.addPlanPackage}
-              // fullWidth='true'
-              // contentText={dictionary[language]?.chooseTheNewPlan}
               dialogContent={
-                <AddSimplePlanForm
-                  open={openAdd}
-                  refresh={refresh}
-                />
+                <AddSimplePlanForm />
               }
             />
           </Box>
-          <PlanList refresh={value} />
+          <PlanList />
           <BtnContainer >
             <Button onClick={openAdd}>
               {dictionary[language]?.addAPlan}
@@ -62,7 +49,6 @@ export const MembershipDetail: FC = () => {
             dialogContent={
               <CancelMembershipForm
                 open={open}
-                refresh={refresh}
               />
             }
           />

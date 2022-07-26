@@ -42,7 +42,6 @@ export const SortOrderQuestion: FC<ChoiceTextProps> = ({
 
   useEffect(() => {
     setIsAnswered(false);
-    console.log({ question })
   }, [question]);
 
 
