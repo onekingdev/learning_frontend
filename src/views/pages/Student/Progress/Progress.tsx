@@ -54,8 +54,7 @@ const getAllTopic: any = (subSubjectList: Array<any>, deep: number) => {
 export const KidsProgress = () => {
     const user = useSelector((state: any) => state.user);
     const student = useSelector((state: any) => state.student);
-    let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'en-us'
+    const language: string = useSelector((state: any) => state.user.language);
 
     const [activeSubjectId, setActiveSubjectId] = useState<number>(-1);
     const [activeSubjectIdTable, setActiveSubjectIdTable] = useState<string>('');
@@ -69,9 +68,11 @@ export const KidsProgress = () => {
     useEffect(() => {
         if (student) {
             (async () => {
-                setAreasOfKnowledge(student.guardianstudentplan.subject);
+                const aoks: Array<any> = (student.guardianstudentplan?.subject
+                    || student.audience?.areaofknowledgeSet || []).filter((item: any) => item.isActive)
+                setAreasOfKnowledge(aoks);
                 // setActiveSubjectId(student.guardianstudentplan.subject.filter((_subject: any) => _subject.name === "Financial LIteracy")[0]?.id || student.guardianstudentplan.subject[0]?.id);
-                setActiveSubjectId(student.guardianstudentplan.subject[0]?.id);
+                setActiveSubjectId(aoks[0]?.id);
             })();
         }
     }, [student]);
@@ -230,7 +231,7 @@ export const KidsProgress = () => {
                             <FormControl fullWidth>
                                 <Select
                                     id='demo-simple-select'
-                                    value={activeSubjectId}
+                                    value={activeSubjectId || ''}
                                     onChange={handleSubjectChange}
                                     SelectDisplayProps={{
                                         style: {

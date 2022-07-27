@@ -41,7 +41,13 @@ export const KnowledgeMap: FC = () => {
 
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
-  const areasOfKnowledge: Array<any> = useSelector((state: any) => state.student.guardianstudentplan.subject);
+
+  /**
+   * !! If the guardianstudentplans is null, then this is teacher kid, this means the kid has gold plan
+   */
+  const areasOfKnowledge: Array<any> = useSelector((state: any) =>
+    state.student.guardianstudentplan?.subject
+    || state.student.audience?.areaofknowledgeSet || []);
   const [loadedImgNum, setLoadedImgNum] = useState(0)
   const [boatX, setBoatX] = useState(window.innerWidth / 2)
   const [boatY, setBoatY] = useState(window.innerHeight / 2)
@@ -72,6 +78,7 @@ export const KnowledgeMap: FC = () => {
   };
 
   useEffect(() => {
+    loadingContext.done();
     const dragonNum = getRandomNumber(areasOfKnowledge.length);
     setDragonNumber(dragonNum)
   }, [])
@@ -90,7 +97,7 @@ export const KnowledgeMap: FC = () => {
             zIndex: 1
           }} />
         <Ocean >
-          {areasOfKnowledge.map(
+          {areasOfKnowledge.filter(item => item.isActive).map(
             (
               areaOfKnowledge: any,
               i

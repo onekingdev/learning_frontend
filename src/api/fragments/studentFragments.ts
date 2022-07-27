@@ -199,6 +199,12 @@ export const STUDENT = `
         currentAvatarPants {
             ${AVATAR}
         }
+        classroom {
+            id
+            audience {
+
+            }
+        }
 `;
 export const STUDENT_RAW = `
         id
