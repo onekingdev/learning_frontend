@@ -201,7 +201,7 @@ export const STUDENT = `
             ${AVATAR}
         }
         classroom {
-            i${_CLASSROOM_SCHEMA}
+            ${_CLASSROOM_SCHEMA}
         }
 `;
 export const STUDENT_RAW = `
