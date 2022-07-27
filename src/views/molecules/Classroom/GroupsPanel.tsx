@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import { Grid } from '@mui/material';
 import groupsImg from 'views/assets/studentGroups.svg'
 import newGroupImg from 'views/assets/newStudentGroup.svg'
 import commonDictionary from 'constants/commonDictionary'
@@ -19,7 +18,7 @@ interface GroupsPanelProps {
 }
 
 const GroupsPanel:FC<GroupsPanelProps> = ({groups, onGroup, onNew}) => {
-  const { token, language } = useSelector((state: any) => state.user)
+  const { language } = useSelector((state: any) => state.user)
 
   return (
     <Container>

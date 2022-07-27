@@ -5,11 +5,12 @@ import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContai
 import GroupsPanel from 'views/molecules/Classroom/GroupsPanel'
 import AddGroupForm from 'views/molecules/Classroom/AddGroupForm';
 import { useQuery } from '@tanstack/react-query';
-import { doFetchClassroomGroups } from 'app/actions';
+import { doFetchClassroomGroups, doFetchClassroomStudents } from 'app/actions';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { Typography } from '@mui/material';
 import { getMessage } from 'views/utils';
 import commonDictionary from 'constants/commonDictionary'
+import EditGroupFrom from 'views/molecules/Classroom/EditGroupForm';
 
 const ClassroomGroups: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -22,13 +23,22 @@ const ClassroomGroups: FC = () => {
     { refetchIntervalInBackground: false }
   )
   const [isOpenGroupDialog, setIsOpenGroupDialog] = useState(false);
+  const [isOpenEditGroupDG, setIsOpenEditGroupDG] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState<any>()
 
   const onNew = () => {
     setIsOpenGroupDialog(true)
   }
 
-  const onGroup = (classroom: any) => {
+  const { data: students } = useQuery(
+    ['fetch-classroom-students', currentClassId],
+    () => doFetchClassroomStudents(currentClassId, token),
+    { refetchIntervalInBackground: false, initialData: [] }
+  )
 
+  const onGroup = (group: any) => {
+    setIsOpenEditGroupDG(true)
+    setSelectedGroup(group)
   }
   useEffect(() => {
 
@@ -40,6 +50,17 @@ const ClassroomGroups: FC = () => {
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.classroom} current='groups'>
       <>
         <AddGroupForm isOpen={isOpenGroupDialog} close={() => setIsOpenGroupDialog(false)} />
+        {
+          selectedGroup &&
+          <EditGroupFrom
+            isOpen={isOpenEditGroupDG}
+            close={() => setIsOpenEditGroupDG(false)}
+            students={students}
+            studentSet={selectedGroup.studentSet}
+            name={selectedGroup.name}
+            id={selectedGroup.id}
+          />
+        }
         {
           isLoading ?
             <LoadingSpinner /> :

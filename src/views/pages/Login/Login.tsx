@@ -167,7 +167,7 @@ export const LogIn: FC = () => {
           <Actions
             googleText={dictionary[language]?.with_google}
             googleColor={ButtonColor.google}
-            // googleAction={() => console.log('google auth')} // !! remove console.logs!!!
+            // googleAction={() => {}} // !! remove console.logs!!!
             or={dictionary[language]?.or}
             loginText={dictionary[language]?.login}
             loginColor={ButtonColor.login}

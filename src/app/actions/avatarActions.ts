@@ -26,7 +26,7 @@ export const doPurchaseAvatarItem = async (
     PURCHASE_AN_AVATAR_ITEM(avatarId, studentId),
     token
   );
-  return res.msg ? console.log(res.msg) : true;
+  return res.msg ? false : true;
 };
 
 export const doSetFavoriteAvatar = async (
@@ -55,8 +55,8 @@ export const doFetchFavoriteAvatars = async (
     token
   );
   return res.msg
-    ? {msg: res.msg}
-    : res.data.studentById.favoriteavatarcollectionSet;
+    ? {msg: res.msg, success: false}
+    : {data: res.data.studentById.favoriteavatarcollectionSet, success: true};
 };
 
 export const doSetUserAvatar = async (

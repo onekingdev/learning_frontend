@@ -1,30 +1,28 @@
-import { FC, useEffect, useState, useContext }     from 'react';
-import styled                                      from 'styled-components';
-import { useSelector, useDispatch }                from 'react-redux';
-import wardrobe                                    from 'views/assets/wardrobe.svg';
-import floor                                       from 'views/assets/avatars/floor.png';
-import { LoadingContext }                          from 'react-router-loading';
-import { ScreenSize }                              from 'constants/screenSize';
-import { useHistory }                              from 'react-router-dom';
-import { AvatarFavorites }                         from './AvatarFavorites';
+import { FC, useEffect, useState, useContext } from 'react';
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import wardrobe from 'views/assets/wardrobe.svg';
+import floor from 'views/assets/avatars/floor.png';
+import { LoadingContext } from 'react-router-loading';
+import { ScreenSize } from 'constants/screenSize';
+import { useHistory } from 'react-router-dom';
+import { AvatarFavorites } from './AvatarFavorites';
 import { doFetchFavoriteAvatars, doSetUserAvatar } from 'app/actions/avatarActions';
-import { AvatarSet }                               from '../AvatarSet';
-import { LeftDrawer }                              from './LeftDrawer';
-import StarRoundedIcon                             from '@mui/icons-material/StarRounded';
-import IconButton                                  from '@mui/material/IconButton';
-import { useSnackbar }                             from 'notistack';
-import { LoadingSpinner }                          from 'views/atoms/Spinner';
-import { AVATAR_SET_DEFAULT }                      from 'app/types'
-import { dictionary }   from 'views/pages/Student/Avatar/dictionary'
+import { AvatarSet } from '../AvatarSet';
+import { LeftDrawer } from './LeftDrawer';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import IconButton from '@mui/material/IconButton';
+import { useSnackbar } from 'notistack';
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { AVATAR_SET_DEFAULT } from 'app/types'
+import { dictionary } from 'views/pages/Student/Avatar/dictionary'
 
 export const AvatarSelector: FC = () => {
 
-  const history       = useHistory();
-  const dispatch      = useDispatch()
-  const user          = useSelector((state: any) => state.user);
-  const student       = useSelector((state: any) => state.student)
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  const history = useHistory();
+  const dispatch = useDispatch()
+  const student = useSelector((state: any) => state.student)
+  const { language, token } = useSelector((state: any) => state.user);
   const loadingContext = useContext(LoadingContext);
   const [loading, setLoading] = useState(false)
 
@@ -42,8 +40,11 @@ export const AvatarSelector: FC = () => {
 
 
   const fetchFavorites = async () => {
-    const res: any = await doFetchFavoriteAvatars(student.id, user.token)
-    res.msg ? console.log('error:', res.msg) : setfavorites(res)
+    const res: any = await doFetchFavoriteAvatars(student.id, token)
+    if (res.success) {
+      setfavorites(res.data)
+    } else
+      enqueueSnackbar(res.msg, { variant: 'error' })
   }
 
   const setCurrentAvatar = (id: number) => {
@@ -60,7 +61,7 @@ export const AvatarSelector: FC = () => {
     setLoading(true)
     if (favorites.length) {
 
-      const res: any = await doSetUserAvatar(student.id, favorites[currentAvatarId].id, user.token)
+      const res: any = await doSetUserAvatar(student.id, favorites[currentAvatarId].id, token)
       if (res.status) {
         dispatch({ type: AVATAR_SET_DEFAULT, payload: res })
         enqueueSnackbar(dictionary[language]?.setUserAvatarSuccessfully, { variant: 'success' })
@@ -104,7 +105,7 @@ export const AvatarSelector: FC = () => {
             loading &&
             <LoadingSpinner />}
 
-          <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} size={150}/>
+          <AvatarSet accessory={accessory} head={head} body={body} pants={footer} skin={skin} size={150} />
           <div style={{ display: 'flex', alignItems: 'start', height: '100%' }}>
             <IconButton
               aria-label={dictionary[language]?.setFavorite}
