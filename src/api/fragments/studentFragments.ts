@@ -7,6 +7,7 @@ import {GRADES} from './peopleFragments';
 import {AVATAR} from './avatarFragments';
 import {BATTERY_RAW} from './batteryFragments';
 import { TOPIC } from './questionFragments';
+import { _CLASSROOM_SCHEMA } from './teacherFraments';
 
 export const GUARIDAN_STUDENT_PLAN_RAW = `
     id
@@ -200,10 +201,7 @@ export const STUDENT = `
             ${AVATAR}
         }
         classroom {
-            id
-            audience {
-
-            }
+            i${_CLASSROOM_SCHEMA}
         }
 `;
 export const STUDENT_RAW = `
