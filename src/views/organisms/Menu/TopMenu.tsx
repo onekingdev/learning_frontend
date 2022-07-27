@@ -11,9 +11,9 @@ import { ScreenSize } from 'constants/screenSize';
 import { useHistory } from 'react-router-dom';
 import { Sidebar } from 'views/organisms/Menu/Sidebar';
 import { ProfileDropDownMenu } from 'views/organisms/Menu/ProfileDropdownMenu';
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { Box } from '@mui/material';
 import { USER_AVATAR_SIZE } from 'constants/common';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 type TopMenuProps = {
   rank         : number;
@@ -38,7 +38,7 @@ export const TopMenu: FC<TopMenuProps> = ({
   energyCharge,
   balance,
 }) => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+  const isMobile = useSocratesMediaQuery('xs')
   const [navOp, setNavOp] = useState(true)
   const changeNavBarOpacity = () => {
     const posY = window.scrollY

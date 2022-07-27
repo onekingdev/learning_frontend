@@ -9,6 +9,7 @@ import {
 } from 'api/mutations/students';
 import mutation from 'api/mutations/get';
 import {sendRawQuery} from 'api/queries/get';
+import { STUDENT_HOMEWORK } from 'api/fragments/studentFragments';
 
 export const setAreasOfKnowledge = (payload: string) => ({
   type: 'SET_AOK',
@@ -234,4 +235,22 @@ export const doFetchWalletTransactions = async (
 export const doFetchUserBadges = async (studentId: number, token: string) => {
   const res: any = await fetchQuery(FETCH_USER_BADGES(studentId), token);
   return res.data?.studentBadgesByStudentId ?? res.errors[0];
+};
+
+
+export const doFetchStudentHomework = async (
+  studentId: string | number,
+  token: string
+) => {
+  const res: any = await fetchQuery(
+    `
+    {
+      studentById(id: ${studentId}) {
+        studenthomeworkSet {
+          ${STUDENT_HOMEWORK}
+        }
+      }
+    }
+    `, token);
+  return res.data?.studentById?.studenthomeworkSet || res.errors[0]; // when django returns error message on fail
 };

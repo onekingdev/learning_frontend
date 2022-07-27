@@ -16,6 +16,7 @@ import bank_icon from 'views/assets/nav-icons/bank.png';
 import collectible_icon from 'views/assets/nav-icons/collectibles.png';
 import profile_icon from 'views/assets/nav-icons/profile.png';
 import tutorial_icon from 'views/assets/nav-icons/tutorial.png';
+import homework_icon from 'views/assets/nav-icons/homework.png';
 import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
 import { TypoIcon } from 'views/atoms/Text';
@@ -27,6 +28,7 @@ import { SET_OLD_USER } from 'app/types';
 import { dictionary } from 'views/pages/Student/Menus/dictionary'
 import YouTube from 'react-youtube';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+import commonDictionary from 'constants/commonDictionary'
 
 export const Sidebar: FC = () => {
 
@@ -122,6 +124,17 @@ export const Sidebar: FC = () => {
                                     size={ICON_SIZE.medium}
                                 />
                                 <TypoIcon >{dictionary[language]?.questions}</TypoIcon >
+                            </IconContainer>
+                        </StyledListItem>
+                        <StyledListItem
+                            onClick={() => history.push('/student/homework')}
+                        >
+                            <IconContainer>
+                                <Icon
+                                    image={homework_icon}
+                                    size={ICON_SIZE.medium}
+                                />
+                                <TypoIcon >{commonDictionary[language]?.homework}</TypoIcon >
                             </IconContainer>
                         </StyledListItem>
                         <StyledListItem

@@ -49,6 +49,7 @@ import Notes from 'views/pages/Teacher/Notes/Notes';
 import ClassDashboard from 'views/pages/Teacher/ClassDashboard';
 import ClassroomSettings from 'views/pages/Teacher/ClassroomSettings/ClassroomSettings';
 import Schools from 'views/pages/Teacher/Schools/Schools';
+import { Homework } from 'views/pages/Student/Homework';
 
 
 const PrivateRoute = ({ requireAuth = true, loading = false, ...rest }) => {
@@ -132,6 +133,7 @@ export function Routes() {
         <PrivateRoute loading={true} path="/progress">
           <KidsProgress />
         </PrivateRoute>
+        <PrivateRoute loading={true} requireAuth={true} path="/student/homework" component={Homework} />
         <PrivateRoute loading={true} exactv path="/review">
           <ProgressReview />
         </PrivateRoute>

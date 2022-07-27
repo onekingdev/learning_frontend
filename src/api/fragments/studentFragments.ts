@@ -6,6 +6,7 @@ import {AREA_OF_KNOWLEDGE} from './areaOfKnowledgeFragments';
 import {GRADES} from './peopleFragments';
 import {AVATAR} from './avatarFragments';
 import {BATTERY_RAW} from './batteryFragments';
+import { TOPIC } from './questionFragments';
 
 export const GUARIDAN_STUDENT_PLAN_RAW = `
     id
@@ -243,3 +244,23 @@ export const LastWeekAndCoinsQuestions = (weekCount: number) => `
         }
     }
 `;
+
+export const STUDENT_HOMEWORK = `
+    id
+    isActive
+    name
+    topic {
+        ${TOPIC}
+    }
+    numberOfQuestions
+    startAt
+    endAt
+    status
+    blockSet {
+        id
+    }
+    result {
+        hits
+        total
+    }
+`
