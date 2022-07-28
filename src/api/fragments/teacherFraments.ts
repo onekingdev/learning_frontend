@@ -175,7 +175,7 @@ export const SUBSCRIBER = `
         createTimestamp
         updateTimestamp
         school {
-            ${SCHOOL}
+            id
         }
     }
 `

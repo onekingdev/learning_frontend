@@ -1,4 +1,6 @@
 import { GROUP } from 'api/fragments/peopleFragments';
+import { LEVEL } from 'api/fragments/schemas';
+import { STUDENT_HOMEWORK } from 'api/fragments/studentFragments';
 import {
   ADD_CLASS_TO_TEACHER,
   CLASSROMM_STUDENTS,
@@ -328,32 +330,36 @@ export const doFetchTeacherClassrooms = async (
   return res.data?.teacherById?.classrooms || res.errors[0]; // when django returns error message on fail
 };
 
-export const teacherCreatesStudent = (payload: string) => ({
-  type: 'TEACHER_CREATE_STUDENT',
-  payload,
-});
 
-export const teacherAuthStudent = (payload: string) => ({
-  type: 'TEACHER_AUTH_STUDENT',
-  payload,
-});
 
-export const teacherCreateGroup = (payload: string) => ({
-  type: 'TEACHER_CREATE_GROUP',
-  payload,
-});
+export const doFetchClassroomStudentsWithAssignments = async (
+  classroomId: string | number,
+  token: string
+) => {
+  const res: any = await fetchQuery(
+    `
+    {
+      classroomById(id: "${classroomId}"){
+        studentSet{
+          id
+          lastName
+          firstName
+          fullName
+          level {
+            ${LEVEL}
+          }
+          points
+          bankWallet {
+            id
+            balance
+          }
+          studenthomeworkSet{
+            ${STUDENT_HOMEWORK}
+          }
+        }
+      }
+    }
+    `, token);
+  return res.data?.classroomById?.studentSet || res.errors[0]; // when django returns error message on fail
+};
 
-export const teacherRemoveGroup = (payload: string) => ({
-  type: 'TEACHER_REMOVE_GROUP',
-  payload,
-});
-
-export const teacherAddStudent = (payload: string) => ({
-  type: 'TEACHER_ADD_STUDENT',
-  payload,
-});
-
-export const teacherRemoveStudent = (payload: string) => ({
-  type: 'TEACHER_REMOVE_STUDENT',
-  payload,
-});

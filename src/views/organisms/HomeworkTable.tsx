@@ -24,7 +24,7 @@ interface Column {
 
 const columns: readonly Column[] = [
   { id: 'name', label: 'Name of Assignment' },
-  { id: 'topic', label: 'Area of knowledge' },
+  { id: 'topic', label: 'Topic' },
   { id: 'startAt', label: 'Start Date' },
   { id: 'endAt', label: 'End Date' },
   // {
