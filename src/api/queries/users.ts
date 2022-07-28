@@ -1,11 +1,11 @@
 import {_USER, USER_PROFILE} from '../fragments/userFragments';
 import {STUDENT} from '../fragments/studentFragments';
-import {COIN_WALLET} from '../fragments/coinWalletFragments';
 
 import {GUARDIAN} from '../fragments/guardianFragments';
 import {_CLASSROOM_SCHEMA, _TEACHERSCHEMA} from 'api/fragments/teacherFraments';
-import { AVATAR } from 'api/fragments/avatarFragments';
-import { _GROUP, _STUDENT } from 'api/fragments/peopleFragments';
+import { _GROUP } from 'api/fragments/peopleFragments';
+import { COIN_WALLET, _AVATAR, _STUDENT } from 'api/fragments/schemas';
+
 export const USERS_QUERY = `
     {
         ${_USER}
@@ -19,16 +19,16 @@ export const USERS_QUERY = `
 export const STUDENT_SCHEMA = `
     ${_STUDENT}
     currentAvatarHead {
-        ${AVATAR}
+        ${_AVATAR}
     }
     currentAvatarAccessories {
-        ${AVATAR}
+        ${_AVATAR}
     }
     currentAvatarClothes {
-        ${AVATAR}
+        ${_AVATAR}
     }
     currentAvatarPants {
-        ${AVATAR}
+        ${_AVATAR}
     }
     grade {
         grade {
@@ -76,7 +76,7 @@ classrooms {
 `
 
 /**
- * Nameing conventions
+ * Naming conventions
  * Full schema will have full name, ex: STUDENT
  * 1 Level Deep Schema, omit 2+ level deep starts with underscore, ex: _USER
  */

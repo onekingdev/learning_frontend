@@ -1,39 +1,15 @@
-import { STUDENT_RAW } from './studentFragments'
+import { AREA_OF_KNOWLEDGE_QUERY } from 'api/queries/questions';
 import { PAYMENT_METHOD, PLAN, PLAN_RAW } from '../fragments/paymentFragments'
 import { COUPON_COODE, } from '../fragments/paymentFragments';
-import { GRADES } from '../fragments/peopleFragments'
-import {
-    // AVATAR,
-    AVATAR_RAW
-} from './avatarFragments'
-export const GUARDIAN_STUDENT = `
-    id
-    identifier
-    randomSlug
-`;
-
-export const GUARDIAN_RAW = `
-    id
-    isActive
-    firstName
-    lastName
-    gender
-`;
-export const GUARDIAN_RAW_OLD = `
-    id
-    identifier
-    isActive
-    deletedTimestamp
-    randomSlug
-    createTimestamp
-    updateTimestamp
-    firstName
-    lastName
-    gender
-`;
+import { AREA_OF_KNOWLEDGE_RAW } from './areaOfKnowledgeFragments';
+import { STUDENT } from './studentFragments';
 
 export const GUARDIAN = `
-    ${GUARDIAN_RAW}
+    id
+    isActive
+    firstName
+    lastName
+    gender
     couponCode {
         ${COUPON_COODE}
     }
@@ -46,90 +22,7 @@ export const GUARDIAN = `
         }
     }
 `
-export const GUARDIAN_OLD = `
-    ${GUARDIAN_RAW}
-    couponCode {
-        ${COUPON_COODE}
-    }
-    guardianstudentSet {
-        ${GUARDIAN_STUDENT}
-        student {
-            ${STUDENT_RAW}
-            currentAvatarHead{
-                ${AVATAR_RAW}
-            }
-            currentAvatarAccessories{
-                ${AVATAR_RAW}
-            }
-            currentAvatarClothes{
-                ${AVATAR_RAW}
-            }
-            currentAvatarPants{
-                ${AVATAR_RAW}
-            }
-            audience {
-                gradeSet {
-                    ${GRADES}
-                }
-            }
-            grade {
-                grade{
-                    ${GRADES}
-                }
-            }
-            user{
-                id
-                username
-                language
-            }
-        }
-    }
-    guardianstudentplanSet {
-        plan {
-            ${PLAN}
-        }
-        ${GUARDIAN_STUDENT}
-        student {
-            ${STUDENT_RAW}
-            currentAvatarHead{
-                ${AVATAR_RAW}
-            }
-            currentAvatarAccessories{
-                ${AVATAR_RAW}
-            }
-            currentAvatarClothes{
-                ${AVATAR_RAW}
-            }
-            currentAvatarPants{
-                ${AVATAR_RAW}
-            }
-            audience {
-                gradeSet {
-                    ${GRADES}
-                }
-            }
-            grade {
-                grade{
-                    ${GRADES}
-                }
-            }
-            user{
-                id
-                username
-                language
-            }
-        }
-    }
-    paymentMethod {
-        ${PAYMENT_METHOD}
-    }
-    availableGuardianstudentplan{
-        id
-        plan{
-            ${PLAN}
-        }
-      }
-`
+
 export const GUARDIAN_ORDERS = `
 orderSet {
   id
@@ -146,4 +39,37 @@ orderSet {
     }
   }
 }
+`
+export const GUARDIAN_STUDENT_PLAN = `
+    id
+    identifier
+    randomSlug
+    student {
+        ${STUDENT}
+    }
+    slug
+    plan {
+      id
+      identifier
+      name
+      description
+      areaOfKnowledge
+      slug
+      priceMonth
+      priceYear
+      currency
+      isCancel
+      subjects {
+          ${AREA_OF_KNOWLEDGE_RAW}
+      }
+    }
+    subject {
+        ${AREA_OF_KNOWLEDGE_QUERY}
+    }
+    cancelReason
+    isCancel
+    isPaid
+    expiredAt
+    period
+    price
 `

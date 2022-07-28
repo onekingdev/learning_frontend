@@ -6,7 +6,6 @@ import { Link }           from 'react-router-dom';
 import { useSelector }    from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { get }            from 'api/queries/get';
-import { AVATAR }         from 'api/fragments/avatarFragments';
 import { IAvatar }        from 'app/entities/avatar';
 import IconButton         from '@mui/material/IconButton';
 import StarRoundedIcon    from '@mui/icons-material/StarRounded';
@@ -19,6 +18,7 @@ import { ColorPickerDropdown }  from 'views/molecules/Avatar/Wardrobe/ColorPicke
 import { dictionary }           from 'views/pages/Student/Avatar/dictionary'
 import wardrobe_icon            from 'views/assets/wardrobe.png';
 import useMediaQuery            from '@mui/material/useMediaQuery';
+import { _AVATAR } from 'api/fragments/schemas';
 
 export const WardrobeSelector: FC = () => {
 
@@ -69,7 +69,7 @@ export const WardrobeSelector: FC = () => {
   }, [reload])
 
   useEffect(() => {
-    get('avatars', `{${AVATAR}}`, handleData, handleError);
+    get('avatars', `{${_AVATAR}}`, handleData, handleError);
   }, []);
   useEffect(() => {
     const accessoriesArray = avatarItems.filter(

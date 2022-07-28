@@ -1,6 +1,6 @@
+import { token } from 'api/fragments/schemas';
 import {GUARDIAN} from '../fragments/guardianFragments';
 import {_USER, USER_PROFILE} from '../fragments/userFragments';
-import {token} from '../fragments/tokenFragments';
 
 export const CREATE_GUARDIAN = (
   email: string,

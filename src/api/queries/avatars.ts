@@ -1,4 +1,4 @@
-import { SIMPLE_AVATAR } from 'api/fragments/avatarFragments';
+import { _AVATAR } from "api/fragments/schemas";
 
 export const FETCH_USER_OWNED_AVATAR_ITEMS = (studentId: number) => `
   query {
@@ -16,16 +16,16 @@ export const FETCH_USER_FAVORITE_AVATARS = (studentId: number) => `
       favoriteavatarcollectionSet{
         id
         avatarAccessorie {
-          ${SIMPLE_AVATAR}
+          ${_AVATAR}
         }
         avatarHead {
-          ${SIMPLE_AVATAR}
+          ${_AVATAR}
         }
         avatarClothes {
-          ${SIMPLE_AVATAR}
+          ${_AVATAR}
         }
         avatarPants {
-          ${SIMPLE_AVATAR}
+          ${_AVATAR}
         }
         skinTone
       }
@@ -42,16 +42,16 @@ export const SET_CURRENT_USER_AVATAR_SET = (
       favoriteAvatarCollection {
         id
         avatarAccessorie{
-          ${SIMPLE_AVATAR}
+          ${_AVATAR}
         }
         avatarHead{
-          ${SIMPLE_AVATAR}
+          ${_AVATAR}
         }
         avatarClothes{
-          ${SIMPLE_AVATAR}
+          ${_AVATAR}
         }
         avatarPants{
-          ${SIMPLE_AVATAR}
+          ${_AVATAR}
         }
         skinTone
       }

@@ -1,15 +1,4 @@
-export const _STUDENT = `
-id
-isActive
-firstName
-lastName
-fullName
-dob
-gender
-points
-intPeriodStartAt
-isNew
-`
+import { _STUDENT } from "./schemas";
 
 export const ORGANIZATIONS = `
     {

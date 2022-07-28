@@ -1,14 +1,13 @@
-import {GUARDIAN, GUARDIAN_ORDERS} from '../fragments/guardianFragments';
+import {GUARDIAN, GUARDIAN_ORDERS, GUARDIAN_STUDENT_PLAN} from '../fragments/guardianFragments';
 import {_USER, USER_PROFILE} from '../fragments/userFragments';
 import {
-  GUARDIAN_STUDENT_PLAN,
   ORDER,
   PLAN_RAW,
   AVAILABLE_PLANS,
 } from '../fragments/paymentFragments';
-import {ORDER_RAW, STUDENT_RAW} from '../fragments/studentFragments';
+import {ORDER_RAW} from '../fragments/studentFragments';
 import {GRADES} from '../fragments/peopleFragments';
-import {AVATAR_RAW} from 'api/fragments/avatarFragments';
+import { _AVATAR, _STUDENT } from 'api/fragments/schemas';
 
 export const CREATE_GUARDIAN = (
   email: string,
@@ -283,18 +282,18 @@ guardianById(id: "${guardianId}"){
   guardianstudentplanSet{
     id
     student{
-      ${STUDENT_RAW}
+      ${_STUDENT}
       currentAvatarHead{
-          ${AVATAR_RAW}
+          ${_AVATAR}
       }
       currentAvatarAccessories{
-          ${AVATAR_RAW}
+          ${_AVATAR}
       }
       currentAvatarClothes{
-          ${AVATAR_RAW}
+          ${_AVATAR}
       }
       currentAvatarPants{
-          ${AVATAR_RAW}
+          ${_AVATAR}
       }
       audience {
           gradeSet {
@@ -328,18 +327,18 @@ export const FETCH_GUARDIAN_PLANS = (guardianId: number) => `
 export const FETCH_STUDENT_BY_ID = (studentId: number) => `
 query {
   studentById (id: "${studentId}"){
-    ${STUDENT_RAW}
+    ${_STUDENT}
     currentAvatarHead{
-        ${AVATAR_RAW}
+        ${_AVATAR}
     }
     currentAvatarAccessories{
-        ${AVATAR_RAW}
+        ${_AVATAR}
     }
     currentAvatarClothes{
-        ${AVATAR_RAW}
+        ${_AVATAR}
     }
     currentAvatarPants{
-        ${AVATAR_RAW}
+        ${_AVATAR}
     }
     guardianstudentplan {
       subject {

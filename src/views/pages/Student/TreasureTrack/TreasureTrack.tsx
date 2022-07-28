@@ -17,7 +17,6 @@ import { Container as MContainer, Backdrop } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { UserRankTreasureTrack } from 'views/molecules/UserRank';
 import { ScreenSize } from 'constants/screenSize';
-import { HonorRoll } from 'api/fragments/honorRollFragments';
 import { LastWeekAndCoinsQuestions } from 'api/fragments/studentFragments';
 import query from 'api/queries/get';
 import { AvatarSet } from 'views/molecules/Avatar/AvatarSet';
@@ -32,6 +31,7 @@ import {
 import GoldMedal from 'views/assets/gold-metal.png';
 import SilverMedal from 'views/assets/silver-metal.png';
 import BronzeMedal from 'views/assets/bronze-metal.png';
+import { HONOR_ROLL } from 'api/fragments/schemas';
 
 const Wrapper = styled.div`
     background-image  : url(${background});
@@ -125,7 +125,7 @@ export const KidsTreasureTrack: FC = () => {
         (async () => {
             if (user && user.token) {
                 // Get Topic Report
-                const res: any = await query('', HonorRoll, user.token).catch(() => ({ success: false }));
+                const res: any = await query('', HONOR_ROLL, user.token).catch(() => ({ success: false }));
                 if (res.success === false) {
                     return
                 }

@@ -2,19 +2,18 @@ import { FC } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import {Typography, Container} from '@mui/material';
+import { Typography, Container } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { SettingBarColor } from 'views/Color';
 import { SoundSwitch } from './SoundSwitch';
 import { LanguageSelect } from './StudentSettingsLanguageSelect';
-import { dictionary }       from 'views/pages/Student/Settings/dictionary'
+import { dictionary } from 'views/pages/Student/Settings/dictionary'
 import { useSelector } from 'react-redux';
 
 export const StudentSettingsAccordian: FC = () => {
-  let language:string     = useSelector((state: any) => state.user.language);
-  language                = language? language : 'en-us'
+  const language = useSelector((state: any) => state.user.language);
   return (
-    <Container sx={{marginTop: 2, marginBottom: 2, borderRadius: 10}}>
+    <Container sx={{ marginTop: 2, marginBottom: 2, borderRadius: 10 }}>
       <Accordion sx={{ marginBottom: 2 }} defaultExpanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -47,9 +46,9 @@ export const StudentSettingsAccordian: FC = () => {
           sx={{ background: SettingBarColor.audio }}
           expandIcon={<ExpandMoreIcon />}
         >
-          <Typography style={{ color: 'white', textAlign:'center' }}>{dictionary[language]?.sound}</Typography>
+          <Typography style={{ color: 'white', textAlign: 'center' }}>{dictionary[language]?.sound}</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{ display: 'flex', justifyContent: 'center'}}>
+        <AccordionDetails sx={{ display: 'flex', justifyContent: 'center' }}>
           <SoundSwitch />
         </AccordionDetails>
       </Accordion>

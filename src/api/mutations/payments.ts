@@ -1,6 +1,6 @@
 import { _TEACHERSCHEMA } from 'api/fragments/teacherFraments';
-import { GUARDIAN, }                  from '../fragments/guardianFragments';
-import { PAYMENT_METHOD, GUARDIAN_STUDENT_PLAN, ORDER } from '../fragments/paymentFragments'
+import { GUARDIAN, GUARDIAN_STUDENT_PLAN, }                  from '../fragments/guardianFragments';
+import { PAYMENT_METHOD, ORDER } from '../fragments/paymentFragments'
 
 
 export const CREATE_ORDER = (

@@ -1,13 +1,12 @@
-import {LEVEL} from './levelFragments';
-import {COIN_WALLET} from './coinWalletFragments';
-import {BANK_WALLET} from './bankFragments';
-import {AUDIENCES} from './peopleFragments';
-import {AREA_OF_KNOWLEDGE} from './areaOfKnowledgeFragments';
-import {GRADES} from './peopleFragments';
-import {AVATAR} from './avatarFragments';
-import {BATTERY_RAW} from './batteryFragments';
+import { BANK_WALLET } from './bankFragments';
+import { AUDIENCES } from './peopleFragments';
+import { AREA_OF_KNOWLEDGE } from './areaOfKnowledgeFragments';
+import { GRADES } from './peopleFragments';
 import { TOPIC } from './questionFragments';
 import { _CLASSROOM_SCHEMA } from './teacherFraments';
+import { COIN_WALLET, LEVEL, _AVATAR, _BATTERY, _STUDENT } from './schemas';
+
+
 
 export const GUARIDAN_STUDENT_PLAN_RAW = `
     id
@@ -22,7 +21,7 @@ export const GUARIDAN_STUDENT_PLAN_RAW = `
     price
 `;
 
-export const ORDER_DETAIL_RAW = `
+const ORDER_DETAIL_RAW = `
     id
     identifier
     createTimestamp
@@ -130,110 +129,7 @@ export const STUDENTS = `
         fullName
 `;
 
-export const STUDENT = `
-        id
-        identifier
-        isActive
-        deletedTimestamp
-        randomSlug
-        createTimestamp
-        updateTimestamp
-        firstName
-        lastName
-        fullName
-        dob
-        gender
-        points
-        isNew
-        intPeriodStartAt
-        activeStudentPlan {
-            ${STUDENT_PLAN}
-        }
-        level {
-            ${LEVEL}
-        }
-        nextLevel {
-            ${LEVEL}
-        }
-        guardianstudentplan{
-            subject {
-                ${AREA_OF_KNOWLEDGE}
-            }
-            ${GUARIDAN_STUDENT_PLAN_RAW}
-            orderDetail {
-                ${ORDER_DETAIL_RAW}
-            }
-        }
-        coinWallet {
-            ${COIN_WALLET}
-        }
-        bankWallet {
-            ${BANK_WALLET}
-        }
-        battery {
-            ${BATTERY_RAW}
-        }
-        audience {
-            ${AUDIENCES}
-            areaofknowledgeSet {
-                ${AREA_OF_KNOWLEDGE}
-            }
-            gradeSet {
-                ${GRADES}
-            }
-        }
-        grade {
-            ${STUDENT_GRADE}
-            grade{
-                ${GRADES}
-            }
-        }
-        currentAvatarHead {
-            ${AVATAR}
-        }
-        currentAvatarAccessories {
-            ${AVATAR}
-        }
-        currentAvatarClothes {
-            ${AVATAR}
-        }
-        currentAvatarPants {
-            ${AVATAR}
-        }
-        classroom {
-            ${_CLASSROOM_SCHEMA}
-        }
-`;
-export const STUDENT_RAW = `
-        id
-        identifier
-        isActive
-        firstName
-        lastName
-        fullName
-        dob
-        gender
-        points
-        intPeriodStartAt
-`;
 
-
-export const STUDENT_RAW_OLD = `
-        id
-        identifier
-        isActive
-        deletedTimestamp
-        randomSlug
-        createTimestamp
-        updateTimestamp
-        firstName
-        lastName
-        fullName
-        dob
-        gender
-        points
-        intPeriodStartAt
-`;
 
 export const LastWeekAndCoinsQuestions = (weekCount: number) => `
     students {
@@ -268,3 +164,65 @@ export const STUDENT_HOMEWORK = `
         total
     }
 `
+
+export const STUDENT = `
+    ${_STUDENT}
+    activeStudentPlan {
+        ${STUDENT_PLAN}
+    }
+    level {
+        ${LEVEL}
+    }
+    nextLevel {
+        ${LEVEL}
+    }
+    guardianstudentplan{
+        subject {
+            ${AREA_OF_KNOWLEDGE}
+        }
+        ${GUARIDAN_STUDENT_PLAN_RAW}
+        orderDetail {
+            ${ORDER_DETAIL_RAW}
+        }
+    }
+    coinWallet {
+        ${COIN_WALLET}
+    }
+    bankWallet {
+        ${BANK_WALLET}
+    }
+    battery {
+        ${_BATTERY}
+    }
+    audience {
+        ${AUDIENCES}
+        areaofknowledgeSet {
+            ${AREA_OF_KNOWLEDGE}
+        }
+        gradeSet {
+            ${GRADES}
+        }
+    }
+    grade {
+        ${STUDENT_GRADE}
+        grade{
+            ${GRADES}
+        }
+    }
+    currentAvatarHead {
+        ${_AVATAR}
+    }
+    currentAvatarAccessories {
+        ${_AVATAR}
+    }
+    currentAvatarClothes {
+        ${_AVATAR}
+    }
+    currentAvatarPants {
+        ${_AVATAR}
+    }
+    classroom {
+        ${_CLASSROOM_SCHEMA}
+    }
+`;
+

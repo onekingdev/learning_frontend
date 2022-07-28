@@ -70,7 +70,7 @@ export const HomeworkTable: FC<{ homeworks: Array<any> }> = ({ homeworks }) => {
     <Paper sx={{ overflow: 'hidden' }}>
       {
         homeworks &&
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer>
           <Table stickyHeader aria-label="sticky table" >
             <TableHead>
               <TableRow >

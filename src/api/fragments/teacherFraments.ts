@@ -1,4 +1,4 @@
-import { COUPON_COODE, DISCOUNT_CODE_DETAIL, PAYMENT_METHOD, PLAN } from "./paymentFragments"
+import { AREA_OF_KNOWLEDGE_RAW } from "./areaOfKnowledgeFragments"
 
 export const _CLASSROOM_SCHEMA = `
     id
@@ -32,7 +32,17 @@ export const TEACHER_SCHEMA = `
     id
     isActive
     discountCode {
-        ${DISCOUNT_CODE_DETAIL}
+        id
+        identifier
+        isActive
+        deletedTimestamp
+        randomSlug
+        code
+        percentage
+        trialDay
+        expiredAt
+        stripeCouponId
+        type
     }
     name
     lastName
@@ -67,13 +77,25 @@ export const _TEACHERSCHEMA = `
     zip
     country
 `
-export const SCHOOL_TEACHER =`
+export const SCHOOL_TEACHER = `
     id
     isActive
     randomSlug
     teacher: TeacherSchema
     plan {
-        ${PLAN}
+        id
+        identifier
+        name
+        description
+        areaOfKnowledge
+        slug
+        priceMonth
+        priceYear
+        currency
+        isCancel
+        subjects {
+            ${AREA_OF_KNOWLEDGE_RAW}
+        }
     }
     orderDetail: OrderDetailSchema
     cancelReason
@@ -98,7 +120,22 @@ export const SCHOOL = `
     country
     district
     paymentmethodSet {
-        ${PAYMENT_METHOD}
+        id
+        method
+        cardFirstName
+        cardLastName
+        cardNumber
+        cardExpMonth
+        cardExpYear
+        cardCvc
+        address1
+        address2
+        city
+        state
+        postCode
+        country
+        phone
+        isDefault
     }
     schoolteacherSet {
         ${SCHOOL_TEACHER}
@@ -121,7 +158,13 @@ export const SUBSCRIBER = `
     zip
     country
     couponCode {
-        ${COUPON_COODE}
+        id
+        identifier
+        code
+        percentage
+        trialDay
+        expiredAt
+        stripeCouponId
     }
     schoolsubscriberSet {
         id

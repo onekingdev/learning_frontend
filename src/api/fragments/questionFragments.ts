@@ -113,10 +113,10 @@ video
 `
 
 export const NEW_R_ANSWER_OPTION = `
-id
-isCorrect
-key
-value
-keyImage
-valueImage
+    id
+    isCorrect
+    key
+    value
+    keyImage
+    valueImage
 `
