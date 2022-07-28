@@ -8,6 +8,8 @@ import {
   CREATE_NEW_PATH_BLOCK,
   FETCH_STUDENT_ANSWER_HISTORY,
 } from 'api/mutations/block';
+import { QUESTION_BLOCK} from '../../api/fragments/blockFragments';
+
 import mutation from 'api/mutations/get';
 import query, {fetchQuery} from 'api/queries/get';
 import {BLOCK_PRESENTATION_QUERY} from 'api/queries/questions';
@@ -190,8 +192,32 @@ export const createNewAiBlock = async (
           ...res.data.createAiBlockPresentation.blockPresentation,
           success: true,
         };
-  } catch (e) {
-    return {msg: 'Network error!', success: false};
+  } catch (e: any) {
+    return {msg: e.message, success: false};
+  }
+};
+
+export const createHomeworkBlock = async (
+  homeworkId: number,
+  token: string
+) => {
+  try {
+    const res: any = await sendRawQuery(
+      `mutation {
+        createHomeworkBlockPresentation(studentHomeworkId: ${homeworkId}) {
+          ${QUESTION_BLOCK}
+        }
+      }`,
+      token
+    );
+    return res.msg
+      ? {msg: res.msg, success: false}
+      : {
+          ...res.data.createHomeworkBlockPresentation.blockPresentation,
+          success: true,
+        };
+  } catch (e: any) {
+    return {msg: e.message, success: false};
   }
 };
 

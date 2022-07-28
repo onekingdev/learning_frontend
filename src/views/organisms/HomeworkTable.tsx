@@ -39,7 +39,13 @@ const columns: readonly Column[] = [
 
 
 
-export const HomeworkTable: FC<{ homeworks: Array<any> }> = ({ homeworks }) => {
+interface HomeworkTableProps {
+  homeworks: Array<any>
+  select: (id: string) => void
+  selectedTaskId: string
+}
+
+export const HomeworkTable: FC<HomeworkTableProps> = ({ homeworks, select, selectedTaskId }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const handleChangePage = (event: any, newPage: number) => {
@@ -95,7 +101,10 @@ export const HomeworkTable: FC<{ homeworks: Array<any> }> = ({ homeworks }) => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row: any) => {
                     return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                      <TableRow hover role="checkbox" tabIndex={-1} key={row.id}
+                        onClick={() => select(row.id)}
+                        selected={selectedTaskId === row.id}
+                      >
                         {columns.map((column) => {
                           const value: any = row[column.id as keyof Object];
                           return (
