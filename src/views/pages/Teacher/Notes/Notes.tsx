@@ -1,11 +1,11 @@
-import { FC, useEffect, useState, useContext }    from 'react';
-import { useSelector }          from 'react-redux';
-import { LoadingContext }       from 'react-router-loading';
-import { useSnackbar }          from 'notistack';
-import { TeacherPgContainer }   from 'views/molecules/PgContainers/TeacherPgContainer';
-import ContentForm              from 'views/molecules/Notes/ContentForm'
-import StudentLists             from 'views/molecules/Notes/StudentLists'
-import { dictionary }           from './dictionary'
+import { FC, useEffect, useState, useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { LoadingContext } from 'react-router-loading';
+import { useSnackbar } from 'notistack';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
+import ContentForm from 'views/molecules/Notes/ContentForm'
+import StudentLists from 'views/molecules/Notes/StudentLists'
+import { dictionary } from './dictionary'
 import { Box } from '@mui/material';
 import { LANGUAGES } from 'constants/common';
 
@@ -42,14 +42,14 @@ const Notes: FC = () => {
   // const {enqueueSnackbar} = useSnackbar();
   // const user              = useSelector((state: any) => state.user);
   // const guardian          = useSelector((state: any) => state.guardian);
-  const language:string     = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const language = useSelector((state: any) => state.user.language);
 
-  const [data, setData]   = useState<any>(test_data);
+  const [data, setData] = useState<any>(test_data);
 
 
   useEffect(() => {
 
-    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+    if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
   }, []);
 
   return (

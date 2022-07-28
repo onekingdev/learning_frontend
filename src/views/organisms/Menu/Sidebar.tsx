@@ -21,7 +21,7 @@ import menu_toggle from 'views/assets/Menu Toggle.svg';
 import styled from 'styled-components';
 import { TypoIcon } from 'views/atoms/Text';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-import { LANGUAGES, TUTORIAL_VDO_URL } from 'constants/common';
+import { TUTORIAL_VDO_URL } from 'constants/common';
 import { VIDEO_TUTORIAL_EXPLAIN } from 'constants/parent';
 import { doSetOldUser } from 'app/actions';
 import { SET_OLD_USER } from 'app/types';
@@ -40,7 +40,7 @@ export const Sidebar: FC = () => {
     const token = useSelector((state: any) => state.user.token);
     const history = useHistory();
 
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    const language = useSelector((state: any) => state.user.language);
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (

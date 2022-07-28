@@ -1,17 +1,17 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import commonDictionary from 'constants/commonDictionary'
-import { Box, Button, Grid, List, ListItem, Paper, Select, Switch, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, List, ListItem, Paper, Switch, TextField, Typography } from '@mui/material';
 import { BasicColor } from 'views/Color';
 import { ClassroomLanguageSelect } from 'views/molecules/Classroom/LanguageSelect';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { LANGUAGES } from 'constants/common';
 
-const ClassroomSettings: FC = (props: any) => {
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+
+const ClassroomSettings: FC = () => {
+  const language = useSelector((state: any) => state.user.language);
   const [settings, setSettings] = useState<any>({
     language: 'en-us',
     game: true,

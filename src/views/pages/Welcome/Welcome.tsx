@@ -13,7 +13,6 @@ import {
   Button,
   Grid,
   ThemeProvider,
-  useMediaQuery
 } from '@mui/material';
 import { welcomePage } from 'views/Theme';
 
@@ -23,15 +22,15 @@ import {
 } from './Style';
 import { Typography } from '@mui/material';
 import { LanguageSelect } from 'views/organisms/Welcome/LanguageSelect';
-import { ScreenSize } from 'constants/screenSize';
 import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
-import { LANGUAGES } from 'constants/common';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+
 
 export const Welcome: FC = () => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+  const isMobile = useSocratesMediaQuery('xs')
   const history = useHistory();
   const dispatch = useDispatch();
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const language = useSelector((state: any) => state.user.language);
 
   useEffect(() => {
     resetReducer(dispatch);

@@ -2,12 +2,11 @@ import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { dictionary } from './dictionary'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
-// import { BasicColor } from 'views/Color';
 import questionMarkInCircle from 'views/assets/questionmark-in-circle.svg'
-import { LANGUAGES } from 'constants/common';
 import { Button, Grid } from '@mui/material';
+
 const AddClassroomForm = (props: any) => {
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    const language = useSelector((state: any) => state.user.language);
 
     const handleCreateNewAccount = () => {
         props.openNewAccountDlg();

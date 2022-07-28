@@ -27,7 +27,7 @@ import {
   useMutation,
 } from '@tanstack/react-query'
 import { doCreateSchool } from 'app/actions';
-import { LANGUAGES, SCHOOL_TYPES } from 'constants/common';
+import { SCHOOL_TYPES } from 'constants/common';
 import { USER_SET_DATA } from 'app/types';
 import { validateEmail } from 'views/utils';
 
@@ -52,7 +52,7 @@ const SchoolSignup: FC = () => {
   const [district, setDistrict] = useState('')
   const [loading, setLoading] = useState(false);
 
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const language = useSelector((state: any) => state.user.language);
 
   const createSchool = useMutation(() => doCreateSchool(
     country.name, district, firstName, lastName, email, schoolName, password, schoolType, userName, zip
@@ -71,7 +71,7 @@ const SchoolSignup: FC = () => {
 
         if (userType === 'SUBSCRIBER')
           history.push('/admin/schools')
-          // history.push('/admin/schools') // Need to be update
+        // history.push('/admin/schools') // Need to be update
       }
     },
     onError: async (error: any) => {

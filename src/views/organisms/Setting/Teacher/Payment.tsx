@@ -13,19 +13,18 @@ import { useSelector } from 'react-redux'
 import payment from 'views/assets/payment/payment.jpg'
 import creditCardType from 'credit-card-type'
 import { dictionary } from './dictionary'
-import { Button, Paper, useMediaQuery } from '@mui/material';
+import { Button, Paper } from '@mui/material';
 import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
-import { ScreenSize } from 'constants/screenSize';
-import { LANGUAGES } from 'constants/common';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 
 export const TeacherPaymentInfo: FC = () => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+  const isMobile = useSocratesMediaQuery('xs')
   const [isEdit, edit] = useState(false)
   const guardian = useSelector((state: any) => state.guardian);
   const cardType = creditCardType(guardian.paymentMethod.cardNumber)
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const language = useSelector((state: any) => state.user.language);
 
   const openEdit = () => edit(!isEdit);
 

@@ -5,7 +5,6 @@ import {
   List,
   ListItem,
   ListSubheader,
-  useMediaQuery,
 } from '@mui/material';
 import { useSelector } from 'react-redux'
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
@@ -14,8 +13,7 @@ import { LSLabel, LSText } from 'views/molecules/Setting/utils/Style';
 import { TeacherCancelPlanForm } from './TeacherCancelPlanForm';
 import { TeacherPlanUpgrade } from './TeacherPlanUpgrade';
 import { dictionary } from './dictionary'
-import { LANGUAGES } from 'constants/common';
-import { ScreenSize } from 'constants/screenSize';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 
 const fake_plans = [
@@ -52,8 +50,8 @@ const fake_plans = [
 ]
 
 export const TeacherPlanList: FC = () => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const isMobile = useSocratesMediaQuery('xs')
+  const language = useSelector((state: any) => state.user.language);
 
   // for change to yearly dialog
   const [isUpdateOpen, update] = useState(false)

@@ -11,12 +11,11 @@ import { LoadingSpinner } from 'views/atoms/Spinner';
 import { CANCEL_REASONS } from 'constants/parent'
 import { dictionary } from './dictionary'
 import { Button, FormControlLabel, Radio } from '@mui/material';
-import { LANGUAGES } from 'constants/common';
 
 
 export const TeacherCancelMembershipForm: FC<{ open: () => void }> = ({ open }) => {
 
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const language = useSelector((state: any) => state.user.language);
 
   const [value, setValue] = useState(CANCEL_REASONS[language][0].value);
   const [loading, setLoading] = useState(false)

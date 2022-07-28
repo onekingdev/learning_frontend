@@ -7,7 +7,7 @@ import { fetchTeacherCertificateFilesFromFirebase } from 'app/firebase';
 import { StudentChkboxList } from 'views/molecules/TeacherCertificates/StudentChkboxList';
 import * as TYPES from 'app/types'
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import { LANGUAGES } from 'constants/common';
+
 
 const mockStudents = [
   {
@@ -29,7 +29,7 @@ const mockStudents = [
 ]
 
 const Certificates: FC = () => {
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const language = useSelector((state: any) => state.user.language);
   const [certImgs, setCertImgs] = useState<Array<any>>([])
   const [selectedId, setSelectedId] = useState<any>(null)
 

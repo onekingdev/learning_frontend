@@ -19,7 +19,7 @@ import {
   Typography,
 } from '@mui/material';
 import { BasicColor } from 'views/Color';
-import { LANGUAGES, USER_TYPE } from 'constants/common';
+import { USER_TYPE } from 'constants/common';
 import background from 'views/assets/colored-shapes-bg.svg';
 import { themeTeacher } from 'views/Theme';
 import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
@@ -32,7 +32,7 @@ export const LogIn: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const { enqueueSnackbar } = useSnackbar();
-  const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+  const language = useSelector((state: any) => state.user.language);
 
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState('');

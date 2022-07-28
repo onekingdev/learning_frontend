@@ -44,7 +44,6 @@ import {
 } from 'country-state-city';
 import commonDictionary from 'constants/commonDictionary'
 import { dictionary } from './dictionary'
-import { LANGUAGES } from 'constants/common';
 import { validatePhoneNumber } from 'views/utils';
 interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): void;
@@ -59,7 +58,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     const guardian = useSelector((state: any) => state.guardian)
     const school = useSelector((state: any) => state.school)
     const teacher = useSelector((state: any) => state.teacher)
-    const language: string = useSelector((state: any) => state.user.language) || LANGUAGES[0].value;
+    const language = useSelector((state: any) => state.user.language);
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
     const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(
