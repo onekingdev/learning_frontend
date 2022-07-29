@@ -26,12 +26,12 @@ import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 import {
   useMutation,
 } from '@tanstack/react-query'
-import { doCreateTeacher } from 'app/actions';
 import FormContainer from 'views/atoms/FormContainer';
 import ContactBox from 'views/organisms/ContactBox';
 import FormBottomDescription from 'views/organisms/FormBottomDescription';
 import { useHistory } from 'react-router-dom';
 import { TEACHER_SET_DATA, USER_SET_DATA } from 'app/types';
+import { doCreateTeacher } from 'app/actions';
 
 const TeacherSignup: FC = () => {
   const isTablet = useSocratesMediaQuery('xs')

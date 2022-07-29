@@ -5,41 +5,11 @@ import {
   ADD_CLASS_TO_TEACHER,
   CLASSROMM_STUDENTS,
   CLASSROOM_GROUPS,
-  CREATE_SCHOOL,
   CREATE_TEACHER,
   TEACHER_CLASSROOMS,
 } from 'api/mutations/teacher';
 import { fetchQuery, sendRawQuery } from 'api/queries/get';
 import { CLASSROOM_SCHEMA, STUDENT_SCHEMA } from 'api/queries/users';
-
-export const doCreateSchool = async (
-  country: string,
-  district: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  name: string,
-  password: string,
-  type: string,
-  userName: string,
-  zip: string
-) => {
-  const res: any = await fetchQuery(
-    CREATE_SCHOOL(
-      country,
-      district,
-      firstName,
-      lastName,
-      email,
-      name,
-      password,
-      type,
-      userName,
-      zip
-    )
-  );
-  return res.data?.createSchool ?? res.errors[0]; // when django returns error message on fail
-};
 
 export const doCreateTeacher = async (
   country: string,
@@ -64,32 +34,6 @@ export const doCreateTeacher = async (
     )
   );
   return res.data?.createTeacher ?? res.errors[0]; // when django returns error message on fail
-};
-
-export const doFetchSubscriberSchools = async (
-  country: string,
-  couponCode: string,
-  email: string,
-  firstName: string,
-  lastName: string,
-  password: string,
-  schoolId: string,
-  userName: string,
-  zip: string
-) => {
-  const res: any = await fetchQuery(
-    CREATE_TEACHER(
-      country,
-      couponCode,
-      email,
-      firstName,
-      lastName,
-      password,
-      userName,
-      zip
-    )
-  );
-  return res.data?.createTeacher?.user ?? res.errors[0]; // when django returns error message on fail
 };
 
 export const doAddClassroomToTeacher = async (

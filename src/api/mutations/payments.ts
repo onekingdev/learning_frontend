@@ -1,3 +1,4 @@
+import { _SCHOOL_SCHEMA } from 'api/fragments/schemas';
 import { _TEACHERSCHEMA } from 'api/fragments/teacherFraments';
 import { GUARDIAN, GUARDIAN_STUDENT_PLAN, }                  from '../fragments/guardianFragments';
 import { PAYMENT_METHOD, ORDER } from '../fragments/paymentFragments'
@@ -83,6 +84,9 @@ export const CONFIRM_PAYMENT_ORDER = (
         status
         teacher {
             ${_TEACHERSCHEMA}
+        }
+        school {
+            ${_SCHOOL_SCHEMA}
         }
     }
 

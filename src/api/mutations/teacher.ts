@@ -1,8 +1,8 @@
 import { COUPON_COODE } from 'api/fragments/paymentFragments';
 import { GROUP } from 'api/fragments/peopleFragments';
+import { SUBSCRIBER, _SCHOOL_SCHEMA } from 'api/fragments/schemas';
 import {
   _CLASSROOM_SCHEMA,
-  SUBSCRIBER,
   _TEACHERSCHEMA,
 } from 'api/fragments/teacherFraments';
 import { _USER, USER_PROFILE } from 'api/fragments/userFragments';
@@ -22,28 +22,31 @@ export const CREATE_SCHOOL = (
 ) => `
 mutation {
 	createSchool (
-        country: "${country}",
-        district: "${district}",
-        firstName: "${firstName}",
-        lastName: "${lastName}",
-        email: "${email}",
-        name: "${name}",
-        password: "${password}",
-        type: "${type}",
-        username: "${userName}",
-        zip: "${zip}",
-    ) {
-        user {
-            ${_USER}
-            profile {
-                ${USER_PROFILE}
-            }
-        }
-        token
-        refreshToken
-        subscriber {
-            ${SUBSCRIBER}
-        }
+    country: "${country}",
+    district: "${district}",
+    firstName: "${firstName}",
+    lastName: "${lastName}",
+    email: "${email}",
+    name: "${name}",
+    password: "${password}",
+    type: "${type}",
+    username: "${userName}",
+    zip: "${zip}",
+  ) {
+    user {
+      ${_USER}
+      profile {
+          ${USER_PROFILE}
+      }
+    }
+    token
+    refreshToken
+    subscriber {
+      ${SUBSCRIBER}
+    }
+    school {
+      ${_SCHOOL_SCHEMA}
+    }
 	}
 }
 `;

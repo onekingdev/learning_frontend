@@ -23,7 +23,7 @@ import {
     OrderTip,
 } from './Style';
 import { LANGUAGES } from 'constants/common';
-import { GUARDIAN_SET_DATA, TEACHER_SET_DATA } from 'app/types';
+import { GUARDIAN_SET_DATA, SUBSCRIBER_ADD_SCHOOL, TEACHER_SET_DATA } from 'app/types';
 import { Typography } from '@mui/material';
 
 type PaymentMethodProps = {
@@ -48,7 +48,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     const trialExpiraton = new Date()
     const paymentFormRef = useRef<PaymentFormFunc>(null)
     const { enqueueSnackbar } = useSnackbar();
-    const {couponCode, language, profile} = useSelector((state: any) => state.user)
+    const { couponCode, language, profile } = useSelector((state: any) => state.user)
     trialExpiraton.setDate(trialExpiraton.getDate() + (couponCode?.trialDay || 0))
     const [subtotal, setSubtotal] = useState(0);
     const [agreeLicense, setAgreeLicense] = useState(false)
@@ -85,7 +85,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             // });
             // TODO: check user type, and when parent redirect to kids/new,
             const userType = profile.role
-            const { teacher, guardian } = result.data
+            const { teacher, guardian, school } = result.data
             switch (userType) {
                 case 'TEACHER':
                     dispatch({
@@ -95,7 +95,12 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     history.push('/teacher/classrooms')
                     break;
                 case 'SUBSCRIBER':
-                    history.push('/kids/new')
+                    // TODO: updated after armin's backend update for confrim order to return subscriber
+                    dispatch({
+                        type: SUBSCRIBER_ADD_SCHOOL,
+                        payload: school
+                    })
+                    history.push('/admin/schools')
                     break;
                 case 'GUARDIAN':
                     dispatch({

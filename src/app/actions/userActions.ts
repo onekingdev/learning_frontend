@@ -52,4 +52,6 @@ export const resetReducer = async (dispatch: any) => {
   dispatch({type: TYPES.STUDENT_RESET});
   dispatch({type: TYPES.USER_RESET});
   dispatch({type: TYPES.TEACHER_RESET});
+  dispatch({type: TYPES.SUBSCRIBER_RESET});
+  dispatch({type: TYPES.SCHOOL_RESET});
 };

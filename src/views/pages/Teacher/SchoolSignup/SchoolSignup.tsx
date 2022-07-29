@@ -26,10 +26,10 @@ import FormBottomDescription from 'views/organisms/FormBottomDescription';
 import {
   useMutation,
 } from '@tanstack/react-query'
-import { doCreateSchool } from 'app/actions';
 import { SCHOOL_TYPES } from 'constants/common';
-import { USER_SET_DATA } from 'app/types';
+import { SCHOOL_SET_DATA, SUBSCRIBER_SET_DATA, USER_SET_DATA } from 'app/types';
 import { validateEmail } from 'views/utils';
+import { doCreateSchool } from 'app/actions';
 
 const SchoolSignup: FC = () => {
   const isMobile = useSocratesMediaQuery('xs')
@@ -61,17 +61,25 @@ const SchoolSignup: FC = () => {
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {
+        const { user, token, subscriber, school } = data
         enqueueSnackbar('School Create Succeed!', { variant: 'success' })
+
         dispatch({
           type: USER_SET_DATA,
-          payload: { ...data.user, token: data.token, refreshToken: data.refreshToken },
+          payload: { ...user, token: token, couponCode: subscriber.couponCode },
         });
-        // history.push('/teacher/payment/School')
-        const userType = data.user?.profile?.role || 'USER'
 
-        if (userType === 'SUBSCRIBER')
-          history.push('/admin/schools')
-        // history.push('/admin/schools') // Need to be update
+        dispatch({
+          type: SCHOOL_SET_DATA,
+          payload: { ...school }
+        })
+
+        dispatch({
+          type: SUBSCRIBER_SET_DATA,
+          payload: { ...subscriber }
+        })
+
+        history.push('/teacher/payment/School')
       }
     },
     onError: async (error: any) => {

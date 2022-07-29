@@ -22,7 +22,29 @@ interface MuiTableFunc {
   getData(): any;
   handleAddData(): void;
 }
-const AddStudents: FC = () => {
+
+const usertypes = [
+  {
+    id: '1',
+    name: 'Admin',
+  },
+  {
+    id: '2',
+    name: 'Teacher',
+  },
+]
+
+const genders = [
+  {
+    id: '1',
+    name: 'Male',
+  },
+  {
+    id: '2',
+    name: 'Femail',
+  },
+]
+const AddTeachers: FC = () => {
 
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
@@ -37,11 +59,11 @@ const AddStudents: FC = () => {
 
   const columns = [
     // { id: 'index', label: 'No', maxWidth: 10 },
+    { id: 'email', label: commonDictionary[language]?.email, minWidth: 30 },
     { id: 'name', label: commonDictionary[language]?.name, minWidth: 30 },
-    { id: 'lastName', label: commonDictionary[language]?.lastName, minWidth: 30 },
     {
-      id: 'username',
-      label: commonDictionary[language]?.username,
+      id: 'lastname',
+      label: commonDictionary[language]?.lastName,
       minWidth: 30,
       required: true,
     },
@@ -51,11 +73,19 @@ const AddStudents: FC = () => {
       minWidth: 50,
     },
     {
-      id: 'grade',
-      label: commonDictionary[language]?.grade,
+      id: 'userType',
+      label: commonDictionary[language]?.user_type,
       minWidth: 50,
       editComponent: 'Select',
-      selectDatas: gradeSet || [],
+      selectDatas: usertypes || [],
+      format: (value: any) => value?.name,
+    },
+    {
+      id: 'gender',
+      label: commonDictionary[language]?.gender,
+      minWidth: 50,
+      editComponent: 'Select',
+      selectDatas: genders || [],
       format: (value: any) => value?.name,
     },
   ]
@@ -79,30 +109,33 @@ const AddStudents: FC = () => {
 
     for (const row of tableData) {
       queryParams.push({
-        classroomId,
-        gradeId: row.grade || '',
+        email: row.email || '',
         name: row.name || '',
         lastName: row.lastName || '',
         password: row.password || '',
-        username: row.username || ''
+        username: row.username || '',
+        gender: row.gender || '',
+        userType: row.userType || ''
       })
     }
 
-    setLoading(true)
-    const res = await doAddStudentsToClassroom(any2String(queryParams), token)
-    if (res.message) {
-      enqueueSnackbar(res.message, { variant: 'error' })
+    console.log({ queryParams })
 
-      setLoading(false)
-    } else {
-      dispatch({
-        type: TEACHER_SET_CURRENT_CLASSROOM,
-        payload: res.data,
-      });
-      setLoading(false)
+    // setLoading(true)
+    // const res = await doAddStudentsToClassroom(any2String(queryParams), token)
+    // if (res.message) {
+    //   enqueueSnackbar(res.message, { variant: 'error' })
 
-      history.push('/teacher/students')
-    }
+    //   setLoading(false)
+    // } else {
+    //   dispatch({
+    //     type: TEACHER_SET_CURRENT_CLASSROOM,
+    //     payload: res.data,
+    //   });
+    //   setLoading(false)
+
+    //   history.push('/teacher/students')
+    // }
 
 
   }
@@ -176,4 +209,4 @@ const AddStudents: FC = () => {
     </TeacherPgContainer>
   );
 };
-export default AddStudents
+export default AddTeachers

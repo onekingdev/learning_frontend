@@ -67,9 +67,8 @@ export const ORDER_DETAIL = `
       plan {
         ${PLAN}
       }
-      subject {
+      subject
           ${AREA_OF_KNOWLEDGE_QUERY}
-      }
       cancelReason
       isCancel
       isPaid

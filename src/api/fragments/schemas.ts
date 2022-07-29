@@ -80,3 +80,31 @@ export const token = `
     refreshToken
 `
 
+export const _SCHOOL_SCHEMA = `
+id
+isActive
+name
+typeOf
+zip
+country
+district
+`
+
+export const SUBSCRIBER = `
+    id
+    isActive
+    firstName
+    lastName
+    gender
+    hasOrder
+    zip
+    country
+    couponCode {
+        id
+        code
+        percentage
+        trialDay
+        expiredAt
+        stripeCouponId
+    }
+`
