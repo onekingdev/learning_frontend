@@ -12,11 +12,13 @@ import {
   ExcelRenderer
 } from 'react-excel-renderer';
 import { useHistory } from 'react-router-dom';
-import { doAddStudentsToClassroom } from 'app/actions';
+import { doAddStudentsToClassroom, doAddTeachersToSchool } from 'app/actions';
 import { any2String } from 'views/utils';
 import { TEACHER_SET_CURRENT_CLASSROOM } from 'app/types';
 import LoadingButton from '@mui/lab/LoadingButton';
 import commonDictionary from 'constants/commonDictionary'
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from 'index'
 
 interface MuiTableFunc {
   getData(): any;
@@ -25,22 +27,22 @@ interface MuiTableFunc {
 
 const usertypes = [
   {
-    id: '1',
+    id: 'admin',
     name: 'Admin',
   },
   {
-    id: '2',
+    id: 'teacher',
     name: 'Teacher',
   },
 ]
 
 const genders = [
   {
-    id: '1',
+    id: 'male',
     name: 'Male',
   },
   {
-    id: '2',
+    id: 'female',
     name: 'Femail',
   },
 ]
@@ -49,21 +51,20 @@ const AddTeachers: FC = () => {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch()
+  const { id } = useSelector((state: any) => state.school);
   const { language, token } = useSelector((state: any) => state.user);
   const TableRef = useRef<MuiTableFunc>(null)
   const [loading, setLoading] = useState(false)
 
   const [tableData, setTableData] = useState<any>([])
-  const gradeSet = useSelector((state: any) => state.teacher?.currentClass?.audience?.gradeSet) || []
-  const classroomId = useSelector((state: any) => state.teacher.currentClass.id)
 
   const columns = [
     // { id: 'index', label: 'No', maxWidth: 10 },
     { id: 'email', label: commonDictionary[language]?.email, minWidth: 30 },
     { id: 'name', label: commonDictionary[language]?.name, minWidth: 30 },
     {
-      id: 'lastname',
-      label: commonDictionary[language]?.lastName,
+      id: 'lastName',
+      label: commonDictionary[language]?.last_name,
       minWidth: 30,
       required: true,
     },
@@ -90,6 +91,26 @@ const AddTeachers: FC = () => {
     },
   ]
 
+  const addTeachersToSchool = useMutation((params: any) => doAddTeachersToSchool(id,
+    any2String(params),
+    token), {
+    onSuccess: async data => {
+      if (data.message) {
+        enqueueSnackbar(data.message, { variant: 'error' })
+      }
+      else {
+        console.log({ data })
+        enqueueSnackbar('Create Group Succeed', { variant: 'success' })
+      }
+    },
+    onError: async (error: any) => {
+      enqueueSnackbar(error.message, { variant: 'error' })
+    },
+    onSettled: async () => {
+      setLoading(false)
+    }
+  })
+
   useEffect(() => {
 
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
@@ -103,6 +124,7 @@ const AddTeachers: FC = () => {
     document?.getElementById('file-input')?.click();
   }
 
+
   const handleSave = async () => {
     const tableData = TableRef?.current?.getData() || []
     const queryParams: Array<any> = []
@@ -113,13 +135,13 @@ const AddTeachers: FC = () => {
         name: row.name || '',
         lastName: row.lastName || '',
         password: row.password || '',
-        username: row.username || '',
         gender: row.gender || '',
         userType: row.userType || ''
       })
     }
 
-    console.log({ queryParams })
+    setLoading(true)
+    addTeachersToSchool.mutate(queryParams)
 
     // setLoading(true)
     // const res = await doAddStudentsToClassroom(any2String(queryParams), token)
@@ -188,7 +210,7 @@ const AddTeachers: FC = () => {
             bgColor={BasicColor.orange}
             onClick={handleImportExcel}
             align="right"
-            value={commonDictionary[language]?.importExcel}
+            value={commonDictionary[language]?.import_excel}
             margin="20px"
           />
           <input id="file-input" type="file" name="name" style={{ display: "none" }} onChange={handleChangeExcelFile} />

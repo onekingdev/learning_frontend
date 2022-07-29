@@ -38,7 +38,7 @@ const AddStudents: FC = () => {
   const columns = [
     // { id: 'index', label: 'No', maxWidth: 10 },
     { id: 'name', label: commonDictionary[language]?.name, minWidth: 30 },
-    { id: 'lastName', label: commonDictionary[language]?.lastName, minWidth: 30 },
+    { id: 'lastName', label: commonDictionary[language]?.last_name, minWidth: 30 },
     {
       id: 'username',
       label: commonDictionary[language]?.username,
@@ -155,7 +155,7 @@ const AddStudents: FC = () => {
             bgColor={BasicColor.orange}
             onClick={handleImportExcel}
             align="right"
-            value={commonDictionary[language]?.importExcel}
+            value={commonDictionary[language]?.import_excel}
             margin="20px"
           />
           <input id="file-input" type="file" name="name" style={{ display: "none" }} onChange={handleChangeExcelFile} />

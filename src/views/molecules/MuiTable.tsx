@@ -229,7 +229,8 @@ const StudentsTable = forwardRef<MuiTableFunc, any>((props: MuiTableProps, ref) 
                       {columns.map((column) => {
                         const value = (column.id in row) ? row[column.id] : '';
                         return (
-                          column.id === 'grade' ?
+                          column?.editComponent === 'Select'?
+                          // column.id === 'grade' ?
                             <TableCell key={column.id} align={column.align}>
                               <FormControl variant='standard' sx={{ m: 1, minWidth: 70 }}>
                                 <Select

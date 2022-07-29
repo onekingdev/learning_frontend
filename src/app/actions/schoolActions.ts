@@ -1,6 +1,5 @@
 import {
   CREATE_SCHOOL,
-  CREATE_TEACHER,
 } from 'api/mutations/teacher';
 import { fetchQuery } from 'api/queries/get';
 
@@ -33,3 +32,24 @@ export const doCreateSchool = async (
   return res.data?.createSchool ?? res.errors[0]; // when django returns error message on fail
 };
 
+export const doAddTeachersToSchool = async (
+  schoolId: number | string,
+  teachers: string,
+  token: string
+) => {
+  const res: any = await fetchQuery(`mutation {
+    createTeachersInSchool(
+      schoolId: ${schoolId},
+      teachers: ${teachers}
+      ) {
+      school {
+        id
+        schoolteacherSet {
+          id
+        }
+      }
+    }
+  }
+  `, token);
+  return res.data?.createTeachersInSchool?.school || res.errors[0]; // when django returns error message on fail
+};
