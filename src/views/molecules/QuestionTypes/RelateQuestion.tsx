@@ -12,6 +12,7 @@ import { BlackBoard, AssistorContainer } from './Styles'
 import { Box } from '@mui/material';
 import { QuestionBoxTitle } from './Elements/QuestionBoxTitle';
 import { RelateQuestionDnd } from './Elements/RelateQuestionDnd';
+import { shuffle } from 'views/utils';
 
 type ChoiceTextProps = {
   question: IAIQuestion;
@@ -95,7 +96,7 @@ export const RelateQuestion: FC<ChoiceTextProps> = ({
         >
           {
             question.answerOptions &&
-            <RelateQuestionDnd options={question.answerOptions} ref={dndRef} />
+            <RelateQuestionDnd options={shuffle(question.answerOptions)} ref={dndRef} />
           }
         </Box>
         <AssistorContainer>
