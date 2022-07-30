@@ -11,7 +11,7 @@ import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { any2String, getMessage } from 'views/utils';
+import { getMessage } from 'views/utils';
 import TeacherTopicTable from 'views/molecules/Table/TeacherTopicTable';
 import { BasicColor } from 'views/Color';
 import { StudentsCheckbox } from 'views/molecules/Classroom/StudentsCheckbox';
@@ -28,10 +28,13 @@ const Assignment: FC = () => {
   const [selected, setSelected] = useState<Array<any>>([])
   const [activeSubjectId, setActiveSubjectId] = useState('');
   const [activeGradeId, setActiveGradeId] = useState('')
-  const [assignmentName, setAssignmentName] = useState('')
+  // const [assignmentName, setAssignmentName] = useState('')
   const [numberofQuestions, setNumberofQuestions] = useState(0)
   const [startDate, setStartDate] = useState<Date>(new Date())
-  const [endDate, setEndDate] = useState<Date>(new Date())
+  // tomorrow.setDate(today.getDate() + 1)
+  const tomorrow = new Date()
+  tomorrow.setDate(startDate.getDate() + 1)
+  const [endDate, setEndDate] = useState<Date>(tomorrow)
   const [loading, setLoading] = useState(false)
 
   const { data: audience, isLoading } = useQuery(['subjects-grades-list-by-audience', 2], () => doFetchSubjectsAndGradeByAudienceId(2))
@@ -46,7 +49,7 @@ const Assignment: FC = () => {
     { enabled: (activeSubjectId !== '' && activeGradeId !== '') })
 
   const assignTask = useMutation(() => doAssignTasksToStudents(
-    assignmentName,
+    'Assignment from Teacher to Student',
     numberofQuestions,
     selected,
     startDate.toISOString(),
@@ -71,7 +74,24 @@ const Assignment: FC = () => {
 
   const handleAssign = () => {
 
+    if (!numberofQuestions) {
+      enqueueSnackbar('Input number of questions', { variant: 'error' })
+      return
+    }
+    if (selected.length < 1) {
+      enqueueSnackbar('Select kids to assign task', { variant: 'error' })
+      return
+    }
+    if (startDate === endDate) {
+      enqueueSnackbar('Select period correctly', { variant: 'error' })
+      return
+    }
     setLoading(true)
+
+    // selected,
+    // startDate.toISOString(),
+    // endDate.toISOString(),
+    // assignmentTopicId,
     assignTask.mutate()
   }
 
@@ -137,7 +157,10 @@ const Assignment: FC = () => {
             // isIdle ? <Typography>Idle</Typography> :
             isTopicLoading ? <Typography>Loading...</Typography> :
               topicError ? <Typography color='red'>{getMessage(topicError)}</Typography> :
-                topics && <TeacherTopicTable data={topics} activeSubjectId={activeSubjectId} />
+                topics &&
+                <Box maxHeight={600} overflow='auto'>
+                  <TeacherTopicTable data={topics} activeSubjectId={activeSubjectId} />
+                </Box>
           }
           <Box
             padding={2}
@@ -168,7 +191,7 @@ const Assignment: FC = () => {
                   flexDirection: 'column',
                   gap: 2
                 }}>
-                  <TextField
+                  {/* <TextField
                     style={{
                       width: '100%'
                     }}
@@ -178,7 +201,7 @@ const Assignment: FC = () => {
                     focused
                     placeholder='Represent the value of a currency with an amount of a different currency'
                     onChange={(e) => setAssignmentName(e.target.value)}
-                  />
+                  /> */}
                   <TextField
                     style={{
                       width: '100%',
