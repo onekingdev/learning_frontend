@@ -23,7 +23,7 @@ interface Column {
 
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Name of Assignment' },
+  { id: 'aok', label: 'Area of Knowledge' },
   { id: 'topic', label: 'Topic' },
   { id: 'startAt', label: 'Start Date' },
   { id: 'endAt', label: 'End Date' },
@@ -58,17 +58,26 @@ export const HomeworkTable: FC<HomeworkTableProps> = ({ homeworks, select, selec
     setPage(0);
   };
 
-  const renderTableCell = (id: string, value: any) => {
+  const renderTableCell = (id: string, homework: any) => {
     switch (id) {
       case 'topic':
-        return value.name
+        return homework.topic?.name || ''
+      case 'status':
+        return homework.status || ''
+      case 'aok':
+        return homework.topic?.areaOfKnowledge?.name || ''
       case 'result':
-        return value.hits + '/' + value.total + '-' + (value.total === 0 ? 0 : +(value.hits / value.total * 100)) + '%';
+
+        return homework.result?.hits + '/' +
+          homework.result.total + '-' +
+          (homework.result.total === 0 ? 0 :
+            +(homework.result.hits / homework.result.total * 100)) + '%';
       case 'startAt':
+        return new Date(homework.startAt).toDateString()
       case 'endAt':
-        return new Date(value).toDateString()
+        return new Date(homework.endAt).toDateString()
       default:
-        return value
+        return ''
     }
   }
 
@@ -99,18 +108,17 @@ export const HomeworkTable: FC<HomeworkTableProps> = ({ homeworks, select, selec
               {
                 homeworks
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row: any) => {
+                  .map((homework: any) => {
                     return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={row.id}
-                        onClick={() => select(row.id)}
-                        selected={selectedTaskId === row.id}
+                      <TableRow hover role="checkbox" tabIndex={-1} key={homework.id}
+                        onClick={() => select(homework.id)}
+                        selected={selectedTaskId === homework.id}
                       >
                         {columns.map((column) => {
-                          const value: any = row[column.id as keyof Object];
                           return (
                             <TableCell key={column.id} align='center' >
                               {
-                                renderTableCell(column.id, value)
+                                renderTableCell(column.id, homework)
                               }
                             </TableCell>
                           );

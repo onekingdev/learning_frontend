@@ -151,6 +151,9 @@ export const STUDENT_HOMEWORK = `
     name
     topic {
         ${TOPIC}
+        areaOfKnowledge {
+            name
+        }
     }
     numberOfQuestions
     startAt

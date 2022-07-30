@@ -293,9 +293,8 @@ export const doFetchClassroomStudentsWithAssignments = async (
             ${LEVEL}
           }
           points
-          bankWallet {
-            id
-            balance
+          coinWallet {
+            blockTransactionCoins
           }
           studenthomeworkSet{
             ${STUDENT_HOMEWORK}
