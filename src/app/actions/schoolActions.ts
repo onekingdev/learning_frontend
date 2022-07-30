@@ -44,12 +44,34 @@ export const doAddTeachersToSchool = async (
       ) {
       school {
         id
-        schoolteacherSet {
-          id
-        }
       }
     }
   }
   `, token);
   return res.data?.createTeachersInSchool?.school || res.errors[0]; // when django returns error message on fail
 };
+
+
+export const doFetchSchoolTeachers = async (
+  schoolId: number | string,
+  token: string
+) => {
+  const res: any = await fetchQuery(
+    `{
+      schoolById(id: "${schoolId}") {
+        schoolteacherSet{
+          teacher{
+            id
+            user {
+              username
+            }
+            firstName
+            lastName
+          }
+        }
+      }
+    }
+    `, token);
+  return res.data?.schoolById?.schoolteacherSet || res.errors[0]; // when django returns error message on fail
+};
+

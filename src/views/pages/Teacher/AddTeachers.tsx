@@ -97,8 +97,8 @@ const AddTeachers: FC = () => {
         enqueueSnackbar(data.message, { variant: 'error' })
       }
       else {
-        console.log({ data })
         enqueueSnackbar('Create Group Succeed', { variant: 'success' })
+        history.push('/admin/schoolTeachers')
       }
     },
     onError: async (error: any) => {
@@ -131,6 +131,7 @@ const AddTeachers: FC = () => {
       queryParams.push({
         email: row.email || '',
         name: row.name || '',
+        username: row.email || '',
         lastName: row.lastName || '',
         password: row.password || '',
         gender: row.gender || '',
