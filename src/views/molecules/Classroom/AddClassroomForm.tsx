@@ -19,7 +19,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { queryClient } from 'index'
 
 const AddClassroomForm = (props: any) => {
-    const { token, language } = useSelector((state: any) => state.user)
+    const { token, language, profile } = useSelector((state: any) => state.user)
     const teacherId = useSelector((state: any) => state.teacher.id)
 
     const { enqueueSnackbar } = useSnackbar();
@@ -61,8 +61,9 @@ const AddClassroomForm = (props: any) => {
         if (!formValidation()) return;
 
         setLoading(true)
+        console.log({ teacherId, role: profile.role })
 
-        const res: any = await doAddClassroomToTeacher(audience, className, token)
+        const res: any = await doAddClassroomToTeacher(audience, className, token, profile.role === 'SUBSCRIBER' ? teacherId : undefined)
         if (res.status) {
             queryClient.setQueryData(['teacher-classrooms', teacherId], (classrooms: Array<any> | undefined) => [...classrooms || [], res.data])
             // dispatch({

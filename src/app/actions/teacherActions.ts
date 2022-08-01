@@ -39,11 +39,12 @@ export const doCreateTeacher = async (
 export const doAddClassroomToTeacher = async (
   audienceId: number | string,
   name: string,
-  token: string
+  token: string,
+  teacherId?: string | number
 ) => {
   try {
     const res: any = await sendRawQuery(
-      ADD_CLASS_TO_TEACHER(audienceId, name),
+      ADD_CLASS_TO_TEACHER(audienceId, name, teacherId),
       token
     );
     return res.msg

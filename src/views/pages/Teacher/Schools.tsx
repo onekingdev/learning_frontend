@@ -22,7 +22,10 @@ const Schools: FC = () => {
       type: SCHOOL_SET_DATA,
       payload: school
     })
-    history.push('/admin/addTeachers')
+    if (!school.schoolteacherSet)
+      history.push('/admin/addTeachers')
+    else
+      history.push('/admin/schoolTeachers')
   }
   useEffect(() => {
 

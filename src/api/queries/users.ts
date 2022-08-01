@@ -4,7 +4,7 @@ import {STUDENT} from '../fragments/studentFragments';
 import {GUARDIAN} from '../fragments/guardianFragments';
 import {_CLASSROOM_SCHEMA, _TEACHERSCHEMA} from 'api/fragments/teacherFraments';
 import { _GROUP } from 'api/fragments/peopleFragments';
-import { COIN_WALLET, _AVATAR, _STUDENT } from 'api/fragments/schemas';
+import { COIN_WALLET, SUBSCRIBER, _AVATAR, _STUDENT } from 'api/fragments/schemas';
 
 export const USERS_QUERY = `
     {
@@ -99,7 +99,7 @@ export const WHOAMI_QUERY = `
                 ${_TEACHERSCHEMA}
             }
             subscriber {
-                id
+                ${SUBSCRIBER}
             }
         }
     }

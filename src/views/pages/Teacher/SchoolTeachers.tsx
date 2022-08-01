@@ -12,6 +12,8 @@ import { LoadingSpinner } from 'views/atoms/Spinner';
 import { Typography } from '@mui/material';
 import { getMessage } from 'views/utils';
 import TeachersPanel from 'views/organisms/TeachersPanel';
+import { TEACHER_SET_DATA } from 'app/types';
+import AddNewTeacher from 'views/molecules/SchoolElements/AddNewTeacher';
 
 const SchoolTeachers: FC = () => {
   const history = useHistory();
@@ -31,9 +33,15 @@ const SchoolTeachers: FC = () => {
     setIsOpenNewForm(true)
   }
 
-  const onClassroom = (classroom: any) => {
+  const onTeacher = (teacher: any) => {
 
-    if (!classroom) return
+    if (!teacher) return
+    // console.log({ teacher })
+    dispatch({
+      type: TEACHER_SET_DATA,
+      payload: teacher.teacher,
+    });
+    history.push('/teacher/classrooms')
 
     // dispatch({
     //   type: TEACHER_SET_CURRENT_CLASSROOM_ID,
@@ -59,12 +67,13 @@ const SchoolTeachers: FC = () => {
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.school_teachers}>
       <>
-        <AddClassroomForm isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} />
+        <AddNewTeacher isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} />
+        {/* <AddClassroomForm isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} /> */}
         {
           isLoading ? <LoadingSpinner /> :
             error ? <Typography color='red'>{getMessage(error)}</Typography> :
               teachers &&
-              <TeachersPanel teachers={teachers} onNew={onNew} onClassroom={onClassroom} />
+              <TeachersPanel teachers={teachers} onNew={onNew} onTeacher={onTeacher} />
         }
       </>
     </TeacherPgContainer>

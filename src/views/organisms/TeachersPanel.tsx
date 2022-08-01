@@ -8,10 +8,10 @@ import commonDictionary from 'constants/commonDictionary'
 interface TeachersPanelProps {
   teachers: any[]
   onNew: () => void
-  onClassroom: (p: any) => void
+  onTeacher: (p: any) => void
 }
 
-const TeachersPanel: FC<TeachersPanelProps> = ({ teachers, onNew, onClassroom }) => {
+const TeachersPanel: FC<TeachersPanelProps> = ({ teachers, onNew, onTeacher }) => {
   const language = useSelector((state: any) => state.user.language);
   return (
     <Container>
@@ -22,12 +22,13 @@ const TeachersPanel: FC<TeachersPanelProps> = ({ teachers, onNew, onClassroom })
             <Grid item key={index} xs={4} sm={3} md={1.5} alignItems='start' sx={{
               cursor: 'pointer'
             }}>
-              <Box key={index} onClick={() => { onClassroom(item) }}>{
+              {
                 item.teacher ?
                   <Box
                     display='flex'
                     flexDirection='column'
                     alignItems={'center'}
+                    onClick={() => { onTeacher(item) }}
                   >
                     <img src={blueDoor} />
                     <Typography textAlign='center'>{item.teacher.firstName}</Typography>
@@ -37,13 +38,13 @@ const TeachersPanel: FC<TeachersPanelProps> = ({ teachers, onNew, onClassroom })
                     display='flex'
                     flexDirection='column'
                     alignItems={'center'}
+                    onClick={() => { onNew() }}
+
                   >
                     <img src={greenDoor} />
                     <Typography textAlign='center'>{'Empty'}</Typography>
                   </Box>
-
               }
-              </Box>
             </Grid>
           )
         }

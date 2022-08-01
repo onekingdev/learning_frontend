@@ -25,6 +25,7 @@ import { themeTeacher } from 'views/Theme';
 import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 import * as TYPES from 'app/types';
+import { SCHOOL_SET_DATA, SUBSCRIBER_SET_DATA } from 'app/types';
 
 export const LogIn: FC = () => {
   const isTablet = useSocratesMediaQuery('sm')
@@ -49,7 +50,7 @@ export const LogIn: FC = () => {
       return;
     }
 
-    const { student, guardian, teacher, user, token } = result.data
+    const { student, guardian, teacher, subscriber, user, token } = result.data
     dispatch({ type: TYPES.USER_SET_DATA, payload: { ...user, token } });
 
 
@@ -94,6 +95,14 @@ export const LogIn: FC = () => {
           history.push('/teacher/classrooms')
         else
           history.push('/teacher/payment')
+        break;
+      case USER_TYPE.subscriber:
+        // Set teacher state
+        dispatch({
+          type: SUBSCRIBER_SET_DATA,
+          payload: { ...subscriber }
+        })
+        history.push('/admin/schools')
         break;
       default:
         history.push('/')

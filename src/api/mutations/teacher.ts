@@ -122,10 +122,15 @@ export const TEACHER_CLASSROOMS = (
 
 export const ADD_CLASS_TO_TEACHER = (
   audienceId: string | number,
-  name: string
+  name: string,
+  teacherId?: string | number
 ) => `
 mutation {
-    createClassroom (audienceId: ${audienceId}, name: "${name}") {
+    createClassroom (
+      audienceId: ${audienceId},
+       name: "${name}",
+       ${teacherId ? 'teacherId: ' + teacherId : ''}
+       ) {
       classroom {
         ${_CLASSROOM_SCHEMA}
           audience {
