@@ -1,4 +1,4 @@
-const dictionary: any = Object.freeze({
+export const commonDictionary: any = Object.freeze({
   'en-us': {
     add_new: 'Add New',
     and: 'and',
@@ -33,6 +33,7 @@ const dictionary: any = Object.freeze({
     import_excel: 'Import Excel',
     language: 'Language',
     last_name: 'Last Name',
+    menu: 'Menu',
     monthly: 'Monthly',
     name: 'Name',
     number_of_classrooms: 'Number of classrooms',
@@ -92,6 +93,7 @@ const dictionary: any = Object.freeze({
     import_excel: 'Import Excel',
     language: 'ภาษา',
     last_name: 'Last Name',
+    menu: 'Menu',
     monthly: 'รายเดือน',
     name: 'Name',
     number_of_classrooms: 'Number of classrooms',
@@ -123,7 +125,7 @@ const dictionary: any = Object.freeze({
     annually: 'Anualmente',
     by_click_create_agree: 'Al hacer clic en Crear cuenta, aceptas',
     children_privacy_policy:
-      'Política de Privacidad para niños de Learn With Socrates',
+    'Política de Privacidad para niños de Learn With Socrates',
       choose_your_plan: 'Elige tu plan',
       class_dashboard: 'Tablero de clase',
       classroom: 'Aula',
@@ -151,6 +153,7 @@ const dictionary: any = Object.freeze({
     import_excel: 'Import Excel',
     language: 'Idioma',
     last_name: 'Last Name',
+    menu: 'Menu',
     monthly: 'Mensual',
     name: 'Name',
     number_of_classrooms: 'Number of classrooms',
@@ -177,4 +180,4 @@ const dictionary: any = Object.freeze({
     welcome: 'Bienvenido',
   },
 });
-export default dictionary;
+export default commonDictionary;

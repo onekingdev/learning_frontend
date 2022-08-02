@@ -1,10 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import Sidebar from 'views/organisms/Menu/TeacherSidebar';
 import logoTitle from 'views/assets/logo-learn.svg'
-import avatar from 'views/assets/profile-icon.svg'
 import {
   AppBar,
-  Avatar,
   Box,
   Typography,
   useMediaQuery
@@ -12,11 +10,13 @@ import {
 import { ScreenSize } from 'constants/screenSize';
 import { BasicColor } from 'views/Color';
 import { useSelector } from 'react-redux';
+import { AccountMenuTeacher } from './TeacherProfileMenu';
 
 
 export const TopMenu: FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
-  const { firstName, lastName } = useSelector((state: any) => state.user)
+  const { firstName, lastName, profile } = useSelector((state: any) => state.user)
+  const { school } = useSelector((state: any) => state)
 
   const [navOp, setNavOp] = useState(true)
   const changeNavBarOpacity = () => {
@@ -53,11 +53,13 @@ export const TopMenu: FC = () => {
           <Typography textAlign={'end'} fontWeight='bold'>
             {firstName} {lastName}
           </Typography>
-          {/* <Typography textAlign={'end'}>
-            {currentClass?.name}
-          </Typography> */}
         </Box>
-        <Avatar sx={{ bgcolor: '#22BAAF', height: '60px', width: '60px', marginLeft: '15px' }} alt='Remy Sharp' src={avatar} />
+        <AccountMenuTeacher
+          firstName={firstName}
+          lastName={lastName}
+          role={profile?.role || ''}
+          schoolName={school.name}
+        />
       </Box>
     </AppBar >
   );
