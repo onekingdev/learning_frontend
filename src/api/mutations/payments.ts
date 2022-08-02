@@ -59,9 +59,9 @@ export const CREATE_ORDER_WITH_OUT_PAY = (
     orderDetailInput: {},
 ) => `
     createOrderWithOutPay(
-        ${ guardianId && 'guardianId: ' + guardianId + ','}
-        ${ teacherId && 'teacherId: ' + teacherId + ','}
-        ${ schoolId && 'schoolId: ' + schoolId + ','}
+        ${ guardianId ? ('guardianId: ' + guardianId + ','):''}
+        ${ teacherId ? ('teacherId: ' + teacherId + ','):''}
+        ${ schoolId ? ('schoolId: ' + schoolId + ','):''}
         orderDetailInput: ${orderDetailInput},
         ){
         guardian {

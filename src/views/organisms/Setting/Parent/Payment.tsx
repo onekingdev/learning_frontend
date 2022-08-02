@@ -19,13 +19,13 @@ const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 export const Payment: FC = () => {
   const [isEdit, edit] = useState(false)
   const guardian = useSelector((state: any) => state.guardian);
-  const cardType = creditCardType(guardian.paymentMethod.cardNumber)
+  const cardType = creditCardType(guardian.paymentMethod?.cardNumber)
   const language = useSelector((state: any) => state.user.language);
 
   const openEdit = () => edit(!isEdit);
 
   return (
-    guardian.paymentMethod.cardNumber ?
+    guardian.paymentMethod?.cardNumber ?
       <LSShadowContainer>
         <LSTitle>
           {dictionary[language]?.yourPaymentMethod}
