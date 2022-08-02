@@ -96,9 +96,12 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
             <MenuItem onClick={() => history.push('/admin/schools')}>
               <Avatar children={<ApartmentIcon />} sx={{ bgcolor: '#22BAAF' }} />Schools
             </MenuItem>
-            <MenuItem onClick={() => history.push('/admin/schoolTeachers')}>
-              <Avatar children={<SchoolIcon />} sx={{ bgcolor: '#22BAAF' }} />{schoolName} teachers
-            </MenuItem>
+            {
+              schoolName &&
+              <MenuItem onClick={() => history.push('/admin/schoolTeachers')}>
+                <Avatar children={<SchoolIcon />} sx={{ bgcolor: '#22BAAF' }} />{schoolName} teachers
+              </MenuItem>
+            }
           </>
         }
         <Divider />
