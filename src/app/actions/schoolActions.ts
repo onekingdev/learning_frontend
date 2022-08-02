@@ -43,12 +43,21 @@ export const doAddTeachersToSchool = async (
       teachers: ${teachers}
       ) {
       school {
-        id
+        schoolteacherSet {
+          teacher {
+            id
+            user {
+                username
+            }
+            firstName
+            lastName
+          }
+        }
       }
     }
   }
   `, token);
-  return res.data?.createTeachersInSchool?.school || res.errors[0]; // when django returns error message on fail
+  return res.data?.createTeachersInSchool?.school?.schoolteacherSet || res.errors[0]; // when django returns error message on fail
 };
 
 

@@ -2,7 +2,7 @@ import {
   FC, useEffect, useState,
   useRef
 } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import Table from 'views/molecules/MuiTable';
@@ -17,38 +17,18 @@ import { any2String } from 'views/utils';
 import LoadingButton from '@mui/lab/LoadingButton';
 import commonDictionary from 'constants/commonDictionary'
 import { useMutation } from '@tanstack/react-query';
+import { GENDERS, USERTYPES } from 'constants/common';
 
 interface MuiTableFunc {
   getData(): any;
   handleAddData(): void;
 }
 
-const usertypes = [
-  {
-    id: 'admin',
-    name: 'Admin',
-  },
-  {
-    id: 'teacher',
-    name: 'Teacher',
-  },
-]
 
-const genders = [
-  {
-    id: 'male',
-    name: 'Male',
-  },
-  {
-    id: 'female',
-    name: 'Femail',
-  },
-]
 const AddTeachers: FC = () => {
 
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch()
   const { id } = useSelector((state: any) => state.school);
   const { language, token } = useSelector((state: any) => state.user);
   const TableRef = useRef<MuiTableFunc>(null)
@@ -76,7 +56,7 @@ const AddTeachers: FC = () => {
       label: commonDictionary[language]?.user_type,
       minWidth: 50,
       editComponent: 'Select',
-      selectDatas: usertypes || [],
+      selectDatas: USERTYPES || [],
       format: (value: any) => value?.name,
     },
     {
@@ -84,7 +64,7 @@ const AddTeachers: FC = () => {
       label: commonDictionary[language]?.gender,
       minWidth: 50,
       editComponent: 'Select',
-      selectDatas: genders || [],
+      selectDatas: GENDERS || [],
       format: (value: any) => value?.name,
     },
   ]

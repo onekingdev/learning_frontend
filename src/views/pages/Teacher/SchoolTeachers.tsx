@@ -3,7 +3,6 @@ import {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import AddClassroomForm from 'views/molecules/Classroom/AddClassroomForm'
 import commonDictionary from 'constants/commonDictionary'
 import { useHistory } from 'react-router-dom';
 import { doFetchSchoolTeachers } from 'app/actions';
@@ -36,27 +35,12 @@ const SchoolTeachers: FC = () => {
   const onTeacher = (teacher: any) => {
 
     if (!teacher) return
-    // console.log({ teacher })
     dispatch({
       type: TEACHER_SET_DATA,
       payload: teacher.teacher,
     });
     history.push('/teacher/classrooms')
 
-    // dispatch({
-    //   type: TEACHER_SET_CURRENT_CLASSROOM_ID,
-    //   payload: classroom.id,
-    // });
-    // dispatch({
-    //   type: TEACHER_SET_CURRENT_CLASSROOM,
-    //   payload: classroom,
-    // });
-    // if (classroom.isEmpty) {
-    //   // history.push('/teacher/addStudent')
-    // }
-    // // TODO Redirect to the Classroom/students page with teacher info
-    // else
-    //   // history.push('/teacher/students')
   }
   useEffect(() => {
 
@@ -68,7 +52,6 @@ const SchoolTeachers: FC = () => {
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.school_teachers}>
       <>
         <AddNewTeacher isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} />
-        {/* <AddClassroomForm isOpen={isOpenNewForm} close={() => setIsOpenNewForm(false)} /> */}
         {
           isLoading ? <LoadingSpinner /> :
             error ? <Typography color='red'>{getMessage(error)}</Typography> :

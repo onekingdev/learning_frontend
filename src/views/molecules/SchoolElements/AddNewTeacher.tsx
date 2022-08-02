@@ -5,47 +5,47 @@ import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import TextField from 'views/molecules/MuiTextField';
 import commonDictionary from 'constants/commonDictionary'
 import LoadingButton from '@mui/lab/LoadingButton';
-import { doAddOneStudentToClassroom } from 'app/actions';
+import { doAddTeachersToSchool } from 'app/actions';
 import { useSnackbar } from 'notistack';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { any2String } from 'views/utils';
+import { GENDERS, USERTYPES } from 'constants/common';
 
 const AddNewTeacher = (props: any) => {
     const { language, token } = useSelector((state: any) => state.user);
-    const gradeSet = useSelector((state: any) => state.teacher?.currentClass?.audience?.gradeSet) || []
-    const { currentClassId } = useSelector((state: any) => state.teacher);
     const queryClient = useQueryClient()
+    const { id } = useSelector((state: any) => state.school);
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const [studentName, setStudentName] = useState('')
+    const [email, setEmail] = useState('')
+    const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [userName, setUserName] = useState('')
     const [pwd, setPwd] = useState('')
+    const [gender, setGender] = useState('')
+    const [userType, setUserType] = useState('')
+
     const [loading, setLoading] = useState(false)
-    const [gradeId, setGradeId] = useState('')
     const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
-        studentName: null,
+        firstName: null,
         lastName: null,
-        userName: null,
         pwd: null,
-        gradeId: null
+        gender: null,
+        email: null,
+        userType: null
     });
 
 
-    const addNewStudent = useMutation(() => doAddOneStudentToClassroom(currentClassId,
-        gradeId,
-        lastName,
-        studentName,
-        pwd,
-        userName,
+    const addTeachersToSchool = useMutation((params: any) => doAddTeachersToSchool(id,
+        any2String(params),
         token), {
         onSuccess: async data => {
             if (data.message) {
                 enqueueSnackbar(data.message, { variant: 'error' })
             }
             else {
-                queryClient.setQueryData(['fetch-classroom-students', currentClassId], data)
-                enqueueSnackbar('Add student Succeed', { variant: 'success' })
+                queryClient.setQueryData(['school-teachers', id], data)
+                enqueueSnackbar('Add teacher to school succeed', { variant: 'success' })
             }
         },
         onError: async (error: any) => {
@@ -74,7 +74,18 @@ const AddNewTeacher = (props: any) => {
         if (!formValidation()) return;
 
         setLoading(true)
-        addNewStudent.mutate()
+        const queryParams: Array<any> = []
+
+        queryParams.push({
+            email: email || '',
+            username: email || '',
+            name: firstName || '',
+            lastName: lastName || '',
+            password: pwd || '',
+            gender: gender || '',
+            userType: userType || ''
+        })
+        addTeachersToSchool.mutate(queryParams)
     }
 
     const handleFormChange = (field: string, errMsg: string) => {
@@ -91,14 +102,26 @@ const AddNewTeacher = (props: any) => {
                     <Grid container spacing={4}>
                         <Grid item xs={12}>
                             <TextField
-                                label={commonDictionary[language]?.teacher_name}
+                                label={commonDictionary[language]?.email}
                                 onChange={(e: any) => {
-                                    handleFormChange('studentName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
-                                    setStudentName(e.target.value)
+                                    handleFormChange('email', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                    setEmail(e.target.value)
                                 }}
-                                error={!!validateMsg.studentName}
-                                helperText={validateMsg.studentName}
-                                value={studentName}
+                                error={!!validateMsg.email}
+                                helperText={validateMsg.email}
+                                value={email || ''}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label={commonDictionary[language]?.first_name}
+                                onChange={(e: any) => {
+                                    handleFormChange('firstName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                    setFirstName(e.target.value)
+                                }}
+                                error={!!validateMsg.firstName}
+                                helperText={validateMsg.firstName}
+                                value={firstName}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -114,33 +137,36 @@ const AddNewTeacher = (props: any) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                label={commonDictionary[language]?.username}
-                                onChange={(e: any) => {
-                                    handleFormChange('userName', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
-                                    setUserName(e.target.value)
-                                }}
-                                error={!!validateMsg.userName}
-                                helperText={validateMsg.userName}
-                                value={userName}
-                            />
+                            <FormControl variant="outlined" fullWidth>
+                                <InputLabel id="demo-simple-select-label">{commonDictionary[language]?.gender}</InputLabel>
+                                <Select
+                                    value={gender || ''}
+                                    label={commonDictionary[language]?.gender}
+                                    onChange={(e: any) => {
+                                        handleFormChange('gender', e.target.value === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                        setGender(e.target.value)
+                                    }}
+                                >
+                                    {GENDERS.map((selectData: any) => (
+                                        <MenuItem value={selectData.id} key={selectData.id}>{selectData?.name}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl variant="outlined" fullWidth>
-                                <InputLabel id="demo-simple-select-label">{commonDictionary[language]?.select_grade}</InputLabel>
+                                <InputLabel id="demo-simple-select-label">{commonDictionary[language]?.user_type}</InputLabel>
                                 <Select
-                                    label={commonDictionary[language]?.select_grade}
-                                    value={gradeId || ''}
-                                    onChange={(e) => {
-                                        handleFormChange('gradeId', e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : '')
-                                        const selectedGrade = gradeSet.find((item: any) => item.id === e.target.value) || {}
-                                        setGradeId(selectedGrade.id)
-                                    }}
-                                    error={!!validateMsg.gradeId}
-                                // helperText={validateMsg.gradeId}
+                                    value={userType || ''}
+                                    label={commonDictionary[language]?.user_type}
+                                    onChange={(e: any) => {
+                                        handleFormChange('userType', e.target.value === 0 ? commonDictionary[language]?.fieldIsRequired : '')
+                                        setUserType(e.target.value)
+                                    }
+                                    }
                                 >
-                                    {gradeSet.length > 0 && gradeSet.map((grade: any) => (
-                                        <MenuItem value={grade.id} key={grade.id}>{grade.name}</MenuItem>
+                                    {USERTYPES.map((selectData: any) => (
+                                        <MenuItem value={selectData.id} key={selectData.id}>{selectData?.name}</MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>

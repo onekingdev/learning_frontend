@@ -25,7 +25,7 @@ import { themeTeacher } from 'views/Theme';
 import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 import * as TYPES from 'app/types';
-import { SCHOOL_SET_DATA, SUBSCRIBER_SET_DATA } from 'app/types';
+import { SUBSCRIBER_SET_DATA } from 'app/types';
 
 export const LogIn: FC = () => {
   const isTablet = useSocratesMediaQuery('sm')

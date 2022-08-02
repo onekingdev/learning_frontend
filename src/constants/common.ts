@@ -87,3 +87,25 @@ export const SUBJECT_COLORS = [
   '#FFCC00',
   '#22BAAF',
 ];
+
+export const USERTYPES = [
+  {
+    id: 'admin',
+    name: 'Admin',
+  },
+  {
+    id: 'teacher',
+    name: 'Teacher',
+  },
+]
+
+export const GENDERS = [
+  {
+    id: 'male',
+    name: 'Male',
+  },
+  {
+    id: 'female',
+    name: 'Femail',
+  },
+]
