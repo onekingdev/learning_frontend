@@ -29,7 +29,7 @@ import { KidsTreasureTrack } from 'views/pages/Student/TreasureTrack/TreasureTra
 import { KidsProgress } from 'views/pages/Student/Progress/Progress';
 //teacher center
 import TeacherSignup from 'views/pages/Teacher/TeacherSignup/TeacherSignup';
-import SchoolSignup from 'views/pages/Teacher/SchoolSignup/SchoolSignup'
+import SchoolSignup from 'views/pages/School/SchoolSignup/SchoolSignup'
 import TeacherPayment from 'views/pages/Teacher/Payment/Payment'
 import Classrooms from 'views/pages/Teacher/Classrooms/Classrooms'
 import Students from 'views/pages/Teacher/Students/Students'
@@ -48,10 +48,10 @@ import { TeacherCreateAccount } from 'views/pages/Teacher/SelectCreateType/Teach
 import Notes from 'views/pages/Teacher/Notes/Notes';
 import ClassDashboard from 'views/pages/Teacher/ClassDashboard';
 import ClassroomSettings from 'views/pages/Teacher/ClassroomSettings/ClassroomSettings';
-import Schools from 'views/pages/Teacher/Schools';
+import Schools from 'views/pages/School/Schools';
 import { Homework } from 'views/pages/Student/Homework';
-import AddTeachers from 'views/pages/Teacher/AddTeachers';
-import SchoolTeachers from 'views/pages/Teacher/SchoolTeachers';
+import AddTeachers from 'views/pages/School/AddTeachers';
+import SchoolTeachers from 'views/pages/School/SchoolTeachers';
 
 
 const PrivateRoute = ({ requireAuth = true, loading = false, ...rest }) => {

@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 
 export const TopMenu: FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
-  const { currentClass, firstName, lastName } = useSelector((state: any) => state.teacher)
+  const { firstName, lastName } = useSelector((state: any) => state.user)
 
   const [navOp, setNavOp] = useState(true)
   const changeNavBarOpacity = () => {
@@ -53,9 +53,9 @@ export const TopMenu: FC = () => {
           <Typography textAlign={'end'} fontWeight='bold'>
             {firstName} {lastName}
           </Typography>
-          <Typography textAlign={'end'}>
+          {/* <Typography textAlign={'end'}>
             {currentClass?.name}
-          </Typography>
+          </Typography> */}
         </Box>
         <Avatar sx={{ bgcolor: '#22BAAF', height: '60px', width: '60px', marginLeft: '15px' }} alt='Remy Sharp' src={avatar} />
       </Box>

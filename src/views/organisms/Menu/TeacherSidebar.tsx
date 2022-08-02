@@ -138,6 +138,10 @@ export const TeacherSidebar: FC = () => {
                         <MenuMark src={helpMark} />
                         <MenuTitle onClick={() => handleMenu('/')}>{dictionary[language]?.logout}</MenuTitle>
                     </LineMenu>
+                    <LineMenu>
+                        <MenuMark src={helpMark} />
+                        <MenuTitle onClick={() => handleMenu('/admin/schoolTeachers')}>{commonDictionary[language]?.school}</MenuTitle>
+                    </LineMenu>
                 </Box>
             </Drawer>
         </div>
