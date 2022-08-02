@@ -71,6 +71,7 @@ export const Welcome: FC = () => {
               // onClick={() => history.push('/teacher/classrooms')}
               variant='contained'
               color='secondary'
+              disabled={true}
             >
               {dictionary[language]?.schoolSignUp}
             </Button>
