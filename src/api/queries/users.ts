@@ -101,6 +101,22 @@ export const WHOAMI_QUERY = `
             subscriber {
                 ${SUBSCRIBER}
             }
+            administrativepersonnel {
+                schooladministrativepersonnel {
+                  school {
+                    id
+                    name
+                    country
+                    district
+                    typeOf
+                    schoolteacherSet {
+                      teacher{
+                        id
+                      }
+                    }
+                  }
+                }
+              }
         }
     }
 `;

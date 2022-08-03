@@ -45,10 +45,10 @@ const Schools: FC = () => {
 
   return (
     <SchoolPageContainer onlyLogoImgNav={false} title={commonDictionary[language]?.schools_homepage}>
-      <Grid container justifyContent={'center'}>
-        {
-          isLoading ? <LoadingSpinner /> :
-            error ? <ErrorMessage error={error} /> :
+      {
+        isLoading ? <LoadingSpinner /> :
+          error ? <ErrorMessage error={error} /> :
+            <Grid container justifyContent={'center'} spacing={2}> {
               schools && schools.map((school: any) => (
                 <Grid item
                   key={school.id}
@@ -57,8 +57,9 @@ const Schools: FC = () => {
                   <SchoolItem school={school.school} />
                 </Grid>
               ))
-        }
-      </Grid>
+            }
+            </Grid>
+      }
     </SchoolPageContainer>
   );
 };

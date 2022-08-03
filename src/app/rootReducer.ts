@@ -10,6 +10,7 @@ import teacher from './reducers/teacherReducer'
 import certificate from './reducers/certificateReducer'
 import subscriber from './reducers/subscriber';
 import school from './reducers/school';
+import admin from './reducers/adminReducer'
 
 
 export default combineReducers({
@@ -23,5 +24,6 @@ export default combineReducers({
     teacher,
     certificate,
     subscriber,
-    school
+    school,
+    admin
 });
