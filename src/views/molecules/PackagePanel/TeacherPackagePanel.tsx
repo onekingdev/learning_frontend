@@ -30,7 +30,7 @@ type PackagePanelProps = {
   language: string
 };
 const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode, disabled = false, onChange, language }) => {
-  const [childrenCount, setChildrenCount] = useState(() => type === 'School' ? 30 : 0);
+  const [childrenCount, setChildrenCount] = useState(0);
   const [sponsorEmail, setSponsorEmail] = useState('')
   const [plan, setPlan] = useState('month');
   //   let temp:any = [];
@@ -55,6 +55,8 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
         <Tip>
           <b>{dictionary[language]?.classroomPlanInclude} : </b>
           {dictionary[language]?.classroomPlanDescription}
+          <br/>
+          {type === 'School' ? 'Default plan has 30 teachers, you have to pay $4/month for each additional teacher': ''}
         </Tip>
         <TeacherBtnContainer>
           {!isSpecialCode &&
@@ -99,7 +101,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
             </div>
           </div>
         </TeacherBtnContainer>
-        <div className="flex flex-row justify-space-around w-100">
+        {/* <div className="flex flex-row justify-space-around w-100">
           <TextField
             label={dictionary[language]?.requestFromSponsor}
             onChange={(e: any) => {
@@ -108,7 +110,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
             value={sponsorEmail}
             disabled={true}
           />
-        </div>
+        </div> */}
         {/* {!isSpecialCode &&
           <PriceContainer>
             <Price> $ {(price * childrenCount).toFixed(2)}</Price>

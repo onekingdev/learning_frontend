@@ -22,7 +22,7 @@ import {
     OrderItemContent,
     OrderTip,
 } from './Style';
-import { LANGUAGES } from 'constants/common';
+import { LANGUAGES, USER_TYPE } from 'constants/common';
 import { GUARDIAN_SET_DATA, SUBSCRIBER_ADD_SCHOOL, TEACHER_SET_DATA } from 'app/types';
 import { Typography } from '@mui/material';
 
@@ -56,6 +56,8 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     const dispatch = useDispatch()
 
     const handleOrder = async () => {
+
+        if (profile.role === USER_TYPE.subscriber) plans.School.childCount = 30 + (plans.School?.childCount || 0)
         /*----------------------- if not selected any package, show error and break -S----------------------*/
         if (((plans.Gold?.childCount || 0) +
             (plans.Combo?.childCount || 0) +
@@ -139,7 +141,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
         const price_gold = plans.Gold?.currentPrice / 100 * offRate * (plans.Gold?.childCount || 0);
         const price_combo = plans.Combo?.currentPrice / 100 * offRate * (plans.Combo?.childCount || 0)
         const price_sole = plans.Sole?.currentPrice / 100 * offRate * (plans.Sole?.childCount || 0)
-        const price_school = plans.School?.currentPrice / 100 * offRate * (plans.School?.childCount || 0)
+        const price_school = plans.School?.currentPrice / 100 * offRate + (plans.School?.childCount || 0) * (plans.School.period === 'month' ? 4 : 48)
         const price_classroom = plans.Classroom?.currentPrice / 100 * offRate * (plans.Classroom?.childCount || 0)
         setSubtotal(price_gold + price_combo + price_sole + price_school + price_classroom)
     }, [plans])
@@ -180,11 +182,16 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                             </OrderItem>
                         }
                         {
-                            plans.School?.childCount > 0 &&
-                            <OrderItem>
-                                <OrderItemTitle>{plans.School.childCount} School {dictionary[language]?.package} </OrderItemTitle>
-                                <OrderItemContent>${plans.School.currentPrice} / {plans.School.period}</OrderItemContent>
-                            </OrderItem>
+                            plans.School?.childCount > 0 && <>
+                                <OrderItem>
+                                    <OrderItemTitle>30 Teachers {dictionary[language]?.package} </OrderItemTitle>
+                                    <OrderItemContent>${plans.School.currentPrice} / {plans.School.period}</OrderItemContent>
+                                </OrderItem>
+                                <OrderItem>
+                                    <OrderItemTitle>Additional {plans.School.childCount} Teacher {dictionary[language]?.package} </OrderItemTitle>
+                                    <OrderItemContent>${plans.School.period === 'month' ? 4 : 48} / {plans.School.period}</OrderItemContent>
+                                </OrderItem>
+                            </>
                         }
                         {
                             plans.Classroom?.childCount > 0 &&

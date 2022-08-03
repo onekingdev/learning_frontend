@@ -179,7 +179,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
         // if(result.error) return {success: false, result: result.error.message};
         // /*------------------------ send request to backend to create payment -S-----------------------------*/
         let orderDetailInputs: any = [];
-        plansDetail = plansDetail !== null ? plansDetail : plans;
+
+        plansDetail = plansDetail || plans;
+        // plansDetail = plansDetail !== null ? plansDetail : plans;
         for (const type in plansDetail) {
             const plan = plansDetail[type]
             if (plan.childCount < 1 || !plan.childCount) continue;

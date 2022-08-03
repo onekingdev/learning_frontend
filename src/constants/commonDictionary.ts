@@ -37,7 +37,7 @@ export const commonDictionary: any = Object.freeze({
     monthly: 'Monthly',
     name: 'Name',
     number_of_classrooms: 'Number of classrooms',
-    number_of_teachers: 'Number of teachers',
+    number_of_teachers: 'Addtional Number of teachers',
     password: 'Password',
     plans: 'Plans',
     priviacy_policy: 'Privacy Policy',
