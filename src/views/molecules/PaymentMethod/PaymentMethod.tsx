@@ -96,10 +96,10 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     break;
                 case 'SUBSCRIBER':
                     // TODO: updated after armin's backend update for confrim order to return subscriber
-                    dispatch({
-                        type: SUBSCRIBER_ADD_SCHOOL,
-                        payload: school
-                    })
+                    // dispatch({
+                    //     type: SUBSCRIBER_ADD_SCHOOL,
+                    //     payload: school
+                    // })
                     history.push('/admin/schools')
                     break;
                 case 'GUARDIAN':

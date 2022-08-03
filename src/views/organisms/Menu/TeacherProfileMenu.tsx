@@ -92,17 +92,15 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
           </MenuItem>
         }
         {
-          role === USER_TYPE.subscriber && <>
-            <MenuItem onClick={() => history.push('/admin/schools')}>
-              <Avatar children={<ApartmentIcon />} sx={{ bgcolor: '#22BAAF' }} />Schools
-            </MenuItem>
-            {
-              schoolName &&
-              <MenuItem onClick={() => history.push('/admin/schoolTeachers')}>
-                <Avatar children={<SchoolIcon />} sx={{ bgcolor: '#22BAAF' }} />{schoolName} teachers
-              </MenuItem>
-            }
-          </>
+          role === USER_TYPE.subscriber &&
+          <MenuItem onClick={() => history.push('/admin/schools')}>
+            <Avatar children={<ApartmentIcon />} sx={{ bgcolor: '#22BAAF' }} />Schools
+          </MenuItem>}
+        {
+          role === USER_TYPE.subscriber && schoolName &&
+          <MenuItem onClick={() => history.push('/admin/schoolTeachers')}>
+            <Avatar children={<SchoolIcon />} sx={{ bgcolor: '#22BAAF' }} />{schoolName} teachers
+          </MenuItem>
         }
         <Divider />
         <MenuItem onClick={() => history.push('/teacher/settings')}>

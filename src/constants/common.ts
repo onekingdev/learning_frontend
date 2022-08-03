@@ -90,7 +90,7 @@ export const SUBJECT_COLORS = [
 
 export const USERTYPES = [
   {
-    id: 'admin',
+    id: 'adminTeacher',
     name: 'Admin',
   },
   {

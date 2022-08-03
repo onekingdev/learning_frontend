@@ -22,7 +22,7 @@ const Schools: FC = () => {
       type: SCHOOL_SET_DATA,
       payload: school
     })
-    if (!school.schoolteacherSet)
+    if (school.schoolteacherSet.length < 1)
       history.push('/admin/addTeachers')
     else
       history.push('/admin/schoolTeachers')

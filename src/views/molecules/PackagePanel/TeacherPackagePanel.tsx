@@ -22,7 +22,7 @@ import {
 } from './Style'
 
 type PackagePanelProps = {
-  type: string;
+  type: 'School' | 'Classroom';
   price: any;
   disabled?: boolean;
   isSpecialCode: boolean;
@@ -30,7 +30,7 @@ type PackagePanelProps = {
   language: string
 };
 const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode, disabled = false, onChange, language }) => {
-  const [childrenCount, setChildrenCount] = useState(0);
+  const [childrenCount, setChildrenCount] = useState(() => type === 'School' ? 30 : 0);
   const [sponsorEmail, setSponsorEmail] = useState('')
   const [plan, setPlan] = useState('month');
   //   let temp:any = [];
@@ -87,7 +87,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
           <div className="flex flex-col p-t-10 p-b-15 font-s-20 font-w-7 w-250">
             <b>{
               type === 'School' ?
-                cDictionary[language]?.number_of_schools :
+                cDictionary[language]?.number_of_teachers :
                 cDictionary[language]?.number_of_classrooms}</b>
             <br />
             <div className="flex flex-row">
