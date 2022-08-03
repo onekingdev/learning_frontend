@@ -1,6 +1,7 @@
 export const commonDictionary: any = Object.freeze({
   'en-us': {
     add_new: 'Add New',
+    add_teachers: 'Add Teachers',
     and: 'and',
     annually: 'Annually',
     by_click_create_agree:
@@ -15,6 +16,7 @@ export const commonDictionary: any = Object.freeze({
     contact_us: 'Contact Us',
     create_account_add: 'Create the account and add to the classroom',
     create_classroom: 'Create Classroom',
+    create_teachers: 'Create Teachers',
     create_group: 'Create Group',
     discounted: 'discounted',
     done: 'Done',
@@ -62,6 +64,7 @@ export const commonDictionary: any = Object.freeze({
   },
   th: {
     add_new: 'เพิ่มใหม่',
+    add_teachers: 'Add Teachers',
     and: 'และ',
     annually: 'รายปี',
     by_click_create_agree: 'การยืนยันสมัครสมาชิกแสดงว่าท่านยอมรับ',
@@ -76,6 +79,7 @@ export const commonDictionary: any = Object.freeze({
     contact_us: 'ติดต่อเรา',
     create_account_add: 'สร้างบัญชีและเพิ่มในห้องเรียน',
     create_classroom: 'Create Classroom',
+    create_teachers: 'Create Teachers',
     create_group: 'Create Group',
     discounted: 'ส่วนลด',
     done: 'Done',
@@ -123,20 +127,22 @@ export const commonDictionary: any = Object.freeze({
   },
   'es-mx': {
     add_new: 'Agregar nueva',
+    add_teachers: 'Add Teachers',
     and: 'y',
     annually: 'Anualmente',
     by_click_create_agree: 'Al hacer clic en Crear cuenta, aceptas',
     children_privacy_policy:
-      'Política de Privacidad para niños de Learn With Socrates',
-    choose_your_plan: 'Elige tu plan',
-    class_dashboard: 'Tablero de clase',
-    classroom: 'Aula',
+    'Política de Privacidad para niños de Learn With Socrates',
+      choose_your_plan: 'Elige tu plan',
+      class_dashboard: 'Tablero de clase',
+      classroom: 'Aula',
     classrooms: 'Aulas',
     classroom_settings: 'Configuración del aula',
     combo: 'Paquete combinado (Elige 2)',
     contact_us: 'Contacta con Nosotros',
     create_account_add: 'Crear la cuenta y agregar al salón de clases',
     create_classroom: 'Create Classroom',
+    create_teachers: 'Create Teachers',
     create_group: 'Create Group',
     discounted: 'descontado',
     done: 'Done',

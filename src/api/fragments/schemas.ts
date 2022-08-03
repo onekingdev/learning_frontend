@@ -108,21 +108,4 @@ export const SUBSCRIBER = `
         expiredAt
         stripeCouponId
     }
-    schoolsubscriberSet {
-        id
-        school {
-            ${_SCHOOL_SCHEMA}
-            schoolteacherSet{
-                teacher{
-                    id
-                    user {
-                        username
-                    }
-                    firstName
-                    lastName
-                }
-            }
-        }
-    }
-
 `

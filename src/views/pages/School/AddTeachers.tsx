@@ -78,6 +78,7 @@ const AddTeachers: FC = () => {
       }
       else {
         enqueueSnackbar('Create Group Succeed', { variant: 'success' })
+
         history.push('/admin/schoolTeachers')
       }
     },
@@ -175,7 +176,7 @@ const AddTeachers: FC = () => {
     });
   }
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.classroom}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.add_teachers}>
       <>
         <div style={{ width: '100%' }}>
           <Button
@@ -204,7 +205,7 @@ const AddTeachers: FC = () => {
             margin: 5
           }}
         >
-          {commonDictionary[language]?.create_classroom}
+          {commonDictionary[language]?.create_teachers}
         </LoadingButton>
       </>
     </TeacherPgContainer>

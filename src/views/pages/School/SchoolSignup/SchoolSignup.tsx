@@ -51,11 +51,12 @@ const SchoolSignup: FC = () => {
   const [country, setCountry] = useState(countries[232])
   const [district, setDistrict] = useState('')
   const [loading, setLoading] = useState(false);
+  const [couponCode, setCouponCode] = useState('')
 
   const language = useSelector((state: any) => state.user.language);
 
   const createSchool = useMutation(() => doCreateSchool(
-    country.name, district, firstName, lastName, email, schoolName, password, schoolType, userName, zip
+    country.name, district, firstName, lastName, email, schoolName, password, schoolType, userName, zip, couponCode
   ), {
     onSuccess: async data => {
       if (data.message) {
@@ -345,6 +346,16 @@ const SchoolSignup: FC = () => {
                 }}
                 error={!!validateMsg.confPassword}
                 helperText={validateMsg.confPassword}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label={dictionary[language]?.couponCode}
+                onChange={e => {
+                  setCouponCode(e.target.value);
+                }}
+                value={couponCode}
+                type="special code"
               />
             </Grid>
           </Grid>

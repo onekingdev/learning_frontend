@@ -18,7 +18,8 @@ export const CREATE_SCHOOL = (
   password: string,
   type: string,
   userName: string,
-  zip: string
+  zip: string,
+  couponCode: string
 ) => `
 mutation {
 	createSchool (
@@ -32,6 +33,7 @@ mutation {
     type: "${type}",
     username: "${userName}",
     zip: "${zip}",
+    ${couponCode ? 'couponCode: "' + couponCode + '",' : ''}
   ) {
     user {
       ${_USER}
