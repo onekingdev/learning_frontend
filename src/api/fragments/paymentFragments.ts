@@ -45,9 +45,15 @@ export const PLAN_RAW = `
   areaOfKnowledge
   slug
   priceMonth
+  pricePreferentialMonth
+  quantityPreferentialMonth
+  quantityLowerLimit
   priceYear
+  pricePreferentialYear
+  quantityPreferentialYear
   currency
   isCancel
+  quantityLowerLimit
 `
 
 

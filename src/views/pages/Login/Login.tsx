@@ -55,6 +55,7 @@ export const LogIn: FC = () => {
 
 
     const userType = user.profile?.role || USER_TYPE.user
+    let redirectUrl = ''
 
     switch (userType) {
 
@@ -76,7 +77,7 @@ export const LogIn: FC = () => {
         });
         dispatch({ type: TYPES.AVATAR_SET_DEFAULT_LOGIN, payload: student });
 
-        history.push('/home')
+        redirectUrl = '/home'
         break;
 
       case USER_TYPE.guardian:
@@ -84,17 +85,23 @@ export const LogIn: FC = () => {
         dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian });
 
         // Direct to payment page, when there are no bought plans
-        guardian.guardianstudentplanSet?.length === 0 ? history.push('/parent/payment') :
-          history.push('/kids/list')
+        redirectUrl = guardian.guardianstudentplanSet?.length === 0 ? '/parent/payment' : '/kids/list'
         break;
 
       case USER_TYPE.teacher:
         // Set teacher state
         dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
-        if (teacher.hasOrder)
-          history.push('/teacher/classrooms')
-        else
-          history.push('/teacher/payment')
+
+        if (!teacher.schoolteacher) {// if the teacher is not school teacher
+
+          if (teacher.hasOrder) // if the teacher has order, then go to classrooms page,
+            redirectUrl = '/teacher/classrooms'
+          else // if the teacher hasn't order, then go to payment page
+            redirectUrl = '/teacher/payment'
+        } else // if school teacher,
+          redirectUrl = '/teacher/classrooms'
+
+
         break;
       case USER_TYPE.subscriber:
         // Set teacher state
@@ -102,7 +109,7 @@ export const LogIn: FC = () => {
           type: SUBSCRIBER_SET_DATA,
           payload: { ...subscriber }
         })
-        history.push('/admin/schools')
+        redirectUrl = '/admin/schools'
         break;
       case USER_TYPE.adminTeacher:
         // Set teacher state
@@ -114,12 +121,13 @@ export const LogIn: FC = () => {
           type: SCHOOL_SET_DATA,
           payload: { ...administrativepersonnel?.schooladministrativepersonnel?.school }
         })
-        history.push('/admin/schoolTeachers')
+        redirectUrl = '/admin/schoolTeachers'
         break;
       default:
-        history.push('/')
+        redirectUrl = '/'
         break;
     }
+    history.push(redirectUrl)
   }
 
   useEffect(() => {

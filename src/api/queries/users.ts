@@ -97,6 +97,9 @@ export const WHOAMI_QUERY = `
             }
             teacher {
                 ${_TEACHERSCHEMA}
+                schoolteacher {
+                    id
+                }
             }
             subscriber {
                 ${SUBSCRIBER}

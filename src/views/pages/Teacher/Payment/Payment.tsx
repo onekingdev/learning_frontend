@@ -79,16 +79,19 @@ const Payment: FC = () => {
       return;
     }
     const plans_re_object: any = {
-      Gold: [],
-      Combo: [],
-      Sole: [],
-      School: [],
-      Classroom: []
+      Gold: {},
+      Combo: {},
+      Sole: {},
+      School: {},
+      Classroom: {}
     };
     for (const plan of result.data) {
       const name: any = plan.name;
       plans_re_object[name] = plan;
       plans_re_object[name].currentPrice = plan.priceMonth;
+      plans_re_object[name].pricePreferentialMonth = plan.pricePreferentialMonth
+      plans_re_object[name].quantityPreferentialYear = plan.quantityPreferentialYear - 1
+      plans_re_object[name].quantityPreferentialMonth = plan.quantityPreferentialMonth - 1
     }
     setPlans(plans_re_object)
     // setPackPrice(plans_re_object)
@@ -113,12 +116,14 @@ const Payment: FC = () => {
         <PackageContainer>
           <PackagePanel
             type={productType}
+            plan={plans[productType]}
             price={plans[productType] ? (plans[productType].currentPrice) : 0}
             onChange={(childrenCount, plan, sponsor) =>
               onChangePackage(childrenCount, plan, sponsor)
             }
             isSpecialCode={isSpecialCode}
             language={language}
+            minCount={plans[productType].quantityLowerLimit || 0}
           />
         </PackageContainer>
         <Elements stripe={stripePromise}>

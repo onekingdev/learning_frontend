@@ -22,8 +22,7 @@ import {
     OrderItemContent,
     OrderTip,
 } from './Style';
-import { LANGUAGES, USER_TYPE } from 'constants/common';
-import { GUARDIAN_SET_DATA, SUBSCRIBER_ADD_SCHOOL, TEACHER_SET_DATA } from 'app/types';
+import { GUARDIAN_SET_DATA, TEACHER_SET_DATA } from 'app/types';
 import { Typography } from '@mui/material';
 
 type PaymentMethodProps = {
@@ -42,6 +41,8 @@ interface PaymentFormFunc {
     handleOrder(plans: any, coupon: string): any;
     handleUpdate(): void;
 }
+
+
 export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode, sponsorEmail }) => {
 
     const history = useHistory();
@@ -57,7 +58,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
 
     const handleOrder = async () => {
 
-        if (profile.role === USER_TYPE.subscriber) plans.School.childCount = 30 + (plans.School?.childCount || 0)
+        // if (profile.role === USER_TYPE.subscriber) {plans.School.childCount = plans.School.quantityPreferentialMonth + (plans.School?.childCount || 0)}
         /*----------------------- if not selected any package, show error and break -S----------------------*/
         if (((plans.Gold?.childCount || 0) +
             (plans.Combo?.childCount || 0) +
@@ -132,17 +133,55 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     //   useEffect(() => {
     //   }, []);
 
+    const calcPrice = (plan: any) => {
+
+
+        //  Sample plan schema
+        // {
+        //     "id": "5",
+        //     "priceMonth": "3.333",
+        //     "pricePreferentialMonth": "4.000",
+        //     "quantityPreferentialMonth": 31,
+        //     "priceYear": "29.997",
+        //     "pricePreferentialYear": "36.000",
+        //     "quantityPreferentialYear": 31,
+        //     "name": "School",
+        //     "quantityLowerLimit": 30,
+        //      period: "month" | "year"
+        //   }
+        if (!plan) return 0
+
+        const { childCount, period, priceMonth,
+            pricePreferentialMonth,
+            quantityPreferentialMonth,
+            priceYear, pricePreferentialYear,
+            quantityPreferentialYear } = plan
+
+        const pricePrefer: number = parseFloat(period === 'month' ? pricePreferentialMonth : pricePreferentialYear)
+        const quantityPrefer: number = +(period === 'month' ? quantityPreferentialMonth : quantityPreferentialYear)
+        const basePrice: number = +(period === 'month' ? priceMonth : priceYear)
+        const price: number =
+            childCount > quantityPrefer ?
+                (basePrice * quantityPrefer + pricePrefer * (childCount - quantityPrefer)) :
+                basePrice * childCount
+
+        return price || 0
+    }
+
     useEffect(() => {
         // const price_gold = plans.Gold.currentPrice / 100 * offRate * ((plans.Gold.childCount - 1 > 0) ? (plans.Gold.childCount - 1) : 0) + (plans.Gold.childCount > 0 ? 1 : 0) * plans.Gold.currentPrice;
         // const price_combo = plans.Combo.currentPrice / 100 * offRate * ((plans.Combo.childCount - 1 > 0) ? (plans.Combo.childCount - 1) : 0) + (plans.Combo.childCount > 0 ? 1 : 0) * plans.Combo.currentPrice;
         // const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0) * plans.Sole.currentPrice;
         // const price_school = plans.School.currentPrice / 100 * offRate * ((plans.School.childCount - 1 > 0) ? (plans.School.childCount - 1) : 0) + (plans.School.childCount > 0 ? 1 : 0) * plans.School.currentPrice;
         // const price_classroom = plans.Classroom.currentPrice / 100 * offRate * ((plans.Classroom.childCount - 1 > 0) ? (plans.Classroom.childCount - 1) : 0) + (plans.Classroom.childCount > 0 ? 1 : 0) * plans.Classroom.currentPrice;
-        const price_gold = plans.Gold?.currentPrice / 100 * offRate * (plans.Gold?.childCount || 0);
-        const price_combo = plans.Combo?.currentPrice / 100 * offRate * (plans.Combo?.childCount || 0)
-        const price_sole = plans.Sole?.currentPrice / 100 * offRate * (plans.Sole?.childCount || 0)
-        const price_school = plans.School?.currentPrice / 100 * offRate + (plans.School?.childCount || 0) * (plans.School.period === 'month' ? 4 : 48)
-        const price_classroom = plans.Classroom?.currentPrice / 100 * offRate * (plans.Classroom?.childCount || 0)
+
+
+        const price_school = calcPrice(plans.School)
+        const price_classroom = calcPrice(plans.Classroom)
+        const price_combo = calcPrice(plans.Combo)
+        const price_gold = calcPrice(plans.Gold)
+        const price_sole = calcPrice(plans.Sole)
+
         setSubtotal(price_gold + price_combo + price_sole + price_school + price_classroom)
     }, [plans])
     return (
@@ -188,8 +227,8 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                                     <OrderItemContent>${plans.School.currentPrice} / {plans.School.period}</OrderItemContent>
                                 </OrderItem>
                                 <OrderItem>
-                                    <OrderItemTitle>Additional {plans.School.childCount} Teacher {dictionary[language]?.package} </OrderItemTitle>
-                                    <OrderItemContent>${plans.School.period === 'month' ? 4 : 48} / {plans.School.period}</OrderItemContent>
+                                    <OrderItemTitle>Additional {plans.School.childCount - (plans.School.period === 'month' ? plans.School.quantityPreferentialMonth : plans.School.quantityPreferentialYear)} Teacher {dictionary[language]?.package} </OrderItemTitle>
+                                    <OrderItemContent>${plans.School.period === 'month' ? plans.School.pricePreferentialMonth : plans.School.pricePreferentialYear} / {plans.School.period}</OrderItemContent>
                                 </OrderItem>
                             </>
                         }
@@ -237,7 +276,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                             </OrderItemTitleContainer>
                             <OrderItemContent>
                                 {/* <div style={{display: 'flex'}}>${(subtotal - couponPrice).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div> */}
-                                <div style={{ display: 'flex' }}>${(subtotal).toFixed(2)}</div>
+                                <div style={{ display: 'flex' }}>${subtotal.toFixed(2)}</div>
                                 <div style={{ fontWeight: 400, lineHeight: '12px', fontSize: '10px' }}>{dictionary[language]?.firstRenewal} : {moment(trialExpiraton).format('YYYY-MM-DD')}</div>
                             </OrderItemContent>
                         </OrderItem>
