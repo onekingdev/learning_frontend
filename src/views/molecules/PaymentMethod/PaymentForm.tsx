@@ -4,8 +4,7 @@ import {
     forwardRef,
     useImperativeHandle
 } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Store } from 'app/configureStore';
+import { useSelector } from 'react-redux';
 import paypal from 'views/assets/paypal.svg';
 import apple from 'views/assets/apple-pay.svg';
 import visacard from 'views/assets/visacard.svg';
@@ -50,47 +49,21 @@ interface PaymentFormFunc {
     handleUpdate(): void;
 }
 export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
-    const dispatch = useDispatch()
     const classes = useStyles();
     const stripe = useStripe();
     const elements = useElements();
-    const user = useSelector((state: Store) => state.user)
+    const { language, token, firstName, lastName, email } = useSelector((state: any) => state.user);
     const guardian = useSelector((state: any) => state.guardian)
     const school = useSelector((state: any) => state.school)
     const teacher = useSelector((state: any) => state.teacher)
-    const language = useSelector((state: any) => state.user.language);
     const countries = Country.getAllCountries()
     const { isUpdate, isSpecialCode } = props
-    const [validateRst, setValidateRst] = useState<{ [key: string]: any }>(
-        isSpecialCode ? {
-            firstName: '',
-            lastName: '',
-            addressOne: null,
-            // addressTwo: null,
-            state: null,
-            city: null,
-            zip: null,
-            country: '',
-            phone: null,
-        } : {
-            firstName: '',
-            lastName: '',
-            cardNumber: null,
-            expiryDate: null,
-            cvc: null,
-            addressOne: null,
-            // addressTwo: null,
-            state: null,
-            city: null,
-            zip: null,
-            country: '',
-            phone: null,
-        });
+    const [validateRst, setValidateRst] = useState<any>({});
 
     const [data, setData] = useState({
         paymentMethod: 'card',
-        firstName: user.firstName,
-        lastName: user.lastName,
+        firstName: firstName,
+        lastName: lastName,
         cardNumber: '',
         cardExpMonth: '',
         cardExpYear: '',
@@ -128,6 +101,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
 
     const formValidation = () => {
         const validateMsgTemp = { ...validateRst }
+
         let valiResult = true;
         for (const key in validateRst) {
             if (validateRst[key] === null) {
@@ -138,6 +112,7 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
             }
         }
         setValidateRst(validateMsgTemp);
+
         return valiResult;
     }
 
@@ -151,8 +126,10 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
 
     const handleOrder = async (plansDetail: any = null) => {
 
+        console.log({ plansDetail })
         if (!formValidation()) {
-            return { success: false, result: 'Validation Failed' };
+            console.log('form validation failed')
+            return { success: false, result: { msg: 'Validation Failed' } };
         }
         if (!stripe) return { success: false, result: "Can't get stripe" };
         if (!elements) return { success: false, result: "Can't get element" };
@@ -209,9 +186,9 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 teacher?.id || null,
                 school?.id || null,
                 orderDetailInputs,
-                user.token,
+                token,
             )
-            result.data.email = user.email;
+            result.data.email = email;
         }
         else {
             result = await createOrder(
@@ -234,15 +211,15 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
                 orderDetailInputs,
                 'Card',
                 'https://',
-                user.token,
+                token,
             )
 
             // // /*------------------------ send request to backend to create payment -E-----------------------------*/
             if (result.success) {
-                result.data.email = user.email;
+                result.data.email = email;
                 const result_confirm = await confirmPaymentOrder(
                     result.data.order.id,
-                    user.token,
+                    token,
                 )
                 result.success = result_confirm.success;
                 result.data = result_confirm.data;
@@ -277,7 +254,32 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
         }
     }))
     useEffect(() => {
-    }, []);
+        const tempval = isSpecialCode ? {
+            firstName: '',
+            addressOne: null,
+            lastName: '',
+            // addressTwo: null,
+            state: null,
+            zip: null,
+            city: null,
+            phone: null,
+            country: '',
+        } : {
+            firstName: '',
+            lastName: '',
+            cardNumber: null,
+            expiryDate: null,
+            cvc: null,
+            addressOne: null,
+            // addressTwo: null,
+            state: null,
+            city: null,
+            zip: null,
+            country: '',
+            phone: null
+        }
+        setValidateRst(tempval)
+    }, [isSpecialCode]);
     return (
         <>
             {!isSpecialCode && <>
