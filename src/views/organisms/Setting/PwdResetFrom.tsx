@@ -10,6 +10,7 @@ import { useSnackbar } from 'notistack';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { dictionary } from './Parent/dictionary'
 import { useMutation } from '@tanstack/react-query';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 interface DialogProps {
     open: () => (void)
@@ -34,7 +35,6 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                 enqueueSnackbar('Update pwd success!', { variant: 'success' })
             }
             open()
-
         },
         onError: async (error: any) => {
             enqueueSnackbar(error.message, { variant: 'error' })
@@ -51,6 +51,8 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
 
         // Call Userfront.resetPassword()
         setLoading(true)
+        if (password)
+            updatePwd.mutate(password)
     }
     return (
         <ThemeProvider theme={settingPage}>
@@ -62,7 +64,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                 </Grid>
                 <Grid item lg={8} xs={12}>
                     <TextField
-                        size='small'
+                        // size='small'
                         id='outlined-password-input'
                         label={dictionary[language]?.newPassword}
                         type='password'
@@ -70,7 +72,6 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                         value={password || ''}
                         onChange={(e) => setPassword(e.target.value)}
                         name='password'
-                        aria-describedby='component-error-text'
                     />
                 </Grid>
                 <Grid item lg={4} xs={12}>
@@ -80,7 +81,8 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                 </Grid>
                 <Grid item lg={8} xs={12}>
                     <TextField
-                        size='small'
+                        aria-describedby='component-error-text'
+                        // size='small'
                         id='outlined-password-confirm'
                         label={dictionary[language]?.confirm}
                         type='password'
@@ -88,19 +90,20 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                         onChange={(e) => setConfirm(e.target.value)}
                         name='confirm'
                         error={confirm !== password}
-                        helperText={errorMsg}
+                    // helperText={'Passwords don\'t match'}
                     />
                 </Grid>
             </LSGridRow>
             <LSButtonContainer>
-                <Button
+                <LoadingButton
                     type='submit'
                     variant='contained'
                     onClick={handleSubmit}
                     disabled={password !== confirm}
+                    loading={loading}
                 >
                     {dictionary[language]?.submit}
-                </Button>
+                </LoadingButton>
             </LSButtonContainer>
         </ThemeProvider>
     );
