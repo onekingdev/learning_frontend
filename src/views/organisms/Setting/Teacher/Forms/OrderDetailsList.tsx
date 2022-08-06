@@ -16,7 +16,6 @@ import { dictionary } from './dictionary'
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 
-
 interface OrderListProps {
   orderDetails: Array<any>
 }

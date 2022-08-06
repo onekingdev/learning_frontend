@@ -152,19 +152,19 @@ mutation{
 `;
 
 export const UPDATE_EMAIL_PASSWORD = (
-  email: string,
-  username: string,
-  password: string
+  email?: string,
+  password?: string
 ) => `
 mutation {
-    changeGuardianEmailPassword(email: "${email}", username: "${username}", password: "${password}"){
-      guardian {
-        user {
-          email
-          username
-        }
-      }
+  changeUserEmailPassword(
+    ${email ? 'email: "' + email + '",' : ''}
+    ${password ? 'password: "' + password + '",' : ''}
+    ) {
+    user {
+      email
+      username
     }
+  }
 }
 `;
 export const FETCH_GUARDIAN_AVAILABLE_BOUGHT_PLANS = (guardianId: number) => `

@@ -40,14 +40,33 @@ export const createGuardian = async (email: string, firstName: string, lastName:
     return { success: true, data: result.data.createGuardian }
 }
 
-export const doUpdateGuardianEmailPassword = async (email: string, username: string, password: string, token: string) => {
-    const res: any = await sendRawQuery(
-        UPDATE_EMAIL_PASSWORD(email, username, password),
+// export const doUpdateGuardianEmailPassword = async (
+//     username: string,
+//     token: string,
+//     email?: string,
+//     password?: string,
+// ) => {
+//     const res: any = await sendRawQuery(
+//         UPDATE_EMAIL_PASSWORD(username, email, password),
+//         token
+//     );
+
+//     return res.msg ? null : res.data.changeGuardianEmailPassword.user;
+// }
+
+
+export const doUpdateUserEmailPassword = async (
+    token: string,
+    email?: string,
+    password?: string
+) => {
+    const res: any = await fetchQuery(
+        UPDATE_EMAIL_PASSWORD(email, password),
         token
     );
-
-    return res.msg ? null : res.data.changeGuardianEmailPassword.user;
+    return res.data?.changeUserEmailPassword?.user || res.errors[0]
 }
+
 
 export const doFetchAvailableBroughtPlans = async (guardianId: number, token: string) => {
     const res: any = await sendRawQuery(
@@ -89,7 +108,7 @@ export const doFetchPlanTypes = async (token: string) => {
         FETCH_PLANS,
         token
     );
-    return res.data.plans ?? res.errors[0]
+    return res.data.plans || res.errors[0]
 }
 
 export const doCancelBroughtPlan = async (orderDetailId: string, reason: string, token: string) => {
@@ -112,7 +131,7 @@ export const doAddStudentPlan = async (
 ) => {
     const res: any = await fetchQuery(
         ADD_STUDENT_PLAN_PACKAGE(guardianId, planId, period),
-            token
+        token
     );
     return res.data?.addGuardianPlan ?? res.errors[0] // when django returns error message on fail
 }
@@ -135,13 +154,13 @@ export const confirmPaymentOrder = async (
 
 export const doCancelMembership = async (
     guardianId: number, reason: string, token: string
-  ) => {
+) => {
     const res: any = await fetchQuery(
         CANCEL_MEMBERSHIP(guardianId, reason),
-            token
+        token
     );
     return res.data ?? res.errors[0]// when django returns error message on fail
-  }
+}
 
 
 export const doFetchGuardianStudents = async (guardianId: number, token: string) => {

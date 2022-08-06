@@ -52,10 +52,10 @@ const userReducer = (
         ...state,
         language: action.payload,
       };
-    case TYPE.GUARDIAN_UPDATE_EMAIL_PWD:
+    case TYPE.USER_SET_EMAIL:
       return {
         ...state,
-        email: action.payload.email,
+        email: action.payload,
       };
     case TYPE.USER_RESET:
       return {

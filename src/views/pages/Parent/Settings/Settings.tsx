@@ -7,7 +7,6 @@ import {
   LSLabel,
   LSText,
 } from 'views/molecules/Setting/utils/Style';
-import { SettingForm }      from 'views/organisms/Setting/Parent/Profile';
 import { Payment }          from 'views/organisms/Setting/Parent/Payment';
 import { MembershipDetail } from 'views/organisms/Setting/Parent/Details';
 import { CssBaseline }      from '@mui/material';
@@ -19,6 +18,7 @@ import {
   SettingContainer,
   TitleContainer,
  } from './Styles';
+import { UserProfile } from 'views/organisms/Setting/UserProfile';
 export const Settings: FC = () => {
   const loadingContext = useContext(LoadingContext);
   let language:string = useSelector((state: any) => state.user.language);
@@ -36,7 +36,7 @@ export const Settings: FC = () => {
         <CssBaseline />
         <Grid container>
           <Grid item xs={12} md={6}>
-            <SettingForm />
+            <UserProfile />
             <Payment />
             <TextGroup>
               <LSLabel>{dictionary[language]?.questions}</LSLabel>
