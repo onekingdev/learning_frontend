@@ -1,4 +1,4 @@
-import { COUPON_COODE } from 'api/fragments/paymentFragments';
+import { COUPON_COODE, PLAN_RAW } from 'api/fragments/paymentFragments';
 import { GROUP } from 'api/fragments/peopleFragments';
 import { SUBSCRIBER, _SCHOOL_SCHEMA } from 'api/fragments/schemas';
 import {
@@ -121,6 +121,38 @@ export const TEACHER_CLASSROOMS = (
   }
 }
 `;
+
+
+export const TEACHER_ORDERS = (
+  teacherId: number | string
+) => `{
+  teacherById(id: "${teacherId}") {
+    orderSet {
+			orderdetailSet {
+        id
+        plan{
+            ${PLAN_RAW}
+        }
+        paymentMethodPlanId
+        subscriptionId
+        quantity
+        period
+        updateFromDetailId
+        status
+        onDiscount
+        discount
+        expiredAt
+        isPaid
+        cancelReason
+        isCancel
+        slug
+        total
+      }
+    }
+  }
+}
+`;
+
 
 export const ADD_CLASS_TO_TEACHER = (
   audienceId: string | number,

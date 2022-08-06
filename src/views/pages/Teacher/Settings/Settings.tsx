@@ -6,9 +6,18 @@ import { TeacherPaymentInfo } from 'views/organisms/Setting/Teacher/Payment';
 import { TeacherMembershipDetail } from 'views/organisms/Setting/Teacher/Details';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import commonDictionary from 'constants/commonDictionary';
+import { useQuery } from '@tanstack/react-query';
+import { doFetchTeacherOrders } from 'app/actions';
 
 const TeacherSettings: FC = () => {
-  const language: string = useSelector((state: any) => state.user.language) || 'en-us'
+  const { language, token } = useSelector((state: any) => state.user)
+  const { id: teacherId } = useSelector((state: any) => state.teacher)
+
+  const { data: orders, isLoading, error } = useQuery(
+    ['teacher-orders', teacherId],
+    () => doFetchTeacherOrders(teacherId, token),
+    { refetchIntervalInBackground: false }
+  )
 
   useEffect(() => {
 
@@ -30,7 +39,10 @@ const TeacherSettings: FC = () => {
           </Grid>
         </Grid>
         <Grid item md={6} sm={12}>
-          <TeacherMembershipDetail />
+          {
+            orders &&
+            <TeacherMembershipDetail orders={orders} />
+          }
         </Grid>
       </Grid>
     </TeacherPgContainer>

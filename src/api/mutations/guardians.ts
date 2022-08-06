@@ -1,12 +1,12 @@
-import {GUARDIAN, GUARDIAN_ORDERS, GUARDIAN_STUDENT_PLAN} from '../fragments/guardianFragments';
-import {_USER, USER_PROFILE} from '../fragments/userFragments';
+import { GUARDIAN, GUARDIAN_ORDERS, GUARDIAN_STUDENT_PLAN } from '../fragments/guardianFragments';
+import { _USER, USER_PROFILE } from '../fragments/userFragments';
 import {
   ORDER,
   PLAN_RAW,
   AVAILABLE_PLANS,
 } from '../fragments/paymentFragments';
-import {ORDER_RAW} from '../fragments/studentFragments';
-import {GRADES} from '../fragments/peopleFragments';
+import { ORDER_RAW } from '../fragments/studentFragments';
+import { GRADES } from '../fragments/peopleFragments';
 import { _AVATAR, _STUDENT } from 'api/fragments/schemas';
 
 export const CREATE_GUARDIAN = (
@@ -193,14 +193,52 @@ query getActiveGuardianPlan {
 `;
 
 export const CANCEL_GUARDIAN_BOUGHT_PLAN = (
-  orderDetailId: string,
+  orderDetailId: string | number,
   reason: string
 ) => `
-mutation cancelGuardianPlan {
+mutation {
     cancelGuardianPlan(orderDetailId: ${orderDetailId}, reason: "${reason}") {
       status
       guardian {
         ${GUARDIAN_ORDERS}
+      }
+    }
+  }
+`;
+
+export const CANCEL_ORDERDETAIL = (
+  orderDetailId: string | number,
+  reason: string,
+) => `
+mutation {
+  cancelOrderdetailById(orderDetailId: ${orderDetailId}, reason: "${reason}") {
+      status
+      guardian {
+        ${GUARDIAN_ORDERS}
+      }
+      teacher {
+        orderSet {
+          orderdetailSet {
+            id
+            plan{
+              ${PLAN_RAW}
+            }
+            paymentMethodPlanId
+            subscriptionId
+            quantity
+            period
+            updateFromDetailId
+            status
+            onDiscount
+            discount
+            expiredAt
+            isPaid
+            cancelReason
+            isCancel
+            slug
+            total
+          }
+        }
       }
     }
   }

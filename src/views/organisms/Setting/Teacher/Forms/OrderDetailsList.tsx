@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import {
   Button,
   Grid,
@@ -16,75 +16,22 @@ import { dictionary } from './dictionary'
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 
-const fake_plans = [
-  {
-    id: 1,
-    plan: {
-      name: 'Gold',
-      priceMonth: '12USD',
-      priceYear: '108USD',
-    },
-    period: 'MONTHLY',
-    expiredAt: '22-06-08',
-  },
-  {
-    id: 2,
-    plan: {
-      name: 'Gold',
-      priceMonth: '12USD',
-      priceYear: '108USD',
-    },
-    period: 'MONTHLY',
-    expiredAt: '22-06-08',
-  },
-  {
-    id: 3,
-    plan: {
-      name: 'Gold',
-      priceMonth: '12USD',
-      priceYear: '108USD',
-    },
-    period: 'YEARLY',
-    expiredAt: '22-06-08',
-  },
-]
 
-export const TeacherPlanList: FC = () => {
+interface OrderListProps {
+  orderDetails: Array<any>
+}
+export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
   const isMobile = useSocratesMediaQuery('xs')
   const language = useSelector((state: any) => state.user.language);
 
-  // for change to yearly dialog
-  const [isUpdateOpen, update] = useState(false)
-  const openUpdate = () => update(!isUpdateOpen);
+  // for change to yearly update dialog
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false)
+
+  // for cancel dialog
   const { isOpen, open } = useDialog()
-  const [tag, seTag] = useState(0)
-  const [plans, setPlans] = useState<Array<any>>([])
-  const [changed, setChanged] = useState(false)
 
-  const toggleChanged = () => {
-    setChanged(!changed)
-  }
-
-  const onBtnClick = (id: number) => {
-    seTag(id)
-    open()
-  }
-
-  const onUpgradeBtnClick = (id: number) => {
-    seTag(id)
-    openUpdate()
-  }
-
-  const onCancelUpgrade = () => openUpdate()
-
-  const fetchAvailableBrougthPlans = async () => {
-    setPlans([])
-    setPlans(fake_plans)
-  }
-
-  useEffect(() => {
-    fetchAvailableBrougthPlans()
-  }, [changed]);
+  // to store currently selected orderDetail
+  const [selected, setSelected] = useState<any>()
 
   return (
     <>
@@ -96,7 +43,7 @@ export const TeacherPlanList: FC = () => {
           </ListSubheader>
         }
       >
-        {plans.length > 0 && plans.map((row, index) => (
+        {orderDetails && orderDetails.map((row, index) => (
           <ListItem key={row.id} divider>
             <Grid container spacing={1} sx={{ background: isMobile ? colors[index % 4] : 'white' }}>
               <Grid item sm={3} xs={12}>
@@ -113,44 +60,52 @@ export const TeacherPlanList: FC = () => {
               </Grid>
               <Grid item sm={6} xs={12}>
                 <Button
-                  disabled={row.period === 'MONTHLY' ? false : true}
-                  onClick={() => onUpgradeBtnClick(index)}
+                  disabled={row.period.toUpperCase() === 'YEARLY' || row.isCancel ? true : false}
+                  onClick={() => {
+                    setSelected(row)
+                    setIsUpdateOpen(true)
+                  }}
                 >{dictionary[language]?.ChangeToYearly}
                 </Button>
               </Grid>
               <Grid item sm={6} xs={12}>
-                <Button onClick={() => onBtnClick(index)}>{dictionary[language]?.CancelPlan}</Button>
+                <Button
+                  onClick={() => { // on cancel plan btn clicked
+                    setSelected(row)
+                    open() // Open cancel plan dialog
+                  }}
+                  disabled={row.isCancel}
+                >{dictionary[language]?.CancelPlan}</Button>
               </Grid>
             </Grid>
           </ListItem>
         ))}
       </List>
-      <LSDialog
-        isOpen={isOpen}
-        open={open}
-        title={dictionary[language]?.CancelChildrenPlan}
-        contentText={dictionary[language]?.YouAreCancellingOneChildSoloArea}
-        dialogContent={
-          <TeacherCancelPlanForm
-            plan={plans[tag]}
+      {
+        selected && <>
+          <LSDialog // Cancel plan dialog
+            isOpen={isOpen}
             open={open}
-            refresh={toggleChanged}
+            title={dictionary[language]?.CancelChildrenPlan}
+            contentText={dictionary[language]?.YouAreCancellingOneChildSoloArea}
+            dialogContent={
+              <TeacherCancelPlanForm
+                orderDetailId={selected?.id || ''}
+              />
+            }
           />
-        }
-      />
-      <LSDialog
-        isOpen={isUpdateOpen}
-        open={openUpdate}
-        title={dictionary[language]?.Upgrade}
-        dialogContent={
-          <TeacherPlanUpgrade
-            plan={plans[tag]}
-            onConfirm={openUpdate}
-            onCancel={onCancelUpgrade}
-            refresh={toggleChanged}
+          <LSDialog // Upgrade to yearly dialog
+            isOpen={isUpdateOpen}
+            open={() => setIsUpdateOpen(!isUpdateOpen)}
+            title={dictionary[language]?.Upgrade}
+            dialogContent={
+              <TeacherPlanUpgrade
+                orderDetail={selected}
+              />
+            }
           />
-        }
-      />
+        </>
+      }
     </>
   );
 }

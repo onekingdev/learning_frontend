@@ -1,21 +1,35 @@
-import { FC } from 'react';
-import { Box, Button, Paper, useMediaQuery } from '@mui/material';
+import { FC, useEffect, useState } from 'react';
+import { Box, Button, Paper } from '@mui/material';
 import { LSTitle } from 'views/molecules/Setting/utils/Style';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
 import { TeacherCancelMembershipForm } from './Forms/TeacherCancelMembershipForm';
 import { useSelector } from 'react-redux';
 import { dictionary } from './dictionary'
-import { TeacherPlanList } from './Forms/TeacherPlanList';
+import { OrderDetailsList } from './Forms/OrderDetailsList';
 import { TeacherAddSimplePlanForm } from './Forms/TeacherAddSimplePlanForm';
 import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
-import { ScreenSize } from 'constants/screenSize';
-export const TeacherMembershipDetail: FC = () => {
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+interface TeacherMembershipDetailProps {
+  orders: Array<any>
+}
+
+export const TeacherMembershipDetail: FC<TeacherMembershipDetailProps> = ({ orders }) => {
+
+  const isMobile = useSocratesMediaQuery('xs')
   const { isOpen, open } = useDialog()
   const { isAddOpen, openAdd } = useAddDialog()
-  const language: string = useSelector((state: any) => state.user.language) || 'en-us';
+  const { language } = useSelector((state: any) => state.user)
+  const [orderDetails, setOrderDetails] = useState<Array<any>>([])
+
+  useEffect(() => {
+      const temp = []
+    for (const order of orders) {
+      temp.push(...order.orderdetailSet)
+    }
+    setOrderDetails(temp)
+  }, [orders])
 
   return (
     <Paper
@@ -43,7 +57,7 @@ export const TeacherMembershipDetail: FC = () => {
             }
           />
         </Box>
-        <TeacherPlanList />
+        <OrderDetailsList orderDetails={orderDetails} />
         <Box >
           <Button onClick={openAdd}>
             {dictionary[language]?.addAPlan}

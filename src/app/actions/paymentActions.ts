@@ -1,5 +1,5 @@
 import { PLAN_QUERY } from 'api/queries/payments'
-import queryFetch from 'api/queries/get';
+import queryFetch, { fetchQuery } from 'api/queries/get';
 import {
     CREATE_ORDER,
     CONFIRM_PAYMENT_ORDER,
@@ -9,6 +9,7 @@ import {
 } from 'api/mutations/payments';
 import { sendRawQuery } from 'api/queries/get';
 import mutationFetch from 'api/mutations/get';
+import { CANCEL_GUARDIAN_BOUGHT_PLAN, CANCEL_ORDERDETAIL } from 'api/mutations/guardians';
 
 export const createOrder = async (
     cardCvc: string,
@@ -212,3 +213,15 @@ export const doChangePaymentMethod = async (guradianId: number, paymentInfo: any
         return { status: false, msg: e.message }
     }
 }
+
+
+export const doCancelOrderDetail = async (
+    orderDetailId: number | string,
+    reason: string,
+    token: string
+) => {
+    const res: any = await fetchQuery(
+        CANCEL_ORDERDETAIL(orderDetailId, reason),
+        token)
+    return res.data?.cancelGuardianPlan || res.errors[0]; // when django returns error message on fail
+};
