@@ -14,7 +14,7 @@ import { TeacherCancelPlanForm } from './TeacherCancelPlanForm';
 import PlanUpgradeForm from './TeacherPlanUpgrade';
 import { dictionary } from './dictionary'
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
-
+import commonDictionary from 'constants/commonDictionary';
 
 interface OrderListProps {
   orderDetails: Array<any>
@@ -85,11 +85,11 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
           <LSDialog // Cancel plan dialog
             isOpen={isOpen}
             open={open}
-            title={dictionary[language]?.CancelChildrenPlan}
-            contentText={dictionary[language]?.YouAreCancellingOneChildSoloArea}
+            title={commonDictionary[language]?.cancel_plan}
             dialogContent={
               <TeacherCancelPlanForm
                 orderDetailId={selected?.id || ''}
+                close={open}
               />
             }
           />

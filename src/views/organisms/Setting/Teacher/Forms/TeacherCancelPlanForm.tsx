@@ -17,10 +17,11 @@ import { queryClient } from 'index';
 
 interface ICancelFormProps {
   orderDetailId: number | string
+  close: () => void
 }
 
 
-export const TeacherCancelPlanForm: FC<ICancelFormProps> = ({ orderDetailId }) => {
+export const TeacherCancelPlanForm: FC<ICancelFormProps> = ({ orderDetailId, close }) => {
 
   const { language, token } = useSelector((state: any) => state.user);
   const { id: teacherId } = useSelector((state: any) => state.teacher)

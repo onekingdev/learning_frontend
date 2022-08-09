@@ -6,6 +6,7 @@ export const commonDictionary: any = Object.freeze({
     annually: 'Annually',
     by_click_create_agree:
       'By clicking Create Account, you agree to Learn With Socrates’s',
+    cancel_plan: 'Cancel Plan',
     children_privacy_policy: 'Children’s Privacy Policy',
     choose_your_plan: 'Choose your plan',
     class_dashboard: 'Class Dashboard',
@@ -68,6 +69,7 @@ export const commonDictionary: any = Object.freeze({
     and: 'และ',
     annually: 'รายปี',
     by_click_create_agree: 'การยืนยันสมัครสมาชิกแสดงว่าท่านยอมรับ',
+    cancel_plan: 'Cancel Plan',
     children_privacy_policy:
       'นโยบายความเป็นส่วนตัวของบุตรหลาน ของ Learn with Socrates',
     choose_your_plan: 'เลือกแพลนผู้ใช้',
@@ -131,11 +133,12 @@ export const commonDictionary: any = Object.freeze({
     and: 'y',
     annually: 'Anualmente',
     by_click_create_agree: 'Al hacer clic en Crear cuenta, aceptas',
+    cancel_plan: 'Cancel Plan',
     children_privacy_policy:
-    'Política de Privacidad para niños de Learn With Socrates',
-      choose_your_plan: 'Elige tu plan',
-      class_dashboard: 'Tablero de clase',
-      classroom: 'Aula',
+      'Política de Privacidad para niños de Learn With Socrates',
+    choose_your_plan: 'Elige tu plan',
+    class_dashboard: 'Tablero de clase',
+    classroom: 'Aula',
     classrooms: 'Aulas',
     classroom_settings: 'Configuración del aula',
     combo: 'Paquete combinado (Elige 2)',

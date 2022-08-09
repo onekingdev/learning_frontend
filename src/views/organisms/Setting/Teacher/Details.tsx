@@ -7,9 +7,9 @@ import { TeacherCancelMembershipForm } from './Forms/TeacherCancelMembershipForm
 import { useSelector } from 'react-redux';
 import { dictionary } from './dictionary'
 import { OrderDetailsList } from './Forms/OrderDetailsList';
-import { TeacherAddSimplePlanForm } from './Forms/TeacherAddSimplePlanForm';
 import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+import { TeacherAddOrderForm } from './Forms/TeacherAddOrderForm';
 
 interface TeacherMembershipDetailProps {
   orders: Array<any>
@@ -51,8 +51,8 @@ export const TeacherMembershipDetail: FC<TeacherMembershipDetailProps> = ({ orde
             // fullWidth='true'
             // contentText={dictionary[language]?.chooseTheNewPlan}
             dialogContent={
-              <TeacherAddSimplePlanForm
-                open={openAdd}
+              <TeacherAddOrderForm
+                // open={openAdd}
               />
             }
           />

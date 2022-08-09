@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FC, useState } from 'react';
-import { Box, FormControlLabel, Grid, Switch, Typography } from '@mui/material';
+import { Box, FormControlLabel, Grid, Radio, Switch, TextField, Typography } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
-import { LSRadio, LSFormControlLabel, LSInputBase } from './utils/Style';
+// import { LSRadio, LSFormControlLabel, LSInputBase } from './utils/Style';
 import { dictionary } from 'views/pages/Parent/Settings/dictionary';
 import commonDictionary from 'constants/commonDictionary'
 import { confirmPaymentOrder, doAddStudentPlan, doFetchPlanTypes } from 'app/actions/guardianActions';
@@ -16,13 +16,13 @@ import { useHistory } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 
 
-export const AddSimplePlanForm: FC = () => {
+export const TeacherAddOrderForm: FC = () => {
 
   const history = useHistory();
   const [yearly, setYearly] = useState(true)
   const { token, language } = useSelector((state: any) => state.user);
   const { id: guardianId } = useSelector((state: any) => state.guardian);
-  const paymentCardNum = useSelector((state: any) => state.guardian.paymentMethod.cardNumber);
+  const paymentCardNum = useSelector((state: any) => state.guardian.paymentMethod?.cardNumber) || '';
   const { enqueueSnackbar } = useSnackbar();
 
   const [parentState, setParentState] = useState<string>('')
@@ -90,7 +90,7 @@ export const AddSimplePlanForm: FC = () => {
           plans.map((plan: any) => {
             return <Grid container alignItems='center' key={plan.id}>
               <Grid item xs={6}>
-                <FormControlLabel value={plan.name} control={<LSRadio />} label={commonDictionary[language]?.[plan.slug as keyof Object] || ''} />
+                <FormControlLabel value={plan.name} control={<Radio />} label={commonDictionary[language]?.[plan.slug as keyof Object] || ''} />
               </Grid>
               <Grid item xs={6}>
                 <Typography variant='body1' textAlign='center'>{yearly ? plan.priceYear : plan.priceMonth}<span style={{ fontSize: '0.8rem' }}>{plan.currency}/{yearly ? commonDictionary[language]?.annually : commonDictionary[language]?.monthly}</span></Typography>
@@ -100,12 +100,12 @@ export const AddSimplePlanForm: FC = () => {
         }
       </RadioGroup>
       <Typography mt={5}>{dictionary[language]?.paymentCardMessage}</Typography>
-      <LSInputBase
+      <TextField
         fullWidth
         disabled
-        border='solid 2px darkblue'
-        border_radius={10}
-        pl={10}
+        // border='solid 2px darkblue'
+        // border_radius={10}
+        // pl={10}
         value={paymentCardNum}
       // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
       />

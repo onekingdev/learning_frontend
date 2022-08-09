@@ -12,6 +12,7 @@ import { BasicColor } from 'views/Color';
 import { doUpgradeOrderdetailById } from 'app/actions/paymentActions';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from 'index';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 interface IUpgradeProps {
   orderDetail: any
@@ -33,7 +34,7 @@ export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
 
 
 
-  const upgradePlan = useMutation(() => doUpgradeOrderdetailById(orderDetail.id, 'YEARLY', 'https://www.return.com/', 12, token), {
+  const upgradePlan = useMutation(() => doUpgradeOrderdetailById(orderDetail.id, 'YEARLY', 'https://www.return.com/', token), {
     onSuccess: async data => {
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
@@ -64,40 +65,36 @@ export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
   }, [])
 
   return (
-    loading ?
-      <LoadingContainer>
-        <ReactLoading type="spinningBubbles" color={BasicColor.green} />
-      </LoadingContainer>
-      :
-      <div >
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-          <LSText >{text[0]}</LSText>
-          <LSLabel mt={0}>{'Annual Plan'}</LSLabel>
-          <LSPaperMoney elevation={6}>
-            <LSLabel fontSize={24} color='darkblue' >{orderDetail?.plan.priceYear}{orderDetail?.plan.currency}<span style={{ fontSize: '14px', color: 'black' }}>{'/year'}</span></LSLabel>
-          </LSPaperMoney>
-          <LSText mt={15} mb={20} textAlign='center'>{text[1]}</LSText>
-          <LSText fontSize={15} margin={0} textAlign='center'>{text[2]}</LSText>
-        </Box>
-        <LSLabel >{'Card Number'}</LSLabel>
-        <LSInputBase
-          fullWidth
-          disabled
-          border='solid 2px darkblue'
-          border_radius={10}
-          pl={10}
-          value={guardian.paymentMethod?.cardNumber}
-        // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
-        />
-        <LSButtonContainer style={{ marginTop: '32px' }}>
-          <Button
-            variant='contained'
-            onClick={onSubmitBtnClicked}
-          >
-            {'Upgrade'}
-          </Button>
-        </LSButtonContainer>
-      </div>
+    <div >
+      <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+        <LSText >{text[0]}</LSText>
+        <LSLabel mt={0}>{'Annual Plan'}</LSLabel>
+        <LSPaperMoney elevation={6}>
+          <LSLabel fontSize={24} color='darkblue' >{orderDetail?.plan.priceYear}{orderDetail?.plan.currency}<span style={{ fontSize: '14px', color: 'black' }}>{'/year'}</span></LSLabel>
+        </LSPaperMoney>
+        <LSText mt={15} mb={20} textAlign='center'>{text[1]}</LSText>
+        <LSText fontSize={15} margin={0} textAlign='center'>{text[2]}</LSText>
+      </Box>
+      <LSLabel >{'Card Number'}</LSLabel>
+      <LSInputBase
+        fullWidth
+        disabled
+        border='solid 2px darkblue'
+        border_radius={10}
+        pl={10}
+        value={guardian.paymentMethod?.cardNumber}
+      // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
+      />
+      <LSButtonContainer style={{ marginTop: '32px' }}>
+        <LoadingButton
+          variant='contained'
+          onClick={onSubmitBtnClicked}
+          loading={loading}
+        >
+          {'Upgrade'}
+        </LoadingButton>
+      </LSButtonContainer>
+    </div>
   );
 }
 

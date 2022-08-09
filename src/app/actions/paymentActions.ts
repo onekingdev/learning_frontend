@@ -224,7 +224,7 @@ export const doCancelOrderDetail = async (
     const res: any = await fetchQuery(
         CANCEL_ORDERDETAIL(orderDetailId, reason),
         token)
-    return res.data?.cancelGuardianPlan || res.errors[0]; // when django returns error message on fail
+    return res.data?.cancelOrderdetailById || res.errors[0]; // when django returns error message on fail
 };
 
 
@@ -233,8 +233,8 @@ export const doUpgradeOrderdetailById = async (
     orderDetailId: number | string,
     period: 'YEARLY' | 'MONTHLY',
     returnUrl: string,
-    schoolId: number | string,
-    token: string
+    token: string,
+    schoolId?: number | string, // For the teacher, schoolId is omitted.
 ) => {
     const res: any = await fetchQuery(
         `
@@ -243,7 +243,7 @@ export const doUpgradeOrderdetailById = async (
                     orderDetailId: ${orderDetailId},
                     period: "${period}",
                     returnUrl: "${returnUrl}",
-                    schoolId: ${schoolId}
+                    ${schoolId ? 'schoolId: "' + schoolId + '",' : ''}
                 ) {
                     teacher {
                         orderSet {
