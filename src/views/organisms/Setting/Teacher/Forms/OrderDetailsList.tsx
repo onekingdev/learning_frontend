@@ -11,7 +11,7 @@ import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { useDialog } from 'views/molecules/Setting/utils/useDialog';
 import { LSLabel, LSText } from 'views/molecules/Setting/utils/Style';
 import { TeacherCancelPlanForm } from './TeacherCancelPlanForm';
-import { TeacherPlanUpgrade } from './TeacherPlanUpgrade';
+import PlanUpgradeForm from './TeacherPlanUpgrade';
 import { dictionary } from './dictionary'
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
@@ -52,7 +52,7 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
                 <LSLabel>{row.period}</LSLabel>
               </Grid>
               <Grid item sm={3} xs={4}>
-                <LSLabel>{row.expiredAt?.slice(0, 10)}</LSLabel>
+                <LSLabel>{row.expiredAt?.slice(0, 10) || 'Unknown'}</LSLabel>
               </Grid>
               <Grid item sm={3} xs={4}>
                 <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth : row.plan.priceYear} {row.plan.currency}</LSLabel>
@@ -98,8 +98,9 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
             open={() => setIsUpdateOpen(!isUpdateOpen)}
             title={dictionary[language]?.Upgrade}
             dialogContent={
-              <TeacherPlanUpgrade
+              <PlanUpgradeForm
                 orderDetail={selected}
+                close={() => setIsUpdateOpen(false)}
               />
             }
           />

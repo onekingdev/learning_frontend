@@ -5,14 +5,17 @@ import {
   LSButtonContainer, LSText,
   LSPaperMoney, LSLabel, LSInputBase
 } from 'views/molecules/Setting/utils/Style';
-// import { doUpdateBroughtPlan }     from 'app/actions/guardianActions';
 import { useSnackbar } from 'notistack';
 import { LoadingContainer } from 'views/atoms/Loading'
 import ReactLoading from 'react-loading';
 import { BasicColor } from 'views/Color';
+import { doUpgradeOrderdetailById } from 'app/actions/paymentActions';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from 'index';
 
 interface IUpgradeProps {
   orderDetail: any
+  close: () => void
 }
 
 const text = [
@@ -21,26 +24,40 @@ const text = [
   'Your credit card on file will be charged for this upgrade.',
 ]
 
-export const TeacherPlanUpgrade: FC<IUpgradeProps> = ({ orderDetail }) => {
+export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
   const guardian = useSelector((state: any) => state.guardian);
-  // const user = useSelector((state: any) => state.user);
+  const { id: teacherId } = useSelector((state: any) => state.teacher)
+  const { token, language } = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false)
 
+
+
+  const upgradePlan = useMutation(() => doUpgradeOrderdetailById(orderDetail.id, 'YEARLY', 'https://www.return.com/', 12, token), {
+    onSuccess: async data => {
+      if (data.message) {
+        enqueueSnackbar(data.message, { variant: 'error' })
+      }
+      else {
+        const orders = data.teacher?.orderSet
+        if (orders)
+          queryClient.setQueryData(['teacher-orders', teacherId], orders)
+        enqueueSnackbar('Upgrade Plan Succeed', { variant: 'success' })
+        close()
+      }
+    },
+    onError: async (error: any) => {
+      enqueueSnackbar(error.message, { variant: 'error' })
+    },
+    onSettled: async () => {
+      setLoading(false)
+    }
+  })
+
   const onSubmitBtnClicked = async () => {
     setLoading(true)
-    // TODO: update query when the backend is done
-    // const res: any = await doUpdateBroughtPlan(guardian.id, orderDetail.id, user.token)
 
-    // Remove this when the backend is done;
-    const res = { status: false }
-
-    if (res.status) {
-      enqueueSnackbar('Student Package updated successfully', { variant: 'success' })
-    } else {
-      enqueueSnackbar('Student Package update failed', { variant: 'error' })
-    }
-    setLoading(false)
+    upgradePlan.mutate()
   }
 
   useEffect(() => {
@@ -83,3 +100,5 @@ export const TeacherPlanUpgrade: FC<IUpgradeProps> = ({ orderDetail }) => {
       </div>
   );
 }
+
+export default PlanUpgradeForm

@@ -1,13 +1,12 @@
 import { FC, useState } from 'react';
 import { settingPage } from 'views/Theme';
-import { Button, TextField, ThemeProvider } from '@mui/material';
+import { TextField, ThemeProvider } from '@mui/material';
 import { LSGridRow, LSLabel } from 'views/molecules/Setting/utils/Style';
 import { Grid } from '@mui/material';
 import { LSButtonContainer } from 'views/molecules/Setting/utils/Style';
 import { doUpdateUserEmailPassword } from 'app/actions/guardianActions';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { LoadingSpinner } from 'views/atoms/Spinner';
 import { dictionary } from './Parent/dictionary'
 import { useMutation } from '@tanstack/react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -20,7 +19,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
     const { enqueueSnackbar } = useSnackbar();
-    const [errorMsg, setErrorMsg] = useState('')
+    // const [errorMsg, setErrorMsg] = useState('')
     const { language, token } = useSelector((state: any) => state.user);
     const [loading, setLoading] = useState(false)
     // Whenever an input changes value, change the corresponding state variable
@@ -46,10 +45,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        // Verify that the passwords match
-        // if (!validatePwd()) return
 
-        // Call Userfront.resetPassword()
         setLoading(true)
         if (password)
             updatePwd.mutate(password)

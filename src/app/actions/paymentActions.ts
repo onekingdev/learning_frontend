@@ -10,6 +10,7 @@ import {
 import { sendRawQuery } from 'api/queries/get';
 import mutationFetch from 'api/mutations/get';
 import { CANCEL_GUARDIAN_BOUGHT_PLAN, CANCEL_ORDERDETAIL } from 'api/mutations/guardians';
+import { PLAN_RAW } from 'api/fragments/paymentFragments';
 
 export const createOrder = async (
     cardCvc: string,
@@ -224,4 +225,53 @@ export const doCancelOrderDetail = async (
         CANCEL_ORDERDETAIL(orderDetailId, reason),
         token)
     return res.data?.cancelGuardianPlan || res.errors[0]; // when django returns error message on fail
+};
+
+
+// ! This is for teacher now, need to update to be common
+export const doUpgradeOrderdetailById = async (
+    orderDetailId: number | string,
+    period: 'YEARLY' | 'MONTHLY',
+    returnUrl: string,
+    schoolId: number | string,
+    token: string
+) => {
+    const res: any = await fetchQuery(
+        `
+            mutation {
+                updateOrderdetailById(
+                    orderDetailId: ${orderDetailId},
+                    period: "${period}",
+                    returnUrl: "${returnUrl}",
+                    schoolId: ${schoolId}
+                ) {
+                    teacher {
+                        orderSet {
+                            orderdetailSet {
+                                id
+                                plan {
+                                    ${PLAN_RAW}
+                                }
+                                paymentMethodPlanId
+                                subscriptionId
+                                quantity
+                                period
+                                updateFromDetailId
+                                status
+                                onDiscount
+                                discount
+                                expiredAt
+                                isPaid
+                                cancelReason
+                                isCancel
+                                slug
+                                total
+                            }
+                        }
+                    }
+                }
+            }
+        `,
+        token)
+    return res.data?.updateOrderdetailById || res.errors[0]; // when django returns error message on fail
 };
