@@ -35,10 +35,10 @@ export const TeacherCancelPlanForm: FC<ICancelFormProps> = ({ orderDetailId, clo
         enqueueSnackbar(data.message, { variant: 'error' })
       }
       else {
-        console.log({ data })
         const orders = data.teacher?.orderSet
         if (orders)
-          queryClient.setQueryData(['teacher-orders', teacherId], orders)
+          queryClient.invalidateQueries(['teacher-orders', teacherId])
+
         enqueueSnackbar('Cancel Plan Succeed', { variant: 'success' })
         close()
       }

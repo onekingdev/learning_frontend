@@ -65,9 +65,6 @@ export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
     },
     onError: async (error: any) => {
       enqueueSnackbar(error.message, { variant: 'error' })
-    },
-    onSettled: async () => {
-      // setLoading(false)
     }
   })
 

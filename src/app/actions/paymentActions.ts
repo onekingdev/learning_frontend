@@ -303,3 +303,19 @@ export const doAddOrder = async (
         token)
     return res.data?.addOrder?.order?.id || res.errors[0]; // when django returns error message on fail
 };
+
+export const doCancelMembership = async (
+    token: string,
+    reason: string,
+) => {
+    const res: any = await fetchQuery(
+        `
+        mutation {
+            cancelMembership(reason: "${reason}") {
+                status
+            }
+        }
+        `,
+        token)
+    return res.data?.cancelMembership?.status || res.errors[0]; // when django returns error message on fail
+};

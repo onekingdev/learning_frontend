@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   ListSubheader,
+  Typography,
 } from '@mui/material';
 import { useSelector } from 'react-redux'
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
@@ -68,15 +69,19 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
                     }}
                   >{dictionary[language]?.ChangeToYearly}
                   </Button>
+
                 </Grid>
                 <Grid item sm={6} xs={12}>
-                  <Button
-                    onClick={() => { // on cancel plan btn clicked
-                      setSelected(row)
-                      open() // Open cancel plan dialog
-                    }}
-                    disabled={row.isCancel}
-                  >{dictionary[language]?.CancelPlan}</Button>
+                  {
+                    row.isCancel ? <Typography variant='inherit' color='gray'>Cancelled</Typography> :
+                      <Button
+                        onClick={() => { // on cancel plan btn clicked
+                          setSelected(row)
+                          open() // Open cancel plan dialog
+                        }}
+                      >{dictionary[language]?.CancelPlan}</Button>
+                  }
+
                 </Grid>
               </Grid>
             </ListItem>
