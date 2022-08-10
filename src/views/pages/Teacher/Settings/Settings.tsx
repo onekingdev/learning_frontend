@@ -8,6 +8,8 @@ import commonDictionary from 'constants/commonDictionary';
 import { useQuery } from '@tanstack/react-query';
 import { doFetchTeacherOrders } from 'app/actions';
 import { UserProfile } from 'views/organisms/Setting/UserProfile';
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { ErrorMessage } from 'views/atoms/ErrorMessage';
 
 const TeacherSettings: FC = () => {
   const { language, token } = useSelector((state: any) => state.user)
@@ -40,8 +42,10 @@ const TeacherSettings: FC = () => {
         </Grid>
         <Grid item md={6} sm={12}>
           {
-            orders &&
-            <TeacherMembershipDetail orders={orders} />
+            isLoading ? <LoadingSpinner /> :
+              error ? <ErrorMessage error={error} /> :
+                orders &&
+                <TeacherMembershipDetail orders={orders} />
           }
         </Grid>
       </Grid>

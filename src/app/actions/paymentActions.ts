@@ -9,8 +9,7 @@ import {
 } from 'api/mutations/payments';
 import { sendRawQuery } from 'api/queries/get';
 import mutationFetch from 'api/mutations/get';
-import { CANCEL_GUARDIAN_BOUGHT_PLAN, CANCEL_ORDERDETAIL } from 'api/mutations/guardians';
-import { PLAN_RAW } from 'api/fragments/paymentFragments';
+import { CANCEL_ORDERDETAIL } from 'api/mutations/guardians';
 
 export const createOrder = async (
     cardCvc: string,
@@ -245,28 +244,11 @@ export const doUpgradeOrderdetailById = async (
                     returnUrl: "${returnUrl}",
                     ${schoolId ? 'schoolId: "' + schoolId + '",' : ''}
                 ) {
-                    teacher {
-                        orderSet {
-                            orderdetailSet {
-                                id
-                                plan {
-                                    ${PLAN_RAW}
-                                }
-                                paymentMethodPlanId
-                                subscriptionId
-                                quantity
-                                period
-                                updateFromDetailId
-                                status
-                                onDiscount
-                                discount
-                                expiredAt
-                                isPaid
-                                cancelReason
-                                isCancel
-                                slug
-                                total
-                            }
+                    status
+                    order {
+                        id
+                        orderdetailSet {
+                            id
                         }
                     }
                 }
@@ -274,4 +256,50 @@ export const doUpgradeOrderdetailById = async (
         `,
         token)
     return res.data?.updateOrderdetailById || res.errors[0]; // when django returns error message on fail
+};
+
+export const doConfirmUpdateOrderDetail = async (
+    orderDetailId: number | string,
+    token: string,
+    schoolId?: number | string, // For the teacher, schoolId is omitted.
+) => {
+    const res: any = await fetchQuery(
+        `
+            mutation {
+                confirmUpdateOrderdetail(
+                    orderDetailId: ${orderDetailId},
+                    ${schoolId ? 'schoolId: "' + schoolId + '",' : ''}
+                ) {
+                    status
+                    teacher {
+                        id
+                    }
+                }
+            }
+        `,
+        token)
+    return res.data?.confirmUpdateOrderdetail || res.errors[0]; // when django returns error message on fail
+};
+
+export const doAddOrder = async (
+    token: string,
+    orderDetailInput: string,
+    schoolId?: number | string,
+) => {
+    const res: any = await fetchQuery(
+        `
+            mutation {
+                addOrder(
+                    ${schoolId ? 'schoolId: "' + schoolId + '",' : ''}
+                    orderDetailInput: ${orderDetailInput},
+                    returnUrl: "www.example.com"
+                ) {
+                    order {
+                        id
+                    }
+                }
+            }
+        `,
+        token)
+    return res.data?.addOrder?.order?.id || res.errors[0]; // when django returns error message on fail
 };

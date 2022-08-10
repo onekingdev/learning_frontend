@@ -24,7 +24,7 @@ export const TeacherMembershipDetail: FC<TeacherMembershipDetailProps> = ({ orde
   const [orderDetails, setOrderDetails] = useState<Array<any>>([])
 
   useEffect(() => {
-      const temp = []
+    const temp = []
     for (const order of orders) {
       temp.push(...order.orderdetailSet)
     }
@@ -52,7 +52,7 @@ export const TeacherMembershipDetail: FC<TeacherMembershipDetailProps> = ({ orde
             // contentText={dictionary[language]?.chooseTheNewPlan}
             dialogContent={
               <TeacherAddOrderForm
-                // open={openAdd}
+                close={openAdd}
               />
             }
           />

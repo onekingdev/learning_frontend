@@ -1,15 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { useSelector } from 'react-redux'
 import {
   LSButtonContainer, LSText,
   LSPaperMoney, LSLabel, LSInputBase
 } from 'views/molecules/Setting/utils/Style';
 import { useSnackbar } from 'notistack';
-import { LoadingContainer } from 'views/atoms/Loading'
-import ReactLoading from 'react-loading';
-import { BasicColor } from 'views/Color';
-import { doUpgradeOrderdetailById } from 'app/actions/paymentActions';
+import { doConfirmUpdateOrderDetail, doUpgradeOrderdetailById } from 'app/actions/paymentActions';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from 'index';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -28,10 +25,33 @@ const text = [
 export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
   const guardian = useSelector((state: any) => state.guardian);
   const { id: teacherId } = useSelector((state: any) => state.teacher)
-  const { token, language } = useSelector((state: any) => state.user);
+  const { token } = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false)
 
+  interface ConfirmUpgrade {
+    orderDetailId: string;
+    token: string;
+  }
+
+  const confirmUpgrade = useMutation(({ orderDetailId, token }: ConfirmUpgrade) => doConfirmUpdateOrderDetail(orderDetailId, token), {
+    onSuccess: async data => {
+      if (data.message) {
+        enqueueSnackbar(data.message, { variant: 'error' })
+      } else {
+        const { teacher } = data
+        if (teacher)
+          queryClient.invalidateQueries(['teacher-orders', teacherId])
+        close()
+      }
+    },
+    onSettled: async () => {
+      setLoading(false)
+    },
+    onError: async (error: any) => {
+      enqueueSnackbar(error.message, { variant: 'error' })
+    },
+  })
 
 
   const upgradePlan = useMutation(() => doUpgradeOrderdetailById(orderDetail.id, 'YEARLY', 'https://www.return.com/', token), {
@@ -40,18 +60,14 @@ export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
         enqueueSnackbar(data.message, { variant: 'error' })
       }
       else {
-        const orders = data.teacher?.orderSet
-        if (orders)
-          queryClient.setQueryData(['teacher-orders', teacherId], orders)
-        enqueueSnackbar('Upgrade Plan Succeed', { variant: 'success' })
-        close()
+        confirmUpgrade.mutate({ orderDetailId: data.order.orderdetailSet[0].id, token })
       }
     },
     onError: async (error: any) => {
       enqueueSnackbar(error.message, { variant: 'error' })
     },
     onSettled: async () => {
-      setLoading(false)
+      // setLoading(false)
     }
   })
 

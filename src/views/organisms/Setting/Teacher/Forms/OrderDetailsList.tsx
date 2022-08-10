@@ -42,43 +42,45 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
           </ListSubheader>
         }
       >
-        {orderDetails && orderDetails.map((row, index) => (
-          <ListItem key={row.id} divider>
-            <Grid container spacing={1} sx={{ background: isMobile ? colors[index % 4] : 'white' }}>
-              <Grid item sm={3} xs={12}>
-                <LSLabel >{row.plan.name}</LSLabel>
+        {orderDetails && orderDetails
+          .filter((item: any) => item.isPaid) // Display only paid plans
+          .map((row, index) => (
+            <ListItem key={row.id} divider>
+              <Grid container spacing={1} sx={{ background: isMobile ? colors[index % 4] : 'white' }}>
+                <Grid item sm={3} xs={12}>
+                  <LSLabel >{row.plan.name}({row.quantity})</LSLabel>
+                </Grid>
+                <Grid item sm={3} xs={4}>
+                  <LSLabel>{row.period}</LSLabel>
+                </Grid>
+                <Grid item sm={3} xs={4}>
+                  <LSLabel>{row.expiredAt?.slice(0, 10) || 'Unknown'}</LSLabel>
+                </Grid>
+                <Grid item sm={3} xs={4}>
+                  <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth : row.plan.priceYear} {row.plan.currency}</LSLabel>
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                  <Button
+                    disabled={row.period.toUpperCase() === 'YEARLY' || row.isCancel ? true : false}
+                    onClick={() => {
+                      setSelected(row)
+                      setIsUpdateOpen(true)
+                    }}
+                  >{dictionary[language]?.ChangeToYearly}
+                  </Button>
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                  <Button
+                    onClick={() => { // on cancel plan btn clicked
+                      setSelected(row)
+                      open() // Open cancel plan dialog
+                    }}
+                    disabled={row.isCancel}
+                  >{dictionary[language]?.CancelPlan}</Button>
+                </Grid>
               </Grid>
-              <Grid item sm={3} xs={4}>
-                <LSLabel>{row.period}</LSLabel>
-              </Grid>
-              <Grid item sm={3} xs={4}>
-                <LSLabel>{row.expiredAt?.slice(0, 10) || 'Unknown'}</LSLabel>
-              </Grid>
-              <Grid item sm={3} xs={4}>
-                <LSLabel>{row.period === 'MONTHLY' ? row.plan.priceMonth : row.plan.priceYear} {row.plan.currency}</LSLabel>
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <Button
-                  disabled={row.period.toUpperCase() === 'YEARLY' || row.isCancel ? true : false}
-                  onClick={() => {
-                    setSelected(row)
-                    setIsUpdateOpen(true)
-                  }}
-                >{dictionary[language]?.ChangeToYearly}
-                </Button>
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <Button
-                  onClick={() => { // on cancel plan btn clicked
-                    setSelected(row)
-                    open() // Open cancel plan dialog
-                  }}
-                  disabled={row.isCancel}
-                >{dictionary[language]?.CancelPlan}</Button>
-              </Grid>
-            </Grid>
-          </ListItem>
-        ))}
+            </ListItem>
+          ))}
       </List>
       {
         selected && <>

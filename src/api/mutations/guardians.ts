@@ -56,13 +56,16 @@ export const CREATE_ORDER = (
 `;
 
 // For confirming new plan in parent/setting page
-export const CONFIRM_PAYMENT_ORDER = (orderId: number) => `
+export const CONFIRM_PAYMENT_ORDER = (orderId: number | string) => `
   mutation {
     confirmPaymentOrder(orderId: ${orderId}) {
       order{
         ${ORDER_RAW}
       }
       status
+      teacher {
+        id
+      }
     }
   }
 `;

@@ -138,7 +138,7 @@ export const doAddStudentPlan = async (
 
 // Resend confirm mutation when add new plan succeed.
 export const confirmPaymentOrder = async (
-    orderId: number, token: string
+    orderId: number | string, token: string
 ) => {
     try {
         const res: any = await sendRawQuery(

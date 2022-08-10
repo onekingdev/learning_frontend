@@ -16,7 +16,9 @@ export const extractQuestion = (str: string) => {
   return str.slice(1, firstBracketIndex);
 };
 
-export const getMessage = (error: any) => error.message;
+export const getMessage = (error: any) => {
+  return error.message || 'Error on fetching!'
+};
 
 export const isValidUrl = (_string: string) => {
   if (!_string) return false;
@@ -92,7 +94,11 @@ export const any2String = (param: any): string => {
     }
     str += '}';
     // let stringifiedObj = Object.entries(param).map(x => x.join(':')).join('\n')
-  } else str = '"' + param.toString() + '"';
+  } else if (typeof param === 'string')
+    str = '"' + param.toString() + '"';
+  else
+    str = param.toString()
+
   return str;
 };
 

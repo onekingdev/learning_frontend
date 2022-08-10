@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FC, useState } from 'react';
 import { Box, FormControlLabel, Grid, Switch, Typography } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
-import { LSRadio, LSFormControlLabel, LSInputBase } from './utils/Style';
+import { LSRadio, LSInputBase } from './utils/Style';
 import { dictionary } from 'views/pages/Parent/Settings/dictionary';
 import commonDictionary from 'constants/commonDictionary'
 import { confirmPaymentOrder, doAddStudentPlan, doFetchPlanTypes } from 'app/actions/guardianActions';
