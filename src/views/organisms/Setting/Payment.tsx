@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { EditPaymentForm } from 'views/molecules/Setting/EditPaymentForm';
+import { EditPaymentForm } from 'views/organisms/Setting/EditPaymentForm';
 import { useSelector } from 'react-redux'
 import payment from 'views/assets/payment/payment.jpg'
 import creditCardType from 'credit-card-type'

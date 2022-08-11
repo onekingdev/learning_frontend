@@ -12,7 +12,7 @@ import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
 import { useSnackbar } from 'notistack';
 import { GUARDIAN_PAYMENT_METHOD_INFO, TEACHER_SET_PAYMENT_METHOD } from 'app/types'
 import commonDictionary from 'constants/commonDictionary'
-import { images } from './utils/images'
+import { images } from '../../molecules/Setting/utils/images'
 import { USER_TYPE } from 'constants/common';
 import { useMutation } from '@tanstack/react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
