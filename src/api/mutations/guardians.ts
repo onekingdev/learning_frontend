@@ -156,17 +156,20 @@ mutation{
 
 export const UPDATE_EMAIL_PASSWORD = (
   email?: string,
-  password?: string
+  username?: string,
+  password?: string,
 ) => `
 mutation {
-  changeUserEmailPassword(
+  changeUserNameEmailPassword(
     ${email ? 'email: "' + email + '",' : ''}
     ${password ? 'password: "' + password + '",' : ''}
+    ${username ? 'username: "' + username + '",' : ''}
     ) {
     user {
       email
       username
     }
+    token
   }
 }
 `;

@@ -54,16 +54,18 @@ export const createGuardian = async (email: string, firstName: string, lastName:
 // }
 
 
-export const doUpdateUserEmailPassword = async (
+export const doUpdateUserNameEmailPassword = async (
     token: string,
     email?: string,
-    password?: string
+    username?: string,
+    password?: string,
 ) => {
+    console.log({token, email, username, password})
     const res: any = await fetchQuery(
-        UPDATE_EMAIL_PASSWORD(email, password),
+        UPDATE_EMAIL_PASSWORD(email, username, password),
         token
     );
-    return res.data?.changeUserEmailPassword?.user || res.errors[0]
+    return res.data?.changeUserNameEmailPassword || res.errors[0]
 }
 
 

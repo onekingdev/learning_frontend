@@ -12,14 +12,13 @@ import { ParentPgStepper } from 'views/molecules/ParentPgStepper/ParentPgStepper
 import { createGuardian } from 'app/actions/guardianActions'
 import { dictionary } from './dictionary';
 import {
-  Container,
   FormContainer,
   Title,
 } from './Style';
 import commonDictionary from 'constants/commonDictionary'
 import ContactBox from 'views/organisms/ContactBox';
 import FormBottomDescription from 'views/organisms/FormBottomDescription';
-import { ThemeProvider } from '@mui/material';
+import { Box, ThemeProvider } from '@mui/material';
 import { themeTeacher } from 'views/Theme';
 import * as TYPES from 'app/types'
 
@@ -110,7 +109,7 @@ const CreateParent: FC = () => {
     <ParentPgContainer onlyLogoImgNav={true}>
       <ThemeProvider theme={themeTeacher}>
         <ParentPgStepper step={1} />
-        <Container>
+        <Box display='flex' justifyContent={'center'} mt={2}>
           <FormContainer>
             <Title>{dictionary[language]?.parentSignup}</Title>
             <Grid container spacing={3}>
@@ -243,7 +242,7 @@ const CreateParent: FC = () => {
             <FormBottomDescription language={language} />
           </FormContainer>
           <ContactBox language={language} />
-        </Container>
+        </Box>
       </ThemeProvider>
     </ParentPgContainer>
   );

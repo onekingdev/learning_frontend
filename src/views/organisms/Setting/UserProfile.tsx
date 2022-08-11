@@ -6,23 +6,26 @@ import {
   LSButtonContainer,
   LSGridRow,
   LSTitle,
-  LSText,
-  LSLabel,
 } from 'views/molecules/Setting/utils/Style';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Paper, TextField, useMediaQuery } from '@mui/material';
+import { Button, Paper, TextField, Typography, useMediaQuery } from '@mui/material';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
 import { ScreenSize } from 'constants/screenSize';
 import { useMutation } from '@tanstack/react-query';
-import { doUpdateUserEmailPassword } from 'app/actions/guardianActions';
+import { doUpdateUserNameEmailPassword } from 'app/actions/guardianActions';
 import { useSnackbar } from 'notistack';
-import { USER_SET_EMAIL } from 'app/types';
+import { USER_SET_DATA, USER_SET_TOKEN } from 'app/types';
 import isEmail from 'validator/lib/isEmail'
 import LoadingButton from '@mui/lab/LoadingButton';
 import { PwdResetForm } from './PwdResetFrom';
 import commonDictionary from 'constants/commonDictionary';
 
+interface IMutationProps {
+  email?: string
+  username?: string
+  token: string
+}
 
 export const UserProfile: FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
@@ -38,7 +41,7 @@ export const UserProfile: FC = () => {
   }
 
 
-  const updateEmail = useMutation((email: string) => doUpdateUserEmailPassword(token, email
+  const updateEmail = useMutation(({ username, email, token }: IMutationProps) => doUpdateUserNameEmailPassword(token, email, username
   ), {
     onSuccess: async data => {
       if (data.message) {
@@ -47,9 +50,13 @@ export const UserProfile: FC = () => {
       else {
         console.log({ data })
         dispatch({
-          type: USER_SET_EMAIL,
-          payload: data.email
+          type: USER_SET_DATA,
+          payload: data.user
         });
+        dispatch({
+          type: USER_SET_TOKEN,
+          payload: data.token
+      });
         enqueueSnackbar('Update email success!', { variant: 'success' })
       }
     },
@@ -66,9 +73,10 @@ export const UserProfile: FC = () => {
     const data = new FormData(event.currentTarget);
 
     const email = data.get('email')?.toString()?.trim() || ''
+    const username = data.get('username')?.toString()?.trim() || ''
     if (isEmail(email)) {
       setLoading(true)
-      updateEmail.mutate(email)
+      updateEmail.mutate({ token, email, username })
     }
     else
       enqueueSnackbar(commonDictionary[language]?.email_is_not_valid, { variant: 'error' })
@@ -87,33 +95,54 @@ export const UserProfile: FC = () => {
       <Box component='form' onSubmit={handleSubmit} noValidate>
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
-            <LSLabel>
-              {commonDictionary[language]?.name}
-            </LSLabel>
+            <Typography fontWeight={'bold'}>
+              {commonDictionary[language]?.username}
+            </Typography>
           </Grid>
           <Grid item lg={8} xs={12}>
-            <LSText pl={20} >
+            <Typography >
               {username}
-            </LSText>
+            </Typography>
           </Grid>
         </LSGridRow>
+
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
-            <LSLabel>
-              {commonDictionary[language]?.current_email}
-            </LSLabel>
+            <Typography fontWeight={'bold'}>
+              {'New username'}
+            </Typography>
           </Grid>
           <Grid item lg={8} xs={12}>
-            <LSText pl={20}>
-              {email}
-            </LSText>
+            <TextField
+              margin='normal'
+              size='small'
+              id='new-username'
+              label={'New username'}
+              name='username'
+              autoComplete='text'
+              defaultValue={username}
+            />
           </Grid>
         </LSGridRow>
+
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
-            <LSLabel >
+            <Typography fontWeight={'bold'}>
+              {commonDictionary[language]?.current_email}
+            </Typography>
+          </Grid>
+          <Grid item lg={8} xs={12}>
+            <Typography>
+              {email}
+            </Typography>
+          </Grid>
+        </LSGridRow>
+
+        <LSGridRow container>
+          <Grid item lg={4} xs={12}>
+            <Typography fontWeight={'bold'}>
               {commonDictionary[language]?.change_email}
-            </LSLabel>
+            </Typography>
           </Grid>
           <Grid item lg={8} xs={12}>
             <TextField
@@ -123,14 +152,15 @@ export const UserProfile: FC = () => {
               label={'e-mail address'}
               name='email'
               autoComplete='email'
+              defaultValue={email}
             />
           </Grid>
         </LSGridRow>
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
-            <LSLabel >
+            <Typography fontWeight={'bold'}>
               {commonDictionary[language]?.password}
-            </LSLabel>
+            </Typography>
           </Grid>
           <Grid item lg={8} xs={12}>
             <LSDialog

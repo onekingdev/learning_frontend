@@ -4,12 +4,13 @@ import { TextField, ThemeProvider } from '@mui/material';
 import { LSGridRow, LSLabel } from 'views/molecules/Setting/utils/Style';
 import { Grid } from '@mui/material';
 import { LSButtonContainer } from 'views/molecules/Setting/utils/Style';
-import { doUpdateUserEmailPassword } from 'app/actions/guardianActions';
-import { useSelector } from 'react-redux';
+import { doUpdateUserNameEmailPassword } from 'app/actions/guardianActions';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useMutation } from '@tanstack/react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
 import commonDictionary from 'constants/commonDictionary';
+import { USER_SET_TOKEN } from 'app/types';
 
 interface DialogProps {
     open: () => (void)
@@ -18,19 +19,23 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
 
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
+    const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
     // const [errorMsg, setErrorMsg] = useState('')
     const { language, token } = useSelector((state: any) => state.user);
     const [loading, setLoading] = useState(false)
     // Whenever an input changes value, change the corresponding state variable
 
-    const updatePwd = useMutation((pwd: string) => doUpdateUserEmailPassword(token, undefined, pwd), {
+    const updatePwd = useMutation((pwd: string) => doUpdateUserNameEmailPassword(token, undefined, undefined, pwd), {
         onSuccess: async data => {
             if (data.message) {
                 enqueueSnackbar(data.message, { variant: 'error' })
             }
             else {
-                console.log({ data })
+                dispatch({
+                    type: USER_SET_TOKEN,
+                    payload: data.token
+                });
                 enqueueSnackbar('Update pwd success!', { variant: 'success' })
             }
             open()

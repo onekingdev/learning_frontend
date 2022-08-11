@@ -20,6 +20,7 @@ import { LoadingContext } from 'react-router-loading';
 import { getPlans } from 'app/actions/paymentActions'
 import { useSnackbar } from 'notistack';
 import { dictionary } from './dictionary';
+import { Box } from '@mui/material';
 
 const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
 
@@ -90,7 +91,7 @@ export const Payment: FC = () => {
   }, []);
   return (
     <ParentPgContainer onlyLogoImgNav={true}>
-      <>
+      <Box display='flex' flexDirection={'column'} alignItems='center'>
         <ParentPgStepper step={2} />
         <TipContainer>
           <Alert severity='info'>
@@ -165,7 +166,7 @@ export const Payment: FC = () => {
             />
           )}
         </Elements>
-      </>
+      </Box>
     </ParentPgContainer>
   );
 };
