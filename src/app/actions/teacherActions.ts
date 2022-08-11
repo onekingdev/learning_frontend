@@ -284,6 +284,14 @@ export const doFetchTeacherOrders = async (
   return res.data?.teacherById?.orderSet || res.errors[0]; // when django returns error message on fail
 };
 
+export const doFetchTeacherPaymentMethods = async (
+  teacherId: number | string,
+  token: string
+) => {
+  const res: any = await fetchQuery(TEACHER_ORDERS(teacherId), token);
+  return res.data?.teacherById?.orderSet || res.errors[0]; // when django returns error message on fail
+};
+
 
 
 export const doFetchClassroomStudentsWithAssignments = async (

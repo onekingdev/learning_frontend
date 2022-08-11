@@ -66,7 +66,7 @@ interface DialogProps {
 }
 const StyledDialog = styled(Dialog) <DialogProps>`
 & .MuiPaper-root {
-  padding: 20px;
+  // padding: 20px;
   max-width: ${props => props.wide === 'true' ? '100%;' : 'auto;'}
   overflow-y: visible
 }
@@ -75,11 +75,11 @@ const StyledIconBtn = styled(IconButton)`
   &.MuiIconButton-root{
     position: absolute;
     right: -20px;
-    top: -10px;
+    top: -15px;
     background: ${BasicColor.green};
     color: white;
     &:hover {
-      background: ${BasicColor.green};
+      background: ${BasicColor.darkGreen};
     }
   }
 `

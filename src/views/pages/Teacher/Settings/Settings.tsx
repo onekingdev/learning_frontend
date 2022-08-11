@@ -1,7 +1,7 @@
 import { FC, useEffect, } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
-import { TeacherPaymentInfo } from 'views/organisms/Setting/Teacher/Payment';
+import { PaymentInfo } from 'views/organisms/Setting/Payment';
 import { TeacherMembershipDetail } from 'views/organisms/Setting/Teacher/Details';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import commonDictionary from 'constants/commonDictionary';
@@ -13,7 +13,7 @@ import { ErrorMessage } from 'views/atoms/ErrorMessage';
 
 const TeacherSettings: FC = () => {
   const { language, token } = useSelector((state: any) => state.user)
-  const { id: teacherId } = useSelector((state: any) => state.teacher)
+  const { id: teacherId, paymentMethod } = useSelector((state: any) => state.teacher)
 
   const { data: orders, isLoading, error } = useQuery(
     ['teacher-orders', teacherId],
@@ -35,9 +35,12 @@ const TeacherSettings: FC = () => {
             <Grid item xs={12}>
               <UserProfile />
             </Grid>
-            <Grid item xs={12}>
-              <TeacherPaymentInfo />
-            </Grid>
+            {
+              paymentMethod &&
+              <Grid item xs={12}>
+                <PaymentInfo paymentMethod={paymentMethod} />
+              </Grid>
+            }
           </Grid>
         </Grid>
         <Grid item md={6} sm={12}>

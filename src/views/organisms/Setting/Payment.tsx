@@ -1,29 +1,22 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
-import Grid from '@mui/material/Grid';
-import {
-  LSGridRow,
-  LSTitle, LSText,
-} from 'views/molecules/Setting/utils/Style';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { EditPaymentForm } from 'views/molecules/Setting/EditPaymentForm';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import { useSelector } from 'react-redux'
 import payment from 'views/assets/payment/payment.jpg'
 import creditCardType from 'credit-card-type'
-import { dictionary } from './dictionary'
-import { Button, Paper } from '@mui/material';
+import { dictionary } from './Teacher/dictionary'
+import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
-const stripePromise = loadStripe('pk_test_RqGIvgu49sLej0wM4rycOkJh');
-
-export const TeacherPaymentInfo: FC = () => {
+interface PaymentInfoProps {
+  paymentMethod: any
+}
+export const PaymentInfo: FC<PaymentInfoProps> = ({ paymentMethod }) => {
   const isMobile = useSocratesMediaQuery('xs')
   const [isEdit, edit] = useState(false)
-  const guardian = useSelector((state: any) => state.guardian);
-  const cardType = creditCardType(guardian.paymentMethod.cardNumber)
+  // const cardType = creditCardType(paymentMethod.cardNumber)
   const language = useSelector((state: any) => state.user.language);
 
   const openEdit = () => edit(!isEdit);
@@ -36,23 +29,27 @@ export const TeacherPaymentInfo: FC = () => {
         width: isMobile ? '100%' : 640
       }}
     >
-      <LSTitle>
+      <Typography variant='h5' fontWeight={'bold'}>
         {dictionary[language]?.yourPaymentMethod}
-      </LSTitle>
-      <LSGridRow container>
-        <Grid item lg={4} xs={4}>
+      </Typography>
+      <Grid container mt={2}>
+        <Grid item xs={4}>
           <MasterCardImg src={payment} />
         </Grid>
-        <Grid item lg={8} xs={8}>
-          <LSText>
-            {cardType[0]?.niceType + ' card ending in ' + guardian.paymentMethod.cardNumber?.slice(-4)}
-          </LSText>
-          <LSText>
-            {dictionary[language]?.expires + ' ' + guardian.paymentMethod?.cardExpMonth + '/' + guardian.paymentMethod?.cardExpYear}
-          </LSText>
+        <Grid container item xs={8}>
+          <Grid item xs={12}>
+            <Typography >
+              {creditCardType(paymentMethod.cardNumber)[0]?.niceType + ' card ending in ' + paymentMethod.cardNumber?.slice(-4)}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography>
+              {dictionary[language]?.expires + ' ' + paymentMethod?.cardExpMonth + '/' + paymentMethod?.cardExpYear}
+            </Typography>
+          </Grid>
         </Grid>
-      </LSGridRow>
-      <LSGridRow container>
+      </Grid>
+      <Box display={'flex'} justifyContent='center' alignItems='center'>
         {/* <Grid item lg={4} xs={4}>
           <Button onClick={open}>
             {dictionary[language]?.addNew}
@@ -70,17 +67,15 @@ export const TeacherPaymentInfo: FC = () => {
         <Grid item lg={8} xs={8}>
           <Button onClick={() => edit(true)}>{dictionary[language]?.edit}</Button>
         </Grid>
-        <LSDialog
-          isOpen={isEdit}
-          title={dictionary[language]?.editPaymentMethod}
-          open={openEdit}
-          dialogContent={
-            <Elements stripe={stripePromise}>
-              <EditPaymentForm open={openEdit} />
-            </Elements>
-          }
-        />
-      </LSGridRow>
+      </Box>
+      <LSDialog
+        isOpen={isEdit}
+        title={dictionary[language]?.editPaymentMethod}
+        open={openEdit}
+        dialogContent={
+          <EditPaymentForm open={openEdit} paymentMethod={paymentMethod} />
+        }
+      />
     </Paper>
     //  : null
   );

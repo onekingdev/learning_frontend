@@ -10,7 +10,8 @@ const INITIAL_STATE = {
   classrooms: Array<any>(0),
   currentClass: null,
   currentClassId: null,
-  assignmentTopicId: ''
+  assignmentTopicId: '',
+  paymentMethod: null,
 };
 const TEACHERReducer = (
   state = INITIAL_STATE,
@@ -53,6 +54,11 @@ const TEACHERReducer = (
         ...state,
         classrooms: [...state.classrooms, action.payload],
       };
+      case TYPE.TEACHER_SET_PAYMENT_METHOD:
+      return{
+        ...state,
+        paymentMethod: action.payload
+      }
     case TYPE.TEACHER_RESET:
       return INITIAL_STATE;
     default:

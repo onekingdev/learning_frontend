@@ -5,6 +5,7 @@ import {GUARDIAN} from '../fragments/guardianFragments';
 import {_CLASSROOM_SCHEMA, _TEACHERSCHEMA} from 'api/fragments/teacherFraments';
 import { _GROUP } from 'api/fragments/peopleFragments';
 import { COIN_WALLET, SUBSCRIBER, _AVATAR, _STUDENT } from 'api/fragments/schemas';
+import { PAYMENT_METHOD } from 'api/fragments/paymentFragments';
 
 export const USERS_QUERY = `
     {
@@ -99,6 +100,9 @@ export const WHOAMI_QUERY = `
                 ${_TEACHERSCHEMA}
                 schoolteacher {
                     id
+                }
+                paymentMethod {
+                    ${PAYMENT_METHOD}
                 }
             }
             subscriber {

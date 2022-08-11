@@ -10,6 +10,7 @@ import {
 import { sendRawQuery } from 'api/queries/get';
 import mutationFetch from 'api/mutations/get';
 import { CANCEL_ORDERDETAIL } from 'api/mutations/guardians';
+import { PAYMENT_METHOD } from 'api/fragments/paymentFragments';
 
 export const createOrder = async (
     cardCvc: string,
@@ -214,6 +215,39 @@ export const doChangePaymentMethod = async (guradianId: number, paymentInfo: any
     }
 }
 
+export const doEditPaymentMethod = async (
+    paymentMethodId: number | string,
+    paymentInfo: any,
+    token: string) => {
+
+    const res: any = await fetchQuery(
+        `
+        mutation {
+            editPaymentMethod(
+                address1: "${paymentInfo.address1}",
+                address2: "${paymentInfo.address2}",
+                cardCvc: "${paymentInfo.cardCvc}",
+                cardExpMonth: "${paymentInfo.cardExpiryDate.slice(0, 2)}",
+                cardExpYear: "${paymentInfo.cardExpiryDate.slice(-2)}",
+                cardNumber: "${paymentInfo.cardNumber}",
+                city: "${paymentInfo.city}",
+                country: "${paymentInfo.country}",
+                paymentMethodId: "${paymentMethodId}",
+                phone: "${paymentInfo.phone}",
+                postCode: "${paymentInfo.postCode}",
+                state: "${paymentInfo.state}",
+            ) {
+                status
+                paymentMethod {
+                    ${PAYMENT_METHOD}
+                }
+            }
+          }
+        `,
+        token)
+    return res.data?.editPaymentMethod?.paymentMethod || res.errors[0]; // when django returns error message on fail
+
+}
 
 export const doCancelOrderDetail = async (
     orderDetailId: number | string,

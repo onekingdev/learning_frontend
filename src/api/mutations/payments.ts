@@ -84,6 +84,9 @@ export const CONFIRM_PAYMENT_ORDER = (
         status
         teacher {
             ${_TEACHERSCHEMA}
+            paymentMethod {
+                ${PAYMENT_METHOD}
+            }
         }
         school {
             ${_SCHOOL_SCHEMA}
@@ -189,10 +192,10 @@ query {
 `
 
 export const CHANGE_PAYMENT_METHOD_INFO = (
-    guardianId: number,
+    guardianId: number | string,
     paymentMethodInfo: any,
 ) => `
-mutation changePaymentMethod {
+mutation {
     changePaymentMethod(
         address1: "${paymentMethodInfo.address1}",
         address2: "${paymentMethodInfo.address2}",

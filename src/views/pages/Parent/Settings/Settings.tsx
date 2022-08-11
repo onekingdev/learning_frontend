@@ -1,30 +1,32 @@
 import { FC, useEffect, useContext } from 'react';
-import { Button, Grid }                      from '@mui/material';
-import { ParentPgContainer }         from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { Title }                     from 'views/molecules/Setting/utils/Style';
+import { Button, Grid } from '@mui/material';
+import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
+import { Title } from 'views/molecules/Setting/utils/Style';
 import {
   TextGroup,
   LSLabel,
   LSText,
 } from 'views/molecules/Setting/utils/Style';
-import { Payment }          from 'views/organisms/Setting/Parent/Payment';
 import { MembershipDetail } from 'views/organisms/Setting/Parent/Details';
-import { CssBaseline }      from '@mui/material';
-import { LoadingContext }   from 'react-router-loading';
-import { TypoTitle }        from 'views/atoms/Text';
-import { useSelector }      from 'react-redux'
-import { dictionary }       from './dictionary'
+import { CssBaseline } from '@mui/material';
+import { LoadingContext } from 'react-router-loading';
+import { TypoTitle } from 'views/atoms/Text';
+import { useSelector } from 'react-redux'
+import { dictionary } from './dictionary'
 import {
   SettingContainer,
   TitleContainer,
- } from './Styles';
+} from './Styles';
 import { UserProfile } from 'views/organisms/Setting/UserProfile';
+import { PaymentInfo } from 'views/organisms/Setting/Payment';
 export const Settings: FC = () => {
+
   const loadingContext = useContext(LoadingContext);
-  let language:string = useSelector((state: any) => state.user.language);
-  language            = language? language : 'en-us'
+  const { paymentMethod } = useSelector((state: any) => state.guardian)
+  const { language } = useSelector((state: any) => state.user)
+
   useEffect(() => {
-    if(window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
+    if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     loadingContext.done();
   }, []);
   return (
@@ -37,7 +39,10 @@ export const Settings: FC = () => {
         <Grid container>
           <Grid item xs={12} md={6}>
             <UserProfile />
-            <Payment />
+            {
+              paymentMethod &&
+              <PaymentInfo paymentMethod={paymentMethod} />
+            }
             <TextGroup>
               <LSLabel>{dictionary[language]?.questions}</LSLabel>
               <LSText>{dictionary[language]?.reachUsAndWeWillHelpYou}</LSText>
