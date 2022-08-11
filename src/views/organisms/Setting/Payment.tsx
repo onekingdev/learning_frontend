@@ -5,10 +5,10 @@ import { EditPaymentForm } from 'views/molecules/Setting/EditPaymentForm';
 import { useSelector } from 'react-redux'
 import payment from 'views/assets/payment/payment.jpg'
 import creditCardType from 'credit-card-type'
-import { dictionary } from './Teacher/dictionary'
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+import commonDictionary from 'constants/commonDictionary';
 
 interface PaymentInfoProps {
   paymentMethod: any
@@ -30,7 +30,7 @@ export const PaymentInfo: FC<PaymentInfoProps> = ({ paymentMethod }) => {
       }}
     >
       <Typography variant='h5' fontWeight={'bold'}>
-        {dictionary[language]?.yourPaymentMethod}
+        {commonDictionary[language]?.yourPaymentMethod}
       </Typography>
       <Grid container mt={2}>
         <Grid item xs={4}>
@@ -44,7 +44,7 @@ export const PaymentInfo: FC<PaymentInfoProps> = ({ paymentMethod }) => {
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              {dictionary[language]?.expires + ' ' + paymentMethod?.cardExpMonth + '/' + paymentMethod?.cardExpYear}
+              {commonDictionary[language]?.expires + ' ' + paymentMethod?.cardExpMonth + '/' + paymentMethod?.cardExpYear}
             </Typography>
           </Grid>
         </Grid>
@@ -52,7 +52,7 @@ export const PaymentInfo: FC<PaymentInfoProps> = ({ paymentMethod }) => {
       <Box display={'flex'} justifyContent='center' alignItems='center'>
         {/* <Grid item lg={4} xs={4}>
           <Button onClick={open}>
-            {dictionary[language]?.addNew}
+            {commonDictionary[language]?.addNew}
           </Button>
           <LSDialog
             isOpen={isOpen}
@@ -65,12 +65,12 @@ export const PaymentInfo: FC<PaymentInfoProps> = ({ paymentMethod }) => {
           />
         </Grid> */}
         <Grid item lg={8} xs={8}>
-          <Button onClick={() => edit(true)}>{dictionary[language]?.edit}</Button>
+          <Button onClick={() => edit(true)}>{commonDictionary[language]?.edit}</Button>
         </Grid>
       </Box>
       <LSDialog
         isOpen={isEdit}
-        title={dictionary[language]?.editPaymentMethod}
+        title={commonDictionary[language]?.editPaymentMethod}
         open={openEdit}
         dialogContent={
           <EditPaymentForm open={openEdit} paymentMethod={paymentMethod} />

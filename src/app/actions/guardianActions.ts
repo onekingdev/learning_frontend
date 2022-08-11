@@ -12,7 +12,6 @@ import {
     FETCH_GUARDIAN_STUDENTS,
     FETCH_AVAILABLE_PLANS,
     FETCH_STUDENT_BY_ID,
-    FETCH_GUARDIAN_PLANS,
     CONFIRM_PAYMENT_ORDER
 } from 'api/mutations/guardians';
 import {
@@ -171,13 +170,6 @@ export const doFetchGuardianStudents = async (guardianId: number, token: string)
     return res.data.guardianById?.guardianstudentplanSet ?? res.errors[0]
 }
 
-export const doFetchGuardianPlans = async (guardianId: number, token: string) => {
-    const res: any = await fetchQuery(
-        FETCH_GUARDIAN_PLANS(guardianId),
-        token
-    );
-    return res.data?.guardianById?.orderSet ?? res.errors[0]
-}
 
 export const doFetchStudentById = async (studentId: number, token: string) => {
     const res: any = await fetchQuery(

@@ -10,7 +10,6 @@ import {
   FormControlLabel,
 } from '@mui/material';
 
-import titleBg from 'views/assets/title-kids-background.png';
 import { ScreenSize } from 'constants/screenSize';
 
 /*--------------------------------------------------------------------------------------------*/
@@ -146,23 +145,7 @@ export const LSTitle = styled.p<{
     font-size: 1.3em;
   }
 `;
-export const Title = styled.div`
-  line-height: 50px;
-  color: white;
-  width: 385px;
-  height: 81px;
-  background: url(${titleBg}) no-repeat center;
-  background-size: contain;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 4vh;
-  @media screen and (max-width: 540px) {
-    width: 60%;
-    margin-top: 10px;
-    margin-bottom: 0;
-  }
-`;
+
 export const TextGroup = styled.div`
   display: flex;
   align-items: center;

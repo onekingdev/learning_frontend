@@ -11,11 +11,10 @@ import { useSelector } from 'react-redux'
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { useDialog } from 'views/molecules/Setting/utils/useDialog';
 import { LSLabel, LSText } from 'views/molecules/Setting/utils/Style';
-import { TeacherCancelPlanForm } from './TeacherCancelPlanForm';
-import PlanUpgradeForm from './TeacherPlanUpgrade';
-import { dictionary } from './dictionary'
+import PlanUpgradeForm from './PlanUpgradeForm';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 import commonDictionary from 'constants/commonDictionary';
+import CancelOrderDetailForm from './CancelOrderDetailForm';
 
 interface OrderListProps {
   orderDetails: Array<any>
@@ -38,8 +37,8 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
       <List
         subheader={
           <ListSubheader sx={{ borderBottom: 'solid gray 1px' }}>
-            <LSLabel fontSize={17} textAlign='center'>{dictionary[language]?.plan}</LSLabel>
-            <LSText textAlign='center' fontSize={13}>{dictionary[language]?.getThreeMonthsFREEForAnnualPlan}</LSText>
+            <LSLabel fontSize={17} textAlign='center'>{commonDictionary[language]?.plan}</LSLabel>
+            <LSText textAlign='center' fontSize={13}>{commonDictionary[language]?.get_three_months_free_for_annual_plan}</LSText>
           </ListSubheader>
         }
       >
@@ -67,7 +66,7 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
                       setSelected(row)
                       setIsUpdateOpen(true)
                     }}
-                  >{dictionary[language]?.ChangeToYearly}
+                  >{commonDictionary[language]?.change_to_yearly}
                   </Button>
 
                 </Grid>
@@ -79,7 +78,7 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
                           setSelected(row)
                           open() // Open cancel plan dialog
                         }}
-                      >{dictionary[language]?.CancelPlan}</Button>
+                      >{commonDictionary[language]?.cancel_plan}</Button>
                   }
 
                 </Grid>
@@ -94,7 +93,7 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
             open={open}
             title={commonDictionary[language]?.cancel_plan}
             dialogContent={
-              <TeacherCancelPlanForm
+              <CancelOrderDetailForm
                 orderDetailId={selected?.id || ''}
                 close={open}
               />
@@ -103,7 +102,7 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
           <LSDialog // Upgrade to yearly dialog
             isOpen={isUpdateOpen}
             open={() => setIsUpdateOpen(!isUpdateOpen)}
-            title={dictionary[language]?.Upgrade}
+            title={commonDictionary[language]?.upgrade}
             dialogContent={
               <PlanUpgradeForm
                 orderDetail={selected}

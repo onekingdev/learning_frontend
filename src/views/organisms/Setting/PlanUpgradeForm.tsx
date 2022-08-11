@@ -10,6 +10,7 @@ import { doConfirmUpdateOrderDetail, doUpgradeOrderdetailById } from 'app/action
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from 'index';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { USER_TYPE } from 'constants/common';
 
 interface IUpgradeProps {
   orderDetail: any
@@ -25,7 +26,8 @@ const text = [
 export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
   const guardian = useSelector((state: any) => state.guardian);
   const { id: teacherId } = useSelector((state: any) => state.teacher)
-  const { token } = useSelector((state: any) => state.user);
+  const { id: guardianId } = useSelector((state: any) => state.guardian)
+  const { token, profile } = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false)
 
@@ -39,9 +41,15 @@ export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {
-        const { teacher } = data
-        if (teacher)
-          queryClient.invalidateQueries(['teacher-orders', teacherId])
+        switch (profile.role) {
+          case USER_TYPE.teacher:
+            queryClient.invalidateQueries(['teacher-orders', teacherId])
+            break;
+          case USER_TYPE.guardian:
+            queryClient.invalidateQueries(['guardian-orders', guardianId])
+            break;
+          default: break
+        }
         close()
       }
     },

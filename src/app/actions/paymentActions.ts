@@ -257,7 +257,7 @@ export const doCancelOrderDetail = async (
     const res: any = await fetchQuery(
         CANCEL_ORDERDETAIL(orderDetailId, reason),
         token)
-    return res.data?.cancelOrderdetailById || res.errors[0]; // when django returns error message on fail
+    return res.data?.cancelOrderdetailById?.status || res.errors[0]; // when django returns error message on fail
 };
 
 

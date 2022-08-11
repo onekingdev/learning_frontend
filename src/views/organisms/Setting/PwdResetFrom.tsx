@@ -7,9 +7,9 @@ import { LSButtonContainer } from 'views/molecules/Setting/utils/Style';
 import { doUpdateUserEmailPassword } from 'app/actions/guardianActions';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { dictionary } from './Parent/dictionary'
 import { useMutation } from '@tanstack/react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
+import commonDictionary from 'constants/commonDictionary';
 
 interface DialogProps {
     open: () => (void)
@@ -55,14 +55,14 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
             <LSGridRow container spacing={3}>
                 <Grid item lg={4} xs={12}>
                     <LSLabel>
-                        {dictionary[language]?.newPassword}
+                        {commonDictionary[language]?.new_password}
                     </LSLabel>
                 </Grid>
                 <Grid item lg={8} xs={12}>
                     <TextField
                         // size='small'
                         id='outlined-password-input'
-                        label={dictionary[language]?.newPassword}
+                        label={commonDictionary[language]?.new_password}
                         type='password'
                         autoComplete='new-password'
                         value={password || ''}
@@ -72,7 +72,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                 </Grid>
                 <Grid item lg={4} xs={12}>
                     <LSLabel>
-                        {dictionary[language]?.confirmPassword}
+                        {commonDictionary[language]?.confirm_password}
                     </LSLabel>
                 </Grid>
                 <Grid item lg={8} xs={12}>
@@ -80,7 +80,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                         aria-describedby='component-error-text'
                         // size='small'
                         id='outlined-password-confirm'
-                        label={dictionary[language]?.confirm}
+                        label={commonDictionary[language]?.confirm}
                         type='password'
                         value={confirm || ''}
                         onChange={(e) => setConfirm(e.target.value)}
@@ -98,7 +98,7 @@ export const PwdResetForm: FC<DialogProps> = ({ open }) => {
                     disabled={password !== confirm}
                     loading={loading}
                 >
-                    {dictionary[language]?.submit}
+                    {commonDictionary[language]?.submit}
                 </LoadingButton>
             </LSButtonContainer>
         </ThemeProvider>

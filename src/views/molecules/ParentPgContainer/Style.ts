@@ -1,6 +1,6 @@
-import styled               from 'styled-components';
-import { ScreenSize }       from 'constants/screenSize';
-import background_mobile    from 'views/assets/colored-shapes-bg.svg';
+import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
+import background_mobile from 'views/assets/colored-shapes-bg.svg';
 
 export const Container = styled.div`
     position: relative;
@@ -112,8 +112,3 @@ export const NoteBook = styled.img`
   z-index: -1;
 `;
 
-export const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;

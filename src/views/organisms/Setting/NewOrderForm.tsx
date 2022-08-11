@@ -17,6 +17,7 @@ import { doAddOrder } from 'app/actions/paymentActions';
 import { queryClient } from 'index';
 import { ChildCounter } from 'views/molecules/ChildCounter';
 import { ErrorMessage } from 'views/atoms/ErrorMessage';
+import { USER_TYPE } from 'constants/common';
 
 
 interface IAddOrder {
@@ -32,11 +33,11 @@ interface IAddOrder {
 interface ITeacherAddOrderForm {
   close: () => void
 }
-export const TeacherAddOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
+export const NewOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
 
   const history = useHistory();
   const [yearly, setYearly] = useState(true)
-  const { token, language } = useSelector((state: any) => state.user);
+  const { token, language, profile } = useSelector((state: any) => state.user);
   const { id: teacherId } = useSelector((state: any) => state.teacher);
   const { id: schoolId } = useSelector((state: any) => state.school);
   const paymentCardNum = useSelector((state: any) => state.guardian.paymentMethod?.cardNumber) || '';
@@ -45,7 +46,8 @@ export const TeacherAddOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
   const [selected, setSelected] = useState<any>(null)
   const [childrenCount, setChildrenCount] = useState(0)
   const [loading, setLoading] = useState(false)
-  const { data: plans, isLoading, error } = useQuery(['plan-types', token], () => doFetchPlanTypes(token))
+  const { data: allPlans, isLoading, error } = useQuery(['plan-types', token], () => doFetchPlanTypes(token))
+  const [plans, setPlans] = useState<any>([])
 
   const createPlan = useMutation(({ token, orderDetailInput, schoolId }: IAddOrder) => doAddOrder(
     token,
@@ -65,10 +67,16 @@ export const TeacherAddOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
         // Redirect to new kid page on success
         else if (confirm.status === 'success') {
           enqueueSnackbar(commonDictionary[language]?.success + ', discounted ' + confirm.order.total + 'USD' + commonDictionary[language]?.from_your_account, { variant: 'success' })
-          // history.push('/kids/new')
-          if (confirm.teacher) {// Update orders list for teacher setting page
-            queryClient.invalidateQueries(['teacher-orders', teacherId])
+          switch (profile.role) {
+            case USER_TYPE.teacher:
+              queryClient.invalidateQueries(['teacher-orders', teacherId])
+              break;
+            case USER_TYPE.guardian:
+              history.push('/kids/new')
+              break;
+            default: break;
           }
+
           close()
         }
         else {
@@ -102,6 +110,22 @@ export const TeacherAddOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
     setSelected(temp)
   };
 
+  React.useEffect(() => {
+    if (allPlans) {
+      if (allPlans.message) setPlans([])
+      switch (profile.role) {
+        case USER_TYPE.teacher:
+          setPlans(allPlans.filter((item: any) => item.name === 'Classroom'))
+          break;
+        case USER_TYPE.guardian:
+          setPlans(allPlans.filter((item: any) => item.name !== 'Classroom' && item.name !== 'School'))
+          break;
+        default:
+          setPlans([])
+          break;
+      }
+    }
+  }, allPlans)
   return (
     <Box>
       <Box display='flex' justifyContent={'space-between'} alignItems='center'>
@@ -111,7 +135,7 @@ export const TeacherAddOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
       {
         isLoading ? <LoadingSpinner /> :
           error ? <ErrorMessage error={error} /> :
-            plans && plans.message ? <ErrorMessage error={plans} /> :
+            plans && allPlans.message ? <ErrorMessage error={allPlans} /> :
               <RadioGroup
                 aria-labelledby="canceling-reason-label"
                 name="radio-buttons-group"
@@ -119,7 +143,7 @@ export const TeacherAddOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
                 value={selected?.id || ''}
                 onChange={handleRadioChange}
               >{
-                  plans.filter((plan: any) => plan.name === 'Classroom').map((plan: any) => {
+                  plans.map((plan: any) => {
                     return <Grid container alignItems='center' key={plan.id}>
                       <Grid item xs={12} sm={6}>
                         <FormControlLabel value={plan.id} control={<Radio />} label={commonDictionary[language]?.[plan.slug as keyof Object] || ''} />
@@ -162,3 +186,5 @@ export const TeacherAddOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
     </Box>
   );
 }
+
+export default NewOrderForm

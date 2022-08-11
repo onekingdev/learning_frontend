@@ -2,7 +2,7 @@ import { FC, useEffect, } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import { PaymentInfo } from 'views/organisms/Setting/Payment';
-import { TeacherMembershipDetail } from 'views/organisms/Setting/Teacher/Details';
+import { OrdersDetails } from 'views/organisms/Setting/OrderDetails';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import commonDictionary from 'constants/commonDictionary';
 import { useQuery } from '@tanstack/react-query';
@@ -48,7 +48,7 @@ const TeacherSettings: FC = () => {
             isLoading ? <LoadingSpinner /> :
               error ? <ErrorMessage error={error} /> :
                 orders &&
-                <TeacherMembershipDetail orders={orders} />
+                <OrdersDetails orders={orders} />
           }
         </Grid>
       </Grid>

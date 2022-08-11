@@ -3,19 +3,19 @@ import { Box, Button, Paper } from '@mui/material';
 import { LSTitle } from 'views/molecules/Setting/utils/Style';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { useDialog, useAddDialog } from 'views/molecules/Setting/utils/useDialog';
-import { TeacherCancelMembershipForm } from './Forms/TeacherCancelMembershipForm';
+import { CancelMembershipForm } from './CancelMembershipForm';
 import { useSelector } from 'react-redux';
-import { dictionary } from './dictionary'
-import { OrderDetailsList } from './Forms/OrderDetailsList';
+import { OrderDetailsList } from './OrderDetailsList';
 import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
-import { TeacherAddOrderForm } from './Forms/TeacherAddOrderForm';
+import NewOrderForm from './NewOrderForm';
+import commonDictionary from 'constants/commonDictionary';
 
 interface TeacherMembershipDetailProps {
   orders: Array<any>
 }
 
-export const TeacherMembershipDetail: FC<TeacherMembershipDetailProps> = ({ orders }) => {
+export const OrdersDetails: FC<TeacherMembershipDetailProps> = ({ orders }) => {
 
   const isMobile = useSocratesMediaQuery('xs')
   const { isOpen, open } = useDialog()
@@ -36,22 +36,22 @@ export const TeacherMembershipDetail: FC<TeacherMembershipDetailProps> = ({ orde
       elevation={5}
       sx={{
         ...PARENT_PAPER_STYLE,
-        width: isMobile ? '100%' : 640
+        width: isMobile ? '100%' : 640,
       }}
     >
       <LSTitle>
-        {dictionary[language]?.membershipDetails}
+        {commonDictionary[language]?.membership_details}
       </LSTitle>
       <Box >
         <Box sx={{ display: 'flex', justifyContent: 'center', margin: 2 }}>
           <LSDialog
             isOpen={isAddOpen}
             open={openAdd}
-            title={dictionary[language]?.addPlanPackage}
+            title={commonDictionary[language]?.add_plan_package}
             // fullWidth='true'
-            // contentText={dictionary[language]?.chooseTheNewPlan}
+            // contentText={commonDictionary[language]?.chooseTheNewPlan}
             dialogContent={
-              <TeacherAddOrderForm
+              <NewOrderForm
                 close={openAdd}
               />
             }
@@ -60,19 +60,19 @@ export const TeacherMembershipDetail: FC<TeacherMembershipDetailProps> = ({ orde
         <OrderDetailsList orderDetails={orderDetails} />
         <Box >
           <Button onClick={openAdd}>
-            {dictionary[language]?.addAPlan}
+            {commonDictionary[language]?.add_a_plan}
           </Button>
           <Button onClick={open}>
-            {dictionary[language]?.cancelMembership}
+            {commonDictionary[language]?.cancel_membership}
           </Button>
         </Box>
         <LSDialog
           isOpen={isOpen}
           open={open}
-          title={dictionary[language]?.cancelMembership}
-          contentText={dictionary[language]?.thankYouForYourPlan}
+          title={commonDictionary[language]?.cancel_membership}
+          contentText={commonDictionary[language]?.thankyou_for_your_plan}
           dialogContent={
-            <TeacherCancelMembershipForm
+            <CancelMembershipForm
               open={open}
             />
           }

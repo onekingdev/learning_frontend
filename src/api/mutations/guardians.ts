@@ -216,33 +216,6 @@ export const CANCEL_ORDERDETAIL = (
 mutation {
   cancelOrderdetailById(orderDetailId: ${orderDetailId}, reason: "${reason}") {
       status
-      guardian {
-        ${GUARDIAN_ORDERS}
-      }
-      teacher {
-        orderSet {
-          orderdetailSet {
-            id
-            plan{
-              ${PLAN_RAW}
-            }
-            paymentMethodPlanId
-            subscriptionId
-            quantity
-            period
-            updateFromDetailId
-            status
-            onDiscount
-            discount
-            expiredAt
-            isPaid
-            cancelReason
-            isCancel
-            slug
-            total
-          }
-        }
-      }
     }
   }
 `;
@@ -357,7 +330,7 @@ guardianById(id: "${guardianId}"){
 }
 `;
 
-export const FETCH_GUARDIAN_PLANS = (guardianId: number) => `
+export const FETCH_GUARDIAN_PLANS = (guardianId: number | string) => `
 {
   guardianById(id: "${guardianId}") {
     ${GUARDIAN_ORDERS}

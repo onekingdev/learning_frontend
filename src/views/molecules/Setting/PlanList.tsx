@@ -7,10 +7,10 @@ import { LSDialog } from './LSDialog';
 import { CancelPlanForm } from './CancelPlanForm';
 import { useDialog } from './utils/useDialog';
 import { Upgrade } from './Upgrade';
-import { doFetchGuardianPlans } from 'app/actions/guardianActions'
 import { dictionary } from './dictionary'
 import { useQuery } from '@tanstack/react-query'
 import { getMessage } from 'views/utils';
+import { doFetchGuardianOrders } from 'app/actions';
 
 export const PlanList: FC = () => {
 
@@ -19,7 +19,7 @@ export const PlanList: FC = () => {
   const { token, language } = useSelector((state: any) => state.user);
   const lang = language || 'en-us'
   const guardianId = useSelector((state: any) => state.guardian.id);
-  const { data, error, isLoading } = useQuery(['fetch-orders-list', guardianId, token], () => doFetchGuardianPlans(guardianId, token))
+  const { data, error, isLoading } = useQuery(['fetch-orders-list', guardianId, token], () => doFetchGuardianOrders(guardianId, token))
   const { isOpen, open } = useDialog()
   const [tag, seTag] = useState(0)
 

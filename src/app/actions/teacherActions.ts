@@ -1,6 +1,7 @@
 import { GROUP } from 'api/fragments/peopleFragments';
 import { LEVEL } from 'api/fragments/schemas';
 import { STUDENT_HOMEWORK } from 'api/fragments/studentFragments';
+import { FETCH_GUARDIAN_PLANS } from 'api/mutations/guardians';
 import {
   ADD_CLASS_TO_TEACHER,
   CLASSROMM_STUDENTS,
@@ -283,6 +284,16 @@ export const doFetchTeacherOrders = async (
   const res: any = await fetchQuery(TEACHER_ORDERS(teacherId), token);
   return res.data?.teacherById?.orderSet || res.errors[0]; // when django returns error message on fail
 };
+
+
+export const doFetchGuardianOrders = async (
+  guardianId: number | string,
+  token: string
+) => {
+  const res: any = await fetchQuery(FETCH_GUARDIAN_PLANS(guardianId), token);
+  return res.data?.guardianById?.orderSet || res.errors[0]; // when django returns error message on fail
+};
+
 
 export const doFetchTeacherPaymentMethods = async (
   teacherId: number | string,

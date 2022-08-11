@@ -12,7 +12,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Paper, TextField, useMediaQuery } from '@mui/material';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
-import { dictionary } from './Teacher/dictionary'
 import { PARENT_PAPER_STYLE } from 'views/MuiStyles';
 import { ScreenSize } from 'constants/screenSize';
 import { useMutation } from '@tanstack/react-query';
@@ -22,6 +21,7 @@ import { USER_SET_EMAIL } from 'app/types';
 import isEmail from 'validator/lib/isEmail'
 import LoadingButton from '@mui/lab/LoadingButton';
 import { PwdResetForm } from './PwdResetFrom';
+import commonDictionary from 'constants/commonDictionary';
 
 
 export const UserProfile: FC = () => {
@@ -64,14 +64,14 @@ export const UserProfile: FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const email = data.get('email')?.toString()
-    const newEmail = email ? email : ''
-    if (isEmail(newEmail)) {
+
+    const email = data.get('email')?.toString()?.trim() || ''
+    if (isEmail(email)) {
       setLoading(true)
-      updateEmail.mutate(newEmail)
+      updateEmail.mutate(email)
     }
     else
-      enqueueSnackbar(dictionary[language]?.emailIsNotValid, { variant: 'error' })
+      enqueueSnackbar(commonDictionary[language]?.email_is_not_valid, { variant: 'error' })
   };
 
   return (
@@ -82,13 +82,13 @@ export const UserProfile: FC = () => {
         width: isMobile ? '100%' : 640
       }}>
       <LSTitle>
-        {dictionary[language]?.profileAndSettings}
+        {commonDictionary[language]?.profile_and_settings}
       </LSTitle>
       <Box component='form' onSubmit={handleSubmit} noValidate>
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
             <LSLabel>
-              {dictionary[language]?.name}
+              {commonDictionary[language]?.name}
             </LSLabel>
           </Grid>
           <Grid item lg={8} xs={12}>
@@ -100,7 +100,7 @@ export const UserProfile: FC = () => {
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
             <LSLabel>
-              {dictionary[language]?.currentEmail}
+              {commonDictionary[language]?.current_email}
             </LSLabel>
           </Grid>
           <Grid item lg={8} xs={12}>
@@ -112,13 +112,12 @@ export const UserProfile: FC = () => {
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
             <LSLabel >
-              {dictionary[language]?.changeEMail}
+              {commonDictionary[language]?.change_email}
             </LSLabel>
           </Grid>
           <Grid item lg={8} xs={12}>
             <TextField
               margin='normal'
-              required
               size='small'
               id='email'
               label={'e-mail address'}
@@ -130,30 +129,30 @@ export const UserProfile: FC = () => {
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
             <LSLabel >
-              {dictionary[language]?.password}
+              {commonDictionary[language]?.password}
             </LSLabel>
           </Grid>
           <Grid item lg={8} xs={12}>
             <LSDialog
               isOpen={openPwdRstDg}
               open={toggleOpenPwdRstDg}
-              title={dictionary[language]?.changePassword}
+              title={commonDictionary[language]?.change_password}
               dialogContent={
                 <PwdResetForm open={toggleOpenPwdRstDg} />
               }
             />
             <Button onClick={toggleOpenPwdRstDg}>
-              {dictionary[language]?.changePassword}
+              {commonDictionary[language]?.change_password}
             </Button>
           </Grid>
         </LSGridRow>
         <LSButtonContainer>
           <LoadingButton
-            type={dictionary[language]?.submit}
+            type={commonDictionary[language]?.submit}
             variant='contained'
             loading={loading}
           >
-            {dictionary[language]?.submit}
+            {commonDictionary[language]?.submit}
           </LoadingButton>
         </LSButtonContainer>
       </Box>

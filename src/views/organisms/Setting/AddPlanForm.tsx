@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FC, useState } from 'react';
 import { Box, FormControlLabel, Grid, Switch, Typography } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
-import { LSRadio, LSInputBase } from './utils/Style';
+import { LSRadio, LSInputBase } from '../../molecules/Setting/utils/Style';
 import { dictionary } from 'views/pages/Parent/Settings/dictionary';
 import commonDictionary from 'constants/commonDictionary'
 import { confirmPaymentOrder, doAddStudentPlan, doFetchPlanTypes } from 'app/actions/guardianActions';
@@ -16,7 +16,7 @@ import { useHistory } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 
 
-export const AddSimplePlanForm: FC = () => {
+export const AddPlanForm: FC = () => {
 
   const history = useHistory();
   const [yearly, setYearly] = useState(true)
@@ -124,3 +124,5 @@ export const AddSimplePlanForm: FC = () => {
     </Box>
   );
 }
+
+export default AddPlanForm

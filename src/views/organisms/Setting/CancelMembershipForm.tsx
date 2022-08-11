@@ -5,23 +5,25 @@ import { BasicColor } from 'views/Color';
 import { LSLabel } from 'views/molecules/Setting/utils/Style';
 import { useSelector } from 'react-redux'
 import { CANCEL_REASONS } from 'constants/parent'
-import { dictionary } from './dictionary'
 import { DialogActions, FormControl, FormControlLabel, Radio } from '@mui/material';
 import { doCancelMembership } from 'app/actions/paymentActions';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { queryClient } from 'index';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { USER_TYPE } from 'constants/common';
+import commonDictionary from 'constants/commonDictionary';
 
 
-export const TeacherCancelMembershipForm: FC<{ open: () => void }> = ({ open }) => {
+export const CancelMembershipForm: FC<{ open: () => void }> = ({ open }) => {
 
-  const { language, token } = useSelector((state: any) => state.user);
+  const { language, token, profile } = useSelector((state: any) => state.user);
 
   const [value, setValue] = useState(CANCEL_REASONS[language][0].value);
   const [loading, setLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar();
   const { id: teacherId } = useSelector((state: any) => state.teacher)
+  const { id: guardianId } = useSelector((state: any) => state.guardian)
 
   const cancelMemebership = useMutation((reason: string) => doCancelMembership(
     token,
@@ -31,8 +33,17 @@ export const TeacherCancelMembershipForm: FC<{ open: () => void }> = ({ open }) 
         enqueueSnackbar(data.message, { variant: 'error' })
       }
       else {
-        if (data === 'success')
-          queryClient.invalidateQueries(['teacher-orders', teacherId])
+        if (data === 'success') {
+          switch (profile.role) {
+            case USER_TYPE.teacher:
+              queryClient.invalidateQueries(['teacher-orders', teacherId])
+              break;
+            case USER_TYPE.guardian:
+              queryClient.invalidateQueries(['guardian-orders', guardianId])
+              break;
+            default: break;
+          }
+        }
 
         enqueueSnackbar('Cancel Membership Succeed', { variant: 'success' })
         open()
@@ -60,7 +71,7 @@ export const TeacherCancelMembershipForm: FC<{ open: () => void }> = ({ open }) 
     <>
       <FormControl>
         <FormLabel id='canceling-reason-label'>
-          <LSLabel>{dictionary[language]?.pleaseTellUsWhyAreYouCanceling}</LSLabel>
+          <LSLabel>{commonDictionary[language]?.please_tell_us_why_are_u_canceling}</LSLabel>
         </FormLabel>
         <RadioGroup
           aria-labelledby='canceling-reason-label'
@@ -82,7 +93,7 @@ export const TeacherCancelMembershipForm: FC<{ open: () => void }> = ({ open }) 
           onClick={onSubmit}
           loading={loading}
         >
-          {dictionary[language]?.submit}
+          {commonDictionary[language]?.submit}
         </LoadingButton>
       </DialogActions>
     </>

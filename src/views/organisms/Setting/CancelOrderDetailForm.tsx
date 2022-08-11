@@ -11,6 +11,7 @@ import { doCancelOrderDetail } from 'app/actions/paymentActions';
 import { useMutation } from '@tanstack/react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { queryClient } from 'index';
+import { USER_TYPE } from 'constants/common';
 
 interface ICancelFormProps {
   orderDetailId: number | string
@@ -18,10 +19,11 @@ interface ICancelFormProps {
 }
 
 
-export const TeacherCancelPlanForm: FC<ICancelFormProps> = ({ orderDetailId, close }) => {
+export const CancelOrderDetailForm: FC<ICancelFormProps> = ({ orderDetailId, close }) => {
 
-  const { language, token } = useSelector((state: any) => state.user);
+  const { language, token, profile } = useSelector((state: any) => state.user);
   const { id: teacherId } = useSelector((state: any) => state.teacher)
+  const { id: guardianId } = useSelector((state: any) => state.guardian)
 
   const [value, setValue] = useState(CANCEL_REASONS[language][0].value);
   const [loading, setLoading] = useState(false)
@@ -35,10 +37,15 @@ export const TeacherCancelPlanForm: FC<ICancelFormProps> = ({ orderDetailId, clo
         enqueueSnackbar(data.message, { variant: 'error' })
       }
       else {
-        const orders = data.teacher?.orderSet
-        if (orders)
-          queryClient.invalidateQueries(['teacher-orders', teacherId])
-
+        switch (profile.role) {
+          case USER_TYPE.teacher:
+            queryClient.invalidateQueries(['teacher-orders', teacherId])
+            break;
+          case USER_TYPE.guardian:
+            queryClient.invalidateQueries(['guardian-orders', guardianId])
+            break;
+          default: break
+        }
         enqueueSnackbar('Cancel Plan Succeed', { variant: 'success' })
         close()
       }
@@ -92,3 +99,4 @@ export const TeacherCancelPlanForm: FC<ICancelFormProps> = ({ orderDetailId, clo
   );
 }
 
+export default CancelOrderDetailForm

@@ -1,59 +1,73 @@
 import { FC, useEffect, useContext } from 'react';
-import { Button, Grid } from '@mui/material';
+import { Button, Container, Grid, ThemeProvider } from '@mui/material';
 import { ParentPgContainer } from 'views/molecules/ParentPgContainer/ParentPgContainer';
-import { Title } from 'views/molecules/Setting/utils/Style';
 import {
   TextGroup,
   LSLabel,
   LSText,
 } from 'views/molecules/Setting/utils/Style';
-import { MembershipDetail } from 'views/organisms/Setting/Parent/Details';
-import { CssBaseline } from '@mui/material';
 import { LoadingContext } from 'react-router-loading';
-import { TypoTitle } from 'views/atoms/Text';
 import { useSelector } from 'react-redux'
 import { dictionary } from './dictionary'
-import {
-  SettingContainer,
-  TitleContainer,
-} from './Styles';
 import { UserProfile } from 'views/organisms/Setting/UserProfile';
 import { PaymentInfo } from 'views/organisms/Setting/Payment';
+import { doFetchGuardianOrders } from 'app/actions';
+import { useQuery } from '@tanstack/react-query';
+import { LoadingSpinner } from 'views/atoms/Spinner';
+import { ErrorMessage } from 'views/atoms/ErrorMessage';
+import { OrdersDetails } from 'views/organisms/Setting/OrderDetails';
+import { settingPage } from 'views/Theme';
 export const Settings: FC = () => {
 
   const loadingContext = useContext(LoadingContext);
-  const { paymentMethod } = useSelector((state: any) => state.guardian)
-  const { language } = useSelector((state: any) => state.user)
+  const { paymentMethod, id: guardianId } = useSelector((state: any) => state.guardian)
+  const { language, token } = useSelector((state: any) => state.user)
+
+  const { data: orders, isLoading, error } = useQuery(
+    ['guardian-orders', guardianId],
+    () => doFetchGuardianOrders(guardianId, token),
+    { refetchIntervalInBackground: false }
+  )
 
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
     loadingContext.done();
   }, []);
   return (
-    <ParentPgContainer onlyLogoImgNav={false}>
-      <SettingContainer>
-        <TitleContainer>
-          <Title><TypoTitle>{dictionary[language]?.settings}</TypoTitle></Title>
-        </TitleContainer>
-        <CssBaseline />
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <UserProfile />
-            {
-              paymentMethod &&
-              <PaymentInfo paymentMethod={paymentMethod} />
-            }
-            <TextGroup>
-              <LSLabel>{dictionary[language]?.questions}</LSLabel>
-              <LSText>{dictionary[language]?.reachUsAndWeWillHelpYou}</LSText>
-              <Button href='#'>{dictionary[language]?.contact}</Button>
-            </TextGroup>
+    <ParentPgContainer onlyLogoImgNav={false} title={dictionary[language]?.settings}>
+      <ThemeProvider theme={settingPage}>
+
+        <Container maxWidth='xl' sx={{ padding: 0, paddingBottom: 5, minHeight: '100vh' }}>
+          <Grid container spacing={3} padding={1} >
+            <Grid item md={6} sm={12}>
+              <Grid container spacing={2} >
+                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
+                  <UserProfile />
+                </Grid>
+                {
+                  paymentMethod &&
+                  <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
+                    <PaymentInfo paymentMethod={paymentMethod} />
+                  </Grid>
+                }
+              </Grid>
+              <TextGroup>
+                <LSLabel>{dictionary[language]?.questions}</LSLabel>
+                <LSText>{dictionary[language]?.reachUsAndWeWillHelpYou}</LSText>
+                <Button href='#'>{dictionary[language]?.contact}</Button>
+              </TextGroup>
+            </Grid>
+            <Grid item md={6} sm={12} sx={{ display: 'flex', justifyContent: 'start' }}>
+              {
+                isLoading ? <LoadingSpinner /> :
+                  error ? <ErrorMessage error={error} /> :
+                    orders &&
+                    <OrdersDetails orders={orders} />
+              }
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <MembershipDetail />
-          </Grid>
-        </Grid>
-      </SettingContainer>
+        </Container>
+      </ThemeProvider>
     </ParentPgContainer>
   );
 };
