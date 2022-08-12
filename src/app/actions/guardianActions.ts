@@ -60,7 +60,6 @@ export const doUpdateUserNameEmailPassword = async (
     username?: string,
     password?: string,
 ) => {
-    console.log({token, email, username, password})
     const res: any = await fetchQuery(
         UPDATE_EMAIL_PASSWORD(email, username, password),
         token

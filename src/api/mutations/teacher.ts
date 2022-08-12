@@ -115,8 +115,10 @@ export const TEACHER_CLASSROOMS = (
   teacherId: number | string
 ) => `{
   teacherById(id: "${teacherId}"){
-    classrooms {
-      ${CLASSROOM_SCHEMA}
+    teacherclassroomSet {
+      classroom {
+        ${CLASSROOM_SCHEMA}
+      }
     }
   }
 }

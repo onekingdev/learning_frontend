@@ -48,7 +48,6 @@ export const UserProfile: FC = () => {
         enqueueSnackbar(data.message, { variant: 'error' })
       }
       else {
-        console.log({ data })
         dispatch({
           type: USER_SET_DATA,
           payload: data.user

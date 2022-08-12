@@ -11,7 +11,7 @@ import {
 import commonDictionary from 'constants/commonDictionary'
 
 interface ClassroomPanelProps {
-  classrooms: any[]
+  classrooms: { classroom: any }[]
   onNew: () => void
   onClassroom: (p: any) => void
 }
@@ -21,23 +21,23 @@ const ClassroomPanel: FC<ClassroomPanelProps> = ({ classrooms, onNew, onClassroo
   return (
     <Container>
       <Grid container justifyContent={'start'}>
-        <Grid item xs={4} sm={3} md={1.5}>
-          <ClassroomItem onClick={() => { onNew() }}>
-            <ClassroomMark src={addClassroomImgMark} />
-            <ClassroomText>{commonDictionary[language]?.add_new}</ClassroomText>
-          </ClassroomItem>
-        </Grid>
         {
-          classrooms &&
           classrooms.map((item: any, index: number) =>
             <Grid item key={index} xs={4} sm={3} md={1.5} alignItems='start'>
-              <ClassroomItem key={index} onClick={() => { onClassroom(item) }}>
-                <ClassroomMark src={ClassroomItemImg} />
-                <ClassroomText>{item.name}</ClassroomText>
-                {
-                  item.isEmpty && <Typography fontSize={12} color='gray'>{'(Empty)'}</Typography>
-                }
-              </ClassroomItem>
+              {
+                item.classroom ?
+                  <ClassroomItem key={index} onClick={() => { onClassroom(item.classroom) }}>
+                    <ClassroomMark src={ClassroomItemImg} />
+                    <ClassroomText>{item.classroom.name}</ClassroomText>
+                    {
+                      item.classroom.isEmpty && <Typography fontSize={12} color='gray'>{'(Empty)'}</Typography>
+                    }
+                  </ClassroomItem> :
+                  <ClassroomItem onClick={() => { onNew() }}>
+                    <ClassroomMark src={addClassroomImgMark} />
+                    <ClassroomText>{commonDictionary[language]?.add_classroom}</ClassroomText>
+                  </ClassroomItem>
+              }
             </Grid>
           )
         }

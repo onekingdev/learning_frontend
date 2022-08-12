@@ -2,6 +2,7 @@ export const commonDictionary: any = Object.freeze({
   'en-us': {
     add_new: 'Add New',
     add_a_plan: 'Add Plan',
+    add_classroom: 'Add Classroom',
     add_plan_package: 'Add Plan Package',
     add_teachers: 'Add Teachers',
     and: 'and',
@@ -88,6 +89,7 @@ export const commonDictionary: any = Object.freeze({
   th: {
     add_new: 'เพิ่มใหม่',
     add_a_plan: 'เพิ่มผู้เรียน',
+    add_classroom: 'Add Classroom',
     add_plan_package: 'เพิ่มแพ็คเกจแพลน',
     add_teachers: 'เพิ่มคุณครู',
     and: 'และ',
@@ -174,6 +176,7 @@ export const commonDictionary: any = Object.freeze({
   'es-mx': {
     add_new: 'Agregar nueva',
     add_a_plan: 'Agregar un plan',
+    add_classroom: 'Add Classroom',
     add_plan_package: 'Agregar paquete de planes',
     add_teachers: 'Agregar Maestros',
     and: 'y',

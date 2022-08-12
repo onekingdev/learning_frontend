@@ -274,7 +274,7 @@ export const doFetchTeacherClassrooms = async (
   token: string
 ) => {
   const res: any = await fetchQuery(TEACHER_CLASSROOMS(teacherId), token);
-  return res.data?.teacherById?.classrooms || res.errors[0]; // when django returns error message on fail
+  return res.data?.teacherById?.teacherclassroomSet || res.errors[0]; // when django returns error message on fail
 };
 
 export const doFetchTeacherOrders = async (

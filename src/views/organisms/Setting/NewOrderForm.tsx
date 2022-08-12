@@ -69,7 +69,7 @@ export const NewOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
           enqueueSnackbar(commonDictionary[language]?.success + ', discounted ' + confirm.order.total + 'USD' + commonDictionary[language]?.from_your_account, { variant: 'success' })
           switch (profile.role) {
             case USER_TYPE.teacher:
-              queryClient.invalidateQueries(['teacher-orders', teacherId])
+              await queryClient.invalidateQueries(['teacher-orders', teacherId])
               break;
             case USER_TYPE.guardian:
               history.push('/kids/new')

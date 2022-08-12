@@ -56,7 +56,7 @@ const Classrooms: FC = () => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
 
   }, []);
-
+  if(classrooms?.message ) return <Typography color='red'>{getMessage(classrooms)}</Typography>
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.classrooms}>
       <>

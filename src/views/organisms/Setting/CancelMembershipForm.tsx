@@ -36,10 +36,10 @@ export const CancelMembershipForm: FC<{ open: () => void }> = ({ open }) => {
         if (data === 'success') {
           switch (profile.role) {
             case USER_TYPE.teacher:
-              queryClient.invalidateQueries(['teacher-orders', teacherId])
+              await queryClient.invalidateQueries(['teacher-orders', teacherId])
               break;
             case USER_TYPE.guardian:
-              queryClient.invalidateQueries(['guardian-orders', guardianId])
+              await queryClient.invalidateQueries(['guardian-orders', guardianId])
               break;
             default: break;
           }

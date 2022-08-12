@@ -61,15 +61,10 @@ const AddClassroomForm = (props: any) => {
         if (!formValidation()) return;
 
         setLoading(true)
-        console.log({ teacherId, role: profile.role })
 
         const res: any = await doAddClassroomToTeacher(audience, className, token, profile.role === 'SUBSCRIBER' ? teacherId : undefined)
         if (res.status) {
-            queryClient.setQueryData(['teacher-classrooms', teacherId], (classrooms: Array<any> | undefined) => [...classrooms || [], res.data])
-            // dispatch({
-            //     type: TEACHER_ADD_CLASSROOM,
-            //     payload: res.data,
-            // });
+            await queryClient.invalidateQueries(['teacher-classrooms', teacherId])
             props.close()
         } else {
             enqueueSnackbar(res.message, { variant: 'error' })

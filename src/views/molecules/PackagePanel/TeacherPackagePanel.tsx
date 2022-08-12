@@ -27,7 +27,7 @@ type PackagePanelProps = {
   language: string
   minCount: number
 };
-const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode, disabled = false, onChange, language, plan, minCount }) => {
+const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode, disabled = false, onChange, language, minCount }) => {
 
   const [childrenCount, setChildrenCount] = useState(0);
   const [period, setPeriod] = useState('month');

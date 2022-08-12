@@ -44,6 +44,9 @@ const Students: FC = () => {
 
   }, []);
 
+
+  if(students?.message ) return <Typography color='red'>{getMessage(students)}</Typography>
+
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom} current='students' >
       <>{
@@ -69,9 +72,11 @@ const Students: FC = () => {
         <AddExistStudentDlg isOpen={isExistingNewAccountDlgOpen} close={() => setIsExistingNewAccountDlgOpen(false)} />
         <AddNewStudent isOpen={isAddNewAccountDlgOpen} close={() => setIsAddNewAccountDlgOpen(false)} />
         {
-          isLoading ? <LoadingSpinner /> : error ? students &&
+          isLoading ? <LoadingSpinner /> : error ?
             <Typography variant='h5' color='red'>{getMessage(error)}</Typography> :
-            <StudentsPanel students={students} onNew={onNew} onStudent={onStudent} />
+            (students &&
+              <StudentsPanel students={students} onNew={onNew} onStudent={onStudent} />
+            )
         }
       </>
     </TeacherPgContainer>

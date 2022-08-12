@@ -40,7 +40,7 @@ interface PaymentFormFunc {
 }
 
 
-export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode, sponsorEmail }) => {
+export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode }) => {
 
     const history = useHistory();
     const isMobile = useSocratesMediaQuery('xs')
