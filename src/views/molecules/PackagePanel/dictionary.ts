@@ -10,8 +10,8 @@ export const dictionary: any = Object.freeze({
         pickOneAreaOfKnowledge: 'Pick one Area of Knowledge',
         monthly:'Monthly',
         yearly: 'Yearly',
-        classroomPlanInclude: 'Classroom Plan Include',
-        classroomPlanDescription: 'Math, ELA, Science, Sight Words, Financial Literacy, Health and Safety',
+        classroomPlanInclude: 'Classroom Plan Includes',
+        classroomPlanDescription: 'Math, ELA, Science, Sight Words, Financial Literacy, Spelling, Health and Safety, and future content',
         requestFromSponsor: 'Sponsor Email',
     },
     'th' :{

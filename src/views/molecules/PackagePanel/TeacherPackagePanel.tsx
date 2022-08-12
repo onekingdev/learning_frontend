@@ -15,6 +15,7 @@ import {
   Tip,
   TeacherBtnContainer
 } from './Style'
+import { Typography } from '@mui/material';
 
 type PackagePanelProps = {
   plan: any
@@ -29,14 +30,7 @@ type PackagePanelProps = {
 const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode, disabled = false, onChange, language, plan, minCount }) => {
 
   const [childrenCount, setChildrenCount] = useState(0);
-  const [sponsorEmail, setSponsorEmail] = useState('')
   const [period, setPeriod] = useState('month');
-  //   let temp:any = [];
-  //   temp = [...paths];
-  //   if(isChecked) temp.push(path)
-  //   else temp.pop(path)
-  //   setPaths(temp)
-  // }
 
   const increaseChildrenCount = () => {
     setChildrenCount(childrenCount + 1)
@@ -49,8 +43,8 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
   }
 
   useEffect(() => {
-    onChange(childrenCount, period, sponsorEmail);
-  }, [childrenCount, period, sponsorEmail]);
+    onChange(childrenCount, period, 'sponsorEmail');
+  }, [childrenCount, period]);
 
   useEffect(() => {
     setChildrenCount(minCount)
@@ -61,7 +55,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
       {disabled && (<Mask />)}
       <TeacherHeader>
         <Avatar src={type === 'School' ? schoolMark : classroomMark} />
-        <b className="font-c-white">{type}</b>
+        <Typography variant='h5' color='white'>{type}</Typography>
       </TeacherHeader>
       <TeacherBody>
         <Tip>
@@ -113,22 +107,7 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
             </div>
           </div>
         </TeacherBtnContainer>
-        {/* <div className="flex flex-row justify-space-around w-100">
-          <TextField
-            label={dictionary[language]?.requestFromSponsor}
-            onChange={(e: any) => {
-              setSponsorEmail(e.target.value);
-            }}
-            value={sponsorEmail}
-            disabled={true}
-          />
-        </div> */}
-        {/* {!isSpecialCode &&
-          <PriceContainer>
-            <Price> $ {(price * childrenCount).toFixed(2)}</Price>
-            <Plan>/{plan}</Plan>
-          </PriceContainer>
-        } */}
+        <Typography>${price}/{period}, up to 40 students</Typography>
       </TeacherBody>
     </TeacherContainer>
   );

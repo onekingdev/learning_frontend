@@ -178,7 +178,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     }, [plans])
     return (
         <Container maxWidth='xl'>
-            <Grid container justifyContent={'center'}>
+            <Grid container justifyContent={'center'} alignItems='start'>
                 <Grid item xs={12} md={8}>
                     <Paper
                         elevation={5}
@@ -189,13 +189,13 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                 <Grid item xs={12} md={4}>
                     <Paper
                         elevation={3}
-                        sx={{ borderColor: BasicColor.paleRed, borderWidth: 1, borderStyle: 'solid' }}>
+                        sx={{ borderColor: BasicColor.paleRed, borderWidth: 1, borderStyle: 'solid', width: '100%' }}>
 
                         <OrderTitleContainer>
                             <OrderTitleLog src={payOrderLog} />
                             <OrderTitle>{dictionary[language]?.orderSummary}</OrderTitle>
                         </OrderTitleContainer>
-                        <Box display='flex' flexDirection={'column'} alignItems='center' justifyContent='center' gap={2} padding={2} sx={{ backgroundColor: BasicColor.blue }}>
+                        <Box display='flex' paddingTop={4} paddingBottom={4} flexDirection={'column'} alignItems='center' justifyContent='center' gap={2} sx={{ backgroundColor: BasicColor.blue }}>
                             {!isSpecialCode &&
                                 <>
                                     {

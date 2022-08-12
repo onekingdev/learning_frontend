@@ -53,17 +53,9 @@ export const OrderTitle = styled.div`
 `
 
 export const OrderItem = styled.div`
-    padding: 23px;
     display: flex;
-    width: 330px;
-    padding-left: 35px;
-    padding-right: 35px;
-    justify-content: space-between;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-        width: 100vw;
-        padding-left: unset;
-        padding-right: unset;
-    }
+    width: 100%;
+    justify-content: space-around;
 `
 export const OrderItemTitleContainer = styled.div`
     display: flex;

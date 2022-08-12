@@ -25,7 +25,6 @@ export const TeacherContainer = styled.div`
     display: flex;
     flex-direction: row;
     background-color: ${BasicColor.brightLightBlue};
-    margin: 38px;
     @media screen and (max-width: ${'780px'}) {
         width: 100vw;
         height: unset;
