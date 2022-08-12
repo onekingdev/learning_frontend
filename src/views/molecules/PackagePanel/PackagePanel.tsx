@@ -29,15 +29,7 @@ type PackagePanelProps = {
 export const PackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode, disabled = false, onChange }) => {
   const [childrenCount, setChildrenCount] = useState(0);
   const [plan, setPlan] = useState('month');
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
-  // const handleCheckPath = (path: string, isChecked: boolean) => {
-  //   let temp:any = [];
-  //   temp = [...paths];
-  //   if(isChecked) temp.push(path)
-  //   else temp.pop(path)
-  //   setPaths(temp)
-  // }
+  const { language } = useSelector((state: any) => state.user);
 
   useEffect(() => {
     onChange(childrenCount, plan);

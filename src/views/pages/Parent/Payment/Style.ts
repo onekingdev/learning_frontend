@@ -6,17 +6,15 @@ export const TipContainer = styled.div`
   display:         flex;
   flex-direction:   row;
   flex-wrap:       wrap;
-  // width:        45vw;
   width:           740px;
   justify-content: space-between;
   padding-top:     80px;
   font-size:       30px;
+  margin: 5px;
 
-  @media screen and (max-width: ${ScreenSize.tablet}) {
+  @media screen and (max-width: ${ScreenSize.phone}) {
     justify-content: center;
-  }
-  @media screen and (max-width: 900px) {
-    width:           unset;
+    width: auto;
   }
 `;
 

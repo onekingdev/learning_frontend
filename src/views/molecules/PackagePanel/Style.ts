@@ -11,17 +11,10 @@ export const Container = styled.div`
     flex-direction: column;
     background-color: ${props => props.color === 'Gold' ? BasicColor.paleOrange : BasicColor.ligntBlue};
     margin: 38px;
-    @media screen and (max-width: ${'500px'}) {
-        margin-left:10px;
-        margin-right: 10px;
-        max-width: 384px;
-        // margin: unset;
-    }
     @media screen and (max-width: ${ScreenSize.phone}) {
         margin-left:10px;
         margin-right: 10px;
-        max-width: 100vw;
-        // margin: unset;
+        width: auto;
     }
 `;
 
