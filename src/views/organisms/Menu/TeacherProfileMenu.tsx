@@ -105,7 +105,7 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
         }
         {
           role === USER_TYPE.subscriber &&
-          <MenuItem onClick={() => history.push('/admin/schools')}>
+          <MenuItem onClick={() => history.push('/subscriber/schools')}>
             <Avatar children={<ApartmentIcon />} sx={{ bgcolor: '#22BAAF' }} />Schools
           </MenuItem>}
         {

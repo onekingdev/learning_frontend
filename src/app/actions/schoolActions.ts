@@ -1,3 +1,4 @@
+import { _SCHOOL_SCHEMA } from 'api/fragments/schemas';
 import {
   CREATE_SCHOOL,
 } from 'api/mutations/teacher';
@@ -55,7 +56,7 @@ export const doAddSchool = async (
         ${couponCode ? 'couponCode: "' + couponCode + '",' : ''}
       ) {
         school {
-          id
+          ${_SCHOOL_SCHEMA}
         }
       }
     }

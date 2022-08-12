@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
 import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
@@ -25,6 +25,7 @@ import {
 import { SCHOOL_TYPES } from 'constants/common';
 import { doAddSchool } from 'app/actions';
 import { makeStyles } from '@mui/styles'
+import { SCHOOL_SET_DATA } from 'app/types';
 
 export const styles = makeStyles({
   select: {
@@ -53,6 +54,7 @@ const AddSchool: FC = () => {
   const isMobile = useSocratesMediaQuery('xs')
   const countries = Country.getAllCountries()
   const classes = styles();
+  const dispatch = useDispatch();
 
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
@@ -74,7 +76,11 @@ const AddSchool: FC = () => {
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {
-        history.push('/subscriber/schools')
+        dispatch({
+          type: SCHOOL_SET_DATA,
+          payload: data.school
+        })
+        history.push('/teacher/payment/School')
       }
     },
     onError: async (error: any) => {

@@ -5,11 +5,8 @@ import {
 
 import school_inactive_img from 'views/assets/school/school_inactive.svg'
 import { BasicColor } from 'views/Color';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 const AddSchoolItem: FC = () => {
-  const history = useHistory();
 
   return (
     <Paper elevation={5}
