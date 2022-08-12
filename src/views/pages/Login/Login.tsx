@@ -109,7 +109,7 @@ export const LogIn: FC = () => {
           type: SUBSCRIBER_SET_DATA,
           payload: { ...subscriber }
         })
-        redirectUrl = '/admin/schools'
+        redirectUrl = '/subscriber/schools'
         break;
       case USER_TYPE.adminTeacher:
         // Set teacher state

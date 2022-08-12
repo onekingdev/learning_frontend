@@ -31,7 +31,38 @@ export const doCreateSchool = async (
       couponCode
     )
   );
-  return res.data?.createSchool ?? res.errors[0]; // when django returns error message on fail
+  return res.data?.createSchool || res.errors[0]; // when django returns error message on fail
+};
+
+export const doAddSchool = async (
+  country: string,
+  district: string,
+  name: string,
+  type: string,
+  zip: string,
+  couponCode: string,
+  token: string
+) => {
+  const res: any = await fetchQuery(
+    `
+    mutation {
+      addSchool (
+        country: "${country}",
+        district: "${district}",
+        name: "${name}",
+        type: "${type}",
+        zip: "${zip}",
+        ${couponCode ? 'couponCode: "' + couponCode + '",' : ''}
+      ) {
+        school {
+          id
+        }
+      }
+    }
+    `,
+    token
+  );
+  return res.data?.addSchool || res.errors[0]; // when django returns error message on fail
 };
 
 export const doAddTeachersToSchool = async (

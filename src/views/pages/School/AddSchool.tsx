@@ -2,20 +2,16 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { LoadingContext } from 'react-router-loading';
 import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from 'views/molecules/MuiTextField';
 import { BasicColor } from 'views/Color';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import { dictionary } from './dictionary';
 import { Country } from 'country-state-city';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import {
-  useStyles,
-} from './Style';
 import commonDictionary from 'constants/commonDictionary'
 import { Box, Typography } from '@mui/material';
 import ContactBox from 'views/organisms/ContactBox';
@@ -27,25 +23,41 @@ import {
   useMutation,
 } from '@tanstack/react-query'
 import { SCHOOL_TYPES } from 'constants/common';
-import { SCHOOL_SET_DATA, SUBSCRIBER_SET_DATA, USER_SET_DATA } from 'app/types';
-import { validateEmail } from 'views/utils';
-import { doCreateSchool } from 'app/actions';
+import { doAddSchool } from 'app/actions';
+import { makeStyles } from '@mui/styles'
 
-const SchoolSignup: FC = () => {
+export const styles = makeStyles({
+  select: {
+    '&.MuiOutlinedInput-root': {
+      borderRadius: '25px',
+      backgroundColor: BasicColor.white,
+    },
+    '& fieldset': {
+      borderColor: BasicColor.brightBlue,
+      borderWidth: '2px'
+    }
+  },
+});
+
+interface MutationProps {
+  country: string,
+  district: string,
+  schoolName: string,
+  schoolType: string,
+  zip: string,
+  couponCode: string,
+  token: string
+}
+
+const AddSchool: FC = () => {
   const isMobile = useSocratesMediaQuery('xs')
   const countries = Country.getAllCountries()
-  const classes = useStyles();
+  const classes = styles();
 
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
-  const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-  const [userName, setUserName] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
   const [schoolType, setSchoolType] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
   const [schoolName, setSchoolName] = useState('');
   const [zip, setZip] = useState('');
   const [country, setCountry] = useState(countries[232])
@@ -53,34 +65,16 @@ const SchoolSignup: FC = () => {
   const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState('')
 
-  const language = useSelector((state: any) => state.user.language);
+  const { language, token } = useSelector((state: any) => state.user);
 
-  const createSchool = useMutation(() => doCreateSchool(
-    country.name, district, firstName, lastName, email, schoolName, password, schoolType, userName, zip, couponCode
+  const addSchool = useMutation(({ country, district, schoolType, zip, couponCode, schoolName, token }: MutationProps) => doAddSchool(
+    country, district, schoolName, schoolType, zip, couponCode, token
   ), {
     onSuccess: async data => {
       if (data.message) {
         enqueueSnackbar(data.message, { variant: 'error' })
       } else {
-        const { user, token, subscriber, school } = data
-        enqueueSnackbar('School Create Succeed!', { variant: 'success' })
-
-        dispatch({
-          type: USER_SET_DATA,
-          payload: { ...user, token: token, couponCode: subscriber.couponCode },
-        });
-
-        dispatch({
-          type: SCHOOL_SET_DATA,
-          payload: { ...school }
-        })
-
-        dispatch({
-          type: SUBSCRIBER_SET_DATA,
-          payload: { ...subscriber }
-        })
-
-        history.push('/teacher/payment/School')
+        history.push('/subscriber/schools')
       }
     },
     onError: async (error: any) => {
@@ -94,17 +88,11 @@ const SchoolSignup: FC = () => {
 
   // const [confPassword, setConfPassword] = useState('');
   const [validateMsg, setValidateMsg] = useState<{ [key: string]: any }>({
-    email: null,
     schoolName: null,
-    lastName: null,
-    firstName: null,
     district: null,
     schoolType: null,
     zip: null,
     Country: '',
-    userName: null,
-    password: null,
-    confPassword: null
   });
 
 
@@ -127,7 +115,15 @@ const SchoolSignup: FC = () => {
     if (!formValidation()) return;
 
     setLoading(true)
-    createSchool.mutate()
+    addSchool.mutate({
+      country: country.name,
+      couponCode,
+      schoolName,
+      schoolType,
+      zip,
+      token,
+      district
+    })
   };
 
   const formValidation = () => {
@@ -150,16 +146,16 @@ const SchoolSignup: FC = () => {
         justifyContent={'center'}
       >
         <FormContainer isMobile={isMobile}>
-          <Typography variant='h4'>{dictionary[language]?.schoolSignup}</Typography>
+          <Typography variant='h4'>{'Add School'}</Typography>
           <Grid container spacing={3} mt={2}>
             <Grid item xs={12}>
               <TextField
-                label={dictionary[language]?.schoolName}
+                label={commonDictionary[language]?.school}
                 onChange={e => {
                   setSchoolName(e.target.value);
                   handleFormChange(
                     'schoolName',
-                    e.target.value?.length === 0 ? dictionary[language]?.fieldIsRequired : ''
+                    e.target.value?.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
                   );
 
                 }}
@@ -169,42 +165,12 @@ const SchoolSignup: FC = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label={dictionary[language]?.firstName}
-                onChange={e => {
-                  setFirstName(e.target.value);
-                  handleFormChange(
-                    'firstName',
-                    e.target.value?.length === 0 ? dictionary[language]?.fieldIsRequired : ''
-                  );
-
-                }}
-                error={!!validateMsg.firstName}
-                helperText={validateMsg.firstName}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={dictionary[language]?.lastName}
-                onChange={e => {
-                  setLastName(e.target.value);
-                  handleFormChange(
-                    'lastName',
-                    e.target.value?.length === 0 ? dictionary[language]?.fieldIsRequired : ''
-                  );
-
-                }}
-                error={!!validateMsg.lastName}
-                helperText={validateMsg.lastName}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={dictionary[language]?.district}
+                label={'district'}
                 onChange={e => {
                   setDistrict(e.target.value);
                   handleFormChange(
                     'district',
-                    e.target.value?.length === 0 ? dictionary[language]?.fieldIsRequired : ''
+                    e.target.value?.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
                   );
 
                 }}
@@ -215,13 +181,13 @@ const SchoolSignup: FC = () => {
             <Grid item xs={12} md={12}>
               <FormControl fullWidth>
                 <InputLabel id="select-schoolType-label">
-                  {dictionary[language]?.schoolType}
+                  {'School Type'}
                 </InputLabel>
                 <Select
                   labelId="select-schoolType-label"
                   id="select-schoolType"
                   // value={countries[countries.findIndex((item: any) => item.name === schoolType.name)]}
-                  label={dictionary[language]?.schoolType}
+                  label={'School Type'}
                   className={`${classes.select} err-border`}
                   // className={`${classes.select} err-border`}
                   onChange={async (e: any) => {
@@ -251,12 +217,12 @@ const SchoolSignup: FC = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                label={dictionary[language]?.zip}
+                label={'Zip/Postal Code'}
                 onChange={e => {
                   setZip(e.target.value);
                   handleFormChange(
                     'zip',
-                    e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : ''
+                    e.target.value.length === 0 ? commonDictionary[language]?.fieldIsRequired : ''
                   );
                 }}
                 error={!!validateMsg.zip}
@@ -266,13 +232,13 @@ const SchoolSignup: FC = () => {
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel id="select-country-label">
-                  {dictionary[language]?.selectYourCountry}
+                  {'Select a Country'}
                 </InputLabel>
                 <Select
                   labelId="select-country-label"
                   id="select-country"
                   value={countries[countries.findIndex((item: any) => item.name === country.name)]}
-                  label={dictionary[language]?.selectYourCountry}
+                  label={'Select a Country'}
                   className={`${classes.select} err-border`}
                   // className={`${classes.select} err-border`}
                   onChange={async (e: any) => {
@@ -301,57 +267,7 @@ const SchoolSignup: FC = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label={dictionary[language]?.email}
-                onChange={e => {
-                  setEmail(e.target.value);
-                  setUserName(e.target.value);
-                  setValidateMsg({
-                    ...validateMsg,
-                    email: e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : !validateEmail(e.target.value) ? dictionary[language]?.thisIsNotEmailAddress : '',
-                    userName: ''
-                  });
-                }}
-                error={!!validateMsg.email}
-                helperText={validateMsg.email}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={dictionary[language]?.password}
-                type="password"
-                onChange={e => {
-                  setPassword(e.target.value);
-                  handleFormChange(
-                    'password',
-                    e.target.value.length === 0 ? dictionary[language]?.fieldIsRequired : ''
-                  );
-                }}
-                error={!!validateMsg.password}
-                helperText={validateMsg.password}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={dictionary[language]?.confirmPassword}
-                type="password"
-                onChange={e => {
-                  // setConfPassword(e.target.value);
-                  handleFormChange(
-                    'confPassword',
-                    e.target.value.length === 0
-                      ? dictionary[language]?.fieldIsRequired
-                      : password !== e.target.value
-                        ? dictionary[language]?.passwordIsNotMatchedWithConfirmPassword
-                        : ''
-                  );
-                }}
-                error={!!validateMsg.confPassword}
-                helperText={validateMsg.confPassword}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={dictionary[language]?.couponCode}
+                label={'Coupon Code'}
                 onChange={e => {
                   setCouponCode(e.target.value);
                 }}
@@ -366,7 +282,7 @@ const SchoolSignup: FC = () => {
             color='aqua'
             onClick={handleCreate}
             loading={loading}
-          > {dictionary[language]?.submit}</LoadingButton>
+          > {commonDictionary[language]?.submit}</LoadingButton>
           <FormBottomDescription language={language} />
         </FormContainer>
         <ContactBox language={language} />
@@ -374,4 +290,4 @@ const SchoolSignup: FC = () => {
     </TeacherPgContainer>
   );
 };
-export default SchoolSignup;
+export default AddSchool;

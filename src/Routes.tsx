@@ -52,6 +52,8 @@ import Schools from 'views/pages/School/Schools';
 import { Homework } from 'views/pages/Student/Homework';
 import AddTeachers from 'views/pages/School/AddTeachers';
 import SchoolTeachers from 'views/pages/School/SchoolTeachers';
+import SchoolSettings from 'views/pages/School/Settings';
+import AddSchool from 'views/pages/School/AddSchool';
 
 
 const PrivateRoute = ({ requireAuth = true, loading = false, ...rest }) => {
@@ -192,9 +194,11 @@ export function Routes() {
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/dashboard" component={ClassDashboard} />
         <PrivateRoute loading={false} requireAuth={false} path="/teacher/classroomSettings" component={ClassroomSettings} />
 
-        <PrivateRoute loading={false} requireAuth={false} path="/admin/schools" component={Schools} />
+        <PrivateRoute loading={false} requireAuth={true} path="/subscriber/schools" component={Schools} />
         <PrivateRoute loading={false} requireAuth={false} path="/admin/addTeachers" component={AddTeachers} />
         <PrivateRoute loading={false} requireAuth={false} path="/admin/schoolTeachers" component={SchoolTeachers} />
+        <PrivateRoute loading={false} requireAuth={true} path="/subscriber/settings" component={SchoolSettings} />
+        <PrivateRoute loading={false} requireAuth={true} path="/subscriber/addSchool" component={AddSchool} />
         <Route path="/teacher/control-aok">
           <ControlAOK />
         </Route>

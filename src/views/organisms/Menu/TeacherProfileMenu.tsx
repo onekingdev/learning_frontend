@@ -36,6 +36,18 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleSettingClicked = () => {
+    switch (role) {
+      case USER_TYPE.teacher:
+        history.push('/teacher/settings')
+        break;
+      case USER_TYPE.subscriber:
+        history.push('/subscriber/settings')
+        break;
+      default: break;
+    }
+  }
   return (
     <>
       <Tooltip title="Account settings">
@@ -103,15 +115,16 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
           </MenuItem>
         }
         <Divider />
-        <MenuItem onClick={() => history.push('/teacher/settings')}>
+
+        <MenuItem onClick={handleSettingClicked}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <Settings />
           </ListItemIcon>
-          Payment Settings
+          Settings
         </MenuItem>
         <MenuItem onClick={() => history.push('/')}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout />
           </ListItemIcon>
           Logout
         </MenuItem>

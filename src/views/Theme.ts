@@ -236,7 +236,7 @@ export const themeTeacher = createTheme({
     MuiTypography: {
       variants: [
         {
-          props: { variant: 'body1' },
+          props: { variant: 'body2' },
           style: ({ theme }) => ({
             fontSize: 24,
             [theme.breakpoints.down('sm')]: {

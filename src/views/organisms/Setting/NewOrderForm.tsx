@@ -149,7 +149,7 @@ export const NewOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
                         <FormControlLabel value={plan.id} control={<Radio />} label={commonDictionary[language]?.[plan.slug as keyof Object] || ''} />
                       </Grid>
                       <Grid item xs={12} sm={6}>
-                        <Typography variant='body1' textAlign='center'>{yearly ? plan.priceYear : plan.priceMonth}<span style={{ fontSize: '0.8rem' }}>{plan.currency}/{yearly ? commonDictionary[language]?.annually : commonDictionary[language]?.monthly}</span></Typography>
+                        <Typography variant='body2' textAlign='center'>{yearly ? plan.priceYear : plan.priceMonth}<span style={{ fontSize: '0.8rem' }}>{plan.currency}/{yearly ? commonDictionary[language]?.annually : commonDictionary[language]?.monthly}</span></Typography>
                       </Grid>
                     </Grid>
                   })

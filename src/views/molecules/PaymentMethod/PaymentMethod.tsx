@@ -103,7 +103,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                     //     type: SUBSCRIBER_ADD_SCHOOL,
                     //     payload: school
                     // })
-                    history.push('/admin/schools')
+                    history.push('/subscriber/schools')
                     break;
                 case 'GUARDIAN':
                     dispatch({

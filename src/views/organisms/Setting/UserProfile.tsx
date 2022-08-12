@@ -56,7 +56,7 @@ export const UserProfile: FC = () => {
         dispatch({
           type: USER_SET_TOKEN,
           payload: data.token
-      });
+        });
         enqueueSnackbar('Update email success!', { variant: 'success' })
       }
     },
@@ -95,12 +95,12 @@ export const UserProfile: FC = () => {
       <Box component='form' onSubmit={handleSubmit} noValidate>
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
-            <Typography fontWeight={'bold'}>
+            <Typography variant='h6' width='100%'>
               {commonDictionary[language]?.username}
             </Typography>
           </Grid>
           <Grid item lg={8} xs={12}>
-            <Typography >
+            <Typography width='100%'>
               {username}
             </Typography>
           </Grid>
@@ -108,7 +108,7 @@ export const UserProfile: FC = () => {
 
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
-            <Typography fontWeight={'bold'}>
+            <Typography variant='h6' width='100%'>
               {'New username'}
             </Typography>
           </Grid>
@@ -127,12 +127,12 @@ export const UserProfile: FC = () => {
 
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
-            <Typography fontWeight={'bold'}>
+            <Typography variant='h6' width='100%'>
               {commonDictionary[language]?.current_email}
             </Typography>
           </Grid>
           <Grid item lg={8} xs={12}>
-            <Typography>
+            <Typography width='100%'>
               {email}
             </Typography>
           </Grid>
@@ -140,7 +140,7 @@ export const UserProfile: FC = () => {
 
         <LSGridRow container>
           <Grid item lg={4} xs={12}>
-            <Typography fontWeight={'bold'}>
+            <Typography variant='h6' width='100%'>
               {commonDictionary[language]?.change_email}
             </Typography>
           </Grid>
@@ -157,25 +157,26 @@ export const UserProfile: FC = () => {
           </Grid>
         </LSGridRow>
         <LSGridRow container>
-          <Grid item lg={4} xs={12}>
-            <Typography fontWeight={'bold'}>
+          <Grid item lg={4} xs={12} >
+            <Typography variant='h6' width='100%'>
               {commonDictionary[language]?.password}
             </Typography>
           </Grid>
-          <Grid item lg={8} xs={12}>
-            <LSDialog
-              isOpen={openPwdRstDg}
-              open={toggleOpenPwdRstDg}
-              title={commonDictionary[language]?.change_password}
-              dialogContent={
-                <PwdResetForm open={toggleOpenPwdRstDg} />
-              }
-            />
-            <Button onClick={toggleOpenPwdRstDg}>
+          <Grid item lg={8} xs={12} width='100%'>
+
+            <Button onClick={toggleOpenPwdRstDg} >
               {commonDictionary[language]?.change_password}
             </Button>
           </Grid>
         </LSGridRow>
+        <LSDialog
+          isOpen={openPwdRstDg}
+          open={toggleOpenPwdRstDg}
+          title={commonDictionary[language]?.change_password}
+          dialogContent={
+            <PwdResetForm open={toggleOpenPwdRstDg} />
+          }
+        />
         <LSButtonContainer>
           <LoadingButton
             type={commonDictionary[language]?.submit}
