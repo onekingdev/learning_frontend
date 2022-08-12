@@ -1,4 +1,4 @@
-import { FC, useEffect, ReactChildren, ReactChild } from 'react';
+import { FC, ReactChildren, ReactChild } from 'react';
 import { ParentPgNav } from 'views/molecules/ParentPgNav/ParentPgNav'
 import colorpanel from 'views/assets/colorPannel.svg';
 import mess from 'views/assets/mess.svg';
@@ -23,6 +23,8 @@ import {
 } from './Style'
 import { ParentPageTitle } from '../PageTitle';
 import { Box } from '@mui/material';
+import styled from 'styled-components';
+import { ScreenSize } from 'constants/screenSize';
 
 type ParentPgContainerProps = {
   onlyLogoImgNav: boolean;
@@ -32,8 +34,6 @@ type ParentPgContainerProps = {
 
 export const ParentPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav, children = (<></>), title }) => {
 
-  useEffect(() => {
-  }, []);
   return (
     <Container>
       <IslandGreen src={islandGreen} />
@@ -53,6 +53,15 @@ export const ParentPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav, 
       <Box mt={5} mb={5}>
         {children}
       </Box>
+      <BottomFiller />
     </Container>
   );
 };
+
+export const BottomFiller = styled.div`
+  height: 65px;
+  width: 100%;
+  @media screen and (min-width: ${ScreenSize.phone}) {
+    display: none;
+  }
+`;

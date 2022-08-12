@@ -9,13 +9,9 @@ import { PaymentForm } from './PaymentForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { dictionary } from './dictionary'
 import {
-    Container,
-    PaymentContainer,
-    OrderContainer,
     OrderTitleContainer,
     OrderTitleLog,
     OrderTitle,
-    OrderBody,
     OrderItem,
     OrderItemTitleContainer,
     OrderItemTitle,
@@ -23,7 +19,8 @@ import {
     OrderTip,
 } from './Style';
 import { GUARDIAN_SET_DATA, TEACHER_SET_DATA } from 'app/types';
-import { Typography } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography } from '@mui/material';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 type PaymentMethodProps = {
     plans: {
@@ -46,6 +43,7 @@ interface PaymentFormFunc {
 export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecialCode, sponsorEmail }) => {
 
     const history = useHistory();
+    const isMobile = useSocratesMediaQuery('xs')
     const trialExpiraton = new Date()
     const paymentFormRef = useRef<PaymentFormFunc>(null)
     const { enqueueSnackbar } = useSnackbar();
@@ -88,7 +86,7 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
             // });
             // TODO: check user type, and when parent redirect to kids/new,
             const userType = profile.role
-            const { teacher, guardian, school } = result.data
+            const { teacher, guardian } = result.data
             switch (userType) {
                 case 'TEACHER':
                     dispatch({
@@ -169,12 +167,6 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
     }
 
     useEffect(() => {
-        // const price_gold = plans.Gold.currentPrice / 100 * offRate * ((plans.Gold.childCount - 1 > 0) ? (plans.Gold.childCount - 1) : 0) + (plans.Gold.childCount > 0 ? 1 : 0) * plans.Gold.currentPrice;
-        // const price_combo = plans.Combo.currentPrice / 100 * offRate * ((plans.Combo.childCount - 1 > 0) ? (plans.Combo.childCount - 1) : 0) + (plans.Combo.childCount > 0 ? 1 : 0) * plans.Combo.currentPrice;
-        // const price_sole = plans.Sole.currentPrice / 100 * offRate * ((plans.Sole.childCount - 1 > 0) ? (plans.Sole.childCount - 1) : 0) + (plans.Sole.childCount > 0 ? 1 : 0) * plans.Sole.currentPrice;
-        // const price_school = plans.School.currentPrice / 100 * offRate * ((plans.School.childCount - 1 > 0) ? (plans.School.childCount - 1) : 0) + (plans.School.childCount > 0 ? 1 : 0) * plans.School.currentPrice;
-        // const price_classroom = plans.Classroom.currentPrice / 100 * offRate * ((plans.Classroom.childCount - 1 > 0) ? (plans.Classroom.childCount - 1) : 0) + (plans.Classroom.childCount > 0 ? 1 : 0) * plans.Classroom.currentPrice;
-
 
         const price_school = calcPrice(plans.School)
         const price_classroom = calcPrice(plans.Classroom)
@@ -185,156 +177,124 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
         setSubtotal(price_gold + price_combo + price_sole + price_school + price_classroom)
     }, [plans])
     return (
-        <Container>
-            <PaymentContainer>
-                <PaymentForm isUpdate={false} ref={paymentFormRef} isSpecialCode={isSpecialCode} />
-            </PaymentContainer>
-            <OrderContainer>
-                <OrderTitleContainer>
-                    <OrderTitleLog src={payOrderLog} />
-                    <OrderTitle>{dictionary[language]?.orderSummary}</OrderTitle>
-                </OrderTitleContainer>
-                {!isSpecialCode &&
-                    <OrderBody>
-                        {
-                            offRate < 100 && <Typography color='white' variant='h6'>You have {100 - offRate}% discount!</Typography>
-                        }
-                        {
-                            plans.Gold?.childCount > 0 &&
-                            <OrderItem>
-                                <OrderItemTitle>{plans.Gold.childCount} Gold {dictionary[language]?.package} </OrderItemTitle>
-                                <OrderItemContent>${plans.Gold.currentPrice} / {plans.Gold.period}</OrderItemContent>
-                            </OrderItem>
-                        }
-                        {
-                            plans.Combo?.childCount > 0 &&
-                            <OrderItem>
-                                <OrderItemTitle>{plans.Combo.childCount} Combo {dictionary[language]?.package} </OrderItemTitle>
-                                <OrderItemContent>${plans.Combo.currentPrice} / {plans.Combo.period}</OrderItemContent>
-                            </OrderItem>
-                        }
-                        {
-                            plans.Sole?.childCount > 0 &&
-                            <OrderItem>
-                                <OrderItemTitle>{plans.Sole.childCount} Solo {dictionary[language]?.package} </OrderItemTitle>
-                                <OrderItemContent>${plans.Sole.currentPrice} / {plans.Sole.period}</OrderItemContent>
-                            </OrderItem>
-                        }
-                        {
-                            plans.School?.childCount > 0 && <>
-                                <OrderItem>
-                                    <OrderItemTitle>30 Teachers {dictionary[language]?.package} </OrderItemTitle>
-                                    <OrderItemContent>${plans.School.currentPrice} / {plans.School.period}</OrderItemContent>
-                                </OrderItem>
-                                <OrderItem>
-                                    <OrderItemTitle>Additional {plans.School.childCount - (plans.School.period === 'month' ? plans.School.quantityPreferentialMonth : plans.School.quantityPreferentialYear)} Teacher {dictionary[language]?.package} </OrderItemTitle>
-                                    <OrderItemContent>${plans.School.period === 'month' ? plans.School.pricePreferentialMonth : plans.School.pricePreferentialYear} / {plans.School.period}</OrderItemContent>
-                                </OrderItem>
-                            </>
-                        }
-                        {
-                            plans.Classroom?.childCount > 0 &&
-                            <OrderItem>
-                                <OrderItemTitle>{plans.Classroom.childCount} Classroom {dictionary[language]?.package} </OrderItemTitle>
-                                <OrderItemContent>${plans.Classroom.currentPrice} / {plans.Classroom.period}</OrderItemContent>
-                            </OrderItem>
-                        }
-                        {/* <Grid container spacing={2} sx={{paddingLeft: '30px', paddingRight: '30px', justifyContent: 'center'}}>
-                    <Grid item md={6} xs={10}>
-                    <TextField
-                        label="Coupon code"
-                        className={classes.codeInput}
-                        value={couponCode}
-                        onChange={(e) => setCouponCode(e.target.value)}
-                    />
-                    </Grid>
-                    <Grid item md={6} xs={10}>
-                        <Button
-                            bgColor={BasicColor.yellow}
-                            color={BasicColor.black}
-                            onClick={applyCoupon}
-                            value="Apply Coupon"
-                        />
-                    </Grid>
-                </Grid> */}
-                        <OrderItem style={{ display: 'none' }}>
-                            <OrderItemTitleContainer>
-                                <OrderItemTitle>{dictionary[language]?.subtotal}</OrderItemTitle>
-                            </OrderItemTitleContainer>
-                            <OrderItemContent>${subtotal.toFixed(2)}</OrderItemContent>
-                        </OrderItem>
-                        <OrderItem style={{ display: 'none' }}>
-                            <OrderItemTitleContainer>
-                                <OrderItemTitle>{dictionary[language]?.coupon}:<div style={{ fontWeight: 400, fontSize: '16px' }}>&nbsp;{dictionary[language]?.year}</div></OrderItemTitle>
-                            </OrderItemTitleContainer>
-                            {/* <OrderItemContent>${couponPrice.toFixed(2)}</OrderItemContent> */}
-                            <OrderItemContent>${0.00}</OrderItemContent>
-                        </OrderItem>
-                        <OrderItem>
-                            <OrderItemTitleContainer>
-                                <OrderItemTitle>{dictionary[language]?.total}</OrderItemTitle>
-                            </OrderItemTitleContainer>
-                            <OrderItemContent>
-                                {/* <div style={{display: 'flex'}}>${(subtotal - couponPrice).toFixed(2)}<div style={{fontSize: '12px', fontWeight: '400'}}>&nbsp;/&nbsp;Month</div></div> */}
-                                <div style={{ display: 'flex' }}>${subtotal.toFixed(2)}</div>
-                                <div style={{ fontWeight: 400, lineHeight: '12px', fontSize: '10px' }}>{dictionary[language]?.firstRenewal} : {moment(trialExpiraton).format('YYYY-MM-DD')}</div>
-                            </OrderItemContent>
-                        </OrderItem>
-                        <OrderTip>
-                            {dictionary[language]?.yourPersonalDataWillOnlyBeUsedToProcessYourOrderAndSupportYourExperience}
-                        </OrderTip>
-                        <OrderTip>
-                            <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)} />
-                            <div style={{ paddingLeft: '20px' }}>{dictionary[language]?.iHaveReadAndAgreeToTheWebsiteTermsAndConditions}</div>
-                        </OrderTip>
-                        <Button
-                            bgColor={BasicColor.green}
-                            onClick={handleOrder}
-                            value={dictionary[language]?.planceAnOrder}
-                            weight={700}
-                            disabled={!agreeLicense}
-                            loading={loading}
-                        />
-                    </OrderBody>
-                }
-                {isSpecialCode &&
-                    <OrderBody>
-                        {
-                            plans.Gold.childCount > 0 &&
-                            <OrderItem>
-                                <OrderItemTitle>{plans.Gold.childCount} Gold {dictionary[language]?.package} </OrderItemTitle>
-                            </OrderItem>
-                        }
-                        {
-                            plans.Combo.childCount > 0 &&
-                            <OrderItem>
-                                <OrderItemTitle>{plans.Combo.childCount} Combo {dictionary[language]?.package} </OrderItemTitle>
-                            </OrderItem>
-                        }
-                        {
-                            plans.Sole.childCount > 0 &&
-                            <OrderItem>
-                                <OrderItemTitle>{plans.Sole.childCount} Solo {dictionary[language]?.package} </OrderItemTitle>
-                            </OrderItem>
-                        }
-                        <OrderTip>
-                            {dictionary[language]?.yourPersonalDataWillOnlyBeUsedToProcessYourOrderAndSupportYourExperience}
-                        </OrderTip>
-                        <OrderTip style={{ display: 'flex' }}>
-                            <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)} />
-                            <div style={{ paddingLeft: '20px' }}>{dictionary[language]?.iHaveReadAndAgreeToTheWebsiteTermsAndConditions}</div>
-                        </OrderTip>
-                        <Button
-                            bgColor={BasicColor.green}
-                            onClick={handleOrder}
-                            value={dictionary[language]?.planceAnOrder}
-                            weight={700}
-                            disabled={!agreeLicense}
-                            loading={loading}
-                        />
-                    </OrderBody>
-                }
-            </OrderContainer>
-        </Container>
+        <Container maxWidth='xl'>
+            <Grid container justifyContent={'center'}>
+                <Grid item xs={12} md={8}>
+                    <Paper
+                        elevation={5}
+                        sx={{ padding: isMobile ? 2 : 6, backgroundColor: BasicColor.veryLightCyanBlue, borderColor: BasicColor.paleRed, borderWidth: 1, borderStyle: 'solid' }}>
+                        <PaymentForm isUpdate={false} ref={paymentFormRef} isSpecialCode={isSpecialCode} />
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Paper
+                        elevation={3}
+                        sx={{ borderColor: BasicColor.paleRed, borderWidth: 1, borderStyle: 'solid' }}>
+
+                        <OrderTitleContainer>
+                            <OrderTitleLog src={payOrderLog} />
+                            <OrderTitle>{dictionary[language]?.orderSummary}</OrderTitle>
+                        </OrderTitleContainer>
+                        <Box display='flex' flexDirection={'column'} alignItems='center' justifyContent='center' gap={2} padding={2} sx={{ backgroundColor: BasicColor.blue }}>
+                            {!isSpecialCode &&
+                                <>
+                                    {
+                                        offRate < 100 && <Typography color='white' variant='h6'>You have {100 - offRate}% discount!</Typography>
+                                    }
+                                    {
+                                        plans.Gold?.childCount > 0 &&
+                                        <OrderItem>
+                                            <OrderItemTitle>{plans.Gold.childCount} Gold {dictionary[language]?.package} </OrderItemTitle>
+                                            <OrderItemContent>${plans.Gold.currentPrice} / {plans.Gold.period}</OrderItemContent>
+                                        </OrderItem>
+                                    }
+                                    {
+                                        plans.Combo?.childCount > 0 &&
+                                        <OrderItem>
+                                            <OrderItemTitle>{plans.Combo.childCount} Combo {dictionary[language]?.package} </OrderItemTitle>
+                                            <OrderItemContent>${plans.Combo.currentPrice} / {plans.Combo.period}</OrderItemContent>
+                                        </OrderItem>
+                                    }
+                                    {
+                                        plans.Sole?.childCount > 0 &&
+                                        <OrderItem>
+                                            <OrderItemTitle>{plans.Sole.childCount} Solo {dictionary[language]?.package} </OrderItemTitle>
+                                            <OrderItemContent>${plans.Sole.currentPrice} / {plans.Sole.period}</OrderItemContent>
+                                        </OrderItem>
+                                    }
+                                    {
+                                        plans.School?.childCount > 0 && <>
+                                            <OrderItem>
+                                                <OrderItemTitle>30 Teachers {dictionary[language]?.package} </OrderItemTitle>
+                                                <OrderItemContent>${plans.School.currentPrice} / {plans.School.period}</OrderItemContent>
+                                            </OrderItem>
+                                            <OrderItem>
+                                                <OrderItemTitle>Additional {plans.School.childCount - (plans.School.period === 'month' ? plans.School.quantityPreferentialMonth : plans.School.quantityPreferentialYear)} Teacher {dictionary[language]?.package} </OrderItemTitle>
+                                                <OrderItemContent>${plans.School.period === 'month' ? plans.School.pricePreferentialMonth : plans.School.pricePreferentialYear} / {plans.School.period}</OrderItemContent>
+                                            </OrderItem>
+                                        </>
+                                    }
+                                    {
+                                        plans.Classroom?.childCount > 0 &&
+                                        <OrderItem>
+                                            <OrderItemTitle>{plans.Classroom.childCount} Classroom {dictionary[language]?.package} </OrderItemTitle>
+                                            <OrderItemContent>${plans.Classroom.currentPrice} / {plans.Classroom.period}</OrderItemContent>
+                                        </OrderItem>
+                                    }
+                                    <OrderItem>
+                                        <OrderItemTitleContainer>
+                                            <OrderItemTitle>{dictionary[language]?.total}</OrderItemTitle>
+                                        </OrderItemTitleContainer>
+                                        <OrderItemContent>
+                                            <div style={{ display: 'flex' }}>${(subtotal * offRate / 100).toFixed(2)}</div>
+                                            <div style={{ fontWeight: 400, lineHeight: '12px', fontSize: '10px' }}>{dictionary[language]?.firstRenewal} : {moment(trialExpiraton).format('YYYY-MM-DD')}</div>
+                                        </OrderItemContent>
+                                    </OrderItem>
+                                </>
+                            }
+                            {isSpecialCode &&
+                                <>
+                                    {
+                                        plans.Gold.childCount > 0 &&
+                                        <OrderItem>
+                                            <OrderItemTitle>{plans.Gold.childCount} Gold {dictionary[language]?.package} </OrderItemTitle>
+                                        </OrderItem>
+                                    }
+                                    {
+                                        plans.Combo.childCount > 0 &&
+                                        <OrderItem>
+                                            <OrderItemTitle>{plans.Combo.childCount} Combo {dictionary[language]?.package} </OrderItemTitle>
+                                        </OrderItem>
+                                    }
+                                    {
+                                        plans.Sole.childCount > 0 &&
+                                        <OrderItem>
+                                            <OrderItemTitle>{plans.Sole.childCount} Solo {dictionary[language]?.package} </OrderItemTitle>
+                                        </OrderItem>
+                                    }
+                                </>
+                            }
+                            <OrderTip>
+                                {dictionary[language]?.yourPersonalDataWillOnlyBeUsedToProcessYourOrderAndSupportYourExperience}
+                            </OrderTip>
+                            <OrderTip style={{ display: 'flex' }}>
+                                <input type="checkbox" id="scales" name="scales" onClick={(e: any) => setAgreeLicense(e.target.checked)} />
+                                <div style={{ paddingLeft: '20px' }}>{dictionary[language]?.iHaveReadAndAgreeToTheWebsiteTermsAndConditions}</div>
+                            </OrderTip>
+                            <Button
+                                bgColor={BasicColor.green}
+                                onClick={handleOrder}
+                                value={dictionary[language]?.planceAnOrder}
+                                weight={700}
+                                disabled={!agreeLicense}
+                                loading={loading}
+                            />
+                        </Box>
+                    </Paper>
+                </Grid>
+            </Grid>
+
+
+        </Container >
     );
 };

@@ -1,4 +1,4 @@
-import styled         from 'styled-components';
+import styled from 'styled-components';
 import { ScreenSize } from 'constants/screenSize';
 import { makeStyles } from '@mui/styles'
 import { BasicColor } from 'views/Color';
@@ -15,57 +15,18 @@ export const Container = styled.div`
     }
 `;
 
-export const PaymentContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    max-width: 720px;
-    // width: 37.5vw;
-    background-color: ${BasicColor.veryLightCyanBlue};
-    border-color: ${BasicColor.paleRed};
-    border-width: 1px;
-    border-style: solid;
-    padding-left: 90px;
-    padding-right: 90px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    // @media screen and (max-width: ${ScreenSize.tablet}) {
-    //     max-width: 720px;
-    // }
-    @media screen and (max-width: 1100px) {
-        max-width: 540px;
-    }
-    @media screen and (max-width: ${ScreenSize.phone}) {
-        width: 95vw;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-`
+// export const PaymentContainer = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     background-color: ${BasicColor.veryLightCyanBlue};
+//     border-color: ${BasicColor.paleRed};
+//     border-width: 1px;
+//     border-style: solid;
+// `
 
 export const Title = styled.div`
     font-size: 32px;
     font-weight: 700;
-`
-
-export const OrderContainer = styled.div`
-    max-width: 510px;
-    display: flex;
-    flex-direction: column;
-    // width: 26.5vw;
-    min-width: 400px;
-    border-width: 1px;
-    border-color: ${BasicColor.blue};
-    border-style: solid;
-    @media screen and (max-width: ${ScreenSize.tablet}) {
-        max-width: 720px;
-        // width: unset;
-    }
-    @media screen and (max-width: 1100px) {
-        max-width: 720px;
-        // display:none
-    }
-    @media screen and (max-width: ${ScreenSize.phone}) {
-        min-width: unset;
-    }
 `
 export const OrderTitleContainer = styled.div`
     background-color: white;
@@ -74,6 +35,11 @@ export const OrderTitleContainer = styled.div`
     justify-content: center;
     align-items: center;
     height: 460px;
+
+    @media screen and (max-width: ${ScreenSize.phone}) {
+        height: auto;
+        padding: 15px;
+    }
 `
 
 export const OrderTitleLog = styled.img`
@@ -86,14 +52,6 @@ export const OrderTitle = styled.div`
     line-height: 40px;
 `
 
-export const OrderBody = styled.div`
-    background-color: ${BasicColor.blue};
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-`
 export const OrderItem = styled.div`
     padding: 23px;
     display: flex;
@@ -206,10 +164,10 @@ export const FlexRow = styled.div`
 
 export const useStyles = makeStyles({
     radio: {
-        '& .MuiSvgIcon-root':{
+        '& .MuiSvgIcon-root': {
             height: '30px',
             width: '30px',
-          }
+        }
     },
     divider: {
         marginTop: '30px !important',
@@ -226,13 +184,13 @@ export const useStyles = makeStyles({
         }
     },
     select: {
-        '&.MuiOutlinedInput-root' : {
-          borderRadius: '25px',
-          backgroundColor: BasicColor.white,
+        '&.MuiOutlinedInput-root': {
+            borderRadius: '25px',
+            backgroundColor: BasicColor.white,
         },
-        '& fieldset' : {
-          borderColor: BasicColor.brightBlue,
-          borderWidth: '2px'
+        '& fieldset': {
+            borderColor: BasicColor.brightBlue,
+            borderWidth: '2px'
         }
     },
-  });
+});
