@@ -275,7 +275,7 @@ const AddSchool: FC = () => {
               <TextField
                 label={'Coupon Code'}
                 onChange={e => {
-                  setCouponCode(e.target.value);
+                  setCouponCode((e.target.value).toUpperCase());
                 }}
                 value={couponCode}
                 type="special code"

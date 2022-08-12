@@ -2,24 +2,13 @@ import { FC, useEffect, } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import { PaymentInfo } from 'views/organisms/Setting/Payment';
-import { OrdersDetails } from 'views/organisms/Setting/OrderDetails';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import commonDictionary from 'constants/commonDictionary';
-import { useQuery } from '@tanstack/react-query';
-import { doFetchTeacherOrders } from 'app/actions';
 import { UserProfile } from 'views/organisms/Setting/UserProfile';
-import { LoadingSpinner } from 'views/atoms/Spinner';
-import { ErrorMessage } from 'views/atoms/ErrorMessage';
 
 const SchoolSettings: FC = () => {
-  const { language, token } = useSelector((state: any) => state.user)
-  const { id: subscriberId, paymentMethod } = useSelector((state: any) => state.subscriber)
-
-  // const { data: orders, isLoading, error } = useQuery(
-  //   ['teacher-orders', teacherId],
-  //   () => doFetchTeacherOrders(teacherId, token),
-  //   { refetchIntervalInBackground: false }
-  // )
+  const { language } = useSelector((state: any) => state.user)
+  const { paymentMethod } = useSelector((state: any) => state.subscriber)
 
   useEffect(() => {
 
@@ -43,14 +32,6 @@ const SchoolSettings: FC = () => {
             }
           </Grid>
         </Grid>
-        {/* <Grid item md={6} sm={12}>
-          {
-            isLoading ? <LoadingSpinner /> :
-              error ? <ErrorMessage error={error} /> :
-                orders &&
-                <OrdersDetails orders={orders} />
-          }
-        </Grid> */}
       </Grid>
     </TeacherPgContainer>
   );

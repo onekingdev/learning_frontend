@@ -289,7 +289,7 @@ const TeacherSignup: FC = () => {
               <TextField
                 label={dictionary[language]?.couponCode}
                 onChange={e => {
-                  setCouponCode(e.target.value);
+                  setCouponCode((e.target.value).toUpperCase());
                 }}
                 value={couponCode}
                 type="special code"
