@@ -27,8 +27,6 @@ export const CardDialog: FC<LSDialogProps> = ({
 }) => {
 
   const onCrossBtnClick = () => {
-    // Do something here...
-
     // Close dialog
     open()
   }
@@ -39,7 +37,7 @@ export const CardDialog: FC<LSDialogProps> = ({
       onClose={open}
       scroll='body'
       fullWidth={fullWidth}
-      maxWidth='md'
+
       sx={{
         '& .MuiPaper-root': {
           borderRadius: 5,

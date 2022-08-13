@@ -17,6 +17,7 @@ import { doAddClassroomToTeacher } from 'app/actions';
 // import { TEACHER_ADD_CLASSROOM } from 'app/types';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { queryClient } from 'index'
+import { USER_TYPE } from 'constants/common';
 
 const AddClassroomForm = (props: any) => {
     const { token, language, profile } = useSelector((state: any) => state.user)
@@ -62,7 +63,7 @@ const AddClassroomForm = (props: any) => {
 
         setLoading(true)
 
-        const res: any = await doAddClassroomToTeacher(audience, className, token, profile.role === 'SUBSCRIBER' ? teacherId : undefined)
+        const res: any = await doAddClassroomToTeacher(audience, className, token, (profile.role === USER_TYPE.subscriber || profile.role === USER_TYPE.adminTeacher) ? teacherId : undefined)
         if (res.status) {
             await queryClient.invalidateQueries(['teacher-classrooms', teacherId])
             props.close()
