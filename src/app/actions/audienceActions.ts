@@ -51,6 +51,7 @@ export const doFetchSubjectsAndGradeByAudienceId = async (audienceId: number) =>
         id
         image
         name
+        isActive
       }
     }
   }`);

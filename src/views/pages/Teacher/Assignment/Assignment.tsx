@@ -2,7 +2,6 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import { dictionary } from './dictionary';
 import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material';
 import { doFetchSubjectsAndGradeByAudienceId, doFetchTopicsByGradeAndSubject } from 'app/actions/audienceActions';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -17,6 +16,7 @@ import { StudentsCheckbox } from 'views/organisms/Classroom/StudentsCheckbox';
 import { doAssignTasksToStudents, doFetchClassroomStudents } from 'app/actions';
 import { useSnackbar } from 'notistack';
 import LoadingButton from '@mui/lab/LoadingButton';
+import commonDictionary from 'constants/commonDictionary';
 
 const Assignment: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -27,13 +27,14 @@ const Assignment: FC = () => {
   const [selected, setSelected] = useState<Array<any>>([])
   const [activeSubjectId, setActiveSubjectId] = useState('');
   const [activeGradeId, setActiveGradeId] = useState('')
-  // const [assignmentName, setAssignmentName] = useState('')
+
   const [numberofQuestions, setNumberofQuestions] = useState(0)
   const [startDate, setStartDate] = useState<Date>(new Date())
-  // tomorrow.setDate(today.getDate() + 1)
+
   const tomorrow = new Date()
   tomorrow.setDate(startDate.getDate() + 1)
   const [endDate, setEndDate] = useState<Date>(tomorrow)
+
   const [loading, setLoading] = useState(false)
 
   const { data: audience, isLoading } = useQuery(['subjects-grades-list-by-audience', 2], () => doFetchSubjectsAndGradeByAudienceId(2))
@@ -89,10 +90,6 @@ const Assignment: FC = () => {
     }
     setLoading(true)
 
-    // selected,
-    // startDate.toISOString(),
-    // endDate.toISOString(),
-    // assignmentTopicId,
     assignTask.mutate()
   }
 
@@ -112,7 +109,7 @@ const Assignment: FC = () => {
 
 
   return (
-    <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.title} current='assignments'>
+    <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.assignment} current='assignments'>
       <Container maxWidth='lg' >
         {audience &&
           <SlideShowSubjects
@@ -244,7 +241,7 @@ const Assignment: FC = () => {
                     onClick={handleAssign}
                     loading={loading}
                   >
-                    {dictionary[language]?.assign}
+                    {commonDictionary[language]?.assign}
                   </LoadingButton>
                 </Paper>
               </Grid>

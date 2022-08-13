@@ -1,20 +1,20 @@
 import { FC, useEffect, useState } from 'react';
-import Sidebar from 'views/organisms/Menu/TeacherSidebar';
+// import Sidebar from 'views/organisms/Menu/TeacherSidebar';
 import logoTitle from 'views/assets/logo-learn.svg'
 import {
   AppBar,
   Box,
   Typography,
-  useMediaQuery
 } from '@mui/material';
-import { ScreenSize } from 'constants/screenSize';
 import { BasicColor } from 'views/Color';
 import { useSelector } from 'react-redux';
 import { AccountMenuTeacher } from './TeacherProfileMenu';
+import { USER_AVATAR_SIZE } from 'constants/common';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
 
 
-export const TopMenu: FC = () => {
-  const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
+export const TeacherTopMenu: FC = () => {
+  const isMobile = useSocratesMediaQuery('xs')
   const { firstName, lastName, profile } = useSelector((state: any) => state.user)
   const { school } = useSelector((state: any) => state)
 
@@ -31,7 +31,8 @@ export const TopMenu: FC = () => {
   }, [])
 
   return (
-    <AppBar
+    <div>
+        <AppBar
       position='fixed'
       sx={{
         top: isMobile ? 'unset' : 0,
@@ -62,5 +63,11 @@ export const TopMenu: FC = () => {
         />
       </Box>
     </AppBar >
+    <div style={{
+      height: USER_AVATAR_SIZE + 10,
+      display: isMobile ? 'none' : 'flex',
+    }} />
+  </div>
+
   );
 };

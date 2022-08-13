@@ -3,7 +3,6 @@ import {
 } from 'react';
 import { useSelector } from 'react-redux';
 import commonDictionary from 'constants/commonDictionary'
-import { SchoolPageContainer } from 'views/molecules/PgContainers/SchoolPgContainer';
 
 import { Grid } from '@mui/material';
 import SchoolItem from 'views/molecules/SchoolElements/SchoolItem';
@@ -13,6 +12,7 @@ import { LoadingSpinner } from 'views/atoms/Spinner';
 import { ErrorMessage } from 'views/atoms/ErrorMessage';
 import AddSchoolItem from 'views/molecules/SchoolElements/AddSchoolItem';
 import { useHistory } from 'react-router-dom';
+import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 
 const Schools: FC = () => {
 
@@ -35,7 +35,7 @@ const Schools: FC = () => {
 
 
   return (
-    <SchoolPageContainer onlyLogoImgNav={false} title={commonDictionary[language]?.schools_homepage}>
+    <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.schools_homepage}>
       {
         isLoading ? <LoadingSpinner /> :
           error ? <ErrorMessage error={error} /> :
@@ -55,7 +55,7 @@ const Schools: FC = () => {
               </Grid>
             </Grid>
       }
-    </SchoolPageContainer>
+    </TeacherPgContainer>
   );
 };
 export default Schools

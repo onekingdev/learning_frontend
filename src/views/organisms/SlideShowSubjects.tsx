@@ -66,17 +66,19 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
         }
       >
         {
-          subjects.map((p: any, index: number) => (
-            <SwiperSlide key={p.id}>
-              <SubjectCard
-                key={p.id}
-                imgUrl={`https://api.withsocrates.com/media/${p.image}`}
-                text={p.name}
-                bgColor={SUBJECT_COLORS[index % 7]}
-                isChecked={checkedIndex === index}
-              />
-            </SwiperSlide>
-          ))
+          subjects
+            .filter(item => item.isActive)
+            .map((p: any, index: number) => (
+              <SwiperSlide key={p.id}>
+                <SubjectCard
+                  key={p.id}
+                  imgUrl={`https://api.withsocrates.com/media/${p.image}`}
+                  text={p.name}
+                  bgColor={SUBJECT_COLORS[index % 7]}
+                  isChecked={checkedIndex === index}
+                />
+              </SwiperSlide>
+            ))
         }
       </Swiper >
       <Box display='flex' justifyContent={'space-between'} position='absolute' top='50%' left={-20} right={-20} zIndex={1}>

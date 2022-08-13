@@ -127,7 +127,6 @@ export const PaymentForm = forwardRef<PaymentFormFunc, any>((props, ref) => {
     const handleOrder = async (plansDetail: any = null) => {
 
         if (!formValidation()) {
-            // console.log('form validation failed')
             return { success: false, result: { msg: 'Validation Failed' } };
         }
         if (!stripe) return { success: false, result: "Can't get stripe" };

@@ -38,7 +38,6 @@ import AddStudent from 'views/pages/Teacher/AddStudents/AddStudents';
 import Assignment from 'views/pages/Teacher/Assignment/Assignment';
 import Results from 'views/pages/Teacher/Results/Results';
 import { AIQuestion } from 'views/pages/Student/Question/AIQuestions';
-import ControlAOK from 'views/pages/Teacher/ControlAOK/ControlAOK';
 import TeacherSettings from 'views/pages/Teacher/Settings/Settings'
 import Certificates from 'views/pages/Teacher/Certificates/Certificates';
 import { GameIframe } from 'views/pages/Student/Games/GameIframe';
@@ -199,9 +198,6 @@ export function Routes() {
         <PrivateRoute loading={false} requireAuth={false} path="/admin/schoolTeachers" component={SchoolTeachers} />
         <PrivateRoute loading={false} requireAuth={true} path="/subscriber/settings" component={SchoolSettings} />
         <PrivateRoute loading={false} requireAuth={true} path="/subscriber/addSchool" component={AddSchool} />
-        <Route path="/teacher/control-aok">
-          <ControlAOK />
-        </Route>
         {/* {process.env.NODE_ENV === 'development' ? ( */}
         {/* ) : null} */}
         <Route path="*" component={Error404} />

@@ -1,5 +1,4 @@
 import { FC, ReactChildren, ReactChild } from 'react';
-import Menu from 'views/pages/Teacher/Menus/TeacherMenu';
 import logo from 'views/assets/socrates-logo.svg';
 import { TeacherPgWrapper } from 'views/atoms/TeacherPgWrapper';
 import {
@@ -12,6 +11,7 @@ import { TeacherPageTitle } from '../PageTitle';
 import { USER_AVATAR_SIZE } from 'constants/common';
 import { ClassroomMenu } from 'views/organisms/Menu/ClassroomMenu';
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+import { TeacherTopMenu } from 'views/organisms/Menu/TeacherTopMenu';
 
 type ParentPgContainerProps = {
   onlyLogoImgNav: boolean;
@@ -39,7 +39,7 @@ export const TeacherPgContainer: FC<ParentPgContainerProps> = ({ onlyLogoImgNav,
               }} />
             </Box>
             :
-            <Menu />}
+            <TeacherTopMenu />}
           {title && <TeacherPageTitle title={title} />}
           {current && <ClassroomMenu current={current} />}
           <Box mt={5} mb={5}>
