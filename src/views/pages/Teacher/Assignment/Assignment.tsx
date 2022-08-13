@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material';
+import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Tab } from '@mui/material';
 import { doFetchSubjectsAndGradeByAudienceId, doFetchTopicsByGradeAndSubject } from 'app/actions/audienceActions';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
@@ -12,11 +12,16 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TeacherTopicTable from 'views/molecules/Table/TeacherTopicTable';
 import { BasicColor } from 'views/Color';
-import { StudentsCheckbox } from 'views/organisms/Classroom/StudentsCheckbox';
-import { doAssignTasksToStudents, doFetchClassroomStudents } from 'app/actions';
+import { doAssignTasksToStudents, doFetchClassroomGroups, doFetchClassroomStudents } from 'app/actions';
 import { useSnackbar } from 'notistack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import commonDictionary from 'constants/commonDictionary';
+
+import { StudentsCheckbox } from 'views/organisms/Classroom/StudentsCheckbox';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import { GroupsCheckbox } from 'views/organisms/Classroom/GroupsCheckbox';
 
 const Assignment: FC = () => {
   const loadingContext = useContext(LoadingContext);
@@ -24,6 +29,8 @@ const Assignment: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { assignmentTopicId, currentClassId } = useSelector((state: any) => state.teacher);
+
+  // Selected students
   const [selected, setSelected] = useState<Array<any>>([])
   const [activeSubjectId, setActiveSubjectId] = useState('');
   const [activeGradeId, setActiveGradeId] = useState('')
@@ -37,13 +44,29 @@ const Assignment: FC = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const { data: audience, isLoading } = useQuery(['subjects-grades-list-by-audience', 2], () => doFetchSubjectsAndGradeByAudienceId(2))
+  // Selected tab value
+  const [value, setValue] = useState('1');
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
+
+
+  // Fetch classroom students
   const { data: students } = useQuery(
-    ['fetch-classroom-students', currentClassId],
+    ['classroom-students', currentClassId],
     () => doFetchClassroomStudents(currentClassId, token),
     { refetchIntervalInBackground: false, initialData: [] }
   )
 
+  // Fetch Classroom groups
+  const { data: groups } = useQuery(
+    ['classroom-groups', currentClassId],
+    () => doFetchClassroomGroups(currentClassId, token),
+    { refetchIntervalInBackground: false }
+  )
+
+  // Fetch audiences
+  const { data: audience, isLoading } = useQuery(['subjects-grades-list-by-audience', 2], () => doFetchSubjectsAndGradeByAudienceId(2))
   // Implement dependent query
   const { data: topics } = useQuery(
     ['topics-by-grade', activeSubjectId, activeGradeId],
@@ -164,28 +187,37 @@ const Assignment: FC = () => {
             padding={2}
             sx={{ background: BasicColor.gray30 }}
           >
-            <Grid container columnSpacing={3} rowSpacing={6} py={2}>
+            <Grid container columnSpacing={3} rowSpacing={6} py={2} alignItems='start'>
               <Grid item xs={12} md={4}>
 
                 <Paper elevation={5} sx={{
-                  height: '100%',
+                  maxHeight: 500,
+                  overflow: 'auto',
                   width: '100%',
                   padding: 2,
-                  margin: 2
                 }}>
-                  {/* <StudentItemContainer>
-                    <input type='checkbox' name='' id={`student-all`} />
-                    <label htmlFor={`student-all`}>All Student</label>
-                  </StudentItemContainer> */}
-                  <Typography>Students</Typography>
-                  <StudentsCheckbox students={students} onChange={setSelected} />
+                  <TabContext value={value}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                      <TabList onChange={handleTabChange} aria-label="lab API tabs example">
+                        <Tab label="Students" value="1" />
+                        <Tab label="Groups" value="2" />
+                      </TabList>
+                    </Box>
+                    <Box>
+                      <TabPanel value="1">
+                        <StudentsCheckbox students={students} onChange={setSelected} />
+                      </TabPanel>
+                      <TabPanel value="2">
+                        <GroupsCheckbox groups={groups} onChange={setSelected} />
+                      </TabPanel>
+                    </Box>
+                  </TabContext>
                 </Paper>
               </Grid>
               <Grid item xs={12} md={8}>
                 <Paper elevation={5} sx={{
                   height: '100%',
                   width: '100%',
-                  margin: 2,
                   padding: 2,
                   display: 'flex',
                   flexDirection: 'column',

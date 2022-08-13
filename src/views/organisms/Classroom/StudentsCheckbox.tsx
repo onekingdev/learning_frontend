@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { FormControlLabel, Paper, Checkbox } from '@mui/material';
+import { FormControlLabel,  Checkbox,  FormGroup } from '@mui/material';
 
 interface IStudents {
     students: Array<any>
@@ -28,40 +28,20 @@ export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
     }, [selected])
 
     return (
-        <Paper sx={{
-            // width: 300,
-            background: '#22BAAF33',
-            // padding: '30px 50px',
-            display: 'flex',
-            alignItems: 'start',
-            flexDirection: 'column'
-        }}>
-            {/* <FormControlLabel
-                label={'All'}
-                value={-1}
-                sx={{
-                    marginLeft: 5
-                }}
-                control={
-                    <Checkbox checked={all} onChange={handleSelectAll} />
-                }
-            /> */}
+        <FormGroup>
             {
                 students.map(student => (
                     <FormControlLabel
                         key={student.id}
                         label={student.fullName || ''}
                         value={student.id}
-                        sx={{
-                            marginLeft: 5
-                        }}
                         control={
                             <Checkbox checked={selected.includes(+student.id)} onChange={() => handleStudentSelect(+student.id)} />
                         }
                     />
                 ))
             }
-        </Paper>
+        </FormGroup>
     )
 
 }

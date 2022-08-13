@@ -35,7 +35,7 @@ const AddExistStudent = (props: any) => {
             if (data.message) {
                 enqueueSnackbar(data.message, { variant: 'error' })
             } else {
-                queryClient.setQueryData(['fetch-classroom-students', currentClassId], data)
+                queryClient.setQueryData(['classroom-students', currentClassId], data)
                 enqueueSnackbar('Add student Succeed', { variant: 'success' })
             }
         },

@@ -25,7 +25,7 @@ const Students: FC = () => {
   const [studentForEdit, setStudentForEdit] = useState<any>();
 
   const { data: students, isLoading, error } = useQuery(
-    ['fetch-classroom-students', currentClassId],
+    ['classroom-students', currentClassId],
     () => doFetchClassroomStudents(currentClassId, token),
     { refetchIntervalInBackground: false, initialData: [] }
   )

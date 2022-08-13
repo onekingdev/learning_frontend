@@ -28,7 +28,7 @@ const EditGroupFrom: FC<EditGroupFormProps> = ({
     const [groupName, setGroupName] = useState('')
 
     const { data: students } = useQuery(
-        ['fetch-classroom-students', currentClassId],
+        ['classroom-students', currentClassId],
         () => doFetchClassroomStudents(currentClassId, token),
         { refetchIntervalInBackground: false, initialData: [] }
     )

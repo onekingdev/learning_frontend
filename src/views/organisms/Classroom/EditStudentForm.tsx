@@ -85,7 +85,7 @@ const EditStudent: FC<EditStudentProps> = ({
                 enqueueSnackbar(data.message, { variant: 'error' })
             }
             else {
-                await queryClient.refetchQueries(['fetch-classroom-students', _classId])
+                await queryClient.refetchQueries(['classroom-students', _classId])
                 enqueueSnackbar('Update student Succeed', { variant: 'success' })
             }
         },
