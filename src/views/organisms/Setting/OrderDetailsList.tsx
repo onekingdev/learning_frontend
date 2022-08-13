@@ -18,8 +18,9 @@ import CancelOrderDetailForm from './CancelOrderDetailForm';
 
 interface OrderListProps {
   orderDetails: Array<any>
+  cardNumber: string
 }
-export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
+export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails, cardNumber }) => {
   const isMobile = useSocratesMediaQuery('xs')
   const language = useSelector((state: any) => state.user.language);
 
@@ -107,6 +108,7 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails }) => {
               <PlanUpgradeForm
                 orderDetail={selected}
                 close={() => setIsUpdateOpen(false)}
+                cardNumber={cardNumber}
               />
             }
           />

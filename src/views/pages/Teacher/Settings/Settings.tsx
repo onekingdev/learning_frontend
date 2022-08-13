@@ -12,8 +12,8 @@ import { LoadingSpinner } from 'views/atoms/Spinner';
 import { ErrorMessage } from 'views/atoms/ErrorMessage';
 
 const TeacherSettings: FC = () => {
-  const { language, token } = useSelector((state: any) => state.user)
-  const { id: teacherId, paymentMethod } = useSelector((state: any) => state.teacher)
+  const { language, token, paymentMethod } = useSelector((state: any) => state.user)
+  const { id: teacherId } = useSelector((state: any) => state.teacher)
 
   const { data: orders, isLoading, error } = useQuery(
     ['teacher-orders', teacherId],
@@ -48,7 +48,9 @@ const TeacherSettings: FC = () => {
             isLoading ? <LoadingSpinner /> :
               error ? <ErrorMessage error={error} /> :
                 orders &&
-                <OrdersDetails orders={orders} />
+                <OrdersDetails orders={orders}
+                  paymentMethod={paymentMethod}
+                />
           }
         </Grid>
       </Grid>

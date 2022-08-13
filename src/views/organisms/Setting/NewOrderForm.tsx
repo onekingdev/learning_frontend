@@ -32,21 +32,22 @@ interface IAddOrder {
 
 interface ITeacherAddOrderForm {
   close: () => void
+  cardNumber: string,
 }
-export const NewOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
+export const NewOrderForm: FC<ITeacherAddOrderForm> = ({ close, cardNumber }) => {
 
   const history = useHistory();
   const [yearly, setYearly] = useState(true)
   const { token, language, profile } = useSelector((state: any) => state.user);
   const { id: teacherId } = useSelector((state: any) => state.teacher);
   const { id: schoolId } = useSelector((state: any) => state.school);
-  const paymentCardNum = useSelector((state: any) => state.guardian.paymentMethod?.cardNumber) || '';
   const { enqueueSnackbar } = useSnackbar();
 
   const [selected, setSelected] = useState<any>(null)
   const [childrenCount, setChildrenCount] = useState(0)
   const [loading, setLoading] = useState(false)
-  const { data: allPlans, isLoading, error } = useQuery(['plan-types', token], () => doFetchPlanTypes(token))
+  const { data: allPlans, isLoading, error } = useQuery(['plan-types', token], () => doFetchPlanTypes(token),
+    { refetchIntervalInBackground: false, initialData: [] })
   const [plans, setPlans] = useState<any>([])
 
   const createPlan = useMutation(({ token, orderDetailInput, schoolId }: IAddOrder) => doAddOrder(
@@ -125,7 +126,7 @@ export const NewOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
           break;
       }
     }
-  }, allPlans)
+  }, [allPlans])
   return (
     <Box>
       <Box display='flex' justifyContent={'space-between'} alignItems='center'>
@@ -162,15 +163,18 @@ export const NewOrderForm: FC<ITeacherAddOrderForm> = ({ close }) => {
         <Typography variant='h6' color='orange' textAlign='center' mt={2}>You will be charged ${((yearly ? selected.priceYear : selected.priceMonth) * childrenCount).toFixed(2)}</Typography>
       }
       <Typography mt={5}>{dictionary[language]?.paymentCardMessage}</Typography>
-      <TextField
-        fullWidth
-        disabled
-        // border='solid 2px darkblue'
-        // border_radius={10}
-        // pl={10}
-        value={paymentCardNum}
-      // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
-      />
+      {
+        cardNumber &&
+        <TextField
+          fullWidth
+          disabled
+          // border='solid 2px darkblue'
+          // border_radius={10}
+          // pl={10}
+          value={cardNumber}
+        // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
+        />
+      }
       <Box display='flex' justifyContent={'center'} padding={2}>
         <LoadingButton
           disabled={!selected}

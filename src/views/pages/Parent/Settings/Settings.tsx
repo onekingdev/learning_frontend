@@ -20,8 +20,8 @@ import { settingPage } from 'views/Theme';
 export const Settings: FC = () => {
 
   const loadingContext = useContext(LoadingContext);
-  const { paymentMethod, id: guardianId } = useSelector((state: any) => state.guardian)
-  const { language, token } = useSelector((state: any) => state.user)
+  const { id: guardianId } = useSelector((state: any) => state.guardian)
+  const { language, token, paymentMethod } = useSelector((state: any) => state.user)
 
   const { data: orders, isLoading, error } = useQuery(
     ['guardian-orders', guardianId],
@@ -61,8 +61,8 @@ export const Settings: FC = () => {
               {
                 isLoading ? <LoadingSpinner /> :
                   error ? <ErrorMessage error={error} /> :
-                    orders &&
-                    <OrdersDetails orders={orders} />
+                    orders && paymentMethod &&
+                    <OrdersDetails orders={orders} paymentMethod={paymentMethod} />
               }
             </Grid>
           </Grid>

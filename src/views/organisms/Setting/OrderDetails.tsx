@@ -13,9 +13,12 @@ import commonDictionary from 'constants/commonDictionary';
 
 interface TeacherMembershipDetailProps {
   orders: Array<any>
+  paymentMethod: {
+    cardNumber: string
+  }
 }
 
-export const OrdersDetails: FC<TeacherMembershipDetailProps> = ({ orders }) => {
+export const OrdersDetails: FC<TeacherMembershipDetailProps> = ({ orders, paymentMethod }) => {
 
   const isMobile = useSocratesMediaQuery('xs')
   const { isOpen, open } = useDialog()
@@ -53,11 +56,12 @@ export const OrdersDetails: FC<TeacherMembershipDetailProps> = ({ orders }) => {
             dialogContent={
               <NewOrderForm
                 close={openAdd}
+                cardNumber={paymentMethod.cardNumber || ''}
               />
             }
           />
         </Box>
-        <OrderDetailsList orderDetails={orderDetails} />
+        <OrderDetailsList orderDetails={orderDetails} cardNumber={paymentMethod.cardNumber}/>
         <Box >
           <Button onClick={openAdd}>
             {commonDictionary[language]?.add_a_plan}

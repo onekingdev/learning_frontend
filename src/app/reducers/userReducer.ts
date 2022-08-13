@@ -19,7 +19,8 @@ const INITIAL_STATE = {
   token: null,
   rewardfulId: null,
   sound: true,
-  couponCode: {}
+  couponCode: {},
+  paymentMethod: null,
 };
 
 const userReducer = (
@@ -56,6 +57,11 @@ const userReducer = (
       return {
         ...state,
         email: action.payload,
+      };
+    case TYPE.USER_SET_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: action.payload,
       };
     case TYPE.USER_RESET:
       return {

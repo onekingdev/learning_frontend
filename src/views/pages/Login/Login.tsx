@@ -83,6 +83,7 @@ export const LogIn: FC = () => {
       case USER_TYPE.guardian:
         // Set guardian state
         dispatch({ type: TYPES.GUARDIAN_SET_DATA, payload: guardian });
+        dispatch({ type: TYPES.USER_SET_PAYMENT_METHOD, payload: guardian.paymentMethod });
 
         // Direct to payment page, when there are no bought plans
         redirectUrl = guardian.guardianstudentplanSet?.length === 0 ? '/parent/payment' : '/kids/list'
@@ -91,6 +92,7 @@ export const LogIn: FC = () => {
       case USER_TYPE.teacher:
         // Set teacher state
         dispatch({ type: TYPES.TEACHER_SET_DATA, payload: teacher })
+        dispatch({ type: TYPES.USER_SET_PAYMENT_METHOD, payload: teacher.paymentMethod });
 
         if (!teacher.schoolteacher) {// if the teacher is not school teacher
 

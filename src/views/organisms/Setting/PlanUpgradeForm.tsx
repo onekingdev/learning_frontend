@@ -12,29 +12,28 @@ import { queryClient } from 'index';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { USER_TYPE } from 'constants/common';
 
+interface ConfirmUpgrade {
+  orderDetailId: string;
+  token: string;
+}
+
 interface IUpgradeProps {
   orderDetail: any
   close: () => void
+  cardNumber: string
 }
-
 const text = [
   'You are going to upgrade your current subscription to an ',
   'The first payment will be prorated according to your billing cycle.',
   'Your credit card on file will be charged for this upgrade.',
 ]
 
-export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
-  const guardian = useSelector((state: any) => state.guardian);
+export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close, cardNumber }) => {
   const { id: teacherId } = useSelector((state: any) => state.teacher)
   const { id: guardianId } = useSelector((state: any) => state.guardian)
   const { token, profile } = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false)
-
-  interface ConfirmUpgrade {
-    orderDetailId: string;
-    token: string;
-  }
 
   const confirmUpgrade = useMutation(({ orderDetailId, token }: ConfirmUpgrade) => doConfirmUpdateOrderDetail(orderDetailId, token), {
     onSuccess: async data => {
@@ -103,7 +102,7 @@ export const PlanUpgradeForm: FC<IUpgradeProps> = ({ orderDetail, close }) => {
         border='solid 2px darkblue'
         border_radius={10}
         pl={10}
-        value={guardian.paymentMethod?.cardNumber}
+        value={cardNumber || ''}
       // endAdornment={<img src={masterCard} style={{ marginRight: '40px', height: '40px' }} />}
       />
       <LSButtonContainer style={{ marginTop: '32px' }}>
