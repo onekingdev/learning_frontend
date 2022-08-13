@@ -29,7 +29,7 @@ export const StudentsCheckbox: FC<IStudents> = ({ students, onChange }) => {
 
     return (
         <Paper sx={{
-            width: 300,
+            // width: 300,
             background: '#22BAAF33',
             // padding: '30px 50px',
             display: 'flex',

@@ -11,7 +11,6 @@ import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { getMessage } from 'views/utils';
 import TeacherTopicTable from 'views/molecules/Table/TeacherTopicTable';
 import { BasicColor } from 'views/Color';
 import { StudentsCheckbox } from 'views/organisms/Classroom/StudentsCheckbox';
@@ -43,7 +42,9 @@ const Assignment: FC = () => {
     () => doFetchClassroomStudents(currentClassId, token),
     { refetchIntervalInBackground: false, initialData: [] }
   )
-  const { data: topics, isLoading: isTopicLoading, error: topicError } = useQuery(
+
+  // Implement dependent query
+  const { data: topics } = useQuery(
     ['topics-by-grade', activeSubjectId, activeGradeId],
     () => doFetchTopicsByGradeAndSubject(activeSubjectId, activeGradeId),
     { enabled: (activeSubjectId !== '' && activeGradeId !== '') })
@@ -155,24 +156,25 @@ const Assignment: FC = () => {
           }
           {
             // isIdle ? <Typography>Idle</Typography> :
-            isTopicLoading ? <Typography>Loading...</Typography> :
-              topicError ? <Typography color='red'>{getMessage(topicError)}</Typography> :
-                topics &&
-                <Box maxHeight={600} overflow='auto'>
-                  <TeacherTopicTable data={topics} activeSubjectId={activeSubjectId} />
-                </Box>
+            // isTopicLoading ? <Typography>Loading...</Typography> :
+            //   topicError ? <Typography color='red'>{getMessage(topicError)}</Typography> :
+            topics &&
+            <Box maxHeight={600} overflow='auto'>
+              <TeacherTopicTable data={topics} activeSubjectId={activeSubjectId} />
+            </Box>
           }
           <Box
             padding={2}
             sx={{ background: BasicColor.gray30 }}
           >
-            <Grid container columnSpacing={3} rowSpacing={6} padding={2}>
+            <Grid container columnSpacing={3} rowSpacing={6} py={2}>
               <Grid item xs={12} md={4}>
 
                 <Paper elevation={5} sx={{
                   height: '100%',
                   width: '100%',
-                  padding: 2
+                  padding: 2,
+                  margin: 2
                 }}>
                   {/* <StudentItemContainer>
                     <input type='checkbox' name='' id={`student-all`} />
@@ -186,6 +188,7 @@ const Assignment: FC = () => {
                 <Paper elevation={5} sx={{
                   height: '100%',
                   width: '100%',
+                  margin: 2,
                   padding: 2,
                   display: 'flex',
                   flexDirection: 'column',
