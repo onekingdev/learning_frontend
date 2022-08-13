@@ -161,6 +161,13 @@ export const themeTeacher = createTheme({
         }
       }
     },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          // textAlign:'end',
+        },
+      }
+    },
     MuiGrid: {
       styleOverrides: {
         item: {

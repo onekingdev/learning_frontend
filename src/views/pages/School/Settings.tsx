@@ -7,8 +7,7 @@ import commonDictionary from 'constants/commonDictionary';
 import { UserProfile } from 'views/organisms/Setting/UserProfile';
 
 const SchoolSettings: FC = () => {
-  const { language } = useSelector((state: any) => state.user)
-  const { paymentMethod } = useSelector((state: any) => state.subscriber)
+  const { language, paymentMethod } = useSelector((state: any) => state.user)
 
   useEffect(() => {
 

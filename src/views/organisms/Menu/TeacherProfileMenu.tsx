@@ -2,17 +2,21 @@ import { FC, MouseEvent, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
-import SchoolIcon from '@mui/icons-material/School';
-import ApartmentIcon from '@mui/icons-material/Apartment';
 import { USER_TYPE } from 'constants/common';
 import { useHistory } from 'react-router-dom';
+import { Link, ListItemText } from '@mui/material';
+
+import logout_icon from 'views/assets/teacher-profile-menu-icons/logout.svg'
+import help_icon from 'views/assets/teacher-profile-menu-icons/help.svg'
+// import payment_icon from 'views/assets/teacher-profile-menu-icons/payment.svg'
+import settings_icon from 'views/assets/classroom-menu/settings-active.svg'
+import classrooms_icon from 'views/assets/teacher-profile-menu-icons/classrooms.svg'
+import school_icon from 'views/assets/teacher-profile-menu-icons/school.svg'
+import teachers_icon from 'views/assets/teacher-profile-menu-icons/teachers.svg'
+import { MenuItemIcon } from './Elements/MenuItemIcon';
 
 interface AccountMenuTeacherProps {
   firstName: string
@@ -45,17 +49,19 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
       case USER_TYPE.subscriber:
         history.push('/subscriber/settings')
         break;
-      default: break;
+      default:
+        history.push('/subscriber/settings')
+        break;
     }
   }
   return (
     <>
-      <Tooltip title="Account settings">
+      <Tooltip title='Account settings'>
         <IconButton
           onClick={handleClick}
-          size="small"
+          size='small'
           aria-controls={open ? 'account-menu' : undefined}
-          aria-haspopup="true"
+          aria-haspopup='true'
           aria-expanded={open ? 'true' : undefined}
         >
           <Avatar sx={{ bgcolor: '#22BAAF' }}>{firstName?.charAt(0)}{lastName?.charAt(0)}</Avatar>
@@ -64,7 +70,7 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
       </Tooltip>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
+        id='account-menu'
         open={open}
         onClose={handleClose}
         onClick={handleClose}
@@ -81,7 +87,7 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
               mr: 1,
             },
             '&:before': {
-              content: '""',
+              content: "''",
               display: 'block',
               position: 'absolute',
               top: 0,
@@ -100,33 +106,38 @@ export const AccountMenuTeacher: FC<AccountMenuTeacherProps> = ({
         {
           role === USER_TYPE.teacher &&
           <MenuItem onClick={() => history.push('/teacher/classrooms')}>
-            <Avatar children={<MeetingRoomIcon />} sx={{ bgcolor: '#22BAAF' }} /> Manage Classrooms
+            <MenuItemIcon image={classrooms_icon} />
+            <ListItemText primary='Classrooms' />
           </MenuItem>
         }
         {
           role === USER_TYPE.subscriber &&
           <MenuItem onClick={() => history.push('/subscriber/schools')}>
-            <Avatar children={<ApartmentIcon />} sx={{ bgcolor: '#22BAAF' }} />Schools
+            <MenuItemIcon image={school_icon} />
+            <ListItemText primary='Schools' />
           </MenuItem>}
         {
-          role === USER_TYPE.subscriber && schoolName &&
+          (role === USER_TYPE.subscriber || role === USER_TYPE.adminTeacher) && schoolName &&
           <MenuItem onClick={() => history.push('/admin/schoolTeachers')}>
-            <Avatar children={<SchoolIcon />} sx={{ bgcolor: '#22BAAF' }} />{schoolName} teachers
+            <MenuItemIcon image={teachers_icon} />
+            <ListItemText primary={schoolName + ' Teachers'} />
           </MenuItem>
         }
         <Divider />
 
         <MenuItem onClick={handleSettingClicked}>
-          <ListItemIcon>
-            <Settings />
-          </ListItemIcon>
-          Settings
+          <MenuItemIcon image={settings_icon} />
+          <ListItemText primary='Settings' />
         </MenuItem>
+
+        <MenuItem >
+          <MenuItemIcon image={help_icon} />
+          <Link href='https://www.withsocrates.com/contact/' target='_blank' sx={{ width: '100%', textAlign: 'start', textDecoration: 'none' }} color='inherit'>Help</Link>
+        </MenuItem>
+
         <MenuItem onClick={() => history.push('/')}>
-          <ListItemIcon>
-            <Logout />
-          </ListItemIcon>
-          Logout
+          <MenuItemIcon image={logout_icon} />
+          <ListItemText primary='Logout' />
         </MenuItem>
       </Menu>
     </>

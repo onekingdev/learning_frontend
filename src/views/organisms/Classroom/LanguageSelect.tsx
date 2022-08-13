@@ -1,10 +1,9 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { USER_SET_LANGUAGE } from 'app/types';
 import { LANGUAGES } from 'constants/common';
 
 export const dictionary: any = Object.freeze({

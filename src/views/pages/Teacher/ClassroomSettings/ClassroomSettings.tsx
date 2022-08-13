@@ -4,7 +4,7 @@ import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContai
 import commonDictionary from 'constants/commonDictionary'
 import { Box, Button, Grid, List, ListItem, Paper, Switch, TextField, Typography } from '@mui/material';
 import { BasicColor } from 'views/Color';
-import { ClassroomLanguageSelect } from 'views/molecules/Classroom/LanguageSelect';
+import { ClassroomLanguageSelect } from 'views/organisms/Classroom/LanguageSelect';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';

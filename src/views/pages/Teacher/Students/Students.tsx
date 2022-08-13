@@ -3,11 +3,11 @@ import {
 } from 'react';
 import { useSelector } from 'react-redux';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import StudentsPanel from 'views/molecules/Classroom/StudentsPanel'
-import ChooseNewStudentTypeDlg from 'views/molecules/Classroom/ChooseNewStudentTypeDlg'
-import AddExistStudentDlg from 'views/molecules/Classroom/AddExistStudent'
-import AddNewStudent from 'views/molecules/Classroom/AddNewStudent'
-import EditStudentForm from 'views/molecules/Classroom/EditStudentForm'
+import StudentsPanel from 'views/organisms/Classroom/StudentsPanel'
+import ChooseNewStudentTypeDlg from 'views/organisms/Classroom/ChooseNewStudentTypeDlg'
+import AddExistStudentDlg from 'views/organisms/Classroom/AddExistStudent'
+import AddNewStudent from 'views/organisms/Classroom/AddNewStudent'
+import EditStudentForm from 'views/organisms/Classroom/EditStudentForm'
 import { dictionary } from './dictionary'
 import { useQuery } from '@tanstack/react-query';
 import { doFetchClassroomStudents } from 'app/actions';

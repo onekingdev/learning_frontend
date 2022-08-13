@@ -3,8 +3,8 @@ import {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import ClassroomPanel from 'views/molecules/Classroom/ClassroomPanel'
-import AddClassroomForm from 'views/molecules/Classroom/AddClassroomForm'
+import ClassroomPanel from 'views/organisms/Classroom/ClassroomPanel'
+import AddClassroomForm from 'views/organisms/Classroom/AddClassroomForm'
 import commonDictionary from 'constants/commonDictionary'
 import { useHistory } from 'react-router-dom';
 import { TEACHER_SET_CURRENT_CLASSROOM, TEACHER_SET_CURRENT_CLASSROOM_ID } from 'app/types';

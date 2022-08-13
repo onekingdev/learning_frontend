@@ -46,7 +46,7 @@ export const TopMenu: FC = () => {
         borderTopLeftRadius: isMobile ? 10 : 0,
         borderTopRightRadius: isMobile ? 10 : 0,
       }}>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <img src={logoTitle} />
       <Box display={isMobile ? 'none' : 'flex'} alignItems='center' >
         <Box>

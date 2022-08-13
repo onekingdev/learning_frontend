@@ -2,15 +2,15 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import GroupsPanel from 'views/molecules/Classroom/GroupsPanel'
-import AddGroupForm from 'views/molecules/Classroom/AddGroupForm';
+import GroupsPanel from 'views/organisms/Classroom/GroupsPanel'
+import AddGroupForm from 'views/organisms/Classroom/AddGroupForm';
 import { useQuery } from '@tanstack/react-query';
 import { doFetchClassroomGroups, doFetchClassroomStudents } from 'app/actions';
 import { LoadingSpinner } from 'views/atoms/Spinner';
 import { Typography } from '@mui/material';
 import { getMessage } from 'views/utils';
 import commonDictionary from 'constants/commonDictionary'
-import EditGroupFrom from 'views/molecules/Classroom/EditGroupForm';
+import EditGroupFrom from 'views/organisms/Classroom/EditGroupForm';
 
 const ClassroomGroups: FC = () => {
   const loadingContext = useContext(LoadingContext);

@@ -3,15 +3,10 @@ import { FC, useEffect, useState } from 'react'
 import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import TextField from 'views/molecules/MuiTextField';
-import { useSnackbar } from 'notistack';
 import commonDictionary from 'constants/commonDictionary'
-import { doCreateGroup, doFetchClassroomStudents } from 'app/actions';
+import {  doFetchClassroomStudents } from 'app/actions';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { StudentsCheckbox } from './StudentsCheckbox';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { queryClient } from 'index'
-import { any2String } from 'views/utils';
-// src\index.tsx
+import {  useQuery } from '@tanstack/react-query';
 
 interface EditGroupFormProps {
     id: string | number
@@ -29,10 +24,8 @@ const EditGroupFrom: FC<EditGroupFormProps> = ({
     isOpen
 }) => {
     const { language, token } = useSelector((state: any) => state.user);
-    const { currentClassId, currentClass } = useSelector((state: any) => state.teacher);
-    const [selected, setSelected] = useState<Array<any>>([])
+    const { currentClassId } = useSelector((state: any) => state.teacher);
     const [groupName, setGroupName] = useState('')
-    const { enqueueSnackbar } = useSnackbar();
 
     const { data: students } = useQuery(
         ['fetch-classroom-students', currentClassId],
@@ -40,43 +33,7 @@ const EditGroupFrom: FC<EditGroupFormProps> = ({
         { refetchIntervalInBackground: false, initialData: [] }
     )
 
-    // const createGroup = useMutation(() => doCreateGroup(currentClassId,
-    //     groupName,
-    //     any2String(selected),
-    //     token), {
-    //     onSuccess: async data => {
-    //         if (data.message) {
-    //             enqueueSnackbar(data.message, { variant: 'error' })
-    //         }
-    //         else {
-    //             queryClient.setQueryData(['classroom-groups', currentClassId], (groups: Array<any> | undefined) => [...groups || [], data])
-    //             enqueueSnackbar('Create Group Succeed', { variant: 'success' })
-    //         }
-    //     },
-    //     onError: async (error: any) => {
-    //         enqueueSnackbar(error.message, { variant: 'error' })
-    //     },
-    //     onSettled: async () => {
-    //         setLoading(false)
-    //         close()
-    //     }
-    // })
-
-
-    const [loading, setLoading] = useState(false)
-
-
-
-    const handleSubmit = async () => {
-        if (selected.length < 1 || !groupName) {
-            enqueueSnackbar('Set group settings correctly', { variant: 'error' })
-            return;
-        }
-        setLoading(true)
-
-        // createGroup.mutate()
-
-    }
+    // const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setGroupName(name)
@@ -122,9 +79,9 @@ const EditGroupFrom: FC<EditGroupFormProps> = ({
                         </Box>
                     }
                     <LoadingButton
-                        onClick={handleSubmit}
+                        onClick={close}
                         variant='contained'
-                        loading={loading}
+                        // loading={loading}
                     >{commonDictionary[language]?.edit_group}
                     </LoadingButton>
                 </Box>

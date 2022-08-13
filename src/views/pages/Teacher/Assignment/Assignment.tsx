@@ -14,7 +14,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { getMessage } from 'views/utils';
 import TeacherTopicTable from 'views/molecules/Table/TeacherTopicTable';
 import { BasicColor } from 'views/Color';
-import { StudentsCheckbox } from 'views/molecules/Classroom/StudentsCheckbox';
+import { StudentsCheckbox } from 'views/organisms/Classroom/StudentsCheckbox';
 import { doAssignTasksToStudents, doFetchClassroomStudents } from 'app/actions';
 import { useSnackbar } from 'notistack';
 import LoadingButton from '@mui/lab/LoadingButton';
