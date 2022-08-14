@@ -1,4 +1,4 @@
-export const TopicFields = (studentId: number) => `
+export const TopicFields = (studentId: number | string) => `
     id
     name
     report(student: ${studentId}) {
@@ -9,7 +9,7 @@ export const TopicFields = (studentId: number) => `
     mastery(student: ${studentId})
 `;
 
-export const TopicsRecursive = (studentId: number) => `
+export const TopicsRecursive = (studentId: number | string) => `
     subTopics {
         ${TopicFields(studentId)}
         subTopics {
@@ -21,7 +21,7 @@ export const TopicsRecursive = (studentId: number) => `
     }
 `;
 
-export const TopicReport = (studentId: number, aokId: number) => `
+export const TopicReport = (studentId: number | string, aokId: number) => `
     rootTopicsByAok(aokId: ${aokId}) {
         ${TopicFields(studentId)}
         ${TopicsRecursive(studentId)}

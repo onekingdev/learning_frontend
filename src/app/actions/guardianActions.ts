@@ -172,7 +172,7 @@ export const doFetchGuardianStudents = async (guardianId: number, token: string)
 }
 
 
-export const doFetchStudentById = async (studentId: number, token: string) => {
+export const doFetchStudentById = async (studentId: number | string, token: string) => {
     const res: any = await fetchQuery(
         FETCH_STUDENT_BY_ID(studentId),
         token

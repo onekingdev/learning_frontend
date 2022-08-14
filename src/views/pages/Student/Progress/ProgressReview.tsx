@@ -1,6 +1,5 @@
 import { useEffect, useContext, useState } from 'react';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
-import { dictionary } from './dictionary'
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { PageTitle } from 'views/molecules/PageTitle';
@@ -22,10 +21,11 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { PeriodSelect } from 'views/molecules/ProgressReview/PeriodSelect';
 import { Wrapper } from './Style';
 import { LoadingSpinner } from 'views/atoms/Spinner';
+import commonDictionary from 'constants/commonDictionary';
 
 
 export const ProgressReview = () => {
-    const { language, token } = useSelector((state: any) => state.user.language);
+    const { language, token } = useSelector((state: any) => state.user);
     const studentId = useSelector((state: any) => state.student.id);
     const [args, setArgs] = useState<any>({ period: 1, status: 'ALL' })
     const loadingContext = useContext(LoadingContext);
@@ -38,43 +38,44 @@ export const ProgressReview = () => {
     return (
         <Wrapper>
             <StudentMenu>
-                <PageTitle title={dictionary[language]?.title} />
-                <Container>
-                    <Box
-                        display='flex'
-                        justifyContent={'space-between'}
-                    >
-                        <Button
-                            variant='contained'
-                            color='secondary'
-                            sx={{ borderRadius: 5 }}
-                            startIcon={<ArrowLeftIcon />}
-                            onClick={() => {
-                                history.goBack()
-                            }}
-                        >
-                            return
-                        </Button>
-                        <PeriodSelect update={setArgs} />
-                    </Box>
-                    {isLoading ? <LoadingSpinner /> :
-                        error ? <Typography color='red'>{getMessage(error)}</Typography> :
-                            <Box
-                                id='blocks-container'
-                                sx={{
-                                    backgroundColor: BasicColor.greenSoft + 'A0',
-                                    minHeight: '90vh',
-                                    padding: 5,
-                                    marginBottom: 5,
-                                }}
-                            >
-                                {
-                                    blocks && <ReviewBlocks blocks={blocks} />
-                                }
-                            </Box>
-                    }
-                </Container>
+                <PageTitle title={commonDictionary[language]?.review} />
             </StudentMenu>
+            <Container sx={{ pb: 5 }}>
+                <Box
+                    id='button-container'
+                    display='flex'
+                    justifyContent={'space-between'}
+                >
+                    <Button
+                        variant='contained'
+                        color='secondary'
+                        sx={{ borderRadius: 5 }}
+                        startIcon={<ArrowLeftIcon />}
+                        onClick={() => {
+                            history.goBack()
+                        }}
+                    >
+                        return
+                    </Button>
+                    <PeriodSelect update={setArgs} />
+                </Box>
+                {isLoading ? <LoadingSpinner /> :
+                    error ? <Typography color='red'>{getMessage(error)}</Typography> :
+                        <Box
+                            id='blocks-container'
+                            sx={{
+                                backgroundColor: BasicColor.greenSoft + 'A0', //Transparent background
+                                // minHeight: '90vh',
+                                padding: 5,
+                            }}
+                            mb={5}
+                        >
+                            {
+                                blocks && <ReviewBlocks blocks={blocks} />
+                            }
+                        </Box>
+                }
+            </Container>
         </Wrapper>
     )
 }

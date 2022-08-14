@@ -163,6 +163,7 @@ const MarkTable = ({
     data: any;
     areasOfKnowledge: any[];
 }) => {
+    console.log({data})
     return (<MarkTableDiv>
         <PcCom style={{
             backgroundColor: colors[0],

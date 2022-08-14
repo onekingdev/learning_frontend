@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     background-image  : url(${background});
     background-repeat : no-repeat;
     background-size   : cover;
-    height            : 100vh;
+    min-height            : 100vh;
 `;
 export const Container = styled.div`
     display        : flex;

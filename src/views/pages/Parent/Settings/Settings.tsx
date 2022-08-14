@@ -36,7 +36,6 @@ export const Settings: FC = () => {
   return (
     <ParentPgContainer onlyLogoImgNav={false} title={dictionary[language]?.settings}>
       <ThemeProvider theme={settingPage}>
-
         <Container maxWidth='xl' sx={{ padding: 0, paddingBottom: 5, minHeight: '100vh' }}>
           <Grid container spacing={3} padding={1} >
             <Grid item md={6} sm={12}>

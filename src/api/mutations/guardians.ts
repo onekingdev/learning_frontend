@@ -341,7 +341,7 @@ export const FETCH_GUARDIAN_PLANS = (guardianId: number | string) => `
 }
 `;
 
-export const FETCH_STUDENT_BY_ID = (studentId: number) => `
+export const FETCH_STUDENT_BY_ID = (studentId: number | string) => `
 query {
   studentById (id: "${studentId}"){
     ${_STUDENT}
@@ -366,6 +366,11 @@ query {
     audience {
         gradeSet {
             ${GRADES}
+        }
+        areaofknowledgeSet {
+          id
+          name
+          isActive
         }
     }
     areaofknowledgestudentreportSet {
