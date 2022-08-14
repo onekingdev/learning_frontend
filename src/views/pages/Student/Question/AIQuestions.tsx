@@ -249,6 +249,9 @@ export const AIQuestion: FC = () => {
     }
     if (!res.success) {
       enqueueSnackbar(res.msg, { variant: 'error' });
+
+      // Redirect to the previous page when there is an error
+      history.goBack()
       // return false;
       return
     }

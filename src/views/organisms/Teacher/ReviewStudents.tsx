@@ -20,7 +20,7 @@ const Row: FC<{ row: any }> = ({ row }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' }, border: `solid 2px ${BasicColor.aqua}` }}>
+      <TableRow sx={{ border: `solid 1px ${BasicColor.aqua}`, borderBottom: 'none' }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -38,7 +38,7 @@ const Row: FC<{ row: any }> = ({ row }) => {
         <TableCell align="right">{row.level?.name}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0, border: `solid 2px ${BasicColor.aqua}` }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0, border: `solid 1px ${BasicColor.aqua}` }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit sx={{ maxHeight: 800, overflow: 'auto' }}>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
@@ -52,6 +52,7 @@ const Row: FC<{ row: any }> = ({ row }) => {
                     <TableCell align="right">Start Date</TableCell>
                     <TableCell align="right">End Date</TableCell>
                     <TableCell align="right">Status</TableCell>
+                    <TableCell align="right">Result</TableCell>
                     <TableCell align="right">Actions</TableCell>
                   </TableRow>
                 </TableHead>
@@ -65,7 +66,20 @@ const Row: FC<{ row: any }> = ({ row }) => {
                         <TableCell>{homework.topic?.areaOfKnowledge?.name}</TableCell>
                         <TableCell align="right">{new Date(homework.startAt).toDateString()}</TableCell>
                         <TableCell align="right">{new Date(homework.endAt).toDateString()}</TableCell>
-                        <TableCell align="right">{homework.status}</TableCell>
+                        <TableCell align="right">
+                          <Typography color={
+                            homework.status === 'DONE' ?
+                              BasicColor.green : homework.status === 'EXPIRED' ? BasicColor.red : BasicColor.yellow} >
+                            {homework.status}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">{
+                          homework.result.total ?
+                            (homework.result.hits) + '/' + (homework.result.total) + '-' +
+                            (+(homework.result.hits / homework.result.total * 100)).toFixed(1) + '%'
+                            :
+                            'None'
+                        }</TableCell>
                         <TableCell align="right">
                           <LoadingButton variant='contained' color='yellow'>Extend</LoadingButton>
                         </TableCell>
@@ -98,16 +112,16 @@ export const ReviewStudentsTasks: FC<ReviewStudentsTasksProps> = ({
         >
           <TableRow >
             <TableCell />
-            <TableCell ><Typography>Name</Typography></TableCell>
-            <TableCell align="right"><Typography>Points</Typography></TableCell>
+            <TableCell ><Typography color='white'>Name</Typography></TableCell>
+            <TableCell align="right"><Typography color='white'>Points</Typography></TableCell>
             <TableCell align="right" >
               <Box display='flex' alignItems='center' justifyContent={'end'}>
                 <img src={coin} style={{ height: 25 }} />
-                <Typography>Coins&nbsp;Earned&nbsp;</Typography>
+                <Typography color='white'>Coins&nbsp;Earned&nbsp;</Typography>
               </Box>
             </TableCell>
             <TableCell align="right">
-              <Typography>Level</Typography>
+              <Typography color='white'>Level</Typography>
             </TableCell>
           </TableRow>
         </TableHead>

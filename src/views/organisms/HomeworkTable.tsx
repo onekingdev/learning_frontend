@@ -71,7 +71,7 @@ export const HomeworkTable: FC<HomeworkTableProps> = ({ homeworks, select, selec
         return homework.result?.hits + '/' +
           homework.result.total + '-' +
           (homework.result.total === 0 ? 0 :
-            +(homework.result.hits / homework.result.total * 100)) + '%';
+            +(homework.result.hits / homework.result.total * 100)).toFixed(1) + '%';
       case 'startAt':
         return new Date(homework.startAt).toDateString()
       case 'endAt':
@@ -113,6 +113,7 @@ export const HomeworkTable: FC<HomeworkTableProps> = ({ homeworks, select, selec
                       <TableRow hover role="checkbox" tabIndex={-1} key={homework.id}
                         onClick={() => select(homework.id)}
                         selected={selectedTaskId === homework.id}
+                        sx={{cursor: 'pointer'}}
                       >
                         {columns.map((column) => {
                           return (
