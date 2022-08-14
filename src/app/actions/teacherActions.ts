@@ -228,16 +228,37 @@ export const doAssignTasksToStudents = async (
   return res.data?.assignStudentsHomework || res.errors[0]; // when django returns error message on fail
 };
 
+export const doDeleteStudent = async (
+  token: string,
+  studentId: string | number,
+  classroomId: string | number,
+) => {
+  const res: any = await fetchQuery(
+    `
+    mutation {
+      removeStudentFromClassroom(
+        studentId: ${studentId},
+        classroomId: ${classroomId}
+      ){
+        classroom {
+          id
+        }
+      }
+    }
+    `, token);
+  return res.data?.removeStudentFromClassroom.classroom || res.errors[0]; // when django returns error message on fail
+};
+
 export const doUpdateStudent = async (
   token: string,
   studentId: string | number,
   classroomId?: string | number,
-  gradeId?:string | number,
+  gradeId?: string | number,
   groupIds?: Array<number | string>,
-  lastName?:string,
-  name?:string,
-  password?:string,
-  username?:string,
+  lastName?: string,
+  name?: string,
+  password?: string,
+  username?: string,
 ) => {
   const res: any = await fetchQuery(
     `

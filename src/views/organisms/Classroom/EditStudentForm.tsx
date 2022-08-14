@@ -2,9 +2,6 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect, FC } from 'react'
 import { Grid, FormControl, Select, Avatar, TextField, FormControlLabel, Checkbox, Typography, Box } from '@mui/material';
 import { dictionary } from './dictionary'
-import {
-    Container,
-} from './Style'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import InputLabel from '@mui/material/InputLabel';
 import { useSnackbar } from 'notistack';
@@ -19,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { doFetchClassroomGroups, doFetchTeacherClassrooms, doUpdateStudent } from 'app/actions';
 import LoadingButton from '@mui/lab/LoadingButton';
+import ConfirmDeleteStudent from './ConfirmDeleteStudentForm';
 
 interface EditStudentProps {
     _id: string | number    // student Id
@@ -54,6 +52,8 @@ const EditStudent: FC<EditStudentProps> = ({
         () => doFetchTeacherClassrooms(teacherId, token),
         { refetchIntervalInBackground: false }
     )
+
+    console.log({ classrooms })
     const { data: groups } = useQuery(
         ['classroom-groups', _classId],
         () => doFetchClassroomGroups(_classId, token),
@@ -67,6 +67,7 @@ const EditStudent: FC<EditStudentProps> = ({
     const [classroom, setClassroom] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
     const [loading, setLoading] = useState(false)
 
@@ -114,9 +115,8 @@ const EditStudent: FC<EditStudentProps> = ({
     }
 
     const handleRemove = () => {
-
-        // TODO: Add backdrop for confirmation
-
+        // Open confirmation Dialog
+        setIsConfirmOpen(true)
     }
 
     const handleViewReport = () => {
@@ -151,11 +151,12 @@ const EditStudent: FC<EditStudentProps> = ({
         _classId
     ])
     return (
-        <Container>
-            <CardDialog
-                isOpen={_isOpen}
-                open={_close}
-                dialogContent={
+        // <Container>
+        <CardDialog
+            isOpen={_isOpen}
+            open={_close}
+            dialogContent={
+                <>
                     <Grid container spacing={3} mt={2} padding={1}>
                         <Grid item container xs={12} sm={4} spacing={3}>
                             <Grid item xs={12}>
@@ -279,17 +280,17 @@ const EditStudent: FC<EditStudentProps> = ({
                                             <Select
                                                 labelId='select-classroom-label'
                                                 id='select-classroom'
-                                                value={classroom}
+                                                value={classroom || ''}
                                                 label={dictionary[language]?.classroom}
                                                 onChange={(e: any) => {
-                                                    const selectedClassroom = classrooms.find((item: any) => item.id === e.target.value)
-                                                    setClassroom(selectedClassroom?.id);
+                                                    const selectedClassroom = classrooms.find((item: any) => item.classroom.id === e.target.value)
+                                                    setClassroom(selectedClassroom?.classroom.id);
                                                 }}
                                                 displayEmpty={true}
                                             >
-                                                {classrooms.length > 0 && classrooms.map((value: any) => (
-                                                    <MenuItem value={value.id} key={value.id}>
-                                                        {value.name}
+                                                {classrooms.length > 0 && classrooms.filter((item: any) => item.classroom).map((value: any) => (
+                                                    <MenuItem value={value.classroom.id} key={value.classroom.id}>
+                                                        {value.classroom.name}
                                                     </MenuItem>
                                                 ))}
                                             </Select>
@@ -353,9 +354,17 @@ const EditStudent: FC<EditStudentProps> = ({
                             </LoadingButton>
                         </Grid>
                     </Grid>
-                }
-            />
-        </Container>
+
+                    <ConfirmDeleteStudent
+                        classroomId={_classId}
+                        close={() => setIsConfirmOpen(false)}
+                        isOpen={isConfirmOpen}
+                        studentId={_id}
+                    />
+                </>
+            }
+        />
+        // </Container>
     )
 }
 
