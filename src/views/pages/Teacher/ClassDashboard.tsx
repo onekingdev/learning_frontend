@@ -73,7 +73,7 @@ const ClassDashboard: FC = () => {
                   width: isMobile ? '100%' : 500,
                 }}>
                   <img src={coin} />
-                  <Typography ><span style={{ fontWeight: 'bold' }}>Today Coins </span>{data.coinsToday}/{data.goalCoinsPerDay}</Typography>
+                  <Typography ><span style={{ fontWeight: 'bold' }}>Today Coins&nbsp;&nbsp;</span>{data.coinsToday}</Typography>
                 </Paper>
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -161,7 +161,7 @@ const ClassDashboard: FC = () => {
                       <Typography textAlign={'start'} width='100%'>{'Class Question Answered'}</Typography>
                     </Grid>
                     <Grid item xs={2}>
-                      <Typography>{20}</Typography>
+                      <Typography>{data.correctQuestionsCountYesterday}</Typography>
                     </Grid>
 
                     <Grid item xs={3}>
