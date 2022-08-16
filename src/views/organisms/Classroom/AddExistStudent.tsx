@@ -79,9 +79,7 @@ const AddExistStudent = (props: any) => {
             open={props.close}
             dialogContent={
                 <div >
-                    <h1>{dictionary[language]?.addingANewStudent}</h1>
-                    <h2>{'(' + dictionary[language]?.existingAccountSocrates + ')'}</h2>
-                    <h3>{dictionary[language]?.pleaseIntroduceNestInformation}</h3>
+                    <h1>{commonDictionary[language]?.add_existing_socrates_student}</h1>
                     <Grid container spacing={4}>
                         <Grid item xs={12}>
                             <TextField

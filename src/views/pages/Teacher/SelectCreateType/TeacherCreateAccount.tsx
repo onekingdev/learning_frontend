@@ -12,20 +12,19 @@ import {
   Grid,
   ThemeProvider,
   Typography,
-  useMediaQuery
 } from '@mui/material';
 import { BasicColor } from 'views/Color';
 import background from 'views/assets/colored-shapes-bg.svg';
-import { ScreenSize } from 'constants/screenSize';
 import { themeTeacher } from 'views/Theme';
 import { TermsAndConditions } from 'views/molecules/Login/TermsAndConditions';
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery';
+import commonDictionary from 'constants/commonDictionary';
 
 export const TeacherCreateAccount: FC = () => {
-  const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
+  const isTablet = useSocratesMediaQuery('sm')
   const history = useHistory();
 
-  let language: string = useSelector((state: any) => state.user.language);
-  language = language ? language : 'en-us'
+  const { language } = useSelector((state: any) => state.user);
 
   return (
     <ThemeProvider theme={themeTeacher}>
@@ -72,7 +71,7 @@ export const TeacherCreateAccount: FC = () => {
           }}
         >
           <Box flexGrow={1} minHeight={30} />
-          <Typography variant='h4' mb={2} color='white' textAlign='center'>{dictionary[language]?.practicePlayGrow}</Typography>
+          <Typography variant='h4' mb={2} color='white' textAlign='center'>{commonDictionary[language]?.practice_play_grow}</Typography>
           <Typography variant='body1' color='white' textAlign='center'>{dictionary[language]?.content}</Typography>
           <Grid container spacing={2} mt={isTablet ? 3 : 5}>
             <Grid item xs={12} sm={6}>
