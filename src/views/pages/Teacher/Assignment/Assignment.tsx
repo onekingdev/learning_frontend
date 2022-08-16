@@ -136,7 +136,8 @@ const Assignment: FC = () => {
       <Container maxWidth='lg' >
         {audience &&
           <SlideShowSubjects
-            subjects={audience.areaofknowledgeSet}
+            // Display only active subjects
+            subjects={audience.areaofknowledgeSet.filter((item: any) => item.isActive)}
             onSlideClick={(id: string) => {
               setActiveSubjectId(id)
             }}

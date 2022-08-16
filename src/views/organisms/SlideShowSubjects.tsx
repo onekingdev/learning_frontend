@@ -25,7 +25,7 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
         slidesPerView={3}
         spaceBetween={10}
         onClick={(swiper) => {
-          if (swiper.clickedIndex) {
+          if (swiper.clickedIndex > -1) {
             setCheckedIndex(swiper.clickedIndex)
             onSlideClick(subjects[swiper.clickedIndex].id)
           }
@@ -67,7 +67,7 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
       >
         {
           subjects
-            .filter(item => item.isActive)
+
             .map((p: any, index: number) => (
               <SwiperSlide key={p.id}>
                 <SubjectCard
@@ -81,10 +81,24 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
             ))
         }
       </Swiper >
-      <Box display='flex' justifyContent={'space-between'} position='absolute' top='50%' left={-20} right={-20} zIndex={1}>
-        <IconButton ref={navigationPrevRef}> <ChevronLeftIcon /></IconButton>
-        <IconButton ref={navigationNextRef} ><ChevronRightIcon /></IconButton>
-      </Box>
+      {/* <Box display='flex' justifyContent={'space-between'} position='absolute' bottom={0} left={-20} right={-20} zIndex={1}> */}
+      <IconButton ref={navigationPrevRef}
+        sx={{
+          position: 'absolute',
+          bottom: 'calc(50% - 25px)',
+          left: -20,
+          zIndex: 1
+        }}
+      > <ChevronLeftIcon /></IconButton>
+      <IconButton ref={navigationNextRef}
+        sx={{
+          position: 'absolute',
+          bottom: 'calc(50% - 25px)',
+          right: -20,
+          zIndex: 1
+        }}
+      ><ChevronRightIcon /></IconButton>
+      {/* </Box> */}
     </Box>
   );
 };
