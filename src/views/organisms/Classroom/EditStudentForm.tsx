@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect, FC } from 'react'
 import { Grid, FormControl, Select, TextField, FormControlLabel, Checkbox, Typography, Box } from '@mui/material';
-import { dictionary } from './dictionary'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import InputLabel from '@mui/material/InputLabel';
 import { useSnackbar } from 'notistack';
@@ -176,7 +175,7 @@ const EditStudent: FC<EditStudentProps> = ({
                             </Grid>
                             <Grid item xs={12}>
                                 <Button
-                                    value={dictionary[language]?.viewProgressReport}
+                                    value={commonDictionary[language]?.view_progress_report}
                                     bgColor={BasicColor.white}
                                     color={BasicColor.blue}
                                     borderColor={BasicColor.blue}
@@ -191,7 +190,7 @@ const EditStudent: FC<EditStudentProps> = ({
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                        label={dictionary[language]?.name}
+                                        label={commonDictionary[language]?.name}
                                         onChange={(e: any) => {
                                             setName(e.target.value)
                                         }}
@@ -200,7 +199,7 @@ const EditStudent: FC<EditStudentProps> = ({
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                        label={dictionary[language]?.lastName}
+                                        label={commonDictionary[language]?.lastName}
                                         onChange={(e: any) => {
                                             setLastName(e.target.value)
                                         }}
@@ -209,7 +208,7 @@ const EditStudent: FC<EditStudentProps> = ({
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                        label={dictionary[language]?.username}
+                                        label={commonDictionary[language]?.username}
                                         onChange={(e: any) => {
                                             setUsername(e.target.value)
                                         }}
@@ -218,7 +217,7 @@ const EditStudent: FC<EditStudentProps> = ({
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                        label={dictionary[language]?.password}
+                                        label={commonDictionary[language]?.password}
                                         onChange={(e: any) => {
                                             setPassword(e.target.value)
                                         }}
@@ -245,13 +244,13 @@ const EditStudent: FC<EditStudentProps> = ({
                                     </FormControl>
                                     {/* <FormControl fullWidth>
                                         <InputLabel id='select-grade-label'>
-                                            {dictionary[language]?.grade}
+                                            {commonDictionary[language]?.grade}
                                         </InputLabel>
                                         <Select
                                             labelId='select-grade-label'
                                             id='select-grade'
                                             value={grade ? grade : {}}
-                                            label={dictionary[language]?.grade}
+                                            label={commonDictionary[language]?.grade}
                                             className={`${classes.select} err-border`}
                                             onChange={(e: any) => {
                                                 setGrade(e.target.value);
@@ -281,13 +280,13 @@ const EditStudent: FC<EditStudentProps> = ({
                                         classrooms &&
                                         <FormControl fullWidth>
                                             <InputLabel id='select-classroom-label'>
-                                                {dictionary[language]?.classroom}
+                                                {commonDictionary[language]?.classroom}
                                             </InputLabel>
                                             <Select
                                                 labelId='select-classroom-label'
                                                 id='select-classroom'
                                                 value={classroom || ''}
-                                                label={dictionary[language]?.classroom}
+                                                label={commonDictionary[language]?.classroom}
                                                 onChange={(e: any) => {
                                                     const selectedClassroom = classrooms.find((item: any) => item.classroom.id === e.target.value)
                                                     setClassroom(selectedClassroom?.classroom.id);
@@ -328,7 +327,7 @@ const EditStudent: FC<EditStudentProps> = ({
 
                                 {/* <Grid item xs={12}>
                                     <Button
-                                        value={'+ ' + dictionary[language]?.addToAGroup}
+                                        value={'+ ' + commonDictionary[language]?.addToAGroup}
                                         color={BasicColor.blue}
                                         bgColor={BasicColor.white}
                                         onClick={handleAddToGroup}
@@ -340,7 +339,7 @@ const EditStudent: FC<EditStudentProps> = ({
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Button
-                                value={dictionary[language]?.removeStudent}
+                                value={commonDictionary[language]?.remove_student}
                                 color={BasicColor.red}
                                 bgColor={BasicColor.white}
                                 onClick={handleRemove}
@@ -356,7 +355,7 @@ const EditStudent: FC<EditStudentProps> = ({
                                 loading={loading}
                                 variant='contained'
                             >
-                                {dictionary[language]?.save}
+                                {commonDictionary[language]?.save}
                             </LoadingButton>
                         </Grid>
                     </Grid>

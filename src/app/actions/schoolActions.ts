@@ -122,6 +122,9 @@ export const doFetchSchoolTeachers = async (
             }
             firstName
             lastName
+            schooladministrativepersonnel {
+              id
+            }
           }
         }
       }
