@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect, FC } from 'react'
-import { Grid, FormControl, Select, Avatar, TextField, FormControlLabel, Checkbox, Typography, Box } from '@mui/material';
+import { Grid, FormControl, Select, TextField, FormControlLabel, Checkbox, Typography, Box } from '@mui/material';
 import { dictionary } from './dictionary'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,7 +9,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from 'views/molecules/MuiButton';
 import { BasicColor } from 'views/Color';
 import commonDictionary from 'constants/commonDictionary'
-import avatar from 'views/assets/avatars/girl-6.svg'
 import { useMediaQuery } from '@mui/material';
 import { ScreenSize } from 'constants/screenSize';
 import { useHistory } from 'react-router-dom';
@@ -17,6 +16,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { doFetchClassroomGroups, doFetchTeacherClassrooms, doUpdateStudent } from 'app/actions';
 import LoadingButton from '@mui/lab/LoadingButton';
 import ConfirmDeleteStudent from './ConfirmDeleteStudentForm';
+import { ImageAvatar } from 'views/molecules/Avatar/DefaultAvatar';
 
 interface EditStudentProps {
     _id: string | number    // student Id
@@ -28,6 +28,10 @@ interface EditStudentProps {
     _groupIds: Array<any>
     _close: () => void
     _isOpen: boolean
+    _currentAvatarAccessories: any,
+    _currentAvatarClothes: any,
+    _currentAvatarHead: any,
+    _currentAvatarPants: any
 }
 
 const EditStudent: FC<EditStudentProps> = ({
@@ -39,7 +43,10 @@ const EditStudent: FC<EditStudentProps> = ({
     _close,
     _groupIds,
     _gradeId,
-    _classId
+    _classId,
+    _currentAvatarAccessories,
+    _currentAvatarClothes,
+    _currentAvatarHead
 }) => {
     const { language, token } = useSelector((state: any) => state.user);
     const isMobile = useMediaQuery(`(max-width: ${ScreenSize.phone})`)
@@ -53,7 +60,6 @@ const EditStudent: FC<EditStudentProps> = ({
         { refetchIntervalInBackground: false }
     )
 
-    console.log({ classrooms })
     const { data: groups } = useQuery(
         ['classroom-groups', _classId],
         () => doFetchClassroomGroups(_classId, token),
@@ -160,12 +166,12 @@ const EditStudent: FC<EditStudentProps> = ({
                     <Grid container spacing={3} mt={2} padding={1}>
                         <Grid item container xs={12} sm={4} spacing={3}>
                             <Grid item xs={12}>
-                                <Avatar src={avatar}
-                                    sx={{
-                                        height: isMobile ? 80 : 200,
-                                        width: isMobile ? 80 : 200,
-                                        border: 'solid gray 2px'
-                                    }}
+                                <ImageAvatar
+                                    name={_firstName || 'F'}
+                                    accessory={_currentAvatarAccessories}
+                                    head={_currentAvatarHead}
+                                    clothes={_currentAvatarClothes}
+                                    size={isMobile ? 80 : 150}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -357,7 +363,7 @@ const EditStudent: FC<EditStudentProps> = ({
 
                     <ConfirmDeleteStudent
                         classroomId={_classId}
-                        close={() => setIsConfirmOpen(false)}
+                        close={_close}
                         isOpen={isConfirmOpen}
                         studentId={_id}
                     />

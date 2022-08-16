@@ -43,12 +43,6 @@ export const StudentItem = styled.div`
 export const StudentMark = styled.img`
 `;
 
-export const StudentText = styled.div`
-  text-align    : center;
-  position      : absolute;
-  bottom        : 30px;
-`;
-
 export const GroupItem = styled.div`
   position      : relative;
   margin-left   : 30px;

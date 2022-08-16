@@ -63,6 +63,7 @@ const AddExistStudent = (props: any) => {
 
     const handleSubmit = () => {
         if (!formValidation()) return;
+        setLoading(true)
         addExistingStudent.mutate()
     }
 

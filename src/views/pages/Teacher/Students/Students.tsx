@@ -45,7 +45,7 @@ const Students: FC = () => {
   }, []);
 
 
-  if(students?.message ) return <Typography color='red'>{getMessage(students)}</Typography>
+  if (students?.message) return <Typography color='red'>{getMessage(students)}</Typography>
 
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.classroom} current='students' >
@@ -61,6 +61,10 @@ const Students: FC = () => {
           _isOpen={isOpenEditStudent}
           _groupIds={studentForEdit.group}
           _close={() => setIsOpenEditStudent(false)}
+          _currentAvatarAccessories={studentForEdit.currentAvatarAccessories}
+          _currentAvatarClothes={studentForEdit.currentAvatarClothes}
+          _currentAvatarPants={studentForEdit.currentAvatarPants}
+          _currentAvatarHead={studentForEdit.currentAvatarHead}
         />
       }
         <ChooseNewStudentTypeDlg
