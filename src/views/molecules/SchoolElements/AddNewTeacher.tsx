@@ -44,7 +44,7 @@ const AddNewTeacher = (props: any) => {
                 enqueueSnackbar(data.message, { variant: 'error' })
             }
             else {
-                queryClient.setQueryData(['school-teachers', id], data)
+                queryClient.invalidateQueries(['school-teachers', id])
                 enqueueSnackbar('Add teacher to school succeed', { variant: 'success' })
             }
         },

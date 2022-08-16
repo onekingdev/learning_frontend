@@ -37,7 +37,7 @@ const SchoolTeachers: FC = () => {
     if (!teacher) return
     dispatch({
       type: TEACHER_SET_DATA,
-      payload: teacher.teacher,
+      payload: teacher,
     });
     history.push('/teacher/classrooms')
 
@@ -56,7 +56,7 @@ const SchoolTeachers: FC = () => {
           isLoading ? <LoadingSpinner /> :
             error ? <Typography color='red'>{getMessage(error)}</Typography> :
               teachers &&
-              <TeachersPanel teachers={teachers} onNew={onNew} onTeacher={onTeacher} />
+              <TeachersPanel teachers={teachers.schoolteacherSet} admins={teachers.schooladministrativepersonnelSet} onNew={onNew} onTeacher={onTeacher} />
         }
       </>
     </TeacherPgContainer>

@@ -9,6 +9,22 @@ export const extractMathjaxText = (str: string) => {
   return matches ? matches[0].slice(1) : '';
 };
 
+export const compareId = (a: any, b: any) => {
+
+  // converting to uppercase to have case-insensitive comparison
+  const id1 = +a.id
+  const id2 = +b.id
+
+  let comparison = 0;
+
+  if (id1 > id2) {
+      comparison = 1;
+  } else if (id1 < id2) {
+      comparison = -1;
+  }
+  return comparison;
+}
+
 export const extractQuestion = (str: string) => {
   const firstBracketIndex = str.indexOf('$');
   if (str.slice(0, 4) === 'TYPE' || str.slice(0, 4) === 'FRAC')

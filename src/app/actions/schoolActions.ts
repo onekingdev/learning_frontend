@@ -102,8 +102,20 @@ export const doFetchSchoolTeachers = async (
   const res: any = await fetchQuery(
     `{
       schoolById(id: "${schoolId}") {
-        schoolteacherSet{
-          teacher{
+        schoolteacherSet {
+          id
+          teacher {
+            id
+            user {
+              username
+            }
+            firstName
+            lastName
+          }
+        }
+        schooladministrativepersonnelSet {
+          id
+          administrativePersonnel {
             id
             user {
               username
@@ -115,7 +127,7 @@ export const doFetchSchoolTeachers = async (
       }
     }
     `, token);
-  return res.data?.schoolById?.schoolteacherSet || res.errors[0]; // when django returns error message on fail
+  return res.data?.schoolById || res.errors[0]; // when django returns error message on fail
 };
 
 export const doFetchSubscriberSchools = async (
