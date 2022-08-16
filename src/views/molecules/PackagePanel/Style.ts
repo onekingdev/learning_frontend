@@ -21,7 +21,7 @@ export const Container = styled.div`
 export const TeacherContainer = styled.div`
     position: relative;
     width: 780px;
-    height: 300px;
+    height: 100%;
     display: flex;
     flex-direction: row;
     background-color: ${BasicColor.brightLightBlue};
@@ -65,7 +65,6 @@ export const Header = styled.div`
 export const TeacherHeader = styled.div`
     width: 250px;
     background-color: ${BasicColor.blue};
-    height: 100%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;

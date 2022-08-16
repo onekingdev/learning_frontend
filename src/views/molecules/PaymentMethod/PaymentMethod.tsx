@@ -225,13 +225,16 @@ export const PaymentMethod: FC<PaymentMethodProps> = ({ plans, offRate, isSpecia
                                     {
                                         plans.School?.childCount > 0 && <>
                                             <OrderItem>
-                                                <OrderItemTitle>30 Teachers {dictionary[language]?.package} </OrderItemTitle>
-                                                <OrderItemContent>${plans.School.currentPrice} / {plans.School.period}</OrderItemContent>
+                                                <OrderItemTitle>School Plan {dictionary[language]?.package} </OrderItemTitle>
+                                                <OrderItemContent>${(plans.School.currentPrice * (plans.School.period === 'month' ? plans.School.quantityPreferentialMonth : plans.School.quantityPreferentialYear)).toFixed(2)} / {plans.School.period}</OrderItemContent>
                                             </OrderItem>
-                                            <OrderItem>
-                                                <OrderItemTitle>Additional {plans.School.childCount - (plans.School.period === 'month' ? plans.School.quantityPreferentialMonth : plans.School.quantityPreferentialYear)} Teacher {dictionary[language]?.package} </OrderItemTitle>
-                                                <OrderItemContent>${plans.School.period === 'month' ? plans.School.pricePreferentialMonth : plans.School.pricePreferentialYear} / {plans.School.period}</OrderItemContent>
-                                            </OrderItem>
+                                            {
+                                                plans.School.childCount - (plans.School.period === 'month' ? plans.School.quantityPreferentialMonth : plans.School.quantityPreferentialYear) > 0 &&
+                                                <OrderItem>
+                                                    <OrderItemTitle>Additional {plans.School.childCount - (plans.School.period === 'month' ? plans.School.quantityPreferentialMonth : plans.School.quantityPreferentialYear)} Teacher {dictionary[language]?.package} </OrderItemTitle>
+                                                    <OrderItemContent>${plans.School.period === 'month' ? plans.School.pricePreferentialMonth : plans.School.pricePreferentialYear} / {plans.School.period}</OrderItemContent>
+                                                </OrderItem>
+                                            }
                                         </>
                                     }
                                     {

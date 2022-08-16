@@ -5,7 +5,7 @@ import Button from 'views/molecules/MuiButton'
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { BasicColor } from 'views/Color';
 import { dictionary } from './dictionary'
-import cDictionary from 'constants/commonDictionary';
+import cDictionary, { commonDictionary } from 'constants/commonDictionary';
 import {
   TeacherContainer,
   TeacherHeader,
@@ -58,12 +58,20 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
         <Typography variant='h5' color='white'>{type}</Typography>
       </TeacherHeader>
       <TeacherBody>
-        <Tip>
-          <b>{dictionary[language]?.classroomPlanInclude} : </b>
-          {dictionary[language]?.classroomPlanDescription}
-          <br />
-          {type === 'School' ? 'Default plan has 30 teachers, you have to pay $4/month for each additional teacher' : ''}
-        </Tip>
+        {
+          type === 'Classroom' &&
+          <Typography>
+            <span style={{ fontWeight: 'bold' }}>{commonDictionary[language]?.classroom_plan_includes}</span>
+            {commonDictionary[language]?.classroom_plan_description}
+          </Typography>
+        }
+        {
+          type === 'School' &&
+          <Typography>
+            <span style={{ fontWeight: 'bold' }}>{commonDictionary[language]?.school_plan_includes}</span>
+            {commonDictionary[language]?.school_plan_description}
+          </Typography>
+        }
         <TeacherBtnContainer>
           {!isSpecialCode &&
             <div className="flex flex-col p-t-10 p-b-15 font-s-20 font-w-7 w-250">
@@ -101,13 +109,13 @@ const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, price, isSpecialCode
             <div className="flex flex-row">
               <ButtonGroup variant="outlined" aria-label="outlined button group">
                 <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={35} width={35} value="-" onClick={decreaseChildrenCount} />
-                <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={35} width={35} value={'' + childrenCount} />
+                <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={35} width={35} value={'' + (childrenCount - minCount)} />
                 <Button variant="outlined" color="black" borderColor="black" radius={0} fontSize={24} height={35} width={35} value="+" onClick={increaseChildrenCount} />
               </ButtonGroup>
             </div>
           </div>
         </TeacherBtnContainer>
-        <Typography>${price}/{period}, up to 40 students</Typography>
+        {/* <Typography>${price}/{period}, up to 40 students</Typography> */}
       </TeacherBody>
     </TeacherContainer>
   );
