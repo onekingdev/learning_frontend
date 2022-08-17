@@ -44,11 +44,6 @@ const EditTeacher: FC<EditStudentProps> = ({
         { refetchIntervalInBackground: false }
     )
 
-    // const { data: groups } = useQuery(
-    //     ['classroom-groups', _classId],
-    //     () => doFetchClassroomGroups(_classId, token),
-    //     { refetchIntervalInBackground: false }
-    // )
     // const { enqueueSnackbar } = useSnackbar();
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -133,6 +128,7 @@ const EditTeacher: FC<EditStudentProps> = ({
                                 <Button
                                     onClick={handleViewTeacherClassroom}
                                     variant='outlined'
+                                    disabled={_userType === 'Admin'}
                                 >
                                     {commonDictionary[language]?.view_teacher_classroom}
                                 </Button>
