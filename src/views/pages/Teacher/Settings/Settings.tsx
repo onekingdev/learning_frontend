@@ -43,16 +43,19 @@ const TeacherSettings: FC = () => {
             }
           </Grid>
         </Grid>
-        <Grid item md={6} sm={12}>
-          {
-            isLoading ? <LoadingSpinner /> :
-              error ? <ErrorMessage error={error} /> :
-                orders &&
-                <OrdersDetails orders={orders}
-                  paymentMethod={paymentMethod}
-                />
-          }
-        </Grid>
+        {
+          paymentMethod &&
+          <Grid item md={6} sm={12}>
+            {
+              isLoading ? <LoadingSpinner /> :
+                error ? <ErrorMessage error={error} /> :
+                  orders &&
+                  <OrdersDetails orders={orders}
+                    paymentMethod={paymentMethod}
+                  />
+            }
+          </Grid>
+        }
       </Grid>
     </TeacherPgContainer>
   );

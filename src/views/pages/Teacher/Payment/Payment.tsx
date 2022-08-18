@@ -59,8 +59,6 @@ const Payment: FC = () => {
   const [sponsorEmail, setSponsorEmail] = useState('')
 
   const [isSpecialCode, setIsSpecialCode] = useState(false)
-  const [showPaymentMethod, setShowPaymentMethod] = useState(true);
-  const [offRate, setOffRate] = useState(50);
 
   const onChangePackage = (count: number, period: string, sponsor: string) => {
     const type = productType === 'School' ? 'School' : 'Classroom'
@@ -106,7 +104,6 @@ const Payment: FC = () => {
     if (parseInt(couponCode?.percentage) === 100) setIsSpecialCode(true)
     // else setIsSpecialCode(true) //For always enable special code for first release
 
-    setOffRate(50);
     setPlanData();
   }, []);
 
@@ -124,17 +121,16 @@ const Payment: FC = () => {
             isSpecialCode={isSpecialCode}
             language={language}
             minCount={plans[productType].quantityLowerLimit || 0}
+            maxCount={couponCode?.code === 'EDCAMPMTWEST2022' && productType === 'Classroom' ? 1 : 40}
           />
         </PackageContainer>
         <Elements stripe={stripePromise}>
-          {showPaymentMethod && (
-            <PaymentMethod
-              plans={plans}
-              offRate={100 - discount}
-              isSpecialCode={isSpecialCode}
-              sponsorEmail={sponsorEmail}
-            />
-          )}
+          <PaymentMethod
+            plans={plans}
+            offRate={100 - discount}
+            isSpecialCode={isSpecialCode}
+            sponsorEmail={sponsorEmail}
+          />
         </Elements>
       </>
     </TeacherPgContainer>

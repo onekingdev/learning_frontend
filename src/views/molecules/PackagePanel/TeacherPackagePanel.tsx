@@ -25,14 +25,17 @@ type PackagePanelProps = {
   onChange: (childrenCount: number, plan: string, sponsorEmail: string) => void;
   language: string
   minCount: number
+  maxCount: number
 };
-const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, isSpecialCode, disabled = false, onChange, language, minCount }) => {
+const TeacherPackagePanel: FC<PackagePanelProps> = ({ type, isSpecialCode, disabled = false, onChange, language, minCount, maxCount }) => {
 
   const [childrenCount, setChildrenCount] = useState(0);
   const [period, setPeriod] = useState('month');
 
+  console.log({ maxCount })
   const increaseChildrenCount = () => {
-    setChildrenCount(childrenCount + 1)
+    if (childrenCount < maxCount)
+      setChildrenCount(childrenCount + 1)
   }
 
   const decreaseChildrenCount = () => {
