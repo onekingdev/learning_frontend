@@ -33,7 +33,7 @@ export const commonDictionary: any = Object.freeze({
     confirm: 'Confirm',
     confirm_password: 'Confirm Password',
     contact_us: 'Contact Us',
-    create_account_to_the_classroom: 'Create the account to the classroom',
+    create_account_to_the_classroom: 'Create the account and add to the classroom',
     create_classroom: 'Create Classroom',
     create_existing_account: 'Create Existing Account',
     create_group: 'Create Group',
