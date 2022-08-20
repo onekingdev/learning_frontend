@@ -167,7 +167,7 @@ const AddNewStudent = (props: any) => {
                                     maxWidth: 'fit-content'
                                 }}
                             >
-                                {commonDictionary[language]?.create_account_add}
+                                {commonDictionary[language]?.create_account_to_the_classroom}
                             </LoadingButton>
                         </Grid>
                     </Grid>
