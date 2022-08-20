@@ -52,6 +52,7 @@ export const doFetchSubjectsAndGradeByAudienceId = async (audienceId: number) =>
         image
         name
         isActive
+        hexColor
       }
     }
   }`);

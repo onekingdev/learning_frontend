@@ -106,6 +106,6 @@ export const GENDERS = [
   },
   {
     id: 'female',
-    name: 'Femail',
+    name: 'Female',
   },
 ]

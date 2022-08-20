@@ -114,7 +114,7 @@ const AddExistStudent = (props: any) => {
                                 }}
                                 loading={loading}
                             >
-                                {dictionary[language]?.addAcctAndToTheClass}
+                                {commonDictionary[language]?.add_account_to_the_classroom}
                             </LoadingButton>
                         </Grid>
                     </Grid>

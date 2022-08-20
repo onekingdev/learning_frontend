@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
-import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Tab } from '@mui/material';
+import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Tab, Typography } from '@mui/material';
 import { doFetchSubjectsAndGradeByAudienceId, doFetchTopicsByGradeAndSubject } from 'app/actions/audienceActions';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
@@ -134,20 +134,17 @@ const Assignment: FC = () => {
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.assignment} current='assignments'>
       <Container maxWidth='lg' >
+        <Typography variant='h5' textAlign='center' maxWidth={700} margin='auto'>To assign the homework, select the subject first and then pick the grade level topic by clicking on the blue tab.</Typography>
         {audience &&
-          <SlideShowSubjects
-            // Display only active subjects
-            subjects={audience.areaofknowledgeSet.filter((item: any) => item.isActive)}
-            onSlideClick={(id: string) => {
-              setActiveSubjectId(id)
-            }}
-          />
-        }
-        <Box
-          sx={{ border: 'solid #A3A5A5 1px' }}
-        >
-          {audience &&
-            <FormControl fullWidth>
+          <Box>
+            <SlideShowSubjects
+              // Display only active subjects
+              subjects={audience.areaofknowledgeSet.filter((item: any) => item.isActive)}
+              onSlideClick={(id: string) => {
+                setActiveSubjectId(id)
+              }}
+            />
+            <FormControl sx={{ width: 200 }}>
               <InputLabel id='grade-select-label' sx={{
                 padding: 'none',
                 color: 'white',
@@ -174,7 +171,11 @@ const Assignment: FC = () => {
                 }
               </Select>
             </FormControl>
-          }
+          </Box>
+        }
+        <Box
+          sx={{ border: 'solid #A3A5A5 1px' }}
+        >
           {
             // isIdle ? <Typography>Idle</Typography> :
             // isTopicLoading ? <Typography>Loading...</Typography> :

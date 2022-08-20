@@ -4,6 +4,7 @@ import { dictionary } from './dictionary'
 import { CardDialog } from 'views/molecules/StudentCard/MyCards/CardDialog';
 import questionMarkInCircle from 'views/assets/questionmark-in-circle.svg'
 import { Button, Grid } from '@mui/material';
+import commonDictionary from 'constants/commonDictionary';
 
 const AddClassroomForm = (props: any) => {
     const language = useSelector((state: any) => state.user.language);
@@ -42,7 +43,7 @@ const AddClassroomForm = (props: any) => {
                                 onClick={handleCreateExistAccount}
                                 variant='contained'
                             >
-                                {dictionary[language]?.createExistAccount}
+                                {commonDictionary[language]?.create_existing_account}
                             </Button>
                         </Grid>
                     </Grid>

@@ -19,7 +19,7 @@ export const SubjectCard: FC<ISubjectBox> = ({ imgUrl, bgColor, text, isChecked 
             flexDirection={'column'}
             justifyContent='space-between'
             alignItems={'center'}
-            margin={2}
+            // margin={2}
             padding={2}
             sx={{
                 background: bgColor,

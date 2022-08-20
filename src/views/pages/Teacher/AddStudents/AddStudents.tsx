@@ -148,16 +148,16 @@ const AddStudents: FC = () => {
             bgColor={BasicColor.green}
             onClick={handleNew}
             align="right"
-            value={commonDictionary[language]?.add_new}
+            value={commonDictionary[language]?.add_new_student}
             margin="20px"
           />
-          <Button
+          {/* <Button
             bgColor={BasicColor.orange}
             onClick={handleImportExcel}
             align="right"
             value={commonDictionary[language]?.import_excel}
             margin="20px"
-          />
+          /> */}
           <input id="file-input" type="file" name="name" style={{ display: "none" }} onChange={handleChangeExcelFile} />
         </div>
         <Table columns={columns} tableData={tableData} ref={TableRef}></Table>

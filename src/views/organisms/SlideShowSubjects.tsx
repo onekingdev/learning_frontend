@@ -6,9 +6,7 @@ import { Navigation, Pagination } from "swiper";
 import 'swiper/css';
 import 'swiper/css/navigation'
 import "swiper/css/pagination"
-import { Box, IconButton } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Box } from '@mui/material';
 
 interface SlideProps {
   subjects: any[]
@@ -22,6 +20,9 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
   return (
     <Box position={'relative'}>
       <Swiper
+        style={{
+          padding: '15px 20px'
+        }}
         slidesPerView={3}
         spaceBetween={10}
         onClick={(swiper) => {
@@ -30,25 +31,21 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
             onSlideClick(subjects[swiper.clickedIndex].id)
           }
         }}
-        pagination={{
-          clickable: true,
-        }}
         navigation={{
           prevEl: navigationPrevRef.current,
           nextEl: navigationNextRef.current,
         }}
-
         modules={[Navigation, Pagination]}
         breakpoints={
           {
             // when window width is >= 1366px
             1366: {
               slidesPerView: 6,
-              spaceBetween: 25
+              spaceBetween: 20
             },
             1024: {
               slidesPerView: 5,
-              spaceBetween: 20
+              spaceBetween: 15
             },
             768: {
               slidesPerView: 4,
@@ -74,31 +71,15 @@ export const SlideShowSubjects: FC<SlideProps> = ({ subjects, onSlideClick }) =>
                   key={p.id}
                   imgUrl={`https://api.withsocrates.com/media/${p.image}`}
                   text={p.name}
-                  bgColor={SUBJECT_COLORS[index % 7]}
+                  bgColor={p.hexColor || '#22BAAF'}
                   isChecked={checkedIndex === index}
                 />
               </SwiperSlide>
             ))
         }
+        <div ref={navigationPrevRef} className='swiper-button-prev' style={{ left: 0, }} />
+        <div ref={navigationNextRef} className='swiper-button-next' style={{ right: 0 }} />
       </Swiper >
-      {/* <Box display='flex' justifyContent={'space-between'} position='absolute' bottom={0} left={-20} right={-20} zIndex={1}> */}
-      <IconButton ref={navigationPrevRef}
-        sx={{
-          position: 'absolute',
-          bottom: 'calc(50% - 25px)',
-          left: -20,
-          zIndex: 1
-        }}
-      > <ChevronLeftIcon /></IconButton>
-      <IconButton ref={navigationNextRef}
-        sx={{
-          position: 'absolute',
-          bottom: 'calc(50% - 25px)',
-          right: -20,
-          zIndex: 1
-        }}
-      ><ChevronRightIcon /></IconButton>
-      {/* </Box> */}
     </Box>
   );
 };
