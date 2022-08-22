@@ -302,7 +302,8 @@ export const AIQuestion: FC = () => {
 
   useEffect(() => {
 
-    setNextMaxExp(student.nextLevel.pointsRequired)
+    if (!student) return
+    setNextMaxExp(student.nextLevel?.pointsRequired)
     setAnswers([])
     let mounted = true
     setQuestionsInAI(mounted)

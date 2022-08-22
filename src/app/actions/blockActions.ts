@@ -8,12 +8,12 @@ import {
   CREATE_NEW_PATH_BLOCK,
   FETCH_STUDENT_ANSWER_HISTORY,
 } from 'api/mutations/block';
-import { QUESTION_BLOCK} from '../../api/fragments/blockFragments';
+import { QUESTION_BLOCK } from '../../api/fragments/blockFragments';
 
 import mutation from 'api/mutations/get';
-import query, {fetchQuery} from 'api/queries/get';
-import {BLOCK_PRESENTATION_QUERY} from 'api/queries/questions';
-import {sendRawQuery} from 'api/queries/get';
+import query, { fetchQuery } from 'api/queries/get';
+import { BLOCK_PRESENTATION_QUERY } from 'api/queries/questions';
+import { sendRawQuery } from 'api/queries/get';
 
 import * as TYPES from '../types';
 
@@ -51,19 +51,19 @@ export const finishBlock = async (
       questionResults
     ),
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
   if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
+    return { success: false, msg: 'Network Error' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
 
-  const {student} = result.data.finishBlockPresentation;
-  dispatch({type: TYPES.STUDENT_SET_DATA, payload: student});
+  const { student } = result.data.finishBlockPresentation;
+  dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student });
   dispatch({
     type: TYPES.EARNING_SET_DATA,
     payload: {
@@ -75,7 +75,7 @@ export const finishBlock = async (
       balance: student.coinWallet.balance,
     },
   });
-  return {success: true, msg: 'Success!'};
+  return { success: true, msg: 'Success!' };
 };
 
 export const createAiBlockPresentation = async (
@@ -86,18 +86,18 @@ export const createAiBlockPresentation = async (
   const res: any = await mutation(
     CREATE_AI_BLOCK_PRESENTATION(aokId),
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
   if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
+    return { success: false, msg: 'Network Error' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
 
-  const {blockPresentation} = result.data.createAiBlockPresentation;
+  const { blockPresentation } = result.data.createAiBlockPresentation;
   // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
   // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
   //     ...earning,
@@ -107,7 +107,7 @@ export const createAiBlockPresentation = async (
   //     expMax: student.level.pointsRequired,
   //     balance: student.coinWallet.balance,
   // }})
-  return {success: true, msg: 'Success!', data: blockPresentation};
+  return { success: true, msg: 'Success!', data: blockPresentation };
 };
 
 export const createPathBlockPresentation = async (
@@ -119,18 +119,18 @@ export const createPathBlockPresentation = async (
   const res: any = await mutation(
     CREATE_PATH_BLOCK_PRESENTATION(studentId, topicId),
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
   if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
+    return { success: false, msg: 'Network Error' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
 
-  const {blockPresentation} = result.data.createPathBlockPresentation;
+  const { blockPresentation } = result.data.createPathBlockPresentation;
   // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
   // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
   //     ...earning,
@@ -140,7 +140,7 @@ export const createPathBlockPresentation = async (
   //     expMax: student.level.pointsRequired,
   //     balance: student.coinWallet.balance,
   // }})
-  return {success: true, msg: 'Success!', data: blockPresentation};
+  return { success: true, msg: 'Success!', data: blockPresentation };
 };
 
 export const getBlockPresentationById = async (
@@ -152,18 +152,18 @@ export const getBlockPresentationById = async (
     `blockPresentationById(id:${blockPresentationId})`,
     BLOCK_PRESENTATION_QUERY,
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
   if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
+    return { success: false, msg: 'Network Error' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
 
-  const {blockPresentationById} = result.data;
+  const { blockPresentationById } = result.data;
   // dispatch({ type: TYPES.STUDENT_SET_DATA, payload: student })
   // dispatch({ type: TYPES.EARNING_SET_DATA, payload: {
   //     ...earning,
@@ -173,7 +173,7 @@ export const getBlockPresentationById = async (
   //     expMax: student.level.pointsRequired,
   //     balance: student.coinWallet.balance,
   // }})
-  return {success: true, msg: 'Success!', data: blockPresentationById};
+  return { success: true, msg: 'Success!', data: blockPresentationById };
 };
 
 export const createNewAiBlock = async (
@@ -187,13 +187,13 @@ export const createNewAiBlock = async (
       token
     );
     return res.msg
-      ? {msg: res.msg, success: false}
+      ? { msg: res.msg, success: false }
       : {
-          ...res.data.createAiBlockPresentation.blockPresentation,
-          success: true,
-        };
+        ...res.data.createAiBlockPresentation.blockPresentation,
+        success: true,
+      };
   } catch (e: any) {
-    return {msg: e.message, success: false};
+    return { msg: e.message, success: false };
   }
 };
 
@@ -205,19 +205,21 @@ export const createHomeworkBlock = async (
     const res: any = await sendRawQuery(
       `mutation {
         createHomeworkBlockPresentation(studentHomeworkId: ${homeworkId}) {
-          ${QUESTION_BLOCK}
+          blockPresentation{
+            ${QUESTION_BLOCK}
+          }
         }
       }`,
       token
     );
     return res.msg
-      ? {msg: res.msg, success: false}
+      ? { msg: res.msg, success: false }
       : {
-          ...res.data.createHomeworkBlockPresentation.blockPresentation,
-          success: true,
-        };
+        ...res.data.createHomeworkBlockPresentation.blockPresentation,
+        success: true,
+      };
   } catch (e: any) {
-    return {msg: e.message, success: false};
+    return { msg: e.message, success: false };
   }
 };
 
@@ -232,13 +234,13 @@ export const createNewPathBlock = async (
       token
     );
     return res.msg
-      ? {msg: res.msg, success: false}
+      ? { msg: res.msg, success: false }
       : {
-          ...res.data.createPathBlockPresentation.blockPresentation,
-          success: true,
-        };
+        ...res.data.createPathBlockPresentation.blockPresentation,
+        success: true,
+      };
   } catch (e: any) {
-    return {msg: e.message, success: false};
+    return { msg: e.message, success: false };
   }
 };
 
@@ -254,17 +256,17 @@ export const newFinishBlock = async (
   const res: any = await mutation(
     FINISH_BLK_PT(blkPTId, batteryLevel, hits, errors, bonusCoins, questions),
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
   if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
+    return { success: false, msg: 'Network Error' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
-  return {success: true, msg: 'Success!', res: result};
+  return { success: true, msg: 'Success!', res: result };
 };
 
 // Get Question Block By Id, this is for test
@@ -272,10 +274,10 @@ export const doGetQuestionBlockById = async (blkId: number, token: string) => {
   try {
     const res: any = await sendRawQuery(GET_QUESIONS(blkId), token);
     return res.msg
-      ? {msg: res.msg, success: false}
-      : {...res.data.blockPresentationById, success: true};
+      ? { msg: res.msg, success: false }
+      : { ...res.data.blockPresentationById, success: true };
   } catch (e: any) {
-    return {msg: e.message, success: false};
+    return { msg: e.message, success: false };
   }
 };
 
