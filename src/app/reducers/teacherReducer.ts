@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   classrooms: Array<any>(0),
   currentClass: null,
   currentClassId: null,
-  assignmentTopicId: '',
+  assignmentTopicId: null,
   paymentMethod: null,
 };
 const TEACHERReducer = (

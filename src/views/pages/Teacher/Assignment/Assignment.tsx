@@ -1,5 +1,5 @@
 import { FC, useEffect, useState, useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Tab, Typography } from '@mui/material';
@@ -22,11 +22,13 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { GroupsCheckbox } from 'views/organisms/Classroom/GroupsCheckbox';
+import { TEACHER_SET_ASSIGNMENT_TOPIC_ID } from 'app/types';
 
 const Assignment: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const { token, language } = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch()
 
   const { assignmentTopicId, currentClassId } = useSelector((state: any) => state.teacher);
 
@@ -87,6 +89,8 @@ const Assignment: FC = () => {
       }
       else {
         enqueueSnackbar('Assign task Succeed', { variant: 'success' })
+        dispatch({ type: TEACHER_SET_ASSIGNMENT_TOPIC_ID, payload: null });
+
       }
     },
     onError: async (error: any) => {
@@ -111,8 +115,12 @@ const Assignment: FC = () => {
       enqueueSnackbar('Select period correctly', { variant: 'error' })
       return
     }
-    setLoading(true)
 
+    if (!assignmentTopicId) {
+      enqueueSnackbar('Select topic', { variant: 'error' })
+      return
+    }
+    setLoading(true)
     assignTask.mutate()
   }
 
