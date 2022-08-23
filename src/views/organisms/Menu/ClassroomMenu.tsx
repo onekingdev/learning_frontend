@@ -60,10 +60,10 @@ export const ClassroomMenu: FC<{ current: string }> = ({ current }) => {
           aria-label="notes"
           label='Notes'
           value='notes' /> */}
-        <Tab icon={<img src={current === 'certificates' ? cert_active : cert_icon} />}
+        {/* <Tab icon={<img src={current === 'certificates' ? cert_active : cert_icon} />}
           aria-label="certificates"
           label='Certificates'
-          value='certificates' />
+          value='certificates' /> */}
         <Tab icon={<img src={current === 'assignments' ? assignment_active : assignment_icon} />}
           aria-label="assignment"
           label='Assignments'
