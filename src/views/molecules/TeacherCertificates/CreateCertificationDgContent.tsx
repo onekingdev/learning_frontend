@@ -1,6 +1,7 @@
 import { FC, useState, useRef, useEffect } from 'react'
 import { Container, Box, Button, Typography } from '@mui/material'
 import { exportComponentAsPNG } from 'react-component-export-image'
+import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery'
 
 interface ICreateCertificate {
     imgUrl: string
@@ -8,8 +9,11 @@ interface ICreateCertificate {
 
 export const CreateCertificationDgContent: FC<ICreateCertificate> = ({ imgUrl }) => {
 
+    const isMobile = useSocratesMediaQuery('xs')
+
     const [title, seTitle] = useState('')
     const [content, setContent] = useState('')
+
     const [img, setImg] = useState('')
     const certRef = useRef<HTMLElement>(null)
 
@@ -25,71 +29,60 @@ export const CreateCertificationDgContent: FC<ICreateCertificate> = ({ imgUrl })
         setImg(imgUrl)
     }, [imgUrl])
 
-    console.log({ imgUrl })
-    console.log('mounted')
     return (
         <Container sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', paddingBottom: 2 }}>
             <Box ref={certRef}
+                id='certificate'
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     position: 'relative',
-                    minHeight: 200,
+                    height: 400,
+                    backgroundImage: `url(${img})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center'
                 }}
             >
-                <img src={img} style={{
-                    width: 800,
-                    height: 'auto',
-                    objectFit: 'contain',
-                }} />
-                <Box
-                    sx={{
-                        width: 400,
+                <input
+                    value={title}
+                    onChange={handleTitleChange}
+                    placeholder='Title'
+                    style={{
                         position: 'absolute',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 2,
-                        alignItems: 'center',
-                        justifyContent: 'center'
+                        top: 100,
+                        left: 0,
+                        right: 0,
+                        fontSize: isMobile ? 24 : 45,
+                        textAlign: 'center',
+                        border: 'none',
+                        background: 'none',
+                        filter: 'drop-shadow(0 0 0.1rem white)'
                     }}
-                >
-                    <input
-                        value={title}
-                        onChange={handleTitleChange}
-                        placeholder='Title'
-                        style={{
-                            fontSize: 45,
-                            textAlign: 'center',
-                            border: title ? 'none' : 'dashed 2px grey',
-                            background: 'none',
-                            filter: 'drop-shadow(0 0 0.1rem white)'
-                        }}
-                    />
-                    <input
-                        value={content}
-                        onChange={handleContentChange}
-                        placeholder='Title'
-                        style={{
-                            fontSize: 20,
-                            textAlign: 'center',
-                            border: content ? 'none' : 'dashed 2px grey',
-                            background: 'none',
-                            filter: 'drop-shadow(0 0 0.1rem white)'
-                        }}
-                    />
-                    <Typography variant='h5'>
-                        Student Name
-                    </Typography>
-                </Box>
+                />
+                <textarea
+                    value={content}
+                    onChange={handleContentChange}
+                    placeholder='Editible Text'
+                    style={{
+                        position: 'absolute',
+                        top: 150,
+                        left: 0,
+                        right: 0,
+                        fontSize: 20,
+                        textAlign: 'center',
+                        border: 'none',
+                        background: 'none',
+                        filter: 'drop-shadow(0 0 0.1rem white)'
+                    }}
+                />
+                <Typography>Student Name</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-evenly', margin: 1 }}>
                 <Button
                     variant='contained'
-                    // onClick={() => { setOpen(true) }}
-                    sx={{
-                        width: 200
-                    }}
+                // onClick={() => { setOpen(true) }}
                 >
                     Send
                 </Button>
@@ -97,9 +90,6 @@ export const CreateCertificationDgContent: FC<ICreateCertificate> = ({ imgUrl })
                     variant='contained'
                     color='warning'
                     onClick={() => exportComponentAsPNG(certRef)}
-                    sx={{
-                        width: 200,
-                    }}
                 >
                     Print
                 </Button>

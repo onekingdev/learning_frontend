@@ -48,8 +48,8 @@ export const OrdersDetails: FC<TeacherMembershipDetailProps> = ({ orders, paymen
       <Box >
         <Box sx={{ display: 'flex', justifyContent: 'center', margin: 2 }}>
           <LSDialog
-            isOpen={isAddOpen}
-            open={openAdd}
+            open={isAddOpen}
+            close={openAdd}
             title={commonDictionary[language]?.add_plan_package}
             // fullWidth='true'
             // contentText={commonDictionary[language]?.chooseTheNewPlan}
@@ -71,8 +71,8 @@ export const OrdersDetails: FC<TeacherMembershipDetailProps> = ({ orders, paymen
           </Button>
         </Box>
         <LSDialog
-          isOpen={isOpen}
-          open={open}
+          open={isOpen}
+          close={open}
           title={commonDictionary[language]?.cancel_membership}
           contentText={commonDictionary[language]?.thankyou_for_your_plan}
           dialogContent={

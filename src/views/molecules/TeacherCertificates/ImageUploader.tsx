@@ -47,10 +47,10 @@ export const ImageUploader: FC = () => {
                 }
             </Paper>
             <LSDialog
-                isOpen={open}
-                open={close}
+                open={open}
+                close={close}
                 title='Upload image'
-                fullWidth='true'
+                fullWidth={true}
                 dialogContent={
                     <ImgUploadDgContent />
                 }

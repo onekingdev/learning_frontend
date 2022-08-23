@@ -29,7 +29,7 @@ export const Wallet: FC<WalletProps> = ({ balance }) => {
           <TypoGeneralText>{balance}</TypoGeneralText>
         </WalletStyle>
         {isDeploy ? (
-          <LSDialog isOpen={isDeploy} open={deployDropdown} dialogContent={<WalletTxHistory />} fullWidth='true' title='Recent Transactions' />
+          <LSDialog open={isDeploy} close={deployDropdown} dialogContent={<WalletTxHistory />} fullWidth={true} title='Recent Transactions' />
         ) : null}
       </WalletContainer>
     </>

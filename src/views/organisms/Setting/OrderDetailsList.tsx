@@ -90,8 +90,8 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails, cardNumber 
       {
         selected && <>
           <LSDialog // Cancel plan dialog
-            isOpen={isOpen}
-            open={open}
+            open={isOpen}
+            close={open}
             title={commonDictionary[language]?.cancel_plan}
             dialogContent={
               <CancelOrderDetailForm
@@ -101,8 +101,8 @@ export const OrderDetailsList: FC<OrderListProps> = ({ orderDetails, cardNumber 
             }
           />
           <LSDialog // Upgrade to yearly dialog
-            isOpen={isUpdateOpen}
-            open={() => setIsUpdateOpen(!isUpdateOpen)}
+            open={isUpdateOpen}
+            close={() => setIsUpdateOpen(!isUpdateOpen)}
             title={commonDictionary[language]?.upgrade}
             dialogContent={
               <PlanUpgradeForm

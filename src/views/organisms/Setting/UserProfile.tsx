@@ -169,8 +169,8 @@ export const UserProfile: FC = () => {
           </Grid>
         </LSGridRow>
         <LSDialog
-          isOpen={openPwdRstDg}
-          open={toggleOpenPwdRstDg}
+          open={openPwdRstDg}
+          close={toggleOpenPwdRstDg}
           title={commonDictionary[language]?.change_password}
           dialogContent={
             <PwdResetForm open={toggleOpenPwdRstDg} />

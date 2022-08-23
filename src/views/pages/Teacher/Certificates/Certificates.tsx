@@ -11,9 +11,11 @@ import { doFetchClassroomStudents } from 'app/actions';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { SentCertDgContent } from 'views/molecules/TeacherCertificates/SendCertDgContent';
 import { CreateCertificationDgContent } from 'views/molecules/TeacherCertificates/CreateCertificationDgContent';
+import { useSnackbar } from 'notistack';
 
 const Certificates: FC = () => {
   const { language, token } = useSelector((state: any) => state.user);
+  const { enqueueSnackbar } = useSnackbar();
   const { currentClassId } = useSelector((state: any) => state.teacher);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false)
@@ -32,6 +34,12 @@ const Certificates: FC = () => {
     ['certificate-images'], () => doFetchTeacherCertificateImages(),
     { refetchIntervalInBackground: false, initialData: [] }
   )
+
+  const openCreate = () => {
+    if (!selectedImgUrl) enqueueSnackbar('Select image to be used as certificate image', { variant: 'error' })
+    else
+      setIsCreateOpen(true)
+  }
 
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
@@ -71,7 +79,7 @@ const Certificates: FC = () => {
                   <ImageUploader />
                 </Grid>
               </Grid>
-              <Button variant='contained' onClick={() => setIsCreateOpen(true)}>Create</Button>
+              <Button variant='contained' onClick={openCreate}>Create</Button>
             </Box>
           </Grid>
           <Grid item>
@@ -85,18 +93,19 @@ const Certificates: FC = () => {
           </Grid>
         </Grid>
         <LSDialog
-          isOpen={isSendOpen}
-          open={() => seIsSendOpen(false)}
+          open={isSendOpen}
+          close={() => seIsSendOpen(false)}
           title='Send Certificate'
           dialogContent={<SentCertDgContent />}
         />
         {
           selectedImgUrl &&
           <LSDialog
-            isOpen={isCreateOpen}
-            open={() => setIsCreateOpen(false)}
+            open={isCreateOpen}
+            close={() => setIsCreateOpen(false)}
             title='Create Certification'
             dialogContent={<CreateCertificationDgContent imgUrl={selectedImgUrl} />}
+            fullWidth
           />
         }
       </Container >

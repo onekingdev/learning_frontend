@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import * as React from 'react';
-import Dialog from '@mui/material/Dialog';
+import Dialog, { DialogProps } from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
@@ -10,34 +10,34 @@ import { settingPage } from '../../Theme';
 import { LSDialogContentText } from './utils/Style';
 
 
-type LSDialogProps = {
+interface LSDialogProps extends DialogProps {
   title?: string
-  isOpen: boolean
   contentText?: string
-  open: () => void
+  close: () => void
   dialogContent?: React.ReactNode | FC
-  fullWidth?: 'true'
+  fullWidth?: boolean
+  open: boolean
 }
 
 export const LSDialog: FC<LSDialogProps> = ({
   title,
   contentText,
-  isOpen,
   dialogContent,
   fullWidth,
-  open,
+  close,
+  open
 }) => {
 
   const onCrossBtnClick = () => {
     // Do something here...
 
     // Close dialog
-    open()
+    close()
   }
 
   return (
     <ThemeProvider theme={settingPage}>
-      <StyledDialog open={isOpen} onClose={open} scroll='body' wide={fullWidth}>
+      <StyledDialog open={open} onClose={close} scroll='body' fullWidth={fullWidth || false}>
         <StyledIconBtn aria-label="close" onClick={() => { onCrossBtnClick() }} >
           <CloseIcon />
         </StyledIconBtn>
@@ -61,13 +61,9 @@ export const LSDialog: FC<LSDialogProps> = ({
 
 
 // Styled components
-interface DialogProps {
-  wide?: string
-}
-const StyledDialog = styled(Dialog) <DialogProps>`
+
+const StyledDialog = styled(Dialog)`
 & .MuiPaper-root {
-  // padding: 20px;
-  max-width: ${props => props.wide === 'true' ? '100%;' : 'auto;'}
   overflow-y: visible
 }
 `

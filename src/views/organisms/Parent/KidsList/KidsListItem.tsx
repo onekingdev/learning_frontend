@@ -76,10 +76,10 @@ const KidsListItem: FC<KidsListProps> = ({
   return (
     <KidContainer>
       <LSDialog
-        isOpen={openLicense}
-        open={() => setOpenLicense(!openLicense)}
+        open={openLicense}
+        close={() => setOpenLicense(false)}
         title={dictionary[language]?.yourChildLicense}
-        fullWidth='true'
+        fullWidth={true}
         dialogContent={
           <LicenseDgContent
             close={() => setOpenLicense(false)}
@@ -91,10 +91,10 @@ const KidsListItem: FC<KidsListProps> = ({
         }
       />
       <LSDialog
-        isOpen={openChangePwd}
-        open={() => setOpenChangePwd(!openChangePwd)}
+        open={openChangePwd}
+        close={() => setOpenChangePwd(false)}
         title={dictionary[language]?.changeYourPassword}
-        fullWidth='true'
+        fullWidth={true}
         dialogContent={
           <>
             <GridContainer container>

@@ -69,9 +69,9 @@ export const PaymentInfo: FC<PaymentInfoProps> = ({ paymentMethod }) => {
         </Grid>
       </Box>
       <LSDialog
-        isOpen={isEdit}
+        open={isEdit}
         title={commonDictionary[language]?.editPaymentMethod}
-        open={openEdit}
+        close={openEdit}
         dialogContent={
           <EditPaymentForm open={openEdit} paymentMethod={paymentMethod} />
         }
