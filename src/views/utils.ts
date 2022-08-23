@@ -90,7 +90,7 @@ export function validateEmail(email: string) {
 }
 
 export const any2String = (param: any): string => {
-  if (!param) return '';
+  if (!param) return '""';
   let str = '';
   if (Array.isArray(param)) {
     str += '[';

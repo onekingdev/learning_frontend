@@ -1,15 +1,17 @@
 import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { DraggableOption } from './DraggableOption';
 import { AnswersList, QuestionsList } from './Styles';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { ScreenSize } from 'constants/screenSize';
+import { BasicColor } from 'views/Color';
 
 interface RelateQuestionDndProps {
   options: Array<any>
+  isAnswered: boolean
 }
-export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ options }, ref) => {
+export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ options, isAnswered }, ref) => {
   const isTablet = useMediaQuery(`(max-width: ${ScreenSize.tablet})`)
   const [state, setState] = useState<any>(null);
 
@@ -65,53 +67,59 @@ export const RelateQuestionDnd = forwardRef<any, RelateQuestionDndProps>(({ opti
   }, [options])
   return (
     state &&
-    <DragDropContext
-      onDragEnd={onDragEnd}
-    >
-      <Droppable droppableId='questions' direction={isTablet ? 'vertical' : 'horizontal'}>
-        {(provided, snapshot) => (
-          <QuestionsList
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            isDraggingOver={snapshot.isDraggingOver}
-            isTablet={isTablet}
-          >
-            {state.questions.map((q: any, i: number) => (
-              <DraggableOption key={q.id} option={q} index={i} />
-            ))}
-            {provided.placeholder}
-          </QuestionsList>
-        )}
-      </Droppable>
-      <Grid container justifyContent='center' alignItems='center' spacing={2}>
-        {
-          options.map((option, index) => {
-            const droppableId = 'answers' + index
-            const words: any = state[droppableId as keyof Object]
-            return (
-              <Grid item key={option.id}>
-                <Typography color='white' variant='h5'>{option.key}</Typography>
-                <Droppable droppableId={droppableId} direction='horizontal'>
-                  {(provided, snapshot) => (
-                    <AnswersList
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      isDraggingOver={snapshot.isDraggingOver}
-                    >
-                      {
-                        words && words.map((q: any, i: any) => (<DraggableOption key={q.id} option={q} index={i} />))
-                      }
-                      {provided.placeholder}
-                    </AnswersList>
-                  )}
-                </Droppable>
-              </Grid>
+    <Box position={'relative'}>
+      {
+        isAnswered &&
+        <Box position={'absolute'} sx={{ inset: -10, background: BasicColor.gray20, zIndex: 1, opacity: 0.1, borderRadius: 2 }} />
+      }
+      <DragDropContext
+        onDragEnd={onDragEnd}
+      >
+        <Droppable droppableId='questions' direction={isTablet ? 'vertical' : 'horizontal'}>
+          {(provided, snapshot) => (
+            <QuestionsList
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              isDraggingOver={snapshot.isDraggingOver}
+              isTablet={isTablet}
+            >
+              {state.questions.map((q: any, i: number) => (
+                <DraggableOption key={q.id} option={q} index={i} />
+              ))}
+              {provided.placeholder}
+            </QuestionsList>
+          )}
+        </Droppable>
+        <Grid container justifyContent='center' alignItems='center' spacing={2}>
+          {
+            options.map((option, index) => {
+              const droppableId = 'answers' + index
+              const words: any = state[droppableId as keyof Object]
+              return (
+                <Grid item key={option.id}>
+                  <Typography color='white' variant='h5'>{option.key}</Typography>
+                  <Droppable droppableId={droppableId} direction='horizontal'>
+                    {(provided, snapshot) => (
+                      <AnswersList
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        isDraggingOver={snapshot.isDraggingOver}
+                      >
+                        {
+                          words && words.map((q: any, i: any) => (<DraggableOption key={q.id} option={q} index={i} />))
+                        }
+                        {provided.placeholder}
+                      </AnswersList>
+                    )}
+                  </Droppable>
+                </Grid>
+              )
+            }
             )
           }
-          )
-        }
-      </Grid>
-    </DragDropContext >
+        </Grid>
+      </DragDropContext >
+    </Box>
   );
 })
 

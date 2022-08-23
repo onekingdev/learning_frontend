@@ -40,9 +40,11 @@ export const RelateQuestion: FC<ChoiceTextProps> = ({
   const [showAssistor, setShowAssistor] = useState(false);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const questionSoundURI = `${process.env.REACT_APP_SERVER_URL}${question.questionAudioUrl}`;
+  const [answerOptions, setAnswerOptions] = useState<Array<any>>([])
 
   useEffect(() => {
     setIsAnswered(false);
+    setAnswerOptions(shuffle(question.answerOptions))
   }, [question]);
 
 
@@ -95,8 +97,8 @@ export const RelateQuestion: FC<ChoiceTextProps> = ({
           alignItems='center'
         >
           {
-            question.answerOptions &&
-            <RelateQuestionDnd options={shuffle(question.answerOptions)} ref={dndRef} />
+            answerOptions &&
+            <RelateQuestionDnd options={answerOptions} ref={dndRef} isAnswered={isAnswered} />
           }
         </Box>
         <AssistorContainer>
