@@ -1,10 +1,9 @@
 import { FC, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { dictionary } from './dictionary'
-import { Container, Grid, Box, Button } from '@mui/material';
+import { Container, Grid, Box, Button, Typography } from '@mui/material';
 import { ImageUploader } from 'views/molecules/TeacherCertificates/ImageUploader';
-import { doFetchTeacherCertificateImages, fetchTeacherCertificateFilesFromFirebase } from 'app/firebase';
-import * as TYPES from 'app/types'
+import { doFetchTeacherCertificateImages } from 'app/firebase';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { StudentsCheckbox } from 'views/organisms/Classroom/StudentsCheckbox';
 import { useQuery } from '@tanstack/react-query';
@@ -13,30 +12,8 @@ import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { SentCertDgContent } from 'views/molecules/TeacherCertificates/SendCertDgContent';
 import { CreateCertificationDgContent } from 'views/molecules/TeacherCertificates/CreateCertificationDgContent';
 
-
-const mockStudents = [
-  {
-    id: 1,
-    name: 'boris',
-  },
-  {
-    id: 2,
-    name: 'timon',
-  },
-  {
-    id: 3,
-    name: 'pumba',
-  },
-  {
-    id: 4,
-    name: 'simba',
-  },
-]
-
 const Certificates: FC = () => {
   const { language, token } = useSelector((state: any) => state.user);
-  const [certImgs, setCertImgs] = useState<Array<any>>([])
-  const [selectedId, setSelectedId] = useState<any>(null)
   const { currentClassId } = useSelector((state: any) => state.teacher);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false)
@@ -45,30 +22,21 @@ const Certificates: FC = () => {
 
   const [selectedImgUrl, setSelectedImgUrl] = useState<null | string>(null)
 
-  const dispatch = useDispatch()
-  const reLoadImgs: boolean = useSelector((state: any) => state.certificate.reLoadImgs);
-
   const { data: students } = useQuery(
     ['classroom-students', currentClassId],
     () => doFetchClassroomStudents(currentClassId, token),
     { refetchIntervalInBackground: false, initialData: [] }
   )
 
-  const { data: images } = useQuery(
+  const { data: images, isLoading } = useQuery(
     ['certificate-images'], () => doFetchTeacherCertificateImages(),
-    { refetchIntervalInBackground: false }
+    { refetchIntervalInBackground: false, initialData: [] }
   )
-
-  console.log({ images, certImgs, selectedImgUrl })
 
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
-    fetchTeacherCertificateFilesFromFirebase(setCertImgs)
   }, []);
 
-  useEffect(() => {
-    fetchTeacherCertificateFilesFromFirebase(setCertImgs)
-  }, [reLoadImgs]);
 
   return (
     <TeacherPgContainer onlyLogoImgNav={false} title={dictionary[language]?.certificates} current='certificates'>
@@ -77,25 +45,27 @@ const Certificates: FC = () => {
           <Grid item>
             <Box sx={{ maxWidth: 900 }}>
               <Grid container spacing={6} >
-                {certImgs &&
-                  certImgs.map((imgUrl, index) => (
-                    <Grid item key={index}>
-                      <Box
-                        sx={{
-                          filter: selectedImgUrl === imgUrl ? 'drop-shadow(0 0 0.75rem gold)' : 'none'
-                        }}
-                        onClick={() => { setSelectedImgUrl(imgUrl) }}
-                      >
-                        <img src={imgUrl}
-                          style={{
-                            borderRadius: 'inherit',
-                            height: 275,
-                            width: 383,
-                            objectFit: 'cover'
-                          }} />
-                      </Box>
-                    </Grid>
-                  ))
+                {
+                  isLoading ? <Typography>Loading...</Typography> :
+                    images &&
+                    images.map((image: any, index) => (
+                      <Grid item key={index}>
+                        <Box
+                          sx={{
+                            filter: selectedImgUrl === image.value ? 'drop-shadow(0 0 0.75rem gold)' : 'none'
+                          }}
+                          onClick={() => { setSelectedImgUrl(image.value) }}
+                        >
+                          <img src={image.value}
+                            style={{
+                              borderRadius: 'inherit',
+                              height: 275,
+                              width: 383,
+                              objectFit: 'cover'
+                            }} />
+                        </Box>
+                      </Grid>
+                    ))
                 }
                 <Grid item>
                   <ImageUploader />
@@ -118,7 +88,7 @@ const Certificates: FC = () => {
           isOpen={isSendOpen}
           open={() => seIsSendOpen(false)}
           title='Send Certificate'
-          children={<SentCertDgContent />}
+          dialogContent={<SentCertDgContent />}
         />
         {
           selectedImgUrl &&
@@ -126,7 +96,7 @@ const Certificates: FC = () => {
             isOpen={isCreateOpen}
             open={() => setIsCreateOpen(false)}
             title='Create Certification'
-            children={<CreateCertificationDgContent imgUrl={selectedImgUrl} />}
+            dialogContent={<CreateCertificationDgContent imgUrl={selectedImgUrl} />}
           />
         }
       </Container >

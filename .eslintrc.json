@@ -34,10 +34,9 @@
         "object": "it",
         "property": "only"
       }
-    ],
-    "env": {"es6": true},
-    "parserOptions": {"ecmaVersion": 2018}
+    ]
   },
+
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
@@ -64,6 +63,7 @@
         "require-atomic-updates": "off",
         "@typescript-eslint/no-explicit-any": "off"
       },
+      "env": {"es6": true},
       "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"

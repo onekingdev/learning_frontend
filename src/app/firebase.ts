@@ -140,30 +140,15 @@ export const uploadTeacherCertificateFileOnFirebase = async (file: any, filename
 
 };
 
-export const fetchTeacherCertificateFilesFromFirebase = async (setUrls: Function) => {
-  const storage = getStorage();
-  const listRef = assetRef(storage, `assets/certificates`);
-  listAll(listRef).then(res => {
-    Promise.all(res.items.map(getDownloadURL)).then(urls => {
-      setUrls(urls)
-    });
-  });
-};
-
 export const doFetchTeacherCertificateImages = async () => {
   const storage = getStorage();
   const listRef = assetRef(storage, `assets/certificates`);
 
-  try {
-    const res = await listAll(listRef)
-    const images = await Promise.allSettled(
-      res.items.map(getDownloadURL)
-    )
-    return images
-  } catch (e) {
-    console.error(e)
-    return []
-  }
+  const res = await listAll(listRef)
+  const images = await Promise.allSettled(
+    res.items.map(getDownloadURL)
+  )
+  return images
 
 };
 

@@ -26,6 +26,7 @@ export const CreateCertificationDgContent: FC<ICreateCertificate> = ({ imgUrl })
     }, [imgUrl])
 
     console.log({ imgUrl })
+    console.log('mounted')
     return (
         <Container sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', paddingBottom: 2 }}>
             <Box ref={certRef}
