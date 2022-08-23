@@ -145,5 +145,8 @@
     "hooks": {
       "pre-commit": "gts check"
     }
-  }
+  },
+  "engines": {
+    "node": ">=12.9.0"
+}
 }
