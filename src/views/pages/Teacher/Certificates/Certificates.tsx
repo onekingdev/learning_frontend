@@ -15,7 +15,7 @@ import { SendCertificationDgContent } from 'views/molecules/TeacherCertificates/
 const Certificates: FC = () => {
   const { language, token } = useSelector((state: any) => state.user);
   const { enqueueSnackbar } = useSnackbar();
-  const { currentClassId } = useSelector((state: any) => state.teacher);
+  const { currentClassId, id: teacherId } = useSelector((state: any) => state.teacher);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false)
   const [isSendOpen, seIsSendOpen] = useState(false)
@@ -128,7 +128,7 @@ const Certificates: FC = () => {
             close={() => seIsSendOpen(false)}
             title='Send Certificate'
             fullWidth
-            dialogContent={<SendCertificationDgContent certificateId={selectedCertId} students={students} />}
+            dialogContent={<SendCertificationDgContent certificateId={selectedCertId} students={students} fromWhoId={teacherId}/>}
           />
         }
         {

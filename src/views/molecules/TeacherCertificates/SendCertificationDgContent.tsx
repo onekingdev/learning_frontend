@@ -13,6 +13,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 interface ICreateCertificate {
     certificateId: string | number
     students: Array<any>
+    fromWhoId: string | number
 }
 
 interface ISendCertificationMutation {
@@ -24,10 +25,10 @@ interface ISendCertificationMutation {
     token: string
 }
 
-export const SendCertificationDgContent: FC<ICreateCertificate> = ({ certificateId, students }) => {
+export const SendCertificationDgContent: FC<ICreateCertificate> = ({ certificateId, students, fromWhoId }) => {
 
     const isMobile = useSocratesMediaQuery('xs')
-    const { token, firstName, lastName,id: userId } = useSelector((state: any) => state.user);
+    const { token, firstName, lastName } = useSelector((state: any) => state.user);
     const [toWhos, SeToWhos] = useState<Array<any>>([])
     const { enqueueSnackbar } = useSnackbar();
 
@@ -91,7 +92,7 @@ export const SendCertificationDgContent: FC<ICreateCertificate> = ({ certificate
         send.mutate({
             certificateId: certificate.id,
             editableText,
-            fromWhoId: userId,
+            fromWhoId,
             title,
             toWhos,
             token
