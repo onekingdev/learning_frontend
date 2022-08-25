@@ -134,8 +134,10 @@ const NewKids: FC = () => {
       'ELA': ela_gold,
       'Hea': health_gold,
       'Sig': ela_gold,
+      'Spe': ela_gold,
     },
     Combo: {
+      'Spe': ela_gold,
       'Mat': math_combo,
       'Fin': financial_combo,
       'Sci': science_combo,
@@ -146,6 +148,7 @@ const NewKids: FC = () => {
     Sole: {
       'Mat': math_sole,
       'Fin': financial_sole,
+      'Spe': ela_gold,
       'Sci': science_sole,
       'ELA': ela_sole,
       'Hea': health_sole,
@@ -375,7 +378,7 @@ const NewKids: FC = () => {
                       map((subject: any, index: number) => (
                         <Subject key={index}>
                           {currentPackage?.plan?.name === 'Gold' && (
-                            <SubjectIcon src={subjectIconsById.Gold[subject?.universalAreaKnowledge.name.slice(0, 3)]} />
+                            <SubjectIcon src={subjectIconsById.Gold[subject?.universalAreaKnowledge?.name?.slice(0, 3) || 'ELA']} />
                           )}
                           {currentPackage?.plan?.name === 'Combo' && (
                             <>
@@ -392,7 +395,7 @@ const NewKids: FC = () => {
                                 }
                                 checked={paths.indexOf(subject) !== -1}
                               />
-                              <SubjectIcon src={subjectIconsById.Combo[subject?.universalAreaKnowledge.name.slice(0, 3)]} />
+                              <SubjectIcon src={subjectIconsById.Combo[subject?.universalAreaKnowledge?.name?.slice(0, 3) || 'ELA']} />
                             </>
                           )}
                           {currentPackage?.plan?.name === 'Sole' && (
@@ -409,10 +412,10 @@ const NewKids: FC = () => {
                                   paddingRight: '9px',
                                 }}
                               />
-                              <SubjectIcon src={subjectIconsById.Sole[subject?.universalAreaKnowledge.name.slice(0, 3)]} />
+                              <SubjectIcon src={subjectIconsById.Sole[subject?.universalAreaKnowledge?.name?.slice(0, 3) || 'ELA']} />
                             </>
                           )}
-                          <SubjectTitle>{subject.name}</SubjectTitle>
+                          <SubjectTitle>{subject?.name}</SubjectTitle>
                         </Subject>
                       ))}
                   </Subjects>
