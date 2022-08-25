@@ -356,3 +356,107 @@ export const doFetchClassroomStudentsWithAssignments = async (
   return res.data?.classroomById?.studentSet || res.errors[0]; // when django returns error message on fail
 };
 
+
+export const doCreateCertificate = async (
+  token: string,
+  image: string,
+  posEditableText: number,
+  posFromWho: number,
+  posName: number,
+  posStudentName: number,
+  posText: number,
+  posTitle: number,
+) => {
+  const res: any = await fetchQuery(
+    `
+    mutation {
+      createCertificate(
+        image: "${image}",
+        posEditableText: ${posEditableText},
+        posFromWho: ${posFromWho},
+        posName: ${posName},
+        posStudentName: ${posStudentName},
+        posText: ${posText},
+        posTitle: ${posTitle},
+      ){
+        certificate {
+          id
+        }
+      }
+    }
+    `, token);
+  return res.data?.createCertificate?.certificate || res.errors[0]; // when django returns error message on fail
+};
+
+
+export const doFetchCertificates = async (
+  token: string
+) => {
+  const res: any = await fetchQuery(`
+    {
+      certificates {
+        id
+        isActive
+        image
+        posTitle
+        posEditableText
+        posStudentName
+        posText
+        posName
+        posFromWho
+      }
+    }
+  `, token);
+  return res.data?.certificates || res.errors[0]; // when django returns error message on fail
+};
+
+export const doFetchCertificateById = async (
+  id: string | number,
+  token: string
+) => {
+  const res: any = await fetchQuery(`
+    {
+      certificatesById (id: ${id}) {
+        id
+        isActive
+        image
+        posTitle
+        posEditableText
+        posStudentName
+        posText
+        posName
+        posFromWho
+      }
+    }
+  `, token);
+  return res.data?.certificatesById || res.errors[0]; // when django returns error message on fail
+};
+
+export const doSendCertificationToStudents = async (
+  certificateId: string | number,
+  editableText: string,
+  fromWhoId: number | string,
+  title: string,
+  toWhos: Array<number>,
+  token: string
+) => {
+  const res: any = await fetchQuery(
+    `
+    mutation {
+      createStudentCertificate(
+        certificate: ${certificateId},
+        editableText: "${editableText}",
+        fromWho: ${fromWhoId},
+        text: "",
+        title: "${title}",
+        toWhos: [${toWhos}]
+      ) {
+        studentCertificates{
+          id
+        }
+      }
+    }
+    `, token);
+  return res.data?.createStudentCertificate?.studentCertificates || res.errors[0]; // when django returns error message on fail
+};
+

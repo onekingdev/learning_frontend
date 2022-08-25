@@ -9,8 +9,7 @@ export const ImageUploader: FC = () => {
 
     const [open, setOpen] = useState(false)
 
-    let language: string = useSelector((state: any) => state.user.language);
-    language = language ? language : 'en-us'
+    const language = useSelector((state: any) => state.user.language);
 
     const close = () => {
         setOpen(false)
@@ -28,20 +27,20 @@ export const ImageUploader: FC = () => {
                 onClick={() => { setOpen(true) }}
                 sx={{
                     // maxHeight: ,
-                    width: 383,
-                    height: 275,
+                    width: 150,
+                    height: 120,
                     background: '#C4C4C4',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     cursor: 'pointer',
                     '&:hover': {
-                        filter: 'drop-shadow(0 0 0.75rem gold)'
+                        filter: 'drop-shadow(0 0 0.2rem gold)'
                     },
                     position: 'relative'
                 }}>
                 {
-                    <Typography variant='h3'>
+                    <Typography variant='h6'>
                         {dictionary[language]?.uploadImage}
                     </Typography>
                 }

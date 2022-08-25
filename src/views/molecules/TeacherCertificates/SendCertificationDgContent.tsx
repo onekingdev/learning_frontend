@@ -1,48 +1,106 @@
-import { FC, useState, useRef, useEffect } from 'react'
-import { Container, Box, Button, Typography, TextField, Grid, ButtonGroup, IconButton, Divider } from '@mui/material'
+import { FC, useState, useRef } from 'react'
+import { Container, Box, Button, Typography } from '@mui/material'
 import { exportComponentAsPNG } from 'react-component-export-image'
 import { useSocratesMediaQuery } from 'hooks/useSocratesMediaQuery'
 
 import { useSelector } from 'react-redux';
-import { useQuery } from '@tanstack/react-query';
-// import { doFetchCertificateById } from 'app/actions';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { doFetchCertificateById, doSendCertificationToStudents } from 'app/actions';
+import { StudentsCheckbox } from 'views/organisms/Classroom/StudentsCheckbox';
+import { useSnackbar } from 'notistack';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 interface ICreateCertificate {
     certificateId: string | number
+    students: Array<any>
 }
 
-export const SendCertificationDgContent: FC<ICreateCertificate> = ({ certificateId }) => {
+interface ISendCertificationMutation {
+    certificateId: string | number,
+    editableText: string,
+    fromWhoId: number | string,
+    title: string,
+    toWhos: Array<number>,
+    token: string
+}
+
+export const SendCertificationDgContent: FC<ICreateCertificate> = ({ certificateId, students }) => {
 
     const isMobile = useSocratesMediaQuery('xs')
-    const { token, firstName, lastName } = useSelector((state: any) => state.user);
+    const { token, firstName, lastName,id: userId } = useSelector((state: any) => state.user);
+    const [toWhos, SeToWhos] = useState<Array<any>>([])
+    const { enqueueSnackbar } = useSnackbar();
 
-    // const { data: certificate } = useQuery(
-    //     ['certificate', certificateId], () => doFetchCertificateById(certificateId, token),
-    //     { refetchIntervalInBackground: false, initialData: [] }
-    // )
+    const { data: certificate } = useQuery(
+        ['certificate', certificateId], () => doFetchCertificateById(certificateId, token),
+        { refetchIntervalInBackground: false, initialData: [] }
+    )
 
     const [title, seTitle] = useState('')
-    const [editibleText, setEditibleText] = useState('')
-    const [fromWho, setFromWho] = useState(firstName + ' ' + lastName)
+    const [editableText, seteditableText] = useState('')
     const [sendDate, setSendDate] = useState<string>('')
+    const [loading, setLoading] = useState(false)
 
     const certRef = useRef<HTMLElement>(null)
+
+    const send = useMutation(({
+        certificateId,
+        editableText,
+        fromWhoId,
+        title,
+        toWhos,
+        token
+    }: ISendCertificationMutation) => doSendCertificationToStudents(
+        certificateId,
+        editableText,
+        fromWhoId,
+        title,
+        toWhos,
+        token), {
+        onSuccess: async data => {
+            if (data.message) {
+                enqueueSnackbar(data.message, { variant: 'error' })
+            }
+            else {
+                enqueueSnackbar('Send certification success', { variant: 'success' })
+            }
+        },
+        onError: async (error: any) => {
+            enqueueSnackbar(error.message, { variant: 'error' })
+        },
+        onSettled: async () => {
+            setLoading(false)
+        }
+    })
 
     const handleTitleChange = (e: any) => {
         seTitle(e.target.value)
     }
 
     const handleContentChange = (e: any) => {
-        setEditibleText(e.target.value)
+        seteditableText(e.target.value)
     }
 
     const handleSendClick = () => {
+        if (!title || !editableText) {
+            enqueueSnackbar('Input title or content', { variant: 'error' })
+            return
+        }
+        setLoading(true)
 
+        send.mutate({
+            certificateId: certificate.id,
+            editableText,
+            fromWhoId: userId,
+            title,
+            toWhos,
+            token
+        })
     }
 
     return (
         <Container sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', paddingBottom: 2 }}>
-            {/* {
+            {
                 certificate &&
                 <Box ref={certRef}
                     id='certificate'
@@ -71,40 +129,43 @@ export const SendCertificationDgContent: FC<ICreateCertificate> = ({ certificate
                             textAlign: 'center',
                             border: 'none',
                             background: 'none',
-                            filter: 'drop-shadow(0 0 0.1rem white)'
+                            filter: 'drop-shadow(0 0 0.1rem blue)'
                         }}
                     />
                     <textarea
-                        value={editibleText}
+                        value={editableText}
                         onChange={handleContentChange}
                         placeholder='Editible Text'
                         style={{
                             position: 'absolute',
-                            top: certificate.posEditibleText,
+                            top: certificate.poseditableText,
                             left: 0,
                             right: 0,
                             fontSize: 20,
                             textAlign: 'center',
                             border: 'none',
                             background: 'none',
-                            filter: 'drop-shadow(0 0 0.1rem white)'
+                            filter: 'drop-shadow(0 0 0.1rem green)'
                         }}
                     />
-                    <input
-                        value={fromWho}
-                        onChange={(e) => setFromWho(e.target.value)}
-                        placeholder='From who'
-                        style={{
-                            position: 'absolute',
-                            bottom: certificate.posFromWho,
-                            left: `calc(50%)`,
-                            right: 0,
-                            textAlign: 'center',
-                            border: 'none',
-                            background: 'none',
-                            filter: 'drop-shadow(0 0 0.1rem white)'
+                    <Typography position='absolute' bottom={certificate.posStudentName}
+                        sx={{ filter: 'drop-shadow(0 0 0.1rem gold)' }}
+                    >
+                        Student Name
+                    </Typography>
+                    <Typography
+                        position='absolute'
+                        bottom={certificate.posFromWho}
+                        left='50%'
+                        right={0}
+                        textAlign='center'
+                        sx={{
+                            filter: 'drop-shadow(0 0 0.1rem purple)',
                         }}
-                    />
+
+                    >
+                        {firstName + ' ' + lastName}
+                    </Typography>
                     <input
                         value={sendDate || new Date().toDateString()}
                         onChange={(e) => setSendDate(e.target.value)}
@@ -120,16 +181,21 @@ export const SendCertificationDgContent: FC<ICreateCertificate> = ({ certificate
                             filter: 'drop-shadow(0 0 0.1rem white)'
                         }}
                     />
-                    <Typography position='absolute' bottom={certificate.posStudentName}>Student Name</Typography>
                 </Box>
-            } */}
+            }
+            {
+                students && <Box sx={{ display: 'flex' }}>
+                    <StudentsCheckbox students={students} onChange={SeToWhos} />
+                </Box>
+            }
             <Box sx={{ display: 'flex', justifyContent: 'space-evenly', margin: 1 }}>
-                <Button
+                <LoadingButton
                     variant='contained'
                     onClick={handleSendClick}
+                    loading={loading}
                 >
                     Send
-                </Button>
+                </LoadingButton>
                 <Button
                     variant='contained'
                     color='warning'
