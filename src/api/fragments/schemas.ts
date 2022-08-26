@@ -109,3 +109,15 @@ export const SUBSCRIBER = `
         stripeCouponId
     }
 `
+
+export const _CERTIFICATE = `
+    id
+    isActive
+    image
+    posTitle
+    posEditableText
+    posStudentName
+    posText
+    posName
+    posFromWho
+`

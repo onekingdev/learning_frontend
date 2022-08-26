@@ -1,5 +1,5 @@
 import { GROUP } from 'api/fragments/peopleFragments';
-import { LEVEL } from 'api/fragments/schemas';
+import { LEVEL, _CERTIFICATE } from 'api/fragments/schemas';
 import { STUDENT_HOMEWORK } from 'api/fragments/studentFragments';
 import { FETCH_GUARDIAN_PLANS } from 'api/mutations/guardians';
 import {
@@ -417,15 +417,7 @@ export const doFetchCertificateById = async (
   const res: any = await fetchQuery(`
     {
       certificatesById (id: ${id}) {
-        id
-        isActive
-        image
-        posTitle
-        posEditableText
-        posStudentName
-        posText
-        posName
-        posFromWho
+        ${_CERTIFICATE}
       }
     }
   `, token);

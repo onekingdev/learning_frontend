@@ -1,6 +1,6 @@
 import * as TYPES from '../types';
-import query, {fetchQuery, fetchRawData} from 'api/queries/get';
-import {STUDENT_WALLET_QUERY} from 'api/queries/users';
+import query, { fetchQuery, fetchRawData } from 'api/queries/get';
+import { STUDENT_WALLET_QUERY } from 'api/queries/users';
 import {
   CREATE_STUDENT,
   CHANGE_STUDENT_GRADE,
@@ -8,8 +8,9 @@ import {
   FETCH_USER_BADGES,
 } from 'api/mutations/students';
 import mutation from 'api/mutations/get';
-import {sendRawQuery} from 'api/queries/get';
+import { sendRawQuery } from 'api/queries/get';
 import { STUDENT_HOMEWORK } from 'api/fragments/studentFragments';
+import { _CERTIFICATE } from 'api/fragments/schemas';
 
 export const setAreasOfKnowledge = (payload: string) => ({
   type: 'SET_AOK',
@@ -25,20 +26,20 @@ export const setCoinWallet = async (
     `studentById(id: "${studentId}")`,
     STUDENT_WALLET_QUERY,
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
 
   if (res.success === false) {
-    return {success: false, msg: 'Network Error'};
+    return { success: false, msg: 'Network Error' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
   const coinWallet = result.data.studentById.coinWallet;
-  dispatch({type: TYPES.EARNING_COIN_SET, payload: coinWallet.balance});
-  return {success: true, msg: 'Success!'};
+  dispatch({ type: TYPES.EARNING_COIN_SET, payload: coinWallet.balance });
+  return { success: true, msg: 'Success!' };
 };
 
 export const createStudent = async (
@@ -67,25 +68,25 @@ export const createStudent = async (
       gradeId
     ),
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
 
   if (res.success === false) {
-    return {success: false, msg: 'Network Error!'};
+    return { success: false, msg: 'Network Error!' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
 
-  const {guardian} = result.data.createStudent;
+  const { guardian } = result.data.createStudent;
 
   dispatch({
     type: TYPES.GUARDIAN_SET_DATA,
     payload: guardian,
   });
-  return {success: true, msg: 'Success', data: result.data.createOrder};
+  return { success: true, msg: 'Success', data: result.data.createOrder };
 };
 
 export const changeStudentGrade = async (
@@ -97,19 +98,19 @@ export const changeStudentGrade = async (
   const res: any = await mutation(
     CHANGE_STUDENT_GRADE(gradeId, studentId),
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
 
   if (res.success === false) {
-    return {success: false, msg: 'Network Error!'};
+    return { success: false, msg: 'Network Error!' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
 
-  const {guardian} = result.data.createChangeStudentGrade;
+  const { guardian } = result.data.createChangeStudentGrade;
 
   dispatch({
     type: TYPES.GUARDIAN_SET_DATA,
@@ -119,7 +120,7 @@ export const changeStudentGrade = async (
   //     type: TYPES.GUARDIAN_SET_STUDENT,
   //     payload: student || []
   // });
-  return {success: true, msg: 'Success', data: result.data.createOrder};
+  return { success: true, msg: 'Success', data: result.data.createOrder };
 };
 
 export const changeStudentPassword = async (
@@ -131,20 +132,20 @@ export const changeStudentPassword = async (
   const res: any = await mutation(
     CHANGE_STUDENT_PASSWORD(password, studentId),
     token
-  ).catch(() => ({success: false}));
+  ).catch(() => ({ success: false }));
 
   if (res.success === false) {
-    return {success: false, msg: 'Network Error!'};
+    return { success: false, msg: 'Network Error!' };
   }
 
   const result: any = await res.json();
 
   if (result.errors) {
-    return {success: false, msg: result.errors[0].message};
+    return { success: false, msg: result.errors[0].message };
   }
 
   // const { guardian, student} = result.data.changeStudentPassword;
-  const {guardian} = result.data.changeStudentPassword;
+  const { guardian } = result.data.changeStudentPassword;
 
   dispatch({
     type: TYPES.GUARDIAN_SET_DATA,
@@ -154,7 +155,7 @@ export const changeStudentPassword = async (
   //     type: TYPES.GUARDIAN_SET_STUDENT,
   //     payload: student || []
   // });
-  return {success: true, msg: 'Success', data: result.data.createOrder};
+  return { success: true, msg: 'Success', data: result.data.createOrder };
 };
 
 export const doSetOldUser = async (token: string) => {
@@ -170,10 +171,10 @@ export const doSetOldUser = async (token: string) => {
       token
     );
     return res.msg
-      ? {msg: res.msg, status: false}
-      : {...res.data.IsNew, status: true};
+      ? { msg: res.msg, status: false }
+      : { ...res.data.IsNew, status: true };
   } catch (e: any) {
-    return {msg: e.message, status: false};
+    return { msg: e.message, status: false };
   }
 };
 
@@ -190,8 +191,8 @@ export const doUpdateUserLanguage = async (language: string, token: string) => {
       token
     );
     return res.msg
-      ? {msg: res.msg, success: false}
-      : {...res.data, success: true};
+      ? { msg: res.msg, success: false }
+      : { ...res.data, success: true };
   } catch (e) {
     return {
       msg: 'Network error! Updating user language failed',
@@ -234,7 +235,41 @@ export const doFetchWalletTransactions = async (
  */
 export const doFetchUserBadges = async (studentId: number, token: string) => {
   const res: any = await fetchQuery(FETCH_USER_BADGES(studentId), token);
-  return res.data?.studentBadgesByStudentId ?? res.errors[0];
+  return res.data?.studentBadgesByStudentId || res.errors[0];
+};
+
+/**
+ * Fetch current user certificates
+ * @param studentId
+ * @param token
+ * @returns
+ */
+export const doFetchStudentCertificates = async (studentId: number, token: string) => {
+  const res: any = await fetchQuery(`
+  {
+    studentById(id: ${studentId}){
+      studentcertificatesSet{
+        id
+        title
+        editableText
+        createTimestamp
+        fromWho {
+          id
+          firstName
+          lastName
+        }
+        toWho {
+          firstName
+          lastName
+        }
+        certificate {
+          ${_CERTIFICATE}
+        }
+      }
+    }
+  }
+  `, token);
+  return res.data?.studentById?.studentcertificatesSet || res.errors[0];
 };
 
 

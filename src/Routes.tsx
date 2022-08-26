@@ -53,6 +53,7 @@ import AddTeachers from 'views/pages/School/AddTeachers';
 import SchoolTeachers from 'views/pages/School/SchoolTeachers';
 import SchoolSettings from 'views/pages/School/Settings';
 import AddSchool from 'views/pages/School/AddSchool';
+import { StudentCertificates } from 'views/pages/Student/Settings/StudentCertificates';
 
 
 const PrivateRoute = ({ requireAuth = true, loading = false, ...rest }) => {
@@ -162,6 +163,7 @@ export function Routes() {
           <Settings />
         </PrivateRoute>
         <PrivateRoute loading={true} path="/report/:reviewer/:studentId" component={Reporting} />
+        <PrivateRoute loading={true} path="/student/certificates" component={StudentCertificates} />
         <PrivateRoute loading={true} path="/parent/payment">
           <Payment />
         </PrivateRoute>
