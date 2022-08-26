@@ -56,7 +56,23 @@ export const doFetchSubjectsAndGradeByAudienceId = async (audienceId: number) =>
       }
     }
   }`);
-  return res.data?.audienceById ?? res.errors[0];
+  return res.data?.audienceById || res.errors[0];
+};
+
+export const doFetchGradesByAokId = async (aokId: number | string) => {
+  const res: any = await fetchQuery(`
+    {
+      areaOfKnowledgeById(id: ${aokId}){
+        audience {
+          gradeSet{
+            id
+            name
+          }
+        }
+      }
+    }
+  `);
+  return res.data?.areaOfKnowledgeById?.audience?.gradeSet || res.errors[0];
 };
 
 export const doFetchTopicsByGradeAndSubject = async (subjectId: number | string, gradeId: number | string) => {

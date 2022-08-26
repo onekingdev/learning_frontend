@@ -18,6 +18,8 @@ import {
   Filler,
 } from './Styles';
 import { Box, Typography, useMediaQuery } from '@mui/material';
+import { doFetchSubjectsAndGradeByAudienceId } from 'app/actions/audienceActions';
+import { useQuery } from '@tanstack/react-query';
 
 const positions = [
   'end',
@@ -42,12 +44,17 @@ export const KnowledgeMap: FC = () => {
   const loadingContext = useContext(LoadingContext);
   const history = useHistory();
 
+  const [aoks, setAoks] = useState<Array<any>>([])
+  const { data: audienceUS } = useQuery(['subjects-grades-list-by-audience', 2], () => doFetchSubjectsAndGradeByAudienceId(2))
+
   /**
    * !! If the guardianstudentplans is null, then this is teacher kid, this means the kid has gold plan
    */
-  const areasOfKnowledge: Array<any> = useSelector((state: any) =>
-    state.student.guardianstudentplan?.subject
-    || state.student.audience?.areaofknowledgeSet || []);
+  // const areasOfKnowledge: Array<any> = useSelector((state: any) =>
+  //   state.student.guardianstudentplan?.subject
+  //   || state.student.audience?.areaofknowledgeSet || []);
+
+  const {student} = useSelector((state: any) => state);
   const [loadedImgNum, setLoadedImgNum] = useState(0)
   const [boatX, setBoatX] = useState(window.innerWidth / 2)
   const [boatY, setBoatY] = useState(window.innerHeight / 2)
@@ -56,7 +63,7 @@ export const KnowledgeMap: FC = () => {
   const onImgLoad = () => {
 
     setLoadedImgNum(loadedImgNum + 1)
-    if (loadedImgNum >= areasOfKnowledge.length - 1)
+    if (loadedImgNum >= aoks.length - 1)
       loadingContext.done();
 
   }
@@ -79,9 +86,25 @@ export const KnowledgeMap: FC = () => {
 
   useEffect(() => {
     loadingContext.done();
-    const dragonNum = getRandomNumber(areasOfKnowledge.length);
+    const dragonNum = getRandomNumber(aoks.length);
     setDragonNumber(dragonNum)
   }, [])
+
+
+  useEffect(() => {
+    if (student.guardianstudentplan?.subject) { // for parent kid
+      setAoks(student.guardianstudentplan.subject)
+    } else { // for school/teacher kid
+      if(audienceUS) {
+        if(+student.audience.id === 2) {
+          setAoks(audienceUS)
+        } else {
+          setAoks([...(student.audience?.areaofknowledgeSet || []), ...audienceUS.areaofknowledgeSet])
+        }
+      }
+    }
+    console.log({aoks, audienceUS})
+  }, [student, audienceUS])
 
   return (
     <Wrapper>
@@ -97,7 +120,7 @@ export const KnowledgeMap: FC = () => {
             zIndex: 1
           }} />
         <Ocean >
-          {areasOfKnowledge.filter(item => item.isActive).map(
+          { aoks.filter(item => item.isActive).map(
             (
               areaOfKnowledge: any,
               i

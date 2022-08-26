@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoadingContext } from 'react-router-loading';
 import { TeacherPgContainer } from 'views/molecules/PgContainers/TeacherPgContainer';
 import { Box, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Tab, Typography } from '@mui/material';
-import { doFetchSubjectsAndGradeByAudienceId, doFetchTopicsByGradeAndSubject } from 'app/actions/audienceActions';
+import { doFetchGradesByAokId, doFetchSubjectsAndGradeByAudienceId, doFetchTopicsByGradeAndSubject } from 'app/actions/audienceActions';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { SlideShowSubjects } from 'views/organisms/SlideShowSubjects';
 
@@ -31,7 +31,7 @@ const Assignment: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch()
 
-  const { assignmentTopicId, currentClassId } = useSelector((state: any) => state.teacher);
+  const { assignmentTopicId, currentClassId, currentClass } = useSelector((state: any) => state.teacher);
 
   // Selected students
   const [selected, setSelected] = useState<Array<any>>([])
@@ -69,12 +69,20 @@ const Assignment: FC = () => {
   )
 
   // Fetch audiences
-  const { data: audience, isLoading } = useQuery(['subjects-grades-list-by-audience', 2], () => doFetchSubjectsAndGradeByAudienceId(2))
+  const { data: audience } = useQuery(['subjects-grades-list-by-audience', currentClass.audience?.id], () => doFetchSubjectsAndGradeByAudienceId(currentClass.audience?.id || 2))
+  const { data: audienceUS } = useQuery(['subjects-grades-list-by-audience', 2], () => doFetchSubjectsAndGradeByAudienceId(2))
+
+  const { data: grades, isLoading } = useQuery(
+    ['grades-by-aok', activeSubjectId],
+    () => doFetchGradesByAokId(activeSubjectId),
+    { enabled: activeSubjectId !== '' })
+
   // Implement dependent query
   const { data: topics } = useQuery(
     ['topics-by-grade', activeSubjectId, activeGradeId],
     () => doFetchTopicsByGradeAndSubject(activeSubjectId, activeGradeId),
     { enabled: (activeSubjectId !== '' && activeGradeId !== '') })
+
 
   const assignTask = useMutation(() => doAssignTasksToStudents(
     'Assignment from Teacher to Student',
@@ -132,9 +140,6 @@ const Assignment: FC = () => {
 
   }, [isLoading]);
 
-
-  // const [students, setStudents] = useState<string[]>(['Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez', 'Lorena Sanchez']);
-
   useEffect(() => {
     if (window.Tawk_API?.onLoaded) if (window.Tawk_API?.onLoaded) window.Tawk_API?.showWidget();
   }, []);
@@ -144,43 +149,51 @@ const Assignment: FC = () => {
     <TeacherPgContainer onlyLogoImgNav={false} title={commonDictionary[language]?.assignment} current='assignments'>
       <Container maxWidth='lg' >
         <Typography variant='h5' textAlign='center' maxWidth={700} margin='auto'>To assign the homework, select the subject first and then pick the grade level topic by clicking on the blue tab.</Typography>
-        {audience &&
+        {
+          audience && audienceUS && !audience.message &&
           <Box>
             <SlideShowSubjects
               // Display only active subjects
-              subjects={audience.areaofknowledgeSet.filter((item: any) => item.isActive)}
+              subjects={
+                (currentClass.audience?.id === 2 ? audience.areaofknowledgeSet :
+                  [...audience.areaofknowledgeSet, ...audienceUS.areaofknowledgeSet])
+                  .filter((item: any) => item.isActive)
+              }
               onSlideClick={(id: string) => {
                 setActiveSubjectId(id)
               }}
             />
-            <FormControl sx={{ width: 200 }}>
-              <InputLabel id='grade-select-label' sx={{
-                padding: 'none',
-                color: 'white',
-                ...(activeGradeId && { display: 'none' })
-              }}>Select Grade
-              </InputLabel>
-              <Select
-                labelId='grade-select-label'
-                id='grade-select'
-                value={activeGradeId || ''}
-                SelectDisplayProps={{
-                  style: {
-                    background: '#1771B9',
-                    color: 'white',
-                    padding: 15
-                  }
-                }}
-                variant='filled'
-                onChange={(e) => setActiveGradeId(e.target.value)}
-              >{
-                  audience.gradeSet.map((item: any) => (
-                    <MenuItem value={item.id}>{item.name}</MenuItem>
-                  ))
-                }
-              </Select>
-            </FormControl>
           </Box>
+        }
+        {
+          grades && !grades.message && // loading done, no error
+          <FormControl sx={{ width: 200 }}>
+            <InputLabel id='grade-select-label' sx={{
+              padding: 'none',
+              color: 'white',
+              ...(activeGradeId && { display: 'none' })
+            }}>Select Grade
+            </InputLabel>
+            <Select
+              labelId='grade-select-label'
+              id='grade-select'
+              value={activeGradeId || ''}
+              SelectDisplayProps={{
+                style: {
+                  background: '#1771B9',
+                  color: 'white',
+                  padding: 15
+                }
+              }}
+              variant='filled'
+              onChange={(e) => setActiveGradeId(e.target.value)}
+            >{
+                grades.map((item: any) => (
+                  <MenuItem value={item.id}>{item.name}</MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
         }
         <Box
           sx={{ border: 'solid #A3A5A5 1px' }}

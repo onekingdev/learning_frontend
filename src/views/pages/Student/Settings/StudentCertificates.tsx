@@ -2,18 +2,15 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { StudentMenu } from 'views/pages/Student/Menus/StudentMenu';
 import { LoadingContext } from 'react-router-loading';
-import { Container, Stack, Grid, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import { PageTitle } from 'views/molecules/PageTitle';
-import { AvatarSet } from 'views/molecules/Avatar/AvatarSet';
 import { useSelector } from 'react-redux';
 import { ProfileMobileTitle } from 'views/molecules/StudentProfile/ProfileMobileTitle'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ScreenSize } from 'constants/screenSize';
 import { Wrapper } from '../Bank/Styles';
 import { useQuery } from '@tanstack/react-query'
-import { doFetchStudentCertificates, doFetchUserBadges } from 'app/actions';
-import { getMessage } from 'views/utils';
-import { useHistory } from 'react-router-dom';
+import { doFetchStudentCertificates, } from 'app/actions';
 import { CertificationThumbnailPreview } from 'views/organisms/Certificates/CertificationThumbnailPreview';
 import { LSDialog } from 'views/molecules/Setting/LSDialog';
 import { ViewCertificate } from 'views/organisms/Certificates/ViewCertificate';
@@ -21,7 +18,6 @@ import { ViewCertificate } from 'views/organisms/Certificates/ViewCertificate';
 export const StudentCertificates: FC = () => {
   const isMobile = useMediaQuery(`(max-width:${ScreenSize.phone})`);
   const loadingContext = useContext(LoadingContext);
-  const avatar = useSelector((state: any) => state.avatar)
 
   const { id: studentId } = useSelector((state: any) => state.student);
   const { language, token } = useSelector((state: any) => state.user);
